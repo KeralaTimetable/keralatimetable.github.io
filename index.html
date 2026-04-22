@@ -1,459 +1,135 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<!-- GOOGLE VERIFICATION TAG -->
-<meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
-
-<title>LocalPlaces</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/@phosphor-icons/web"></script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<script>
-tailwind.config = {
-darkMode: 'class',
-theme: {
-extend: {
-fontFamily: { sans: ['Inter', 'sans-serif'], display: ['Outfit', 'sans-serif'] },
-colors: { primary: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' } },
-animation: { 'fade-up': 'fadeUp 0.5s ease-out forwards' },
-keyframes: { fadeUp: { '0%': { opacity: 0, transform: 'translateY(10px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } } }
-}
-}
-}
-</script>
-<style>
-body { background-color: #f8fafc; color: #1e293b; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
-.dark body { background-color: #0b1121; color: #f1f5f9; }
-.aurora-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; opacity: 0.6; pointer-events: none; background: radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.15), transparent 50%), radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.15), transparent 50%); }
-.dark .aurora-bg { opacity: 0.3; }
-nav, main, footer, .modal-layer { position: relative; z-index: 10; }
-.glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
-.dark .glass-nav { background: rgba(15, 23, 42, 0.85); border-bottom: 1px solid rgba(255,255,255,0.05); }
-.modern-input { width: 100%; padding: 0.8rem 1rem; border-radius: 1rem; background: rgba(255,255,255,0.9); border: 1px solid rgba(0,0,0,0.05); transition: all 0.2s; font-size: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
-.modern-input:focus { outline: 2px solid #6366f1; background: #fff; }
-.dark .modern-input { background: rgba(30, 41, 59, 0.9); color: white; border-color: rgba(255,255,255,0.05); }
-.place-card { background: white; border-radius: 1.25rem; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); transition: transform 0.2s; cursor: pointer; position: relative; z-index: 20; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
-.dark .place-card { background: #1e293b; border-color: rgba(255,255,255,0.05); }
-.btn-gradient { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; }
-.cat-pill { padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 700; transition: all 0.2s; white-space: nowrap; border: 1px solid transparent; }
-.cat-pill.active { background-color: #0f172a; color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-.dark .cat-pill.active { background-color: #fff; color: #0f172a; }
-.cat-pill:not(.active) { background-color: #fff; border-color: #e2e8f0; color: #64748b; }
-.dark .cat-pill:not(.active) { background-color: #1e293b; border-color: #334155; color: #cbd5e1; }
-.safe-pb { padding-bottom: env(safe-area-inset-bottom); }
-.bar { width: 3px; background: currentColor; animation: sound 0s infinite ease-in-out alternate; height: 4px; border-radius: 2px; }
-.playing .bar { animation-duration: 0.4s; }
-@keyframes sound { 0% { height: 4px; } 100% { height: 16px; } }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTU B. Tech S2 2026 Exam Timetable</title>
+    
+    <meta name="description" content="Download the official KTU B.Tech S2 timetable. Get the latest ktu s2 exam date, ktu btech s2 exam notification, and ktu exam schedule from APJ Abdul Kalam Technological University in Thiruvananthapuram, India.">
+    <meta name="keywords" content="APJ Abdul Kalam Technological University, University in Thiruvananthapuram India, ktu btech s2 timetable, ktu s2 exam date, ktu btech s2 exam notification, ktu exam schedule, ktu btech s2 syllabus, ktu official website, ktu results date">
+    <meta name="robots" content="index, follow">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .bg-mesh {
+            background-color: #f8fafc;
+            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
+                              radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
+                              radial-gradient(at 0% 50%, hsla(228,100%,74%,0.15) 0px, transparent 50%);
+        }
+        .ad-space { 
+            background: rgba(241, 245, 249, 0.7); 
+            border: 1px dashed #cbd5e1; 
+            display: flex; align-items: center; justify-content: center; 
+            color: #94a3b8; font-size: 0.875rem; font-weight: 500;
+            backdrop-filter: blur(4px);
+        }
+        .btn-glow { box-shadow: 0 0 20px rgba(79, 70, 229, 0.4); }
+    </style>
 </head>
-<body class="antialiased safe-pb">
-<div class="aurora-bg"></div>
+<body class="text-slate-800 antialiased flex flex-col min-h-screen bg-mesh">
 
-<nav class="fixed top-0 w-full z-50 glass-nav shadow-sm transition-colors duration-300">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex justify-between items-center h-16">
-<div class="flex items-center gap-2 cursor-pointer" onclick="app.renderHome()">
-<div class="bg-indigo-600 text-white p-1.5 rounded-lg flex-shrink-0">
-<img src="logo.png" class="w-6 h-6 object-contain hidden" id="nav-logo" onload="this.classList.remove('hidden');this.previousElementSibling?.remove()">
-<i class="ph-bold ph-map-trifold text-xl" id="nav-icon"></i>
-</div>
-<!-- TWO TONE TITLE -->
-<span class="text-lg sm:text-xl font-bold tracking-tight truncate">
-<span class="text-slate-900 dark:text-white">Local</span><span class="text-indigo-600 dark:text-indigo-400">Places</span>
-</span>
-</div>
-<div class="flex items-center gap-2">
-<div id="gps-status" class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold">
-<div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div><span>GPS</span>
-</div>
-<button onclick="app.toggleTheme()" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 transition"><i id="theme-icon" class="ph-fill ph-moon text-xl"></i></button>
-<button id="auto-btn" onclick="app.openAuto()" class="hidden bg-purple-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg flex items-center gap-1"><i class="ph-bold ph-magic-wand"></i> Auto</button>
-<button id="create-btn" onclick="app.openEditor()" class="hidden bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg"><i class="ph-bold ph-plus"></i> Add</button>
-<button id="sitemap-btn" onclick="app.generateSitemap()" class="hidden bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg"><i class="ph-bold ph-sitemap"></i> SEO</button>
-<button onclick="app.handleAdmin()" class="p-2 rounded-full transition hover:bg-black/5 dark:hover:bg-white/10"><i id="admin-icon" class="ph-bold ph-lock-key text-xl"></i></button>
-</div>
-</div>
-</div>
-</nav>
+    <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-slate-200/50 shadow-sm">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">Kerala <span class="text-indigo-600">Timetable</span></h1>
+            </div>
+            <span class="bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full border border-indigo-100">Latest Updates</span>
+        </div>
+    </header>
 
-<main class="pt-24 pb-12 px-4 max-w-7xl mx-auto min-h-screen relative z-10">
-<div id="hero-section" class="max-w-3xl mx-auto text-center mb-10 transition-all duration-300">
-<h1 class="text-3xl sm:text-5xl font-display font-extrabold text-slate-900 dark:text-white mb-6">Discover nearby gems.</h1>
-<div class="relative max-w-2xl mx-auto group z-20">
-<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><i class="ph-bold ph-magnifying-glass text-slate-400 text-xl"></i></div>
-<input type="text" id="main-search" oninput="app.handleSearch(this.value)" class="modern-input pl-12 pr-14 shadow-lg" placeholder="Search places, cities...">
-<button onclick="app.triggerAI()" class="absolute inset-y-1.5 right-1.5 bg-indigo-600 text-white p-2 rounded-lg shadow-md hover:scale-105 transition"><i class="ph-bold ph-sparkle animate-pulse"></i></button>
-</div>
-<div class="mt-6 flex justify-center gap-3">
-<button onclick="app.random()" class="flex items-center gap-2 px-5 py-2 bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-full font-bold text-sm hover:scale-105 transition shadow-sm backdrop-blur-sm text-indigo-600 dark:text-indigo-400"><i class="ph-fill ph-dice-five text-lg"></i> Surprise Me</button>
-</div>
-<div class="flex overflow-x-auto gap-2 mt-8 pb-2 justify-start sm:justify-center no-scrollbar px-1">
-<button onclick="app.filter('All')" class="cat-pill active">All</button>
-<button onclick="app.filter('Nature')" class="cat-pill">Nature</button>
-<button onclick="app.filter('Historic')" class="cat-pill">Historic</button>
-<button onclick="app.filter('Urban')" class="cat-pill">Urban</button>
-<button onclick="app.filter('Food')" class="cat-pill">Food</button>
-</div>
-</div>
+    <main class="flex-grow max-w-3xl mx-auto px-4 py-10 w-full flex flex-col items-center">
+        
+        <div class="ad-space w-full h-24 mb-8 rounded-xl">
+            <span>Advertisement Placeholder</span>
+        </div>
 
-<div id="app-container" class="transition-all duration-300 min-h-[400px]">
-<div class="text-center py-20 animate-pulse"><p class="text-slate-500 font-bold">Loading places...</p></div>
-</div>
-</main>
+        <div class="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8 md:p-10 text-center w-full relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-indigo-50 rounded-full blur-3xl opacity-60"></div>
+            
+            <div class="relative z-10">
+                <div class="inline-flex items-center justify-center p-3 bg-indigo-50 rounded-2xl mb-5 text-indigo-600">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                </div>
+                
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">KTU B.Tech S2 Timetable</h2>
+                <p class="text-slate-500 font-medium mb-8">Official Exam Dates & Notification</p>
 
-<!-- FOOTER WITH COPYRIGHT -->
-<footer class="border-t border-slate-200 dark:border-slate-800 py-8 text-center relative z-10">
-<p class="text-slate-500 dark:text-slate-400 text-sm">Copyright &copy; <span id="year"></span> LocalPlaces. All rights reserved.</p>
-</footer>
+                <div class="text-left bg-slate-50 border border-slate-100 p-5 rounded-2xl mb-8 text-sm text-slate-600 shadow-inner">
+                    <p class="mb-3 leading-relaxed"><strong>Important Update:</strong> The <strong>APJ Abdul Kalam Technological University</strong> (a premier university in Thiruvananthapuram, India) has released the latest exam schedule. Students can download the official document below to verify their specific <strong>ktu s2 exam date</strong> and subject codes.</p>
+                </div>
 
-<!-- Modals -->
-<div id="login-modal" class="modal-layer fixed inset-0 z-[60] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-<div class="bg-white dark:bg-slate-900 p-8 rounded-3xl w-full max-w-sm shadow-2xl border border-white/10 relative">
-<button onclick="app.closeLogin()" class="absolute top-4 right-4 text-slate-400 hover:text-red-500"><i class="ph-bold ph-x text-xl"></i></button>
-<h3 class="text-xl font-bold dark:text-white text-center mb-6">Admin Access</h3>
-<input id="user-in" class="modern-input mb-3 font-bold" placeholder="Username">
-<input id="pass-in" type="password" class="modern-input mb-6 font-bold" placeholder="Password">
-<button onclick="app.login()" class="w-full btn-gradient py-3.5 rounded-xl font-bold shadow-lg hover:scale-[1.02] transition">Unlock</button>
-</div>
-</div>
+                <div id="download-section" class="py-4">
+                    <div id="loading-container" class="flex flex-col items-center justify-center space-y-4">
+                        <div class="w-8 h-8 border-4 border-indigo-100 border-t-indigo-600 rounded-full animate-spin"></div>
+                        <p id="timer-text" class="text-lg font-semibold text-slate-700">Connecting to Drive in <span id="countdown" class="text-indigo-600 font-bold w-6 inline-block text-center">15</span>s...</p>
+                    </div>
+                    
+                    <a id="download-btn" href="#" target="_blank" class="hidden w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl transition-all duration-300 transform hover:-translate-y-1 items-center justify-center gap-2">
+                        <svg class="w-5 h-5 inline-block -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Open S2 Timetable PDF
+                    </a>
+                </div>
 
-<div id="sitemap-modal" class="modal-layer fixed inset-0 z-[60] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-<div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl shadow-2xl border border-white/10 p-6">
-<div class="flex justify-between mb-4"><h3 class="font-bold text-lg dark:text-white">Sitemap (For Google Search)</h3><button onclick="document.getElementById('sitemap-modal').classList.add('hidden')"><i class="ph-bold ph-x text-xl"></i></button></div>
-<p class="text-xs text-slate-500 mb-2">Copy this list and submit to Google Search Console.</p>
-<textarea id="sitemap-area" class="modern-input w-full h-48 font-mono text-xs" readonly></textarea>
-<button onclick="navigator.clipboard.writeText(document.getElementById('sitemap-area').value); alert('Copied!');" class="w-full btn-gradient py-2 mt-3 rounded-lg font-bold shadow-lg">Copy All Links</button>
-</div>
-</div>
+                <div class="mt-10 pt-8 border-t border-slate-100 text-left">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Related Topics & Searches</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-white border border-slate-200 text-slate-500 text-xs px-3 py-1.5 rounded-md">ktu btech s2 timetable</span>
+                        <span class="bg-white border border-slate-200 text-slate-500 text-xs px-3 py-1.5 rounded-md">ktu s2 exam date</span>
+                        <span class="bg-white border border-slate-200 text-slate-500 text-xs px-3 py-1.5 rounded-md">ktu btech s2 exam notification</span>
+                        <span class="bg-white border border-slate-200 text-slate-500 text-xs px-3 py-1.5 rounded-md">ktu exam schedule</span>
+                        <span class="bg-white border border-slate-200 text-slate-500 text-xs px-3 py-1.5 rounded-md">ktu btech s2 syllabus</span>
+                        <span class="bg-white border border-slate-200 text-slate-500 text-xs px-3 py-1.5 rounded-md">ktu official website</span>
+                        <span class="bg-white border border-slate-200 text-slate-500 text-xs px-3 py-1.5 rounded-md">ktu results date</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div id="editor-modal" class="modal-layer fixed inset-0 z-[60] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-<div class="bg-white dark:bg-slate-900 w-full max-w-4xl h-[90vh] flex flex-col rounded-3xl shadow-2xl border border-white/10 overflow-hidden">
-<div class="p-5 border-b dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
-<h3 class="font-bold text-xl dark:text-white">Edit Place</h3>
-<button onclick="app.closeEditor()" class="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full"><i class="ph-bold ph-x text-xl"></i></button>
-</div>
-<div class="p-6 overflow-y-auto flex-1 space-y-5">
-<input type="hidden" id="edit-id">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<input id="inp-title" class="modern-input font-bold" placeholder="Title">
-<select id="inp-category" class="modern-input cursor-pointer font-bold"><option value="Nature">Nature</option><option value="Historic">Historic</option><option value="Urban">Urban</option><option value="Religious">Religious</option><option value="Food">Food</option></select>
-</div>
+        <div class="ad-space w-full h-64 mt-8 rounded-xl">
+            <span>Advertisement Placeholder</span>
+        </div>
 
-<!-- RATING INPUT -->
-<div>
-<label class="text-xs font-bold text-slate-500 uppercase">Rating (0-5)</label>
-<input id="inp-rating" type="number" step="0.1" min="0" max="5" class="modern-input font-bold mt-1" placeholder="e.g. 4.5">
-</div>
+    </main>
 
-<div class="bg-indigo-50 dark:bg-indigo-900/10 p-5 rounded-2xl border border-indigo-100 dark:border-indigo-800/30">
-<label class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase mb-2 block">Google Map Link (Auto-Fill)</label>
-<input id="inp-maplink" class="modern-input text-sm mb-3" placeholder="Paste link from address bar..." oninput="app.parseMap(this.value)">
-<div class="grid grid-cols-2 gap-3">
-<input id="inp-lat" class="modern-input text-xs font-mono bg-white dark:bg-slate-800" placeholder="Lat" readonly>
-<input id="inp-lng" class="modern-input text-xs font-mono bg-white dark:bg-slate-800" placeholder="Lng" readonly>
-</div>
-<div class="mt-2 text-right"><button onclick="app.getGPS()" class="text-xs font-bold text-indigo-600 hover:underline">Use My Location</button></div>
-</div>
-<div class="grid grid-cols-2 gap-4">
-<input id="inp-state" class="modern-input text-sm" placeholder="State">
-<input id="inp-district" class="modern-input text-sm" placeholder="District">
-<input id="inp-city" class="modern-input text-sm" placeholder="City">
-<input id="inp-location" class="modern-input text-sm" placeholder="Specific Location">
-</div>
-<input id="inp-image" class="modern-input" placeholder="Image URL">
-<textarea id="inp-desc" rows="2" class="modern-input" placeholder="Short Description"></textarea>
-<textarea id="inp-content" rows="6" class="modern-input font-mono text-sm" placeholder="Full Content (Markdown supported)"></textarea>
-<input type="hidden" id="inp-keywords">
-</div>
-<div class="p-5 border-t dark:border-slate-700 flex justify-end gap-3 bg-slate-50 dark:bg-slate-800/50">
-<button onclick="app.closeEditor()" class="px-6 py-2.5 rounded-xl font-bold text-slate-500 hover:bg-slate-200 transition">Cancel</button>
-<button onclick="app.save()" class="px-8 py-2.5 btn-gradient rounded-xl font-bold shadow-lg hover:scale-105 transition">Save</button>
-</div>
-</div>
-</div>
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center">
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
+            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast and direct access to university resources. We are an independent platform and not officially affiliated with Kerala Technological University.</p>
+        </div>
+    </footer>
 
-<div id="auto-modal" class="modal-layer fixed inset-0 z-[60] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-<div class="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl shadow-2xl border border-white/10 p-6">
-<div class="flex justify-between mb-4"><h3 class="font-bold text-xl dark:text-white">AI Auto-Add</h3><button onclick="app.closeAuto()"><i class="ph-bold ph-x text-xl"></i></button></div>
-<input id="auto-query" class="modern-input mb-4" placeholder="e.g. Best beaches in Goa...">
-<button onclick="app.runAuto()" id="run-auto-btn" class="w-full btn-gradient py-3 rounded-xl font-bold mb-4 shadow-lg">Find & Add</button>
-<div id="auto-logs" class="hidden bg-slate-100 dark:bg-slate-800 p-4 rounded-xl text-xs font-mono h-32 overflow-y-auto text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700"></div>
-</div>
-</div>
+    <script>
+        // 1. Your Google Drive Link
+        const pdfLink = "https://drive.google.com/file/d/10OUYuFCWDRspRVhexXhYzcKOCfgS7mwR/view?usp=drivesdk";
+        
+        // 2. Timer Setup
+        let timeLeft = 15;
+        
+        const countdownEl = document.getElementById('countdown');
+        const timerTextEl = document.getElementById('timer-text');
+        const downloadBtn = document.getElementById('download-btn');
+        const loadingContainer = document.getElementById('loading-container');
 
-<!-- MAIN LOGIC -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        const timer = setInterval(() => {
+            timeLeft--;
+            countdownEl.textContent = timeLeft;
 
-// YOUR CONFIG
-const firebaseConfig = {
-apiKey: "AIzaSyDlVnYqJTvVXlrpD6vyNqmLQYiAzoB_J8M",
-authDomain: "localplace-c0b18.firebaseapp.com",
-projectId: "localplace-c0b18",
-storageBucket: "localplace-c0b18.firebasestorage.app",
-messagingSenderId: "631086890668",
-appId: "1:631086890668:web:884b6a0f2b74fdf980a909"
-};
-const apiKey = firebaseConfig.apiKey;
-
-const fb = initializeApp(firebaseConfig);
-const db = getFirestore(fb);
-const auth = getAuth(fb);
-
-window.app = {
-data: [], userPos: null, admin: false, cat: 'All', ref: null,
-creds: { u: 'admin@lp', p: 'Bz8@localplaces' },
-synth: window.speechSynthesis, speaking: false,
-
-init() {
-this.theme();
-const pid = new URLSearchParams(window.location.search).get('place');
-this.startAuth(pid);
-
-navigator.geolocation.getCurrentPosition(p => {
-this.userPos = { lat: p.coords.latitude, lng: p.coords.longitude };
-document.getElementById('gps-status').classList.remove('hidden');
-document.getElementById('gps-status').classList.add('flex');
-if(!document.getElementById('hero-section').classList.contains('hidden')) this.render();
-});
-
-document.getElementById('year').textContent = new Date().getFullYear();
-
-window.onpopstate = () => {
-const id = new URLSearchParams(window.location.search).get('place');
-id ? this.renderDetail(id, false) : this.renderHome(false);
-};
-},
-
-async startAuth(initialId) {
-try { await signInAnonymously(auth); }
-catch(e) { console.error("Auth Failed:", e); }
-
-onAuthStateChanged(auth, u => {
-if(u) {
-this.ref = collection(db, 'localPlaces');
-onSnapshot(this.ref, s => {
-this.data = s.docs.map(d => ({id: d.id, ...d.data()}));
-initialId ? this.renderDetail(initialId, false) : this.render();
-}, e => {
-console.error(e);
-document.getElementById('app-container').innerHTML = `<div class="text-center py-20 text-rose-500 font-bold">Error: Check Firestore Rules.</div>`;
-});
-}
-});
-},
-
-renderHome(updateUrl = true) {
-this.synth.cancel(); this.speaking = false;
-document.title = "LocalPlaces";
-if(updateUrl) {
-const url = new URL(window.location);
-url.searchParams.delete('place');
-window.history.pushState({}, '', url);
-}
-document.getElementById('hero-section').classList.remove('hidden');
-this.render();
-},
-
-render(search='') {
-const con = document.getElementById('app-container');
-let list = this.data.filter(i => (this.cat==='All' || i.category===this.cat) && (i.title.toLowerCase().includes(search)||i.city?.toLowerCase().includes(search)));
-
-if(this.userPos) {
-list.forEach(i => i._dist = this.dist(this.userPos.lat, this.userPos.lng, i.lat, i.lng));
-list.sort((a,b) => (parseFloat(a._dist)||999) - (parseFloat(b._dist)||999));
-}
-
-if(list.length === 0) {
-if(this.data.length === 0) return con.innerHTML = `<div class="text-center py-20 text-slate-400">Database Empty. Login to Add Places.</div>`;
-return con.innerHTML = `<div class="text-center py-20 text-slate-400">No places found.</div>`;
-}
-
-con.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">${list.map((i, idx) => `
-<div class="place-card group animate-fade-up" style="animation-delay: ${idx * 0.05}s" onclick="window.app.renderDetail('${i.id}')">
-<div class="h-52 relative overflow-hidden bg-slate-100 dark:bg-slate-800">
-<img src="${i.image}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" loading="lazy" onerror="this.src='https://via.placeholder.com/400?text=No+Image'">
-<div class="absolute top-3 right-3 flex gap-2">
-${i.rating ? `<span class="bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-md shadow-sm flex items-center gap-1"><i class="ph-fill ph-star"></i> ${i.rating}</span>` : ''}
-<span class="bg-white/90 dark:bg-black/80 backdrop-blur-md text-xs font-bold px-2 py-1 rounded-md shadow-sm">${i.category}</span>
-</div>
-${i._dist ? `<div class="absolute bottom-3 left-3 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-md shadow-lg flex items-center gap-1"><i class="ph-bold ph-navigation-arrow"></i> ${i._dist} km</div>` : ''}
-</div>
-<div class="p-5">
-<h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1 leading-tight group-hover:text-indigo-500 transition">${i.title}</h3>
-<div class="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400 mb-3"><i class="ph-fill ph-map-pin"></i> ${i.city || 'Unknown'}</div>
-<p class="text-sm text-slate-600 dark:text-slate-300 line-clamp-2">${i.desc}</p>
-</div>
-</div>`).join('')}</div>`;
-},
-
-renderDetail(id, updateUrl = true) {
-const item = this.data.find(d => String(d.id) === String(id));
-if(!item) return console.error("ID not found:", id);
-
-document.title = `${item.title} | LocalPlaces`;
-this.injectSchema(item);
-
-if(updateUrl) {
-const url = new URL(window.location);
-url.searchParams.set('place', id);
-window.history.pushState({}, '', url);
-}
-
-document.getElementById('hero-section').classList.add('hidden');
-
-const mapUrl = item.maplink || `https://www.google.com/maps/search/?api=1&query=${item.lat},${item.lng}`;
-
-document.getElementById('app-container').innerHTML = `
-<div class="animate-fade-up">
-<div class="flex justify-between items-center mb-6">
-<button onclick="window.app.renderHome()" class="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 flex items-center gap-2 text-sm font-bold transition"><i class="ph-bold ph-arrow-left"></i> Back</button>
-<div class="flex gap-2">
-<button id="audio-btn" onclick="window.app.toggleAudio('${item.id}')" class="px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold text-sm flex items-center gap-2 transition hover:bg-slate-50"><i class="ph-fill ph-speaker-high"></i> Listen</button>
-<a href="${mapUrl}" target="_blank" class="px-5 py-2 rounded-full btn-gradient font-bold text-sm flex items-center gap-2 shadow-lg hover:scale-105 transition"><i class="ph-bold ph-navigation-arrow"></i> Navigate</a>
-</div>
-</div>
-<div class="relative h-[300px] w-full rounded-2xl overflow-hidden shadow-xl mb-8 group">
-<img src="${item.image}" class="w-full h-full object-cover">
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-8 w-full">
-<div class="flex gap-2 mb-2">
-<span class="inline-block bg-white/20 backdrop-blur-md text-white text-xs font-extrabold px-3 py-1.5 rounded-full border border-white/10">${item.category}</span>
-${item.rating ? `<span class="inline-block bg-yellow-500 text-black text-xs font-extrabold px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1"><i class="ph-fill ph-star"></i> ${item.rating}/5</span>` : ''}
-</div>
-<h1 class="text-3xl font-extrabold text-white mb-1">${item.title}</h1>
-<div class="text-slate-200 text-lg flex items-center gap-2"><i class="ph-fill ph-map-pin"></i> ${item.location || item.city}</div>
-</div>
-</div>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-${this.info('State', item.state, 'ph-map-trifold text-purple-500')} ${this.info('District', item.district, 'ph-buildings text-blue-500')} ${this.info('City', item.city, 'ph-city text-emerald-500')} ${this.info('Location', item.location, 'ph-push-pin text-rose-500')}
-</div>
-<div class="${this.admin?'':'hidden'} mb-8 flex gap-4 p-4 rounded-xl bg-slate-100 dark:bg-slate-800 border-2 border-dashed border-slate-300 dark:border-slate-600">
-<button onclick="window.app.openEditor('${item.id}')" class="flex-1 py-2 font-bold text-slate-600 dark:text-slate-300 hover:text-indigo-600">Edit</button>
-<div class="w-px bg-slate-300 dark:bg-slate-600"></div>
-<button onclick="window.app.del('${item.id}')" class="flex-1 py-2 font-bold text-rose-500 hover:text-rose-600">Delete</button>
-</div>
-<article class="prose dark:prose-invert lg:prose-xl max-w-none text-slate-700 dark:text-slate-300">${marked.parse(item.content||'')}</article>
-</div>`;
-window.scrollTo(0,0);
-},
-
-// SEO ENGINE
-injectSchema(item) {
-const script = document.createElement('script');
-script.type = 'application/ld+json';
-script.text = JSON.stringify({
-"@context": "https://schema.org", "@type": "TouristAttraction", "name": item.title, "description": item.desc, "image": item.image, "address": { "@type": "PostalAddress", "addressLocality": item.city, "addressRegion": item.state }, "geo": { "@type": "GeoCoordinates", "latitude": item.lat, "longitude": item.lng }, "aggregateRating": item.rating ? { "@type": "AggregateRating", "ratingValue": item.rating, "reviewCount": "1" } : undefined
-});
-document.head.appendChild(script);
-},
-generateSitemap() {
-const baseUrl = window.location.href.split('?')[0];
-let sitemap = this.data.map(i => `${baseUrl}?place=${i.id}`).join('\n');
-document.getElementById('sitemap-area').value = sitemap;
-document.getElementById('sitemap-modal').classList.remove('hidden');
-},
-
-// ADMIN
-handleAdmin() { this.admin ? (this.admin=false, this.ui(), alert("Locked")) : document.getElementById('login-modal').classList.remove('hidden'); },
-closeLogin() { document.getElementById('login-modal').classList.add('hidden'); },
-login() {
-const u = document.getElementById('user-in').value, p = document.getElementById('pass-in').value;
-if(u===this.creds.u && p===this.creds.p) { this.admin=true; this.closeLogin(); this.ui(); } else alert("Invalid");
-},
-ui() {
-const s = this.admin ? 'remove' : 'add';
-['create-btn','auto-btn','sitemap-btn'].forEach(id=>document.getElementById(id).classList[s]('hidden'));
-document.getElementById('admin-icon').className = this.admin ? 'ph-fill ph-lock-open text-indigo-500' : 'ph-bold ph-lock-key';
-},
-openEditor(id=null) { document.getElementById('editor-modal').classList.remove('hidden'); document.getElementById('edit-id').value=''; ['title','image','state','district','city','location','desc','content','lat','lng','maplink','rating'].forEach(k=>document.getElementById('inp-'+k).value=''); if(id){const d=this.data.find(i=>String(i.id)===String(id)); document.getElementById('edit-id').value=id; for(let k in d){const el=document.getElementById('inp-'+k); if(el) el.value=d[k];}} },
-closeEditor() { document.getElementById('editor-modal').classList.add('hidden'); },
-parseMap(url) { let m = url.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/) || url.match(/q=(-?\d+\.\d+),(-?\d+\.\d+)/); if(m) { document.getElementById('inp-lat').value=m[1]; document.getElementById('inp-lng').value=m[2]; } },
-getGPS() { navigator.geolocation.getCurrentPosition(p=>{ document.getElementById('inp-lat').value=p.coords.latitude.toFixed(6); document.getElementById('inp-lng').value=p.coords.longitude.toFixed(6); }); },
-async save() {
-const id=document.getElementById('edit-id').value, d={createdAt: Date.now()};
-['title','category','image','state','district','city','location','desc','content','lat','lng','maplink','rating'].forEach(k=>d[k]=document.getElementById('inp-'+k).value);
-if(!d.title) return alert("Title required");
-try { id ? await updateDoc(doc(this.ref,id),d) : await addDoc(this.ref,d); this.closeEditor(); } catch(e){alert(e.message);}
-},
-async del(id) { if(confirm("Delete?")) { await deleteDoc(doc(this.ref,id)); this.renderHome(); } },
-
-filter(c) {
-this.cat=c;
-document.querySelectorAll('.cat-pill').forEach(b => {
-b.classList.toggle('active', b.innerText === c);
-b.classList.toggle('bg-slate-900', b.innerText === c); b.classList.toggle('text-white', b.innerText === c);
-b.classList.toggle('bg-white', b.innerText !== c); b.classList.toggle('dark:bg-slate-800', b.innerText !== c);
-});
-this.render();
-},
-handleSearch(v) { this.render(v.toLowerCase()); },
-random() { if(this.data.length) this.renderDetail(this.data[Math.floor(Math.random()*this.data.length)].id); },
-async triggerAI() {
-const q = document.getElementById('main-search').value; if(!q) return alert("Type something!");
-const c = document.getElementById('app-container');
-c.innerHTML = `<div class="text-center py-20 animate-pulse text-indigo-500 font-bold">AI is thinking...</div>`;
-try {
-const p = `Filter: "${q}". JSON: {category:string, location:string, keywords:[]}`;
-const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:p}]}]})});
-const j = JSON.parse((await r.json()).candidates[0].content.parts[0].text.replace(/```json|```/g,'').trim());
-const list = this.data.filter(i => (j.category && i.category===j.category) || (j.location && JSON.stringify(i).toLowerCase().includes(j.location.toLowerCase())));
-this.render(list.length ? '' : q.toLowerCase());
-} catch(e) { this.render(q.toLowerCase()); }
-},
-openAuto() { document.getElementById('auto-modal').classList.remove('hidden'); },
-closeAuto() { document.getElementById('auto-modal').classList.add('hidden'); },
-async runAuto() {
-const q=document.getElementById('auto-query').value; if(!q) return;
-const btn=document.getElementById('run-auto-btn'), log=document.getElementById('auto-logs');
-btn.innerHTML="Scanning..."; log.classList.remove('hidden'); log.innerHTML=`> Searching "${q}"...`;
-try {
-const prompt = `Use Google Search. Find 3 REAL places for query "${q}". Exact Lat/Lng required. Also estimate 'rating' (e.g. 4.5). JSON Array: [{title,lat,lng,state,district,city,location,category,desc,content,rating}]`;
-const req = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({contents:[{parts:[{text:prompt}]}], tools:[{google_search:{}}]})});
-const res = await req.json();
-const places = JSON.parse(res.candidates[0].content.parts[0].text.replace(/```json|```/g,'').trim());
-for(const p of places) {
-log.innerHTML += `\n> Saving ${p.title}...`;
-await addDoc(this.ref, {...p, image: `https://source.unsplash.com/800x600/?${p.title}`, createdAt:Date.now()});
-}
-setTimeout(()=>{this.closeAuto(); this.render();}, 1500);
-} catch(e) { log.innerHTML+=`\nError: ${e.message}`; } finally { btn.innerHTML="Find & Add"; }
-},
-
-// Utils
-theme() { if(localStorage.theme==='dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark'); this.icon(); },
-toggleTheme() { document.documentElement.classList.toggle('dark'); localStorage.theme=document.documentElement.classList.contains('dark')?'dark':'light'; this.icon(); },
-icon() { document.getElementById('theme-icon').className = document.documentElement.classList.contains('dark') ? 'ph-fill ph-sun text-xl' : 'ph-fill ph-moon text-xl'; },
-dist(lat1,lon1,lat2,lon2) { if(!lat1||!lon2)return null; const R=6371,d=Math.PI/180,a=Math.sin((lat2-lat1)*d/2)**2+Math.cos(lat1*d)*Math.cos(lat2*d)*Math.sin((lon2-lon1)*d/2)**2; return (R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))).toFixed(1); },
-toggleAudio(id) {
-const i = this.data.find(d=>String(d.id)===String(id));
-if(this.speaking) { this.synth.cancel(); this.speaking=false; this.updAud(false); return; }
-const ut = new SpeechSynthesisUtterance(`${i.title}. ${i.desc}. ${i.content}`.replace(/[#*]/g,''));
-ut.onend = () => { this.speaking=false; this.updAud(false); };
-this.synth.speak(ut); this.speaking=true; this.updAud(true);
-},
-updAud(play) { const b=document.getElementById('audio-btn'); if(b) { b.innerHTML=play?`<div class="flex items-end gap-1 h-3 playing"><div class="bar"></div><div class="bar"></div><div class="bar"></div></div> Stop`:`<i class="ph-fill ph-speaker-high"></i> Listen`; b.classList.toggle('bg-indigo-600', play); b.classList.toggle('text-white', play); } },
-
-info(l, v, icon) {
-return `<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl flex flex-col items-center justify-center text-center border dark:border-slate-700 shadow-sm">
-<i class="ph-duotone ${icon} text-2xl mb-2"></i>
-<div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">${l}</div>
-<div class="font-bold text-slate-900 dark:text-white truncate w-full text-sm">${v||'-'}</div>
-</div>`;
-}
-};
-
-window.app.init();
-</script>
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                
+                loadingContainer.classList.add('hidden');
+                
+                downloadBtn.href = pdfLink;
+                downloadBtn.classList.remove('hidden');
+                downloadBtn.classList.add('flex', 'btn-glow'); 
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
-
-
