@@ -10,7 +10,6 @@
     <title>KTU B.Tech S2 2026 Exam Timetable</title>
     
     <meta name="description" content="Download the official KTU B.Tech S2 timetable for 2026. Get the direct PDF for APJAKTU regular and supplementary exam dates, S2 exam notifications, and Kerala Technological University schedule.">
-    
     <meta name="keywords" content="KTU B.Tech S2 timetable 2026, KTU S2 regular exam date, KTU S2 supplementary timetable pdf, APJAKTU second semester exam schedule, APJ Abdul Kalam Technological University, Kerala Engineering Exam Dates, ktu exam notification 2026, ktu btech s2 syllabus, ktu latest updates">
     <meta name="robots" content="index, follow">
     
@@ -76,8 +75,8 @@
                     <p class="mb-3 leading-relaxed"><strong>Important Update:</strong> The <strong>APJ Abdul Kalam Technological University (APJAKTU)</strong> has officially released the latest exam schedule for second-semester engineering students. Download the secure PDF below to verify your specific <strong>KTU S2 regular and supplementary exam dates</strong>.</p>
                 </div>
 
-                <div id="download-section" class="py-4">
-                    <div id="loading-container" class="flex flex-col items-center justify-center space-y-4">
+                <div id="download-section" class="py-4 flex flex-col items-center justify-center gap-4">
+                    <div id="loading-container" class="flex flex-col items-center justify-center space-y-4 w-full">
                         <div class="w-8 h-8 border-4 border-indigo-100 border-t-indigo-600 rounded-full animate-spin"></div>
                         <p id="timer-text" class="text-lg font-semibold text-slate-700">Connecting to Drive in <span id="countdown" class="text-indigo-600 font-bold w-6 inline-block text-center">15</span>s...</p>
                     </div>
@@ -86,9 +85,28 @@
                         <svg class="w-5 h-5 inline-block -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         Download PDF Timetable
                     </a>
+
+                    <a id="whatsapp-btn" href="https://api.whatsapp.com/send?text=🚨 *KTU S2 Timetable is Out!* Download the official Regular & Supplementary PDF directly here: https://keralatimetable.github.io/" target="_blank" class="hidden w-full md:w-auto bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 items-center justify-center gap-2 shadow-sm">
+                        <svg class="w-5 h-5 inline-block -mt-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.125.553 4.179 1.604 5.99L.492 23.508l5.635-1.478A11.968 11.968 0 0012.031 24c6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.202c-.161.455-.938.868-1.332.915-.36.042-.818.121-2.502-.538-2.035-.798-3.344-2.884-3.444-3.018-.1-.134-.823-1.096-.823-2.091 0-.995.518-1.485.698-1.684.18-.198.39-.248.52-.248.13 0 .26.002.378.007.126.005.293-.048.455.34.168.402.571 1.397.621 1.498.05.1.08.218.015.348-.065.13-.098.212-.195.328-.098.116-.207.248-.293.348-.095.108-.195.228-.083.422.112.194.498.825 1.07 1.335.738.658 1.353.86 1.545.955.193.095.305.08.418-.04.113-.12.485-.563.615-.758.13-.195.26-.163.435-.098.175.065 1.107.522 1.297.618.19.095.318.142.365.222.048.08.048.468-.113.923z"/></svg>
+                        Share to Class Group
+                    </a>
                 </div>
 
-                <div class="mt-10 pt-8 border-t border-slate-100 text-left">
+                <div class="mt-12 text-left border-t border-slate-100 pt-8">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Frequently Asked Questions</h3>
+                    <div class="space-y-3">
+                        <div class="bg-slate-50 p-4 border border-slate-100 rounded-xl">
+                            <h4 class="font-bold text-slate-700 text-sm">When do the KTU S2 Exams start?</h4>
+                            <p class="text-xs text-slate-500 mt-1">Please refer to the official PDF download above for the exact start dates and subject codes for both Regular and Supplementary batches.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 border border-slate-100 rounded-xl">
+                            <h4 class="font-bold text-slate-700 text-sm">Is this the final timetable or tentative?</h4>
+                            <p class="text-xs text-slate-500 mt-1">This document contains the finalized schedule published directly by the APJ Abdul Kalam Technological University (KTU).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-8 border-t border-slate-100 text-left">
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Related Topics & Searches</h3>
                     <div class="flex flex-wrap gap-2">
                         <span class="bg-white border border-slate-200 text-slate-500 text-xs px-3 py-1.5 rounded-md">KTU B.Tech S2 Timetable 2026</span>
@@ -124,6 +142,7 @@
         
         const countdownEl = document.getElementById('countdown');
         const downloadBtn = document.getElementById('download-btn');
+        const whatsappBtn = document.getElementById('whatsapp-btn');
         const loadingContainer = document.getElementById('loading-container');
 
         const timer = setInterval(() => {
@@ -133,9 +152,15 @@
             if (timeLeft <= 0) {
                 clearInterval(timer);
                 loadingContainer.classList.add('hidden');
+                
+                // Show Download Button
                 downloadBtn.href = pdfLink;
                 downloadBtn.classList.remove('hidden');
                 downloadBtn.classList.add('flex', 'btn-glow'); 
+                
+                // Show WhatsApp Button
+                whatsappBtn.classList.remove('hidden');
+                whatsappBtn.classList.add('flex');
             }
         }, 1000);
     </script>
