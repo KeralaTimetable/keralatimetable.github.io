@@ -1,5 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import google.generativeai as genai
 import json
@@ -12,14 +15,12 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # --- SETUP AI ---
-# Grab the secret key from GitHub Actions
 api_key = os.environ.get("GEMINI_API_KEY")
 if api_key:
     genai.configure(api_key=api_key)
-    # Using Gemini Flash - it is extremely fast and perfect for text generation
     model = genai.GenerativeModel('gemini-1.5-flash')
 else:
-    print("WARNING: No Gemini API Key found. AI features will be disabled.")
+    print("WARNING: No Gemini API Key found.")
     model = None
 # ----------------
 
@@ -35,7 +36,6 @@ def clean_title(title):
     return slug.replace(' ', '-')
 
 def generate_sitemap(updates):
-    print("Generating XML Sitemap...")
     sitemap_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     main_pages = ['/index.html', '/updates.html']
@@ -57,20 +57,19 @@ def ask_ai_for_content(title):
     I have scraped a link from the APJ Abdul Kalam Technological University website.
     The title of the link is: "{title}"
     
-    Task 1: If this title sounds like a generic website menu item (e.g., 'Gallery', 'Mandatory Disclosures', 'Contact Us', 'Read More'), reply EXACTLY with the word "JUNK".
+    Task 1: If this title sounds like a generic website menu item (e.g., 'Gallery', 'Mandatory Disclosures', 'Contact Us', 'Read More', 'Home'), reply EXACTLY with the word "JUNK".
     Task 2: If it is a real academic, exam, or university announcement, write a highly detailed, professional 2-sentence description for a student. Include keywords naturally. 
     Do not use introductory phrases, just give me the final description.
     """
     try:
         response = model.generate_content(prompt)
-        text = response.text.strip()
-        return text
+        return response.text.strip()
     except Exception as e:
         print(f"AI Error: {e}")
         return "Official KTU notification. Download the document to view details."
 
 def main():
-    print("Starting AI-Powered Chrome Scraper...")
+    print("Starting AI-Powered React Scraper...")
     
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -94,25 +93,34 @@ def main():
         template_html = template_file.read()
 
     for target_url in URLS_TO_SCRAPE:
-        print(f"Loading: {target_url}")
+        print(f"\n--- Loading React App: {target_url} ---")
         try:
             driver.get(target_url)
-            time.sleep(15) 
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
-            time.sleep(3) 
+            
+            # --- THE REACT BYPASS ---
+            print("Waiting for KTU's Javascript to build the page inside <div id='root'>...")
+            try:
+                # Wait up to 20 seconds for ACTUAL 'a' tags (links) to appear inside the body
+                WebDriverWait(driver, 20).until(
+                    EC.presence_of_all_elements_located((By.TAG_NAME, "a"))
+                )
+                time.sleep(3) # Give it 3 extra seconds just to finish rendering animations
+            except Exception as e:
+                print("Warning: Page took too long to load React components.")
+            # ------------------------
             
             soup = BeautifulSoup(driver.page_source, 'html.parser')
             all_links = soup.find_all('a')
+            print(f"DEBUG: Successfully captured {len(all_links)} links from the React App.")
             
             count = 0
             for link_tag in all_links:
-                if count >= 10: break # Process top 10 to save AI API limits
+                if count >= 10: break 
                 
                 title = link_tag.text.strip()
                 doc_link = link_tag.get('href', '')
                 
-                # Basic filter to save AI calls
-                if len(title) < 20 or doc_link.startswith('#') or 'javascript' in doc_link:
+                if len(title) < 12 or doc_link.startswith('#') or 'javascript' in doc_link:
                     continue
                 if '/Menu/' in doc_link and target_url not in doc_link:
                     continue
@@ -123,15 +131,14 @@ def main():
                 if doc_link in existing_links:
                     continue
                     
-                print(f"Analyzing with AI: {title[:50]}...")
-                
-                # --- ASK THE AI ---
+                print(f"Sending to AI: {title[:60]}...")
                 ai_description = ask_ai_for_content(title)
                 
                 if "JUNK" in ai_description:
-                    print("AI rejected this as a junk link. Skipping.")
+                    print("  -> AI Rejected (Junk Menu Link)")
                     continue
-                # ------------------
+                
+                print("  -> AI Approved & Wrote Content!")
                 
                 file_name = f"{clean_title(title)}.html"
                 if len(file_name) > 100: file_name = file_name[:100] + ".html"
@@ -139,7 +146,7 @@ def main():
                 new_page = template_html.replace('{{TITLE}}', title)
                 new_page = new_page.replace('{{DATE}}', date_str)
                 new_page = new_page.replace('{{LINK}}', doc_link)
-                new_page = new_page.replace('{{DESCRIPTION}}', ai_description) # AI Text Injected!
+                new_page = new_page.replace('{{DESCRIPTION}}', ai_description)
                 new_page = new_page.replace('{{KEYWORDS}}', title.replace(' ', ', '))
 
                 with open(file_name, 'w', encoding='utf-8') as new_file:
@@ -164,7 +171,7 @@ def main():
         json.dump(all_updates[:30], f, indent=4)
         
     generate_sitemap(all_updates[:30])
-    print(f"Success! Added {len(new_updates)} AI-generated pages.")
+    print(f"\nSuccess! Added {len(new_updates)} AI-generated pages.")
 
 if __name__ == "__main__":
     main()
