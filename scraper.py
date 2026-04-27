@@ -7,7 +7,7 @@ import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def main():
-    print("--- KTU X-RAY DEBUGGER SCRIPT ---")
+    print("--- KTU X-RAY SCRIPT V2 (DEEP SCAN) ---")
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
@@ -24,21 +24,28 @@ def main():
     print("Waiting 15 seconds for React to build the page...")
     time.sleep(15)
     
-    # Grab the HTML
     soup = BeautifulSoup(driver.page_source, 'html.parser')
+    
+    print("\n--- SCAN 1: LOOKING AT LINK CONTAINERS ---")
     all_links = soup.find_all('a')
-    
-    print(f"\n--- FOUND {len(all_links)} LINKS ON THE PAGE ---")
-    
     for i, link in enumerate(all_links):
-        # Clean up the text so it prints nicely
-        text = link.text.strip().replace('\n', ' ')
         href = link.get('href', 'NO_LINK')
-        
-        # Print every single link so we can read KTU's structure
-        if len(text) > 2 or "pdf" in href.lower() or "attachment" in href.lower():
-            print(f"[{i}] TEXT: '{text[:80]}' | HREF: '{href}'")
+        # Skip the boring menu links to keep the log clean
+        if "Menu" in href or href == "#" or "schools.ktu.edu.in" in href:
+            continue
             
+        # Get the text of the box wrapping the link (this usually contains the title!)
+        parent_text = link.parent.text.strip().replace('\n', ' ')
+        print(f"[{i}] HREF: '{href}'")
+        print(f"    SURROUNDING TEXT: '{parent_text[:150]}'")
+
+    print("\n--- SCAN 2: LOOKING AT HEADERS (Where titles hide) ---")
+    headers = soup.find_all(['h4', 'h5', 'h6', 'strong'])
+    for i, h in enumerate(headers[:15]): # Just check the first 15 headers
+        text = h.text.strip().replace('\n', ' ')
+        if len(text) > 10: # Only print headers that have actual words
+            print(f"Header [{i}]: '{text[:100]}'")
+
     print("\n--- DEBUGGER FINISHED ---")
     driver.quit()
 
