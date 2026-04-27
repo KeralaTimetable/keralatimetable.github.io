@@ -1,22 +1,19 @@
-import requests
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import json
 import os
 import re
 from datetime import datetime
-import urllib3
-
-# Suppress SSL warnings
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+import time
 
 URLS_TO_SCRAPE = [
     "https://ktu.edu.in/Menu/announcements",
     "https://ktu.edu.in/exam/notification"
 ]
-
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-}
 
 BASE_WEBSITE_URL = "https://keralatimetable.github.io"
 
@@ -29,7 +26,6 @@ def generate_sitemap(updates):
     sitemap_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
     sitemap_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 
-    # 1. Add your static main pages first
     main_pages = ['/index.html', '/updates.html']
     for page in main_pages:
         sitemap_content += '  <url>\n'
@@ -38,7 +34,6 @@ def generate_sitemap(updates):
         sitemap_content += '    <priority>1.0</priority>\n'
         sitemap_content += '  </url>\n'
 
-    # 2. Add all the auto-generated announcement pages
     today_date = datetime.now().strftime("%Y-%m-%d")
     for update in updates:
         sitemap_content += '  <url>\n'
@@ -49,14 +44,21 @@ def generate_sitemap(updates):
         sitemap_content += '  </url>\n'
 
     sitemap_content += '</urlset>'
-
-    # Save to sitemap.xml
     with open('sitemap.xml', 'w', encoding='utf-8') as f:
         f.write(sitemap_content)
-    print("Sitemap successfully created!")
 
 def main():
-    print("Starting KTU Multi-Scraper...")
+    print("Starting Headless Chrome Scraper...")
+    
+    # 1. Setup Invisible Chrome Browser
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("window-size=1920,1080")
+    chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+    
+    driver = webdriver.Chrome(options=chrome_options)
     
     existing_updates = []
     if os.path.exists('updates.json'):
@@ -73,22 +75,27 @@ def main():
         template_html = template_file.read()
 
     for target_url in URLS_TO_SCRAPE:
-        print(f"Scraping: {target_url}")
+        print(f"Loading Javascript for: {target_url}")
         try:
-            response = requests.get(target_url, headers=HEADERS, verify=False, timeout=15)
-            soup = BeautifulSoup(response.text, 'html.parser')
+            # 2. Open page and wait for Javascript to load the data
+            driver.get(target_url)
+            time.sleep(5) # Force it to wait 5 seconds for KTU's servers
             
-            containers = soup.find_all(['tr', 'li'])
+            # Grab the fully rendered HTML
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
             
-            for item in containers[:15]: 
-                link_tag = item.find('a')
-                if not link_tag: 
-                    continue
+            # Since KTU changed their layout, we grab ALL links and filter the smart way
+            all_links = soup.find_all('a')
+            
+            count = 0
+            for link_tag in all_links:
+                if count >= 15: break # Only process top 15
                 
                 title = link_tag.text.strip()
                 doc_link = link_tag.get('href', '')
                 
-                if len(title) < 10 or doc_link.startswith('#') or 'javascript' in doc_link:
+                # Smart Filter: Real announcements usually have long titles (more than 20 characters)
+                if len(title) < 20 or doc_link.startswith('#') or 'javascript' in doc_link:
                     continue
                     
                 if doc_link.startswith('/'):
@@ -99,7 +106,7 @@ def main():
                 if doc_link in existing_links:
                     continue
                     
-                print(f"New Update Found: {title[:50]}...")
+                print(f"Found Data: {title[:50]}...")
                 
                 file_name = f"{clean_title(title)}.html"
                 if len(file_name) > 100:
@@ -126,19 +133,21 @@ def main():
                     "link": doc_link
                 })
                 existing_links.append(doc_link)
+                count += 1
 
         except Exception as e:
-            print(f"An error occurred while scraping {target_url}: {e}")
+            print(f"Error scraping {target_url}: {e}")
 
-    # Combine updates and save
+    # Close the invisible browser
+    driver.quit()
+
     all_updates = new_updates + existing_updates
     with open('updates.json', 'w', encoding='utf-8') as f:
-        json.dump(all_updates[:30], f, indent=4) # Keep top 30
+        json.dump(all_updates[:30], f, indent=4)
         
-    # Trigger the new sitemap generator!
     generate_sitemap(all_updates[:30])
-
-    print(f"Scraping Complete! Added {len(new_updates)} new pages.")
+    print(f"Success! Added {len(new_updates)} new items.")
 
 if __name__ == "__main__":
     main()
+
