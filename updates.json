@@ -1,5 +1,29 @@
 [
     {
+        "title": "Jobs/Careers",
+        "date": "April 27, 2026",
+        "page_url": "jobscareers.html",
+        "link": "https://ktu.edu.in/job&career/jobnotification"
+    },
+    {
+        "title": "University Schools",
+        "date": "April 27, 2026",
+        "page_url": "university-schools.html",
+        "link": "https://schools.ktu.edu.in/"
+    },
+    {
+        "title": "Norms And Rules",
+        "date": "April 27, 2026",
+        "page_url": "norms-and-rules.html",
+        "link": "https://ktu.edu.in/exam/norms-and-rules"
+    },
+    {
+        "title": "Notification",
+        "date": "April 27, 2026",
+        "page_url": "notification.html",
+        "link": "https://ktu.edu.in/exam/notification"
+    },
+    {
         "title": "Mandatory Disclosures",
         "date": "April 27, 2026",
         "page_url": "mandatory-disclosures.html",

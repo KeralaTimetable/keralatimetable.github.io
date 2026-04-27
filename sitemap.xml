@@ -11,6 +11,30 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://keralatimetable.github.io/jobscareers.html</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://keralatimetable.github.io/university-schools.html</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://keralatimetable.github.io/norms-and-rules.html</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://keralatimetable.github.io/notification.html</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://keralatimetable.github.io/mandatory-disclosures.html</loc>
     <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
