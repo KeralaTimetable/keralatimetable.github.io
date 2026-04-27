@@ -80,7 +80,7 @@ def main():
             
             # --- SLOW SERVER FIX ---
             print("Waiting 15 seconds for slow KTU servers...")
-            time.sleep(15) 
+            time.sleep(60) 
             
             # Scroll down the page to trigger 'Lazy Load' scripts
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight/2);")
