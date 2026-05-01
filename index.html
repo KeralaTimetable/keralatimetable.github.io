@@ -35,12 +35,24 @@
 <body class="text-slate-800 antialiased flex flex-col min-h-screen bg-mesh">
 
     <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-slate-200/50 shadow-sm">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-2">
                 <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">Kerala <span class="text-indigo-600">Timetable</span></h1>
             </div>
-            <span class="bg-indigo-50 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full border border-indigo-100">Latest Updates</span>
+            
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="status.html" class="text-xs font-bold text-slate-600 hover:text-indigo-600 bg-white border border-slate-200 shadow-sm px-4 py-2 rounded-full transition-colors flex items-center gap-2">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    Server Status
+                </a>
+                <a href="updates.html" class="text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm px-4 py-2 rounded-full transition-colors flex items-center gap-1">
+                    Notice Board <span class="ml-1">&rarr;</span>
+                </a>
+            </div>
         </div>
     </header>
 
