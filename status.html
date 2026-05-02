@@ -46,8 +46,8 @@
         <div id="overall-banner" class="w-full rounded-xl p-5 mb-8 border shadow-sm flex items-center gap-4 bg-slate-50 border-slate-200">
             <div id="overall-icon" class="w-10 h-10 rounded-full bg-slate-200 animate-pulse"></div>
             <div>
-                <h3 id="overall-text" class="text-xl font-bold text-slate-700">Fetching live data...</h3>
-                <p id="overall-time" class="text-sm text-slate-500">Please wait</p>
+                <h3 id="overall-text" class="text-xl font-bold text-slate-700">Running live check...</h3>
+                <p id="overall-time" class="text-sm text-slate-500">Pinging servers right now</p>
             </div>
         </div>
 
@@ -63,26 +63,20 @@
             </div>
         </div>
 
-        <h3 class="text-lg font-bold text-slate-800 mb-4">Individual Services</h3>
+        <h3 class="text-lg font-bold text-slate-800 mb-4">Live Services</h3>
         <div id="services-container" class="space-y-3 mb-10">
-            <div class="bg-white border border-slate-200 rounded-xl p-5 flex justify-between items-center shadow-sm">
-                <div class="h-5 bg-slate-200 rounded w-1/3 animate-pulse"></div>
-                <div class="h-6 bg-slate-200 rounded-full w-20 animate-pulse"></div>
             </div>
-            <div class="bg-white border border-slate-200 rounded-xl p-5 flex justify-between items-center shadow-sm">
-                <div class="h-5 bg-slate-200 rounded w-1/4 animate-pulse"></div>
-                <div class="h-6 bg-slate-200 rounded-full w-20 animate-pulse"></div>
-            </div>
-        </div>
 
-        <button onclick="fetchHistory()" class="mb-10 mx-auto bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold py-2.5 px-6 rounded-full transition-all flex items-center gap-2 shadow-sm text-sm">
+        <button onclick="runLiveCheck()" class="mb-10 mx-auto bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold py-2.5 px-6 rounded-full transition-all flex items-center gap-2 shadow-sm text-sm">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
             Refresh Status
         </button>
 
         <div class="border-t border-slate-200 pt-8 w-full">
             <h3 class="text-lg font-bold text-slate-800 mb-4">Past Incidents (Last 12 Hours)</h3>
-            <ul id="history-list" class="space-y-3"></ul>
+            <ul id="history-list" class="space-y-3">
+                <li class="text-xs text-slate-400 text-center py-2 animate-pulse">Loading history...</li>
+            </ul>
         </div>
 
         <div class="ad-space w-full min-h-[250px] mt-10 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200">
@@ -93,122 +87,186 @@
     </main>
 
     <script>
+        const TARGET_SERVICES = [
+            { id: "main", name: "KTU Main Website", url: "https://ktu.edu.in" },
+            { id: "app", name: "e-Governance Portal", url: "https://app.ktu.edu.in" },
+            { id: "api", name: "KTU API Server", url: "https://api.ktu.edu.in" }
+        ];
+
+        async function runLiveCheck() {
+            const servicesContainer = document.getElementById('services-container');
+            const sslBanner = document.getElementById('ssl-alert-banner');
+            
+            // 1. Reset UI to Loading State
+            updateOverallBanner("Running live check...", null);
+            servicesContainer.innerHTML = '';
+            
+            TARGET_SERVICES.forEach(svc => {
+                servicesContainer.innerHTML += `
+                    <div class="bg-white border border-slate-200 rounded-xl p-4 flex justify-between items-center shadow-sm">
+                        <div class="flex flex-col w-1/2">
+                            <span class="font-bold text-slate-800 text-sm md:text-base">${svc.name}</span>
+                            <span class="text-xs text-slate-400 mt-0.5" id="ping-${svc.id}">Pinging live...</span>
+                        </div>
+                        <div class="h-6 bg-slate-200 rounded-full w-20 animate-pulse" id="status-${svc.id}"></div>
+                    </div>
+                `;
+            });
+
+            // 2. Fetch the Python Logbook (to grab history & deep SSL checks)
+            let sslIssueDetected = false;
+            try {
+                const histRes = await fetch('status-history.json?t=' + new Date().getTime());
+                const data = await histRes.json();
+                if (data.length > 0) {
+                    // Check if Python caught an SSL issue recently
+                    if (data[0].overall_status === "SSL Issues Detected") {
+                        sslIssueDetected = true;
+                        sslBanner.classList.remove('hidden');
+                    } else {
+                        sslBanner.classList.add('hidden');
+                    }
+                    renderHistory(data);
+                }
+            } catch (e) { console.log("History logbook error"); }
+
+            // 3. Execute Live Pings (Concurrent)
+            let downCount = 0;
+            const pingPromises = TARGET_SERVICES.map(async (svc) => {
+                const startTime = Date.now();
+                try {
+                    // Use allorigins proxy to bypass CORS for real-time pinging
+                    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(svc.url)}`;
+                    const response = await fetch(proxyUrl);
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.contents) {
+                            const ping = Date.now() - startTime;
+                            updateServiceCard(svc.id, "Online", `${ping}ms`);
+                            return "Online";
+                        }
+                    }
+                    throw new Error("No contents returned");
+                } catch (error) {
+                    // If the Python bot told us it's an SSL issue, display that instead of "Offline"
+                    if (sslIssueDetected && svc.id === "app") {
+                        updateServiceCard(svc.id, "SSL Issue", "Blocked");
+                        return "SSL Issue";
+                    } else {
+                        updateServiceCard(svc.id, "Offline", "Timeout");
+                        downCount++;
+                        return "Offline";
+                    }
+                }
+            });
+
+            // Wait for all 3 pings to finish
+            await Promise.all(pingPromises);
+
+            // 4. Calculate Final Real-Time Status
+            let finalStatus = "All Systems Operational";
+            if (downCount === TARGET_SERVICES.length) finalStatus = "Major Outage";
+            else if (downCount > 0) finalStatus = "Partial Outage";
+            else if (sslIssueDetected) finalStatus = "SSL Issues Detected";
+
+            updateOverallBanner(finalStatus, new Date());
+        }
+
+        // --- Helper UI Functions ---
+
+        function updateServiceCard(id, status, pingText) {
+            const pingEl = document.getElementById(`ping-${id}`);
+            const statusEl = document.getElementById(`status-${id}`);
+            pingEl.innerText = `Response: ${pingText}`;
+            
+            let pillClass = "bg-red-100 text-red-700 border-red-200";
+            let statusText = "Offline";
+
+            if (status === "Online") {
+                pillClass = "bg-emerald-100 text-emerald-800 border-emerald-200";
+                statusText = "Operational";
+            } else if (status === "SSL Issue") {
+                pillClass = "bg-amber-100 text-amber-800 border-amber-200";
+                statusText = "SSL Error";
+            }
+
+            statusEl.className = `text-xs font-bold px-3 py-1 text-center rounded-full border ${pillClass}`;
+            statusEl.innerText = statusText;
+        }
+
+        function renderHistory(data) {
+            const historyList = document.getElementById('history-list');
+            historyList.innerHTML = '';
+            data.forEach(record => {
+                const recordTime = new Date(record.timestamp);
+                const diffMins = Math.floor((new Date() - recordTime) / 60000);
+                let timeText = diffMins < 1 ? "Just now" : diffMins < 60 ? `${diffMins} mins ago` : `${Math.floor(diffMins/60)} hrs ago`;
+                const clockTime = recordTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+                let dotColor = record.overall_status === "All Systems Operational" ? "bg-emerald-500" : 
+                               record.overall_status === "Major Outage" ? "bg-red-500" : "bg-amber-500";
+
+                historyList.innerHTML += `
+                    <li class="flex justify-between items-center p-3 rounded-lg border border-slate-100 bg-white shadow-sm">
+                        <div class="flex items-center gap-3 w-[55%]">
+                            <span class="w-2.5 h-2.5 rounded-full ${dotColor} flex-shrink-0"></span>
+                            <span class="text-sm font-bold text-slate-700 truncate">${record.overall_status}</span>
+                        </div>
+                        <div class="flex flex-col text-right w-[45%]">
+                            <span class="text-slate-600 font-bold text-xs">${timeText}</span>
+                            <span class="text-slate-400 text-[10px]">${clockTime}</span>
+                        </div>
+                    </li>
+                `;
+            });
+        }
+
         function updateOverallBanner(status, timestamp) {
             const banner = document.getElementById('overall-banner');
             const icon = document.getElementById('overall-icon');
             const text = document.getElementById('overall-text');
             const timeEl = document.getElementById('overall-time');
 
-            // Format "Last checked at 4:30 PM"
-            const recordTime = new Date(timestamp);
-            const timeString = recordTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-            timeEl.innerText = `Last checked at ${timeString}`;
             text.innerText = status;
+            
+            if (timestamp) {
+                const timeString = timestamp.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+                timeEl.innerText = `Live check completed at ${timeString}`;
+            } else {
+                timeEl.innerText = "Please wait...";
+            }
 
             icon.classList.remove('animate-pulse');
-            icon.innerHTML = ''; // clear loading state
+            icon.innerHTML = ''; 
 
-            if (status === "All Systems Operational") {
+            if (status === "Running live check...") {
+                banner.className = "w-full rounded-xl p-5 mb-8 border flex items-center gap-4 bg-slate-50 border-slate-200";
+                text.className = "text-xl font-bold text-slate-700";
+                icon.className = "w-10 h-10 rounded-full bg-slate-200 animate-pulse flex-shrink-0";
+            }
+            else if (status === "All Systems Operational") {
                 banner.className = "w-full rounded-xl p-5 mb-8 border flex items-center gap-4 bg-emerald-50 border-emerald-200";
                 text.className = "text-xl font-bold text-emerald-800";
-                icon.className = "w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-[0_0_15px_rgba(16,185,129,0.4)]";
+                icon.className = "w-10 h-10 rounded-full bg-emerald-500 flex flex-shrink-0 items-center justify-center text-white shadow-[0_0_15px_rgba(16,185,129,0.4)]";
                 icon.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>`;
             } 
             else if (status === "Partial Outage" || status === "SSL Issues Detected") {
                 banner.className = "w-full rounded-xl p-5 mb-8 border flex items-center gap-4 bg-amber-50 border-amber-200";
                 text.className = "text-xl font-bold text-amber-800";
-                icon.className = "w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center text-white shadow-[0_0_15px_rgba(245,158,11,0.4)]";
+                icon.className = "w-10 h-10 rounded-full bg-amber-500 flex flex-shrink-0 items-center justify-center text-white shadow-[0_0_15px_rgba(245,158,11,0.4)]";
                 icon.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
             } 
             else {
                 banner.className = "w-full rounded-xl p-5 mb-8 border flex items-center gap-4 bg-red-50 border-red-200";
                 text.className = "text-xl font-bold text-red-800";
-                icon.className = "w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white shadow-[0_0_15px_rgba(239,68,68,0.4)]";
+                icon.className = "w-10 h-10 rounded-full bg-red-500 flex flex-shrink-0 items-center justify-center text-white shadow-[0_0_15px_rgba(239,68,68,0.4)]";
                 icon.innerHTML = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>`;
             }
         }
 
-        async function fetchHistory() {
-            try {
-                // Fetch the latest JSON built by the Python script
-                const response = await fetch('status-history.json?t=' + new Date().getTime());
-                const data = await response.json();
-                
-                if (data.length === 0) return;
-
-                const latest = data[0];
-                updateOverallBanner(latest.overall_status, latest.timestamp);
-
-                // Check for SSL warning across all services
-                const sslBanner = document.getElementById('ssl-alert-banner');
-                let hasSSL = false;
-                for (const [name, info] of Object.entries(latest.services)) {
-                    if (info.status === "SSL Issue") hasSSL = true;
-                }
-                sslBanner.style.display = hasSSL ? 'block' : 'none';
-
-                // Render Individual Services List
-                const servicesContainer = document.getElementById('services-container');
-                servicesContainer.innerHTML = ''; 
-
-                for (const [name, info] of Object.entries(latest.services)) {
-                    let pillClass = "bg-red-100 text-red-700 border-red-200";
-                    let statusText = info.status === "Offline" ? info.error_type : info.status;
-                    
-                    if (info.status === "Online") {
-                        pillClass = "bg-emerald-100 text-emerald-800 border-emerald-200";
-                        statusText = "Operational";
-                    } else if (info.status === "SSL Issue") {
-                        pillClass = "bg-amber-100 text-amber-800 border-amber-200";
-                        statusText = "SSL Error";
-                    }
-
-                    servicesContainer.innerHTML += `
-                        <div class="bg-white border border-slate-200 rounded-xl p-4 flex justify-between items-center shadow-sm">
-                            <div class="flex flex-col">
-                                <span class="font-bold text-slate-800 text-sm md:text-base">${name}</span>
-                                <span class="text-xs text-slate-400 mt-0.5">Response: ${info.ping}ms</span>
-                            </div>
-                            <span class="text-xs font-bold px-3 py-1 rounded-full border ${pillClass}">
-                                ${statusText}
-                            </span>
-                        </div>
-                    `;
-                }
-
-                // Render Hourly History
-                const historyList = document.getElementById('history-list');
-                historyList.innerHTML = '';
-                
-                data.forEach(record => {
-                    const recordTime = new Date(record.timestamp);
-                    const diffMins = Math.floor((new Date() - recordTime) / 60000);
-                    let timeText = diffMins < 1 ? "Just now" : diffMins < 60 ? `${diffMins} mins ago` : `${Math.floor(diffMins/60)} hrs ago`;
-                    const clockTime = recordTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-
-                    let dotColor = record.overall_status === "All Systems Operational" ? "bg-emerald-500" : 
-                                   record.overall_status === "Major Outage" ? "bg-red-500" : "bg-amber-500";
-
-                    historyList.innerHTML += `
-                        <li class="flex justify-between items-center p-3 rounded-lg border border-slate-100 bg-white shadow-sm">
-                            <div class="flex items-center gap-3 w-1/2">
-                                <span class="w-2.5 h-2.5 rounded-full ${dotColor} flex-shrink-0"></span>
-                                <span class="text-sm font-bold text-slate-700 truncate">${record.overall_status}</span>
-                            </div>
-                            <div class="flex flex-col text-right w-1/2">
-                                <span class="text-slate-600 font-bold text-xs">${timeText}</span>
-                                <span class="text-slate-400 text-[10px]">${clockTime}</span>
-                            </div>
-                        </li>
-                    `;
-                });
-
-            } catch (error) {
-                console.log("History failed to load.", error);
-            }
-        }
-
-        window.onload = fetchHistory;
+        // Automatically run the live check the second the page opens
+        window.onload = runLiveCheck;
     </script>
 </body>
 </html>
