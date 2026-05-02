@@ -236,9 +236,22 @@
                 data.forEach(record => {
                     const recordTime = new Date(record.timestamp);
                     const now = new Date();
-                    const diffHours = Math.round((now - recordTime) / (1000 * 60 * 60));
                     
-                    let timeText = diffHours === 0 ? "Just now" : `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+                    // Calculate exact minutes instead of just hours
+                    const diffMins = Math.floor((now - recordTime) / (1000 * 60));
+                    
+                    let timeText = "";
+                    if (diffMins < 1) {
+                        timeText = "Just now";
+                    } else if (diffMins < 60) {
+                        timeText = `${diffMins} min${diffMins > 1 ? 's' : ''} ago`;
+                    } else {
+                        const diffHours = Math.floor(diffMins / 60);
+                        timeText = `${diffHours} hr${diffHours > 1 ? 's' : ''} ago`;
+                    }
+
+                    // Extract the exact clock time (e.g., "4:00 PM")
+                    const clockTime = recordTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 
                     let dotColor = "bg-red-500";
                     let bgColor = "bg-red-50";
@@ -260,13 +273,16 @@
                     const li = document.createElement('li');
                     li.className = `flex justify-between items-center p-3 rounded-lg border border-slate-100 ${bgColor}`;
                     li.innerHTML = `
-                        <div class="flex items-center gap-3">
-                            <span class="w-2.5 h-2.5 rounded-full ${dotColor}"></span>
+                        <div class="flex items-center gap-3 w-1/3">
+                            <span class="w-2.5 h-2.5 rounded-full ${dotColor} flex-shrink-0"></span>
                             <span class="text-sm font-bold ${textColor}">${record.status}</span>
                         </div>
-                        <div class="flex items-center gap-4 text-xs">
-                            <span class="text-slate-500 font-medium">${timeText}</span>
-                            <span class="text-slate-400 font-mono bg-white px-2 py-0.5 rounded border border-slate-200 shadow-sm">${pingText}</span>
+                        <div class="flex items-center justify-between w-2/3 text-xs">
+                            <div class="flex flex-col text-left">
+                                <span class="text-slate-700 font-bold">${timeText}</span>
+                                <span class="text-slate-400 text-[10px]">${clockTime}</span>
+                            </div>
+                            <span class="text-slate-500 font-mono bg-white px-2 py-1 rounded border border-slate-200 shadow-sm whitespace-nowrap ml-2">${pingText}</span>
                         </div>
                     `;
                     list.appendChild(li);
