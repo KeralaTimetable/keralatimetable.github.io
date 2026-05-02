@@ -1,0 +1,35 @@
+name: Hourly Server Ping
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Runs exactly at the top of every hour (e.g., 1:00, 2:00, 3:00)
+  workflow_dispatch: # Allows you to click the manual "Run workflow" button
+
+permissions:
+  contents: write
+
+jobs:
+  ping-and-log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install Required Libraries
+        run: pip install requests urllib3
+          
+      - name: Run Smart Ping Script
+        run: python ping-server.py
+        
+      - name: Commit and Push History
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "KTU Ping-Bot"
+          git add status-history.json
+          git diff --staged --quiet || git commit -m "Automated update: Logged smart hourly server status"
+          git push
