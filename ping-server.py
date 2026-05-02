@@ -5,66 +5,73 @@ from datetime import datetime, timezone
 import time
 import urllib3
 
-# Suppress the warning we get when we intentionally bypass SSL to measure ping
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-def main():
-    print("Running KTU Smart Diagnostic Ping...")
-    
-    # We test the e-Governance portal, as this is where students actually log in
-    target_url = "https://app.ktu.edu.in" 
-    
+# We now check multiple KTU endpoints independently
+SERVICES = {
+    "KTU Main Website": "https://ktu.edu.in",
+    "e-Governance Portal (Login)": "https://app.ktu.edu.in",
+    "KTU API Server": "https://api.ktu.edu.in"
+}
+
+def check_service(name, url):
     status = "Offline"
-    error_type = "None"
+    error_type = "Timeout"
     ping_time = 0
-    
     start_time = time.time()
     
-    # Step 1: Strict Test (Checks if the site works AND if SSL is valid)
     try:
-        response = requests.get(target_url, timeout=10)
-        
+        response = requests.get(url, timeout=10)
         if response.status_code == 200:
             status = "Online"
+            error_type = "None"
             ping_time = int((time.time() - start_time) * 1000)
         elif response.status_code >= 500:
-            status = "Offline"
-            error_type = "Server Overloaded (500)"
-            
+            error_type = f"Server Error ({response.status_code})"
     except requests.exceptions.SSLError:
-        print("DETECTED: SSL Certificate Expired!")
         status = "SSL Issue"
         error_type = "Certificate Error"
-        
-        # The site is actually alive, just insecure. Let's measure the ping anyway.
         try:
-            start_time_2 = time.time()
-            requests.get(target_url, timeout=10, verify=False)
-            ping_time = int((time.time() - start_time_2) * 1000)
-        except:
-            pass
-            
+            start_2 = time.time()
+            requests.get(url, timeout=10, verify=False)
+            ping_time = int((time.time() - start_2) * 1000)
+        except: pass
     except requests.exceptions.Timeout:
-        print("DETECTED: Server Timeout!")
-        status = "Offline"
-        error_type = "Connection Timeout"
-        
+        error_type = "Timeout"
     except Exception as e:
-        print(f"DETECTED: General Error - {e}")
-        status = "Offline"
         error_type = "Unreachable"
+        
+    return {"status": status, "error_type": error_type, "ping": ping_time}
 
-    # Step 2: Save the Data
-    timestamp = datetime.now(timezone.utc).isoformat()
+def main():
+    print("Running KTU Multi-Service Ping...")
+    results = {}
+    down_count = 0
+    ssl_issue = False
     
+    for name, url in SERVICES.items():
+        res = check_service(name, url)
+        results[name] = res
+        print(f"{name}: {res['status']} ({res['ping']}ms)")
+        
+        if res['status'] == "Offline": down_count += 1
+        if res['status'] == "SSL Issue": ssl_issue = True
+        
+    # Determine the overall global status
+    if down_count == len(SERVICES):
+        overall = "Major Outage"
+    elif down_count > 0:
+        overall = "Partial Outage"
+    elif ssl_issue:
+        overall = "SSL Issues Detected"
+    else:
+        overall = "All Systems Operational"
+
     new_record = {
-        "timestamp": timestamp,
-        "status": status,
-        "error_type": error_type,
-        "ping": ping_time
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "overall_status": overall,
+        "services": results
     }
-    
-    print(f"Result: {status} | Error: {error_type} | Ping: {ping_time}ms")
 
     history = []
     if os.path.exists('status-history.json'):
@@ -78,7 +85,7 @@ def main():
     with open('status-history.json', 'w') as f:
         json.dump(history, f, indent=4)
         
-    print("Smart Logbook updated successfully!")
+    print(f"Logbook updated! Overall Status: {overall}")
 
 if __name__ == "__main__":
     main()
