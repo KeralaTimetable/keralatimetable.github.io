@@ -1,5 +1,26 @@
 [
     {
+        "timestamp": "2026-05-02T21:33:35.866765+00:00",
+        "overall_status": "SSL Issues Detected",
+        "services": {
+            "KTU Main Website": {
+                "status": "Online",
+                "error_type": "None",
+                "ping": 1840
+            },
+            "e-Governance Portal": {
+                "status": "SSL Issue",
+                "error_type": "Certificate Error",
+                "ping": 1394
+            },
+            "KTU API Server": {
+                "status": "Online",
+                "error_type": "None",
+                "ping": 1605
+            }
+        }
+    },
+    {
         "timestamp": "2026-05-02T20:34:09.288550+00:00",
         "overall_status": "SSL Issues Detected",
         "services": {
