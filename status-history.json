@@ -1,0 +1,8 @@
+[
+    {
+        "timestamp": "2026-05-02T10:55:36.918713+00:00",
+        "status": "SSL Issue",
+        "error_type": "Certificate Error",
+        "ping": 1346
+    }
+]
