@@ -6,9 +6,9 @@
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
     
-    <title>Is KTU Down? Live Server Status Checker</title>
-    <meta name="description" content="Check if the official APJ Abdul Kalam Technological University (KTU) website and student portal are currently down, offline, or working normally.">
-    <meta name="keywords" content="is ktu down, ktu site status, ktu student portal not opening, ktu server down, ktu live status">
+    <title>Is KTU Down? Live Server Status & Student Portal Checker</title>
+    <meta name="description" content="Live check to see if the official APJ Abdul Kalam Technological University (KTU) website, student login portal, or result servers are currently down, slow, or offline today.">
+    <meta name="keywords" content="is ktu down, ktu site status, ktu student portal not opening, ktu server down, ktu live status, ktu login error, ktu result site down, apjaktu server status, ktu website slow, ktu student login down today, ktu portal error 504, ktu server timeout 2026">
     <meta name="robots" content="index, follow">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -38,7 +38,16 @@
                 <h1 class="text-xl font-extrabold tracking-tight text-slate-900">Kerala <span class="text-indigo-600">Timetable</span></h1>
             </a>
             <div class="flex gap-3">
-                <a href="updates.html" class="text-sm font-semibold text-slate-500 hover:text-indigo-600">Notice Board</a>
+                <a href="status.html" class="text-xs font-bold text-slate-600 hover:text-indigo-600 bg-white border border-slate-200 shadow-sm px-4 py-2 rounded-full transition-colors flex items-center gap-2">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    Status
+                </a>
+                <a href="updates.html" class="text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm px-4 py-2 rounded-full transition-colors flex items-center gap-1">
+                    Notice Board
+                </a>
             </div>
         </div>
     </header>
@@ -56,6 +65,21 @@
                 };
             </script>
             <script src="https://www.highperformanceformat.com/3c5610dd6b4d28e2fcbaeb129ed5df09/invoke.js"></script>
+        </div>
+
+        <div id="ssl-alert-banner" class="hidden w-full mb-6 bg-[#2a1f1a] border border-[#d97706] rounded-2xl p-6 shadow-lg transform transition-all duration-500 hover:scale-[1.01]">
+            <div class="flex items-start gap-4">
+                <div class="text-[#f59e0b] mt-1">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-[#f59e0b] mb-2 tracking-wide">Portal SSL Certificate Issue</h3>
+                    <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+                        KTU is currently facing an SSL issue. The server is online, but your browser is blocking access for security reasons.<br><br>
+                        <span class="text-white font-medium">Solution:</span> Login is available by using <strong>Mozilla Firefox</strong> or opening a <strong>Chrome Incognito</strong> window. Click <code class="bg-black/50 px-2 py-1 rounded text-slate-300 border border-slate-700">Advanced</code> &rarr; <code class="bg-black/50 px-2 py-1 rounded text-slate-300 border border-slate-700">Proceed to site</code>.
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div class="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8 md:p-12 w-full text-center relative overflow-hidden">
@@ -81,6 +105,50 @@
             </button>
             
             <p class="text-xs text-slate-400 mt-6">Note: This tool checks the main university web servers. Individual student portal logins may experience separate database delays during result days.</p>
+
+            <div class="mt-10 border-t border-slate-100 pt-8 w-full text-left">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider">Hourly Logbook</h3>
+                    <span class="text-[10px] bg-slate-100 text-slate-400 px-2 py-1 rounded font-bold">Auto-updates hourly</span>
+                </div>
+                
+                <ul id="history-list" class="space-y-3">
+                    <li class="text-xs text-slate-400 text-center py-2 animate-pulse">Loading server history...</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="w-full text-left mt-8 pt-8 border-t border-slate-200">
+            <h3 class="text-xl font-bold text-slate-800 mb-6">Frequently Asked Questions</h3>
+            
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white p-5 border border-slate-100 shadow-sm rounded-2xl">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Why is the KTU student portal not opening?
+                    </h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">During peak times, especially when B.Tech exam results or S2 timetables are published, the APJAKTU servers experience extreme traffic spikes. This overload causes the KTU student login page to timeout, show a 504 Gateway error, or stop opening entirely.</p>
+                </div>
+
+                <div class="bg-white p-5 border border-slate-100 shadow-sm rounded-2xl">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        Is the KTU result site down today?
+                    </h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">You can use the live ping tool above to verify if the main KTU website is down globally, or if it is just your internet connection. If the tool says "Offline," the university servers are down and you will need to wait for their IT team to restart the database.</p>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Live Search Trends</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-white border border-slate-200 text-slate-400 text-[11px] px-3 py-1 rounded-md">KTU Server Status</span>
+                    <span class="bg-white border border-slate-200 text-slate-400 text-[11px] px-3 py-1 rounded-md">Student Login Error</span>
+                    <span class="bg-white border border-slate-200 text-slate-400 text-[11px] px-3 py-1 rounded-md">Is KTU Down Right Now</span>
+                    <span class="bg-white border border-slate-200 text-slate-400 text-[11px] px-3 py-1 rounded-md">APJAKTU Website Not Working</span>
+                    <span class="bg-white border border-slate-200 text-slate-400 text-[11px] px-3 py-1 rounded-md">Result Portal Crash 2026</span>
+                </div>
+            </div>
         </div>
 
         <div class="ad-space w-full min-h-[250px] mt-8 rounded-xl overflow-hidden flex items-center justify-center">
@@ -97,13 +165,13 @@
     <script src="https://pl29230435.profitablecpmratenetwork.com/1b/6a/6e/1b6a6efd9291e58fa17a4b56b1943b54.js"></script>
 
     <script>
+        // 1. Live Ping Logic
         async function checkServerStatus() {
             const statusText = document.getElementById('status-text');
             const statusIcon = document.getElementById('status-icon');
             const pingTime = document.getElementById('ping-time');
             const container = document.getElementById('status-container');
 
-            // 1. Set to Loading State
             container.className = "flex flex-col items-center justify-center p-8 bg-slate-50 rounded-2xl border border-slate-200 transition-all duration-300";
             statusText.innerText = "Pinging servers...";
             statusText.className = "text-3xl font-extrabold text-slate-600 mt-2";
@@ -113,7 +181,6 @@
             const startTime = Date.now();
 
             try {
-                // 2. Use a proxy to ping the KTU website without CORS errors
                 const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://ktu.edu.in')}`);
                 
                 if (response.ok) {
@@ -122,7 +189,6 @@
                     const ping = endTime - startTime;
 
                     if (data.contents) {
-                        // 3. SUCCESS - Site is Working
                         container.className = "flex flex-col items-center justify-center p-8 bg-emerald-50/50 rounded-2xl border border-emerald-100 transition-all duration-300";
                         statusText.innerText = "Online (Working)";
                         statusText.className = "text-3xl font-extrabold text-emerald-500 mt-2";
@@ -135,7 +201,6 @@
                     throw new Error("Proxy failed");
                 }
             } catch (error) {
-                // 4. FAILED - Site is Down
                 container.className = "flex flex-col items-center justify-center p-8 bg-red-50/50 rounded-2xl border border-red-100 transition-all duration-300";
                 statusText.innerText = "Offline (Site Down)";
                 statusText.className = "text-3xl font-extrabold text-red-500 mt-2";
@@ -144,8 +209,78 @@
             }
         }
 
-        // Run the check automatically when the page opens
-        window.onload = checkServerStatus;
+        // 2. Fetch Hourly History Logic
+        async function fetchHistory() {
+            try {
+                // Ensure we skip browser cache to always get the latest JSON
+                const response = await fetch('status-history.json?t=' + new Date().getTime());
+                const data = await response.json();
+                const list = document.getElementById('history-list');
+                const sslBanner = document.getElementById('ssl-alert-banner');
+                
+                list.innerHTML = ''; 
+                
+                if (data.length === 0) {
+                    list.innerHTML = '<li class="text-xs text-slate-400 text-center">No history recorded yet. Check back in an hour!</li>';
+                    return;
+                }
+
+                // --- SMART ALERT CHECK ---
+                if (data[0].status === "SSL Issue") {
+                    sslBanner.classList.remove('hidden');
+                } else {
+                    sslBanner.classList.add('hidden');
+                }
+                // -------------------------
+
+                data.forEach(record => {
+                    const recordTime = new Date(record.timestamp);
+                    const now = new Date();
+                    const diffHours = Math.round((now - recordTime) / (1000 * 60 * 60));
+                    
+                    let timeText = diffHours === 0 ? "Just now" : `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+
+                    let dotColor = "bg-red-500";
+                    let bgColor = "bg-red-50";
+                    let textColor = "text-red-700";
+                    let pingText = record.error_type || "Timeout";
+
+                    if (record.status === "Online") {
+                        dotColor = "bg-emerald-500";
+                        bgColor = "bg-slate-50";
+                        textColor = "text-slate-700";
+                        pingText = `${record.ping}ms`;
+                    } else if (record.status === "SSL Issue") {
+                        dotColor = "bg-amber-500";
+                        bgColor = "bg-amber-50/50";
+                        textColor = "text-amber-700";
+                        pingText = `SSL Warning (${record.ping}ms)`;
+                    }
+
+                    const li = document.createElement('li');
+                    li.className = `flex justify-between items-center p-3 rounded-lg border border-slate-100 ${bgColor}`;
+                    li.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <span class="w-2.5 h-2.5 rounded-full ${dotColor}"></span>
+                            <span class="text-sm font-bold ${textColor}">${record.status}</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-xs">
+                            <span class="text-slate-500 font-medium">${timeText}</span>
+                            <span class="text-slate-400 font-mono bg-white px-2 py-0.5 rounded border border-slate-200 shadow-sm">${pingText}</span>
+                        </div>
+                    `;
+                    list.appendChild(li);
+                });
+            } catch (error) {
+                console.log("History not available yet.");
+            }
+        }
+
+        // 3. Initialize Both Checkers on Load
+        window.onload = () => {
+            checkServerStatus();
+            fetchHistory();
+        };
     </script>
 </body>
 </html>
