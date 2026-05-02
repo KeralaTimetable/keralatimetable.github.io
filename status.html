@@ -79,6 +79,36 @@
             </ul>
         </div>
 
+        <div class="w-full text-left mt-10 pt-8 border-t border-slate-200">
+            <h3 class="text-xl font-bold text-slate-800 mb-6">Frequently Asked Questions</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white p-5 border border-slate-100 shadow-sm rounded-2xl">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Why is the KTU student portal not opening?
+                    </h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">During peak times, especially when B.Tech exam results or S2 timetables are published, the APJAKTU servers experience extreme traffic spikes. This causes the KTU student login page to timeout, show a 504 Gateway error, or stop opening entirely.</p>
+                </div>
+                <div class="bg-white p-5 border border-slate-100 shadow-sm rounded-2xl">
+                    <h4 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        Is the KTU result site down today?
+                    </h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">You can use the live ping tool above to verify if the main KTU website is down globally, or if it's just your internet. If the tool says "Offline" or "Major Outage," the university servers are down and you will need to wait.</p>
+                </div>
+            </div>
+            
+            <div class="mt-6">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Live Search Trends</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-white border border-slate-200 text-slate-400 text-[11px] px-3 py-1 rounded-md">KTU Server Status</span>
+                    <span class="bg-white border border-slate-200 text-slate-400 text-[11px] px-3 py-1 rounded-md">Student Login Error</span>
+                    <span class="bg-white border border-slate-200 text-slate-400 text-[11px] px-3 py-1 rounded-md">Is KTU Down Right Now</span>
+                    <span class="bg-white border border-slate-200 text-slate-400 text-[11px] px-3 py-1 rounded-md">Result Portal Crash 2026</span>
+                </div>
+            </div>
+        </div>
+
         <div class="ad-space w-full min-h-[250px] mt-10 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200">
             <script async="async" data-cfasync="false" src="https://pl29230436.profitablecpmratenetwork.com/d8d90802dcf5c4de595fff221ca18899/invoke.js"></script>
             <div id="container-d8d90802dcf5c4de595fff221ca18899"></div>
@@ -86,7 +116,14 @@
 
     </main>
 
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center">
+        <p class="text-slate-500 text-sm">Kerala Timetable | Unofficial KTU Resources</p>
+    </footer>
+
+    <script src="https://pl29230435.profitablecpmratenetwork.com/1b/6a/6e/1b6a6efd9291e58fa17a4b56b1943b54.js"></script>
+
     <script>
+        // Ensure names match the Python script exactly
         const TARGET_SERVICES = [
             { id: "main", name: "KTU Main Website", url: "https://ktu.edu.in" },
             { id: "app", name: "e-Governance Portal", url: "https://app.ktu.edu.in" },
@@ -97,30 +134,30 @@
             const servicesContainer = document.getElementById('services-container');
             const sslBanner = document.getElementById('ssl-alert-banner');
             
-            // 1. Reset UI to Loading State
             updateOverallBanner("Running live check...", null);
             servicesContainer.innerHTML = '';
             
             TARGET_SERVICES.forEach(svc => {
                 servicesContainer.innerHTML += `
                     <div class="bg-white border border-slate-200 rounded-xl p-4 flex justify-between items-center shadow-sm">
-                        <div class="flex flex-col w-1/2">
-                            <span class="font-bold text-slate-800 text-sm md:text-base">${svc.name}</span>
-                            <span class="text-xs text-slate-400 mt-0.5" id="ping-${svc.id}">Pinging live...</span>
+                        <div class="flex flex-col w-[60%]">
+                            <span class="font-bold text-slate-800 text-sm md:text-base truncate">${svc.name}</span>
+                            <span class="text-xs text-slate-400 mt-0.5" id="ping-${svc.id}">Connecting...</span>
                         </div>
-                        <div class="h-6 bg-slate-200 rounded-full w-20 animate-pulse" id="status-${svc.id}"></div>
+                        <div class="h-6 bg-slate-200 rounded-full w-24 animate-pulse" id="status-${svc.id}"></div>
                     </div>
                 `;
             });
 
-            // 2. Fetch the Python Logbook (to grab history & deep SSL checks)
+            // Fetch the Python Logbook (which now has the Chrome Disguise)
+            let latestPythonData = null;
             let sslIssueDetected = false;
             try {
                 const histRes = await fetch('status-history.json?t=' + new Date().getTime());
                 const data = await histRes.json();
                 if (data.length > 0) {
-                    // Check if Python caught an SSL issue recently
-                    if (data[0].overall_status === "SSL Issues Detected") {
+                    latestPythonData = data[0]; 
+                    if (latestPythonData.overall_status === "SSL Issues Detected") {
                         sslIssueDetected = true;
                         sslBanner.classList.remove('hidden');
                     } else {
@@ -130,15 +167,13 @@
                 }
             } catch (e) { console.log("History logbook error"); }
 
-            // 3. Execute Live Pings (Concurrent)
             let downCount = 0;
             const pingPromises = TARGET_SERVICES.map(async (svc) => {
                 const startTime = Date.now();
                 try {
-                    // Use allorigins proxy to bypass CORS for real-time pinging
+                    // Try the live proxy first
                     const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(svc.url)}`;
                     const response = await fetch(proxyUrl);
-                    
                     if (response.ok) {
                         const data = await response.json();
                         if (data.contents) {
@@ -147,24 +182,31 @@
                             return "Online";
                         }
                     }
-                    throw new Error("No contents returned");
+                    throw new Error("Proxy Blocked by Firewall");
                 } catch (error) {
-                    // If the Python bot told us it's an SSL issue, display that instead of "Offline"
-                    if (sslIssueDetected && svc.id === "app") {
-                        updateServiceCard(svc.id, "SSL Issue", "Blocked");
-                        return "SSL Issue";
-                    } else {
-                        updateServiceCard(svc.id, "Offline", "Timeout");
-                        downCount++;
-                        return "Offline";
+                    // PROXY BLOCKED: Fallback to the disguised Python Bot data
+                    if (latestPythonData && latestPythonData.services[svc.name]) {
+                        const pythonStatus = latestPythonData.services[svc.name].status;
+                        const pythonPing = latestPythonData.services[svc.name].ping;
+                        
+                        if (pythonStatus === "Online") {
+                            updateServiceCard(svc.id, "Online", `${pythonPing}ms (via Bot)`);
+                            return "Online";
+                        } else if (pythonStatus === "SSL Issue") {
+                            updateServiceCard(svc.id, "SSL Issue", "Blocked");
+                            return "SSL Issue";
+                        }
                     }
+                    
+                    // If the Python bot ALSO couldn't get through, it's genuinely down
+                    updateServiceCard(svc.id, "Offline", "Timeout");
+                    downCount++;
+                    return "Offline";
                 }
             });
 
-            // Wait for all 3 pings to finish
             await Promise.all(pingPromises);
 
-            // 4. Calculate Final Real-Time Status
             let finalStatus = "All Systems Operational";
             if (downCount === TARGET_SERVICES.length) finalStatus = "Major Outage";
             else if (downCount > 0) finalStatus = "Partial Outage";
@@ -172,8 +214,6 @@
 
             updateOverallBanner(finalStatus, new Date());
         }
-
-        // --- Helper UI Functions ---
 
         function updateServiceCard(id, status, pingText) {
             const pingEl = document.getElementById(`ping-${id}`);
@@ -265,7 +305,7 @@
             }
         }
 
-        // Automatically run the live check the second the page opens
+        // Run on load
         window.onload = runLiveCheck;
     </script>
 </body>
