@@ -1,0 +1,49 @@
+name: KTU Automated Bots (Status & Notices)
+
+# This tells GitHub WHEN to run the bot
+on:
+  schedule:
+    - cron: '0 * * * *' # Runs exactly at the top of every hour (e.g., 1:00, 2:00, 3:00)
+  workflow_dispatch:    # This adds the "Run workflow" button so you can test it manually!
+
+jobs:
+  update-ktu-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Grab your website files
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Set up the Python environment
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # 3. Install required packages (requests is needed to fetch websites)
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      # 4. Run your server status checker
+      - name: Run KTU Server Ping
+        run: python ping-server.py
+
+      # 5. Run your new Notice Board fetcher
+      - name: Run KTU Notice Fetcher
+        run: python fetch_notices.py
+
+      # 6. Save the new JSON files and push them to your website
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Add the specific files we want to save
+          git add status-history.json notices.json
+          
+          # This line checks if the files actually changed. If they did, it saves them. 
+          # If nothing changed, it just skips without throwing an error!
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update KTU status and notices" && git push)
