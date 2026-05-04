@@ -1,11 +1,7 @@
 import requests
 import json
 import time
-from datetime import datetime, timezone, timedelta
-import urllib3
-
-# This tells Python to ignore strict SSL certificate warnings (act like Chrome)
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+from datetime import datetime, timezone
 
 # THESE NAMES MUST MATCH YOUR STATUS.HTML EXACTLY
 TARGET_SERVICES = [
@@ -30,8 +26,8 @@ def ping_servers():
     for svc in TARGET_SERVICES:
         start_time = time.time()
         try:
-            # verify=False is the magic trick that bypasses the strict Python SSL block
-            response = requests.get(svc["url"], headers=HEADERS, timeout=15, verify=False)
+            # We removed verify=False. The bot will now catch REAL SSL errors!
+            response = requests.get(svc["url"], headers=HEADERS, timeout=15)
             ping_ms = int((time.time() - start_time) * 1000)
             
             if response.status_code < 500:
@@ -43,9 +39,9 @@ def ping_servers():
                 down_count += 1
                 
         except requests.exceptions.SSLError:
-            # We still catch this just in case, but verify=False makes it very rare now
+            # Catch strict SSL configuration errors
             results[svc["name"]] = {"status": "SSL Issue", "ping": "Blocked"}
-            print(f"{svc['name']}: SSL Issue")
+            print(f"{svc['name']}: SSL Issue Detected")
             ssl_count += 1
             
         except requests.exceptions.RequestException:
@@ -63,11 +59,12 @@ def ping_servers():
     else:
         overall = "All Systems Operational"
 
-    # IST Time Conversion
-    ist_time = datetime.now(timezone.utc) + timedelta(hours=5, minutes=30)
+    # THE TIME BUG FIX: Output standard ISO 8601 UTC time with a 'Z'
+    # JavaScript's 'new Date()' parses this flawlessly and auto-converts to the student's local time
+    utc_time = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     
     new_record = {
-        "timestamp": ist_time.isoformat(),
+        "timestamp": utc_time,
         "overall_status": overall,
         "services": results
     }
