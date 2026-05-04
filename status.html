@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
+    
     <title>Is KTU Down? Live Server Status Checker | Kerala Timetable</title>
     <meta name="description" content="Live check to see if the official APJ Abdul Kalam Technological University (KTU) website, student login portal, or result servers are currently down, slow, or offline today.">
     <meta name="keywords" content="is ktu down, ktu site status, ktu student portal not opening, ktu server down, ktu live status, ktu login error, ktu result site down, apjaktu server status, ktu website slow">
@@ -106,7 +108,14 @@
     </main>
 
     <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center">
-        <p class="text-slate-500 text-sm">Kerala Timetable | Unofficial KTU Resources</p>
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
+            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast and direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
+            <div class="mt-4 space-x-4">
+                <a href="/about.html" class="text-indigo-600 text-xs font-bold hover:underline">About Us</a>
+                <a href="https://keralatimetable.stck.me/profile" target="_blank" class="text-indigo-600 text-xs font-bold hover:underline">Support Us</a>
+            </div>
+        </div>
     </footer>
 
     <script>
@@ -136,7 +145,7 @@
                 `;
             });
 
-            // Fetch the Python Logbook (which now has the Chrome Disguise)
+            // Fetch the Python Logbook (as a historical backup)
             let latestPythonData = null;
             let sslIssueDetected = false;
             try {
@@ -157,21 +166,28 @@
             let downCount = 0;
             const pingPromises = TARGET_SERVICES.map(async (svc) => {
                 const startTime = Date.now();
+                
                 try {
-                    // Try the live proxy first
-                    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(svc.url)}`;
-                    const response = await fetch(proxyUrl);
-                    if (response.ok) {
-                        const data = await response.json();
-                        if (data.contents) {
-                            const ping = Date.now() - startTime;
-                            updateServiceCard(svc.id, "Online", `${ping}ms`);
-                            return "Online";
-                        }
-                    }
-                    throw new Error("Proxy Blocked by Firewall");
+                    // THE DIRECT STUDENT PING (Bypasses Firewalls)
+                    // Uses 'no-cors' to ping KTU directly from the user's Jio/Airtel network
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8-second timeout
+                    
+                    await fetch(svc.url + '?cb=' + Date.now(), { 
+                        mode: 'no-cors', 
+                        cache: 'no-store',
+                        signal: controller.signal
+                    });
+                    
+                    clearTimeout(timeoutId);
+                    
+                    // If the fetch doesn't throw a network error, the server is physically online!
+                    const ping = Date.now() - startTime;
+                    updateServiceCard(svc.id, "Online", `${ping}ms`);
+                    return "Online";
+                    
                 } catch (error) {
-                    // PROXY BLOCKED: Fallback to the disguised Python Bot data
+                    // ATTEMPT 2: If the direct ping fails, check what the Bot saw earlier
                     if (latestPythonData && latestPythonData.services[svc.name]) {
                         const pythonStatus = latestPythonData.services[svc.name].status;
                         const pythonPing = latestPythonData.services[svc.name].ping;
@@ -185,7 +201,7 @@
                         }
                     }
                     
-                    // If the Python bot ALSO couldn't get through, it's genuinely down
+                    // ATTEMPT 3: Genuinely Offline
                     updateServiceCard(svc.id, "Offline", "Timeout");
                     downCount++;
                     return "Offline";
