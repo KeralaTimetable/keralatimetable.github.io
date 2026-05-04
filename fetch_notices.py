@@ -1,70 +1,53 @@
-import requests
 import json
-import urllib3
+import time
+from playwright.sync_api import sync_playwright
 
-# Ignore strict SSL warnings
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+def fetch_notices_with_browser():
+    print("Launching invisible browser to bypass x-Token security...")
+    
+    with sync_playwright() as p:
+        # Launch an invisible Chromium browser
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
 
-def fetch_notices():
-    print("Bypassing KTU CSRF Security Firewall (Attempt 2)...")
-    
-    session = requests.Session()
-    
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Accept": "application/json, text/plain, */*",
-        "Origin": "https://ktu.edu.in",
-        "Referer": "https://ktu.edu.in/"
-    }
-    
-    api_url = "https://api.ktu.edu.in/ktu-web-portal-api/anon/announcemnts"
-    
-    try:
-        # Step 1: Knock directly on the API's door to get the security token
-        print("Pinging the API server to extract the security cookie...")
-        
-        # We do a simple GET request first. The server will likely throw an error, 
-        # but it will STILL hand us the CSRF token in the process!
-        session.get(api_url, headers=headers, verify=False, timeout=15)
-        
-        # Dig through the cookie jar to find the token (ignoring case)
-        xsrf_token = None
-        for cookie in session.cookies:
-            if cookie.name.upper() == 'XSRF-TOKEN':
-                xsrf_token = cookie.value
-                break
-                
-        if xsrf_token:
-            headers["X-XSRF-TOKEN"] = xsrf_token
-            print("Successfully stole the XSRF-TOKEN from the API!")
-        else:
-            print("Still no token found. Trying to proceed anyway...")
+        notices_data = []
 
-        # Step 2: Now send the real request with the token attached!
-        print("Fetching notices...")
-        payload = {"number": 0, "size": 20}
-        
-        # Most modern APIs use POST for this, but we will test it.
-        response = session.post(api_url, headers=headers, json=payload, verify=False, timeout=15)
-        
-        # If POST fails, try GET just in case!
-        if response.status_code != 200:
-            print(f"POST failed (HTTP {response.status_code}), trying GET instead...")
-            response = session.get(api_url, headers=headers, params=payload, verify=False, timeout=15)
+        # We will set up a "listener" to catch the API response in mid-air
+        def handle_response(response):
+            if "api.ktu.edu.in/ktu-web-portal-api/anon/announcemnts" in response.url and response.status == 200:
+                print("Intercepted the API data successfully!")
+                try:
+                    data = response.json()
+                    notices_data.append(data)
+                except Exception as e:
+                    print("Failed to parse JSON from interception:", e)
 
-        if response.status_code == 200:
-            data = response.json()
+        page.on("response", handle_response)
+
+        try:
+            print("Navigating to KTU Announcements page...")
+            # We go directly to the page that loads the announcements
+            page.goto("https://ktu.edu.in/eu/core/announcements.htm", timeout=60000)
             
-            with open("notices.json", "w") as f:
-                json.dump(data, f, indent=4)
-                
-            print("Success! Bypassed firewall and saved KTU notices.")
-        else:
-            print(f"Failed. Server returned HTTP {response.status_code}")
-            print("Server response:", response.text[:250])
+            # Wait for the table to load (this ensures the API call was made)
+            page.wait_for_selector(".table-responsive", timeout=15000)
             
-    except Exception as e:
-        print(f"Error fetching notices: {e}")
+            # Give it 2 extra seconds just to ensure the interception caught the data
+            time.sleep(2)
+            
+            if len(notices_data) > 0:
+                # We successfully caught the data!
+                with open("notices.json", "w") as f:
+                    json.dump(notices_data[0], f, indent=4)
+                print("Success! Saved intercepted data to notices.json")
+            else:
+                print("Error: Reached the page, but didn't catch the API data in transit.")
+                
+        except Exception as e:
+            print(f"Browser automation failed: {e}")
+            
+        finally:
+            browser.close()
 
 if __name__ == "__main__":
-    fetch_notices()
+    fetch_notices_with_browser()
