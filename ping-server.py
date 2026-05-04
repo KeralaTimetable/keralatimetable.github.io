@@ -1,104 +1,91 @@
 import requests
 import json
-import os
-from datetime import datetime, timezone
 import time
+from datetime import datetime, timezone, timedelta
 import urllib3
 
+# This tells Python to ignore strict SSL certificate warnings (act like Chrome)
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-SERVICES = {
-    "KTU Main Website": "https://ktu.edu.in",
-    "e-Governance Portal": "https://app.ktu.edu.in",
-    "KTU API Server": "https://api.ktu.edu.in"
-}
+# THESE NAMES MUST MATCH YOUR STATUS.HTML EXACTLY
+TARGET_SERVICES = [
+    {"name": "KTU Main Website", "url": "https://ktu.edu.in"},
+    {"name": "KTU Login Portal", "url": "https://app.ktu.edu.in"},
+    {"name": "KTU API Server", "url": "https://api.ktu.edu.in"}
+]
 
-# The Chrome Disguise
+# Disguise the bot as a normal Windows computer using Google Chrome
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.5",
-    "Connection": "keep-alive"
 }
 
-def check_service(name, url):
-    status = "Offline"
-    error_type = "Timeout"
-    ping_time = 0
-    start_time = time.time()
-    
-    try:
-        # ATTEMPT 1: Act like a normal browser (Checks SSL strictly)
-        response = requests.get(url, headers=HEADERS, timeout=12)
-        
-        if response.status_code < 500:
-            status = "Online"
-            error_type = "None"
-            ping_time = int((time.time() - start_time) * 1000)
-        else:
-            error_type = f"Server Error ({response.status_code})"
-            
-    except requests.exceptions.SSLError:
-        # BOOM! We caught the SSL Certificate Error!
-        status = "SSL Issue"
-        error_type = "Certificate Error"
-        
-        # ATTEMPT 2: Bypass the SSL just to measure the ping time
-        try:
-            start_2 = time.time()
-            requests.get(url, headers=HEADERS, timeout=10, verify=False)
-            ping_time = int((time.time() - start_2) * 1000)
-        except: pass
-            
-    except requests.exceptions.Timeout:
-        error_type = "Timeout"
-    except Exception as e:
-        error_type = "Unreachable"
-        
-    return {"status": status, "error_type": error_type, "ping": ping_time}
-
-def main():
+def ping_servers():
     print("Running KTU Smart Stealth Ping...")
     results = {}
     down_count = 0
-    ssl_issue = False
-    
-    for name, url in SERVICES.items():
-        res = check_service(name, url)
-        results[name] = res
-        print(f"{name}: {res['status']} ({res['ping']}ms)")
-        
-        if res['status'] == "Offline": down_count += 1
-        if res['status'] == "SSL Issue": ssl_issue = True
-        
-    if down_count == len(SERVICES):
+    ssl_count = 0
+
+    for svc in TARGET_SERVICES:
+        start_time = time.time()
+        try:
+            # verify=False is the magic trick that bypasses the strict Python SSL block
+            response = requests.get(svc["url"], headers=HEADERS, timeout=15, verify=False)
+            ping_ms = int((time.time() - start_time) * 1000)
+            
+            if response.status_code < 500:
+                results[svc["name"]] = {"status": "Online", "ping": ping_ms}
+                print(f"{svc['name']}: Online ({ping_ms}ms)")
+            else:
+                results[svc["name"]] = {"status": "Offline", "ping": "Timeout"}
+                print(f"{svc['name']}: Offline (HTTP {response.status_code})")
+                down_count += 1
+                
+        except requests.exceptions.SSLError:
+            # We still catch this just in case, but verify=False makes it very rare now
+            results[svc["name"]] = {"status": "SSL Issue", "ping": "Blocked"}
+            print(f"{svc['name']}: SSL Issue")
+            ssl_count += 1
+            
+        except requests.exceptions.RequestException:
+            results[svc["name"]] = {"status": "Offline", "ping": "Timeout"}
+            print(f"{svc['name']}: Offline (Timeout/Blocked)")
+            down_count += 1
+
+    # Determine Overall Status
+    if down_count == len(TARGET_SERVICES):
         overall = "Major Outage"
     elif down_count > 0:
         overall = "Partial Outage"
-    elif ssl_issue:
+    elif ssl_count > 0:
         overall = "SSL Issues Detected"
     else:
         overall = "All Systems Operational"
 
+    # IST Time Conversion
+    ist_time = datetime.now(timezone.utc) + timedelta(hours=5, minutes=30)
+    
     new_record = {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": ist_time.isoformat(),
         "overall_status": overall,
         "services": results
     }
 
-    history = []
-    if os.path.exists('status-history.json'):
-        with open('status-history.json', 'r') as f:
-            try: history = json.load(f)
-            except: pass
-            
+    # Save to history file
+    try:
+        with open("status-history.json", "r") as f:
+            history = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        history = []
+
     history.insert(0, new_record)
-    history = history[:12]
-    
-    with open('status-history.json', 'w') as f:
+    history = history[:12] # Keep only the last 12 hours
+
+    with open("status-history.json", "w") as f:
         json.dump(history, f, indent=4)
-        
+
     print(f"Logbook updated! Overall Status: {overall}")
 
 if __name__ == "__main__":
-    main()
+    ping_servers()
