@@ -22,15 +22,15 @@
 
     <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <a href="/index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
                 <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 <h1 class="text-xl font-extrabold tracking-tight text-slate-900">Kerala <span class="text-indigo-600">Timetable</span></h1>
             </a>
             <div class="flex gap-3">
-                <a href="status.html" class="text-xs font-bold text-slate-600 bg-slate-100 px-4 py-2 rounded-full flex items-center gap-2">
+                <a href="/status.html" class="text-xs font-bold text-slate-600 bg-slate-100 px-4 py-2 rounded-full flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Status
                 </a>
-                <a href="updates.html" class="text-xs font-bold text-white bg-indigo-600 px-4 py-2 rounded-full">Notice Board</a>
+                <a href="/updates.html" class="text-xs font-bold text-white bg-indigo-600 px-4 py-2 rounded-full">Notice Board</a>
             </div>
         </div>
     </header>
@@ -145,33 +145,28 @@
                 `;
             });
 
-            // Fetch the Python Logbook (as a historical backup)
+            // Fetch the Python Logbook (for History and Fallback only)
             let latestPythonData = null;
-            let sslIssueDetected = false;
             try {
                 const histRes = await fetch('status-history.json?t=' + new Date().getTime());
                 const data = await histRes.json();
                 if (data.length > 0) {
                     latestPythonData = data[0]; 
-                    if (latestPythonData.overall_status === "SSL Issues Detected") {
-                        sslIssueDetected = true;
-                        sslBanner.classList.remove('hidden');
-                    } else {
-                        sslBanner.classList.add('hidden');
-                    }
                     renderHistory(data);
                 }
             } catch (e) { console.log("History logbook error"); }
 
-            let downCount = 0;
+            let onlineCount = 0;
+            let offlineCount = 0;
+            let sslCount = 0;
+
             const pingPromises = TARGET_SERVICES.map(async (svc) => {
                 const startTime = Date.now();
                 
                 try {
-                    // THE DIRECT STUDENT PING (Bypasses Firewalls)
-                    // Uses 'no-cors' to ping KTU directly from the user's Jio/Airtel network
+                    // ATTEMPT 1: Direct Student Ping
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8-second timeout
+                    const timeoutId = setTimeout(() => controller.abort(), 8000);
                     
                     await fetch(svc.url + '?cb=' + Date.now(), { 
                         mode: 'no-cors', 
@@ -181,39 +176,51 @@
                     
                     clearTimeout(timeoutId);
                     
-                    // If the fetch doesn't throw a network error, the server is physically online!
                     const ping = Date.now() - startTime;
                     updateServiceCard(svc.id, "Online", `${ping}ms`);
-                    return "Online";
+                    onlineCount++;
                     
                 } catch (error) {
-                    // ATTEMPT 2: If the direct ping fails, check what the Bot saw earlier
+                    // ATTEMPT 2: Bot Fallback
                     if (latestPythonData && latestPythonData.services[svc.name]) {
                         const pythonStatus = latestPythonData.services[svc.name].status;
                         const pythonPing = latestPythonData.services[svc.name].ping;
                         
                         if (pythonStatus === "Online") {
                             updateServiceCard(svc.id, "Online", `${pythonPing}ms (via Bot)`);
-                            return "Online";
+                            onlineCount++;
+                            return;
                         } else if (pythonStatus === "SSL Issue") {
                             updateServiceCard(svc.id, "SSL Issue", "Blocked");
-                            return "SSL Issue";
+                            sslCount++;
+                            return;
                         }
                     }
                     
                     // ATTEMPT 3: Genuinely Offline
                     updateServiceCard(svc.id, "Offline", "Timeout");
-                    downCount++;
-                    return "Offline";
+                    offlineCount++;
                 }
             });
 
             await Promise.all(pingPromises);
 
+            // Calculate exact live overall status based ONLY on current cards
             let finalStatus = "All Systems Operational";
-            if (downCount === TARGET_SERVICES.length) finalStatus = "Major Outage";
-            else if (downCount > 0) finalStatus = "Partial Outage";
-            else if (sslIssueDetected) finalStatus = "SSL Issues Detected";
+            if (offlineCount === TARGET_SERVICES.length) {
+                finalStatus = "Major Outage";
+            } else if (offlineCount > 0) {
+                finalStatus = "Partial Outage";
+            } else if (sslCount > 0) {
+                finalStatus = "SSL Issues Detected";
+            }
+
+            // Show or hide SSL warning banner based ONLY on current live check
+            if (sslCount > 0) {
+                sslBanner.classList.remove('hidden');
+            } else {
+                sslBanner.classList.add('hidden');
+            }
 
             updateOverallBanner(finalStatus, new Date());
         }
