@@ -1,5 +1,23 @@
 [
     {
+        "timestamp": "2026-05-04T10:05:25Z",
+        "overall_status": "SSL Issues Detected",
+        "services": {
+            "KTU Main Website": {
+                "status": "Online",
+                "ping": 6303
+            },
+            "KTU Login Portal": {
+                "status": "SSL Issue",
+                "ping": "Blocked"
+            },
+            "KTU API Server": {
+                "status": "Online",
+                "ping": 1445
+            }
+        }
+    },
+    {
         "timestamp": "2026-05-04T10:01:00Z",
         "overall_status": "SSL Issues Detected",
         "services": {
@@ -218,27 +236,6 @@
                 "status": "Online",
                 "error_type": "None",
                 "ping": 6391
-            }
-        }
-    },
-    {
-        "timestamp": "2026-05-03T18:03:23.347842+00:00",
-        "overall_status": "SSL Issues Detected",
-        "services": {
-            "KTU Main Website": {
-                "status": "Online",
-                "error_type": "None",
-                "ping": 5482
-            },
-            "e-Governance Portal": {
-                "status": "SSL Issue",
-                "error_type": "Certificate Error",
-                "ping": 1170
-            },
-            "KTU API Server": {
-                "status": "Online",
-                "error_type": "None",
-                "ping": 1396
             }
         }
     }
