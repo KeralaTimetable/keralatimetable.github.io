@@ -5,47 +5,53 @@ import urllib3
 # Ignore strict SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-API_URL = "https://api.ktu.edu.in/ktu-web-portal-api/anon/announcemnts"
-
 def fetch_notices():
-    print("Fetching latest notices from KTU API...")
+    print("Bypassing KTU CSRF Security Firewall...")
     
-    # We must look EXACTLY like the official KTU website to bypass the 500 error
+    # Step 1: Create a "Session". This acts like a real browser tab and remembers cookies!
+    session = requests.Session()
+    
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "application/json, text/plain, */*",
-        "Referer": "https://ktu.edu.in/",
         "Origin": "https://ktu.edu.in",
-        "Content-Type": "application/json"
-    }
-    
-    # Modern APIs usually require pagination data to know how many notices to send
-    payload = {
-        "number": 0,
-        "size": 20
+        "Referer": "https://ktu.edu.in/"
     }
     
     try:
-        # ATTEMPT 1: Try a POST request (Standard for University APIs)
-        response = requests.post(API_URL, headers=headers, json=payload, verify=False, timeout=15)
+        # Step 2: Visit the homepage FIRST to trick the server into giving us the security cookie
+        print("Knocking on the front door to get the security token...")
+        session.get("https://ktu.edu.in/", headers=headers, verify=False, timeout=15)
         
-        # ATTEMPT 2: If it actually wanted a GET request, fallback to GET
-        if response.status_code in [500, 405, 400]:
-            print(f"POST returned {response.status_code}, trying GET instead...")
-            response = requests.get(API_URL, headers=headers, verify=False, timeout=15)
+        # Look inside the cookie jar and steal the XSRF token
+        xsrf_token = session.cookies.get('XSRF-TOKEN')
+        
+        # If we found the token, put it on our wrist (in the headers)
+        if xsrf_token:
+            headers["X-XSRF-TOKEN"] = xsrf_token
+            print("Successfully stole the XSRF-TOKEN!")
+        else:
+            print("No token found. Proceeding anyway...")
 
-        # Check if we finally got the data (HTTP 200 OK)
+        # Step 3: Now hit the API with our verified session and token!
+        print("Fetching notices from the API...")
+        api_url = "https://api.ktu.edu.in/ktu-web-portal-api/anon/announcemnts"
+        
+        # The payload requesting the first 20 notices
+        payload = {"number": 0, "size": 20}
+        
+        response = session.post(api_url, headers=headers, json=payload, verify=False, timeout=15)
+        
         if response.status_code == 200:
             data = response.json()
             
             with open("notices.json", "w") as f:
                 json.dump(data, f, indent=4)
                 
-            print("Success! Saved KTU notices to notices.json")
+            print("Success! Bypassed firewall and saved KTU notices.")
         else:
-            print(f"Failed to fetch. KTU Server returned HTTP {response.status_code}")
-            # Print the server's complaint so we can debug it if it fails again
-            print("Server response:", response.text[:250]) 
+            print(f"Failed. Server returned HTTP {response.status_code}")
+            print("Server response:", response.text[:250])
             
     except Exception as e:
         print(f"Error fetching notices: {e}")
