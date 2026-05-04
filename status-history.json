@@ -1,5 +1,23 @@
 [
     {
+        "timestamp": "2026-05-04T09:54:55Z",
+        "overall_status": "SSL Issues Detected",
+        "services": {
+            "KTU Main Website": {
+                "status": "Online",
+                "ping": 6154
+            },
+            "KTU Login Portal": {
+                "status": "SSL Issue",
+                "ping": "Blocked"
+            },
+            "KTU API Server": {
+                "status": "Online",
+                "ping": 1546
+            }
+        }
+    },
+    {
         "timestamp": "2026-05-04T07:25:42Z",
         "overall_status": "SSL Issues Detected",
         "services": {
@@ -16,7 +34,7 @@
                 "ping": 2582
             }
         }
-    }, 
+    },
     {
         "timestamp": "2026-05-04T07:12:42.362693+00:00",
         "overall_status": "SSL Issues Detected",
