@@ -3,178 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
-    
-    <title>KTU Notice Board & Latest Updates | Kerala Timetable</title>
-    <meta name="description" content="Get the latest instant updates, official circulars, and exam notifications from the APJ Abdul Kalam Technological University (KTU) without the server lag.">
-    
+    <title>KTU Notifications and Announcements | Kerala Timetable</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
-        .bg-mesh {
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
-                              radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
-                              radial-gradient(at 0% 50%, hsla(228,100%,74%,0.15) 0px, transparent 50%);
-            background-attachment: fixed;
-        }
+        body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="text-slate-800 antialiased flex flex-col min-h-screen bg-mesh">
+<body class="bg-gradient-to-b from-blue-50 to-white min-h-screen text-slate-800">
 
-    <!-- Header -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/50 shadow-sm">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">Kerala <span class="text-indigo-600">Timetable</span></h1>
+    <!-- Navbar / Header Area -->
+    <header class="pt-8 pb-6 px-4 text-center">
+        <h1 class="text-2xl font-extrabold flex items-center justify-center gap-2 mb-4">
+            <i class="far fa-calendar-alt text-indigo-600"></i>
+            Kerala <span class="text-indigo-600">Timetable</span>
+        </h1>
+        <div class="flex justify-center gap-3 text-sm font-semibold">
+            <!-- Link this to your status page -->
+            <a href="index.html" class="px-4 py-2 bg-white border border-slate-200 rounded-full shadow-sm text-slate-600 hover:bg-slate-50 transition-colors flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Status
             </a>
-            
-            <div class="flex gap-3">
-                <a href="status.html" class="text-xs font-bold text-slate-600 bg-white border border-slate-200 shadow-sm px-4 py-2 rounded-full flex items-center gap-2 hover:text-indigo-600 transition-colors">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Status
-                </a>
-                <a href="updates.html" class="text-xs font-bold text-white bg-indigo-600 shadow-sm px-4 py-2 rounded-full flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                    Notice Board
-                </a>
-            </div>
+            <!-- Active Tab -->
+            <button class="px-4 py-2 bg-indigo-600 text-white rounded-full shadow-md flex items-center gap-2">
+                <i class="far fa-bell"></i> Notice Board
+            </button>
         </div>
     </header>
 
-    <main class="flex-grow max-w-3xl mx-auto px-4 py-10 w-full flex flex-col">
-        
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 pb-12">
         <div class="text-center mb-8">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">KTU Notice Board</h2>
+            <h2 class="text-3xl font-black text-slate-900 mb-2">KTU Notice Board</h2>
             <p class="text-slate-500 font-medium">Fast, ad-free updates directly from the university API.</p>
         </div>
 
-        <!-- Live Search Bar -->
+        <!-- Search Bar -->
         <div class="relative mb-8">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <i class="fas fa-search text-slate-400"></i>
             </div>
-            <input type="text" id="searchInput" class="block w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-sm text-sm font-medium transition-all" placeholder="Search for timetables, exams, or keywords...">
-        </div>
-
-        <!-- Loader -->
-        <div id="loader" class="flex flex-col items-center justify-center py-12 space-y-4">
-            <div class="w-10 h-10 border-4 border-indigo-100 border-t-indigo-600 rounded-full animate-spin"></div>
-            <p class="text-slate-500 font-medium text-sm animate-pulse">Syncing latest notices...</p>
+            <input type="text" id="searchInput" class="block w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-sm transition-all" placeholder="Search for timetables, exams, or keywords...">
         </div>
 
         <!-- Notices Container -->
-        <div id="notices-container" class="space-y-4">
-            <!-- JavaScript will inject cards here -->
-        </div>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center">
-        <div class="max-w-3xl mx-auto px-4">
-            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
-            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast and direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
-            <div class="mt-4 space-x-4">
-                <a href="about.html" class="text-indigo-600 text-xs font-bold hover:underline">About Us</a>
-                <a href="https://keralatimetable.stck.me/profile" target="_blank" class="text-indigo-600 text-xs font-bold hover:underline">Support Us</a>
+        <div id="notices-container" class="flex flex-col gap-4">
+            <!-- Loading State -->
+            <div class="text-center py-10">
+                <i class="fas fa-circle-notch fa-spin text-indigo-500 text-3xl mb-3"></i>
+                <p class="text-slate-500 font-medium">Loading latest notices...</p>
             </div>
         </div>
-    </footer>
+    </main>
 
     <script>
+        // Store all notices globally so the search bar can filter them without re-downloading
         let allNotices = [];
 
-        async function fetchNotices() {
-            const container = document.getElementById('notices-container');
-            const loader = document.getElementById('loader');
-
+        // 1. Fetch the data from your automated JSON file
+        async function loadNotices() {
             try {
-                // Fetch the JSON file generated by your GitHub Bot
-                const response = await fetch('notices.json?t=' + new Date().getTime());
-                
-                if (!response.ok) throw new Error("File not found");
+                // Change "notices.json" to "updates.json" if that is what you named it in Python!
+                const response = await fetch('notices.json'); 
+                if (!response.ok) throw new Error("Failed to fetch data");
                 
                 const data = await response.json();
+                allNotices = data.content || [];
                 
-                // Navigate into the {"content": []} array based on your payload
-                if (data && data.content) {
-                    allNotices = data.content;
-                } else if (Array.isArray(data)) {
-                    allNotices = data;
-                }
+                // 2. Sort the notices by Date (Newest First)
+                allNotices.sort((a, b) => {
+                    const dateA = new Date(a.announcementDate);
+                    const dateB = new Date(b.announcementDate);
+                    return dateB - dateA; // Sorts descending
+                });
 
-                loader.classList.add('hidden');
+                // 3. Render them to the screen
                 renderNotices(allNotices);
-
             } catch (error) {
                 console.error("Error loading notices:", error);
-                loader.innerHTML = `
-                    <div class="bg-amber-50 border border-amber-200 text-amber-800 p-5 rounded-2xl flex flex-col items-center text-center">
-                        <svg class="w-8 h-8 mb-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                        <span class="font-bold text-sm">Bot is preparing the data!</span>
-                        <span class="text-xs mt-1 opacity-80">The background bot hasn't created the notices.json file yet. It should appear within the hour.</span>
-                    </div>
-                `;
+                document.getElementById('notices-container').innerHTML = `
+                    <div class="text-center py-10 text-red-500 font-medium bg-red-50 rounded-2xl border border-red-100">
+                        <i class="fas fa-exclamation-triangle mb-2 text-xl"></i><br>
+                        Failed to load notices. Please try again later.
+                    </div>`;
             }
         }
 
+        // 4. The Upgraded UI Render Function
         function renderNotices(noticesToRender) {
             const container = document.getElementById('notices-container');
             container.innerHTML = '';
 
             if (noticesToRender.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center py-10 text-slate-400 font-medium bg-white rounded-2xl border border-slate-100 shadow-sm">
+                    <div class="text-center py-10 text-slate-500 font-medium bg-white rounded-2xl border border-slate-200 shadow-sm">
+                        <i class="fas fa-search mb-2 text-2xl text-slate-300"></i><br>
                         No matching notices found.
                     </div>`;
                 return;
             }
 
             noticesToRender.forEach(notice => {
-                // Safely extract data
                 const subject = notice.subject || "Untitled Notification";
                 const rawDate = notice.announcementDate || "";
                 
-                // Format the Date (Converts "2026-05-04 00:00:00" to "4 May, 2026")
-                let dateStr = "";
-                if (rawDate) {
-                    const dateObj = new Date(rawDate.replace(" ", "T"));
-                    if (!isNaN(dateObj)) {
-                        dateStr = dateObj.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-                    } else {
-                        dateStr = rawDate.split(' ')[0]; // Fallback to just the date part
+                // Format Date nicely
+                let dateStr = rawDate;
+                let noticeDateObj = new Date(rawDate);
+                try {
+                    const parts = rawDate.split(',');
+                    if (parts.length > 1) {
+                         const datePart = parts[1].trim(); 
+                         const yearPart = parts[2] ? parts[2].trim() : noticeDateObj.getFullYear();
+                         dateStr = `${datePart}, ${yearPart}`;
                     }
-                }
+                } catch(e) {}
 
-                // Check for PDF attachments
-                const hasAttachment = notice.attachmentList && notice.attachmentList.length > 0;
-                let attachmentBadge = '';
-                if (hasAttachment) {
-                    attachmentBadge = `
-                        <span class="inline-flex items-center gap-1 bg-red-50 text-red-600 border border-red-100 text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider">
-                            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
-                            PDF Attached
-                        </span>
-                    `;
-                }
+                // Calculate if notice is "New" (Posted within the last 7 days)
+                const today = new Date();
+                const diffTime = Math.abs(today - noticeDateObj);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                const isNew = diffDays <= 7;
+                
+                // Create the Badge
+                let newBadge = isNew 
+                    ? `<span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-600 border border-emerald-100 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider animate-pulse">
+                            <i class="fas fa-star text-[10px]"></i> New
+                       </span>`
+                    : `<span class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-600 border border-indigo-100 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">
+                           <i class="fas fa-bullhorn text-[10px]"></i> KTU
+                       </span>`;
 
-                // Create the HTML Card
+                // Build the Card HTML
                 const card = `
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col gap-3 group relative overflow-hidden">
-                        <div class="flex justify-between items-start gap-4">
-                            <h3 class="text-slate-800 font-bold text-sm leading-relaxed group-hover:text-indigo-600 transition-colors">${subject}</h3>
-                            <span class="text-[11px] font-bold text-slate-500 bg-slate-50 border border-slate-100 px-2.5 py-1 rounded-md whitespace-nowrap">${dateStr}</span>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-indigo-300 transition-all duration-300 flex flex-col gap-4 group">
+                        
+                        <div class="flex-grow">
+                            <h3 class="text-slate-800 font-bold text-base md:text-lg leading-snug group-hover:text-indigo-600 transition-colors">${subject}</h3>
                         </div>
                         
-                        <div class="flex justify-between items-center mt-2 border-t border-slate-50 pt-3">
-                            <div>${attachmentBadge}</div>
-                            <a href="https://ktu.edu.in/eu/core/announcements.htm" target="_blank" rel="noopener noreferrer" class="text-indigo-600 text-xs font-bold hover:text-indigo-800 transition-colors flex items-center gap-1">
-                                View Official <span class="hidden md:inline">Site</span> &rarr;
+                        <div class="flex flex-wrap items-center justify-between mt-auto pt-4 border-t border-slate-100 gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="flex items-center text-slate-500 text-xs font-semibold bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200">
+                                    <i class="far fa-calendar-alt mr-1.5 text-slate-400"></i> ${dateStr}
+                                </div>
+                                ${newBadge}
+                            </div>
+                            
+                            <a href="${notice.urlHref || 'https://ktu.edu.in/Menu/announcements'}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors shadow-sm gap-1.5 whitespace-nowrap border border-indigo-100 hover:border-indigo-600 group-hover:bg-indigo-600 group-hover:text-white">
+                                View Official <i class="fas fa-arrow-right text-[10px]"></i>
                             </a>
                         </div>
                     </div>
@@ -183,18 +163,17 @@
             });
         }
 
-        // Live Search Filtering Event Listener
+        // 5. Search Bar Logic (Filters instantly as you type)
         document.getElementById('searchInput').addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
-            const filteredNotices = allNotices.filter(notice => {
-                const subject = (notice.subject || "").toLowerCase();
-                return subject.includes(searchTerm);
-            });
+            const filteredNotices = allNotices.filter(notice => 
+                (notice.subject || "").toLowerCase().includes(searchTerm)
+            );
             renderNotices(filteredNotices);
         });
 
-        // Start everything when the page loads
-        window.onload = fetchNotices;
+        // Initialize
+        loadNotices();
     </script>
 </body>
 </html>
