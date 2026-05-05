@@ -2,43 +2,34 @@ import requests
 import json
 import urllib3
 
-# Ignore strict SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-def fetch_notices_api():
-    print("Testing the 'Amnesia' API Bypass...")
+def fetch_alert_api():
+    print("Connecting to the ktunotes.live API...")
     
-    API_URL = "https://api.ktu.edu.in/ktu-web-portal-api/anon/announcemnts"
+    # The exact URL you found in your Network tab!
+    url = "https://alert.ktunotes.live/api/notifications"
     
-    # We deliberately REMOVE the Origin, Referer, and complex User-Agent.
-    # We want to look like a dumb internal script, not a web browser.
     headers = {
-        "Accept": "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-        "Connection": "keep-alive"
-    }
-    
-    payload = {
-        "number": 0,
-        "size": 20
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "application/json"
     }
     
     try:
-        response = requests.post(API_URL, headers=headers, json=payload, verify=False, timeout=15)
+        response = requests.get(url, headers=headers, verify=False, timeout=15)
         
         if response.status_code == 200:
+            print("Successfully connected! Here is the raw data:")
             data = response.json()
             
-            with open("notices.json", "w") as f:
-                json.dump(data, f, indent=4)
-                
-            print("JACKPOT! The Amnesia bypass worked. Data saved!")
+            # Print the first 1000 characters of the JSON nicely formatted
+            print(json.dumps(data, indent=2)[:1000])
+            
         else:
-            print(f"Failed. Server returned HTTP {response.status_code}")
-            print("Response:", response.text[:250])
+            print(f"Failed. HTTP {response.status_code}")
             
     except Exception as e:
-        print(f"API request failed: {e}")
+        print(f"API Fetch failed: {e}")
 
 if __name__ == "__main__":
-    fetch_notices_api()
+    fetch_alert_api()
