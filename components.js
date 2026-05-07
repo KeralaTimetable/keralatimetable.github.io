@@ -2,25 +2,25 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     const navContainer = document.getElementById('navigation-container');
     if (!navContainer) return;
 
-    // Determine the logo text based on whether it's a blog page
+    // Original clean logo text styling
     const logoHtml = isBlog 
-        ? `<span class="text-slate-800">Kerala <span class="text-indigo-600">Timetable</span> <span class="text-slate-300 font-light ml-1">| Blog</span></span>`
+        ? `<span class="text-slate-800">Kerala <span class="text-indigo-600">Timetable</span> <span class="text-slate-400 font-normal ml-1">| Blog</span></span>`
         : `<span class="text-slate-800">Kerala <span class="text-indigo-600">Timetable</span></span>`;
 
     const navHTML = `
         <header class="bg-white/80 backdrop-blur-md border-b border-slate-200/60 sticky top-0 z-50 shadow-sm">
             <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
                 
-                <button id="mobile-menu-btn" class="md:hidden text-slate-500 hover:text-indigo-600 focus:outline-none p-2 -ml-2 rounded-lg hover:bg-slate-50 transition-colors">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
+                <div class="flex items-center gap-4">
+                    <button id="mobile-menu-btn" class="md:hidden text-slate-500 hover:text-indigo-600 focus:outline-none p-1 rounded-lg transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
 
-                <a href="${basePath}index.html" class="flex items-center gap-2 font-black text-xl tracking-tight hover:opacity-80 transition-opacity">
-                    <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-md shadow-indigo-200">
-                        <i class="far fa-calendar-alt text-sm"></i>
-                    </div>
-                    ${logoHtml}
-                </a>
+                    <a href="${basePath}index.html" class="flex items-center gap-2 font-black text-xl tracking-tight">
+                        <i class="far fa-calendar-alt text-indigo-600 text-xl"></i>
+                        ${logoHtml}
+                    </a>
+                </div>
 
                 <nav class="hidden md:flex items-center gap-8 text-sm font-bold text-slate-500">
                     <a href="${basePath}index.html" class="hover:text-indigo-600 transition-colors ${activePage === 'home' ? 'text-indigo-600' : ''}">Home</a>
@@ -43,9 +43,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             
             <div class="h-16 px-4 flex items-center justify-between border-b border-slate-100">
                 <div class="flex items-center gap-2 font-black text-lg tracking-tight">
-                    <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center shadow-md">
-                        <i class="far fa-calendar-alt text-xs"></i>
-                    </div>
+                    <i class="far fa-calendar-alt text-indigo-600 text-xl"></i>
                     <span class="text-slate-800">Menu</span>
                 </div>
                 <button id="close-menu-btn" class="w-8 h-8 rounded-full bg-slate-50 text-slate-500 flex items-center justify-center hover:bg-rose-50 hover:text-rose-500 transition-colors">
@@ -91,12 +89,11 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 
     function openMenu() {
         overlay.classList.remove('hidden');
-        // Small delay to allow display:block to apply before animating opacity
         setTimeout(() => {
             overlay.classList.remove('opacity-0');
             panel.classList.remove('-translate-x-full');
         }, 10);
-        document.body.style.overflow = 'hidden'; // Prevent scrolling
+        document.body.style.overflow = 'hidden';
     }
 
     function closeMenu() {
@@ -104,8 +101,8 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
         panel.classList.add('-translate-x-full');
         setTimeout(() => {
             overlay.classList.add('hidden');
-        }, 300); // Wait for transition to finish
-        document.body.style.overflow = ''; // Restore scrolling
+        }, 300);
+        document.body.style.overflow = '';
     }
 
     menuBtn.addEventListener('click', openMenu);
