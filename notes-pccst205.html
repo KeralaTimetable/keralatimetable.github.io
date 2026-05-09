@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
+    
+    <title>KTU Discrete Mathematics Notes S2 BTech (PCCST205)</title>
+    
+    <meta name="description" content="Download comprehensive KTU notes for Discrete Mathematics (PCCST205). Get direct, wait-free PDF downloads for Module 1, 2, 3, and 4 for S2 B.Tech students.">
+    <meta name="keywords" content="discrete mathematics ktu notes, PCCST205 notes, discrete maths ktu, KTU S2 BTech notes pdf, APJAKTU semester 2 maths notes, ktu study materials, Module 1 Sets Functions Relations, ktu latest updates">
+    <meta name="robots" content="index, follow">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .bg-mesh {
+            background-color: #f8fafc;
+            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
+                              radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
+                              radial-gradient(at 0% 50%, hsla(228,100%,74%,0.15) 0px, transparent 50%);
+        }
+        .module-card:hover { transform: translateY(-4px); border-color: #c7d2fe; box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.1), 0 8px 10px -6px rgba(79, 70, 229, 0.1); }
+    </style>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Kerala Timetable",
+      "url": "https://keralatimetable.github.io/",
+      "description": "Web application for APJAKTU students providing server status, exam timetables, and academic updates.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "inLanguage": "en-IN"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context" : "https://schema.org",
+      "@type" : "WebSite",
+      "name" : "Kerala Timetable",
+      "alternateName" : "KTU Timetable",
+      "url" : "https://keralatimetable.github.io/"
+    }
+    </script>
+    <meta property="og:site_name" content="Kerala Timetable">
+
+</head>
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <div id="mobile-menu" class="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-[60] flex flex-col border-r border-slate-100">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+            <h2 class="text-lg font-extrabold text-slate-900 tracking-tight">Menu</h2>
+            <button id="close-menu-btn" class="p-2 text-slate-400 hover:text-red-500 transition-colors rounded-full hover:bg-white shadow-sm focus:outline-none">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+        </div>
+        
+        <nav class="flex-grow py-6 px-4 flex flex-col gap-2">
+            <a href="index.html" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl font-semibold transition-all">
+                <i class="fas fa-home w-5 text-center text-slate-400"></i> Home
+            </a>
+            <a href="status.html" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl font-semibold transition-all">
+                <i class="fas fa-server w-5 text-center text-slate-400"></i> KTU Server Status
+            </a>
+            <a href="updates.html" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl font-semibold transition-all">
+                <i class="fas fa-bullhorn w-5 text-center text-slate-400"></i> KTU Latest Updates
+            </a>
+            <a href="about.html" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl font-semibold transition-all">
+                <i class="fas fa-info-circle w-5 text-center text-slate-400"></i> About
+            </a>
+        </nav>
+        
+        <div class="p-6 border-t border-slate-100 text-center">
+            <p class="text-xs text-slate-400 font-medium tracking-wide">© 2026 Kerala Timetable</p>
+        </div>
+    </div>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+    <header class="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            
+            <div class="flex items-center gap-3">
+                <button id="open-menu-btn" class="p-2 -ml-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none lg:hidden">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                
+                <a href="index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                    <svg class="w-6 h-6 sm:w-7 sm:h-7 text-indigo-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-none">Kerala <span class="text-indigo-600">Timetable</span></h1>
+                </a>
+            </div>
+
+            <div class="hidden lg:flex gap-3">
+                <a href="status.html" class="text-sm font-bold text-slate-600 bg-white hover:bg-slate-50 border border-slate-200 px-5 py-2.5 rounded-full shadow-sm flex items-center gap-2 transition-colors">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    KTU Server Status
+                </a>
+                <a href="updates.html" class="text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2.5 rounded-full shadow-md transition-colors flex items-center gap-2">
+                    <i class="fas fa-bullhorn text-[10px]"></i> Notice Board
+                </a>
+            </div>
+            
+            <div class="lg:hidden">
+                <a href="updates.html" class="w-10 h-10 flex items-center justify-center bg-indigo-50 text-indigo-600 rounded-full border border-indigo-100 shadow-sm">
+                   <i class="fas fa-bell"></i>
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl mx-auto px-4 py-10 w-full">
+        
+        <div class="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-6 md:p-10 w-full relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-indigo-50 rounded-full blur-3xl opacity-60"></div>
+            
+            <div class="relative z-10">
+                <div class="text-center mb-10">
+                    <div class="inline-flex items-center justify-center p-3 bg-indigo-50 rounded-2xl mb-4 text-indigo-600 shadow-sm border border-indigo-100">
+                        <i class="fas fa-book text-2xl"></i>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">KTU Discrete Mathematics Notes</h2>
+                    <p class="text-slate-500 font-medium max-w-xl mx-auto">S2 B.Tech • Course Code: <strong>PCCST205</strong> • Direct PDF Downloads</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
+                    
+                    <div class="module-card bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col transition-all duration-300">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-100 px-3 py-1 rounded-md w-max mb-3 border border-indigo-200">Module 1</span>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2 leading-tight">Sets, Functions, and Relations</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow">Comprehensive notes covering set theory operations, types of functions, and relation properties.</p>
+                        <a href="https://drive.google.com/file/d/1hJz65El0q1h766sJC1vaIO2Gr2zlOIXT/view?usp=drivesdk" target="_blank" class="w-full bg-white hover:bg-indigo-600 text-indigo-600 hover:text-white border border-indigo-200 hover:border-indigo-600 font-bold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+
+                    <div class="module-card bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col transition-all duration-300">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-rose-600 bg-rose-100 px-3 py-1 rounded-md w-max mb-3 border border-rose-200">Module 2</span>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2 leading-tight">Mathematical Logic & Proofs</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow">Detailed guide on propositional logic, truth tables, and various methods of mathematical proofs.</p>
+                        <a href="https://drive.google.com/file/d/1pImXqKAjXxVM-j3tM9xECHE_kPCTLvFR/view?usp=drivesdk" target="_blank" class="w-full bg-white hover:bg-indigo-600 text-indigo-600 hover:text-white border border-indigo-200 hover:border-indigo-600 font-bold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+
+                    <div class="module-card bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col transition-all duration-300">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-emerald-600 bg-emerald-100 px-3 py-1 rounded-md w-max mb-3 border border-emerald-200">Module 3</span>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2 leading-tight">Induction and Recurrences</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow">Clear explanations on mathematical induction and solving recurrence relations.</p>
+                        <a href="https://drive.google.com/file/d/1m2PgpIhA0h-Bnjw6Wq0M73IQoPsTG1nG/view?usp=drivesdk" target="_blank" class="w-full bg-white hover:bg-indigo-600 text-indigo-600 hover:text-white border border-indigo-200 hover:border-indigo-600 font-bold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+
+                    <div class="module-card bg-slate-50 border border-slate-200 rounded-2xl p-6 flex flex-col transition-all duration-300">
+                        <span class="text-[10px] font-black uppercase tracking-wider text-amber-600 bg-amber-100 px-3 py-1 rounded-md w-max mb-3 border border-amber-200">Module 4</span>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2 leading-tight">Group Theory</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow">Complete notes on algebraic structures, groups, subgroups, and theorems.</p>
+                        <a href="https://drive.google.com/file/d/15uKzDDhn77LS_vydGesagMYVulHQgO4D/view?usp=drivesdk" target="_blank" class="w-full bg-white hover:bg-indigo-600 text-indigo-600 hover:text-white border border-indigo-200 hover:border-indigo-600 font-bold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="flex justify-center mb-10 border-b border-slate-100 pb-10">
+                    <a href="https://api.whatsapp.com/send?text=🚨 *KTU S2 Discrete Maths Notes (PCCST205)* All modules available for instant download here: https://keralatimetable.github.io/" target="_blank" class="bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 inline-flex items-center justify-center gap-2 shadow-md">
+                        <i class="fab fa-whatsapp text-lg"></i> Share Notes with Classmates
+                    </a>
+                </div>
+
+                <div class="text-left">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">Frequently Asked Questions</h3>
+                    <div class="space-y-3">
+                        <div class="bg-slate-50 p-4 border border-slate-100 rounded-xl">
+                            <h4 class="font-bold text-slate-700 text-sm">Are these notes applicable for the 2019 scheme?</h4>
+                            <p class="text-xs text-slate-500 mt-1">Yes, these notes follow the official KTU 2019 scheme for PCCST205 (Discrete Mathematics) for second-semester B.Tech students.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 border border-slate-100 rounded-xl">
+                            <h4 class="font-bold text-slate-700 text-sm">Do I need to wait to download these PDFs?</h4>
+                            <p class="text-xs text-slate-500 mt-1">No! Unlike other sites, we provide direct Google Drive links with zero wait time or forced advertisements.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-8 border-t border-slate-100 text-left">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Related Topics & Searches</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-white border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-md">discrete mathematics ktu notes</span>
+                        <span class="bg-white border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-md">PCCST205 notes</span>
+                        <span class="bg-white border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-md">discrete maths ktu</span>
+                        <span class="bg-white border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-md">KTU S2 BTech notes</span>
+                        <span class="bg-white border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-md">KTU Module 1 Notes</span>
+                        <span class="bg-white border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-md">KTU Group Theory</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center">
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
+            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
+            <div class="mt-4 space-x-4">
+                <a href="about.html" class="text-indigo-600 text-xs font-bold hover:underline">About Us</a>
+                <a href="https://keralatimetable.stck.me/profile" target="_blank" class="text-indigo-600 text-xs font-bold hover:underline">Support Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Hamburger Menu Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const openBtn = document.getElementById('open-menu-btn');
+            const closeBtn = document.getElementById('close-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('menu-overlay');
+
+            function toggleMenu() {
+                menu.classList.toggle('-translate-x-full');
+                
+                if (menu.classList.contains('-translate-x-full')) {
+                    overlay.classList.remove('opacity-100', 'pointer-events-auto');
+                    overlay.classList.add('opacity-0', 'pointer-events-none');
+                    document.body.style.overflow = ''; 
+                } else {
+                    overlay.classList.remove('opacity-0', 'pointer-events-none');
+                    overlay.classList.add('opacity-100', 'pointer-events-auto');
+                    document.body.style.overflow = 'hidden'; 
+                }
+            }
+
+            openBtn.addEventListener('click', toggleMenu);
+            closeBtn.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
+        });
+    </script>
+</body>
+</html>
