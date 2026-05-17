@@ -99,11 +99,11 @@
             <div class="max-w-3xl mx-auto bg-white/80 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(79,70,229,0.1)] rounded-3xl p-3 relative z-20">
                 
                 <div class="relative group">
-                    <div class="absolute -inset-0.5 bg-[linear-gradient(90deg,#4285F4,#EA4335,#FBBC05,#34A853)] rounded-full opacity-70 group-hover:opacity-100 transition duration-300"></div>
-                    <div class="absolute -inset-1 bg-[linear-gradient(90deg,#4285F4,#EA4335,#FBBC05,#34A853)] rounded-full blur opacity-30 group-focus-within:opacity-50 transition duration-300"></div>
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-2xl opacity-70 group-hover:opacity-100 transition duration-300"></div>
+                    <div class="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-2xl blur opacity-30 group-focus-within:opacity-60 transition duration-300"></div>
                     
-                    <form id="quick-search-form" class="relative flex items-center bg-white rounded-full p-1.5 shadow-sm">
-                        <button type="submit" class="w-12 h-12 ml-1 text-slate-400 hover:text-[#4285F4] transition-colors rounded-full focus:outline-none">
+                    <form id="quick-search-form" class="relative flex items-center bg-white rounded-2xl p-1.5 shadow-sm">
+                        <button type="submit" class="w-12 h-12 ml-1 text-slate-400 hover:text-indigo-600 transition-colors rounded-xl focus:outline-none">
                             <i class="fas fa-search text-lg"></i>
                         </button>
                         
@@ -111,7 +111,7 @@
                             <input type="search" id="quick-search-input" placeholder="Type subject, course code (e.g. Python, MAT101)..." class="w-full bg-transparent border-none focus:outline-none text-slate-700 font-bold placeholder-slate-400 text-sm md:text-base" autocomplete="off">
                         </div>
                         
-                        <div id="chevron-trigger" class="w-10 h-10 flex items-center justify-center text-slate-400 cursor-pointer hover:bg-slate-100 rounded-full transition-colors mr-1">
+                        <div id="chevron-trigger" class="w-10 h-10 flex items-center justify-center text-slate-400 cursor-pointer hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors mr-1">
                             <i id="chevron-icon" class="fas fa-chevron-down transition-transform duration-300"></i>
                         </div>
                     </form>
@@ -268,7 +268,7 @@
                 } else if (query.includes('electrical') || query.includes('gxest104')) {
                     window.location.href = 'KTU/CSE/S1/notes/electrical-electronics.html';
                 } else if (query !== '') {
-                    // Triggers the Google-colored toast warning
+                    // Triggers the styled toast warning
                     showToast(`Searching for "<strong>${query}</strong>"... We are currently indexing this resource. Please check back soon!`, 'warning');
                 }
             });
@@ -317,10 +317,9 @@
                 let icon = 'fa-check-circle text-emerald-500';
                 let border = 'border-emerald-200';
                 
-                // If the search fails, use a blue/red warning icon to match Google style
                 if (type === 'warning') {
-                    icon = 'fa-search text-[#EA4335]';
-                    border = 'border-[#4285F4]/30';
+                    icon = 'fa-search text-indigo-500';
+                    border = 'border-indigo-200';
                 }
 
                 toast.className = `toast-enter bg-white border ${border} shadow-lg rounded-xl p-4 pr-10 flex items-start gap-3 max-w-sm pointer-events-auto relative`;
