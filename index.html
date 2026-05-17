@@ -102,19 +102,20 @@
                     <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-2xl opacity-70 group-hover:opacity-100 transition duration-300"></div>
                     <div class="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-2xl blur opacity-30 group-focus-within:opacity-60 transition duration-300"></div>
                     
-                    <form id="quick-search-form" class="relative flex items-center bg-white rounded-2xl p-1.5 shadow-sm">
-                        <button type="submit" class="w-12 h-12 ml-1 text-slate-400 hover:text-indigo-600 transition-colors rounded-xl focus:outline-none">
+                                        <form id="quick-search-form" class="relative flex items-center bg-white rounded-2xl p-1.5 shadow-sm">
+                        <button type="submit" class="w-12 h-12 ml-1 pl-1 text-slate-400 hover:text-indigo-600 transition-colors rounded-xl focus:outline-none flex items-center justify-center">
                             <i class="fas fa-search text-lg"></i>
                         </button>
                         
                         <div class="flex-grow text-left px-2">
-                            <input type="search" id="quick-search-input" placeholder="Type subject, course code (e.g. Python, MAT101)..." class="w-full bg-transparent border-none focus:outline-none text-slate-700 font-bold placeholder-slate-400 text-sm md:text-base" autocomplete="off">
+                            <input type="search" id="quick-search-input" placeholder="Search subjects (e.g. MAT101, Python)..." class="w-full bg-transparent border-none focus:outline-none text-slate-700 font-bold placeholder-slate-400 text-sm md:text-base" autocomplete="off">
                         </div>
                         
                         <div id="chevron-trigger" class="w-10 h-10 flex items-center justify-center text-slate-400 cursor-pointer hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors mr-1">
                             <i id="chevron-icon" class="fas fa-chevron-down transition-transform duration-300"></i>
                         </div>
                     </form>
+
                 </div>
 
                 <div id="filter-panel" class="expand-panel">
