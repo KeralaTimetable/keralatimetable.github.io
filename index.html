@@ -102,7 +102,7 @@
                     <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-2xl opacity-70 group-hover:opacity-100 transition duration-300"></div>
                     <div class="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-2xl blur opacity-30 group-focus-within:opacity-60 transition duration-300"></div>
                     
-                                        <form id="quick-search-form" class="relative flex items-center bg-white rounded-2xl p-1.5 shadow-sm">
+                    <form id="quick-search-form" class="relative flex items-center bg-white rounded-2xl p-1.5 shadow-sm">
                         <button type="submit" class="w-12 h-12 ml-1 pl-1 text-slate-400 hover:text-indigo-600 transition-colors rounded-xl focus:outline-none flex items-center justify-center">
                             <i class="fas fa-search text-lg"></i>
                         </button>
@@ -115,7 +115,6 @@
                             <i id="chevron-icon" class="fas fa-chevron-down transition-transform duration-300"></i>
                         </div>
                     </form>
-
                 </div>
 
                 <div id="filter-panel" class="expand-panel">
@@ -165,16 +164,72 @@
                     </div>
                 </div>
             </div>
+
+            <div class="max-w-4xl mx-auto mt-12 relative z-20 text-left md:text-center">
+                
+                <h3 class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider mb-3 ml-2 md:ml-0 inline-block">Quick Access</h3>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+                    
+                    <a href="timetable.html" class="flex flex-col items-center p-4 bg-white/80 backdrop-blur-md border border-slate-200 rounded-2xl hover:border-amber-400 hover:shadow-[0_8px_20px_rgba(245,158,11,0.15)] hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center text-white shadow-sm mb-3 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-calendar-day text-xl"></i>
+                        </div>
+                        <span class="text-xs md:text-sm font-extrabold text-slate-700">Timetables</span>
+                    </a>
+
+                    <a href="notes.html" class="flex flex-col items-center p-4 bg-white/80 backdrop-blur-md border border-slate-200 rounded-2xl hover:border-indigo-400 hover:shadow-[0_8px_20px_rgba(99,102,241,0.15)] hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-xl flex items-center justify-center text-white shadow-sm mb-3 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-book-open text-xl"></i>
+                        </div>
+                        <span class="text-xs md:text-sm font-extrabold text-slate-700">Study Notes</span>
+                    </a>
+
+                    <a href="pyq.html" class="flex flex-col items-center p-4 bg-white/80 backdrop-blur-md border border-slate-200 rounded-2xl hover:border-fuchsia-400 hover:shadow-[0_8px_20px_rgba(217,70,239,0.15)] hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="w-12 h-12 bg-gradient-to-br from-fuchsia-500 to-pink-600 rounded-xl flex items-center justify-center text-white shadow-sm mb-3 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-file-alt text-xl"></i>
+                        </div>
+                        <span class="text-xs md:text-sm font-extrabold text-slate-700">Previous PYQs</span>
+                    </a>
+
+                    <a href="updates.html" class="flex flex-col items-center p-4 bg-white/80 backdrop-blur-md border border-slate-200 rounded-2xl hover:border-emerald-400 hover:shadow-[0_8px_20px_rgba(16,185,129,0.15)] hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center text-white shadow-sm mb-3 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-bullhorn text-xl"></i>
+                        </div>
+                        <span class="text-xs md:text-sm font-extrabold text-slate-700">KTU Updates</span>
+                    </a>
+
+                    <a href="status.html" class="flex flex-col items-center p-4 bg-white/80 backdrop-blur-md border border-slate-200 rounded-2xl hover:border-cyan-400 hover:shadow-[0_8px_20px_rgba(6,182,212,0.15)] hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center text-white shadow-sm mb-3 group-hover:scale-110 transition-transform duration-300 relative">
+                            <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-400 border-2 border-cyan-500"></span>
+                            </span>
+                            <i class="fas fa-server text-xl"></i>
+                        </div>
+                        <span class="text-xs md:text-sm font-extrabold text-slate-700">Server Status</span>
+                    </a>
+
+                    <a href="blog/index.html" class="flex flex-col items-center p-4 bg-white/80 backdrop-blur-md border border-slate-200 rounded-2xl hover:border-violet-400 hover:shadow-[0_8px_20px_rgba(139,92,246,0.15)] hover:-translate-y-1 transition-all duration-300 group">
+                        <div class="w-12 h-12 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center text-white shadow-sm mb-3 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-feather-alt text-xl"></i>
+                        </div>
+                        <span class="text-xs md:text-sm font-extrabold text-slate-700">KTU Blog</span>
+                    </a>
+
+                </div>
+            </div>
+            
         </div>
 
-        <div class="w-full max-w-5xl mx-auto px-4 py-12 relative z-10">
-            <div class="flex items-center justify-between mb-8">
+        <div class="w-full max-w-5xl mx-auto px-4 py-8 relative z-10 text-left md:text-center">
+            <div class="flex items-center justify-start md:justify-center mb-8">
                 <h3 class="text-xl font-extrabold text-slate-900 flex items-center gap-2">
                     <i class="fas fa-fire text-orange-500"></i> Trending Now
                 </h3>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-left">
                 
                 <a href="KTU/CSE/S1/notes/" class="bg-white border border-slate-200 rounded-2xl p-6 hover:-translate-y-2 hover:border-indigo-300 hover:shadow-[0_10px_20px_rgba(79,70,229,0.1)] transition-all duration-300 group">
                     <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
@@ -203,9 +258,38 @@
             </div>
         </div>
 
+        <div class="w-full max-w-5xl mx-auto px-4 py-8 mb-4 relative z-10">
+            <div class="bg-gradient-to-br from-[#128C7E] to-[#25D366] rounded-3xl p-8 md:p-12 shadow-[0_20px_40px_rgba(37,211,102,0.25)] text-white flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group">
+                
+                <div class="absolute -top-24 -right-24 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-700 pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-black opacity-10 rounded-full blur-3xl group-hover:scale-125 transition-transform duration-700 pointer-events-none"></div>
+                
+                <div class="flex-1 relative z-10 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 backdrop-blur-md rounded-full text-white text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-5 border border-white/30 shadow-sm">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-80"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+                        </span>
+                        Official Community
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight text-white drop-shadow-md">Get Instant KTU Alerts <span class="text-yellow-300">🔥</span></h3>
+                    <p class="text-emerald-50 text-sm md:text-base font-medium max-w-lg mx-auto md:mx-0 leading-relaxed">
+                        Never miss an exam timetable, result update, or a new study note again. Join thousands of KTU students tracking updates instantly.
+                    </p>
+                </div>
+                
+                <div class="relative z-10 flex-shrink-0 w-full md:w-auto mt-2 md:mt-0">
+                    <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full md:w-auto flex items-center justify-center gap-3 bg-white text-[#128C7E] hover:text-[#075E54] hover:bg-slate-50 font-extrabold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl text-lg">
+                        <i class="fab fa-whatsapp text-2xl"></i> Follow Channel
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+
     </main>
 
-    <footer class="border-t border-slate-200/60 bg-white py-10 mt-10">
+    <footer class="border-t border-slate-200/60 bg-white py-10 mt-6">
         <div class="max-w-5xl mx-auto px-4 text-center">
             <h3 class="text-slate-800 font-extrabold text-xl mb-3">Kerala <span class="text-indigo-600">Timetable</span></h3>
             <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto mb-6">Built by students, for students. We provide fast, direct access to university resources. Not officially affiliated with APJ Abdul Kalam Technological University.</p>
@@ -236,7 +320,6 @@
             const selResource = document.getElementById('select-resource');
             const btnFind = document.getElementById('btn-find');
 
-            // Open panel when clicking the input or the chevron
             function openPanel() {
                 if (!panel.classList.contains('active')) {
                     panel.classList.add('active');
@@ -254,10 +337,9 @@
 
             // --- SMART QUICK SEARCH (FORM SUBMIT LOGIC) ---
             searchForm.addEventListener('submit', function (e) {
-                e.preventDefault(); // Prevents page reload
+                e.preventDefault(); 
                 let query = searchInput.value.toLowerCase().trim();
                 
-                // Simple routing based on keywords
                 if (query.includes('python') || query.includes('ucest105')) {
                     window.location.href = 'KTU/CSE/S1/notes/python.html';
                 } else if (query.includes('math') || query.includes('gamat101')) {
@@ -269,7 +351,6 @@
                 } else if (query.includes('electrical') || query.includes('gxest104')) {
                     window.location.href = 'KTU/CSE/S1/notes/electrical-electronics.html';
                 } else if (query !== '') {
-                    // Triggers the styled toast warning
                     showToast(`Searching for "<strong>${query}</strong>"... We are currently indexing this resource. Please check back soon!`, 'warning');
                 }
             });
