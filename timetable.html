@@ -16,10 +16,15 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        /* The Sporty Font Class */
+        .font-sporty { font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em; }
+
         .bg-mesh {
             background-color: #f8fafc;
             background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
@@ -126,13 +131,13 @@
         const timetablesData = [
             {
                 id: 1,
-                title: "B.Tech S2 (R,S) Examination May 2026", // Handles long titles
+                title: "B.Tech S2 (R,S) Examination May 2026",
                 semester: "S2",
-                categoryBadge: "S1/S2", // Used for filtering
+                categoryBadge: "S1/S2", 
                 type: "Regular & Supply",
                 scheme: "2024 Scheme",
-                startDate: "2026-05-25T09:30:00", // Start date & time
-                endDate: "2026-06-10T12:30:00",   // End date
+                startDate: "2026-05-25T09:30:00", 
+                endDate: "2026-06-10T12:30:00",   
                 viewLink: "btech/s2/supply-2026.html",
                 pdfLink: "#"
             },
@@ -194,20 +199,20 @@
             const dateOptions = { month: 'short', day: 'numeric' };
             const dateString = `${startObj.toLocaleDateString('en-US', dateOptions)} - ${endObj.toLocaleDateString('en-US', dateOptions)}`;
 
-            // Build dynamic UI pieces
+            // Build dynamic UI pieces (Using Sporty Font & Larger Size)
             let statusHTML = '';
             if (statusText === 'LIVE') {
-                statusHTML = `<div class="w-full bg-rose-50 border-t border-rose-100 p-2 text-center text-[10px] font-black text-rose-600 uppercase tracking-widest"><i class="fas fa-circle text-[8px] animate-pulse mr-1"></i> Ongoing Now</div>`;
+                statusHTML = `<div class="w-full bg-rose-500 border-t border-rose-600 p-3 text-center text-[15px] font-sporty text-white tracking-widest shadow-[0_-4px_15px_rgba(244,63,94,0.3)] z-10"><i class="fas fa-circle text-[10px] animate-pulse mr-1.5"></i> Ongoing Now</div>`;
             } else if (isCountdown) {
-                statusHTML = `<div class="w-full bg-amber-50 border-t border-amber-100 p-2.5 text-center"><div class="text-[10px] font-bold text-amber-700 uppercase tracking-widest mb-0.5">Starts In</div><div class="countdown-target font-black text-amber-600 text-sm tracking-widest" data-date="${item.startDate}">00:00:00:00</div></div>`;
+                statusHTML = `<div class="w-full bg-amber-50 border-t border-amber-200 p-3.5 text-center z-10"><div class="text-[10px] font-bold text-amber-700 uppercase tracking-widest mb-1">Starts In</div><div class="countdown-target font-sporty text-amber-600 text-xl md:text-2xl tracking-wider drop-shadow-sm" data-date="${item.startDate}">00:00:00:00</div></div>`;
             } else if (statusText === 'PAST') {
-                statusHTML = `<div class="w-full bg-slate-100 border-t border-slate-200 p-2 text-center text-[10px] font-bold text-slate-500 uppercase tracking-widest">Exam Completed</div>`;
+                statusHTML = `<div class="w-full bg-slate-100 border-t border-slate-200 p-3 text-center text-xs font-bold text-slate-500 uppercase tracking-widest z-10">Exam Completed</div>`;
             }
 
             return `
                 <div class="timetable-card bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm flex flex-col relative overflow-hidden h-full group" data-category="${item.categoryBadge}">
                     
-                    <div class="absolute -bottom-4 -right-2 text-8xl font-black text-slate-900 opacity-[0.03] pointer-events-none select-none z-0">
+                    <div class="absolute top-1 right-2 text-7xl font-black text-slate-900 opacity-[0.035] pointer-events-none select-none z-0 leading-none">
                         ${item.semester}
                     </div>
 
@@ -217,7 +222,7 @@
                             <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200">${item.type}</span>
                         </div>
                         
-                        <h3 class="text-lg font-extrabold text-slate-800 leading-tight mb-2 line-clamp-2" title="${item.title}">${item.title}</h3>
+                        <h3 class="text-lg font-extrabold text-slate-800 leading-tight mb-2 line-clamp-2 pr-4" title="${item.title}">${item.title}</h3>
                         
                         <div class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-4">
                             <i class="fas fa-book text-slate-300"></i> ${item.scheme}
@@ -254,37 +259,31 @@
             let hasOngoing = false;
             let hasUpcoming = false;
 
-            // Clear Grids
             ongoingGrid.innerHTML = '';
             upcomingGrid.innerHTML = '';
             vaultGrid.innerHTML = '';
 
-            // Sort logic: Closest start dates first
             const sortedData = [...timetablesData].sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
 
             sortedData.forEach(item => {
                 const start = new Date(item.startDate);
                 const end = new Date(item.endDate);
                 
-                // 1. Check Ongoing (Live)
                 if (now >= start && now <= end) {
                     ongoingGrid.innerHTML += generateCardHTML(item, 'LIVE', false);
-                    vaultGrid.innerHTML += generateCardHTML(item, 'LIVE', false); // Keep in vault too
+                    vaultGrid.innerHTML += generateCardHTML(item, 'LIVE', false); 
                     hasOngoing = true;
                 } 
-                // 2. Check Upcoming (Future)
                 else if (now < start) {
                     upcomingGrid.innerHTML += generateCardHTML(item, '', true);
                     vaultGrid.innerHTML += generateCardHTML(item, '', true); 
                     hasUpcoming = true;
                 } 
-                // 3. Past (Vault Only)
                 else {
                     vaultGrid.innerHTML += generateCardHTML(item, 'PAST', false);
                 }
             });
 
-            // Toggle Section Visibility
             document.getElementById('ongoing-section').style.display = hasOngoing ? 'block' : 'none';
             document.getElementById('upcoming-section').style.display = hasUpcoming ? 'block' : 'none';
         }
@@ -299,8 +298,7 @@
                 const distance = targetDate - now;
 
                 if (distance < 0) {
-                    timer.innerHTML = "EXAM STARTED";
-                    // Optionally, trigger a re-render here if it crosses the threshold
+                    timer.innerHTML = "STARTED";
                     return;
                 }
 
@@ -309,7 +307,6 @@
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Format with leading zeros
                 timer.innerHTML = `${days}d : ${hours.toString().padStart(2, '0')}h : ${minutes.toString().padStart(2, '0')}m : ${seconds.toString().padStart(2, '0')}s`;
             });
         }
@@ -321,7 +318,6 @@
 
             buttons.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    // UI Update
                     buttons.forEach(b => {
                         b.classList.remove('bg-slate-800', 'text-white');
                         b.classList.add('bg-white', 'text-slate-500');
@@ -329,7 +325,6 @@
                     btn.classList.remove('bg-white', 'text-slate-500');
                     btn.classList.add('bg-slate-800', 'text-white');
 
-                    // Filter Logic
                     const filterValue = btn.getAttribute('data-filter');
                     const cards = document.getElementById('vault-grid').children;
                     let visibleCount = 0;
@@ -337,7 +332,7 @@
                     for (let i = 0; i < cards.length; i++) {
                         const card = cards[i];
                         if (filterValue === 'All' || card.getAttribute('data-category').includes(filterValue)) {
-                            card.style.display = 'flex'; // Use flex because it's a flex-col card
+                            card.style.display = 'flex'; 
                             visibleCount++;
                         } else {
                             card.style.display = 'none';
@@ -362,14 +357,12 @@
             renderDashboard();
             setupFilters();
             
-            // Start Timers
             updateLiveClock();
             updateCountdowns();
-            setInterval(updateCountdowns, 1000); // Tick every second
+            setInterval(updateCountdowns, 1000); 
             setInterval(updateLiveClock, 1000);
         });
 
     </script>
 </body>
 </html>
-
