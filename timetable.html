@@ -212,7 +212,7 @@
             return `
                 <div class="timetable-card bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm flex flex-col relative overflow-hidden h-full group" data-category="${item.categoryBadge}">
                     
-                    <div class="absolute top-1 right-2 text-7xl font-black text-slate-900 opacity-[0.035] pointer-events-none select-none z-0 leading-none">
+                    <div class="absolute top-1 right-2 text-7xl font-black text-slate-900 opacity-10 pointer-events-none select-none z-0 leading-none">
                         ${item.semester}
                     </div>
 
@@ -235,7 +235,7 @@
                             
                             <div class="flex items-center gap-2">
                                 <a href="${item.viewLink}" class="flex-grow bg-slate-800 hover:bg-indigo-600 text-white text-center font-bold py-2.5 px-4 rounded-xl transition-colors text-sm shadow-sm">
-                                    View Dates
+                                    View/Download 
                                 </a>
                                 <a href="${item.pdfLink}" target="_blank" class="flex-shrink-0 w-11 h-11 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 flex items-center justify-center rounded-xl border border-indigo-100 transition-colors" title="Download PDF">
                                     <i class="fas fa-file-pdf"></i>
