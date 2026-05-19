@@ -1,92 +1,112 @@
-function loadNavigation(activePage = '', basePath = '', isSubdir = false) {
-    const navHtml = `
-    <header class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 transition-all duration-300">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="flex items-center justify-between h-16 md:h-20">
+// components.js
+
+// Added 'isBlog' which tells the header to add the "| Blog" text!
+function loadNavigation(activePage, basePath = '', isBlog = false) { 
+    
+    // If it's a blog, create the extra text. If not, leave it blank.
+    const logoExtension = isBlog ? ' <span class="text-slate-400 font-medium ml-1">| Blog</span>' : '';
+
+    const navHTML = `
+        <div id="mobile-menu" class="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-[60] flex flex-col border-r border-slate-100">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                <h2 class="text-lg font-extrabold text-slate-900 tracking-tight">Menu</h2>
+                <button id="close-menu-btn" class="p-2 text-slate-400 hover:text-red-500 transition-colors rounded-full hover:bg-white shadow-sm focus:outline-none">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+            
+            <nav class="flex-grow py-6 px-4 flex flex-col gap-2 overflow-y-auto">
+                <a href="${basePath}index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'home' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
+                    <i class="fas fa-home w-5 text-center ${activePage === 'home' ? 'text-indigo-600' : 'text-slate-400'}"></i> Home
+                </a>
                 
-                <a href="${basePath}index.html" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-emerald-500 rounded-xl flex items-center justify-center text-white font-black text-lg shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-300">
-                        KT
-                    </div>
-                    <span class="font-extrabold text-slate-800 text-lg md:text-xl tracking-tight group-hover:text-indigo-600 transition-colors">Kerala Timetable</span>
+                <a href="${basePath}timetable.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'timetable' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
+                    <i class="fas fa-calendar-day w-5 text-center ${activePage === 'timetable' ? 'text-indigo-600' : 'text-slate-400'}"></i> Timetables
+                </a>
+                
+                <a href="${basePath}notes.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'notes' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
+                    <i class="fas fa-book-open w-5 text-center ${activePage === 'notes' ? 'text-indigo-600' : 'text-slate-400'}"></i> Study Notes
                 </a>
 
-                <nav class="hidden md:flex items-center gap-8">
-                    <a href="${basePath}index.html" class="text-sm font-bold ${activePage === 'home' ? 'text-indigo-600' : 'text-slate-500 hover:text-indigo-600'} transition-colors">Home</a>
-                    
-                    <a href="${basePath}timetable.html" class="text-sm font-bold ${activePage === 'timetable' ? 'text-indigo-600' : 'text-slate-500 hover:text-indigo-600'} transition-colors">Timetables</a>
-                    
-                    <a href="${basePath}notes.html" class="text-sm font-bold ${activePage === 'notes' ? 'text-indigo-600' : 'text-slate-500 hover:text-indigo-600'} transition-colors">Study Notes</a>
-                    
-                    <a href="${basePath}updates.html" class="text-sm font-bold ${activePage === 'updates' ? 'text-indigo-600' : 'text-slate-500 hover:text-indigo-600'} transition-colors">Updates</a>
-                    <a href="${basePath}status.html" class="text-sm font-bold flex items-center gap-1.5 ${activePage === 'status' ? 'text-indigo-600' : 'text-slate-500 hover:text-indigo-600'} transition-colors">
+                <a href="${basePath}status.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'status' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
+                    <i class="fas fa-server w-5 text-center ${activePage === 'status' ? 'text-indigo-600' : 'text-slate-400'}"></i> KTU Server Status
+                </a>
+                <a href="${basePath}updates.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'updates' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
+                    <i class="fas fa-bullhorn w-5 text-center ${activePage === 'updates' ? 'text-indigo-600' : 'text-slate-400'}"></i> KTU Latest Updates
+                </a>
+                <a href="${basePath}blog/index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'blog' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
+                    <i class="fas fa-feather-alt w-5 text-center ${activePage === 'blog' ? 'text-indigo-600' : 'text-slate-400'}"></i> Blog
+                </a>
+                <a href="${basePath}about.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'about' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
+                    <i class="fas fa-info-circle w-5 text-center ${activePage === 'about' ? 'text-indigo-600' : 'text-slate-400'}"></i> About
+                </a>
+            </nav>
+            
+            <div class="p-6 border-t border-slate-100 text-center">
+                <p class="text-xs text-slate-400 font-medium tracking-wide">© 2026 Kerala Timetable</p>
+            </div>
+        </div>
+
+        <div id="menu-overlay" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+        <header class="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all duration-300">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <button id="open-menu-btn" class="p-2 -ml-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none lg:hidden">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                    <a href="${basePath}index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                        <svg class="w-6 h-6 sm:w-7 sm:h-7 text-indigo-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-none">Kerala <span class="text-indigo-600">Timetable</span>${logoExtension}</h1>
+                    </a>
+                </div>
+
+                <div class="hidden lg:flex gap-3">
+                    <a href="${basePath}status.html" class="text-sm px-5 py-2.5 rounded-full flex items-center gap-2 transition-colors ${activePage === 'status' ? 'font-bold text-slate-800 bg-white border border-slate-200 shadow-sm' : 'font-bold text-slate-600 bg-slate-100 hover:bg-slate-200'}">
                         <span class="relative flex h-2 w-2">
                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                         </span>
                         Status
                     </a>
-                </nav>
-
-                <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center text-slate-500 hover:bg-slate-100 hover:text-indigo-600 rounded-lg transition-colors focus:outline-none">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1)]">
-            <div class="flex flex-col px-6 py-4 space-y-4">
-                <a href="${basePath}index.html" class="text-base font-bold flex items-center gap-3 ${activePage === 'home' ? 'text-indigo-600' : 'text-slate-600 hover:text-indigo-600'} transition-colors">
-                    <i class="fas fa-home w-5 text-center"></i> Home
-                </a>
+                    <a href="${basePath}updates.html" class="text-sm px-5 py-2.5 rounded-full flex items-center gap-2 transition-colors ${activePage === 'updates' ? 'font-bold text-white bg-indigo-600 shadow-md' : 'font-bold text-slate-600 bg-slate-100 hover:bg-indigo-600 hover:text-white'}">
+                        <i class="fas fa-bullhorn text-[10px]"></i> Notice Board
+                    </a>
+                    <a href="${basePath}blog/index.html" class="text-sm px-5 py-2.5 rounded-full flex items-center gap-2 transition-colors ${activePage === 'blog' ? 'font-bold text-white bg-indigo-600 shadow-md' : 'font-bold text-slate-600 bg-slate-100 hover:bg-indigo-600 hover:text-white'}">
+                        <i class="fas fa-feather-alt text-[10px]"></i> Blog
+                    </a>
+                </div>
                 
-                <a href="${basePath}timetable.html" class="text-base font-bold flex items-center gap-3 ${activePage === 'timetable' ? 'text-indigo-600' : 'text-slate-600 hover:text-indigo-600'} transition-colors">
-                    <i class="fas fa-calendar-day w-5 text-center"></i> Timetables
-                </a>
-
-                <a href="${basePath}notes.html" class="text-base font-bold flex items-center gap-3 ${activePage === 'notes' ? 'text-indigo-600' : 'text-slate-600 hover:text-indigo-600'} transition-colors">
-                    <i class="fas fa-book-open w-5 text-center"></i> Study Notes
-                </a>
-
-                <a href="${basePath}updates.html" class="text-base font-bold flex items-center gap-3 ${activePage === 'updates' ? 'text-indigo-600' : 'text-slate-600 hover:text-indigo-600'} transition-colors">
-                    <i class="fas fa-bullhorn w-5 text-center"></i> Notice Board
-                </a>
-                
-                <a href="${basePath}status.html" class="text-base font-bold flex items-center gap-3 ${activePage === 'status' ? 'text-indigo-600' : 'text-slate-600 hover:text-indigo-600'} transition-colors">
-                    <div class="w-5 flex justify-center">
-                        <span class="relative flex h-2.5 w-2.5">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                        </span>
-                    </div>
-                    Server Status
-                </a>
+                <div class="lg:hidden">
+                    <a href="${basePath}updates.html" class="w-10 h-10 flex items-center justify-center bg-indigo-50 text-indigo-600 rounded-full border border-indigo-100 shadow-sm">
+                       <i class="fas fa-bell"></i>
+                    </a>
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
     `;
 
-    // Inject into the page
-    const container = document.getElementById('navigation-container');
-    if (container) {
-        container.innerHTML = navHtml;
-    }
-
-    // Mobile Menu Toggle Logic
-    const btn = document.getElementById('mobile-menu-btn');
+    document.getElementById('navigation-container').innerHTML = navHTML;
+    
+    const openBtn = document.getElementById('open-menu-btn');
+    const closeBtn = document.getElementById('close-menu-btn');
     const menu = document.getElementById('mobile-menu');
-    const icon = btn ? btn.querySelector('i') : null;
+    const overlay = document.getElementById('menu-overlay');
 
-    if (btn && menu && icon) {
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-            if (menu.classList.contains('hidden')) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            }
-        });
+    function toggleMenu() {
+        menu.classList.toggle('-translate-x-full');
+        if (menu.classList.contains('-translate-x-full')) {
+            overlay.classList.remove('opacity-100', 'pointer-events-auto');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = ''; 
+        } else {
+            overlay.classList.remove('opacity-0', 'pointer-events-none');
+            overlay.classList.add('opacity-100', 'pointer-events-auto');
+            document.body.style.overflow = 'hidden'; 
+        }
     }
+
+    openBtn.addEventListener('click', toggleMenu);
+    closeBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
 }
