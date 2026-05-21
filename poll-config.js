@@ -1,13 +1,13 @@
 // poll-config.js
-// You can add as many exams here as you want. Just follow this format.
+// Make sure this file name exactly matches the script tag in polls.html
 
-export const pollConfig = [
+window.examPollConfig = [
     {
-        id: "UCEST105_2026_Regular", // Unique ID (Don't change this once live)
+        id: "UCEST105_2026_Regular", 
         subjectName: "UCEST105 - Python for Engineers",
         type: "Regular",
-        opensAt: "2026-05-21T12:30:00", // When the poll becomes active
-        closesAt: "2026-05-22T12:30:00"  // Auto-locks 24 hours later
+        opensAt: "2026-05-21T12:30:00", 
+        closesAt: "2026-05-22T12:30:00"  
     },
     {
         id: "GAMAT101_2026_Regular",
