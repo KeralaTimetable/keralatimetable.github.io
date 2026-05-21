@@ -1,17 +1,28 @@
 // poll-config.js
+
 window.examPollConfig = [
+    // ==========================================
+    // CSE SEMESTER 1 - SUPPLY EXAMS (MAY 2026)
+    // ==========================================
     {
-        id: "UCEST105_2026_Regular", 
-        subjectName: "UCEST105 - Python",
-        tags: ["CSE", "S1", "Regular"], // 👈 Add as many tags as you want here!
-        opensAt: "2026-05-21T12:30:00", 
-        closesAt: "2026-05-22T12:30:00"  
+        id: "GMEST103_2026_Supply", 
+        subjectName: "GMEST103 - Engineering Graphics & CAD",
+        tags: ["CSE", "S1", "Supply"],
+        opensAt: "2026-05-22T16:30:00",   // Opens May 22 at 4:30 PM
+        closesAt: "2026-05-23T16:30:00"   // Locks May 23 at 4:30 PM
     },
     {
-        id: "GAMAT101_2026_Supply",
-        subjectName: "GAMAT101 - Linear Algebra",
-        tags: ["Common", "S1", "Supply"], 
-        opensAt: "2026-05-24T12:30:00",
-        closesAt: "2026-05-25T12:30:00"
+        id: "GXEST104_2026_Supply",
+        subjectName: "GXEST104 - Intro to Electrical & Electronics",
+        tags: ["CSE", "S1", "Supply"],
+        opensAt: "2026-05-25T16:30:00",   // Opens May 25 at 4:30 PM
+        closesAt: "2026-05-26T16:30:00"   // Locks May 26 at 4:30 PM
+    },
+    {
+        id: "UCEST105_2026_Supply",
+        subjectName: "UCEST105 - Algorithmic Thinking with Python",
+        tags: ["CSE", "S1", "Supply"],
+        opensAt: "2026-05-29T16:30:00",   // Opens May 29 at 4:30 PM
+        closesAt: "2026-05-30T16:30:00"   // Locks May 30 at 4:30 PM
     }
 ];
