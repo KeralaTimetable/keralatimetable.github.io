@@ -66,9 +66,11 @@
         import { getDatabase, ref, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
         
         try {
+            // 👇 YOUR COMPLETE AND FIXED FIREBASE CONFIG 👇
             const firebaseConfig = {
                 apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
                 authDomain: "kerala-timetable-db.firebaseapp.com",
+                databaseURL: "https://kerala-timetable-db-default-rtdb.asia-southeast1.firebasedatabase.app",
                 projectId: "kerala-timetable-db",
                 storageBucket: "kerala-timetable-db.firebasestorage.app",
                 messagingSenderId: "527439836518",
@@ -78,11 +80,10 @@
             const app = initializeApp(firebaseConfig);
             const db = getDatabase(app);
 
-            // Fetch the config we loaded in the script tag above
             const myPolls = window.examPollConfig;
             
             if (!myPolls) {
-                throw new Error("poll-config.js could not be read. Please check if the file is correctly named and located in the same folder.");
+                throw new Error("poll-config.js could not be read. Please make sure you have created it and named it correctly.");
             }
 
             window.submitVote = function(pollId, category) {
