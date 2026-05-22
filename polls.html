@@ -121,6 +121,7 @@
                     const openTime = new Date(poll.opensAt);
                     const closeTime = new Date(poll.closesAt);
                     
+                    const isUpcoming = now < openTime;
                     const isOpen = now >= openTime && now <= closeTime;
                     const hasVoted = localStorage.getItem('voted_' + poll.id);
 
@@ -128,9 +129,15 @@
                     const pollCard = document.createElement('div');
                     pollCard.className = "bg-white/70 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(79,70,229,0.08)] rounded-3xl p-6 md:p-8 mb-8";
                     
-                    let statusHtml = isOpen 
-                        ? '<div class="flex items-center gap-2 text-rose-500 text-xs font-bold uppercase tracking-widest animate-pulse-soft"><i class="fas fa-circle text-[8px]"></i> Live Now</div>'
-                        : '<div class="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest"><i class="fas fa-lock text-[10px]"></i> Poll Closed</div>';
+                    // NEW: Updated Status Badge Logic
+                    let statusHtml = '';
+                    if (isUpcoming) {
+                        statusHtml = '<div class="flex items-center gap-2 text-indigo-500 text-xs font-bold uppercase tracking-widest"><i class="fas fa-calendar-alt text-[10px]"></i> Upcoming</div>';
+                    } else if (isOpen) {
+                        statusHtml = '<div class="flex items-center gap-2 text-rose-500 text-xs font-bold uppercase tracking-widest animate-pulse-soft"><i class="fas fa-circle text-[8px]"></i> Live Now</div>';
+                    } else {
+                        statusHtml = '<div class="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest"><i class="fas fa-lock text-[10px]"></i> Poll Closed</div>';
+                    }
 
                     // Generate Tags HTML (e.g. [CSE] [S1])
                     let tagsHtml = '';
@@ -160,10 +167,21 @@
                     pollCard.innerHTML = html;
                     wrapper.appendChild(pollCard);
 
-                    // Inject either the Voting Grid or the Live Results
+                    // Inject specific UI based on timing
                     const contentArea = document.getElementById('content-area-' + poll.id);
                     
-                    if (isOpen && !hasVoted) {
+                    if (isUpcoming) {
+                        // UPCOMING STATE
+                        contentArea.innerHTML = `
+                            <div class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-6 text-center">
+                                <i class="fas fa-hourglass-half text-3xl text-indigo-400 mb-3"></i>
+                                <h3 class="text-sm font-black text-indigo-900 uppercase tracking-widest mb-1">Poll Opens Soon</h3>
+                                <p class="text-xs text-indigo-600/80 font-medium">Check back when the exam ends to cast your vote.</p>
+                            </div>
+                        `;
+                        startCountdown(openTime, pollCard, "Opens in");
+                    } else if (isOpen && !hasVoted) {
+                        // LIVE VOTING STATE
                         contentArea.innerHTML = `
                             <div id="action-area-${poll.id}" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 md:p-6">
                                 <div class="text-center mb-5">
@@ -193,9 +211,13 @@
                                 </div>
                             </div>
                         `;
-                        startCountdown(closeTime, pollCard);
+                        startCountdown(closeTime, pollCard, "Auto-locks in");
                     } else {
+                        // ALREADY VOTED OR CLOSED STATE
                         renderResultsUI(poll.id);
+                        if (isOpen) {
+                            startCountdown(closeTime, pollCard, "Auto-locks in");
+                        }
                     }
                 });
                 
@@ -264,19 +286,19 @@
                 });
             }
 
-            // Lock Timer
-            function startCountdown(closeTime, container) {
+            // Enhanced Lock Timer (Handles both Opening and Closing)
+            function startCountdown(targetTime, container, prefixText) {
                 const timerDiv = document.createElement('div');
                 timerDiv.className = "text-center mt-4 text-xs font-bold text-slate-400 font-sporty flex justify-center items-center gap-2";
                 container.appendChild(timerDiv);
 
                 const interval = setInterval(() => {
                     const now = new Date().getTime();
-                    const distance = closeTime.getTime() - now;
+                    const distance = targetTime.getTime() - now;
 
                     if (distance < 0) {
                         clearInterval(interval);
-                        initPolls(); // Auto-lock by reloading the UI
+                        initPolls(); // Auto-reload to switch states (Upcoming -> Live -> Closed)
                         return;
                     }
 
@@ -284,7 +306,7 @@
                     const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                     const s = Math.floor((distance % (1000 * 60)) / 1000);
 
-                    timerDiv.innerHTML = `<i class="fas fa-clock text-slate-300"></i> Auto-locks in: ${h}h ${m}m ${s}s`;
+                    timerDiv.innerHTML = `<i class="fas fa-clock text-slate-300"></i> ${prefixText}: ${h}h ${m}m ${s}s`;
                 }, 1000);
             }
 
