@@ -204,7 +204,7 @@
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                                     <button onclick="submitVote('${poll.id}', 'easy')" class="flex flex-col items-center justify-center p-4 bg-white border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 rounded-xl transition-all shadow-sm group">
                                         <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">😊</span>
-                                        <span class="font-bold text-xs text-slate-700 group-hover:text-emerald-600">Free Pass</span>
+                                        <span class="font-bold text-xs text-slate-700 group-hover:text-emerald-600">Easy</span>
                                     </button>
                                     <button onclick="submitVote('${poll.id}', 'average')" class="flex flex-col items-center justify-center p-4 bg-white border border-slate-200 hover:border-indigo-500 hover:bg-indigo-50 rounded-xl transition-all shadow-sm group">
                                         <span class="text-3xl mb-2 group-hover:scale-110 transition-transform">😐</span>
@@ -289,7 +289,7 @@
                         `;
                     };
 
-                    chartsDiv.innerHTML += generateBar('Free Pass', data.easy || 0, '#10b981', '😊');
+                    chartsDiv.innerHTML += generateBar('Easy', data.easy || 0, '#10b981', '😊');
                     chartsDiv.innerHTML += generateBar('Average', data.average || 0, '#4f46e5', '😐');
                     chartsDiv.innerHTML += generateBar('Hard', data.hard || 0, '#f97316', '😓');
                     chartsDiv.innerHTML += generateBar('Supply Confirm', data.supply || 0, '#e11d48', '💀');
