@@ -26,7 +26,7 @@
         }
         .animate-pulse-soft { animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 
-        /* NEW: Smooth Entry Animation */
+        /* Smooth Entry Animation */
         @keyframes fadeInUp {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -113,7 +113,7 @@
                 runTransaction(voteRef, (currentVotes) => {
                     return (currentVotes || 0) + 1;
                 }).then(() => {
-                    renderResultsUI(pollId); // Swap to the live bar chart
+                    renderResultsUI(pollId, false); // Swap to the live bar chart
                 }).catch((error) => {
                     console.error("Firebase Error:", error);
                     alert("Database write error. Please try again.");
@@ -126,12 +126,40 @@
                 wrapper.innerHTML = '';
                 const now = new Date();
 
-                myPolls.forEach((poll, index) => {
+                // AUTO-SORTING LOGIC: Priority: 1. Live Now -> 2. Upcoming -> 3. Closed
+                const sortedPolls = myPolls.sort((a, b) => {
+                    const openA = new Date(a.opensAt);
+                    const closeA = new Date(a.closesAt);
+                    const isLiveA = now >= openA && now <= closeA;
+                    const isUpcomingA = now < openA;
+
+                    const openB = new Date(b.opensAt);
+                    const closeB = new Date(b.closesAt);
+                    const isLiveB = now >= openB && now <= closeB;
+                    const isUpcomingB = now < openB;
+
+                    let rankA = 3; 
+                    if (isLiveA) rankA = 1;
+                    else if (isUpcomingA) rankA = 2;
+
+                    let rankB = 3; 
+                    if (isLiveB) rankB = 1;
+                    else if (isUpcomingB) rankB = 2;
+
+                    if (rankA === rankB) {
+                         return openA - openB; 
+                    }
+                    return rankA - rankB;
+                });
+
+                // Render the sorted array
+                sortedPolls.forEach((poll, index) => {
                     const openTime = new Date(poll.opensAt);
                     const closeTime = new Date(poll.closesAt);
                     
                     const isUpcoming = now < openTime;
                     const isOpen = now >= openTime && now <= closeTime;
+                    const isClosed = now > closeTime;
                     const hasVoted = localStorage.getItem('voted_' + poll.id);
 
                     // Build the Poll Card Container with Staggered Animation
@@ -224,7 +252,7 @@
                         startCountdown(closeTime, pollCard, "Auto-locks in");
                     } else {
                         // ALREADY VOTED OR CLOSED STATE
-                        renderResultsUI(poll.id);
+                        renderResultsUI(poll.id, isClosed);
                         if (isOpen) {
                             startCountdown(closeTime, pollCard, "Auto-locks in");
                         }
@@ -244,7 +272,7 @@
             }
 
             // Results UI Generator
-            function renderResultsUI(pollId) {
+            function renderResultsUI(pollId, isClosed) {
                 const contentArea = document.getElementById('content-area-' + pollId);
                 contentArea.innerHTML = `
                     <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
@@ -293,10 +321,60 @@
                     chartsDiv.innerHTML += generateBar('Average', data.average || 0, '#4f46e5', '😐');
                     chartsDiv.innerHTML += generateBar('Hard', data.hard || 0, '#f97316', '😓');
                     chartsDiv.innerHTML += generateBar('Supply Confirm', data.supply || 0, '#e11d48', '💀');
+
+                    // 🌟 NEW: VERDICT CALCULATION LOGIC 🌟
+                    let maxVotes = -1;
+                    let isTie = false;
+                    let verdictData = null;
+
+                    const categories = [
+                        { key: 'easy', label: 'Easy', color: 'text-emerald-600', emoji: '😊', bg: 'bg-emerald-50', border: 'border-emerald-200' },
+                        { key: 'average', label: 'Average', color: 'text-indigo-600', emoji: '😐', bg: 'bg-indigo-50', border: 'border-indigo-200' },
+                        { key: 'hard', label: 'Hard', color: 'text-orange-600', emoji: '😓', bg: 'bg-orange-50', border: 'border-orange-200' },
+                        { key: 'supply', label: 'Supply Confirm', color: 'text-rose-600', emoji: '💀', bg: 'bg-rose-50', border: 'border-rose-200' }
+                    ];
+
+                    categories.forEach(cat => {
+                        const votes = data[cat.key] || 0;
+                        if (votes > maxVotes) {
+                            maxVotes = votes;
+                            verdictData = cat;
+                            isTie = false;
+                        } else if (votes === maxVotes && votes > 0) {
+                            isTie = true;
+                        }
+                    });
+
+                    // Only show Verdict banner if there are votes
+                    if (total > 0) {
+                        let verdictHtml = '';
+                        let bannerLabel = isClosed ? "Final Verdict" : "Leading Trend";
+                        
+                        if (isTie) {
+                            verdictHtml = `
+                                <div class="mt-5 pt-4 border-t border-slate-200">
+                                    <div class="bg-slate-100 border border-slate-200 rounded-xl p-3 flex items-center justify-between opacity-90">
+                                        <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">${bannerLabel}</span>
+                                        <div class="text-sm font-black text-slate-600">Mixed Reactions 🤷‍♂️</div>
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            verdictHtml = `
+                                <div class="mt-5 pt-4 border-t border-slate-200">
+                                    <div class="${verdictData.bg} border ${verdictData.border} rounded-xl p-3 flex items-center justify-between ${!isClosed ? 'opacity-80' : ''}">
+                                        <span class="text-xs font-bold ${verdictData.color} uppercase tracking-widest">${bannerLabel}</span>
+                                        <div class="text-sm font-black ${verdictData.color}">${verdictData.label} ${verdictData.emoji}</div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        chartsDiv.innerHTML += verdictHtml;
+                    }
                 });
             }
 
-            // CORRECTED: Enhanced Lock Timer (Handles Days Properly)
+            // Enhanced Lock Timer (Handles Days Properly)
             function startCountdown(targetTime, container, prefixText) {
                 const timerDiv = document.createElement('div');
                 timerDiv.className = "text-center mt-4 text-xs font-bold text-slate-400 font-sporty flex justify-center items-center gap-2";
@@ -312,13 +390,12 @@
                         return;
                     }
 
-                    // NEW MATH: Calculates Total Days
+                    // Calculates Total Days
                     const d = Math.floor(distance / (1000 * 60 * 60 * 24));
                     const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                     const s = Math.floor((distance % (1000 * 60)) / 1000);
 
-                    // Display Days if > 0, otherwise just Hours/Mins/Secs
                     let timeString = d > 0 ? `${d}d ${h}h ${m}m ${s}s` : `${h}h ${m}m ${s}s`;
 
                     timerDiv.innerHTML = `<i class="fas fa-clock text-slate-300"></i> ${prefixText}: ${timeString}`;
