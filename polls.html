@@ -322,7 +322,7 @@
                     chartsDiv.innerHTML += generateBar('Hard', data.hard || 0, '#f97316', '😓');
                     chartsDiv.innerHTML += generateBar('Supply Confirm', data.supply || 0, '#e11d48', '💀');
 
-                    // 🌟 NEW: VERDICT CALCULATION LOGIC 🌟
+                    // 🌟 VERDICT CALCULATION LOGIC 🌟
                     let maxVotes = -1;
                     let isTie = false;
                     let verdictData = null;
@@ -345,10 +345,10 @@
                         }
                     });
 
-                    // Only show Verdict banner if there are votes
-                    if (total > 0) {
+                    // Only show Verdict banner if there are votes AND the poll is completely closed
+                    if (total > 0 && isClosed) {
                         let verdictHtml = '';
-                        let bannerLabel = isClosed ? "Final Verdict" : "Leading Trend";
+                        let bannerLabel = "Final Verdict";
                         
                         if (isTie) {
                             verdictHtml = `
@@ -362,7 +362,7 @@
                         } else {
                             verdictHtml = `
                                 <div class="mt-5 pt-4 border-t border-slate-200">
-                                    <div class="${verdictData.bg} border ${verdictData.border} rounded-xl p-3 flex items-center justify-between ${!isClosed ? 'opacity-80' : ''}">
+                                    <div class="${verdictData.bg} border ${verdictData.border} rounded-xl p-3 flex items-center justify-between">
                                         <span class="text-xs font-bold ${verdictData.color} uppercase tracking-widest">${bannerLabel}</span>
                                         <div class="text-sm font-black ${verdictData.color}">${verdictData.label} ${verdictData.emoji}</div>
                                     </div>
