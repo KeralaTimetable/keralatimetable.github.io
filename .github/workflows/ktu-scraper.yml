@@ -2,10 +2,10 @@ name: KTU Calendar Auto-Scraper
 
 on:
   schedule:
-    # Runs daily at 00:00 UTC
+    # Runs daily at 00:00 UTC (around 5:30 AM IST)
     - cron: '0 0 * * *'
   workflow_dispatch: 
-    # Allows you to click "Run workflow" manually from the Actions tab
+    # Creates a "Run workflow" button in the Actions tab for manual testing
 
 jobs:
   scrape-and-update:
@@ -27,10 +27,12 @@ jobs:
           playwright install chromium
 
       - name: Run KTU Scraper
+        # This executes your exact untouched scraper.py file
         run: python scraper.py
 
-      - name: Commit and Push New PDFs & Configuration
+      - name: Commit and Push New PDFs
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "🤖 Auto-update: KTU Academic Calendars Synced"
+          commit_message: "🤖 Auto-update: Downloaded latest KTU Academic Calendars"
           commit_author: "GitHub Actions Bot <actions@github.com>"
+          # This action will automatically detect any new PDFs in the downloads/ folder and push them!
