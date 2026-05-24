@@ -41,8 +41,8 @@ def scrape_academic_calendars(output_dir="./downloads"):
         page.on("response", on_response)
         
         print("Navigating to KTU Academic Calendars...")
-        page.goto("https://ktu.edu.in/academics/academic_calendar", wait_until="networkidle")
-        
+        page.goto("https://ktu.edu.in/academics/academic_calendar", wait_until="domcontentloaded", timeout=60000)
+
         # Buffer to allow all AJAX scripts to complete and render
         page.wait_for_timeout(4000) 
         
