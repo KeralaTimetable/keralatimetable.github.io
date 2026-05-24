@@ -98,8 +98,7 @@
                 </div>
 
                 <div class="flex overflow-x-auto no-scrollbar gap-2 mb-8 pb-2 border-b border-slate-200/60 w-full" id="filter-tabs">
-                    <button class="filter-btn active bg-slate-800 text-white font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="All">All Timetables</button>
-                    <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S1">S1 / S2</button>
+                    <button class="filter-btn active bg-slate-800 text-white font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S1">S1 / S2</button>
                     <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S3">S3 / S4</button>
                     <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S5">S5 / S6</button>
                     <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S7">S7 / S8</button>
@@ -237,6 +236,48 @@
 
             document.getElementById('ongoing-section').style.display = hasOngoing ? 'block' : 'none';
             document.getElementById('upcoming-section').style.display = hasUpcoming ? 'block' : 'none';
+
+            // NEW: Automatically apply the S1 filter when the page loads
+            applyFilter('S1');
+        }
+
+        // --- FILTER PILL LOGIC (For Semester Vault) ---
+        function applyFilter(filterValue) {
+            const cards = document.getElementById('vault-grid').children;
+            const emptyState = document.getElementById('empty-state');
+            let visibleCount = 0;
+
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                if (card.getAttribute('data-category').includes(filterValue)) {
+                    card.style.display = 'flex'; 
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+
+            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function setupFilters() {
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // UI state change
+                    buttons.forEach(b => {
+                        b.classList.remove('bg-slate-800', 'text-white');
+                        b.classList.add('bg-white', 'text-slate-500');
+                    });
+                    btn.classList.remove('bg-white', 'text-slate-500');
+                    btn.classList.add('bg-slate-800', 'text-white');
+
+                    // Filter logic
+                    const filterValue = btn.getAttribute('data-filter');
+                    applyFilter(filterValue);
+                });
+            });
         }
 
         // --- COUNTDOWN TIMER LOGIC ---
@@ -259,39 +300,6 @@
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                 timer.innerHTML = `${days}d : ${hours.toString().padStart(2, '0')}h : ${minutes.toString().padStart(2, '0')}m : ${seconds.toString().padStart(2, '0')}s`;
-            });
-        }
-
-        // --- FILTER PILL LOGIC (For Semester Vault) ---
-        function setupFilters() {
-            const buttons = document.querySelectorAll('.filter-btn');
-            const emptyState = document.getElementById('empty-state');
-
-            buttons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    buttons.forEach(b => {
-                        b.classList.remove('bg-slate-800', 'text-white');
-                        b.classList.add('bg-white', 'text-slate-500');
-                    });
-                    btn.classList.remove('bg-white', 'text-slate-500');
-                    btn.classList.add('bg-slate-800', 'text-white');
-
-                    const filterValue = btn.getAttribute('data-filter');
-                    const cards = document.getElementById('vault-grid').children;
-                    let visibleCount = 0;
-
-                    for (let i = 0; i < cards.length; i++) {
-                        const card = cards[i];
-                        if (filterValue === 'All' || card.getAttribute('data-category').includes(filterValue)) {
-                            card.style.display = 'flex'; 
-                            visibleCount++;
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    }
-
-                    emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
-                });
             });
         }
 
