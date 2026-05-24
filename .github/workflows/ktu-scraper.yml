@@ -1,12 +1,11 @@
 name: KTU Calendar Auto-Scraper
 
-# When should this workflow run?
 on:
   schedule:
-    # Runs automatically every day at 00:00 UTC (around 5:30 AM IST)
+    # Runs daily at 00:00 UTC
     - cron: '0 0 * * *'
   workflow_dispatch: 
-    # This line adds a "Run Workflow" button in GitHub so you can trigger it manually anytime!
+    # Allows you to click "Run workflow" manually from the Actions tab
 
 jobs:
   scrape-and-update:
@@ -30,8 +29,8 @@ jobs:
       - name: Run KTU Scraper
         run: python scraper.py
 
-      - name: Commit and Push New PDFs
+      - name: Commit and Push New PDFs & Configuration
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "🤖 Auto-update: Downloaded latest KTU Academic Calendars"
+          commit_message: "🤖 Auto-update: KTU Academic Calendars Synced"
           commit_author: "GitHub Actions Bot <actions@github.com>"
