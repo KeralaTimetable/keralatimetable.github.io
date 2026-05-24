@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
+    
+    <title>KTU Academic Calendars | Latest S1-S8 Schedules</title>
+    <link rel="canonical" href="https://keralatimetable.github.io/calendar.html" />
+
+    <meta name="description" content="Download the latest official KTU Academic Calendars for B.Tech, B.Arch, M.Tech, MBA, and MCA. Track semester start dates, exam windows, and project deadlines.">
+    <meta name="keywords" content="ktu academic calendar, ktu calendar 2026, ktu btech calendar, ktu s2 academic calendar, kerala technological university important dates">
+    <meta name="robots" content="index, follow">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        .font-sporty { font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em; }
+
+        .bg-mesh {
+            background-color: #f8fafc;
+            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
+                              radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
+                              radial-gradient(at 0% 50%, hsla(228,100%,74%,0.15) 0px, transparent 50%);
+        }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .calendar-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .calendar-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.15); border-color: #c7d2fe; }
+
+        @keyframes fadeUpEntry {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+    </style>
+</head>
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <div id="navigation-container" class="min-h-[73px] w-full"></div>
+
+    <main class="flex-grow w-full pb-20">
+        
+        <div class="w-full max-w-6xl mx-auto px-4 pt-10 pb-8 text-center relative z-20">
+            <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
+                <i class="fas fa-sync-alt animate-spin-slow text-indigo-500"></i> Auto-Synced
+            </div>
+            <h1 class="animate-fade-up delay-100 text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
+                Academic <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Calendars</span>
+            </h1>
+            <p class="animate-fade-up delay-200 text-slate-500 font-medium md:text-lg max-w-2xl mx-auto mb-2">
+                Official semester schedules, class dates, and project deadlines directly from the university.
+            </p>
+        </div>
+
+        <div class="w-full max-w-6xl mx-auto px-4 relative z-20">
+            
+            <div class="animate-fade-up delay-300">
+                
+                <div class="flex overflow-x-auto no-scrollbar gap-2 mb-8 pb-2 border-b border-slate-200/60 w-full" id="filter-tabs">
+                    <button class="filter-btn active bg-slate-800 text-white font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors shadow-sm" data-filter="All">All Programs</button>
+                    <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors shadow-sm" data-filter="B.Tech">B.Tech</button>
+                    <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors shadow-sm" data-filter="B.Arch">B.Arch</button>
+                    <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors shadow-sm" data-filter="PG">PG (M.Tech / MBA / MCA)</button>
+                </div>
+
+                <div id="calendar-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    </div>
+                
+                <div id="empty-state" class="hidden text-center py-16 bg-white/50 border border-slate-200 border-dashed rounded-3xl mt-8">
+                    <i class="fas fa-filter text-4xl text-slate-300 mb-4"></i>
+                    <h3 class="text-lg font-bold text-slate-700">No calendars found</h3>
+                    <p class="text-sm text-slate-500 mt-1">Try selecting a different program filter.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-200/60 bg-white py-10 mt-auto">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <h3 class="text-slate-800 font-extrabold text-xl mb-3">Kerala <span class="text-indigo-600">Timetable</span></h3>
+            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto mb-6">Built by students, for students. We provide fast, direct access to university resources.</p>
+            <div class="flex justify-center gap-6">
+                <a href="status.html" class="text-slate-400 hover:text-indigo-600 font-medium text-sm transition-colors">Server Status</a>
+                <a href="about.html" class="text-slate-400 hover:text-indigo-600 font-medium text-sm transition-colors">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="components.js?v=12"></script>
+    <script>
+        loadNavigation('calendar', '', false);
+
+        // --- SCRAPED DATA CONFIGURATION ---
+        // You can eventually move this array to a separate `calendar-config.js` file just like you did with timetables!
+        const calendarData = [
+            { program: 'M.Tech', sem: 'S4', title: 'MTech S4 academic calendar with dates of extended project submission', date: '2026-03-07', file: 'downloads/2026-03-07_1.MTECHAcademicCalender_S4.pdf' },
+            { program: 'B.Tech', sem: 'S2', title: 'Academic Calendar - Jan 2026 to Mar 2026 B. Tech S2', date: '2026-02-10', file: 'downloads/2026-02-10_2.B.TechAcademicCalender_S2_Jan26-June26.pdf' },
+            { program: 'B.Tech', sem: 'S4/S6/S8', title: 'Academic Calendar - Dec 2025 B. Tech S4/S6/S8', date: '2026-02-10', file: 'downloads/2026-02-10_1.B.TechAcademicCalender_EvenSem_Dec25-June26.pdf' },
+            { program: 'B.Arch', sem: 'S2', title: 'Academic Calendar - Jan 2026 to March 2026 B. Arch S2', date: '2026-02-10', file: 'downloads/2026-02-10_2.B.ArchAcademicCalender_S2_JAN26_-June26.pdf' },
+            { program: 'B.Arch', sem: 'S4-S10', title: 'Academic Calendar - December 2025-June 2026 B. Arch S4/S6/S8/S10', date: '2026-02-10', file: 'downloads/2026-02-10_1.B.ArchAcademicCalender_S4_S6_S8_S10_Dec25_-June26.pdf' },
+            { program: 'M.Tech', sem: 'S2', title: 'Academic Calendar - Jan 2026 to June 2026 MTech S2', date: '2026-01-07', file: 'downloads/2026-01-07_MergedAll.pdf' },
+            { program: 'MBA', sem: 'S2', title: 'Academic Calendar - Dec 2026 to June 2026 MBA S2', date: '2026-01-07', file: 'downloads/2026-01-07_2ndsemMBARev.pdf' },
+            { program: 'MCA', sem: 'S2', title: 'Academic Calendar for Integrated MCA S2', date: '2026-01-07', file: 'downloads/2026-01-07_IntMCAS2S4S6S8S10.pdf' },
+            { program: 'M.Arch/M.Plan', sem: 'S1', title: 'Academic Calendar for M.Arch/M.Plan S1', date: '2026-01-07', file: 'downloads/2026-01-07_2ndsemMArchMPlan.pdf' },
+            { program: 'M.Tech', sem: 'S2', title: 'Academic Calendar for MTech S2', date: '2026-01-07', file: 'downloads/2026-01-07_2ndsemMTech.pdf' }
+        ];
+
+        // --- STYLING LOGIC FOR BADGES ---
+        function getProgramStyles(programStr) {
+            const prog = programStr.toUpperCase();
+            if (prog.includes('B.TECH')) return { bg: 'bg-blue-50', text: 'text-blue-600', border: 'border-blue-200', icon: 'fa-laptop-code' };
+            if (prog.includes('B.ARCH')) return { bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-emerald-200', icon: 'fa-drafting-compass' };
+            if (prog.includes('M.TECH') || prog.includes('M.ARCH') || prog.includes('M.PLAN')) return { bg: 'bg-purple-50', text: 'text-purple-600', border: 'border-purple-200', icon: 'fa-user-graduate' };
+            if (prog.includes('MBA') || prog.includes('MCA')) return { bg: 'bg-amber-50', text: 'text-amber-600', border: 'border-amber-200', icon: 'fa-briefcase' };
+            return { bg: 'bg-slate-50', text: 'text-slate-600', border: 'border-slate-200', icon: 'fa-file-alt' };
+        }
+
+        function formatDisplayDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        // --- RENDER CALENDARS ---
+        function renderCalendars() {
+            const grid = document.getElementById('calendar-grid');
+            grid.innerHTML = '';
+            
+            // Sort by date (Newest first)
+            const sortedData = [...calendarData].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            sortedData.forEach((item, index) => {
+                const styles = getProgramStyles(item.program);
+                const displayDate = formatDisplayDate(item.date);
+                
+                // Determine broad category for the filter buttons
+                let filterCategory = 'PG';
+                if (item.program.includes('B.Tech')) filterCategory = 'B.Tech';
+                if (item.program.includes('B.Arch')) filterCategory = 'B.Arch';
+
+                const cardHTML = `
+                    <div class="calendar-card bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col h-full animate-fade-in-up" data-category="${filterCategory}" style="animation-delay: ${index * 0.05}s">
+                        
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex gap-2">
+                                <span class="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider border ${styles.bg} ${styles.text} ${styles.border} flex items-center gap-1.5">
+                                    <i class="fas ${styles.icon}"></i> ${item.program}
+                                </span>
+                                <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-500 border border-slate-200">
+                                    ${item.sem}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-base font-extrabold text-slate-800 leading-snug mb-3 flex-grow">${item.title}</h3>
+                        
+                        <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
+                            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+                                <i class="fas fa-calendar-check text-slate-300"></i> ${displayDate}
+                            </div>
+                            
+                            <a href="${item.file}" target="_blank" class="flex-shrink-0 flex items-center gap-2 bg-indigo-50 hover:bg-indigo-600 hover:text-white text-indigo-600 font-bold py-2 px-4 rounded-xl transition-all duration-300 shadow-sm border border-indigo-100 hover:border-indigo-600 text-sm">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+        }
+
+        // --- FILTER PILL LOGIC ---
+        function setupFilters() {
+            const buttons = document.querySelectorAll('.filter-btn');
+            const emptyState = document.getElementById('empty-state');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update Button UI
+                    buttons.forEach(b => {
+                        b.classList.remove('bg-slate-800', 'text-white');
+                        b.classList.add('bg-white', 'text-slate-500');
+                    });
+                    btn.classList.remove('bg-white', 'text-slate-500');
+                    btn.classList.add('bg-slate-800', 'text-white');
+
+                    // Filter Cards
+                    const filterValue = btn.getAttribute('data-filter');
+                    const cards = document.getElementById('calendar-grid').children;
+                    let visibleCount = 0;
+
+                    for (let i = 0; i < cards.length; i++) {
+                        const card = cards[i];
+                        if (filterValue === 'All' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'flex'; 
+                            visibleCount++;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+
+                    // Show empty state if nothing matches
+                    emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+                });
+            });
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCalendars();
+            setupFilters();
+        });
+
+    </script>
+</body>
+</html>
