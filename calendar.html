@@ -101,23 +101,11 @@
     </footer>
 
     <script src="components.js?v=12"></script>
+    
+    <script src="calendar-config.js"></script>
+
     <script>
         loadNavigation('calendar', '', false);
-
-        // --- SCRAPED DATA CONFIGURATION ---
-        // You can eventually move this array to a separate `calendar-config.js` file just like you did with timetables!
-        const calendarData = [
-            { program: 'M.Tech', sem: 'S4', title: 'MTech S4 academic calendar with dates of extended project submission', date: '2026-03-07', file: 'downloads/2026-03-07_1.MTECHAcademicCalender_S4.pdf' },
-            { program: 'B.Tech', sem: 'S2', title: 'Academic Calendar - Jan 2026 to Mar 2026 B. Tech S2', date: '2026-02-10', file: 'downloads/2026-02-10_2.B.TechAcademicCalender_S2_Jan26-June26.pdf' },
-            { program: 'B.Tech', sem: 'S4/S6/S8', title: 'Academic Calendar - Dec 2025 B. Tech S4/S6/S8', date: '2026-02-10', file: 'downloads/2026-02-10_1.B.TechAcademicCalender_EvenSem_Dec25-June26.pdf' },
-            { program: 'B.Arch', sem: 'S2', title: 'Academic Calendar - Jan 2026 to March 2026 B. Arch S2', date: '2026-02-10', file: 'downloads/2026-02-10_2.B.ArchAcademicCalender_S2_JAN26_-June26.pdf' },
-            { program: 'B.Arch', sem: 'S4-S10', title: 'Academic Calendar - December 2025-June 2026 B. Arch S4/S6/S8/S10', date: '2026-02-10', file: 'downloads/2026-02-10_1.B.ArchAcademicCalender_S4_S6_S8_S10_Dec25_-June26.pdf' },
-            { program: 'M.Tech', sem: 'S2', title: 'Academic Calendar - Jan 2026 to June 2026 MTech S2', date: '2026-01-07', file: 'downloads/2026-01-07_MergedAll.pdf' },
-            { program: 'MBA', sem: 'S2', title: 'Academic Calendar - Dec 2026 to June 2026 MBA S2', date: '2026-01-07', file: 'downloads/2026-01-07_2ndsemMBARev.pdf' },
-            { program: 'MCA', sem: 'S2', title: 'Academic Calendar for Integrated MCA S2', date: '2026-01-07', file: 'downloads/2026-01-07_IntMCAS2S4S6S8S10.pdf' },
-            { program: 'M.Arch/M.Plan', sem: 'S1', title: 'Academic Calendar for M.Arch/M.Plan S1', date: '2026-01-07', file: 'downloads/2026-01-07_2ndsemMArchMPlan.pdf' },
-            { program: 'M.Tech', sem: 'S2', title: 'Academic Calendar for MTech S2', date: '2026-01-07', file: 'downloads/2026-01-07_2ndsemMTech.pdf' }
-        ];
 
         // --- STYLING LOGIC FOR BADGES ---
         function getProgramStyles(programStr) {
@@ -137,8 +125,17 @@
         // --- RENDER CALENDARS ---
         function renderCalendars() {
             const grid = document.getElementById('calendar-grid');
+            const emptyState = document.getElementById('empty-state');
             grid.innerHTML = '';
             
+            // Safety check: Ensure the python script has actually generated the data
+            if (typeof calendarData === 'undefined' || calendarData.length === 0) {
+                emptyState.querySelector('h3').innerText = "Syncing with KTU...";
+                emptyState.querySelector('p').innerText = "Please check back in a few minutes while we fetch the latest schedules.";
+                emptyState.style.display = 'block';
+                return;
+            }
+
             // Sort by date (Newest first)
             const sortedData = [...calendarData].sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -213,7 +210,13 @@
                     }
 
                     // Show empty state if nothing matches
-                    emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+                    if (typeof calendarData !== 'undefined' && calendarData.length > 0) {
+                        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+                        if (visibleCount === 0) {
+                            emptyState.querySelector('h3').innerText = "No calendars found";
+                            emptyState.querySelector('p').innerText = "Try selecting a different program filter.";
+                        }
+                    }
                 });
             });
         }
