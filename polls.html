@@ -206,38 +206,21 @@
                     
                     // Container to hold BOTH the poll card AND the external WhatsApp banner
                     const groupContainer = document.createElement('div');
-                    groupContainer.className = "mb-12"; // Spacing out entire blocks
+                    groupContainer.className = "mb-10"; // Increased margin to space out entire blocks
                     groupContainer.appendChild(pollCard);
 
                     // --- 2. BUILD THE EXTERNAL WHATSAPP BANNER (IF LIVE) ---
                     if (isOpen) {
                         const whatsappBanner = document.createElement('div');
-                        whatsappBanner.className = "mt-5 animate-fade-in-up"; // Spacing from card
+                        whatsappBanner.className = "mt-3 animate-fade-in-up";
                         whatsappBanner.style.opacity = "0";
                         whatsappBanner.style.animationDelay = `${(index * 0.15) + 0.1}s`; // Slightly after the card
                         
                         whatsappBanner.innerHTML = `
-                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center text-slate-800 relative z-20">
-                                <div class="flex items-center justify-center gap-1.5 mb-5 text-[#055a4e]">
-                                    <i class="fab fa-whatsapp text-lg"></i>
-                                    <h3 class="text-sm font-black uppercase tracking-widest text-slate-800">KTU Channel on WhatsApp</h3>
-                                </div>
-                                
-                                <div class="relative w-24 h-24 mx-auto mb-6">
-                                    <div class="absolute inset-0 rounded-full bg-mesh animate-pulse-soft"></div>
-                                    <div class="absolute inset-2 rounded-full bg-white shadow-inner flex items-center justify-center">
-                                        <i class="fab fa-whatsapp text-4xl text-[#055a4e]"></i>
-                                    </div>
-                                </div>
-
-                                <p class="font-sporty font-black text-slate-900 mb-3">follow WhatsApp channel for KTU Updates</p>
-                                
-                                <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#055a4e] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-sm block mb-2">
-                                    Join WhatsApp Channel
-                                </a>
-                                
-                                <p class="text-xs text-slate-500">or, search Kerala Timetable in WhatsApp</p>
-                            </div>
+                            <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#355749] text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-sm text-sm">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                Follow WhatsApp Channel for KTU Updates
+                            </a>
                         `;
                         groupContainer.appendChild(whatsappBanner);
                     }
@@ -354,109 +337,4 @@
                                 </div>
                             </div>
                         `;
-                    };
-
-                    chartsDiv.innerHTML += generateBar('Easy', data.easy || 0, '#10b981', '😊');
-                    chartsDiv.innerHTML += generateBar('Average', data.average || 0, '#4f46e5', '😐');
-                    chartsDiv.innerHTML += generateBar('Hard', data.hard || 0, '#f97316', '😓');
-                    chartsDiv.innerHTML += generateBar('Supply Confirm', data.supply || 0, '#e11d48', '💀');
-
-                    // 🌟 VERDICT CALCULATION LOGIC 🌟
-                    let maxVotes = -1;
-                    let isTie = false;
-                    let verdictData = null;
-
-                    const categories = [
-                        { key: 'easy', label: 'Easy', color: 'text-emerald-600', emoji: '😊', bg: 'bg-emerald-50', border: 'border-emerald-200' },
-                        { key: 'average', label: 'Average', color: 'text-indigo-600', emoji: '😐', bg: 'bg-indigo-50', border: 'border-indigo-200' },
-                        { key: 'hard', label: 'Hard', color: 'text-orange-600', emoji: '😓', bg: 'bg-orange-50', border: 'border-orange-200' },
-                        { key: 'supply', label: 'Supply Confirm', color: 'text-rose-600', emoji: '💀', bg: 'bg-rose-50', border: 'border-rose-200' }
-                    ];
-
-                    categories.forEach(cat => {
-                        const votes = data[cat.key] || 0;
-                        if (votes > maxVotes) {
-                            maxVotes = votes;
-                            verdictData = cat;
-                            isTie = false;
-                        } else if (votes === maxVotes && votes > 0) {
-                            isTie = true;
-                        }
-                    });
-
-                    // Only show Verdict banner if there are votes AND the poll is completely closed
-                    if (total > 0 && isClosed) {
-                        let verdictHtml = '';
-                        let bannerLabel = "Final Verdict";
-                        
-                        if (isTie) {
-                            verdictHtml = `
-                                <div class="mt-5 pt-4 border-t border-slate-200">
-                                    <div class="bg-slate-100 border border-slate-200 rounded-xl p-3 flex items-center justify-between opacity-90">
-                                        <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">${bannerLabel}</span>
-                                        <div class="text-sm font-black text-slate-600">Mixed Reactions 🤷‍♂️</div>
-                                    </div>
-                                </div>
-                            `;
-                        } else {
-                            verdictHtml = `
-                                <div class="mt-5 pt-4 border-t border-slate-200">
-                                    <div class="${verdictData.bg} border ${verdictData.border} rounded-xl p-3 flex items-center justify-between">
-                                        <span class="text-xs font-bold ${verdictData.color} uppercase tracking-widest">${bannerLabel}</span>
-                                        <div class="text-sm font-black ${verdictData.color}">${verdictData.label} ${verdictData.emoji}</div>
-                                    </div>
-                                </div>
-                            `;
-                        }
-                        chartsDiv.innerHTML += verdictHtml;
-                    }
-                });
-            }
-
-            // Enhanced Lock Timer (Handles Days Properly)
-            function startCountdown(targetTime, container, prefixText) {
-                const timerDiv = document.createElement('div');
-                timerDiv.className = "text-center mt-4 text-xs font-bold text-slate-400 font-sporty flex justify-center items-center gap-2";
-                container.appendChild(timerDiv);
-
-                const interval = setInterval(() => {
-                    const now = new Date().getTime();
-                    const distance = targetTime.getTime() - now;
-
-                    if (distance < 0) {
-                        clearInterval(interval);
-                        initPolls(); // Auto-reload to switch states (Upcoming -> Live -> Closed)
-                        return;
-                    }
-
-                    // Calculates Total Days
-                    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-                    let timeString = d > 0 ? `${d}d ${h}h ${m}m ${s}s` : `${h}h ${m}m ${s}s`;
-
-                    timerDiv.innerHTML = `<i class="fas fa-clock text-slate-300"></i> ${prefixText}: ${timeString}`;
-                }, 1000);
-            }
-
-            // Execute
-            if (typeof loadNavigation === 'function') {
-                loadNavigation('', '', false);
-            }
-            initPolls();
-
-        } catch (error) {
-            console.error(error);
-            document.getElementById('polls-wrapper').innerHTML = `
-                <div class="text-center py-12 bg-rose-50 border border-rose-200 rounded-2xl animate-fade-in-up">
-                    <i class="fas fa-exclamation-triangle text-4xl text-rose-500 mb-4"></i>
-                    <h3 class="text-lg font-black text-rose-700 mb-2">System Error</h3>
-                    <p class="text-sm font-medium text-rose-500 px-4">${error.message}</p>
-                </div>
-            `;
-        }
-    </script>
-</body>
-</html>
+          
