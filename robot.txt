@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://keralatimetable.github.io/sitemap.xml
