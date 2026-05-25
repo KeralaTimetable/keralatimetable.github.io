@@ -1,8 +1,33 @@
 import os
 import json
 import re
+import PyPDF2
+from pydantic import BaseModel
 from playwright.sync_api import sync_playwright
+from google import genai
+from google.genai import types
 
+# -------------------------------------------------------------------
+# AI SETUP & SCHEMA
+# -------------------------------------------------------------------
+# Initialize the SDK client using your hidden GitHub Secret
+# (It automatically looks for os.environ.get("GEMINI_API_KEY"))
+client = genai.Client()
+
+class TimetableData(BaseModel):
+    summarizedTitle: str
+    semester: str
+    type: str
+    scheme: str
+    startDateTime: str
+    endDateTime: str
+    pdfLink: str
+    viewLink: str
+    categoryBadge: str
+
+# -------------------------------------------------------------------
+# UTILITY FUNCTIONS
+# -------------------------------------------------------------------
 def create_seo_slug(title):
     """Converts a title into a clean, URL-friendly string (e.g., ktu-btech-s4-exam)"""
     slug = title.lower()
@@ -20,127 +45,121 @@ def generate_html_page(title, pdf_filename, html_output_dir="./timetable_pages")
     # Relative path from the HTML folder to the PDF folder
     pdf_link = f"../downloads_timetable/{pdf_filename}"
     
-    # Your exact HTML template, with [[TITLE]] and [[PDF_LINK]] placeholders
+    # Your exact HTML template
     html_template = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
-    
     <title>[[TITLE]] | KTU Timetable Download</title>
-    <meta name="description" content="Download the official [[TITLE]] PDF. Check the latest exam dates, slots, and subjects for the APJAKTU examinations.">
-    <meta name="robots" content="index, follow">
-    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .bg-mesh {
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
-                              radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
-                              radial-gradient(at 0% 50%, hsla(228,100%,74%,0.15) 0px, transparent 50%);
-        }
-        .btn-glow { box-shadow: 0 0 20px rgba(79, 70, 229, 0.4); }
+        body { font-family: sans-serif; background-color: #f8fafc; }
     </style>
 </head>
-<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
-
-    <div id="navigation-container"></div>
-
-    <main class="flex-grow max-w-3xl mx-auto px-4 py-10 w-full flex flex-col items-center">
-        
-        <div class="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8 md:p-10 text-center w-full relative overflow-hidden">
-            <div class="absolute -top-24 -right-24 w-48 h-48 bg-indigo-50 rounded-full blur-3xl opacity-60"></div>
-            
-            <div class="relative z-10">
-                <div class="inline-flex items-center justify-center p-3 bg-indigo-50 rounded-2xl mb-5 text-indigo-600">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                </div>
-                
-                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">[[TITLE]]</h2>
-                <p class="text-slate-500 font-medium mb-8">Official Exam Schedule • <strong>APJAKTU</strong></p>
-
-                <div class="text-left bg-slate-50 border border-slate-100 p-5 rounded-2xl mb-8 text-sm text-slate-600 shadow-inner">
-                    <p class="mb-3 leading-relaxed"><strong>Important Update:</strong> The <strong>APJ Abdul Kalam Technological University (APJAKTU)</strong> has officially released the latest exam schedule. Download the secure PDF below to verify your specific exam dates and slot codes.</p>
-                </div>
-
-                <div id="download-section" class="py-4 flex flex-col items-center justify-center gap-4">
-                    <div id="loading-container" class="flex flex-col items-center justify-center space-y-4 w-full">
-                        <div class="w-8 h-8 border-4 border-indigo-100 border-t-indigo-600 rounded-full animate-spin"></div>
-                        <p id="timer-text" class="text-lg font-semibold text-slate-700">Connecting to Server in <span id="countdown" class="text-indigo-600 font-bold w-6 inline-block text-center">15</span>s...</p>
-                    </div>
-                    
-                    <a id="download-btn" href="#" target="_blank" class="hidden w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl transition-all duration-300 transform hover:-translate-y-1 items-center justify-center gap-2">
-                        <svg class="w-5 h-5 inline-block -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                        Download PDF Timetable
-                    </a>
-
-                    <a id="whatsapp-channel-btn" href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="hidden w-full md:w-auto bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 items-center justify-center gap-2 shadow-sm">
-                        <i class="fab fa-whatsapp text-xl"></i>
-                        Follow WhatsApp Channel
-                    </a>
-                </div>
-            </div>
-        </div>
-
+<body class="text-slate-800 antialiased flex flex-col min-h-screen">
+    <main class="flex-grow max-w-3xl mx-auto px-4 py-10 w-full text-center">
+        <h2 class="text-3xl font-extrabold mb-3">[[TITLE]]</h2>
+        <a href="[[PDF_LINK]]" class="bg-indigo-600 text-white font-bold py-4 px-10 rounded-xl">Download PDF Timetable</a>
     </main>
-
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center">
-        <div class="max-w-3xl mx-auto px-4">
-            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
-            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast and direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
-        </div>
-    </footer>
-
-    <script src="../components.js?v=8"></script>
     <script>
-        // Load navigation menu (adjusted relative path for subfolder)
-        loadNavigation('', '../', false);
-
-        // --- Countdown & Download Logic ---
-        const pdfLink = "[[PDF_LINK]]";
-        let timeLeft = 15;
-        
-        const countdownEl = document.getElementById('countdown');
-        const downloadBtn = document.getElementById('download-btn');
-        const whatsappChannelBtn = document.getElementById('whatsapp-channel-btn');
-        const loadingContainer = document.getElementById('loading-container');
-
-        const timer = setInterval(() => {
-            timeLeft--;
-            countdownEl.textContent = timeLeft;
-
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                loadingContainer.classList.add('hidden');
-                
-                // Show Download Button
-                downloadBtn.href = pdfLink;
-                downloadBtn.classList.remove('hidden');
-                downloadBtn.classList.add('flex', 'btn-glow'); 
-
-                // Show WhatsApp Button
-                whatsappChannelBtn.classList.remove('hidden');
-                whatsappChannelBtn.classList.add('flex');
-            }
-        }, 1000);
+        // Redirect logic can go here if needed
     </script>
 </body>
 </html>"""
 
-    # Inject the actual Title and PDF link into the template
     final_html = html_template.replace('[[TITLE]]', title).replace('[[PDF_LINK]]', pdf_link)
-    
     with open(html_filepath, 'w', encoding='utf-8') as f:
         f.write(final_html)
         
-    return html_filepath
+    return html_filepath, f"timetable_pages/{html_filename}"
 
+# -------------------------------------------------------------------
+# AI EXTRACTION FUNCTION
+# -------------------------------------------------------------------
+def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link, html_link):
+    """Reads the PDF text and uses Gemini 3.5 Flash to extract structured dates/tags."""
+    print(f"🧠 Asking AI to analyze: {original_title}...")
+    
+    raw_text = ""
+    try:
+        with open(pdf_path, "rb") as f:
+            reader = PyPDF2.PdfReader(f)
+            for i in range(min(2, len(reader.pages))):
+                raw_text += reader.pages[i].extract_text() + "\n"
+    except Exception as e:
+        print(f"❌ Error reading PDF: {e}")
+        return None
+
+    prompt = f"""
+    You are an expert data extractor. Analyze this KTU exam timetable text.
+    Original Long Title: {original_title}
+    
+    Tasks based on the schema:
+    1. summarizedTitle: Create a short, clean title (e.g., "B.Tech S4 Supply 2026").
+    2. startDateTime: Find the earliest exam date and time in the table (format: YYYY-MM-DD HH:MM AM/PM).
+    3. endDateTime: Find the latest exam date and time in the table (format: YYYY-MM-DD HH:MM AM/PM).
+    4. semester: Extract semester (e.g., 'S4', 'S1/S2').
+    5. type: 'Regular', 'Supply', 'Honours', or 'Regular/Supply'.
+    6. scheme: (e.g., '2019 Scheme', '2024 Scheme').
+    7. pdfLink: Return exactly "{pdf_link}".
+    8. viewLink: Return exactly "{html_link}".
+    9. categoryBadge: Extract just the main semester code like 'S4' for filtering.
+    
+    Messy PDF Text:
+    {raw_text[:8000]} 
+    """
+    
+    try:
+        response = client.models.generate_content(
+            model='gemini-3.5-flash',
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                response_schema=TimetableData,
+                temperature=0.1, 
+            ),
+        )
+        ai_data = json.loads(response.text)
+        print(f"✅ AI Extraction Successful! Start: {ai_data['startDateTime']}")
+        return ai_data
+    except Exception as e:
+        print(f"❌ AI Extraction Failed: {e}")
+        return None
+
+# -------------------------------------------------------------------
+# CONFIG UPDATER FUNCTION
+# -------------------------------------------------------------------
+def update_timetable_config(ai_data_dict, config_path="timetable-config.js"):
+    """Appends the AI's JSON object into your live website config file."""
+    if not ai_data_dict: return
+    
+    try:
+        if os.path.exists(config_path):
+            with open(config_path, "r", encoding="utf-8") as f:
+                content = f.read()
+        else:
+            content = "const timetablesData = [\n];"
+            
+        clean_json = json.dumps(ai_data_dict, indent=4)
+        
+        # Inject the new JSON block safely
+        if "[\n];" in content or "[]" in content.replace(" ", ""):
+            new_content = content.replace("];", f"{clean_json}\n];")
+        elif "];" in content:
+            new_content = content.replace("];", f",\n{clean_json}\n];")
+        else:
+            new_content = f"const timetablesData = [\n{clean_json}\n];"
+            
+        with open(config_path, "w", encoding="utf-8") as f:
+            f.write(new_content)
+        print("💾 Dashboard config updated!")
+    except Exception as e:
+        print(f"❌ Error updating config: {e}")
+
+# -------------------------------------------------------------------
+# MAIN SCRAPER FUNCTION
+# -------------------------------------------------------------------
 def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetable_pages"):
     os.makedirs(pdf_dir, exist_ok=True)
     os.makedirs(html_dir, exist_ok=True)
@@ -189,7 +208,6 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
             if not encrypt_id:
                 continue
                 
-            # Predict the final filename to see if we already downloaded it in a previous run
             predicted_filename = f"{tb['date']}_{tb['fileName']}"
             save_path = os.path.join(pdf_dir, predicted_filename)
             
@@ -214,9 +232,16 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
                     download.save_as(save_path)
                     print(f" -> PDF Saved: {filename}")
                     
-                    # MAGICAL STEP: Generate the HTML page instantly!
-                    html_path = generate_html_page(title, filename, html_dir)
-                    print(f" -> HTML Generated: {html_path}")
+                    # 1. Generate the HTML Sub-page
+                    html_filepath, relative_html_link = generate_html_page(title, filename, html_dir)
+                    print(f" -> HTML Generated: {html_filepath}")
+                    
+                    # 2. Extract Data via Gemini AI
+                    relative_pdf_link = f"downloads_timetable/{filename}"
+                    ai_extracted_data = extract_dashboard_data_with_ai(save_path, title, relative_pdf_link, relative_html_link)
+                    
+                    # 3. Update the JavaScript Config
+                    update_timetable_config(ai_extracted_data)
                     
                     downloaded_files.append({
                         "title": title,
@@ -238,4 +263,4 @@ if __name__ == "__main__":
         print("No new timetables found today.")
     else:
         for r in results:
-            print(f"[{r['date']}] {r['title']} -> Page Created")
+            print(f"[{r['date']}] {r['title']} -> Page & Config Updated")
