@@ -211,21 +211,20 @@
 
                     // --- 2. BUILD THE EXTERNAL WHATSAPP BANNER (IF LIVE) ---
                     if (isOpen) {
-                        const whatsappBanner = document.createElement('div');
-                        whatsappBanner.className = "mt-3 animate-fade-in-up";
-                        whatsappBanner.style.opacity = "0";
-                        whatsappBanner.style.animationDelay = `${(index * 0.15) + 0.1}s`; // Slightly after the card
-                        
-                        whatsappBanner.innerHTML = `
-                            <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#355749] hover:bg-[#355749] text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-sm text-sm">
-                                <i class="fab fa-whatsapp text-lg"></i>
-                                Follow WhatsApp Channel for KTU Updates
-                            </a>
-                        `;
-                        groupContainer.appendChild(whatsappBanner);
-                    }
+                    const whatsappBanner = document.createElement('div');
+                    whatsappBanner.className = "mt-3 animate-fade-in-up";
+                    whatsappBanner.style.opacity = "0";
+                     whatsappBanner.style.animationDelay = `${(index * 0.15) + 0.1}s`; // Slightly after the card
+    
+              whatsappBanner.innerHTML = `
+                 <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-[#355749] font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-sm text-sm border border-[#355749]">
+                 <i class="fab fa-whatsapp text-lg"></i>
+                  Follow WhatsApp Channel for KTU Updates
+                </a>
+                 `;
+                    groupContainer.appendChild(whatsappBanner);
+                   }
 
-                    wrapper.appendChild(groupContainer);
 
                     // --- 3. INJECT SPECIFIC UI CONTENT BASED ON TIMING ---
                     const contentArea = document.getElementById('content-area-' + poll.id);
