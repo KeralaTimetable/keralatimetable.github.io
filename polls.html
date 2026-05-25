@@ -162,9 +162,9 @@
                     const isClosed = now > closeTime;
                     const hasVoted = localStorage.getItem('voted_' + poll.id);
 
-                    // Build the Poll Card Container with Staggered Animation
+                    // --- 1. BUILD THE MAIN POLL CARD ---
                     const pollCard = document.createElement('div');
-                    pollCard.className = "bg-white/70 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(79,70,229,0.08)] rounded-3xl p-6 md:p-8 mb-8 animate-fade-in-up";
+                    pollCard.className = "bg-white/70 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(79,70,229,0.08)] rounded-3xl p-6 md:p-8 animate-fade-in-up";
                     pollCard.style.opacity = "0"; // Start hidden for animation
                     pollCard.style.animationDelay = `${index * 0.15}s`; // Stagger the entry
                     
@@ -188,7 +188,7 @@
                         });
                     }
 
-                    // Card Header with Dynamic WhatsApp CTA injection
+                    // Card Header 
                     let html = `
                         <div class="flex justify-between items-start mb-6">
                             <div>
@@ -200,21 +200,34 @@
                             ${statusHtml}
                         </div>
                         <div id="content-area-${poll.id}"></div>
-                        
-                        ${isOpen ? `
-                        <div class="mt-5 animate-fade-in-up delay-100">
-                            <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-sm">
-                                <i class="fab fa-whatsapp text-xl"></i>
-                                Follow WhatsApp Channel for KTU Updates
-                            </a>
-                        </div>
-                        ` : ''}
                     `;
                     
                     pollCard.innerHTML = html;
-                    wrapper.appendChild(pollCard);
+                    
+                    // Container to hold BOTH the poll card AND the external WhatsApp banner
+                    const groupContainer = document.createElement('div');
+                    groupContainer.className = "mb-10"; // Increased margin to space out entire blocks
+                    groupContainer.appendChild(pollCard);
 
-                    // Inject specific UI based on timing
+                    // --- 2. BUILD THE EXTERNAL WHATSAPP BANNER (IF LIVE) ---
+                    if (isOpen) {
+                        const whatsappBanner = document.createElement('div');
+                        whatsappBanner.className = "mt-3 animate-fade-in-up";
+                        whatsappBanner.style.opacity = "0";
+                        whatsappBanner.style.animationDelay = `${(index * 0.15) + 0.1}s`; // Slightly after the card
+                        
+                        whatsappBanner.innerHTML = `
+                            <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-sm text-sm">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                Follow WhatsApp Channel for KTU Updates
+                            </a>
+                        `;
+                        groupContainer.appendChild(whatsappBanner);
+                    }
+
+                    wrapper.appendChild(groupContainer);
+
+                    // --- 3. INJECT SPECIFIC UI CONTENT BASED ON TIMING ---
                     const contentArea = document.getElementById('content-area-' + poll.id);
                     
                     if (isUpcoming) {
@@ -226,7 +239,7 @@
                                 <p class="text-xs text-indigo-600/80 font-medium">Check back when the exam ends to cast your vote.</p>
                             </div>
                         `;
-                        startCountdown(openTime, pollCard, "Opens in");
+                        startCountdown(openTime, contentArea, "Opens in");
                     } else if (isOpen && !hasVoted) {
                         // LIVE VOTING STATE
                         contentArea.innerHTML = `
@@ -258,12 +271,12 @@
                                 </div>
                             </div>
                         `;
-                        startCountdown(closeTime, pollCard, "Auto-locks in");
+                        startCountdown(closeTime, contentArea, "Auto-locks in");
                     } else {
                         // ALREADY VOTED OR CLOSED STATE
                         renderResultsUI(poll.id, isClosed);
                         if (isOpen) {
-                            startCountdown(closeTime, pollCard, "Auto-locks in");
+                            startCountdown(closeTime, contentArea, "Auto-locks in");
                         }
                     }
                 });
