@@ -38,4 +38,56 @@ window.timetablesData = [
         viewLink: "btech/s4/supply-2026.html",
         pdfLink: "https://drive.google.com/file/d/1Ndiq-v27ol7_42OG_Y42YedyBaQruOyz/view?usp=drivesdk"
     }
+,
+{
+    "id": "mplan_mba_s1_rescheduled_may2026",
+    "title": "M.Plan & MBA S1 Supplementary/FE Rescheduled Exams May 2026",
+    "semester": "S1",
+    "categoryBadge": "S1",
+    "type": "Supply",
+    "scheme": "2020 & 2025 Scheme",
+    "startDate": "2026-06-03T14:00:00",
+    "endDate": "2026-06-08T17:00:00",
+    "viewLink": "timetable_pages/rescheduling-of-examination-of-28-05-2026-due-to-eid-notification-reg.html",
+    "pdfLink": "downloads_timetable/2026-05-23_Reschedulingofexaminationof28.05.2026duetoEID-NotificationAPPROVED.pdf"
+}
+,
+{
+    "id": "m_planning_s1_may_2026",
+    "title": "M. Planning S1 Supplementary May 2026",
+    "semester": "S1",
+    "categoryBadge": "S1",
+    "type": "Supply",
+    "scheme": "2025 Scheme",
+    "startDate": "2026-05-30T13:30:00",
+    "endDate": "2026-06-08T16:00:00",
+    "viewLink": "timetable_pages/detailed-time-table-of-m-planning-s1-s-fe-may-2026-2025-scheme-examination-notification-reg.html",
+    "pdfLink": "downloads_timetable/2026-05-23_M.PlanningS1(S,FE)May2026APPROVED.pdf"
+}
+,
+{
+    "id": "mtech_s1_june2026",
+    "title": "M.Tech S1 Supply June 2026",
+    "semester": "S1",
+    "categoryBadge": "S1",
+    "type": "Supply",
+    "scheme": "2022 Scheme",
+    "startDate": "2026-06-02T13:30:00",
+    "endDate": "2026-06-02T16:00:00",
+    "viewLink": "timetable_pages/m-tech-s1-s-fe-2022-scheme-including-working-professionals-and-part-time-exam-june-2026-notification.html",
+    "pdfLink": "downloads_timetable/2026-05-23_M.TechS1(S,FE)(2022sch)approved.pdf"
+}
+,
+{
+    "id": "btech_s4_may2026",
+    "title": "B.Tech S4 Supply/FE May 2026",
+    "semester": "S4",
+    "categoryBadge": "S4",
+    "type": "Supply",
+    "scheme": "2019 Scheme",
+    "startDate": "2026-07-10T09:30:00",
+    "endDate": "2026-07-10T12:30:00",
+    "viewLink": "timetable_pages/detailed-revised-time-table-of-b-tech-s4-s-fe-exam-may-2026-including-working-professionals-2019-scheme-notification.html",
+    "pdfLink": "downloads_timetable/2026-05-14_RevisedTimeTableofB.TechS4(2019SCHEME)APPROVED.pdf"
+}
 ];
