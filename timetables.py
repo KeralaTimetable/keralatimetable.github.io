@@ -11,19 +11,20 @@ from google.genai import types
 # AI SETUP & SCHEMA
 # -------------------------------------------------------------------
 # Initialize the SDK client using your hidden GitHub Secret
-# (It automatically looks for os.environ.get("GEMINI_API_KEY"))
 client = genai.Client()
 
+# This schema exactly matches the keys expected by your timetable.html JS
 class TimetableData(BaseModel):
-    summarizedTitle: str
+    id: str
+    title: str
     semester: str
+    categoryBadge: str
     type: str
     scheme: str
-    startDateTime: str
-    endDateTime: str
-    pdfLink: str
+    startDate: str
+    endDate: str
     viewLink: str
-    categoryBadge: str
+    pdfLink: str
 
 # -------------------------------------------------------------------
 # UTILITY FUNCTIONS
@@ -62,9 +63,6 @@ def generate_html_page(title, pdf_filename, html_output_dir="./timetable_pages")
         <h2 class="text-3xl font-extrabold mb-3">[[TITLE]]</h2>
         <a href="[[PDF_LINK]]" class="bg-indigo-600 text-white font-bold py-4 px-10 rounded-xl">Download PDF Timetable</a>
     </main>
-    <script>
-        // Redirect logic can go here if needed
-    </script>
 </body>
 </html>"""
 
@@ -91,20 +89,22 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link, html_link
         print(f"❌ Error reading PDF: {e}")
         return None
 
+    # Prompt forces strict 24-hour 'T' format for JavaScript Date parsing
     prompt = f"""
     You are an expert data extractor. Analyze this KTU exam timetable text.
     Original Long Title: {original_title}
     
     Tasks based on the schema:
-    1. summarizedTitle: Create a short, clean title (e.g., "B.Tech S4 Supply 2026").
-    2. startDateTime: Find the earliest exam date and time in the table (format: YYYY-MM-DD HH:MM AM/PM).
-    3. endDateTime: Find the latest exam date and time in the table (format: YYYY-MM-DD HH:MM AM/PM).
-    4. semester: Extract semester (e.g., 'S4', 'S1/S2').
-    5. type: 'Regular', 'Supply', 'Honours', or 'Regular/Supply'.
-    6. scheme: (e.g., '2019 Scheme', '2024 Scheme').
-    7. pdfLink: Return exactly "{pdf_link}".
-    8. viewLink: Return exactly "{html_link}".
-    9. categoryBadge: Extract just the main semester code like 'S4' for filtering.
+    1. id: Create a short, unique snake_case ID (e.g., "mca_s2_may2026").
+    2. title: Create a short, clean title (e.g., "MCA S2 Regular/Supply May 2026").
+    3. startDate: Find the earliest exam date and time. MUST be formatted EXACTLY like this: YYYY-MM-DDTHH:MM:SS (Use 24-hour time and the 'T' separator).
+    4. endDate: Find the latest exam date and time. MUST be formatted EXACTLY like this: YYYY-MM-DDTHH:MM:SS (Use 24-hour time and the 'T' separator).
+    5. semester: Extract the specific semester (e.g., 'S4', 'S1', 'S1-S5').
+    6. categoryBadge: Extract a category for filtering (e.g., 'S1', 'S3', 'S5', 'S7').
+    7. type: 'Regular', 'Supply', 'Honours', or 'Regular/Supply'.
+    8. scheme: (e.g., '2019 Scheme', '2024 Scheme').
+    9. pdfLink: Return exactly "{pdf_link}".
+    10. viewLink: Return exactly "{html_link}".
     
     Messy PDF Text:
     {raw_text[:8000]} 
@@ -121,7 +121,7 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link, html_link
             ),
         )
         ai_data = json.loads(response.text)
-        print(f"✅ AI Extraction Successful! Start: {ai_data['startDateTime']}")
+        print(f"✅ AI Extraction Successful! Start: {ai_data['startDate']}")
         return ai_data
     except Exception as e:
         print(f"❌ AI Extraction Failed: {e}")
@@ -131,7 +131,7 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link, html_link
 # CONFIG UPDATER FUNCTION
 # -------------------------------------------------------------------
 def update_timetable_config(ai_data_dict, config_path="timetable-config.js"):
-    """Appends the AI's JSON object into your live website config file."""
+    """Safely appends the AI's JSON object into window.timetablesData."""
     if not ai_data_dict: return
     
     try:
@@ -139,21 +139,27 @@ def update_timetable_config(ai_data_dict, config_path="timetable-config.js"):
             with open(config_path, "r", encoding="utf-8") as f:
                 content = f.read()
         else:
-            content = "const timetablesData = [\n];"
+            content = "window.timetablesData = [\n];"
             
         clean_json = json.dumps(ai_data_dict, indent=4)
         
-        # Inject the new JSON block safely
-        if "[\n];" in content or "[]" in content.replace(" ", ""):
-            new_content = content.replace("];", f"{clean_json}\n];")
-        elif "];" in content:
-            new_content = content.replace("];", f",\n{clean_json}\n];")
+        # Robust method to inject into the JavaScript array
+        last_bracket_idx = content.rfind(']')
+        if last_bracket_idx != -1:
+            array_content = content[content.find('[')+1:last_bracket_idx].strip()
+            if array_content:
+                # Array already has items, prepend with comma
+                new_content = content[:last_bracket_idx] + ",\n" + clean_json + "\n" + content[last_bracket_idx:]
+            else:
+                # Array is empty
+                new_content = content[:last_bracket_idx] + "\n" + clean_json + "\n" + content[last_bracket_idx:]
+                
+            with open(config_path, "w", encoding="utf-8") as f:
+                f.write(new_content)
+            print("💾 Dashboard config updated!")
         else:
-            new_content = f"const timetablesData = [\n{clean_json}\n];"
+            print("❌ Error: Could not find closing bracket in config file.")
             
-        with open(config_path, "w", encoding="utf-8") as f:
-            f.write(new_content)
-        print("💾 Dashboard config updated!")
     except Exception as e:
         print(f"❌ Error updating config: {e}")
 
