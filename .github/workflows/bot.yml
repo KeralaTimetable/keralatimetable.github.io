@@ -2,7 +2,7 @@ name: KTU Automated Bots (Status & Notices)
 
 on:
   schedule:
-        - cron: '0 */4 * * *' 
+    - cron: '0 */4 * * *' 
   workflow_dispatch:    
 
 jobs:
@@ -33,6 +33,10 @@ jobs:
       - name: Run KTU Calendar Scraper
         run: python scraper.py
 
+      # ADDED: Your new timetable bot
+      - name: Run KTU Timetable Scraper
+        run: python timetables.py
+
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
@@ -43,4 +47,8 @@ jobs:
           git add calendar-config.js || true
           git add downloads/ || true
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update KTU status, notices & calendars" && git push)
+          # ADDED: Tracking for your timetable PDFs and auto-generated HTML pages
+          git add downloads_timetable/ || true
+          git add timetable_pages/ || true
+          
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update KTU status, notices, calendars & timetables" && git push)
