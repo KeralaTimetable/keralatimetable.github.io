@@ -25,7 +25,7 @@ class TimetableData(BaseModel):
     pdfLink: str
 
 # -------------------------------------------------------------------
-# UTILITY FUNCTIONS (UPDATED HTML TEMPLATE)
+# UTILITY FUNCTIONS
 # -------------------------------------------------------------------
 def create_seo_slug(title):
     """Converts a title into a clean, URL-friendly string (e.g., ktu-btech-s4-exam)"""
@@ -222,7 +222,7 @@ def generate_html_page(title, pdf_filename, html_output_dir="./timetable_pages")
 
 
 # -------------------------------------------------------------------
-# AI EXTRACTION FUNCTION (UNTOUCHED)
+# AI EXTRACTION FUNCTION (UPDATED TO READ FULL PDF)
 # -------------------------------------------------------------------
 def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link, html_link):
     """Reads the PDF text and uses Gemini to extract structured dates/tags."""
@@ -232,13 +232,16 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link, html_link
     try:
         with open(pdf_path, "rb") as f:
             reader = PyPDF2.PdfReader(f)
-            for i in range(min(2, len(reader.pages))):
-                raw_text += reader.pages[i].extract_text() + "\n"
+            # FIX: Read every single page of the PDF to ensure we catch the final exams
+            for i in range(len(reader.pages)):
+                text = reader.pages[i].extract_text()
+                if text:
+                    raw_text += text + "\n"
     except Exception as e:
         print(f"❌ Error reading PDF: {e}")
         return None
 
-    # Prompt forces strict 24-hour 'T' format for JavaScript Date parsing
+    # Prompt updated to command scanning the entire document
     prompt = f"""
     You are an expert data extractor. Analyze this KTU exam timetable text.
     Original Long Title: {original_title}
@@ -246,8 +249,8 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link, html_link
     Tasks based on the schema:
     1. id: Create a short, unique snake_case ID (e.g., "mca_s2_may2026").
     2. title: Create a short, clean title (e.g., "MCA S2 Regular/Supply May 2026").
-    3. startDate: Find the earliest exam date and time. MUST be formatted EXACTLY like this: YYYY-MM-DDTHH:MM:SS (Use 24-hour time and the 'T' separator).
-    4. endDate: Find the latest exam date and time. MUST be formatted EXACTLY like this: YYYY-MM-DDTHH:MM:SS (Use 24-hour time and the 'T' separator).
+    3. startDate: Scan the ENTIRE document and find the VERY FIRST exam date and time. Format: YYYY-MM-DDTHH:MM:SS
+    4. endDate: Scan the ENTIRE document and find the VERY LAST/LATEST exam date and time. Format: YYYY-MM-DDTHH:MM:SS
     5. semester: Extract the specific semester (e.g., 'S4', 'S1', 'S1-S5').
     6. categoryBadge: Extract a category for filtering (e.g., 'S1', 'S3', 'S5', 'S7').
     7. type: 'Regular', 'Supply', 'Honours', or 'Regular/Supply'.
@@ -256,7 +259,7 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link, html_link
     10. viewLink: Return exactly "{html_link}".
     
     Messy PDF Text:
-    {raw_text[:8000]} 
+    {raw_text[:40000]} 
     """
     
     try:
@@ -266,11 +269,11 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link, html_link
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
                 response_schema=TimetableData,
-                temperature=0.1, 
+                temperature=0.0, # Lowered for maximum mathematical strictness
             ),
         )
         ai_data = json.loads(response.text)
-        print(f"✅ AI Extraction Successful! Start: {ai_data['startDate']}")
+        print(f"✅ AI Extraction Successful! Start: {ai_data['startDate']} | End: {ai_data['endDate']}")
         return ai_data
     except Exception as e:
         print(f"❌ AI Extraction Failed: {e}")
