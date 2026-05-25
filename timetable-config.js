@@ -21,8 +21,8 @@ window.timetablesData = [
         categoryBadge: "S3/S4", 
         type: "Supply & FE",
         scheme: "2019 Scheme",
-        startDate: "2026-06-02T13:30:00", // Update with exact S3 dates
-        endDate: "2026-06-17T16:30:00",   // Update with exact S3 dates
+        startDate: "2026-06-02T13:30:00", 
+        endDate: "2026-06-17T16:30:00",   
         viewLink: "btech/s3/supply-2026.html",
         pdfLink: "https://drive.google.com/file/d/1mdHPCTodfVSTSs9In3EkP54FgczqvExv/view?usp=drivesdk"
     },
@@ -38,3 +38,4 @@ window.timetablesData = [
         viewLink: "btech/s4/supply-2026.html",
         pdfLink: "https://drive.google.com/file/d/1Ndiq-v27ol7_42OG_Y42YedyBaQruOyz/view?usp=drivesdk"
     }
+];
