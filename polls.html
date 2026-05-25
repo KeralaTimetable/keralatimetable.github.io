@@ -188,7 +188,7 @@
                         });
                     }
 
-                    // Card Header
+                    // Card Header with Dynamic WhatsApp CTA injection
                     let html = `
                         <div class="flex justify-between items-start mb-6">
                             <div>
@@ -200,6 +200,15 @@
                             ${statusHtml}
                         </div>
                         <div id="content-area-${poll.id}"></div>
+                        
+                        ${isOpen ? `
+                        <div class="mt-5 animate-fade-in-up delay-100">
+                            <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-sm">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                                Follow WhatsApp Channel for KTU Updates
+                            </a>
+                        </div>
+                        ` : ''}
                     `;
                     
                     pollCard.innerHTML = html;
