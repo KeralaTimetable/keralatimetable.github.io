@@ -21,7 +21,8 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 playwright PyPDF2 google-genai pydantic
+          # ADDED: firebase-admin
+          pip install requests beautifulsoup4 playwright PyPDF2 google-genai pydantic firebase-admin
           python -m playwright install chromium
 
       - name: Run KTU Server Ping
@@ -37,6 +38,8 @@ jobs:
       - name: Run KTU Timetable Scraper
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # ADDED: Firebase secret for push notifications
+          FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
         run: python timetables.py
 
       # ADDED: Global Sitemap Generator (runs after all pages are built)
