@@ -220,4 +220,30 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-time-table-of-b-tech-s6-honours-examination-april-2026-2023-admission-notification.html",
     "pdfLink": "downloads_timetable/2026-05-26_B.TechS6HonoursExamination,April2026.pdf"
 }
+,
+{
+    "id": "mca_s2_may2026",
+    "title": "MCA S2 Regular/Supply May 2026",
+    "semester": "S2",
+    "categoryBadge": "S2",
+    "type": "Regular/Supply",
+    "scheme": "2020 Scheme",
+    "startDate": "2026-05-29T09:30:00",
+    "endDate": "2026-06-05T12:30:00",
+    "viewLink": "timetable_pages/revised-detailed-time-table-of-mca-2-year-s2-r-s-exam-may-2026-2020-scheme-notification.html",
+    "pdfLink": "downloads_timetable/2026-05-26_RevisedMCA2YearS2(R,S)approved.pdf"
+}
+,
+{
+    "id": "btech_s4_pt_april2026",
+    "title": "B.Tech S4 (PT) Supply/FE April 2026",
+    "semester": "S4",
+    "categoryBadge": "S4",
+    "type": "Supply",
+    "scheme": "2019 Scheme",
+    "startDate": "2026-04-29T13:30:00",
+    "endDate": "2026-07-15T09:30:00",
+    "viewLink": "timetable_pages/detailed-revised-time-table-of-b-tech-s4-pt-s-fe-exam-april-2026-2019-scheme-notification.html",
+    "pdfLink": "downloads_timetable/2026-05-26_RevisedTimeTableofB.TechS4(PT)APPROVED.pdf"
+}
 ];
