@@ -168,4 +168,56 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-revised-time-table-of-b-tech-s4-s-fe-exam-may-2026-including-working-professionals-2019-scheme-notification.html",
     "pdfLink": "downloads_timetable/2026-05-14_RevisedTimeTableofB.TechS4(2019SCHEME)APPROVED.pdf"
 }
+,
+{
+    "id": "btech_s4_minor_april2026",
+    "title": "B.Tech S4 Minor Examination April 2026",
+    "semester": "S4",
+    "categoryBadge": "S4",
+    "type": "Regular",
+    "scheme": "2024 Scheme",
+    "startDate": "2026-06-04T09:30:00",
+    "endDate": "2026-06-04T12:00:00",
+    "viewLink": "timetable_pages/detailed-time-table-of-b-tech-s4-minor-examination-april-2026-2024-admission-notification.html",
+    "pdfLink": "downloads_timetable/2026-05-26_B.TechS4MinorAprilapproved.pdf"
+}
+,
+{
+    "id": "btech_s4_honours_april2026",
+    "title": "B.Tech S4 Honours April 2026",
+    "semester": "S4",
+    "categoryBadge": "S4",
+    "type": "Honours",
+    "scheme": "2024 Scheme",
+    "startDate": "2026-06-02T09:30:00",
+    "endDate": "2026-06-02T12:00:00",
+    "viewLink": "timetable_pages/detailed-time-table-of-b-tech-s4-honours-examination-april-2026-2024-admission-notification.html",
+    "pdfLink": "downloads_timetable/2026-05-26_B.TechS4HonoursAprilapproved.pdf"
+}
+,
+{
+    "id": "btech_s6_minor_april2026",
+    "title": "B.Tech S6 Minor Examination April 2026",
+    "semester": "S6",
+    "categoryBadge": "S6",
+    "type": "Minor",
+    "scheme": "2023 Admission",
+    "startDate": "2026-06-04T09:30:00",
+    "endDate": "2026-06-04T12:30:00",
+    "viewLink": "timetable_pages/detailed-time-table-of-b-tech-s6-minor-examination-april-2026-2023-admission-notification.html",
+    "pdfLink": "downloads_timetable/2026-05-26_B.TechS6MinorAprilapproved.pdf"
+}
+,
+{
+    "id": "btech_s6_honours_april2026",
+    "title": "B.Tech S6 Honours Examination April 2026",
+    "semester": "S6",
+    "categoryBadge": "S6",
+    "type": "Honours",
+    "scheme": "2023 Admission",
+    "startDate": "2026-06-02T09:30:00",
+    "endDate": "2026-06-02T12:30:00",
+    "viewLink": "timetable_pages/detailed-time-table-of-b-tech-s6-honours-examination-april-2026-2023-admission-notification.html",
+    "pdfLink": "downloads_timetable/2026-05-26_B.TechS6HonoursExamination,April2026.pdf"
+}
 ];
