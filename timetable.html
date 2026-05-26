@@ -249,3 +249,178 @@
                     vaultGrid.innerHTML += generateCardHTML(item, 'PAST', false);
                 }
             });
+
+            document.getElementById('ongoing-section').style.display = hasOngoing ? 'block' : 'none';
+            document.getElementById('upcoming-section').style.display = hasUpcoming ? 'block' : 'none';
+
+            applyFilter('S1');
+        }
+
+        // --- FILTER PILL LOGIC ---
+        function applyFilter(filterValue) {
+            const cards = document.getElementById('vault-grid').children;
+            const emptyState = document.getElementById('empty-state');
+            let visibleCount = 0;
+
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                if (card.getAttribute('data-category').includes(filterValue)) {
+                    card.style.display = 'flex'; 
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function setupFilters() {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => {
+                        b.classList.remove('bg-slate-800', 'text-white');
+                        b.classList.add('bg-white', 'text-slate-500');
+                    });
+                    btn.classList.remove('bg-white', 'text-slate-500');
+                    btn.classList.add('bg-slate-800', 'text-white');
+                    applyFilter(btn.getAttribute('data-filter'));
+                });
+            });
+        }
+
+        // --- COUNTDOWN TIMER LOGIC ---
+        function updateCountdowns() {
+            const timers = document.querySelectorAll('.countdown-target');
+            const now = new Date().getTime();
+
+            timers.forEach(timer => {
+                const targetDate = new Date(timer.getAttribute('data-date')).getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    timer.innerHTML = "STARTED";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                timer.innerHTML = `${days}d : ${hours.toString().padStart(2, '0')}h : ${minutes.toString().padStart(2, '0')}m : ${seconds.toString().padStart(2, '0')}s`;
+            });
+        }
+
+        // --- LIVE CLOCK TICKER ---
+        function updateLiveClock() {
+            const clockEl = document.getElementById('live-clock');
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            clockEl.innerHTML = `System Time: ${now.toLocaleDateString('en-IN', options)}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDashboard();
+            setupFilters();
+            updateLiveClock();
+            updateCountdowns();
+            setInterval(updateCountdowns, 1000); 
+            setInterval(updateLiveClock, 1000);
+        });
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
+            authDomain: "kerala-timetable-db.firebaseapp.com",
+            projectId: "kerala-timetable-db",
+            storageBucket: "kerala-timetable-db.firebasestorage.app",
+            messagingSenderId: "527439836518",
+            appId: "1:527439836518:web:af7725a5bf07d6a4f584a7"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        
+        let messaging;
+        try {
+            messaging = getMessaging(app);
+        } catch (e) {
+            console.log("Push messaging is not supported in this browser environment.", e);
+        }
+
+        const VAPID_KEY = "BCXy6JKM4MiYTvrHVYo5eJ1aj2vBwYUtDybZ6HUL_n0VpQhF8bHEY6XlrFidLLJBLyQ_FtJ6LyFGTYfr6WAwLZU";
+
+        // Auto-show banner after 4 seconds if not already answered
+        setTimeout(() => {
+            if (!localStorage.getItem('push_prompted') && Notification.permission !== 'denied' && Notification.permission !== 'granted') {
+                const banner = document.getElementById('push-notification-banner');
+                if(banner) {
+                    banner.classList.remove('translate-y-[200%]'); // Slides up smoothly
+                }
+            }
+        }, 4000);
+
+        // Hide banner
+        window.dismissPushBanner = function() {
+            document.getElementById('push-notification-banner').classList.add('translate-y-[200%]');
+            localStorage.setItem('push_prompted', 'dismissed'); 
+        }
+
+        // Request permission and save token
+        window.enablePushNotifications = async function() {
+            try {
+                if (!messaging) throw new Error("Messaging not supported");
+                
+                // Native browser prompt
+                const permission = await Notification.requestPermission();
+                
+                if (permission === 'granted') {
+                    const token = await getToken(messaging, { vapidKey: VAPID_KEY });
+                    
+                    if (token) {
+                        // Securely save to Firebase Realtime DB
+                        const tokenRef = ref(db, 'subscribers/' + token);
+                        await set(tokenRef, {
+                            joinedAt: new Date().toISOString(),
+                            platform: navigator.platform
+                        });
+                        
+                        localStorage.setItem('push_prompted', 'subscribed');
+                        
+                        // Beautiful Success UI Transition
+                        document.getElementById('push-buttons').style.display = 'none';
+                        
+                        const iconContainer = document.getElementById('push-icon-container');
+                        iconContainer.className = "bg-emerald-500/20 p-3 rounded-2xl border border-emerald-500/30 flex-shrink-0";
+                        
+                        const icon = document.getElementById('push-icon');
+                        icon.className = "fas fa-check-circle text-2xl text-emerald-400";
+                        
+                        document.getElementById('push-title').innerText = "You're All Set!";
+                        document.getElementById('push-desc').innerText = "We'll notify you instantly when new updates drop.";
+                        
+                        // Wait 3 seconds, then slide away
+                        setTimeout(() => {
+                            document.getElementById('push-notification-banner').classList.add('translate-y-[200%]');
+                        }, 3000);
+                    }
+                } else {
+                    console.log("User denied notifications.");
+                    window.dismissPushBanner();
+                }
+            } catch (error) {
+                console.error("Subscription error:", error);
+                alert("Please ensure notifications are enabled in your browser settings.");
+                window.dismissPushBanner();
+            }
+        }
+    </script>
+</body>
+</html>
