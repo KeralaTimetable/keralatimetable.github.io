@@ -336,9 +336,12 @@
         import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
 
         // Firebase Configuration
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
             authDomain: "kerala-timetable-db.firebaseapp.com",
+            // YOU MUST ADD THIS LINE:
+            databaseURL: "https://kerala-timetable-db-default-rtdb.asia-southeast1.firebasedatabase.app",
             projectId: "kerala-timetable-db",
             storageBucket: "kerala-timetable-db.firebasestorage.app",
             messagingSenderId: "527439836518",
