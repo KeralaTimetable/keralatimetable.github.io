@@ -38,10 +38,13 @@ try:
             tokens=tokens
         )
         
-        # ⚠️ This is the updated line:
-        response = messaging.send_each_for_multicast(message)
-        
-        print(f"🎯 Push Results -> Success: {response.success_count} | Failed: {response.failure_count}")
+        # We wrap this specific call in its own try/except to catch exactly what fails
+        try:
+            print("Sending message to Firebase...")
+            response = messaging.send_each_for_multicast(message)
+            print(f"🎯 Push Results -> Success: {response.success_count} | Failed: {response.failure_count}")
+        except Exception as inner_e:
+            print(f"❌ Failed specifically during sending: {inner_e}")
 
 except Exception as e:
-    print(f"❌ Error: {e}")
+    print(f"❌ General Error: {e}")
