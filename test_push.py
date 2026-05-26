@@ -38,7 +38,9 @@ try:
             tokens=tokens
         )
         
-        rresponse = messaging.send_each_for_multicast(message)
+        # ⚠️ This is the updated line:
+        response = messaging.send_each_for_multicast(message)
+        
         print(f"🎯 Push Results -> Success: {response.success_count} | Failed: {response.failure_count}")
 
 except Exception as e:
