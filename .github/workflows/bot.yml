@@ -2,7 +2,7 @@ name: KTU Automated Bots (Status & Notices)
 
 on:
   schedule:
-    - cron: '0 */5 * * *' 
+    - cron: '0 */4 * * *' 
   workflow_dispatch:    
 
 jobs:
@@ -39,6 +39,10 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python timetables.py
 
+      # ADDED: Global Sitemap Generator (runs after all pages are built)
+      - name: Run Global Sitemap Generator
+        run: python generate_sitemap.py
+
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
@@ -49,9 +53,12 @@ jobs:
           git add calendar-config.js || true
           git add downloads/ || true
           
-          # ADDED: Tracking for your timetable PDFs and auto-generated HTML pages
+          # Tracking for your timetable PDFs and auto-generated HTML pages
           git add downloads_timetable/ || true
           git add timetable_pages/ || true
           git add timetable-config.js || true
           
-          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update KTU status, notices, calendars & timetables" && git push)
+          # ADDED: Tracking for the newly generated sitemap
+          git add sitemap.xml || true
+          
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update KTU status, notices, calendars, timetables & sitemap" && git push)
