@@ -7,6 +7,70 @@ from playwright.sync_api import sync_playwright
 from google import genai
 from google.genai import types
 
+# --- NEW: FIREBASE IMPORTS ---
+import firebase_admin
+from firebase_admin import credentials, messaging, db
+
+# -------------------------------------------------------------------
+# FIREBASE SETUP
+# -------------------------------------------------------------------
+firebase_creds_json = os.environ.get('FIREBASE_CREDENTIALS')
+if firebase_creds_json:
+    try:
+        cred_dict = json.loads(firebase_creds_json)
+        cred = credentials.Certificate(cred_dict)
+        firebase_admin.initialize_app(cred, {
+            'databaseURL': 'https://kerala-timetable-db-default-rtdb.asia-southeast1.firebasedatabase.app'
+        })
+        print("✅ Firebase Admin initialized successfully.")
+    except Exception as e:
+        print(f"⚠️ Firebase Init Error: {e}")
+else:
+    print("⚠️ FIREBASE_CREDENTIALS not found in environment variables. Push notifications will be skipped.")
+
+def send_push_notification(title, body):
+    """Fetches tokens from Firebase and broadcasts the push notification."""
+    if not firebase_creds_json:
+        print("⏭️ Skipping Push: No Firebase credentials found.")
+        return
+        
+    try:
+        # Fetch all subscriber tokens from the database
+        ref = db.reference('subscribers')
+        subscribers = ref.get()
+        
+        if not subscribers:
+            print("📭 No subscribers found in database.")
+            return
+            
+        # Extract just the token strings
+        tokens = list(subscribers.keys())
+        print(f"📢 Preparing to send push notification to {len(tokens)} devices...")
+        
+        # Firebase has a limit of 500 tokens per multicast message.
+        # This chunks the tokens into batches of 500 automatically.
+        success_total = 0
+        failure_total = 0
+        
+        for i in range(0, len(tokens), 500):
+            batch_tokens = tokens[i:i + 500]
+            message = messaging.MulticastMessage(
+                notification=messaging.Notification(
+                    title=title,
+                    body=body
+                ),
+                tokens=batch_tokens
+            )
+            response = messaging.send_multicast(message)
+            success_total += response.success_count
+            failure_total += response.failure_count
+            
+        print(f"🚀 Push Sent! Success: {success_total} | Failed: {failure_total}")
+        
+    except Exception as e:
+        print(f"❌ Error sending push notification: {e}")
+
+
 # -------------------------------------------------------------------
 # AI SETUP & SCHEMA
 # -------------------------------------------------------------------
@@ -313,7 +377,7 @@ def update_timetable_config(ai_data_dict, config_path="timetable-config.js"):
         print(f"❌ Error updating config: {e}")
 
 # -------------------------------------------------------------------
-# MAIN SCRAPER FUNCTION (UNTOUCHED)
+# MAIN SCRAPER FUNCTION
 # -------------------------------------------------------------------
 def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetable_pages"):
     os.makedirs(pdf_dir, exist_ok=True)
@@ -398,6 +462,14 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
                     # 3. Update the JavaScript Config
                     update_timetable_config(ai_extracted_data)
                     
+                    # --- NEW: TRIGGER PUSH NOTIFICATION ---
+                    if ai_extracted_data:
+                        short_title = ai_extracted_data.get('title', title)
+                        send_push_notification(
+                            title="🚨 New KTU Timetable Published!",
+                            body=f"{short_title} is now available on the dashboard."
+                        )
+                    
                     downloaded_files.append({
                         "title": title,
                         "date": tb['date'],
@@ -418,4 +490,4 @@ if __name__ == "__main__":
         print("No new timetables found today.")
     else:
         for r in results:
-            print(f"[{r['date']}] {r['title']} -> Page & Config Updated")
+            print(f"[{r['date']}] {r['title']} -> Page & Config Updated (Push Sent)")
