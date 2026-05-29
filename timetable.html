@@ -336,11 +336,9 @@
         import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
 
         // Firebase Configuration
-        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
             authDomain: "kerala-timetable-db.firebaseapp.com",
-            // YOU MUST ADD THIS LINE:
             databaseURL: "https://kerala-timetable-db-default-rtdb.asia-southeast1.firebasedatabase.app",
             projectId: "kerala-timetable-db",
             storageBucket: "kerala-timetable-db.firebasestorage.app",
@@ -377,7 +375,6 @@
         }
 
         // Request permission and save token
-        // Request permission and save token
         window.enablePushNotifications = async function() {
             try {
                 if (!messaging) throw new Error("Messaging not supported");
@@ -391,6 +388,9 @@
                     // 1. MANUALLY REGISTER THE SERVICE WORKER
                     const registration = await navigator.serviceWorker.register('./firebase-messaging-sw.js');
                     console.log("Service Worker registered successfully:", registration);
+                    
+                    // NEW LINE: Wait for the service worker to become fully active!
+                    await navigator.serviceWorker.ready;
                     
                     // 2. PASS THE REGISTRATION TO FIREBASE
                     const token = await getToken(messaging, { 
