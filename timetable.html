@@ -37,19 +37,17 @@
         .timetable-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .timetable-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.15); border-color: #c7d2fe; }
 
-        /* Existing Animation */
         @keyframes fadeUpEntry {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
-        /* --- NEW: Slide Down Animation for Banner --- */
         @keyframes slideDownIn {
-            0% { opacity: 0; transform: translateY(-30px); }
+            0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-slide-down { animation: slideDownIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-slide-down { animation: slideDownIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
@@ -77,6 +75,21 @@
 
         <div class="w-full max-w-6xl mx-auto px-4 relative z-20">
             
+            <div id="new-timetable-banner" class="hidden mb-8 animate-slide-down delay-200">
+                <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-3 sm:p-4 flex items-start sm:items-center justify-between gap-3 shadow-sm">
+                    <div class="flex items-start sm:items-center gap-3 w-full overflow-hidden">
+                        <div class="bg-indigo-600 text-white text-[10px] font-black px-2 py-1.5 rounded uppercase tracking-widest whitespace-nowrap flex-shrink-0 mt-0.5 sm:mt-0 shadow-sm shadow-indigo-500/20">
+                            <i class="fas fa-bolt mr-1 text-indigo-200"></i> Just In
+                        </div>
+                        <div id="banner-titles" class="flex flex-col gap-1.5 text-sm font-bold text-slate-800 w-full">
+                            </div>
+                    </div>
+                    <button onclick="dismissNewBanner()" class="text-slate-400 hover:text-indigo-600 p-1 flex-shrink-0 transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
             <div id="ongoing-section" class="animate-fade-up delay-300 mb-12 hidden">
                 <div class="flex items-center gap-3 mb-5 border-b border-rose-200/50 pb-3">
                     <span class="relative flex h-3.5 w-3.5">
@@ -95,31 +108,6 @@
                     <h2 class="text-2xl font-black text-slate-900 tracking-tight">Upcoming Exams</h2>
                 </div>
                 <div id="upcoming-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                </div>
-            </div>
-
-            <div id="new-timetable-banner" class="hidden mb-10 w-full animate-slide-down delay-200">
-                <div class="relative bg-white/90 backdrop-blur-md p-5 md:p-6 rounded-3xl border-2 border-dashed border-indigo-200/70 shadow-lg shadow-indigo-500/5 flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-5 pr-12 overflow-hidden group">
-                    
-                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-50 rounded-full blur-2xl group-hover:bg-indigo-100/70 transition-colors"></div>
-
-                    <div class="p-3.5 bg-indigo-100 rounded-2xl text-indigo-600 border border-indigo-200 shadow-inner flex-shrink-0 relative z-10 transition-transform group-hover:scale-110">
-                        <i class="fas fa-bullhorn text-2xl md:text-3xl rotate-[-15deg] animate-pulse"></i>
-                    </div>
-
-                    <div class="flex-grow text-center sm:text-left relative z-10">
-                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
-                            <span class="bg-indigo-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-md shadow-indigo-500/20">JUST IN</span>
-                            <span id="banner-date" class="text-xs font-bold text-slate-400">May 29</span>
-                        </div>
-                        <h4 id="banner-title" class="text-base md:text-lg font-extrabold text-slate-900 leading-snug tracking-tight">
-                            </h4>
-                        <p class="text-sm text-slate-500 mt-1.5 font-medium leading-relaxed max-w-xl">A new examination timetable has been published by APJAKTU and is now available for download.</p>
-                    </div>
-
-                    <button onclick="dismissNewBanner()" class="absolute top-4 right-4 text-slate-400 hover:text-indigo-600 p-1.5 rounded-full transition-colors z-20 bg-slate-100 hover:bg-indigo-100/70 border border-slate-200 hover:border-indigo-200" title="Dismiss">
-                        <i class="fas fa-times text-lg"></i>
-                    </button>
                 </div>
             </div>
 
@@ -287,7 +275,7 @@
             document.getElementById('ongoing-section').style.display = hasOngoing ? 'block' : 'none';
             document.getElementById('upcoming-section').style.display = hasUpcoming ? 'block' : 'none';
 
-            applyFilter('S1/S2'); // Fixed initial load filter
+            applyFilter('S1/S2'); 
         }
 
         // --- SMART FILTER PILL LOGIC ---
@@ -296,15 +284,11 @@
             const emptyState = document.getElementById('empty-state');
             let visibleCount = 0;
 
-            // Split the filter value (e.g. "S1" or "S1/S2") into an array of individual semesters
             const targetSemesters = filterValue.split('/').map(s => s.trim().toUpperCase());
 
             for (let i = 0; i < cards.length; i++) {
                 const card = cards[i];
-                // Get the card's category and make sure we have a clean string to compare against
                 const cardCategoryStr = (card.getAttribute('data-category') || "").toUpperCase();
-                
-                // Check if ANY of the target semesters exist within the card's category string
                 const isMatch = targetSemesters.some(sem => cardCategoryStr.includes(sem));
 
                 if (isMatch) {
@@ -363,63 +347,54 @@
             clockEl.innerHTML = `System Time: ${now.toLocaleDateString('en-IN', options)}`;
         }
 
-        /* --- NEW: LATEST UPDATES BANNER LOGIC --- */
+        /* --- UPDATED: MULTI-ITEM COMPACT UPDATES BANNER LOGIC --- */
         function checkLatestUpdates() {
             if (!window.timetablesData || window.timetablesData.length === 0) return;
 
             const banner = document.getElementById('new-timetable-banner');
             if (!banner) return;
 
-            // 1. Sort data by startDate DESC to find the absolute newest entry based on your config
-            const latestUpdates = [...window.timetablesData].sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
-            const newest = latestUpdates[0];
+            // Sort data by startDate to find recent exams
+            const sortedUpdates = [...window.timetablesData].sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+            
+            // Get up to the 2 most recent updates to keep it compact
+            const newestItems = sortedUpdates.slice(0, 2);
 
-            // 2. Check if user already dismissed THIS specific update (by ID)
-            if (localStorage.getItem(`dismissed_new_${newest.id}`)) return;
+            // Generate a combined ID so if a new item drops, the banner resets and shows again
+            const batchId = newestItems.map(item => item.id).join('_');
 
-            // 3. Define threshold for "New" (e.g., started within last 7 days)
-            // *NOTE: Based on discussion, you might add 'publishedDate' later. Using startDate logic for now.
-            const now = new Date();
-            const start = new Date(newest.startDate);
-            const timeDiff = now - start;
-            const diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            // If user dismissed this exact combination of new items, hide it
+            if (localStorage.getItem(`dismissed_new_${batchId}`)) return;
 
-            // Showing if started within last 7 days (including in the future for countdowns)
-            if (start > now || Math.abs(diffDays) <= 7) {
-                // 4. Populate the banner
-                document.getElementById('banner-title').textContent = newest.title;
-                
-                const dateOptions = { month: 'short', day: 'numeric' };
-                // Using May 29 fallback if startDate is invalid for demo purposes, 
-                // in real use 'start' variable will work.
-                document.getElementById('banner-date').textContent = "May 29"; 
+            // Populate the titles cleanly with a small dot separator
+            const titlesContainer = document.getElementById('banner-titles');
+            titlesContainer.innerHTML = newestItems.map(item => 
+                `<div class="truncate"><i class="fas fa-circle text-[6px] text-indigo-300 align-middle mr-1.5"></i>${item.title}</div>`
+            ).join('');
 
-                // Save the ID to banner for dismissal function
-                banner.setAttribute('data-newest-id', newest.id);
+            // Save the batch ID to the banner for the dismissal function
+            banner.setAttribute('data-batch-id', batchId);
 
-                // 5. Show it
-                banner.classList.remove('hidden');
-                banner.style.display = 'block'; // Ensure display is block for flex logic inside
-            }
+            // Show banner
+            banner.classList.remove('hidden');
         }
 
         // Dismissal function for onclick
         window.dismissNewBanner = function() {
             const banner = document.getElementById('new-timetable-banner');
-            const updateId = banner.getAttribute('data-newest-id');
+            const batchId = banner.getAttribute('data-batch-id');
             
-            // Save dismissal to localstorage specific to this update
-            if(updateId) {
-                localStorage.setItem(`dismissed_new_${updateId}`, 'true');
+            if(batchId) {
+                localStorage.setItem(`dismissed_new_${batchId}`, 'true');
             }
 
             // Apply fade-out animation and hide
-            banner.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+            banner.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
             banner.style.opacity = '0';
-            banner.style.transform = 'translateY(-20px)';
+            banner.style.transform = 'translateY(-10px)';
             setTimeout(() => {
                 banner.style.display = 'none';
-            }, 500);
+            }, 300);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -427,7 +402,7 @@
             setupFilters();
             updateLiveClock();
             updateCountdowns();
-            checkLatestUpdates(); // <--- NEW CALL
+            checkLatestUpdates(); 
             setInterval(updateCountdowns, 1000); 
             setInterval(updateLiveClock, 1000);
         });
