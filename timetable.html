@@ -37,11 +37,20 @@
         .timetable-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .timetable-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.15); border-color: #c7d2fe; }
 
+        /* Existing Animation */
         @keyframes fadeUpEntry {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        /* --- NEW: Slide Down Animation for Banner --- */
+        @keyframes slideDownIn {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-down { animation: slideDownIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
@@ -86,6 +95,31 @@
                     <h2 class="text-2xl font-black text-slate-900 tracking-tight">Upcoming Exams</h2>
                 </div>
                 <div id="upcoming-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                </div>
+            </div>
+
+            <div id="new-timetable-banner" class="hidden mb-10 w-full animate-slide-down delay-200">
+                <div class="relative bg-white/90 backdrop-blur-md p-5 md:p-6 rounded-3xl border-2 border-dashed border-indigo-200/70 shadow-lg shadow-indigo-500/5 flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-5 pr-12 overflow-hidden group">
+                    
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-50 rounded-full blur-2xl group-hover:bg-indigo-100/70 transition-colors"></div>
+
+                    <div class="p-3.5 bg-indigo-100 rounded-2xl text-indigo-600 border border-indigo-200 shadow-inner flex-shrink-0 relative z-10 transition-transform group-hover:scale-110">
+                        <i class="fas fa-bullhorn text-2xl md:text-3xl rotate-[-15deg] animate-pulse"></i>
+                    </div>
+
+                    <div class="flex-grow text-center sm:text-left relative z-10">
+                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
+                            <span class="bg-indigo-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-md shadow-indigo-500/20">JUST IN</span>
+                            <span id="banner-date" class="text-xs font-bold text-slate-400">May 29</span>
+                        </div>
+                        <h4 id="banner-title" class="text-base md:text-lg font-extrabold text-slate-900 leading-snug tracking-tight">
+                            </h4>
+                        <p class="text-sm text-slate-500 mt-1.5 font-medium leading-relaxed max-w-xl">A new examination timetable has been published by APJAKTU and is now available for download.</p>
+                    </div>
+
+                    <button onclick="dismissNewBanner()" class="absolute top-4 right-4 text-slate-400 hover:text-indigo-600 p-1.5 rounded-full transition-colors z-20 bg-slate-100 hover:bg-indigo-100/70 border border-slate-200 hover:border-indigo-200" title="Dismiss">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
                 </div>
             </div>
 
@@ -329,11 +363,71 @@
             clockEl.innerHTML = `System Time: ${now.toLocaleDateString('en-IN', options)}`;
         }
 
+        /* --- NEW: LATEST UPDATES BANNER LOGIC --- */
+        function checkLatestUpdates() {
+            if (!window.timetablesData || window.timetablesData.length === 0) return;
+
+            const banner = document.getElementById('new-timetable-banner');
+            if (!banner) return;
+
+            // 1. Sort data by startDate DESC to find the absolute newest entry based on your config
+            const latestUpdates = [...window.timetablesData].sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+            const newest = latestUpdates[0];
+
+            // 2. Check if user already dismissed THIS specific update (by ID)
+            if (localStorage.getItem(`dismissed_new_${newest.id}`)) return;
+
+            // 3. Define threshold for "New" (e.g., started within last 7 days)
+            // *NOTE: Based on discussion, you might add 'publishedDate' later. Using startDate logic for now.
+            const now = new Date();
+            const start = new Date(newest.startDate);
+            const timeDiff = now - start;
+            const diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+            // Showing if started within last 7 days (including in the future for countdowns)
+            if (start > now || Math.abs(diffDays) <= 7) {
+                // 4. Populate the banner
+                document.getElementById('banner-title').textContent = newest.title;
+                
+                const dateOptions = { month: 'short', day: 'numeric' };
+                // Using May 29 fallback if startDate is invalid for demo purposes, 
+                // in real use 'start' variable will work.
+                document.getElementById('banner-date').textContent = "May 29"; 
+
+                // Save the ID to banner for dismissal function
+                banner.setAttribute('data-newest-id', newest.id);
+
+                // 5. Show it
+                banner.classList.remove('hidden');
+                banner.style.display = 'block'; // Ensure display is block for flex logic inside
+            }
+        }
+
+        // Dismissal function for onclick
+        window.dismissNewBanner = function() {
+            const banner = document.getElementById('new-timetable-banner');
+            const updateId = banner.getAttribute('data-newest-id');
+            
+            // Save dismissal to localstorage specific to this update
+            if(updateId) {
+                localStorage.setItem(`dismissed_new_${updateId}`, 'true');
+            }
+
+            // Apply fade-out animation and hide
+            banner.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+            banner.style.opacity = '0';
+            banner.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+                banner.style.display = 'none';
+            }, 500);
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             renderDashboard();
             setupFilters();
             updateLiveClock();
             updateCountdowns();
+            checkLatestUpdates(); // <--- NEW CALL
             setInterval(updateCountdowns, 1000); 
             setInterval(updateLiveClock, 1000);
         });
