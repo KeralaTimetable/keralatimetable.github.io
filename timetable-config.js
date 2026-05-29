@@ -246,4 +246,30 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-revised-time-table-of-b-tech-s4-pt-s-fe-exam-april-2026-2019-scheme-notification.html",
     "pdfLink": "downloads_timetable/2026-05-26_RevisedTimeTableofB.TechS4(PT)APPROVED.pdf"
 }
+,
+{
+    "id": "btech_s3_pt_june2026",
+    "title": "B.Tech S3 (PT) Supply/FE June 2026",
+    "semester": "S3",
+    "categoryBadge": "S3",
+    "type": "Supply",
+    "scheme": "2019 Scheme",
+    "startDate": "2026-06-01T09:30:00",
+    "endDate": "2026-07-20T09:30:00",
+    "viewLink": "timetable_pages/detailed-time-table-of-b-tech-s3-pt-s-fe-exam-june-2026-2019-scheme-notification.html",
+    "pdfLink": "downloads_timetable/2026-05-29_B.TechS3(PT)(S,FE)JUNEAPPROVED.pdf"
+}
+,
+{
+    "id": "btech_s5_june2026",
+    "title": "B.Tech S5 Supply/FE June 2026",
+    "semester": "S5",
+    "categoryBadge": "S5",
+    "type": "Supply",
+    "scheme": "2019 Scheme",
+    "startDate": "2026-06-01T09:30:00",
+    "endDate": "2026-06-12T09:30:00",
+    "viewLink": "timetable_pages/detailed-time-table-of-b-tech-s5-s-fe-exam-june-2026-including-wp-s-2019-scheme-notification.html",
+    "pdfLink": "downloads_timetable/2026-05-29_B.TechS5(S,FE)June(2019sch)approved.pdf"
+}
 ];
