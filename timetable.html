@@ -161,10 +161,8 @@
     <script>
         loadNavigation('timetable', '', false);
 
-        // Fetch data from external config
         const timetablesData = window.timetablesData || [];
 
-        // --- STYLING LOGIC FOR SEMESTER BADGES ---
         function getSemesterStyles(semesterStr) {
             const sem = semesterStr.toUpperCase();
             if (sem.includes('S1') || sem.includes('S2')) return { bg: 'bg-indigo-100', text: 'text-indigo-700', border: 'border-indigo-200' };
@@ -174,7 +172,6 @@
             return { bg: 'bg-slate-100', text: 'text-slate-700', border: 'border-slate-200' };
         }
 
-        // --- HTML CARD GENERATOR ---
         function generateCardHTML(item, statusText = '', isCountdown = false) {
             const styles = getSemesterStyles(item.semester);
             const startObj = new Date(item.startDate);
@@ -232,7 +229,6 @@
             `;
         }
 
-        // --- DASHBOARD ENGINE (Sorting & Rendering) ---
         function renderDashboard() {
             if (!timetablesData || timetablesData.length === 0) {
                 document.getElementById('empty-state').style.display = 'block';
@@ -278,7 +274,6 @@
             applyFilter('S1/S2'); 
         }
 
-        // --- SMART FILTER PILL LOGIC ---
         function applyFilter(filterValue) {
             const cards = document.getElementById('vault-grid').children;
             const emptyState = document.getElementById('empty-state');
@@ -316,7 +311,6 @@
             });
         }
 
-        // --- COUNTDOWN TIMER LOGIC ---
         function updateCountdowns() {
             const timers = document.querySelectorAll('.countdown-target');
             const now = new Date().getTime();
@@ -339,7 +333,6 @@
             });
         }
 
-        // --- LIVE CLOCK TICKER ---
         function updateLiveClock() {
             const clockEl = document.getElementById('live-clock');
             const now = new Date();
@@ -347,39 +340,56 @@
             clockEl.innerHTML = `System Time: ${now.toLocaleDateString('en-IN', options)}`;
         }
 
-        /* --- UPDATED: MULTI-ITEM COMPACT UPDATES BANNER LOGIC --- */
+        /* --- THE ULTIMATE PDF-DATE BANNER LOGIC (First-Time User Proof!) --- */
         function checkLatestUpdates() {
             if (!window.timetablesData || window.timetablesData.length === 0) return;
 
             const banner = document.getElementById('new-timetable-banner');
             if (!banner) return;
 
-            // Sort data by startDate to find recent exams
-            const sortedUpdates = [...window.timetablesData].sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+            const now = new Date();
+            const newUpdates = [];
             
-            // Get up to the 2 most recent updates to keep it compact
-            const newestItems = sortedUpdates.slice(0, 2);
+            // 1. Grab the last 10 items the bot added to the bottom of the config
+            const bottomItems = [...window.timetablesData].reverse().slice(0, 10);
 
-            // Generate a combined ID so if a new item drops, the banner resets and shows again
-            const batchId = newestItems.map(item => item.id).join('_');
+            for (const item of bottomItems) {
+                // 2. Extract the true "Publish Date" from the PDF filename using Regex!
+                // It looks for exactly "YYYY-MM-DD" inside the pdfLink.
+                const dateMatch = item.pdfLink ? item.pdfLink.match(/(\d{4}-\d{2}-\d{2})/) : null;
+                
+                if (dateMatch) {
+                    const publishDate = new Date(dateMatch[1]);
+                    const daysSincePublish = (now - publishDate) / (1000 * 60 * 60 * 24);
 
-            // If user dismissed this exact combination of new items, hide it
+                    // 3. If the PDF was published within the last 3 days, it's officially "NEW"
+                    // (Using >= 0 to ensure we don't accidentally grab a future date if one exists)
+                    if (daysSincePublish >= 0 && daysSincePublish <= 3) {
+                        newUpdates.push(item);
+                    }
+                }
+            }
+
+            if (newUpdates.length === 0) return;
+
+            // 4. Keep it compact: only show max 2 items in the banner
+            const displayItems = newUpdates.slice(0, 2);
+
+            // 5. Check if user already dismissed this specific combination
+            const batchId = displayItems.map(item => item.id).join('_');
             if (localStorage.getItem(`dismissed_new_${batchId}`)) return;
 
-            // Populate the titles cleanly with a small dot separator
+            // 6. Populate and show!
             const titlesContainer = document.getElementById('banner-titles');
-            titlesContainer.innerHTML = newestItems.map(item => 
+            titlesContainer.innerHTML = displayItems.map(item => 
                 `<div class="truncate"><i class="fas fa-circle text-[6px] text-indigo-300 align-middle mr-1.5"></i>${item.title}</div>`
             ).join('');
 
-            // Save the batch ID to the banner for the dismissal function
             banner.setAttribute('data-batch-id', batchId);
-
-            // Show banner
             banner.classList.remove('hidden');
         }
 
-        // Dismissal function for onclick
+        // Dismissal function
         window.dismissNewBanner = function() {
             const banner = document.getElementById('new-timetable-banner');
             const batchId = banner.getAttribute('data-batch-id');
@@ -388,7 +398,6 @@
                 localStorage.setItem(`dismissed_new_${batchId}`, 'true');
             }
 
-            // Apply fade-out animation and hide
             banner.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
             banner.style.opacity = '0';
             banner.style.transform = 'translateY(-10px)';
@@ -413,7 +422,6 @@
         import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
 
-        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
             authDomain: "kerala-timetable-db.firebaseapp.com",
@@ -436,50 +444,42 @@
 
         const VAPID_KEY = "BCXy6JKM4MiYTvrHVYo5eJ1aj2vBwYUtDybZ6HUL_n0VpQhF8bHEY6XlrFidLLJBLyQ_FtJ6LyFGTYfr6WAwLZU";
 
-        // Auto-show banner after 4 seconds if not already answered
         setTimeout(() => {
             if (!localStorage.getItem('push_prompted') && Notification.permission !== 'denied' && Notification.permission !== 'granted') {
                 const banner = document.getElementById('push-notification-banner');
                 if(banner) {
-                    banner.classList.remove('translate-y-[200%]'); // Slides up smoothly
+                    banner.classList.remove('translate-y-[200%]'); 
                 }
             }
         }, 4000);
 
-        // Hide banner
         window.dismissPushBanner = function() {
             document.getElementById('push-notification-banner').classList.add('translate-y-[200%]');
             localStorage.setItem('push_prompted', 'dismissed'); 
         }
 
-        // Request permission and save token
         window.enablePushNotifications = async function() {
             try {
                 if (!messaging) throw new Error("Messaging not supported");
                 
-                // Native browser prompt
                 const permission = await Notification.requestPermission();
                 
                 if (permission === 'granted') {
                     console.log("Permission granted. Registering Service Worker manually...");
                     
-                    // 1. MANUALLY REGISTER THE SERVICE WORKER
                     const registration = await navigator.serviceWorker.register('./firebase-messaging-sw.js');
                     console.log("Service Worker registered successfully:", registration);
                     
-                    // Wait for the service worker to become fully active!
                     await navigator.serviceWorker.ready;
                     
-                    // 2. PASS THE REGISTRATION TO FIREBASE
                     const token = await getToken(messaging, { 
                         vapidKey: VAPID_KEY,
-                        serviceWorkerRegistration: registration // This forces Firebase to use our file
+                        serviceWorkerRegistration: registration 
                     });
                     
                     if (token) {
                         console.log("Token generated!", token);
                         
-                        // Securely save to Firebase Realtime DB
                         const tokenRef = ref(db, 'subscribers/' + token);
                         await set(tokenRef, {
                             joinedAt: new Date().toISOString(),
@@ -488,7 +488,6 @@
                         
                         localStorage.setItem('push_prompted', 'subscribed');
                         
-                        // Beautiful Success UI Transition
                         document.getElementById('push-buttons').style.display = 'none';
                         
                         const iconContainer = document.getElementById('push-icon-container');
@@ -500,7 +499,6 @@
                         document.getElementById('push-title').innerText = "You're All Set!";
                         document.getElementById('push-desc').innerText = "We'll notify you instantly when new updates drop.";
                         
-                        // Wait 3 seconds, then slide away
                         setTimeout(() => {
                             document.getElementById('push-notification-banner').classList.add('translate-y-[200%]');
                         }, 3000);
