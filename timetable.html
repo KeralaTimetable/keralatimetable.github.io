@@ -98,10 +98,10 @@
                 </div>
 
                 <div class="flex overflow-x-auto no-scrollbar gap-2 mb-8 pb-2 border-b border-slate-200/60 w-full" id="filter-tabs">
-                    <button class="filter-btn active bg-slate-800 text-white font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S1">S1 / S2</button>
-                    <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S3">S3 / S4</button>
-                    <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S5">S5 / S6</button>
-                    <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S7">S7 / S8</button>
+                    <button class="filter-btn active bg-slate-800 text-white font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S1/S2">S1 / S2</button>
+                    <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S3/S4">S3 / S4</button>
+                    <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S5/S6">S5 / S6</button>
+                    <button class="filter-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-xl whitespace-nowrap transition-colors" data-filter="S7/S8">S7 / S8</button>
                 </div>
 
                 <div id="vault-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -253,18 +253,27 @@
             document.getElementById('ongoing-section').style.display = hasOngoing ? 'block' : 'none';
             document.getElementById('upcoming-section').style.display = hasUpcoming ? 'block' : 'none';
 
-            applyFilter('S1');
+            applyFilter('S1/S2'); // Fixed initial load filter
         }
 
-        // --- FILTER PILL LOGIC ---
+        // --- SMART FILTER PILL LOGIC ---
         function applyFilter(filterValue) {
             const cards = document.getElementById('vault-grid').children;
             const emptyState = document.getElementById('empty-state');
             let visibleCount = 0;
 
+            // Split the filter value (e.g. "S1" or "S1/S2") into an array of individual semesters
+            const targetSemesters = filterValue.split('/').map(s => s.trim().toUpperCase());
+
             for (let i = 0; i < cards.length; i++) {
                 const card = cards[i];
-                if (card.getAttribute('data-category').includes(filterValue)) {
+                // Get the card's category and make sure we have a clean string to compare against
+                const cardCategoryStr = (card.getAttribute('data-category') || "").toUpperCase();
+                
+                // Check if ANY of the target semesters exist within the card's category string
+                const isMatch = targetSemesters.some(sem => cardCategoryStr.includes(sem));
+
+                if (isMatch) {
                     card.style.display = 'flex'; 
                     visibleCount++;
                 } else {
@@ -389,7 +398,7 @@
                     const registration = await navigator.serviceWorker.register('./firebase-messaging-sw.js');
                     console.log("Service Worker registered successfully:", registration);
                     
-                    // NEW LINE: Wait for the service worker to become fully active!
+                    // Wait for the service worker to become fully active!
                     await navigator.serviceWorker.ready;
                     
                     // 2. PASS THE REGISTRATION TO FIREBASE
