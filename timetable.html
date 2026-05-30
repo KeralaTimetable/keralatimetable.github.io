@@ -120,7 +120,6 @@
                 </div>
 
                 <div class="flex overflow-x-auto no-scrollbar gap-2 mb-3 w-full" id="course-filters">
-                    <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-4 py-2 rounded-xl whitespace-nowrap transition-colors text-sm" data-course="ALL">All Courses</button>
                     <button class="course-btn active bg-indigo-600 text-white font-bold px-4 py-2 rounded-xl whitespace-nowrap transition-colors text-sm shadow-sm" data-course="BTECH">B.Tech</button>
                     <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-4 py-2 rounded-xl whitespace-nowrap transition-colors text-sm" data-course="MTECH">M.Tech</button>
                     <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-4 py-2 rounded-xl whitespace-nowrap transition-colors text-sm" data-course="MCA">MCA</button>
@@ -182,7 +181,7 @@
             return { bg: 'bg-slate-100', text: 'text-slate-700', border: 'border-slate-200' };
         }
 
-        // Helper to extract course from title
+        // Improved Helper to extract course from title
         function getCourseFromTitle(title) {
             const t = title.toUpperCase();
             if (t.includes('B.TECH')) return 'BTECH';
@@ -291,21 +290,26 @@
                 }
             });
 
-            // --- B.TECH PRIORITY SORTING LOGIC ---
+            // --- SORTING LOGIC ---
+            
+            // Priority Sort for Ongoing & Vault: B.Tech First, then Chronological
             const prioritySort = (a, b) => {
                 const aIsBtech = a.title.toUpperCase().includes('B.TECH');
                 const bIsBtech = b.title.toUpperCase().includes('B.TECH');
                 
-                // If one is B.Tech and the other isn't, B.Tech wins
                 if (aIsBtech && !bIsBtech) return -1;
                 if (!aIsBtech && bIsBtech) return 1;
                 
-                // Otherwise, standard chronological sort
                 return new Date(a.startDate) - new Date(b.startDate);
             };
 
+            // Chronological Sort for Upcoming: Soonest First (No B.Tech Priority)
+            const chronologicalSort = (a, b) => {
+                 return new Date(a.startDate) - new Date(b.startDate);
+            };
+
             ongoingItems.sort(prioritySort);
-            upcomingItems.sort(prioritySort);
+            upcomingItems.sort(chronologicalSort); // Fixed Upcoming Sorting
             vaultItems.sort(prioritySort);
 
             ongoingGrid.innerHTML = ongoingItems.map(item => generateCardHTML(item, 'LIVE', false)).join('');
@@ -324,7 +328,7 @@
             const activeCourseBtn = document.querySelector('.course-btn.active');
             const activeSemBtn = document.querySelector('.sem-btn.active');
             
-            const activeCourse = activeCourseBtn ? activeCourseBtn.getAttribute('data-course') : 'ALL';
+            const activeCourse = activeCourseBtn ? activeCourseBtn.getAttribute('data-course') : 'BTECH';
             const activeSem = activeSemBtn ? activeSemBtn.getAttribute('data-filter') : 'ALL';
 
             const targetSemesters = activeSem !== 'ALL' ? activeSem.split('/').map(s => s.trim().toUpperCase()) : [];
@@ -339,15 +343,22 @@
                 const cardCourseStr = (card.getAttribute('data-course') || "").toUpperCase();
 
                 // Check Course match
-                let courseMatch = (activeCourse === 'ALL') || (cardCourseStr === activeCourse);
-                if (activeCourse === 'OTHER' && !['BTECH', 'MTECH', 'MCA', 'MBA'].includes(cardCourseStr)) {
-                    courseMatch = true; // Catches BHMCT, M.PLANNING, etc.
+                let courseMatch = false;
+                if (activeCourse === 'OTHER') {
+                    courseMatch = !['BTECH', 'MTECH', 'MCA', 'MBA'].includes(cardCourseStr);
+                } else {
+                    courseMatch = cardCourseStr === activeCourse;
                 }
 
                 // Check Semester match
                 let semMatch = true;
                 if (activeSem !== 'ALL') {
-                    semMatch = targetSemesters.some(sem => cardCategoryStr.includes(sem));
+                    // Match specific semester string inside the category badge (e.g. S1 inside S1/S2 or S1)
+                     semMatch = targetSemesters.some(sem => {
+                        // Ensure we don't accidentally match S1 with S10 by checking exact boundaries if needed,
+                        // but simple includes works well for S1-S8 logic.
+                        return cardCategoryStr.includes(sem) || cardCategoryStr === sem;
+                     });
                 }
 
                 // Show card only if BOTH match
