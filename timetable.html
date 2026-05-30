@@ -207,6 +207,15 @@
             const dateString = `${startObj.toLocaleDateString('en-US', dateOptions)} - ${endObj.toLocaleDateString('en-US', dateOptions)}`;
             
             const courseTag = getCourseFromTitle(item.title);
+            
+            // --- SMART DISPLAY NAME FOR COURSE TAG ---
+            let courseDisplay = 'KTU';
+            if (courseTag === 'BTECH') courseDisplay = 'B.Tech';
+            else if (courseTag === 'MTECH') courseDisplay = 'M.Tech';
+            else if (courseTag === 'MCA') courseDisplay = 'MCA';
+            else if (courseTag === 'MBA') courseDisplay = 'MBA';
+            else if (item.title.toUpperCase().includes('BHMCT')) courseDisplay = 'BHMCT';
+            else if (item.title.toUpperCase().includes('PLANNING')) courseDisplay = 'M.Plan';
 
             let statusHTML = '';
             if (statusText === 'LIVE') {
@@ -225,7 +234,8 @@
                     </div>
 
                     <div class="p-5 flex-grow relative z-10 flex flex-col">
-                        <div class="flex items-center gap-2 mb-8">
+                        <div class="flex items-center flex-wrap gap-2 mb-8">
+                            <span class="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider bg-slate-800 text-white shadow-sm">${courseDisplay}</span>
                             <span class="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider border ${styles.bg} ${styles.text} ${styles.border}">${item.semester}</span>
                             <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200">${item.type}</span>
                         </div>
