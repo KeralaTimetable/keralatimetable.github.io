@@ -181,7 +181,6 @@
             return { bg: 'bg-slate-100', text: 'text-slate-700', border: 'border-slate-200' };
         }
 
-        // Improved Helper to extract course from title
         function getCourseFromTitle(title) {
             const t = title.toUpperCase();
             if (t.includes('B.TECH')) return 'BTECH';
@@ -265,12 +264,11 @@
             let upcomingItems = [];
             let vaultItems = [];
 
-            // --- 24-HOUR AUTO REMOVAL LOGIC ---
             const validData = timetablesData.filter(item => {
                 const end = new Date(item.endDate);
-                if (isNaN(end)) return true; // safety fallback
+                if (isNaN(end)) return true;
                 const diffHours = (now - end) / (1000 * 60 * 60);
-                return diffHours <= 24; // Keep only if it ended less than 24 hrs ago (or hasn't ended yet)
+                return diffHours <= 24;
             });
 
             validData.forEach(item => {
@@ -289,10 +287,7 @@
                     vaultItems.push({...item, status: 'PAST'});
                 }
             });
-
-            // --- SORTING LOGIC ---
             
-            // Priority Sort for Ongoing & Vault: B.Tech First, then Chronological
             const prioritySort = (a, b) => {
                 const aIsBtech = a.title.toUpperCase().includes('B.TECH');
                 const bIsBtech = b.title.toUpperCase().includes('B.TECH');
@@ -303,13 +298,12 @@
                 return new Date(a.startDate) - new Date(b.startDate);
             };
 
-            // Chronological Sort for Upcoming: Soonest First (No B.Tech Priority)
             const chronologicalSort = (a, b) => {
                  return new Date(a.startDate) - new Date(b.startDate);
             };
 
             ongoingItems.sort(prioritySort);
-            upcomingItems.sort(chronologicalSort); // Fixed Upcoming Sorting
+            upcomingItems.sort(chronologicalSort); 
             vaultItems.sort(prioritySort);
 
             ongoingGrid.innerHTML = ongoingItems.map(item => generateCardHTML(item, 'LIVE', false)).join('');
@@ -319,11 +313,9 @@
             document.getElementById('ongoing-section').style.display = ongoingItems.length ? 'block' : 'none';
             document.getElementById('upcoming-section').style.display = upcomingItems.length ? 'block' : 'none';
 
-            // Trigger combined filters initially
             applyCombinedFilters(); 
         }
 
-        // --- NEW: COMBINED COURSE + SEMESTER FILTER LOGIC ---
         function applyCombinedFilters() {
             const activeCourseBtn = document.querySelector('.course-btn.active');
             const activeSemBtn = document.querySelector('.sem-btn.active');
@@ -342,7 +334,6 @@
                 const cardCategoryStr = (card.getAttribute('data-category') || "").toUpperCase();
                 const cardCourseStr = (card.getAttribute('data-course') || "").toUpperCase();
 
-                // Check Course match
                 let courseMatch = false;
                 if (activeCourse === 'OTHER') {
                     courseMatch = !['BTECH', 'MTECH', 'MCA', 'MBA'].includes(cardCourseStr);
@@ -350,18 +341,13 @@
                     courseMatch = cardCourseStr === activeCourse;
                 }
 
-                // Check Semester match
                 let semMatch = true;
                 if (activeSem !== 'ALL') {
-                    // Match specific semester string inside the category badge (e.g. S1 inside S1/S2 or S1)
                      semMatch = targetSemesters.some(sem => {
-                        // Ensure we don't accidentally match S1 with S10 by checking exact boundaries if needed,
-                        // but simple includes works well for S1-S8 logic.
                         return cardCategoryStr.includes(sem) || cardCategoryStr === sem;
                      });
                 }
 
-                // Show card only if BOTH match
                 if (courseMatch && semMatch) {
                     card.style.display = 'flex'; 
                     visibleCount++;
@@ -372,30 +358,37 @@
             emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
         }
 
+        // --- FIXED: ADDED 'active' TOGGLE TO BUTTONS ---
         function setupFilters() {
             const courseBtns = document.querySelectorAll('.course-btn');
             const semBtns = document.querySelectorAll('.sem-btn');
 
             courseBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
+                    // Remove styling AND 'active' class from all course buttons
                     courseBtns.forEach(b => {
-                        b.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+                        b.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm', 'active');
                         b.classList.add('bg-slate-100', 'text-slate-600');
                     });
+                    // Add styling AND 'active' class to clicked button
                     btn.classList.remove('bg-slate-100', 'text-slate-600');
-                    btn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+                    btn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm', 'active');
+                    
                     applyCombinedFilters();
                 });
             });
 
             semBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
+                    // Remove styling AND 'active' class from all sem buttons
                     semBtns.forEach(b => {
-                        b.classList.remove('bg-slate-800', 'text-white');
+                        b.classList.remove('bg-slate-800', 'text-white', 'active');
                         b.classList.add('bg-white', 'text-slate-500');
                     });
+                    // Add styling AND 'active' class to clicked button
                     btn.classList.remove('bg-white', 'text-slate-500');
-                    btn.classList.add('bg-slate-800', 'text-white');
+                    btn.classList.add('bg-slate-800', 'text-white', 'active');
+                    
                     applyCombinedFilters();
                 });
             });
