@@ -7,7 +7,6 @@ import re
 # ==========================================
 INPUT_FILE = 'ktu_syllabus_raw.json'
 OUTPUT_DIR = 'syllabus_out' # Rename to 'syllabus' before pushing to GitHub
-SITE_URL = 'https://keralatimetable.github.io'
 
 # Load JSON Data
 with open(INPUT_FILE, 'r', encoding='utf-8') as f:
@@ -16,7 +15,7 @@ with open(INPUT_FILE, 'r', encoding='utf-8') as f:
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # ==========================================
-# HELPER FUNCTIONS
+# HELPER FUNCTIONS & SORTING
 # ==========================================
 def slugify(text):
     text = text.lower()
@@ -24,16 +23,13 @@ def slugify(text):
     return text.strip('-')
 
 def extract_code(name):
-    # Extracts text inside parenthesis, e.g., "Subject Name - (GAMAT101)" -> "GAMAT101"
     match = re.search(r'\((.*?)\)', name)
     return match.group(1) if match else "KTU"
 
 def clean_name(name):
-    # Removes the hyphen and the code in parenthesis
     return re.sub(r'\s*-\s*\(.*?\)', '', name).strip()
 
 def get_branch_acronym(branch_name):
-    # Converts long branch names to SEO-friendly acronyms
     b = branch_name.upper()
     if 'COMPUTER' in b: return 'CSE'
     if 'MECHANICAL' in b: return 'ME'
@@ -41,9 +37,27 @@ def get_branch_acronym(branch_name):
     if 'ELECTRICAL AND ELECTRONICS' in b: return 'EEE'
     if 'ELECTRONICS AND COMMUNICATION' in b: return 'ECE'
     if 'INFORMATION TECHNOLOGY' in b: return 'IT'
-    
-    # Fallback: creates acronym from first letters of each word
     return "".join([word[0] for word in branch_name.split() if word.isalpha()])
+
+# --- Custom Sorting Logic ---
+def get_branch_priority(branch_name):
+    b = branch_name.upper()
+    if 'COMPUTER' in b: return 1 # CSE First
+    if 'CIVIL' in b: return 2    # Civil Second
+    if 'MECHANICAL' in b: return 3
+    if 'ELECTRICAL AND ELECTRONICS' in b: return 4
+    if 'ELECTRONICS AND COMMUNICATION' in b: return 5
+    return 99
+
+# --- Theme Engine for Modern UI ---
+def get_branch_theme(branch_name):
+    b = branch_name.upper()
+    if 'COMPUTER' in b: return ('indigo', 'fa-laptop-code')
+    if 'CIVIL' in b: return ('emerald', 'fa-building')
+    if 'MECHANICAL' in b: return ('orange', 'fa-cogs')
+    if 'ELECTRICAL AND ELECTRONICS' in b: return ('amber', 'fa-bolt')
+    if 'ELECTRONICS AND COMMUNICATION' in b: return ('purple', 'fa-microchip')
+    return ('blue', 'fa-graduation-cap')
 
 # ==========================================
 # HTML TEMPLATES
@@ -54,7 +68,6 @@ def get_header(title, desc):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
     <title>{title}</title>
     <meta name="description" content="{desc}">
     <meta name="robots" content="index, follow">
@@ -74,10 +87,15 @@ def get_header(title, desc):
         }}
         .no-scrollbar::-webkit-scrollbar {{ display: none; }}
         .no-scrollbar {{ -ms-overflow-style: none; scrollbar-width: none; }}
-        .subject-card {{ transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }}
-        .subject-card:hover {{ transform: translateY(-4px); box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.15); border-color: #c7d2fe; }}
-        @keyframes fadeUpEntry {{ 0% {{ opacity: 0; transform: translateY(15px); }} 100% {{ opacity: 1; transform: translateY(0); }} }}
-        .animate-fade-up {{ animation: fadeUpEntry 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }}
+        
+        /* Modern UI Hover Transitions */
+        .hub-card {{ transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }}
+        .hub-card:hover {{ transform: translateY(-6px); }}
+        
+        @keyframes fadeUpEntry {{ 0% {{ opacity: 0; transform: translateY(20px); }} 100% {{ opacity: 1; transform: translateY(0); }} }}
+        .animate-fade-up {{ opacity: 0; animation: fadeUpEntry 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }}
+        .delay-100 {{ animation-delay: 100ms; }}
+        .delay-200 {{ animation-delay: 200ms; }}
     </style>
 </head>
 <body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
@@ -89,9 +107,7 @@ def get_footer():
     return f"""
     </main>
     <script src="/components.js?v=12"></script>
-    <script>
-        if(typeof loadNavigation === 'function') loadNavigation('', '', false);
-    </script>
+    <script>if(typeof loadNavigation === 'function') loadNavigation('', '', false);</script>
 </body>
 </html>
 """
@@ -99,36 +115,44 @@ def get_footer():
 # ==========================================
 # 1. GENERATE MAIN HUB (index.html)
 # ==========================================
-main_title = "KTU B.Tech Syllabus 2024 Scheme | All Branches"
-main_desc = "Download official KTU B.Tech syllabus PDFs for the 2024 scheme. Select your branch to access semester-wise study materials."
+# Sort branches based on custom priority (CSE -> Civil -> Others)
+sorted_branches = sorted(data.keys(), key=lambda x: (get_branch_priority(x), x))
 
-main_html = get_header(main_title, main_desc)
+main_html = get_header("KTU B.Tech Syllabus 2024 Scheme | All Branches", "Download official KTU B.Tech syllabus PDFs for the 2024 scheme.")
 main_html += """
-        <div class="w-full max-w-6xl mx-auto px-4 pt-10 pb-6 text-center relative z-20">
+        <div class="w-full max-w-6xl mx-auto px-4 pt-12 pb-8 text-center relative z-20">
             <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800 border border-slate-700 text-white text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-                <i class="fas fa-book-open text-indigo-400"></i> Official Curriculum
+                <i class="fas fa-layer-group text-cyan-400"></i> Official Curriculum
             </div>
-            <h1 class="animate-fade-up delay-100 text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
-                B.Tech Syllabus <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-emerald-500">2024 Scheme</span>
+            <h1 class="animate-fade-up delay-100 text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-4">
+                B.Tech Syllabus <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-emerald-500">2024</span>
             </h1>
-            <p class="animate-fade-up delay-200 text-slate-500 font-medium md:text-lg max-w-2xl mx-auto mb-8">
-                Select your engineering branch below to access semester-wise syllabus PDFs.
+            <p class="animate-fade-up delay-200 text-slate-500 font-medium md:text-lg max-w-2xl mx-auto mb-10">
+                Select your engineering branch below to access beautifully organized, semester-wise syllabus PDFs.
             </p>
         </div>
-        <div class="w-full max-w-5xl mx-auto px-4 relative z-20 animate-fade-up delay-300">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="w-full max-w-5xl mx-auto px-4 relative z-20 animate-fade-up delay-200">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 """
 
-for branch in data.keys():
+for branch in sorted_branches:
     branch_slug = slugify(branch)
     branch_acronym = get_branch_acronym(branch)
+    color, icon = get_branch_theme(branch)
+    
+    # Modern Colorful Card Design
     main_html += f"""
-                <a href="{branch_slug}/index.html" class="subject-card bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center group">
-                    <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors shadow-sm">
-                        <i class="fas fa-microchip"></i>
+                <a href="{branch_slug}/index.html" class="hub-card relative bg-white/80 backdrop-blur-xl border border-slate-200 rounded-3xl p-8 flex flex-col items-center justify-center text-center group overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-{color}-300">
+                    
+                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-{color}-400/20 rounded-full blur-3xl group-hover:bg-{color}-500/30 transition-all duration-500"></div>
+                    <div class="absolute -bottom-10 -left-10 w-24 h-24 bg-slate-300/20 rounded-full blur-2xl group-hover:bg-{color}-300/20 transition-all duration-500"></div>
+                    
+                    <div class="relative w-16 h-16 bg-{color}-50 text-{color}-600 rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:scale-110 group-hover:bg-{color}-600 group-hover:text-white transition-all duration-300 shadow-sm border border-{color}-100 z-10">
+                        <i class="fas {icon}"></i>
                     </div>
-                    <span class="text-[10px] font-black bg-slate-800 text-white px-2 py-1 rounded mb-2">B.TECH</span>
-                    <h2 class="font-bold text-slate-800 text-base leading-snug">{branch} ({branch_acronym})</h2>
+                    
+                    <span class="relative text-[10px] font-black bg-slate-800 text-white px-3 py-1 rounded-md mb-3 tracking-widest shadow-sm z-10">B.TECH</span>
+                    <h2 class="relative font-extrabold text-slate-800 text-lg leading-snug group-hover:text-{color}-700 transition-colors z-10">{branch} ({branch_acronym})</h2>
                 </a>
     """
 main_html += "</div></div>" + get_footer()
@@ -139,99 +163,137 @@ with open(os.path.join(OUTPUT_DIR, 'index.html'), 'w', encoding='utf-8') as f:
 # ==========================================
 # 2. GENERATE BRANCH & SEMESTER PAGES
 # ==========================================
-for branch, years in data.items():
+for branch in sorted_branches:
+    years = data[branch]
     branch_slug = slugify(branch)
     branch_dir = os.path.join(OUTPUT_DIR, branch_slug)
     os.makedirs(branch_dir, exist_ok=True)
+    
     branch_acronym = get_branch_acronym(branch)
+    color, icon = get_branch_theme(branch)
     
-    # --- BRANCH INDEX ---
-    branch_page_title = f"KTU B.Tech {branch_acronym} Syllabus 2024 Scheme"
-    branch_page_desc = f"Download complete KTU B.Tech {branch_acronym} ({branch}) syllabus PDFs for the 2024 scheme. All semesters available."
+    # --- FLATTEN SEMESTERS (Removing Year Grouping) ---
+    all_sems = {}
+    for year, semesters in years.items():
+        all_sems.update(semesters)
     
-    branch_html = get_header(branch_page_title, branch_page_desc)
+    # Sort semesters properly (S1, S2, S3...)
+    def get_sem_num(sem_str):
+        m = re.search(r'\d+', sem_str)
+        return int(m.group()) if m else 99
+    sorted_sem_keys = sorted(all_sems.keys(), key=get_sem_num)
+    
+    # --- BRANCH INDEX (e.g., /computer-science-and-engineering/index.html) ---
+    branch_html = get_header(f"KTU B.Tech {branch_acronym} Syllabus 2024 Scheme", f"Download complete KTU B.Tech {branch_acronym} syllabus PDFs for the 2024 scheme. All semesters available.")
     branch_html += f"""
-        <div class="w-full max-w-5xl mx-auto px-4 pt-8 pb-4 relative z-20 animate-fade-up">
+        <div class="w-full max-w-5xl mx-auto px-4 pt-10 pb-6 relative z-20 animate-fade-up">
             <div class="flex items-center flex-wrap text-xs font-bold text-slate-400 uppercase tracking-wider mb-6 gap-2">
-                <a href="/syllabus/index.html" class="hover:text-indigo-600 transition-colors">Syllabus Hub</a>
+                <a href="/syllabus/index.html" class="hover:text-{color}-600 transition-colors">Hub</a>
                 <i class="fas fa-chevron-right text-[8px]"></i>
-                <span class="text-slate-700">{branch_acronym}</span>
+                <span class="text-slate-700 bg-slate-100 px-2 py-0.5 rounded">{branch_acronym}</span>
             </div>
             
-            <h1 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight mb-2">KTU B.Tech {branch_acronym} Syllabus</h1>
-            <p class="text-slate-500 font-medium mb-8">2024 Scheme • {branch}</p>
+            <div class="flex items-center gap-4 mb-4">
+                <div class="w-12 h-12 bg-{color}-100 text-{color}-600 rounded-xl flex items-center justify-center text-2xl shadow-sm border border-{color}-200">
+                    <i class="fas {icon}"></i>
+                </div>
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight">KTU {branch_acronym} Syllabus</h1>
+                    <p class="text-slate-500 font-medium mt-1">B.Tech 2024 Scheme • {branch}</p>
+                </div>
+            </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="w-full h-px bg-slate-200 mt-8 mb-8"></div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
     """
     
-    for year, semesters in years.items():
-        for semester in semesters.keys():
-            sem_slug = slugify(semester)
-            short_sem = semester.replace('Semester ', 'S')
-            sub_count = len(semesters[semester])
-            
-            branch_html += f"""
-                <a href="{sem_slug}.html" class="subject-card bg-white border border-slate-200 rounded-xl p-5 text-center group">
-                    <h3 class="font-black text-2xl text-slate-800 group-hover:text-indigo-600 transition-colors mb-1">{short_sem}</h3>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">{sub_count} Subjects</p>
+    # Render unified, colorful semester grid
+    for semester in sorted_sem_keys:
+        subjects_list = all_sems[semester]
+        sem_slug = slugify(semester)
+        short_sem = semester.replace('Semester ', 'S')
+        sub_count = len(subjects_list)
+        
+        # Super-Modern Interactive Semester Card
+        branch_html += f"""
+                <a href="{sem_slug}.html" class="hub-card relative rounded-3xl p-6 overflow-hidden group border border-slate-200 bg-white/80 hover:border-transparent">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-br from-{color}-500 to-{color}-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="font-black text-4xl text-slate-800 group-hover:text-white transition-colors duration-300 mb-1">{short_sem}</h3>
+                        <p class="text-xs font-bold text-slate-400 group-hover:text-{color}-100 uppercase tracking-widest transition-colors duration-300">
+                            {sub_count} Subjects
+                        </p>
+                        
+                        <div class="absolute bottom-0 right-0 w-8 h-8 bg-slate-100 group-hover:bg-white/20 rounded-full flex items-center justify-center text-slate-400 group-hover:text-white transition-all duration-500 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -bottom-4 -right-2 text-7xl font-black text-slate-900 opacity-5 group-hover:opacity-20 group-hover:text-white transition-all duration-500 select-none z-0">
+                        {short_sem}
+                    </div>
                 </a>
-            """
-            
-            # --- SEMESTER SPECIFIC PAGE ---
-            sem_page_title = f"KTU B.Tech {short_sem} {branch_acronym} Syllabus 2024 Scheme"
-            sem_page_desc = f"Download individual subject syllabus PDFs for KTU B.Tech {short_sem} {branch_acronym} (2024 Scheme). Direct downloads available."
-            
-            sem_html = get_header(sem_page_title, sem_page_desc)
-            sem_html += f"""
-        <div class="w-full max-w-6xl mx-auto px-4 pt-8 pb-4 relative z-20 animate-fade-up">
-            <div class="flex items-center flex-wrap text-xs font-bold text-slate-400 uppercase tracking-wider mb-6 gap-2">
-                <a href="/syllabus/index.html" class="hover:text-indigo-600 transition-colors">Hub</a>
+        """
+        
+        # --- SEMESTER SPECIFIC PAGE ---
+        sem_page_title = f"KTU B.Tech {short_sem} {branch_acronym} Syllabus 2024 Scheme"
+        sem_page_desc = f"Download individual subject syllabus PDFs for KTU B.Tech {short_sem} {branch_acronym} (2024 Scheme)."
+        
+        sem_html = get_header(sem_page_title, sem_page_desc)
+        sem_html += f"""
+        <div class="w-full max-w-6xl mx-auto px-4 pt-10 pb-6 relative z-20 animate-fade-up">
+            <div class="flex items-center flex-wrap text-xs font-bold text-slate-400 uppercase tracking-wider mb-8 gap-2">
+                <a href="/syllabus/index.html" class="hover:text-{color}-600 transition-colors">Hub</a>
                 <i class="fas fa-chevron-right text-[8px]"></i>
-                <a href="index.html" class="hover:text-indigo-600 transition-colors">{branch_acronym}</a>
+                <a href="index.html" class="hover:text-{color}-600 transition-colors bg-slate-100 hover:bg-{color}-50 px-2 py-0.5 rounded transition-all">{branch_acronym}</a>
                 <i class="fas fa-chevron-right text-[8px]"></i>
-                <span class="text-slate-700">{short_sem}</span>
+                <span class="text-slate-700 bg-slate-200 px-2 py-0.5 rounded">{short_sem}</span>
             </div>
             
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-                <div>
-                    <h1 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight mb-2">{short_sem} {branch_acronym} Syllabus</h1>
-                    <p class="text-slate-500 font-medium">B.Tech 2024 Scheme</p>
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 bg-white/60 backdrop-blur-xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.03)] p-6 rounded-3xl">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 bg-gradient-to-br from-{color}-500 to-{color}-600 text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-{color}-500/30">
+                        <span class="font-sporty font-black">{short_sem}</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-black text-slate-900 leading-tight">{branch_acronym} Syllabus</h1>
+                        <p class="text-slate-500 font-medium text-sm mt-0.5">2024 Scheme • {sub_count} Subjects Available</p>
+                    </div>
                 </div>
-                <span class="bg-indigo-100 text-indigo-700 text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest w-max">{sub_count} Subjects</span>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            """
+        """
+        
+        for subject in subjects_list:
+            raw_name = subject.get('name', 'Unknown Subject')
+            sub_name = clean_name(raw_name)
+            sub_code = extract_code(raw_name)
+            sub_link = subject.get('link', '#')
             
-            for subject in semesters[semester]:
-                # FIX: Added .get() methods to prevent KeyError crashes
-                raw_name = subject.get('name', 'Unknown Subject')
-                sub_name = clean_name(raw_name)
-                sub_code = extract_code(raw_name)
-                sub_link = subject.get('link', '#')
-                
-                # Logic for button styling based on link availability
-                if sub_link == '#':
-                    btn_classes = "w-full bg-slate-100 text-slate-400 cursor-not-allowed font-bold text-sm px-4 py-2.5 rounded-xl flex items-center justify-center gap-2 border border-slate-200"
-                    btn_text = "Link Unavailable"
-                    target = ""
-                else:
-                    btn_classes = "w-full bg-slate-50 hover:bg-emerald-500 text-slate-600 hover:text-white border border-slate-200 hover:border-emerald-500 font-bold text-sm px-4 py-2.5 rounded-xl flex items-center justify-center gap-2 transition-colors"
-                    btn_text = "Download PDF"
-                    target = 'target="_blank"'
-                
-                # Subject Card
-                sem_html += f"""
-                <div class="subject-card bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm flex flex-col p-5 group relative overflow-hidden">
+            if sub_link == '#':
+                btn_classes = "w-full bg-slate-100 text-slate-400 cursor-not-allowed font-bold text-sm px-4 py-2.5 rounded-xl flex items-center justify-center gap-2 border border-slate-200"
+                btn_text = "Link Unavailable"
+                target = ""
+            else:
+                btn_classes = f"w-full bg-slate-50 hover:bg-{color}-600 text-slate-600 hover:text-white border border-slate-200 hover:border-{color}-600 font-bold text-sm px-4 py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-lg hover:shadow-{color}-500/20"
+                btn_text = "Download PDF"
+                target = 'target="_blank"'
+            
+            sem_html += f"""
+                <div class="hub-card bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm flex flex-col p-5 group relative overflow-hidden">
                     
-                    <div class="absolute -bottom-2 -right-2 text-6xl font-black text-slate-900 opacity-[0.02] pointer-events-none select-none z-0">
+                    <div class="absolute -bottom-4 -right-2 text-7xl font-black text-slate-900 opacity-[0.02] pointer-events-none select-none z-0 transition-transform group-hover:scale-110 group-hover:-rotate-3">
                         {short_sem}
                     </div>
                     
                     <div class="relative z-10 flex-grow flex flex-col">
                         <div class="flex items-center flex-wrap gap-2 mb-4">
                             <span class="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider bg-slate-800 text-white shadow-sm">B.TECH</span>
-                            <span class="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider bg-indigo-100 text-indigo-700 border border-indigo-200">{short_sem}</span>
+                            <span class="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider bg-{color}-100 text-{color}-700 border border-{color}-200">{short_sem}</span>
                             <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200 font-sporty">{sub_code}</span>
                         </div>
                         
@@ -242,16 +304,15 @@ for branch, years in data.items():
                         </a>
                     </div>
                 </div>
-                """
-            
-            sem_html += "</div></div>" + get_footer()
-            
-            with open(os.path.join(branch_dir, f"{sem_slug}.html"), 'w', encoding='utf-8') as f:
-                f.write(sem_html)
+            """
+        
+        sem_html += "</div></div>" + get_footer()
+        
+        with open(os.path.join(branch_dir, f"{sem_slug}.html"), 'w', encoding='utf-8') as f:
+            f.write(sem_html)
 
-        branch_html += "</div></div>" + get_footer()
-        with open(os.path.join(branch_dir, 'index.html'), 'w', encoding='utf-8') as f:
-            f.write(branch_html)
+    branch_html += "</div></div>" + get_footer()
+    with open(os.path.join(branch_dir, 'index.html'), 'w', encoding='utf-8') as f:
+        f.write(branch_html)
 
-print("✅ SUCCESS! Your B.Tech SEO syllabus site is generated in the 'syllabus_out' folder.")
-print("ℹ️  IMPORTANT: Make sure your GitHub Action renames the output folder to 'syllabus'!")
+print("✅ SUCCESS! The Modern, Auto-Sorted UI Syllabus site is generated in the 'syllabus_out' folder.")
