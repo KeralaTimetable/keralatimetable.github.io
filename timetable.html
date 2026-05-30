@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,7 +75,7 @@
 
         <div class="w-full max-w-6xl mx-auto px-4 relative z-20">
             
-            <div id="new-timetable-banner" class="hidden mb-8 animate-slide-down delay-200">
+            <div id="new-timetable-banner" class="hidden mb-6 animate-slide-down delay-200">
                 <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-3 sm:p-4 flex items-start sm:items-center justify-between gap-3 shadow-sm">
                     <div class="flex items-start sm:items-center gap-3 w-full overflow-hidden">
                         <div class="bg-indigo-600 text-white text-[10px] font-black px-2 py-1.5 rounded uppercase tracking-widest whitespace-nowrap flex-shrink-0 mt-0.5 sm:mt-0 shadow-sm shadow-indigo-500/20">
@@ -88,6 +88,14 @@
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
+            </div>
+
+            <div class="flex justify-center md:justify-start mb-8 animate-fade-up delay-200">
+                <a href="#semester-vault" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-200 hover:shadow-sm rounded-full text-sm font-bold transition-all group">
+                    <i class="fas fa-search text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
+                    Search specific timetables
+                    <i class="fas fa-arrow-down text-[10px] ml-1 opacity-50 group-hover:animate-bounce"></i>
+                </a>
             </div>
 
             <div id="ongoing-section" class="animate-fade-up delay-300 mb-12 hidden">
@@ -111,7 +119,7 @@
                 </div>
             </div>
 
-            <div class="animate-fade-up delay-300">
+            <div id="semester-vault" class="animate-fade-up delay-300 scroll-mt-24">
                 <div class="flex items-center justify-between gap-3 mb-4">
                     <div class="flex items-center gap-3">
                         <i class="fas fa-layer-group text-indigo-500 text-xl"></i>
@@ -358,19 +366,16 @@
             emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
         }
 
-        // --- FIXED: ADDED 'active' TOGGLE TO BUTTONS ---
         function setupFilters() {
             const courseBtns = document.querySelectorAll('.course-btn');
             const semBtns = document.querySelectorAll('.sem-btn');
 
             courseBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    // Remove styling AND 'active' class from all course buttons
                     courseBtns.forEach(b => {
                         b.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm', 'active');
                         b.classList.add('bg-slate-100', 'text-slate-600');
                     });
-                    // Add styling AND 'active' class to clicked button
                     btn.classList.remove('bg-slate-100', 'text-slate-600');
                     btn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm', 'active');
                     
@@ -380,12 +385,10 @@
 
             semBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    // Remove styling AND 'active' class from all sem buttons
                     semBtns.forEach(b => {
                         b.classList.remove('bg-slate-800', 'text-white', 'active');
                         b.classList.add('bg-white', 'text-slate-500');
                     });
-                    // Add styling AND 'active' class to clicked button
                     btn.classList.remove('bg-white', 'text-slate-500');
                     btn.classList.add('bg-slate-800', 'text-white', 'active');
                     
