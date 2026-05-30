@@ -1,0 +1,52 @@
+name: Generate Syllabus Pages
+
+# This tells GitHub to run the script whenever the JSON file is updated
+on:
+  push:
+    paths:
+      - 'ktu_syllabus_raw.json'
+      - 'build_syllabus.py'
+  # This allows you to run it manually from the "Actions" tab if needed
+  workflow_dispatch:
+
+# Give the bot permission to push the new HTML files to your repository
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run the Python Generator
+        run: python build_syllabus.py
+
+      - name: Update the Syllabus Folder
+        run: |
+          # Remove the old syllabus folder to clear out outdated files
+          rm -rf syllabus
+          
+          # Rename the newly generated 'syllabus_out' folder to 'syllabus'
+          mv syllabus_out syllabus
+
+      - name: Commit and Push to GitHub Pages
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Add the new syllabus folder to git
+          git add syllabus/
+          
+          # Commit the changes (or skip if nothing changed)
+          git commit -m "🤖 Auto-generated new syllabus HTML pages" || echo "No changes to commit"
+          
+          # Push the new pages live to your website
+          git push
