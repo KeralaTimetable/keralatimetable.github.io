@@ -131,8 +131,8 @@ main_html += """
                 Select your engineering branch below to access beautifully organized, semester-wise syllabus PDFs.
             </p>
         </div>
-        <div class="w-full max-w-5xl mx-auto px-4 relative z-20 animate-fade-up delay-200">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="w-full max-w-6xl mx-auto px-4 relative z-20 animate-fade-up delay-200">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-5">
 """
 
 for branch in sorted_branches:
@@ -140,19 +140,20 @@ for branch in sorted_branches:
     branch_acronym = get_branch_acronym(branch)
     color, icon = get_branch_theme(branch)
     
-    # Modern Colorful Card Design
+    # Modern, Compact Colorful Card Design
     main_html += f"""
-                <a href="{branch_slug}/index.html" class="hub-card relative bg-white/80 backdrop-blur-xl border border-slate-200 rounded-3xl p-8 flex flex-col items-center justify-center text-center group overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-{color}-300">
+                <a href="{branch_slug}/index.html" class="hub-card relative bg-white/80 backdrop-blur-xl border border-slate-200 rounded-3xl p-5 flex flex-col items-center justify-center text-center group overflow-hidden hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.1)] hover:border-{color}-300">
                     
-                    <div class="absolute -top-12 -right-12 w-32 h-32 bg-{color}-400/20 rounded-full blur-3xl group-hover:bg-{color}-500/30 transition-all duration-500"></div>
-                    <div class="absolute -bottom-10 -left-10 w-24 h-24 bg-slate-300/20 rounded-full blur-2xl group-hover:bg-{color}-300/20 transition-all duration-500"></div>
+                    <div class="absolute -top-8 -right-8 w-24 h-24 bg-{color}-400/20 rounded-full blur-2xl group-hover:bg-{color}-500/30 transition-all duration-500"></div>
+                    <div class="absolute -bottom-8 -left-8 w-20 h-20 bg-slate-300/20 rounded-full blur-xl group-hover:bg-{color}-300/20 transition-all duration-500"></div>
                     
-                    <div class="relative w-16 h-16 bg-{color}-50 text-{color}-600 rounded-2xl flex items-center justify-center text-3xl mb-5 group-hover:scale-110 group-hover:bg-{color}-600 group-hover:text-white transition-all duration-300 shadow-sm border border-{color}-100 z-10">
+                    <div class="relative w-12 h-12 bg-{color}-50 text-{color}-600 rounded-2xl flex items-center justify-center text-xl mb-3 group-hover:scale-110 group-hover:bg-{color}-600 group-hover:text-white transition-all duration-300 shadow-sm border border-{color}-100 z-10">
                         <i class="fas {icon}"></i>
                     </div>
                     
-                    <span class="relative text-[10px] font-black bg-slate-800 text-white px-3 py-1 rounded-md mb-3 tracking-widest shadow-sm z-10">B.TECH</span>
-                    <h2 class="relative font-extrabold text-slate-800 text-lg leading-snug group-hover:text-{color}-700 transition-colors z-10">{branch} ({branch_acronym})</h2>
+                    <span class="relative text-[9px] font-black bg-slate-800 text-white px-2 py-0.5 rounded mb-2 tracking-widest shadow-sm z-10">B.TECH</span>
+                    <h2 class="relative font-extrabold text-slate-800 text-base leading-snug group-hover:text-{color}-700 transition-colors z-10">{branch_acronym}</h2>
+                    <p class="relative text-[10px] text-slate-500 mt-1 font-semibold leading-tight line-clamp-2 z-10">{branch}</p>
                 </a>
     """
 main_html += "</div></div>" + get_footer()
@@ -215,13 +216,17 @@ for branch in sorted_branches:
         short_sem = semester.replace('Semester ', 'S')
         sub_count = len(subjects_list)
         
-        # Super-Modern Interactive Semester Card
+        # CHANGED: Watermark positioned top-right, Opacity increased by 10% (0.05 -> 0.15)
         branch_html += f"""
                 <a href="{sem_slug}.html" class="hub-card relative rounded-3xl p-6 overflow-hidden group border border-slate-200 bg-white/80 hover:border-transparent">
                     
                     <div class="absolute inset-0 bg-gradient-to-br from-{color}-500 to-{color}-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
                     
-                    <div class="relative z-10 flex flex-col h-full">
+                    <div class="absolute top-2 right-4 text-7xl font-black text-slate-900 opacity-[0.15] group-hover:opacity-[0.25] group-hover:text-white transition-all duration-500 select-none z-0">
+                        {short_sem}
+                    </div>
+                    
+                    <div class="relative z-10 flex flex-col h-full pt-8">
                         <h3 class="font-black text-4xl text-slate-800 group-hover:text-white transition-colors duration-300 mb-1">{short_sem}</h3>
                         <p class="text-xs font-bold text-slate-400 group-hover:text-{color}-100 uppercase tracking-widest transition-colors duration-300">
                             {sub_count} Subjects
@@ -230,10 +235,6 @@ for branch in sorted_branches:
                         <div class="absolute bottom-0 right-0 w-8 h-8 bg-slate-100 group-hover:bg-white/20 rounded-full flex items-center justify-center text-slate-400 group-hover:text-white transition-all duration-500 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
                             <i class="fas fa-arrow-right text-xs"></i>
                         </div>
-                    </div>
-                    
-                    <div class="absolute -bottom-4 -right-2 text-7xl font-black text-slate-900 opacity-5 group-hover:opacity-20 group-hover:text-white transition-all duration-500 select-none z-0">
-                        {short_sem}
                     </div>
                 </a>
         """
@@ -315,4 +316,4 @@ for branch in sorted_branches:
     with open(os.path.join(branch_dir, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(branch_html)
 
-print("✅ SUCCESS! The Modern, Auto-Sorted UI Syllabus site is generated in the 'syllabus_out' folder.")
+print("✅ SUCCESS! The compact, Auto-Sorted UI Syllabus site is generated in the 'syllabus_out' folder.")
