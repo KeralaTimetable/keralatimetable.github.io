@@ -272,4 +272,30 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-time-table-of-b-tech-s5-s-fe-exam-june-2026-including-wp-s-2019-scheme-notification.html",
     "pdfLink": "downloads_timetable/2026-05-29_B.TechS5(S,FE)June(2019sch)approved.pdf"
 }
+,
+{
+    "id": "mba_s3_june2026",
+    "title": "MBA S3 Supply/FE June 2026",
+    "semester": "S3",
+    "categoryBadge": "S3",
+    "type": "Supply",
+    "scheme": "2020 Scheme",
+    "startDate": "2026-06-05T14:00:00",
+    "endDate": "2026-06-22T13:30:00",
+    "viewLink": "timetable_pages/detailed-time-table-of-mba-s3-s-fe-exam-june-2026-2020-scheme-notification.html",
+    "pdfLink": "downloads_timetable/2026-05-30_MBAS3June2026(2020sch)approved.pdf"
+}
+,
+{
+    "id": "m_arch_m_plan_s3_june2026",
+    "title": "M. Arch / M. Planning S3 Supply/FE June 2026",
+    "semester": "S3",
+    "categoryBadge": "S3",
+    "type": "Supply",
+    "scheme": "2016 Scheme",
+    "startDate": "2026-06-01T13:30:00",
+    "endDate": "2026-06-08T16:30:00",
+    "viewLink": "timetable_pages/detailed-time-tables-of-m-arch-m-planning-s3-s-fe-june-2026-2016-scheme-examinations-notification.html",
+    "pdfLink": "downloads_timetable/2026-05-30_M.Arch,M.PlanningS3(2016sch)approved.pdf"
+}
 ];
