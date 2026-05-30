@@ -145,9 +145,7 @@ for branch, years in data.items():
     os.makedirs(branch_dir, exist_ok=True)
     branch_acronym = get_branch_acronym(branch)
     
-    # --- BRANCH INDEX (e.g., /computer-science-and-engineering/index.html) ---
-    
-    # NEW SEO TITLE FORMAT: KTU btech CSE SYLLABUS 2024 SCHEME
+    # --- BRANCH INDEX ---
     branch_page_title = f"KTU B.Tech {branch_acronym} Syllabus 2024 Scheme"
     branch_page_desc = f"Download complete KTU B.Tech {branch_acronym} ({branch}) syllabus PDFs for the 2024 scheme. All semesters available."
     
@@ -172,7 +170,6 @@ for branch, years in data.items():
             short_sem = semester.replace('Semester ', 'S')
             sub_count = len(semesters[semester])
             
-            # Add Sem Card to Branch Index
             branch_html += f"""
                 <a href="{sem_slug}.html" class="subject-card bg-white border border-slate-200 rounded-xl p-5 text-center group">
                     <h3 class="font-black text-2xl text-slate-800 group-hover:text-indigo-600 transition-colors mb-1">{short_sem}</h3>
@@ -180,9 +177,7 @@ for branch, years in data.items():
                 </a>
             """
             
-            # --- SEMESTER SPECIFIC PAGE (e.g., /computer-science/semester-1.html) ---
-            
-            # NEW SEO TITLE FORMAT: KTU B.Tech S1 CSE Syllabus 2024 Scheme
+            # --- SEMESTER SPECIFIC PAGE ---
             sem_page_title = f"KTU B.Tech {short_sem} {branch_acronym} Syllabus 2024 Scheme"
             sem_page_desc = f"Download individual subject syllabus PDFs for KTU B.Tech {short_sem} {branch_acronym} (2024 Scheme). Direct downloads available."
             
@@ -209,9 +204,21 @@ for branch, years in data.items():
             """
             
             for subject in semesters[semester]:
-                sub_name = clean_name(subject['name'])
-                sub_code = extract_code(subject['name'])
-                sub_link = subject['link']
+                # FIX: Added .get() methods to prevent KeyError crashes
+                raw_name = subject.get('name', 'Unknown Subject')
+                sub_name = clean_name(raw_name)
+                sub_code = extract_code(raw_name)
+                sub_link = subject.get('link', '#')
+                
+                # Logic for button styling based on link availability
+                if sub_link == '#':
+                    btn_classes = "w-full bg-slate-100 text-slate-400 cursor-not-allowed font-bold text-sm px-4 py-2.5 rounded-xl flex items-center justify-center gap-2 border border-slate-200"
+                    btn_text = "Link Unavailable"
+                    target = ""
+                else:
+                    btn_classes = "w-full bg-slate-50 hover:bg-emerald-500 text-slate-600 hover:text-white border border-slate-200 hover:border-emerald-500 font-bold text-sm px-4 py-2.5 rounded-xl flex items-center justify-center gap-2 transition-colors"
+                    btn_text = "Download PDF"
+                    target = 'target="_blank"'
                 
                 # Subject Card
                 sem_html += f"""
@@ -230,8 +237,8 @@ for branch, years in data.items():
                         
                         <h3 class="text-base font-extrabold text-slate-800 leading-tight mb-6 pr-2 flex-grow">{sub_name}</h3>
                         
-                        <a href="{sub_link}" target="_blank" class="w-full bg-slate-50 hover:bg-emerald-500 text-slate-600 hover:text-white border border-slate-200 hover:border-emerald-500 font-bold text-sm px-4 py-2.5 rounded-xl flex items-center justify-center gap-2 transition-colors">
-                            <i class="fas fa-file-pdf"></i> Download PDF
+                        <a href="{sub_link}" {target} class="{btn_classes}">
+                            <i class="fas fa-file-pdf"></i> {btn_text}
                         </a>
                     </div>
                 </div>
@@ -247,4 +254,4 @@ for branch, years in data.items():
             f.write(branch_html)
 
 print("✅ SUCCESS! Your B.Tech SEO syllabus site is generated in the 'syllabus_out' folder.")
-print("ℹ️  IMPORTANT: Make sure to rename the output folder to 'syllabus' when moving it to your main repository!")
+print("ℹ️  IMPORTANT: Make sure your GitHub Action renames the output folder to 'syllabus'!")
