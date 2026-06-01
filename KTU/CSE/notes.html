@@ -21,38 +21,30 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         
-        /* Vibrant Mesh Background */
+        /* High-End Subtle Mesh Background */
         .bg-mesh {
             background-color: #f8fafc;
-            background-image: radial-gradient(at 10% 20%, hsla(250,100%,74%,0.1) 0px, transparent 50%),
-                              radial-gradient(at 80% 10%, hsla(189,100%,56%,0.1) 0px, transparent 50%),
-                              radial-gradient(at 50% 80%, hsla(340,100%,74%,0.1) 0px, transparent 50%);
+            background-image: radial-gradient(at 0% 0%, hsla(228,100%,74%,0.08) 0px, transparent 50%),
+                              radial-gradient(at 100% 0%, hsla(250,100%,74%,0.08) 0px, transparent 50%),
+                              radial-gradient(at 50% 100%, hsla(228,100%,74%,0.08) 0px, transparent 50%);
         }
         
-        /* Premium Card Physics */
-        .glass-card {
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        /* Premium Standard Tile Physics */
+        .premium-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
         }
-        .glass-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            background-color: rgba(255, 255, 255, 0.95);
-        }
-        
-        /* Dynamic Inner Glow */
-        .glow-orb {
-            transition: opacity 0.5s ease, transform 0.7s ease;
-            mix-blend-mode: multiply;
-        }
-        .glass-card:hover .glow-orb {
-            opacity: 1;
-            transform: scale(1.8) translate(-10px, 10px);
+        .premium-card:hover {
+            transform: translateY(-6px);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 100%);
+            box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.15), 0 0 0 1px rgba(79, 70, 229, 0.2);
         }
 
         /* Subtle Pattern */
         .bg-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2364748b' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2364748b' fill-opacity='0.04' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
         }
 
         /* Animated Title Gradient */
@@ -85,105 +77,137 @@
         
         <!-- Hero Section -->
         <div class="text-center mb-16 relative z-10 pt-4">
-            <div class="inline-flex items-center justify-center px-5 py-2 bg-white/60 backdrop-blur-md rounded-full mb-6 text-slate-700 shadow-sm border border-slate-200/60 text-[11px] font-black uppercase tracking-widest transition-transform hover:scale-105 cursor-default">
-                <i class="fas fa-layer-group text-indigo-500 mr-2 text-sm"></i> Official Curriculum Hub
+            <div class="inline-flex items-center justify-center px-5 py-2 bg-white/80 backdrop-blur-md rounded-full mb-6 text-slate-600 shadow-sm border border-slate-200/80 text-[11px] font-black uppercase tracking-widest cursor-default">
+                <i class="fas fa-layer-group text-indigo-600 mr-2 text-sm"></i> Official Curriculum Hub
             </div>
             <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
-                B.Tech CSE <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-indigo-500 to-rose-500 animate-gradient">Notes</span>
+                B.Tech CSE <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 animate-gradient">Notes</span>
             </h1>
             <p class="text-slate-500 font-medium max-w-xl mx-auto text-sm md:text-base leading-relaxed">
                 2024 Scheme Study Materials. Choose your semester to begin.
             </p>
         </div>
 
-        <!-- VIBRANT 8-COLUMN GRID -->
+        <!-- UNIFIED, STANDARD PREMIUM 8-COLUMN GRID -->
         <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-5 relative z-10 mb-16 px-2">
             
-            <!-- S1 (Emerald / Fresh Start) -->
-            <a href="S1/notes/index.html" class="glass-card group relative aspect-square bg-white/60 border border-slate-200 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden hover:border-emerald-300 hover:shadow-[0_20px_40px_-10px_rgba(16,185,129,0.2)]">
-                <div class="glow-orb absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-emerald-300/30 to-teal-300/30 rounded-full blur-2xl opacity-0"></div>
-                <div class="relative z-10 w-12 h-12 mb-3 bg-gradient-to-br from-emerald-400 to-teal-600 text-white rounded-[14px] flex items-center justify-center text-xl shadow-lg shadow-emerald-500/30 group-hover:-translate-y-1 transition-transform duration-500">
-                    <i class="fas fa-leaf"></i>
+            <!-- S1 Tile -->
+            <a href="S1/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
+                    <i class="fas fa-folder-open text-sm"></i>
                 </div>
-                <h3 class="relative z-10 text-3xl font-black text-slate-700 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-emerald-500 group-hover:to-teal-600 transition-all duration-300">S1</h3>
+                <div class="relative z-10 flex flex-col items-center mt-2">
+                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
+                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">1</h3>
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </a>
 
-            <!-- S2 (Blue / Foundation) -->
-            <a href="S2/notes/index.html" class="glass-card group relative aspect-square bg-white/60 border border-slate-200 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden hover:border-blue-300 hover:shadow-[0_20px_40px_-10px_rgba(59,130,246,0.2)]">
-                <div class="glow-orb absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-blue-300/30 to-cyan-300/30 rounded-full blur-2xl opacity-0"></div>
-                <div class="relative z-10 w-12 h-12 mb-3 bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-[14px] flex items-center justify-center text-xl shadow-lg shadow-blue-500/30 group-hover:-translate-y-1 transition-transform duration-500">
-                    <i class="fas fa-water"></i>
+            <!-- S2 Tile -->
+            <a href="S2/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
+                    <i class="fas fa-folder-open text-sm"></i>
                 </div>
-                <h3 class="relative z-10 text-3xl font-black text-slate-700 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-blue-500 group-hover:to-cyan-600 transition-all duration-300">S2</h3>
+                <div class="relative z-10 flex flex-col items-center mt-2">
+                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
+                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">2</h3>
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </a>
 
-            <!-- S3 (Indigo / Core Tech) -->
-            <a href="S3/notes/index.html" class="glass-card group relative aspect-square bg-white/60 border border-slate-200 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden hover:border-indigo-300 hover:shadow-[0_20px_40px_-10px_rgba(99,102,241,0.2)]">
-                <div class="glow-orb absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-indigo-300/30 to-violet-300/30 rounded-full blur-2xl opacity-0"></div>
-                <div class="relative z-10 w-12 h-12 mb-3 bg-gradient-to-br from-indigo-500 to-violet-600 text-white rounded-[14px] flex items-center justify-center text-xl shadow-lg shadow-indigo-500/30 group-hover:-translate-y-1 transition-transform duration-500">
-                    <i class="fas fa-code-branch"></i>
+            <!-- S3 Tile -->
+            <a href="S3/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
+                    <i class="fas fa-folder-open text-sm"></i>
                 </div>
-                <h3 class="relative z-10 text-3xl font-black text-slate-700 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-500 group-hover:to-violet-600 transition-all duration-300">S3</h3>
+                <div class="relative z-10 flex flex-col items-center mt-2">
+                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
+                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">3</h3>
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </a>
 
-            <!-- S4 (Fuchsia / Architecture) -->
-            <a href="S4/notes/index.html" class="glass-card group relative aspect-square bg-white/60 border border-slate-200 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden hover:border-fuchsia-300 hover:shadow-[0_20px_40px_-10px_rgba(217,70,239,0.2)]">
-                <div class="glow-orb absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-fuchsia-300/30 to-pink-300/30 rounded-full blur-2xl opacity-0"></div>
-                <div class="relative z-10 w-12 h-12 mb-3 bg-gradient-to-br from-fuchsia-500 to-pink-500 text-white rounded-[14px] flex items-center justify-center text-xl shadow-lg shadow-fuchsia-500/30 group-hover:-translate-y-1 transition-transform duration-500">
-                    <i class="fas fa-server"></i>
+            <!-- S4 Tile -->
+            <a href="S4/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
+                    <i class="fas fa-folder-open text-sm"></i>
                 </div>
-                <h3 class="relative z-10 text-3xl font-black text-slate-700 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-fuchsia-500 group-hover:to-pink-600 transition-all duration-300">S4</h3>
+                <div class="relative z-10 flex flex-col items-center mt-2">
+                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
+                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">4</h3>
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </a>
 
-            <!-- S5 (Rose / Advanced) -->
-            <a href="S5/notes/index.html" class="glass-card group relative aspect-square bg-white/60 border border-slate-200 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden hover:border-rose-300 hover:shadow-[0_20px_40px_-10px_rgba(244,63,94,0.2)]">
-                <div class="glow-orb absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-rose-300/30 to-red-300/30 rounded-full blur-2xl opacity-0"></div>
-                <div class="relative z-10 w-12 h-12 mb-3 bg-gradient-to-br from-rose-500 to-red-500 text-white rounded-[14px] flex items-center justify-center text-xl shadow-lg shadow-rose-500/30 group-hover:-translate-y-1 transition-transform duration-500">
-                    <i class="fas fa-network-wired"></i>
+            <!-- S5 Tile -->
+            <a href="S5/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
+                    <i class="fas fa-folder-open text-sm"></i>
                 </div>
-                <h3 class="relative z-10 text-3xl font-black text-slate-700 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-rose-500 group-hover:to-red-600 transition-all duration-300">S5</h3>
+                <div class="relative z-10 flex flex-col items-center mt-2">
+                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
+                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">5</h3>
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </a>
 
-            <!-- S6 (Orange / Analysis) -->
-            <a href="S6/notes/index.html" class="glass-card group relative aspect-square bg-white/60 border border-slate-200 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden hover:border-orange-300 hover:shadow-[0_20px_40px_-10px_rgba(249,115,22,0.2)]">
-                <div class="glow-orb absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-orange-300/30 to-amber-300/30 rounded-full blur-2xl opacity-0"></div>
-                <div class="relative z-10 w-12 h-12 mb-3 bg-gradient-to-br from-orange-500 to-amber-500 text-white rounded-[14px] flex items-center justify-center text-xl shadow-lg shadow-orange-500/30 group-hover:-translate-y-1 transition-transform duration-500">
-                    <i class="fas fa-chart-pie"></i>
+            <!-- S6 Tile -->
+            <a href="S6/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
+                    <i class="fas fa-folder-open text-sm"></i>
                 </div>
-                <h3 class="relative z-10 text-3xl font-black text-slate-700 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-orange-500 group-hover:to-amber-600 transition-all duration-300">S6</h3>
+                <div class="relative z-10 flex flex-col items-center mt-2">
+                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
+                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">6</h3>
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </a>
 
-            <!-- S7 (Amber / Intelligence) -->
-            <a href="S7/notes/index.html" class="glass-card group relative aspect-square bg-white/60 border border-slate-200 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden hover:border-amber-400 hover:shadow-[0_20px_40px_-10px_rgba(245,158,11,0.2)]">
-                <div class="glow-orb absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-amber-300/30 to-yellow-300/30 rounded-full blur-2xl opacity-0"></div>
-                <div class="relative z-10 w-12 h-12 mb-3 bg-gradient-to-br from-amber-400 to-yellow-500 text-white rounded-[14px] flex items-center justify-center text-xl shadow-lg shadow-amber-500/30 group-hover:-translate-y-1 transition-transform duration-500">
-                    <i class="fas fa-brain"></i>
+            <!-- S7 Tile -->
+            <a href="S7/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
+                    <i class="fas fa-folder-open text-sm"></i>
                 </div>
-                <h3 class="relative z-10 text-3xl font-black text-slate-700 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-amber-500 group-hover:to-yellow-500 transition-all duration-300">S7</h3>
+                <div class="relative z-10 flex flex-col items-center mt-2">
+                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
+                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">7</h3>
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </a>
 
-            <!-- S8 (Slate / Graduation) -->
-            <a href="S8/notes/index.html" class="glass-card group relative aspect-square bg-white/60 border border-slate-200 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden hover:border-slate-400 hover:shadow-[0_20px_40px_-10px_rgba(71,85,105,0.2)]">
-                <div class="glow-orb absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-slate-400/30 to-gray-400/30 rounded-full blur-2xl opacity-0"></div>
-                <div class="relative z-10 w-12 h-12 mb-3 bg-gradient-to-br from-slate-700 to-slate-900 text-white rounded-[14px] flex items-center justify-center text-xl shadow-lg shadow-slate-700/30 group-hover:-translate-y-1 transition-transform duration-500">
-                    <i class="fas fa-flag-checkered"></i>
+            <!-- S8 Tile -->
+            <a href="S8/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
+                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
+                    <i class="fas fa-folder-open text-sm"></i>
                 </div>
-                <h3 class="relative z-10 text-3xl font-black text-slate-700 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-slate-700 group-hover:to-slate-900 transition-all duration-300">S8</h3>
+                <div class="relative z-10 flex flex-col items-center mt-2">
+                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
+                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">8</h3>
+                </div>
+                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </a>
 
         </div>
 
         <!-- Tags Section -->
-        <div class="bg-white/70 backdrop-blur-xl rounded-[2rem] p-6 md:p-8 border border-slate-200/80 shadow-sm relative z-10 bg-pattern max-w-4xl mx-auto">
+        <div class="bg-white/80 backdrop-blur-xl rounded-[2rem] p-6 md:p-8 border border-slate-200/80 shadow-sm relative z-10 bg-pattern max-w-4xl mx-auto">
             <h3 class="text-[12px] font-black text-slate-400 uppercase tracking-widest mb-5 flex items-center gap-2 justify-center md:justify-start">
                 <i class="fas fa-hashtag text-slate-300"></i> Trending CSE Topics
             </h3>
             <div class="flex flex-wrap gap-2.5 justify-center md:justify-start">
-                <span class="bg-white border border-slate-200 hover:border-slate-400 hover:text-slate-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu cse notes</span>
-                <span class="bg-white border border-slate-200 hover:border-slate-400 hover:text-slate-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu b.tech cse 2024 scheme</span>
-                <span class="bg-white border border-slate-200 hover:border-slate-400 hover:text-slate-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">computer science engineering ktu</span>
-                <span class="bg-white border border-slate-200 hover:border-slate-400 hover:text-slate-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu 2024 study materials</span>
-                <span class="bg-white border border-slate-200 hover:border-slate-400 hover:text-slate-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu computer science hub</span>
+                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu cse notes</span>
+                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu b.tech cse 2024 scheme</span>
+                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">computer science engineering ktu</span>
+                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu 2024 study materials</span>
+                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu computer science hub</span>
             </div>
         </div>
 
