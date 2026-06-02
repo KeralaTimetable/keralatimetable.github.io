@@ -97,7 +97,10 @@ def get_header(title, desc):
         .delay-100 {{ animation-delay: 100ms; }}
         .delay-200 {{ animation-delay: 200ms; }}
     </style>
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <meta property="og:site_name" content="Kerala Timetable">
 </head>
+
 <body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
     <div id="navigation-container" class="min-h-[73px] w-full"></div>
     <main class="flex-grow w-full pb-20">

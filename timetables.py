@@ -153,7 +153,10 @@ def generate_html_page(title, pdf_filename, html_output_dir="./timetable_pages")
     }
     </script>
 
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <meta property="og:site_name" content="Kerala Timetable">
 </head>
+
 <body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
     <div id="navigation-container"></div>
