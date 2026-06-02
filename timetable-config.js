@@ -298,4 +298,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-time-tables-of-m-arch-m-planning-s3-s-fe-june-2026-2016-scheme-examinations-notification.html",
     "pdfLink": "downloads_timetable/2026-05-30_M.Arch,M.PlanningS3(2016sch)approved.pdf"
 }
+,
+{
+    "id": "btech_s4_challenge_april2026",
+    "title": "B.Tech S4 Challenge Course April 2026",
+    "semester": "S4",
+    "categoryBadge": "S4",
+    "type": "Challenge",
+    "scheme": "2024 Scheme",
+    "startDate": "2026-06-10T09:30:00",
+    "endDate": "2026-06-12T12:00:00",
+    "viewLink": "timetable_pages/detailed-time-table-of-b-tech-s4-challenge-course-examination-april-2026-2024-scheme-notification.html",
+    "pdfLink": "downloads_timetable/2026-06-02_B.TechS4Challengeapril2026(2024sch)approved.pdf"
+}
 ];
