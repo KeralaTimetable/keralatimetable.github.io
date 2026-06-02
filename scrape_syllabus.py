@@ -37,9 +37,16 @@ async def scrape_ktu_syllabi(scheme_name, out_dir, headless, max_branches):
         )
         page = await context.new_page()
         
-        # 1. Load the schemes page
+        # 1. Load the schemes page (FIXED: Changed to domcontentloaded and 90s timeout)
         print("Navigating to KTU Academics Scheme page...")
-        await page.goto("https://ktu.edu.in/academics/scheme", wait_until="networkidle", timeout=60000)
+        try:
+            await page.goto("https://ktu.edu.in/academics/scheme", wait_until="domcontentloaded", timeout=90000)
+            # Wait an extra 2 seconds to let any dynamic JavaScript render
+            await page.wait_for_timeout(2000) 
+        except Exception as e:
+            print(f"Failed to load KTU website: {e}")
+            await browser.close()
+            return
         
         # 2. Find and click the 'Branch' link for the targeted scheme
         print(f"Locating block for scheme: '{scheme_name}'...")
@@ -121,9 +128,10 @@ async def scrape_ktu_syllabi(scheme_name, out_dir, headless, max_branches):
         async def ensure_on_branch_page():
             if "/academics/branch" not in page.url:
                 print("Not on branch page. Reloading branch list...")
-                await page.goto("https://ktu.edu.in/academics/scheme", wait_until="networkidle", timeout=60000)
+                # FIX: Changed to domcontentloaded and 90s timeout
+                await page.goto("https://ktu.edu.in/academics/scheme", wait_until="domcontentloaded", timeout=90000)
+                await page.wait_for_timeout(2000)
                 
-                # BUGFIX: Removed the 'f' string prefix and duplicate curly braces
                 await page.evaluate("""(targetScheme) => {
                     const elements = Array.from(document.querySelectorAll('*'));
                     let targetCard = null;
@@ -197,7 +205,8 @@ async def scrape_ktu_syllabi(scheme_name, out_dir, headless, max_branches):
             # Perform download
             print("  Syllabus PDF detected! Starting download...")
             try:
-                async with page.expect_download(timeout=15000) as download_info:
+                # FIX: Increased download timeout to 45 seconds for large PDFs
+                async with page.expect_download(timeout=45000) as download_info:
                     await page.evaluate("""() => {
                         const btns = Array.from(document.querySelectorAll('button')).filter(btn => {
                             const text = btn.innerText ? btn.innerText.trim() : '';
