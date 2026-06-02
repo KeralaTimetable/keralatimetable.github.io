@@ -1,22 +1,16 @@
-name: Generate Syllabus Pages
+name: KTU Master Automation (Scrape, Split & Build)
 
-# This tells GitHub to run the script whenever the JSON file is updated
 on:
-  push:
-    paths:
-      - 'ktu_syllabus_raw.json'
-      - 'build_syllabus.py'
-  # This allows you to run it manually from the "Actions" tab if needed
-  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1' # Runs automatically every Monday at midnight
+  workflow_dispatch: # Allows you to click "Run workflow" manually
 
-# Give the bot permission to push the new HTML files to your repository
 permissions:
   contents: write
 
 jobs:
-  build:
+  run-everything:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,29 +18,44 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      - name: Run the Python Generator
+      - name: Install Scraping Dependencies
+        run: |
+          pip install playwright pymupdf
+          playwright install chromium
+
+      - name: 1. Run the KTU Scraper
+        run: |
+          python scrape_syllabus.py --scheme "B.TECH FULL TIME 2024 SCHEME" --outdir "./raw_pdfs"
+
+      - name: 2. Run the PDF Splitter
+        run: |
+          # Add your branch splits here based on what downloaded
+          if [ -f "./raw_pdfs/Cse.pdf" ]; then
+            python split_syllabus.py --pdf ./raw_pdfs/Cse.pdf --branch "Computer Science and Engineering" --scheme "B.Tech Full Time 2024 Scheme" --outdir "."
+          fi
+
+      - name: 3. Run the UI Builder
         run: python build_syllabus.py
 
-      - name: Update the Syllabus Folder
+      - name: 4. Clean up and Format
         run: |
-          # Remove the old syllabus folder to clear out outdated files
+          # Replace old syllabus HTML with the new ones
           rm -rf syllabus
-          
-          # Rename the newly generated 'syllabus_out' folder to 'syllabus'
           mv syllabus_out syllabus
 
-      - name: Commit and Push to GitHub Pages
+      - name: 5. Commit and Push Everything to GitHub Pages
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Add the new syllabus folder to git
+          # Add the split PDFs, the JSON, and the HTML UI
+          git add pdfs/
+          git add syllabus_flat.json
+          git add syllabus_data.json
+          git add syllabus_database.csv
           git add syllabus/
           
-          # Commit the changes (or skip if nothing changed)
-          git commit -m "🤖 Auto-generated new syllabus HTML pages" || echo "No changes to commit"
-          
-          # Push the new pages live to your website
+          git commit -m "🚀 Auto-Scraped KTU, Split PDFs, and Updated UI" || echo "No changes to commit"
           git push
