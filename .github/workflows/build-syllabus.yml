@@ -29,12 +29,9 @@ jobs:
         run: |
           python scrape_syllabus.py --scheme "B.TECH FULL TIME 2024 SCHEME" --outdir "./raw_pdfs"
 
-      - name: 2. Run the PDF Splitter
+      - name: 2. Run the PDF Splitter (Bulk Process All Branches)
         run: |
-          # Add your branch splits here based on what downloaded
-          if [ -f "./raw_pdfs/Cse.pdf" ]; then
-            python split_syllabus.py --pdf ./raw_pdfs/Cse.pdf --branch "Computer Science and Engineering" --scheme "B.Tech Full Time 2024 Scheme" --outdir "."
-          fi
+          python split_syllabus.py --summary "./raw_pdfs/downloaded_syllabi.json" --outdir "."
 
       - name: 3. Run the UI Builder
         run: python build_syllabus.py
@@ -53,8 +50,6 @@ jobs:
           # Add the split PDFs, the JSON, and the HTML UI
           git add pdfs/
           git add syllabus_flat.json
-          git add syllabus_data.json
-          git add syllabus_database.csv
           git add syllabus/
           
           git commit -m "🚀 Auto-Scraped KTU, Split PDFs, and Updated UI" || echo "No changes to commit"
