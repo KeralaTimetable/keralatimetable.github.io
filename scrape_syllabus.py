@@ -122,20 +122,22 @@ async def scrape_ktu_syllabi(scheme_name, out_dir, headless, max_branches):
             if "/academics/branch" not in page.url:
                 print("Not on branch page. Reloading branch list...")
                 await page.goto("https://ktu.edu.in/academics/scheme", wait_until="networkidle", timeout=60000)
-                await page.evaluate(f"""(targetScheme) => {{
+                
+                # BUGFIX: Removed the 'f' string prefix and duplicate curly braces
+                await page.evaluate("""(targetScheme) => {
                     const elements = Array.from(document.querySelectorAll('*'));
                     let targetCard = null;
-                    for (let el of elements) {{
-                        if (el.innerText && el.innerText.toUpperCase().includes(targetScheme.toUpperCase())) {{
-                            if (!targetCard || el.innerText.length < targetCard.innerText.length) {{
+                    for (let el of elements) {
+                        if (el.innerText && el.innerText.toUpperCase().includes(targetScheme.toUpperCase())) {
+                            if (!targetCard || el.innerText.length < targetCard.innerText.length) {
                                 targetCard = el;
                             }
                         }
                     }
-                    if (targetCard) {{
+                    if (targetCard) {
                         let container = targetCard;
-                        for (let i = 0; i < 5; i++) {{
-                            if (container.parentElement && (container.className.includes('card') || container.className.includes('box') || container.className.includes('border') || container.className.includes('p-'))) {{
+                        for (let i = 0; i < 5; i++) {
+                            if (container.parentElement && (container.className.includes('card') || container.className.includes('box') || container.className.includes('border') || container.className.includes('p-'))) {
                                 container = container.parentElement;
                                 break;
                             }
@@ -144,7 +146,7 @@ async def scrape_ktu_syllabi(scheme_name, out_dir, headless, max_branches):
                         const branchLink = Array.from(container.querySelectorAll('a, button')).find(a => a.innerText.trim() === 'Branch');
                         if (branchLink) branchLink.click();
                     }
-                }}""", scheme_name)
+                }""", scheme_name)
                 await page.wait_for_timeout(5000)
         
         # 4. Loop through branches and download available PDFs
