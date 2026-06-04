@@ -109,6 +109,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://keralatimetable.github.io/KTU/CSE/S3/notes/index.html</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://keralatimetable.github.io/syllabus/index.html</loc>
     <lastmod>2026-06-04</lastmod>
     <changefreq>weekly</changefreq>
