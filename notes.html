@@ -21,33 +21,38 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
         
-        /* Premium Background Mesh */
+        /* Base Background */
         .bg-mesh {
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 0% 0%, hsla(228,100%,74%,0.1) 0px, transparent 50%),
-                              radial-gradient(at 100% 0%, hsla(250,100%,74%,0.1) 0px, transparent 50%);
+            background-color: #f1f5f9; /* Slightly darker so the glass pops more */
         }
 
-        /* Floating Animation for Orbs */
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg) scale(1); }
-            33% { transform: translateY(-15px) rotate(2deg) scale(1.05); }
-            66% { transform: translateY(10px) rotate(-2deg) scale(0.95); }
-            100% { transform: translateY(0px) rotate(0deg) scale(1); }
-        }
-        .animate-float { animation: float 8s ease-in-out infinite; }
-        .animate-float-delayed { animation: float 10s ease-in-out infinite; animation-delay: 2s; }
-
-        /* LIGHT Premium Glassmorphism (For Quick Search) */
-        .light-glass {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%);
-            backdrop-filter: blur(24px);
+        /* -------------------------------------------
+           AUTHENTIC GLASSMORPHISM
+        ------------------------------------------- */
+        .real-glass {
+            background: rgba(255, 255, 255, 0.35); /* High transparency */
+            backdrop-filter: blur(24px); /* Heavy blur */
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+            /* Edge highlights mimicking physical glass */
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            /* Deep shadow for depth */
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.15);
+            /* 3D Transform properties */
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
         }
 
-        /* Custom Select Input Styling (Dark arrow for light theme) */
+        /* Inner glass for inputs */
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Custom Select Input Styling */
         select.custom-select {
             appearance: none;
             background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23475569%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
@@ -56,11 +61,20 @@
             background-size: 0.65rem auto;
         }
 
+        /* Continuous Orb Animation (in addition to mouse tracking) */
+        @keyframes float-pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 0.6; }
+        }
+        .orb-pulse { animation: float-pulse 6s ease-in-out infinite; }
+        
         /* Premium Branch Cards */
         .branch-card {
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
         .branch-card:hover {
             transform: translateY(-8px);
@@ -79,96 +93,102 @@
 
     <div id="navigation-container"></div>
 
-    <!-- Parallax Wrappers (Scroll effect applies here) -->
-    <div id="parallax-bg-1" class="fixed top-20 left-10 z-0 pointer-events-none transition-transform duration-75 ease-out">
-        <!-- Floating Animation applies to inner div -->
-        <div class="w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float"></div>
-    </div>
-    
-    <div id="parallax-bg-2" class="fixed top-40 right-10 z-0 pointer-events-none transition-transform duration-75 ease-out">
-        <!-- Floating Animation applies to inner div -->
-        <div class="w-80 h-80 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float-delayed"></div>
+    <!-- 3D Parallax Orbs Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <!-- Scroll wrapper 1 -->
+        <div id="scroll-bg-1" class="absolute top-20 -left-10 w-96 h-96 transition-transform duration-100 ease-out">
+            <!-- Mouse track inner -->
+            <div id="mouse-orb-1" class="w-full h-full bg-indigo-400 rounded-full mix-blend-multiply filter blur-[80px] orb-pulse transition-transform duration-100 ease-out"></div>
+        </div>
+        <!-- Scroll wrapper 2 -->
+        <div id="scroll-bg-2" class="absolute top-60 -right-20 w-[30rem] h-[30rem] transition-transform duration-100 ease-out">
+            <!-- Mouse track inner -->
+            <div id="mouse-orb-2" class="w-full h-full bg-purple-400 rounded-full mix-blend-multiply filter blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        </div>
     </div>
 
     <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-12 relative z-10">
         
         <!-- Hero Section -->
         <div class="text-center mb-12">
-            <div class="inline-flex items-center justify-center p-3 bg-white rounded-2xl mb-5 text-indigo-600 shadow-[0_4px_20px_rgba(79,70,229,0.15)] border border-slate-100">
+            <div class="inline-flex items-center justify-center p-3 bg-white/80 backdrop-blur-md rounded-2xl mb-5 text-indigo-600 shadow-[0_4px_20px_rgba(79,70,229,0.15)] border border-white">
                 <i class="fas fa-book-open text-2xl"></i>
             </div>
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-4 tracking-tight">
                 KTU Notes <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">2024 Scheme</span>
             </h1>
-            <p class="text-slate-500 font-medium max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+            <p class="text-slate-600 font-medium max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
                 The ultimate academic hub. Find your exact syllabus, study notes, and materials organized by branch and semester.
             </p>
         </div>
 
         <!-- Two Column Layout for Desktop -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16 perspective-1000">
             
-            <!-- Light Glassmorphism Quick Finder Widget -->
-            <div class="lg:col-span-5 relative">
-                <div class="light-glass rounded-[2rem] p-8 w-full sticky top-24">
-                    <div class="flex items-center gap-3 mb-8">
-                        <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm border border-indigo-200">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h2 class="text-2xl font-black text-slate-800 tracking-tight">Quick Finder</h2>
-                    </div>
-
-                    <div class="space-y-6">
-                        <!-- Branch Dropdown -->
-                        <div>
-                            <label class="block text-xs font-black text-slate-500 uppercase tracking-wider mb-2 ml-1">Branch</label>
-                            <select id="quickBranch" class="custom-select w-full bg-white/70 border border-slate-200 text-slate-800 font-semibold text-base rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer shadow-sm backdrop-blur-md hover:bg-white/90">
-                                <option value="" disabled selected>Select Branch</option>
-                                <option value="CSE">Computer Science (CSE)</option>
-                                <option value="CE" disabled>Civil (Coming Soon)</option>
-                                <option value="ME" disabled>Mechanical (Coming Soon)</option>
-                                <option value="EEE" disabled>Electrical (Coming Soon)</option>
-                            </select>
+            <!-- Real Glassmorphism 3D Tilt Widget -->
+            <div class="lg:col-span-5 relative" style="perspective: 1000px;">
+                <div id="glass-card" class="real-glass rounded-[2rem] p-8 w-full sticky top-24 z-20">
+                    <!-- TranslateZ forces this element to pop out in 3D space -->
+                    <div style="transform: translateZ(30px);">
+                        <div class="flex items-center gap-3 mb-8">
+                            <div class="w-10 h-10 rounded-full bg-white/70 backdrop-blur-sm flex items-center justify-center text-indigo-600 shadow-sm border border-white">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h2 class="text-2xl font-black text-slate-800 tracking-tight">Quick Finder</h2>
                         </div>
 
-                        <!-- Semester Dropdown -->
-                        <div>
-                            <label class="block text-xs font-black text-slate-500 uppercase tracking-wider mb-2 ml-1">Semester</label>
-                            <select id="quickSem" class="custom-select w-full bg-white/70 border border-slate-200 text-slate-800 font-semibold text-base rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer shadow-sm backdrop-blur-md hover:bg-white/90">
-                                <option value="" disabled selected>Select Semester</option>
-                                <option value="S1">Semester 1</option>
-                                <option value="S2">Semester 2</option>
-                                <option value="S3">Semester 3</option>
-                                <option value="S4">Semester 4</option>
-                                <option value="S5">Semester 5</option>
-                                <option value="S6">Semester 6</option>
-                                <option value="S7">Semester 7</option>
-                                <option value="S8">Semester 8</option>
-                            </select>
-                        </div>
+                        <div class="space-y-6">
+                            <!-- Branch Dropdown -->
+                            <div>
+                                <label class="block text-xs font-black text-slate-600 uppercase tracking-wider mb-2 ml-1">Branch</label>
+                                <select id="quickBranch" class="custom-select inner-glass w-full text-slate-800 font-semibold text-base rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer hover:bg-white/70">
+                                    <option value="" disabled selected>Select Branch</option>
+                                    <option value="CSE">Computer Science (CSE)</option>
+                                    <option value="CE" disabled>Civil (Coming Soon)</option>
+                                    <option value="ME" disabled>Mechanical (Coming Soon)</option>
+                                    <option value="EEE" disabled>Electrical (Coming Soon)</option>
+                                </select>
+                            </div>
 
-                        <button onclick="handleQuickSearch()" class="w-full mt-6 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-2xl shadow-[0_8px_20px_rgba(79,70,229,0.25)] transform transition hover:-translate-y-1 flex items-center justify-center gap-2">
-                            Access Notes <i class="fas fa-arrow-right text-sm"></i>
-                        </button>
+                            <!-- Semester Dropdown -->
+                            <div>
+                                <label class="block text-xs font-black text-slate-600 uppercase tracking-wider mb-2 ml-1">Semester</label>
+                                <select id="quickSem" class="custom-select inner-glass w-full text-slate-800 font-semibold text-base rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer hover:bg-white/70">
+                                    <option value="" disabled selected>Select Semester</option>
+                                    <option value="S1">Semester 1</option>
+                                    <option value="S2">Semester 2</option>
+                                    <option value="S3">Semester 3</option>
+                                    <option value="S4">Semester 4</option>
+                                    <option value="S5">Semester 5</option>
+                                    <option value="S6">Semester 6</option>
+                                    <option value="S7">Semester 7</option>
+                                    <option value="S8">Semester 8</option>
+                                </select>
+                            </div>
+
+                            <button onclick="handleQuickSearch()" class="w-full mt-6 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-2xl shadow-[0_8px_20px_rgba(79,70,229,0.3)] transform transition hover:scale-[1.02] flex items-center justify-center gap-2">
+                                Access Notes <i class="fas fa-arrow-right text-sm"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Branch Grid Layout -->
-            <div class="lg:col-span-7">
+            <div class="lg:col-span-7 z-10">
                 <div class="flex items-center gap-3 mb-6 px-2">
                     <h3 class="text-lg font-black text-slate-800">Browse by Branch</h3>
-                    <div class="h-px bg-slate-200 flex-grow ml-2"></div>
+                    <div class="h-px bg-slate-300 flex-grow ml-2 opacity-50"></div>
                 </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     
                     <!-- CSE Card -->
-                    <a href="KTU/CSE/notes.html" class="branch-card border border-slate-200/60 rounded-3xl p-6 relative group overflow-hidden sm:col-span-2">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-2xl -mr-10 -mt-10 transition-transform duration-500 group-hover:scale-150"></div>
+                    <a href="KTU/CSE/notes.html" class="branch-card rounded-3xl p-6 relative group overflow-hidden sm:col-span-2">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-100 rounded-full blur-2xl -mr-10 -mt-10 transition-transform duration-500 group-hover:scale-150"></div>
                         <div class="relative z-10 flex items-center justify-between">
                             <div class="flex items-center gap-5">
-                                <div class="w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-3xl shadow-sm border border-indigo-100 transition-transform group-hover:scale-110 group-hover:rotate-3 duration-300">
+                                <div class="w-16 h-16 rounded-2xl bg-white/80 text-indigo-600 flex items-center justify-center text-3xl shadow-sm border border-white transition-transform group-hover:scale-110 group-hover:rotate-3 duration-300">
                                     <i class="fas fa-laptop-code"></i>
                                 </div>
                                 <div>
@@ -176,17 +196,17 @@
                                     <p class="text-slate-500 font-medium text-sm mt-1">CSE • S1 to S8 Available</p>
                                 </div>
                             </div>
-                            <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm">
+                            <div class="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm border border-white">
                                 <i class="fas fa-chevron-right text-sm"></i>
                             </div>
                         </div>
                     </a>
 
                     <!-- Civil Card -->
-                    <a href="#" class="branch-card border border-slate-200/60 rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                    <a href="#" class="branch-card rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between gap-4">
-                            <div class="w-12 h-12 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center text-xl shadow-sm border border-slate-200">
+                            <div class="w-12 h-12 rounded-2xl bg-white/80 text-slate-400 flex items-center justify-center text-xl shadow-sm border border-white">
                                 <i class="fas fa-building"></i>
                             </div>
                             <div>
@@ -197,10 +217,10 @@
                     </a>
 
                     <!-- Mechanical Card -->
-                    <a href="#" class="branch-card border border-slate-200/60 rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                    <a href="#" class="branch-card rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between gap-4">
-                            <div class="w-12 h-12 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center text-xl shadow-sm border border-slate-200">
+                            <div class="w-12 h-12 rounded-2xl bg-white/80 text-slate-400 flex items-center justify-center text-xl shadow-sm border border-white">
                                 <i class="fas fa-cogs"></i>
                             </div>
                             <div>
@@ -211,10 +231,10 @@
                     </a>
 
                     <!-- EEE Card -->
-                    <a href="#" class="branch-card border border-slate-200/60 rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                    <a href="#" class="branch-card rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between gap-4">
-                            <div class="w-12 h-12 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center text-xl shadow-sm border border-slate-200">
+                            <div class="w-12 h-12 rounded-2xl bg-white/80 text-slate-400 flex items-center justify-center text-xl shadow-sm border border-white">
                                 <i class="fas fa-bolt"></i>
                             </div>
                             <div>
@@ -225,10 +245,10 @@
                     </a>
 
                     <!-- ECE Card -->
-                    <a href="#" class="branch-card border border-slate-200/60 rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                    <a href="#" class="branch-card rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between gap-4">
-                            <div class="w-12 h-12 rounded-2xl bg-slate-50 text-slate-400 flex items-center justify-center text-xl shadow-sm border border-slate-200">
+                            <div class="w-12 h-12 rounded-2xl bg-white/80 text-slate-400 flex items-center justify-center text-xl shadow-sm border border-white">
                                 <i class="fas fa-microchip"></i>
                             </div>
                             <div>
@@ -243,17 +263,17 @@
         </div>
 
         <!-- SEO Tags / Recent Searches Section -->
-        <div class="mt-8 pt-8 border-t border-slate-200/60">
+        <div class="mt-8 pt-8 border-t border-slate-200/60 z-10 relative">
             <h3 class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                 <i class="fas fa-fire text-orange-400"></i> Trending Searches
             </h3>
             <div class="flex flex-wrap gap-2.5">
-                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu notes 2024 scheme</span>
-                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu cse s3 notes pdf</span>
-                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">btech first year study materials ktu</span>
-                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">data structures ktu 2024</span>
-                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu civil notes pdf download</span>
-                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">kerala timetable notes</span>
+                <span class="bg-white/80 backdrop-blur-sm border border-white hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu notes 2024 scheme</span>
+                <span class="bg-white/80 backdrop-blur-sm border border-white hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu cse s3 notes pdf</span>
+                <span class="bg-white/80 backdrop-blur-sm border border-white hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">btech first year study materials ktu</span>
+                <span class="bg-white/80 backdrop-blur-sm border border-white hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">data structures ktu 2024</span>
+                <span class="bg-white/80 backdrop-blur-sm border border-white hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu civil notes pdf download</span>
+                <span class="bg-white/80 backdrop-blur-sm border border-white hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">kerala timetable notes</span>
             </div>
         </div>
 
@@ -271,16 +291,43 @@
         // Load Header Navigation
         if(typeof loadNavigation === 'function') loadNavigation('notes', '/', false);
 
-        // --- TRUE PARALLAX SCROLL SCRIPT ---
+        // --- 1. VERTICAL SCROLL PARALLAX ---
         window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const bg1 = document.getElementById('parallax-bg-1');
-            const bg2 = document.getElementById('parallax-bg-2');
+            const scrolled = window.scrollY;
+            const scrollBg1 = document.getElementById('scroll-bg-1');
+            const scrollBg2 = document.getElementById('scroll-bg-2');
             
-            // Move orb 1 down slightly as you scroll
-            if(bg1) bg1.style.transform = `translateY(${scrolled * 0.4}px)`;
-            // Move orb 2 up slightly faster as you scroll
-            if(bg2) bg2.style.transform = `translateY(${scrolled * -0.2}px)`;
+            if(scrollBg1) scrollBg1.style.transform = `translateY(${scrolled * 0.3}px)`;
+            if(scrollBg2) scrollBg2.style.transform = `translateY(${scrolled * -0.2}px)`;
+        });
+
+        // --- 2. 3D MOUSE PARALLAX & TILT ---
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; // Range -1 to 1
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+            // Shift background orbs opposite to mouse (Depth illusion)
+            const mouseOrb1 = document.getElementById('mouse-orb-1');
+            const mouseOrb2 = document.getElementById('mouse-orb-2');
+            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+
+            // 3D Tilt the Glass Card
+            const glassCard = document.getElementById('glass-card');
+            if(glassCard) {
+                // Adjust degrees here for stronger/weaker tilt (currently max 6 deg)
+                glassCard.style.transform = `perspective(1000px) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
+            }
+        });
+
+        // Reset 3D Tilt when mouse leaves window
+        document.addEventListener('mouseleave', () => {
+            const glassCard = document.getElementById('glass-card');
+            const mouseOrb1 = document.getElementById('mouse-orb-1');
+            const mouseOrb2 = document.getElementById('mouse-orb-2');
+            if(glassCard) glassCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+            if(mouseOrb1) mouseOrb1.style.transform = `translate(0px, 0px)`;
+            if(mouseOrb2) mouseOrb2.style.transform = `translate(0px, 0px)`;
         });
 
         // --- Quick Search Functionality ---
