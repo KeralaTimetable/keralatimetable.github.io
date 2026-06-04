@@ -1,9 +1,3 @@
-    <meta property="og:title" content="Kerala Timetable | KTU Dashboard">
-    <meta property="og:description" content="The ultimate live KTU Exam Timetable dashboard and B.Tech Syllabus hub.">
-    <meta property="og:image" content="https://keralatimetable.github.io/social-preview.png">
-    <meta property="og:url" content="https://keralatimetable.github.io/">
-    <meta property="og:type" content="website">
-</head>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +28,14 @@
                               radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
                               radial-gradient(at 0% 50%, hsla(228,100%,74%,0.15) 0px, transparent 50%);
         }
+
+        /* Continuous Orb Animation for Parallax Background */
+        @keyframes float-pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+        .orb-pulse { animation: float-pulse 6s ease-in-out infinite; }
         
         /* Smooth Expand Animation for Command Center */
         .expand-panel {
@@ -98,13 +100,28 @@
     </script>
     <link rel="icon" href="/favicon.png" type="image/png">
     <meta property="og:site_name" content="Kerala Timetable">
+    <meta property="og:title" content="Kerala Timetable | KTU Dashboard">
+    <meta property="og:description" content="The ultimate live KTU Exam Timetable dashboard and B.Tech Syllabus hub.">
+    <meta property="og:image" content="https://keralatimetable.github.io/social-preview.png">
+    <meta property="og:url" content="https://keralatimetable.github.io/">
+    <meta property="og:type" content="website">
 </head>
 
 <body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
     <div id="navigation-container" class="min-h-[73px] w-full"></div>
 
-    <main class="flex-grow w-full flex flex-col items-center">
+    <!-- 3D Parallax Orbs Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="scroll-bg-1" class="absolute top-10 -left-10 w-96 h-96 transition-transform duration-100 ease-out">
+            <div id="mouse-orb-1" class="w-full h-full bg-indigo-400/40 rounded-full mix-blend-multiply filter blur-[80px] orb-pulse transition-transform duration-100 ease-out"></div>
+        </div>
+        <div id="scroll-bg-2" class="absolute top-80 -right-20 w-[30rem] h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-2" class="w-full h-full bg-emerald-400/30 rounded-full mix-blend-multiply filter blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+    <main class="flex-grow w-full flex flex-col items-center relative z-10">
         
         <div class="w-full max-w-5xl mx-auto px-4 pt-12 pb-8 md:pt-20 md:pb-16 text-center relative">
             
@@ -123,71 +140,79 @@
                 Stop digging through cluttered websites. Select your branch, semester, and resource below to get instant, ad-free PDFs.
             </p>
 
-            <div class="animate-fade-up delay-300 max-w-3xl mx-auto bg-white/80 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(79,70,229,0.1)] rounded-3xl p-3 relative z-20">
+            <!-- 3D Perspective Wrapper for the Command Center -->
+            <div class="animate-fade-up delay-300 max-w-3xl mx-auto w-full relative z-20" style="perspective: 1000px;">
                 
-                <div class="relative group">
-                    <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-2xl opacity-70 group-hover:opacity-100 transition duration-300"></div>
-                    <div class="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-2xl blur opacity-30 group-focus-within:opacity-60 transition duration-300"></div>
+                <!-- The Tilt Card -->
+                <div id="tilt-card" class="bg-white/80 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(79,70,229,0.1)] rounded-3xl p-3 transition-transform duration-100 ease-out" style="transform-style: preserve-3d;">
                     
-                    <form id="quick-search-form" class="relative flex items-center bg-white rounded-2xl p-1.5 shadow-sm">
-                        <button type="submit" class="w-12 h-12 ml-1 pl-1 text-slate-400 hover:text-indigo-600 transition-colors rounded-xl focus:outline-none flex items-center justify-center">
-                            <i class="fas fa-search text-lg"></i>
-                        </button>
-                        
-                        <div class="flex-grow text-left px-2">
-                            <input type="search" id="quick-search-input" placeholder="Search subjects (e.g. MAT101, Python)..." class="w-full bg-transparent border-none focus:outline-none text-slate-700 font-bold placeholder-slate-400 text-sm md:text-base" autocomplete="off">
-                        </div>
-                        
-                        <div id="chevron-trigger" class="w-10 h-10 flex items-center justify-center text-slate-400 cursor-pointer hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors mr-1">
-                            <i id="chevron-icon" class="fas fa-chevron-down transition-transform duration-300"></i>
-                        </div>
-                    </form>
-                </div>
-
-                <div id="filter-panel" class="expand-panel">
-                    <div class="p-4 pt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                        
-                        <div class="text-left">
-                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">1. Select Branch</label>
-                            <select id="select-branch" class="w-full bg-slate-50 border border-slate-200 text-slate-700 font-semibold rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow">
-                                <option value="" disabled selected>Choose Branch...</option>
-                                <option value="CSE">Computer Science (CSE)</option>
-                                <option value="CE">Civil Engineering (CE)</option>
-                                <option value="ME">Mechanical Engg (ME)</option>
-                                <option value="EEE">Electrical (EEE)</option>
-                                <option value="ECE">Electronics (ECE)</option>
-                            </select>
+                    <!-- Inner content popping out in 3D -->
+                    <div style="transform: translateZ(20px);">
+                        <div class="relative group">
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-2xl opacity-70 group-hover:opacity-100 transition duration-300"></div>
+                            <div class="absolute -inset-1 bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-2xl blur opacity-30 group-focus-within:opacity-60 transition duration-300"></div>
+                            
+                            <form id="quick-search-form" class="relative flex items-center bg-white rounded-2xl p-1.5 shadow-sm">
+                                <button type="submit" class="w-12 h-12 ml-1 pl-1 text-slate-400 hover:text-indigo-600 transition-colors rounded-xl focus:outline-none flex items-center justify-center">
+                                    <i class="fas fa-search text-lg"></i>
+                                </button>
+                                
+                                <div class="flex-grow text-left px-2">
+                                    <input type="search" id="quick-search-input" placeholder="Search subjects (e.g. MAT101, Python)..." class="w-full bg-transparent border-none focus:outline-none text-slate-700 font-bold placeholder-slate-400 text-sm md:text-base" autocomplete="off">
+                                </div>
+                                
+                                <div id="chevron-trigger" class="w-10 h-10 flex items-center justify-center text-slate-400 cursor-pointer hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors mr-1">
+                                    <i id="chevron-icon" class="fas fa-chevron-down transition-transform duration-300"></i>
+                                </div>
+                            </form>
                         </div>
 
-                        <div class="text-left">
-                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">2. Semester</label>
-                            <select id="select-sem" class="w-full bg-slate-50 border border-slate-200 text-slate-700 font-semibold rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" disabled>
-                                <option value="" disabled selected>Choose Sem...</option>
-                                <option value="S1">Semester 1 (S1)</option>
-                                <option value="S2">Semester 2 (S2)</option>
-                                <option value="S3">Semester 3 (S3)</option>
-                                <option value="S4">Semester 4 (S4)</option>
-                            </select>
-                        </div>
+                        <div id="filter-panel" class="expand-panel">
+                            <div class="p-4 pt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                
+                                <div class="text-left">
+                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">1. Select Branch</label>
+                                    <select id="select-branch" class="w-full bg-slate-50 border border-slate-200 text-slate-700 font-semibold rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow">
+                                        <option value="" disabled selected>Choose Branch...</option>
+                                        <option value="CSE">Computer Science (CSE)</option>
+                                        <option value="CE">Civil Engineering (CE)</option>
+                                        <option value="ME">Mechanical Engg (ME)</option>
+                                        <option value="EEE">Electrical (EEE)</option>
+                                        <option value="ECE">Electronics (ECE)</option>
+                                    </select>
+                                </div>
 
-                        <div class="text-left">
-                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">3. Resource</label>
-                            <select id="select-resource" class="w-full bg-slate-50 border border-slate-200 text-slate-700 font-semibold rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" disabled>
-                                <option value="" disabled selected>What do you need?</option>
-                                <option value="notes">Study Notes (PDF)</option>
-                                <option value="timetable">Exam Timetable</option>
-                                <option value="syllabus">Syllabus</option>
-                                <option value="pyq">Previous Question Papers</option>
-                            </select>
+                                <div class="text-left">
+                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">2. Semester</label>
+                                    <select id="select-sem" class="w-full bg-slate-50 border border-slate-200 text-slate-700 font-semibold rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" disabled>
+                                        <option value="" disabled selected>Choose Sem...</option>
+                                        <option value="S1">Semester 1 (S1)</option>
+                                        <option value="S2">Semester 2 (S2)</option>
+                                        <option value="S3">Semester 3 (S3)</option>
+                                        <option value="S4">Semester 4 (S4)</option>
+                                    </select>
+                                </div>
+
+                                <div class="text-left">
+                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">3. Resource</label>
+                                    <select id="select-resource" class="w-full bg-slate-50 border border-slate-200 text-slate-700 font-semibold rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" disabled>
+                                        <option value="" disabled selected>What do you need?</option>
+                                        <option value="notes">Study Notes (PDF)</option>
+                                        <option value="timetable">Exam Timetable</option>
+                                        <option value="syllabus">Syllabus</option>
+                                        <option value="pyq">Previous Question Papers</option>
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="px-4 pb-4 pt-2">
+                                <button id="btn-find" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg shadow-slate-800/30 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none" disabled>
+                                    <span>Find Resources</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
                         </div>
-                        
-                    </div>
-                    
-                    <div class="px-4 pb-4 pt-2">
-                        <button id="btn-find" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg shadow-slate-800/30 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none" disabled>
-                            <span>Find Resources</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -337,7 +362,7 @@
 
     </main>
 
-    <footer class="border-t border-slate-200/60 bg-white py-10 mt-6">
+    <footer class="border-t border-slate-200/60 bg-white py-10 mt-6 relative z-10">
         <div class="max-w-5xl mx-auto px-4 text-center">
             <h3 class="text-slate-800 font-extrabold text-xl mb-3">Kerala <span class="text-indigo-600">Timetable</span></h3>
             <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto mb-6">Built by students, for students. We provide fast, direct access to university resources. Not officially affiliated with APJ Abdul Kalam Technological University.</p>
@@ -478,7 +503,6 @@
             if (window.examPollConfig && window.examPollConfig.length > 0) {
                 const now = new Date();
                 
-                // Find the first poll that is currently active (between opensAt and closesAt)
                 const activePoll = window.examPollConfig.find(poll => {
                     const openTime = new Date(poll.opensAt);
                     const closeTime = new Date(poll.closesAt);
@@ -490,7 +514,6 @@
                     
                     let tagsHtml = '';
                     if (activePoll.tags && Array.isArray(activePoll.tags)) {
-                        // Show max 2 tags in the small widget so it doesn't get cluttered
                         activePoll.tags.slice(0, 2).forEach((tag, index) => { 
                             let colorClass = index === 0 ? "bg-rose-50 text-rose-600 border-rose-200" : "bg-slate-100 text-slate-600 border-slate-200";
                             tagsHtml += `<span class="inline-block px-2 py-0.5 border ${colorClass} text-[9px] font-sporty rounded text-center">${tag}</span>`;
@@ -523,6 +546,66 @@
                         </div>
                     `;
                     widgetContainer.classList.remove('hidden');
+                }
+            }
+
+            // --- 1. BUTTERY SMOOTH VERTICAL SCROLL PARALLAX ---
+            let lastScrollY = window.scrollY;
+            let ticking = false;
+
+            window.addEventListener('scroll', () => {
+                lastScrollY = window.scrollY;
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const scrollBg1 = document.getElementById('scroll-bg-1');
+                        const scrollBg2 = document.getElementById('scroll-bg-2');
+                        
+                        if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.3}px)`;
+                        if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // --- 2. 3D MOUSE PARALLAX & TILT (PC) ---
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 2; // Range -1 to 1
+                const y = (e.clientY / window.innerHeight - 0.5) * 2;
+                applyParallax(x, y);
+            });
+
+            document.addEventListener('mouseleave', () => {
+                applyParallax(0, 0);
+            });
+
+            // --- 3. GYROSCOPE TILT PARALLAX (Mobile) ---
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', (e) => {
+                    if(e.gamma === null || e.beta === null) return;
+                    
+                    let x = e.gamma / 40; 
+                    let y = (e.beta - 45) / 40; 
+
+                    x = Math.max(-1, Math.min(1, x));
+                    y = Math.max(-1, Math.min(1, y));
+
+                    applyParallax(x, y);
+                }, true);
+            }
+
+            // --- SHARED PARALLAX ENGINE ---
+            function applyParallax(x, y) {
+                const mouseOrb1 = document.getElementById('mouse-orb-1');
+                const mouseOrb2 = document.getElementById('mouse-orb-2');
+                
+                if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+                if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+
+                const tiltCard = document.getElementById('tilt-card');
+                if(tiltCard) {
+                    // Milder rotation values here to keep the search form perfectly usable
+                    tiltCard.style.transform = `perspective(1000px) rotateX(${y * -4}deg) rotateY(${x * 4}deg)`;
                 }
             }
         });
