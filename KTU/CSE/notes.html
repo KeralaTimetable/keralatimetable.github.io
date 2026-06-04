@@ -1,73 +1,37 @@
-    <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
-    
-    <title>KTU B.Tech CSE Notes 2024 Scheme All Semesters</title>
-    <link rel="canonical" href="https://keralatimetable.github.io/KTU/CSE/notes.html" />
-
-    <meta name="description" content="Ultimate KTU B.Tech Computer Science & Engineering (CSE) Notes Hub. Download wait-free PDFs for Semester 1 to Semester 8 under the 2024 Scheme.">
-    <meta name="keywords" content="ktu cse notes, ktu computer science notes 2024 scheme, ktu b.tech s1 to s8 cse notes, ktu cse study materials, apjaktu cse notes pdf download">
+    <title>KTU B.Tech CSE Notes 2024 Scheme</title>
+    <meta name="description" content="Download complete KTU B.Tech CSE Notes and study materials for the 2024 scheme. All semesters available.">
     <meta name="robots" content="index, follow">
     
     <script src="/tailwind-local.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        /* High-End Subtle Mesh Background */
+        .font-sporty { font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em; }
         .bg-mesh {
             background-color: #f8fafc;
-            background-image: radial-gradient(at 0% 0%, hsla(228,100%,74%,0.08) 0px, transparent 50%),
-                              radial-gradient(at 100% 0%, hsla(250,100%,74%,0.08) 0px, transparent 50%),
-                              radial-gradient(at 50% 100%, hsla(228,100%,74%,0.08) 0px, transparent 50%);
+            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
+                              radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
+                              radial-gradient(at 0% 50%, hsla(228,100%,74%,0.15) 0px, transparent 50%);
         }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Premium Standard Tile Physics */
-        .premium-card {
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
-        }
-        .premium-card:hover {
-            transform: translateY(-6px);
-            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 100%);
-            box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.15), 0 0 0 1px rgba(79, 70, 229, 0.2);
-        }
-
-        /* Subtle Pattern */
-        .bg-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2364748b' fill-opacity='0.04' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        /* Animated Title Gradient */
-        @keyframes gradient-x {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        .animate-gradient {
-            animation: gradient-x 6s ease infinite;
-            background-size: 200% auto;
-        }
+        /* Modern UI Hover Transitions */
+        .hub-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .hub-card:hover { transform: translateY(-6px); }
+        
+        @keyframes fadeUpEntry { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
     </style>
-    
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Kerala Timetable - CSE Notes Hub",
-      "url": "https://keralatimetable.github.io/KTU/CSE/notes.html",
-      "description": "Central hub for APJAKTU Computer Science & Engineering notes from Semester 1 to Semester 8.",
-      "applicationCategory": "EducationalApplication"
-    }
-    </script>
     <link rel="icon" href="/favicon.png" type="image/png">
     <meta property="og:site_name" content="Kerala Timetable">
     <meta property="og:image" content="https://keralatimetable.github.io/social-preview.png">
@@ -75,158 +39,153 @@
 </head>
 
 <body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+    <div id="navigation-container" class="min-h-[73px] w-full"></div>
+    <main class="flex-grow w-full pb-20">
 
-    <div id="navigation-container"></div>
-
-    <main class="flex-grow max-w-6xl mx-auto px-4 py-12 w-full">
-        
-        <!-- Hero Section -->
-        <div class="text-center mb-16 relative z-10 pt-4">
-            <div class="inline-flex items-center justify-center px-5 py-2 bg-white/80 backdrop-blur-md rounded-full mb-6 text-slate-600 shadow-sm border border-slate-200/80 text-[11px] font-black uppercase tracking-widest cursor-default">
-                <i class="fas fa-layer-group text-indigo-600 mr-2 text-sm"></i> Official Curriculum Hub
+        <div class="w-full max-w-5xl mx-auto px-4 pt-10 pb-6 relative z-20 animate-fade-up">
+            <div class="flex items-center flex-wrap text-xs font-bold text-slate-400 uppercase tracking-wider mb-6 gap-2">
+                <a href="/notes/index.html" class="hover:text-indigo-600 transition-colors">Notes Hub</a>
+                <i class="fas fa-chevron-right text-[8px]"></i>
+                <span class="text-slate-700 bg-slate-100 px-2 py-0.5 rounded">CSE</span>
             </div>
-            <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
-                B.Tech CSE <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 animate-gradient">Notes</span>
-            </h1>
-            <p class="text-slate-500 font-medium max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-                2024 Scheme Study Materials. Choose your semester to begin.
-            </p>
-        </div>
-
-        <!-- UNIFIED, STANDARD PREMIUM 8-COLUMN GRID -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-5 relative z-10 mb-16 px-2">
             
-            <!-- S1 Tile -->
-            <a href="S1/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
-                    <i class="fas fa-folder-open text-sm"></i>
+            <div class="flex items-center gap-4 mb-4">
+                <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-2xl shadow-sm border border-indigo-200">
+                    <i class="fas fa-folder-open"></i>
                 </div>
-                <div class="relative z-10 flex flex-col items-center mt-2">
-                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
-                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">1</h3>
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-black text-slate-900 leading-tight">KTU CSE Notes</h1>
+                    <p class="text-slate-500 font-medium mt-1">B.Tech 2024 Scheme • COMPUTER SCIENCE AND ENGINEERING</p>
                 </div>
-                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </a>
+            </div>
+            
+            <div class="w-full h-px bg-slate-200 mt-8 mb-8"></div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+    
+                <!-- S1 Card -->
+                <a href="s1.html" class="hub-card relative rounded-3xl p-6 overflow-hidden group border border-slate-200 bg-white/80 hover:border-transparent">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    <div class="absolute top-2 right-4 text-7xl font-black text-slate-900 opacity-[0.15] group-hover:opacity-[0.25] group-hover:text-white transition-all duration-500 select-none z-0">S1</div>
+                    
+                    <div class="relative z-10 flex flex-col h-full pt-8">
+                        <h3 class="font-black text-4xl text-slate-800 group-hover:text-white transition-colors duration-300 mb-1">S1</h3>
+                        <p class="text-xs font-bold text-slate-400 group-hover:text-indigo-100 uppercase tracking-widest transition-colors duration-300">Semester 1</p>
+                        
+                        <div class="absolute bottom-0 right-0 w-8 h-8 bg-slate-100 group-hover:bg-white/20 rounded-full flex items-center justify-center text-slate-400 group-hover:text-white transition-all duration-500 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </div>
+                    </div>
+                </a>
 
-            <!-- S2 Tile -->
-            <a href="S2/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
-                    <i class="fas fa-folder-open text-sm"></i>
-                </div>
-                <div class="relative z-10 flex flex-col items-center mt-2">
-                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
-                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">2</h3>
-                </div>
-                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </a>
+                <!-- S2 Card -->
+                <a href="s2.html" class="hub-card relative rounded-3xl p-6 overflow-hidden group border border-slate-200 bg-white/80 hover:border-transparent">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    <div class="absolute top-2 right-4 text-7xl font-black text-slate-900 opacity-[0.15] group-hover:opacity-[0.25] group-hover:text-white transition-all duration-500 select-none z-0">S2</div>
+                    
+                    <div class="relative z-10 flex flex-col h-full pt-8">
+                        <h3 class="font-black text-4xl text-slate-800 group-hover:text-white transition-colors duration-300 mb-1">S2</h3>
+                        <p class="text-xs font-bold text-slate-400 group-hover:text-indigo-100 uppercase tracking-widest transition-colors duration-300">Semester 2</p>
+                        
+                        <div class="absolute bottom-0 right-0 w-8 h-8 bg-slate-100 group-hover:bg-white/20 rounded-full flex items-center justify-center text-slate-400 group-hover:text-white transition-all duration-500 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </div>
+                    </div>
+                </a>
 
-            <!-- S3 Tile -->
-            <a href="S3/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
-                    <i class="fas fa-folder-open text-sm"></i>
-                </div>
-                <div class="relative z-10 flex flex-col items-center mt-2">
-                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
-                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">3</h3>
-                </div>
-                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </a>
-
-            <!-- S4 Tile -->
-            <a href="S4/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
-                    <i class="fas fa-folder-open text-sm"></i>
-                </div>
-                <div class="relative z-10 flex flex-col items-center mt-2">
-                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
-                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">4</h3>
-                </div>
-                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </a>
-
-            <!-- S5 Tile -->
-            <a href="S5/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
-                    <i class="fas fa-folder-open text-sm"></i>
-                </div>
-                <div class="relative z-10 flex flex-col items-center mt-2">
-                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
-                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">5</h3>
-                </div>
-                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </a>
-
-            <!-- S6 Tile -->
-            <a href="S6/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
-                    <i class="fas fa-folder-open text-sm"></i>
-                </div>
-                <div class="relative z-10 flex flex-col items-center mt-2">
-                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
-                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">6</h3>
-                </div>
-                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </a>
-
-            <!-- S7 Tile -->
-            <a href="S7/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
-                    <i class="fas fa-folder-open text-sm"></i>
-                </div>
-                <div class="relative z-10 flex flex-col items-center mt-2">
-                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
-                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">7</h3>
-                </div>
-                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </a>
-
-            <!-- S8 Tile -->
-            <a href="S8/notes/index.html" class="premium-card group relative aspect-square border border-slate-200/80 rounded-[2rem] flex flex-col items-center justify-center text-center overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="absolute top-5 right-5 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300">
-                    <i class="fas fa-folder-open text-sm"></i>
-                </div>
-                <div class="relative z-10 flex flex-col items-center mt-2">
-                    <span class="text-[9px] font-black tracking-[0.2em] text-slate-400 group-hover:text-indigo-500 mb-1 transition-colors duration-300">SEM</span>
-                    <h3 class="text-4xl font-black text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-indigo-600 group-hover:to-purple-600 transition-all duration-300">8</h3>
-                </div>
-                <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-            </a>
-
-        </div>
-
-        <!-- Tags Section -->
-        <div class="bg-white/80 backdrop-blur-xl rounded-[2rem] p-6 md:p-8 border border-slate-200/80 shadow-sm relative z-10 bg-pattern max-w-4xl mx-auto">
-            <h3 class="text-[12px] font-black text-slate-400 uppercase tracking-widest mb-5 flex items-center gap-2 justify-center md:justify-start">
-                <i class="fas fa-hashtag text-slate-300"></i> Trending CSE Topics
-            </h3>
-            <div class="flex flex-wrap gap-2.5 justify-center md:justify-start">
-                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu cse notes</span>
-                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu b.tech cse 2024 scheme</span>
-                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">computer science engineering ktu</span>
-                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu 2024 study materials</span>
-                <span class="bg-white border border-slate-200 hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-500 text-[11px] font-bold px-4 py-2 rounded-xl cursor-pointer shadow-sm">ktu computer science hub</span>
+                <!-- S3 Card -->
+                <a href="s3.html" class="hub-card relative rounded-3xl p-6 overflow-hidden group border border-slate-200 bg-white/80 hover:border-transparent">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    <div class="absolute top-2 right-4 text-7xl font-black text-slate-900 opacity-[0.15] group-hover:opacity-[0.25] group-hover:text-white transition-all duration-500 select-none z-0">S3</div>
+                    
+                    <div class="relative z-10 flex flex-col h-full pt-8">
+                        <h3 class="font-black text-4xl text-slate-800 group-hover:text-white transition-colors duration-300 mb-1">S3</h3>
+                        <p class="text-xs font-bold text-slate-400 group-hover:text-indigo-100 uppercase tracking-widest transition-colors duration-300">Semester 3</p>
+                        
+                        <div class="absolute bottom-0 right-0 w-8 h-8 bg-slate-100 group-hover:bg-white/20 rounded-full flex items-center justify-center text-slate-400 group-hover:text-white transition-all duration-500 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </div>
+                    </div>
+                </a>
+        
+                <!-- S4 Card -->
+                <a href="s4.html" class="hub-card relative rounded-3xl p-6 overflow-hidden group border border-slate-200 bg-white/80 hover:border-transparent">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    <div class="absolute top-2 right-4 text-7xl font-black text-slate-900 opacity-[0.15] group-hover:opacity-[0.25] group-hover:text-white transition-all duration-500 select-none z-0">S4</div>
+                    
+                    <div class="relative z-10 flex flex-col h-full pt-8">
+                        <h3 class="font-black text-4xl text-slate-800 group-hover:text-white transition-colors duration-300 mb-1">S4</h3>
+                        <p class="text-xs font-bold text-slate-400 group-hover:text-indigo-100 uppercase tracking-widest transition-colors duration-300">Semester 4</p>
+                        
+                        <div class="absolute bottom-0 right-0 w-8 h-8 bg-slate-100 group-hover:bg-white/20 rounded-full flex items-center justify-center text-slate-400 group-hover:text-white transition-all duration-500 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </div>
+                    </div>
+                </a>
+        
+                <!-- S5 Card -->
+                <a href="s5.html" class="hub-card relative rounded-3xl p-6 overflow-hidden group border border-slate-200 bg-white/80 hover:border-transparent">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    <div class="absolute top-2 right-4 text-7xl font-black text-slate-900 opacity-[0.15] group-hover:opacity-[0.25] group-hover:text-white transition-all duration-500 select-none z-0">S5</div>
+                    
+                    <div class="relative z-10 flex flex-col h-full pt-8">
+                        <h3 class="font-black text-4xl text-slate-800 group-hover:text-white transition-colors duration-300 mb-1">S5</h3>
+                        <p class="text-xs font-bold text-slate-400 group-hover:text-indigo-100 uppercase tracking-widest transition-colors duration-300">Semester 5</p>
+                        
+                        <div class="absolute bottom-0 right-0 w-8 h-8 bg-slate-100 group-hover:bg-white/20 rounded-full flex items-center justify-center text-slate-400 group-hover:text-white transition-all duration-500 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </div>
+                    </div>
+                </a>
+        
+                <!-- S6 Card -->
+                <a href="s6.html" class="hub-card relative rounded-3xl p-6 overflow-hidden group border border-slate-200 bg-white/80 hover:border-transparent">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    <div class="absolute top-2 right-4 text-7xl font-black text-slate-900 opacity-[0.15] group-hover:opacity-[0.25] group-hover:text-white transition-all duration-500 select-none z-0">S6</div>
+                    
+                    <div class="relative z-10 flex flex-col h-full pt-8">
+                        <h3 class="font-black text-4xl text-slate-800 group-hover:text-white transition-colors duration-300 mb-1">S6</h3>
+                        <p class="text-xs font-bold text-slate-400 group-hover:text-indigo-100 uppercase tracking-widest transition-colors duration-300">Semester 6</p>
+                        
+                        <div class="absolute bottom-0 right-0 w-8 h-8 bg-slate-100 group-hover:bg-white/20 rounded-full flex items-center justify-center text-slate-400 group-hover:text-white transition-all duration-500 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </div>
+                    </div>
+                </a>
+        
+                <!-- S7 Card -->
+                <a href="s7.html" class="hub-card relative rounded-3xl p-6 overflow-hidden group border border-slate-200 bg-white/80 hover:border-transparent">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    <div class="absolute top-2 right-4 text-7xl font-black text-slate-900 opacity-[0.15] group-hover:opacity-[0.25] group-hover:text-white transition-all duration-500 select-none z-0">S7</div>
+                    
+                    <div class="relative z-10 flex flex-col h-full pt-8">
+                        <h3 class="font-black text-4xl text-slate-800 group-hover:text-white transition-colors duration-300 mb-1">S7</h3>
+                        <p class="text-xs font-bold text-slate-400 group-hover:text-indigo-100 uppercase tracking-widest transition-colors duration-300">Semester 7</p>
+                        
+                        <div class="absolute bottom-0 right-0 w-8 h-8 bg-slate-100 group-hover:bg-white/20 rounded-full flex items-center justify-center text-slate-400 group-hover:text-white transition-all duration-500 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </div>
+                    </div>
+                </a>
+        
+                <!-- S8 Card -->
+                <a href="s8.html" class="hub-card relative rounded-3xl p-6 overflow-hidden group border border-slate-200 bg-white/80 hover:border-transparent">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    <div class="absolute top-2 right-4 text-7xl font-black text-slate-900 opacity-[0.15] group-hover:opacity-[0.25] group-hover:text-white transition-all duration-500 select-none z-0">S8</div>
+                    
+                    <div class="relative z-10 flex flex-col h-full pt-8">
+                        <h3 class="font-black text-4xl text-slate-800 group-hover:text-white transition-colors duration-300 mb-1">S8</h3>
+                        <p class="text-xs font-bold text-slate-400 group-hover:text-indigo-100 uppercase tracking-widest transition-colors duration-300">Semester 8</p>
+                        
+                        <div class="absolute bottom-0 right-0 w-8 h-8 bg-slate-100 group-hover:bg-white/20 rounded-full flex items-center justify-center text-slate-400 group-hover:text-white transition-all duration-500 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
-
     </main>
-
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center">
-        <div class="max-w-3xl mx-auto px-4">
-            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
-            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
-        </div>
-    </footer>
-    <script src="../../components.js?v=11"></script>
-    <script>
-        loadNavigation('', '../../', false);
-    </script>
+    <script src="/components.js?v=12"></script>
+    <script>if(typeof loadNavigation === 'function') loadNavigation('', '', false);</script>
 </body>
 </html>
