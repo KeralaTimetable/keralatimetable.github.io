@@ -114,10 +114,9 @@
             <div class="inline-flex items-center justify-center p-3 bg-white/80 backdrop-blur-md rounded-2xl mb-5 text-indigo-600 shadow-[0_4px_20px_rgba(79,70,229,0.15)] border border-white">
                 <i class="fas fa-book-open text-2xl"></i>
             </div>
-                                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-4 tracking-tight">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-4 tracking-tight">
                 KTU Notes <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">2024 Scheme</span>
             </h1>
-
 
             <p class="text-slate-600 font-medium max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
                 The ultimate academic hub. Find your exact syllabus, study notes, and materials organized by branch and semester.
@@ -293,44 +292,71 @@
         // Load Header Navigation
         if(typeof loadNavigation === 'function') loadNavigation('notes', '/', false);
 
-        // --- 1. VERTICAL SCROLL PARALLAX ---
-        window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            const scrollBg1 = document.getElementById('scroll-bg-1');
-            const scrollBg2 = document.getElementById('scroll-bg-2');
-            
-            if(scrollBg1) scrollBg1.style.transform = `translateY(${scrolled * 0.3}px)`;
-            if(scrollBg2) scrollBg2.style.transform = `translateY(${scrolled * -0.2}px)`;
-        });
+        // --- 1. BUTTERY SMOOTH VERTICAL SCROLL PARALLAX (Mobile Optimized) ---
+        let lastScrollY = window.scrollY;
+        let ticking = false;
 
-        // --- 2. 3D MOUSE PARALLAX & TILT ---
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollBg1 = document.getElementById('scroll-bg-1');
+                    const scrollBg2 = document.getElementById('scroll-bg-2');
+                    
+                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.3}px)`;
+                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // --- 2. 3D MOUSE PARALLAX (For PC) ---
         document.addEventListener('mousemove', (e) => {
             const x = (e.clientX / window.innerWidth - 0.5) * 2; // Range -1 to 1
             const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            applyParallax(x, y);
+        });
 
-            // Shift background orbs opposite to mouse (Depth illusion)
+        // Reset 3D Tilt when mouse leaves window
+        document.addEventListener('mouseleave', () => {
+            applyParallax(0, 0);
+        });
+
+        // --- 3. GYROSCOPE TILT PARALLAX (For Mobile) ---
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', (e) => {
+                if(e.gamma === null || e.beta === null) return;
+                
+                // e.gamma is left/right tilt (-90 to 90)
+                // e.beta is front/back tilt (-180 to 180). Assume ~45 degrees is neutral holding position.
+                let x = e.gamma / 40; 
+                let y = (e.beta - 45) / 40; 
+
+                // Cap the values between -1 and 1 so it doesn't tilt too far
+                x = Math.max(-1, Math.min(1, x));
+                y = Math.max(-1, Math.min(1, y));
+
+                applyParallax(x, y);
+            }, true);
+        }
+
+        // --- SHARED PARALLAX FUNCTION ---
+        function applyParallax(x, y) {
             const mouseOrb1 = document.getElementById('mouse-orb-1');
             const mouseOrb2 = document.getElementById('mouse-orb-2');
+            
+            // Move orbs opposite to tilt/mouse
             if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
             if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
 
             // 3D Tilt the Glass Card
             const glassCard = document.getElementById('glass-card');
             if(glassCard) {
-                // Adjust degrees here for stronger/weaker tilt (currently max 6 deg)
+                // Adjust degrees here for stronger/weaker tilt
                 glassCard.style.transform = `perspective(1000px) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
             }
-        });
-
-        // Reset 3D Tilt when mouse leaves window
-        document.addEventListener('mouseleave', () => {
-            const glassCard = document.getElementById('glass-card');
-            const mouseOrb1 = document.getElementById('mouse-orb-1');
-            const mouseOrb2 = document.getElementById('mouse-orb-2');
-            if(glassCard) glassCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
-            if(mouseOrb1) mouseOrb1.style.transform = `translate(0px, 0px)`;
-            if(mouseOrb2) mouseOrb2.style.transform = `translate(0px, 0px)`;
-        });
+        }
 
         // --- Quick Search Functionality ---
         function handleQuickSearch() {
