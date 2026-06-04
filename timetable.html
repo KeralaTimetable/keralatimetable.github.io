@@ -70,10 +70,16 @@
 
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
     </style>
     <link rel="icon" href="/favicon.png" type="image/png">
     <meta property="og:site_name" content="Kerala Timetable">
+    <meta property="og:title" content="Kerala Timetable | KTU Dashboard">
+    <meta property="og:description" content="The ultimate live KTU Exam Timetable dashboard and B.Tech Syllabus hub.">
     <meta property="og:image" content="https://keralatimetable.github.io/social-preview.png">
+    <meta property="og:url" content="https://keralatimetable.github.io/">
     <meta property="og:type" content="website">
 </head>
 
@@ -82,10 +88,10 @@
     <div id="navigation-container" class="min-h-[73px] w-full z-50 relative"></div>
 
     <div id="scroll-bg-1" class="fixed top-10 -left-10 w-96 h-96 pointer-events-none z-0 transition-transform duration-75 ease-out">
-        <div id="mouse-orb-1" class="w-full h-full bg-amber-400/30 rounded-full mix-blend-multiply filter blur-[80px] orb-pulse transition-transform duration-100 ease-out"></div>
+        <div id="mouse-orb-1" class="w-full h-full bg-amber-500 rounded-full mix-blend-multiply filter blur-[80px] orb-pulse transition-transform duration-100 ease-out"></div>
     </div>
     <div id="scroll-bg-2" class="fixed top-80 -right-20 w-[30rem] h-[30rem] pointer-events-none z-0 transition-transform duration-75 ease-out">
-        <div id="mouse-orb-2" class="w-full h-full bg-orange-400/20 rounded-full mix-blend-multiply filter blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        <div id="mouse-orb-2" class="w-full h-full bg-orange-500 rounded-full mix-blend-multiply filter blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
     </div>
 
     <main class="flex-grow w-full pb-20 relative z-10">
@@ -128,7 +134,7 @@
                 </a>
             </div>
 
-            <div id="ongoing-section" class="scroll-reveal mb-12 hidden">
+            <div id="ongoing-section" class="animate-fade-up delay-300 mb-12 hidden">
                 <div class="flex items-center gap-3 mb-5 border-b border-rose-200/50 pb-3">
                     <span class="relative flex h-3.5 w-3.5">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
@@ -140,7 +146,7 @@
                 </div>
             </div>
 
-            <div id="upcoming-section" class="scroll-reveal mb-16 hidden">
+            <div id="upcoming-section" class="animate-fade-up delay-400 mb-16 hidden">
                 <div class="flex items-center gap-3 mb-5 border-b border-amber-200/50 pb-3">
                     <i class="fas fa-hourglass-half text-amber-500 text-xl"></i>
                     <h2 class="text-2xl font-black text-slate-900 tracking-tight">Upcoming Exams</h2>
