@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
+    
+    <title>KTU Trend Radar | PYQ Heatmaps & Pass Predictor</title>
+    
+    <meta name="description" content="Stop guessing. We scanned 5 years of KTU past papers to find the highest-yielding topics. Access live PYQ heatmaps and pass your exams easily.">
+    <meta name="keywords" content="ktu trend radar, ktu pyq heatmap, ktu pass predictor, ktu important topics, ktu previous year questions analyzed, s1 s2 ktu sure questions">
+    
+    <script src="/tailwind-local.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        .font-sporty { font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em; }
+
+        .bg-mesh {
+            background-color: #f8fafc;
+            background-image: radial-gradient(at 40% 20%, hsla(328,100%,74%,0.1) 0px, transparent 50%),
+                              radial-gradient(at 80% 0%, hsla(269,100%,56%,0.1) 0px, transparent 50%),
+                              radial-gradient(at 0% 50%, hsla(328,100%,74%,0.1) 0px, transparent 50%);
+        }
+
+        /* Continuous Orb Animation for Parallax Background */
+        @keyframes float-pulse {
+            0% { transform: translateY(0px) scale(1); opacity: 0.5; }
+            50% { transform: translateY(-20px) scale(1.05); opacity: 0.8; }
+            100% { transform: translateY(0px) scale(1); opacity: 0.5; }
+        }
+        .orb-pulse { animation: float-pulse 8s ease-in-out infinite; }
+
+        /* Radar Ping Animation */
+        @keyframes ping-radar {
+            0% { transform: scale(0.8); opacity: 0.8; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+        .radar-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid #f43f5e;
+            animation: ping-radar 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        /* Glassmorphic Search Focus */
+        .search-container { transition: all 0.3s ease; }
+        .search-container:focus-within { box-shadow: 0 20px 40px -10px rgba(244, 63, 94, 0.2); border-color: #fda4af; transform: translateY(-2px); }
+
+        /* Card Hover Effects */
+        .radar-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .radar-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.15); border-color: #ddd6fe; }
+        .radar-card:hover .scan-btn { background-color: #8b5cf6; color: white; }
+
+        /* SCROLL REVEAL & INITIAL LOAD ANIMATIONS */
+        @keyframes fadeUpEntry {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+
+        .scroll-reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <div id="navigation-container" class="min-h-[73px] w-full z-50 relative"></div>
+
+    <!-- 3D Parallax Orbs Background (Rose & Violet Theme) -->
+    <div id="scroll-bg-1" class="fixed top-10 -left-10 w-96 h-96 pointer-events-none z-0 transition-transform duration-75 ease-out">
+        <div id="mouse-orb-1" class="w-full h-full bg-rose-500 rounded-full mix-blend-multiply filter blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+    </div>
+    <div id="scroll-bg-2" class="fixed top-80 -right-20 w-[30rem] h-[30rem] pointer-events-none z-0 transition-transform duration-75 ease-out">
+        <div id="mouse-orb-2" class="w-full h-full bg-violet-500 rounded-full mix-blend-multiply filter blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+    </div>
+
+    <main class="flex-grow w-full flex flex-col items-center relative z-10 pb-20">
+        
+        <!-- Hero Section -->
+        <div class="w-full max-w-5xl mx-auto px-4 pt-12 pb-8 md:pt-20 md:pb-12 text-center relative">
+            
+            <div class="animate-fade-up flex justify-center mb-6">
+                <div class="relative w-16 h-16 bg-white border border-rose-100 rounded-2xl flex items-center justify-center shadow-lg z-10">
+                    <div class="radar-ring"></div>
+                    <div class="radar-ring" style="animation-delay: 1s;"></div>
+                    <i class="fas fa-satellite-dish text-3xl text-rose-500 relative z-10 animate-pulse"></i>
+                </div>
+            </div>
+
+            <h1 class="animate-fade-up delay-100 text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-4">
+                KTU Trend <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-violet-600">Radar</span>
+            </h1>
+            <p class="animate-fade-up delay-200 text-slate-500 font-medium md:text-lg max-w-2xl mx-auto mb-10">
+                Stop guessing what to study. We scanned 5 years of past papers to find the exact high-yield topics coming for tomorrow's exam.
+            </p>
+
+            <!-- 3D Perspective Search Card -->
+            <div class="animate-fade-up delay-300 max-w-3xl mx-auto w-full relative z-20" style="perspective: 1000px;">
+                <div id="tilt-card" class="bg-white/70 backdrop-blur-2xl border border-white shadow-[0_20px_50px_rgba(225,29,72,0.1)] rounded-3xl p-3 sm:p-4 transition-transform duration-100 ease-out" style="transform-style: preserve-3d;">
+                    
+                    <div style="transform: translateZ(25px);">
+                        <div class="search-container relative flex items-center bg-white rounded-2xl p-2 shadow-sm border border-slate-100">
+                            <div class="w-12 h-12 ml-1 text-rose-400 flex items-center justify-center">
+                                <i class="fas fa-search text-xl"></i>
+                            </div>
+                            <input type="text" id="subject-search" placeholder="Search subject name or code (e.g. EST102)..." class="flex-grow bg-transparent border-none focus:outline-none text-slate-700 font-bold placeholder-slate-400 text-sm md:text-base px-2 w-full" autocomplete="off">
+                            <div class="hidden sm:flex items-center gap-2 mr-2">
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-400 text-[10px] font-bold rounded-lg uppercase tracking-wider">Ctrl + K</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Filters -->
+        <div class="animate-fade-up delay-300 w-full max-w-5xl mx-auto px-4 mb-8 relative z-20">
+            <div class="flex overflow-x-auto no-scrollbar gap-2 pb-2 justify-start md:justify-center w-full" id="filter-container">
+                <button class="filter-btn active bg-slate-800 text-white font-bold px-5 py-2 rounded-xl whitespace-nowrap transition-colors text-sm shadow-sm" data-filter="ALL">All Subjects</button>
+                <button class="filter-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2 rounded-xl whitespace-nowrap transition-colors text-sm" data-filter="S1">S1 Series</button>
+                <button class="filter-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2 rounded-xl whitespace-nowrap transition-colors text-sm" data-filter="S2">S2 Series</button>
+                <button class="filter-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2 rounded-xl whitespace-nowrap transition-colors text-sm flex items-center gap-1" data-filter="HARD"><i class="fas fa-fire text-rose-500"></i> Hardest to Pass</button>
+            </div>
+        </div>
+
+        <!-- The Radars Grid -->
+        <div class="scroll-reveal w-full max-w-5xl mx-auto px-4 relative z-20">
+            <div class="flex items-center justify-between mb-6 border-b border-slate-200/60 pb-3">
+                <h3 class="text-lg font-black text-slate-900 tracking-tight flex items-center gap-2">
+                    <i class="fas fa-chart-pie text-violet-500"></i> Available Radars
+                </h3>
+                <span id="result-count" class="text-xs font-bold text-slate-400 bg-white border border-slate-200 px-3 py-1 rounded-full shadow-sm">6 Subjects</span>
+            </div>
+
+            <div id="radar-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Subject Card 1 -->
+                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="programming in c" data-code="est102" data-sem="S2" data-hard="true">
+                    <div class="absolute top-4 right-4 flex gap-1">
+                        <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                    </div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-red-600 flex items-center justify-center text-white shadow-md shadow-rose-500/20 flex-shrink-0">
+                            <i class="fas fa-code text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">EST102 • S2</span>
+                            <h3 class="font-extrabold text-slate-800 leading-tight">Programming in C</h3>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 mb-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-500">Predictability Score</span>
+                            <span class="text-xs font-black text-emerald-500">94% Match</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-1.5 mb-3">
+                            <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 94%"></div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-500">Difficulty</span>
+                            <span class="text-xs font-black text-rose-500 bg-rose-50 px-2 py-0.5 rounded border border-rose-100">Extreme 🔥</span>
+                        </div>
+                    </div>
+                    <button class="scan-btn w-full mt-auto bg-slate-100 text-slate-600 font-bold py-3.5 rounded-xl border border-slate-200 transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-fingerprint"></i> Scan Heatmap
+                    </button>
+                </div>
+
+                <!-- Subject Card 2 -->
+                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="mathematics for information science-1 calculus" data-code="mat101" data-sem="S1" data-hard="true">
+                    <div class="absolute top-4 right-4 flex gap-1">
+                        <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                    </div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-600 flex items-center justify-center text-white shadow-md shadow-violet-500/20 flex-shrink-0">
+                            <i class="fas fa-calculator text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">MAT101 • S1</span>
+                            <h3 class="font-extrabold text-slate-800 leading-tight">Mathematics-1</h3>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 mb-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-500">Predictability Score</span>
+                            <span class="text-xs font-black text-emerald-500">88% Match</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-1.5 mb-3">
+                            <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 88%"></div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-500">Difficulty</span>
+                            <span class="text-xs font-black text-orange-500 bg-orange-50 px-2 py-0.5 rounded border border-orange-100">High ⭐</span>
+                        </div>
+                    </div>
+                    <button class="scan-btn w-full mt-auto bg-slate-100 text-slate-600 font-bold py-3.5 rounded-xl border border-slate-200 transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-fingerprint"></i> Scan Heatmap
+                    </button>
+                </div>
+
+                <!-- Subject Card 3 -->
+                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="physics for information science" data-code="pht100" data-sem="S1" data-hard="false">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 flex-shrink-0">
+                            <i class="fas fa-atom text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">PHT100 • S1 / S2</span>
+                            <h3 class="font-extrabold text-slate-800 leading-tight">Engineering Physics</h3>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 mb-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-500">Predictability Score</span>
+                            <span class="text-xs font-black text-emerald-500">91% Match</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-1.5 mb-3">
+                            <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 91%"></div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-500">Difficulty</span>
+                            <span class="text-xs font-black text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-100">Medium</span>
+                        </div>
+                    </div>
+                    <button class="scan-btn w-full mt-auto bg-slate-100 text-slate-600 font-bold py-3.5 rounded-xl border border-slate-200 transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-fingerprint"></i> Scan Heatmap
+                    </button>
+                </div>
+
+                 <!-- Subject Card 4 -->
+                 <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="mathematics for information science-2 vector calculus differential equations" data-code="mat102" data-sem="S2" data-hard="true">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-600 flex items-center justify-center text-white shadow-md shadow-violet-500/20 flex-shrink-0">
+                            <i class="fas fa-square-root-variable text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">MAT102 • S2</span>
+                            <h3 class="font-extrabold text-slate-800 leading-tight">Mathematics-2</h3>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 mb-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-500">Predictability Score</span>
+                            <span class="text-xs font-black text-emerald-500">82% Match</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-1.5 mb-3">
+                            <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 82%"></div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-500">Difficulty</span>
+                            <span class="text-xs font-black text-orange-500 bg-orange-50 px-2 py-0.5 rounded border border-orange-100">High ⭐</span>
+                        </div>
+                    </div>
+                    <button class="scan-btn w-full mt-auto bg-slate-100 text-slate-600 font-bold py-3.5 rounded-xl border border-slate-200 transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-fingerprint"></i> Scan Heatmap
+                    </button>
+                </div>
+
+                <!-- Subject Card 5 -->
+                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="engineering entrepreneurship & ipr intellectual property" data-code="hut200" data-sem="S2" data-hard="false">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 flex-shrink-0">
+                            <i class="fas fa-lightbulb text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">HUT200 • S2</span>
+                            <h3 class="font-extrabold text-slate-800 leading-tight">Entrepreneurship & IPR</h3>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 mb-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-500">Predictability Score</span>
+                            <span class="text-xs font-black text-emerald-500">98% Match</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-1.5 mb-3">
+                            <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 98%"></div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-500">Difficulty</span>
+                            <span class="text-xs font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">Scoring Subject</span>
+                        </div>
+                    </div>
+                    <button class="scan-btn w-full mt-auto bg-slate-100 text-slate-600 font-bold py-3.5 rounded-xl border border-slate-200 transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-fingerprint"></i> Scan Heatmap
+                    </button>
+                </div>
+
+                <!-- Subject Card 6 -->
+                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="algorithmic thinking with python" data-code="est105" data-sem="S1" data-hard="false">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white shadow-md shadow-cyan-500/20 flex-shrink-0">
+                            <i class="fab fa-python text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">EST105 • S1</span>
+                            <h3 class="font-extrabold text-slate-800 leading-tight">Algorithmic Python</h3>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 mb-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-slate-500">Predictability Score</span>
+                            <span class="text-xs font-black text-emerald-500">89% Match</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-1.5 mb-3">
+                            <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 89%"></div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-500">Difficulty</span>
+                            <span class="text-xs font-black text-cyan-600 bg-cyan-50 px-2 py-0.5 rounded border border-cyan-100">Medium</span>
+                        </div>
+                    </div>
+                    <button class="scan-btn w-full mt-auto bg-slate-100 text-slate-600 font-bold py-3.5 rounded-xl border border-slate-200 transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-fingerprint"></i> Scan Heatmap
+                    </button>
+                </div>
+
+            </div>
+            
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-16 bg-white/50 backdrop-blur-md border border-slate-200 border-dashed rounded-3xl mt-6">
+                <i class="fas fa-search-minus text-4xl text-slate-300 mb-3"></i>
+                <h3 class="text-lg font-bold text-slate-700">Radar found nothing</h3>
+                <p class="text-sm text-slate-500">We couldn't find a subject matching your search.</p>
+                <button onclick="document.getElementById('subject-search').value=''; document.getElementById('subject-search').dispatchEvent(new Event('input'));" class="mt-4 text-rose-500 font-bold text-sm hover:underline">Clear Search</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="components.js?v=13"></script>
+
+    <script>
+        // Load the shared navigation (we'll pretend 'trend-radar' is active)
+        loadNavigation('trend-radar', '', false);
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- 1. LIVE SEARCH & FILTER ENGINE ---
+            const searchInput = document.getElementById('subject-search');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.radar-card');
+            const emptyState = document.getElementById('empty-state');
+            const resultCount = document.getElementById('result-count');
+
+            let currentFilter = 'ALL';
+
+            function filterCards() {
+                const query = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const title = card.getAttribute('data-title').toLowerCase();
+                    const code = card.getAttribute('data-code').toLowerCase();
+                    const sem = card.getAttribute('data-sem');
+                    const isHard = card.getAttribute('data-hard') === 'true';
+
+                    // Check Search Query
+                    const matchesSearch = title.includes(query) || code.includes(query);
+
+                    // Check Category Filter
+                    let matchesFilter = true;
+                    if (currentFilter === 'S1') matchesFilter = sem === 'S1';
+                    if (currentFilter === 'S2') matchesFilter = sem === 'S2';
+                    if (currentFilter === 'HARD') matchesFilter = isHard;
+
+                    if (matchesSearch && matchesFilter) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Update UI based on results
+                emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+                resultCount.textContent = `${visibleCount} Subject${visibleCount !== 1 ? 's' : ''}`;
+            }
+
+            // Bind Search Input
+            searchInput.addEventListener('input', filterCards);
+
+            // Bind Category Filters
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // Update Active Button Styling
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-slate-800', 'text-white', 'active', 'shadow-sm');
+                        b.classList.add('bg-white', 'text-slate-600');
+                    });
+                    
+                    e.currentTarget.classList.remove('bg-white', 'text-slate-600');
+                    e.currentTarget.classList.add('bg-slate-800', 'text-white', 'active', 'shadow-sm');
+
+                    currentFilter = e.currentTarget.getAttribute('data-filter');
+                    filterCards();
+                });
+            });
+
+            // Keyboard shortcut (Ctrl+K) to focus search
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+            });
+
+
+            // --- 2. SCROLL REVEAL INTERSECTION OBSERVER ---
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                scrollObserver.observe(el);
+            });
+
+
+            // --- 3. 3D BACKGROUND PARALLAX SCROLL ---
+            let lastScrollY = window.scrollY;
+            let ticking = false;
+
+            window.addEventListener('scroll', () => {
+                lastScrollY = window.scrollY;
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const scrollBg1 = document.getElementById('scroll-bg-1');
+                        const scrollBg2 = document.getElementById('scroll-bg-2');
+                        
+                        if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.4}px)`;
+                        if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+
+            // --- 4. 3D MOUSE PARALLAX & TILT (PC) ---
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+                const y = (e.clientY / window.innerHeight - 0.5) * 2;
+                applyParallax(x, y);
+            });
+            document.addEventListener('mouseleave', () => applyParallax(0, 0));
+
+            // --- 5. GYROSCOPE TILT PARALLAX (Mobile) ---
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', (e) => {
+                    if(e.gamma === null || e.beta === null) return;
+                    let x = Math.max(-1, Math.min(1, e.gamma / 40));
+                    let y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
+                    applyParallax(x, y);
+                }, true);
+            }
+
+            // --- SHARED 3D ENGINE ---
+            function applyParallax(x, y) {
+                const mouseOrb1 = document.getElementById('mouse-orb-1');
+                const mouseOrb2 = document.getElementById('mouse-orb-2');
+                if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+                if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+
+                const tiltCard = document.getElementById('tilt-card');
+                if(tiltCard) {
+                    // Mild rotation so the text box remains easily typable
+                    tiltCard.style.transform = `perspective(1000px) rotateX(${y * -3}deg) rotateY(${x * 3}deg)`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
