@@ -61,7 +61,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                     </a>
                 </div>
 
-                <div class="hidden lg:flex gap-3">
+                <div class="hidden lg:flex gap-3 items-center">
                     <a href="/status.html" class="text-sm px-5 py-2.5 rounded-full flex items-center gap-2 transition-colors ${activePage === 'status' ? 'font-bold text-slate-800 bg-white border border-slate-200 shadow-sm' : 'font-bold text-slate-600 bg-slate-100 hover:bg-slate-200'}">
                         <span class="relative flex h-2 w-2">
                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -75,9 +75,17 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                     <a href="/blog/index.html" class="text-sm px-5 py-2.5 rounded-full flex items-center gap-2 transition-colors ${activePage === 'blog' ? 'font-bold text-white bg-indigo-600 shadow-md' : 'font-bold text-slate-600 bg-slate-100 hover:bg-indigo-600 hover:text-white'}">
                         <i class="fas fa-feather-alt text-[10px]"></i> Blog
                     </a>
+                    
+                    <button id="theme-toggle-desktop" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors focus:outline-none ml-1">
+                        <i class="fas fa-moon text-lg transition-transform duration-300"></i>
+                    </button>
                 </div>
                 
-                <div class="lg:hidden">
+                <div class="lg:hidden flex items-center gap-3">
+                    <button id="theme-toggle-mobile" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-colors focus:outline-none">
+                        <i class="fas fa-moon transition-transform duration-300"></i>
+                    </button>
+                    
                     <a href="/updates.html" class="w-10 h-10 flex items-center justify-center bg-indigo-50 text-indigo-600 rounded-full border border-indigo-100 shadow-sm">
                        <i class="fas fa-bell"></i>
                     </a>
@@ -88,6 +96,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 
     document.getElementById('navigation-container').innerHTML = navHTML;
     
+    // --- MENU LOGIC ---
     const openBtn = document.getElementById('open-menu-btn');
     const closeBtn = document.getElementById('close-menu-btn');
     const menu = document.getElementById('mobile-menu');
@@ -109,4 +118,89 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     openBtn.addEventListener('click', toggleMenu);
     closeBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
+
+
+    // --- DARK MODE LOGIC ---
+    const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+    const icons = document.querySelectorAll('#theme-toggle-desktop i, #theme-toggle-mobile i');
+
+    function updateThemeIcons(isDark) {
+        icons.forEach(icon => {
+            if (isDark) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                icon.style.transform = 'rotate(360deg)';
+                icon.style.color = '#fbbf24'; // Golden amber color for Sun
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                icon.style.transform = 'rotate(0deg)';
+                icon.style.color = ''; // Revert to default text-slate-600
+            }
+        });
+    }
+
+    // Check system preference or localStorage
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        updateThemeIcons(true);
+    } else {
+        document.documentElement.classList.remove('dark');
+        updateThemeIcons(false);
+    }
+
+    // Toggle Action
+    function toggleTheme() {
+        document.documentElement.classList.toggle('dark');
+        const isDark = document.documentElement.classList.contains('dark');
+        
+        if (isDark) {
+            localStorage.theme = 'dark';
+            updateThemeIcons(true);
+        } else {
+            localStorage.theme = 'light';
+            updateThemeIcons(false);
+        }
+    }
+
+    if(themeToggleDesktop) themeToggleDesktop.addEventListener('click', toggleTheme);
+    if(themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
 }
+
+// --- GLOBAL CSS OVERRIDE FOR DARK MODE ---
+// This injects a stylesheet into every page to force dark mode colors seamlessly
+const globalDarkModeStyles = `
+<style>
+    /* Base Body Overrides */
+    html.dark body { background-color: #0f172a !important; color: #f8fafc !important; }
+    
+    /* Global Cards & White Sections */
+    html.dark .bg-white { background-color: #1e293b !important; border-color: #334155 !important; }
+    
+    /* Lighter Gray background areas */
+    html.dark .bg-slate-50, html.dark .bg-slate-100 { background-color: #0f172a !important; border-color: #334155 !important; }
+    
+    /* Text Color Normalization */
+    html.dark .text-slate-900, html.dark .text-slate-800, html.dark .text-slate-700 { color: #f8fafc !important; }
+    html.dark .text-slate-600, html.dark .text-slate-500 { color: #94a3b8 !important; }
+    
+    /* Borders */
+    html.dark .border-slate-200, html.dark .border-slate-100 { border-color: #334155 !important; }
+    
+    /* Header Translucency Fix */
+    html.dark .bg-white\\/70 { background-color: rgba(30, 41, 59, 0.85) !important; border-color: rgba(51, 65, 85, 0.5) !important; }
+    
+    /* Keep Primary Accents Vibrant */
+    html.dark .text-indigo-600 { color: #818cf8 !important; }
+    html.dark .bg-indigo-50 { background-color: rgba(99, 102, 241, 0.1) !important; border-color: rgba(99, 102, 241, 0.2) !important; }
+    
+    /* Mobile Menu Drawer Fix */
+    html.dark #mobile-menu { background-color: #1e293b !important; border-color: #334155 !important; }
+    html.dark #mobile-menu .bg-slate-50 { background-color: #0f172a !important; }
+    
+    /* Buttons / Hover states */
+    html.dark .hover\\:bg-slate-100:hover, html.dark .hover\\:bg-slate-200:hover { background-color: #334155 !important; color: #f8fafc !important; }
+</style>
+`;
+document.head.insertAdjacentHTML('beforeend', globalDarkModeStyles);
