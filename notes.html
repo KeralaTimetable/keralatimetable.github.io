@@ -83,7 +83,6 @@
         }
     </style>
     
-    <!-- Smart OG Tags -->
     <meta property="og:site_name" content="Kerala Timetable">
     <meta property="og:image" content="https://keralatimetable.github.io/social-preview.png">
     <meta property="og:type" content="website">
@@ -93,23 +92,17 @@
 
     <div id="navigation-container"></div>
 
-    <!-- 3D Parallax Orbs Background -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <!-- Scroll wrapper 1 -->
-        <div id="scroll-bg-1" class="absolute top-20 -left-10 w-96 h-96 transition-transform duration-100 ease-out">
-            <!-- Mouse track inner -->
-            <div id="mouse-orb-1" class="w-full h-full bg-indigo-400 rounded-full mix-blend-multiply filter blur-[80px] orb-pulse transition-transform duration-100 ease-out"></div>
+        <div id="scroll-bg-1" class="absolute top-20 -left-32 md:-left-10 w-72 h-72 md:w-96 md:h-96 transition-transform duration-100 ease-out">
+            <div id="mouse-orb-1" class="w-full h-full bg-indigo-400 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[80px] orb-pulse transition-transform duration-100 ease-out"></div>
         </div>
-        <!-- Scroll wrapper 2 -->
-        <div id="scroll-bg-2" class="absolute top-60 -right-20 w-[30rem] h-[30rem] transition-transform duration-100 ease-out">
-            <!-- Mouse track inner -->
-            <div id="mouse-orb-2" class="w-full h-full bg-purple-400 rounded-full mix-blend-multiply filter blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        <div id="scroll-bg-2" class="absolute top-60 -right-32 md:-right-20 w-80 h-80 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-2" class="w-full h-full bg-purple-400 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
         </div>
     </div>
 
     <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-12 relative z-10">
         
-        <!-- Hero Section -->
         <div class="text-center mb-12">
             <div class="inline-flex items-center justify-center p-3 bg-white/80 backdrop-blur-md rounded-2xl mb-5 text-indigo-600 shadow-[0_4px_20px_rgba(79,70,229,0.15)] border border-white">
                 <i class="fas fa-book-open text-2xl"></i>
@@ -123,13 +116,10 @@
             </p>
         </div>
 
-        <!-- Two Column Layout for Desktop -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16 perspective-1000">
             
-            <!-- Real Glassmorphism 3D Tilt Widget -->
             <div class="lg:col-span-5 relative" style="perspective: 1000px;">
                 <div id="glass-card" class="real-glass rounded-[2rem] p-8 w-full sticky top-24 z-20">
-                    <!-- TranslateZ forces this element to pop out in 3D space -->
                     <div style="transform: translateZ(30px);">
                         <div class="flex items-center gap-3 mb-8">
                             <div class="w-10 h-10 rounded-full bg-white/70 backdrop-blur-sm flex items-center justify-center text-indigo-600 shadow-sm border border-white">
@@ -139,7 +129,6 @@
                         </div>
 
                         <div class="space-y-6">
-                            <!-- Branch Dropdown -->
                             <div>
                                 <label class="block text-xs font-black text-slate-600 uppercase tracking-wider mb-2 ml-1">Branch</label>
                                 <select id="quickBranch" class="custom-select inner-glass w-full text-slate-800 font-semibold text-base rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer hover:bg-white/70">
@@ -151,7 +140,6 @@
                                 </select>
                             </div>
 
-                            <!-- Semester Dropdown -->
                             <div>
                                 <label class="block text-xs font-black text-slate-600 uppercase tracking-wider mb-2 ml-1">Semester</label>
                                 <select id="quickSem" class="custom-select inner-glass w-full text-slate-800 font-semibold text-base rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer hover:bg-white/70">
@@ -175,7 +163,6 @@
                 </div>
             </div>
 
-            <!-- Branch Grid Layout -->
             <div class="lg:col-span-7 z-10">
                 <div class="flex items-center gap-3 mb-6 px-2">
                     <h3 class="text-lg font-black text-slate-800">Browse by Branch</h3>
@@ -184,7 +171,6 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     
-                    <!-- CSE Card -->
                     <a href="KTU/CSE/notes.html" class="branch-card rounded-3xl p-6 relative group overflow-hidden sm:col-span-2">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-100 rounded-full blur-2xl -mr-10 -mt-10 transition-transform duration-500 group-hover:scale-150"></div>
                         <div class="relative z-10 flex items-center justify-between">
@@ -203,7 +189,6 @@
                         </div>
                     </a>
 
-                    <!-- Civil Card -->
                     <a href="#" class="branch-card rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between gap-4">
@@ -217,7 +202,6 @@
                         </div>
                     </a>
 
-                    <!-- Mechanical Card -->
                     <a href="#" class="branch-card rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between gap-4">
@@ -231,7 +215,6 @@
                         </div>
                     </a>
 
-                    <!-- EEE Card -->
                     <a href="#" class="branch-card rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between gap-4">
@@ -245,7 +228,6 @@
                         </div>
                     </a>
 
-                    <!-- ECE Card -->
                     <a href="#" class="branch-card rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between gap-4">
@@ -263,7 +245,6 @@
             </div>
         </div>
 
-        <!-- SEO Tags / Recent Searches Section -->
         <div class="mt-8 pt-8 border-t border-slate-200/60 z-10 relative">
             <h3 class="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                 <i class="fas fa-fire text-orange-400"></i> Trending Searches
