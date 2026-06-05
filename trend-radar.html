@@ -25,6 +25,18 @@
                               radial-gradient(at 0% 50%, hsla(328,100%,74%,0.1) 0px, transparent 50%);
         }
 
+        /* Custom Dropdown Styling */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f43f5e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+            cursor: pointer;
+        }
+
         /* Continuous Orb Animation for Parallax Background */
         @keyframes float-pulse {
             0% { transform: translateY(0px) scale(1); opacity: 0.5; }
@@ -53,7 +65,7 @@
         /* Card Hover Effects */
         .radar-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .radar-card:hover { transform: translateY(-8px); box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.15); border-color: #ddd6fe; }
-        .radar-card:hover .scan-btn { background-color: #8b5cf6; color: white; }
+        .radar-card:hover .scan-btn { background-color: #8b5cf6; color: white; border-color: #8b5cf6; }
 
         /* SCROLL REVEAL & INITIAL LOAD ANIMATIONS */
         @keyframes fadeUpEntry {
@@ -74,17 +86,15 @@
 
     <div id="navigation-container" class="min-h-[73px] w-full z-50 relative"></div>
 
-    <!-- 3D Parallax Orbs Background (Rose & Violet Theme) -->
-    <div id="scroll-bg-1" class="fixed top-10 -left-10 w-96 h-96 pointer-events-none z-0 transition-transform duration-75 ease-out">
-        <div id="mouse-orb-1" class="w-full h-full bg-rose-500 rounded-full mix-blend-multiply filter blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+    <div id="scroll-bg-1" class="fixed top-10 -left-32 md:-left-10 w-72 h-72 md:w-96 md:h-96 pointer-events-none z-0 transition-transform duration-75 ease-out">
+        <div id="mouse-orb-1" class="w-full h-full bg-rose-500/40 md:bg-rose-500 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
     </div>
-    <div id="scroll-bg-2" class="fixed top-80 -right-20 w-[30rem] h-[30rem] pointer-events-none z-0 transition-transform duration-75 ease-out">
-        <div id="mouse-orb-2" class="w-full h-full bg-violet-500 rounded-full mix-blend-multiply filter blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+    <div id="scroll-bg-2" class="fixed top-80 -right-32 md:-right-20 w-80 h-80 md:w-[30rem] md:h-[30rem] pointer-events-none z-0 transition-transform duration-75 ease-out">
+        <div id="mouse-orb-2" class="w-full h-full bg-violet-500/40 md:bg-violet-500 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
     </div>
 
     <main class="flex-grow w-full flex flex-col items-center relative z-10 pb-20">
         
-        <!-- Hero Section -->
         <div class="w-full max-w-5xl mx-auto px-4 pt-12 pb-8 md:pt-20 md:pb-12 text-center relative">
             
             <div class="animate-fade-up flex justify-center mb-6">
@@ -102,12 +112,11 @@
                 Stop guessing what to study. We scanned 5 years of past papers to find the exact high-yield topics coming for tomorrow's exam.
             </p>
 
-            <!-- 3D Perspective Search Card -->
-            <div class="animate-fade-up delay-300 max-w-3xl mx-auto w-full relative z-20" style="perspective: 1000px;">
-                <div id="tilt-card" class="bg-white/70 backdrop-blur-2xl border border-white shadow-[0_20px_50px_rgba(225,29,72,0.1)] rounded-3xl p-3 sm:p-4 transition-transform duration-100 ease-out" style="transform-style: preserve-3d;">
+            <div class="animate-fade-up delay-300 max-w-4xl mx-auto w-full relative z-20" style="perspective: 1000px;">
+                <div id="tilt-card" class="bg-white/70 backdrop-blur-2xl border border-white shadow-[0_20px_50px_rgba(225,29,72,0.1)] rounded-3xl p-4 sm:p-5 transition-transform duration-100 ease-out" style="transform-style: preserve-3d;">
                     
                     <div style="transform: translateZ(25px);">
-                        <div class="search-container relative flex items-center bg-white rounded-2xl p-2 shadow-sm border border-slate-100">
+                        <div class="search-container relative flex items-center bg-white rounded-2xl p-2 shadow-sm border border-slate-100 mb-4">
                             <div class="w-12 h-12 ml-1 text-rose-400 flex items-center justify-center">
                                 <i class="fas fa-search text-xl"></i>
                             </div>
@@ -116,24 +125,50 @@
                                 <span class="px-2.5 py-1 bg-slate-100 text-slate-400 text-[10px] font-bold rounded-lg uppercase tracking-wider">Ctrl + K</span>
                             </div>
                         </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div class="relative">
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 ml-1">Branch</label>
+                                <select id="filter-branch" class="w-full bg-white border border-slate-200 text-slate-700 font-bold rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-400 transition-shadow text-sm">
+                                    <option value="ALL">All Branches</option>
+                                    <option value="COMMON">Common (S1/S2)</option>
+                                    <option value="CSE">Computer Science</option>
+                                    <option value="CE">Civil Engineering</option>
+                                    <option value="ME">Mechanical Engg</option>
+                                    <option value="EEE">Electrical Engg</option>
+                                    <option value="ECE">Electronics Engg</option>
+                                </select>
+                            </div>
+
+                            <div class="relative">
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 ml-1">Semester</label>
+                                <select id="filter-sem" class="w-full bg-white border border-slate-200 text-slate-700 font-bold rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-400 transition-shadow text-sm">
+                                    <option value="ALL">All Semesters</option>
+                                    <option value="S1">Semester 1 (S1)</option>
+                                    <option value="S2">Semester 2 (S2)</option>
+                                    <option value="S3">Semester 3 (S3)</option>
+                                    <option value="S4">Semester 4 (S4)</option>
+                                </select>
+                            </div>
+
+                            <div class="relative">
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 ml-1">Subject Filter</label>
+                                <select id="filter-subject" class="w-full bg-white border border-slate-200 text-slate-700 font-bold rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-rose-400 transition-shadow text-sm">
+                                    <option value="ALL">All Categories</option>
+                                    <option value="PROGRAMMING">Programming / Coding</option>
+                                    <option value="MATH">Mathematics</option>
+                                    <option value="CORE">Core / Theory</option>
+                                    <option value="HUMANITIES">Humanities / Mgt</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     
                 </div>
             </div>
         </div>
 
-        <!-- Dashboard Filters -->
-        <div class="animate-fade-up delay-300 w-full max-w-5xl mx-auto px-4 mb-8 relative z-20">
-            <div class="flex overflow-x-auto no-scrollbar gap-2 pb-2 justify-start md:justify-center w-full" id="filter-container">
-                <button class="filter-btn active bg-slate-800 text-white font-bold px-5 py-2 rounded-xl whitespace-nowrap transition-colors text-sm shadow-sm" data-filter="ALL">All Subjects</button>
-                <button class="filter-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2 rounded-xl whitespace-nowrap transition-colors text-sm" data-filter="S1">S1 Series</button>
-                <button class="filter-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2 rounded-xl whitespace-nowrap transition-colors text-sm" data-filter="S2">S2 Series</button>
-                <button class="filter-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 font-bold px-5 py-2 rounded-xl whitespace-nowrap transition-colors text-sm flex items-center gap-1" data-filter="HARD"><i class="fas fa-fire text-rose-500"></i> Hardest to Pass</button>
-            </div>
-        </div>
-
-        <!-- The Radars Grid -->
-        <div class="scroll-reveal w-full max-w-5xl mx-auto px-4 relative z-20">
+        <div class="scroll-reveal w-full max-w-5xl mx-auto px-4 relative z-20 mt-6">
             <div class="flex items-center justify-between mb-6 border-b border-slate-200/60 pb-3">
                 <h3 class="text-lg font-black text-slate-900 tracking-tight flex items-center gap-2">
                     <i class="fas fa-chart-pie text-violet-500"></i> Available Radars
@@ -142,8 +177,8 @@
             </div>
 
             <div id="radar-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Subject Card 1 -->
-                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="programming in c" data-code="est102" data-sem="S2" data-hard="true">
+                
+                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="programming in c" data-code="est102" data-branch="CSE" data-sem="S2" data-type="PROGRAMMING">
                     <div class="absolute top-4 right-4 flex gap-1">
                         <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
                     </div>
@@ -152,7 +187,7 @@
                             <i class="fas fa-code text-xl"></i>
                         </div>
                         <div>
-                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">EST102 • S2</span>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">EST102 • S2 • CSE</span>
                             <h3 class="font-extrabold text-slate-800 leading-tight">Programming in C</h3>
                         </div>
                     </div>
@@ -174,8 +209,7 @@
                     </button>
                 </div>
 
-                <!-- Subject Card 2 -->
-                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="mathematics for information science-1 calculus" data-code="mat101" data-sem="S1" data-hard="true">
+                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="mathematics for information science-1 calculus" data-code="mat101" data-branch="COMMON" data-sem="S1" data-type="MATH">
                     <div class="absolute top-4 right-4 flex gap-1">
                         <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
                     </div>
@@ -184,7 +218,7 @@
                             <i class="fas fa-calculator text-xl"></i>
                         </div>
                         <div>
-                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">MAT101 • S1</span>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">MAT101 • S1 • COMMON</span>
                             <h3 class="font-extrabold text-slate-800 leading-tight">Mathematics-1</h3>
                         </div>
                     </div>
@@ -206,14 +240,13 @@
                     </button>
                 </div>
 
-                <!-- Subject Card 3 -->
-                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="physics for information science" data-code="pht100" data-sem="S1" data-hard="false">
+                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="physics for information science" data-code="pht100" data-branch="COMMON" data-sem="S1" data-type="CORE">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 flex-shrink-0">
                             <i class="fas fa-atom text-xl"></i>
                         </div>
                         <div>
-                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">PHT100 • S1 / S2</span>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">PHT100 • S1/S2 • COMMON</span>
                             <h3 class="font-extrabold text-slate-800 leading-tight">Engineering Physics</h3>
                         </div>
                     </div>
@@ -235,14 +268,13 @@
                     </button>
                 </div>
 
-                 <!-- Subject Card 4 -->
-                 <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="mathematics for information science-2 vector calculus differential equations" data-code="mat102" data-sem="S2" data-hard="true">
+                 <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="mathematics for information science-2 vector calculus differential equations" data-code="mat102" data-branch="COMMON" data-sem="S2" data-type="MATH">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-600 flex items-center justify-center text-white shadow-md shadow-violet-500/20 flex-shrink-0">
                             <i class="fas fa-square-root-variable text-xl"></i>
                         </div>
                         <div>
-                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">MAT102 • S2</span>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">MAT102 • S2 • COMMON</span>
                             <h3 class="font-extrabold text-slate-800 leading-tight">Mathematics-2</h3>
                         </div>
                     </div>
@@ -264,14 +296,13 @@
                     </button>
                 </div>
 
-                <!-- Subject Card 5 -->
-                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="engineering entrepreneurship & ipr intellectual property" data-code="hut200" data-sem="S2" data-hard="false">
+                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="engineering entrepreneurship & ipr intellectual property" data-code="hut200" data-branch="COMMON" data-sem="S2" data-type="HUMANITIES">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 flex-shrink-0">
                             <i class="fas fa-lightbulb text-xl"></i>
                         </div>
                         <div>
-                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">HUT200 • S2</span>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">HUT200 • S2 • COMMON</span>
                             <h3 class="font-extrabold text-slate-800 leading-tight">Entrepreneurship & IPR</h3>
                         </div>
                     </div>
@@ -285,7 +316,7 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-xs font-bold text-slate-500">Difficulty</span>
-                            <span class="text-xs font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">Scoring Subject</span>
+                            <span class="text-xs font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">Scoring</span>
                         </div>
                     </div>
                     <button class="scan-btn w-full mt-auto bg-slate-100 text-slate-600 font-bold py-3.5 rounded-xl border border-slate-200 transition-colors flex items-center justify-center gap-2">
@@ -293,14 +324,13 @@
                     </button>
                 </div>
 
-                <!-- Subject Card 6 -->
-                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="algorithmic thinking with python" data-code="est105" data-sem="S1" data-hard="false">
+                <div class="radar-card bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-6 shadow-sm flex flex-col relative" data-title="algorithmic thinking with python" data-code="est105" data-branch="CSE" data-sem="S1" data-type="PROGRAMMING">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-white shadow-md shadow-cyan-500/20 flex-shrink-0">
                             <i class="fab fa-python text-xl"></i>
                         </div>
                         <div>
-                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">EST105 • S1</span>
+                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">EST105 • S1 • CSE</span>
                             <h3 class="font-extrabold text-slate-800 leading-tight">Algorithmic Python</h3>
                         </div>
                     </div>
@@ -324,54 +354,131 @@
 
             </div>
             
-            <!-- Empty State -->
             <div id="empty-state" class="hidden text-center py-16 bg-white/50 backdrop-blur-md border border-slate-200 border-dashed rounded-3xl mt-6">
                 <i class="fas fa-search-minus text-4xl text-slate-300 mb-3"></i>
                 <h3 class="text-lg font-bold text-slate-700">Radar found nothing</h3>
-                <p class="text-sm text-slate-500">We couldn't find a subject matching your search.</p>
-                <button onclick="document.getElementById('subject-search').value=''; document.getElementById('subject-search').dispatchEvent(new Event('input'));" class="mt-4 text-rose-500 font-bold text-sm hover:underline">Clear Search</button>
+                <p class="text-sm text-slate-500">We couldn't find a subject matching your filters.</p>
+                <button id="clear-filters-btn" class="mt-4 text-rose-500 font-bold text-sm hover:underline">Clear All Filters</button>
             </div>
         </div>
 
     </main>
 
-    <script src="components.js?v=13"></script>
+    <div id="heatmap-modal" class="fixed inset-0 z-[100] hidden flex items-end sm:items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300">
+        <div id="modal-backdrop" class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm cursor-pointer"></div>
+        
+        <div id="modal-content" class="relative w-full sm:w-[90%] max-w-2xl bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-100 transform translate-y-full sm:translate-y-10 transition-transform duration-300 ease-out max-h-[85vh] flex flex-col overflow-hidden">
+            
+            <div class="p-5 sm:p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50 sm:rounded-t-3xl">
+                <div class="flex items-center gap-3">
+                    <div id="modal-icon" class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-red-600 text-white flex items-center justify-center shadow-md shadow-rose-500/20">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div>
+                        <span id="modal-code" class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">EST102</span>
+                        <h3 id="modal-title" class="font-extrabold text-slate-800 text-lg leading-none">Programming in C</h3>
+                    </div>
+                </div>
+                <button id="close-modal-btn" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-200 hover:bg-rose-100 hover:text-rose-600 text-slate-500 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="p-5 sm:p-6 overflow-y-auto custom-scrollbar flex-grow">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-rose-50 border border-rose-100 text-rose-700 text-xs font-bold uppercase tracking-wider mb-5">
+                    <i class="fas fa-fire"></i> Module 1: Guaranteed Topics
+                </div>
+
+                <div class="mb-5">
+                    <div class="flex justify-between items-end mb-1">
+                        <h4 class="font-bold text-slate-700 text-sm">Pointers & Memory Allocation</h4>
+                        <span class="text-[10px] font-black text-rose-600 bg-rose-100 px-2 py-0.5 rounded">100% HEAT</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-2">Asked in 5 out of 5 previous exams. Usually for 10 marks.</p>
+                    <div class="w-full bg-slate-100 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-rose-400 to-rose-600 h-2 rounded-full w-[100%] shadow-[0_0_10px_rgba(225,29,72,0.4)]"></div>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <div class="flex justify-between items-end mb-1">
+                        <h4 class="font-bold text-slate-700 text-sm">File Handling (fopen, fclose)</h4>
+                        <span class="text-[10px] font-black text-orange-600 bg-orange-100 px-2 py-0.5 rounded">80% HEAT</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-2">Asked in 4 out of 5 previous exams.</p>
+                    <div class="w-full bg-slate-100 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-amber-400 to-orange-500 h-2 rounded-full w-[80%]"></div>
+                    </div>
+                </div>
+                
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-wider mb-5 mt-4">
+                    <i class="fas fa-leaf"></i> Safe to Skip (Low Yield)
+                </div>
+                
+                 <div class="mb-2">
+                    <div class="flex justify-between items-end mb-1">
+                        <h4 class="font-bold text-slate-700 text-sm">Command Line Arguments</h4>
+                        <span class="text-[10px] font-black text-slate-500 bg-slate-100 px-2 py-0.5 rounded">20% HEAT</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-2">Only asked once in the last 5 years.</p>
+                    <div class="w-full bg-slate-100 rounded-full h-2">
+                        <div class="bg-emerald-400 h-2 rounded-full w-[20%]"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 sm:p-5 border-t border-slate-100 bg-white">
+                <a href="KTU/CSE/S2/c-programming.html" class="w-full block text-center bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 rounded-xl transition-colors shadow-md shadow-violet-500/20">
+                    Go to Study Notes
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="components.js?v=14"></script>
 
     <script>
-        // Load the shared navigation (we'll pretend 'trend-radar' is active)
+        // Load navigation
         loadNavigation('trend-radar', '', false);
 
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- 1. LIVE SEARCH & FILTER ENGINE ---
+            // --- 1. LIVE SEARCH & COMBINED DROPDOWN FILTERS ---
             const searchInput = document.getElementById('subject-search');
-            const filterBtns = document.querySelectorAll('.filter-btn');
+            const branchSelect = document.getElementById('filter-branch');
+            const semSelect = document.getElementById('filter-sem');
+            const subjectSelect = document.getElementById('filter-subject');
+            const clearBtn = document.getElementById('clear-filters-btn');
+            
             const cards = document.querySelectorAll('.radar-card');
             const emptyState = document.getElementById('empty-state');
             const resultCount = document.getElementById('result-count');
 
-            let currentFilter = 'ALL';
-
             function filterCards() {
                 const query = searchInput.value.toLowerCase().trim();
+                const branchVal = branchSelect.value;
+                const semVal = semSelect.value;
+                const typeVal = subjectSelect.value;
+
                 let visibleCount = 0;
 
                 cards.forEach(card => {
+                    // Extract Data Attributes
                     const title = card.getAttribute('data-title').toLowerCase();
                     const code = card.getAttribute('data-code').toLowerCase();
+                    const branch = card.getAttribute('data-branch');
                     const sem = card.getAttribute('data-sem');
-                    const isHard = card.getAttribute('data-hard') === 'true';
+                    const type = card.getAttribute('data-type');
 
-                    // Check Search Query
+                    // Check Text Search
                     const matchesSearch = title.includes(query) || code.includes(query);
 
-                    // Check Category Filter
-                    let matchesFilter = true;
-                    if (currentFilter === 'S1') matchesFilter = sem === 'S1';
-                    if (currentFilter === 'S2') matchesFilter = sem === 'S2';
-                    if (currentFilter === 'HARD') matchesFilter = isHard;
+                    // Check Dropdowns (If 'COMMON', it appears for all branches in S1/S2)
+                    const matchesBranch = (branchVal === 'ALL' || branch === branchVal || branch === 'COMMON');
+                    const matchesSem = (semVal === 'ALL' || sem === semVal);
+                    const matchesType = (typeVal === 'ALL' || type === typeVal);
 
-                    if (matchesSearch && matchesFilter) {
+                    if (matchesSearch && matchesBranch && matchesSem && matchesType) {
                         card.style.display = 'flex';
                         visibleCount++;
                     } else {
@@ -379,32 +486,29 @@
                     }
                 });
 
-                // Update UI based on results
+                // Update UI
                 emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
                 resultCount.textContent = `${visibleCount} Subject${visibleCount !== 1 ? 's' : ''}`;
             }
 
-            // Bind Search Input
+            // Bind Event Listeners
             searchInput.addEventListener('input', filterCards);
+            branchSelect.addEventListener('change', filterCards);
+            semSelect.addEventListener('change', filterCards);
+            subjectSelect.addEventListener('change', filterCards);
 
-            // Bind Category Filters
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    // Update Active Button Styling
-                    filterBtns.forEach(b => {
-                        b.classList.remove('bg-slate-800', 'text-white', 'active', 'shadow-sm');
-                        b.classList.add('bg-white', 'text-slate-600');
-                    });
-                    
-                    e.currentTarget.classList.remove('bg-white', 'text-slate-600');
-                    e.currentTarget.classList.add('bg-slate-800', 'text-white', 'active', 'shadow-sm');
-
-                    currentFilter = e.currentTarget.getAttribute('data-filter');
+            // Clear Filters Button Logic
+            if(clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    searchInput.value = '';
+                    branchSelect.value = 'ALL';
+                    semSelect.value = 'ALL';
+                    subjectSelect.value = 'ALL';
                     filterCards();
                 });
-            });
+            }
 
-            // Keyboard shortcut (Ctrl+K) to focus search
+            // Keyboard shortcut (Ctrl+K)
             document.addEventListener('keydown', (e) => {
                 if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                     e.preventDefault();
@@ -412,32 +516,56 @@
                 }
             });
 
+            // --- 2. MODAL LOGIC (Option B implementation) ---
+            const modal = document.getElementById('heatmap-modal');
+            const modalContent = document.getElementById('modal-content');
+            const backdrop = document.getElementById('modal-backdrop');
+            const closeBtn = document.getElementById('close-modal-btn');
+            const scanBtns = document.querySelectorAll('.scan-btn');
 
-            // --- 2. SCROLL REVEAL INTERSECTION OBSERVER ---
+            function openModal() {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0', 'pointer-events-none');
+                    modal.classList.add('opacity-100', 'pointer-events-auto');
+                    modalContent.classList.remove('translate-y-full', 'sm:translate-y-10');
+                    modalContent.classList.add('translate-y-0');
+                    document.body.style.overflow = 'hidden'; 
+                }, 10);
+            }
+
+            function closeModal() {
+                modal.classList.remove('opacity-100', 'pointer-events-auto');
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                modalContent.classList.remove('translate-y-0');
+                modalContent.classList.add('translate-y-full', 'sm:translate-y-10');
+                document.body.style.overflow = '';
+                
+                setTimeout(() => { modal.classList.add('hidden'); }, 300);
+            }
+
+            scanBtns.forEach(btn => btn.addEventListener('click', openModal));
+            closeBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+
+
+            // --- 3. SCROLL REVEAL INTERSECTION OBSERVER ---
             const scrollObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
             }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
-            document.querySelectorAll('.scroll-reveal').forEach(el => {
-                scrollObserver.observe(el);
-            });
+            document.querySelectorAll('.scroll-reveal').forEach(el => scrollObserver.observe(el));
 
 
-            // --- 3. 3D BACKGROUND PARALLAX SCROLL ---
+            // --- 4. BACKGROUND PARALLAX SCROLL ---
             let lastScrollY = window.scrollY;
             let ticking = false;
-
             window.addEventListener('scroll', () => {
                 lastScrollY = window.scrollY;
                 if (!ticking) {
                     window.requestAnimationFrame(() => {
                         const scrollBg1 = document.getElementById('scroll-bg-1');
                         const scrollBg2 = document.getElementById('scroll-bg-2');
-                        
                         if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.4}px)`;
                         if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
                         ticking = false;
@@ -447,25 +575,7 @@
             }, { passive: true });
 
 
-            // --- 4. 3D MOUSE PARALLAX & TILT (PC) ---
-            document.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth - 0.5) * 2; 
-                const y = (e.clientY / window.innerHeight - 0.5) * 2;
-                applyParallax(x, y);
-            });
-            document.addEventListener('mouseleave', () => applyParallax(0, 0));
-
-            // --- 5. GYROSCOPE TILT PARALLAX (Mobile) ---
-            if (window.DeviceOrientationEvent) {
-                window.addEventListener('deviceorientation', (e) => {
-                    if(e.gamma === null || e.beta === null) return;
-                    let x = Math.max(-1, Math.min(1, e.gamma / 40));
-                    let y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
-                    applyParallax(x, y);
-                }, true);
-            }
-
-            // --- SHARED 3D ENGINE ---
+            // --- 5. 3D MOUSE PARALLAX & TILT (PC + Mobile) ---
             function applyParallax(x, y) {
                 const mouseOrb1 = document.getElementById('mouse-orb-1');
                 const mouseOrb2 = document.getElementById('mouse-orb-2');
@@ -474,9 +584,25 @@
 
                 const tiltCard = document.getElementById('tilt-card');
                 if(tiltCard) {
-                    // Mild rotation so the text box remains easily typable
+                    // Mild rotation so dropdowns and text box remain perfectly usable
                     tiltCard.style.transform = `perspective(1000px) rotateX(${y * -3}deg) rotateY(${x * 3}deg)`;
                 }
+            }
+
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+                const y = (e.clientY / window.innerHeight - 0.5) * 2;
+                applyParallax(x, y);
+            });
+            document.addEventListener('mouseleave', () => applyParallax(0, 0));
+
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', (e) => {
+                    if(e.gamma === null || e.beta === null) return;
+                    let x = Math.max(-1, Math.min(1, e.gamma / 40));
+                    let y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
+                    applyParallax(x, y);
+                }, true);
             }
         });
     </script>
