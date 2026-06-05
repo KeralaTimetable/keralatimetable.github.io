@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
+    
+    <title>Campus Ambassador Program | Kerala Timetable</title>
+    <link rel="canonical" href="https://keralatimetable.github.io/ambassador.html" />
+
+    <meta name="description" content="Join the Kerala Timetable Campus Ambassador Program. Connect your KTU college with top academic resources, build your resume, and lead your campus community.">
+    <meta name="keywords" content="ktu campus ambassador, kerala timetable ambassador, student leadership ktu, ktu student community">
+    
+    <script src="/tailwind-local.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        
+        .bg-mesh {
+            background-color: #f8fafc;
+        }
+
+        /* Authentic Glassmorphism */
+        .real-glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        .inner-glass:focus {
+            background: #ffffff;
+            border-color: #818cf8;
+            box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.15);
+            outline: none;
+        }
+
+        select.custom-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23475569%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.25rem top 50%;
+            background-size: 0.65rem auto;
+        }
+
+        @keyframes float-pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+        .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
+
+        @keyframes fadeUpEntry {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+    </style>
+</head>
+
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
+
+    <div id="navigation-container"></div>
+
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="scroll-bg-1" class="absolute top-10 -left-32 md:-left-10 w-72 h-72 md:w-96 md:h-96 transition-transform duration-100 ease-out">
+            <div id="mouse-orb-1" class="w-full h-full bg-amber-400/50 md:bg-amber-400 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+        </div>
+        <div id="scroll-bg-2" class="absolute top-80 -right-32 md:-right-20 w-80 h-80 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-2" class="w-full h-full bg-indigo-500/40 md:bg-indigo-500 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+    <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-12 md:py-16 relative z-10">
+        
+        <div class="text-center mb-12 lg:mb-16">
+            <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 border border-amber-200 text-amber-700 text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
+                <i class="fas fa-star"></i> Student Leadership Initiative
+            </div>
+            <h1 class="animate-fade-up delay-100 text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
+                Campus Ambassador <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Program</span>
+            </h1>
+            <p class="animate-fade-up delay-200 text-slate-600 font-medium max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+                Become the official bridge between your college and the Kerala Timetable platform. Empower your peers, build your resume, and lead your campus.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            <div class="lg:col-span-7 animate-fade-up delay-200 space-y-8">
+                
+                <div class="real-glass rounded-3xl p-6 sm:p-8">
+                    <h2 class="text-2xl font-black text-slate-900 mb-3 flex items-center gap-3">
+                        <i class="fas fa-globe text-indigo-500"></i> What is it?
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                        The program is a student-driven community initiative designed to connect APJAKTU engineering students across Kerala with free, high-quality academic resources. Ambassadors act as the official bridge between their specific college and the Kerala Timetable platform, ensuring their peers have access to the latest syllabi, notes, and server updates.
+                    </p>
+                </div>
+
+                <div class="real-glass rounded-3xl p-6 sm:p-8">
+                    <h2 class="text-2xl font-black text-slate-900 mb-5 flex items-center gap-3">
+                        <i class="fas fa-tasks text-emerald-500"></i> Core Responsibilities
+                    </h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-xs"></i></div>
+                            <div>
+                                <strong class="text-slate-800 block mb-0.5">Resource Sourcing</strong>
+                                <span class="text-slate-600 text-sm">Collaborating with top students and faculty to collect high-quality notes, lab records, and PYQs to upload to the platform.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-xs"></i></div>
+                            <div>
+                                <strong class="text-slate-800 block mb-0.5">Community Management</strong>
+                                <span class="text-slate-600 text-sm">Sharing platform updates, new feature releases, and critical KTU announcements directly into your college's official WhatsApp/Telegram groups.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-1 w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-xs"></i></div>
+                            <div>
+                                <strong class="text-slate-800 block mb-0.5">Creative Marketing</strong>
+                                <span class="text-slate-600 text-sm">Distribute highly distinct, artistic marketing materials—like vintage storybook-style digital flyers featuring detailed black-and-white ink illustrations, fine stippling, and bold hatching—to make our platform stand out on your college notice boards.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="real-glass rounded-3xl p-6">
+                        <h3 class="text-lg font-black text-slate-900 mb-4 flex items-center gap-2">
+                            <i class="fas fa-sync-alt text-blue-500"></i> The Lifecycle
+                        </h3>
+                        <ol class="text-sm text-slate-600 space-y-3 relative border-l-2 border-slate-200 ml-3 pl-4">
+                            <li class="relative">
+                                <span class="absolute -left-[23px] top-0 w-3 h-3 bg-white border-2 border-blue-500 rounded-full"></span>
+                                <strong>Application:</strong> Apply via the form.
+                            </li>
+                            <li class="relative">
+                                <span class="absolute -left-[23px] top-0 w-3 h-3 bg-white border-2 border-blue-500 rounded-full"></span>
+                                <strong>Onboarding:</strong> Join the central networking hub.
+                            </li>
+                            <li class="relative">
+                                <span class="absolute -left-[23px] top-0 w-3 h-3 bg-white border-2 border-blue-500 rounded-full"></span>
+                                <strong>The Term:</strong> Serve for 3-6 months.
+                            </li>
+                            <li class="relative">
+                                <span class="absolute -left-[23px] top-0 w-3 h-3 bg-white border-2 border-blue-500 rounded-full"></span>
+                                <strong>Graduation:</strong> Final review & certification.
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="real-glass rounded-3xl p-6">
+                        <h3 class="text-lg font-black text-slate-900 mb-4 flex items-center gap-2">
+                            <i class="fas fa-gift text-rose-500"></i> Perks & Benefits
+                        </h3>
+                        <ul class="text-sm text-slate-600 space-y-3">
+                            <li class="flex items-center gap-2"><i class="fas fa-certificate text-rose-400 w-4"></i> Verified CA Certificate</li>
+                            <li class="flex items-center gap-2"><i class="fab fa-linkedin text-rose-400 w-4"></i> LinkedIn Endorsements</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-users text-rose-400 w-4"></i> Exclusive Networking</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-rocket text-rose-400 w-4"></i> Direct Platform Impact</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="lg:col-span-5 relative animate-fade-up delay-300">
+                <div class="real-glass rounded-[2rem] p-6 sm:p-8 w-full sticky top-24 z-20">
+                    <h2 class="text-2xl font-black text-slate-800 tracking-tight mb-2">Apply Now</h2>
+                    <p class="text-slate-500 text-sm mb-6">Fill out the form below to join the first cohort of Campus Ambassadors.</p>
+
+                    <form onsubmit="submitApplication(event)" class="space-y-4">
+                        
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Full Name</label>
+                            <input type="text" id="fullName" required placeholder="John Doe" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Email</label>
+                                <input type="email" id="email" required placeholder="john@example.com" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">WhatsApp No.</label>
+                                <input type="tel" id="whatsapp" required placeholder="+91" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">College Name</label>
+                            <input type="text" id="college" required placeholder="Enter full college name" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Branch</label>
+                                <select id="branch" required class="custom-select inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="CSE/IT">CSE / IT</option>
+                                    <option value="ECE/EEE">ECE / EEE</option>
+                                    <option value="ME/CE">ME / CE</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Semester</label>
+                                <select id="semester" required class="custom-select inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="S1/S2">S1 / S2</option>
+                                    <option value="S3/S4">S3 / S4</option>
+                                    <option value="S5/S6">S5 / S6</option>
+                                    <option value="S7/S8">S7 / S8</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Why should we select you?</label>
+                            <textarea id="reason" required rows="3" placeholder="Tell us about your community involvement or digital marketing skills..." class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3 resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full mt-4 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transform transition hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            Submit Application <i class="fas fa-paper-plane text-xs"></i>
+                        </button>
+                    </form>
+                    
+                    <div id="success-state" class="hidden absolute inset-0 bg-white/95 backdrop-blur-md rounded-[2rem] flex flex-col items-center justify-center p-8 text-center z-30">
+                        <div class="w-16 h-16 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center text-3xl mb-4 shadow-sm">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-800 mb-2">Application Received!</h3>
+                        <p class="text-sm text-slate-500">Thank you for your interest. We will review your profile and reach out via WhatsApp soon.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center relative z-10">
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
+            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
+        </div>
+    </footer>
+
+    <script src="/components.js?v=15"></script>
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // Firebase Configuration (From your existing app)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
+            authDomain: "kerala-timetable-db.firebaseapp.com",
+            databaseURL: "https://kerala-timetable-db-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "kerala-timetable-db",
+            storageBucket: "kerala-timetable-db.firebasestorage.app",
+            messagingSenderId: "527439836518",
+            appId: "1:527439836518:web:af7725a5bf07d6a4f584a7"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Load Header Navigation
+        if(typeof loadNavigation === 'function') loadNavigation('', '/', false);
+
+        // --- REAL FIREBASE FORM SUBMISSION ---
+        window.submitApplication = async function(e) {
+            e.preventDefault(); // Prevent page reload
+            
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            
+            // Show loading state
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            btn.disabled = true;
+            
+            // Gather all the data from the form
+            const applicationData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                college: document.getElementById('college').value,
+                branch: document.getElementById('branch').value,
+                semester: document.getElementById('semester').value,
+                reason: document.getElementById('reason').value,
+                submittedAt: new Date().toISOString()
+            };
+
+            try {
+                // Point to a new node in your database called 'ambassador_applications'
+                const dbRef = ref(db, 'ambassador_applications');
+                // Create a new unique ID for this submission
+                const newApplicationRef = push(dbRef);
+                
+                // Save the data to Firebase
+                await set(newApplicationRef, applicationData);
+                
+                // Show the success screen
+                document.getElementById('success-state').classList.remove('hidden');
+                
+            } catch (error) {
+                console.error("Error saving data: ", error);
+                alert("Oops! Something went wrong while submitting. Please check your connection and try again.");
+                // Revert button if there's an error
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // --- 1. BUTTERY SMOOTH VERTICAL SCROLL PARALLAX ---
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollBg1 = document.getElementById('scroll-bg-1');
+                    const scrollBg2 = document.getElementById('scroll-bg-2');
+                    
+                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.3}px)`;
+                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // --- 2. 3D MOUSE PARALLAX (For PC) ---
+        function applyParallax(x, y) {
+            const mouseOrb1 = document.getElementById('mouse-orb-1');
+            const mouseOrb2 = document.getElementById('mouse-orb-2');
+            
+            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            applyParallax(x, y);
+        });
+
+        document.addEventListener('mouseleave', () => applyParallax(0, 0));
+
+        // --- 3. GYROSCOPE TILT PARALLAX (For Mobile) ---
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', (e) => {
+                if(e.gamma === null || e.beta === null) return;
+                let x = Math.max(-1, Math.min(1, e.gamma / 40));
+                let y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
+                applyParallax(x, y);
+            }, true);
+        }
+    </script>
+</body>
+</html>
