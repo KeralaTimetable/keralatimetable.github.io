@@ -50,7 +50,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
         <div id="menu-overlay" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
 
         <header class="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all duration-300">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
                 <div class="flex items-center gap-3">
                     <button id="open-menu-btn" class="p-2 -ml-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none lg:hidden">
                         <i class="fas fa-bars text-xl"></i>
@@ -61,18 +61,28 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                     </a>
                 </div>
 
-                <div class="hidden lg:flex gap-3">
-                    <a href="/status.html" class="text-sm px-5 py-2.5 rounded-full flex items-center gap-2 transition-colors ${activePage === 'status' ? 'font-bold text-slate-800 bg-white border border-slate-200 shadow-sm' : 'font-bold text-slate-600 bg-slate-100 hover:bg-slate-200'}">
+                <div class="hidden lg:flex gap-2 items-center">
+                    <a href="/notes.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'notes' ? 'font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 shadow-sm' : 'font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-100'}">
+                        <i class="fas fa-book-open text-[10px]"></i> Study Notes
+                    </a>
+                    <a href="/timetable.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'timetable' ? 'font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 shadow-sm' : 'font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-100'}">
+                        <i class="fas fa-calendar-day text-[10px]"></i> Timetables
+                    </a>
+                    
+                    <!-- Subtle Divider -->
+                    <div class="w-px h-5 bg-slate-200 mx-1"></div>
+                    
+                    <a href="/status.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'status' ? 'font-bold text-slate-800 bg-white border border-slate-200 shadow-sm' : 'font-bold text-slate-600 bg-slate-100 hover:bg-slate-200'}">
                         <span class="relative flex h-2 w-2">
                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                         </span>
                         Status
                     </a>
-                    <a href="/updates.html" class="text-sm px-5 py-2.5 rounded-full flex items-center gap-2 transition-colors ${activePage === 'updates' ? 'font-bold text-white bg-indigo-600 shadow-md' : 'font-bold text-slate-600 bg-slate-100 hover:bg-indigo-600 hover:text-white'}">
+                    <a href="/updates.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'updates' ? 'font-bold text-white bg-indigo-600 shadow-md' : 'font-bold text-slate-600 bg-slate-100 hover:bg-indigo-600 hover:text-white'}">
                         <i class="fas fa-bullhorn text-[10px]"></i> Notice Board
                     </a>
-                    <a href="/blog/index.html" class="text-sm px-5 py-2.5 rounded-full flex items-center gap-2 transition-colors ${activePage === 'blog' ? 'font-bold text-white bg-indigo-600 shadow-md' : 'font-bold text-slate-600 bg-slate-100 hover:bg-indigo-600 hover:text-white'}">
+                    <a href="/blog/index.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'blog' ? 'font-bold text-white bg-indigo-600 shadow-md' : 'font-bold text-slate-600 bg-slate-100 hover:bg-indigo-600 hover:text-white'}">
                         <i class="fas fa-feather-alt text-[10px]"></i> Blog
                     </a>
                 </div>
