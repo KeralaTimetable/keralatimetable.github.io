@@ -55,6 +55,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://keralatimetable.github.io/trend-radar.html</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://keralatimetable.github.io/polls.html</loc>
     <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -80,6 +86,12 @@
   </url>
   <url>
     <loc>https://keralatimetable.github.io/KTU/CSE/notes.html</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://keralatimetable.github.io/KTU/CSE/S2/notes/index.html</loc>
     <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -356,6 +368,12 @@
   </url>
   <url>
     <loc>https://keralatimetable.github.io/timetable_pages/detailed-time-table-of-b-tech-s2-challenge-course-examination-april-2026-2024-scheme-notification.html</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://keralatimetable.github.io/timetable_pages/m-arch-s2-s-fe-june-2026-2016-scheme-examination-notification.html</loc>
     <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
