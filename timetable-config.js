@@ -324,4 +324,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-time-table-of-mca-2-year-s1-s-fe-exam-june-2026-2020-scheme-notification.html",
     "pdfLink": "downloads_timetable/2026-06-08_MCA2YearS1(S,FE)june2026approved.pdf"
 }
+,
+{
+    "id": "mca_2yr_s1_june2026",
+    "title": "MCA 2 Year S1 (S, FE) Exam June 2026",
+    "semester": "S1",
+    "categoryBadge": "S1",
+    "type": "Supply",
+    "scheme": "2020 Scheme",
+    "startDate": "2026-06-09T13:30:00",
+    "endDate": "2026-06-09T16:30:00",
+    "viewLink": "timetable_pages/mca-2-year-s1-s-fe-exam-june-2026-2020-scheme-postponement-of-slot-a-exam-scheduled-for-09-06-2026-notification.html",
+    "pdfLink": "downloads_timetable/2026-06-08_KTU-EX-II#1-4990-2024MCA2YearSlotApostponement.pdf"
+}
 ];
