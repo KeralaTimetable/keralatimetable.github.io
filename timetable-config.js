@@ -311,4 +311,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-time-table-of-b-tech-s4-challenge-course-examination-april-2026-2024-scheme-notification.html",
     "pdfLink": "downloads_timetable/2026-06-02_B.TechS4Challengeapril2026(2024sch)approved.pdf"
 }
+,
+{
+    "id": "mca_2yr_s1_june2026",
+    "title": "MCA 2 Year S1 Supplementary/FE June 2026",
+    "semester": "S1",
+    "categoryBadge": "S1",
+    "type": "Supply",
+    "scheme": "2020 Scheme",
+    "startDate": "2026-06-09T13:30:00",
+    "endDate": "2026-06-17T13:30:00",
+    "viewLink": "timetable_pages/detailed-time-table-of-mca-2-year-s1-s-fe-exam-june-2026-2020-scheme-notification.html",
+    "pdfLink": "downloads_timetable/2026-06-08_MCA2YearS1(S,FE)june2026approved.pdf"
+}
 ];
