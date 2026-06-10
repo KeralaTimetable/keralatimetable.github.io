@@ -337,4 +337,43 @@ window.timetablesData = [
     "viewLink": "timetable_pages/mca-2-year-s1-s-fe-exam-june-2026-2020-scheme-postponement-of-slot-a-exam-scheduled-for-09-06-2026-notification.html",
     "pdfLink": "downloads_timetable/2026-06-08_KTU-EX-II#1-4990-2024MCA2YearSlotApostponement.pdf"
 }
+,
+{
+    "id": "mca_s1_june2026_revised",
+    "title": "MCA S1 (S, FE) Revised Schedule June 2026",
+    "semester": "S1",
+    "categoryBadge": "S1",
+    "type": "Supply",
+    "scheme": "2020 Scheme",
+    "startDate": "2026-06-19T13:30:00",
+    "endDate": "2026-06-19T16:30:00",
+    "viewLink": "timetable_pages/mca-2-years-revised-schedule-of-slot-a-course-20mca101-mathematical-foundations-for-computing-notification.html",
+    "pdfLink": "downloads_timetable/2026-06-10_RevisedscheduleofSlotAcourse20MCA101-MathematicalFoundationsforcomputingnotificationapproved.pdf"
+}
+,
+{
+    "id": "mtech_s1_june2026_reschedule",
+    "title": "M.Tech S1 (S,FE) Power Electronic Circuits Rescheduling June 2026",
+    "semester": "S1",
+    "categoryBadge": "S1",
+    "type": "Supply",
+    "scheme": "2022 Scheme",
+    "startDate": "2026-06-15T09:00:00",
+    "endDate": "2026-06-15T12:00:00",
+    "viewLink": "timetable_pages/rescheduling-of-m-tech-s1-s-fe-exam-june-2026-2022-scheme-course-code-221tee006-power-electronic-circuits-notification.html",
+    "pdfLink": "downloads_timetable/2026-06-10_powerelectroniccircuit.pdf"
+}
+,
+{
+    "id": "rescheduled_exams_june2026",
+    "title": "Rescheduled Examinations June 2026",
+    "semester": "S1-S5",
+    "categoryBadge": "S1-S5",
+    "type": "Supply",
+    "scheme": "Multiple Schemes",
+    "startDate": "2026-06-11T13:30:00",
+    "endDate": "2026-06-23T13:30:00",
+    "viewLink": "timetable_pages/rescheduling-of-examinations-of-08-06-2026-monday-revised-dates-notification.html",
+    "pdfLink": "downloads_timetable/2026-06-10_ReschedulingofExaminationsof08.06.2026,Monday-ReviseddatesNotificationapproved.pdf"
+}
 ];
