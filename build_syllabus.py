@@ -110,7 +110,7 @@ def get_header(title, desc):
     </style>
     <link rel="icon" href="/favicon.png" type="image/png">
     <meta property="og:site_name" content="Kerala Timetable">
-    <meta property="og:image" content="https://keralatimetable.github.io/social-preview.png">
+    <meta property="og:image" content="https://www.keralatimetable.in/social-preview.png">
     <meta property="og:type" content="website">
 </head>
 
