@@ -7,7 +7,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     const logoExtension = isBlog ? ' <span class="text-slate-400 font-medium ml-1">| Blog</span>' : '';
 
     const navHTML = `
-        <div id="mobile-menu" class="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-[60] flex flex-col border-r border-slate-100">
+        <div id="mobile-menu" class="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl transform -translate-x-full z-[60] flex flex-col border-r border-slate-100">
             <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
                 <h2 class="text-lg font-extrabold text-slate-900 tracking-tight">Menu</h2>
                 <button id="close-menu-btn" class="p-2 text-slate-400 hover:text-red-500 transition-colors rounded-full hover:bg-white shadow-sm focus:outline-none">
@@ -47,7 +47,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             </div>
         </div>
 
-        <div id="menu-overlay" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+        <div id="menu-overlay" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 opacity-0 pointer-events-none"></div>
 
         <header class="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all duration-300">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
@@ -69,7 +69,6 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                         <i class="fas fa-calendar-day text-[10px]"></i> Timetables
                     </a>
                     
-                    <!-- Subtle Divider -->
                     <div class="w-px h-5 bg-slate-200 mx-1"></div>
                     
                     <a href="/status.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'status' ? 'font-bold text-slate-800 bg-white border border-slate-200 shadow-sm' : 'font-bold text-slate-600 bg-slate-100 hover:bg-slate-200'}">
@@ -102,6 +101,12 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     const closeBtn = document.getElementById('close-menu-btn');
     const menu = document.getElementById('mobile-menu');
     const overlay = document.getElementById('menu-overlay');
+
+    // Add the animations back dynamically after a tiny delay so the browser doesn't trigger them on load
+    setTimeout(() => {
+        if (menu) menu.classList.add('transition-transform', 'duration-300', 'ease-in-out');
+        if (overlay) overlay.classList.add('transition-opacity', 'duration-300');
+    }, 50);
 
     function toggleMenu() {
         menu.classList.toggle('-translate-x-full');
