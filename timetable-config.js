@@ -376,4 +376,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/rescheduling-of-examinations-of-08-06-2026-monday-revised-dates-notification.html",
     "pdfLink": "downloads_timetable/2026-06-10_ReschedulingofExaminationsof08.06.2026,Monday-ReviseddatesNotificationapproved.pdf"
 }
+,
+{
+    "id": "mca_2yr_s3_june2026",
+    "title": "MCA 2 Year S3 Supply/FE June 2026",
+    "semester": "S3",
+    "categoryBadge": "S3",
+    "type": "Supply",
+    "scheme": "2020 Scheme",
+    "startDate": "2026-06-16T13:30:00",
+    "endDate": "2026-06-22T13:30:00",
+    "viewLink": "timetable_pages/detailed-time-table-of-mca-2-year-s3-s-fe-exam-june-2026-2020-scheme-notification.html",
+    "pdfLink": "downloads_timetable/2026-06-11_MCA2YearS3(S,FE)Exam2026approved.pdf"
+}
 ];
