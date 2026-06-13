@@ -42,13 +42,15 @@
             outline: none;
         }
 
-        /* Custom dropdown styling */
+        /* Fixed dropdown styling to prevent floating arrows and text overlap */
         select.custom-select {
             appearance: none;
+            -webkit-appearance: none;
             background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23475569%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
             background-repeat: no-repeat;
-            background-position: right 1.25rem top 50%;
+            background-position: right 1.2rem center;
             background-size: 0.65rem auto;
+            padding-right: 2.5rem; 
         }
 
         @keyframes float-pulse {
@@ -132,9 +134,9 @@
                     </div>
 
                     <div>
-                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Upload Screenshot Proof <span class="text-red-500">*</span></label>
-                        <input type="file" id="screenshot" accept="image/*" required class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-2.5 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-slate-800 file:text-white hover:file:bg-slate-700 cursor-pointer">
-                        <p class="text-[10px] text-slate-400 mt-2 ml-1">Please include a clear screenshot of the chat showing their number and the message.</p>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Upload Screenshot Proof(s) <span class="text-red-500">*</span></label>
+                        <input type="file" id="screenshot" accept="image/*" required multiple class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-2.5 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-slate-800 file:text-white hover:file:bg-slate-700 cursor-pointer">
+                        <p class="text-[10px] text-slate-400 mt-2 ml-1">You can select multiple screenshots at once to show the full chat history.</p>
                     </div>
 
                     <button type="submit" class="w-full mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-red-500/30 transform transition hover:-translate-y-0.5 flex items-center justify-center gap-2">
@@ -164,6 +166,16 @@
             
             const btn = e.target.querySelector('button[type="submit"]');
             const originalText = btn.innerHTML;
+            
+            const fileInput = document.getElementById('screenshot');
+            const files = fileInput.files;
+
+            // Discord has a strict limit of 10 attachments per message
+            if (files.length > 10) {
+                alert("Please select a maximum of 10 screenshots per report.");
+                return;
+            }
+
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading Proof...';
             btn.disabled = true;
 
@@ -174,14 +186,14 @@
             const number = document.getElementById('offenderNumber').value;
             const type = document.getElementById('violationType').value;
             const description = document.getElementById('description').value;
-            const fileInput = document.getElementById('screenshot');
-            const file = fileInput.files[0];
 
             // Package the data for Discord
             const formData = new FormData();
             formData.append('content', `🚨 **NEW REPORT RECEIVED** 🚨\n**Group:** ${groupName}\n**Offender Number:** ${number}\n**Violation Type:** ${type}\n**Details:** ${description}`);
-            if (file) {
-                formData.append('file', file);
+            
+            // Loop through selected files and append them to formData
+            for (let i = 0; i < files.length; i++) {
+                formData.append(`file[${i}]`, files[i]);
             }
 
             try {
@@ -198,7 +210,7 @@
                 }
             } catch (error) {
                 console.error("Error sending report:", error);
-                alert("Failed to submit report. The image file might be too large.");
+                alert("Failed to submit report. Ensure your internet connection is stable and the files aren't too large.");
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             }
