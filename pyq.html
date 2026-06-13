@@ -172,7 +172,8 @@
                 const response = await fetch('AKTU_BTech_2019_QuestionPapers.json');
                 const rawData = await response.json();
 
-                const validSchemes = ["2019 Scheme", "2024 Scheme"];
+                const validSchemes = ["2019 Scheme", "2024 Scheme (New)"];
+
                 
                 rawData.forEach(item => {
                     if (!item["Scheme"] || !validSchemes.includes(item["Scheme"])) return;
