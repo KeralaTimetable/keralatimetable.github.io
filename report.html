@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
+    
+    <title>Report an Issue | Kerala Timetable</title>
+    <link rel="canonical" href="https://www.keralatimetable.in/report.html" />
+
+    <meta name="description" content="Anonymously report spam, harassment, or rule violations in the Kerala Timetable WhatsApp community.">
+    
+    <script src="/tailwind-local.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        
+        .bg-mesh { background-color: #f8fafc; }
+
+        .real-glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        .inner-glass:focus {
+            background: #ffffff;
+            border-color: #ef4444;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+            outline: none;
+        }
+
+        /* Custom dropdown styling */
+        select.custom-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23475569%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.25rem top 50%;
+            background-size: 0.65rem auto;
+        }
+
+        @keyframes float-pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+        .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
+
+        @keyframes fadeUpEntry {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+    </style>
+</head>
+
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
+
+    <div id="navigation-container" class="z-50 relative"></div>
+
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="scroll-bg-1" class="absolute -top-4 -left-8 md:top-10 md:-left-10 w-64 h-64 md:w-96 md:h-96 transition-transform duration-100 ease-out">
+            <div id="mouse-orb-1" class="w-full h-full bg-red-400/50 md:bg-red-400 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+        </div>
+        <div id="scroll-bg-2" class="absolute top-[40%] -right-8 md:top-80 md:-right-20 w-64 h-64 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-2" class="w-full h-full bg-orange-400/40 md:bg-orange-500 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+    <main class="flex-grow w-full max-w-3xl mx-auto px-4 py-12 md:py-16 relative z-10">
+        
+        <div class="text-center mb-10">
+            <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-200 text-red-600 text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
+                <i class="fas fa-shield-alt"></i> Anonymous Secure Portal
+            </div>
+            <h1 class="animate-fade-up delay-100 text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
+                Report <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">Violations</span>
+            </h1>
+            <p class="animate-fade-up delay-200 text-slate-500 font-medium text-sm max-w-lg mx-auto">
+                Did someone DM you without permission, send spam, or harass you? Report it anonymously below. We ban offenders instantly.
+            </p>
+        </div>
+
+        <div class="animate-fade-up delay-300 relative">
+            <div class="real-glass rounded-[2rem] p-6 sm:p-10">
+                <form id="reportForm" onsubmit="submitReport(event)" class="space-y-5">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Which WhatsApp Group?</label>
+                            <select id="groupName" required class="custom-select inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                                <option value="" disabled selected>Select the group</option>
+                                <option value="Kerala Timetable KTU">Kerala Timetable KTU</option>
+                                <option value="Kerala Timetable KTU 2">Kerala Timetable KTU 2</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Offender's WhatsApp Number</label>
+                            <input type="tel" id="offenderNumber" required placeholder="e.g. +91 98765 43210" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Type of Violation</label>
+                        <select id="violationType" required class="custom-select inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                            <option value="" disabled selected>Select category</option>
+                            <option value="Spammer (Unwanted Links/Ads)">Spammer (Unwanted Links/Ads)</option>
+                            <option value="Scammer (Asking for Money/Assignments)">Scammer (Asking for Money/Assignments)</option>
+                            <option value="Harassment/Creep (Unwanted DMs)">Harassment/Creep (Unwanted DMs)</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">What happened?</label>
+                        <textarea id="description" required rows="3" placeholder="Explain briefly what they sent you..." class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3 resize-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Upload Screenshot Proof <span class="text-red-500">*</span></label>
+                        <input type="file" id="screenshot" accept="image/*" required class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-2.5 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-slate-800 file:text-white hover:file:bg-slate-700 cursor-pointer">
+                        <p class="text-[10px] text-slate-400 mt-2 ml-1">Please include a clear screenshot of the chat showing their number and the message.</p>
+                    </div>
+
+                    <button type="submit" class="w-full mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-red-500/30 transform transition hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                        Submit Anonymous Report <i class="fas fa-paper-plane text-xs"></i>
+                    </button>
+                </form>
+                
+                <div id="success-state" class="hidden absolute inset-0 bg-white/95 backdrop-blur-md rounded-[2rem] flex flex-col items-center justify-center p-8 text-center z-30">
+                    <div class="w-16 h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center text-3xl mb-4 shadow-sm">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-slate-800 mb-2">Report Sent Securely</h3>
+                    <p class="text-sm text-slate-500">Thank you for helping keep the community safe. Our admins have been notified and will investigate immediately.</p>
+                    <button onclick="location.reload()" class="mt-6 text-sm font-bold text-red-500 hover:text-red-600 underline text-underline-offset-4">Submit another report</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/components.js?v=16"></script>
+    <script>
+        if(typeof loadNavigation === 'function') loadNavigation('', '/', false);
+
+        // --- DISCORD WEBHOOK LOGIC ---
+        async function submitReport(e) {
+            e.preventDefault();
+            
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading Proof...';
+            btn.disabled = true;
+
+            // Your live Discord Webhook
+            const webhookUrl = "https://discord.com/api/webhooks/1515231063708926084/_WXcXTorXre0eI01oJfNw0LB_NrbiVN6AHc_29w_jPjdiyqf6F9PVWB4MnHslYRSddUB"; 
+            
+            const groupName = document.getElementById('groupName').value;
+            const number = document.getElementById('offenderNumber').value;
+            const type = document.getElementById('violationType').value;
+            const description = document.getElementById('description').value;
+            const fileInput = document.getElementById('screenshot');
+            const file = fileInput.files[0];
+
+            // Package the data for Discord
+            const formData = new FormData();
+            formData.append('content', `🚨 **NEW REPORT RECEIVED** 🚨\n**Group:** ${groupName}\n**Offender Number:** ${number}\n**Violation Type:** ${type}\n**Details:** ${description}`);
+            if (file) {
+                formData.append('file', file);
+            }
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    document.getElementById('success-state').classList.remove('hidden');
+                    document.getElementById('reportForm').reset();
+                } else {
+                    throw new Error('Failed to send to Discord');
+                }
+            } catch (error) {
+                console.error("Error sending report:", error);
+                alert("Failed to submit report. The image file might be too large.");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // Parallax background logic
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            const orb1 = document.getElementById('mouse-orb-1');
+            const orb2 = document.getElementById('mouse-orb-2');
+            if(orb1) orb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+            if(orb2) orb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+        });
+    </script>
+</body>
+</html>
