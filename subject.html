@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
+    
+    <title>KTU PYQ Download | Kerala Timetable</title>
+    
+    <script src="/tailwind-local.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        .font-sporty { font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em; }
+        
+        .bg-mesh { background-color: #f8fafc; }
+
+        .real-glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        @keyframes float-pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+        .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
+
+        @keyframes fadeUpEntry {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        /* Loader */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #6366f1;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
+
+    <div id="navigation-container" class="z-50 relative"></div>
+
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="scroll-bg-1" class="absolute -top-4 -left-8 md:top-10 md:-left-10 w-64 h-64 md:w-96 md:h-96 transition-transform duration-100 ease-out">
+            <div id="mouse-orb-1" class="w-full h-full bg-indigo-400/30 md:bg-indigo-400 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+        </div>
+        <div id="scroll-bg-2" class="absolute top-[40%] -right-8 md:top-80 md:-right-20 w-64 h-64 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-2" class="w-full h-full bg-cyan-400/30 md:bg-cyan-500 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+    <main class="flex-grow w-full max-w-5xl mx-auto px-4 py-8 md:py-12 relative z-10">
+        
+        <a href="pyq.html" class="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-indigo-600 transition-colors mb-6 bg-white/50 px-4 py-2 rounded-xl border border-slate-200">
+            <i class="fas fa-arrow-left"></i> Back to Vault
+        </a>
+
+        <div id="loadingState" class="flex flex-col items-center justify-center py-20">
+            <div class="loader mb-4"></div>
+            <h2 class="text-xl font-bold text-slate-700">Fetching Question Papers...</h2>
+            <p class="text-sm text-slate-500 mt-2">Searching the database for your subject.</p>
+        </div>
+
+        <div id="headerContainer" class="hidden mb-10 text-center md:text-left">
+            </div>
+
+        <div id="pdfGrid" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            </div>
+
+        <div id="emptyState" class="hidden text-center py-16 real-glass rounded-[2rem]">
+            <div class="w-20 h-20 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 shadow-inner">
+                <i class="fas fa-search-minus"></i>
+            </div>
+            <h3 class="text-2xl font-black text-slate-800 mb-2">Subject Not Found</h3>
+            <p class="text-sm text-slate-500 mb-6">We couldn't find any papers matching that course code.</p>
+            <a href="pyq.html" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition">Return to Directory</a>
+        </div>
+
+    </main>
+
+    <script src="/components.js?v=16"></script>
+    <script>
+        if(typeof loadNavigation === 'function') loadNavigation('', '/', false);
+
+        // --- 1. GET URL PARAMETERS ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetCode = urlParams.get('code');
+        const targetScheme = urlParams.get('scheme') || '2019 Scheme';
+
+        // --- 2. FETCH AND RENDER DATA ---
+        async function loadSubjectData() {
+            if (!targetCode) {
+                showEmptyState();
+                return;
+            }
+
+            try {
+                // Fetch the massive JSON file
+                const response = await fetch('AKTU_BTech_2019_QuestionPapers.json');
+                const rawData = await response.json();
+
+                // Filter for exactly this subject and scheme
+                const subjectPapers = rawData.filter(item => 
+                    item["Course Code"] === targetCode && 
+                    item["Scheme"] === targetScheme &&
+                    item["Download Link"] // Ensure it actually has a link
+                );
+
+                if (subjectPapers.length === 0) {
+                    showEmptyState();
+                    return;
+                }
+
+                // Sort papers by Year (Descending - newest first)
+                subjectPapers.sort((a, b) => (b["Year"] || 0) - (a["Year"] || 0));
+
+                renderHeader(subjectPapers[0]);
+                renderGrid(subjectPapers);
+
+            } catch (error) {
+                console.error("Error loading data:", error);
+                showEmptyState();
+            }
+        }
+
+        // --- 3. RENDER HEADER UI ---
+        function renderHeader(metaData) {
+            const header = document.getElementById('headerContainer');
+            document.title = `${metaData["Course Code"]} - ${metaData["Subject Name"]} PYQ | Kerala Timetable`;
+            
+            header.innerHTML = `
+                <div class="animate-fade-up">
+                    <div class="inline-flex items-center gap-2 mb-3">
+                        <span class="px-3 py-1 bg-slate-800 text-white text-[10px] font-sporty rounded-md shadow-sm">
+                            ${metaData["Course Code"]}
+                        </span>
+                        <span class="px-3 py-1 bg-emerald-100 border border-emerald-200 text-emerald-700 text-[10px] font-bold uppercase tracking-wider rounded-md">
+                            ${metaData["Scheme"]}
+                        </span>
+                    </div>
+                    <h1 class="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-2">
+                        ${metaData["Subject Name"]}
+                    </h1>
+                    <p class="text-slate-500 font-medium text-sm">
+                        <i class="fas fa-university mr-1"></i> ${metaData["Branch"] || 'All Branches'}
+                    </p>
+                </div>
+            `;
+            header.classList.remove('hidden');
+        }
+
+        // --- 4. RENDER PDF CARDS ---
+        function renderGrid(papers) {
+            const grid = document.getElementById('pdfGrid');
+            document.getElementById('loadingState').classList.add('hidden');
+            grid.classList.remove('hidden');
+
+            papers.forEach((paper, index) => {
+                const monthYear = paper["Exam (Month Year)"] || 'Unknown Exam';
+                const year = paper["Year"] || 'N/A';
+                
+                // Logic to generate smart badges based on exam month
+                let badgeClass = "bg-slate-100 text-slate-600 border-slate-200";
+                let badgeIcon = "fa-calendar-alt";
+                let badgeText = "Exam Session";
+
+                const myLower = monthYear.toLowerCase();
+                if (myLower.includes('supply') || myLower.includes('supplementary')) {
+                    badgeClass = "bg-rose-100 text-rose-600 border-rose-200";
+                    badgeIcon = "fa-sync-alt";
+                    badgeText = "Supplementary";
+                } else if (myLower.includes('december') || myLower.includes('january')) {
+                    badgeClass = "bg-indigo-100 text-indigo-600 border-indigo-200";
+                    badgeIcon = "fa-snowflake";
+                    badgeText = "Winter Session";
+                } else if (myLower.includes('may') || myLower.includes('june') || myLower.includes('july')) {
+                    badgeClass = "bg-amber-100 text-amber-600 border-amber-200";
+                    badgeIcon = "fa-sun";
+                    badgeText = "Summer Session";
+                }
+
+                const delay = index * 100; // Staggered animation delay
+
+                grid.innerHTML += `
+                    <div class="real-glass rounded-2xl p-5 flex flex-col hover:-translate-y-1 transition-transform duration-300 animate-fade-up" style="animation-delay: ${delay}ms;">
+                        
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex flex-col">
+                                <span class="text-3xl font-black text-slate-800 tracking-tighter leading-none">${year}</span>
+                                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">${monthYear}</span>
+                            </div>
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 border text-[9px] font-black uppercase tracking-wider rounded-md ${badgeClass}">
+                                <i class="fas ${badgeIcon}"></i> ${badgeText}
+                            </span>
+                        </div>
+
+                        <div class="mt-auto pt-4 flex">
+                            <a href="${paper["Download Link"]}" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-indigo-600 text-white text-sm font-bold py-3.5 px-4 rounded-xl transition shadow-lg shadow-slate-800/20">
+                                <i class="fas fa-file-pdf"></i> Download PDF
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function showEmptyState() {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('emptyState').classList.remove('hidden');
+        }
+
+        // Initialize script
+        document.addEventListener('DOMContentLoaded', loadSubjectData);
+
+        // Parallax background logic
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            const orb1 = document.getElementById('mouse-orb-1');
+            const orb2 = document.getElementById('mouse-orb-2');
+            if(orb1) orb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+            if(orb2) orb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+        });
+    </script>
+</body>
+</html>
