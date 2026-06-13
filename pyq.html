@@ -11,8 +11,6 @@
     <link rel="canonical" href="https://www.keralatimetable.in/pyq.html" />
 
     <meta name="description" content="Download KTU B.Tech Previous Year Question Papers (PYQs) for all branches and semesters. Instant PDF downloads for 2019 and 2024 scheme.">
-    <meta name="keywords" content="ktu pyq, ktu previous year question papers, ktu btech question papers, ktu python pyq, ktu maths pyq">
-    <meta name="robots" content="index, follow">
     
     <script src="/tailwind-local.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -39,10 +37,10 @@
         .subject-card:hover { transform: translateY(-4px); box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.15); border-color: #c7d2fe; }
 
         @keyframes fadeUpEntry {
-            0% { opacity: 0; transform: translateY(15px); }
+            0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-up { animation: fadeUpEntry 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-fade-up { animation: fadeUpEntry 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
         /* Loading Spinner */
         .loader {
@@ -55,10 +53,6 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
-    <link rel="icon" href="/favicon.png" type="image/png">
-    <meta property="og:site_name" content="Kerala Timetable">
-    <meta property="og:image" content="https://www.keralatimetable.in/social-preview.png">
-    <meta property="og:type" content="website">
 </head>
 
 <body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
@@ -75,7 +69,7 @@
                 Previous Year <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-emerald-500">Questions</span>
             </h1>
             <p class="animate-fade-up text-slate-500 font-medium md:text-lg max-w-2xl mx-auto mb-8">
-                Select your branch and semester to instantly access highly optimized PYQ PDFs.
+                Follow the steps below to instantly access highly optimized PYQ PDFs.
             </p>
         </div>
 
@@ -107,37 +101,47 @@
         <div class="w-full max-w-5xl mx-auto px-4 relative z-20">
             <div class="bg-white/60 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(79,70,229,0.05)] rounded-3xl p-6 md:p-8">
                 
-                <div id="loadingState" class="flex flex-col items-center justify-center py-6">
+                <div id="loadingState" class="flex flex-col items-center justify-center py-10">
                     <div class="loader mb-3"></div>
-                    <p class="text-sm font-bold text-slate-500">Loading Database...</p>
+                    <p class="text-sm font-bold text-slate-500">Loading PYQ Database...</p>
                 </div>
 
                 <div id="dynamicContent" class="hidden">
-                    <div class="mb-8">
+                    
+                    <div id="step-scheme" class="mb-8">
                         <h2 class="text-sm font-black text-slate-800 uppercase tracking-widest mb-4 flex items-center gap-2">
-                            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs">1</span> 
+                            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs shadow-sm">1</span> 
+                            Select Scheme
+                        </h2>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="scheme-container">
+                            </div>
+                    </div>
+
+                    <div id="step-branch" class="hidden mb-8 border-t border-slate-200/60 pt-8">
+                        <h2 class="text-sm font-black text-slate-800 uppercase tracking-widest mb-4 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs shadow-sm">2</span> 
                             Select Branch
                         </h2>
                         <div class="grid grid-cols-2 md:grid-cols-5 gap-3" id="branch-container">
                             </div>
                     </div>
 
-                    <div class="mb-8 border-t border-slate-200/60 pt-8" id="semester-section">
+                    <div id="step-semester" class="hidden mb-8 border-t border-slate-200/60 pt-8">
                         <h2 class="text-sm font-black text-slate-800 uppercase tracking-widest mb-4 flex items-center gap-2">
-                            <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs">2</span> 
+                            <span class="w-6 h-6 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-xs shadow-sm">3</span> 
                             Select Semester
                         </h2>
                         <div class="flex overflow-x-auto no-scrollbar gap-2 pb-2" id="semester-container">
                             </div>
                     </div>
 
-                    <div class="border-t border-slate-200/60 pt-8" id="subject-section">
-                        <div class="flex items-center justify-between mb-6">
+                    <div id="step-subject" class="hidden border-t border-slate-200/60 pt-8">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-3">
                             <h2 class="text-sm font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
-                                <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs"><i class="fas fa-check"></i></span> 
-                                Available Subjects
+                                <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs shadow-sm"><i class="fas fa-check"></i></span> 
+                                Choose Subject
                             </h2>
-                            <span id="result-count" class="text-xs font-bold text-slate-400 bg-slate-100 px-3 py-1 rounded-full">0 Subjects</span>
+                            <span id="result-count" class="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">0 Subjects Found</span>
                         </div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="subject-container">
@@ -155,50 +159,48 @@
         if(typeof loadNavigation === 'function') loadNavigation('', '', false);
 
         // --- STATE MANAGEMENT ---
+        // New structure: pyqDatabase[scheme][branch][sem][courseCode]
         let pyqDatabase = {};
+        
+        let activeScheme = null; 
         let activeBranch = null; 
-        let activeSem = 'S1';     
+        let activeSem = null;     
 
-        // --- 1. THE DATA ENGINE (Dynamic Parsing) ---
+        // --- 1. THE DATA ENGINE ---
         async function buildDatabaseFromJSON() {
             try {
-                // Fetch your scraped JSON file
                 const response = await fetch('AKTU_BTech_2019_QuestionPapers.json');
                 const rawData = await response.json();
 
                 const validSchemes = ["2019 Scheme", "2024 Scheme"];
                 
-                // Process the massive array into our structured UI database
                 rawData.forEach(item => {
                     if (!item["Scheme"] || !validSchemes.includes(item["Scheme"])) return;
                     if (!item["Branch"] || !item["Course Code"]) return;
 
+                    const scheme = item["Scheme"];
                     const branch = item["Branch"];
                     const sem = extractSemester(item["Semester / Exam Group"]);
-                    if (!sem) return; // Skip if we can't determine semester
+                    if (!sem) return; 
 
                     const courseCode = item["Course Code"];
                     const subjectName = item["Subject Name"];
-                    const scheme = item["Scheme"];
 
-                    // Initialize branch if it doesn't exist
-                    if (!pyqDatabase[branch]) {
-                        pyqDatabase[branch] = { 
+                    // Build the nested hierarchy
+                    if (!pyqDatabase[scheme]) pyqDatabase[scheme] = {};
+                    if (!pyqDatabase[scheme][branch]) {
+                        pyqDatabase[scheme][branch] = { 
                             name: branch, 
                             icon: getBranchIcon(branch), 
                             semesters: {} 
                         };
                     }
-                    
-                    // Initialize semester if it doesn't exist
-                    if (!pyqDatabase[branch].semesters[sem]) {
-                        pyqDatabase[branch].semesters[sem] = {}; 
+                    if (!pyqDatabase[scheme][branch].semesters[sem]) {
+                        pyqDatabase[scheme][branch].semesters[sem] = {}; 
                     }
 
-                    // Use courseCode as key to prevent duplicate subject cards
-                    // We point the link to our dynamic subject.html page
-                    if (!pyqDatabase[branch].semesters[sem][courseCode]) {
-                        pyqDatabase[branch].semesters[sem][courseCode] = {
+                    if (!pyqDatabase[scheme][branch].semesters[sem][courseCode]) {
+                        pyqDatabase[scheme][branch].semesters[sem][courseCode] = {
                             code: courseCode,
                             name: subjectName,
                             link: `subject.html?code=${courseCode}&scheme=${encodeURIComponent(scheme)}`
@@ -206,26 +208,21 @@
                     }
                 });
 
-                // Set initial active branch to the first one alphabetically
-                if (Object.keys(pyqDatabase).length > 0) {
-                    activeBranch = Object.keys(pyqDatabase).sort()[0];
-                }
-
-                // Hide loading state, show content
                 document.getElementById('loadingState').classList.add('hidden');
                 document.getElementById('dynamicContent').classList.remove('hidden');
 
-                updateUI();
+                // Initial render: Only show the schemes
+                renderSchemes();
 
             } catch (error) {
                 console.error("Error loading JSON database:", error);
                 document.getElementById('loadingState').innerHTML = `
-                    <p class="text-red-500 text-sm font-bold"><i class="fas fa-exclamation-triangle"></i> Failed to load database. Please make sure AKTU_BTech_2019_QuestionPapers.json is uploaded.</p>
+                    <p class="text-red-500 text-sm font-bold"><i class="fas fa-exclamation-triangle"></i> Failed to load database. Please ensure AKTU_BTech_2019_QuestionPapers.json exists.</p>
                 `;
             }
         }
 
-        // Helper: Convert scraped semester strings ("Fourth Semester...") to "S4"
+        // Helpers
         function extractSemester(semString) {
             if (!semString) return null;
             const str = semString.toLowerCase();
@@ -240,7 +237,6 @@
             return null; 
         }
 
-        // Helper: Assign cool icons based on branch name
         function getBranchIcon(branchName) {
             const name = branchName.toLowerCase();
             if (name.includes('computer') || name.includes('data')) return 'fa-laptop-code';
@@ -253,30 +249,53 @@
         }
 
         // --- RENDER FUNCTIONS ---
+
+        function renderSchemes() {
+            const container = document.getElementById('scheme-container');
+            container.innerHTML = '';
+            
+            const availableSchemes = Object.keys(pyqDatabase).sort();
+
+            availableSchemes.forEach(scheme => {
+                const isActive = activeScheme === scheme;
+                const btnClass = isActive 
+                    ? 'bg-indigo-600 text-white border-indigo-600 shadow-md transform scale-[1.02]' 
+                    : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300 hover:bg-slate-50';
+
+                const iconColor = isActive ? 'text-white' : 'text-indigo-500';
+
+                container.innerHTML += `
+                    <button onclick="selectScheme('${scheme}')" class="flex items-center justify-center gap-2 p-4 rounded-xl border font-bold text-sm transition-all duration-300 ${btnClass}">
+                        <i class="fas fa-layer-group ${iconColor}"></i> ${scheme}
+                    </button>
+                `;
+            });
+        }
+
         function renderBranches() {
             const container = document.getElementById('branch-container');
             container.innerHTML = '';
 
-            // Sort branches alphabetically
-            const sortedBranches = Object.keys(pyqDatabase).sort();
+            if (!activeScheme || !pyqDatabase[activeScheme]) return;
+
+            const sortedBranches = Object.keys(pyqDatabase[activeScheme]).sort();
 
             sortedBranches.forEach(branchKey => {
-                const branch = pyqDatabase[branchKey];
+                const branchData = pyqDatabase[activeScheme][branchKey];
                 const isActive = activeBranch === branchKey;
                 
-                // Make branch name shorter for UI if it's too long
                 let displayName = branchKey;
                 if(displayName.length > 20) displayName = displayName.substring(0, 18) + '...';
                 
                 const btnClass = isActive 
-                    ? 'bg-slate-800 text-white border-slate-800 shadow-md ring-2 ring-indigo-500/30' 
-                    : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300 hover:bg-slate-50';
+                    ? 'bg-slate-800 text-white border-slate-800 shadow-md ring-2 ring-emerald-500/30' 
+                    : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/50';
 
-                const iconColor = isActive ? 'text-indigo-400' : 'text-slate-400';
+                const iconColor = isActive ? 'text-emerald-400' : 'text-slate-400';
 
                 container.innerHTML += `
-                    <button onclick="selectBranch('${branchKey}')" title="${branchKey}" class="flex flex-col items-center justify-center p-4 rounded-2xl border transition-all duration-200 ${btnClass}">
-                        <i class="fas ${branch.icon} text-xl mb-2 ${iconColor}"></i>
+                    <button onclick="selectBranch('${branchKey}')" title="${branchKey}" class="flex flex-col items-center justify-center p-4 rounded-2xl border transition-all duration-300 ${btnClass}">
+                        <i class="fas ${branchData.icon} text-xl mb-2 ${iconColor}"></i>
                         <span class="font-bold text-[11px] md:text-xs tracking-wide text-center leading-tight">${displayName}</span>
                     </button>
                 `;
@@ -287,25 +306,26 @@
             const container = document.getElementById('semester-container');
             container.innerHTML = '';
 
+            if (!activeScheme || !activeBranch || !pyqDatabase[activeScheme][activeBranch]) return;
+
             const allSems = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'];
 
             allSems.forEach(sem => {
                 const isActive = activeSem === sem;
-                const hasData = pyqDatabase[activeBranch] && 
-                               pyqDatabase[activeBranch].semesters[sem] && 
-                               Object.keys(pyqDatabase[activeBranch].semesters[sem]).length > 0;
+                const hasData = pyqDatabase[activeScheme][activeBranch].semesters[sem] && 
+                               Object.keys(pyqDatabase[activeScheme][activeBranch].semesters[sem]).length > 0;
                 
                 let btnClass = '';
                 if (isActive) {
-                    btnClass = 'bg-indigo-600 text-white border-indigo-600 shadow-md';
+                    btnClass = 'bg-amber-500 text-white border-amber-500 shadow-md';
                 } else if (!hasData) {
-                    btnClass = 'bg-slate-50 text-slate-400 border-slate-200 opacity-50 cursor-not-allowed'; 
+                    btnClass = 'bg-slate-50 text-slate-300 border-slate-100 opacity-60 cursor-not-allowed'; 
                 } else {
-                    btnClass = 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:border-indigo-300';
+                    btnClass = 'bg-white text-slate-600 border-slate-200 hover:bg-amber-50 hover:border-amber-300';
                 }
 
                 container.innerHTML += `
-                    <button ${!hasData ? 'disabled' : ''} onclick="selectSemester('${sem}')" class="flex-shrink-0 px-6 py-3 rounded-xl border font-bold text-sm transition-all duration-200 ${btnClass}">
+                    <button ${!hasData ? 'disabled' : ''} onclick="selectSemester('${sem}')" class="flex-shrink-0 px-6 py-3 rounded-xl border font-black text-sm transition-all duration-300 ${btnClass}">
                         ${sem}
                     </button>
                 `;
@@ -318,46 +338,44 @@
             container.innerHTML = '';
 
             let subjectsDict = {};
-            if (pyqDatabase[activeBranch] && pyqDatabase[activeBranch].semesters[activeSem]) {
-                subjectsDict = pyqDatabase[activeBranch].semesters[activeSem];
+            if (activeScheme && activeBranch && activeSem && 
+                pyqDatabase[activeScheme][activeBranch].semesters[activeSem]) {
+                subjectsDict = pyqDatabase[activeScheme][activeBranch].semesters[activeSem];
             }
             
             const subjectsArray = Object.values(subjectsDict).sort((a, b) => a.name.localeCompare(b.name));
             
-            countBadge.innerText = `${subjectsArray.length} Subjects`;
+            countBadge.innerText = `${subjectsArray.length} Subjects Found`;
 
             if (subjectsArray.length === 0) {
                 container.innerHTML = `
                     <div class="col-span-full py-12 text-center bg-slate-50 border border-slate-200 border-dashed rounded-2xl">
                         <i class="fas fa-folder-open text-3xl text-slate-300 mb-3"></i>
-                        <h3 class="text-sm font-bold text-slate-600">No subjects added yet</h3>
-                        <p class="text-xs text-slate-400 mt-1">Check back later for ${activeBranch} ${activeSem} papers.</p>
+                        <h3 class="text-sm font-bold text-slate-600">No subjects available yet</h3>
+                        <p class="text-xs text-slate-400 mt-1">We are updating the database for ${activeBranch} ${activeSem}.</p>
                     </div>
                 `;
                 return;
             }
 
-            container.classList.remove('animate-fade-up');
-            void container.offsetWidth; 
-            container.classList.add('animate-fade-up');
-
-            subjectsArray.forEach(subject => {
+            subjectsArray.forEach((subject, index) => {
+                const delay = index * 50; // Staggered animation
                 container.innerHTML += `
-                    <div class="subject-card bg-white border border-slate-200 rounded-2xl p-5 flex flex-col relative overflow-hidden group">
+                    <div class="subject-card bg-white border border-slate-200 rounded-2xl p-5 flex flex-col relative overflow-hidden group animate-fade-up" style="animation-delay: ${delay}ms; opacity: 0;">
                         <div class="absolute -bottom-2 -right-2 text-6xl font-black text-slate-900 opacity-[0.02] pointer-events-none select-none z-0">
                             ${activeSem}
                         </div>
                         
                         <div class="relative z-10 flex-grow flex flex-col">
-                            <span class="inline-block px-2.5 py-1 bg-slate-100 border border-slate-200 text-slate-500 text-[10px] font-sporty rounded-md mb-3 w-max">
+                            <span class="inline-block px-2.5 py-1 bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-sporty rounded-md mb-3 w-max shadow-sm">
                                 ${subject.code}
                             </span>
                             <h3 class="text-base font-extrabold text-slate-800 leading-tight mb-4 pr-2 line-clamp-2" title="${subject.name}">
                                 ${subject.name}
                             </h3>
                             
-                            <a href="${subject.link}" class="mt-auto flex items-center justify-center gap-2 w-full bg-slate-50 hover:bg-indigo-600 text-slate-600 hover:text-white font-bold py-2.5 rounded-xl text-sm transition-colors border border-slate-200 hover:border-indigo-600">
-                                <i class="fas fa-file-pdf"></i> View All PYQs
+                            <a href="${subject.link}" class="mt-auto flex items-center justify-center gap-2 w-full bg-slate-800 hover:bg-rose-500 text-white font-bold py-3 rounded-xl text-sm transition-colors shadow-md">
+                                <i class="fas fa-folder-open"></i> Access PYQs
                             </a>
                         </div>
                     </div>
@@ -365,30 +383,59 @@
             });
         }
 
-        // --- INTERACTION HANDLERS ---
+        // --- INTERACTION HANDLERS (Progressive Disclosure Logic) ---
+        
+        function selectScheme(scheme) {
+            activeScheme = scheme;
+            
+            // Reset lower levels
+            activeBranch = null;
+            activeSem = null;
+            
+            renderSchemes(); // Update active state colors
+            
+            // Show Branch section and populate it
+            const branchSection = document.getElementById('step-branch');
+            branchSection.classList.remove('hidden');
+            branchSection.classList.add('animate-fade-up');
+            renderBranches();
+
+            // Hide Semester & Subject sections until branch is chosen
+            document.getElementById('step-semester').classList.add('hidden');
+            document.getElementById('step-subject').classList.add('hidden');
+        }
+
         function selectBranch(branch) {
             activeBranch = branch;
             
-            // Auto-select S1 if current sem is empty for new branch
-            if (!pyqDatabase[activeBranch].semesters[activeSem] || Object.keys(pyqDatabase[activeBranch].semesters[activeSem]).length === 0) {
-                // Find first available semester
-                const availableSems = Object.keys(pyqDatabase[activeBranch].semesters);
-                if(availableSems.length > 0) {
-                    activeSem = availableSems.sort()[0];
-                }
-            }
-            updateUI();
+            // Reset lower levels
+            activeSem = null;
+            
+            renderBranches(); // Update active state colors
+            
+            // Show Semester section and populate it
+            const semSection = document.getElementById('step-semester');
+            semSection.classList.remove('hidden');
+            semSection.classList.remove('animate-fade-up');
+            void semSection.offsetWidth; // trigger reflow
+            semSection.classList.add('animate-fade-up');
+            renderSemesters();
+
+            // Hide Subject section until sem is chosen
+            document.getElementById('step-subject').classList.add('hidden');
         }
 
         function selectSemester(sem) {
             activeSem = sem;
-            updateUI();
-        }
-
-        function updateUI() {
-            if(!activeBranch) return; // Prevent render if DB failed to load
-            renderBranches();
-            renderSemesters();
+            
+            renderSemesters(); // Update active state colors
+            
+            // Show Subject section and populate it
+            const subjectSection = document.getElementById('step-subject');
+            subjectSection.classList.remove('hidden');
+            subjectSection.classList.remove('animate-fade-up');
+            void subjectSection.offsetWidth; // trigger reflow
+            subjectSection.classList.add('animate-fade-up');
             renderSubjects();
         }
 
