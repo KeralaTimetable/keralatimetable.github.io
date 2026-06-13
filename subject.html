@@ -112,15 +112,13 @@
             }
 
             try {
-                // Fetch the massive JSON file
                 const response = await fetch('AKTU_BTech_2019_QuestionPapers.json');
                 const rawData = await response.json();
 
-                // Filter for exactly this subject and scheme
                 const subjectPapers = rawData.filter(item => 
                     item["Course Code"] === targetCode && 
                     item["Scheme"] === targetScheme &&
-                    item["Download Link"] // Ensure it actually has a link
+                    item["Download Link"] 
                 );
 
                 if (subjectPapers.length === 0) {
@@ -128,7 +126,7 @@
                     return;
                 }
 
-                // Sort papers by Year (Descending - newest first)
+                // Sort papers by Year (Descending)
                 subjectPapers.sort((a, b) => (b["Year"] || 0) - (a["Year"] || 0));
 
                 renderHeader(subjectPapers[0]);
@@ -166,47 +164,57 @@
             header.classList.remove('hidden');
         }
 
-        // --- 4. RENDER PDF CARDS ---
+        // --- 4. RENDER PDF CARDS (Updated Logic) ---
         function renderGrid(papers) {
             const grid = document.getElementById('pdfGrid');
             document.getElementById('loadingState').classList.add('hidden');
             grid.classList.remove('hidden');
 
             papers.forEach((paper, index) => {
-                const monthYear = paper["Exam (Month Year)"] || 'Unknown Exam';
+                const rawExamText = paper["Exam (Month Year)"] || 'Unknown Exam';
                 const year = paper["Year"] || 'N/A';
                 
-                // Logic to generate smart badges based on exam month
-                let badgeClass = "bg-slate-100 text-slate-600 border-slate-200";
-                let badgeIcon = "fa-calendar-alt";
-                let badgeText = "Exam Session";
+                // --- Smart KTU Exam Logic ---
+                const myLower = rawExamText.toLowerCase();
+                let badgeClass = "bg-emerald-100 text-emerald-700 border-emerald-200";
+                let badgeIcon = "fa-check-circle";
+                let badgeText = "Regular"; // Default assumption
 
-                const myLower = monthYear.toLowerCase();
-                if (myLower.includes('supply') || myLower.includes('supplementary')) {
-                    badgeClass = "bg-rose-100 text-rose-600 border-rose-200";
+                const hasSupply = myLower.includes('supply') || myLower.includes('supplementary');
+                const hasRegular = myLower.includes('regular');
+
+                if (hasSupply && hasRegular) {
+                    badgeClass = "bg-purple-100 text-purple-700 border-purple-200";
+                    badgeIcon = "fa-layer-group";
+                    badgeText = "Regular & Supply";
+                } else if (hasSupply) {
+                    badgeClass = "bg-rose-100 text-rose-700 border-rose-200";
                     badgeIcon = "fa-sync-alt";
-                    badgeText = "Supplementary";
-                } else if (myLower.includes('december') || myLower.includes('january')) {
-                    badgeClass = "bg-indigo-100 text-indigo-600 border-indigo-200";
-                    badgeIcon = "fa-snowflake";
-                    badgeText = "Winter Session";
-                } else if (myLower.includes('may') || myLower.includes('june') || myLower.includes('july')) {
-                    badgeClass = "bg-amber-100 text-amber-600 border-amber-200";
-                    badgeIcon = "fa-sun";
-                    badgeText = "Summer Session";
+                    badgeText = "Supply";
                 }
 
-                const delay = index * 100; // Staggered animation delay
+                // Clean the month text: remove extra words so it looks pristine (e.g. just "DECEMBER")
+                let cleanMonth = rawExamText
+                    .replace(/regular/gi, '')
+                    .replace(/supplementary/gi, '')
+                    .replace(/supply/gi, '')
+                    .replace(/&/g, '')
+                    .replace(year.toString(), '') // remove the year to prevent duplication
+                    .trim();
+                
+                if(!cleanMonth) cleanMonth = "EXAM";
+
+                const delay = index * 100;
 
                 grid.innerHTML += `
                     <div class="real-glass rounded-2xl p-5 flex flex-col hover:-translate-y-1 transition-transform duration-300 animate-fade-up" style="animation-delay: ${delay}ms;">
                         
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex flex-col">
-                                <span class="text-3xl font-black text-slate-800 tracking-tighter leading-none">${year}</span>
-                                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">${monthYear}</span>
+                                <span class="text-4xl font-black text-slate-800 tracking-tighter leading-none">${year}</span>
+                                <span class="text-[11px] font-bold text-slate-500 uppercase tracking-widest mt-1">${cleanMonth}</span>
                             </div>
-                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 border text-[9px] font-black uppercase tracking-wider rounded-md ${badgeClass}">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1.5 border text-[9px] font-black uppercase tracking-wider rounded-md shadow-sm ${badgeClass}">
                                 <i class="fas ${badgeIcon}"></i> ${badgeText}
                             </span>
                         </div>
