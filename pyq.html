@@ -5,445 +5,370 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
     
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
-    
-    <title>KTU Previous Year Question Papers (PYQ) | Kerala Timetable</title>
-    <link rel="canonical" href="https://www.keralatimetable.in/pyq.html" />
-
-    <meta name="description" content="Download KTU B.Tech Previous Year Question Papers (PYQs) for all branches and semesters. Instant PDF downloads for 2019 and 2024 scheme.">
+    <title>KTU Previous Year Question Papers | Kerala Timetable</title>
+    <meta name="description" content="Search and instantly download KTU B.Tech PYQs. Fast, watermarked, and ready for your exams.">
     
     <script src="/tailwind-local.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        /* The Sporty Font Class */
-        .font-sporty { font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em; }
-
-        .bg-mesh {
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
-                              radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
-                              radial-gradient(at 0% 50%, hsla(228,100%,74%,0.15) 0px, transparent 50%);
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #050505; 
+            color: #ffffff;
+            overflow-x: hidden;
         }
-        
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        .subject-card { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-        .subject-card:hover { transform: translateY(-4px); box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.15); border-color: #c7d2fe; }
-
-        @keyframes fadeUpEntry {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+        /* 3D Parallax & Background Grid */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            pointer-events: none;
         }
-        .animate-fade-up { animation: fadeUpEntry 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        
-        /* Loading Spinner */
+
+        .ambient-glow {
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, rgba(0, 0, 0, 0) 60%);
+            top: -20vw;
+            left: 20vw;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+
+        .glass-input {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Fira Code', monospace;
+        }
+        .glass-input:focus {
+            outline: none;
+            border-color: #10b981; /* Emerald 500 */
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Typewriter Cursor */
+        .cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            color: #10b981;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Loader */
         .loader {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #6366f1;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid #10b981;
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 30px;
+            height: 30px;
             animation: spin 1s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Custom Scrollbar for results */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
     </style>
 </head>
 
-<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+<body class="antialiased min-h-screen flex flex-col relative" onmousemove="handleParallax(event)">
 
-    <div id="navigation-container" class="min-h-[73px] w-full z-50 relative"></div>
+    <div class="bg-grid"></div>
+    <div class="ambient-glow" id="glowOrbs"></div>
 
-    <main class="flex-grow w-full pb-20 relative z-10">
+    <div id="navigation-container" class="z-50 relative"></div>
+
+    <main class="flex-grow w-full max-w-5xl mx-auto px-4 pt-16 pb-20 relative z-10 flex flex-col items-center">
         
-        <div class="w-full max-w-6xl mx-auto px-4 pt-10 pb-6 text-center relative z-20">
-            <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800 border border-slate-700 text-white text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-                <i class="fas fa-file-alt text-emerald-400"></i> KTU PYQ Vault
-            </div>
-            <h1 class="animate-fade-up text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
-                Previous Year <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-emerald-500">Questions</span>
+        <div class="text-center mb-12 transform translate-z-10">
+            <h2 class="text-slate-400 font-medium tracking-widest uppercase text-sm mb-3">Hi, Student</h2>
+            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+                KTU Question Papers <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Instantly.</span>
             </h1>
-            <p class="animate-fade-up text-slate-500 font-medium md:text-lg max-w-2xl mx-auto mb-8">
-                Follow the steps below to instantly access highly optimized PYQ PDFs.
+            <p class="text-slate-400 font-medium md:text-lg mb-8">
+                Explore <span id="typewriter" class="text-emerald-400 font-bold cursor"></span>
             </p>
         </div>
 
-        <div class="w-full max-w-4xl mx-auto px-4 mb-12 animate-fade-up relative z-20">
-            <div class="flex items-center gap-2 mb-4 pl-2">
-                <i class="fas fa-fire text-orange-500"></i>
-                <h3 class="text-sm font-bold text-slate-600 uppercase tracking-wider">Top Searched Subjects</h3>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <a href="subject.html?code=UCEST105&scheme=2019%20Scheme" class="bg-white/80 backdrop-blur-md border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50 rounded-2xl p-4 flex flex-col items-center justify-center text-center transition-all shadow-sm hover:shadow-md group">
-                    <span class="text-[10px] font-sporty text-slate-400 group-hover:text-indigo-400 mb-1">UCEST105</span>
-                    <span class="font-bold text-slate-800 text-sm">Python</span>
-                </a>
-                <a href="subject.html?code=MAT101&scheme=2019%20Scheme" class="bg-white/80 backdrop-blur-md border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50 rounded-2xl p-4 flex flex-col items-center justify-center text-center transition-all shadow-sm hover:shadow-md group">
-                    <span class="text-[10px] font-sporty text-slate-400 group-hover:text-indigo-400 mb-1">MAT101</span>
-                    <span class="font-bold text-slate-800 text-sm">Mathematics</span>
-                </a>
-                <a href="subject.html?code=UCEST206&scheme=2019%20Scheme" class="bg-white/80 backdrop-blur-md border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50 rounded-2xl p-4 flex flex-col items-center justify-center text-center transition-all shadow-sm hover:shadow-md group">
-                    <span class="text-[10px] font-sporty text-slate-400 group-hover:text-indigo-400 mb-1">UCEST206</span>
-                    <span class="font-bold text-slate-800 text-sm">IPR Notes</span>
-                </a>
-                <a href="subject.html?code=EST110&scheme=2019%20Scheme" class="bg-white/80 backdrop-blur-md border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50 rounded-2xl p-4 flex flex-col items-center justify-center text-center transition-all shadow-sm hover:shadow-md group">
-                    <span class="text-[10px] font-sporty text-slate-400 group-hover:text-indigo-400 mb-1">EST110</span>
-                    <span class="font-bold text-slate-800 text-sm">Graphics</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="w-full max-w-5xl mx-auto px-4 relative z-20">
-            <div class="bg-white/60 backdrop-blur-xl border border-white shadow-[0_20px_50px_rgba(79,70,229,0.05)] rounded-3xl p-6 md:p-8">
+        <div id="parallax-container" class="w-full max-w-2xl relative perspective-1000 mb-16">
+            <div id="search-card" class="glass-panel rounded-3xl p-6 md:p-8 w-full flex flex-col gap-4">
                 
-                <div id="loadingState" class="flex flex-col items-center justify-center py-10">
-                    <div class="loader mb-3"></div>
-                    <p class="text-sm font-bold text-slate-500">Loading PYQ Database...</p>
-                </div>
-
-                <div id="dynamicContent" class="hidden">
+                <p class="text-xs text-slate-500 font-bold uppercase tracking-widest text-center">Start by entering your course code</p>
+                
+                <form id="searchForm" onsubmit="executeSearch(event)" class="relative flex items-center">
+                    <i class="fas fa-search absolute left-6 text-slate-400 text-lg"></i>
+                    <input type="text" id="searchInput" autocomplete="off" placeholder="e.g. MAT101, UCEST105..." 
+                           class="glass-input w-full rounded-2xl py-5 pl-14 pr-16 text-lg transition-all" required>
                     
-                    <div id="step-scheme" class="mb-8">
-                        <h2 class="text-sm font-black text-slate-800 uppercase tracking-widest mb-4 flex items-center gap-2">
-                            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs shadow-sm">1</span> 
-                            Select Scheme
-                        </h2>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="scheme-container">
-                            </div>
-                    </div>
+                    <button type="submit" class="absolute right-3 w-12 h-12 bg-emerald-500 hover:bg-emerald-400 text-white rounded-xl flex items-center justify-center transition-all shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:scale-105">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
 
-                    <div id="step-branch" class="hidden mb-8 border-t border-slate-200/60 pt-8">
-                        <h2 class="text-sm font-black text-slate-800 uppercase tracking-widest mb-4 flex items-center gap-2">
-                            <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs shadow-sm">2</span> 
-                            Select Branch
-                        </h2>
-                        <div class="grid grid-cols-2 md:grid-cols-5 gap-3" id="branch-container">
-                            </div>
+                <div class="flex items-center justify-center gap-3 mt-2">
+                    <div class="px-5 py-2 bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 rounded-full text-xs font-bold flex items-center gap-2 cursor-pointer shadow-[0_0_10px_rgba(16,185,129,0.1)]">
+                        <i class="fas fa-file-pdf"></i> PYQ
                     </div>
-
-                    <div id="step-semester" class="hidden mb-8 border-t border-slate-200/60 pt-8">
-                        <h2 class="text-sm font-black text-slate-800 uppercase tracking-widest mb-4 flex items-center gap-2">
-                            <span class="w-6 h-6 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-xs shadow-sm">3</span> 
-                            Select Semester
-                        </h2>
-                        <div class="flex overflow-x-auto no-scrollbar gap-2 pb-2" id="semester-container">
-                            </div>
+                    <div class="px-5 py-2 bg-black/40 border border-white/5 text-slate-500 rounded-full text-xs font-medium flex items-center gap-2 cursor-not-allowed">
+                        <i class="fas fa-book"></i> Notes <i class="fas fa-lock text-[10px]"></i>
                     </div>
-
-                    <div id="step-subject" class="hidden border-t border-slate-200/60 pt-8">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-3">
-                            <h2 class="text-sm font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
-                                <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs shadow-sm"><i class="fas fa-check"></i></span> 
-                                Choose Subject
-                            </h2>
-                            <span id="result-count" class="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">0 Subjects Found</span>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="subject-container">
-                            </div>
+                    <div class="px-5 py-2 bg-black/40 border border-white/5 text-slate-500 rounded-full text-xs font-medium flex items-center gap-2 cursor-not-allowed">
+                        <i class="fas fa-scroll"></i> Syllabus <i class="fas fa-lock text-[10px]"></i>
                     </div>
                 </div>
-
             </div>
         </div>
+
+        <div id="results-area" class="w-full max-w-4xl hidden flex-col items-center">
+            
+            <div id="loading-state" class="hidden flex-col items-center justify-center py-10">
+                <div class="loader mb-4"></div>
+                <p class="text-sm font-bold text-slate-400 animate-pulse">Searching KTU Database...</p>
+            </div>
+
+            <div id="results-header" class="w-full flex justify-between items-end border-b border-slate-800 pb-4 mb-6 hidden">
+                <h3 class="text-xl font-bold text-white"><span id="search-term-display" class="text-emerald-400 font-'Fira Code'"></span> Papers</h3>
+                <span id="result-count" class="text-xs font-bold text-slate-500 bg-slate-900 px-3 py-1 rounded-full border border-slate-800"></span>
+            </div>
+
+            <div id="results-grid" class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+                </div>
+        </div>
+
     </main>
 
     <script src="components.js?v=12"></script>
     <script>
-        // Load Navbar
         if(typeof loadNavigation === 'function') loadNavigation('', '', false);
 
-        // --- STATE MANAGEMENT ---
-        // New structure: pyqDatabase[scheme][branch][sem][courseCode]
-        let pyqDatabase = {};
-        
-        let activeScheme = null; 
-        let activeBranch = null; 
-        let activeSem = null;     
+        // --- 1. Typewriter Effect ---
+        const words = ["MAT101...", "UCEST105...", "EST110...", "GAMAT101...", "Previous Papers..."];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeTarget = document.getElementById("typewriter");
 
-        // --- 1. THE DATA ENGINE ---
-        async function buildDatabaseFromJSON() {
-            try {
-                const response = await fetch('AKTU_BTech_2019_QuestionPapers.json');
-                const rawData = await response.json();
-
-                const validSchemes = ["2019 Scheme", "2024 Scheme (New)"];
-
-                
-                rawData.forEach(item => {
-                    if (!item["Scheme"] || !validSchemes.includes(item["Scheme"])) return;
-                    if (!item["Branch"] || !item["Course Code"]) return;
-
-                    const scheme = item["Scheme"];
-                    const branch = item["Branch"];
-                    const sem = extractSemester(item["Semester / Exam Group"]);
-                    if (!sem) return; 
-
-                    const courseCode = item["Course Code"];
-                    const subjectName = item["Subject Name"];
-
-                    // Build the nested hierarchy
-                    if (!pyqDatabase[scheme]) pyqDatabase[scheme] = {};
-                    if (!pyqDatabase[scheme][branch]) {
-                        pyqDatabase[scheme][branch] = { 
-                            name: branch, 
-                            icon: getBranchIcon(branch), 
-                            semesters: {} 
-                        };
-                    }
-                    if (!pyqDatabase[scheme][branch].semesters[sem]) {
-                        pyqDatabase[scheme][branch].semesters[sem] = {}; 
-                    }
-
-                    if (!pyqDatabase[scheme][branch].semesters[sem][courseCode]) {
-                        pyqDatabase[scheme][branch].semesters[sem][courseCode] = {
-                            code: courseCode,
-                            name: subjectName,
-                            link: `subject.html?code=${courseCode}&scheme=${encodeURIComponent(scheme)}`
-                        };
-                    }
-                });
-
-                document.getElementById('loadingState').classList.add('hidden');
-                document.getElementById('dynamicContent').classList.remove('hidden');
-
-                // Initial render: Only show the schemes
-                renderSchemes();
-
-            } catch (error) {
-                console.error("Error loading JSON database:", error);
-                document.getElementById('loadingState').innerHTML = `
-                    <p class="text-red-500 text-sm font-bold"><i class="fas fa-exclamation-triangle"></i> Failed to load database. Please ensure AKTU_BTech_2019_QuestionPapers.json exists.</p>
-                `;
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typeTarget.innerText = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeTarget.innerText = currentWord.substring(0, charIndex + 1);
+                charIndex++;
             }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000; // Pause at end of word
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500; // Pause before new word
+            }
+            setTimeout(type, typeSpeed);
         }
+        setTimeout(type, 1000);
 
-        // Helpers
-        function extractSemester(semString) {
-            if (!semString) return null;
-            const str = semString.toLowerCase();
-            if (str.includes('s1') || str.includes('first')) return 'S1';
-            if (str.includes('s2') || str.includes('second')) return 'S2';
-            if (str.includes('s3') || str.includes('third')) return 'S3';
-            if (str.includes('s4') || str.includes('fourth')) return 'S4';
-            if (str.includes('s5') || str.includes('fifth')) return 'S5';
-            if (str.includes('s6') || str.includes('sixth')) return 'S6';
-            if (str.includes('s7') || str.includes('seventh')) return 'S7';
-            if (str.includes('s8') || str.includes('eighth')) return 'S8';
-            return null; 
-        }
+        // --- 2. 3D Parallax Tilt Effect ---
+        const card = document.getElementById('search-card');
+        const container = document.getElementById('parallax-container');
 
-        function getBranchIcon(branchName) {
-            const name = branchName.toLowerCase();
-            if (name.includes('computer') || name.includes('data')) return 'fa-laptop-code';
-            if (name.includes('civil')) return 'fa-building';
-            if (name.includes('mechanical')) return 'fa-cogs';
-            if (name.includes('electrical')) return 'fa-bolt';
-            if (name.includes('electronic')) return 'fa-microchip';
-            if (name.includes('robot')) return 'fa-robot';
-            return 'fa-book-open';
-        }
-
-        // --- RENDER FUNCTIONS ---
-
-        function renderSchemes() {
-            const container = document.getElementById('scheme-container');
-            container.innerHTML = '';
+        function handleParallax(e) {
+            // Only apply on larger screens
+            if(window.innerWidth < 768) return; 
             
-            const availableSchemes = Object.keys(pyqDatabase).sort();
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left; // x position within the element.
+            const y = e.clientY - rect.top;  // y position within the element.
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Calculate rotation (max 8 degrees)
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
 
-            availableSchemes.forEach(scheme => {
-                const isActive = activeScheme === scheme;
-                const btnClass = isActive 
-                    ? 'bg-indigo-600 text-white border-indigo-600 shadow-md transform scale-[1.02]' 
-                    : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300 hover:bg-slate-50';
-
-                const iconColor = isActive ? 'text-white' : 'text-indigo-500';
-
-                container.innerHTML += `
-                    <button onclick="selectScheme('${scheme}')" class="flex items-center justify-center gap-2 p-4 rounded-xl border font-bold text-sm transition-all duration-300 ${btnClass}">
-                        <i class="fas fa-layer-group ${iconColor}"></i> ${scheme}
-                    </button>
-                `;
-            });
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
         }
 
-        function renderBranches() {
-            const container = document.getElementById('branch-container');
-            container.innerHTML = '';
+        // Reset transform when mouse leaves the area
+        document.body.addEventListener('mouseleave', () => {
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
 
-            if (!activeScheme || !pyqDatabase[activeScheme]) return;
+        // --- 3. Render API Integration ---
+        const API_URL = "https://ktu-papers-api.onrender.com"; // Your live Python API
 
-            const sortedBranches = Object.keys(pyqDatabase[activeScheme]).sort();
+        async function executeSearch(e) {
+            e.preventDefault();
+            const query = document.getElementById('searchInput').value.trim().toUpperCase();
+            if(!query) return;
 
-            sortedBranches.forEach(branchKey => {
-                const branchData = pyqDatabase[activeScheme][branchKey];
-                const isActive = activeBranch === branchKey;
+            const resultsArea = document.getElementById('results-area');
+            const loader = document.getElementById('loading-state');
+            const grid = document.getElementById('results-grid');
+            const header = document.getElementById('results-header');
+
+            // UI Resets
+            resultsArea.classList.remove('hidden');
+            resultsArea.classList.add('flex');
+            loader.classList.remove('hidden');
+            loader.classList.add('flex');
+            grid.innerHTML = '';
+            header.classList.add('hidden');
+
+            try {
+                // Fetch from your FastAPI backend
+                const response = await fetch(`${API_URL}/search?q=${query}`);
+                if (!response.ok) throw new Error("API Error");
                 
-                let displayName = branchKey;
-                if(displayName.length > 20) displayName = displayName.substring(0, 18) + '...';
+                const data = await response.json();
                 
-                const btnClass = isActive 
-                    ? 'bg-slate-800 text-white border-slate-800 shadow-md ring-2 ring-emerald-500/30' 
-                    : 'bg-white text-slate-600 border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/50';
-
-                const iconColor = isActive ? 'text-emerald-400' : 'text-slate-400';
-
-                container.innerHTML += `
-                    <button onclick="selectBranch('${branchKey}')" title="${branchKey}" class="flex flex-col items-center justify-center p-4 rounded-2xl border transition-all duration-300 ${btnClass}">
-                        <i class="fas ${branchData.icon} text-xl mb-2 ${iconColor}"></i>
-                        <span class="font-bold text-[11px] md:text-xs tracking-wide text-center leading-tight">${displayName}</span>
-                    </button>
-                `;
-            });
-        }
-
-        function renderSemesters() {
-            const container = document.getElementById('semester-container');
-            container.innerHTML = '';
-
-            if (!activeScheme || !activeBranch || !pyqDatabase[activeScheme][activeBranch]) return;
-
-            const allSems = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'];
-
-            allSems.forEach(sem => {
-                const isActive = activeSem === sem;
-                const hasData = pyqDatabase[activeScheme][activeBranch].semesters[sem] && 
-                               Object.keys(pyqDatabase[activeScheme][activeBranch].semesters[sem]).length > 0;
+                loader.classList.remove('flex');
+                loader.classList.add('hidden');
+                header.classList.remove('hidden');
                 
-                let btnClass = '';
-                if (isActive) {
-                    btnClass = 'bg-amber-500 text-white border-amber-500 shadow-md';
-                } else if (!hasData) {
-                    btnClass = 'bg-slate-50 text-slate-300 border-slate-100 opacity-60 cursor-not-allowed'; 
-                } else {
-                    btnClass = 'bg-white text-slate-600 border-slate-200 hover:bg-amber-50 hover:border-amber-300';
+                document.getElementById('search-term-display').innerText = query;
+                document.getElementById('result-count').innerText = `${data.count} found`;
+
+                if (data.count === 0) {
+                    grid.innerHTML = `
+                        <div class="col-span-full py-12 text-center bg-slate-900/50 border border-slate-800 rounded-2xl">
+                            <i class="fas fa-ghost text-4xl text-slate-700 mb-4"></i>
+                            <h3 class="text-slate-300 font-bold">No papers found for "${query}"</h3>
+                            <p class="text-slate-500 text-sm mt-2">Check the course code and try again.</p>
+                        </div>
+                    `;
+                    return;
                 }
 
-                container.innerHTML += `
-                    <button ${!hasData ? 'disabled' : ''} onclick="selectSemester('${sem}')" class="flex-shrink-0 px-6 py-3 rounded-xl border font-black text-sm transition-all duration-300 ${btnClass}">
-                        ${sem}
-                    </button>
-                `;
-            });
-        }
-
-        function renderSubjects() {
-            const container = document.getElementById('subject-container');
-            const countBadge = document.getElementById('result-count');
-            container.innerHTML = '';
-
-            let subjectsDict = {};
-            if (activeScheme && activeBranch && activeSem && 
-                pyqDatabase[activeScheme][activeBranch].semesters[activeSem]) {
-                subjectsDict = pyqDatabase[activeScheme][activeBranch].semesters[activeSem];
-            }
-            
-            const subjectsArray = Object.values(subjectsDict).sort((a, b) => a.name.localeCompare(b.name));
-            
-            countBadge.innerText = `${subjectsArray.length} Subjects Found`;
-
-            if (subjectsArray.length === 0) {
-                container.innerHTML = `
-                    <div class="col-span-full py-12 text-center bg-slate-50 border border-slate-200 border-dashed rounded-2xl">
-                        <i class="fas fa-folder-open text-3xl text-slate-300 mb-3"></i>
-                        <h3 class="text-sm font-bold text-slate-600">No subjects available yet</h3>
-                        <p class="text-xs text-slate-400 mt-1">We are updating the database for ${activeBranch} ${activeSem}.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            subjectsArray.forEach((subject, index) => {
-                const delay = index * 50; // Staggered animation
-                container.innerHTML += `
-                    <div class="subject-card bg-white border border-slate-200 rounded-2xl p-5 flex flex-col relative overflow-hidden group animate-fade-up" style="animation-delay: ${delay}ms; opacity: 0;">
-                        <div class="absolute -bottom-2 -right-2 text-6xl font-black text-slate-900 opacity-[0.02] pointer-events-none select-none z-0">
-                            ${activeSem}
-                        </div>
-                        
-                        <div class="relative z-10 flex-grow flex flex-col">
-                            <span class="inline-block px-2.5 py-1 bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-sporty rounded-md mb-3 w-max shadow-sm">
-                                ${subject.code}
-                            </span>
-                            <h3 class="text-base font-extrabold text-slate-800 leading-tight mb-4 pr-2 line-clamp-2" title="${subject.name}">
-                                ${subject.name}
-                            </h3>
+                // Render Results
+                data.results.forEach(paper => {
+                    grid.innerHTML += `
+                        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between h-full">
+                            <div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="inline-block px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-bold font-'Fira Code' rounded-md">
+                                        ${paper.course_code}
+                                    </span>
+                                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                                        <i class="far fa-calendar-alt"></i> ${paper.exam_session}
+                                    </span>
+                                </div>
+                                <h4 class="text-sm font-bold text-slate-200 leading-snug mb-5 line-clamp-2" title="${paper.title}">
+                                    ${paper.title}
+                                </h4>
+                            </div>
                             
-                            <a href="${subject.link}" class="mt-auto flex items-center justify-center gap-2 w-full bg-slate-800 hover:bg-rose-500 text-white font-bold py-3 rounded-xl text-sm transition-colors shadow-md">
-                                <i class="fas fa-folder-open"></i> Access PYQs
-                            </a>
+                            <button onclick="downloadPaper('${paper.handle}', '${paper.exam_session}', this)" class="w-full bg-slate-800 hover:bg-emerald-600 text-white border border-slate-700 hover:border-emerald-500 text-xs font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 group">
+                                <i class="fas fa-download group-hover:-translate-y-0.5 transition-transform"></i>
+                                <span>Get PDF</span>
+                            </button>
                         </div>
+                    `;
+                });
+
+            } catch (error) {
+                console.error(error);
+                loader.classList.remove('flex');
+                loader.classList.add('hidden');
+                grid.innerHTML = `
+                    <div class="col-span-full py-8 text-center text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-2xl">
+                        <i class="fas fa-exclamation-triangle mb-2"></i>
+                        <p class="text-sm font-bold">Failed to connect to the database server.</p>
+                        <p class="text-xs text-rose-400/70 mt-1">Render API might be waking up (takes ~30s). Please try again.</p>
                     </div>
                 `;
-            });
+            }
         }
 
-        // --- INTERACTION HANDLERS (Progressive Disclosure Logic) ---
-        
-        function selectScheme(scheme) {
-            activeScheme = scheme;
-            
-            // Reset lower levels
-            activeBranch = null;
-            activeSem = null;
-            
-            renderSchemes(); // Update active state colors
-            
-            // Show Branch section and populate it
-            const branchSection = document.getElementById('step-branch');
-            branchSection.classList.remove('hidden');
-            branchSection.classList.add('animate-fade-up');
-            renderBranches();
+        // --- 4. Watermarked PDF Download ---
+        async function downloadPaper(handle, examSession, btnElement) {
+            const originalHTML = btnElement.innerHTML;
+            btnElement.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Processing...`;
+            btnElement.disabled = true;
+            btnElement.classList.add('bg-emerald-600', 'border-emerald-500', 'cursor-not-allowed');
 
-            // Hide Semester & Subject sections until branch is chosen
-            document.getElementById('step-semester').classList.add('hidden');
-            document.getElementById('step-subject').classList.add('hidden');
+            try {
+                const response = await fetch(`${API_URL}/download`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        handles: [handle],
+                        watermark: true
+                    })
+                });
+
+                if (!response.ok) throw new Error("Download failed");
+
+                const blob = await response.blob();
+                const downloadUrl = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = downloadUrl;
+                
+                // Format name: KTU_MAT101_December_2025.pdf
+                const courseCode = document.getElementById('searchInput').value.trim().toUpperCase();
+                const safeSession = examSession.replace(/\s+/g, '_');
+                a.download = `KTU_${courseCode}_${safeSession}.pdf`; 
+                
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                
+                btnElement.innerHTML = `<i class="fas fa-check"></i> Downloaded`;
+                setTimeout(() => {
+                    btnElement.innerHTML = originalHTML;
+                    btnElement.disabled = false;
+                    btnElement.classList.remove('bg-emerald-600', 'border-emerald-500', 'cursor-not-allowed');
+                }, 2000);
+
+            } catch (error) {
+                console.error(error);
+                alert("Could not process PDF. Server might be busy.");
+                btnElement.innerHTML = originalHTML;
+                btnElement.disabled = false;
+                btnElement.classList.remove('bg-emerald-600', 'border-emerald-500', 'cursor-not-allowed');
+            }
         }
-
-        function selectBranch(branch) {
-            activeBranch = branch;
-            
-            // Reset lower levels
-            activeSem = null;
-            
-            renderBranches(); // Update active state colors
-            
-            // Show Semester section and populate it
-            const semSection = document.getElementById('step-semester');
-            semSection.classList.remove('hidden');
-            semSection.classList.remove('animate-fade-up');
-            void semSection.offsetWidth; // trigger reflow
-            semSection.classList.add('animate-fade-up');
-            renderSemesters();
-
-            // Hide Subject section until sem is chosen
-            document.getElementById('step-subject').classList.add('hidden');
-        }
-
-        function selectSemester(sem) {
-            activeSem = sem;
-            
-            renderSemesters(); // Update active state colors
-            
-            // Show Subject section and populate it
-            const subjectSection = document.getElementById('step-subject');
-            subjectSection.classList.remove('hidden');
-            subjectSection.classList.remove('animate-fade-up');
-            void subjectSection.offsetWidth; // trigger reflow
-            subjectSection.classList.add('animate-fade-up');
-            renderSubjects();
-        }
-
-        // --- INITIALIZE ---
-        document.addEventListener('DOMContentLoaded', () => {
-            buildDatabaseFromJSON();
-        });
     </script>
 </body>
 </html>
