@@ -1,0 +1,29 @@
+name: Update KTU Database
+
+on:
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        
+      - name: Run Harvest Script
+        run: python ktu_repo.py harvest
+        
+      - name: Commit and Save Database to GitHub
+        run: |
+          git config --global user.name 'GitHub Action Bot'
+          git config --global user.email 'action@github.com'
+          git add ktu_index.db
+          git commit -m "Auto-updated KTU PYQ Database" || echo "No new papers found"
+          git push
