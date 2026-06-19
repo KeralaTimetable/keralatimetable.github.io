@@ -37,7 +37,7 @@ app.add_middleware(
 
 # ---- branding config (set these to your own) ----
 BRAND_TEXT = os.getenv("BRAND_TEXT", "KERALATIMETABLE.IN")
-LOGO_PATH  = os.getenv("BRAND_LOGO_PATH", "Keralattlogo.png")     # path to your logo .png
+LOGO_PATH  = os.getenv("BRAND_LOGO_PATH", "keralattlogo.png")     # path to your logo .png
 LOGO_BYTES = open(LOGO_PATH, "rb").read() if LOGO_PATH and os.path.exists(LOGO_PATH) else None
 ADMIN_KEY  = os.getenv("ADMIN_KEY", "change-me")
 
