@@ -287,8 +287,8 @@
             }, true);
         }
 
-        // --- 3. Render API Integration & Quick Search ---
-        const API_URL = "https://ktu-papers-api.onrender.com"; 
+        // --- 3. Hugging Face API Integration & Quick Search ---
+        const API_URL = "https://keralatimetable-ktu-papers-api.hf.space"; 
 
         function quickSearch(code) {
             document.getElementById('searchInput').value = code;
@@ -373,7 +373,7 @@
                     <div class="col-span-full py-8 text-center text-rose-600 bg-rose-50 border border-rose-200 rounded-[1.5rem]">
                         <i class="fas fa-exclamation-triangle mb-2"></i>
                         <p class="text-sm font-bold">Failed to connect to the database server.</p>
-                        <p class="text-xs text-rose-500 mt-1">Render API might be waking up (takes ~30s). Please try again.</p>
+                        <p class="text-xs text-rose-500 mt-1">Please check your internet connection and try again.</p>
                     </div>
                 `;
             }
