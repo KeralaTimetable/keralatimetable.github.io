@@ -9,29 +9,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      - name: Clean Binary Files for Hugging Face
+      - name: Build Clean Deployment Bundle
         run: |
-          # Configure a temporary git identity
+          # 1. Create a completely empty folder outside the main repo
+          mkdir ../deploy_bundle
+          
+          # 2. Copy ONLY the specific files your Python API needs to run
+          cp requirements.txt ../deploy_bundle/
+          cp Dockerfile ../deploy_bundle/
+          cp ktu_index.db ../deploy_bundle/
+          
+          # Copy your Python code files
+          cp *.py ../deploy_bundle/ || true
+          
+          # Copy your logo image for the watermark (if it sits in the root)
+          cp keralattlogo.png ../deploy_bundle/ || true
+
+          # 3. Move into the clean folder and initialize a brand-new Git setup
+          cd ../deploy_bundle
+          git init -b main
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
           
-          # Force Git to treat the database as a standard file instead of a blocked binary
-          echo "ktu_index.db -binary" > .gitattributes
-          git add .gitattributes
+          # 4. Stage and commit only these essential files
+          git add .
+          git commit -m "Deploy clean API instance"
           
-          # Strip out all heavy static asset folders and images
-          git rm -r --cached downloads/ || true
-          git rm -r --cached downloads_timetable/ || true
-          git rm -r --cached pdfs/ || true
-          git rm --cached favicon.png || true
-          
-          # Commit these changes purely for the Hugging Face mirror
-          git commit -m "Optimize file structure for Hugging Face deployment" || true
-
-      - name: Push to Hugging Face
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push --force https://KeralaTimetable:$HF_TOKEN@huggingface.co/spaces/KeralaTimetable/ktu-papers-api main
+          # 5. Force push this 100% sterile repository straight to Hugging Face
+          git push --force https://KeralaTimetable:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/KeralaTimetable/ktu-papers-api main
