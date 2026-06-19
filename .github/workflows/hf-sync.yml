@@ -14,16 +14,22 @@ jobs:
 
       - name: Clean Binary Files for Hugging Face
         run: |
-          # Configure a temporary git identity for this worker step
+          # Configure a temporary git identity
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
           
-          # Untrack the heavy PDF folders from this temporary deployment commit
+          # Force Git to treat the database as a standard file instead of a blocked binary
+          echo "ktu_index.db -binary" > .gitattributes
+          git add .gitattributes
+          
+          # Strip out all heavy static asset folders and images
           git rm -r --cached downloads/ || true
           git rm -r --cached downloads_timetable/ || true
+          git rm -r --cached pdfs/ || true
+          git rm --cached favicon.png || true
           
-          # Commit the removal locally on the runner (won't affect your actual GitHub files)
-          git commit -m "Remove binary files for Hugging Face deployment" || true
+          # Commit these changes purely for the Hugging Face mirror
+          git commit -m "Optimize file structure for Hugging Face deployment" || true
 
       - name: Push to Hugging Face
         env:
