@@ -36,9 +36,24 @@ jobs:
           git lfs install
           git lfs track "ktu_index.db"
           
-          # 4. Stage and commit everything
-          git add .
-          git commit -m "Deploy clean API instance with LFS"
+          # 4. Create the required README.md with Hugging Face Docker metadata
+          cat << 'EOF' > README.md
+          ---
+          title: ktu-papers-api
+          emoji: 🐳
+          colorFrom: blue
+          colorTo: indigo
+          sdk: docker
+          pinned: false
+          ---
           
-          # 5. Force push this repository straight to Hugging Face
+          # KTU Papers API
+          Hosted on Hugging Face Spaces using Docker.
+          EOF
+          
+          # 5. Stage and commit everything
+          git add .
+          git commit -m "Deploy clean API instance with LFS and README metadata"
+          
+          # 6. Force push this repository straight to Hugging Face
           git push --force https://KeralaTimetable:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/KeralaTimetable/ktu-papers-api main
