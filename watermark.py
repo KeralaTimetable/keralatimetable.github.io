@@ -1,11 +1,8 @@
 """
 watermark.py
 ------------
-Add your brand watermark (logo + faint diagonal text) to KTU question paper PDFs,
+Add your brand watermark (centered logo + bottom text) to KTU question paper PDFs,
 and merge multiple papers into one branded file. Pure-Python, uses PyMuPDF.
-
-This reproduces what KTUSPOT's "library-orchestrator" does:
-download -> merge -> stamp logo on every page -> return branded PDF.
 """
 
 from __future__ import annotations
@@ -14,18 +11,10 @@ import fitz  # PyMuPDF
 
 def add_watermark(pdf_bytes: bytes,
                   logo_bytes: bytes | None = None,
-                  text: str | None = "KTUSPOT.IN",
-                  logo_scale: float = 0.22,
-                  logo_margin: float = 12,
-                  text_opacity: float = 0.12,
-                  text_color=(0.55, 0.55, 0.55),
-                  angle: int = 45) -> bytes:
-    """Return new PDF bytes with a logo (top-right) and a faint diagonal
-    repeating text watermark stamped on every page.
-
-    logo_bytes : PNG bytes of your logo (optional)
-    text       : diagonal watermark text, e.g. your domain (optional)
-    """
+                  text: str | None = "Downloaded from Keralatimetable.in",
+                  logo_scale: float = 0.65,
+                  text_color=(0.2, 0.2, 0.2)) -> bytes:
+    """Return new PDF bytes with a centered logo and bottom-center text."""
     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
 
     logo_ratio = None
@@ -37,23 +26,29 @@ def add_watermark(pdf_bytes: bytes,
     for page in doc:
         r = page.rect
 
-        # 1) faint diagonal repeating text across the page
-        if text:
-            tw = fitz.TextWriter(r)
-            fs = max(28, r.width / 12)
-            for fx, fy in [(0.10, 0.35), (0.30, 0.62), (0.05, 0.85)]:
-                tw.append(fitz.Point(r.width * fx, r.height * fy), text, fontsize=fs)
-            pivot = fitz.Point(r.width / 2, r.height / 2)
-            tw.write_text(page, opacity=text_opacity, color=text_color,
-                          morph=(pivot, fitz.Matrix(angle)), overlay=True)
-
-        # 2) logo image, top-right corner
+        # 1) Large Logo image, centered in the middle of the page
         if logo_bytes and logo_ratio:
             w = r.width * logo_scale
             h = w * logo_ratio
-            box = fitz.Rect(r.width - logo_margin - w, logo_margin,
-                            r.width - logo_margin, logo_margin + h)
+            
+            # Calculate coordinates for absolute center
+            x0 = (r.width - w) / 2
+            y0 = (r.height - h) / 2
+            
+            box = fitz.Rect(x0, y0, x0 + w, y0 + h)
+            # overlay=True puts it on top. It respects native PNG transparency.
             page.insert_image(box, stream=logo_bytes, overlay=True)
+
+        # 2) Text watermark, bottom center, full opacity
+        if text:
+            font_size = 12
+            # Calculate text width to perfectly center it horizontally
+            text_length = fitz.get_text_length(text, fontname="helv", fontsize=font_size)
+            x_text = (r.width - text_length) / 2
+            y_text = r.height - 30  # 30 units up from the bottom edge
+            
+            # Insert text at the calculated point with full opacity
+            page.insert_text(fitz.Point(x_text, y_text), text, fontsize=font_size, fontname="helv", color=text_color, overlay=True)
 
     out = doc.tobytes(garbage=4, deflate=True)
     doc.close()
@@ -74,7 +69,7 @@ def merge_pdfs(pdf_bytes_list: list[bytes]) -> bytes:
 
 def brand_papers(pdf_bytes_list: list[bytes],
                  logo_bytes: bytes | None = None,
-                 text: str | None = "KTUSPOT.IN") -> bytes:
+                 text: str | None = "Downloaded from Keralatimetable.in") -> bytes:
     """Merge a list of PDFs then watermark the whole thing -> branded bytes."""
     merged = merge_pdfs(pdf_bytes_list) if len(pdf_bytes_list) > 1 else pdf_bytes_list[0]
     return add_watermark(merged, logo_bytes=logo_bytes, text=text)
@@ -86,5 +81,6 @@ if __name__ == "__main__":
     inp, logo, outp = sys.argv[1], sys.argv[2], sys.argv[3]
     pdf = open(inp, "rb").read()
     lg = open(logo, "rb").read()
-    open(outp, "wb").write(add_watermark(pdf, logo_bytes=lg, text="KTUSPOT.IN"))
+    open(outp, "wb").write(add_watermark(pdf, logo_bytes=lg, text="Downloaded from Keralatimetable.in"))
     print("wrote", outp)
+
