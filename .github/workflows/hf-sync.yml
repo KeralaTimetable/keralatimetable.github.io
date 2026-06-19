@@ -26,15 +26,19 @@ jobs:
           # Copy your logo image for the watermark (if it sits in the root)
           cp keralattlogo.png ../deploy_bundle/ || true
 
-          # 3. Move into the clean folder and initialize a brand-new Git setup
+          # 3. Move into the clean folder and initialize Git with LFS support
           cd ../deploy_bundle
           git init -b main
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
           
-          # 4. Stage and commit only these essential files
-          git add .
-          git commit -m "Deploy clean API instance"
+          # Set up Git LFS to handle the database file correctly for Hugging Face
+          git lfs install
+          git lfs track "ktu_index.db"
           
-          # 5. Force push this 100% sterile repository straight to Hugging Face
+          # 4. Stage and commit everything
+          git add .
+          git commit -m "Deploy clean API instance with LFS"
+          
+          # 5. Force push this repository straight to Hugging Face
           git push --force https://KeralaTimetable:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/KeralaTimetable/ktu-papers-api main
