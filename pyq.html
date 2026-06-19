@@ -218,10 +218,11 @@
         }
         setTimeout(type, 1000);
 
-        // --- 2. UNIFIED PARALLAX ENGINE ---
+        // --- 2. UNIFIED 3D PARALLAX ENGINE (Synced with notes.html) ---
         let lastScrollY = window.scrollY;
         let ticking = false;
 
+        // A. Vertical Scroll Parallax
         window.addEventListener('scroll', () => {
             lastScrollY = window.scrollY;
             if (!ticking) {
@@ -237,50 +238,52 @@
             }
         }, { passive: true });
 
-        const card = document.getElementById('search-card');
-        const container = document.getElementById('parallax-container');
-
-        function applyOrbParallax(x, y) {
+        // B. Shared Parallax Function (Moves orbs AND tilts the search card)
+        function applyParallax(x, y) {
             const mouseOrb1 = document.getElementById('mouse-orb-1');
             const mouseOrb2 = document.getElementById('mouse-orb-2');
+            
+            // Move orbs opposite to tilt/mouse
             if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
             if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+
+            // 3D Tilt the Glass Search Card
+            const glassCard = document.getElementById('search-card');
+            if(glassCard) {
+                // Adjust degrees here for stronger/weaker tilt (matches notes.html logic)
+                glassCard.style.transform = `perspective(1000px) rotateX(${y * -6}deg) rotateY(${x * 6}deg) scale3d(1.02, 1.02, 1.02)`;
+            }
         }
 
+        // C. Mouse Parallax (For PC)
         document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; // Range -1 to 1
             const y = (e.clientY / window.innerHeight - 0.5) * 2;
-            applyOrbParallax(x, y);
-
-            if(window.innerWidth >= 768 && container && card) {
-                const rect = container.getBoundingClientRect();
-                
-                if(e.clientY > rect.top - 200 && e.clientY < rect.bottom + 200) {
-                    const cardX = e.clientX - rect.left; 
-                    const cardY = e.clientY - rect.top;  
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = ((cardY - centerY) / centerY) * -8;
-                    const rotateY = ((cardX - centerX) / centerX) * 8;
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                } else {
-                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                }
-            }
+            applyParallax(x, y);
         });
 
+        // Reset 3D Tilt when mouse leaves window
         document.addEventListener('mouseleave', () => {
-            applyOrbParallax(0, 0);
-            if(card) card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            applyParallax(0, 0);
+            const glassCard = document.getElementById('search-card');
+            if(glassCard) glassCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         });
 
+        // D. Gyroscope Tilt Parallax (For Mobile)
         if (window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', (e) => {
                 if(e.gamma === null || e.beta === null) return;
-                let x = Math.max(-1, Math.min(1, e.gamma / 40));
-                let y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
-                applyOrbParallax(x, y);
+                
+                // e.gamma is left/right tilt (-90 to 90)
+                // e.beta is front/back tilt (-180 to 180). Assume ~45 degrees is neutral holding position.
+                let x = e.gamma / 40; 
+                let y = (e.beta - 45) / 40; 
+
+                // Cap the values between -1 and 1 so it doesn't tilt too far
+                x = Math.max(-1, Math.min(1, x));
+                y = Math.max(-1, Math.min(1, y));
+
+                applyParallax(x, y);
             }, true);
         }
 
