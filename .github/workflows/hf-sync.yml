@@ -11,6 +11,20 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Clean Binary Files for Hugging Face
+        run: |
+          # Configure a temporary git identity for this worker step
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          
+          # Untrack the heavy PDF folders from this temporary deployment commit
+          git rm -r --cached downloads/ || true
+          git rm -r --cached downloads_timetable/ || true
+          
+          # Commit the removal locally on the runner (won't affect your actual GitHub files)
+          git commit -m "Remove binary files for Hugging Face deployment" || true
+
       - name: Push to Hugging Face
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
