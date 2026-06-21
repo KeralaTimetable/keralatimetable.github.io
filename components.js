@@ -56,7 +56,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                     <a href="/index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        <svg class="w-6 h-6 sm:w-7 sm:h-7 text-indigo-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <img src="/k.png" alt="Kerala Timetable Logo" class="w-6 h-6 sm:w-7 sm:h-7 object-contain shrink-0" />
                         <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-none">Kerala <span class="text-indigo-600">Timetable</span>${logoExtension}</h1>
                     </a>
                 </div>
