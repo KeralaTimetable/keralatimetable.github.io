@@ -2,7 +2,8 @@ import os
 from datetime import datetime, timezone
 
 # --- CONFIGURATION ---
-BASE_URL = "https://www.keralatimetable.in/"
+# REMOVED 'www.' to fix the Google Search Console Redirect Error
+BASE_URL = "https://keralatimetable.in/"
 # Folders or files you DO NOT want in Google Search
 EXCLUDED_DIRS = ['.git', '.github', 'downloads_timetable'] 
 EXCLUDED_FILES = ['components.js', 'poll-config.js', 'timetable-config.js', '404.html']
