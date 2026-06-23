@@ -389,4 +389,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-time-table-of-mca-2-year-s3-s-fe-exam-june-2026-2020-scheme-notification.html",
     "pdfLink": "downloads_timetable/2026-06-11_MCA2YearS3(S,FE)Exam2026approved.pdf"
 }
+,
+{
+    "id": "pg_special_july_aug_2026",
+    "title": "PG Programmes Special Examinations July/August 2026",
+    "semester": "S1-S9",
+    "categoryBadge": "S1",
+    "type": "Supply",
+    "scheme": "2015 Scheme",
+    "startDate": "2026-07-01T09:30:00",
+    "endDate": "2026-08-07T09:30:00",
+    "viewLink": "timetable_pages/revised-examination-calendar-pg-programmes-2015-scheme-special-examinations-july-august-2026-including-part-time.html",
+    "pdfLink": "downloads_timetable/2026-06-23_RevisedCalendar-PGjuly2026(2015sch).pdf"
+}
 ];
