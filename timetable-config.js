@@ -402,4 +402,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/revised-examination-calendar-pg-programmes-2015-scheme-special-examinations-july-august-2026-including-part-time.html",
     "pdfLink": "downloads_timetable/2026-06-23_RevisedCalendar-PGjuly2026(2015sch).pdf"
 }
+,
+{
+    "id": "mba_special_jan2026",
+    "title": "MBA Special Examinations (T1, T2, T3 & T5) January 2026",
+    "semester": "T1-T5",
+    "categoryBadge": "T1-T5",
+    "type": "Supply",
+    "scheme": "2015 Scheme",
+    "startDate": "2026-07-01T13:30:00",
+    "endDate": "2026-08-03T13:30:00",
+    "viewLink": "timetable_pages/detailed-time-tables-of-mba-special-examinations-t1-t2-t3-t5-january-2026-including-part-time-notification.html",
+    "pdfLink": "downloads_timetable/2026-06-25_MBASpecial(T1,T2,T3T5)January2026approved.pdf"
+}
 ];
