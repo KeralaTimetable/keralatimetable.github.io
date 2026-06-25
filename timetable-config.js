@@ -415,4 +415,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-time-tables-of-mba-special-examinations-t1-t2-t3-t5-january-2026-including-part-time-notification.html",
     "pdfLink": "downloads_timetable/2026-06-25_MBASpecial(T1,T2,T3T5)January2026approved.pdf"
 }
+,
+{
+    "id": "mca_integrated_s1_july2026",
+    "title": "MCA Integrated S1 Supplementary/FE July 2026",
+    "semester": "S1",
+    "categoryBadge": "S1",
+    "type": "Supply",
+    "scheme": "2020 Scheme",
+    "startDate": "2026-07-06T09:30:00",
+    "endDate": "2026-07-16T09:30:00",
+    "viewLink": "timetable_pages/detailed-time-table-of-mca-integrated-s1-s-fe-july-2026-exam-2020-scheme-notification.html",
+    "pdfLink": "downloads_timetable/2026-06-25_MCAIntegratedS1(S,FE)July2026approved.pdf"
+}
 ];
