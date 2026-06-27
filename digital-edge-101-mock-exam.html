@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Edge 101 - Mock Exam | Kerala Timetable</title>
     
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/tailwind-local.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
@@ -185,6 +185,10 @@
                 <button onclick="startExamination()" class="w-full mt-8 bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-8 rounded-xl shadow-xl transform transition hover:-translate-y-0.5 flex justify-center items-center gap-2">
                     Start Mock Assessment <i class="fas fa-paper-plane text-xs"></i>
                 </button>
+
+                <div class="mt-6 p-4 rounded-xl border border-white/60 text-xs text-slate-600 leading-relaxed text-center inner-glass shadow-sm">
+                    <strong>Disclaimer:</strong> This platform is an independent study resource and is not affiliated with, endorsed by, or associated with NASSCOM or any government organization. It is intended solely to help students understand exam patterns and prepare more effectively.
+                </div>
             </div>
         </div>
     </main>
@@ -269,8 +273,12 @@
 
     <div id="result-view" class="hidden absolute inset-0 bg-mesh z-[60] overflow-y-auto px-4 py-12">
         <div class="max-w-3xl mx-auto animate-fade-up">
-            <div class="real-glass rounded-[2rem] p-8 sm:p-10 shadow-2xl border border-white">
+            <div class="real-glass rounded-[2rem] p-8 sm:p-10 shadow-2xl border border-white relative">
                 
+                <div id="db-save-status" class="absolute top-6 right-6 text-xs font-bold text-slate-500 flex items-center gap-1.5 bg-white/60 px-3 py-1.5 rounded-full shadow-sm border border-white">
+                    <i class="fas fa-spinner fa-spin text-blue-500"></i> Saving Result...
+                </div>
+
                 <h2 class="text-3xl font-black text-slate-900 border-b border-white/50 pb-5 mb-8 text-center flex items-center justify-center gap-3">
                     <i class="fas fa-award text-blue-500"></i> Assessment Results
                 </h2>
@@ -329,7 +337,24 @@
     <script src="/components.js?v=15"></script>
     <script src="questions.js"></script> 
 
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // --- FIREBASE CONFIGURATION ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
+            authDomain: "kerala-timetable-db.firebaseapp.com",
+            databaseURL: "https://kerala-timetable-db-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "kerala-timetable-db",
+            storageBucket: "kerala-timetable-db.firebasestorage.app",
+            messagingSenderId: "527439836518",
+            appId: "1:527439836518:web:af7725a5bf07d6a4f584a7"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
         // Load Header Navigation
         if(typeof loadNavigation === 'function') loadNavigation('', '/', false);
 
@@ -416,7 +441,7 @@
             appState.totalQuestions = Math.min(30, masterQuestionPool.length);
             document.getElementById('total-q-display').innerText = `${appState.totalQuestions} MCQs`;
 
-            const savedState = localStorage.getItem('ktunotes_mock_v3');
+            const savedState = localStorage.getItem('ktunotes_mock_v4');
             if (savedState) {
                 appState = JSON.parse(savedState);
                 if (appState.isExamActive) {
@@ -428,16 +453,16 @@
 
         function saveState() {
             if (appState.isExamActive) {
-                localStorage.setItem('ktunotes_mock_v3', JSON.stringify(appState));
+                localStorage.setItem('ktunotes_mock_v4', JSON.stringify(appState));
             }
         }
 
-        function clearStateAndReload() {
-            localStorage.removeItem('ktunotes_mock_v3');
+        window.clearStateAndReload = function() {
+            localStorage.removeItem('ktunotes_mock_v4');
             location.reload();
         }
 
-        function startExamination() {
+        window.startExamination = function() {
             const nameInput = document.getElementById('candidate-name').value.trim();
             const consent = document.getElementById('consent-check').checked;
 
@@ -469,12 +494,10 @@
         }
 
         function resumeExamination() {
-            // Hide Landing and Top Nav
             document.getElementById('main-container').classList.add('hidden');
             const nav = document.getElementById('navigation-container');
             if(nav) nav.classList.add('hidden');
             
-            // Show Quiz
             document.getElementById('quiz-view').classList.remove('hidden');
             
             buildPalette();
@@ -497,7 +520,7 @@
 
                 if (appState.timeRemaining <= 0) {
                     clearInterval(trackingInterval);
-                    submitExamination();
+                    window.submitExamination();
                 }
             }, 1000);
         }
@@ -569,7 +592,6 @@
                 containerHtml.insertAdjacentHTML('beforeend', optionNode);
             });
 
-            // Update Mark Button
             const markBtn = document.getElementById('mark-btn');
             if(appState.questionStatus[appState.indexActive] === 'marked') {
                 markBtn.innerHTML = `<i class="fas fa-check"></i> Marked`;
@@ -581,7 +603,6 @@
                 markBtn.classList.add('text-purple-600');
             }
 
-            // Buttons state
             document.getElementById('prev-btn').disabled = (appState.indexActive === 0);
             
             const actionWrapper = document.getElementById('action-btn-wrapper');
@@ -602,7 +623,7 @@
             buildPalette(); 
         }
 
-        function recordOptionSelection(val) {
+        window.recordOptionSelection = function(val) {
             appState.responsesUser[appState.indexActive] = val;
             if (appState.questionStatus[appState.indexActive] !== 'marked') {
                 appState.questionStatus[appState.indexActive] = 'answered';
@@ -615,7 +636,7 @@
             buildPalette();
         }
 
-        function clearResponse() {
+        window.clearResponse = function() {
             delete appState.responsesUser[appState.indexActive];
             document.querySelectorAll('.option-input').forEach(input => input.checked = false);
             document.querySelectorAll('.option-label').forEach(el => el.classList.remove('selected', 'font-bold'));
@@ -628,7 +649,7 @@
             buildPalette();
         }
 
-        function toggleMarkForReview() {
+        window.toggleMarkForReview = function() {
             const currentStatus = appState.questionStatus[appState.indexActive];
             if (currentStatus === 'marked') {
                 appState.questionStatus[appState.indexActive] = appState.responsesUser[appState.indexActive] ? 'answered' : 'not-answered';
@@ -639,7 +660,7 @@
             presentActiveQuestion(); 
         }
 
-        function navigateQuestion(step) {
+        window.navigateQuestion = function(step) {
             const target = appState.indexActive + step;
             if (target >= 0 && target < appState.totalQuestions) jumpToQuestion(target);
         }
@@ -659,12 +680,36 @@
             presentActiveQuestion();
         }
 
-        function submitExamination() {
+        window.submitExamination = function() {
             if (confirm("Are you sure you want to submit the examination?")) {
                 appState.isExamActive = false;
                 clearInterval(trackingInterval);
-                localStorage.removeItem('ktunotes_mock_v3'); 
+                localStorage.removeItem('ktunotes_mock_v4'); 
                 renderResults();
+            }
+        }
+
+        async function saveResultToFirebase(name, correct, total, accuracy) {
+            const statusEl = document.getElementById('db-save-status');
+            try {
+                const dbRef = ref(db, 'mock_exam_results');
+                const newRecordRef = push(dbRef);
+                
+                await set(newRecordRef, {
+                    candidateName: name,
+                    score: correct,
+                    totalQuestions: total,
+                    accuracyPercent: accuracy,
+                    completedAt: new Date().toISOString()
+                });
+                
+                // Update UI to success
+                statusEl.innerHTML = `<i class="fas fa-check-circle text-emerald-500"></i> Record Saved`;
+                statusEl.classList.add('text-emerald-700');
+            } catch (error) {
+                console.error("Error saving result to Firebase: ", error);
+                statusEl.innerHTML = `<i class="fas fa-exclamation-circle text-red-500"></i> Sync Failed`;
+                statusEl.classList.add('text-red-700');
             }
         }
 
@@ -672,7 +717,6 @@
             document.getElementById('quiz-view').classList.add('hidden');
             document.getElementById('result-view').classList.remove('hidden');
 
-            // Bring nav back
             const nav = document.getElementById('navigation-container');
             if(nav) nav.classList.remove('hidden');
 
@@ -716,6 +760,9 @@
                 awardTxt.className = "text-4xl font-black text-red-600";
                 awardTxt.innerText = `Failed (${accuracy}%)`;
             }
+
+            // Save to Firebase Database
+            saveResultToFirebase(appState.candidateName, correct, appState.totalQuestions, accuracy);
         }
         
         window.onload = loadOrInitializeState;
