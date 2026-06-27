@@ -10,8 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-        .bg-mesh { background-color: #f8fafc; background-image: radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 24px 24px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; background-color: #f8fafc; }
+        
+        /* Custom Scrollbar for horizontal palette */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
 
         .real-glass {
             background: rgba(255, 255, 255, 0.85);
@@ -21,39 +29,39 @@
             box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.08);
         }
 
-        .inner-glass {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Standardized Option Styles */
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            margin-bottom: 0.75rem;
+        }
+        
+        .option-label:hover {
+            border-color: #94a3b8;
+            background: #f8fafc;
         }
 
-        .option-label { cursor: pointer; display: block; }
+        .option-input:checked + .opt-content-wrapper {
+            font-weight: 600;
+        }
         
-        .option-label:hover .inner-glass {
-            border-color: #93c5fd;
+        .option-label.selected {
+            border-color: #3b82f6;
             background: #eff6ff;
-            transform: translateY(-2px);
-        }
-        
-        .option-input:checked + .inner-glass {
-            background: #ffffff;
-            border-color: #3b82f6;
-            box-shadow: 0 4px 15px -3px rgba(59, 130, 246, 0.2), 0 0 0 4px rgba(59, 130, 246, 0.15);
-            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
         }
 
-        .option-input:checked + .inner-glass .opt-letter {
-            background-color: #3b82f6;
-            color: #ffffff;
-            border-color: #3b82f6;
-        }
-
-        /* Status Colors for Palette */
-        .status-answered { background-color: #10b981; color: white; border-color: #059669; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3); }
-        .status-not-answered { background-color: #ef4444; color: white; border-color: #b91c1c; box-shadow: 0 2px 5px rgba(239, 68, 68, 0.3); }
-        .status-marked { background-color: #8b5cf6; color: white; border-color: #6d28d9; box-shadow: 0 2px 5px rgba(139, 92, 246, 0.3); }
-        .status-unvisited { background-color: #f1f5f9; color: #475569; border-color: #cbd5e1; }
+        /* Palette Status Colors */
+        .status-answered { background-color: #10b981; color: white; border-color: #059669; }
+        .status-not-answered { background-color: #ef4444; color: white; border-color: #b91c1c; }
+        .status-marked { background-color: #8b5cf6; color: white; border-color: #6d28d9; }
+        .status-unvisited { background-color: #e2e8f0; color: #475569; border-color: #cbd5e1; }
 
         @keyframes fadeUpEntry {
             0% { opacity: 0; transform: translateY(20px); }
@@ -66,249 +74,228 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        
+        /* Ensure footer doesn't overlap content */
+        .quiz-content-area {
+            padding-bottom: 220px; /* Space for the sticky footer */
+            padding-top: 80px; /* Space for the sticky header */
+        }
     </style>
 </head>
 
-<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
+<body class="text-slate-800 antialiased flex flex-col min-h-screen relative">
 
-    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute -top-20 -left-20 w-96 h-96 bg-blue-400/20 rounded-full mix-blend-multiply filter blur-[100px]"></div>
-        <div class="absolute top-[30%] -right-20 w-[35rem] h-[35rem] bg-indigo-400/15 rounded-full mix-blend-multiply filter blur-[120px]"></div>
-        <div class="absolute -bottom-32 left-[20%] w-[30rem] h-[30rem] bg-emerald-400/15 rounded-full mix-blend-multiply filter blur-[100px]"></div>
-    </div>
-
-    <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-8 relative z-10 flex flex-col justify-center min-h-screen">
+    <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-8 relative z-10 flex flex-col justify-center min-h-screen" id="main-container">
         
+        <!-- LANDING VIEW -->
         <div id="landing-view" class="max-w-3xl mx-auto w-full space-y-6 animate-fade-up">
             <div class="text-center mb-8">
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-slate-200 text-blue-600 text-xs font-extrabold uppercase tracking-wider mb-4">
-                    <i class="fas fa-file-signature text-blue-500"></i> KTU B.Tech Semester 2
+                    <i class="fas fa-laptop-code text-blue-500"></i> KTU B.Tech Semester 2
                 </div>
                 <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3 gradient-text">NASSCOM Skill Enhancement</h1>
-                <p class="text-slate-500 text-lg font-medium">Digital Edge 101 - Official Mock Assessment</p>
+                <p class="text-slate-500 text-lg font-medium">Digital Edge 101 - Practice Mock Assessment</p>
             </div>
 
-            <div class="real-glass rounded-[2rem] p-6 sm:p-10 shadow-2xl">
+            <div class="real-glass rounded-3xl p-6 sm:p-10 shadow-2xl">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                    <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
-                        <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mb-3">
-                            <i class="far fa-clock text-blue-500 text-lg"></i>
-                        </div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm text-center">
+                        <div class="text-blue-500 mb-2"><i class="far fa-clock text-xl"></i></div>
                         <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Duration</div>
                         <div class="font-bold text-slate-800">60 Mins</div>
                     </div>
-                    <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
-                        <div class="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center mb-3">
-                            <i class="fas fa-list-ol text-indigo-500 text-lg"></i>
-                        </div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm text-center">
+                        <div class="text-indigo-500 mb-2"><i class="fas fa-list-ol text-xl"></i></div>
                         <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Questions</div>
                         <div class="font-bold text-slate-800" id="total-q-display">30 MCQs</div>
                     </div>
-                    <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
-                        <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center mb-3">
-                            <i class="fas fa-bullseye text-emerald-500 text-lg"></i>
-                        </div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm text-center">
+                        <div class="text-emerald-500 mb-2"><i class="fas fa-bullseye text-xl"></i></div>
                         <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Max Score</div>
                         <div class="font-bold text-slate-800">100 Marks</div>
                     </div>
-                    <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
-                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center mb-3">
-                            <i class="fas fa-shield-alt text-red-500 text-lg"></i>
-                        </div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm text-center">
+                        <div class="text-red-500 mb-2"><i class="fas fa-shield-alt text-xl"></i></div>
                         <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Proctoring</div>
                         <div class="font-bold text-slate-800">Enabled</div>
                     </div>
                 </div>
 
                 <div class="mb-8">
-                    <h3 class="font-bold text-slate-800 mb-4 text-lg flex items-center gap-2 border-b border-slate-100 pb-3">
-                        <i class="fas fa-clipboard-list text-slate-400"></i> Examination Guidelines
-                    </h3>
-                    <ul class="space-y-4 text-sm text-slate-600 font-medium">
-                        <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-xl">
-                            <i class="fas fa-random text-blue-500 mt-0.5 text-lg"></i> 
-                            <span>The examination consists of randomized questions selected from the master pool representing all core modules.</span>
+                    <h3 class="font-bold text-slate-800 mb-4 text-lg border-b border-slate-100 pb-2">Examination Guidelines</h3>
+                    <ul class="space-y-3 text-sm text-slate-600 font-medium">
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-circle text-[8px] text-blue-500 mt-1.5"></i> 
+                            <span>Questions are randomized from the master pool representing all core modules.</span>
                         </li>
-                        <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-xl">
-                            <i class="fas fa-eye text-red-500 mt-0.5 text-lg"></i> 
-                            <span><strong>Anti-Cheat Shield:</strong> Browser focus is monitored. Leaving the active window or swapping tabs will trigger a warning.</span>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-circle text-[8px] text-red-500 mt-1.5"></i> 
+                            <span><strong>Anti-Cheat:</strong> Browser focus is monitored. Leaving the active window triggers a warning.</span>
                         </li>
-                        <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-xl">
-                            <i class="fas fa-cloud-upload-alt text-indigo-500 mt-0.5 text-lg"></i> 
-                            <span>Progress is automatically saved. No negative marking is applied. A minimum score of <strong>50%</strong> is required to pass.</span>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-circle text-[8px] text-indigo-500 mt-1.5"></i> 
+                            <span>No negative marking is applied. A minimum score of 50% is required to pass.</span>
                         </li>
                     </ul>
                 </div>
 
-                <div class="space-y-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
                     <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Candidate Name (For Scorecard)</label>
-                        <input type="text" id="candidate-name" placeholder="Enter your full name" class="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:outline-none focus:ring-0 focus:border-blue-500 font-medium bg-slate-50 transition-colors">
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Candidate Name</label>
+                        <input type="text" id="candidate-name" placeholder="Enter your full name" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition-shadow">
                     </div>
-                    <label class="flex items-center gap-3 cursor-pointer mt-4 group">
-                        <div class="relative flex items-center">
-                            <input type="checkbox" id="consent-check" class="peer h-5 w-5 cursor-pointer appearance-none rounded-md border-2 border-slate-300 checked:border-blue-600 checked:bg-blue-600 transition-all">
-                            <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                                <i class="fas fa-check text-xs"></i>
-                            </span>
-                        </div>
-                        <span class="text-sm font-medium text-slate-600 group-hover:text-slate-900 transition-colors">I have read all the instructions and certify that I am ready to begin.</span>
+                    <label class="flex items-center gap-3 cursor-pointer mt-2 group">
+                        <input type="checkbox" id="consent-check" class="h-5 w-5 cursor-pointer rounded text-blue-600 focus:ring-blue-500 border-gray-300">
+                        <span class="text-sm font-medium text-slate-600">I have read the instructions and am ready to begin.</span>
                     </label>
                 </div>
 
-                <button onclick="startExamination()" class="w-full mt-6 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-blue-500/30 transform transition hover:-translate-y-0.5 flex justify-center items-center gap-2">
-                    START MOCK EXAMINATION <i class="fas fa-rocket ml-1"></i>
+                <button onclick="startExamination()" class="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition-colors flex justify-center items-center gap-2">
+                    Start Mock Assessment
                 </button>
-
-                <p class="text-xs text-slate-500 mt-5 text-center leading-relaxed px-4">
-                    <strong>Disclaimer:</strong> This platform is not officially associated with NASSCOM or the government. It is specifically designed as a study aid to help students understand exam patterns and prepare better.
-                </p>
-            </div>
-        </div>
-
-        <div id="quiz-view" class="hidden flex flex-col lg:flex-row gap-6 animate-fade-up max-w-7xl mx-auto w-full">
-            
-            <div class="lg:w-3/4 flex flex-col space-y-4">
-                
-                <div class="real-glass rounded-2xl px-6 py-4 flex flex-col sm:flex-row justify-between items-center shadow-md gap-4 sm:gap-0">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500">
-                            <i class="fas fa-user-graduate"></i>
-                        </div>
-                        <div class="font-bold text-slate-800 text-lg" id="display-name">Candidate: User</div>
-                    </div>
-                    <div class="flex items-center gap-3 bg-white px-5 py-2.5 rounded-xl border-2 border-slate-100 shadow-sm">
-                        <i id="timer-icon" class="far fa-clock text-blue-500 animate-pulse"></i>
-                        <span id="timer" class="text-xl font-bold text-slate-800 font-mono tracking-wider">60:00</span>
-                    </div>
-                </div>
-
-                <div class="real-glass rounded-[2rem] flex flex-col flex-grow shadow-xl relative overflow-hidden">
-                    <div class="w-full bg-slate-100 h-1.5 absolute top-0 left-0">
-                        <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-1.5 transition-all duration-500 ease-out" style="width: 0%"></div>
-                    </div>
-
-                    <div class="p-6 sm:p-10 flex flex-col h-full">
-                        <div class="mb-6 flex justify-between items-center border-b border-slate-200/60 pb-4">
-                            <span id="question-indicator" class="text-sm font-black text-blue-600 uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-lg">Question 1</span>
-                            <button onclick="toggleMarkForReview()" id="mark-btn" class="text-xs font-bold px-4 py-2 rounded-xl border-2 border-slate-200 text-slate-600 hover:bg-purple-50 hover:text-purple-600 hover:border-purple-300 transition-all flex items-center gap-2 focus:outline-none">
-                                <i class="fas fa-bookmark"></i> Mark for Review
-                            </button>
-                        </div>
-
-                        <div class="flex-grow">
-                            <h2 id="question-text" class="text-lg md:text-xl font-bold text-slate-800 mb-6 leading-relaxed">
-                                Loading examination payload...
-                            </h2>
-                            
-                            <div id="image-container" class="mb-8 hidden flex justify-center">
-                                <img id="question-image" src="" alt="Question Resource" class="max-h-64 object-contain rounded-xl border-2 border-slate-100 shadow-md p-2 bg-white">
-                            </div>
-
-                            <div id="options-container" class="space-y-3">
-                                </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-10 pt-6 border-t border-slate-200/60">
-                            <button id="prev-btn" onclick="navigateQuestion(-1)" class="px-6 py-3 rounded-xl font-bold text-sm text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
-                                <i class="fas fa-arrow-left text-xs"></i> Previous
-                            </button>
-                            
-                            <button id="next-btn" onclick="navigateQuestion(1)" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-0.5 flex items-center gap-2">
-                                Save & Next <i class="fas fa-arrow-right text-xs"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lg:w-1/4 space-y-4">
-                <div class="real-glass rounded-[2rem] p-6 shadow-xl h-full flex flex-col sticky top-6">
-                    <h3 class="font-bold text-slate-800 mb-5 text-sm uppercase tracking-wider border-b border-slate-200 pb-3 flex items-center gap-2">
-                        <i class="fas fa-th text-indigo-500"></i> Question Palette
-                    </h3>
-                    
-                    <div id="palette-grid" class="grid grid-cols-5 gap-2 mb-6 flex-grow content-start">
-                        </div>
-
-                    <div class="mt-auto pt-5 border-t border-slate-200 space-y-3 text-xs font-semibold text-slate-600 bg-slate-50/50 p-4 rounded-xl">
-                        <div class="flex items-center gap-3"><span class="w-4 h-4 rounded shadow-sm status-answered inline-block"></span> Answered</div>
-                        <div class="flex items-center gap-3"><span class="w-4 h-4 rounded shadow-sm status-not-answered inline-block"></span> Not Answered</div>
-                        <div class="flex items-center gap-3"><span class="w-4 h-4 rounded shadow-sm status-marked inline-block"></span> Marked for Review</div>
-                        <div class="flex items-center gap-3"><span class="w-4 h-4 rounded shadow-sm status-unvisited inline-block border border-slate-300"></span> Not Visited</div>
-                    </div>
-
-                    <button onclick="submitExamination()" class="w-full mt-6 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-500/30 transition-transform transform hover:-translate-y-0.5 flex justify-center items-center gap-2">
-                        <i class="fas fa-check-double"></i> Submit Exam
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div id="result-view" class="hidden max-w-3xl mx-auto w-full space-y-6 animate-fade-up">
-            <div class="real-glass rounded-[2.5rem] p-8 sm:p-10 shadow-2xl border border-white">
-                
-                <h2 class="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-4 mb-6 flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
-                        <i class="fas fa-chart-pie text-blue-500 text-xl"></i>
-                    </div> 
-                    Mock Test Results Summary
-                </h2>
-                
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                    <div class="inner-glass rounded-2xl p-4 border border-slate-200 bg-white">
-                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Candidate</span>
-                        <span id="res-name" class="text-lg font-black text-slate-800 truncate block">Master</span>
-                    </div>
-                    <div class="inner-glass rounded-2xl p-4 border border-slate-200 bg-white">
-                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Date Completed</span>
-                        <span id="res-date" class="text-lg font-bold text-slate-800 truncate block">27/06/2026</span>
-                    </div>
-                    <div class="inner-glass rounded-2xl p-4 border border-slate-200 bg-white col-span-2 md:col-span-1">
-                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Time Spent</span>
-                        <span id="res-time" class="text-lg font-bold text-slate-800 truncate block">0m 0s</span>
-                    </div>
-                </div>
-
-                <div id="award-banner" class="rounded-3xl p-8 text-center mb-8 shadow-sm border-2">
-                    <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Examination Status</div>
-                    <div id="award-text" class="text-3xl md:text-4xl font-black">Evaluating...</div>
-                </div>
-                
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-center">
-                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 shadow-sm">
-                        <div class="text-3xl font-black text-slate-800 mb-1" id="res-total">30</div>
-                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Total Qs</div>
-                    </div>
-                    <div class="bg-emerald-50 rounded-2xl p-4 border border-emerald-200 shadow-sm">
-                        <div class="text-3xl font-black text-emerald-600 mb-1" id="res-correct">0</div>
-                        <div class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Correct</div>
-                    </div>
-                    <div class="bg-red-50 rounded-2xl p-4 border border-red-200 shadow-sm">
-                        <div class="text-3xl font-black text-red-600 mb-1" id="res-incorrect">0</div>
-                        <div class="text-[10px] font-bold text-red-600 uppercase tracking-wider">Incorrect</div>
-                    </div>
-                    <div class="bg-slate-100 rounded-2xl p-4 border border-slate-300 shadow-sm">
-                        <div class="text-3xl font-black text-slate-500 mb-1" id="res-skipped">0</div>
-                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Skipped</div>
-                    </div>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8 border-t border-slate-200">
-                    <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                        <i class="fas fa-redo text-sm"></i> Retake Examination
-                    </button>
-                    <a href="/" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors text-center border-2 border-transparent hover:border-slate-200">
-                        Return to Dashboard
-                    </a>
-                </div>
             </div>
         </div>
 
     </main>
 
-    <script src="components.js"></script>
-    <script src="questions.js"></script>
+    <!-- QUIZ VIEW (Full Screen Overlay style) -->
+    <div id="quiz-view" class="hidden fixed inset-0 bg-slate-50 z-50 flex flex-col overflow-hidden">
+        
+        <!-- Sticky Header -->
+        <header class="bg-blue-700 text-white shadow-md w-full px-4 py-3 flex justify-between items-center z-20 flex-shrink-0">
+            <div class="flex items-center gap-2 truncate">
+                <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm"><i class="fas fa-laptop-code"></i></div>
+                <h1 class="font-bold text-sm md:text-base truncate hidden sm:block">Digital Edge 101 - Mock</h1>
+                <h1 class="font-bold text-sm truncate sm:hidden">Mock Exam</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-800 px-4 py-1.5 rounded-lg border border-blue-600 shadow-inner flex items-center gap-2">
+                    <span id="timer" class="font-bold font-mono tracking-wider text-base md:text-lg">60:00</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-200 h-1 flex-shrink-0">
+            <div id="progress-bar" class="bg-blue-500 h-1 transition-all duration-300" style="width: 0%"></div>
+        </div>
+
+        <!-- Scrollable Content Area -->
+        <div class="flex-grow overflow-y-auto px-4 py-6 md:px-10 pb-[220px]">
+            <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <div class="mb-4">
+                    <h2 id="question-indicator" class="text-lg font-bold text-slate-800">Question 1 of 30</h2>
+                </div>
+                
+                <div class="mb-6">
+                    <p id="question-text" class="text-base md:text-lg text-slate-700 leading-relaxed">
+                        Loading question...
+                    </p>
+                    <div id="image-container" class="mt-4 mb-2 hidden flex justify-center">
+                        <img id="question-image" src="" alt="Question Image" class="max-h-64 object-contain rounded border border-slate-200 p-1">
+                    </div>
+                </div>
+
+                <div id="options-container" class="space-y-3">
+                    <!-- Options injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Footer Navigation & Actions -->
+        <footer class="bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] w-full absolute bottom-0 left-0 z-20 p-3 md:p-4 flex flex-col gap-3">
+            
+            <!-- Horizontal Palette -->
+            <div class="w-full max-w-4xl mx-auto">
+                <div id="palette-horizontal" class="flex overflow-x-auto gap-2 pb-2 hide-scrollbar items-center px-1">
+                    <!-- Palette items injected here -->
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="w-full max-w-4xl mx-auto">
+                <div class="grid grid-cols-2 md:flex md:flex-row gap-2 mb-2">
+                    <button onclick="toggleMarkForReview()" id="mark-btn" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded md:flex-1 text-sm flex items-center justify-center gap-2 hover:bg-purple-700 transition">
+                        <i class="fas fa-thumbtack"></i> Mark for Review
+                    </button>
+                    <button onclick="clearResponse()" class="bg-white text-slate-700 border border-slate-300 font-semibold py-2 px-4 rounded md:flex-1 text-sm hover:bg-slate-50 transition">
+                        Clear Response
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-2">
+                    <button id="prev-btn" onclick="navigateQuestion(-1)" class="bg-white text-slate-700 border border-slate-300 font-bold py-2.5 px-4 rounded text-sm hover:bg-slate-50 transition flex items-center justify-center gap-1 disabled:opacity-50">
+                        &larr; Back
+                    </button>
+                    <button onclick="submitExamination()" class="bg-red-500 text-white font-bold py-2.5 px-4 rounded text-sm hover:bg-red-600 transition shadow-sm">
+                        Submit
+                    </button>
+                    <button id="next-btn" onclick="navigateQuestion(1)" class="bg-blue-600 text-white font-bold py-2.5 px-4 rounded text-sm hover:bg-blue-700 transition shadow-sm flex items-center justify-center gap-1">
+                        Save & Next &rarr;
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- RESULT VIEW -->
+    <div id="result-view" class="hidden max-w-3xl mx-auto w-full space-y-6 animate-fade-up px-4 py-8 absolute inset-0 bg-[#f8fafc] z-[60] overflow-y-auto">
+        <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200 mt-10 mb-10 max-w-3xl mx-auto">
+            
+            <h2 class="text-2xl font-black text-slate-900 border-b border-slate-200 pb-4 mb-6 text-center">
+                Assessment Results
+            </h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 text-center">
+                    <span class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Candidate</span>
+                    <span id="res-name" class="text-base font-bold text-slate-800 truncate block">User</span>
+                </div>
+                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 text-center">
+                    <span class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Date</span>
+                    <span id="res-date" class="text-base font-bold text-slate-800 block">--/--/----</span>
+                </div>
+                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 text-center col-span-2 md:col-span-1">
+                    <span class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Time Spent</span>
+                    <span id="res-time" class="text-base font-bold text-slate-800 block">0m 0s</span>
+                </div>
+            </div>
+
+            <div id="award-banner" class="rounded-2xl p-6 text-center mb-8 border-2">
+                <div class="text-xs font-bold uppercase tracking-widest mb-1 opacity-80">Final Grade</div>
+                <div id="award-text" class="text-3xl font-black">Evaluating...</div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-center">
+                <div class="p-4">
+                    <div class="text-3xl font-black text-slate-800 mb-1" id="res-total">30</div>
+                    <div class="text-xs font-bold text-slate-500 uppercase">Total</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-3xl font-black text-emerald-600 mb-1" id="res-correct">0</div>
+                    <div class="text-xs font-bold text-emerald-600 uppercase">Correct</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-3xl font-black text-red-600 mb-1" id="res-incorrect">0</div>
+                    <div class="text-xs font-bold text-red-600 uppercase">Incorrect</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-3xl font-black text-slate-400 mb-1" id="res-skipped">0</div>
+                    <div class="text-xs font-bold text-slate-400 uppercase">Skipped</div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center pt-6 border-t border-slate-200">
+                <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition text-center">
+                    Retake Examination
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Assuming questions.js defines: const masterQuestionPool = [{ q: "...", o: ["...","..."], a: "A", img: "" }, ...]; -->
+    <script src="questions.js"></script> 
 
     <script>
         // State Management
@@ -331,22 +318,24 @@
         window.addEventListener('blur', () => {
             if(appState.isExamActive) {
                 appState.cheatWarnings++;
-                alert(`ANTI-CHEAT WARNING: Browser focus lost. Please do not switch tabs or minimize the window during the active examination.\n\nWarnings logged: ${appState.cheatWarnings}`);
+                alert(`ANTI-CHEAT WARNING: Browser focus lost. Please do not switch tabs during the active examination.\n\nWarnings logged: ${appState.cheatWarnings}`);
             }
         });
 
         function loadOrInitializeState() {
-            // Verify if questions.js loaded properly
+            // Check for mock data if questions.js is absent (for demonstration)
             if (typeof masterQuestionPool === 'undefined' || masterQuestionPool.length === 0) {
-                alert("Error: questions.js file is missing or empty. Please ensure the file is in the same directory.");
-                return;
+                window.masterQuestionPool = [
+                    { q: "In the context of neural networks and deep learning, a tech startup aims to enhance its product recommendations using AI. What application is most suitable for achieving this goal?", o: ["Optimize manufacturing processes", "Secure financial transactions", "Enhance customer engagement", "Streamline project management"], a: "C" },
+                    { q: "Which of the following best describes the primary function of an activation function in a neural network?", o: ["To initialize the weights of the network", "To introduce non-linearity into the model", "To calculate the loss function", "To normalize the input data"], a: "B" },
+                    { q: "What is the purpose of a test dataset in machine learning?", o: ["To train the model parameters", "To adjust hyperparameters during training", "To evaluate the final model's performance on unseen data", "To increase the size of the training set"], a: "C" }
+                ];
             }
 
-            // Define total questions dynamically (max 30 or however many exist)
             appState.totalQuestions = Math.min(30, masterQuestionPool.length);
             document.getElementById('total-q-display').innerText = `${appState.totalQuestions} MCQs`;
 
-            const savedState = localStorage.getItem('ktunotes_nasscom_mock_state');
+            const savedState = localStorage.getItem('ktunotes_mock_v2');
             if (savedState) {
                 appState = JSON.parse(savedState);
                 if (appState.isExamActive) {
@@ -358,12 +347,12 @@
 
         function saveState() {
             if (appState.isExamActive) {
-                localStorage.setItem('ktunotes_nasscom_mock_state', JSON.stringify(appState));
+                localStorage.setItem('ktunotes_mock_v2', JSON.stringify(appState));
             }
         }
 
         function clearStateAndReload() {
-            localStorage.removeItem('ktunotes_nasscom_mock_state');
+            localStorage.removeItem('ktunotes_mock_v2');
             location.reload();
         }
 
@@ -371,17 +360,12 @@
             const nameInput = document.getElementById('candidate-name').value.trim();
             const consent = document.getElementById('consent-check').checked;
 
-            if (!nameInput) return alert("Please enter your name for the scorecard.");
+            if (!nameInput) return alert("Please enter your name.");
             if (!consent) return alert("Please check the consent box to proceed.");
             
-            if (typeof masterQuestionPool === 'undefined') {
-                return alert("The question bank failed to load. Please check your questions.js file.");
-            }
-
             appState.candidateName = nameInput;
-            document.getElementById('display-name').innerText = `Candidate: ${nameInput}`;
 
-            // Initialize Dataset (Randomize & Select target number)
+            // Randomize and select dataset
             let poolCopy = [...masterQuestionPool];
             for (let i = poolCopy.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -393,21 +377,21 @@
             for(let i=0; i < appState.totalQuestions; i++) {
                 appState.questionStatus[i] = 'unvisited';
             }
-            appState.questionStatus[0] = 'not-answered'; // First question visited
+            appState.questionStatus[0] = 'not-answered';
 
             appState.isExamActive = true;
             appState.indexActive = 0;
             appState.timeRemaining = 3600;
             appState.timeSpent = 0;
+            appState.responsesUser = {};
 
             saveState();
             resumeExamination();
         }
 
         function resumeExamination() {
-            document.getElementById('landing-view').classList.add('hidden');
+            document.getElementById('main-container').classList.add('hidden');
             document.getElementById('quiz-view').classList.remove('hidden');
-            document.getElementById('display-name').innerText = `Candidate: ${appState.candidateName}`;
             
             buildPalette();
             presentActiveQuestion();
@@ -425,7 +409,6 @@
                 
                 document.getElementById('timer').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
                 
-                // Save state every 5 seconds
                 if (appState.timeRemaining % 5 === 0) saveState();
 
                 if (appState.timeRemaining <= 0) {
@@ -436,35 +419,47 @@
         }
 
         function buildPalette() {
-            const grid = document.getElementById('palette-grid');
-            grid.innerHTML = "";
+            const palette = document.getElementById('palette-horizontal');
+            palette.innerHTML = "";
+            
             for(let i=0; i < appState.totalQuestions; i++) {
                 const status = appState.questionStatus[i];
-                const activeClass = i === appState.indexActive ? 'ring-2 ring-offset-2 ring-blue-500 scale-110' : '';
+                const isActive = i === appState.indexActive;
                 
-                grid.insertAdjacentHTML('beforeend', `
-                    <button onclick="jumpToQuestion(${i})" class="w-9 h-9 rounded-lg text-xs font-bold transition-all duration-200 status-${status} ${activeClass} flex items-center justify-center border hover:opacity-80 focus:outline-none shadow-sm">
-                        ${i + 1}
-                    </button>
-                `);
+                // Styling active element with a border just like the reference
+                const borderClass = isActive ? 'border-2 border-blue-600 shadow-md' : 'border border-slate-300';
+                
+                // Creating the button element
+                const btn = document.createElement('button');
+                btn.onclick = () => jumpToQuestion(i);
+                btn.className = `min-w-[40px] h-[44px] rounded flex-shrink-0 flex items-center justify-center font-semibold text-sm status-${status} ${borderClass} transition-all focus:outline-none`;
+                btn.innerText = i + 1;
+                btn.id = `pal-btn-${i}`;
+                
+                palette.appendChild(btn);
+            }
+            
+            // Auto-scroll palette to active question
+            const activeBtn = document.getElementById(`pal-btn-${appState.indexActive}`);
+            if(activeBtn) {
+                activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
             }
         }
 
         function presentActiveQuestion() {
             const item = appState.quizDataset[appState.indexActive];
-            const indicesMap = ["A", "B", "C", "D", "E", "F"]; // Extended for potentially larger option sets
+            const indicesMap = ["A", "B", "C", "D", "E", "F"];
             
             document.getElementById('question-indicator').innerText = `Question ${appState.indexActive + 1} of ${appState.totalQuestions}`;
             document.getElementById('question-text').innerText = item.q;
             
-            // Progress Bar Update
+            // Progress Bar
             const progressPercent = ((appState.indexActive + 1) / appState.totalQuestions) * 100;
             document.getElementById('progress-bar').style.width = `${progressPercent}%`;
 
-            // Image Support Logic
+            // Image Check
             const imgEl = document.getElementById('question-image');
             const imgContainer = document.getElementById('image-container');
-            
             if (item.img) {
                 imgEl.src = item.img;
                 imgContainer.classList.remove('hidden');
@@ -473,55 +468,49 @@
                 imgContainer.classList.add('hidden');
             }
 
+            // Options Rendering
             const containerHtml = document.getElementById('options-container');
             containerHtml.innerHTML = "";
             
             item.o.forEach((optionStr, indexIdx) => {
                 const letter = indicesMap[indexIdx];
-                const selectedState = appState.responsesUser[appState.indexActive] === letter ? 'checked' : '';
+                const isSelected = appState.responsesUser[appState.indexActive] === letter;
+                const selectedClass = isSelected ? 'selected' : '';
                 
                 const optionNode = `
-                    <label class="option-label block relative">
-                        <input type="radio" name="mock-answer" value="${letter}" onclick="recordOptionSelection('${letter}')" class="option-input peer sr-only" ${selectedState}>
-                        <div class="inner-glass rounded-2xl p-4 flex items-center gap-4 border-2 border-transparent">
-                            <span class="opt-letter w-10 h-10 rounded-xl bg-slate-100 flex shrink-0 items-center justify-center font-bold text-slate-500 text-sm transition-colors border border-slate-200 shadow-sm">${letter}</span>
-                            <span class="text-sm md:text-base font-semibold text-slate-700">${optionStr}</span>
+                    <label class="option-label ${selectedClass}" id="label-${letter}">
+                        <div class="flex items-center h-5 mt-0.5">
+                            <input type="radio" name="mock-answer" value="${letter}" onclick="recordOptionSelection('${letter}')" class="option-input w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" ${isSelected ? 'checked' : ''}>
+                        </div>
+                        <div class="ml-3 text-sm md:text-base text-slate-700 opt-content-wrapper flex gap-2">
+                            <span class="font-bold text-slate-900">${letter}.</span>
+                            <span>${optionStr}</span>
                         </div>
                     </label>
                 `;
                 containerHtml.insertAdjacentHTML('beforeend', optionNode);
             });
 
-            // Update Mark Button State
+            // Update Mark Button Text
             const markBtn = document.getElementById('mark-btn');
             if(appState.questionStatus[appState.indexActive] === 'marked') {
-                markBtn.classList.replace('text-slate-600', 'text-white');
-                markBtn.classList.replace('hover:bg-purple-50', 'hover:bg-purple-600');
-                markBtn.classList.replace('border-slate-200', 'border-purple-500');
-                markBtn.classList.add('bg-purple-500');
-                markBtn.innerHTML = `<i class="fas fa-bookmark"></i> Marked`;
+                markBtn.innerHTML = `<i class="fas fa-check"></i> Marked`;
+                markBtn.classList.add('bg-purple-800');
             } else {
-                markBtn.classList.replace('text-white', 'text-slate-600');
-                markBtn.classList.replace('hover:bg-purple-600', 'hover:bg-purple-50');
-                markBtn.classList.replace('border-purple-500', 'border-slate-200');
-                markBtn.classList.remove('bg-purple-500');
-                markBtn.innerHTML = `<i class="far fa-bookmark text-slate-400"></i> Mark for Review`;
+                markBtn.innerHTML = `<i class="fas fa-thumbtack"></i> Mark for Review`;
+                markBtn.classList.remove('bg-purple-800');
             }
 
-            // Button States
+            // Buttons state
             document.getElementById('prev-btn').disabled = (appState.indexActive === 0);
             
-            const actionBtn = document.getElementById('next-btn');
+            const nextBtn = document.getElementById('next-btn');
             if (appState.indexActive === appState.totalQuestions - 1) {
-                // Change to Submit style on last question
-                actionBtn.innerHTML = `Submit Exam <i class="fas fa-paper-plane text-xs ml-1"></i>`;
-                actionBtn.className = "bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-emerald-500/30 transform transition hover:-translate-y-0.5 flex items-center gap-2";
-                actionBtn.onclick = submitExamination;
+                nextBtn.disabled = true;
+                nextBtn.classList.add('opacity-50');
             } else {
-                // Normal Save & Next style
-                actionBtn.innerHTML = `Save & Next <i class="fas fa-arrow-right text-xs ml-1"></i>`;
-                actionBtn.className = "bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-0.5 flex items-center gap-2";
-                actionBtn.onclick = () => navigateQuestion(1);
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('opacity-50');
             }
 
             buildPalette(); 
@@ -532,6 +521,28 @@
             if (appState.questionStatus[appState.indexActive] !== 'marked') {
                 appState.questionStatus[appState.indexActive] = 'answered';
             }
+            saveState();
+            
+            // Visual update without full re-render
+            document.querySelectorAll('.option-label').forEach(el => el.classList.remove('selected'));
+            document.getElementById(`label-${val}`).classList.add('selected');
+            
+            buildPalette();
+        }
+
+        function clearResponse() {
+            // Remove from state
+            delete appState.responsesUser[appState.indexActive];
+            
+            // Uncheck UI radios
+            document.querySelectorAll('.option-input').forEach(input => input.checked = false);
+            document.querySelectorAll('.option-label').forEach(el => el.classList.remove('selected'));
+            
+            // Update status
+            if (appState.questionStatus[appState.indexActive] !== 'marked') {
+                appState.questionStatus[appState.indexActive] = 'not-answered';
+            }
+            
             saveState();
             buildPalette();
         }
@@ -548,10 +559,10 @@
         }
 
         function navigateQuestion(step) {
-            if (step === 1 && appState.indexActive === appState.totalQuestions - 1) {
-                return; 
+            const target = appState.indexActive + step;
+            if (target >= 0 && target < appState.totalQuestions) {
+                jumpToQuestion(target);
             }
-            jumpToQuestion(appState.indexActive + step);
         }
 
         function jumpToQuestion(targetIndex) {
@@ -570,10 +581,10 @@
         }
 
         function submitExamination() {
-            if (confirm("Submit examination? You will not be able to change your answers after submission.")) {
+            if (confirm("Are you sure you want to submit the examination?")) {
                 appState.isExamActive = false;
                 clearInterval(trackingInterval);
-                localStorage.removeItem('ktunotes_nasscom_mock_state'); 
+                localStorage.removeItem('ktunotes_mock_v2'); 
                 renderResults();
             }
         }
@@ -581,6 +592,11 @@
         function renderResults() {
             document.getElementById('quiz-view').classList.add('hidden');
             document.getElementById('result-view').classList.remove('hidden');
+            
+            // Make sure parent main is hidden so overlay shows clean
+            if(document.getElementById('main-container')) {
+                 document.getElementById('main-container').style.display = 'none';
+            }
 
             let correct = 0;
             let skipped = 0;
@@ -594,11 +610,9 @@
             const incorrect = appState.totalQuestions - correct - skipped;
             const accuracy = Math.round((correct / appState.totalQuestions) * 100);
 
-            // Populate Metadata
+            // Populate Info
             document.getElementById('res-name').innerText = appState.candidateName;
-            
-            const today = new Date();
-            document.getElementById('res-date').innerText = today.toLocaleDateString('en-GB'); 
+            document.getElementById('res-date').innerText = new Date().toLocaleDateString(); 
             
             const minsSpent = Math.floor(appState.timeSpent / 60);
             const secsSpent = appState.timeSpent % 60;
@@ -610,31 +624,25 @@
             document.getElementById('res-incorrect').innerText = incorrect;
             document.getElementById('res-skipped').innerText = skipped;
 
-            // Academic Grading Calculation
+            // Grading
             const banner = document.getElementById('award-banner');
             const awardTxt = document.getElementById('award-text');
             
-            banner.className = "rounded-3xl p-8 text-center mb-8 shadow-sm border-2 ";
             if (accuracy >= 80) {
-                banner.classList.add('bg-emerald-50', 'border-emerald-200');
-                awardTxt.className = "text-3xl md:text-4xl font-black text-emerald-600";
-                awardTxt.innerText = `PASSED WITH DISTINCTION (${accuracy}%)`;
-            } else if (accuracy >= 60) {
-                banner.classList.add('bg-blue-50', 'border-blue-200');
-                awardTxt.className = "text-3xl md:text-4xl font-black text-blue-600";
-                awardTxt.innerText = `PASSED WITH CREDIT (${accuracy}%)`;
+                banner.className = "rounded-2xl p-6 text-center mb-8 border-2 bg-emerald-50 border-emerald-200";
+                awardTxt.className = "text-3xl font-black text-emerald-600";
+                awardTxt.innerText = `Excellent (${accuracy}%)`;
             } else if (accuracy >= 50) {
-                banner.classList.add('bg-indigo-50', 'border-indigo-200');
-                awardTxt.className = "text-3xl md:text-4xl font-black text-indigo-600";
-                awardTxt.innerText = `PASSED (${accuracy}%)`;
+                banner.className = "rounded-2xl p-6 text-center mb-8 border-2 bg-blue-50 border-blue-200";
+                awardTxt.className = "text-3xl font-black text-blue-600";
+                awardTxt.innerText = `Passed (${accuracy}%)`;
             } else {
-                banner.classList.add('bg-red-50', 'border-red-200');
-                awardTxt.className = "text-3xl md:text-4xl font-black text-red-600";
-                awardTxt.innerText = `FAILED (${accuracy}%)`;
+                banner.className = "rounded-2xl p-6 text-center mb-8 border-2 bg-red-50 border-red-200";
+                awardTxt.className = "text-3xl font-black text-red-600";
+                awardTxt.innerText = `Failed (${accuracy}%)`;
             }
         }
         
-        // Auto-resume check on page load
         window.onload = loadOrInitializeState;
     </script>
 </body>
