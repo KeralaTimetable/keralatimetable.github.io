@@ -3,309 +3,392 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NASSCOM Digital Edge 101 - Mock Exam | Kerala Timetable</title>
+    <title>Digital Edge 101 - Mock Exam | Kerala Timetable</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; background-color: #f8fafc; }
-        
-        /* Custom Scrollbar for horizontal palette */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        .bg-mesh { background-color: #f8fafc; }
 
+        /* Authentic Glassmorphism */
         .real-glass {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.1);
         }
 
-        /* Standardized Option Styles */
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+
+        .inner-glass:focus, .inner-glass:focus-within {
+            background: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            outline: none;
+        }
+
+        /* Orb Animations */
+        @keyframes float-pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+        .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
+
+        /* General UI animations */
+        @keyframes fadeUpEntry {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+
+        /* Custom Scrollbar for horizontal palette */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Exam Option Styles */
         .option-label {
             display: flex;
             align-items: flex-start;
             padding: 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
             cursor: pointer;
             transition: all 0.2s;
-            background: white;
             margin-bottom: 0.75rem;
         }
         
         .option-label:hover {
+            background: rgba(255, 255, 255, 0.8);
             border-color: #94a3b8;
-            background: #f8fafc;
         }
 
-        .option-input:checked + .opt-content-wrapper {
-            font-weight: 600;
-        }
+        .option-input:checked + .opt-content-wrapper { font-weight: 700; }
         
         .option-label.selected {
-            border-color: #3b82f6;
             background: #eff6ff;
-            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+            box-shadow: 0 4px 15px -3px rgba(59, 130, 246, 0.15);
         }
 
         /* Palette Status Colors */
         .status-answered { background-color: #10b981; color: white; border-color: #059669; }
         .status-not-answered { background-color: #ef4444; color: white; border-color: #b91c1c; }
         .status-marked { background-color: #8b5cf6; color: white; border-color: #6d28d9; }
-        .status-unvisited { background-color: #e2e8f0; color: #475569; border-color: #cbd5e1; }
-
-        @keyframes fadeUpEntry {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-up { animation: fadeUpEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .status-unvisited { background-color: rgba(255, 255, 255, 0.6); color: #475569; border-color: #cbd5e1; }
         
-        .gradient-text {
-            background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        /* Ensure footer doesn't overlap content */
         .quiz-content-area {
-            padding-bottom: 220px; /* Space for the sticky footer */
-            padding-top: 80px; /* Space for the sticky header */
+            padding-bottom: 220px;
+            padding-top: 80px;
         }
     </style>
 </head>
 
-<body class="text-slate-800 antialiased flex flex-col min-h-screen relative">
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
 
-    <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-8 relative z-10 flex flex-col justify-center min-h-screen" id="main-container">
+    <div id="navigation-container" class="transition-opacity duration-300 relative z-50"></div>
+
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="scroll-bg-1" class="absolute top-10 -left-32 md:-left-10 w-72 h-72 md:w-96 md:h-96 transition-transform duration-100 ease-out">
+            <div id="mouse-orb-1" class="w-full h-full bg-blue-400/50 md:bg-blue-400 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+        </div>
+        <div id="scroll-bg-2" class="absolute top-80 -right-32 md:-right-20 w-80 h-80 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-2" class="w-full h-full bg-indigo-500/40 md:bg-indigo-500 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        </div>
+        <div id="scroll-bg-3" class="absolute -bottom-32 left-[20%] w-80 h-80 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-3" class="w-full h-full bg-emerald-400/30 md:bg-emerald-400/40 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 1s;"></div>
+        </div>
+    </div>
+
+    <main id="main-container" class="flex-grow w-full max-w-6xl mx-auto px-4 py-12 md:py-16 relative z-10 flex flex-col justify-center min-h-[80vh]">
         
-        <!-- LANDING VIEW -->
-        <div id="landing-view" class="max-w-3xl mx-auto w-full space-y-6 animate-fade-up">
-            <div class="text-center mb-8">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-slate-200 text-blue-600 text-xs font-extrabold uppercase tracking-wider mb-4">
+        <div id="landing-view" class="max-w-3xl mx-auto w-full space-y-6">
+            <div class="text-center mb-12">
+                <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-slate-200 text-blue-600 text-xs font-extrabold uppercase tracking-wider mb-6">
                     <i class="fas fa-laptop-code text-blue-500"></i> KTU B.Tech Semester 2
                 </div>
-                <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3 gradient-text">NASSCOM Skill Enhancement</h1>
-                <p class="text-slate-500 text-lg font-medium">Digital Edge 101 - Practice Mock Assessment</p>
+                <h1 class="animate-fade-up delay-100 text-4xl md:text-5xl font-black tracking-tight mb-4 text-slate-900">
+                    NASSCOM Skill <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Enhancement</span>
+                </h1>
+                <p class="animate-fade-up delay-200 text-slate-600 text-lg font-medium max-w-2xl mx-auto">
+                    Digital Edge 101 - Practice Mock Assessment
+                </p>
             </div>
 
-            <div class="real-glass rounded-3xl p-6 sm:p-10 shadow-2xl">
+            <div class="animate-fade-up delay-200 real-glass rounded-[2rem] p-6 sm:p-10">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm text-center">
-                        <div class="text-blue-500 mb-2"><i class="far fa-clock text-xl"></i></div>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Duration</div>
+                    <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="text-blue-500 mb-2"><i class="far fa-clock text-2xl"></i></div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Duration</div>
                         <div class="font-bold text-slate-800">60 Mins</div>
                     </div>
-                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm text-center">
-                        <div class="text-indigo-500 mb-2"><i class="fas fa-list-ol text-xl"></i></div>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Questions</div>
+                    <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="text-indigo-500 mb-2"><i class="fas fa-list-ol text-2xl"></i></div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Questions</div>
                         <div class="font-bold text-slate-800" id="total-q-display">30 MCQs</div>
                     </div>
-                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm text-center">
-                        <div class="text-emerald-500 mb-2"><i class="fas fa-bullseye text-xl"></i></div>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Max Score</div>
+                    <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="text-emerald-500 mb-2"><i class="fas fa-bullseye text-2xl"></i></div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Max Score</div>
                         <div class="font-bold text-slate-800">100 Marks</div>
                     </div>
-                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm text-center">
-                        <div class="text-red-500 mb-2"><i class="fas fa-shield-alt text-xl"></i></div>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Proctoring</div>
+                    <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="text-red-500 mb-2"><i class="fas fa-shield-alt text-2xl"></i></div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Proctoring</div>
                         <div class="font-bold text-slate-800">Enabled</div>
                     </div>
                 </div>
 
-                <div class="mb-8">
-                    <h3 class="font-bold text-slate-800 mb-4 text-lg border-b border-slate-100 pb-2">Examination Guidelines</h3>
-                    <ul class="space-y-3 text-sm text-slate-600 font-medium">
-                        <li class="flex items-start gap-2">
+                <div class="mb-8 real-glass rounded-2xl p-6">
+                    <h3 class="font-bold text-slate-900 mb-4 text-lg flex items-center gap-2 border-b border-white/50 pb-3">
+                        <i class="fas fa-info-circle text-indigo-500"></i> Examination Guidelines
+                    </h3>
+                    <ul class="space-y-4 text-sm text-slate-700 font-medium">
+                        <li class="flex items-start gap-3">
                             <i class="fas fa-circle text-[8px] text-blue-500 mt-1.5"></i> 
                             <span>Questions are randomized from the master pool representing all core modules.</span>
                         </li>
-                        <li class="flex items-start gap-2">
+                        <li class="flex items-start gap-3">
                             <i class="fas fa-circle text-[8px] text-red-500 mt-1.5"></i> 
                             <span><strong>Anti-Cheat:</strong> Browser focus is monitored. Leaving the active window triggers a warning.</span>
                         </li>
-                        <li class="flex items-start gap-2">
+                        <li class="flex items-start gap-3">
                             <i class="fas fa-circle text-[8px] text-indigo-500 mt-1.5"></i> 
                             <span>No negative marking is applied. A minimum score of 50% is required to pass.</span>
                         </li>
                     </ul>
                 </div>
 
-                <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                <div class="space-y-4">
                     <div>
-                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Candidate Name</label>
-                        <input type="text" id="candidate-name" placeholder="Enter your full name" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white transition-shadow">
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Candidate Name</label>
+                        <input type="text" id="candidate-name" placeholder="Enter your full name" class="inner-glass w-full text-slate-800 text-sm md:text-base rounded-xl px-5 py-4 transition-all">
                     </div>
-                    <label class="flex items-center gap-3 cursor-pointer mt-2 group">
-                        <input type="checkbox" id="consent-check" class="h-5 w-5 cursor-pointer rounded text-blue-600 focus:ring-blue-500 border-gray-300">
-                        <span class="text-sm font-medium text-slate-600">I have read the instructions and am ready to begin.</span>
+                    <label class="flex items-center gap-3 cursor-pointer mt-4 group p-2">
+                        <input type="checkbox" id="consent-check" class="h-5 w-5 cursor-pointer rounded border-gray-300 text-blue-600 focus:ring-blue-500 transition-colors bg-white/50">
+                        <span class="text-sm font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">I have read the instructions and am ready to begin.</span>
                     </label>
                 </div>
 
-                <button onclick="startExamination()" class="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition-colors flex justify-center items-center gap-2">
-                    Start Mock Assessment
+                <button onclick="startExamination()" class="w-full mt-8 bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-8 rounded-xl shadow-xl transform transition hover:-translate-y-0.5 flex justify-center items-center gap-2">
+                    Start Mock Assessment <i class="fas fa-paper-plane text-xs"></i>
                 </button>
             </div>
         </div>
-
     </main>
 
-    <!-- QUIZ VIEW (Full Screen Overlay style) -->
-    <div id="quiz-view" class="hidden fixed inset-0 bg-slate-50 z-50 flex flex-col overflow-hidden">
+    <div id="quiz-view" class="hidden fixed inset-0 bg-mesh z-50 flex flex-col overflow-hidden">
         
-        <!-- Sticky Header -->
-        <header class="bg-blue-700 text-white shadow-md w-full px-4 py-3 flex justify-between items-center z-20 flex-shrink-0">
-            <div class="flex items-center gap-2 truncate">
-                <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm"><i class="fas fa-laptop-code"></i></div>
-                <h1 class="font-bold text-sm md:text-base truncate hidden sm:block">Digital Edge 101 - Mock</h1>
-                <h1 class="font-bold text-sm truncate sm:hidden">Mock Exam</h1>
+        <header class="real-glass border-b-0 border-t-0 border-l-0 border-r-0 rounded-none w-full px-4 md:px-8 py-3 flex justify-between items-center z-20 flex-shrink-0 shadow-sm">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-md">
+                    <i class="fas fa-laptop-code text-sm"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-slate-900 text-sm md:text-base leading-tight">Digital Edge 101</h1>
+                    <p class="text-xs font-semibold text-slate-500 hidden sm:block">Mock Assessment</p>
+                </div>
             </div>
             <div class="flex items-center gap-3">
-                <div class="bg-blue-800 px-4 py-1.5 rounded-lg border border-blue-600 shadow-inner flex items-center gap-2">
-                    <span id="timer" class="font-bold font-mono tracking-wider text-base md:text-lg">60:00</span>
+                <div class="inner-glass px-4 py-2 rounded-xl border border-white/80 shadow-sm flex items-center gap-2 bg-white/80">
+                    <i class="far fa-clock text-blue-600 animate-pulse"></i>
+                    <span id="timer" class="font-bold text-slate-800 font-mono tracking-wider text-base md:text-lg">60:00</span>
                 </div>
             </div>
         </header>
 
-        <!-- Progress Bar -->
-        <div class="w-full bg-slate-200 h-1 flex-shrink-0">
-            <div id="progress-bar" class="bg-blue-500 h-1 transition-all duration-300" style="width: 0%"></div>
+        <div class="w-full bg-slate-200/50 h-1 flex-shrink-0">
+            <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-1 transition-all duration-300" style="width: 0%"></div>
         </div>
 
-        <!-- Scrollable Content Area -->
-        <div class="flex-grow overflow-y-auto px-4 py-6 md:px-10 pb-[220px]">
-            <div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <div class="mb-4">
-                    <h2 id="question-indicator" class="text-lg font-bold text-slate-800">Question 1 of 30</h2>
+        <div class="flex-grow overflow-y-auto px-4 py-6 md:px-10 pb-[220px] relative">
+            <div class="max-w-4xl mx-auto real-glass p-6 md:p-8 rounded-[2rem]">
+                <div class="mb-6 flex justify-between items-center border-b border-white/50 pb-4">
+                    <h2 id="question-indicator" class="text-sm font-black text-blue-600 uppercase tracking-wider bg-blue-50/50 px-3 py-1.5 rounded-lg inline-block">Question 1 of 30</h2>
                 </div>
                 
-                <div class="mb-6">
-                    <p id="question-text" class="text-base md:text-lg text-slate-700 leading-relaxed">
+                <div class="mb-8">
+                    <p id="question-text" class="text-lg md:text-xl font-bold text-slate-800 leading-relaxed">
                         Loading question...
                     </p>
-                    <div id="image-container" class="mt-4 mb-2 hidden flex justify-center">
-                        <img id="question-image" src="" alt="Question Image" class="max-h-64 object-contain rounded border border-slate-200 p-1">
+                    <div id="image-container" class="mt-6 mb-2 hidden flex justify-center">
+                        <img id="question-image" src="" alt="Question Image" class="max-h-72 object-contain rounded-xl border border-white/80 p-2 inner-glass">
                     </div>
                 </div>
 
                 <div id="options-container" class="space-y-3">
-                    <!-- Options injected here -->
-                </div>
+                    </div>
             </div>
         </div>
 
-        <!-- Sticky Footer Navigation & Actions -->
-        <footer class="bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] w-full absolute bottom-0 left-0 z-20 p-3 md:p-4 flex flex-col gap-3">
+        <footer class="real-glass border-b-0 border-l-0 border-r-0 rounded-none w-full absolute bottom-0 left-0 z-20 p-4 md:p-6 flex flex-col gap-4">
             
-            <!-- Horizontal Palette -->
-            <div class="w-full max-w-4xl mx-auto">
+            <div class="w-full max-w-5xl mx-auto">
                 <div id="palette-horizontal" class="flex overflow-x-auto gap-2 pb-2 hide-scrollbar items-center px-1">
-                    <!-- Palette items injected here -->
-                </div>
+                    </div>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="w-full max-w-4xl mx-auto">
-                <div class="grid grid-cols-2 md:flex md:flex-row gap-2 mb-2">
-                    <button onclick="toggleMarkForReview()" id="mark-btn" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded md:flex-1 text-sm flex items-center justify-center gap-2 hover:bg-purple-700 transition">
-                        <i class="fas fa-thumbtack"></i> Mark for Review
+            <div class="w-full max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0 mt-2">
+                
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <button id="prev-btn" onclick="navigateQuestion(-1)" class="inner-glass text-slate-700 font-bold py-3 px-5 rounded-xl text-sm hover:bg-white transition flex-1 sm:flex-none flex items-center justify-center gap-2 disabled:opacity-50">
+                        <i class="fas fa-arrow-left text-xs"></i> Back
                     </button>
-                    <button onclick="clearResponse()" class="bg-white text-slate-700 border border-slate-300 font-semibold py-2 px-4 rounded md:flex-1 text-sm hover:bg-slate-50 transition">
-                        Clear Response
+                    <button onclick="clearResponse()" class="inner-glass text-slate-600 font-bold py-3 px-5 rounded-xl text-sm hover:text-red-500 hover:bg-white transition flex-1 sm:flex-none">
+                        Clear
                     </button>
+                </div>
+
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <button onclick="toggleMarkForReview()" id="mark-btn" class="inner-glass text-purple-600 font-bold py-3 px-5 rounded-xl text-sm hover:bg-white transition flex-1 sm:flex-none flex items-center justify-center gap-2">
+                        <i class="fas fa-bookmark"></i> Review
+                    </button>
+                    
+                    <div id="action-btn-wrapper" class="flex-1 sm:flex-none">
+                        <button id="next-btn" onclick="navigateQuestion(1)" class="bg-slate-900 text-white font-bold py-3 px-8 rounded-xl text-sm hover:bg-slate-800 shadow-lg transform transition hover:-translate-y-0.5 w-full flex items-center justify-center gap-2">
+                            Save & Next <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
                 </div>
                 
-                <div class="grid grid-cols-3 gap-2">
-                    <button id="prev-btn" onclick="navigateQuestion(-1)" class="bg-white text-slate-700 border border-slate-300 font-bold py-2.5 px-4 rounded text-sm hover:bg-slate-50 transition flex items-center justify-center gap-1 disabled:opacity-50">
-                        &larr; Back
-                    </button>
-                    <button onclick="submitExamination()" class="bg-red-500 text-white font-bold py-2.5 px-4 rounded text-sm hover:bg-red-600 transition shadow-sm">
-                        Submit
-                    </button>
-                    <button id="next-btn" onclick="navigateQuestion(1)" class="bg-blue-600 text-white font-bold py-2.5 px-4 rounded text-sm hover:bg-blue-700 transition shadow-sm flex items-center justify-center gap-1">
-                        Save & Next &rarr;
-                    </button>
-                </div>
             </div>
         </footer>
     </div>
 
-    <!-- RESULT VIEW -->
-    <div id="result-view" class="hidden max-w-3xl mx-auto w-full space-y-6 animate-fade-up px-4 py-8 absolute inset-0 bg-[#f8fafc] z-[60] overflow-y-auto">
-        <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200 mt-10 mb-10 max-w-3xl mx-auto">
-            
-            <h2 class="text-2xl font-black text-slate-900 border-b border-slate-200 pb-4 mb-6 text-center">
-                Assessment Results
-            </h2>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 text-center">
-                    <span class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Candidate</span>
-                    <span id="res-name" class="text-base font-bold text-slate-800 truncate block">User</span>
+    <div id="result-view" class="hidden absolute inset-0 bg-mesh z-[60] overflow-y-auto px-4 py-12">
+        <div class="max-w-3xl mx-auto animate-fade-up">
+            <div class="real-glass rounded-[2rem] p-8 sm:p-10 shadow-2xl border border-white">
+                
+                <h2 class="text-3xl font-black text-slate-900 border-b border-white/50 pb-5 mb-8 text-center flex items-center justify-center gap-3">
+                    <i class="fas fa-award text-blue-500"></i> Assessment Results
+                </h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                    <div class="inner-glass rounded-2xl p-5 text-center">
+                        <span class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Candidate</span>
+                        <span id="res-name" class="text-lg font-bold text-slate-800 truncate block">User</span>
+                    </div>
+                    <div class="inner-glass rounded-2xl p-5 text-center">
+                        <span class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Date</span>
+                        <span id="res-date" class="text-lg font-bold text-slate-800 block">--/--/----</span>
+                    </div>
+                    <div class="inner-glass rounded-2xl p-5 text-center col-span-2 md:col-span-1">
+                        <span class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Time Spent</span>
+                        <span id="res-time" class="text-lg font-bold text-slate-800 block">0m 0s</span>
+                    </div>
                 </div>
-                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 text-center">
-                    <span class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Date</span>
-                    <span id="res-date" class="text-base font-bold text-slate-800 block">--/--/----</span>
-                </div>
-                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 text-center col-span-2 md:col-span-1">
-                    <span class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Time Spent</span>
-                    <span id="res-time" class="text-base font-bold text-slate-800 block">0m 0s</span>
-                </div>
-            </div>
 
-            <div id="award-banner" class="rounded-2xl p-6 text-center mb-8 border-2">
-                <div class="text-xs font-bold uppercase tracking-widest mb-1 opacity-80">Final Grade</div>
-                <div id="award-text" class="text-3xl font-black">Evaluating...</div>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-center">
-                <div class="p-4">
-                    <div class="text-3xl font-black text-slate-800 mb-1" id="res-total">30</div>
-                    <div class="text-xs font-bold text-slate-500 uppercase">Total</div>
+                <div id="award-banner" class="rounded-3xl p-8 text-center mb-10 inner-glass shadow-sm">
+                    <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Final Grade</div>
+                    <div id="award-text" class="text-4xl font-black">Evaluating...</div>
                 </div>
-                <div class="p-4">
-                    <div class="text-3xl font-black text-emerald-600 mb-1" id="res-correct">0</div>
-                    <div class="text-xs font-bold text-emerald-600 uppercase">Correct</div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-center">
+                    <div class="inner-glass bg-white/50 rounded-2xl p-5">
+                        <div class="text-4xl font-black text-slate-800 mb-1" id="res-total">30</div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase">Total Qs</div>
+                    </div>
+                    <div class="inner-glass bg-emerald-50/50 rounded-2xl p-5 border-emerald-100">
+                        <div class="text-4xl font-black text-emerald-600 mb-1" id="res-correct">0</div>
+                        <div class="text-[10px] font-bold text-emerald-600 uppercase">Correct</div>
+                    </div>
+                    <div class="inner-glass bg-red-50/50 rounded-2xl p-5 border-red-100">
+                        <div class="text-4xl font-black text-red-600 mb-1" id="res-incorrect">0</div>
+                        <div class="text-[10px] font-bold text-red-600 uppercase">Incorrect</div>
+                    </div>
+                    <div class="inner-glass bg-slate-50/50 rounded-2xl p-5">
+                        <div class="text-4xl font-black text-slate-400 mb-1" id="res-skipped">0</div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase">Skipped</div>
+                    </div>
                 </div>
-                <div class="p-4">
-                    <div class="text-3xl font-black text-red-600 mb-1" id="res-incorrect">0</div>
-                    <div class="text-xs font-bold text-red-600 uppercase">Incorrect</div>
-                </div>
-                <div class="p-4">
-                    <div class="text-3xl font-black text-slate-400 mb-1" id="res-skipped">0</div>
-                    <div class="text-xs font-bold text-slate-400 uppercase">Skipped</div>
-                </div>
-            </div>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center pt-6 border-t border-slate-200">
-                <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition text-center">
-                    Retake Examination
-                </button>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center pt-8 border-t border-white/50">
+                    <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
+                        <i class="fas fa-redo text-sm"></i> Retake Examination
+                    </button>
+                    <a href="/" class="w-full sm:w-auto px-10 py-4 rounded-xl font-bold text-sm text-slate-600 hover:text-slate-900 hover:bg-white inner-glass transition-all text-center flex items-center justify-center">
+                        Return Home
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
-    <!-- Assuming questions.js defines: const masterQuestionPool = [{ q: "...", o: ["...","..."], a: "A", img: "" }, ...]; -->
+    <script src="/components.js?v=15"></script>
     <script src="questions.js"></script> 
 
     <script>
-        // State Management
+        // Load Header Navigation
+        if(typeof loadNavigation === 'function') loadNavigation('', '/', false);
+
+        // --- PARALLAX EFFECTS ---
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollBg1 = document.getElementById('scroll-bg-1');
+                    const scrollBg2 = document.getElementById('scroll-bg-2');
+                    const scrollBg3 = document.getElementById('scroll-bg-3');
+                    
+                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.3}px)`;
+                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                    if(scrollBg3) scrollBg3.style.transform = `translateY(${lastScrollY * 0.15}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        function applyParallax(x, y) {
+            const mouseOrb1 = document.getElementById('mouse-orb-1');
+            const mouseOrb2 = document.getElementById('mouse-orb-2');
+            const mouseOrb3 = document.getElementById('mouse-orb-3');
+            
+            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+            if(mouseOrb3) mouseOrb3.style.transform = `translate(${x * -20}px, ${y * 30}px)`;
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            applyParallax(x, y);
+        });
+
+        document.addEventListener('mouseleave', () => applyParallax(0, 0));
+
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', (e) => {
+                if(e.gamma === null || e.beta === null) return;
+                let x = Math.max(-1, Math.min(1, e.gamma / 40));
+                let y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
+                applyParallax(x, y);
+            }, true);
+        }
+
+        // --- QUIZ LOGIC ---
         let appState = {
             candidateName: "",
             quizDataset: [],
             indexActive: 0,
             responsesUser: {},
-            questionStatus: {}, // 'unvisited', 'answered', 'not-answered', 'marked'
-            timeRemaining: 3600, // 60 mins
+            questionStatus: {},
+            timeRemaining: 3600, 
             timeSpent: 0,
             isExamActive: false,
             cheatWarnings: 0,
@@ -314,7 +397,6 @@
 
         let trackingInterval = null;
 
-        // Anti-Cheat Blur Detection
         window.addEventListener('blur', () => {
             if(appState.isExamActive) {
                 appState.cheatWarnings++;
@@ -323,7 +405,6 @@
         });
 
         function loadOrInitializeState() {
-            // Check for mock data if questions.js is absent (for demonstration)
             if (typeof masterQuestionPool === 'undefined' || masterQuestionPool.length === 0) {
                 window.masterQuestionPool = [
                     { q: "In the context of neural networks and deep learning, a tech startup aims to enhance its product recommendations using AI. What application is most suitable for achieving this goal?", o: ["Optimize manufacturing processes", "Secure financial transactions", "Enhance customer engagement", "Streamline project management"], a: "C" },
@@ -335,7 +416,7 @@
             appState.totalQuestions = Math.min(30, masterQuestionPool.length);
             document.getElementById('total-q-display').innerText = `${appState.totalQuestions} MCQs`;
 
-            const savedState = localStorage.getItem('ktunotes_mock_v2');
+            const savedState = localStorage.getItem('ktunotes_mock_v3');
             if (savedState) {
                 appState = JSON.parse(savedState);
                 if (appState.isExamActive) {
@@ -347,12 +428,12 @@
 
         function saveState() {
             if (appState.isExamActive) {
-                localStorage.setItem('ktunotes_mock_v2', JSON.stringify(appState));
+                localStorage.setItem('ktunotes_mock_v3', JSON.stringify(appState));
             }
         }
 
         function clearStateAndReload() {
-            localStorage.removeItem('ktunotes_mock_v2');
+            localStorage.removeItem('ktunotes_mock_v3');
             location.reload();
         }
 
@@ -365,7 +446,6 @@
             
             appState.candidateName = nameInput;
 
-            // Randomize and select dataset
             let poolCopy = [...masterQuestionPool];
             for (let i = poolCopy.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -373,7 +453,6 @@
             }
             appState.quizDataset = poolCopy.slice(0, appState.totalQuestions);
             
-            // Initialize statuses
             for(let i=0; i < appState.totalQuestions; i++) {
                 appState.questionStatus[i] = 'unvisited';
             }
@@ -390,7 +469,12 @@
         }
 
         function resumeExamination() {
+            // Hide Landing and Top Nav
             document.getElementById('main-container').classList.add('hidden');
+            const nav = document.getElementById('navigation-container');
+            if(nav) nav.classList.add('hidden');
+            
+            // Show Quiz
             document.getElementById('quiz-view').classList.remove('hidden');
             
             buildPalette();
@@ -426,20 +510,17 @@
                 const status = appState.questionStatus[i];
                 const isActive = i === appState.indexActive;
                 
-                // Styling active element with a border just like the reference
-                const borderClass = isActive ? 'border-2 border-blue-600 shadow-md' : 'border border-slate-300';
+                const borderClass = isActive ? 'border-2 border-blue-600 shadow-md transform scale-110' : 'border border-slate-300';
                 
-                // Creating the button element
                 const btn = document.createElement('button');
                 btn.onclick = () => jumpToQuestion(i);
-                btn.className = `min-w-[40px] h-[44px] rounded flex-shrink-0 flex items-center justify-center font-semibold text-sm status-${status} ${borderClass} transition-all focus:outline-none`;
+                btn.className = `min-w-[44px] h-[44px] rounded-xl flex-shrink-0 flex items-center justify-center font-bold text-sm status-${status} ${borderClass} transition-all focus:outline-none`;
                 btn.innerText = i + 1;
                 btn.id = `pal-btn-${i}`;
                 
                 palette.appendChild(btn);
             }
             
-            // Auto-scroll palette to active question
             const activeBtn = document.getElementById(`pal-btn-${appState.indexActive}`);
             if(activeBtn) {
                 activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -453,11 +534,9 @@
             document.getElementById('question-indicator').innerText = `Question ${appState.indexActive + 1} of ${appState.totalQuestions}`;
             document.getElementById('question-text').innerText = item.q;
             
-            // Progress Bar
             const progressPercent = ((appState.indexActive + 1) / appState.totalQuestions) * 100;
             document.getElementById('progress-bar').style.width = `${progressPercent}%`;
 
-            // Image Check
             const imgEl = document.getElementById('question-image');
             const imgContainer = document.getElementById('image-container');
             if (item.img) {
@@ -468,22 +547,21 @@
                 imgContainer.classList.add('hidden');
             }
 
-            // Options Rendering
             const containerHtml = document.getElementById('options-container');
             containerHtml.innerHTML = "";
             
             item.o.forEach((optionStr, indexIdx) => {
                 const letter = indicesMap[indexIdx];
                 const isSelected = appState.responsesUser[appState.indexActive] === letter;
-                const selectedClass = isSelected ? 'selected' : '';
+                const selectedClass = isSelected ? 'selected font-bold' : '';
                 
                 const optionNode = `
-                    <label class="option-label ${selectedClass}" id="label-${letter}">
-                        <div class="flex items-center h-5 mt-0.5">
-                            <input type="radio" name="mock-answer" value="${letter}" onclick="recordOptionSelection('${letter}')" class="option-input w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500" ${isSelected ? 'checked' : ''}>
+                    <label class="option-label inner-glass ${selectedClass}" id="label-${letter}">
+                        <div class="flex items-center h-5 mt-0.5 shrink-0">
+                            <input type="radio" name="mock-answer" value="${letter}" onclick="recordOptionSelection('${letter}')" class="option-input w-4 h-4 text-blue-600 bg-white border-gray-300 focus:ring-blue-500" ${isSelected ? 'checked' : ''}>
                         </div>
-                        <div class="ml-3 text-sm md:text-base text-slate-700 opt-content-wrapper flex gap-2">
-                            <span class="font-bold text-slate-900">${letter}.</span>
+                        <div class="ml-4 text-sm md:text-base text-slate-700 opt-content-wrapper flex gap-3">
+                            <span class="font-black text-slate-400 bg-white px-2 py-0.5 rounded shadow-sm text-xs">${letter}</span>
                             <span>${optionStr}</span>
                         </div>
                     </label>
@@ -491,26 +569,34 @@
                 containerHtml.insertAdjacentHTML('beforeend', optionNode);
             });
 
-            // Update Mark Button Text
+            // Update Mark Button
             const markBtn = document.getElementById('mark-btn');
             if(appState.questionStatus[appState.indexActive] === 'marked') {
                 markBtn.innerHTML = `<i class="fas fa-check"></i> Marked`;
-                markBtn.classList.add('bg-purple-800');
+                markBtn.classList.add('bg-purple-600', 'text-white');
+                markBtn.classList.remove('text-purple-600');
             } else {
-                markBtn.innerHTML = `<i class="fas fa-thumbtack"></i> Mark for Review`;
-                markBtn.classList.remove('bg-purple-800');
+                markBtn.innerHTML = `<i class="fas fa-bookmark"></i> Review`;
+                markBtn.classList.remove('bg-purple-600', 'text-white');
+                markBtn.classList.add('text-purple-600');
             }
 
             // Buttons state
             document.getElementById('prev-btn').disabled = (appState.indexActive === 0);
             
-            const nextBtn = document.getElementById('next-btn');
+            const actionWrapper = document.getElementById('action-btn-wrapper');
             if (appState.indexActive === appState.totalQuestions - 1) {
-                nextBtn.disabled = true;
-                nextBtn.classList.add('opacity-50');
+                actionWrapper.innerHTML = `
+                    <button onclick="submitExamination()" class="bg-red-500 text-white font-bold py-3 px-8 rounded-xl text-sm hover:bg-red-600 shadow-lg transform transition hover:-translate-y-0.5 w-full flex items-center justify-center gap-2">
+                        Submit Exam <i class="fas fa-paper-plane text-xs"></i>
+                    </button>
+                `;
             } else {
-                nextBtn.disabled = false;
-                nextBtn.classList.remove('opacity-50');
+                actionWrapper.innerHTML = `
+                    <button id="next-btn" onclick="navigateQuestion(1)" class="bg-slate-900 text-white font-bold py-3 px-8 rounded-xl text-sm hover:bg-slate-800 shadow-lg transform transition hover:-translate-y-0.5 w-full flex items-center justify-center gap-2">
+                        Save & Next <i class="fas fa-arrow-right text-xs"></i>
+                    </button>
+                `;
             }
 
             buildPalette(); 
@@ -523,22 +609,17 @@
             }
             saveState();
             
-            // Visual update without full re-render
-            document.querySelectorAll('.option-label').forEach(el => el.classList.remove('selected'));
-            document.getElementById(`label-${val}`).classList.add('selected');
+            document.querySelectorAll('.option-label').forEach(el => el.classList.remove('selected', 'font-bold'));
+            document.getElementById(`label-${val}`).classList.add('selected', 'font-bold');
             
             buildPalette();
         }
 
         function clearResponse() {
-            // Remove from state
             delete appState.responsesUser[appState.indexActive];
-            
-            // Uncheck UI radios
             document.querySelectorAll('.option-input').forEach(input => input.checked = false);
-            document.querySelectorAll('.option-label').forEach(el => el.classList.remove('selected'));
+            document.querySelectorAll('.option-label').forEach(el => el.classList.remove('selected', 'font-bold'));
             
-            // Update status
             if (appState.questionStatus[appState.indexActive] !== 'marked') {
                 appState.questionStatus[appState.indexActive] = 'not-answered';
             }
@@ -560,9 +641,7 @@
 
         function navigateQuestion(step) {
             const target = appState.indexActive + step;
-            if (target >= 0 && target < appState.totalQuestions) {
-                jumpToQuestion(target);
-            }
+            if (target >= 0 && target < appState.totalQuestions) jumpToQuestion(target);
         }
 
         function jumpToQuestion(targetIndex) {
@@ -584,7 +663,7 @@
             if (confirm("Are you sure you want to submit the examination?")) {
                 appState.isExamActive = false;
                 clearInterval(trackingInterval);
-                localStorage.removeItem('ktunotes_mock_v2'); 
+                localStorage.removeItem('ktunotes_mock_v3'); 
                 renderResults();
             }
         }
@@ -592,11 +671,10 @@
         function renderResults() {
             document.getElementById('quiz-view').classList.add('hidden');
             document.getElementById('result-view').classList.remove('hidden');
-            
-            // Make sure parent main is hidden so overlay shows clean
-            if(document.getElementById('main-container')) {
-                 document.getElementById('main-container').style.display = 'none';
-            }
+
+            // Bring nav back
+            const nav = document.getElementById('navigation-container');
+            if(nav) nav.classList.remove('hidden');
 
             let correct = 0;
             let skipped = 0;
@@ -610,7 +688,6 @@
             const incorrect = appState.totalQuestions - correct - skipped;
             const accuracy = Math.round((correct / appState.totalQuestions) * 100);
 
-            // Populate Info
             document.getElementById('res-name').innerText = appState.candidateName;
             document.getElementById('res-date').innerText = new Date().toLocaleDateString(); 
             
@@ -618,27 +695,25 @@
             const secsSpent = appState.timeSpent % 60;
             document.getElementById('res-time').innerText = `${minsSpent}m ${secsSpent}s`;
 
-            // Populate Stats
             document.getElementById('res-total').innerText = appState.totalQuestions;
             document.getElementById('res-correct').innerText = correct;
             document.getElementById('res-incorrect').innerText = incorrect;
             document.getElementById('res-skipped').innerText = skipped;
 
-            // Grading
             const banner = document.getElementById('award-banner');
             const awardTxt = document.getElementById('award-text');
             
             if (accuracy >= 80) {
-                banner.className = "rounded-2xl p-6 text-center mb-8 border-2 bg-emerald-50 border-emerald-200";
-                awardTxt.className = "text-3xl font-black text-emerald-600";
+                banner.classList.add('bg-emerald-100/50', 'border', 'border-emerald-200');
+                awardTxt.className = "text-4xl font-black text-emerald-600";
                 awardTxt.innerText = `Excellent (${accuracy}%)`;
             } else if (accuracy >= 50) {
-                banner.className = "rounded-2xl p-6 text-center mb-8 border-2 bg-blue-50 border-blue-200";
-                awardTxt.className = "text-3xl font-black text-blue-600";
+                banner.classList.add('bg-blue-100/50', 'border', 'border-blue-200');
+                awardTxt.className = "text-4xl font-black text-blue-600";
                 awardTxt.innerText = `Passed (${accuracy}%)`;
             } else {
-                banner.className = "rounded-2xl p-6 text-center mb-8 border-2 bg-red-50 border-red-200";
-                awardTxt.className = "text-3xl font-black text-red-600";
+                banner.classList.add('bg-red-100/50', 'border', 'border-red-200');
+                awardTxt.className = "text-4xl font-black text-red-600";
                 awardTxt.innerText = `Failed (${accuracy}%)`;
             }
         }
