@@ -11,227 +11,311 @@
     
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-        .bg-mesh { background-color: #f0f4f8; }
+        .bg-mesh { background-color: #f8fafc; background-image: radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 24px 24px; }
 
         .real-glass {
-            background: rgba(255, 255, 255, 0.65);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-top: 1px solid rgba(255, 255, 255, 0.9);
-            border-left: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.08);
         }
 
         .inner-glass {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .option-label { cursor: pointer; }
+        .option-label { cursor: pointer; display: block; }
+        
+        .option-label:hover .inner-glass {
+            border-color: #93c5fd;
+            background: #eff6ff;
+            transform: translateY(-2px);
+        }
         
         .option-input:checked + .inner-glass {
             background: #ffffff;
             border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            box-shadow: 0 4px 15px -3px rgba(59, 130, 246, 0.2), 0 0 0 4px rgba(59, 130, 246, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .option-input:checked + .inner-glass .opt-letter {
+            background-color: #3b82f6;
+            color: #ffffff;
+            border-color: #3b82f6;
         }
 
         /* Status Colors for Palette */
-        .status-answered { background-color: #10b981; color: white; border-color: #059669; }
-        .status-not-answered { background-color: #ef4444; color: white; border-color: #b91c1c; }
-        .status-marked { background-color: #8b5cf6; color: white; border-color: #6d28d9; }
-        .status-unvisited { background-color: #e2e8f0; color: #475569; border-color: #cbd5e1; }
+        .status-answered { background-color: #10b981; color: white; border-color: #059669; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3); }
+        .status-not-answered { background-color: #ef4444; color: white; border-color: #b91c1c; box-shadow: 0 2px 5px rgba(239, 68, 68, 0.3); }
+        .status-marked { background-color: #8b5cf6; color: white; border-color: #6d28d9; box-shadow: 0 2px 5px rgba(139, 92, 246, 0.3); }
+        .status-unvisited { background-color: #f1f5f9; color: #475569; border-color: #cbd5e1; }
 
         @keyframes fadeUpEntry {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-up { animation: fadeUpEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
 </head>
 
 <body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
 
+    <!-- Background Decoration Orbs -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute -top-10 -left-10 w-96 h-96 bg-blue-400/20 rounded-full mix-blend-multiply filter blur-[90px]"></div>
-        <div class="absolute top-[40%] -right-20 w-[30rem] h-[30rem] bg-indigo-400/20 rounded-full mix-blend-multiply filter blur-[100px]"></div>
+        <div class="absolute -top-20 -left-20 w-96 h-96 bg-blue-400/20 rounded-full mix-blend-multiply filter blur-[100px]"></div>
+        <div class="absolute top-[30%] -right-20 w-[35rem] h-[35rem] bg-indigo-400/15 rounded-full mix-blend-multiply filter blur-[120px]"></div>
+        <div class="absolute -bottom-32 left-[20%] w-[30rem] h-[30rem] bg-emerald-400/15 rounded-full mix-blend-multiply filter blur-[100px]"></div>
     </div>
 
+    <!-- Main Container -->
     <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-8 relative z-10 flex flex-col justify-center min-h-screen">
         
+        <!-- 1. LANDING VIEW -->
         <div id="landing-view" class="max-w-3xl mx-auto w-full space-y-6 animate-fade-up">
             <div class="text-center mb-8">
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-600 text-xs font-bold uppercase tracking-wider mb-3">
-                    <i class="fas fa-file-signature"></i> KTU B.Tech Semester 2
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-slate-200 text-blue-600 text-xs font-extrabold uppercase tracking-wider mb-4">
+                    <i class="fas fa-file-signature text-blue-500"></i> KTU B.Tech Semester 2
                 </div>
-                <h1 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">NASSCOM Skill Enhancement</h1>
-                <p class="text-slate-500 mt-2 font-medium">Digital Edge 101 - Official Mock Assessment</p>
+                <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3 gradient-text">NASSCOM Skill Enhancement</h1>
+                <p class="text-slate-500 text-lg font-medium">Digital Edge 101 - Official Mock Assessment</p>
             </div>
 
-            <div class="real-glass rounded-3xl p-6 sm:p-8 shadow-xl">
+            <div class="real-glass rounded-[2rem] p-6 sm:p-10 shadow-2xl">
+                <!-- Exam Specs Grid -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                    <div class="inner-glass p-4 rounded-2xl text-center">
-                        <i class="far fa-clock text-blue-500 text-xl mb-2"></i>
+                    <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mb-3">
+                            <i class="far fa-clock text-blue-500 text-lg"></i>
+                        </div>
                         <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Duration</div>
                         <div class="font-bold text-slate-800">60 Mins</div>
                     </div>
-                    <div class="inner-glass p-4 rounded-2xl text-center">
-                        <i class="fas fa-list-ol text-indigo-500 text-xl mb-2"></i>
+                    <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center mb-3">
+                            <i class="fas fa-list-ol text-indigo-500 text-lg"></i>
+                        </div>
                         <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Questions</div>
                         <div class="font-bold text-slate-800" id="total-q-display">30 MCQs</div>
                     </div>
-                    <div class="inner-glass p-4 rounded-2xl text-center">
-                        <i class="fas fa-bullseye text-emerald-500 text-xl mb-2"></i>
+                    <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center mb-3">
+                            <i class="fas fa-bullseye text-emerald-500 text-lg"></i>
+                        </div>
                         <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Max Score</div>
                         <div class="font-bold text-slate-800">100 Marks</div>
                     </div>
-                    <div class="inner-glass p-4 rounded-2xl text-center">
-                        <i class="fas fa-shield-alt text-red-500 text-xl mb-2"></i>
+                    <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center mb-3">
+                            <i class="fas fa-shield-alt text-red-500 text-lg"></i>
+                        </div>
                         <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Proctoring</div>
                         <div class="font-bold text-slate-800">Enabled</div>
                     </div>
                 </div>
 
                 <div class="mb-8">
-                    <h3 class="font-bold text-slate-800 mb-4 text-lg border-b border-slate-200 pb-2">Examination Guidelines & Rules</h3>
-                    <ul class="space-y-3 text-sm text-slate-600 font-medium">
-                        <li class="flex items-start gap-2"><i class="fas fa-random text-blue-500 mt-1"></i> The examination consists of randomized questions selected from the master pool representing all core modules.</li>
-                        <li class="flex items-start gap-2"><i class="fas fa-eye text-red-500 mt-1"></i> <strong>Anti-Cheat Shield:</strong> Browser focus is monitored. Leaving the active window or swapping tabs will trigger a warning.</li>
-                        <li class="flex items-start gap-2"><i class="fas fa-check-circle text-emerald-500 mt-1"></i> No negative marking is applied. Attempt all questions.</li>
-                        <li class="flex items-start gap-2"><i class="fas fa-cloud-upload-alt text-indigo-500 mt-1"></i> Progress is automatically saved to local storage. You can refresh safely without losing your session.</li>
-                        <li class="flex items-start gap-2"><i class="fas fa-award text-yellow-500 mt-1"></i> <strong>Passing Criteria:</strong> A minimum score of 50% is required to pass this mock evaluation.</li>
+                    <h3 class="font-bold text-slate-800 mb-4 text-lg flex items-center gap-2 border-b border-slate-100 pb-3">
+                        <i class="fas fa-clipboard-list text-slate-400"></i> Examination Guidelines
+                    </h3>
+                    <ul class="space-y-4 text-sm text-slate-600 font-medium">
+                        <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-xl">
+                            <i class="fas fa-random text-blue-500 mt-0.5 text-lg"></i> 
+                            <span>The examination consists of randomized questions selected from the master pool representing all core modules.</span>
+                        </li>
+                        <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-xl">
+                            <i class="fas fa-eye text-red-500 mt-0.5 text-lg"></i> 
+                            <span><strong>Anti-Cheat Shield:</strong> Browser focus is monitored. Leaving the active window or swapping tabs will trigger a warning.</span>
+                        </li>
+                        <li class="flex items-start gap-3 bg-slate-50 p-3 rounded-xl">
+                            <i class="fas fa-cloud-upload-alt text-indigo-500 mt-0.5 text-lg"></i> 
+                            <span>Progress is automatically saved. No negative marking is applied. A minimum score of <strong>50%</strong> is required to pass.</span>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                <div class="space-y-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
                     <div>
                         <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Candidate Name (For Scorecard)</label>
-                        <input type="text" id="candidate-name" placeholder="Enter your full name" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-medium bg-white">
+                        <input type="text" id="candidate-name" placeholder="Enter your full name" class="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:outline-none focus:ring-0 focus:border-blue-500 font-medium bg-slate-50 transition-colors">
                     </div>
-                    <label class="flex items-center gap-3 cursor-pointer mt-4">
-                        <input type="checkbox" id="consent-check" class="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
-                        <span class="text-sm font-medium text-slate-700">I have read all the instructions and certify that I am ready to begin.</span>
+                    <label class="flex items-center gap-3 cursor-pointer mt-4 group">
+                        <div class="relative flex items-center">
+                            <input type="checkbox" id="consent-check" class="peer h-5 w-5 cursor-pointer appearance-none rounded-md border-2 border-slate-300 checked:border-blue-600 checked:bg-blue-600 transition-all">
+                            <span class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-check text-xs"></i>
+                            </span>
+                        </div>
+                        <span class="text-sm font-medium text-slate-600 group-hover:text-slate-900 transition-colors">I have read all the instructions and certify that I am ready to begin.</span>
                     </label>
                 </div>
 
-                <button onclick="startExamination()" class="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-0.5">
-                    START MOCK EXAMINATION
+                <button onclick="startExamination()" class="w-full mt-6 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-blue-500/30 transform transition hover:-translate-y-0.5 flex justify-center items-center gap-2">
+                    START MOCK EXAMINATION <i class="fas fa-rocket ml-1"></i>
                 </button>
             </div>
         </div>
 
-        <div id="quiz-view" class="hidden grid grid-cols-1 lg:grid-cols-4 gap-6 animate-fade-up">
+        <!-- 2. QUIZ INTERFACE VIEW -->
+        <div id="quiz-view" class="hidden flex flex-col lg:flex-row gap-6 animate-fade-up max-w-7xl mx-auto w-full">
             
-            <div class="lg:col-span-3 flex flex-col space-y-4">
+            <!-- Left Panel: Main Quiz Area -->
+            <div class="lg:w-3/4 flex flex-col space-y-4">
                 
-                <div class="real-glass rounded-2xl px-6 py-4 flex justify-between items-center shadow-sm">
-                    <div class="font-bold text-slate-800" id="display-name">Candidate: User</div>
-                    <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-inner">
-                        <i id="timer-icon" class="far fa-clock text-blue-500"></i>
-                        <span id="timer" class="text-lg font-bold text-slate-800 font-mono tracking-wider">60:00</span>
+                <!-- Header Status -->
+                <div class="real-glass rounded-2xl px-6 py-4 flex flex-col sm:flex-row justify-between items-center shadow-md gap-4 sm:gap-0">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="font-bold text-slate-800 text-lg" id="display-name">Candidate: User</div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white px-5 py-2.5 rounded-xl border-2 border-slate-100 shadow-sm">
+                        <i id="timer-icon" class="far fa-clock text-blue-500 animate-pulse"></i>
+                        <span id="timer" class="text-xl font-bold text-slate-800 font-mono tracking-wider">60:00</span>
                     </div>
                 </div>
 
-                <div class="real-glass rounded-[2rem] p-6 sm:p-10 flex flex-col flex-grow shadow-xl relative">
-                    <div class="mb-6 flex justify-between items-center border-b border-slate-200/50 pb-4">
-                        <span id="question-indicator" class="text-sm font-black text-blue-600 uppercase tracking-wider">Question 1</span>
-                        <button onclick="toggleMarkForReview()" id="mark-btn" class="text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-purple-50 hover:text-purple-600 hover:border-purple-300 transition-colors flex items-center gap-2">
-                            <i class="fas fa-bookmark"></i> Mark for Review
-                        </button>
+                <!-- Quiz Card -->
+                <div class="real-glass rounded-[2rem] flex flex-col flex-grow shadow-xl relative overflow-hidden">
+                    <!-- Progress Bar Top -->
+                    <div class="w-full bg-slate-100 h-1.5 absolute top-0 left-0">
+                        <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-1.5 transition-all duration-500 ease-out" style="width: 0%"></div>
                     </div>
 
-                    <div class="flex-grow">
-                        <h2 id="question-text" class="text-lg md:text-xl font-bold text-slate-800 mb-6 leading-relaxed">
-                            Loading examination payload...
-                        </h2>
-                        <div id="options-container" class="space-y-3">
+                    <div class="p-6 sm:p-10 flex flex-col h-full">
+                        <!-- Progress Header -->
+                        <div class="mb-6 flex justify-between items-center border-b border-slate-200/60 pb-4">
+                            <span id="question-indicator" class="text-sm font-black text-blue-600 uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-lg">Question 1</span>
+                            <button onclick="toggleMarkForReview()" id="mark-btn" class="text-xs font-bold px-4 py-2 rounded-xl border-2 border-slate-200 text-slate-600 hover:bg-purple-50 hover:text-purple-600 hover:border-purple-300 transition-all flex items-center gap-2 focus:outline-none">
+                                <i class="fas fa-bookmark"></i> Mark for Review
+                            </button>
+                        </div>
+
+                        <!-- Current Question Payload -->
+                        <div class="flex-grow">
+                            <h2 id="question-text" class="text-lg md:text-xl font-bold text-slate-800 mb-6 leading-relaxed">
+                                Loading examination payload...
+                            </h2>
+                            
+                            <!-- Image Container (Hidden by default) -->
+                            <div id="image-container" class="mb-8 hidden flex justify-center">
+                                <img id="question-image" src="" alt="Question Resource" class="max-h-64 object-contain rounded-xl border-2 border-slate-100 shadow-md p-2 bg-white">
                             </div>
-                    </div>
 
-                    <div class="flex justify-between items-center mt-8 pt-6 border-t border-slate-200/50">
-                        <button id="prev-btn" onclick="navigateQuestion(-1)" class="px-5 py-3 rounded-xl font-bold text-sm text-slate-500 hover:text-slate-800 hover:bg-slate-100/80 transition-colors flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed">
-                            <i class="fas fa-arrow-left text-xs"></i> Previous
-                        </button>
-                        
-                        <button id="next-btn" onclick="navigateQuestion(1)" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-8 rounded-xl shadow-md transform transition hover:-translate-y-0.5 flex items-center gap-2">
-                            Save & Next <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
+                            <div id="options-container" class="space-y-3">
+                                <!-- Dynamic options loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Footer Operations -->
+                        <div class="flex justify-between items-center mt-10 pt-6 border-t border-slate-200/60">
+                            <button id="prev-btn" onclick="navigateQuestion(-1)" class="px-6 py-3 rounded-xl font-bold text-sm text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
+                                <i class="fas fa-arrow-left text-xs"></i> Previous
+                            </button>
+                            
+                            <button id="next-btn" onclick="navigateQuestion(1)" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-0.5 flex items-center gap-2">
+                                Save & Next <i class="fas fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-1 space-y-4">
-                <div class="real-glass rounded-[2rem] p-6 shadow-xl h-full flex flex-col">
-                    <h3 class="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wider border-b border-slate-200 pb-2">Question Palette</h3>
+            <!-- Right Panel: Question Palette -->
+            <div class="lg:w-1/4 space-y-4">
+                <div class="real-glass rounded-[2rem] p-6 shadow-xl h-full flex flex-col sticky top-6">
+                    <h3 class="font-bold text-slate-800 mb-5 text-sm uppercase tracking-wider border-b border-slate-200 pb-3 flex items-center gap-2">
+                        <i class="fas fa-th text-indigo-500"></i> Question Palette
+                    </h3>
                     
+                    <!-- Palette Grid -->
                     <div id="palette-grid" class="grid grid-cols-5 gap-2 mb-6 flex-grow content-start">
-                        </div>
-
-                    <div class="mt-auto pt-4 border-t border-slate-200 space-y-2 text-xs font-semibold text-slate-600">
-                        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded status-answered inline-block"></span> Answered</div>
-                        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded status-not-answered inline-block"></span> Not Answered</div>
-                        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded status-marked inline-block"></span> Marked for Review</div>
-                        <div class="flex items-center gap-2"><span class="w-4 h-4 rounded status-unvisited inline-block border"></span> Not Visited</div>
+                        <!-- Numbers generated via JS -->
                     </div>
 
-                    <button onclick="submitExamination()" class="w-full mt-6 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-colors">
-                        Submit Exam
+                    <!-- Legend -->
+                    <div class="mt-auto pt-5 border-t border-slate-200 space-y-3 text-xs font-semibold text-slate-600 bg-slate-50/50 p-4 rounded-xl">
+                        <div class="flex items-center gap-3"><span class="w-4 h-4 rounded shadow-sm status-answered inline-block"></span> Answered</div>
+                        <div class="flex items-center gap-3"><span class="w-4 h-4 rounded shadow-sm status-not-answered inline-block"></span> Not Answered</div>
+                        <div class="flex items-center gap-3"><span class="w-4 h-4 rounded shadow-sm status-marked inline-block"></span> Marked for Review</div>
+                        <div class="flex items-center gap-3"><span class="w-4 h-4 rounded shadow-sm status-unvisited inline-block border border-slate-300"></span> Not Visited</div>
+                    </div>
+
+                    <button onclick="submitExamination()" class="w-full mt-6 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-500/30 transition-transform transform hover:-translate-y-0.5 flex justify-center items-center gap-2">
+                        <i class="fas fa-check-double"></i> Submit Exam
                     </button>
                 </div>
             </div>
         </div>
 
+        <!-- 3. ASSESSMENT RESULT VIEW -->
         <div id="result-view" class="hidden max-w-3xl mx-auto w-full space-y-6 animate-fade-up">
             <div class="real-glass rounded-[2.5rem] p-8 sm:p-10 shadow-2xl border border-white">
                 
-                <h2 class="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-4 mb-6"><i class="fas fa-chart-pie text-blue-500 mr-2"></i> Mock Test Results Summary</h2>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight border-b border-slate-200 pb-4 mb-6 flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
+                        <i class="fas fa-chart-pie text-blue-500 text-xl"></i>
+                    </div> 
+                    Mock Test Results Summary
+                </h2>
                 
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                    <div class="inner-glass rounded-2xl p-4 border border-slate-200">
+                    <div class="inner-glass rounded-2xl p-4 border border-slate-200 bg-white">
                         <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Candidate</span>
                         <span id="res-name" class="text-lg font-black text-slate-800 truncate block">Master</span>
                     </div>
-                    <div class="inner-glass rounded-2xl p-4 border border-slate-200">
+                    <div class="inner-glass rounded-2xl p-4 border border-slate-200 bg-white">
                         <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Date Completed</span>
                         <span id="res-date" class="text-lg font-bold text-slate-800 truncate block">27/06/2026</span>
                     </div>
-                    <div class="inner-glass rounded-2xl p-4 border border-slate-200 col-span-2 md:col-span-1">
+                    <div class="inner-glass rounded-2xl p-4 border border-slate-200 bg-white col-span-2 md:col-span-1">
                         <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Time Spent</span>
                         <span id="res-time" class="text-lg font-bold text-slate-800 truncate block">0m 0s</span>
                     </div>
                 </div>
 
-                <div id="award-banner" class="rounded-2xl p-6 text-center mb-8 shadow-inner border">
-                    <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Examination Status</div>
-                    <div id="award-text" class="text-2xl md:text-3xl font-black">Evaluating...</div>
+                <!-- Dynamic Academic Banner -->
+                <div id="award-banner" class="rounded-3xl p-8 text-center mb-8 shadow-sm border-2">
+                    <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Examination Status</div>
+                    <div id="award-text" class="text-3xl md:text-4xl font-black">Evaluating...</div>
                 </div>
                 
+                <!-- Detailed Stats -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-center">
-                    <div class="bg-slate-50 rounded-xl p-3 border border-slate-200">
-                        <div class="text-2xl font-black text-slate-800" id="res-total">30</div>
-                        <div class="text-[10px] font-bold text-slate-500 uppercase">Total Questions</div>
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 shadow-sm">
+                        <div class="text-3xl font-black text-slate-800 mb-1" id="res-total">30</div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Total Qs</div>
                     </div>
-                    <div class="bg-emerald-50 rounded-xl p-3 border border-emerald-200">
-                        <div class="text-2xl font-black text-emerald-600" id="res-correct">0</div>
-                        <div class="text-[10px] font-bold text-emerald-600 uppercase">Correct Answers</div>
+                    <div class="bg-emerald-50 rounded-2xl p-4 border border-emerald-200 shadow-sm">
+                        <div class="text-3xl font-black text-emerald-600 mb-1" id="res-correct">0</div>
+                        <div class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Correct</div>
                     </div>
-                    <div class="bg-red-50 rounded-xl p-3 border border-red-200">
-                        <div class="text-2xl font-black text-red-600" id="res-incorrect">0</div>
-                        <div class="text-[10px] font-bold text-red-600 uppercase">Incorrect</div>
+                    <div class="bg-red-50 rounded-2xl p-4 border border-red-200 shadow-sm">
+                        <div class="text-3xl font-black text-red-600 mb-1" id="res-incorrect">0</div>
+                        <div class="text-[10px] font-bold text-red-600 uppercase tracking-wider">Incorrect</div>
                     </div>
-                    <div class="bg-slate-100 rounded-xl p-3 border border-slate-300">
-                        <div class="text-2xl font-black text-slate-500" id="res-skipped">0</div>
-                        <div class="text-[10px] font-bold text-slate-500 uppercase">Skipped</div>
+                    <div class="bg-slate-100 rounded-2xl p-4 border border-slate-300 shadow-sm">
+                        <div class="text-3xl font-black text-slate-500 mb-1" id="res-skipped">0</div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Skipped</div>
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-3 justify-center items-center pt-6 border-t border-slate-200">
-                    <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-0.5">
-                        <i class="fas fa-redo text-xs mr-2"></i> Retake Examination
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8 border-t border-slate-200">
+                    <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                        <i class="fas fa-redo text-sm"></i> Retake Examination
                     </button>
-                    <a href="/" class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors text-center">
+                    <a href="/" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors text-center border-2 border-transparent hover:border-slate-200">
                         Return to Dashboard
                     </a>
                 </div>
@@ -240,7 +324,8 @@
 
     </main>
 
-    <script src="questions.js"></script>
+    <!-- LOAD THE EXTERNAL QUESTIONS FILE -->
+    <script src="components.js"></script>
 
     <script>
         // State Management
@@ -268,9 +353,9 @@
         });
 
         function loadOrInitializeState() {
-            // Verify if questions.js loaded properly
+            // Verify if components.js loaded properly
             if (typeof masterQuestionPool === 'undefined' || masterQuestionPool.length === 0) {
-                alert("Error: questions.js file is missing or empty. Please ensure the file is in the same directory.");
+                alert("Error: components.js file is missing or empty. Please ensure the file is in the same directory.");
                 return;
             }
 
@@ -307,7 +392,7 @@
             if (!consent) return alert("Please check the consent box to proceed.");
             
             if (typeof masterQuestionPool === 'undefined') {
-                return alert("The question bank failed to load. Please check your questions.js file.");
+                return alert("The question bank failed to load. Please check your components.js file.");
             }
 
             appState.candidateName = nameInput;
@@ -372,10 +457,10 @@
             grid.innerHTML = "";
             for(let i=0; i < appState.totalQuestions; i++) {
                 const status = appState.questionStatus[i];
-                const activeClass = i === appState.indexActive ? 'ring-2 ring-offset-2 ring-blue-500' : '';
+                const activeClass = i === appState.indexActive ? 'ring-2 ring-offset-2 ring-blue-500 scale-110' : '';
                 
                 grid.insertAdjacentHTML('beforeend', `
-                    <button onclick="jumpToQuestion(${i})" class="w-8 h-8 rounded text-xs font-bold transition-all status-${status} ${activeClass} flex items-center justify-center border cursor-pointer hover:opacity-80">
+                    <button onclick="jumpToQuestion(${i})" class="w-9 h-9 rounded-lg text-xs font-bold transition-all duration-200 status-${status} ${activeClass} flex items-center justify-center border hover:opacity-80 focus:outline-none shadow-sm">
                         ${i + 1}
                     </button>
                 `);
@@ -386,9 +471,25 @@
             const item = appState.quizDataset[appState.indexActive];
             const indicesMap = ["A", "B", "C", "D", "E", "F"]; // Extended for potentially larger option sets
             
-            document.getElementById('question-indicator').innerText = `Question ${appState.indexActive + 1}`;
+            document.getElementById('question-indicator').innerText = `Question ${appState.indexActive + 1} of ${appState.totalQuestions}`;
             document.getElementById('question-text').innerText = item.q;
             
+            // Progress Bar Update
+            const progressPercent = ((appState.indexActive + 1) / appState.totalQuestions) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+            // Image Support Logic
+            const imgEl = document.getElementById('question-image');
+            const imgContainer = document.getElementById('image-container');
+            
+            if (item.img) {
+                imgEl.src = item.img;
+                imgContainer.classList.remove('hidden');
+            } else {
+                imgEl.src = "";
+                imgContainer.classList.add('hidden');
+            }
+
             const containerHtml = document.getElementById('options-container');
             containerHtml.innerHTML = "";
             
@@ -399,9 +500,9 @@
                 const optionNode = `
                     <label class="option-label block relative">
                         <input type="radio" name="mock-answer" value="${letter}" onclick="recordOptionSelection('${letter}')" class="option-input peer sr-only" ${selectedState}>
-                        <div class="inner-glass rounded-xl p-4 flex items-center gap-4 hover:bg-white/80 transition-all border border-slate-200">
-                            <span class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center font-bold text-slate-500 text-sm transition-colors border border-slate-200/50">${letter}</span>
-                            <span class="text-sm font-semibold text-slate-700">${optionStr}</span>
+                        <div class="inner-glass rounded-2xl p-4 flex items-center gap-4 border-2 border-transparent">
+                            <span class="opt-letter w-10 h-10 rounded-xl bg-slate-100 flex shrink-0 items-center justify-center font-bold text-slate-500 text-sm transition-colors border border-slate-200 shadow-sm">${letter}</span>
+                            <span class="text-sm md:text-base font-semibold text-slate-700">${optionStr}</span>
                         </div>
                     </label>
                 `;
@@ -412,20 +513,32 @@
             const markBtn = document.getElementById('mark-btn');
             if(appState.questionStatus[appState.indexActive] === 'marked') {
                 markBtn.classList.replace('text-slate-600', 'text-white');
-                markBtn.classList.replace('hover:bg-purple-50', 'bg-purple-500');
+                markBtn.classList.replace('hover:bg-purple-50', 'hover:bg-purple-600');
+                markBtn.classList.replace('border-slate-200', 'border-purple-500');
+                markBtn.classList.add('bg-purple-500');
                 markBtn.innerHTML = `<i class="fas fa-bookmark"></i> Marked`;
             } else {
                 markBtn.classList.replace('text-white', 'text-slate-600');
-                markBtn.classList.replace('bg-purple-500', 'hover:bg-purple-50');
-                markBtn.innerHTML = `<i class="far fa-bookmark"></i> Mark for Review`;
+                markBtn.classList.replace('hover:bg-purple-600', 'hover:bg-purple-50');
+                markBtn.classList.replace('border-purple-500', 'border-slate-200');
+                markBtn.classList.remove('bg-purple-500');
+                markBtn.innerHTML = `<i class="far fa-bookmark text-slate-400"></i> Mark for Review`;
             }
 
+            // Button States
             document.getElementById('prev-btn').disabled = (appState.indexActive === 0);
+            
             const actionBtn = document.getElementById('next-btn');
             if (appState.indexActive === appState.totalQuestions - 1) {
-                actionBtn.innerHTML = `Finish <i class="fas fa-flag-checkered text-xs ml-1"></i>`;
+                // Change to Submit style on last question
+                actionBtn.innerHTML = `Submit Exam <i class="fas fa-paper-plane text-xs ml-1"></i>`;
+                actionBtn.className = "bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-emerald-500/30 transform transition hover:-translate-y-0.5 flex items-center gap-2";
+                actionBtn.onclick = submitExamination;
             } else {
-                actionBtn.innerHTML = `Save & Next <i class="fas fa-arrow-right text-xs"></i>`;
+                // Normal Save & Next style
+                actionBtn.innerHTML = `Save & Next <i class="fas fa-arrow-right text-xs ml-1"></i>`;
+                actionBtn.className = "bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-0.5 flex items-center gap-2";
+                actionBtn.onclick = () => navigateQuestion(1);
             }
 
             buildPalette(); 
@@ -474,7 +587,7 @@
         }
 
         function submitExamination() {
-            if (confirm("Submit examination? You will not be able to change your answers.")) {
+            if (confirm("Submit examination? You will not be able to change your answers after submission.")) {
                 appState.isExamActive = false;
                 clearInterval(trackingInterval);
                 localStorage.removeItem('ktunotes_nasscom_mock_state'); 
@@ -518,22 +631,22 @@
             const banner = document.getElementById('award-banner');
             const awardTxt = document.getElementById('award-text');
             
-            banner.className = "rounded-2xl p-6 text-center mb-8 shadow-inner border ";
+            banner.className = "rounded-3xl p-8 text-center mb-8 shadow-sm border-2 ";
             if (accuracy >= 80) {
                 banner.classList.add('bg-emerald-50', 'border-emerald-200');
-                awardTxt.className = "text-2xl md:text-3xl font-black text-emerald-600";
+                awardTxt.className = "text-3xl md:text-4xl font-black text-emerald-600";
                 awardTxt.innerText = `PASSED WITH DISTINCTION (${accuracy}%)`;
             } else if (accuracy >= 60) {
                 banner.classList.add('bg-blue-50', 'border-blue-200');
-                awardTxt.className = "text-2xl md:text-3xl font-black text-blue-600";
+                awardTxt.className = "text-3xl md:text-4xl font-black text-blue-600";
                 awardTxt.innerText = `PASSED WITH CREDIT (${accuracy}%)`;
             } else if (accuracy >= 50) {
                 banner.classList.add('bg-indigo-50', 'border-indigo-200');
-                awardTxt.className = "text-2xl md:text-3xl font-black text-indigo-600";
+                awardTxt.className = "text-3xl md:text-4xl font-black text-indigo-600";
                 awardTxt.innerText = `PASSED (${accuracy}%)`;
             } else {
                 banner.classList.add('bg-red-50', 'border-red-200');
-                awardTxt.className = "text-2xl md:text-3xl font-black text-red-600";
+                awardTxt.className = "text-3xl md:text-4xl font-black text-red-600";
                 awardTxt.innerText = `FAILED (${accuracy}%)`;
             }
         }
