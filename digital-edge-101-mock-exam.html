@@ -71,17 +71,14 @@
 
 <body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
 
-    <!-- Background Decoration Orbs -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div class="absolute -top-20 -left-20 w-96 h-96 bg-blue-400/20 rounded-full mix-blend-multiply filter blur-[100px]"></div>
         <div class="absolute top-[30%] -right-20 w-[35rem] h-[35rem] bg-indigo-400/15 rounded-full mix-blend-multiply filter blur-[120px]"></div>
         <div class="absolute -bottom-32 left-[20%] w-[30rem] h-[30rem] bg-emerald-400/15 rounded-full mix-blend-multiply filter blur-[100px]"></div>
     </div>
 
-    <!-- Main Container -->
     <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-8 relative z-10 flex flex-col justify-center min-h-screen">
         
-        <!-- 1. LANDING VIEW -->
         <div id="landing-view" class="max-w-3xl mx-auto w-full space-y-6 animate-fade-up">
             <div class="text-center mb-8">
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-slate-200 text-blue-600 text-xs font-extrabold uppercase tracking-wider mb-4">
@@ -92,7 +89,6 @@
             </div>
 
             <div class="real-glass rounded-[2rem] p-6 sm:p-10 shadow-2xl">
-                <!-- Exam Specs Grid -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                     <div class="inner-glass p-5 rounded-2xl text-center flex flex-col items-center justify-center">
                         <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mb-3">
@@ -163,16 +159,17 @@
                 <button onclick="startExamination()" class="w-full mt-6 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-blue-500/30 transform transition hover:-translate-y-0.5 flex justify-center items-center gap-2">
                     START MOCK EXAMINATION <i class="fas fa-rocket ml-1"></i>
                 </button>
+
+                <p class="text-xs text-slate-500 mt-5 text-center leading-relaxed px-4">
+                    <strong>Disclaimer:</strong> This platform is not officially associated with NASSCOM or the government. It is specifically designed as a study aid to help students understand exam patterns and prepare better.
+                </p>
             </div>
         </div>
 
-        <!-- 2. QUIZ INTERFACE VIEW -->
         <div id="quiz-view" class="hidden flex flex-col lg:flex-row gap-6 animate-fade-up max-w-7xl mx-auto w-full">
             
-            <!-- Left Panel: Main Quiz Area -->
             <div class="lg:w-3/4 flex flex-col space-y-4">
                 
-                <!-- Header Status -->
                 <div class="real-glass rounded-2xl px-6 py-4 flex flex-col sm:flex-row justify-between items-center shadow-md gap-4 sm:gap-0">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500">
@@ -186,15 +183,12 @@
                     </div>
                 </div>
 
-                <!-- Quiz Card -->
                 <div class="real-glass rounded-[2rem] flex flex-col flex-grow shadow-xl relative overflow-hidden">
-                    <!-- Progress Bar Top -->
                     <div class="w-full bg-slate-100 h-1.5 absolute top-0 left-0">
                         <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-1.5 transition-all duration-500 ease-out" style="width: 0%"></div>
                     </div>
 
                     <div class="p-6 sm:p-10 flex flex-col h-full">
-                        <!-- Progress Header -->
                         <div class="mb-6 flex justify-between items-center border-b border-slate-200/60 pb-4">
                             <span id="question-indicator" class="text-sm font-black text-blue-600 uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-lg">Question 1</span>
                             <button onclick="toggleMarkForReview()" id="mark-btn" class="text-xs font-bold px-4 py-2 rounded-xl border-2 border-slate-200 text-slate-600 hover:bg-purple-50 hover:text-purple-600 hover:border-purple-300 transition-all flex items-center gap-2 focus:outline-none">
@@ -202,23 +196,19 @@
                             </button>
                         </div>
 
-                        <!-- Current Question Payload -->
                         <div class="flex-grow">
                             <h2 id="question-text" class="text-lg md:text-xl font-bold text-slate-800 mb-6 leading-relaxed">
                                 Loading examination payload...
                             </h2>
                             
-                            <!-- Image Container (Hidden by default) -->
                             <div id="image-container" class="mb-8 hidden flex justify-center">
                                 <img id="question-image" src="" alt="Question Resource" class="max-h-64 object-contain rounded-xl border-2 border-slate-100 shadow-md p-2 bg-white">
                             </div>
 
                             <div id="options-container" class="space-y-3">
-                                <!-- Dynamic options loaded here -->
-                            </div>
+                                </div>
                         </div>
 
-                        <!-- Footer Operations -->
                         <div class="flex justify-between items-center mt-10 pt-6 border-t border-slate-200/60">
                             <button id="prev-btn" onclick="navigateQuestion(-1)" class="px-6 py-3 rounded-xl font-bold text-sm text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
                                 <i class="fas fa-arrow-left text-xs"></i> Previous
@@ -232,19 +222,15 @@
                 </div>
             </div>
 
-            <!-- Right Panel: Question Palette -->
             <div class="lg:w-1/4 space-y-4">
                 <div class="real-glass rounded-[2rem] p-6 shadow-xl h-full flex flex-col sticky top-6">
                     <h3 class="font-bold text-slate-800 mb-5 text-sm uppercase tracking-wider border-b border-slate-200 pb-3 flex items-center gap-2">
                         <i class="fas fa-th text-indigo-500"></i> Question Palette
                     </h3>
                     
-                    <!-- Palette Grid -->
                     <div id="palette-grid" class="grid grid-cols-5 gap-2 mb-6 flex-grow content-start">
-                        <!-- Numbers generated via JS -->
-                    </div>
+                        </div>
 
-                    <!-- Legend -->
                     <div class="mt-auto pt-5 border-t border-slate-200 space-y-3 text-xs font-semibold text-slate-600 bg-slate-50/50 p-4 rounded-xl">
                         <div class="flex items-center gap-3"><span class="w-4 h-4 rounded shadow-sm status-answered inline-block"></span> Answered</div>
                         <div class="flex items-center gap-3"><span class="w-4 h-4 rounded shadow-sm status-not-answered inline-block"></span> Not Answered</div>
@@ -259,7 +245,6 @@
             </div>
         </div>
 
-        <!-- 3. ASSESSMENT RESULT VIEW -->
         <div id="result-view" class="hidden max-w-3xl mx-auto w-full space-y-6 animate-fade-up">
             <div class="real-glass rounded-[2.5rem] p-8 sm:p-10 shadow-2xl border border-white">
                 
@@ -285,13 +270,11 @@
                     </div>
                 </div>
 
-                <!-- Dynamic Academic Banner -->
                 <div id="award-banner" class="rounded-3xl p-8 text-center mb-8 shadow-sm border-2">
                     <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Examination Status</div>
                     <div id="award-text" class="text-3xl md:text-4xl font-black">Evaluating...</div>
                 </div>
                 
-                <!-- Detailed Stats -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-center">
                     <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 shadow-sm">
                         <div class="text-3xl font-black text-slate-800 mb-1" id="res-total">30</div>
@@ -324,8 +307,8 @@
 
     </main>
 
-    <!-- LOAD THE EXTERNAL QUESTIONS FILE -->
     <script src="components.js"></script>
+    <script src="questions.js"></script>
 
     <script>
         // State Management
@@ -353,9 +336,9 @@
         });
 
         function loadOrInitializeState() {
-            // Verify if components.js loaded properly
+            // Verify if questions.js loaded properly
             if (typeof masterQuestionPool === 'undefined' || masterQuestionPool.length === 0) {
-                alert("Error: components.js file is missing or empty. Please ensure the file is in the same directory.");
+                alert("Error: questions.js file is missing or empty. Please ensure the file is in the same directory.");
                 return;
             }
 
@@ -392,7 +375,7 @@
             if (!consent) return alert("Please check the consent box to proceed.");
             
             if (typeof masterQuestionPool === 'undefined') {
-                return alert("The question bank failed to load. Please check your components.js file.");
+                return alert("The question bank failed to load. Please check your questions.js file.");
             }
 
             appState.candidateName = nameInput;
