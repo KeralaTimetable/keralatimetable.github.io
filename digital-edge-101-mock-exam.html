@@ -340,17 +340,51 @@
 
                 <!-- Action Buttons Area including WhatsApp -->
                 <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center pt-8 border-t border-white/50">
+                    <button onclick="showReviewView()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
+                        <i class="fas fa-search-plus text-sm"></i> Review Answers
+                    </button>
+                    
                     <a href="https://chat.whatsapp.com/B67C9XqtoJM5DSTqa3jMV1" target="_blank" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
                         <i class="fab fa-whatsapp text-lg"></i> Join WhatsApp Group
                     </a>
                     
                     <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
-                        <i class="fas fa-redo text-sm"></i> Retake Examination
+                        <i class="fas fa-redo text-sm"></i> Retake Exam
                     </button>
                     
                     <a href="/" class="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-sm text-slate-600 hover:text-slate-900 hover:bg-white inner-glass transition-all text-center flex items-center justify-center">
                         Return Home
                     </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REVIEW ANSWERS VIEW -->
+    <div id="review-view" class="hidden absolute inset-0 bg-mesh z-[70] overflow-y-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto animate-fade-up">
+            <div class="real-glass rounded-[2rem] p-6 sm:p-10 shadow-2xl border border-white relative">
+                
+                <div class="flex flex-col md:flex-row justify-between items-center border-b border-white/50 pb-5 mb-8 gap-4">
+                    <h2 class="text-2xl md:text-3xl font-black text-slate-900 flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center shadow-sm">
+                            <i class="fas fa-clipboard-check text-purple-600 text-xl"></i>
+                        </div>
+                        Exam Review
+                    </h2>
+                    <button onclick="hideReviewView()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm transition-colors flex items-center gap-2 shadow-sm">
+                        <i class="fas fa-times"></i> Close Review
+                    </button>
+                </div>
+
+                <div id="review-container" class="space-y-6">
+                    <!-- Review items injected here -->
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-white/50 text-center">
+                    <button onclick="hideReviewView()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition-transform transform hover:-translate-y-0.5">
+                        Back to Scorecard
+                    </button>
                 </div>
             </div>
         </div>
@@ -632,7 +666,7 @@
             const actionWrapper = document.getElementById('action-btn-wrapper');
             if (appState.indexActive === appState.totalQuestions - 1) {
                 actionWrapper.innerHTML = `
-                    <button onclick="submitExamination()" class="bg-red-500 text-white font-bold py-3 px-8 rounded-xl text-sm hover:bg-red-600 shadow-lg transform transition hover:-translate-y-0.5 w-full flex items-center justify-center gap-2">
+                    <button onclick="submitExamination()" class="bg-emerald-600 text-white font-bold py-3 px-8 rounded-xl text-sm hover:bg-emerald-700 shadow-lg transform transition hover:-translate-y-0.5 w-full flex items-center justify-center gap-2">
                         Submit Exam <i class="fas fa-paper-plane text-xs"></i>
                     </button>
                 `;
@@ -727,7 +761,6 @@
                     completedAt: new Date().toISOString()
                 });
                 
-                // Update UI to success
                 statusEl.innerHTML = `<i class="fas fa-check-circle text-emerald-500"></i> Record Saved`;
                 statusEl.classList.add('text-emerald-700');
             } catch (error) {
@@ -785,8 +818,94 @@
                 awardTxt.innerText = `Failed (${accuracy}%)`;
             }
 
-            // Save to Firebase Database
             saveResultToFirebase(appState.candidateName, correct, appState.totalQuestions, accuracy);
+        }
+
+        // --- REVIEW ANSWERS LOGIC ---
+        window.showReviewView = function() {
+            document.getElementById('result-view').classList.add('hidden');
+            document.getElementById('review-view').classList.remove('hidden');
+            generateReviewHTML();
+        }
+
+        window.hideReviewView = function() {
+            document.getElementById('review-view').classList.add('hidden');
+            document.getElementById('result-view').classList.remove('hidden');
+        }
+
+        function generateReviewHTML() {
+            const container = document.getElementById('review-container');
+            container.innerHTML = '';
+            const indicesMap = ["A", "B", "C", "D", "E", "F"];
+
+            appState.quizDataset.forEach((item, index) => {
+                const userAns = appState.responsesUser[index];
+                const correctAns = item.a;
+                
+                let statusBadge = '';
+                let wrapperClass = '';
+                
+                // Set borders and badges based on correctness
+                if (userAns === correctAns) {
+                    statusBadge = '<span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-md text-[10px] sm:text-xs font-bold uppercase"><i class="fas fa-check-circle"></i> Correct</span>';
+                    wrapperClass = 'border-l-4 border-emerald-500';
+                } else if (!userAns) {
+                    statusBadge = '<span class="bg-slate-200 text-slate-600 px-3 py-1 rounded-md text-[10px] sm:text-xs font-bold uppercase"><i class="fas fa-minus-circle"></i> Skipped</span>';
+                    wrapperClass = 'border-l-4 border-slate-400';
+                } else {
+                    statusBadge = '<span class="bg-red-100 text-red-700 px-3 py-1 rounded-md text-[10px] sm:text-xs font-bold uppercase"><i class="fas fa-times-circle"></i> Incorrect</span>';
+                    wrapperClass = 'border-l-4 border-red-500';
+                }
+
+                // Render image if present
+                let imgHTML = item.img ? `<img src="${item.img}" class="max-h-48 object-contain rounded-xl border border-slate-200 mt-4 mb-4 bg-white p-2">` : '';
+
+                // Loop over options and apply highlights
+                let optionsHTML = '';
+                item.o.forEach((optStr, optIdx) => {
+                    const letter = indicesMap[optIdx];
+                    let optClass = "bg-white/50 border-slate-200 text-slate-600";
+                    let icon = "";
+                    let letterClass = "bg-white/60 text-slate-500 border-slate-200";
+
+                    if (letter === correctAns) {
+                        // Highlight correct answer
+                        optClass = "bg-emerald-50 border-emerald-500 text-emerald-800 font-bold shadow-sm";
+                        letterClass = "bg-emerald-500 text-white border-emerald-600";
+                        icon = "<i class='fas fa-check text-emerald-600 ml-auto'></i>";
+                    } else if (letter === userAns && userAns !== correctAns) {
+                        // Highlight wrong selection
+                        optClass = "bg-red-50 border-red-300 text-red-800 line-through opacity-80";
+                        letterClass = "bg-red-200 text-red-800 border-red-300";
+                        icon = "<i class='fas fa-times text-red-500 ml-auto'></i>";
+                    }
+
+                    optionsHTML += `
+                        <div class="p-3 sm:p-4 rounded-xl border flex items-center gap-3 md:gap-4 ${optClass}">
+                            <span class="w-8 h-8 md:w-10 md:h-10 rounded-lg flex shrink-0 items-center justify-center font-bold text-sm border shadow-sm ${letterClass}">${letter}</span>
+                            <span class="text-sm md:text-base">${optStr}</span>
+                            ${icon}
+                        </div>
+                    `;
+                });
+
+                // Assemble Question Box
+                const qHTML = `
+                    <div class="inner-glass p-5 md:p-6 rounded-2xl ${wrapperClass} shadow-sm">
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-2 sm:mb-4 gap-3">
+                            <h3 class="font-bold text-slate-800 text-base md:text-lg flex-1">
+                                <span class="text-slate-400 mr-1">${index + 1}.</span> ${item.q}
+                            </h3>
+                            <div class="shrink-0 sm:mt-1">${statusBadge}</div>
+                        </div>
+                        ${imgHTML}
+                        <div class="space-y-3 mt-4">
+                            ${optionsHTML}
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', qHTML);
+            });
         }
         
         window.onload = loadOrInitializeState;
