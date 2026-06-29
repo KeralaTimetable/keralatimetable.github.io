@@ -271,73 +271,74 @@
         </footer>
     </div>
 
-    <div id="result-view" class="hidden absolute inset-0 bg-mesh z-[60] overflow-y-auto px-4 py-12">
-        <div class="max-w-4xl mx-auto animate-fade-up">
-            <div class="real-glass rounded-[2rem] p-8 sm:p-10 shadow-2xl border border-white relative">
+    <!-- ADJUSTED RESULT VIEW FOR BETTER MOBILE VISIBILITY (SPACING COMPRESSED) -->
+    <div id="result-view" class="hidden absolute inset-0 bg-mesh z-[60] overflow-y-auto px-4 py-4 md:py-8 flex flex-col items-center">
+        <div class="max-w-4xl mx-auto animate-fade-up w-full my-auto">
+            <div class="real-glass rounded-[1.5rem] md:rounded-[2rem] p-5 sm:p-8 shadow-2xl border border-white relative">
                 
-                <div id="db-save-status" class="absolute top-6 right-6 text-xs font-bold text-slate-500 flex items-center gap-1.5 bg-white/60 px-3 py-1.5 rounded-full shadow-sm border border-white">
-                    <i class="fas fa-spinner fa-spin text-blue-500"></i> Saving Result...
+                <div id="db-save-status" class="absolute top-4 right-4 sm:top-6 sm:right-6 text-[10px] sm:text-xs font-bold text-slate-500 flex items-center gap-1.5 bg-white/60 px-3 py-1.5 rounded-full shadow-sm border border-white">
+                    <i class="fas fa-spinner fa-spin text-blue-500"></i> <span class="hidden sm:inline">Saving Result...</span><span class="sm:hidden">Saving...</span>
                 </div>
 
-                <h2 class="text-3xl font-black text-slate-900 border-b border-white/50 pb-5 mb-8 text-center flex items-center justify-center gap-3">
+                <h2 class="text-2xl md:text-3xl font-black text-slate-900 border-b border-white/50 pb-4 mb-4 text-center flex items-center justify-center gap-3 mt-4 sm:mt-0">
                     <i class="fas fa-award text-blue-500"></i> Assessment Results
                 </h2>
                 
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-                    <div class="inner-glass rounded-2xl p-5 text-center">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                    <div class="inner-glass rounded-xl p-3 sm:p-4 text-center">
                         <span class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Candidate</span>
-                        <span id="res-name" class="text-lg font-bold text-slate-800 truncate block">User</span>
+                        <span id="res-name" class="text-base sm:text-lg font-bold text-slate-800 truncate block">User</span>
                     </div>
-                    <div class="inner-glass rounded-2xl p-5 text-center">
+                    <div class="inner-glass rounded-xl p-3 sm:p-4 text-center">
                         <span class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Date</span>
-                        <span id="res-date" class="text-lg font-bold text-slate-800 block">--/--/----</span>
+                        <span id="res-date" class="text-base sm:text-lg font-bold text-slate-800 block">--/--/----</span>
                     </div>
-                    <div class="inner-glass rounded-2xl p-5 text-center col-span-2 md:col-span-1">
+                    <div class="inner-glass rounded-xl p-3 sm:p-4 text-center col-span-2 md:col-span-1">
                         <span class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Time Spent</span>
-                        <span id="res-time" class="text-lg font-bold text-slate-800 block">0m 0s</span>
+                        <span id="res-time" class="text-base sm:text-lg font-bold text-slate-800 block">0m 0s</span>
                     </div>
                 </div>
 
-                <div id="award-banner" class="rounded-3xl p-8 text-center mb-10 inner-glass shadow-sm">
-                    <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Final Grade</div>
-                    <div id="award-text" class="text-4xl font-black">Evaluating...</div>
+                <div id="award-banner" class="rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass shadow-sm">
+                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Final Grade</div>
+                    <div id="award-text" class="text-2xl sm:text-3xl font-black">Evaluating...</div>
                 </div>
                 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-center">
-                    <div class="inner-glass bg-white/50 rounded-2xl p-5">
-                        <div class="text-4xl font-black text-slate-800 mb-1" id="res-total">30</div>
-                        <div class="text-[10px] font-bold text-slate-500 uppercase">Total Qs</div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5 text-center">
+                    <div class="inner-glass bg-white/50 rounded-xl p-3 sm:p-4">
+                        <div class="text-2xl sm:text-3xl font-black text-slate-800 mb-1" id="res-total">30</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-500 uppercase">Total Qs</div>
                     </div>
-                    <div class="inner-glass bg-emerald-50/50 rounded-2xl p-5 border-emerald-100">
-                        <div class="text-4xl font-black text-emerald-600 mb-1" id="res-correct">0</div>
-                        <div class="text-[10px] font-bold text-emerald-600 uppercase">Correct</div>
+                    <div class="inner-glass bg-emerald-50/50 rounded-xl p-3 sm:p-4 border-emerald-100">
+                        <div class="text-2xl sm:text-3xl font-black text-emerald-600 mb-1" id="res-correct">0</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-emerald-600 uppercase">Correct</div>
                     </div>
-                    <div class="inner-glass bg-red-50/50 rounded-2xl p-5 border-red-100">
-                        <div class="text-4xl font-black text-red-600 mb-1" id="res-incorrect">0</div>
-                        <div class="text-[10px] font-bold text-red-600 uppercase">Incorrect</div>
+                    <div class="inner-glass bg-red-50/50 rounded-xl p-3 sm:p-4 border-red-100">
+                        <div class="text-2xl sm:text-3xl font-black text-red-600 mb-1" id="res-incorrect">0</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-red-600 uppercase">Incorrect</div>
                     </div>
-                    <div class="inner-glass bg-slate-50/50 rounded-2xl p-5">
-                        <div class="text-4xl font-black text-slate-400 mb-1" id="res-skipped">0</div>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase">Skipped</div>
+                    <div class="inner-glass bg-slate-50/50 rounded-xl p-3 sm:p-4">
+                        <div class="text-2xl sm:text-3xl font-black text-slate-400 mb-1" id="res-skipped">0</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase">Skipped</div>
                     </div>
                 </div>
 
-                <div class="flex justify-center mb-10 px-2 sm:px-0">
-                    <a href="https://chat.whatsapp.com/Dai125BQnk296l1NNVjzrj" target="_blank" class="w-full md:w-3/4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-6 rounded-xl shadow-xl transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-3 text-base sm:text-lg border border-emerald-400">
-                        <i class="fab fa-whatsapp text-2xl"></i> Join Kerala Timetable WhatsApp Group for Notes
+                <div class="flex justify-center mb-5 px-1 sm:px-0">
+                    <a href="https://chat.whatsapp.com/Dai125BQnk296l1NNVjzrj" target="_blank" class="w-full md:w-3/4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 sm:px-6 rounded-xl shadow-md transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2 text-sm sm:text-base border border-emerald-400">
+                        <i class="fab fa-whatsapp text-xl sm:text-2xl"></i> Join Kerala Timetable WhatsApp Group
                     </a>
                 </div>
 
-                <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center pt-8 border-t border-white/50">
-                    <button onclick="showReviewView()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
+                <div class="flex flex-col sm:flex-row flex-wrap gap-3 justify-center pt-5 border-t border-white/50">
+                    <button onclick="showReviewView()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-md transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2 text-sm">
                         <i class="fas fa-search-plus text-sm"></i> Review Answers
                     </button>
                     
-                    <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
+                    <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-md transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2 text-sm">
                         <i class="fas fa-redo text-sm"></i> Retake Exam
                     </button>
                     
-                    <a href="/" class="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-sm text-slate-600 hover:text-slate-900 hover:bg-white inner-glass transition-all text-center flex items-center justify-center">
+                    <a href="/" class="w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-sm text-slate-600 hover:text-slate-900 hover:bg-white inner-glass transition-all text-center flex items-center justify-center">
                         Return Home
                     </a>
                 </div>
@@ -742,11 +743,11 @@
                     completedAt: new Date().toISOString()
                 });
                 
-                statusEl.innerHTML = `<i class="fas fa-check-circle text-emerald-500"></i> Record Saved`;
+                statusEl.innerHTML = `<i class="fas fa-check-circle text-emerald-500"></i> <span class="hidden sm:inline">Record Saved</span><span class="sm:hidden">Saved</span>`;
                 statusEl.classList.add('text-emerald-700');
             } catch (error) {
                 console.error("Error saving result to Firebase: ", error);
-                statusEl.innerHTML = `<i class="fas fa-exclamation-circle text-red-500"></i> Sync Failed`;
+                statusEl.innerHTML = `<i class="fas fa-exclamation-circle text-red-500"></i> <span class="hidden sm:inline">Sync Failed</span><span class="sm:hidden">Failed</span>`;
                 statusEl.classList.add('text-red-700');
             }
         }
@@ -785,17 +786,18 @@
             const banner = document.getElementById('award-banner');
             const awardTxt = document.getElementById('award-text');
             
+            // Re-assigned text sizes in JS to match heavily reduced height elements
             if (accuracy >= 80) {
                 banner.classList.add('bg-emerald-100/50', 'border', 'border-emerald-200');
-                awardTxt.className = "text-4xl font-black text-emerald-600";
+                awardTxt.className = "text-2xl sm:text-3xl font-black text-emerald-600";
                 awardTxt.innerText = `Excellent (${accuracy}%)`;
             } else if (accuracy >= 50) {
                 banner.classList.add('bg-blue-100/50', 'border', 'border-blue-200');
-                awardTxt.className = "text-4xl font-black text-blue-600";
+                awardTxt.className = "text-2xl sm:text-3xl font-black text-blue-600";
                 awardTxt.innerText = `Passed (${accuracy}%)`;
             } else {
                 banner.classList.add('bg-red-100/50', 'border', 'border-red-200');
-                awardTxt.className = "text-4xl font-black text-red-600";
+                awardTxt.className = "text-2xl sm:text-3xl font-black text-red-600";
                 awardTxt.innerText = `Failed (${accuracy}%)`;
             }
 
