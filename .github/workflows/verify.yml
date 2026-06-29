@@ -1,0 +1,31 @@
+name: Verify Subject Backup
+
+on:
+  workflow_dispatch:
+    inputs:
+      subject_code:
+        description: 'Enter the subject code to verify (e.g., GAMAT101)'
+        required: true
+        default: 'GAMAT101'
+
+jobs:
+  verify-backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        # Only huggingface_hub is needed for checking existing files
+        run: pip install huggingface_hub
+
+      - name: Run Verification Script
+        env:
+          # Passes the text box input from GitHub into the Python script
+          SUBJECT_CODE: ${{ github.event.inputs.subject_code }}
+        run: python verify_subject.py
