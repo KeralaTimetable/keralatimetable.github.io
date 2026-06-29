@@ -428,4 +428,43 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-time-table-of-mca-integrated-s1-s-fe-july-2026-exam-2020-scheme-notification.html",
     "pdfLink": "downloads_timetable/2026-06-25_MCAIntegratedS1(S,FE)July2026approved.pdf"
 }
+,
+{
+    "id": "mca_second_year_direct_special_jan2026",
+    "title": "MCA Second Year Direct Special Examinations January 2026",
+    "semester": "S1-S3",
+    "categoryBadge": "S1-S3",
+    "type": "Special",
+    "scheme": "2016 Regulations",
+    "startDate": "2026-07-01T09:30:00",
+    "endDate": "2026-07-24T12:30:00",
+    "viewLink": "timetable_pages/detailed-time-tables-of-mca-second-year-direct-special-examinations-january-2026-2016-regulations-notification.html",
+    "pdfLink": "downloads_timetable/2026-06-29_KTU-EX-II#1-4990-2024MCA2ndyeardirect.pdf"
+}
+,
+{
+    "id": "mca_integrated_s1_s9_special_april2026",
+    "title": "MCA Integrated S1-S9 Special Examinations April 2026",
+    "semester": "S1-S9",
+    "categoryBadge": "S1-S9",
+    "type": "Supply",
+    "scheme": "2016 Scheme",
+    "startDate": "2026-07-01T09:30:00",
+    "endDate": "2026-08-06T09:30:00",
+    "viewLink": "timetable_pages/detailed-time-tables-of-mca-integrated-special-examinations-2016-scheme-s1-s9-april-2026-notification.html",
+    "pdfLink": "downloads_timetable/2026-06-29_KTU-SOEX-II-4033-2017MCAIntegratedoldschemeapril2026.pdf"
+}
+,
+{
+    "id": "mca_s1_s5_special_jan2026",
+    "title": "MCA S1-S5 Special Examinations January 2026",
+    "semester": "S1-S5",
+    "categoryBadge": "S1-S5",
+    "type": "Supply",
+    "scheme": "2016 Regulations",
+    "startDate": "2026-07-01T09:30:00",
+    "endDate": "2026-07-24T09:30:00",
+    "viewLink": "timetable_pages/detailed-time-tables-of-mca-s1-s5-special-examinations-january-2026-2016-regulations-notification.html",
+    "pdfLink": "downloads_timetable/2026-06-29_KTU-EX-II#1-4990-2024MCA3year(1).pdf"
+}
 ];
