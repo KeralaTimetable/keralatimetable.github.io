@@ -8,6 +8,7 @@ This is the layer you call from your website frontend OR from another AI / agent
 from __future__ import annotations
 import io
 import os
+import httpx 
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import StreamingResponse
@@ -33,6 +34,8 @@ LOGO_PATH  = os.getenv("BRAND_LOGO_PATH", "keralattlogo.png")
 LOGO_BYTES = open(LOGO_PATH, "rb").read() if LOGO_PATH and os.path.exists(LOGO_PATH) else None
 ADMIN_KEY  = os.getenv("ADMIN_KEY", "change-me")
 
+# ---- Hugging Face Vault URL ----
+DATASET_RAW_URL = "https://huggingface.co/datasets/KeralaTimetable/ktu-pyq-archive/resolve/main"
 
 class DownloadReq(BaseModel):
     handles: list[str]          
@@ -88,17 +91,28 @@ def paper(prefix: str, num: str):
 
 
 @app.post("/download")
-def download(req: DownloadReq):
-    """Download + (optionally) merge + watermark the requested papers."""
+async def download(req: DownloadReq):
+    """Download from Hugging Face + (optionally) merge + watermark the requested papers."""
     if not req.handles:
         raise HTTPException(400, "no handles provided")
+    
     pdfs: list[bytes] = []
-    for h in req.handles:
-        url = repo.resolve_pdf_url(h)
-        if not url:
-            raise HTTPException(404, f"no PDF for handle {h}")
-        pdfs.append(repo.download_pdf(url))
+    
+    # follow_redirects=True allows httpx to follow Hugging Face CDN routing
+    async with httpx.AsyncClient(follow_redirects=True) as client:
+        for h in req.handles:
+            # Convert JEC '1/9757' into Hugging Face '1_9757.pdf'
+            safe_filename = f"{h.replace('/', '_')}.pdf"
+            file_url = f"{DATASET_RAW_URL}/{safe_filename}"
+            
+            response = await client.get(file_url)
+            if response.status_code != 200:
+                print(f"FAILED: {file_url} returned status {response.status_code}")
+                raise HTTPException(404, f"no PDF for handle {h} in cloud archive")
+            
+            pdfs.append(response.content)
 
+    # Your custom watermark.py processes the bytes here
     if req.watermark:
         out = wm.brand_papers(pdfs, logo_bytes=LOGO_BYTES, text=BRAND_TEXT)
     else:
