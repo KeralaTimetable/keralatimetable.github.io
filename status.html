@@ -71,7 +71,6 @@
     <!-- Background Orbs -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div id="scroll-bg-1" class="absolute -top-10 -left-20 md:top-10 md:-left-10 w-72 h-72 md:w-96 md:h-96 transition-transform duration-100 ease-out">
-            <!-- Using Blue & Emerald for status vibe -->
             <div id="mouse-orb-1" class="w-full h-full bg-blue-400/50 md:bg-blue-400 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
         </div>
         <div id="scroll-bg-2" class="absolute top-[50%] -right-20 md:top-[40%] md:-right-10 w-80 h-80 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
@@ -171,6 +170,9 @@
     </script>
 
     <script>
+        // API Base URL Setup 
+        const API_URL = "https://keralatimetable-ktu-papers-api.hf.space";
+
         const TARGET_SERVICES = [
             { id: "main", name: "KTU Main Website", url: "https://ktu.edu.in" },
             { id: "app", name: "KTU Login Portal", url: "https://app.ktu.edu.in" },
@@ -196,65 +198,37 @@
                 `;
             });
 
-            let latestPythonData = null;
+            // 1. Fetch historical logs in the background
             try {
                 const histRes = await fetch('status-history.json?t=' + new Date().getTime());
                 const data = await histRes.json();
-                if (data.length > 0) {
-                    latestPythonData = data[0]; 
-                    renderHistory(data);
-                }
+                if (data.length > 0) renderHistory(data);
             } catch (e) { console.log("History logbook error"); }
 
             let onlineCount = 0;
             let offlineCount = 0;
             let sslCount = 0;
 
+            // 2. Execute Precise Live Pings routed through your HF API Proxy
             const pingPromises = TARGET_SERVICES.map(async (svc) => {
-                const startTime = Date.now();
-                
                 try {
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 8000);
+                    const res = await fetch(`${API_URL}/live-ping?url=${encodeURIComponent(svc.url)}`);
+                    if (!res.ok) throw new Error();
                     
-                    await fetch(svc.url + '?cb=' + Date.now(), { 
-                        mode: 'no-cors', 
-                        cache: 'no-store',
-                        signal: controller.signal
-                    });
+                    const result = await res.json();
                     
-                    clearTimeout(timeoutId);
-                    
-                    const ping = Date.now() - startTime;
-                    updateServiceCard(svc.id, "Online", `${ping}ms`);
-                    onlineCount++; 
-                    
-                } catch (error) {
-                    if (latestPythonData && latestPythonData.services[svc.name]) {
-                        const pythonStatus = latestPythonData.services[svc.name].status;
-                        const pythonPing = latestPythonData.services[svc.name].ping;
-                        
-                        if (pythonStatus.includes("Online")) {
-                            let displayPing = typeof pythonPing === 'number' ? `${pythonPing}ms` : pythonPing;
-                            const match = pythonStatus.match(/\((.*?)\)/);
-                            if (match) displayPing = match[1]; 
-                            
-                            updateServiceCard(svc.id, "Online", `${displayPing} (Bot)`);
-                            onlineCount++;
-                            return;
-                        } else if (pythonStatus.includes("SSL Issue")) {
-                            updateServiceCard(svc.id, "SSL Issue", "Blocked");
-                            sslCount++;
-                            return;
-                        } else {
-                            const match = pythonStatus.match(/\((.*?)\)/);
-                            const reason = match ? match[1] : "Timeout";
-                            updateServiceCard(svc.id, "Offline", `${reason} (Bot)`);
-                            offlineCount++;
-                            return;
-                        }
+                    if (result.status === "Online") {
+                        updateServiceCard(svc.id, "Online", `${result.ping}ms`);
+                        onlineCount++;
+                    } else if (result.status === "SSL Issue") {
+                        updateServiceCard(svc.id, "SSL Issue", result.detail);
+                        sslCount++;
+                    } else {
+                        updateServiceCard(svc.id, "Offline", result.detail);
+                        offlineCount++;
                     }
-                    
+                } catch (error) {
+                    // Fail-safe fall back to a standard non-cors proxy timeout if API layout is sleeping
                     updateServiceCard(svc.id, "Offline", "Timeout");
                     offlineCount++;
                 }
@@ -262,6 +236,7 @@
 
             await Promise.all(pingPromises);
 
+            // 3. Set accurate overall banners based on real-time proxy results
             let finalStatus = "All Systems Operational";
             if (offlineCount === TARGET_SERVICES.length) {
                 finalStatus = "Major Outage";
@@ -370,10 +345,10 @@
             }
         }
 
-        // Run on load
+        // Run automatically on load
         window.onload = runLiveCheck;
 
-        // --- 1. BUTTERY SMOOTH VERTICAL SCROLL PARALLAX ---
+        // --- 1. SMOOTH SCROLL PARALLAX ENGINE ---
         let lastScrollY = window.scrollY;
         let ticking = false;
 
@@ -392,7 +367,7 @@
             }
         }, { passive: true });
 
-        // --- 2. 3D MOUSE PARALLAX (For PC) ---
+        // --- 2. 3D MOUSE PARALLAX (For PC layout viewports) ---
         function applyParallax(x, y) {
             const mouseOrb1 = document.getElementById('mouse-orb-1');
             const mouseOrb2 = document.getElementById('mouse-orb-2');
@@ -409,7 +384,7 @@
 
         document.addEventListener('mouseleave', () => applyParallax(0, 0));
 
-        // --- 3. GYROSCOPE TILT PARALLAX (For Mobile) ---
+        // --- 3. GYROSCOPE TILT PARALLAX (For Mobile hardware) ---
         if (window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', (e) => {
                 if(e.gamma === null || e.beta === null) return;
