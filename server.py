@@ -1,13 +1,14 @@
 """
 server.py
 ---------
-FastAPI REST API exposing KTU paper search + branded download.
+FastAPI REST API exposing KTU paper search + branded download + live status pinging.
 This is the layer you call from your website frontend OR from another AI / agent.
 """
 
 from __future__ import annotations
 import io
 import os
+import time  # <--- Added for tracking response latency in the status check
 import httpx 
 
 from fastapi import FastAPI, HTTPException, Query
@@ -88,6 +89,38 @@ def paper(prefix: str, num: str):
     if not pdf_url:
         raise HTTPException(404, "paper not found or no PDF")
     return {"handle": handle, "pdf_url": pdf_url}
+
+
+@app.get("/live-ping")
+async def live_ping(url: str):
+    """
+    🆕 Bypasses browser CORS restrictions to run an completely transparent backend ping test to KTU.
+    Accurately isolates genuine 502/504 errors and SSL handshake blockages.
+    """
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    }
+    start_time = time.time()
+    try:
+        # Using a strict 6-second max response time for live validation
+        async with httpx.AsyncClient(timeout=6.0, verify=False) as client:
+            response = await client.get(url, headers=headers)
+            ping_ms = int((time.time() - start_time) * 1000)
+            
+            if response.status_code < 400:
+                return {"status": "Online", "ping": ping_ms, "detail": "Operational"}
+            else:
+                return {"status": "Offline", "ping": "Error", "detail": f"HTTP {response.status_code}"}
+                
+    except httpx.ConnectTimeout:
+        return {"status": "Offline", "ping": "Timeout", "detail": "Connection Timeout"}
+    except httpx.ConnectError as e:
+        # Check if the connection dropped cleanly due to local SSL verification crashes
+        if "SSL" in str(e) or "certificate" in str(e):
+            return {"status": "SSL Issue", "ping": "Blocked", "detail": "SSL Error"}
+        return {"status": "Offline", "ping": "Error", "detail": "Network Error"}
+    except Exception:
+        return {"status": "Offline", "ping": "Error", "detail": "Down"}
 
 
 @app.post("/download")
