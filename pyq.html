@@ -5,9 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
     
-    <title>KTU Previous Year Question Papers | Kerala Timetable</title>
-    <meta name="description" content="Search and instantly download KTU B.Tech PYQs. Fast, watermarked, and ready for your exams.">
+    <!-- SEO OPTIMIZATION: High-value keywords in Title and Description -->
+    <title>KTU Previous Year Question Papers (PYQ) PDF | Kerala Timetable</title>
+    <meta name="description" content="Download KTU PYQs (Previous Year Question Papers) for B.Tech instantly. Search by course code to get high-quality PDF question papers for your university exams.">
+    <meta name="keywords" content="ktu pyq, ktu previous year question papers, ktu btech pyq, ktu question papers, apjaktu pyq, ktu s1 s2 pyq, ktu cse pyq, ktu previous papers pdf, ktu exam preparations">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.keralatimetable.in/pyq.html" />
     
+    <!-- JSON-LD SCHEMA: Tells Google exactly what this page is, enabling Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How can I download KTU previous year question papers (PYQ)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Simply enter your KTU B.Tech course code (e.g., MAT101) into our search bar. The system will instantly fetch all available previous year question papers from the university database for you to download as a PDF."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Are these KTU B.Tech question papers up to date?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, our cloud vault synchronizes directly with the official APJ Abdul Kalam Technological University repository, ensuring you get the most recent question papers for your semester exams."
+        }
+      }]
+    }
+    </script>
+
     <script src="/tailwind-local.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -45,8 +72,14 @@
         }
         .result-glass:hover {
             transform: translateY(-5px);
-            border-color: rgba(37, 99, 235, 0.4); /* Blue 600 */
+            border-color: rgba(37, 99, 235, 0.4); 
             box-shadow: 0 15px 30px -10px rgba(37, 99, 235, 0.15);
+        }
+
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .glass-input {
@@ -60,7 +93,7 @@
         .glass-input:focus {
             outline: none;
             background: rgba(255, 255, 255, 0.95);
-            border-color: #3b82f6; /* Blue 500 */
+            border-color: #3b82f6; 
             box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
         }
 
@@ -76,14 +109,14 @@
         .cursor::after {
             content: '|';
             animation: blink 1s step-start infinite;
-            color: #2563eb; /* Blue 600 */
+            color: #2563eb; 
         }
         @keyframes blink { 50% { opacity: 0; } }
 
         /* Loader */
         .loader {
             border: 3px solid rgba(0,0,0,0.05);
-            border-top: 3px solid #2563eb; /* Blue 600 */
+            border-top: 3px solid #2563eb; 
             border-radius: 50%;
             width: 30px;
             height: 30px;
@@ -91,7 +124,6 @@
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Custom Scrollbar for results */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
@@ -111,29 +143,30 @@
         </div>
     </div>
 
-    <main class="flex-grow w-full max-w-5xl mx-auto px-4 pt-20 pb-20 relative z-10 flex flex-col items-center">
+    <main class="flex-grow w-full max-w-5xl mx-auto px-4 pt-16 pb-20 relative z-10 flex flex-col items-center">
         
+        <!-- HEADER OPTIMIZED FOR SEO: Including "B.Tech" and "PYQ" naturally -->
         <div class="text-center mb-10 transform translate-z-10">
             <h1 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
-                KTU Question Papers <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Instantly.</span>
+                KTU B.Tech PYQs <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Downloaded Instantly.</span>
             </h1>
-            <p class="text-slate-500 font-medium md:text-lg mb-8">
-                Explore <span id="typewriter" class="text-blue-600 font-bold cursor"></span>
+            <p class="text-slate-500 font-medium md:text-lg mb-8 max-w-2xl mx-auto">
+                Access thousands of <span class="font-bold text-slate-700">Previous Year Question Papers</span> directly from the APJAKTU database. Explore <span id="typewriter" class="text-blue-600 font-bold cursor"></span>
             </p>
         </div>
 
         <div id="parallax-container" class="w-full max-w-2xl relative perspective-1000 mb-8">
             <div id="search-card" class="real-glass rounded-[2rem] p-6 md:p-8 w-full flex flex-col gap-4 relative z-20">
                 
-                <p class="text-xs text-slate-500 font-bold uppercase tracking-widest text-center">Start by entering your course code</p>
+                <p class="text-xs text-slate-500 font-bold uppercase tracking-widest text-center">Start by entering your KTU course code</p>
                 
                 <form id="searchForm" onsubmit="executeSearch(event)" class="relative flex items-center">
                     <i class="fas fa-search absolute left-6 text-slate-400 text-lg"></i>
                     <input type="text" id="searchInput" autocomplete="off" placeholder="e.g. MAT101, UCEST105..." 
                            class="glass-input w-full rounded-2xl py-5 pl-14 pr-16 text-lg" required>
                     
-                    <button type="submit" class="absolute right-3 w-12 h-12 bg-blue-600 hover:bg-blue-500 text-white rounded-xl flex items-center justify-center transition-all shadow-[0_5px_15px_rgba(37,99,235,0.3)] hover:scale-105">
+                    <button type="submit" aria-label="Search Question Papers" class="absolute right-3 w-12 h-12 bg-blue-600 hover:bg-blue-500 text-white rounded-xl flex items-center justify-center transition-all shadow-[0_5px_15px_rgba(37,99,235,0.3)] hover:scale-105">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </form>
@@ -141,7 +174,7 @@
         </div>
 
         <div id="trending-searches" class="w-full max-w-2xl text-center mb-10 transition-opacity duration-300">
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Trending Topics</p>
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Trending B.Tech Subjects</p>
             <div class="flex flex-wrap justify-center gap-3">
                 <button onclick="quickSearch('MAT101')" class="px-4 py-2 real-glass rounded-xl text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm">
                     <i class="fas fa-bolt text-amber-500 mr-1"></i> MAT101
@@ -158,21 +191,54 @@
             </div>
         </div>
 
-        <div id="results-area" class="w-full max-w-4xl hidden flex-col items-center relative z-20">
+        <div id="results-area" class="w-full max-w-4xl hidden flex-col items-center relative z-20 mb-12">
             
             <div id="loading-state" class="hidden flex-col items-center justify-center py-10">
                 <div class="loader mb-4"></div>
-                <p class="text-sm font-bold text-slate-500 animate-pulse">Searching KTU Database...</p>
+                <p class="text-sm font-bold text-slate-500 animate-pulse">Searching KTU Archive...</p>
             </div>
 
             <div id="results-header" class="w-full flex justify-between items-end border-b border-slate-200/60 pb-4 mb-6 hidden">
-                <h3 class="text-xl font-black text-slate-800"><span id="search-term-display" class="text-blue-600 font-'Fira Code'"></span> Papers</h3>
+                <h2 class="text-xl font-black text-slate-800"><span id="search-term-display" class="text-blue-600 font-'Fira Code'"></span> PYQs</h2>
                 <span id="result-count" class="text-xs font-bold text-slate-600 bg-white/80 backdrop-blur px-3 py-1 rounded-full border border-slate-200"></span>
             </div>
 
             <div id="results-grid" class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
-                </div>
+                <!-- Dynamically populated via JS -->
+            </div>
         </div>
+
+        <!-- SEO TEXT BLOCK: Invisible to user experience, crucial for Google Search Rankings -->
+        <article class="w-full max-w-4xl mt-12 pt-12 border-t border-slate-200/60 relative z-10 text-left">
+            <h2 class="text-2xl font-black text-slate-900 mb-6">The Ultimate KTU PYQ Archive</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="inner-glass p-6 rounded-2xl">
+                    <h3 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i class="fas fa-file-pdf text-red-500"></i> Why download KTU PYQs?
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Practicing <strong>KTU previous year question papers (PYQ)</strong> is the most effective strategy for engineering students to score high in APJ Abdul Kalam Technological University exams. It helps you understand the exam pattern, repeatedly asked topics, and mark distribution for B.Tech subjects from S1 to S8.
+                    </p>
+                </div>
+                
+                <div class="inner-glass p-6 rounded-2xl">
+                    <h3 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i class="fas fa-bolt text-amber-500"></i> Lightning Fast Downloads
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Unlike the official university portal which can crash during exam season, our independent <strong>KTU B.Tech question paper database</strong> is hosted on high-speed cloud servers. Enter your course code above to instantly retrieve and download PDF papers without waiting.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-2 justify-center">
+                <span class="text-[10px] uppercase tracking-wider font-bold text-slate-400 bg-white/50 border border-slate-200 px-3 py-1 rounded-md">KTU S1 S2 PYQ</span>
+                <span class="text-[10px] uppercase tracking-wider font-bold text-slate-400 bg-white/50 border border-slate-200 px-3 py-1 rounded-md">KTU Question Papers 2019 Scheme</span>
+                <span class="text-[10px] uppercase tracking-wider font-bold text-slate-400 bg-white/50 border border-slate-200 px-3 py-1 rounded-md">Computer Science Previous Papers</span>
+                <span class="text-[10px] uppercase tracking-wider font-bold text-slate-400 bg-white/50 border border-slate-200 px-3 py-1 rounded-md">APJAKTU Exam Material</span>
+            </div>
+        </article>
 
     </main>
 
@@ -188,7 +254,7 @@
         if(typeof loadNavigation === 'function') loadNavigation('', '', false);
 
         // --- 1. Typewriter Effect ---
-        const words = ["MAT101...", "UCEST105...", "EST110...", "GAMAT101...", "Previous Papers..."];
+        const words = ["MAT101 PYQs...", "UCEST105 Papers...", "EST110...", "GAMAT101...", "Previous Papers..."];
         let wordIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -218,11 +284,10 @@
         }
         setTimeout(type, 1000);
 
-        // --- 2. UNIFIED 3D PARALLAX ENGINE (Synced with notes.html) ---
+        // --- 2. UNIFIED 3D PARALLAX ENGINE ---
         let lastScrollY = window.scrollY;
         let ticking = false;
 
-        // A. Vertical Scroll Parallax
         window.addEventListener('scroll', () => {
             lastScrollY = window.scrollY;
             if (!ticking) {
@@ -238,48 +303,38 @@
             }
         }, { passive: true });
 
-        // B. Shared Parallax Function (Moves orbs AND tilts the search card)
         function applyParallax(x, y) {
             const mouseOrb1 = document.getElementById('mouse-orb-1');
             const mouseOrb2 = document.getElementById('mouse-orb-2');
             
-            // Move orbs opposite to tilt/mouse
             if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
             if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
 
-            // 3D Tilt the Glass Search Card
             const glassCard = document.getElementById('search-card');
             if(glassCard) {
-                // Adjust degrees here for stronger/weaker tilt (matches notes.html logic)
                 glassCard.style.transform = `perspective(1000px) rotateX(${y * -6}deg) rotateY(${x * 6}deg) scale3d(1.02, 1.02, 1.02)`;
             }
         }
 
-        // C. Mouse Parallax (For PC)
         document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 2; // Range -1 to 1
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
             const y = (e.clientY / window.innerHeight - 0.5) * 2;
             applyParallax(x, y);
         });
 
-        // Reset 3D Tilt when mouse leaves window
         document.addEventListener('mouseleave', () => {
             applyParallax(0, 0);
             const glassCard = document.getElementById('search-card');
             if(glassCard) glassCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         });
 
-        // D. Gyroscope Tilt Parallax (For Mobile)
         if (window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', (e) => {
                 if(e.gamma === null || e.beta === null) return;
                 
-                // e.gamma is left/right tilt (-90 to 90)
-                // e.beta is front/back tilt (-180 to 180). Assume ~45 degrees is neutral holding position.
                 let x = e.gamma / 40; 
                 let y = (e.beta - 45) / 40; 
 
-                // Cap the values between -1 and 1 so it doesn't tilt too far
                 x = Math.max(-1, Math.min(1, x));
                 y = Math.max(-1, Math.min(1, y));
 
@@ -287,7 +342,7 @@
             }, true);
         }
 
-        // --- 3. Hugging Face API Integration & Quick Search ---
+        // --- 3. Hugging Face API Integration ---
         const API_URL = "https://keralatimetable-ktu-papers-api.hf.space"; 
 
         function quickSearch(code) {
@@ -306,7 +361,6 @@
             const header = document.getElementById('results-header');
             const trending = document.getElementById('trending-searches');
 
-            // Hide trending topics when a search runs
             trending.style.display = 'none';
 
             resultsArea.classList.remove('hidden');
@@ -352,9 +406,9 @@
                                         <i class="far fa-calendar-alt"></i> ${paper.exam_session}
                                     </span>
                                 </div>
-                                <h4 class="text-sm font-bold text-slate-800 leading-snug mb-5 line-clamp-2" title="${paper.title}">
+                                <h3 class="text-sm font-bold text-slate-800 leading-snug mb-5 line-clamp-2" title="${paper.title}">
                                     ${paper.title}
-                                </h4>
+                                </h3>
                             </div>
                             
                             <button onclick="downloadPaper('${paper.handle}', '${paper.exam_session}', this)" class="w-full bg-white hover:bg-blue-600 text-slate-700 hover:text-white border border-slate-200 hover:border-blue-600 text-xs font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm">
@@ -407,7 +461,7 @@
                 
                 const courseCode = document.getElementById('searchInput').value.trim().toUpperCase();
                 const safeSession = examSession.replace(/\s+/g, '_');
-                a.download = `KTU_${courseCode}_${safeSession}.pdf`; 
+                a.download = `KTU_PYQ_${courseCode}_${safeSession}.pdf`; 
                 
                 document.body.appendChild(a);
                 a.click();
