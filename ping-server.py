@@ -28,43 +28,61 @@ def ping_servers():
     for svc in TARGET_SERVICES:
         start_time = time.time()
         try:
-            # STEP 1: Normal strict ping. 
+            # STEP 1: Normal strict ping
             response = requests.get(svc["url"], headers=HEADERS, timeout=15)
             ping_ms = int((time.time() - start_time) * 1000)
             
-            if response.status_code < 500:
+            if response.status_code < 400:
                 results[svc["name"]] = {"status": "Online", "ping": ping_ms}
                 print(f"{svc['name']}: Online ({ping_ms}ms)")
+            elif response.status_code < 500:
+                results[svc["name"]] = {"status": f"Online (HTTP {response.status_code})", "ping": ping_ms}
+                print(f"{svc['name']}: Online but returning Client Error (HTTP {response.status_code})")
             else:
-                results[svc["name"]] = {"status": "Offline", "ping": "Timeout"}
+                # This will cleanly catch 500, 502, 503, 504 Gateway errors
+                results[svc["name"]] = {"status": f"Offline (HTTP {response.status_code})", "ping": "Error"}
                 print(f"{svc['name']}: Offline (HTTP {response.status_code})")
                 down_count += 1
                 
         except requests.exceptions.SSLError:
-            # STEP 2: GitHub threw a fake SSL error because it doesn't recognize Indian Certs.
-            # Let's do a fallback check to verify if the server is actually alive.
+            # STEP 2: Server threw an SSL error. Let's do a fallback check to verify if the server is actually alive.
             try:
                 fallback_start = time.time()
                 fallback = requests.get(svc["url"], headers=HEADERS, timeout=15, verify=False)
                 ping_ms = int((time.time() - fallback_start) * 1000)
                 
-                if fallback.status_code < 500:
-                    # The server responded! It's just the GitHub CA bug. Mark as Online.
+                if fallback.status_code < 400:
                     results[svc["name"]] = {"status": "Online", "ping": ping_ms}
                     print(f"{svc['name']}: Online (CA Mismatch Bypassed)")
+                elif fallback.status_code < 500:
+                    results[svc["name"]] = {"status": f"Online (HTTP {fallback.status_code})", "ping": ping_ms}
+                    print(f"{svc['name']}: Online but returning Client Error (CA Mismatch, HTTP {fallback.status_code})")
                 else:
-                    results[svc["name"]] = {"status": "Offline", "ping": "Timeout"}
+                    results[svc["name"]] = {"status": f"Offline (HTTP {fallback.status_code})", "ping": "Error"}
+                    print(f"{svc['name']}: Offline (HTTP {fallback.status_code})")
                     down_count += 1
                     
+            except requests.exceptions.Timeout:
+                # Captures if the server hangs infinitely during fallback
+                results[svc["name"]] = {"status": "Offline (Connection Timeout)", "ping": "Timeout"}
+                print(f"{svc['name']}: Offline (Connection Timeout)")
+                down_count += 1
+                
             except requests.exceptions.RequestException:
                 # If the fallback ALSO crashes, it means KTU is having a genuine, massive SSL/Connection failure.
                 results[svc["name"]] = {"status": "SSL Issue", "ping": "Blocked"}
                 print(f"{svc['name']}: Genuine SSL/Connection Issue Detected")
                 ssl_count += 1
                 
+        except requests.exceptions.Timeout:
+             # Captures if the server hangs infinitely on the very first try
+             results[svc["name"]] = {"status": "Offline (Connection Timeout)", "ping": "Timeout"}
+             print(f"{svc['name']}: Offline (Connection Timeout)")
+             down_count += 1
+             
         except requests.exceptions.RequestException:
-            results[svc["name"]] = {"status": "Offline", "ping": "Timeout"}
-            print(f"{svc['name']}: Offline (Timeout/Blocked)")
+            results[svc["name"]] = {"status": "Offline (Network Error)", "ping": "Error"}
+            print(f"{svc['name']}: Offline (Network/Routing Error)")
             down_count += 1
 
     # Determine Overall Status
@@ -92,7 +110,7 @@ def ping_servers():
         history = []
 
     history.insert(0, new_record)
-    history = history[:12] # Keep only the last 12 hours
+    history = history[:12] # Keep only the last 12 entries to prevent the file from getting too large
 
     with open("status-history.json", "w") as f:
         json.dump(history, f, indent=4)
