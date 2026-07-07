@@ -467,4 +467,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-time-tables-of-mca-s1-s5-special-examinations-january-2026-2016-regulations-notification.html",
     "pdfLink": "downloads_timetable/2026-06-29_KTU-EX-II#1-4990-2024MCA3year(1).pdf"
 }
+,
+{
+    "id": "mca_integrated_s3_s5_s7_s9_july2026",
+    "title": "MCA Integrated S3, S5, S7, S9 Supply/FE July 2026",
+    "semester": "S3, S5, S7, S9",
+    "categoryBadge": "S3, S5, S7, S9",
+    "type": "Supply",
+    "scheme": "2020 Scheme",
+    "startDate": "2026-07-15T09:30:00",
+    "endDate": "2026-07-30T13:30:00",
+    "viewLink": "timetable_pages/detailed-time-tables-of-mca-integrated-s3-s-fe-s5-s-fe-s7-s-fe-and-s9-s-fe-july-2026-examinations-2020-scheme-notification.html",
+    "pdfLink": "downloads_timetable/2026-07-07_MCAIntegratedS3,S5,S7,S9JULY2026(2026SCH)APPROVED.pdf"
+}
 ];
