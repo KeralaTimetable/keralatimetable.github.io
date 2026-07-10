@@ -480,4 +480,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-time-tables-of-mca-integrated-s3-s-fe-s5-s-fe-s7-s-fe-and-s9-s-fe-july-2026-examinations-2020-scheme-notification.html",
     "pdfLink": "downloads_timetable/2026-07-07_MCAIntegratedS3,S5,S7,S9JULY2026(2026SCH)APPROVED.pdf"
 }
+,
+{
+    "id": "btech_s2_pt_may2026_reschedule",
+    "title": "B.Tech S2 (PT) (S, FE) Exam May 2026",
+    "semester": "S2",
+    "categoryBadge": "S2",
+    "type": "Supply",
+    "scheme": "2019 Scheme",
+    "startDate": "2026-07-20T09:30:00",
+    "endDate": "2026-07-23T09:30:00",
+    "viewLink": "timetable_pages/b-tech-s2-pt-s-fe-exam-may-2026-2019-scheme-rescheduling-of-slot-e-course-hut-200-professional-ethics.html",
+    "pdfLink": "downloads_timetable/2026-07-10_B.TechS2(PT)(S,FE)ExamMay2026(2019)hut200rescheduling.pdf"
+}
 ];
