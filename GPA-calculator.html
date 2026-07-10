@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official KTU SGPA & CGPA Calculator based on the 2019 Scheme. Calculate your engineering grades instantly.">
+    <title>KTU SGPA & CGPA Calculator | Kerala Timetable</title>
+    
+    <script src="/tailwind-local.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        
+        .bg-mesh { background-color: #f8fafc; }
+
+        /* Authentic Glassmorphism */
+        .real-glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.05);
+            transform-style: preserve-3d;
+        }
+
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        
+        .inner-glass:focus-within {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: #6366f1; /* Indigo 500 */
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+        }
+
+        /* Form Inputs */
+        input, select {
+            background: transparent;
+            outline: none;
+            width: 100%;
+            color: #1e293b;
+            font-weight: 600;
+        }
+        
+        input::placeholder { color: #94a3b8; font-weight: 500; }
+
+        select.custom-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2364748b%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem top 50%;
+            background-size: 0.65rem auto;
+            cursor: pointer;
+        }
+
+        /* Orb Animations */
+        @keyframes float-pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+        .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
+
+        /* Entry Animations */
+        @keyframes fadeUpEntry {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        
+        /* Monospace font for digits */
+        .font-digits { font-family: 'Fira Code', monospace; }
+        
+        /* Hide number arrows */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    </style>
+</head>
+
+<body class="bg-mesh text-slate-800 antialiased min-h-screen flex flex-col relative">
+
+    <div id="navigation-container" class="relative z-50"></div>
+
+    <!-- Background Orbs (Cyan & Violet for math/tech vibe) -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="scroll-bg-1" class="absolute -top-10 -left-10 w-72 h-72 md:w-96 md:h-96 transition-transform duration-100 ease-out">
+            <div id="mouse-orb-1" class="w-full h-full bg-cyan-400/50 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+        </div>
+        <div id="scroll-bg-2" class="absolute top-[40%] -right-10 w-80 h-80 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-2" class="w-full h-full bg-violet-500/40 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+    <main class="flex-grow w-full max-w-4xl mx-auto px-4 py-10 md:py-16 relative z-10 flex flex-col items-center">
+        
+        <div class="text-center mb-8 animate-fade-up">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-100 border border-indigo-200 text-indigo-700 text-xs font-bold uppercase tracking-wider mb-5 shadow-sm">
+                <i class="fas fa-calculator"></i> 2019 Scheme
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                KTU <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-500">Calculator</span>
+            </h1>
+        </div>
+
+        <!-- Segmented Control Toggle -->
+        <div class="real-glass p-1.5 rounded-full flex gap-1 mb-10 w-full max-w-sm animate-fade-up delay-100">
+            <button id="tab-sgpa" onclick="switchMode('SGPA')" class="flex-1 py-2.5 rounded-full bg-indigo-600 text-white font-bold text-sm shadow-md transition-all duration-300">
+                Semester (SGPA)
+            </button>
+            <button id="tab-cgpa" onclick="switchMode('CGPA')" class="flex-1 py-2.5 rounded-full bg-transparent text-slate-600 hover:text-slate-800 font-bold text-sm transition-all duration-300">
+                Overall (CGPA)
+            </button>
+        </div>
+
+        <!-- Interactive Parallax Container -->
+        <div id="parallax-container" class="w-full relative perspective-1000 mb-12 animate-fade-up delay-200">
+            
+            <div id="calculator-card" class="real-glass rounded-[2rem] p-4 md:p-8 w-full relative z-20 flex flex-col md:flex-row gap-8">
+                
+                <!-- Left Side: Inputs -->
+                <div class="w-full md:w-2/3 flex flex-col">
+                    <div class="flex justify-between items-end mb-4 px-1">
+                        <h2 id="calc-title" class="text-lg font-black text-slate-800">Add Subjects</h2>
+                        <button onclick="clearAll()" class="text-xs font-bold text-slate-400 hover:text-rose-500 transition-colors">
+                            <i class="fas fa-trash-alt mr-1"></i> Clear
+                        </button>
+                    </div>
+
+                    <!-- Column Headers -->
+                    <div id="headers-sgpa" class="grid grid-cols-12 gap-3 mb-2 px-2 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                        <div class="col-span-5 md:col-span-6">Subject Name (Opt.)</div>
+                        <div class="col-span-3 text-center">Credits</div>
+                        <div class="col-span-3 text-center">Grade</div>
+                        <div class="col-span-1"></div>
+                    </div>
+                    <div id="headers-cgpa" class="hidden grid grid-cols-12 gap-3 mb-2 px-2 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                        <div class="col-span-5 md:col-span-6">Semester</div>
+                        <div class="col-span-3 text-center">Credits</div>
+                        <div class="col-span-3 text-center">SGPA</div>
+                        <div class="col-span-1"></div>
+                    </div>
+
+                    <!-- Rows Container -->
+                    <div id="rows-container" class="space-y-3 mb-6">
+                        <!-- Rows injected by JS -->
+                    </div>
+
+                    <button onclick="addRow()" class="w-full py-3.5 inner-glass rounded-xl text-indigo-600 font-bold text-sm hover:bg-white/80 transition-all border-dashed border-2 flex items-center justify-center gap-2">
+                        <i class="fas fa-plus"></i> Add Row
+                    </button>
+                </div>
+
+                <!-- Right Side: Live Result Dashboard -->
+                <div class="w-full md:w-1/3 flex flex-col gap-4">
+                    <div class="inner-glass rounded-[1.5rem] p-6 h-full flex flex-col items-center justify-center text-center shadow-sm relative overflow-hidden group">
+                        
+                        <!-- Glowing background effect inside result box -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 z-10" id="result-label">Your SGPA</p>
+                        
+                        <div class="relative z-10 mb-4">
+                            <span id="final-score" class="text-5xl md:text-6xl font-black text-slate-800 font-digits tracking-tighter">0.00</span>
+                        </div>
+
+                        <div class="w-full bg-slate-200/50 rounded-full h-2.5 mb-4 z-10 overflow-hidden">
+                            <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 to-cyan-400 h-2.5 rounded-full w-0 transition-all duration-700 ease-out"></div>
+                        </div>
+
+                        <div class="flex justify-between w-full text-xs font-bold text-slate-500 z-10">
+                            <span>Total Credits: <span id="total-credits" class="text-slate-700">0</span></span>
+                            <span id="performance-text" class="text-indigo-600">Enter Grades</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center relative z-10">
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="text-slate-800 font-bold text-sm mb-1">Kerala Timetable</h3>
+            <p class="text-slate-500 text-xs">KTU 2019 Scheme Grade Rules Applied.</p>
+        </div>
+    </footer>
+
+    <script src="components.js"></script>
+    <script>
+        // Load Header Navigation if applicable
+        if(typeof loadNavigation === 'function') loadNavigation('', '/', false);
+
+        // --- 1. CALCULATOR LOGIC & STATE ---
+        let currentMode = 'SGPA'; 
+        
+        // KTU 2019 Scheme Grade Points
+        const GRADE_POINTS = {
+            'S': 10.0, 'A+': 9.0, 'A': 8.5, 'B+': 8.0, 
+            'B': 7.5, 'C+': 7.0, 'C': 6.5, 'D': 6.0, 
+            'P': 5.5, 'F': 0.0, 'FE': 0.0, 'I': 0.0
+        };
+
+        function switchMode(mode) {
+            currentMode = mode;
+            
+            const btnSgpa = document.getElementById('tab-sgpa');
+            const btnCgpa = document.getElementById('tab-cgpa');
+            const headerSgpa = document.getElementById('headers-sgpa');
+            const headerCgpa = document.getElementById('headers-cgpa');
+            
+            if(mode === 'SGPA') {
+                // UI Switch
+                btnSgpa.className = "flex-1 py-2.5 rounded-full bg-indigo-600 text-white font-bold text-sm shadow-md transition-all duration-300";
+                btnCgpa.className = "flex-1 py-2.5 rounded-full bg-transparent text-slate-600 hover:text-slate-800 font-bold text-sm transition-all duration-300";
+                headerSgpa.classList.remove('hidden');
+                headerCgpa.classList.add('hidden');
+                document.getElementById('calc-title').innerText = "Add Subjects";
+                document.getElementById('result-label').innerText = "Your SGPA";
+            } else {
+                // UI Switch
+                btnCgpa.className = "flex-1 py-2.5 rounded-full bg-indigo-600 text-white font-bold text-sm shadow-md transition-all duration-300";
+                btnSgpa.className = "flex-1 py-2.5 rounded-full bg-transparent text-slate-600 hover:text-slate-800 font-bold text-sm transition-all duration-300";
+                headerCgpa.classList.remove('hidden');
+                headerSgpa.classList.add('hidden');
+                document.getElementById('calc-title').innerText = "Add Semesters";
+                document.getElementById('result-label').innerText = "Your CGPA";
+            }
+
+            clearAll(); // Resets and injects default rows for the new mode
+        }
+
+        function createRowHTML() {
+            if (currentMode === 'SGPA') {
+                return `
+                    <div class="calc-row grid grid-cols-12 gap-2 md:gap-3 items-center group">
+                        <div class="col-span-5 md:col-span-6 inner-glass rounded-xl px-3 py-2.5">
+                            <input type="text" placeholder="Subject (Opt.)" class="text-sm">
+                        </div>
+                        <div class="col-span-3 inner-glass rounded-xl px-3 py-2.5 text-center">
+                            <input type="number" min="1" max="10" placeholder="0" class="credit-input text-center text-sm font-digits" oninput="calculate()">
+                        </div>
+                        <div class="col-span-3 inner-glass rounded-xl px-2 py-2.5">
+                            <select class="grade-input custom-select text-center text-sm font-bold pl-2" onchange="calculate()">
+                                <option value="" disabled selected>-</option>
+                                <option value="S">S</option>
+                                <option value="A+">A+</option>
+                                <option value="A">A</option>
+                                <option value="B+">B+</option>
+                                <option value="B">B</option>
+                                <option value="C+">C+</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="P">P</option>
+                                <option value="F">F</option>
+                                <option value="FE">FE</option>
+                            </select>
+                        </div>
+                        <div class="col-span-1 text-right">
+                            <button onclick="removeRow(this)" class="text-slate-300 hover:text-rose-500 transition-colors p-2">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="calc-row grid grid-cols-12 gap-2 md:gap-3 items-center group">
+                        <div class="col-span-5 md:col-span-6 inner-glass rounded-xl px-3 py-2.5">
+                            <input type="text" placeholder="S1, S2..." class="text-sm">
+                        </div>
+                        <div class="col-span-3 inner-glass rounded-xl px-3 py-2.5 text-center">
+                            <input type="number" min="1" max="30" placeholder="0" class="credit-input text-center text-sm font-digits" oninput="calculate()">
+                        </div>
+                        <div class="col-span-3 inner-glass rounded-xl px-3 py-2.5 text-center">
+                            <input type="number" min="0" max="10" step="0.01" placeholder="0.00" class="sgpa-input text-center text-sm font-digits" oninput="calculate()">
+                        </div>
+                        <div class="col-span-1 text-right">
+                            <button onclick="removeRow(this)" class="text-slate-300 hover:text-rose-500 transition-colors p-2">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function addRow() {
+            const container = document.getElementById('rows-container');
+            container.insertAdjacentHTML('beforeend', createRowHTML());
+        }
+
+        function removeRow(btn) {
+            const row = btn.closest('.calc-row');
+            row.remove();
+            calculate();
+        }
+
+        function clearAll() {
+            const container = document.getElementById('rows-container');
+            container.innerHTML = '';
+            
+            // Inject default rows (6 for SGPA, 4 for CGPA)
+            const defaultRows = currentMode === 'SGPA' ? 6 : 4;
+            for(let i=0; i<defaultRows; i++) {
+                addRow();
+            }
+            calculate();
+        }
+
+        function calculate() {
+            const rows = document.querySelectorAll('.calc-row');
+            let totalCredits = 0;
+            let totalPoints = 0;
+            let hasFailed = false;
+
+            rows.forEach(row => {
+                const creditVal = parseFloat(row.querySelector('.credit-input').value);
+                
+                if(currentMode === 'SGPA') {
+                    const gradeVal = row.querySelector('.grade-input').value;
+                    if (!isNaN(creditVal) && creditVal > 0 && GRADE_POINTS[gradeVal] !== undefined) {
+                        totalCredits += creditVal;
+                        totalPoints += (creditVal * GRADE_POINTS[gradeVal]);
+                        if(['F', 'FE', 'I'].includes(gradeVal)) hasFailed = true;
+                    }
+                } else {
+                    const sgpaVal = parseFloat(row.querySelector('.sgpa-input').value);
+                    if (!isNaN(creditVal) && creditVal > 0 && !isNaN(sgpaVal) && sgpaVal >= 0) {
+                        totalCredits += creditVal;
+                        totalPoints += (creditVal * sgpaVal);
+                    }
+                }
+            });
+
+            const scoreDisplay = document.getElementById('final-score');
+            const progBar = document.getElementById('progress-bar');
+            const perfText = document.getElementById('performance-text');
+            const creditDisplay = document.getElementById('total-credits');
+
+            creditDisplay.innerText = totalCredits;
+
+            if (totalCredits === 0) {
+                scoreDisplay.innerText = "0.00";
+                progBar.style.width = "0%";
+                perfText.innerText = "Enter Grades";
+                perfText.className = "text-slate-400";
+                return;
+            }
+
+            let finalGPA = (totalPoints / totalCredits).toFixed(2);
+            
+            // UI Updates based on score
+            scoreDisplay.innerText = finalGPA;
+            progBar.style.width = `${(finalGPA / 10) * 100}%`;
+
+            if (currentMode === 'SGPA' && hasFailed) {
+                perfText.innerText = "Failed Subject(s)";
+                perfText.className = "text-rose-500 font-black";
+                progBar.className = "bg-rose-500 h-2.5 rounded-full transition-all duration-700 ease-out";
+            } else {
+                progBar.className = "bg-gradient-to-r from-indigo-500 to-cyan-400 h-2.5 rounded-full transition-all duration-700 ease-out";
+                
+                if (finalGPA >= 9.0) {
+                    perfText.innerText = "Outstanding!";
+                    perfText.className = "text-emerald-500 font-black";
+                } else if (finalGPA >= 8.0) {
+                    perfText.innerText = "Excellent";
+                    perfText.className = "text-indigo-500 font-black";
+                } else if (finalGPA >= 7.0) {
+                    perfText.innerText = "Good";
+                    perfText.className = "text-cyan-500 font-black";
+                } else if (finalGPA >= 6.0) {
+                    perfText.innerText = "Average";
+                    perfText.className = "text-amber-500 font-black";
+                } else {
+                    perfText.innerText = "Needs Improvement";
+                    perfText.className = "text-rose-500 font-black";
+                }
+            }
+        }
+
+        // Initialize defaults on load
+        window.onload = () => { clearAll(); };
+
+        // --- 2. 3D PARALLAX ENGINE (Synced exactly with ambassador.html) ---
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        // Vertical Scroll Parallax
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollBg1 = document.getElementById('scroll-bg-1');
+                    const scrollBg2 = document.getElementById('scroll-bg-2');
+                    
+                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.3}px)`;
+                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Apply Parallax Matrix
+        function applyParallax(x, y) {
+            const mouseOrb1 = document.getElementById('mouse-orb-1');
+            const mouseOrb2 = document.getElementById('mouse-orb-2');
+            
+            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+
+            const glassCard = document.getElementById('calculator-card');
+            if(glassCard) {
+                // Subtle 3D tilt
+                glassCard.style.transform = `perspective(1000px) rotateX(${y * -4}deg) rotateY(${x * 4}deg) scale3d(1.01, 1.01, 1.01)`;
+            }
+        }
+
+        // Mouse Tracker (PC)
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            applyParallax(x, y);
+        });
+
+        // Reset Tracker
+        document.addEventListener('mouseleave', () => {
+            applyParallax(0, 0);
+            const glassCard = document.getElementById('calculator-card');
+            if(glassCard) glassCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+
+        // Gyroscope Tracker (Mobile)
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', (e) => {
+                if(e.gamma === null || e.beta === null) return;
+                let x = Math.max(-1, Math.min(1, e.gamma / 40));
+                let y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
+                applyParallax(x, y);
+            }, true);
+        }
+    </script>
+</body>
+</html>
