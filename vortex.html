@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -17,6 +18,34 @@
             background-color: #0f172a; /* Slate 900 - Dark Mode */
             color: #f8fafc;
             overflow-x: hidden; 
+        }
+
+        /* --- DARK MODE OVERRIDE FOR INJECTED HEADER --- */
+        #navigation-container nav,
+        #navigation-container header,
+        #navigation-container [class*="bg-white"] {
+            background-color: #0f172a !important;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2) !important;
+        }
+
+        /* Force dark text to turn white */
+        #navigation-container [class*="text-slate-800"], 
+        #navigation-container [class*="text-slate-900"],
+        #navigation-container [class*="text-slate-600"] {
+            color: #f8fafc !important;
+        }
+
+        /* Fix the notification bell button background */
+        #navigation-container [class*="bg-slate-100"],
+        #navigation-container [class*="bg-slate-50"] {
+            background-color: rgba(139, 92, 246, 0.15) !important;
+            color: #a78bfa !important;
+        }
+
+        /* Make the "Kerala Timetable" blue logo text match the violet theme */
+        #navigation-container .text-blue-600,
+        #navigation-container .text-indigo-600 {
+            color: #a78bfa !important; 
         }
 
         /* Dark Mode Gaming Glassmorphism */
@@ -61,6 +90,13 @@
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
         
+        /* Subtle Glow Pulse for CTA */
+        @keyframes cta-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(168, 85, 247, 0.8); }
+        }
+        .animate-cta-glow { animation: cta-glow 2.5s ease-in-out infinite; }
+
         .font-gaming { font-family: 'Orbitron', sans-serif; }
     </style>
 </head>
@@ -79,7 +115,8 @@
         </div>
     </div>
 
-    <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-12 md:py-16 relative z-10">
+    <!-- Added extra top padding (pt-12 md:pt-20) for header breathing room -->
+    <main class="flex-grow w-full max-w-6xl mx-auto px-4 pt-12 pb-16 md:pt-20 md:pb-20 relative z-10">
         
         <!-- Hero Section -->
         <div class="flex flex-col items-center text-center mb-16 animate-fade-up">
@@ -87,8 +124,8 @@
                 <i class="fas fa-gamepad"></i> Official eFootball Tournament
             </div>
             
-            <!-- Logo Integration -->
-            <img src="assets/vortex.png" alt="Vortex Season 1" class="w-full max-w-lg md:max-w-2xl mb-6 drop-shadow-[0_0_30px_rgba(168,85,247,0.5)] transform hover:scale-105 transition-transform duration-500">
+            <!-- Logo Integration (Updated Path) -->
+            <img src="Assets/vortex.png" alt="Vortex Season 1" class="w-full max-w-lg md:max-w-2xl mb-6 drop-shadow-[0_0_30px_rgba(168,85,247,0.5)] transform hover:scale-105 transition-transform duration-500">
             
             <p class="text-slate-300 font-medium md:text-lg max-w-2xl mx-auto leading-relaxed mt-4">
                 Hosted by <span class="text-white font-bold">Kerala Timetable</span>. Assemble your ultimate squad, follow the strict protocols, and battle it out for glory.
@@ -212,7 +249,8 @@
                             </div>
                         </div>
 
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5RvEoxJECTPkdcl86QBt_pBJpXJ3EBsorOVP_GPZVdUW1zw/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="block w-full py-4 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white font-black uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] transform hover:-translate-y-1 transition-all duration-300">
+                        <!-- Added animate-cta-glow for extra visibility -->
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5RvEoxJECTPkdcl86QBt_pBJpXJ3EBsorOVP_GPZVdUW1zw/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="animate-cta-glow block w-full py-4 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white font-black uppercase tracking-widest text-sm transform hover:-translate-y-1 transition-all duration-300">
                             REGISTER NOW <i class="fas fa-chevron-right ml-2 text-xs"></i>
                         </a>
                         
