@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VORTEX Season 1 | eFootball Tournament by Kerala Timetable</title>
+    <meta name="description" content="Join VORTEX, the premier eFootball online tournament hosted by Kerala Timetable. Register now for Season 1.">
+    
+    <script src="/tailwind-local.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Using Orbitron for that distinct gaming/cyberpunk feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #0f172a; /* Slate 900 - Dark Mode */
+            color: #f8fafc;
+            overflow-x: hidden; 
+        }
+
+        /* Dark Mode Gaming Glassmorphism */
+        .real-glass {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(139, 92, 246, 0.3); /* Violet border */
+            border-top: 1px solid rgba(167, 139, 250, 0.5);
+            border-left: 1px solid rgba(167, 139, 250, 0.5);
+            box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(139, 92, 246, 0.1);
+        }
+
+        .inner-glass {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .inner-glass:hover {
+            border-color: rgba(168, 85, 247, 0.6);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2), inset 0 2px 4px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Orb Animations */
+        @keyframes float-pulse {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.4; }
+            50% { transform: scale(1.1) translate(20px, -20px); opacity: 0.7; }
+            100% { transform: scale(1) translate(0, 0); opacity: 0.4; }
+        }
+        .orb-pulse { animation: float-pulse 8s ease-in-out infinite; }
+        
+        /* Entry Animations */
+        @keyframes fadeUpEntry {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        
+        .font-gaming { font-family: 'Orbitron', sans-serif; }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen flex flex-col relative">
+
+    <div id="navigation-container" class="relative z-50"></div>
+
+    <!-- Background Orbs (Deep Violet & Magenta to match the logo) -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-10 -left-20 w-72 h-72 md:w-96 md:h-96">
+            <div id="mouse-orb-1" class="w-full h-full bg-violet-600/50 rounded-full mix-blend-screen filter blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+        </div>
+        <div class="absolute top-[40%] -right-20 w-80 h-80 md:w-[40rem] md:h-[40rem]">
+            <div id="mouse-orb-2" class="w-full h-full bg-fuchsia-600/40 rounded-full mix-blend-screen filter blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 3s;"></div>
+        </div>
+    </div>
+
+    <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-12 md:py-16 relative z-10">
+        
+        <!-- Hero Section -->
+        <div class="flex flex-col items-center text-center mb-16 animate-fade-up">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-900/50 border border-violet-500/50 text-violet-300 text-xs font-bold uppercase tracking-widest mb-6 shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                <i class="fas fa-gamepad"></i> Official eFootball Tournament
+            </div>
+            
+            <!-- Logo Integration -->
+            <img src="IMG_20260710_085455-Photoroom.png" alt="Vortex Season 1" class="w-full max-w-lg md:max-w-2xl mb-6 drop-shadow-[0_0_30px_rgba(168,85,247,0.5)] transform hover:scale-105 transition-transform duration-500">
+            
+            <p class="text-slate-300 font-medium md:text-lg max-w-2xl mx-auto leading-relaxed mt-4">
+                Hosted by <span class="text-white font-bold">Kerala Timetable</span>. Assemble your ultimate squad, follow the strict protocols, and battle it out for glory.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- LEFT COLUMN: Tournament Rules -->
+            <div class="lg:col-span-8 space-y-6 animate-fade-up delay-100">
+                
+                <div class="real-glass rounded-3xl p-6 md:p-8">
+                    <h2 class="text-2xl font-gaming font-bold text-white mb-6 flex items-center gap-3">
+                        <i class="fas fa-sliders-h text-violet-400"></i> Match Settings
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="inner-glass p-4 rounded-2xl flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-slate-800/80 border border-violet-500/30 flex items-center justify-center text-violet-400 flex-shrink-0">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Match Time</p>
+                                <p class="text-lg font-bold text-white">8 Minutes</p>
+                            </div>
+                        </div>
+                        
+                        <div class="inner-glass p-4 rounded-2xl flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-slate-800/80 border border-violet-500/30 flex items-center justify-center text-violet-400 flex-shrink-0">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Substitutions</p>
+                                <p class="text-lg font-bold text-white">5 Subs <span class="text-xs text-slate-400 font-medium">(3 Intervals)</span></p>
+                            </div>
+                        </div>
+
+                        <div class="inner-glass p-4 rounded-2xl flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-slate-800/80 border border-violet-500/30 flex items-center justify-center text-violet-400 flex-shrink-0">
+                                <i class="fas fa-thermometer-half"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Player Condition</p>
+                                <p class="text-lg font-bold text-white">Random</p>
+                            </div>
+                        </div>
+
+                        <div class="inner-glass p-4 rounded-2xl flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-slate-800/80 border border-violet-500/30 flex items-center justify-center text-violet-400 flex-shrink-0">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Formation Rule</p>
+                                <p class="text-lg font-bold text-rose-400">No 5-ATB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="real-glass rounded-3xl p-6 md:p-8">
+                    <h2 class="text-2xl font-gaming font-bold text-white mb-6 flex items-center gap-3">
+                        <i class="fas fa-gavel text-fuchsia-400"></i> Official Protocol
+                    </h2>
+                    
+                    <ul class="space-y-4">
+                        <li class="inner-glass p-4 rounded-xl flex items-start gap-4">
+                            <i class="fas fa-handshake text-emerald-400 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Fairplay is Mandatory</h4>
+                                <p class="text-slate-400 text-xs mt-1 leading-relaxed">Toxic behavior, back-passing abuse, or intentional lagging will result in immediate disqualification.</p>
+                            </div>
+                        </li>
+                        <li class="inner-glass p-4 rounded-xl flex items-start gap-4">
+                            <i class="fas fa-hourglass-end text-amber-400 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Strict Deadlines</h4>
+                                <p class="text-slate-400 text-xs mt-1 leading-relaxed">Results of matches played after the assigned deadline time will absolutely not be accepted by the admin team.</p>
+                            </div>
+                        </li>
+                        <li class="inner-glass p-4 rounded-xl flex items-start gap-4">
+                            <i class="fas fa-camera text-blue-400 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Result Verification</h4>
+                                <p class="text-slate-400 text-xs mt-1 leading-relaxed">The winning player must take a clear screenshot of the final match result screen and DM it directly to the admin.</p>
+                            </div>
+                        </li>
+                        <li class="inner-glass p-4 rounded-xl flex items-start gap-4 border-l-2 border-l-rose-500">
+                            <i class="fas fa-wifi text-rose-400 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Disconnects & Net Issues</h4>
+                                <p class="text-slate-400 text-xs mt-1 leading-relaxed">In case of any network errors, game crashes, or suspicious opponent disconnects, take a screenshot immediately and DM the admin for a ruling.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: Registration Card -->
+            <div class="lg:col-span-4 sticky top-24 animate-fade-up delay-200">
+                <div class="real-glass rounded-3xl p-6 md:p-8 text-center border-t border-fuchsia-500/50 shadow-[0_0_40px_rgba(192,38,211,0.15)] relative overflow-hidden">
+                    
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-fuchsia-500/20 rounded-full filter blur-[30px] z-0"></div>
+
+                    <div class="relative z-10">
+                        <h3 class="text-sm font-bold text-slate-300 uppercase tracking-widest mb-2">Entry Fee</h3>
+                        <div class="flex items-center justify-center gap-1 mb-6">
+                            <span class="text-3xl font-black text-fuchsia-400">₹</span>
+                            <span class="text-6xl font-gaming font-black text-white">5</span>
+                        </div>
+
+                        <div class="space-y-3 mb-8 text-left">
+                            <div class="flex items-center gap-3 text-sm text-slate-300">
+                                <i class="fas fa-check-circle text-emerald-400"></i> Assured Prize Pool
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-slate-300">
+                                <i class="fas fa-check-circle text-emerald-400"></i> Managed Brackets
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-slate-300">
+                                <i class="fas fa-check-circle text-emerald-400"></i> Kerala Timetable Community
+                            </div>
+                        </div>
+
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5RvEoxJECTPkdcl86QBt_pBJpXJ3EBsorOVP_GPZVdUW1zw/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" class="block w-full py-4 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white font-black uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] transform hover:-translate-y-1 transition-all duration-300">
+                            REGISTER NOW <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                        </a>
+                        
+                        <p class="text-[10px] text-slate-500 mt-4 uppercase tracking-wider">Slots are limited. First come, first serve.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="mt-auto border-t border-slate-800 bg-slate-900/80 backdrop-blur-md py-8 text-center relative z-10">
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="text-slate-300 font-bold text-lg mb-2">Kerala Timetable</h3>
+            <p class="text-slate-500 text-xs leading-relaxed max-w-lg mx-auto">VORTEX eFootball Tournament is an independent community event hosted by Kerala Timetable.</p>
+        </div>
+    </footer>
+
+    <script src="components.js"></script>
+    <script>
+        if(typeof loadNavigation === 'function') loadNavigation('', '/', false);
+
+        // --- MOUSE PARALLAX ENGINE (PC ONLY) ---
+        function applyParallax(x, y) {
+            const orb1 = document.getElementById('mouse-orb-1');
+            const orb2 = document.getElementById('mouse-orb-2');
+            
+            if(orb1) orb1.style.transform = `translate(${x * -40}px, ${y * -40}px)`;
+            if(orb2) orb2.style.transform = `translate(${x * 50}px, ${y * 50}px)`;
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            applyParallax(x, y);
+        });
+        
+        document.addEventListener('mouseleave', () => applyParallax(0, 0));
+    </script>
+</body>
+</html>
