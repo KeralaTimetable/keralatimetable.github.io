@@ -493,4 +493,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/b-tech-s2-pt-s-fe-exam-may-2026-2019-scheme-rescheduling-of-slot-e-course-hut-200-professional-ethics.html",
     "pdfLink": "downloads_timetable/2026-07-10_B.TechS2(PT)(S,FE)ExamMay2026(2019)hut200rescheduling.pdf"
 }
+,
+{
+    "id": "mtech_s1_s2_s3_special_jan2026",
+    "title": "M.Tech S1, S2, S3 Special Exam Jan 2026",
+    "semester": "S1, S2, S3",
+    "categoryBadge": "S1, S2, S3",
+    "type": "Supply",
+    "scheme": "2015/2016 Scheme",
+    "startDate": "2026-07-15T09:30:00",
+    "endDate": "2026-07-29T12:30:00",
+    "viewLink": "timetable_pages/detailed-time-tables-of-m-tech-s1-s2-s3-special-exam-jan-2026-2015-scheme-m-tech-s3-pt-special-exam-jan-2026-2016-scheme-notification-reg.html",
+    "pdfLink": "downloads_timetable/2026-07-13_KTU-SOEX-II-4033-2017M.Tech.pdf"
+}
 ];
