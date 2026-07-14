@@ -506,4 +506,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/detailed-time-tables-of-m-tech-s1-s2-s3-special-exam-jan-2026-2015-scheme-m-tech-s3-pt-special-exam-jan-2026-2016-scheme-notification-reg.html",
     "pdfLink": "downloads_timetable/2026-07-13_KTU-SOEX-II-4033-2017M.Tech.pdf"
 }
+,
+{
+    "id": "mca_integrated_s7_july2026",
+    "title": "MCA Integrated S7 Supply/FE July 2026",
+    "semester": "S7",
+    "categoryBadge": "S7",
+    "type": "Supply",
+    "scheme": "2020 Scheme",
+    "startDate": "2026-07-21T09:30:00",
+    "endDate": "2026-07-30T09:30:00",
+    "viewLink": "timetable_pages/revised-detailed-time-table-of-mca-integrated-s7-s-fe-july-2026-examinations-2020-scheme-notification.html",
+    "pdfLink": "downloads_timetable/2026-07-14_RevisedMCAIntegratedS7(S,FE)July2026(2020sch).pdf"
+}
 ];
