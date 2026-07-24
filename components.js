@@ -1,4 +1,21 @@
-// components.js
+// --- Google Analytics 4 (GA4) Live Tracking ---
+// This runs automatically in the background without affecting your design
+(function() {
+    const gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-TK5MBC372D';
+    document.head.appendChild(gaScript);
+
+    const gaInlineScript = document.createElement('script');
+    gaInlineScript.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TK5MBC372D');
+    `;
+    document.head.appendChild(gaInlineScript);
+})();
+// ----------------------------------------------
 
 // Added 'isBlog' which tells the header to add the "| Blog" text!
 function loadNavigation(activePage, basePath = '', isBlog = false) { 
