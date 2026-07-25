@@ -37,6 +37,17 @@
         .calendar-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .calendar-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.15); border-color: #c7d2fe; }
 
+        /* Authentic Glassmorphism for WhatsApp Banner */
+        .real-glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.05);
+        }
+
         @keyframes fadeUpEntry {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -65,9 +76,22 @@
             <h1 class="animate-fade-up delay-100 text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
                 Academic <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Calendars</span>
             </h1>
-            <p class="animate-fade-up delay-200 text-slate-500 font-medium md:text-lg max-w-2xl mx-auto mb-2">
+            <p class="animate-fade-up delay-200 text-slate-500 font-medium md:text-lg max-w-2xl mx-auto mb-6">
                 Official semester schedules, class dates, and project deadlines directly from the university.
             </p>
+
+            <!-- Glassmorphism WhatsApp Channel Banner -->
+            <div class="animate-fade-up delay-200 max-w-2xl mx-auto pb-4">
+                <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full mx-auto real-glass hover:bg-white/60 text-slate-800 py-4 px-6 rounded-2xl transition-all flex items-center justify-center gap-4 shadow-sm group">
+                    <div class="bg-[#25D366] text-white w-12 h-12 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                    </div>
+                    <div class="flex flex-col text-left">
+                        <span class="text-base md:text-lg font-black text-slate-800">Join our WhatsApp channel for Latest KTU Updates</span>
+                        <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">For instant calendar & exam updates</span>
+                    </div>
+                </a>
+            </div>
         </div>
 
         <div class="w-full max-w-6xl mx-auto px-4 relative z-20">
@@ -110,7 +134,6 @@
         loadNavigation('calendar', '', false);
 
         // --- SCRAPED DATA CONFIGURATION ---
-        // Manually update this array when you run your Python scraper
         const calendarData = [
             { program: 'M.Tech', sem: 'S4', title: 'MTech S4 academic calendar with dates of extended project submission', date: '2026-03-07', file: 'downloads/2026-03-07_1.MTECHAcademicCalender_S4.pdf' },
             { program: 'B.Tech', sem: 'S2', title: 'Academic Calendar - Jan 2026 to Mar 2026 B. Tech S2', date: '2026-02-10', file: 'downloads/2026-02-10_2.B.TechAcademicCalender_S2_Jan26-June26.pdf' },
