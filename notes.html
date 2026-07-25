@@ -211,8 +211,8 @@
                         </div>
                     </a>
 
-                    <!-- AD Card -->
-                    <a href="/KTU/AD/notes.html" class="branch-card rounded-3xl p-6 relative group overflow-hidden">
+                    <!-- AD Card FIXED: Pointing to /KTU/AI-DS/notes.html -->
+                    <a href="/KTU/AI-DS/notes.html" class="branch-card rounded-3xl p-6 relative group overflow-hidden">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-100 rounded-full blur-2xl -mr-10 -mt-10 transition-transform duration-500 group-hover:scale-150"></div>
                         <div class="relative z-10 flex items-center justify-between">
                             <div class="flex items-center gap-4">
@@ -310,7 +310,7 @@
         </div>
     </footer>
 
-    <script src="/components.js?v=12"></script>
+    <script src="/components.js?v=13"></script>
     <script>
         // Load Header Navigation
         if(typeof loadNavigation === 'function') loadNavigation('notes', '/', false);
@@ -395,7 +395,8 @@
                 window.location.href = `/KTU/CSE/${sem}/notes/index.html`;
             } else if (branch === 'AD') {
                 if (sem === 'S5') {
-                    window.location.href = `/KTU/AD/${sem}/notes/index.html`;
+                    // FIXED: Pointing Quick Search to the safe /KTU/AI-DS/ path
+                    window.location.href = `/KTU/AI-DS/${sem}/notes/index.html`;
                 } else {
                     alert("Only S5 notes are currently available for AI & Data Science!");
                 }
