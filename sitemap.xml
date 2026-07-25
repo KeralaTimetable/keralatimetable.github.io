@@ -361,6 +361,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://keralatimetable.in/KTU/AI-DS/S5/notes/index.html</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://keralatimetable.in/KTU/AI-DS/S5/notes/PECST521.html</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://keralatimetable.in/KTU/CSE/notes.html</loc>
     <lastmod>2026-07-25</lastmod>
     <changefreq>weekly</changefreq>
