@@ -93,7 +93,7 @@
       "@type": "CollectionPage",
       "name": "KTU B.Tech Notes 2024 Scheme",
       "url": "https://keralatimetable.in/notes.html",
-      "description": "The master directory for APJAKTU B.Tech study materials, featuring PDF notes for CSE, CE, ME, EEE, and ECE branches.",
+      "description": "The master directory for APJAKTU B.Tech study materials, featuring PDF notes for CSE, AD, CE, ME, EEE, and ECE branches.",
       "publisher": {
         "@type": "Organization",
         "name": "Kerala Timetable"
@@ -157,6 +157,7 @@
                                 <select id="quickBranch" class="custom-select inner-glass w-full text-slate-800 font-semibold text-base rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer hover:bg-white/70">
                                     <option value="" disabled selected>Select Branch</option>
                                     <option value="CSE">Computer Science (CSE)</option>
+                                    <option value="AD">AI & Data Science (AD)</option>
                                     <option value="CE" disabled>Civil (Coming Soon)</option>
                                     <option value="ME" disabled>Mechanical (Coming Soon)</option>
                                     <option value="EEE" disabled>Electrical (Coming Soon)</option>
@@ -194,24 +195,39 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     
-                    <a href="KTU/CSE/notes.html" class="branch-card rounded-3xl p-6 relative group overflow-hidden sm:col-span-2">
+                    <!-- CSE Card -->
+                    <a href="/KTU/CSE/notes.html" class="branch-card rounded-3xl p-6 relative group overflow-hidden">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-100 rounded-full blur-2xl -mr-10 -mt-10 transition-transform duration-500 group-hover:scale-150"></div>
                         <div class="relative z-10 flex items-center justify-between">
-                            <div class="flex items-center gap-5">
-                                <div class="w-16 h-16 rounded-2xl bg-white/80 text-indigo-600 flex items-center justify-center text-3xl shadow-sm border border-white transition-transform group-hover:scale-110 group-hover:rotate-3 duration-300">
+                            <div class="flex items-center gap-4">
+                                <div class="w-14 h-14 shrink-0 rounded-2xl bg-white/80 text-indigo-600 flex items-center justify-center text-2xl shadow-sm border border-white transition-transform group-hover:scale-110 group-hover:rotate-3 duration-300">
                                     <i class="fas fa-laptop-code"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-xl font-black text-slate-900 group-hover:text-indigo-600 transition-colors">Computer Science</h3>
-                                    <p class="text-slate-500 font-medium text-sm mt-1">CSE • S1 to S8 Available</p>
+                                    <h3 class="text-lg font-black text-slate-900 group-hover:text-indigo-600 transition-colors leading-tight">Computer Science</h3>
+                                    <p class="text-slate-500 font-medium text-xs mt-1">CSE • S1 to S8</p>
                                 </div>
-                            </div>
-                            <div class="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center text-slate-400 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm border border-white">
-                                <i class="fas fa-chevron-right text-sm"></i>
                             </div>
                         </div>
                     </a>
 
+                    <!-- AD Card -->
+                    <a href="/KTU/AD/notes.html" class="branch-card rounded-3xl p-6 relative group overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-100 rounded-full blur-2xl -mr-10 -mt-10 transition-transform duration-500 group-hover:scale-150"></div>
+                        <div class="relative z-10 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-14 h-14 shrink-0 rounded-2xl bg-white/80 text-emerald-600 flex items-center justify-center text-2xl shadow-sm border border-white transition-transform group-hover:scale-110 group-hover:-rotate-3 duration-300">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-black text-slate-900 group-hover:text-emerald-600 transition-colors leading-tight">AI & Data Science</h3>
+                                    <p class="text-slate-500 font-medium text-xs mt-1">AD • S5 Available</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- CE Card -->
                     <a href="#" class="branch-card rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between gap-4">
@@ -225,6 +241,7 @@
                         </div>
                     </a>
 
+                    <!-- ME Card -->
                     <a href="#" class="branch-card rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between gap-4">
@@ -238,6 +255,7 @@
                         </div>
                     </a>
 
+                    <!-- EEE Card -->
                     <a href="#" class="branch-card rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between gap-4">
@@ -251,6 +269,7 @@
                         </div>
                     </a>
 
+                    <!-- ECE Card -->
                     <a href="#" class="branch-card rounded-3xl p-6 relative group overflow-hidden opacity-80 cursor-not-allowed">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-slate-100 rounded-full blur-2xl -mr-10 -mt-10"></div>
                         <div class="relative z-10 flex flex-col h-full justify-between gap-4">
@@ -374,6 +393,12 @@
 
             if (branch === 'CSE') {
                 window.location.href = `/KTU/CSE/${sem}/notes/index.html`;
+            } else if (branch === 'AD') {
+                if (sem === 'S5') {
+                    window.location.href = `/KTU/AD/${sem}/notes/index.html`;
+                } else {
+                    alert("Only S5 notes are currently available for AI & Data Science!");
+                }
             } else {
                 alert("Notes for " + branch + " are coming soon!");
             }
