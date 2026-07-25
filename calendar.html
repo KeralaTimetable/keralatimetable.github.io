@@ -82,7 +82,7 @@
                 </div>
 
                 <div id="calendar-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    </div>
+                </div>
                 
                 <div id="empty-state" class="hidden text-center py-16 bg-white/50 border border-slate-200 border-dashed rounded-3xl mt-8">
                     <i class="fas fa-filter text-4xl text-slate-300 mb-4"></i>
@@ -122,13 +122,7 @@
             { program: 'MCA', sem: 'S2', title: 'Academic Calendar for Integrated MCA S2', date: '2026-01-07', file: 'downloads/2026-01-07_IntMCAS2S4S6S8S10.pdf' },
             { program: 'M.Arch/M.Plan', sem: 'S1', title: 'Academic Calendar for M.Arch/M.Plan S1', date: '2026-01-07', file: 'downloads/2026-01-07_2ndsemMArchMPlan.pdf' },
             { program: 'M.Tech', sem: 'S2', title: 'Academic Calendar for MTech S2', date: '2026-01-07', file: 'downloads/2026-01-07_2ndsemMTech.pdf' }, 
-            {
-    program: 'All Programs',
-    sem: 'AY 2026-27',
-    title: 'KTU Academic Calendar AY 2026-27 (B.Tech, B.Arch, B.Des, BBA, BCA & BHMCT)',
-    date: '2026-07-25',
-    file: 'downloads/KTU_Academic_Calendar_AY_2026-27_All_Programs.pdf'
-            }
+            { program: 'All Programs', sem: 'AY 2026-27', title: 'KTU Academic Calendar AY 2026-27 (B.Tech, B.Arch, B.Des, BBA, BCA & BHMCT)', date: '2026-07-25', file: 'downloads/KTU_Academic_Calendar_AY_2026-27_All_Programs.pdf'}
         ];
 
         // --- STYLING LOGIC FOR BADGES ---
@@ -146,6 +140,16 @@
             return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
         }
 
+        // Checks if the date is within 7 days from today
+        function isNew(dateString) {
+            const itemDate = new Date(dateString);
+            const now = new Date();
+            const diffInTime = now - itemDate;
+            const diffInDays = diffInTime / (1000 * 3600 * 24);
+            
+            return diffInDays >= 0 && diffInDays <= 7;
+        }
+
         // --- RENDER CALENDARS ---
         function renderCalendars() {
             const grid = document.getElementById('calendar-grid');
@@ -158,22 +162,31 @@
                 const styles = getProgramStyles(item.program);
                 const displayDate = formatDisplayDate(item.date);
                 
+                // Dynamic "NEW" Badge HTML (shown only for items <= 7 days old)
+                const newBadge = isNew(item.date) 
+                    ? `<span class="px-2 py-1 rounded-md text-[10px] font-black uppercase tracking-wider bg-rose-500 text-white shadow-sm flex items-center gap-1 animate-pulse">
+                        <i class="fas fa-sparkles text-[9px]"></i> NEW
+                       </span>`
+                    : '';
+                
                 // Determine broad category for the filter buttons
                 let filterCategory = 'PG';
                 if (item.program.includes('B.Tech')) filterCategory = 'B.Tech';
                 if (item.program.includes('B.Arch')) filterCategory = 'B.Arch';
+                if (item.program.includes('All Programs')) filterCategory = 'All';
 
                 const cardHTML = `
                     <div class="calendar-card bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-col h-full animate-fade-in-up" data-category="${filterCategory}" style="animation-delay: ${index * 0.05}s">
                         
                         <div class="flex justify-between items-start mb-4">
-                            <div class="flex gap-2">
+                            <div class="flex gap-2 flex-wrap items-center">
                                 <span class="px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider border ${styles.bg} ${styles.text} ${styles.border} flex items-center gap-1.5">
                                     <i class="fas ${styles.icon}"></i> ${item.program}
                                 </span>
                                 <span class="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-500 border border-slate-200">
                                     ${item.sem}
                                 </span>
+                                ${newBadge}
                             </div>
                         </div>
                         
@@ -216,7 +229,7 @@
 
                     for (let i = 0; i < cards.length; i++) {
                         const card = cards[i];
-                        if (filterValue === 'All' || card.getAttribute('data-category') === filterValue) {
+                        if (filterValue === 'All' || card.getAttribute('data-category') === filterValue || card.getAttribute('data-category') === 'All') {
                             card.style.display = 'flex'; 
                             visibleCount++;
                         } else {
