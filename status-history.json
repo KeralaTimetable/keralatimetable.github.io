@@ -1,5 +1,23 @@
 [
     {
+        "timestamp": "2026-08-05T17:46:36Z",
+        "overall_status": "All Systems Operational",
+        "services": {
+            "KTU Main Website": {
+                "status": "Online",
+                "ping": 2067
+            },
+            "KTU Login Portal": {
+                "status": "Online",
+                "ping": 1340
+            },
+            "KTU API Server": {
+                "status": "Online",
+                "ping": 976
+            }
+        }
+    },
+    {
         "timestamp": "2026-08-05T14:22:36Z",
         "overall_status": "All Systems Operational",
         "services": {
@@ -194,24 +212,6 @@
             "KTU API Server": {
                 "status": "Online",
                 "ping": 5534
-            }
-        }
-    },
-    {
-        "timestamp": "2026-08-03T17:56:49Z",
-        "overall_status": "All Systems Operational",
-        "services": {
-            "KTU Main Website": {
-                "status": "Online",
-                "ping": 6188
-            },
-            "KTU Login Portal": {
-                "status": "Online",
-                "ping": 1222
-            },
-            "KTU API Server": {
-                "status": "Online",
-                "ping": 1752
             }
         }
     }
