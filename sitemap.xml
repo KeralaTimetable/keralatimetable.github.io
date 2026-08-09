@@ -379,6 +379,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://keralatimetable.in/KTU/CC/S5/notes/PCCST503.html</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://keralatimetable.in/KTU/CC/S5/notes/PCCST501.html</loc>
     <lastmod>2026-08-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -446,6 +452,12 @@
   </url>
   <url>
     <loc>https://keralatimetable.in/KTU/CSE/S1/notes/electrical-electronics.html</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://keralatimetable.in/KTU/CSE/S5/notes/index.html</loc>
     <lastmod>2026-08-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
