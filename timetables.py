@@ -118,11 +118,11 @@ def generate_html_page(title, pdf_filename, html_output_dir="./timetable_pages")
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
     
-    <title>[[TITLE]] | KTU Timetable</title>
-    <link rel="canonical" href="https://www.keralatimetable.in/timetable_pages/[[SLUG]].html" />
+    <title>[[TITLE]] | KTU Timetable </title>
+    <link rel="canonical" href="https://keralatimetable.in/timetable_pages/[[SLUG]].html" />
 
     <meta name="description" content="Download the official [[TITLE]] PDF. Check the latest exam dates, slots, and subjects for the APJAKTU examinations.">
-    <meta name="keywords" content="[[TITLE]], KTU Time Table, KTU Exam Date PDF Download, Kerala Tech University, ktu latest updates">
+    <meta name="keywords" content="[[TITLE]], KTU Time Table, KTU Exam Date PDF Download, Kerala Tech University, ktu latest updates, Kerala Timetable">
     <meta name="robots" content="index, follow">
     
     <script src="/tailwind-local.js"></script>
