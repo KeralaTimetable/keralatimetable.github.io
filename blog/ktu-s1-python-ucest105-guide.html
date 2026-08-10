@@ -12,8 +12,9 @@
     <meta name="keywords" content="ktu s1 btech, algorithmic thinking with python, UCEST105, ktu pyq, ktu python notes, ktu first year, ktu supplies">
     <meta name="robots" content="index, follow">
     
-    <!-- SEO-Friendly Canonical URL -->
+    <!-- SEO-Friendly Canonical URL & Favicon -->
     <link rel="canonical" href="https://keralatimetable.in/blog/ktu-s1-python-ucest105-guide.html" />
+    <link rel="icon" href="https://keralatimetable.in/favicon.png" type="image/png">
     
     <!-- Open Graph Tags -->
     <meta property="og:title" content="KTU S1: How to Pass Algorithmic Thinking with Python (UCEST105)">
@@ -30,18 +31,36 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
         .bg-mesh {
             background-color: #f8fafc;
-            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
-                              radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%);
         }
+        
+        /* Orb Animations */
+        @keyframes float-pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+        .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
+
         .prose-custom p { @apply text-slate-600 leading-relaxed mb-6 text-lg; }
     </style>
 </head>
 
 <body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
 
-    <div id="navigation-container"></div>
+    <div id="navigation-container" class="z-50 relative"></div>
 
-    <main class="flex-grow max-w-4xl mx-auto px-4 py-8 w-full">
+    <!-- Interactive Background Orbs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="scroll-bg-1" class="absolute -top-4 -left-8 md:top-10 md:-left-10 w-64 h-64 md:w-96 md:h-96 transition-transform duration-100 ease-out">
+            <div id="mouse-orb-1" class="w-full h-full bg-amber-400/60 md:bg-amber-400 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+        </div>
+        <div id="scroll-bg-2" class="absolute top-[40%] -right-8 md:top-80 md:-right-20 w-64 h-64 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-2" class="w-full h-full bg-indigo-500/50 md:bg-indigo-500 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+    <!-- Main Content wrapped with relative z-10 to sit above orbs -->
+    <main class="flex-grow max-w-4xl mx-auto px-4 py-8 w-full relative z-10">
         
         <nav class="text-[11px] font-black text-slate-400 mb-8 uppercase tracking-widest flex items-center gap-2">
             <a href="../index.html" class="hover:text-indigo-600 transition-colors"><i class="fas fa-home"></i> Home</a> 
@@ -53,9 +72,6 @@
 
         <article class="bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white p-6 md:p-12 mb-8 relative overflow-hidden">
             
-            <!-- Abstract background element -->
-            <div class="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full blur-[80px] opacity-70 pointer-events-none"></div>
-
             <!-- Header Section -->
             <header class="relative z-10 mb-10 border-b border-slate-100 pb-10">
                 <div class="flex flex-wrap items-center gap-2 mb-6">
@@ -63,7 +79,7 @@
                         <i class="fas fa-fingerprint text-indigo-400"></i> UCEST105
                     </span>
                     
-                    <!-- NEW MALAYALAM TRANSLATION BUTTON -->
+                    <!-- MALAYALAM TRANSLATION BUTTON -->
                     <button onclick="window.open('https://translate.google.com/translate?sl=en&tl=ml&u=' + encodeURIComponent(window.location.href), '_blank')" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 text-[10px] font-black rounded-lg uppercase tracking-widest border border-blue-200 shadow-sm transition-colors cursor-pointer group">
                         <i class="fas fa-language text-blue-500 text-sm group-hover:scale-110 transition-transform"></i> Translate to മലയാളം
                     </button>
@@ -98,7 +114,7 @@
 
                 <!-- Visual Grid injected into narrative -->
                 <div class="grid md:grid-cols-3 gap-5 my-8">
-                    <div class="bg-slate-50 border border-slate-100 rounded-3xl p-6 hover:-translate-y-1 transition-transform">
+                    <div class="bg-white/60 border border-slate-100 rounded-3xl p-6 shadow-sm hover:-translate-y-1 transition-transform">
                         <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm text-amber-500 mb-4 border border-slate-100">
                             <i class="fas fa-hourglass-half"></i>
                         </div>
@@ -106,7 +122,7 @@
                         <p class="text-xs font-medium text-slate-500 leading-relaxed">The S1 calendar is compressed. You have less than 90 days to master a new language.</p>
                     </div>
                     
-                    <div class="bg-slate-50 border border-slate-100 rounded-3xl p-6 hover:-translate-y-1 transition-transform">
+                    <div class="bg-white/60 border border-slate-100 rounded-3xl p-6 shadow-sm hover:-translate-y-1 transition-transform">
                         <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm text-rose-500 mb-4 border border-slate-100">
                             <i class="fas fa-brain"></i>
                         </div>
@@ -114,7 +130,7 @@
                         <p class="text-xs font-medium text-slate-500 leading-relaxed">You cannot memorize code. The exams test your ability to build complex algorithms.</p>
                     </div>
 
-                    <div class="bg-slate-50 border border-slate-100 rounded-3xl p-6 hover:-translate-y-1 transition-transform">
+                    <div class="bg-white/60 border border-slate-100 rounded-3xl p-6 shadow-sm hover:-translate-y-1 transition-transform">
                         <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm text-indigo-500 mb-4 border border-slate-100">
                             <i class="fas fa-laptop-code"></i>
                         </div>
@@ -129,7 +145,7 @@
             </div>
 
             <!-- Visual Callout (Pro Tip) -->
-            <div class="relative z-10 mb-14 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6 shadow-sm">
+            <div class="relative z-10 mb-14 bg-gradient-to-r from-emerald-50/80 to-teal-50/80 backdrop-blur-md border border-emerald-100 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6 shadow-sm">
                 <div class="w-16 h-16 shrink-0 bg-white rounded-full flex items-center justify-center text-emerald-500 text-2xl shadow-[0_4px_20px_rgba(16,185,129,0.15)]">
                     <i class="fas fa-lightbulb"></i>
                 </div>
@@ -142,7 +158,7 @@
             </div>
 
             <!-- The Action Plan Section -->
-            <div class="relative z-10 mb-14 bg-indigo-600 rounded-[2.5rem] p-8 md:p-10 shadow-xl text-white overflow-hidden">
+            <div class="relative z-10 mb-14 bg-indigo-600/95 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 shadow-xl text-white overflow-hidden">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -mr-20 -mt-20"></div>
                 
                 <h2 class="text-3xl font-black tracking-tight mb-4">The 3-Step Survival Plan</h2>
@@ -185,7 +201,7 @@
 
             <!-- Resource Buttons -->
             <div class="relative z-10 grid sm:grid-cols-2 gap-4 mb-16">
-                <a href="../KTU/CSE/S1/notes/index.html" class="flex items-center p-5 bg-white border-2 border-slate-100 rounded-[1.5rem] shadow-sm hover:shadow-[0_8px_20px_rgb(79,70,229,0.1)] hover:border-indigo-200 transition-all group">
+                <a href="../KTU/CSE/S1/notes/index.html" class="flex items-center p-5 bg-white/80 backdrop-blur-sm border-2 border-slate-100 rounded-[1.5rem] shadow-sm hover:shadow-[0_8px_20px_rgb(79,70,229,0.1)] hover:border-indigo-200 transition-all group">
                     <div class="w-14 h-14 flex-shrink-0 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mr-5 group-hover:scale-110 group-hover:rotate-3 transition-transform">
                         <i class="fas fa-file-pdf"></i>
                     </div>
@@ -196,7 +212,7 @@
                     <i class="fas fa-chevron-right ml-auto text-slate-300 group-hover:text-indigo-600 transition-colors"></i>
                 </a>
                 
-                <a href="../pyq.html" class="flex items-center p-5 bg-white border-2 border-slate-100 rounded-[1.5rem] shadow-sm hover:shadow-[0_8px_20px_rgb(16,185,129,0.1)] hover:border-emerald-200 transition-all group">
+                <a href="../pyq.html" class="flex items-center p-5 bg-white/80 backdrop-blur-sm border-2 border-slate-100 rounded-[1.5rem] shadow-sm hover:shadow-[0_8px_20px_rgb(16,185,129,0.1)] hover:border-emerald-200 transition-all group">
                     <div class="w-14 h-14 flex-shrink-0 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mr-5 group-hover:scale-110 group-hover:-rotate-3 transition-transform">
                         <i class="fas fa-history"></i>
                     </div>
@@ -208,7 +224,7 @@
                 </a>
             </div>
 
-            <!-- University Rules Section with Text Intro -->
+            <!-- University Rules Section -->
             <div class="relative z-10 prose-custom mb-6">
                 <h2 class="text-2xl font-black text-slate-900 mb-4">Mastering the KTU System</h2>
                 <p>
@@ -216,9 +232,8 @@
                 </p>
             </div>
 
-            <!-- Rules Grid -->
             <div class="relative z-10 grid md:grid-cols-2 gap-4 mb-16">
-                <div class="bg-slate-50 border border-slate-100 rounded-[1.5rem] p-6 relative overflow-hidden group">
+                <div class="bg-slate-50/80 backdrop-blur-sm border border-slate-100 rounded-[1.5rem] p-6 relative overflow-hidden group">
                     <i class="fas fa-user-check absolute -right-4 -bottom-4 text-7xl text-slate-200/50 group-hover:text-indigo-100 transition-colors"></i>
                     <h3 class="font-black text-slate-800 text-lg mb-2 relative z-10">Attendance Rules</h3>
                     <p class="text-sm font-medium text-slate-500 mb-5 relative z-10">Learn the 75% rule, how medical leaves actually work, and the strict limits on condonation.</p>
@@ -227,7 +242,7 @@
                     </a>
                 </div>
                 
-                <div class="bg-slate-50 border border-slate-100 rounded-[1.5rem] p-6 relative overflow-hidden group">
+                <div class="bg-slate-50/80 backdrop-blur-sm border border-slate-100 rounded-[1.5rem] p-6 relative overflow-hidden group">
                     <i class="fas fa-chart-pie absolute -right-4 -bottom-4 text-7xl text-slate-200/50 group-hover:text-purple-100 transition-colors"></i>
                     <h3 class="font-black text-slate-800 text-lg mb-2 relative z-10">Grading System</h3>
                     <p class="text-sm font-medium text-slate-500 mb-5 relative z-10">How does a 40/100 become an 'F'? Understand the grading scale and CGPA percentage formulas.</p>
@@ -258,16 +273,67 @@
         </article>
     </main>
 
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center">
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center relative z-10">
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-black text-lg mb-1">Kerala Timetable</h3>
             <p class="text-slate-500 font-medium text-sm">Independent student platform for KTU updates & tools.</p>
         </div>
     </footer>
 
-    <script src="../components.js?v=17"></script>
+    <script src="../components.js?v=18"></script>
     <script>
         if(typeof loadNavigation === 'function') loadNavigation('none', '../', true);
+
+        // --- UNIFIED 3D PARALLAX ENGINE ---
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollBg1 = document.getElementById('scroll-bg-1');
+                    const scrollBg2 = document.getElementById('scroll-bg-2');
+                    
+                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.3}px)`;
+                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        function applyParallax(x, y) {
+            const mouseOrb1 = document.getElementById('mouse-orb-1');
+            const mouseOrb2 = document.getElementById('mouse-orb-2');
+            
+            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            applyParallax(x, y);
+        });
+
+        document.addEventListener('mouseleave', () => {
+            applyParallax(0, 0);
+        });
+
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', (e) => {
+                if(e.gamma === null || e.beta === null) return;
+                
+                let x = e.gamma / 40; 
+                let y = (e.beta - 45) / 40; 
+
+                x = Math.max(-1, Math.min(1, x));
+                y = Math.max(-1, Math.min(1, y));
+
+                applyParallax(x, y);
+            }, true);
+        }
     </script>
 </body>
 </html>
