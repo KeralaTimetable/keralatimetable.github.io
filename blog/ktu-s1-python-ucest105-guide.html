@@ -29,8 +29,39 @@
     
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-        .bg-mesh {
-            background-color: #f8fafc;
+        .bg-mesh { background-color: #f8fafc; }
+        
+        /* Authentic Glassmorphism (Imported from Ambassador Page) */
+        .real-glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        /* Dark Variant for the Action Plan Section */
+        .dark-glass {
+            background: rgba(79, 70, 229, 0.85); /* Indigo 600 base */
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        .inner-glass:hover {
+            background: rgba(255, 255, 255, 0.85);
+            transform: translateY(-2px);
         }
         
         /* Orb Animations */
@@ -70,17 +101,18 @@
             <span class="text-indigo-600 border-b border-indigo-200 pb-0.5">S1 Guide</span>
         </nav>
 
-        <article class="bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white p-6 md:p-12 mb-8 relative overflow-hidden">
+        <!-- Applied .real-glass to the main article wrapper -->
+        <article class="real-glass rounded-[2.5rem] p-6 md:p-12 mb-8 relative overflow-hidden">
             
             <!-- Header Section -->
-            <header class="relative z-10 mb-10 border-b border-slate-100 pb-10">
+            <header class="relative z-10 mb-10 border-b border-slate-200/60 pb-10">
                 <div class="flex flex-wrap items-center gap-2 mb-6">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-900 text-white text-[10px] font-black rounded-lg uppercase tracking-widest shadow-sm">
                         <i class="fas fa-fingerprint text-indigo-400"></i> UCEST105
                     </span>
                     
                     <!-- MALAYALAM TRANSLATION BUTTON -->
-                    <button onclick="window.open('https://translate.google.com/translate?sl=en&tl=ml&u=' + encodeURIComponent(window.location.href), '_blank')" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 text-[10px] font-black rounded-lg uppercase tracking-widest border border-blue-200 shadow-sm transition-colors cursor-pointer group">
+                    <button onclick="window.open('https://translate.google.com/translate?sl=en&tl=ml&u=' + encodeURIComponent(window.location.href), '_blank')" class="inline-flex items-center gap-1.5 px-3 py-1 inner-glass hover:bg-white text-blue-700 text-[10px] font-black rounded-lg uppercase tracking-widest cursor-pointer group">
                         <i class="fas fa-language text-blue-500 text-sm group-hover:scale-110 transition-transform"></i> Translate to മലയാളം
                     </button>
 
@@ -112,9 +144,9 @@
                     A significant part of the difficulty stems from the diverse backgrounds of incoming students. If you took computer science in higher secondary, you might feel a step ahead. But if you come from a pure biology background, writing lines of code can feel like reading a foreign language. The university exams exploit this gap perfectly.
                 </p>
 
-                <!-- Visual Grid injected into narrative -->
+                <!-- Visual Grid injected with .inner-glass -->
                 <div class="grid md:grid-cols-3 gap-5 my-8">
-                    <div class="bg-white/60 border border-slate-100 rounded-3xl p-6 shadow-sm hover:-translate-y-1 transition-transform">
+                    <div class="inner-glass rounded-3xl p-6">
                         <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm text-amber-500 mb-4 border border-slate-100">
                             <i class="fas fa-hourglass-half"></i>
                         </div>
@@ -122,7 +154,7 @@
                         <p class="text-xs font-medium text-slate-500 leading-relaxed">The S1 calendar is compressed. You have less than 90 days to master a new language.</p>
                     </div>
                     
-                    <div class="bg-white/60 border border-slate-100 rounded-3xl p-6 shadow-sm hover:-translate-y-1 transition-transform">
+                    <div class="inner-glass rounded-3xl p-6">
                         <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm text-rose-500 mb-4 border border-slate-100">
                             <i class="fas fa-brain"></i>
                         </div>
@@ -130,7 +162,7 @@
                         <p class="text-xs font-medium text-slate-500 leading-relaxed">You cannot memorize code. The exams test your ability to build complex algorithms.</p>
                     </div>
 
-                    <div class="bg-white/60 border border-slate-100 rounded-3xl p-6 shadow-sm hover:-translate-y-1 transition-transform">
+                    <div class="inner-glass rounded-3xl p-6">
                         <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm text-indigo-500 mb-4 border border-slate-100">
                             <i class="fas fa-laptop-code"></i>
                         </div>
@@ -144,9 +176,9 @@
                 </p>
             </div>
 
-            <!-- Visual Callout (Pro Tip) -->
-            <div class="relative z-10 mb-14 bg-gradient-to-r from-emerald-50/80 to-teal-50/80 backdrop-blur-md border border-emerald-100 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6 shadow-sm">
-                <div class="w-16 h-16 shrink-0 bg-white rounded-full flex items-center justify-center text-emerald-500 text-2xl shadow-[0_4px_20px_rgba(16,185,129,0.15)]">
+            <!-- Visual Callout (Pro Tip) with .inner-glass and slight emerald tint -->
+            <div class="relative z-10 mb-14 inner-glass rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6" style="background: rgba(236, 253, 245, 0.6);">
+                <div class="w-16 h-16 shrink-0 bg-white rounded-full flex items-center justify-center text-emerald-500 text-2xl shadow-[0_4px_20px_rgba(16,185,129,0.15)] border border-emerald-100">
                     <i class="fas fa-lightbulb"></i>
                 </div>
                 <div>
@@ -157,8 +189,8 @@
                 </div>
             </div>
 
-            <!-- The Action Plan Section -->
-            <div class="relative z-10 mb-14 bg-indigo-600/95 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 shadow-xl text-white overflow-hidden">
+            <!-- The Action Plan Section using custom .dark-glass -->
+            <div class="relative z-10 mb-14 dark-glass rounded-[2.5rem] p-8 md:p-10 text-white overflow-hidden">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -mr-20 -mt-20"></div>
                 
                 <h2 class="text-3xl font-black tracking-tight mb-4">The 3-Step Survival Plan</h2>
@@ -199,10 +231,10 @@
                 </p>
             </div>
 
-            <!-- Resource Buttons -->
+            <!-- Resource Buttons with .inner-glass -->
             <div class="relative z-10 grid sm:grid-cols-2 gap-4 mb-16">
-                <a href="../KTU/CSE/S1/notes/index.html" class="flex items-center p-5 bg-white/80 backdrop-blur-sm border-2 border-slate-100 rounded-[1.5rem] shadow-sm hover:shadow-[0_8px_20px_rgb(79,70,229,0.1)] hover:border-indigo-200 transition-all group">
-                    <div class="w-14 h-14 flex-shrink-0 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mr-5 group-hover:scale-110 group-hover:rotate-3 transition-transform">
+                <a href="../KTU/CSE/S1/notes/index.html" class="flex items-center p-5 inner-glass rounded-[1.5rem] group">
+                    <div class="w-14 h-14 flex-shrink-0 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mr-5 group-hover:scale-110 group-hover:rotate-3 transition-transform border border-indigo-100">
                         <i class="fas fa-file-pdf"></i>
                     </div>
                     <div>
@@ -212,8 +244,8 @@
                     <i class="fas fa-chevron-right ml-auto text-slate-300 group-hover:text-indigo-600 transition-colors"></i>
                 </a>
                 
-                <a href="../pyq.html" class="flex items-center p-5 bg-white/80 backdrop-blur-sm border-2 border-slate-100 rounded-[1.5rem] shadow-sm hover:shadow-[0_8px_20px_rgb(16,185,129,0.1)] hover:border-emerald-200 transition-all group">
-                    <div class="w-14 h-14 flex-shrink-0 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mr-5 group-hover:scale-110 group-hover:-rotate-3 transition-transform">
+                <a href="../pyq.html" class="flex items-center p-5 inner-glass rounded-[1.5rem] group">
+                    <div class="w-14 h-14 flex-shrink-0 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mr-5 group-hover:scale-110 group-hover:-rotate-3 transition-transform border border-emerald-100">
                         <i class="fas fa-history"></i>
                     </div>
                     <div>
@@ -233,7 +265,7 @@
             </div>
 
             <div class="relative z-10 grid md:grid-cols-2 gap-4 mb-16">
-                <div class="bg-slate-50/80 backdrop-blur-sm border border-slate-100 rounded-[1.5rem] p-6 relative overflow-hidden group">
+                <div class="inner-glass rounded-[1.5rem] p-6 relative overflow-hidden group">
                     <i class="fas fa-user-check absolute -right-4 -bottom-4 text-7xl text-slate-200/50 group-hover:text-indigo-100 transition-colors"></i>
                     <h3 class="font-black text-slate-800 text-lg mb-2 relative z-10">Attendance Rules</h3>
                     <p class="text-sm font-medium text-slate-500 mb-5 relative z-10">Learn the 75% rule, how medical leaves actually work, and the strict limits on condonation.</p>
@@ -242,7 +274,7 @@
                     </a>
                 </div>
                 
-                <div class="bg-slate-50/80 backdrop-blur-sm border border-slate-100 rounded-[1.5rem] p-6 relative overflow-hidden group">
+                <div class="inner-glass rounded-[1.5rem] p-6 relative overflow-hidden group">
                     <i class="fas fa-chart-pie absolute -right-4 -bottom-4 text-7xl text-slate-200/50 group-hover:text-purple-100 transition-colors"></i>
                     <h3 class="font-black text-slate-800 text-lg mb-2 relative z-10">Grading System</h3>
                     <p class="text-sm font-medium text-slate-500 mb-5 relative z-10">How does a 40/100 become an 'F'? Understand the grading scale and CGPA percentage formulas.</p>
@@ -253,7 +285,7 @@
             </div>
 
             <!-- Join Community Section -->
-            <div class="relative z-10 mt-12 pt-12 border-t border-slate-100 text-center">
+            <div class="relative z-10 mt-12 pt-12 border-t border-slate-200/60 text-center">
                 <div class="inline-flex items-center justify-center w-16 h-16 bg-[#25D366]/10 text-[#25D366] rounded-full mb-5 text-3xl shadow-sm">
                     <i class="fab fa-whatsapp"></i>
                 </div>
@@ -261,10 +293,10 @@
                 <p class="text-slate-500 text-lg font-medium max-w-lg mx-auto mb-8">Join our community of KTU students for instant exam updates, study materials, and late-night doubt solving.</p>
                 
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-4 px-8 rounded-2xl shadow-[0_8px_20px_rgba(37,211,102,0.25)] transform transition hover:-translate-y-1 text-lg">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-4 px-8 rounded-2xl shadow-[0_8px_20px_rgba(37,211,102,0.25)] transform transition hover:-translate-y-1 text-lg border border-[#25D366]">
                         <i class="fas fa-bell"></i> Official Channel
                     </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-700 font-bold py-4 px-8 rounded-2xl shadow-sm transform transition hover:-translate-y-1 hover:border-[#25D366] hover:text-[#25D366] text-lg">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 inner-glass text-slate-700 font-bold py-4 px-8 rounded-2xl transform transition hover:-translate-y-1 hover:border-[#25D366] hover:text-[#25D366] text-lg">
                         <i class="fas fa-users"></i> Discussion Group
                     </a>
                 </div>
