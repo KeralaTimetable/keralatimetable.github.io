@@ -33,11 +33,7 @@
             background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
                               radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%);
         }
-        /* Sleek scrollbar for code blocks or horizontal overflow */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .prose-custom p { @apply text-slate-600 leading-relaxed mb-6 text-lg; }
     </style>
 </head>
 
@@ -61,7 +57,7 @@
             <div class="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full blur-[80px] opacity-70 pointer-events-none"></div>
 
             <!-- Header Section -->
-            <header class="relative z-10 mb-12 border-b border-slate-100 pb-10">
+            <header class="relative z-10 mb-10 border-b border-slate-100 pb-10">
                 <div class="flex flex-wrap gap-2 mb-6">
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-900 text-white text-[10px] font-black rounded-lg uppercase tracking-widest shadow-sm">
                         <i class="fas fa-fingerprint text-indigo-400"></i> UCEST105
@@ -75,148 +71,179 @@
                     The Ultimate Guide to Passing <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">S1 Python</span>
                 </h1>
                 
-                <p class="text-lg md:text-xl font-medium text-slate-500 leading-relaxed max-w-2xl">
+                <p class="text-xl font-medium text-slate-500 leading-relaxed max-w-2xl">
                     Algorithmic Thinking with Python is the first major hurdle of your B.Tech journey. Here is exactly how to strategize, practice, and clear the exam without a supply.
                 </p>
             </header>
 
-            <!-- Visual Section: Why is it hard? -->
-            <div class="relative z-10 mb-14">
-                <h2 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-3">
-                    <span class="w-8 h-px bg-slate-200"></span> Why is UCEST105 so difficult?
-                </h2>
+            <!-- Narrative Content + Visual Grid -->
+            <div class="relative z-10 prose-custom mb-12">
+                <p>
+                    Stepping onto an engineering campus for the first time is an unforgettable experience. Your mind is likely buzzing with the excitement of Fresher's Day, exploring the massive campus, and making new friends. But amidst all the celebrations, the academic reality of KTU hits hard and fast. 
+                </p>
+                <p>
+                    For many first-semester B.Tech students, <strong>Algorithmic Thinking with Python (UCEST105)</strong> quickly becomes the most intimidating subject on the syllabus. Over the past few years, it has consistently triggered a massive wave of supplementary exams. And because it is a common course for everyone—whether you are in Computer Science, Civil, or Mechanical—you cannot escape it.
+                </p>
                 
-                <div class="grid md:grid-cols-3 gap-5">
+                <h2 class="text-2xl font-black text-slate-900 mt-12 mb-6">Why is the university exam so unpredictable?</h2>
+                <p>
+                    A significant part of the difficulty stems from the diverse backgrounds of incoming students. If you took computer science in higher secondary, you might feel a step ahead. But if you come from a pure biology background, writing lines of code can feel like reading a foreign language. The university exams exploit this gap perfectly.
+                </p>
+
+                <!-- Visual Grid injected into narrative -->
+                <div class="grid md:grid-cols-3 gap-5 my-8">
                     <div class="bg-slate-50 border border-slate-100 rounded-3xl p-6 hover:-translate-y-1 transition-transform">
-                        <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm text-amber-500 mb-4 text-xl border border-slate-100">
+                        <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm text-amber-500 mb-4 border border-slate-100">
                             <i class="fas fa-hourglass-half"></i>
                         </div>
-                        <h3 class="font-black text-slate-800 mb-2">3-Month Rush</h3>
-                        <p class="text-xs font-medium text-slate-500 leading-relaxed">The S1 calendar is highly compressed. You have less than 90 days to master a completely new language from scratch.</p>
+                        <h3 class="font-black text-slate-800 text-sm mb-2">3-Month Rush</h3>
+                        <p class="text-xs font-medium text-slate-500 leading-relaxed">The S1 calendar is compressed. You have less than 90 days to master a new language.</p>
                     </div>
                     
                     <div class="bg-slate-50 border border-slate-100 rounded-3xl p-6 hover:-translate-y-1 transition-transform">
-                        <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm text-rose-500 mb-4 text-xl border border-slate-100">
+                        <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm text-rose-500 mb-4 border border-slate-100">
                             <i class="fas fa-brain"></i>
                         </div>
-                        <h3 class="font-black text-slate-800 mb-2">Pure Logic</h3>
-                        <p class="text-xs font-medium text-slate-500 leading-relaxed">You cannot memorize your way through this. The exams test your ability to build algorithmic logic, not just textbook theory.</p>
+                        <h3 class="font-black text-slate-800 text-sm mb-2">Pure Logic</h3>
+                        <p class="text-xs font-medium text-slate-500 leading-relaxed">You cannot memorize code. The exams test your ability to build complex algorithms.</p>
                     </div>
 
                     <div class="bg-slate-50 border border-slate-100 rounded-3xl p-6 hover:-translate-y-1 transition-transform">
-                        <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm text-indigo-500 mb-4 text-xl border border-slate-100">
+                        <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm text-indigo-500 mb-4 border border-slate-100">
                             <i class="fas fa-laptop-code"></i>
                         </div>
-                        <h3 class="font-black text-slate-800 mb-2">Application Heavy</h3>
-                        <p class="text-xs font-medium text-slate-500 leading-relaxed">University question papers push well beyond basic syntax, throwing unpredictable application-level problems at you.</p>
+                        <h3 class="font-black text-slate-800 text-sm mb-2">Application Heavy</h3>
+                        <p class="text-xs font-medium text-slate-500 leading-relaxed">Questions push well beyond basic syntax into difficult, application-level problems.</p>
+                    </div>
+                </div>
+
+                <p>
+                    The examination papers rarely cater to absolute beginners. Instead of asking you to define what a "loop" is, they will ask you to write a nested loop to calculate a mathematical series or manipulate a complex dataset. Developing this analytical capacity in just three months is the real challenge.
+                </p>
+            </div>
+
+            <!-- Visual Callout (Pro Tip) -->
+            <div class="relative z-10 mb-14 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6 shadow-sm">
+                <div class="w-16 h-16 shrink-0 bg-white rounded-full flex items-center justify-center text-emerald-500 text-2xl shadow-[0_4px_20px_rgba(16,185,129,0.15)]">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div>
+                    <h4 class="text-emerald-800 font-black text-lg mb-1">Pro Tip: Don't just read code!</h4>
+                    <p class="text-emerald-700 font-medium text-sm leading-relaxed">
+                        Reading a textbook will give you a false sense of security. You will look at a Python script and think, <em>"Yeah, that makes sense."</em> But the moment you face a blank screen in an exam, your mind will go blank. You must physically type out every program to build muscle memory.
+                    </p>
+                </div>
+            </div>
+
+            <!-- The Action Plan Section -->
+            <div class="relative z-10 mb-14 bg-indigo-600 rounded-[2.5rem] p-8 md:p-10 shadow-xl text-white overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                
+                <h2 class="text-3xl font-black tracking-tight mb-4">The 3-Step Survival Plan</h2>
+                <p class="text-indigo-100 font-medium mb-8 max-w-xl">Follow this blueprint from the first week of classes to ensure you don't fall behind when the syllabus accelerates in Module 3.</p>
+                
+                <div class="space-y-4">
+                    <div class="flex items-start gap-5 bg-white/10 border border-white/20 rounded-2xl p-5 backdrop-blur-sm">
+                        <div class="w-10 h-10 rounded-full bg-white text-indigo-600 font-black flex items-center justify-center shrink-0 shadow-sm text-lg">1</div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Master the Basics First</h4>
+                            <p class="text-indigo-100 text-sm font-medium leading-relaxed">Use free interactive platforms like W3Schools or YouTube tutorials to get comfortable with basic syntax, if-statements, and lists before trying to tackle the heavy KTU syllabus.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-5 bg-white/10 border border-white/20 rounded-2xl p-5 backdrop-blur-sm">
+                        <div class="w-10 h-10 rounded-full bg-white text-indigo-600 font-black flex items-center justify-center shrink-0 shadow-sm text-lg">2</div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Study the Pattern</h4>
+                            <p class="text-indigo-100 text-sm font-medium leading-relaxed">Don't study blindly. Download past papers early on to understand exactly how KTU phrases their logic questions and 14-mark essays. It will change how you view your textbook.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-5 bg-white/10 border border-white/20 rounded-2xl p-5 backdrop-blur-sm">
+                        <div class="w-10 h-10 rounded-full bg-white text-indigo-600 font-black flex items-center justify-center shrink-0 shadow-sm text-lg">3</div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-1">Leverage Quality Resources</h4>
+                            <p class="text-indigo-100 text-sm font-medium leading-relaxed">Stop wasting hours searching WhatsApp groups for scattered PDFs. Build your foundation using structured, module-wise notes that focus on previous exam questions.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Visual Section: The Action Plan -->
-            <div class="relative z-10 mb-14 bg-indigo-600 rounded-[2rem] p-8 md:p-10 shadow-lg text-white overflow-hidden">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -mr-20 -mt-20"></div>
-                
-                <h2 class="text-2xl font-black tracking-tight mb-8">The 3-Step Survival Plan</h2>
-                
-                <div class="space-y-4">
-                    <div class="flex items-start gap-4 bg-white/10 border border-white/20 rounded-2xl p-4 backdrop-blur-sm">
-                        <div class="w-8 h-8 rounded-full bg-white text-indigo-600 font-black flex items-center justify-center shrink-0">1</div>
-                        <div>
-                            <h4 class="font-bold text-lg mb-1">Master the Basics First</h4>
-                            <p class="text-indigo-100 text-sm font-medium">Use interactive platforms like W3Schools to get comfortable with basic syntax, loops, and lists before looking at KTU syllabus.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start gap-4 bg-white/10 border border-white/20 rounded-2xl p-4 backdrop-blur-sm">
-                        <div class="w-8 h-8 rounded-full bg-white text-indigo-600 font-black flex items-center justify-center shrink-0">2</div>
-                        <div>
-                            <h4 class="font-bold text-lg mb-1">Study the Pattern</h4>
-                            <p class="text-indigo-100 text-sm font-medium">Don't study blindly. Download past papers to understand exactly how KTU phrases their logic questions and 14-mark essays.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4 bg-white/10 border border-white/20 rounded-2xl p-4 backdrop-blur-sm">
-                        <div class="w-8 h-8 rounded-full bg-white text-indigo-600 font-black flex items-center justify-center shrink-0">3</div>
-                        <div>
-                            <h4 class="font-bold text-lg mb-1">Code, Don't Read</h4>
-                            <p class="text-indigo-100 text-sm font-medium">Reading code will give you a false sense of security. Open an IDE and physically type out every single program.</p>
-                        </div>
-                    </div>
-                </div>
+            <!-- Narrative to Resource Transition -->
+            <div class="relative z-10 prose-custom mb-8">
+                <h2 class="text-2xl font-black text-slate-900 mb-4">Your Essential S1 Toolkit</h2>
+                <p>
+                    To execute this plan, you need the right materials at your fingertips. We have compiled a comprehensive set of resources tailored specifically for UCEST105. Use these links below to access our free, structured study materials and the complete archive of past university question papers.
+                </p>
             </div>
 
             <!-- Resource Buttons -->
-            <div class="relative z-10 mb-16">
-                <h2 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-3">
-                    <span class="w-8 h-px bg-slate-200"></span> Your Essential Toolkit
-                </h2>
+            <div class="relative z-10 grid sm:grid-cols-2 gap-4 mb-16">
+                <a href="../KTU/CSE/S1/notes/index.html" class="flex items-center p-5 bg-white border-2 border-slate-100 rounded-[1.5rem] shadow-sm hover:shadow-[0_8px_20px_rgb(79,70,229,0.1)] hover:border-indigo-200 transition-all group">
+                    <div class="w-14 h-14 flex-shrink-0 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mr-5 group-hover:scale-110 group-hover:rotate-3 transition-transform">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-black text-slate-800 text-lg group-hover:text-indigo-600 transition-colors">Free Python Notes</h4>
+                        <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-wider">Module 1 to 5</p>
+                    </div>
+                    <i class="fas fa-chevron-right ml-auto text-slate-300 group-hover:text-indigo-600 transition-colors"></i>
+                </a>
                 
-                <div class="grid sm:grid-cols-2 gap-4">
-                    <a href="../KTU/CSE/S1/notes/index.html" class="flex items-center p-5 bg-white border-2 border-slate-100 rounded-[1.5rem] shadow-sm hover:shadow-[0_8px_20px_rgb(79,70,229,0.1)] hover:border-indigo-200 transition-all group">
-                        <div class="w-14 h-14 flex-shrink-0 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mr-5 group-hover:scale-110 group-hover:rotate-3 transition-transform">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-black text-slate-800 text-lg group-hover:text-indigo-600 transition-colors">Free Python Notes</h4>
-                            <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-wider">Module 1 to 5</p>
-                        </div>
-                        <i class="fas fa-chevron-right ml-auto text-slate-300 group-hover:text-indigo-600 transition-colors"></i>
-                    </a>
-                    
-                    <a href="../pyq.html" class="flex items-center p-5 bg-white border-2 border-slate-100 rounded-[1.5rem] shadow-sm hover:shadow-[0_8px_20px_rgb(16,185,129,0.1)] hover:border-emerald-200 transition-all group">
-                        <div class="w-14 h-14 flex-shrink-0 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mr-5 group-hover:scale-110 group-hover:-rotate-3 transition-transform">
-                            <i class="fas fa-history"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-black text-slate-800 text-lg group-hover:text-emerald-600 transition-colors">KTU PYQ Portal</h4>
-                            <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-wider">Search UCEST105</p>
-                        </div>
-                        <i class="fas fa-chevron-right ml-auto text-slate-300 group-hover:text-emerald-600 transition-colors"></i>
-                    </a>
-                </div>
+                <a href="../pyq.html" class="flex items-center p-5 bg-white border-2 border-slate-100 rounded-[1.5rem] shadow-sm hover:shadow-[0_8px_20px_rgb(16,185,129,0.1)] hover:border-emerald-200 transition-all group">
+                    <div class="w-14 h-14 flex-shrink-0 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mr-5 group-hover:scale-110 group-hover:-rotate-3 transition-transform">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-black text-slate-800 text-lg group-hover:text-emerald-600 transition-colors">KTU PYQ Portal</h4>
+                        <p class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-wider">Search UCEST105</p>
+                    </div>
+                    <i class="fas fa-chevron-right ml-auto text-slate-300 group-hover:text-emerald-600 transition-colors"></i>
+                </a>
             </div>
 
-            <!-- University Rules (Visual Grid) -->
-            <div class="relative z-10 mb-12">
-                <h2 class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-3">
-                    <span class="w-8 h-px bg-slate-200"></span> KTU Survival Guides
-                </h2>
+            <!-- University Rules Section with Text Intro -->
+            <div class="relative z-10 prose-custom mb-6">
+                <h2 class="text-2xl font-black text-slate-900 mb-4">Mastering the KTU System</h2>
+                <p>
+                    Failing Python is bad, but being barred from writing the exam altogether is worse. Beyond mastering your subjects, navigating KTU successfully requires a clear understanding of university regulations. Don't wait until the week before exams to figure out how attendance shortages or CGPA calculations work. 
+                </p>
+            </div>
+
+            <!-- Rules Grid -->
+            <div class="relative z-10 grid md:grid-cols-2 gap-4 mb-16">
+                <div class="bg-slate-50 border border-slate-100 rounded-[1.5rem] p-6 relative overflow-hidden group">
+                    <i class="fas fa-user-check absolute -right-4 -bottom-4 text-7xl text-slate-200/50 group-hover:text-indigo-100 transition-colors"></i>
+                    <h3 class="font-black text-slate-800 text-lg mb-2 relative z-10">Attendance Rules</h3>
+                    <p class="text-sm font-medium text-slate-500 mb-5 relative z-10">Learn the 75% rule, how medical leaves actually work, and the strict limits on condonation.</p>
+                    <a href="../attendance-rules.html" class="inline-flex items-center gap-2 text-xs font-black text-indigo-600 uppercase tracking-widest hover:text-indigo-800 relative z-10">
+                        Read Guide <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
                 
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="bg-slate-50 border border-slate-100 rounded-[1.5rem] p-6 relative overflow-hidden group">
-                        <i class="fas fa-user-check absolute -right-4 -bottom-4 text-7xl text-slate-200/50 group-hover:text-indigo-100 transition-colors"></i>
-                        <h3 class="font-black text-slate-800 text-lg mb-2 relative z-10">Attendance Rules</h3>
-                        <p class="text-sm font-medium text-slate-500 mb-5 relative z-10">Don't get blocked from writing exams. Learn the 75% rule, medical leaves, and condonation limits.</p>
-                        <a href="../attendance-rules.html" class="inline-flex items-center gap-2 text-xs font-black text-indigo-600 uppercase tracking-widest hover:text-indigo-800 relative z-10">
-                            Read Guide <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                    
-                    <div class="bg-slate-50 border border-slate-100 rounded-[1.5rem] p-6 relative overflow-hidden group">
-                        <i class="fas fa-chart-pie absolute -right-4 -bottom-4 text-7xl text-slate-200/50 group-hover:text-purple-100 transition-colors"></i>
-                        <h3 class="font-black text-slate-800 text-lg mb-2 relative z-10">Grading System</h3>
-                        <p class="text-sm font-medium text-slate-500 mb-5 relative z-10">How does a 40/100 become an 'F'? Understand the S, A+, B scale and how to calculate your CGPA percentage.</p>
-                        <a href="grading-system.html" class="inline-flex items-center gap-2 text-xs font-black text-purple-600 uppercase tracking-widest hover:text-purple-800 relative z-10">
-                            Read Guide <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
+                <div class="bg-slate-50 border border-slate-100 rounded-[1.5rem] p-6 relative overflow-hidden group">
+                    <i class="fas fa-chart-pie absolute -right-4 -bottom-4 text-7xl text-slate-200/50 group-hover:text-purple-100 transition-colors"></i>
+                    <h3 class="font-black text-slate-800 text-lg mb-2 relative z-10">Grading System</h3>
+                    <p class="text-sm font-medium text-slate-500 mb-5 relative z-10">How does a 40/100 become an 'F'? Understand the grading scale and CGPA percentage formulas.</p>
+                    <a href="grading-system.html" class="inline-flex items-center gap-2 text-xs font-black text-purple-600 uppercase tracking-widest hover:text-purple-800 relative z-10">
+                        Read Guide <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
 
             <!-- Join Community Section -->
-            <div class="relative z-10 mt-12 pt-10 border-t border-slate-100 text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-[#25D366]/10 text-[#25D366] rounded-full mb-4 text-3xl">
+            <div class="relative z-10 mt-12 pt-12 border-t border-slate-100 text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-[#25D366]/10 text-[#25D366] rounded-full mb-5 text-3xl shadow-sm">
                     <i class="fab fa-whatsapp"></i>
                 </div>
-                <h2 class="text-2xl font-black text-slate-800 mb-3 tracking-tight">Don't navigate S1 alone.</h2>
-                <p class="text-slate-500 font-medium max-w-md mx-auto mb-8">Join our community of KTU students for instant exam updates, study materials, and doubt solving.</p>
+                <h2 class="text-3xl font-black text-slate-900 mb-4 tracking-tight">Don't navigate S1 alone.</h2>
+                <p class="text-slate-500 text-lg font-medium max-w-lg mx-auto mb-8">Join our community of KTU students for instant exam updates, study materials, and late-night doubt solving.</p>
                 
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3.5 px-8 rounded-2xl shadow-[0_8px_20px_rgba(37,211,102,0.25)] transform transition hover:-translate-y-1">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-4 px-8 rounded-2xl shadow-[0_8px_20px_rgba(37,211,102,0.25)] transform transition hover:-translate-y-1 text-lg">
                         <i class="fas fa-bell"></i> Official Channel
                     </a>
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-700 font-bold py-3.5 px-8 rounded-2xl shadow-sm transform transition hover:-translate-y-1 hover:border-[#25D366] hover:text-[#25D366]">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-700 font-bold py-4 px-8 rounded-2xl shadow-sm transform transition hover:-translate-y-1 hover:border-[#25D366] hover:text-[#25D366] text-lg">
                         <i class="fas fa-users"></i> Discussion Group
                     </a>
                 </div>
@@ -232,7 +259,7 @@
         </div>
     </footer>
 
-    <script src="../components.js?v=16"></script>
+    <script src="../components.js?v=17"></script>
     <script>
         if(typeof loadNavigation === 'function') loadNavigation('none', '../', true);
     </script>
