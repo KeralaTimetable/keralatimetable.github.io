@@ -11,8 +11,9 @@
     <link rel="canonical" href="https://keralatimetable.in/compiler.html" />
     <link rel="icon" href="https://keralatimetable.in/favicon.png" type="image/png">
 
-    <!-- Pyodide WASM Engine -->
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
+    <!-- FAST ENGINE: Skulpt (Replaces heavy Pyodide) -->
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
 
     <script src="/tailwind-local.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -99,7 +100,7 @@
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50 text-indigo-600 border border-indigo-100 text-[10px] font-black rounded-lg uppercase tracking-widest shadow-sm mb-2">
-                    <i class="fas fa-terminal"></i> UCEST105 Lab Companion
+                    <i class="fas fa-bolt"></i> Lightning Fast Engine
                 </span>
                 <h1 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
                     Python <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Online Compiler</span>
@@ -109,11 +110,11 @@
             <!-- Engine Loading Status Badge -->
             <div id="status-badge" class="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 border border-amber-200 text-amber-700 text-xs font-bold rounded-2xl shadow-sm self-start md:self-auto">
                 <i class="fas fa-circle-notch fa-spin text-amber-500"></i>
-                <span>Initializing Python Engine...</span>
+                <span>Initializing Engine...</span>
             </div>
         </div>
 
-        <!-- Mobile Tab Toggle (Hidden on Desktop lg:hidden) -->
+        <!-- Mobile Tab Toggle -->
         <div class="flex lg:hidden bg-white/50 backdrop-blur-md p-1.5 rounded-2xl mb-6 shadow-sm border border-slate-200">
             <button onclick="switchTab('editor')" id="tab-editor" class="flex-1 py-2.5 text-sm font-bold rounded-xl bg-indigo-600 text-white shadow-sm transition-all flex items-center justify-center gap-2">
                 <i class="fas fa-code"></i> main.py
@@ -123,23 +124,19 @@
             </button>
         </div>
 
-        <!-- Editor & Terminal Layout (Half-by-Half on Desktop) -->
-        <!-- Note: lg:grid-cols-2 creates the perfect 50/50 split -->
+        <!-- Editor & Terminal Layout -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
             
             <!-- Code Editor Panel -->
-            <!-- Classes: Flex on mobile by default, ALWAYS flex on desktop (lg:flex) -->
             <div id="editor-panel" class="flex flex-col lg:flex w-full h-full">
                 <div class="real-glass rounded-[2rem] p-4 md:p-6 flex flex-col gap-4 h-full">
                     
-                    <!-- Toolbar Controls -->
                     <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-200/60">
                         <div class="flex items-center gap-2">
                             <i class="fas fa-code text-indigo-600"></i>
                             <span class="font-bold text-slate-800 text-sm">main.py</span>
                         </div>
 
-                        <!-- Preset Code Selector -->
                         <div class="flex items-center gap-2 w-full sm:w-auto">
                             <select id="preset-selector" onchange="loadPreset(this.value)" class="custom-select bg-white/80 border border-slate-200 text-slate-700 text-xs font-bold rounded-xl px-3 py-2 pr-8 w-full sm:w-auto cursor-pointer focus:outline-none">
                                 <option value="hello">Sample: Hello World</option>
@@ -150,10 +147,8 @@
                         </div>
                     </div>
 
-                    <!-- Interactive Code Input -->
                     <textarea id="code-input" class="code-textarea w-full h-[400px] lg:h-[500px] rounded-2xl p-4 text-sm text-slate-800 flex-grow" spellcheck="false" placeholder="# Type your Python code here..."></textarea>
 
-                    <!-- Action Buttons -->
                     <div class="flex items-center justify-between gap-3 pt-2">
                         <button onclick="clearEditor()" class="px-4 py-3 bg-white/80 hover:bg-white text-slate-600 border border-slate-200 text-xs font-bold rounded-xl transition-all shadow-sm">
                             <i class="fas fa-trash-alt md:mr-1"></i> <span class="hidden md:inline">Clear</span>
@@ -168,11 +163,9 @@
             </div>
 
             <!-- Terminal Output Panel -->
-            <!-- Classes: Hidden on mobile by default, ALWAYS flex on desktop (lg:flex) -->
             <div id="output-panel" class="hidden flex-col lg:flex w-full h-full">
                 <div class="dark-terminal rounded-[2rem] p-4 md:p-6 flex flex-col h-full min-h-[400px] lg:min-h-[500px]">
                     
-                    <!-- Terminal Header -->
                     <div class="flex items-center justify-between pb-3 border-b border-slate-700/60 mb-4">
                         <div class="flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-rose-500"></div>
@@ -186,7 +179,6 @@
                         </button>
                     </div>
 
-                    <!-- Output Console Stream -->
                     <div id="terminal" class="terminal-output flex-grow text-sm text-emerald-400 overflow-y-auto max-h-[400px] lg:max-h-[550px]">
 <span class="text-slate-500">// Terminal output will appear here after clicking "Run Code"...</span>
                     </div>
@@ -216,37 +208,33 @@
             const tabOutput = document.getElementById('tab-output');
 
             if (tab === 'editor') {
-                // Show Editor, Hide Output
                 editorPanel.classList.remove('hidden');
                 editorPanel.classList.add('flex');
                 outputPanel.classList.remove('flex');
                 outputPanel.classList.add('hidden');
                 
-                // Update Button Styles
                 tabEditor.className = "flex-1 py-2.5 text-sm font-bold rounded-xl bg-indigo-600 text-white shadow-sm transition-all flex items-center justify-center gap-2";
                 tabOutput.className = "flex-1 py-2.5 text-sm font-bold rounded-xl text-slate-500 hover:text-slate-700 transition-all flex items-center justify-center gap-2";
             } else {
-                // Hide Editor, Show Output
                 editorPanel.classList.remove('flex');
                 editorPanel.classList.add('hidden');
                 outputPanel.classList.remove('hidden');
                 outputPanel.classList.add('flex');
                 
-                // Update Button Styles
                 tabOutput.className = "flex-1 py-2.5 text-sm font-bold rounded-xl bg-slate-800 text-white shadow-sm transition-all flex items-center justify-center gap-2";
                 tabEditor.className = "flex-1 py-2.5 text-sm font-bold rounded-xl text-slate-500 hover:text-slate-700 transition-all flex items-center justify-center gap-2";
             }
         }
 
-        // --- 2. PRESET CODE TEMPLATES ---
+        // --- 2. PRESET CODE TEMPLATES (Optimized for Skulpt) ---
         const presets = {
-            hello: `# KTU UCEST105 - Lab Example\nprint("Welcome to Kerala Timetable Python Compiler!")\n\nfor i in range(1, 6):\n    print(f"Iteration {i}: Python is working on WebAssembly!")`,
+            hello: `# KTU UCEST105 - Lab Example\nprint("Welcome to Kerala Timetable Python Compiler!")\n\nfor i in range(1, 6):\n    print("Iteration " + str(i) + ": Python is running lightning fast!")`,
             
-            quadratic: `# Roots of Quadratic Equation\nimport cmath\n\na = 1\nb = 5\nc = 6\n\nd = (b**2) - (4*a*c)\n\nroot1 = (-b - cmath.sqrt(d)) / (2*a)\nroot2 = (-b + cmath.sqrt(d)) / (2*a)\n\nprint(f"The roots of {a}x² + {b}x + {c} are:")\nprint(f"Root 1: {root1}")\nprint(f"Root 2: {root2}")`,
+            quadratic: `# Roots of Quadratic Equation\nimport cmath\n\na = 1\nb = 5\nc = 6\n\nd = (b**2) - (4*a*c)\n\nroot1 = (-b - cmath.sqrt(d)) / (2*a)\nroot2 = (-b + cmath.sqrt(d)) / (2*a)\n\nprint("The roots of {}x² + {}x + {} are:".format(a, b, c))\nprint("Root 1:", root1)\nprint("Root 2:", root2)`,
             
-            factorial: `# Recursive Factorial\ndef factorial(n):\n    if n == 1 or n == 0:\n        return 1\n    else:\n        return n * factorial(n - 1)\n\nnum = 5\nprint(f"Factorial of {num} is {factorial(num)}")`,
+            factorial: `# Recursive Factorial\ndef factorial(n):\n    if n == 1 or n == 0:\n        return 1\n    else:\n        return n * factorial(n - 1)\n\nnum = 5\nprint("Factorial of " + str(num) + " is " + str(factorial(num)))`,
             
-            input_demo: `# Interactive Input Demo\nname = input("Enter your name: ")\nbranch = input("Enter your branch (e.g. CSE): ")\n\nprint(f"\\nHello {name}! Best of luck with your {branch} studies.")`
+            input_demo: `# Interactive Input Demo\nname = input("Enter your name: ")\nbranch = input("Enter your branch (e.g. CSE): ")\n\nprint("\\nHello " + name + "! Best of luck with your " + branch + " studies.")`
         };
 
         document.getElementById('code-input').value = presets.hello;
@@ -265,7 +253,7 @@
             document.getElementById('terminal').innerHTML = '<span class="text-slate-500">// Terminal cleared.</span>\n';
         }
 
-        // Handle Tab key inside Textarea for proper indentation
+        // Handle Tab key inside Textarea
         document.getElementById('code-input').addEventListener('keydown', function(e) {
             if (e.key === 'Tab') {
                 e.preventDefault();
@@ -276,53 +264,15 @@
             }
         });
 
-        // --- 3. PYODIDE ENGINE SETUP ---
-        let pyodideInstance = null;
-
-        async function initPyodideEngine() {
-            const statusBadge = document.getElementById('status-badge');
-            const runBtn = document.getElementById('run-btn');
-
-            try {
-                pyodideInstance = await loadPyodide();
-                
-                pyodideInstance.setStdout({ batched: (str) => appendToTerminal(str, 'stdout') });
-                pyodideInstance.setStderr({ batched: (str) => appendToTerminal(str, 'stderr') });
-
-                // Override builtins.input with a JS prompt popup
-                await pyodideInstance.runPythonAsync(`
-import builtins
-import js
-
-def custom_input(prompt_text=""):
-    result = js.prompt(prompt_text)
-    if result is None:
-        raise KeyboardInterrupt("User cancelled input.")
-    print(f"{prompt_text}{result}")
-    return result
-
-builtins.input = custom_input
-                `);
-
-                statusBadge.className = "inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold rounded-2xl shadow-sm self-start md:self-auto";
-                statusBadge.innerHTML = '<i class="fas fa-check-circle text-emerald-500"></i><span>Python Engine Ready</span>';
-                runBtn.disabled = false;
-
-            } catch (error) {
-                console.error(error);
-                statusBadge.className = "inline-flex items-center gap-2 px-4 py-2 bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold rounded-2xl shadow-sm self-start md:self-auto";
-                statusBadge.innerHTML = '<i class="fas fa-exclamation-triangle text-rose-500"></i><span>Failed to Load Pyodide</span>';
-            }
-        }
-
+        // --- 3. SKULPT ENGINE LOGIC ---
         function appendToTerminal(str, type = 'stdout') {
             const terminal = document.getElementById('terminal');
-            const line = document.createElement('div');
+            const line = document.createElement('span');
             
             if (type === 'stderr') {
                 line.className = 'text-rose-400 font-semibold';
             } else if (type === 'info') {
-                line.className = 'text-indigo-300 italic';
+                line.className = 'text-indigo-300 italic block mt-2';
             } else {
                 line.className = 'text-emerald-400';
             }
@@ -332,34 +282,72 @@ builtins.input = custom_input
             terminal.scrollTop = terminal.scrollHeight;
         }
 
-        async function runPythonCode() {
-            if (!pyodideInstance) return;
+        // Initialize Engine State
+        window.addEventListener('DOMContentLoaded', () => {
+            const statusBadge = document.getElementById('status-badge');
+            
+            // Wait briefly to ensure Skulpt script tag has fully parsed
+            setTimeout(() => {
+                if (typeof Sk !== "undefined") {
+                    statusBadge.className = "inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold rounded-2xl shadow-sm self-start md:self-auto";
+                    statusBadge.innerHTML = '<i class="fas fa-bolt text-emerald-500"></i><span>Engine Ready</span>';
+                    document.getElementById('run-btn').disabled = false;
+                } else {
+                    statusBadge.className = "inline-flex items-center gap-2 px-4 py-2 bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold rounded-2xl shadow-sm self-start md:self-auto";
+                    statusBadge.innerHTML = '<i class="fas fa-exclamation-triangle text-rose-500"></i><span>Failed to load compiler</span>';
+                }
+            }, 500);
+        });
 
-            // Automatically switch to the output tab on mobile devices when run is clicked
+        function runPythonCode() {
             switchTab('output');
-
+            
             const code = document.getElementById('code-input').value;
             const terminal = document.getElementById('terminal');
             const runBtn = document.getElementById('run-btn');
 
             terminal.innerHTML = '';
-            appendToTerminal("Running script...\n", "info");
+            appendToTerminal("Running script...\n\n", "info");
 
             runBtn.disabled = true;
             runBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Running...';
 
-            try {
-                await pyodideInstance.runPythonAsync(code);
+            // Configure Skulpt Settings
+            Sk.configure({
+                output: function(text) { 
+                    appendToTerminal(text, 'stdout'); 
+                },
+                read: function(x) {
+                    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                        throw "File not found: '" + x + "'";
+                    return Sk.builtinFiles["files"][x];
+                },
+                // Handle python input() securely with Promises
+                inputfun: function(promptText) {
+                    return new Promise((resolve, reject) => {
+                        let userInput = window.prompt(promptText || "");
+                        if(userInput === null) {
+                            reject(new Error("User cancelled input"));
+                        } else {
+                            appendToTerminal(promptText + userInput + "\n", 'stdout');
+                            resolve(userInput);
+                        }
+                    });
+                }
+            });
+
+            // Execute the code asynchronously
+            Sk.misceval.asyncToPromise(() => 
+                Sk.importMainWithBody("<stdin>", false, code, true)
+            ).then(() => {
                 appendToTerminal("\n[Process finished successfully]", "info");
-            } catch (err) {
-                appendToTerminal(`\n${err.message}`, "stderr");
-            } finally {
+            }).catch((err) => {
+                appendToTerminal(`\n${err.toString()}`, "stderr");
+            }).finally(() => {
                 runBtn.disabled = false;
                 runBtn.innerHTML = '<i class="fas fa-play"></i><span>Run Code</span>';
-            }
+            });
         }
-
-        window.addEventListener('DOMContentLoaded', initPyodideEngine);
 
         // --- 4. PARALLAX EFFECTS ---
         let lastScrollY = window.scrollY;
