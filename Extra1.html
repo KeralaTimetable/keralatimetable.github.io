@@ -93,10 +93,10 @@
     </div>
 
     <!-- Main Content Container -->
-    <main class="flex-grow max-w-7xl mx-auto px-4 py-8 w-full relative z-10">
+    <main class="flex-grow max-w-[1400px] mx-auto px-4 py-8 w-full relative z-10">
         
         <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50 text-indigo-600 border border-indigo-100 text-[10px] font-black rounded-lg uppercase tracking-widest shadow-sm mb-2">
                     <i class="fas fa-terminal"></i> UCEST105 Lab Companion
@@ -113,12 +113,24 @@
             </div>
         </div>
 
-        <!-- Editor & Terminal Layout (Stacked on Mobile, Side-by-Side on Desktop) -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Mobile Tab Toggle (Hidden on Desktop lg:hidden) -->
+        <div class="flex lg:hidden bg-white/50 backdrop-blur-md p-1.5 rounded-2xl mb-6 shadow-sm border border-slate-200">
+            <button onclick="switchTab('editor')" id="tab-editor" class="flex-1 py-2.5 text-sm font-bold rounded-xl bg-indigo-600 text-white shadow-sm transition-all flex items-center justify-center gap-2">
+                <i class="fas fa-code"></i> main.py
+            </button>
+            <button onclick="switchTab('output')" id="tab-output" class="flex-1 py-2.5 text-sm font-bold rounded-xl text-slate-500 hover:text-slate-700 transition-all flex items-center justify-center gap-2">
+                <i class="fas fa-terminal"></i> Output
+            </button>
+        </div>
+
+        <!-- Editor & Terminal Layout (Half-by-Half on Desktop) -->
+        <!-- Note: lg:grid-cols-2 creates the perfect 50/50 split -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
             
-            <!-- Code Editor Panel (Left Column) -->
-            <div class="lg:col-span-7 flex flex-col gap-4">
-                <div class="real-glass rounded-[2rem] p-4 md:p-6 flex flex-col gap-4">
+            <!-- Code Editor Panel -->
+            <!-- Classes: Flex on mobile by default, ALWAYS flex on desktop (lg:flex) -->
+            <div id="editor-panel" class="flex flex-col lg:flex w-full h-full">
+                <div class="real-glass rounded-[2rem] p-4 md:p-6 flex flex-col gap-4 h-full">
                     
                     <!-- Toolbar Controls -->
                     <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-200/60">
@@ -139,15 +151,15 @@
                     </div>
 
                     <!-- Interactive Code Input -->
-                    <textarea id="code-input" class="code-textarea w-full h-[320px] md:h-[420px] rounded-2xl p-4 text-sm text-slate-800" spellcheck="false" placeholder="# Type your Python code here..."></textarea>
+                    <textarea id="code-input" class="code-textarea w-full h-[400px] lg:h-[500px] rounded-2xl p-4 text-sm text-slate-800 flex-grow" spellcheck="false" placeholder="# Type your Python code here..."></textarea>
 
                     <!-- Action Buttons -->
                     <div class="flex items-center justify-between gap-3 pt-2">
-                        <button onclick="clearEditor()" class="px-4 py-2.5 bg-white/80 hover:bg-white text-slate-600 border border-slate-200 text-xs font-bold rounded-xl transition-all shadow-sm">
-                            <i class="fas fa-trash-alt mr-1"></i> Clear
+                        <button onclick="clearEditor()" class="px-4 py-3 bg-white/80 hover:bg-white text-slate-600 border border-slate-200 text-xs font-bold rounded-xl transition-all shadow-sm">
+                            <i class="fas fa-trash-alt md:mr-1"></i> <span class="hidden md:inline">Clear</span>
                         </button>
 
-                        <button id="run-btn" onclick="runPythonCode()" disabled class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white text-sm font-extrabold rounded-xl shadow-[0_4px_15px_rgba(79,70,229,0.3)] transition-all flex items-center gap-2 cursor-pointer disabled:cursor-not-allowed">
+                        <button id="run-btn" onclick="runPythonCode()" disabled class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 text-white text-sm font-extrabold rounded-xl shadow-[0_4px_15px_rgba(79,70,229,0.3)] transition-all flex items-center gap-2 cursor-pointer disabled:cursor-not-allowed w-full md:w-auto justify-center">
                             <i class="fas fa-play"></i>
                             <span>Run Code</span>
                         </button>
@@ -155,9 +167,10 @@
                 </div>
             </div>
 
-            <!-- Terminal Output Panel (Right Column) -->
-            <div class="lg:col-span-5 flex flex-col gap-4">
-                <div class="dark-terminal rounded-[2rem] p-4 md:p-6 flex flex-col h-full min-h-[350px] md:min-h-[500px]">
+            <!-- Terminal Output Panel -->
+            <!-- Classes: Hidden on mobile by default, ALWAYS flex on desktop (lg:flex) -->
+            <div id="output-panel" class="hidden flex-col lg:flex w-full h-full">
+                <div class="dark-terminal rounded-[2rem] p-4 md:p-6 flex flex-col h-full min-h-[400px] lg:min-h-[500px]">
                     
                     <!-- Terminal Header -->
                     <div class="flex items-center justify-between pb-3 border-b border-slate-700/60 mb-4">
@@ -174,7 +187,7 @@
                     </div>
 
                     <!-- Output Console Stream -->
-                    <div id="terminal" class="terminal-output flex-grow text-xs text-emerald-400 overflow-y-auto max-h-[380px] md:max-h-[480px]">
+                    <div id="terminal" class="terminal-output flex-grow text-sm text-emerald-400 overflow-y-auto max-h-[400px] lg:max-h-[550px]">
 <span class="text-slate-500">// Terminal output will appear here after clicking "Run Code"...</span>
                     </div>
                 </div>
@@ -195,7 +208,37 @@
     <script>
         if(typeof loadNavigation === 'function') loadNavigation('', '', false);
 
-        // --- 1. PRESET CODE TEMPLATES ---
+        // --- 1. MOBILE TAB SWITCHER ---
+        function switchTab(tab) {
+            const editorPanel = document.getElementById('editor-panel');
+            const outputPanel = document.getElementById('output-panel');
+            const tabEditor = document.getElementById('tab-editor');
+            const tabOutput = document.getElementById('tab-output');
+
+            if (tab === 'editor') {
+                // Show Editor, Hide Output
+                editorPanel.classList.remove('hidden');
+                editorPanel.classList.add('flex');
+                outputPanel.classList.remove('flex');
+                outputPanel.classList.add('hidden');
+                
+                // Update Button Styles
+                tabEditor.className = "flex-1 py-2.5 text-sm font-bold rounded-xl bg-indigo-600 text-white shadow-sm transition-all flex items-center justify-center gap-2";
+                tabOutput.className = "flex-1 py-2.5 text-sm font-bold rounded-xl text-slate-500 hover:text-slate-700 transition-all flex items-center justify-center gap-2";
+            } else {
+                // Hide Editor, Show Output
+                editorPanel.classList.remove('flex');
+                editorPanel.classList.add('hidden');
+                outputPanel.classList.remove('hidden');
+                outputPanel.classList.add('flex');
+                
+                // Update Button Styles
+                tabOutput.className = "flex-1 py-2.5 text-sm font-bold rounded-xl bg-slate-800 text-white shadow-sm transition-all flex items-center justify-center gap-2";
+                tabEditor.className = "flex-1 py-2.5 text-sm font-bold rounded-xl text-slate-500 hover:text-slate-700 transition-all flex items-center justify-center gap-2";
+            }
+        }
+
+        // --- 2. PRESET CODE TEMPLATES ---
         const presets = {
             hello: `# KTU UCEST105 - Lab Example\nprint("Welcome to Kerala Timetable Python Compiler!")\n\nfor i in range(1, 6):\n    print(f"Iteration {i}: Python is working on WebAssembly!")`,
             
@@ -206,7 +249,6 @@
             input_demo: `# Interactive Input Demo\nname = input("Enter your name: ")\nbranch = input("Enter your branch (e.g. CSE): ")\n\nprint(f"\\nHello {name}! Best of luck with your {branch} studies.")`
         };
 
-        // Load Default Preset
         document.getElementById('code-input').value = presets.hello;
 
         function loadPreset(key) {
@@ -234,7 +276,7 @@
             }
         });
 
-        // --- 2. PYODIDE ENGINE SETUP ---
+        // --- 3. PYODIDE ENGINE SETUP ---
         let pyodideInstance = null;
 
         async function initPyodideEngine() {
@@ -244,13 +286,8 @@
             try {
                 pyodideInstance = await loadPyodide();
                 
-                // Override stdout & stderr to push directly into our HTML terminal
-                pyodideInstance.setStdout({
-                    batched: (str) => appendToTerminal(str, 'stdout')
-                });
-                pyodideInstance.setStderr({
-                    batched: (str) => appendToTerminal(str, 'stderr')
-                });
+                pyodideInstance.setStdout({ batched: (str) => appendToTerminal(str, 'stdout') });
+                pyodideInstance.setStderr({ batched: (str) => appendToTerminal(str, 'stderr') });
 
                 // Override builtins.input with a JS prompt popup
                 await pyodideInstance.runPythonAsync(`
@@ -298,6 +335,9 @@ builtins.input = custom_input
         async function runPythonCode() {
             if (!pyodideInstance) return;
 
+            // Automatically switch to the output tab on mobile devices when run is clicked
+            switchTab('output');
+
             const code = document.getElementById('code-input').value;
             const terminal = document.getElementById('terminal');
             const runBtn = document.getElementById('run-btn');
@@ -319,10 +359,9 @@ builtins.input = custom_input
             }
         }
 
-        // Initialize Pyodide on page load
         window.addEventListener('DOMContentLoaded', initPyodideEngine);
 
-        // --- 3. PARALLAX EFFECTS ---
+        // --- 4. PARALLAX EFFECTS ---
         let lastScrollY = window.scrollY;
         let ticking = false;
 
