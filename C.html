@@ -50,6 +50,7 @@
             box-shadow: inset 0 0 20px rgba(255,255,255,0.5), 0 10px 30px rgba(0,0,0,0.05);
         }
 
+        /* Fixed Search Expand Logic */
         .expand-panel {
             max-height: 0;
             overflow: hidden;
@@ -62,6 +63,47 @@
             overflow: visible;
         }
 
+        /* --- Custom Hybrid Card for Quick Access --- */
+        .hybrid-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .hybrid-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        
+        @media (min-width: 768px) {
+            .hybrid-card {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+                padding: 1.25rem;
+                background: rgba(255, 255, 255, 0.45);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.8);
+                border-radius: 2rem;
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+            }
+            .hybrid-card:hover {
+                background: rgba(255, 255, 255, 0.65);
+                transform: translateY(-2px) translateX(-2px);
+                box-shadow: 4px 12px 40px 0 rgba(31, 38, 135, 0.08);
+            }
+        }
+
+        /* Hero Carousel Slide Logic */
         .hero-slide {
             position: absolute;
             inset: 1.5rem;
@@ -71,6 +113,7 @@
             .hero-slide { inset: 2rem; }
         }
 
+        /* Page Load Entrance Animation */
         @keyframes slideRightToLeft {
             0% { opacity: 0; transform: translateX(80px); }
             100% { opacity: 1; transform: translateX(0); }
@@ -80,6 +123,7 @@
             animation: slideRightToLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
+        /* Staggered Delays */
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
@@ -338,191 +382,203 @@
             </div>
         </div>
 
-        <!-- QUICK ACCESS GRID -->
+        <!-- QUICK ACCESS HYBRID GRID -->
         <div id="quick-access" class="w-full mt-6">
             <div class="flex items-center justify-between mb-4 px-2 slide-rtl delay-300">
                 <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Quick Access</h3>
             </div>
             
+            <!-- Grid is 2 cols on Mobile to match old design, 3 cols on Desktop -->
             <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
                 
-                <a href="timetable.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[350ms]">
-                    <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-orange-500/30 group-hover:scale-110 transition-transform shrink-0">
+                <!-- 1. Timetables -->
+                <a href="timetable.html" class="hybrid-card group slide-rtl delay-[350ms]">
+                    <div class="flex flex-col md:flex-row items-center gap-0 md:gap-4 w-full">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-sm md:shadow-lg shadow-orange-500/30 group-hover:scale-110 transition-transform shrink-0 mb-2 md:mb-0">
                             <i class="fas fa-calendar-day text-xl md:text-2xl"></i>
                         </div>
-                        <div class="text-center lg:text-left mt-1 lg:mt-0">
-                            <h4 class="font-extrabold text-slate-800 lg:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight lg:mb-0.5">Timetables</h4>
-                            <p class="hidden lg:block text-xs md:text-sm text-slate-500 font-medium">Check semester & exam schedules</p>
+                        <div class="text-center md:text-left mt-1 md:mt-0">
+                            <h4 class="font-extrabold text-slate-700 md:text-slate-900 text-xs md:text-base lg:text-lg mb-0 leading-tight md:mb-0.5">Timetables</h4>
+                            <p class="hidden md:block text-xs md:text-sm text-slate-500 font-medium">Check semester & exam schedules</p>
                         </div>
                     </div>
-                    <div class="hidden lg:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
+                    <div class="hidden md:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
                         <i class="fas fa-chevron-right text-xs"></i>
                     </div>
                 </a>
 
-                <a href="notes.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[400ms]">
-                    <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-indigo-500/30 group-hover:scale-110 transition-transform shrink-0">
+                <!-- 2. Study Notes -->
+                <a href="notes.html" class="hybrid-card group slide-rtl delay-[400ms]">
+                    <div class="flex flex-col md:flex-row items-center gap-0 md:gap-4 w-full">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-sm md:shadow-lg shadow-indigo-500/30 group-hover:scale-110 transition-transform shrink-0 mb-2 md:mb-0">
                             <i class="fas fa-book-open text-xl md:text-2xl"></i>
                         </div>
-                        <div class="text-center lg:text-left mt-1 lg:mt-0">
-                            <h4 class="font-extrabold text-slate-800 lg:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight lg:mb-0.5">Study Notes</h4>
-                            <p class="hidden lg:block text-xs md:text-sm text-slate-500 font-medium">Free notes by KTU students</p>
+                        <div class="text-center md:text-left mt-1 md:mt-0">
+                            <h4 class="font-extrabold text-slate-700 md:text-slate-900 text-xs md:text-base lg:text-lg mb-0 leading-tight md:mb-0.5">Study Notes</h4>
+                            <p class="hidden md:block text-xs md:text-sm text-slate-500 font-medium">Free notes by KTU students</p>
                         </div>
                     </div>
-                    <div class="hidden lg:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
+                    <div class="hidden md:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
                         <i class="fas fa-chevron-right text-xs"></i>
                     </div>
                 </a>
 
-                <a href="pyq.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[450ms]">
-                    <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-fuchsia-500 to-pink-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-fuchsia-500/30 group-hover:scale-110 transition-transform shrink-0">
+                <!-- 3. Previous Papers -->
+                <a href="pyq.html" class="hybrid-card group slide-rtl delay-[450ms]">
+                    <div class="flex flex-col md:flex-row items-center gap-0 md:gap-4 w-full">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-fuchsia-500 to-pink-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-sm md:shadow-lg shadow-fuchsia-500/30 group-hover:scale-110 transition-transform shrink-0 mb-2 md:mb-0">
                             <i class="fas fa-file-alt text-xl md:text-2xl"></i>
                         </div>
-                        <div class="text-center lg:text-left mt-1 lg:mt-0">
-                            <h4 class="font-extrabold text-slate-800 lg:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight lg:mb-0.5">Previous Papers</h4>
-                            <p class="hidden lg:block text-xs md:text-sm text-slate-500 font-medium">All PYQs in one place</p>
+                        <div class="text-center md:text-left mt-1 md:mt-0">
+                            <h4 class="font-extrabold text-slate-700 md:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight md:mb-0.5">Previous Papers</h4>
+                            <p class="hidden md:block text-xs md:text-sm text-slate-500 font-medium">All PYQs in one place</p>
                         </div>
                     </div>
-                    <div class="hidden lg:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
+                    <div class="hidden md:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
                         <i class="fas fa-chevron-right text-xs"></i>
                     </div>
                 </a>
 
-                <a href="updates.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[500ms]">
-                    <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform shrink-0">
+                <!-- 4. KTU Updates -->
+                <a href="updates.html" class="hybrid-card group slide-rtl delay-[500ms]">
+                    <div class="flex flex-col md:flex-row items-center gap-0 md:gap-4 w-full">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-sm md:shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform shrink-0 mb-2 md:mb-0">
                             <i class="fas fa-bullhorn text-xl md:text-2xl"></i>
                         </div>
-                        <div class="text-center lg:text-left mt-1 lg:mt-0">
-                            <h4 class="font-extrabold text-slate-800 lg:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight lg:mb-0.5">KTU Updates</h4>
-                            <p class="hidden lg:block text-xs md:text-sm text-slate-500 font-medium">Latest announcements & news</p>
+                        <div class="text-center md:text-left mt-1 md:mt-0">
+                            <h4 class="font-extrabold text-slate-700 md:text-slate-900 text-xs md:text-base lg:text-lg mb-0 leading-tight md:mb-0.5">KTU Updates</h4>
+                            <p class="hidden md:block text-xs md:text-sm text-slate-500 font-medium">Latest announcements & news</p>
                         </div>
                     </div>
-                    <div class="hidden lg:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
+                    <div class="hidden md:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
                         <i class="fas fa-chevron-right text-xs"></i>
                     </div>
                 </a>
 
-                <a href="status.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[550ms]">
-                    <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform relative shrink-0">
+                <!-- 5. Server Status -->
+                <a href="status.html" class="hybrid-card group slide-rtl delay-[550ms]">
+                    <div class="flex flex-col md:flex-row items-center gap-0 md:gap-4 w-full">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-sm md:shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform relative shrink-0 mb-2 md:mb-0">
                             <span class="absolute -top-1 -right-1 flex h-3 md:h-3.5 w-3 md:w-3.5">
                               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                               <span class="relative inline-flex rounded-full h-3 md:h-3.5 w-3 md:w-3.5 bg-emerald-400 border-2 border-cyan-500"></span>
                             </span>
                             <i class="fas fa-server text-xl md:text-2xl"></i>
                         </div>
-                        <div class="text-center lg:text-left mt-1 lg:mt-0">
-                            <h4 class="font-extrabold text-slate-800 lg:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight lg:mb-0.5">Server Status</h4>
-                            <p class="hidden lg:block text-xs md:text-sm text-slate-500 font-medium">Platform uptime & latency</p>
+                        <div class="text-center md:text-left mt-1 md:mt-0">
+                            <h4 class="font-extrabold text-slate-700 md:text-slate-900 text-xs md:text-base lg:text-lg mb-0 leading-tight md:mb-0.5">Server Status</h4>
+                            <p class="hidden md:block text-xs md:text-sm text-slate-500 font-medium">Platform uptime & latency</p>
                         </div>
                     </div>
-                    <div class="hidden lg:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
+                    <div class="hidden md:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
                         <i class="fas fa-chevron-right text-xs"></i>
                     </div>
                 </a>
 
-                <a href="blog/index.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[600ms]">
-                    <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-violet-500/30 group-hover:scale-110 transition-transform shrink-0">
+                <!-- 6. KTU Blog -->
+                <a href="blog/index.html" class="hybrid-card group slide-rtl delay-[600ms]">
+                    <div class="flex flex-col md:flex-row items-center gap-0 md:gap-4 w-full">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-sm md:shadow-lg shadow-violet-500/30 group-hover:scale-110 transition-transform shrink-0 mb-2 md:mb-0">
                             <i class="fas fa-feather-alt text-xl md:text-2xl"></i>
                         </div>
-                        <div class="text-center lg:text-left mt-1 lg:mt-0">
-                            <h4 class="font-extrabold text-slate-800 lg:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight lg:mb-0.5">KTU Blog</h4>
-                            <p class="hidden lg:block text-xs md:text-sm text-slate-500 font-medium">Tips, guides & student stories</p>
+                        <div class="text-center md:text-left mt-1 md:mt-0">
+                            <h4 class="font-extrabold text-slate-700 md:text-slate-900 text-xs md:text-base lg:text-lg mb-0 leading-tight md:mb-0.5">KTU Blog</h4>
+                            <p class="hidden md:block text-xs md:text-sm text-slate-500 font-medium">Tips, guides & student stories</p>
                         </div>
                     </div>
-                    <div class="hidden lg:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
+                    <div class="hidden md:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
                         <i class="fas fa-chevron-right text-xs"></i>
                     </div>
                 </a>
 
-                <a href="polls.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[650ms]">
-                    <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-rose-500 to-red-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-rose-500/30 group-hover:scale-110 transition-transform relative shrink-0">
+                <!-- 7. Exam Review Hub -->
+                <a href="polls.html" class="hybrid-card group slide-rtl delay-[650ms]">
+                    <div class="flex flex-col md:flex-row items-center gap-0 md:gap-4 w-full">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-rose-500 to-red-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-sm md:shadow-lg shadow-rose-500/30 group-hover:scale-110 transition-transform relative shrink-0 mb-2 md:mb-0">
                             <span class="absolute -top-1 -right-1 flex h-3 md:h-3.5 w-3 md:w-3.5">
                               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                               <span class="relative inline-flex rounded-full h-3 md:h-3.5 w-3 md:w-3.5 bg-rose-400 border-2 border-red-500"></span>
                             </span>
                             <i class="fas fa-poll text-xl md:text-2xl"></i>
                         </div>
-                        <div class="text-center lg:text-left mt-1 lg:mt-0">
-                            <h4 class="font-extrabold text-slate-800 lg:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight lg:mb-0.5">Exam Review Hub</h4>
-                            <p class="hidden lg:block text-xs md:text-sm text-slate-500 font-medium">Student polls & difficulty ratings</p>
+                        <div class="text-center md:text-left mt-1 md:mt-0">
+                            <h4 class="font-extrabold text-slate-700 md:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight md:mb-0.5">Exam Review Hub</h4>
+                            <p class="hidden md:block text-xs md:text-sm text-slate-500 font-medium">Student polls & difficulty ratings</p>
                         </div>
                     </div>
-                    <div class="hidden lg:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
+                    <div class="hidden md:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
                         <i class="fas fa-chevron-right text-xs"></i>
                     </div>
                 </a>
 
-                <a href="calendar.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[700ms]">
-                    <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-pink-500/30 group-hover:scale-110 transition-transform shrink-0">
+                <!-- 8. Academic Calendars -->
+                <a href="calendar.html" class="hybrid-card group slide-rtl delay-[700ms]">
+                    <div class="flex flex-col md:flex-row items-center gap-0 md:gap-4 w-full">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-sm md:shadow-lg shadow-pink-500/30 group-hover:scale-110 transition-transform shrink-0 mb-2 md:mb-0">
                             <i class="fas fa-calendar-alt text-xl md:text-2xl"></i>
                         </div>
-                        <div class="text-center lg:text-left mt-1 lg:mt-0">
-                            <h4 class="font-extrabold text-slate-800 lg:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight lg:mb-0.5">Academic Calendars</h4>
-                            <p class="hidden lg:block text-xs md:text-sm text-slate-500 font-medium">Official KTU schedules</p>
+                        <div class="text-center md:text-left mt-1 md:mt-0">
+                            <h4 class="font-extrabold text-slate-700 md:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight md:mb-0.5">Academic Calendars</h4>
+                            <p class="hidden md:block text-xs md:text-sm text-slate-500 font-medium">Official KTU schedules</p>
                         </div>
                     </div>
-                    <div class="hidden lg:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
+                    <div class="hidden md:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
                         <i class="fas fa-chevron-right text-xs"></i>
                     </div>
                 </a>
 
-                <a href="https://keralatimetable.in/ambassador.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[750ms]">
-                    <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-yellow-500/30 group-hover:scale-110 transition-transform relative shrink-0">
+                <!-- 9. Ambassador Program -->
+                <a href="https://keralatimetable.in/ambassador.html" class="hybrid-card group slide-rtl delay-[750ms]">
+                    <div class="flex flex-col md:flex-row items-center gap-0 md:gap-4 w-full">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-sm md:shadow-lg shadow-yellow-500/30 group-hover:scale-110 transition-transform relative shrink-0 mb-2 md:mb-0">
                             <span class="absolute -top-1 -right-1 flex h-3 md:h-3.5 w-3 md:w-3.5">
                               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                               <span class="relative inline-flex rounded-full h-3 md:h-3.5 w-3 md:w-3.5 bg-yellow-400 border-2 border-orange-500"></span>
                             </span>
                             <i class="fas fa-handshake text-xl md:text-2xl"></i>
                         </div>
-                        <div class="text-center lg:text-left mt-1 lg:mt-0">
-                            <h4 class="font-extrabold text-slate-800 lg:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight lg:mb-0.5">Ambassador Program</h4>
-                            <p class="hidden lg:block text-xs md:text-sm text-slate-500 font-medium">Student leadership initiative</p>
+                        <div class="text-center md:text-left mt-1 md:mt-0">
+                            <h4 class="font-extrabold text-slate-700 md:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight md:mb-0.5">Ambassador Program</h4>
+                            <p class="hidden md:block text-xs md:text-sm text-slate-500 font-medium">Student leadership initiative</p>
                         </div>
                     </div>
-                    <div class="hidden lg:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
+                    <div class="hidden md:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
                         <i class="fas fa-chevron-right text-xs"></i>
                     </div>
                 </a>
 
-                <a href="https://keralatimetable.in/report.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[800ms]">
-                    <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-slate-400 to-slate-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-slate-500/30 group-hover:scale-110 transition-transform shrink-0">
+                <!-- 10. Report an Issue -->
+                <a href="https://keralatimetable.in/report.html" class="hybrid-card group slide-rtl delay-[800ms]">
+                    <div class="flex flex-col md:flex-row items-center gap-0 md:gap-4 w-full">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-slate-400 to-slate-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-sm md:shadow-lg shadow-slate-500/30 group-hover:scale-110 transition-transform shrink-0 mb-2 md:mb-0">
                             <i class="fas fa-flag text-xl md:text-2xl"></i>
                         </div>
-                        <div class="text-center lg:text-left mt-1 lg:mt-0">
-                            <h4 class="font-extrabold text-slate-800 lg:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight lg:mb-0.5">Report an Issue</h4>
-                            <p class="hidden lg:block text-xs md:text-sm text-slate-500 font-medium">Found a bug? Let us know</p>
+                        <div class="text-center md:text-left mt-1 md:mt-0">
+                            <h4 class="font-extrabold text-slate-700 md:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight md:mb-0.5">Report an Issue</h4>
+                            <p class="hidden md:block text-xs md:text-sm text-slate-500 font-medium">Found a bug? Let us know</p>
                         </div>
                     </div>
-                    <div class="hidden lg:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
+                    <div class="hidden md:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
                         <i class="fas fa-chevron-right text-xs"></i>
                     </div>
                 </a>
 
-                <a href="https://keralatimetable.in/vortex.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group col-span-2 lg:col-span-1 slide-rtl delay-[850ms]">
-                    <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
-                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-purple-500 to-fuchsia-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-transform relative shrink-0">
+                <!-- 11. Vortex Tournament -->
+                <a href="https://keralatimetable.in/vortex.html" class="hybrid-card group col-span-2 lg:col-span-1 slide-rtl delay-[850ms]">
+                    <div class="flex flex-col md:flex-row items-center gap-0 md:gap-4 w-full">
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-purple-500 to-fuchsia-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-sm md:shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-transform relative shrink-0 mb-2 md:mb-0">
                             <span class="absolute -top-1 -right-1 flex h-3 md:h-3.5 w-3 md:w-3.5">
                               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                               <span class="relative inline-flex rounded-full h-3 md:h-3.5 w-3 md:w-3.5 bg-purple-400 border-2 border-fuchsia-500"></span>
                             </span>
                             <i class="fas fa-gamepad text-xl md:text-2xl"></i>
                         </div>
-                        <div class="text-center lg:text-left mt-1 lg:mt-0">
-                            <h4 class="font-extrabold text-slate-800 lg:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight lg:mb-0.5">Vortex Tournament</h4>
-                            <p class="hidden lg:block text-xs md:text-sm text-slate-500 font-medium">eFootball campus championship</p>
+                        <div class="text-center md:text-left mt-1 md:mt-0">
+                            <h4 class="font-extrabold text-slate-700 md:text-slate-900 text-[11px] sm:text-xs md:text-base lg:text-lg mb-0 leading-tight md:mb-0.5">Vortex Tournament</h4>
+                            <p class="hidden md:block text-xs md:text-sm text-slate-500 font-medium">eFootball campus championship</p>
                         </div>
                     </div>
-                    <div class="hidden lg:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
+                    <div class="hidden md:flex w-8 h-8 rounded-full bg-white text-slate-400 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-100 shrink-0">
                         <i class="fas fa-chevron-right text-xs"></i>
                     </div>
                 </a>
