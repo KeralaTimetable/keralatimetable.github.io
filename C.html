@@ -81,8 +81,9 @@
     <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-6 flex flex-col items-center relative z-10 space-y-6">
         
         <!-- HERO SECTION -->
-        <div class="glass-panel rounded-[2.5rem] w-full p-8 md:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
+        <div class="glass-panel rounded-[2.5rem] w-full p-8 md:p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 min-h-[400px]">
             
+            <!-- Left Side: Text Content -->
             <div class="w-full md:w-3/5 relative z-10 text-center md:text-left">
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50/80 border border-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-wider mb-6 shadow-sm backdrop-blur-sm">
                     <i class="fas fa-users text-indigo-500"></i> Trusted by 2 Lakh+ KTU Students
@@ -116,8 +117,8 @@
                 </div>
             </div>
 
-            <!-- FIXED: Right Side 3D Glass Illustration Mockup (Visible on Mobile) -->
-            <div class="w-full md:w-2/5 relative h-56 md:h-80 flex items-center justify-center mt-6 md:mt-0 transform scale-75 md:scale-100">
+            <!-- 3D Glass Illustration Mockup (Absolute on Mobile to prevent height increase) -->
+            <div class="absolute top-1/2 -translate-y-1/2 -right-16 md:relative md:top-auto md:-translate-y-0 md:right-auto w-[120%] md:w-2/5 h-auto md:h-80 flex items-center justify-center opacity-30 md:opacity-100 transform scale-75 md:scale-100 z-0 pointer-events-none md:pointer-events-auto">
                 
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-blue-400/30 blur-[40px] rounded-full"></div>
                 
@@ -326,8 +327,10 @@
 
     <script src="components.js?v=11"></script>
     <script>
+        // Initialize Navigation
         if(typeof loadNavigation === 'function') loadNavigation('home', '', false);
 
+        // Search Bar Dropdown Logic
         document.addEventListener('DOMContentLoaded', () => {
             const searchInput = document.getElementById('quick-search-input');
             const chevronTrigger = document.getElementById('chevron-trigger');
@@ -339,11 +342,13 @@
                 chevronIcon.classList.toggle('rotate-180');
             }
 
+            // Open on focus or click
             searchInput.addEventListener('focus', () => {
                 if (!panel.classList.contains('active')) togglePanel();
             });
             chevronTrigger.addEventListener('click', togglePanel);
             
+            // Basic routing logic for the 'Find' button
             document.getElementById('btn-find').addEventListener('click', (e) => {
                 e.preventDefault();
                 const branch = document.getElementById('select-branch').value;
