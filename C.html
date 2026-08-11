@@ -50,7 +50,6 @@
             box-shadow: inset 0 0 20px rgba(255,255,255,0.5), 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        /* Fixed Search Expand Logic */
         .expand-panel {
             max-height: 0;
             overflow: hidden;
@@ -63,25 +62,40 @@
             overflow: visible;
         }
 
-        /* --- NEW: Right-to-Left Slide Animation --- */
+        .hero-slide {
+            position: absolute;
+            inset: 1.5rem;
+            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.7s ease;
+        }
+        @media (min-width: 768px) {
+            .hero-slide { inset: 2rem; }
+        }
+
         @keyframes slideRightToLeft {
             0% { opacity: 0; transform: translateX(80px); }
             100% { opacity: 1; transform: translateX(0); }
         }
         .slide-rtl {
-            opacity: 0; /* Hidden before animation starts */
+            opacity: 0;
             animation: slideRightToLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Staggered Delays */
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
-        .delay-400 { animation-delay: 400ms; }
-        .delay-500 { animation-delay: 500ms; }
-        .delay-600 { animation-delay: 600ms; }
-        .delay-700 { animation-delay: 700ms; }
-        .delay-800 { animation-delay: 800ms; }
+        .delay-[350ms] { animation-delay: 350ms; }
+        .delay-[400ms] { animation-delay: 400ms; }
+        .delay-[450ms] { animation-delay: 450ms; }
+        .delay-[500ms] { animation-delay: 500ms; }
+        .delay-[550ms] { animation-delay: 550ms; }
+        .delay-[600ms] { animation-delay: 600ms; }
+        .delay-[650ms] { animation-delay: 650ms; }
+        .delay-[700ms] { animation-delay: 700ms; }
+        .delay-[750ms] { animation-delay: 750ms; }
+        .delay-[800ms] { animation-delay: 800ms; }
+        .delay-[850ms] { animation-delay: 850ms; }
+        .delay-[900ms] { animation-delay: 900ms; }
+        .delay-[1000ms] { animation-delay: 1000ms; }
 
         select {
             -webkit-appearance: none;
@@ -101,41 +115,38 @@
 
     <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-4 md:py-6 flex flex-col items-center relative z-10 space-y-6">
         
-        <!-- HERO CAROUSEL SECTION (Reduced container padding, restored fonts) -->
-        <div class="glass-panel rounded-[2.5rem] w-full relative overflow-hidden flex flex-col min-h-[380px] md:min-h-[360px] slide-rtl delay-100">
+        <!-- HERO CAROUSEL SECTION -->
+        <div class="glass-panel rounded-[2.5rem] w-full relative overflow-hidden flex flex-col min-h-[480px] md:min-h-[380px] slide-rtl delay-100">
             
             <!-- SLIDE 1: General Resources -->
-            <div class="hero-slide absolute inset-6 md:inset-8 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-10 transition-opacity duration-700 opacity-100 z-20">
+            <div class="hero-slide flex flex-col md:flex-row items-center justify-between gap-4 md:gap-10 z-20" style="opacity: 1; transform: translateX(0);">
                 
                 <div class="w-full md:w-[55%] relative z-10 text-center md:text-left mt-2 md:mt-0">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50/80 border border-indigo-100 text-indigo-700 text-[10px] md:text-xs font-bold uppercase tracking-wider mb-4 md:mb-5 shadow-sm backdrop-blur-sm">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50/80 border border-indigo-100 text-indigo-700 text-[10px] md:text-xs font-black uppercase tracking-wider mb-4 md:mb-5 shadow-sm backdrop-blur-sm">
                         <i class="fas fa-users text-indigo-500"></i> Trusted by 2 Lakh+ Students
                     </div>
 
-                    <!-- Restored to large font size -->
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-3 md:mb-5">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.05] mb-3 md:mb-4">
                         KTU Resources, <br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-400">Simplified.</span>
                     </h1>
                     
-                    <!-- Restored to large font size -->
-                    <p class="text-slate-600 font-medium md:text-lg max-w-md mx-auto md:mx-0 mb-6 leading-relaxed">
+                    <p class="text-slate-600 font-bold text-sm md:text-base max-w-md mx-auto md:mx-0 mb-6 leading-relaxed">
                         Get access to timetables, notes, previous year papers and latest updates — all in one place.
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3">
-                        <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full sm:w-auto px-6 py-3.5 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-400 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 hover:scale-105 transition-transform flex items-center justify-center gap-2">
+                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 pb-8 md:pb-0">
+                        <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-400 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 hover:scale-105 transition-transform flex items-center justify-center gap-2">
                             <i class="fab fa-whatsapp text-lg"></i> Join WhatsApp
                         </a>
                         
-                        <a href="#quick-access" class="w-full sm:w-auto px-6 py-3.5 rounded-full bg-white/60 border border-white hover:bg-white text-slate-700 font-bold text-sm shadow-sm transition-colors flex items-center justify-center gap-2">
+                        <a href="#quick-access" class="w-full sm:w-auto px-6 py-3 rounded-full bg-white/60 border border-white hover:bg-white text-slate-700 font-bold text-sm shadow-sm transition-colors flex items-center justify-center gap-2">
                             Explore <i class="fas fa-chevron-right text-xs"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Kept scaling on mobile to save height, but full size on desktop -->
-                <div class="absolute top-1/2 -translate-y-1/2 -right-12 md:relative md:top-auto md:-translate-y-0 md:right-auto w-[100%] md:w-[45%] h-auto md:h-72 flex items-center justify-center opacity-20 md:opacity-100 transform scale-50 md:scale-95 z-0 pointer-events-none md:pointer-events-auto">
+                <div class="absolute top-1/2 -translate-y-1/2 -right-8 md:relative md:top-auto md:-translate-y-0 md:right-auto w-[100%] md:w-[45%] h-auto md:h-72 flex items-center justify-center opacity-20 md:opacity-100 transform scale-50 md:scale-95 z-0 pointer-events-none md:pointer-events-auto">
                     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-blue-400/30 blur-[40px] rounded-full"></div>
                     <div class="glass-folder w-60 h-44 rounded-2xl relative transform rotate-6 z-10 flex flex-col items-center justify-center text-indigo-300">
                         <div class="absolute -top-8 -left-5 w-28 h-36 bg-white/40 backdrop-blur-md border border-white/80 rounded-xl shadow-xl transform -rotate-12 flex flex-col p-3 gap-2">
@@ -151,78 +162,78 @@
                 </div>
             </div>
 
-            <!-- SLIDE 2: PYQ Hub -->
-            <div class="hero-slide absolute inset-6 md:inset-8 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 transition-opacity duration-700 opacity-0 pointer-events-none z-10">
+            <!-- SLIDE 2: PYQ Hub (Red/Rose Theme) -->
+            <div class="hero-slide flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 z-10 pointer-events-none" style="opacity: 0; transform: translateX(50px);">
                 
                 <div class="w-full md:w-[55%] relative z-10 text-center md:text-left mt-2 md:mt-0">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50/80 border border-amber-100 text-amber-700 text-[10px] md:text-xs font-bold uppercase tracking-wider mb-4 md:mb-5 shadow-sm backdrop-blur-sm">
-                        <i class="fas fa-bolt text-amber-500"></i> High-Speed Cloud Archive
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50/80 border border-red-100 text-red-700 text-[10px] md:text-xs font-black uppercase tracking-wider mb-4 md:mb-5 shadow-sm backdrop-blur-sm">
+                        <i class="fas fa-rocket text-red-500"></i> 100% Free Archive
                     </div>
 
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-3 md:mb-5">
-                        KTU <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">PYQ Hub.</span>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.05] mb-3 md:mb-4 uppercase">
+                        UNLIMITED KTU PYQs. <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-rose-500">ONE SEARCH AWAY.</span>
                     </h2>
                     
-                    <p class="text-slate-600 font-medium md:text-lg max-w-md mx-auto md:mx-0 mb-6 leading-relaxed">
-                        Download completely free, lightning-fast Previous Year Question Papers. No waiting, no ads.
+                    <p class="text-slate-600 font-bold text-sm md:text-base max-w-md mx-auto md:mx-0 mb-6 leading-relaxed">
+                        The fastest way to find previous year question papers. Organized, precise, and instantly ready to download.
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3">
-                        <a href="pyq.html" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-sm shadow-lg shadow-amber-500/20 hover:scale-105 transition-transform flex items-center justify-center gap-2">
-                            <i class="fas fa-search text-lg"></i> Search PYQs
+                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 pb-8 md:pb-0">
+                        <a href="pyq.html" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-red-500 to-rose-600 text-white font-bold text-sm shadow-lg shadow-red-500/20 hover:scale-105 transition-transform flex items-center justify-center gap-2">
+                            <i class="fas fa-search text-lg"></i> Find Papers
                         </a>
                     </div>
                 </div>
 
-                <div class="absolute top-1/2 -translate-y-1/2 -right-12 md:relative md:top-auto md:-translate-y-0 md:right-auto w-[100%] md:w-[45%] h-auto md:h-72 flex items-center justify-center opacity-20 md:opacity-100 transform scale-50 md:scale-95 z-0 pointer-events-none md:pointer-events-auto">
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-amber-400/20 blur-[40px] rounded-full"></div>
-                    <div class="glass-folder w-60 h-44 rounded-2xl relative transform rotate-6 z-10 flex flex-col items-center justify-center text-amber-300">
+                <div class="absolute top-1/2 -translate-y-1/2 -right-8 md:relative md:top-auto md:-translate-y-0 md:right-auto w-[100%] md:w-[45%] h-auto md:h-72 flex items-center justify-center opacity-20 md:opacity-100 transform scale-50 md:scale-95 z-0 pointer-events-none md:pointer-events-auto">
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-rose-400/20 blur-[40px] rounded-full"></div>
+                    <div class="glass-folder w-60 h-44 rounded-2xl relative transform rotate-6 z-10 flex flex-col items-center justify-center text-rose-300">
                         <div class="absolute -top-8 -left-5 w-28 h-36 bg-white/40 backdrop-blur-md border border-white/80 rounded-xl shadow-xl transform -rotate-12 flex items-center justify-center">
-                            <i class="fas fa-file-alt text-6xl text-rose-400/80"></i>
+                            <i class="fas fa-file-pdf text-6xl text-red-500/80"></i>
                         </div>
-                        <div class="absolute -top-12 -right-3 text-6xl text-amber-500 drop-shadow-xl transform rotate-12">
-                            <i class="fas fa-history"></i>
+                        <div class="absolute -top-12 -right-3 text-6xl text-red-500 drop-shadow-xl transform rotate-12">
+                            <i class="fas fa-bolt"></i>
                         </div>
-                        <i class="fas fa-bolt text-6xl opacity-50"></i>
+                        <i class="fas fa-history text-6xl opacity-50"></i>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 3: B.Tech Study Notes -->
-            <div class="hero-slide absolute inset-6 md:inset-8 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 transition-opacity duration-700 opacity-0 pointer-events-none z-10">
+            <!-- SLIDE 3: B.Tech Study Notes & Updates (Amber/Yellow Theme) -->
+            <div class="hero-slide flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 z-10 pointer-events-none" style="opacity: 0; transform: translateX(50px);">
                 
                 <div class="w-full md:w-[55%] relative z-10 text-center md:text-left mt-2 md:mt-0">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-fuchsia-50/80 border border-fuchsia-100 text-fuchsia-700 text-[10px] md:text-xs font-bold uppercase tracking-wider mb-4 md:mb-5 shadow-sm backdrop-blur-sm">
-                        <i class="fas fa-book text-fuchsia-500"></i> 2024 Scheme Updated
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50/80 border border-amber-100 text-amber-700 text-[10px] md:text-xs font-black uppercase tracking-wider mb-4 md:mb-5 shadow-sm backdrop-blur-sm">
+                        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Stay Ahead
                     </div>
 
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-3 md:mb-5">
-                        B.Tech <span class="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-pink-500">Study Notes.</span>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.05] mb-3 md:mb-4 uppercase">
+                        LIVE ALERTS & <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-yellow-500">2024 SCHEME NOTES.</span>
                     </h2>
                     
-                    <p class="text-slate-600 font-medium md:text-lg max-w-md mx-auto md:mx-0 mb-6 leading-relaxed">
-                        Get the latest syllabus and PYQ-oriented notes for your exams. High-quality, organized, and completely free.
+                    <p class="text-slate-600 font-bold text-sm md:text-base max-w-md mx-auto md:mx-0 mb-6 leading-relaxed">
+                        Never miss a deadline. Get instant campus notifications and the highest quality study materials for your semester.
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3">
-                        <a href="notes.html" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white font-bold text-sm shadow-lg shadow-fuchsia-500/20 hover:scale-105 transition-transform flex items-center justify-center gap-2">
-                            <i class="fas fa-book-open text-lg"></i> Browse Notes
+                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 pb-8 md:pb-0">
+                        <a href="notes.html" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-white font-bold text-sm shadow-lg shadow-amber-500/20 hover:scale-105 transition-transform flex items-center justify-center gap-2">
+                            <i class="fas fa-bell text-lg"></i> Access Materials
                         </a>
                     </div>
                 </div>
 
-                <div class="absolute top-1/2 -translate-y-1/2 -right-12 md:relative md:top-auto md:-translate-y-0 md:right-auto w-[100%] md:w-[45%] h-auto md:h-72 flex items-center justify-center opacity-20 md:opacity-100 transform scale-50 md:scale-95 z-0 pointer-events-none md:pointer-events-auto">
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-fuchsia-400/20 blur-[40px] rounded-full"></div>
-                    <div class="glass-folder w-60 h-44 rounded-2xl relative transform rotate-6 z-10 flex flex-col items-center justify-center text-fuchsia-300">
+                <div class="absolute top-1/2 -translate-y-1/2 -right-8 md:relative md:top-auto md:-translate-y-0 md:right-auto w-[100%] md:w-[45%] h-auto md:h-72 flex items-center justify-center opacity-20 md:opacity-100 transform scale-50 md:scale-95 z-0 pointer-events-none md:pointer-events-auto">
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-amber-400/20 blur-[40px] rounded-full"></div>
+                    <div class="glass-folder w-60 h-44 rounded-2xl relative transform rotate-6 z-10 flex flex-col items-center justify-center text-amber-300">
                         <div class="absolute -top-8 -left-5 w-28 h-36 bg-white/40 backdrop-blur-md border border-white/80 rounded-xl shadow-xl transform -rotate-12 flex flex-col items-center justify-center p-3">
-                            <div class="w-full h-1.5 bg-fuchsia-400/40 rounded mb-1.5"></div>
-                            <div class="w-full h-1.5 bg-fuchsia-400/40 rounded mb-1.5"></div>
-                            <div class="w-3/4 h-1.5 bg-fuchsia-400/40 rounded"></div>
+                            <i class="fas fa-book-reader text-5xl text-amber-500/80 mb-2"></i>
                         </div>
-                        <div class="absolute -top-12 -right-3 text-6xl text-fuchsia-500 drop-shadow-xl transform rotate-12">
-                            <i class="fas fa-bookmark"></i>
+                        <div class="absolute -top-12 -right-3 text-6xl text-amber-500 drop-shadow-xl transform rotate-12">
+                            <i class="fas fa-bell"></i>
                         </div>
-                        <i class="fas fa-book-reader text-6xl opacity-50"></i>
+                        <i class="fas fa-bullhorn text-6xl opacity-50"></i>
                     </div>
                 </div>
             </div>
@@ -233,6 +244,14 @@
                 <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-indigo-200 hover:bg-indigo-300 transition-all duration-300" data-index="1"></button>
                 <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-indigo-200 hover:bg-indigo-300 transition-all duration-300" data-index="2"></button>
             </div>
+
+            <!-- Carousel Arrows -->
+            <button id="btn-prev" class="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/70 hover:bg-white rounded-full items-center justify-center text-slate-400 hover:text-indigo-600 shadow-sm transition-colors z-30">
+                <i class="fas fa-chevron-left text-sm"></i>
+            </button>
+            <button id="btn-next" class="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/70 hover:bg-white rounded-full items-center justify-center text-slate-400 hover:text-indigo-600 shadow-sm transition-colors z-30">
+                <i class="fas fa-chevron-right text-sm"></i>
+            </button>
         </div>
 
         <!-- SEARCH BAR (Animated Entry) -->
@@ -287,7 +306,6 @@
             
             <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
                 
-                <!-- 1. Timetables -->
                 <a href="timetable.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[350ms]">
                     <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-orange-500/30 group-hover:scale-110 transition-transform shrink-0">
@@ -303,7 +321,6 @@
                     </div>
                 </a>
 
-                <!-- 2. Study Notes -->
                 <a href="notes.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[400ms]">
                     <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-indigo-500/30 group-hover:scale-110 transition-transform shrink-0">
@@ -319,7 +336,6 @@
                     </div>
                 </a>
 
-                <!-- 3. Previous Papers -->
                 <a href="pyq.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[450ms]">
                     <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-fuchsia-500 to-pink-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-fuchsia-500/30 group-hover:scale-110 transition-transform shrink-0">
@@ -335,7 +351,6 @@
                     </div>
                 </a>
 
-                <!-- 4. KTU Updates -->
                 <a href="updates.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[500ms]">
                     <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform shrink-0">
@@ -351,7 +366,6 @@
                     </div>
                 </a>
 
-                <!-- 5. Server Status -->
                 <a href="status.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[550ms]">
                     <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform relative shrink-0">
@@ -371,7 +385,6 @@
                     </div>
                 </a>
 
-                <!-- 6. KTU Blog -->
                 <a href="blog/index.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[600ms]">
                     <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-violet-500/30 group-hover:scale-110 transition-transform shrink-0">
@@ -387,7 +400,6 @@
                     </div>
                 </a>
 
-                <!-- 7. Exam Review Hub -->
                 <a href="polls.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[650ms]">
                     <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-rose-500 to-red-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-rose-500/30 group-hover:scale-110 transition-transform relative shrink-0">
@@ -407,7 +419,6 @@
                     </div>
                 </a>
 
-                <!-- 8. Academic Calendars -->
                 <a href="calendar.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[700ms]">
                     <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-pink-500/30 group-hover:scale-110 transition-transform shrink-0">
@@ -423,7 +434,6 @@
                     </div>
                 </a>
 
-                <!-- 9. Ambassador Program -->
                 <a href="https://keralatimetable.in/ambassador.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[750ms]">
                     <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-yellow-500/30 group-hover:scale-110 transition-transform relative shrink-0">
@@ -443,7 +453,6 @@
                     </div>
                 </a>
 
-                <!-- 10. Report an Issue -->
                 <a href="https://keralatimetable.in/report.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group slide-rtl delay-[800ms]">
                     <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-slate-400 to-slate-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-slate-500/30 group-hover:scale-110 transition-transform shrink-0">
@@ -459,7 +468,6 @@
                     </div>
                 </a>
 
-                <!-- 11. Vortex Tournament -->
                 <a href="https://keralatimetable.in/vortex.html" class="glass-panel glass-panel-hover rounded-2xl md:rounded-[2rem] p-4 md:p-5 flex flex-col lg:flex-row items-center lg:justify-between transition-all group col-span-2 lg:col-span-1 slide-rtl delay-[850ms]">
                     <div class="flex flex-col lg:flex-row items-center gap-2 lg:gap-5">
                         <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-purple-500 to-fuchsia-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-md md:shadow-lg shadow-purple-500/30 group-hover:scale-110 transition-transform relative shrink-0">
@@ -554,26 +562,36 @@
         if(typeof loadNavigation === 'function') loadNavigation('home', '', false);
 
         document.addEventListener('DOMContentLoaded', () => {
-            // --- CAROUSEL LOGIC ---
+            // --- CAROUSEL LOGIC WITH DYNAMIC TIMEOUT ---
             const slides = document.querySelectorAll('.hero-slide');
             const dots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.getElementById('btn-prev');
+            const nextBtn = document.getElementById('btn-next');
             
             let currentSlide = 0;
-            let slideInterval;
+            let slideTimer; // Using setTimeout instead of setInterval
 
-            function updateCarousel(index) {
+            function updateCarousel(newIndex, direction = 'next') {
                 slides.forEach((slide, i) => {
-                    if (i === index) {
-                        slide.classList.remove('opacity-0', 'pointer-events-none', 'z-10');
-                        slide.classList.add('opacity-100', 'z-20');
+                    if (i === newIndex) {
+                        slide.style.opacity = '1';
+                        slide.style.transform = 'translateX(0)';
+                        slide.style.zIndex = '20';
+                        slide.style.pointerEvents = 'auto';
                     } else {
-                        slide.classList.remove('opacity-100', 'z-20');
-                        slide.classList.add('opacity-0', 'pointer-events-none', 'z-10');
+                        slide.style.opacity = '0';
+                        slide.style.zIndex = '10';
+                        slide.style.pointerEvents = 'none';
+                        if (direction === 'next') {
+                            slide.style.transform = (i === currentSlide) ? 'translateX(-50px)' : 'translateX(50px)';
+                        } else {
+                            slide.style.transform = (i === currentSlide) ? 'translateX(50px)' : 'translateX(-50px)';
+                        }
                     }
                 });
 
                 dots.forEach((dot, i) => {
-                    if (i === index) {
+                    if (i === newIndex) {
                         dot.classList.remove('w-1.5', 'bg-indigo-200', 'hover:bg-indigo-300');
                         dot.classList.add('w-6', 'bg-indigo-500');
                     } else {
@@ -581,28 +599,50 @@
                         dot.classList.add('w-1.5', 'bg-indigo-200', 'hover:bg-indigo-300');
                     }
                 });
+
+                currentSlide = newIndex;
+                resetTimer(); // Reset the timer every time the slide changes
             }
 
             function nextSlide() {
-                currentSlide = (currentSlide + 1) % slides.length;
-                updateCarousel(currentSlide);
+                let newIndex = (currentSlide + 1) % slides.length;
+                updateCarousel(newIndex, 'next');
             }
 
-            function resetInterval() {
-                clearInterval(slideInterval);
-                slideInterval = setInterval(nextSlide, 5000);
+            function prevSlide() {
+                let newIndex = (currentSlide - 1 + slides.length) % slides.length;
+                updateCarousel(newIndex, 'prev');
             }
+
+            function resetTimer() {
+                clearTimeout(slideTimer);
+                // Slide 0 gets 7 seconds, others get 4 seconds
+                let duration = (currentSlide === 0) ? 7000 : 4000;
+                slideTimer = setTimeout(nextSlide, duration);
+            }
+
+            nextBtn.addEventListener('click', () => { 
+                let newIndex = (currentSlide + 1) % slides.length;
+                updateCarousel(newIndex, 'next'); 
+            });
+            
+            prevBtn.addEventListener('click', () => { 
+                let newIndex = (currentSlide - 1 + slides.length) % slides.length;
+                updateCarousel(newIndex, 'prev'); 
+            });
 
             dots.forEach(dot => {
                 dot.addEventListener('click', (e) => {
-                    currentSlide = parseInt(e.target.getAttribute('data-index'));
-                    updateCarousel(currentSlide);
-                    resetInterval();
+                    let targetIndex = parseInt(e.target.getAttribute('data-index'));
+                    let direction = targetIndex > currentSlide ? 'next' : 'prev';
+                    if (targetIndex !== currentSlide) {
+                        updateCarousel(targetIndex, direction);
+                    }
                 });
             });
 
             // Start Autoplay
-            resetInterval();
+            resetTimer();
 
             // --- SEARCH BAR DROPDOWN LOGIC ---
             const searchForm = document.getElementById('quick-search-form');
