@@ -169,9 +169,9 @@ function injectGlobalAd() {
         const moduleGridContainer = firstModule.parentElement; 
         
         // Define your ad banner HTML
-        // Fix applied: removed fixed heights so w-full and h-auto handle native scaling perfectly.
+        // Fix applied: Changed max-w-3xl to md:max-w-xl lg:max-w-2xl to shrink desktop footprint
         const adHTML = `
-        <a href="https://forms.gle/VT8NGk9vi7gT7tgT7" target="_blank" rel="noopener noreferrer" class="block w-full max-w-3xl mx-auto mb-10 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group border border-slate-100 bg-slate-50 fade-in-ad">
+        <a href="https://forms.gle/VT8NGk9vi7gT7tgT7" target="_blank" rel="noopener noreferrer" class="block w-full md:max-w-xl lg:max-w-2xl mx-auto mb-10 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group border border-slate-100 bg-slate-50 fade-in-ad">
             <img src="/images/Ad.png" alt="Vortex Tournament Registration" width="1881" height="836" class="w-full h-auto group-hover:scale-105 transition-transform duration-500 ease-out">
         </a>
         <style>
