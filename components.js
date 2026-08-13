@@ -151,3 +151,38 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     closeBtn.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 }
+
+// ----------------------------------------------
+// GLOBAL AD INJECTOR STRICTLY FOR NOTE PAGES
+// ----------------------------------------------
+function injectGlobalAd() {
+    // 1. Check if the current URL actually contains the word "notes"
+    const currentURL = window.location.href.toLowerCase();
+    const isNotePage = currentURL.includes('notes');
+    
+    // 2. Find the first module card on the page
+    const firstModule = document.querySelector('.module-card');
+    
+    // 3. STRICT CHECK: Only inject if BOTH conditions are true
+    if (isNotePage && firstModule) {
+        // Find the grid container that holds the modules
+        const moduleGridContainer = firstModule.parentElement; 
+        
+        // Define your ad banner HTML
+        const adHTML = `
+        <a href="https://forms.gle/VT8NGk9vi7gT7tgT7" target="_blank" rel="noopener noreferrer" class="block w-full mb-10 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group border border-slate-100 bg-slate-50 fade-in-ad">
+            <img src="/images/Ad.png" alt="Vortex Tournament Registration" width="1881" height="836" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
+        </a>
+        <style>
+            @keyframes fadeInAd { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+            .fade-in-ad { animation: fadeInAd 0.5s ease-out forwards; }
+        </style>
+        `;
+        
+        // Insert the ad directly before the module grid
+        moduleGridContainer.insertAdjacentHTML('beforebegin', adHTML);
+    }
+}
+
+// Run the injector automatically when the page loads
+document.addEventListener('DOMContentLoaded', injectGlobalAd);
