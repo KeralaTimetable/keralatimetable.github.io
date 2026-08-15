@@ -15,6 +15,6 @@ window.KTU_NOTICES = [
  4. Pay ₹100 via HDFC/Federal Bank (Card, UPI, or Net Banking).
  ",
         link: "https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D/465",
-        tags: ["5th Year", "2024 Scheme", "Exams"]
+        tags: ["5th Year", "2024 Scheme", "MOOC"]
     }
 ];
