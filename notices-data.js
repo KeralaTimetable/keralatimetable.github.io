@@ -14,7 +14,7 @@ window.KTU_NOTICES = [
  3. Enter course details, submit, and proceed to payment.
  4. Pay ₹100 via HDFC/Federal Bank (Card, UPI, or Net Banking).
  ",
-        link: "https://ktu.edu.in/Menu/announcements",
+        link: "https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D/465",
         tags: ["5th Year", "2024 Scheme", "Exams"]
     }
 ];
