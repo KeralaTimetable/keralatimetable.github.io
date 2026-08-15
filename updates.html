@@ -43,13 +43,22 @@
             <input type="text" id="searchInput" class="block w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-sm transition-all" placeholder="Search for timetables, exams, or keywords...">
         </div>
 
-        <!-- Horizontal Scrolling Filter Bar -->
+        <!-- Horizontal Scrolling Filter Bar (Updated for all Semesters) -->
         <div class="flex gap-2 overflow-x-auto pb-4 mb-2 hide-scrollbar whitespace-nowrap" id="filter-container">
             <button class="filter-btn active bg-indigo-600 text-white font-bold px-5 py-2 rounded-full shadow-md text-sm border border-indigo-600 shrink-0" data-filter="All">
                 All Updates
             </button>
-            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="S5">
-                S5
+            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="1st Year">
+                1st Year (S1/S2)
+            </button>
+            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="2nd Year">
+                2nd Year (S3/S4)
+            </button>
+            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="3rd Year">
+                3rd Year (S5/S6)
+            </button>
+            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="4th Year">
+                4th Year (S7/S8)
             </button>
             <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="2024 Scheme">
                 2024 Scheme
@@ -57,8 +66,8 @@
             <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="2019 Scheme">
                 2019 Scheme
             </button>
-            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="All B.Tech">
-                All B.Tech
+            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="General">
+                General
             </button>
         </div>
 
@@ -128,7 +137,7 @@
 
     <script>
         let currentFilter = 'All';
-        let currentRenderedNotices = []; // To store currently displayed notices for the modal
+        let currentRenderedNotices = []; 
 
         function initializeNotices() {
             try {
