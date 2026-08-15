@@ -12,8 +12,7 @@ window.KTU_NOTICES = [
  1. Log in to KTU Student Portal.
  2. Go to Non-KTU/Previously Done Course Registration Request → Click Add.
  3. Enter course details, submit, and proceed to payment.
- 4. Pay ₹100 via HDFC/Federal Bank (Card, UPI, or Net Banking).
- ",
+ 4. Pay ₹100 via HDFC/Federal Bank (Card, UPI, or Net Banking).",
         link: "https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D/465",
         tags: ["5th Year", "2024 Scheme", "MOOC"]
     }
