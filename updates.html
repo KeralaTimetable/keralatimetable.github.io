@@ -1,15 +1,24 @@
-    <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KTU Notification and Announcements | KTU Latest Updates</title>
+    
     <script src="/tailwind-local.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        /* Hide scrollbar for the filter bar */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .filter-btn { transition: all 0.3s ease; }
     </style>
+    
     <link rel="icon" href="/favicon.png" type="image/png">
     <meta property="og:site_name" content="Kerala Timetable">
     <meta property="og:image" content="https://www.keralatimetable.in/social-preview.png">
@@ -26,11 +35,31 @@
             <p class="text-slate-500 font-medium">Fast, ad-free updates directly from KTU.</p>
         </div>
 
-        <div class="relative mb-8">
+        <!-- Search Bar -->
+        <div class="relative mb-5">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <i class="fas fa-search text-slate-400"></i>
             </div>
             <input type="text" id="searchInput" class="block w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-sm transition-all" placeholder="Search for timetables, exams, or keywords...">
+        </div>
+
+        <!-- Horizontal Scrolling Filter Bar -->
+        <div class="flex gap-2 overflow-x-auto pb-4 mb-2 hide-scrollbar whitespace-nowrap" id="filter-container">
+            <button class="filter-btn active bg-indigo-600 text-white font-bold px-5 py-2 rounded-full shadow-md text-sm border border-indigo-600 shrink-0" data-filter="All">
+                All Updates
+            </button>
+            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="S5">
+                S5
+            </button>
+            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="2024 Scheme">
+                2024 Scheme
+            </button>
+            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="2019 Scheme">
+                2019 Scheme
+            </button>
+            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="All B.Tech">
+                All B.Tech
+            </button>
         </div>
 
         <div id="notices-container" class="flex flex-col gap-4">
@@ -52,79 +81,74 @@
         </div>
     </footer>
 
+    <!-- Load Components and Notification Data -->
     <script src="components.js"></script>
+    <script src="notices-data.js"></script>
+    
     <script>
         loadNavigation('updates');
     </script>
 
     <script>
-        let allNotices = [];
+        let currentFilter = 'All';
 
-        // 1. Fetch the data from your automated JSON file
-        async function loadNotices() {
+        function initializeNotices() {
             try {
-                const response = await fetch('notices.json'); 
-                if (!response.ok) throw new Error("Failed to fetch data");
-                
-                const data = await response.json();
-                allNotices = data.content || [];
-                
-                // 2. Sort the notices by Date (Newest First)
-                allNotices.sort((a, b) => {
-                    const dateA = new Date(a.announcementDate);
-                    const dateB = new Date(b.announcementDate);
-                    return dateB - dateA; 
-                });
+                // Read from the newly created notices-data.js
+                if (!window.KTU_NOTICES || window.KTU_NOTICES.length === 0) {
+                    throw new Error("No data found in notices-data.js");
+                }
 
-                // 3. Render them to the screen
-                renderNotices(allNotices);
+                // Sort by Date (Newest First)
+                window.KTU_NOTICES.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                filterAndRender();
             } catch (error) {
                 console.error("Error loading notices:", error);
                 document.getElementById('notices-container').innerHTML = `
                     <div class="text-center py-10 text-red-500 font-medium bg-red-50 rounded-2xl border border-red-100">
                         <i class="fas fa-exclamation-triangle mb-2 text-xl"></i><br>
-                        Failed to load notices. Please try again later.
+                        Failed to load notices. Please check notices-data.js formatting.
                     </div>`;
             }
         }
 
-        // 4. Render the UI Cards
-        function renderNotices(noticesToRender) {
+        function filterAndRender() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const container = document.getElementById('notices-container');
+            
+            // Filter Logic
+            const filteredNotices = window.KTU_NOTICES.filter(notice => {
+                const matchesSearch = notice.title.toLowerCase().includes(searchTerm);
+                const matchesFilter = currentFilter === 'All' || (notice.tags && notice.tags.includes(currentFilter));
+                return matchesSearch && matchesFilter;
+            });
+
             container.innerHTML = '';
 
-            if (noticesToRender.length === 0) {
+            if (filteredNotices.length === 0) {
                 container.innerHTML = `
                     <div class="text-center py-10 text-slate-500 font-medium bg-white rounded-2xl border border-slate-200 shadow-sm">
                         <i class="fas fa-search mb-2 text-2xl text-slate-300"></i><br>
-                        No matching notices found.
+                        No notices found for this category or search.
                     </div>`;
                 return;
             }
 
-            noticesToRender.forEach(notice => {
-                const subject = notice.subject || "Untitled Notification";
-                const rawDate = notice.announcementDate || "";
+            const today = new Date();
+
+            filteredNotices.forEach(notice => {
+                const noticeDateObj = new Date(notice.date);
                 
-                // Format Date nicely
-                let dateStr = rawDate;
-                let noticeDateObj = new Date(rawDate);
-                try {
-                    const parts = rawDate.split(',');
-                    if (parts.length > 1) {
-                         const datePart = parts[1].trim(); 
-                         const yearPart = parts[2] ? parts[2].trim() : noticeDateObj.getFullYear();
-                         dateStr = `${datePart}, ${yearPart}`;
-                    }
-                } catch(e) {}
+                // Format Date nicely (e.g., "15 Aug 2026")
+                const options = { day: 'numeric', month: 'short', year: 'numeric' };
+                const formattedDate = noticeDateObj.toLocaleDateString('en-GB', options);
 
                 // Calculate if notice is "New" (Posted within the last 7 days)
-                const today = new Date();
                 const diffTime = Math.abs(today - noticeDateObj);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                 const isNew = diffDays <= 7;
                 
-                // Create the Badge
                 let newBadge = isNew 
                     ? `<span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-600 border border-emerald-100 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider animate-pulse">
                             <i class="fas fa-star text-[10px]"></i> New
@@ -133,23 +157,34 @@
                            <i class="fas fa-bullhorn text-[10px]"></i> KTU
                        </span>`;
 
+                // Generate visual tags for the card
+                let tagsHTML = '';
+                if (notice.tags && notice.tags.length > 0) {
+                    tagsHTML = `<div class="flex flex-wrap gap-1.5 mb-2 mt-1">`;
+                    notice.tags.forEach(tag => {
+                        tagsHTML += `<span class="bg-slate-100 text-slate-500 border border-slate-200 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">${tag}</span>`;
+                    });
+                    tagsHTML += `</div>`;
+                }
+
                 // Build the Card HTML
                 const card = `
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-indigo-300 transition-all duration-300 flex flex-col gap-4 group">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-indigo-300 transition-all duration-300 flex flex-col gap-3 group">
                         
                         <div class="flex-grow">
-                            <h3 class="text-slate-800 font-bold text-base md:text-lg leading-snug group-hover:text-indigo-600 transition-colors">${subject}</h3>
+                            ${tagsHTML}
+                            <h3 class="text-slate-800 font-bold text-base md:text-lg leading-snug group-hover:text-indigo-600 transition-colors">${notice.title}</h3>
                         </div>
                         
                         <div class="flex flex-wrap items-center justify-between mt-auto pt-4 border-t border-slate-100 gap-3">
                             <div class="flex items-center gap-3">
                                 <div class="flex items-center text-slate-500 text-xs font-semibold bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200">
-                                    <i class="far fa-calendar-alt mr-1.5 text-slate-400"></i> ${dateStr}
+                                    <i class="far fa-calendar-alt mr-1.5 text-slate-400"></i> ${formattedDate}
                                 </div>
                                 ${newBadge}
                             </div>
                             
-                            <a href="${notice.urlHref || 'https://ktu.edu.in/Menu/announcements'}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors shadow-sm gap-1.5 whitespace-nowrap border border-indigo-100 hover:border-indigo-600 group-hover:bg-indigo-600 group-hover:text-white">
+                            <a href="${notice.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors shadow-sm gap-1.5 whitespace-nowrap border border-indigo-100 hover:border-indigo-600 group-hover:bg-indigo-600 group-hover:text-white">
                                 View Official <i class="fas fa-arrow-right text-[10px]"></i>
                             </a>
                         </div>
@@ -159,17 +194,32 @@
             });
         }
 
-        // 5. Search Bar Logic (Filters instantly as you type)
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const filteredNotices = allNotices.filter(notice => 
-                (notice.subject || "").toLowerCase().includes(searchTerm)
-            );
-            renderNotices(filteredNotices);
+        // Search Input Listener
+        document.getElementById('searchInput').addEventListener('input', filterAndRender);
+
+        // Filter Button Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Reset styling for all buttons
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-indigo-600', 'text-white', 'border-indigo-600', 'shadow-md');
+                    b.classList.add('bg-white', 'text-slate-600', 'border-slate-200', 'shadow-sm');
+                });
+                
+                // Apply active styling to clicked button
+                const clickedBtn = e.target;
+                clickedBtn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200', 'shadow-sm');
+                clickedBtn.classList.add('active', 'bg-indigo-600', 'text-white', 'border-indigo-600', 'shadow-md');
+                
+                // Update state and re-render
+                currentFilter = clickedBtn.getAttribute('data-filter');
+                filterAndRender();
+            });
         });
 
-        // Initialize the fetch sequence
-        loadNotices();
+        // Initialize script
+        initializeNotices();
     </script>
 </body>
 </html>
