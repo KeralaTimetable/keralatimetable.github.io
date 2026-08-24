@@ -1045,6 +1045,72 @@
     "pdf_file": "pdfs/S8_OECST835.pdf"
   },
   {
+    "branch": "ARTIFICIAL INTELLIGENCE",
+    "scheme": "B.Tech Full Time 2024 Scheme",
+    "semester": "S4",
+    "course_code": "GAMAT401",
+    "subject_name": "Mathematics for Computer and Information Science \u2013 4 (Group A)",
+    "start_page": 53,
+    "end_page": 56,
+    "page_count": 4,
+    "pdf_file": "pdfs/S4_GAMAT401.pdf"
+  },
+  {
+    "branch": "ARTIFICIAL INTELLIGENCE",
+    "scheme": "B.Tech Full Time 2024 Scheme",
+    "semester": "S4",
+    "course_code": "PCCST402",
+    "subject_name": "DATABASE MANAGEMENT SYSTEMS (Common to CS/CD/CA/CR/AD/AI/CB/CN/CC/CU/CI/CG)",
+    "start_page": 57,
+    "end_page": 60,
+    "page_count": 4,
+    "pdf_file": "pdfs/S4_PCCST402.pdf"
+  },
+  {
+    "branch": "ARTIFICIAL INTELLIGENCE",
+    "scheme": "B.Tech Full Time 2024 Scheme",
+    "semester": "S4",
+    "course_code": "PCCST403",
+    "subject_name": "OPERATING SYSTEMS (Common to CS/CD/CM/CR/CA/AD/AI/CB/CN/CC/CU/CI/CG)",
+    "start_page": 61,
+    "end_page": 128,
+    "page_count": 68,
+    "pdf_file": "pdfs/S4_PCCST403.pdf"
+  },
+  {
+    "branch": "ARTIFICIAL INTELLIGENCE",
+    "scheme": "B.Tech Full Time 2024 Scheme",
+    "semester": "S5",
+    "course_code": "PCCST501",
+    "subject_name": "COMPUTER NETWORKS (Common to CS/CD/CM/CR/CA/AD/AI/CB/CN/CU/CI)",
+    "start_page": 129,
+    "end_page": 158,
+    "page_count": 30,
+    "pdf_file": "pdfs/S5_PCCST501.pdf"
+  },
+  {
+    "branch": "ARTIFICIAL INTELLIGENCE",
+    "scheme": "B.Tech Full Time 2024 Scheme",
+    "semester": "S5",
+    "course_code": "PECST524",
+    "subject_name": "DATA COMPRESSION ( Common to CS/CD/CM/CR/AD/AI/AM/CN/CI)",
+    "start_page": 159,
+    "end_page": 177,
+    "page_count": 19,
+    "pdf_file": "pdfs/S5_PECST524.pdf"
+  },
+  {
+    "branch": "ARTIFICIAL INTELLIGENCE",
+    "scheme": "B.Tech Full Time 2024 Scheme",
+    "semester": "S5",
+    "course_code": "PCCAL507",
+    "subject_name": "AI ALGORITHMS LAB (Common to CA/AI)",
+    "start_page": 178,
+    "end_page": 187,
+    "page_count": 10,
+    "pdf_file": "pdfs/S5_PCCAL507.pdf"
+  },
+  {
     "branch": "ELECTRONICS ENGINEERING (VLSI DESIGN AND TECHNOLOGY)",
     "scheme": "B.Tech Full Time 2024 Scheme",
     "semester": "S3",
