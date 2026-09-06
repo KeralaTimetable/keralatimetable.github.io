@@ -221,8 +221,8 @@
                 <p class="text-sm font-bold text-slate-500 animate-pulse">Searching KTU Archive...</p>
             </div>
 
-            <!-- Enhanced Scheme Filters: 2024, 2019, 2015 -->
-            <div id="results-header" class="w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-200/60 pb-4 mb-6 hidden gap-4">
+            <!-- Added scroll-mt-8 for clean spacing when auto-scrolling -->
+            <div id="results-header" class="w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-200/60 pb-4 mb-6 hidden gap-4 scroll-mt-8">
                 <div>
                     <h2 class="text-xl font-black text-slate-800"><span id="search-term-display" class="text-blue-600 font-'Fira Code'"></span> PYQs</h2>
                     <span id="result-count" class="text-xs font-bold text-slate-600 bg-white/80 backdrop-blur px-3 py-1 rounded-full border border-slate-200 mt-2 inline-block"></span>
@@ -446,6 +446,11 @@
                 header.classList.remove('hidden');
                 
                 renderGrid(query);
+
+                // Auto-scroll directly to the header showing "<Code> PYQs"
+                setTimeout(() => {
+                    header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
 
             } catch (error) {
                 console.error(error);
