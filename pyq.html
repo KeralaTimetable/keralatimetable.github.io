@@ -221,17 +221,18 @@
                 <p class="text-sm font-bold text-slate-500 animate-pulse">Searching KTU Archive...</p>
             </div>
 
-            <!-- ENHANCED: Results Header now includes Scheme Filters -->
+            <!-- Enhanced Scheme Filters: 2024, 2019, 2015 -->
             <div id="results-header" class="w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-200/60 pb-4 mb-6 hidden gap-4">
                 <div>
                     <h2 class="text-xl font-black text-slate-800"><span id="search-term-display" class="text-blue-600 font-'Fira Code'"></span> PYQs</h2>
                     <span id="result-count" class="text-xs font-bold text-slate-600 bg-white/80 backdrop-blur px-3 py-1 rounded-full border border-slate-200 mt-2 inline-block"></span>
                 </div>
                 
-                <div id="scheme-filters" class="flex gap-1.5 bg-slate-100/70 p-1.5 rounded-xl border border-slate-200 shadow-inner">
+                <div id="scheme-filters" class="flex flex-wrap gap-1.5 bg-slate-100/70 p-1.5 rounded-xl border border-slate-200 shadow-inner">
                     <button onclick="setSchemeFilter('All')" id="btn-filter-all" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 transition-all">All</button>
-                    <button onclick="setSchemeFilter(6)" id="btn-filter-2019" class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 transition-all">2019 Scheme</button>
                     <button onclick="setSchemeFilter(8)" id="btn-filter-2024" class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 transition-all">2024 Scheme</button>
+                    <button onclick="setSchemeFilter(6)" id="btn-filter-2019" class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 transition-all">2019 Scheme</button>
+                    <button onclick="setSchemeFilter(5)" id="btn-filter-2015" class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 transition-all">2015 Scheme</button>
                 </div>
             </div>
 
@@ -393,17 +394,21 @@
 
         function updateFilterUI() {
             const btnAll = document.getElementById('btn-filter-all');
-            const btn2019 = document.getElementById('btn-filter-2019');
             const btn2024 = document.getElementById('btn-filter-2024');
+            const btn2019 = document.getElementById('btn-filter-2019');
+            const btn2015 = document.getElementById('btn-filter-2015');
             
             const inactiveClass = "px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 transition-all";
             const activeClass = "px-4 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 transition-all";
 
-            [btnAll, btn2019, btn2024].forEach(btn => btn.className = inactiveClass);
+            [btnAll, btn2024, btn2019, btn2015].forEach(btn => {
+                if (btn) btn.className = inactiveClass;
+            });
 
-            if(activeSchemeFilter === 'All') btnAll.className = activeClass;
-            else if(activeSchemeFilter === 6) btn2019.className = activeClass;
-            else if(activeSchemeFilter === 8) btn2024.className = activeClass;
+            if(activeSchemeFilter === 'All' && btnAll) btnAll.className = activeClass;
+            else if(activeSchemeFilter === 8 && btn2024) btn2024.className = activeClass;
+            else if(activeSchemeFilter === 6 && btn2019) btn2019.className = activeClass;
+            else if(activeSchemeFilter === 5 && btn2015) btn2015.className = activeClass;
         }
 
         async function executeSearch(e) {
@@ -484,7 +489,9 @@
                 let schemeBadge = '';
                 const codeLength = paper.course_code ? paper.course_code.trim().length : 0;
                 
-                if (codeLength === 6) {
+                if (codeLength === 5) {
+                    schemeBadge = `<span class="inline-block px-2 py-1 bg-amber-50 border border-amber-200 text-amber-700 text-[9px] font-bold uppercase tracking-wider rounded-md">2015 Scheme</span>`;
+                } else if (codeLength === 6) {
                     schemeBadge = `<span class="inline-block px-2 py-1 bg-purple-50 border border-purple-200 text-purple-700 text-[9px] font-bold uppercase tracking-wider rounded-md">2019 Scheme</span>`;
                 } else if (codeLength === 8) {
                     schemeBadge = `<span class="inline-block px-2 py-1 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[9px] font-bold uppercase tracking-wider rounded-md">2024 Scheme</span>`;
