@@ -5,19 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
     
-    <!-- SEO OPTIMIZATION: High-value keywords in Title and Description -->
     <title>KTU Previous Year Question Papers (PYQ) PDF | Kerala Timetable</title>
     <meta name="description" content="Download KTU PYQs (Previous Year Question Papers) for B.Tech instantly. Search by course code to get high-quality PDF question papers for your university exams.">
     <meta name="keywords" content="ktu pyq, ktu previous year question papers, ktu btech pyq, ktu question papers, apjaktu pyq, ktu s1 s2 pyq, ktu cse pyq, ktu previous papers pdf, ktu exam preparations">
     <meta name="robots" content="index, follow">
     
-    <!-- FIXED: Canonical URL without www -->
     <link rel="canonical" href="https://keralatimetable.in/pyq.html" />
-    
-    <!-- FIXED: Absolute Favicon URL for Google Search Snippets -->
     <link rel="icon" href="https://keralatimetable.in/favicon.png" type="image/png">
 
-    <!-- ADDED: Complete OG Tags without www -->
     <meta property="og:site_name" content="Kerala Timetable">
     <meta property="og:title" content="KTU Previous Year Question Papers (PYQ) PDF | Kerala Timetable">
     <meta property="og:description" content="Download KTU PYQs for B.Tech instantly. Search by course code to get high-quality PDF question papers for your university exams.">
@@ -25,7 +20,6 @@
     <meta property="og:image" content="https://keralatimetable.in/social-preview.png">
     <meta property="og:type" content="website">
     
-    <!-- UPGRADED JSON-LD SCHEMA: Combines CollectionPage and FAQPage -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -72,7 +66,6 @@
             background-color: #f8fafc;
         }
 
-        /* Authentic Glassmorphism */
         .real-glass {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(24px);
@@ -120,7 +113,6 @@
             box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
         }
 
-        /* Orb Animations */
         @keyframes float-pulse {
             0% { transform: scale(1); opacity: 0.5; }
             50% { transform: scale(1.05); opacity: 0.7; }
@@ -128,7 +120,6 @@
         }
         .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
 
-        /* Typewriter Cursor */
         .cursor::after {
             content: '|';
             animation: blink 1s step-start infinite;
@@ -136,7 +127,6 @@
         }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* Loader */
         .loader {
             border: 3px solid rgba(0,0,0,0.05);
             border-top: 3px solid #2563eb; 
@@ -168,21 +158,21 @@
 
     <main class="flex-grow w-full max-w-5xl mx-auto px-4 pt-16 pb-20 relative z-10 flex flex-col items-center">
         
-        <!-- HEADER OPTIMIZED FOR SEO: Expanding H1 to include full search terms -->
         <div class="text-center mb-10 transform translate-z-10">
             <h1 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
                 KTU Previous Year Question Papers <br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Downloaded Instantly.</span>
             </h1>
             <p class="text-slate-500 font-medium md:text-lg mb-8 max-w-2xl mx-auto">
-                Access thousands of <span class="font-bold text-slate-700">B.Tech PYQs</span> directly from the APJAKTU database. Explore <span id="typewriter" class="text-blue-600 font-bold cursor"></span>
+                Access thousands of <span class="font-bold text-slate-700">B.Tech PYQs</span> directly from the APJAKTU database.<br>
+                <span class="block mt-1">Explore <span id="typewriter" class="text-blue-600 font-bold cursor"></span></span>
             </p>
         </div>
 
         <div id="parallax-container" class="w-full max-w-2xl relative perspective-1000 mb-8">
             <div id="search-card" class="real-glass rounded-[2rem] p-6 md:p-8 w-full flex flex-col gap-4 relative z-20">
                 
-                <p class="text-xs text-slate-500 font-bold uppercase tracking-widest text-center">Start by entering your KTU course code</p>
+                <p class="text-xs text-slate-500 font-bold uppercase tracking-widest text-center">Start by entering your KTU course code or subject</p>
                 
                 <form id="searchForm" onsubmit="executeSearch(event)" class="relative flex items-center">
                     <i class="fas fa-search absolute left-6 text-slate-400 text-lg"></i>
@@ -196,7 +186,6 @@
             </div>
         </div>
 
-        <!-- WhatsApp Group Banner -->
         <a href="https://chat.whatsapp.com/CD0wDNFlMDbKFQW1TWDg3l" target="_blank" rel="noopener noreferrer" class="w-full max-w-sm mx-auto mb-10 real-glass hover:bg-white/60 text-slate-800 py-3 px-6 rounded-2xl transition-all flex items-center justify-center gap-4 shadow-sm border border-[#25D366]/40 hover:border-[#25D366]/70 group z-20 relative">
             <div class="bg-[#25D366] text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                 <i class="fab fa-whatsapp text-xl"></i>
@@ -232,9 +221,18 @@
                 <p class="text-sm font-bold text-slate-500 animate-pulse">Searching KTU Archive...</p>
             </div>
 
-            <div id="results-header" class="w-full flex justify-between items-end border-b border-slate-200/60 pb-4 mb-6 hidden">
-                <h2 class="text-xl font-black text-slate-800"><span id="search-term-display" class="text-blue-600 font-'Fira Code'"></span> PYQs</h2>
-                <span id="result-count" class="text-xs font-bold text-slate-600 bg-white/80 backdrop-blur px-3 py-1 rounded-full border border-slate-200"></span>
+            <!-- ENHANCED: Results Header now includes Scheme Filters -->
+            <div id="results-header" class="w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-200/60 pb-4 mb-6 hidden gap-4">
+                <div>
+                    <h2 class="text-xl font-black text-slate-800"><span id="search-term-display" class="text-blue-600 font-'Fira Code'"></span> PYQs</h2>
+                    <span id="result-count" class="text-xs font-bold text-slate-600 bg-white/80 backdrop-blur px-3 py-1 rounded-full border border-slate-200 mt-2 inline-block"></span>
+                </div>
+                
+                <div id="scheme-filters" class="flex gap-1.5 bg-slate-100/70 p-1.5 rounded-xl border border-slate-200 shadow-inner">
+                    <button onclick="setSchemeFilter('All')" id="btn-filter-all" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 transition-all">All</button>
+                    <button onclick="setSchemeFilter(6)" id="btn-filter-2019" class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 transition-all">2019 Scheme</button>
+                    <button onclick="setSchemeFilter(8)" id="btn-filter-2024" class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 transition-all">2024 Scheme</button>
+                </div>
             </div>
 
             <div id="results-grid" class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -242,7 +240,6 @@
             </div>
         </div>
 
-        <!-- SEO TEXT BLOCK: Invisible to user experience, crucial for Google Search Rankings -->
         <article class="w-full max-w-4xl mt-12 pt-12 border-t border-slate-200/60 relative z-10 text-left">
             <h2 class="text-2xl font-black text-slate-900 mb-6">The Ultimate KTU PYQ Archive</h2>
             
@@ -376,12 +373,37 @@
             }, true);
         }
 
-        // --- 3. Hugging Face API Integration ---
+        // --- 3. Hugging Face API & Filter Logic ---
         const API_URL = "https://keralatimetable-ktu-papers-api.hf.space"; 
+        
+        let currentSearchData = [];
+        let activeSchemeFilter = 'All';
 
         function quickSearch(code) {
             document.getElementById('searchInput').value = code;
             executeSearch(new Event('submit', { cancelable: true }));
+        }
+
+        function setSchemeFilter(filterType) {
+            activeSchemeFilter = filterType;
+            updateFilterUI();
+            const query = document.getElementById('searchInput').value.trim().toUpperCase();
+            renderGrid(query);
+        }
+
+        function updateFilterUI() {
+            const btnAll = document.getElementById('btn-filter-all');
+            const btn2019 = document.getElementById('btn-filter-2019');
+            const btn2024 = document.getElementById('btn-filter-2024');
+            
+            const inactiveClass = "px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 transition-all";
+            const activeClass = "px-4 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 transition-all";
+
+            [btnAll, btn2019, btn2024].forEach(btn => btn.className = inactiveClass);
+
+            if(activeSchemeFilter === 'All') btnAll.className = activeClass;
+            else if(activeSchemeFilter === 6) btn2019.className = activeClass;
+            else if(activeSchemeFilter === 8) btn2024.className = activeClass;
         }
 
         async function executeSearch(e) {
@@ -410,62 +432,15 @@
                 
                 const data = await response.json();
                 
+                currentSearchData = data.results;
+                activeSchemeFilter = 'All'; 
+                updateFilterUI();
+                
                 loader.classList.remove('flex');
                 loader.classList.add('hidden');
                 header.classList.remove('hidden');
                 
-                document.getElementById('search-term-display').innerText = query;
-                document.getElementById('result-count').innerText = `${data.count} found`;
-
-                if (data.count === 0) {
-                    grid.innerHTML = `
-                        <div class="col-span-full py-12 text-center real-glass rounded-[2rem]">
-                            <i class="fas fa-ghost text-4xl text-slate-300 mb-4"></i>
-                            <h3 class="text-slate-600 font-bold">No papers found for "${query}"</h3>
-                            <p class="text-slate-400 text-sm mt-2">Check the course code and try again.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                data.results.forEach(paper => {
-                    // Determine Scheme based on course code length
-                    let schemeBadge = '';
-                    const codeLength = paper.course_code ? paper.course_code.trim().length : 0;
-                    
-                    if (codeLength === 6) {
-                        schemeBadge = `<span class="inline-block px-2 py-1 bg-purple-50 border border-purple-200 text-purple-700 text-[9px] font-bold uppercase tracking-wider rounded-md">2019 Scheme</span>`;
-                    } else if (codeLength === 8) {
-                        schemeBadge = `<span class="inline-block px-2 py-1 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[9px] font-bold uppercase tracking-wider rounded-md">2024 Scheme</span>`;
-                    }
-
-                    grid.innerHTML += `
-                        <div class="result-glass rounded-[1.5rem] p-5 flex flex-col justify-between h-full group">
-                            <div>
-                                <!-- Updated Top Row Layout -->
-                                <div class="flex justify-between items-start mb-3">
-                                    <div class="flex flex-wrap items-center gap-2">
-                                        <span class="inline-block px-2.5 py-1 bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-bold font-'Fira Code' rounded-md">
-                                            ${paper.course_code}
-                                        </span>
-                                        ${schemeBadge}
-                                    </div>
-                                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider shrink-0 mt-0.5">
-                                        <i class="far fa-calendar-alt"></i> ${paper.exam_session}
-                                    </span>
-                                </div>
-                                <h3 class="text-sm font-bold text-slate-800 leading-snug mb-5 line-clamp-2" title="${paper.title}">
-                                    ${paper.title}
-                                </h3>
-                            </div>
-                            
-                            <button onclick="downloadPaper('${paper.handle}', '${paper.exam_session}', this)" class="w-full bg-white hover:bg-blue-600 text-slate-700 hover:text-white border border-slate-200 hover:border-blue-600 text-xs font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm">
-                                <i class="fas fa-download transition-transform"></i>
-                                <span>Get PDF</span>
-                            </button>
-                        </div>
-                    `;
-                });
+                renderGrid(query);
 
             } catch (error) {
                 console.error(error);
@@ -479,6 +454,68 @@
                     </div>
                 `;
             }
+        }
+
+        function renderGrid(query) {
+            const grid = document.getElementById('results-grid');
+            grid.innerHTML = '';
+
+            const filteredData = currentSearchData.filter(paper => {
+                if (activeSchemeFilter === 'All') return true;
+                const codeLength = paper.course_code ? paper.course_code.trim().length : 0;
+                return codeLength === activeSchemeFilter;
+            });
+            
+            document.getElementById('search-term-display').innerText = query;
+            document.getElementById('result-count').innerText = `${filteredData.length} papers`;
+
+            if (filteredData.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center real-glass rounded-[2rem]">
+                        <i class="fas fa-ghost text-4xl text-slate-300 mb-4"></i>
+                        <h3 class="text-slate-600 font-bold">No papers found for this scheme.</h3>
+                        <p class="text-slate-400 text-sm mt-2">Try switching the filter to view other results.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredData.forEach(paper => {
+                let schemeBadge = '';
+                const codeLength = paper.course_code ? paper.course_code.trim().length : 0;
+                
+                if (codeLength === 6) {
+                    schemeBadge = `<span class="inline-block px-2 py-1 bg-purple-50 border border-purple-200 text-purple-700 text-[9px] font-bold uppercase tracking-wider rounded-md">2019 Scheme</span>`;
+                } else if (codeLength === 8) {
+                    schemeBadge = `<span class="inline-block px-2 py-1 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[9px] font-bold uppercase tracking-wider rounded-md">2024 Scheme</span>`;
+                }
+
+                grid.innerHTML += `
+                    <div class="result-glass rounded-[1.5rem] p-5 flex flex-col justify-between h-full group">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="inline-block px-2.5 py-1 bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-bold font-'Fira Code' rounded-md">
+                                        ${paper.course_code}
+                                    </span>
+                                    ${schemeBadge}
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider shrink-0 mt-0.5">
+                                    <i class="far fa-calendar-alt"></i> ${paper.exam_session}
+                                </span>
+                            </div>
+                            <h3 class="text-sm font-bold text-slate-800 leading-snug mb-5 line-clamp-2" title="${paper.title}">
+                                ${paper.title}
+                            </h3>
+                        </div>
+                        
+                        <button onclick="downloadPaper('${paper.handle}', '${paper.exam_session}', this)" class="w-full bg-white hover:bg-blue-600 text-slate-700 hover:text-white border border-slate-200 hover:border-blue-600 text-xs font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fas fa-download transition-transform"></i>
+                            <span>Get PDF</span>
+                        </button>
+                    </div>
+                `;
+            });
         }
 
         // --- 4. Watermarked PDF Download ---
