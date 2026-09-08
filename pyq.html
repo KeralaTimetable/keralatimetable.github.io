@@ -176,7 +176,7 @@
                 
                 <form id="searchForm" onsubmit="executeSearch(event)" class="relative flex items-center">
                     <i class="fas fa-search absolute left-6 text-slate-400 text-lg"></i>
-                    <input type="text" id="searchInput" autocomplete="off" placeholder="e.g. MAT101, UCEST105..." 
+                    <input type="text" id="searchInput" autocomplete="off" placeholder="e.g. MAT101, UCEST105, Digital Electronics..." 
                            class="glass-input w-full rounded-2xl py-5 pl-14 pr-16 text-lg" required>
                     
                     <button type="submit" aria-label="Search Question Papers" class="absolute right-3 w-12 h-12 bg-blue-600 hover:bg-blue-500 text-white rounded-xl flex items-center justify-center transition-all shadow-[0_5px_15px_rgba(37,99,235,0.3)] hover:scale-105">
@@ -221,7 +221,7 @@
                 <p class="text-sm font-bold text-slate-500 animate-pulse">Searching KTU Archive...</p>
             </div>
 
-            <!-- Added scroll-mt-8 for clean spacing when auto-scrolling -->
+            <!-- Results Header: Scheme filter bar is dynamically hidden for course codes like GAMAT401 -->
             <div id="results-header" class="w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-200/60 pb-4 mb-6 hidden gap-4 scroll-mt-8">
                 <div>
                     <h2 class="text-xl font-black text-slate-800"><span id="search-term-display" class="text-blue-600 font-'Fira Code'"></span> PYQs</h2>
@@ -380,6 +380,13 @@
         let currentSearchData = [];
         let activeSchemeFilter = 'All';
 
+        // Check if query is a course code (e.g. GAMAT401, MAT101, UCEST105, CS201) vs a Subject Name
+        function isCourseCode(query) {
+            const clean = query.trim().replace(/[-\s]/g, '');
+            // Matches 2 to 7 letters followed by 2 to 4 digits (optional letter or digit suffix)
+            return /^[A-Z]{2,7}\d{2,4}[A-Z0-9]?$/i.test(clean);
+        }
+
         function quickSearch(code) {
             document.getElementById('searchInput').value = code;
             executeSearch(new Event('submit', { cancelable: true }));
@@ -420,6 +427,7 @@
             const loader = document.getElementById('loading-state');
             const grid = document.getElementById('results-grid');
             const header = document.getElementById('results-header');
+            const schemeFilters = document.getElementById('scheme-filters');
             const trending = document.getElementById('trending-searches');
 
             trending.style.display = 'none';
@@ -440,6 +448,13 @@
                 currentSearchData = data.results;
                 activeSchemeFilter = 'All'; 
                 updateFilterUI();
+
+                // Differentiate Course Code (hide toggle) vs Subject Name (show toggle)
+                if (isCourseCode(query)) {
+                    schemeFilters.classList.add('hidden');
+                } else {
+                    schemeFilters.classList.remove('hidden');
+                }
                 
                 loader.classList.remove('flex');
                 loader.classList.add('hidden');
@@ -494,6 +509,7 @@
                 let schemeBadge = '';
                 const codeLength = paper.course_code ? paper.course_code.trim().length : 0;
                 
+                // Badges are preserved on cards regardless of course code or subject search
                 if (codeLength === 5) {
                     schemeBadge = `<span class="inline-block px-2 py-1 bg-amber-50 border border-amber-200 text-amber-700 text-[9px] font-bold uppercase tracking-wider rounded-md">2015 Scheme</span>`;
                 } else if (codeLength === 6) {
