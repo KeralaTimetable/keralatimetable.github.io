@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <title>KTU Recorded Video Lectures | Kerala Timetable</title>
+    <link rel="icon" href="https://keralatimetable.in/favicon.png" type="image/png">
+
+    <!-- Local Tailwind Script from your site (with automatic CDN fallback for offline testing) -->
+    <script src="/tailwind-local.js"></script>
+    <script>
+        if (!window.tailwind) {
+            document.write('<script src="https://cdn.tailwindcss.com"><\/script>');
+        }
+    </script>
+
+    <!-- Google Identity Services (Sign-in with Google) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- Icons & Fonts exactly matching your pasted file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow-x: hidden;
+        }
+
+        .bg-mesh {
+            background-color: #f8fafc;
+        }
+
+        .real-glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.05);
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+
+        .result-glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px 0 rgba(31, 38, 135, 0.05);
+            transition: all 0.3s ease;
+        }
+        .result-glass:hover {
+            transform: translateY(-5px);
+            border-color: rgba(37, 99, 235, 0.4); 
+            box-shadow: 0 15px 30px -10px rgba(37, 99, 235, 0.15);
+        }
+
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            color: #1e293b; 
+            font-family: 'Fira Code', monospace;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        .glass-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-color: #3b82f6; 
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+        }
+
+        @keyframes float-pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+        .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
+
+        .cursor::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            color: #2563eb; 
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .loader {
+            border: 3px solid rgba(0,0,0,0.05);
+            border-top: 3px solid #2563eb; 
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+
+<body class="bg-mesh text-slate-800 antialiased min-h-screen flex flex-col relative">
+
+    <!-- Navbar Container from your components.js -->
+    <div id="navigation-container" class="z-50 relative"></div>
+
+    <!-- Ambient Gradient Orbs with 3D Mouse Parallax -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="scroll-bg-1" class="absolute -top-4 -left-8 md:top-10 md:-left-10 w-64 h-64 md:w-96 md:h-96 transition-transform duration-100 ease-out">
+            <div id="mouse-orb-1" class="w-full h-full bg-amber-400/60 md:bg-amber-400 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+        </div>
+        <div id="scroll-bg-2" class="absolute top-[40%] -right-8 md:top-80 md:-right-20 w-64 h-64 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-2" class="w-full h-full bg-indigo-500/50 md:bg-indigo-500 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+    <main class="flex-grow w-full max-w-5xl mx-auto px-4 pt-16 pb-20 relative z-10 flex flex-col items-center">
+        
+        <!-- Header -->
+        <div class="text-center mb-10 transform translate-z-10">
+            <h1 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-4">
+                KTU Recorded Video Lectures <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Authorized Student Vault.</span>
+            </h1>
+            <p class="text-slate-500 font-medium md:text-lg mb-8 max-w-2xl mx-auto">
+                Full-length B.Tech recorded sessions strictly for enrolled students.<br>
+                <span class="block mt-1">Explore <span id="typewriter" class="text-blue-600 font-bold cursor"></span></span>
+            </p>
+        </div>
+
+        <!-- 3D Parallax Central Card: Login Gate & Search Bar -->
+        <div id="parallax-container" class="w-full max-w-2xl relative perspective-1000 mb-8">
+            <div id="search-card" class="real-glass rounded-[2rem] p-6 md:p-8 w-full flex flex-col gap-5 relative z-20">
+                
+                <!-- STATE 1: Not Logged In (Google Login Button) -->
+                <div id="auth-gate" class="flex flex-col items-center text-center py-2">
+                    <div class="w-12 h-12 bg-blue-50 border border-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-3 shadow-inner">
+                        <i class="fas fa-user-shield text-xl"></i>
+                    </div>
+                    <h3 class="text-base font-black text-slate-800 mb-1">Student Authentication Required</h3>
+                    <p class="text-xs text-slate-500 max-w-sm mb-4">Sign in using your enrolled Google Account to view your classes.</p>
+                    
+                    <div id="g_id_onload"
+                         data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+                         data-callback="handleCredentialResponse"
+                         data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin" 
+                         data-type="standard" 
+                         data-size="large" 
+                         data-theme="outline" 
+                         data-text="continue_with"
+                         data-shape="pill">
+                    </div>
+                </div>
+
+                <!-- STATE 2: Access Denied Banner -->
+                <div id="auth-error" class="hidden flex-col items-center p-4 bg-rose-50 border border-rose-200 rounded-2xl text-center">
+                    <i class="fas fa-lock text-rose-500 text-xl mb-1"></i>
+                    <h4 class="text-xs font-black text-rose-800 uppercase tracking-wide">Access Restricted</h4>
+                    <p id="denied-email" class="text-xs font-mono text-rose-600 mt-1"></p>
+                    <p class="text-[11px] text-slate-500 mt-1">This email address is not registered in our student database.</p>
+                    <button onclick="resetAuthState()" class="mt-2 text-xs font-bold text-blue-600 hover:underline">
+                        Sign in with a different account
+                    </button>
+                </div>
+
+                <!-- STATE 3: Logged In & Enrolled (Unlocked Search Bar + Profile Pill) -->
+                <div id="auth-active" class="hidden flex-col gap-4">
+                    <div class="flex items-center justify-between bg-white/60 p-2.5 rounded-2xl border border-white/80">
+                        <div class="flex items-center gap-3">
+                            <img id="user-avatar" src="" alt="Student Profile" class="w-9 h-9 rounded-xl border border-blue-400 shadow-sm object-cover">
+                            <div class="text-left">
+                                <span id="user-name" class="block text-xs font-black text-slate-800 leading-tight"></span>
+                                <span id="user-email" class="block text-[10px] font-mono text-slate-500"></span>
+                            </div>
+                        </div>
+                        <button onclick="signOutUser()" class="px-3 py-1.5 bg-white text-rose-600 hover:bg-rose-50 border border-slate-200 hover:border-rose-200 rounded-xl text-xs font-bold transition-all shadow-sm">
+                            <i class="fas fa-sign-out-alt mr-1"></i> Sign Out
+                        </button>
+                    </div>
+
+                    <!-- Search Form matching your PYQ template -->
+                    <form id="searchForm" onsubmit="executeVideoSearch(event)" class="relative flex items-center">
+                        <i class="fas fa-search absolute left-6 text-slate-400 text-lg"></i>
+                        <input type="text" id="searchInput" autocomplete="off" placeholder="Search by course code (e.g. MAT101, EST105)..." 
+                               class="glass-input w-full rounded-2xl py-5 pl-14 pr-16 text-lg">
+                        
+                        <button type="submit" aria-label="Search Class Lectures" class="absolute right-3 w-12 h-12 bg-blue-600 hover:bg-blue-500 text-white rounded-xl flex items-center justify-center transition-all shadow-[0_5px_15px_rgba(37,99,235,0.3)] hover:scale-105">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- WhatsApp Group Card matching your template -->
+        <a href="https://chat.whatsapp.com/CD0wDNFlMDbKFQW1TWDg3l" target="_blank" rel="noopener noreferrer" class="w-full max-w-sm mx-auto mb-10 real-glass hover:bg-white/60 text-slate-800 py-3 px-6 rounded-2xl transition-all flex items-center justify-center gap-4 shadow-sm border border-[#25D366]/40 hover:border-[#25D366]/70 group z-20 relative">
+            <div class="bg-[#25D366] text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                <i class="fab fa-whatsapp text-xl"></i>
+            </div>
+            <div class="flex flex-col text-left">
+                <span class="text-sm font-black text-slate-800">Join Student WhatsApp Group</span>
+                <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">For Doubt Clearing & Class Links</span>
+            </div>
+        </a>
+
+        <!-- Trending Subject Tags -->
+        <div id="trending-searches" class="w-full max-w-2xl text-center mb-10 transition-opacity duration-300">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Trending Lecture Subjects</p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <button onclick="quickFilter('MAT101')" class="px-4 py-2 real-glass rounded-xl text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm">
+                    <i class="fas fa-bolt text-amber-500 mr-1"></i> MAT101
+                </button>
+                <button onclick="quickFilter('UCEST105')" class="px-4 py-2 real-glass rounded-xl text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm">
+                    UCEST105
+                </button>
+                <button onclick="quickFilter('GAMAT101')" class="px-4 py-2 real-glass rounded-xl text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm">
+                    GAMAT101
+                </button>
+                <button onclick="quickFilter('EST110')" class="px-4 py-2 real-glass rounded-xl text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm">
+                    EST110
+                </button>
+            </div>
+        </div>
+
+        <!-- Video Vault Section (Hidden until verified) -->
+        <div id="results-area" class="w-full max-w-4xl hidden flex-col items-center relative z-20 mb-12">
+            
+            <!-- Video Theater Mode Player -->
+            <div class="w-full real-glass rounded-[2rem] p-4 md:p-6 mb-8 border border-white/80 shadow-xl">
+                <div class="relative w-full overflow-hidden rounded-2xl bg-slate-900 shadow-inner" style="padding-top: 56.25%;">
+                    <iframe id="theater-iframe" class="absolute top-0 left-0 w-full h-full border-0" 
+                            src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="mt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span id="player-code" class="px-2.5 py-0.5 bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-bold font-'Fira Code' rounded-md"></span>
+                            <span id="player-module" class="px-2 py-0.5 bg-purple-50 border border-purple-200 text-purple-700 text-[9px] font-bold uppercase rounded-md"></span>
+                        </div>
+                        <h2 id="player-title" class="text-base md:text-lg font-black text-slate-800"></h2>
+                    </div>
+                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl">
+                        <i class="fas fa-lock-open mr-1.5"></i> Stream Unlocked
+                    </span>
+                </div>
+            </div>
+
+            <!-- Results Header with Scheme/Module Filters -->
+            <div id="results-header" class="w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-200/60 pb-4 mb-6 gap-4 scroll-mt-8">
+                <div>
+                    <h2 class="text-xl font-black text-slate-800"><span id="search-term-display" class="text-blue-600 font-'Fira Code'">All</span> Classes</h2>
+                    <span id="result-count" class="text-xs font-bold text-slate-600 bg-white/80 backdrop-blur px-3 py-1 rounded-full border border-slate-200 mt-2 inline-block"></span>
+                </div>
+                
+                <div id="module-filters" class="flex flex-wrap gap-1.5 bg-slate-100/70 p-1.5 rounded-xl border border-slate-200 shadow-inner">
+                    <button onclick="setModuleFilter('All')" id="btn-filter-all" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 transition-all">All</button>
+                    <button onclick="setModuleFilter('Module 1')" id="btn-filter-m1" class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 transition-all">Module 1</button>
+                    <button onclick="setModuleFilter('Module 2')" id="btn-filter-m2" class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 transition-all">Module 2</button>
+                    <button onclick="setModuleFilter('Module 3')" id="btn-filter-m3" class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 transition-all">Module 3</button>
+                </div>
+            </div>
+
+            <!-- Results Grid using your exact .result-glass -->
+            <div id="results-grid" class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </div>
+
+        <!-- Article Info Section matching your template -->
+        <article class="w-full max-w-4xl mt-12 pt-12 border-t border-slate-200/60 relative z-10 text-left">
+            <h2 class="text-2xl font-black text-slate-900 mb-6">KTU Lecture Vault Guidelines</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="inner-glass p-6 rounded-2xl">
+                    <h3 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i class="fas fa-play-circle text-blue-600"></i> Syllabi-Aligned Recordings
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        These video lectures are structured specifically for APJAKTU B.Tech subjects, covering modules, previous year question paper solutions, and key theoretical derivations.
+                    </p>
+                </div>
+                
+                <div class="inner-glass p-6 rounded-2xl">
+                    <h3 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i class="fas fa-user-lock text-amber-500"></i> Access Protection
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        To preserve class exclusivity, video access is verified by Google Authentication. Only student emails approved by course administration will be admitted.
+                    </p>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Footer matching your site -->
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center relative z-10">
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
+            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
+        </div>
+    </footer>
+
+    <!-- Script matching your components.js loader -->
+    <script src="components.js?v=12"></script>
+    <script>
+        if(typeof loadNavigation === 'function') loadNavigation('', '', false);
+
+        // ==========================================
+        // 1. CONFIGURATION: WHITELIST & LECTURES
+        // ==========================================
+
+        // Put your allowed student emails here (case-insensitive)
+        const ALLOWED_STUDENTS = [
+            "yourpersonalemail@gmail.com",
+            "student1@gmail.com",
+            "student2@gmail.com"
+        ];
+
+        // Your YouTube recorded class repository
+        const LECTURES_DATA = [
+            {
+                id: 1,
+                courseCode: "MAT101",
+                title: "Linear Algebra: Eigenvalues & Cayley-Hamilton Theorem",
+                module: "Module 1",
+                examSession: "Semester 1",
+                duration: "45 mins",
+                youtubeId: "dQw4w9WgXcQ" // Put YouTube Video ID
+            },
+            {
+                id: 2,
+                courseCode: "MAT101",
+                title: "Calculus: Partial Derivatives & Maxima-Minima",
+                module: "Module 2",
+                examSession: "Semester 1",
+                duration: "50 mins",
+                youtubeId: "dQw4w9WgXcQ"
+            },
+            {
+                id: 3,
+                courseCode: "UCEST105",
+                title: "Programming in C: Structures, Unions & File Pointers",
+                module: "Module 3",
+                examSession: "Semester 2",
+                duration: "1 hr 12 mins",
+                youtubeId: "dQw4w9WgXcQ"
+            },
+            {
+                id: 4,
+                courseCode: "EST110",
+                title: "Engineering Mechanics: Equilibrium of Rigid Bodies & Trusses",
+                module: "Module 1",
+                examSession: "Semester 1",
+                duration: "38 mins",
+                youtubeId: "dQw4w9WgXcQ"
+            }
+        ];
+
+        let activeModuleFilter = 'All';
+        let searchQuery = '';
+
+        // ==========================================
+        // 2. GOOGLE OAUTH & WHITELIST HANDLER
+        // ==========================================
+        
+        function parseJwt(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
+
+        function handleCredentialResponse(response) {
+            const payload = parseJwt(response.credential);
+            const userEmail = payload.email.toLowerCase();
+
+            const isAuthorized = ALLOWED_STUDENTS.some(email => email.toLowerCase() === userEmail);
+
+            if (isAuthorized) {
+                const userData = {
+                    name: payload.name,
+                    email: userEmail,
+                    picture: payload.picture
+                };
+                sessionStorage.setItem("ktu_vault_user", JSON.stringify(userData));
+                unlockVault(userData);
+            } else {
+                document.getElementById('auth-gate').classList.add('hidden');
+                document.getElementById('auth-error').classList.remove('hidden');
+                document.getElementById('auth-error').classList.add('flex');
+                document.getElementById('denied-email').innerText = userEmail;
+            }
+        }
+
+        function unlockVault(user) {
+            document.getElementById('auth-gate').classList.add('hidden');
+            document.getElementById('auth-error').classList.add('hidden');
+            document.getElementById('auth-active').classList.remove('hidden');
+            document.getElementById('auth-active').classList.add('flex');
+
+            document.getElementById('user-avatar').src = user.picture || "https://lh3.googleusercontent.com/a/default-user";
+            document.getElementById('user-name').innerText = user.name;
+            document.getElementById('user-email').innerText = user.email;
+
+            document.getElementById('results-area').classList.remove('hidden');
+            document.getElementById('results-area').classList.add('flex');
+
+            // Load first video into theater mode
+            if(LECTURES_DATA.length > 0) {
+                playVideo(LECTURES_DATA[0].id);
+            }
+
+            renderGrid();
+        }
+
+        function signOutUser() {
+            sessionStorage.removeItem("ktu_vault_user");
+            location.reload();
+        }
+
+        function resetAuthState() {
+            document.getElementById('auth-error').classList.add('hidden');
+            document.getElementById('auth-gate').classList.remove('hidden');
+        }
+
+        // Maintain session on browser reload
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = sessionStorage.getItem("ktu_vault_user");
+            if (saved) {
+                try {
+                    unlockVault(JSON.parse(saved));
+                } catch(e) {
+                    sessionStorage.removeItem("ktu_vault_user");
+                }
+            }
+        });
+
+        // ==========================================
+        // 3. SEARCH, FILTERS & GRID RENDERING
+        // ==========================================
+
+        function executeVideoSearch(e) {
+            if (e) e.preventDefault();
+            searchQuery = document.getElementById('searchInput').value.trim().toUpperCase();
+            renderGrid();
+        }
+
+        function quickFilter(code) {
+            document.getElementById('searchInput').value = code;
+            searchQuery = code;
+            renderGrid();
+        }
+
+        function setModuleFilter(mod) {
+            activeModuleFilter = mod;
+            updateFilterPills();
+            renderGrid();
+        }
+
+        function updateFilterPills() {
+            const btnAll = document.getElementById('btn-filter-all');
+            const btnM1 = document.getElementById('btn-filter-m1');
+            const btnM2 = document.getElementById('btn-filter-m2');
+            const btnM3 = document.getElementById('btn-filter-m3');
+
+            const inactiveClass = "px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-700 hover:bg-slate-200/50 transition-all";
+            const activeClass = "px-4 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 transition-all";
+
+            [btnAll, btnM1, btnM2, btnM3].forEach(btn => { if(btn) btn.className = inactiveClass; });
+
+            if(activeModuleFilter === 'All' && btnAll) btnAll.className = activeClass;
+            else if(activeModuleFilter === 'Module 1' && btnM1) btnM1.className = activeClass;
+            else if(activeModuleFilter === 'Module 2' && btnM2) btnM2.className = activeClass;
+            else if(activeModuleFilter === 'Module 3' && btnM3) btnM3.className = activeClass;
+        }
+
+        function playVideo(lectureId) {
+            const lecture = LECTURES_DATA.find(l => l.id === lectureId);
+            if (!lecture) return;
+
+            document.getElementById('theater-iframe').src = `https://www.youtube.com/embed/${lecture.youtubeId}?autoplay=1&rel=0`;
+            document.getElementById('player-title').innerText = lecture.title;
+            document.getElementById('player-code').innerText = lecture.courseCode;
+            document.getElementById('player-module').innerText = lecture.module;
+
+            document.getElementById('results-area').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('results-grid');
+            grid.innerHTML = '';
+
+            const filtered = LECTURES_DATA.filter(item => {
+                const matchesSearch = !searchQuery || 
+                    item.courseCode.includes(searchQuery) || 
+                    item.title.toUpperCase().includes(searchQuery);
+                const matchesModule = (activeModuleFilter === 'All') || (item.module === activeModuleFilter);
+                return matchesSearch && matchesModule;
+            });
+
+            document.getElementById('search-term-display').innerText = searchQuery || 'All';
+            document.getElementById('result-count').innerText = `${filtered.length} classes`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center real-glass rounded-[2rem]">
+                        <i class="fas fa-ghost text-4xl text-slate-300 mb-4"></i>
+                        <h3 class="text-slate-600 font-bold">No lecture sessions found.</h3>
+                        <p class="text-slate-400 text-sm mt-2">Try clearing your search or switching the module filter.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(lecture => {
+                grid.innerHTML += `
+                    <div class="result-glass rounded-[1.5rem] p-5 flex flex-col justify-between h-full group">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="inline-block px-2.5 py-1 bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-bold font-'Fira Code' rounded-md">
+                                        ${lecture.courseCode}
+                                    </span>
+                                    <span class="inline-block px-2 py-1 bg-purple-50 border border-purple-200 text-purple-700 text-[9px] font-bold uppercase tracking-wider rounded-md">
+                                        ${lecture.module}
+                                    </span>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider shrink-0 mt-0.5">
+                                    <i class="far fa-clock"></i> ${lecture.duration}
+                                </span>
+                            </div>
+                            <h3 class="text-sm font-bold text-slate-800 leading-snug mb-5 line-clamp-2" title="${lecture.title}">
+                                ${lecture.title}
+                            </h3>
+                        </div>
+                        
+                        <button onclick="playVideo(${lecture.id})" class="w-full bg-white hover:bg-blue-600 text-slate-700 hover:text-white border border-slate-200 hover:border-blue-600 text-xs font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fas fa-play-circle text-blue-500 group-hover:text-white transition-colors"></i>
+                            <span>Watch Class</span>
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        // ==========================================
+        // 4. ANIMATIONS & PARALLAX ENGINE
+        // ==========================================
+
+        const words = ["MAT101 Linear Algebra...", "UCEST105 Programming...", "GAMAT101 Calculus...", "EST110 Mechanics..."];
+        let wordIndex = 0, charIndex = 0, isDeleting = false;
+        const typeTarget = document.getElementById("typewriter");
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typeTarget.innerText = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeTarget.innerText = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+            setTimeout(type, typeSpeed);
+        }
+        setTimeout(type, 1000);
+
+        let lastScrollY = window.scrollY, ticking = false;
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollBg1 = document.getElementById('scroll-bg-1');
+                    const scrollBg2 = document.getElementById('scroll-bg-2');
+                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.3}px)`;
+                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        function applyParallax(x, y) {
+            const mouseOrb1 = document.getElementById('mouse-orb-1');
+            const mouseOrb2 = document.getElementById('mouse-orb-2');
+            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+
+            const glassCard = document.getElementById('search-card');
+            if(glassCard) {
+                glassCard.style.transform = `perspective(1000px) rotateX(${y * -6}deg) rotateY(${x * 6}deg) scale3d(1.02, 1.02, 1.02)`;
+            }
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            applyParallax(x, y);
+        });
+
+        document.addEventListener('mouseleave', () => {
+            applyParallax(0, 0);
+            const glassCard = document.getElementById('search-card');
+            if(glassCard) glassCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+    </script>
+</body>
+</html>
