@@ -532,4 +532,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/revised-detailed-time-table-of-mca-integrated-s7-s-fe-july-2026-examinations-2020-scheme-notification.html",
     "pdfLink": "downloads_timetable/2026-07-14_RevisedMCAIntegratedS7(S,FE)July2026(2020sch).pdf"
 }
+,
+{
+    "id": "btech_s8_sept2026",
+    "title": "B.Tech S8 Regular/Supply September 2026",
+    "semester": "S8",
+    "categoryBadge": "S8",
+    "type": "Regular/Supply",
+    "scheme": "2019 Scheme",
+    "startDate": "2026-09-28T09:30:00",
+    "endDate": "2026-10-05T12:30:00",
+    "viewLink": "timetable_pages/the-detailed-timetable-of-b-tech-s8-s-fe-exam-september-2026-2019-scheme-including-b-tech-s8-pt-s-fe-exam-september-2026-2019-scheme-b-tech-s8-wp-s-exam-september-2026.html",
+    "pdfLink": "downloads_timetable/2026-09-17_B.TechS8(S,FE)ExamSeptember2026(2019sch)approved.pdf"
+}
 ];
