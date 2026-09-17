@@ -97,18 +97,18 @@ def create_seo_slug(title):
     slug = re.sub(r'[^a-z0-9]+', '-', slug)
     return slug.strip('-')
 
-def generate_html_page(title, pdf_filename, html_output_dir="./timetable_pages"):
+def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_pages"):
     """Injects the scraped data into your HTML template and saves the file."""
     os.makedirs(html_output_dir, exist_ok=True)
     
-    slug = create_seo_slug(title)
+    slug = create_seo_slug(short_title)
     html_filename = f"{slug}.html"
     html_filepath = os.path.join(html_output_dir, html_filename)
     
     # Relative path from the HTML folder to the PDF folder
     pdf_link = f"../downloads_timetable/{pdf_filename}"
     
-    # Your beautiful, advanced HTML template with dynamic placeholders
+    # HTML Template - Updated to append "+ Timetable Download" in Title & Heading
     html_template = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,7 +118,7 @@ def generate_html_page(title, pdf_filename, html_output_dir="./timetable_pages")
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
     
-    <title>[[TITLE]] | KTU Timetable </title>
+    <title>[[TITLE]] + Timetable Download | KTU Timetable</title>
     <link rel="canonical" href="https://keralatimetable.in/timetable_pages/[[SLUG]].html" />
 
     <meta name="description" content="Download the official [[TITLE]] PDF. Check the latest exam dates, slots, and subjects for the APJAKTU examinations.">
@@ -173,8 +173,7 @@ def generate_html_page(title, pdf_filename, html_output_dir="./timetable_pages")
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 </div>
                 
-                <!-- FIX APPLIED HERE: Responsive text sizing for mobile -->
-                <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight leading-snug">[[TITLE]]</h2>
+                <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight leading-snug">[[TITLE]] + Timetable Download</h2>
                 <p class="text-slate-500 font-medium mb-8">Official Exam Schedule • <strong>APJAKTU</strong></p>
 
                 <div class="text-left bg-slate-50 border border-slate-100 p-5 rounded-2xl mb-8 text-sm text-slate-600 shadow-inner">
@@ -283,7 +282,7 @@ def generate_html_page(title, pdf_filename, html_output_dir="./timetable_pages")
 </body>
 </html>"""
 
-    final_html = html_template.replace('[[TITLE]]', title).replace('[[PDF_LINK]]', pdf_link).replace('[[SLUG]]', slug)
+    final_html = html_template.replace('[[TITLE]]', short_title).replace('[[PDF_LINK]]', pdf_link).replace('[[SLUG]]', slug)
     
     with open(html_filepath, 'w', encoding='utf-8') as f:
         f.write(final_html)
@@ -294,7 +293,7 @@ def generate_html_page(title, pdf_filename, html_output_dir="./timetable_pages")
 # -------------------------------------------------------------------
 # AI EXTRACTION FUNCTION (UPDATED TO READ FULL PDF)
 # -------------------------------------------------------------------
-def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link, html_link):
+def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
     """Reads the PDF text and uses Gemini to extract structured dates/tags."""
     print(f"🧠 Asking AI to analyze: {original_title}...")
     
@@ -311,7 +310,7 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link, html_link
         print(f"❌ Error reading PDF: {e}")
         return None
 
-    # Prompt updated to command scanning the entire document
+    # Prompt updated to remove viewLink requirement for now (we inject it later)
     prompt = f"""
     You are an expert data extractor. Analyze this KTU exam timetable text.
     Original Long Title: {original_title}
@@ -326,7 +325,7 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link, html_link
     7. type: 'Regular', 'Supply', 'Honours', or 'Regular/Supply'.
     8. scheme: (e.g., '2019 Scheme', '2024 Scheme').
     9. pdfLink: Return exactly "{pdf_link}".
-    10. viewLink: Return exactly "{html_link}".
+    10. viewLink: Return an empty string ("").
     
     Messy PDF Text:
     {raw_text[:40000]} 
@@ -454,27 +453,38 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
                     filename = f"{tb['date']}_{tb['fileName'] or download.suggested_filename}"
                     save_path = os.path.join(pdf_dir, filename)
                     
+                    # 1. Save the PDF FIRST
                     download.save_as(save_path)
                     print(f" -> PDF Saved: {filename}")
                     
-                    # 1. Generate the HTML Sub-page
-                    html_filepath, relative_html_link = generate_html_page(title, filename, html_dir)
-                    print(f" -> HTML Generated: {html_filepath}")
-                    
-                    # 2. Extract Data via Gemini AI
+                    # 2. Extract Data via Gemini AI using the downloaded PDF
                     relative_pdf_link = f"downloads_timetable/{filename}"
-                    ai_extracted_data = extract_dashboard_data_with_ai(save_path, title, relative_pdf_link, relative_html_link)
+                    ai_extracted_data = extract_dashboard_data_with_ai(save_path, title, relative_pdf_link)
                     
-                    # 3. Update the JavaScript Config
-                    update_timetable_config(ai_extracted_data)
-                    
-                    # --- NEW: TRIGGER PUSH NOTIFICATION ---
                     if ai_extracted_data:
+                        # Grab the short title AI generated
                         short_title = ai_extracted_data.get('title', title)
+                        
+                        # 3. Generate HTML using the SHORT TITLE
+                        html_filepath, relative_html_link = generate_html_page(short_title, filename, html_dir)
+                        print(f" -> HTML Generated: {html_filepath}")
+                        
+                        # Update the viewLink now that the HTML page exists
+                        ai_extracted_data['viewLink'] = relative_html_link
+                        
+                        # 4. Update the JavaScript Config
+                        update_timetable_config(ai_extracted_data)
+                        
+                        # 5. TRIGGER PUSH NOTIFICATION
                         send_push_notification(
                             title="🚨 New KTU Timetable Published!",
                             body=f"{short_title} is now available on the dashboard."
                         )
+                    else:
+                        # Fallback just in case AI fails
+                        html_filepath, relative_html_link = generate_html_page(title, filename, html_dir)
+                        print(f" -> HTML Generated (Fallback Title): {html_filepath}")
+
                     
                     downloaded_files.append({
                         "title": title,
