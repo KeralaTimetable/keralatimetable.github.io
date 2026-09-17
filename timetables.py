@@ -173,7 +173,8 @@ def generate_html_page(title, pdf_filename, html_output_dir="./timetable_pages")
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 </div>
                 
-                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">[[TITLE]]</h2>
+                <!-- FIX APPLIED HERE: Responsive text sizing for mobile -->
+                <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight leading-snug">[[TITLE]]</h2>
                 <p class="text-slate-500 font-medium mb-8">Official Exam Schedule • <strong>APJAKTU</strong></p>
 
                 <div class="text-left bg-slate-50 border border-slate-100 p-5 rounded-2xl mb-8 text-sm text-slate-600 shadow-inner">
