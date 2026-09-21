@@ -166,14 +166,14 @@
             <div class="lg:col-span-6 relative animate-fade-up delay-300">
                 <div class="real-glass rounded-[2rem] p-6 sm:p-8 w-full">
                     
-                    <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-4 mb-6 flex items-start gap-3 shadow-inner">
+                    <div id="privacyNotice" class="bg-indigo-50 border border-indigo-100 rounded-xl p-4 mb-6 flex items-start gap-3 shadow-inner">
                         <i class="fas fa-lock text-indigo-500 mt-1"></i>
                         <p class="text-[12px] leading-relaxed text-indigo-800">
                             <strong>Privacy Notice:</strong> We collect only the information necessary for the selection process. Your responses will be used solely to evaluate your application. We do not ask for unnecessary personal details like your college or semester.
                         </p>
                     </div>
 
-                    <form onsubmit="submitApplication(event)" class="space-y-4">
+                    <form id="applicationForm" onsubmit="submitApplication(event)" class="space-y-4">
                         
                         <div>
                             <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Name / WhatsApp Display Name *</label>
@@ -265,8 +265,9 @@
                         </button>
                     </form>
                     
-                    <div id="success-state" class="hidden absolute inset-0 bg-white/95 backdrop-blur-md rounded-[2rem] flex flex-col items-center justify-center p-8 text-center z-30">
-                        <div class="w-16 h-16 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center text-3xl mb-4 shadow-sm">
+                    <!-- Modified Success State: Hidden by default, standard document flow when shown -->
+                    <div id="success-state" class="hidden flex-col items-center justify-center py-12 text-center animate-fade-up">
+                        <div class="w-16 h-16 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center text-3xl mb-4 shadow-sm mx-auto">
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <h3 class="text-xl font-black text-slate-800 mb-2">Application Received!</h3>
@@ -375,7 +376,17 @@
                 
                 await set(newApplicationRef, applicationData);
                 
-                document.getElementById('success-state').classList.remove('hidden');
+                // Hide the form and privacy notice so the container shrinks
+                document.getElementById('applicationForm').classList.add('hidden');
+                document.getElementById('privacyNotice').classList.add('hidden');
+
+                // Show the success state in standard document flow
+                const successState = document.getElementById('success-state');
+                successState.classList.remove('hidden');
+                successState.classList.add('flex');
+
+                // Smoothly scroll to the success message so the user sees it immediately
+                successState.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
             } catch (error) {
                 console.error("Error saving data: ", error);
