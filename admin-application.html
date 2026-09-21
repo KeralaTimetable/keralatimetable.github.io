@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
+    
+    <title>Admin Application | Kerala Timetable</title>
+    <link rel="canonical" href="https://www.keralatimetable.in/admin-application.html" />
+
+    <meta name="description" content="Apply to become a Community Admin for Kerala Timetable. Help moderate, guide, and protect our massive student community.">
+    <meta name="keywords" content="ktu admin, kerala timetable admin, student leadership ktu, community moderation">
+    
+    <script src="/tailwind-local.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        
+        .bg-mesh {
+            background-color: #f8fafc;
+        }
+
+        .real-glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        .inner-glass:focus {
+            background: #ffffff;
+            border-color: #818cf8;
+            box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.15);
+            outline: none;
+        }
+
+        select.custom-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23475569%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.25rem top 50%;
+            background-size: 0.65rem auto;
+        }
+
+        @keyframes float-pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+        .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
+
+        @keyframes fadeUpEntry {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+    </style>
+</head>
+
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
+
+    <div id="navigation-container"></div>
+
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="scroll-bg-1" class="absolute top-10 -left-32 md:-left-10 w-72 h-72 md:w-96 md:h-96 transition-transform duration-100 ease-out">
+            <div id="mouse-orb-1" class="w-full h-full bg-indigo-400/40 md:bg-indigo-400 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+        </div>
+        <div id="scroll-bg-2" class="absolute top-80 -right-32 md:-right-20 w-80 h-80 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-2" class="w-full h-full bg-emerald-500/30 md:bg-emerald-500 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+    <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-12 md:py-16 relative z-10">
+        
+        <div class="text-center mb-12 lg:mb-16">
+            <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-100 border border-indigo-200 text-indigo-700 text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
+                <i class="fas fa-shield-alt"></i> Community Leadership
+            </div>
+            <h1 class="animate-fade-up delay-100 text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
+                Community <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Admin</span> Application
+            </h1>
+            <p class="animate-fade-up delay-200 text-slate-600 font-medium max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+                Help us protect and guide the Kerala Timetable student community. Keep our spaces spam-free, highly useful, and focused on student success.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            <div class="lg:col-span-6 animate-fade-up delay-200 space-y-6">
+                
+                <div class="real-glass rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-white/60 to-indigo-50/40">
+                    <h2 class="text-xl font-black text-slate-900 mb-2 flex items-center gap-3">
+                        <i class="fas fa-star text-amber-500"></i> The Core Principle
+                    </h2>
+                    <blockquote class="border-l-4 border-indigo-500 pl-4 py-1 mt-4">
+                        <p class="text-slate-700 font-bold italic">"Admin is a responsibility, not a status."</p>
+                        <p class="text-slate-500 text-sm mt-1">Use the position to help students, not to gain personal advantage.</p>
+                    </blockquote>
+                </div>
+
+                <div class="real-glass rounded-3xl p-6 sm:p-8">
+                    <h2 class="text-xl font-black text-slate-900 mb-5 flex items-center gap-3">
+                        <i class="fas fa-scroll text-slate-700"></i> Official Admin Rules
+                    </h2>
+                    <ul class="space-y-4 text-sm text-slate-600">
+                        <li class="flex items-start gap-3">
+                            <div class="mt-0.5 text-indigo-500 font-black">1.</div>
+                            <div>
+                                <strong class="text-slate-800 block">Student First & Neutrality</strong>
+                                Always prioritize the benefit and safety of students. Communicate respectfully and avoid unnecessary arguments.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-0.5 text-indigo-500 font-black">2.</div>
+                            <div>
+                                <strong class="text-slate-800 block">No Abuse of Power</strong>
+                                Privileges must not be used for personal benefit, promotions, referral links, spam, harassment, or targeting members.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-0.5 text-indigo-500 font-black">3.</div>
+                            <div>
+                                <strong class="text-slate-800 block">Protect Member Privacy & Data</strong>
+                                Never share members' phone numbers, messages, screenshots, or personal information outside the community. No scraping or data selling.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-0.5 text-indigo-500 font-black">4.</div>
+                            <div>
+                                <strong class="text-slate-800 block">Responsible Moderation & Teamwork</strong>
+                                Scams, spam, and suspicious DMs should be handled swiftly. Discuss major bans or announcements with the existing admin team first.
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-0.5 text-indigo-500 font-black">5.</div>
+                            <div>
+                                <strong class="text-slate-800 block">Keep Internal Matters Internal</strong>
+                                Admin discussions and moderation decisions should not be unnecessarily shared outside the admin team.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6 relative animate-fade-up delay-300">
+                <div class="real-glass rounded-[2rem] p-6 sm:p-8 w-full">
+                    
+                    <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-4 mb-6 flex items-start gap-3 shadow-inner">
+                        <i class="fas fa-lock text-indigo-500 mt-1"></i>
+                        <p class="text-[12px] leading-relaxed text-indigo-800">
+                            <strong>Privacy Notice:</strong> We collect only the information necessary for the selection process. Your responses will be used solely to evaluate your application. We do not ask for unnecessary personal details like your college or semester.
+                        </p>
+                    </div>
+
+                    <form onsubmit="submitApplication(event)" class="space-y-4">
+                        
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Name / WhatsApp Display Name *</label>
+                            <input type="text" id="fullName" required placeholder="Your name" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">WhatsApp Number (Optional)</label>
+                            <input type="tel" id="whatsapp" placeholder="+91" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                            <p class="text-[10px] text-slate-400 ml-1 mt-1">Only used if we need to contact you for onboarding.</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Why do you want to become a Kerala Timetable Admin? *</label>
+                            <textarea id="whyAdmin" required rows="2" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3 resize-y"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">What can you contribute to the community? *</label>
+                            <textarea id="contribution" required rows="2" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3 resize-y"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">How much time can you realistically contribute? *</label>
+                            <select id="timeAvailable" required class="custom-select inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                                <option value="" disabled selected>Select</option>
+                                <option value="< 30 mins">Less than 30 minutes/day</option>
+                                <option value="30-60 mins">30–60 minutes/day</option>
+                                <option value="1-2 hours">1–2 hours/day</option>
+                                <option value="When needed">Mainly when needed</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">How would you handle spam, scams, or unwanted promos? *</label>
+                            <textarea id="spamHandling" required rows="2" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3 resize-y"></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Managed a community before? *</label>
+                                <select id="managedBefore" required class="custom-select inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3" onchange="toggleExperienceField()">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">How active are you here? *</label>
+                                <select id="activityLevel" required class="custom-select inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3">
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="Very active">Very active</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Occasionally active">Occasionally active</option>
+                                    <option value="Mostly inactive">Mostly inactive</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="experienceWrapper" class="hidden">
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Briefly describe your experience</label>
+                            <textarea id="managementExp" rows="2" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3 resize-y"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">What is one thing you would improve about Kerala Timetable? *</label>
+                            <textarea id="improvement" required rows="2" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3 resize-y"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Anything else you would like us to know? (Optional)</label>
+                            <textarea id="anythingElse" rows="2" class="inner-glass w-full text-slate-800 text-sm rounded-xl px-4 py-3 resize-y"></textarea>
+                        </div>
+
+                        <!-- Agreement Checkboxes -->
+                        <div class="mt-6 p-4 bg-white/40 rounded-xl border border-slate-200/60 space-y-3">
+                            <label class="flex items-start gap-3 cursor-pointer group">
+                                <input type="checkbox" required class="mt-1 w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500 transition-colors">
+                                <span class="text-xs text-slate-700 font-semibold group-hover:text-indigo-700 transition-colors">I have read and agree to follow the Kerala Timetable Admin Rules.</span>
+                            </label>
+                            <label class="flex items-start gap-3 cursor-pointer group">
+                                <input type="checkbox" required class="mt-1 w-4 h-4 text-rose-500 rounded border-slate-300 focus:ring-rose-500 transition-colors">
+                                <span class="text-xs text-slate-700 font-semibold group-hover:text-rose-600 transition-colors">I understand that admin access can be removed if I misuse my responsibilities.</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="w-full mt-4 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transform transition hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            Submit Application <i class="fas fa-check text-xs"></i>
+                        </button>
+                    </form>
+                    
+                    <div id="success-state" class="hidden absolute inset-0 bg-white/95 backdrop-blur-md rounded-[2rem] flex flex-col items-center justify-center p-8 text-center z-30">
+                        <div class="w-16 h-16 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center text-3xl mb-4 shadow-sm">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-800 mb-2">Application Received!</h3>
+                        <p class="text-sm text-slate-500">Thank you for stepping up to help the community. If selected, our team will reach out to you directly.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center relative z-10">
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
+            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
+        </div>
+    </footer>
+
+    <script src="/components.js?v=15"></script>
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
+            authDomain: "kerala-timetable-db.firebaseapp.com",
+            databaseURL: "https://kerala-timetable-db-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "kerala-timetable-db",
+            storageBucket: "kerala-timetable-db.firebasestorage.app",
+            messagingSenderId: "527439836518",
+            appId: "1:527439836518:web:af7725a5bf07d6a4f584a7"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Load Header Navigation
+        if(typeof loadNavigation === 'function') loadNavigation('', '/', false);
+
+        // Logic to show/hide the previous experience textarea
+        window.toggleExperienceField = function() {
+            const select = document.getElementById('managedBefore');
+            const wrapper = document.getElementById('experienceWrapper');
+            const expInput = document.getElementById('managementExp');
+            
+            if (select.value === 'Yes') {
+                wrapper.classList.remove('hidden');
+                expInput.setAttribute('required', 'true');
+            } else {
+                wrapper.classList.add('hidden');
+                expInput.removeAttribute('required');
+                expInput.value = ''; 
+            }
+        }
+
+        // --- REAL FIREBASE FORM SUBMISSION ---
+        window.submitApplication = async function(e) {
+            e.preventDefault(); 
+            
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            btn.disabled = true;
+            
+            const applicationData = {
+                fullName: document.getElementById('fullName').value,
+                whatsapp: document.getElementById('whatsapp').value || 'Not provided',
+                whyAdmin: document.getElementById('whyAdmin').value,
+                contribution: document.getElementById('contribution').value,
+                timeAvailable: document.getElementById('timeAvailable').value,
+                spamHandling: document.getElementById('spamHandling').value,
+                managedBefore: document.getElementById('managedBefore').value,
+                managementExp: document.getElementById('managementExp').value || 'N/A',
+                improvement: document.getElementById('improvement').value,
+                activityLevel: document.getElementById('activityLevel').value,
+                anythingElse: document.getElementById('anythingElse').value || 'None',
+                agreedToRules: true,
+                agreedToRevocation: true,
+                submittedAt: new Date().toISOString()
+            };
+
+            try {
+                // Save to admin_applications node
+                const dbRef = ref(db, 'admin_applications');
+                const newApplicationRef = push(dbRef);
+                
+                await set(newApplicationRef, applicationData);
+                
+                document.getElementById('success-state').classList.remove('hidden');
+                
+            } catch (error) {
+                console.error("Error saving data: ", error);
+                alert("Oops! Something went wrong while submitting. Please check your connection and try again.");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // --- PARALLAX ANIMATIONS ---
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollBg1 = document.getElementById('scroll-bg-1');
+                    const scrollBg2 = document.getElementById('scroll-bg-2');
+                    
+                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.3}px)`;
+                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        function applyParallax(x, y) {
+            const mouseOrb1 = document.getElementById('mouse-orb-1');
+            const mouseOrb2 = document.getElementById('mouse-orb-2');
+            
+            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            applyParallax(x, y);
+        });
+
+        document.addEventListener('mouseleave', () => applyParallax(0, 0));
+
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', (e) => {
+                if(e.gamma === null || e.beta === null) return;
+                let x = Math.max(-1, Math.min(1, e.gamma / 40));
+                let y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
+                applyParallax(x, y);
+            }, true);
+        }
+    </script>
+</body>
+</html>
