@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>ARGON 2026 — The Gemini 4 Quiz | Kerala Timetable</title>
     
     <!-- Tailwind Local with CDN Fallback -->
@@ -15,96 +15,128 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
             background: 
-                radial-gradient(at 0% 0%, rgba(219, 234, 254, 0.7) 0px, transparent 45%),
-                radial-gradient(at 100% 0%, rgba(238, 242, 255, 0.7) 0px, transparent 45%),
-                radial-gradient(at 100% 100%, rgba(209, 250, 229, 0.5) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.6) 0px, transparent 50%),
+                radial-gradient(at 0% 0%, rgba(219, 234, 254, 0.75) 0px, transparent 45%),
+                radial-gradient(at 100% 0%, rgba(238, 242, 255, 0.75) 0px, transparent 45%),
+                radial-gradient(at 100% 100%, rgba(209, 250, 229, 0.55) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.65) 0px, transparent 50%),
                 #f8fafc;
             min-height: 100vh;
+            min-height: 100dvh;
         }
 
-        /* Deluxe Glassmorphism */
+        /* Glassmorphism System */
         .real-glass {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(28px) saturate(190%);
-            -webkit-backdrop-filter: blur(28px) saturate(190%);
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
             border: 1px solid rgba(255, 255, 255, 0.85);
             border-top: 1px solid rgba(255, 255, 255, 0.98);
             border-left: 1px solid rgba(255, 255, 255, 0.98);
             box-shadow: 
-                0 24px 48px -12px rgba(15, 23, 42, 0.07),
-                0 1px 2px 0 rgba(255, 255, 255, 0.8) inset,
+                0 24px 48px -12px rgba(15, 23, 42, 0.08),
+                0 1px 2px 0 rgba(255, 255, 255, 0.9) inset,
                 0 -1px 2px 0 rgba(15, 23, 42, 0.02) inset;
         }
 
         .inner-glass {
-            background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border: 1px solid rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.58);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 
                 0 4px 16px -2px rgba(15, 23, 42, 0.03), 
-                inset 0 1px 2px rgba(255, 255, 255, 0.9);
+                inset 0 1px 2px rgba(255, 255, 255, 0.95);
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .inner-glass:hover {
-            background: rgba(255, 255, 255, 0.8);
-            border-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.05), inset 0 1px 2px rgba(255, 255, 255, 1);
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(255, 255, 255, 1);
+            box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.06), inset 0 1px 2px rgba(255, 255, 255, 1);
         }
 
         .inner-glass:focus, .inner-glass:focus-within {
             background: #ffffff;
             border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16), 0 8px 20px -4px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16), 0 8px 20px -4px rgba(59, 130, 246, 0.12);
             outline: none;
         }
 
-        /* Ambient Glowing Orbs */
-        @keyframes float-pulse {
-            0% { transform: scale(1) translateY(0); opacity: 0.45; }
-            50% { transform: scale(1.08) translateY(-10px); opacity: 0.65; }
-            100% { transform: scale(1) translateY(0); opacity: 0.45; }
+        /* Ambient Dynamic Light Orbs */
+        @keyframes orb-float-1 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -40px) scale(1.08); }
+            66% { transform: translate(-25px, 20px) scale(0.96); }
         }
-        .orb-pulse { animation: float-pulse 8s ease-in-out infinite; }
+        @keyframes orb-float-2 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(-40px, 35px) scale(1.06); }
+            66% { transform: translate(25px, -30px) scale(0.94); }
+        }
+        @keyframes orb-float-3 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(35px, -30px) scale(1.1); }
+        }
+        .orb-anim-1 { animation: orb-float-1 14s ease-in-out infinite; }
+        .orb-anim-2 { animation: orb-float-2 16s ease-in-out infinite; }
+        .orb-anim-3 { animation: orb-float-3 18s ease-in-out infinite; }
 
+        /* Shimmer Wave */
+        @keyframes shimmer-sweep {
+            0% { transform: translateX(-150%) skewX(-20deg); }
+            100% { transform: translateX(250%) skewX(-20deg); }
+        }
+        .shimmer-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: translateX(-150%) skewX(-20deg);
+            animation: shimmer-sweep 6s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        /* Entry Animations */
         @keyframes fadeUpEntry {
-            0% { opacity: 0; transform: translateY(24px); }
+            0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .delay-100 { animation-delay: 100ms; }
-        .delay-200 { animation-delay: 200ms; }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 80ms; }
+        .delay-200 { animation-delay: 160ms; }
 
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* Option Tile Interactions */
+        /* Interactive Option Pill Animation */
         .option-label {
             display: flex;
             align-items: flex-start;
-            padding: 1.15rem 1.25rem;
+            padding: 0.9rem 1rem;
             border-radius: 1rem;
             cursor: pointer;
             transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-            margin-bottom: 0.85rem;
+            margin-bottom: 0.75rem;
             position: relative;
+            touch-action: manipulation;
         }
         
         .option-label:hover {
-            transform: translateY(-1.5px);
-            background: rgba(255, 255, 255, 0.88);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.92);
             border-color: #cbd5e1;
-            box-shadow: 0 10px 24px -6px rgba(15, 23, 42, 0.06);
+            box-shadow: 0 10px 24px -6px rgba(15, 23, 42, 0.08);
         }
 
-        .option-input:checked + .opt-content-wrapper { font-weight: 700; }
-        
+        .option-label:active {
+            transform: scale(0.985);
+        }
+
         .option-label.selected {
-            background: rgba(239, 246, 255, 0.92);
+            background: rgba(239, 246, 255, 0.95);
             border-color: #3b82f6;
-            box-shadow: 0 12px 28px -6px rgba(59, 130, 246, 0.22), inset 0 1px 2px rgba(255, 255, 255, 1);
+            box-shadow: 0 12px 28px -6px rgba(59, 130, 246, 0.25), inset 0 1px 2px rgba(255, 255, 255, 1);
             transform: translateY(-1px);
         }
 
@@ -128,10 +160,16 @@
             box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
         }
         .status-unvisited { 
-            background: rgba(255, 255, 255, 0.7); 
+            background: rgba(255, 255, 255, 0.75); 
             color: #64748b; 
-            border-color: rgba(203, 213, 225, 0.8); 
+            border-color: rgba(203, 213, 225, 0.85); 
         }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* iOS Safe Area Padding */
+        .pb-safe { padding-bottom: max(1.25rem, env(safe-area-inset-bottom)); }
     </style>
 </head>
 
@@ -142,175 +180,191 @@
 
     <!-- Parallax Orb Lights -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div id="scroll-bg-1" class="absolute top-10 -left-28 md:-left-10 w-72 h-72 md:w-96 md:h-96 transition-transform duration-100 ease-out">
-            <div id="mouse-orb-1" class="w-full h-full bg-blue-400/40 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out"></div>
+        <div id="scroll-bg-1" class="absolute top-10 -left-20 md:-left-10 w-72 h-72 md:w-[28rem] md:h-[28rem]">
+            <div id="mouse-orb-1" class="w-full h-full bg-blue-400/40 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[110px] orb-anim-1"></div>
         </div>
-        <div id="scroll-bg-2" class="absolute top-72 -right-28 md:-right-20 w-80 h-80 md:w-[32rem] md:h-[32rem] transition-transform duration-100 ease-out">
-            <div id="mouse-orb-2" class="w-full h-full bg-indigo-400/35 rounded-full mix-blend-multiply filter blur-[90px] md:blur-[110px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2.5s;"></div>
+        <div id="scroll-bg-2" class="absolute top-72 -right-20 md:-right-20 w-80 h-80 md:w-[32rem] md:h-[32rem]">
+            <div id="mouse-orb-2" class="w-full h-full bg-indigo-400/35 rounded-full mix-blend-multiply filter blur-[90px] md:blur-[120px] orb-anim-2"></div>
         </div>
-        <div id="scroll-bg-3" class="absolute -bottom-28 left-[22%] w-80 h-80 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
-            <div id="mouse-orb-3" class="w-full h-full bg-teal-300/30 rounded-full mix-blend-multiply filter blur-[90px] md:blur-[110px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 1.2s;"></div>
+        <div id="scroll-bg-3" class="absolute -bottom-28 left-[15%] w-80 h-80 md:w-[30rem] md:h-[30rem]">
+            <div id="mouse-orb-3" class="w-full h-full bg-teal-300/30 rounded-full mix-blend-multiply filter blur-[90px] md:blur-[120px] orb-anim-3"></div>
         </div>
     </div>
 
-    <!-- LANDING VIEW -->
-    <main id="main-container" class="flex-grow w-full max-w-5xl mx-auto px-4 py-8 md:py-14 relative z-10 flex flex-col justify-center min-h-[82vh]">
-        <div id="landing-view" class="max-w-3xl mx-auto w-full space-y-6">
-            <div class="text-center mb-8">
-                <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md shadow-sm border border-slate-200/80 text-blue-600 text-xs font-black uppercase tracking-wider mb-5">
+    <!-- ==================== LANDING VIEW ==================== -->
+    <main id="main-container" class="flex-grow w-full max-w-5xl mx-auto px-3.5 sm:px-6 py-6 sm:py-10 md:py-14 relative z-10 flex flex-col justify-center">
+        <div id="landing-view" class="max-w-3xl mx-auto w-full space-y-5 sm:space-y-6">
+            
+            <div class="text-center mb-6 sm:mb-8">
+                <div class="animate-fade-up inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md shadow-sm border border-slate-200/90 text-blue-600 text-[11px] sm:text-xs font-black uppercase tracking-wider mb-4">
                     <span class="w-2 h-2 rounded-full bg-blue-500 animate-ping inline-block"></span>
-                    <i class="fas fa-atom text-blue-500"></i> Google DeepMind • Frontier AI
+                    <i class="fas fa-atom text-blue-500"></i> Frontier AI • Gemini 4 Argon
                 </div>
-                <h1 class="animate-fade-up delay-100 text-3xl md:text-5xl font-black tracking-tight mb-3 text-slate-900 leading-tight">
+                <h1 class="animate-fade-up delay-100 text-2xl sm:text-4xl md:text-5xl font-black tracking-tight mb-2 sm:mb-3 text-slate-900 leading-tight">
                     ARGON 2026 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">— The Gemini 4 Quiz</span>
                 </h1>
-                <p class="animate-fade-up delay-200 text-slate-600 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
-                    Test your comprehensive understanding of Gemini 4 Argon: architectural breakthroughs, 1M output tokens, benchmark records, and massive C/C++ to Rust refactors.
+                <p class="animate-fade-up delay-200 text-slate-600 text-xs sm:text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed px-2">
+                    Test your expertise on Google DeepMind's Gemini 4 Argon model, covering 1M single-pass output tokens, benchmarks, and production migrations.
                 </p>
             </div>
 
-            <div class="animate-fade-up delay-200 real-glass rounded-[2.2rem] p-6 sm:p-10">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 mb-8">
-                    <div class="inner-glass p-4 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
-                        <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-2 shadow-sm">
-                            <i class="far fa-clock text-lg"></i>
+            <div class="animate-fade-up delay-200 real-glass rounded-[1.8rem] sm:rounded-[2.2rem] p-4 sm:p-8 md:p-10">
+                
+                <!-- Quick Metrics Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 mb-6 sm:mb-8">
+                    <div class="inner-glass p-3 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-1.5 sm:mb-2 shadow-sm">
+                            <i class="far fa-clock text-sm sm:text-base"></i>
                         </div>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Duration</div>
-                        <div class="font-extrabold text-slate-800 text-base">30 Mins</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest">Duration</div>
+                        <div class="font-extrabold text-slate-800 text-sm sm:text-base">30 Mins</div>
                     </div>
-                    <div class="inner-glass p-4 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
-                        <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 mb-2 shadow-sm">
-                            <i class="fas fa-list-ol text-lg"></i>
+                    <div class="inner-glass p-3 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 mb-1.5 sm:mb-2 shadow-sm">
+                            <i class="fas fa-list-ol text-sm sm:text-base"></i>
                         </div>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Questions</div>
-                        <div class="font-extrabold text-slate-800 text-base" id="total-q-display">30 MCQs</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest">Questions</div>
+                        <div class="font-extrabold text-slate-800 text-sm sm:text-base" id="total-q-display">30 MCQs</div>
                     </div>
-                    <div class="inner-glass p-4 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-2 shadow-sm">
-                            <i class="fas fa-award text-lg"></i>
+                    <div class="inner-glass p-3 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-1.5 sm:mb-2 shadow-sm">
+                            <i class="fas fa-award text-sm sm:text-base"></i>
                         </div>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Certificate</div>
-                        <div class="font-extrabold text-slate-800 text-base">At 50%+</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest">Certificate</div>
+                        <div class="font-extrabold text-slate-800 text-sm sm:text-base">Score 50%+</div>
                     </div>
-                    <div class="inner-glass p-4 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
-                        <div class="w-10 h-10 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600 mb-2 shadow-sm">
-                            <i class="fas fa-shield-alt text-lg"></i>
+                    <div class="inner-glass p-3 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600 mb-1.5 sm:mb-2 shadow-sm">
+                            <i class="fas fa-shield-alt text-sm sm:text-base"></i>
                         </div>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Proctoring</div>
-                        <div class="font-extrabold text-slate-800 text-base">Active</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest">Proctoring</div>
+                        <div class="font-extrabold text-slate-800 text-sm sm:text-base">Active</div>
                     </div>
                 </div>
 
-                <div class="mb-8 inner-glass rounded-2xl p-5 sm:p-6 border border-white">
-                    <h3 class="font-black text-slate-900 mb-3.5 text-base flex items-center gap-2 border-b border-slate-200/50 pb-3">
-                        <i class="fas fa-info-circle text-blue-500"></i> Examination Guidelines
+                <!-- Guidelines -->
+                <div class="mb-6 inner-glass rounded-2xl p-4 sm:p-6 border border-white">
+                    <h3 class="font-black text-slate-900 mb-3 text-sm sm:text-base flex items-center gap-2 border-b border-slate-200/50 pb-2.5">
+                        <i class="fas fa-info-circle text-blue-500"></i> Assessment Rules
                     </h3>
-                    <ul class="space-y-3 text-xs md:text-sm text-slate-600 font-medium">
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600 font-medium">
                         <li class="flex items-start gap-2.5">
                             <i class="fas fa-check-circle text-blue-500 mt-0.5 shrink-0 text-xs"></i> 
-                            <span>Scores of 50% or above earn a downloadable, verified completion certificate sent to your email.</span>
+                            <span>Scores of 50% or above earn a downloadable, verified completion certificate emailed to you.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <i class="fas fa-exclamation-triangle text-amber-500 mt-0.5 shrink-0 text-xs"></i> 
-                            <span><strong>Anti-Cheat Active:</strong> Switching tabs or leaving the exam window triggers monitored warnings.</span>
+                            <span><strong>Anti-Cheat Enabled:</strong> Leaving or switching tabs triggers proctoring warnings.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <i class="fas fa-bookmark text-purple-500 mt-0.5 shrink-0 text-xs"></i> 
-                            <span>You can mark and review questions anytime before clicking final submit.</span>
+                            <span>You can mark and review questions anytime before final submission.</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Registration Details -->
-                <div class="space-y-4">
+                <div class="space-y-3.5">
                     <div>
-                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Candidate Full Name</label>
-                        <input type="text" id="candidate-name" placeholder="Enter your full name (for certificate)" class="inner-glass w-full text-slate-800 text-sm md:text-base rounded-xl px-5 py-4 transition-all">
+                        <label class="block text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Candidate Full Name</label>
+                        <input type="text" id="candidate-name" placeholder="Enter your full name (for certificate)" class="inner-glass w-full text-slate-800 text-sm md:text-base rounded-xl px-4 py-3 sm:py-3.5 transition-all">
                     </div>
                     <div>
-                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Email Address <span class="text-blue-600 lowercase">(certificate destination)</span></label>
-                        <input type="email" id="candidate-email" placeholder="name@example.com" class="inner-glass w-full text-slate-800 text-sm md:text-base rounded-xl px-5 py-4 transition-all">
+                        <label class="block text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Email Address <span class="text-blue-600 lowercase">(certificate destination)</span></label>
+                        <input type="email" id="candidate-email" placeholder="name@example.com" class="inner-glass w-full text-slate-800 text-sm md:text-base rounded-xl px-4 py-3 sm:py-3.5 transition-all">
                     </div>
-                    <label class="flex items-center gap-3 cursor-pointer mt-4 group p-2 rounded-xl hover:bg-white/40 transition">
-                        <input type="checkbox" id="consent-check" class="h-5 w-5 cursor-pointer rounded-lg border-gray-300 text-blue-600 focus:ring-blue-500 transition-colors bg-white/70">
-                        <span class="text-xs sm:text-sm font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">I confirm my details are correct and I am ready to start the 30-minute exam.</span>
+                    <label class="flex items-center gap-2.5 cursor-pointer mt-3 group p-2 rounded-xl hover:bg-white/40 transition">
+                        <input type="checkbox" id="consent-check" class="h-4 w-4 sm:h-5 sm:w-5 cursor-pointer rounded-lg border-gray-300 text-blue-600 focus:ring-blue-500 transition-colors bg-white/70">
+                        <span class="text-xs sm:text-sm font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">I confirm my details are correct and agree to begin.</span>
                     </label>
                 </div>
 
-                <button onclick="startExamination()" class="w-full mt-7 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 hover:from-blue-600 hover:to-indigo-600 text-white font-bold py-4 px-8 rounded-xl shadow-xl transform transition duration-200 hover:-translate-y-0.5 flex justify-center items-center gap-2 text-sm sm:text-base">
+                <button onclick="startExamination()" class="w-full mt-6 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 hover:from-blue-600 hover:to-indigo-600 text-white font-bold py-3.5 sm:py-4 px-6 rounded-xl shadow-xl transform transition duration-150 active:scale-95 flex justify-center items-center gap-2 text-sm sm:text-base">
                     Begin Assessment <i class="fas fa-arrow-right text-xs"></i>
                 </button>
+
+                <!-- Independent Community Disclaimer -->
+                <div class="mt-6 p-3.5 rounded-xl border border-slate-200/60 bg-white/40 text-[11px] sm:text-xs text-slate-500 leading-relaxed text-center">
+                    <strong class="text-slate-700">Notice:</strong> This quiz is an independent assessment designed solely for educational, research, and technical preparation purposes. It is <strong>NOT</strong> organized, affiliated, authorized, sponsored, or endorsed by Google LLC, Google DeepMind, or the official Gemini project.
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- QUIZ VIEW -->
-    <div id="quiz-view" class="hidden fixed inset-0 bg-transparent z-50 flex flex-col overflow-hidden">
-        <header class="real-glass border-b border-t-0 border-l-0 border-r-0 rounded-none w-full px-4 md:px-8 py-3.5 flex justify-between items-center z-20 flex-shrink-0 shadow-sm">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md">
-                    <i class="fas fa-atom text-sm"></i>
+    <!-- ==================== QUIZ VIEW ==================== -->
+    <div id="quiz-view" class="hidden fixed inset-0 bg-transparent z-50 flex flex-col h-[100dvh] overflow-hidden">
+        
+        <!-- Header Bar -->
+        <header class="real-glass border-b border-t-0 border-l-0 border-r-0 rounded-none w-full px-3.5 sm:px-6 md:px-8 py-2.5 sm:py-3 flex justify-between items-center z-20 flex-shrink-0 shadow-sm">
+            <div class="flex items-center gap-2.5 sm:gap-3">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md shrink-0">
+                    <i class="fas fa-atom text-xs sm:text-sm"></i>
                 </div>
                 <div>
-                    <h1 class="font-black text-slate-900 text-sm md:text-base leading-tight">Gemini 4 Argon</h1>
-                    <p class="text-xs font-semibold text-slate-500 hidden sm:block">Model Knowledge Assessment</p>
+                    <h1 class="font-black text-slate-900 text-xs sm:text-sm md:text-base leading-tight">Gemini 4 Argon</h1>
+                    <p class="text-[10px] sm:text-xs font-semibold text-slate-500 hidden sm:block">Model Knowledge Assessment</p>
                 </div>
             </div>
-            <div class="flex items-center gap-3">
-                <div class="inner-glass px-4 py-2 rounded-xl shadow-sm flex items-center gap-2.5 bg-white/80">
-                    <span class="relative flex h-2.5 w-2.5">
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="inner-glass px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl shadow-sm flex items-center gap-2 bg-white/80">
+                    <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-600"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
                     </span>
-                    <i class="far fa-clock text-blue-600"></i>
-                    <span id="timer" class="font-black text-slate-800 font-mono tracking-wider text-base md:text-lg">30:00</span>
+                    <i class="far fa-clock text-blue-600 text-xs sm:text-sm"></i>
+                    <span id="timer" class="font-black text-slate-800 font-mono tracking-wider text-sm sm:text-base md:text-lg">30:00</span>
                 </div>
             </div>
         </header>
 
-        <div class="w-full bg-slate-200/50 h-1.5 flex-shrink-0">
-            <div id="progress-bar" class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 h-1.5 transition-all duration-300" style="width: 0%"></div>
+        <!-- Progress Indicator -->
+        <div class="w-full bg-slate-200/50 h-1 sm:h-1.5 flex-shrink-0">
+            <div id="progress-bar" class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 h-1 sm:h-1.5 transition-all duration-300" style="width: 0%"></div>
         </div>
 
-        <div class="flex-grow overflow-y-auto px-4 py-6 md:px-10 pb-[230px] relative">
-            <div class="max-w-4xl mx-auto real-glass p-6 md:p-9 rounded-[2.2rem]">
-                <div class="mb-6 flex justify-between items-center border-b border-slate-200/50 pb-4">
-                    <h2 id="question-indicator" class="text-xs font-black text-blue-600 uppercase tracking-widest bg-blue-50 border border-blue-100/80 px-3.5 py-1.5 rounded-full inline-block shadow-sm">Question 1 of 30</h2>
+        <!-- Scrollable Question Canvas -->
+        <div class="flex-grow overflow-y-auto px-3.5 py-4 sm:px-8 md:px-10 pb-[230px] sm:pb-[190px] relative">
+            <div class="max-w-4xl mx-auto real-glass p-4 sm:p-7 md:p-9 rounded-[1.8rem] sm:rounded-[2.2rem] shadow-sm">
+                <div class="mb-4 sm:mb-6 flex justify-between items-center border-b border-slate-200/50 pb-3">
+                    <h2 id="question-indicator" class="text-[10px] sm:text-xs font-black text-blue-600 uppercase tracking-widest bg-blue-50 border border-blue-100 px-3 py-1 rounded-full inline-block shadow-sm">
+                        Question 1 of 30
+                    </h2>
                 </div>
                 
-                <div class="mb-8">
-                    <p id="question-text" class="text-lg md:text-xl font-bold text-slate-900 leading-relaxed">
+                <div class="mb-5 sm:mb-7">
+                    <p id="question-text" class="text-base sm:text-lg md:text-xl font-bold text-slate-900 leading-snug sm:leading-relaxed">
                         Loading question...
                     </p>
                 </div>
 
-                <div id="options-container" class="space-y-3"></div>
+                <div id="options-container" class="space-y-2.5 sm:space-y-3"></div>
             </div>
         </div>
 
-        <footer class="real-glass border-t border-b-0 border-l-0 border-r-0 rounded-none w-full absolute bottom-0 left-0 z-20 p-4 md:p-5 flex flex-col gap-3.5 backdrop-blur-2xl">
+        <!-- Sticky Floating Footer -->
+        <footer class="real-glass border-t border-b-0 border-l-0 border-r-0 rounded-none w-full absolute bottom-0 left-0 z-20 px-3 py-2.5 sm:px-6 sm:py-3.5 flex flex-col gap-2.5 backdrop-blur-2xl pb-safe">
             <div class="w-full max-w-5xl mx-auto">
-                <div id="palette-horizontal" class="flex overflow-x-auto gap-2 pb-1 hide-scrollbar items-center px-1"></div>
+                <div id="palette-horizontal" class="flex overflow-x-auto gap-1.5 sm:gap-2 pb-1 hide-scrollbar items-center px-1"></div>
             </div>
 
-            <div class="w-full max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-0">
-                <div class="flex items-center gap-2.5 w-full sm:w-auto">
-                    <button id="prev-btn" onclick="navigateQuestion(-1)" class="inner-glass text-slate-700 font-bold py-3 px-5 rounded-xl text-sm hover:bg-white transition flex-1 sm:flex-none flex items-center justify-center gap-2 disabled:opacity-40">
-                        <i class="fas fa-arrow-left text-xs"></i> Back
+            <div class="w-full max-w-5xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
+                <div class="flex items-center gap-2 w-auto">
+                    <button id="prev-btn" onclick="navigateQuestion(-1)" class="inner-glass text-slate-700 font-bold py-2.5 px-3.5 sm:py-3 sm:px-5 rounded-xl text-xs sm:text-sm hover:bg-white transition flex items-center justify-center gap-1.5 disabled:opacity-40 active:scale-95">
+                        <i class="fas fa-arrow-left text-[10px]"></i> <span class="hidden sm:inline">Back</span>
                     </button>
-                    <button onclick="clearResponse()" class="inner-glass text-slate-600 font-bold py-3 px-5 rounded-xl text-sm hover:text-red-600 hover:bg-white transition flex-1 sm:flex-none">
+                    <button onclick="clearResponse()" class="inner-glass text-slate-600 font-bold py-2.5 px-3.5 sm:py-3 sm:px-4 rounded-xl text-xs sm:text-sm hover:text-red-600 hover:bg-white transition flex items-center justify-center active:scale-95">
                         Clear
                     </button>
                 </div>
 
-                <div class="flex items-center gap-2.5 w-full sm:w-auto">
-                    <button onclick="toggleMarkForReview()" id="mark-btn" class="inner-glass text-purple-600 font-bold py-3 px-5 rounded-xl text-sm hover:bg-white transition flex-1 sm:flex-none flex items-center justify-center gap-2">
-                        <i class="fas fa-bookmark"></i> Review
+                <div class="flex items-center gap-2 w-auto">
+                    <button onclick="toggleMarkForReview()" id="mark-btn" class="inner-glass text-purple-600 font-bold py-2.5 px-3.5 sm:py-3 sm:px-5 rounded-xl text-xs sm:text-sm hover:bg-white transition flex items-center justify-center gap-1.5 active:scale-95">
+                        <i class="fas fa-bookmark text-xs"></i> <span class="hidden sm:inline">Review</span>
                     </button>
                     
                     <div id="action-btn-wrapper" class="flex-1 sm:flex-none">
-                        <button id="next-btn" onclick="navigateQuestion(1)" class="bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold py-3 px-8 rounded-xl text-sm hover:from-blue-600 hover:to-indigo-600 shadow-md transform transition hover:-translate-y-0.5 w-full flex items-center justify-center gap-2">
-                            Save & Next <i class="fas fa-arrow-right text-xs"></i>
+                        <button id="next-btn" onclick="navigateQuestion(1)" class="bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold py-2.5 px-4 sm:py-3 sm:px-7 rounded-xl text-xs sm:text-sm hover:from-blue-600 hover:to-indigo-600 shadow-md transform transition active:scale-95 flex items-center justify-center gap-1.5 whitespace-nowrap">
+                            <span>Save & Next</span> <i class="fas fa-arrow-right text-[10px]"></i>
                         </button>
                     </div>
                 </div>
@@ -318,116 +372,121 @@
         </footer>
     </div>
 
-    <!-- RESULT VIEW -->
-    <div id="result-view" class="hidden absolute inset-0 bg-transparent z-[60] overflow-y-auto px-4 py-8 md:py-12 flex flex-col items-center">
+    <!-- ==================== RESULT VIEW ==================== -->
+    <div id="result-view" class="hidden absolute inset-0 bg-transparent z-[60] overflow-y-auto px-3.5 py-6 sm:py-10 flex flex-col items-center">
         <div class="max-w-4xl mx-auto animate-fade-up w-full my-auto">
-            <div class="real-glass rounded-[2rem] p-6 sm:p-9 shadow-2xl border border-white relative">
+            <div class="real-glass rounded-[1.8rem] sm:rounded-[2.2rem] p-4 sm:p-8 md:p-10 shadow-2xl border border-white relative">
                 
-                <div id="db-save-status" class="absolute top-4 right-4 sm:top-6 sm:right-6 text-[10px] sm:text-xs font-bold text-slate-500 flex items-center gap-1.5 bg-white/70 px-3 py-1.5 rounded-full shadow-sm border border-white">
+                <div id="db-save-status" class="absolute top-3.5 right-3.5 sm:top-6 sm:right-6 text-[10px] sm:text-xs font-bold text-slate-500 flex items-center gap-1.5 bg-white/70 px-2.5 py-1 rounded-full shadow-sm border border-white">
                     <i class="fas fa-spinner fa-spin text-blue-500"></i> <span class="hidden sm:inline">Saving Result...</span><span class="sm:hidden">Saving...</span>
                 </div>
 
-                <h2 class="text-2xl md:text-3xl font-black text-slate-900 border-b border-slate-200/50 pb-4 mb-5 text-center flex items-center justify-center gap-3">
+                <h2 class="text-xl sm:text-3xl font-black text-slate-900 border-b border-slate-200/50 pb-3 sm:pb-4 mb-4 text-center flex items-center justify-center gap-2 sm:gap-3">
                     <i class="fas fa-award text-blue-500"></i> Assessment Results
                 </h2>
                 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                    <div class="inner-glass rounded-2xl p-3.5 sm:p-4 text-center">
-                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Candidate</span>
-                        <span id="res-name" class="text-base sm:text-lg font-black text-slate-800 truncate block">User</span>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mb-3.5">
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center">
+                        <span class="block text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Candidate</span>
+                        <span id="res-name" class="text-xs sm:text-base font-black text-slate-800 truncate block">User</span>
                     </div>
-                    <div class="inner-glass rounded-2xl p-3.5 sm:p-4 text-center">
-                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Email</span>
-                        <span id="res-email" class="text-xs sm:text-sm font-black text-slate-800 truncate block" title="Candidate Email">user@email.com</span>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center">
+                        <span class="block text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Email</span>
+                        <span id="res-email" class="text-[11px] sm:text-sm font-black text-slate-800 truncate block">user@email.com</span>
                     </div>
-                    <div class="inner-glass rounded-2xl p-3.5 sm:p-4 text-center">
-                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Date</span>
-                        <span id="res-date" class="text-base sm:text-lg font-black text-slate-800 block">--/--/----</span>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center">
+                        <span class="block text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Date</span>
+                        <span id="res-date" class="text-xs sm:text-base font-black text-slate-800 block">--/--/----</span>
                     </div>
-                    <div class="inner-glass rounded-2xl p-3.5 sm:p-4 text-center">
-                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Time Spent</span>
-                        <span id="res-time" class="text-base sm:text-lg font-black text-slate-800 block">0m 0s</span>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center">
+                        <span class="block text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Time Spent</span>
+                        <span id="res-time" class="text-xs sm:text-base font-black text-slate-800 block">0m 0s</span>
                     </div>
                 </div>
 
-                <div id="award-banner" class="rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass shadow-sm">
-                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Score Result</div>
-                    <div id="award-text" class="text-2xl sm:text-3xl font-black">Evaluating...</div>
+                <div id="award-banner" class="rounded-2xl p-3.5 sm:p-5 text-center mb-3.5 inner-glass shadow-sm shimmer-card">
+                    <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Score Status</div>
+                    <div id="award-text" class="text-xl sm:text-3xl font-black">Evaluating...</div>
                 </div>
 
                 <!-- Certificate Status Message -->
-                <div id="cert-notice-box" class="inner-glass rounded-2xl p-4 mb-5 flex items-center justify-center gap-3 border border-white">
-                    <div class="w-9 h-9 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 shrink-0">
-                        <i class="fas fa-certificate text-lg"></i>
+                <div id="cert-notice-box" class="inner-glass rounded-xl sm:rounded-2xl p-3 sm:p-4 mb-4 flex items-center justify-center gap-2.5 border border-white">
+                    <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 shrink-0">
+                        <i class="fas fa-certificate text-sm sm:text-base"></i>
                     </div>
-                    <p class="text-xs sm:text-sm font-semibold text-slate-700 leading-snug">
+                    <p class="text-[11px] sm:text-sm font-semibold text-slate-700 leading-snug">
                         <span id="cert-status-msg">Your certificate will be generated and dispatched to:</span>
                         <strong id="cert-email-target" class="text-blue-600 block sm:inline"></strong>
                     </p>
                 </div>
                 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6 text-center">
-                    <div class="inner-glass rounded-2xl p-4">
-                        <div class="text-2xl sm:text-3xl font-black text-slate-800 mb-0.5" id="res-total">30</div>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Qs</div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mb-5 text-center">
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5">
+                        <div class="text-xl sm:text-3xl font-black text-slate-800 mb-0.5" id="res-total">30</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Qs</div>
                     </div>
-                    <div class="inner-glass rounded-2xl p-4 bg-emerald-50/50 border-emerald-100">
-                        <div class="text-2xl sm:text-3xl font-black text-emerald-600 mb-0.5" id="res-correct">0</div>
-                        <div class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Correct</div>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 bg-emerald-50/50 border-emerald-100">
+                        <div class="text-xl sm:text-3xl font-black text-emerald-600 mb-0.5" id="res-correct">0</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Correct</div>
                     </div>
-                    <div class="inner-glass rounded-2xl p-4 bg-rose-50/50 border-rose-100">
-                        <div class="text-2xl sm:text-3xl font-black text-rose-600 mb-0.5" id="res-incorrect">0</div>
-                        <div class="text-[10px] font-bold text-rose-600 uppercase tracking-wider">Incorrect</div>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 bg-rose-50/50 border-rose-100">
+                        <div class="text-xl sm:text-3xl font-black text-rose-600 mb-0.5" id="res-incorrect">0</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-rose-600 uppercase tracking-wider">Incorrect</div>
                     </div>
-                    <div class="inner-glass rounded-2xl p-4 bg-slate-50/50 border-slate-200">
-                        <div class="text-2xl sm:text-3xl font-black text-slate-400 mb-0.5" id="res-skipped">0</div>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Skipped</div>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 bg-slate-50/50 border-slate-200">
+                        <div class="text-xl sm:text-3xl font-black text-slate-400 mb-0.5" id="res-skipped">0</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider">Skipped</div>
                     </div>
                 </div>
 
-                <div class="flex justify-center mb-6 px-1 sm:px-0">
-                    <a href="https://chat.whatsapp.com/Dai125BQnk296l1NNVjzrj" target="_blank" class="w-full md:w-3/4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 px-5 sm:px-6 rounded-xl shadow-md transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2.5 text-sm sm:text-base border border-emerald-400">
-                        <i class="fab fa-whatsapp text-xl sm:text-2xl"></i> Join Kerala Timetable WhatsApp Group
+                <div class="flex justify-center mb-5">
+                    <a href="https://chat.whatsapp.com/Dai125BQnk296l1NNVjzrj" target="_blank" class="w-full md:w-3/4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl shadow-md transition transform active:scale-95 text-center flex items-center justify-center gap-2 text-xs sm:text-sm border border-emerald-400">
+                        <i class="fab fa-whatsapp text-lg"></i> Join Kerala Timetable WhatsApp Community
                     </a>
                 </div>
 
-                <div class="flex flex-col sm:flex-row flex-wrap gap-3 justify-center pt-5 border-t border-slate-200/50">
-                    <button onclick="showReviewView()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-xl shadow-md transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2 text-sm">
-                        <i class="fas fa-search-plus text-sm"></i> Review Answers & Keys
+                <div class="flex flex-col sm:flex-row flex-wrap gap-2.5 justify-center pt-4 border-t border-slate-200/50">
+                    <button onclick="showReviewView()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 sm:py-3 px-5 rounded-xl shadow-md transition transform active:scale-95 text-center flex items-center justify-center gap-2 text-xs sm:text-sm">
+                        <i class="fas fa-search-plus text-xs"></i> Review Answers & Keys
                     </button>
                     
-                    <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-md transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2 text-sm">
-                        <i class="fas fa-redo text-sm"></i> Retake Assessment
+                    <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 sm:py-3 px-5 rounded-xl shadow-md transition transform active:scale-95 text-center flex items-center justify-center gap-2 text-xs sm:text-sm">
+                        <i class="fas fa-redo text-xs"></i> Retake Assessment
                     </button>
                     
-                    <a href="/" class="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-sm text-slate-600 hover:text-slate-900 hover:bg-white inner-glass transition-all text-center flex items-center justify-center">
+                    <a href="/" class="w-full sm:w-auto px-5 py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm text-slate-600 hover:text-slate-900 hover:bg-white inner-glass transition-all text-center flex items-center justify-center">
                         Return Home
                     </a>
+                </div>
+
+                <!-- Scorecard Disclaimer Footer -->
+                <div class="mt-5 text-center text-[10px] sm:text-[11px] text-slate-400">
+                    Independent Study & Benchmarking Tool • Not affiliated with Google or Gemini.
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- REVIEW VIEW -->
-    <div id="review-view" class="hidden absolute inset-0 bg-transparent z-[70] overflow-y-auto px-4 py-10">
+    <!-- ==================== REVIEW VIEW ==================== -->
+    <div id="review-view" class="hidden absolute inset-0 bg-transparent z-[70] overflow-y-auto px-3.5 py-8 sm:py-12">
         <div class="max-w-4xl mx-auto animate-fade-up">
-            <div class="real-glass rounded-[2rem] p-6 sm:p-10 shadow-2xl border border-white relative">
-                <div class="flex flex-col md:flex-row justify-between items-center border-b border-slate-200/50 pb-5 mb-8 gap-4">
-                    <h2 class="text-2xl md:text-3xl font-black text-slate-900 flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center shadow-sm">
-                            <i class="fas fa-clipboard-check text-purple-600 text-xl"></i>
+            <div class="real-glass rounded-[1.8rem] sm:rounded-[2.2rem] p-4 sm:p-8 md:p-10 shadow-2xl border border-white relative">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200/50 pb-4 mb-6 gap-3">
+                    <h2 class="text-lg sm:text-2xl font-black text-slate-900 flex items-center gap-2.5">
+                        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-purple-100 flex items-center justify-center shadow-sm shrink-0">
+                            <i class="fas fa-clipboard-check text-purple-600 text-sm sm:text-lg"></i>
                         </div>
                         Answer Key Review
                     </h2>
-                    <button onclick="hideReviewView()" class="inner-glass hover:bg-white text-slate-700 px-5 py-2.5 rounded-xl font-bold text-sm transition-colors flex items-center gap-2 shadow-sm">
+                    <button onclick="hideReviewView()" class="inner-glass hover:bg-white text-slate-700 px-4 py-2 rounded-xl font-bold text-xs sm:text-sm transition-colors flex items-center gap-1.5 self-end sm:self-auto">
                         <i class="fas fa-times"></i> Close Review
                     </button>
                 </div>
 
-                <div id="review-container" class="space-y-5"></div>
+                <div id="review-container" class="space-y-4"></div>
 
-                <div class="mt-8 pt-6 border-t border-slate-200/50 text-center">
-                    <button onclick="hideReviewView()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-10 rounded-xl shadow-lg transition-transform transform hover:-translate-y-0.5 text-sm sm:text-base">
+                <div class="mt-6 pt-5 border-t border-slate-200/50 text-center">
+                    <button onclick="hideReviewView()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform transform active:scale-95 text-xs sm:text-sm">
                         Back to Scorecard
                     </button>
                 </div>
@@ -435,7 +494,7 @@
         </div>
     </div>
 
-    <!-- Fallback-enabled components.js loading -->
+    <!-- Fallback-enabled components.js and questions.js -->
     <script src="/components.js?v=16" onerror="this.onerror=null;this.src='../components.js';"></script>
     <script src="questions.js"></script>
 
@@ -458,7 +517,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Safe Navigation Initialization
+        // Safe Navigation Header Loader
         function initNav() {
             if (typeof loadNavigation === 'function') {
                 loadNavigation('', '/', false);
@@ -472,7 +531,7 @@
         }
         initNav();
 
-        // Parallax Effect
+        // Parallax scroll and mouse movements (throttled)
         let lastScrollY = window.scrollY;
         let ticking = false;
 
@@ -484,34 +543,18 @@
                     const scrollBg2 = document.getElementById('scroll-bg-2');
                     const scrollBg3 = document.getElementById('scroll-bg-3');
                     
-                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.25}px)`;
-                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.18}px)`;
-                    if(scrollBg3) scrollBg3.style.transform = `translateY(${lastScrollY * 0.12}px)`;
+                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.22}px)`;
+                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.15}px)`;
+                    if(scrollBg3) scrollBg3.style.transform = `translateY(${lastScrollY * 0.1}px)`;
                     ticking = false;
                 });
                 ticking = true;
             }
         }, { passive: true });
 
-        function applyParallax(x, y) {
-            const mouseOrb1 = document.getElementById('mouse-orb-1');
-            const mouseOrb2 = document.getElementById('mouse-orb-2');
-            const mouseOrb3 = document.getElementById('mouse-orb-3');
-            
-            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -25}px, ${y * -25}px)`;
-            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 35}px, ${y * 35}px)`;
-            if(mouseOrb3) mouseOrb3.style.transform = `translate(${x * -18}px, ${y * 25}px)`;
-        }
-
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
-            const y = (e.clientY / window.innerHeight - 0.5) * 2;
-            applyParallax(x, y);
-        });
-
-        // Anti-Cheat & Quiz Engine State (30 Mins = 1800s)
+        // Quiz State Management (30 Minutes = 1800 Seconds)
         const EXAM_DURATION = 1800;
-        const STORAGE_KEY = 'gemini4_argon_quiz_v3';
+        const STORAGE_KEY = 'gemini4_argon_quiz_v4';
 
         let appState = {
             candidateName: "",
@@ -532,13 +575,13 @@
         window.addEventListener('blur', () => {
             if(appState.isExamActive) {
                 appState.cheatWarnings++;
-                alert(`ANTI-CHEAT WARNING: Browser focus lost. Please do not switch tabs.\n\nWarnings logged: ${appState.cheatWarnings}`);
+                alert(`ANTI-CHEAT NOTICE: Exam focus lost.\nLeaving the active window is monitored.\n\nWarnings: ${appState.cheatWarnings}`);
             }
         });
 
         function loadOrInitializeState() {
             if (typeof masterQuestionPool === 'undefined' || masterQuestionPool.length === 0) {
-                console.error("questions.js not detected.");
+                console.error("questions.js pool missing.");
                 return;
             }
 
@@ -582,7 +625,7 @@
                 return alert("Please enter a valid email address to receive your certificate.");
             }
 
-            if (!consent) return alert("Please check the consent box to proceed.");
+            if (!consent) return alert("Please confirm that your details are accurate to proceed.");
             
             appState.candidateName = nameInput;
             appState.candidateEmail = emailInput;
@@ -648,7 +691,7 @@
                 
                 const btn = document.createElement('button');
                 btn.onclick = () => jumpToQuestion(i);
-                btn.className = `min-w-[42px] h-[42px] rounded-xl flex-shrink-0 flex items-center justify-center font-bold text-xs status-${status} ${ringClass} transition-all duration-150 focus:outline-none`;
+                btn.className = `min-w-[38px] h-[38px] sm:min-w-[42px] sm:h-[42px] rounded-xl flex-shrink-0 flex items-center justify-center font-bold text-xs status-${status} ${ringClass} transition-all duration-150 active:scale-90 focus:outline-none`;
                 btn.innerText = i + 1;
                 btn.id = `pal-btn-${i}`;
                 
@@ -684,8 +727,8 @@
                         <div class="flex items-center h-5 mt-0.5 shrink-0">
                             <input type="radio" name="mock-answer" value="${letter}" onclick="recordOptionSelection('${letter}')" class="option-input w-4 h-4 text-blue-600 bg-white border-gray-300 focus:ring-blue-500" ${isSelected ? 'checked' : ''}>
                         </div>
-                        <div class="ml-4 text-sm md:text-base text-slate-800 opt-content-wrapper flex items-start gap-3">
-                            <span class="font-black text-slate-500 bg-white/90 border border-slate-200/80 px-2.5 py-0.5 rounded-lg shadow-sm text-xs mt-0.5">${letter}</span>
+                        <div class="ml-3 sm:ml-4 text-xs sm:text-sm md:text-base text-slate-800 opt-content-wrapper flex items-start gap-2.5">
+                            <span class="font-black text-slate-500 bg-white/95 border border-slate-200/90 px-2 py-0.5 rounded-lg shadow-sm text-[11px] sm:text-xs mt-0.5 shrink-0">${letter}</span>
                             <span class="leading-relaxed">${optionStr}</span>
                         </div>
                     </label>
@@ -695,11 +738,11 @@
 
             const markBtn = document.getElementById('mark-btn');
             if(appState.questionStatus[appState.indexActive] === 'marked') {
-                markBtn.innerHTML = `<i class="fas fa-check"></i> Marked`;
+                markBtn.innerHTML = `<i class="fas fa-check text-xs"></i> <span class="hidden sm:inline">Marked</span>`;
                 markBtn.classList.add('bg-purple-600', 'text-white');
                 markBtn.classList.remove('text-purple-600');
             } else {
-                markBtn.innerHTML = `<i class="fas fa-bookmark"></i> Review`;
+                markBtn.innerHTML = `<i class="fas fa-bookmark text-xs"></i> <span class="hidden sm:inline">Review</span>`;
                 markBtn.classList.remove('bg-purple-600', 'text-white');
                 markBtn.classList.add('text-purple-600');
             }
@@ -709,14 +752,14 @@
             const actionWrapper = document.getElementById('action-btn-wrapper');
             if (appState.indexActive === appState.totalQuestions - 1) {
                 actionWrapper.innerHTML = `
-                    <button onclick="submitExamination()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 px-8 rounded-xl text-sm hover:from-emerald-700 hover:to-teal-700 shadow-lg transform transition hover:-translate-y-0.5 w-full flex items-center justify-center gap-2">
-                        Submit Quiz <i class="fas fa-paper-plane text-xs"></i>
+                    <button onclick="submitExamination()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-2.5 px-4 sm:py-3 sm:px-7 rounded-xl text-xs sm:text-sm hover:from-emerald-700 hover:to-teal-700 shadow-lg transform transition active:scale-95 flex items-center justify-center gap-1.5 whitespace-nowrap">
+                        <span>Submit Exam</span> <i class="fas fa-paper-plane text-[10px]"></i>
                     </button>
                 `;
             } else {
                 actionWrapper.innerHTML = `
-                    <button id="next-btn" onclick="navigateQuestion(1)" class="bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold py-3 px-8 rounded-xl text-sm hover:from-blue-600 hover:to-indigo-600 shadow-md transform transition hover:-translate-y-0.5 w-full flex items-center justify-center gap-2">
-                        Save & Next <i class="fas fa-arrow-right text-xs"></i>
+                    <button id="next-btn" onclick="navigateQuestion(1)" class="bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold py-2.5 px-4 sm:py-3 sm:px-7 rounded-xl text-xs sm:text-sm hover:from-blue-600 hover:to-indigo-600 shadow-md transform transition active:scale-95 flex items-center justify-center gap-1.5 whitespace-nowrap">
+                        <span>Save & Next</span> <i class="fas fa-arrow-right text-[10px]"></i>
                     </button>
                 `;
             }
@@ -780,7 +823,7 @@
         }
 
         window.submitExamination = function() {
-            if (confirm("Are you sure you want to finish and submit the quiz?")) {
+            if (confirm("Are you ready to submit your assessment?")) {
                 appState.isExamActive = false;
                 clearInterval(trackingInterval);
                 localStorage.removeItem(STORAGE_KEY); 
@@ -834,7 +877,6 @@
 
             document.getElementById('res-name').innerText = appState.candidateName;
             document.getElementById('res-email').innerText = appState.candidateEmail;
-            document.getElementById('res-email').title = appState.candidateEmail;
             document.getElementById('res-date').innerText = new Date().toLocaleDateString(); 
             
             const minsSpent = Math.floor(appState.timeSpent / 60);
@@ -854,20 +896,20 @@
             certTarget.innerText = appState.candidateEmail;
 
             if (accuracy >= 80) {
-                banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass bg-emerald-100/50 border border-emerald-200';
-                awardTxt.className = "text-2xl sm:text-3xl font-black text-emerald-600";
+                banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass bg-emerald-100/60 border border-emerald-200 shimmer-card';
+                awardTxt.className = "text-xl sm:text-3xl font-black text-emerald-600";
                 awardTxt.innerText = `Mastery (${accuracy}%)`;
                 certMsg.innerText = "Congratulations! Your Certificate of Mastery will be dispatched to:";
             } else if (accuracy >= 50) {
-                banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass bg-blue-100/50 border border-blue-200';
-                awardTxt.className = "text-2xl sm:text-3xl font-black text-blue-600";
+                banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass bg-blue-100/60 border border-blue-200 shimmer-card';
+                awardTxt.className = "text-xl sm:text-3xl font-black text-blue-600";
                 awardTxt.innerText = `Passed (${accuracy}%)`;
                 certMsg.innerText = "Well done! Your Certificate of Completion will be dispatched to:";
             } else {
-                banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass bg-rose-100/50 border border-rose-200';
-                awardTxt.className = "text-2xl sm:text-3xl font-black text-rose-600";
+                banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass bg-rose-100/60 border border-rose-200';
+                awardTxt.className = "text-xl sm:text-3xl font-black text-rose-600";
                 awardTxt.innerText = `Needs Improvement (${accuracy}%)`;
-                certMsg.innerText = "Minimum passing mark is 50% for a certificate. Retake available. Registered email:";
+                certMsg.innerText = "Score 50% or more to qualify for a certificate. Registered email:";
             }
 
             saveResultToFirebase(appState.candidateName, appState.candidateEmail, correct, appState.totalQuestions, accuracy);
@@ -897,13 +939,13 @@
                 let wrapperClass = '';
                 
                 if (userAns === correctAns) {
-                    statusBadge = '<span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-md text-[10px] sm:text-xs font-bold uppercase"><i class="fas fa-check-circle"></i> Correct</span>';
+                    statusBadge = '<span class="bg-emerald-100 text-emerald-700 px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase"><i class="fas fa-check-circle"></i> Correct</span>';
                     wrapperClass = 'border-l-4 border-emerald-500';
                 } else if (!userAns) {
-                    statusBadge = '<span class="bg-slate-200 text-slate-600 px-3 py-1 rounded-md text-[10px] sm:text-xs font-bold uppercase"><i class="fas fa-minus-circle"></i> Skipped</span>';
+                    statusBadge = '<span class="bg-slate-200 text-slate-600 px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase"><i class="fas fa-minus-circle"></i> Skipped</span>';
                     wrapperClass = 'border-l-4 border-slate-400';
                 } else {
-                    statusBadge = '<span class="bg-rose-100 text-rose-700 px-3 py-1 rounded-md text-[10px] sm:text-xs font-bold uppercase"><i class="fas fa-times-circle"></i> Incorrect</span>';
+                    statusBadge = '<span class="bg-rose-100 text-rose-700 px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase"><i class="fas fa-times-circle"></i> Incorrect</span>';
                     wrapperClass = 'border-l-4 border-rose-500';
                 }
 
@@ -917,31 +959,31 @@
                     if (letter === correctAns) {
                         optClass = "bg-emerald-50/90 border-emerald-500 text-emerald-900 font-bold shadow-sm";
                         letterClass = "bg-emerald-500 text-white border-emerald-600";
-                        icon = "<i class='fas fa-check text-emerald-600 ml-auto'></i>";
+                        icon = "<i class='fas fa-check text-emerald-600 ml-auto text-xs'></i>";
                     } else if (letter === userAns && userAns !== correctAns) {
                         optClass = "bg-rose-50/90 border-rose-300 text-rose-800 line-through opacity-85";
                         letterClass = "bg-rose-200 text-rose-800 border-rose-300";
-                        icon = "<i class='fas fa-times text-rose-500 ml-auto'></i>";
+                        icon = "<i class='fas fa-times text-rose-500 ml-auto text-xs'></i>";
                     }
 
                     optionsHTML += `
-                        <div class="p-3.5 sm:p-4 rounded-xl border flex items-center gap-3 md:gap-4 ${optClass}">
-                            <span class="w-8 h-8 md:w-9 md:h-9 rounded-lg flex shrink-0 items-center justify-center font-bold text-xs md:text-sm border shadow-sm ${letterClass}">${letter}</span>
-                            <span class="text-xs md:text-sm leading-relaxed">${optStr}</span>
+                        <div class="p-2.5 sm:p-3.5 rounded-xl border flex items-center gap-2.5 sm:gap-3.5 ${optClass}">
+                            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex shrink-0 items-center justify-center font-bold text-xs border shadow-sm ${letterClass}">${letter}</span>
+                            <span class="text-xs sm:text-sm leading-relaxed">${optStr}</span>
                             ${icon}
                         </div>
                     `;
                 });
 
                 const qHTML = `
-                    <div class="inner-glass p-5 md:p-6 rounded-2xl ${wrapperClass} shadow-sm">
-                        <div class="flex flex-col sm:flex-row justify-between items-start mb-2 sm:mb-4 gap-3">
-                            <h3 class="font-bold text-slate-800 text-base md:text-lg flex-1 leading-snug">
+                    <div class="inner-glass p-3.5 sm:p-5 rounded-2xl ${wrapperClass} shadow-sm">
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-2 gap-2">
+                            <h3 class="font-bold text-slate-800 text-xs sm:text-base flex-1 leading-snug">
                                 <span class="text-slate-400 mr-1">${index + 1}.</span> ${item.q}
                             </h3>
-                            <div class="shrink-0 sm:mt-1">${statusBadge}</div>
+                            <div class="shrink-0">${statusBadge}</div>
                         </div>
-                        <div class="space-y-2.5 mt-4">
+                        <div class="space-y-2 mt-3">
                             ${optionsHTML}
                         </div>
                     </div>
