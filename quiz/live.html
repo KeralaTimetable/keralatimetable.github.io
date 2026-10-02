@@ -8,318 +8,331 @@
     <!-- Tailwind Local with CDN Fallback -->
     <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
             background: 
-                radial-gradient(ellipse 90% 60% at 50% -15%, rgba(147, 51, 234, 0.22), transparent),
-                radial-gradient(ellipse 70% 50% at 100% 30%, rgba(6, 182, 212, 0.18), transparent),
-                radial-gradient(ellipse 60% 50% at 0% 80%, rgba(99, 102, 241, 0.16), transparent),
-                #0b0f19;
-            color: #f1f5f9;
+                radial-gradient(at 0% 0%, rgba(219, 234, 254, 0.75) 0px, transparent 45%),
+                radial-gradient(at 100% 0%, rgba(238, 242, 255, 0.75) 0px, transparent 45%),
+                radial-gradient(at 100% 100%, rgba(209, 250, 229, 0.55) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.65) 0px, transparent 50%),
+                #f8fafc;
             min-height: 100vh;
             min-height: 100dvh;
         }
 
-        .font-mono-code { font-family: 'JetBrains Mono', monospace; }
-
-        /* Argon Plasma Dark Glass */
-        .argon-glass-panel {
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(28px) saturate(220%);
-            -webkit-backdrop-filter: blur(28px) saturate(220%);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-top: 1px solid rgba(167, 139, 250, 0.4);
-            border-left: 1px solid rgba(103, 232, 249, 0.3);
+        /* Glassmorphism System */
+        .real-glass {
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-top: 1px solid rgba(255, 255, 255, 0.98);
+            border-left: 1px solid rgba(255, 255, 255, 0.98);
             box-shadow: 
-                0 30px 60px -15px rgba(2, 6, 23, 0.8),
-                0 0 40px -10px rgba(139, 92, 246, 0.15) inset,
-                0 1px 1px 0 rgba(255, 255, 255, 0.1) inset;
+                0 24px 48px -12px rgba(15, 23, 42, 0.08),
+                0 1px 2px 0 rgba(255, 255, 255, 0.9) inset,
+                0 -1px 2px 0 rgba(15, 23, 42, 0.02) inset;
         }
 
-        .argon-card {
-            background: rgba(30, 41, 59, 0.45);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.08);
-            transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.58);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 
+                0 4px 16px -2px rgba(15, 23, 42, 0.03), 
+                inset 0 1px 2px rgba(255, 255, 255, 0.95);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .argon-card:hover {
-            background: rgba(30, 41, 59, 0.7);
-            border-color: rgba(147, 197, 253, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px -6px rgba(14, 165, 233, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+        .inner-glass:hover {
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(255, 255, 255, 1);
+            box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.06), inset 0 1px 2px rgba(255, 255, 255, 1);
         }
 
-        .argon-input {
-            background: rgba(15, 23, 42, 0.75);
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            color: #f8fafc;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
-            transition: all 0.25s ease;
-        }
-
-        .argon-input:focus {
-            background: rgba(15, 23, 42, 0.95);
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.22), 0 0 20px rgba(56, 189, 248, 0.25);
+        .inner-glass:focus, .inner-glass:focus-within {
+            background: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16), 0 8px 20px -4px rgba(59, 130, 246, 0.12);
             outline: none;
         }
 
-        /* Gas Glow Beam animations */
-        @keyframes plasma-breathe {
-            0%, 100% { opacity: 0.4; transform: scale(1); filter: blur(90px); }
-            50% { opacity: 0.7; transform: scale(1.08); filter: blur(110px); }
+        /* Ambient Dynamic Light Orbs */
+        @keyframes orb-float-1 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -40px) scale(1.08); }
+            66% { transform: translate(-25px, 20px) scale(0.96); }
         }
-        .plasma-glow-1 { animation: plasma-breathe 8s ease-in-out infinite; }
-        .plasma-glow-2 { animation: plasma-breathe 10s ease-in-out 3s infinite; }
+        @keyframes orb-float-2 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(-40px, 35px) scale(1.06); }
+            66% { transform: translate(25px, -30px) scale(0.94); }
+        }
+        @keyframes orb-float-3 {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(35px, -30px) scale(1.1); }
+        }
+        .orb-anim-1 { animation: orb-float-1 14s ease-in-out infinite; }
+        .orb-anim-2 { animation: orb-float-2 16s ease-in-out infinite; }
+        .orb-anim-3 { animation: orb-float-3 18s ease-in-out infinite; }
 
-        @keyframes scanline {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(1000%); }
+        /* Shimmer Wave */
+        @keyframes shimmer-sweep {
+            0% { transform: translateX(-150%) skewX(-20deg); }
+            100% { transform: translateX(250%) skewX(-20deg); }
         }
-        .scanline-effect {
-            animation: scanline 8s linear infinite;
+        .shimmer-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: translateX(-150%) skewX(-20deg);
+            animation: shimmer-sweep 6s infinite ease-in-out;
+            pointer-events: none;
         }
 
-        /* Option Tile in Quiz View */
+        /* Entry Animations */
+        @keyframes fadeUpEntry {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 80ms; }
+        .delay-200 { animation-delay: 160ms; }
+
+        /* Interactive Option Pill Animation */
         .option-label {
             display: flex;
             align-items: flex-start;
-            padding: 1rem 1.15rem;
+            padding: 0.9rem 1rem;
             border-radius: 1rem;
             cursor: pointer;
             transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
             margin-bottom: 0.75rem;
-            background: rgba(30, 41, 59, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #cbd5e1;
+            position: relative;
+            touch-action: manipulation;
         }
         
         .option-label:hover {
             transform: translateY(-2px);
-            background: rgba(51, 65, 85, 0.6);
-            border-color: rgba(56, 189, 248, 0.4);
-            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.92);
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 24px -6px rgba(15, 23, 42, 0.08);
+        }
+
+        .option-label:active {
+            transform: scale(0.985);
         }
 
         .option-label.selected {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.65), rgba(88, 28, 135, 0.65));
-            border-color: #38bdf8;
-            box-shadow: 0 10px 28px -4px rgba(56, 189, 248, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.25);
-            color: #ffffff;
+            background: rgba(239, 246, 255, 0.95);
+            border-color: #3b82f6;
+            box-shadow: 0 12px 28px -6px rgba(59, 130, 246, 0.25), inset 0 1px 2px rgba(255, 255, 255, 1);
             transform: translateY(-1px);
         }
 
         /* Palette Status Classes */
         .status-answered { 
-            background: linear-gradient(135deg, #059669, #10b981); 
+            background: linear-gradient(135deg, #10b981, #059669); 
             color: white; 
-            border-color: #34d399; 
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+            border-color: #047857; 
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
         .status-not-answered { 
-            background: linear-gradient(135deg, #dc2626, #ef4444); 
+            background: linear-gradient(135deg, #f87171, #ef4444); 
             color: white; 
-            border-color: #f87171; 
-            box-shadow: 0 0 12px rgba(239, 68, 68, 0.35);
+            border-color: #dc2626; 
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
         }
         .status-marked { 
-            background: linear-gradient(135deg, #7c3aed, #a855f7); 
+            background: linear-gradient(135deg, #a855f7, #7c3aed); 
             color: white; 
-            border-color: #c084fc; 
-            box-shadow: 0 0 14px rgba(168, 85, 247, 0.45);
+            border-color: #6d28d9; 
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
         }
         .status-unvisited { 
-            background: rgba(30, 41, 59, 0.6); 
-            color: #94a3b8; 
-            border-color: rgba(255, 255, 255, 0.08); 
+            background: rgba(255, 255, 255, 0.75); 
+            color: #64748b; 
+            border-color: rgba(203, 213, 225, 0.85); 
         }
 
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* iOS Safe Area Padding */
         .pb-safe { padding-bottom: max(1.25rem, env(safe-area-inset-bottom)); }
     </style>
 </head>
 
-<body class="antialiased flex flex-col min-h-screen relative selection:bg-cyan-500 selection:text-slate-950">
+<body class="text-slate-800 antialiased flex flex-col min-h-screen relative selection:bg-blue-500 selection:text-white">
 
     <!-- Global Navigation Container loaded by components.js -->
     <div id="navigation-container" class="transition-opacity duration-300 relative z-50"></div>
 
-    <!-- Ionized Argon Plasma Atmospheric Orbs -->
+    <!-- Parallax Orb Lights -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute -top-32 -left-32 w-[34rem] h-[34rem] bg-violet-600/25 rounded-full plasma-glow-1"></div>
-        <div class="absolute top-1/4 -right-32 w-[38rem] h-[38rem] bg-cyan-500/20 rounded-full plasma-glow-2"></div>
-        <div class="absolute -bottom-32 left-1/3 w-[32rem] h-[32rem] bg-indigo-600/20 rounded-full plasma-glow-1"></div>
+        <div id="scroll-bg-1" class="absolute top-10 -left-20 md:-left-10 w-72 h-72 md:w-[28rem] md:h-[28rem]">
+            <div id="mouse-orb-1" class="w-full h-full bg-blue-400/40 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[110px] orb-anim-1"></div>
+        </div>
+        <div id="scroll-bg-2" class="absolute top-72 -right-20 md:-right-20 w-80 h-80 md:w-[32rem] md:h-[32rem]">
+            <div id="mouse-orb-2" class="w-full h-full bg-indigo-400/35 rounded-full mix-blend-multiply filter blur-[90px] md:blur-[120px] orb-anim-2"></div>
+        </div>
+        <div id="scroll-bg-3" class="absolute -bottom-28 left-[15%] w-80 h-80 md:w-[30rem] md:h-[30rem]">
+            <div id="mouse-orb-3" class="w-full h-full bg-teal-300/30 rounded-full mix-blend-multiply filter blur-[90px] md:blur-[120px] orb-anim-3"></div>
+        </div>
     </div>
 
-    <!-- ==================== ARGON FRONT (LANDING HERO) ==================== -->
+    <!-- ==================== LANDING VIEW ==================== -->
     <main id="main-container" class="flex-grow w-full max-w-5xl mx-auto px-3.5 sm:px-6 py-6 sm:py-10 md:py-14 relative z-10 flex flex-col justify-center">
-        <div id="landing-view" class="max-w-3xl mx-auto w-full space-y-6">
+        <div id="landing-view" class="max-w-3xl mx-auto w-full space-y-5 sm:space-y-6">
             
-            <!-- Hero Header with Argon Element Insignia -->
-            <div class="text-center">
-                
-                <!-- Periodic Element Chamber Badge -->
-                <div class="relative inline-block mx-auto mb-4 group cursor-default">
-                    <div class="absolute -inset-2 rounded-2xl bg-gradient-to-r from-violet-600 via-cyan-400 to-indigo-600 opacity-60 blur-xl group-hover:opacity-90 transition duration-700 animate-pulse"></div>
-                    <div class="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-slate-950/85 border border-cyan-400/40 backdrop-blur-xl flex flex-col justify-between p-2.5 shadow-2xl">
-                        <div class="flex justify-between items-center text-[10px] font-mono-code font-bold text-cyan-400">
-                            <span>18</span>
-                            <span class="text-[8px] text-slate-400">39.948</span>
-                        </div>
-                        <div class="text-2xl sm:text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-cyan-200 to-violet-300">
-                            Ar
-                        </div>
-                        <div class="text-[8px] font-mono-code tracking-widest text-indigo-300 uppercase font-bold text-center">
-                            ARGON
-                        </div>
-                    </div>
+            <div class="text-center mb-6 sm:mb-8">
+                <div class="animate-fade-up inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md shadow-sm border border-slate-200/90 text-blue-600 text-[11px] sm:text-xs font-black uppercase tracking-wider mb-4">
+                    <span class="w-2 h-2 rounded-full bg-blue-500 animate-ping inline-block"></span>
+                    <i class="fas fa-atom text-blue-500"></i> Frontier AI • Gemini 4 Argon
                 </div>
-
-                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/80 border border-cyan-500/30 text-cyan-300 text-[10px] sm:text-xs font-mono-code uppercase tracking-wider mb-3 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.2)]">
-                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-                    Google DeepMind • Gemini 4 Architecture
-                </div>
-
-                <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight mb-2.5 text-white leading-tight">
-                    ARGON <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400">2026</span>
+                <h1 class="animate-fade-up delay-100 text-2xl sm:text-4xl md:text-5xl font-black tracking-tight mb-2 sm:mb-3 text-slate-900 leading-tight">
+                    ARGON 2026 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">— The Gemini 4 Quiz</span>
                 </h1>
-                <p class="text-slate-400 text-xs sm:text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed px-2">
-                    Official benchmark assessment for Gemini 4 Argon: 1M single-pass output tokens, automated Rust conversions, quantum spacetime optimization, and agentic workflows.
+                <p class="animate-fade-up delay-200 text-slate-600 text-xs sm:text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed px-2">
+                    Test your expertise on Google DeepMind's Gemini 4 Argon model, covering 1M single-pass output tokens, benchmarks, and production migrations.
                 </p>
-
-                <!-- Spec Pill Telemetry -->
-                <div class="flex flex-wrap items-center justify-center gap-2 mt-4 text-[10px] sm:text-xs font-mono-code text-slate-300">
-                    <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">1M OUTPUT PASS</span>
-                    <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">LVBENCH 91.7%</span>
-                    <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10">DEEPSWE 77.9%</span>
-                    <span class="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-400/30 text-cyan-300">FAIRWIND PROTOCOL</span>
-                </div>
             </div>
 
-            <!-- Main Chamber Panel -->
-            <div class="argon-glass-panel rounded-[2rem] sm:rounded-[2.4rem] p-4 sm:p-8 md:p-10 relative overflow-hidden">
+            <div class="animate-fade-up delay-200 real-glass rounded-[1.8rem] sm:rounded-[2.2rem] p-4 sm:p-8 md:p-10">
                 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 mb-6">
-                    <div class="argon-card p-3.5 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-500/15 border border-blue-400/30 flex items-center justify-center text-blue-400 mb-1.5 shadow-[0_0_10px_rgba(59,130,246,0.2)]">
+                <!-- Quick Metrics Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 mb-6 sm:mb-8">
+                    <div class="inner-glass p-3 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-1.5 sm:mb-2 shadow-sm">
                             <i class="far fa-clock text-sm sm:text-base"></i>
                         </div>
-                        <div class="text-[9px] sm:text-[10px] font-mono-code font-bold text-slate-400 uppercase tracking-widest">Time Cap</div>
-                        <div class="font-extrabold text-white text-sm sm:text-base">30 Mins</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest">Duration</div>
+                        <div class="font-extrabold text-slate-800 text-sm sm:text-base">30 Mins</div>
                     </div>
-                    <div class="argon-card p-3.5 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center text-indigo-400 mb-1.5 shadow-[0_0_10px_rgba(99,102,241,0.2)]">
+                    <div class="inner-glass p-3 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 mb-1.5 sm:mb-2 shadow-sm">
                             <i class="fas fa-list-ol text-sm sm:text-base"></i>
                         </div>
-                        <div class="text-[9px] sm:text-[10px] font-mono-code font-bold text-slate-400 uppercase tracking-widest">Dataset</div>
-                        <div class="font-extrabold text-white text-sm sm:text-base" id="total-q-display">30 MCQs</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest">Questions</div>
+                        <div class="font-extrabold text-slate-800 text-sm sm:text-base" id="total-q-display">30 MCQs</div>
                     </div>
-                    <div class="argon-card p-3.5 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center text-emerald-400 mb-1.5 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+                    <div class="inner-glass p-3 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-1.5 sm:mb-2 shadow-sm">
                             <i class="fas fa-award text-sm sm:text-base"></i>
                         </div>
-                        <div class="text-[9px] sm:text-[10px] font-mono-code font-bold text-slate-400 uppercase tracking-widest">Certificate</div>
-                        <div class="font-extrabold text-white text-sm sm:text-base">Score ≥ 50%</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest">Certificate</div>
+                        <div class="font-extrabold text-slate-800 text-sm sm:text-base">Score 50%+</div>
                     </div>
-                    <div class="argon-card p-3.5 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-rose-500/15 border border-rose-400/30 flex items-center justify-center text-rose-400 mb-1.5 shadow-[0_0_10px_rgba(244,63,94,0.2)]">
+                    <div class="inner-glass p-3 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600 mb-1.5 sm:mb-2 shadow-sm">
                             <i class="fas fa-shield-alt text-sm sm:text-base"></i>
                         </div>
-                        <div class="text-[9px] sm:text-[10px] font-mono-code font-bold text-slate-400 uppercase tracking-widest">Proctor</div>
-                        <div class="font-extrabold text-white text-sm sm:text-base">Monitored</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest">Proctoring</div>
+                        <div class="font-extrabold text-slate-800 text-sm sm:text-base">Active</div>
                     </div>
                 </div>
 
-                <!-- Registration Terminal -->
+                <!-- Guidelines -->
+                <div class="mb-6 inner-glass rounded-2xl p-4 sm:p-6 border border-white">
+                    <h3 class="font-black text-slate-900 mb-3 text-sm sm:text-base flex items-center gap-2 border-b border-slate-200/50 pb-2.5">
+                        <i class="fas fa-info-circle text-blue-500"></i> Assessment Rules
+                    </h3>
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600 font-medium">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fas fa-check-circle text-blue-500 mt-0.5 shrink-0 text-xs"></i> 
+                            <span>Scores of 50% or above earn a downloadable, verified completion certificate emailed to you.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fas fa-exclamation-triangle text-amber-500 mt-0.5 shrink-0 text-xs"></i> 
+                            <span><strong>Anti-Cheat Enabled:</strong> Leaving or switching tabs triggers proctoring warnings.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fas fa-bookmark text-purple-500 mt-0.5 shrink-0 text-xs"></i> 
+                            <span>You can mark and review questions anytime before final submission.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Registration Details -->
                 <div class="space-y-3.5">
                     <div>
-                        <label class="block text-[10px] sm:text-[11px] font-mono-code uppercase tracking-wider mb-1.5 ml-1 text-slate-300">
-                            Candidate Full Name <span class="text-cyan-400 font-bold">*</span>
-                        </label>
-                        <input type="text" id="candidate-name" placeholder="Enter full name for verification" class="argon-input w-full text-sm sm:text-base rounded-xl px-4 py-3.5 transition-all">
+                        <label class="block text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Candidate Full Name</label>
+                        <input type="text" id="candidate-name" placeholder="Enter your full name (for certificate)" class="inner-glass w-full text-slate-800 text-sm md:text-base rounded-xl px-4 py-3 sm:py-3.5 transition-all">
                     </div>
                     <div>
-                        <label class="block text-[10px] sm:text-[11px] font-mono-code uppercase tracking-wider mb-1.5 ml-1 text-slate-300">
-                            Recipient Email Address <span class="text-cyan-400 font-bold">*</span>
-                        </label>
-                        <input type="email" id="candidate-email" placeholder="name@domain.com (certificate target)" class="argon-input w-full text-sm sm:text-base rounded-xl px-4 py-3.5 transition-all">
+                        <label class="block text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Email Address <span class="text-blue-600 lowercase">(certificate destination)</span></label>
+                        <input type="email" id="candidate-email" placeholder="name@example.com" class="inner-glass w-full text-slate-800 text-sm md:text-base rounded-xl px-4 py-3 sm:py-3.5 transition-all">
                     </div>
-                    
-                    <label class="flex items-center gap-2.5 cursor-pointer mt-3 group p-2 rounded-xl hover:bg-white/5 transition">
-                        <input type="checkbox" id="consent-check" class="h-4 w-4 sm:h-5 sm:w-5 cursor-pointer rounded-lg border-slate-600 text-cyan-500 focus:ring-cyan-400 bg-slate-900">
-                        <span class="text-xs sm:text-sm font-semibold text-slate-300 group-hover:text-white transition-colors">
-                            I verify my information and acknowledge the 30-minute exam timer.
-                        </span>
+                    <label class="flex items-center gap-2.5 cursor-pointer mt-3 group p-2 rounded-xl hover:bg-white/40 transition">
+                        <input type="checkbox" id="consent-check" class="h-4 w-4 sm:h-5 sm:w-5 cursor-pointer rounded-lg border-gray-300 text-blue-600 focus:ring-blue-500 transition-colors bg-white/70">
+                        <span class="text-xs sm:text-sm font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">I confirm my details are correct and agree to begin.</span>
                     </label>
                 </div>
 
-                <!-- Plasma CTA Trigger Button -->
-                <button onclick="startExamination()" class="w-full mt-6 relative group overflow-hidden rounded-xl p-[1px] focus:outline-none active:scale-[0.99] transition">
-                    <span class="absolute inset-0 bg-gradient-to-r from-cyan-500 via-indigo-500 to-violet-600 rounded-xl group-hover:opacity-100 transition duration-300"></span>
-                    <span class="relative flex items-center justify-center gap-2 w-full bg-slate-950 hover:bg-slate-900/90 text-white font-black text-sm sm:text-base py-4 px-6 rounded-xl transition duration-200">
-                        <span>LAUNCH ARGON ASSESSMENT</span>
-                        <i class="fas fa-bolt text-cyan-400 text-xs group-hover:translate-x-1 transition-transform"></i>
-                    </span>
+                <button onclick="startExamination()" class="w-full mt-6 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 hover:from-blue-600 hover:to-indigo-600 text-white font-bold py-3.5 sm:py-4 px-6 rounded-xl shadow-xl transform transition duration-150 active:scale-95 flex justify-center items-center gap-2 text-sm sm:text-base">
+                    Begin Assessment <i class="fas fa-arrow-right text-xs"></i>
                 </button>
 
-                <!-- Prominent Disclaimer -->
-                <div class="mt-6 p-3.5 rounded-xl border border-white/5 bg-slate-950/60 text-[11px] sm:text-xs text-slate-400 leading-relaxed text-center font-mono-code">
-                    <span class="text-amber-400 font-bold">LEGAL NOTICE:</span> This assessment is an independent educational benchmark created for technical evaluation. It is <strong>NOT</strong> affiliated, organized, sponsored, or endorsed by Google LLC, Google DeepMind, or the official Gemini project.
+                <!-- Independent Community Disclaimer -->
+                <div class="mt-6 p-3.5 rounded-xl border border-slate-200/60 bg-white/40 text-[11px] sm:text-xs text-slate-500 leading-relaxed text-center">
+                    <strong class="text-slate-700">Notice:</strong> This quiz is an independent assessment designed solely for educational, research, and technical preparation purposes. It is <strong>NOT</strong> organized, affiliated, authorized, sponsored, or endorsed by Google LLC, Google DeepMind, or the official Gemini project.
                 </div>
             </div>
         </div>
     </main>
 
     <!-- ==================== QUIZ VIEW ==================== -->
-    <div id="quiz-view" class="hidden fixed inset-0 bg-[#070b14] z-50 flex flex-col h-[100dvh] overflow-hidden">
+    <div id="quiz-view" class="hidden fixed inset-0 bg-transparent z-50 flex flex-col h-[100dvh] overflow-hidden">
         
         <!-- Header Bar -->
-        <header class="argon-glass-panel border-b border-t-0 border-l-0 border-r-0 rounded-none w-full px-3.5 sm:px-6 md:px-8 py-2.5 sm:py-3.5 flex justify-between items-center z-20 flex-shrink-0">
+        <header class="real-glass border-b border-t-0 border-l-0 border-r-0 rounded-none w-full px-3.5 sm:px-6 md:px-8 py-2.5 sm:py-3 flex justify-between items-center z-20 flex-shrink-0 shadow-sm">
             <div class="flex items-center gap-2.5 sm:gap-3">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-tr from-cyan-500 to-violet-600 rounded-xl flex items-center justify-center text-white shadow-[0_0_15px_rgba(6,182,212,0.4)] shrink-0">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md shrink-0">
                     <i class="fas fa-atom text-xs sm:text-sm"></i>
                 </div>
                 <div>
-                    <h1 class="font-black text-white text-xs sm:text-sm md:text-base leading-tight">Gemini 4 Argon</h1>
-                    <p class="text-[10px] sm:text-xs font-mono-code text-cyan-400 hidden sm:block">Model Knowledge Assessment</p>
+                    <h1 class="font-black text-slate-900 text-xs sm:text-sm md:text-base leading-tight">Gemini 4 Argon</h1>
+                    <p class="text-[10px] sm:text-xs font-semibold text-slate-500 hidden sm:block">Model Knowledge Assessment</p>
                 </div>
             </div>
             <div class="flex items-center gap-2 sm:gap-3">
-                <div class="argon-card px-3.5 py-1.5 sm:py-2 rounded-xl flex items-center gap-2 bg-slate-950/80 border border-cyan-500/30">
+                <div class="inner-glass px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl shadow-sm flex items-center gap-2 bg-white/80">
                     <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
                     </span>
-                    <i class="far fa-clock text-cyan-400 text-xs sm:text-sm"></i>
-                    <span id="timer" class="font-black text-cyan-300 font-mono-code tracking-wider text-sm sm:text-base md:text-lg">30:00</span>
+                    <i class="far fa-clock text-blue-600 text-xs sm:text-sm"></i>
+                    <span id="timer" class="font-black text-slate-800 font-mono tracking-wider text-sm sm:text-base md:text-lg">30:00</span>
                 </div>
             </div>
         </header>
 
-        <!-- Dynamic Laser Progress Bar -->
-        <div class="w-full bg-slate-900 h-1 sm:h-1.5 flex-shrink-0">
-            <div id="progress-bar" class="bg-gradient-to-r from-cyan-400 via-indigo-500 to-violet-500 h-1 sm:h-1.5 transition-all duration-300 shadow-[0_0_10px_rgba(6,182,212,0.6)]" style="width: 0%"></div>
+        <!-- Progress Indicator -->
+        <div class="w-full bg-slate-200/50 h-1 sm:h-1.5 flex-shrink-0">
+            <div id="progress-bar" class="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 h-1 sm:h-1.5 transition-all duration-300" style="width: 0%"></div>
         </div>
 
         <!-- Scrollable Question Canvas -->
         <div class="flex-grow overflow-y-auto px-3.5 py-4 sm:px-8 md:px-10 pb-[230px] sm:pb-[190px] relative">
-            <div class="max-w-4xl mx-auto argon-glass-panel p-4 sm:p-7 md:p-9 rounded-[1.8rem] sm:rounded-[2.4rem]">
-                <div class="mb-4 sm:mb-6 flex justify-between items-center border-b border-white/10 pb-3">
-                    <h2 id="question-indicator" class="text-[10px] sm:text-xs font-mono-code font-bold text-cyan-300 uppercase tracking-widest bg-cyan-500/10 border border-cyan-400/30 px-3 py-1 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.15)]">
+            <div class="max-w-4xl mx-auto real-glass p-4 sm:p-7 md:p-9 rounded-[1.8rem] sm:rounded-[2.2rem] shadow-sm">
+                <div class="mb-4 sm:mb-6 flex justify-between items-center border-b border-slate-200/50 pb-3">
+                    <h2 id="question-indicator" class="text-[10px] sm:text-xs font-black text-blue-600 uppercase tracking-widest bg-blue-50 border border-blue-100 px-3 py-1 rounded-full inline-block shadow-sm">
                         Question 1 of 30
                     </h2>
                 </div>
                 
                 <div class="mb-5 sm:mb-7">
-                    <p id="question-text" class="text-base sm:text-lg md:text-xl font-bold text-white leading-snug sm:leading-relaxed">
+                    <p id="question-text" class="text-base sm:text-lg md:text-xl font-bold text-slate-900 leading-snug sm:leading-relaxed">
                         Loading question...
                     </p>
                 </div>
@@ -328,29 +341,29 @@
             </div>
         </div>
 
-        <!-- Bottom Action Palette -->
-        <footer class="argon-glass-panel border-t border-b-0 border-l-0 border-r-0 rounded-none w-full absolute bottom-0 left-0 z-20 px-3 py-2.5 sm:px-6 sm:py-3.5 flex flex-col gap-2.5 pb-safe">
+        <!-- Sticky Floating Footer -->
+        <footer class="real-glass border-t border-b-0 border-l-0 border-r-0 rounded-none w-full absolute bottom-0 left-0 z-20 px-3 py-2.5 sm:px-6 sm:py-3.5 flex flex-col gap-2.5 backdrop-blur-2xl pb-safe">
             <div class="w-full max-w-5xl mx-auto">
                 <div id="palette-horizontal" class="flex overflow-x-auto gap-1.5 sm:gap-2 pb-1 hide-scrollbar items-center px-1"></div>
             </div>
 
             <div class="w-full max-w-5xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
                 <div class="flex items-center gap-2 w-auto">
-                    <button id="prev-btn" onclick="navigateQuestion(-1)" class="argon-card text-slate-300 font-bold py-2.5 px-3.5 sm:py-3 sm:px-5 rounded-xl text-xs sm:text-sm hover:text-white transition flex items-center justify-center gap-1.5 disabled:opacity-40 active:scale-95">
+                    <button id="prev-btn" onclick="navigateQuestion(-1)" class="inner-glass text-slate-700 font-bold py-2.5 px-3.5 sm:py-3 sm:px-5 rounded-xl text-xs sm:text-sm hover:bg-white transition flex items-center justify-center gap-1.5 disabled:opacity-40 active:scale-95">
                         <i class="fas fa-arrow-left text-[10px]"></i> <span class="hidden sm:inline">Back</span>
                     </button>
-                    <button onclick="clearResponse()" class="argon-card text-slate-400 font-bold py-2.5 px-3.5 sm:py-3 sm:px-4 rounded-xl text-xs sm:text-sm hover:text-rose-400 transition flex items-center justify-center active:scale-95">
+                    <button onclick="clearResponse()" class="inner-glass text-slate-600 font-bold py-2.5 px-3.5 sm:py-3 sm:px-4 rounded-xl text-xs sm:text-sm hover:text-red-600 hover:bg-white transition flex items-center justify-center active:scale-95">
                         Clear
                     </button>
                 </div>
 
                 <div class="flex items-center gap-2 w-auto">
-                    <button onclick="toggleMarkForReview()" id="mark-btn" class="argon-card text-purple-400 font-bold py-2.5 px-3.5 sm:py-3 sm:px-5 rounded-xl text-xs sm:text-sm hover:text-purple-300 transition flex items-center justify-center gap-1.5 active:scale-95">
+                    <button onclick="toggleMarkForReview()" id="mark-btn" class="inner-glass text-purple-600 font-bold py-2.5 px-3.5 sm:py-3 sm:px-5 rounded-xl text-xs sm:text-sm hover:bg-white transition flex items-center justify-center gap-1.5 active:scale-95">
                         <i class="fas fa-bookmark text-xs"></i> <span class="hidden sm:inline">Review</span>
                     </button>
                     
                     <div id="action-btn-wrapper" class="flex-1 sm:flex-none">
-                        <button id="next-btn" onclick="navigateQuestion(1)" class="bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-bold py-2.5 px-4 sm:py-3 sm:px-7 rounded-xl text-xs sm:text-sm hover:from-cyan-400 hover:to-indigo-500 shadow-[0_0_20px_rgba(6,182,212,0.4)] transform transition active:scale-95 flex items-center justify-center gap-1.5 whitespace-nowrap">
+                        <button id="next-btn" onclick="navigateQuestion(1)" class="bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold py-2.5 px-4 sm:py-3 sm:px-7 rounded-xl text-xs sm:text-sm hover:from-blue-600 hover:to-indigo-600 shadow-md transform transition active:scale-95 flex items-center justify-center gap-1.5 whitespace-nowrap">
                             <span>Save & Next</span> <i class="fas fa-arrow-right text-[10px]"></i>
                         </button>
                     </div>
@@ -360,119 +373,120 @@
     </div>
 
     <!-- ==================== RESULT VIEW ==================== -->
-    <div id="result-view" class="hidden absolute inset-0 bg-[#070b14] z-[60] overflow-y-auto px-3.5 py-6 sm:py-10 flex flex-col items-center">
+    <div id="result-view" class="hidden absolute inset-0 bg-transparent z-[60] overflow-y-auto px-3.5 py-6 sm:py-10 flex flex-col items-center">
         <div class="max-w-4xl mx-auto animate-fade-up w-full my-auto">
-            <div class="argon-glass-panel rounded-[2rem] sm:rounded-[2.4rem] p-4 sm:p-8 md:p-10 shadow-2xl relative">
+            <div class="real-glass rounded-[1.8rem] sm:rounded-[2.2rem] p-4 sm:p-8 md:p-10 shadow-2xl border border-white relative">
                 
-                <div id="db-save-status" class="absolute top-3.5 right-3.5 sm:top-6 sm:right-6 text-[10px] sm:text-xs font-mono-code text-slate-400 flex items-center gap-1.5 bg-slate-900/80 px-2.5 py-1 rounded-full border border-white/10">
-                    <i class="fas fa-spinner fa-spin text-cyan-400"></i> <span class="hidden sm:inline">Syncing Database...</span><span class="sm:hidden">Syncing...</span>
+                <div id="db-save-status" class="absolute top-3.5 right-3.5 sm:top-6 sm:right-6 text-[10px] sm:text-xs font-bold text-slate-500 flex items-center gap-1.5 bg-white/70 px-2.5 py-1 rounded-full shadow-sm border border-white">
+                    <i class="fas fa-spinner fa-spin text-blue-500"></i> <span class="hidden sm:inline">Saving Result...</span><span class="sm:hidden">Saving...</span>
                 </div>
 
-                <h2 class="text-xl sm:text-3xl font-black text-white border-b border-white/10 pb-3 sm:pb-4 mb-4 text-center flex items-center justify-center gap-2 sm:gap-3">
-                    <i class="fas fa-atom text-cyan-400"></i> Assessment Telemetry
+                <h2 class="text-xl sm:text-3xl font-black text-slate-900 border-b border-slate-200/50 pb-3 sm:pb-4 mb-4 text-center flex items-center justify-center gap-2 sm:gap-3">
+                    <i class="fas fa-award text-blue-500"></i> Assessment Results
                 </h2>
                 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mb-3.5">
-                    <div class="argon-card rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center">
-                        <span class="block text-[9px] sm:text-[10px] font-mono-code font-bold text-slate-400 uppercase tracking-widest mb-0.5">Candidate</span>
-                        <span id="res-name" class="text-xs sm:text-base font-black text-white truncate block">User</span>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center">
+                        <span class="block text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Candidate</span>
+                        <span id="res-name" class="text-xs sm:text-base font-black text-slate-800 truncate block">User</span>
                     </div>
-                    <div class="argon-card rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center">
-                        <span class="block text-[9px] sm:text-[10px] font-mono-code font-bold text-slate-400 uppercase tracking-widest mb-0.5">Email</span>
-                        <span id="res-email" class="text-[11px] sm:text-sm font-black text-cyan-300 truncate block">user@email.com</span>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center">
+                        <span class="block text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Email</span>
+                        <span id="res-email" class="text-[11px] sm:text-sm font-black text-slate-800 truncate block">user@email.com</span>
                     </div>
-                    <div class="argon-card rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center">
-                        <span class="block text-[9px] sm:text-[10px] font-mono-code font-bold text-slate-400 uppercase tracking-widest mb-0.5">Date</span>
-                        <span id="res-date" class="text-xs sm:text-base font-black text-white block">--/--/----</span>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center">
+                        <span class="block text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Date</span>
+                        <span id="res-date" class="text-xs sm:text-base font-black text-slate-800 block">--/--/----</span>
                     </div>
-                    <div class="argon-card rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center">
-                        <span class="block text-[9px] sm:text-[10px] font-mono-code font-bold text-slate-400 uppercase tracking-widest mb-0.5">Time Spent</span>
-                        <span id="res-time" class="text-xs sm:text-base font-black text-white block">0m 0s</span>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 text-center">
+                        <span class="block text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Time Spent</span>
+                        <span id="res-time" class="text-xs sm:text-base font-black text-slate-800 block">0m 0s</span>
                     </div>
                 </div>
 
-                <div id="award-banner" class="rounded-2xl p-3.5 sm:p-5 text-center mb-3.5 argon-card border border-white/10">
-                    <div class="text-[9px] sm:text-[10px] font-mono-code font-bold text-slate-400 uppercase tracking-widest mb-0.5">Score Status</div>
+                <div id="award-banner" class="rounded-2xl p-3.5 sm:p-5 text-center mb-3.5 inner-glass shadow-sm shimmer-card">
+                    <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Score Status</div>
                     <div id="award-text" class="text-xl sm:text-3xl font-black">Evaluating...</div>
                 </div>
 
                 <!-- Certificate Status Message -->
-                <div id="cert-notice-box" class="argon-card rounded-xl sm:rounded-2xl p-3 sm:p-4 mb-4 flex items-center justify-center gap-2.5 border border-cyan-400/30">
-                    <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
+                <div id="cert-notice-box" class="inner-glass rounded-xl sm:rounded-2xl p-3 sm:p-4 mb-4 flex items-center justify-center gap-2.5 border border-white">
+                    <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 shrink-0">
                         <i class="fas fa-certificate text-sm sm:text-base"></i>
                     </div>
-                    <p class="text-[11px] sm:text-sm font-medium text-slate-300 leading-snug">
-                        <span id="cert-status-msg">Your certificate will be dispatched to:</span>
-                        <strong id="cert-email-target" class="text-cyan-400 block sm:inline font-mono-code"></strong>
+                    <p class="text-[11px] sm:text-sm font-semibold text-slate-700 leading-snug">
+                        <span id="cert-status-msg">Your certificate will be generated and dispatched to:</span>
+                        <strong id="cert-email-target" class="text-blue-600 block sm:inline"></strong>
                     </p>
                 </div>
                 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mb-5 text-center">
-                    <div class="argon-card rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5">
-                        <div class="text-xl sm:text-3xl font-black text-white mb-0.5" id="res-total">30</div>
-                        <div class="text-[9px] sm:text-[10px] font-mono-code text-slate-400 uppercase tracking-wider">Total Qs</div>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5">
+                        <div class="text-xl sm:text-3xl font-black text-slate-800 mb-0.5" id="res-total">30</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Qs</div>
                     </div>
-                    <div class="argon-card rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 bg-emerald-500/10 border-emerald-500/30">
-                        <div class="text-xl sm:text-3xl font-black text-emerald-400 mb-0.5" id="res-correct">0</div>
-                        <div class="text-[9px] sm:text-[10px] font-mono-code text-emerald-400 uppercase tracking-wider">Correct</div>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 bg-emerald-50/50 border-emerald-100">
+                        <div class="text-xl sm:text-3xl font-black text-emerald-600 mb-0.5" id="res-correct">0</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Correct</div>
                     </div>
-                    <div class="argon-card rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 bg-rose-500/10 border-rose-500/30">
-                        <div class="text-xl sm:text-3xl font-black text-rose-400 mb-0.5" id="res-incorrect">0</div>
-                        <div class="text-[9px] sm:text-[10px] font-mono-code text-rose-400 uppercase tracking-wider">Incorrect</div>
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 bg-rose-50/50 border-rose-100">
+                        <div class="text-xl sm:text-3xl font-black text-rose-600 mb-0.5" id="res-incorrect">0</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-rose-600 uppercase tracking-wider">Incorrect</div>
                     </div>
-                    <div class="argon-card rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5">
+                    <div class="inner-glass rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 bg-slate-50/50 border-slate-200">
                         <div class="text-xl sm:text-3xl font-black text-slate-400 mb-0.5" id="res-skipped">0</div>
-                        <div class="text-[9px] sm:text-[10px] font-mono-code text-slate-400 uppercase tracking-wider">Skipped</div>
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider">Skipped</div>
                     </div>
                 </div>
 
                 <div class="flex justify-center mb-5">
-                    <a href="https://chat.whatsapp.com/Dai125BQnk296l1NNVjzrj" target="_blank" class="w-full md:w-3/4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition transform active:scale-95 text-center flex items-center justify-center gap-2 text-xs sm:text-sm">
-                        <i class="fab fa-whatsapp text-lg"></i> Join Kerala Timetable Community
+                    <a href="https://chat.whatsapp.com/Dai125BQnk296l1NNVjzrj" target="_blank" class="w-full md:w-3/4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl shadow-md transition transform active:scale-95 text-center flex items-center justify-center gap-2 text-xs sm:text-sm border border-emerald-400">
+                        <i class="fab fa-whatsapp text-lg"></i> Join Kerala Timetable WhatsApp Community
                     </a>
                 </div>
 
-                <div class="flex flex-col sm:flex-row flex-wrap gap-2.5 justify-center pt-4 border-t border-white/10">
-                    <button onclick="showReviewView()" class="w-full sm:w-auto bg-violet-600 hover:bg-violet-500 text-white font-bold py-2.5 sm:py-3 px-5 rounded-xl shadow-md transition transform active:scale-95 text-center flex items-center justify-center gap-2 text-xs sm:text-sm">
-                        <i class="fas fa-search-plus text-xs"></i> Review Answer Matrix
+                <div class="flex flex-col sm:flex-row flex-wrap gap-2.5 justify-center pt-4 border-t border-slate-200/50">
+                    <button onclick="showReviewView()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 sm:py-3 px-5 rounded-xl shadow-md transition transform active:scale-95 text-center flex items-center justify-center gap-2 text-xs sm:text-sm">
+                        <i class="fas fa-search-plus text-xs"></i> Review Answers & Keys
                     </button>
                     
-                    <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 sm:py-3 px-5 rounded-xl shadow-md transition transform active:scale-95 text-center flex items-center justify-center gap-2 text-xs sm:text-sm">
+                    <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 sm:py-3 px-5 rounded-xl shadow-md transition transform active:scale-95 text-center flex items-center justify-center gap-2 text-xs sm:text-sm">
                         <i class="fas fa-redo text-xs"></i> Retake Assessment
                     </button>
                     
-                    <a href="/" class="w-full sm:w-auto px-5 py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm text-slate-400 hover:text-white argon-card transition-all text-center flex items-center justify-center">
+                    <a href="/" class="w-full sm:w-auto px-5 py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm text-slate-600 hover:text-slate-900 hover:bg-white inner-glass transition-all text-center flex items-center justify-center">
                         Return Home
                     </a>
                 </div>
 
-                <div class="mt-5 text-center text-[10px] sm:text-[11px] font-mono-code text-slate-500">
-                    Independent Technical Benchmark • Not associated with Google or Gemini.
+                <!-- Scorecard Disclaimer Footer -->
+                <div class="mt-5 text-center text-[10px] sm:text-[11px] text-slate-400">
+                    Independent Study & Benchmarking Tool • Not affiliated with Google or Gemini.
                 </div>
             </div>
         </div>
     </div>
 
     <!-- ==================== REVIEW VIEW ==================== -->
-    <div id="review-view" class="hidden absolute inset-0 bg-[#070b14] z-[70] overflow-y-auto px-3.5 py-8 sm:py-12">
+    <div id="review-view" class="hidden absolute inset-0 bg-transparent z-[70] overflow-y-auto px-3.5 py-8 sm:py-12">
         <div class="max-w-4xl mx-auto animate-fade-up">
-            <div class="argon-glass-panel rounded-[1.8rem] sm:rounded-[2.4rem] p-4 sm:p-8 md:p-10 shadow-2xl relative">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/10 pb-4 mb-6 gap-3">
-                    <h2 class="text-lg sm:text-2xl font-black text-white flex items-center gap-2.5">
-                        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-violet-500/20 flex items-center justify-center shadow-sm shrink-0 text-violet-400">
-                            <i class="fas fa-clipboard-check text-sm sm:text-lg"></i>
+            <div class="real-glass rounded-[1.8rem] sm:rounded-[2.2rem] p-4 sm:p-8 md:p-10 shadow-2xl border border-white relative">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200/50 pb-4 mb-6 gap-3">
+                    <h2 class="text-lg sm:text-2xl font-black text-slate-900 flex items-center gap-2.5">
+                        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-purple-100 flex items-center justify-center shadow-sm shrink-0">
+                            <i class="fas fa-clipboard-check text-purple-600 text-sm sm:text-lg"></i>
                         </div>
-                        Diagnostic Key Review
+                        Answer Key Review
                     </h2>
-                    <button onclick="hideReviewView()" class="argon-card hover:bg-white/10 text-slate-300 px-4 py-2 rounded-xl font-bold text-xs sm:text-sm transition-colors flex items-center gap-1.5 self-end sm:self-auto">
+                    <button onclick="hideReviewView()" class="inner-glass hover:bg-white text-slate-700 px-4 py-2 rounded-xl font-bold text-xs sm:text-sm transition-colors flex items-center gap-1.5 self-end sm:self-auto">
                         <i class="fas fa-times"></i> Close Review
                     </button>
                 </div>
 
                 <div id="review-container" class="space-y-4"></div>
 
-                <div class="mt-6 pt-5 border-t border-white/10 text-center">
-                    <button onclick="hideReviewView()" class="bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform transform active:scale-95 text-xs sm:text-sm">
+                <div class="mt-6 pt-5 border-t border-slate-200/50 text-center">
+                    <button onclick="hideReviewView()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform transform active:scale-95 text-xs sm:text-sm">
                         Back to Scorecard
                     </button>
                 </div>
@@ -517,9 +531,30 @@
         }
         initNav();
 
-        // Quiz Engine State (30 Minutes = 1800 Seconds)
+        // Parallax scroll and mouse movements (throttled)
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollBg1 = document.getElementById('scroll-bg-1');
+                    const scrollBg2 = document.getElementById('scroll-bg-2');
+                    const scrollBg3 = document.getElementById('scroll-bg-3');
+                    
+                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.22}px)`;
+                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.15}px)`;
+                    if(scrollBg3) scrollBg3.style.transform = `translateY(${lastScrollY * 0.1}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Quiz State Management (30 Minutes = 1800 Seconds)
         const EXAM_DURATION = 1800;
-        const STORAGE_KEY = 'gemini4_argon_quiz_v5';
+        const STORAGE_KEY = 'gemini4_argon_quiz_v4';
 
         let appState = {
             candidateName: "",
@@ -540,7 +575,7 @@
         window.addEventListener('blur', () => {
             if(appState.isExamActive) {
                 appState.cheatWarnings++;
-                alert(`[ARGON MONITOR]: Window focus interrupted.\nSwitching tabs is actively monitored.\n\nWarnings: ${appState.cheatWarnings}`);
+                alert(`ANTI-CHEAT NOTICE: Exam focus lost.\nLeaving the active window is monitored.\n\nWarnings: ${appState.cheatWarnings}`);
             }
         });
 
@@ -652,11 +687,11 @@
                 const status = appState.questionStatus[i];
                 const isActive = i === appState.indexActive;
                 
-                const ringClass = isActive ? 'ring-2 ring-cyan-400 ring-offset-2 ring-offset-slate-950 scale-110' : 'border border-white/10';
+                const ringClass = isActive ? 'ring-2 ring-blue-600 ring-offset-2 ring-offset-white scale-110' : 'border border-slate-300/80';
                 
                 const btn = document.createElement('button');
                 btn.onclick = () => jumpToQuestion(i);
-                btn.className = `min-w-[38px] h-[38px] sm:min-w-[42px] sm:h-[42px] rounded-xl flex-shrink-0 flex items-center justify-center font-bold text-xs status-${status} ${ringClass} transition-all duration-150 active:scale-90 focus:outline-none font-mono-code`;
+                btn.className = `min-w-[38px] h-[38px] sm:min-w-[42px] sm:h-[42px] rounded-xl flex-shrink-0 flex items-center justify-center font-bold text-xs status-${status} ${ringClass} transition-all duration-150 active:scale-90 focus:outline-none`;
                 btn.innerText = i + 1;
                 btn.id = `pal-btn-${i}`;
                 
@@ -688,12 +723,12 @@
                 const selectedClass = isSelected ? 'selected' : '';
                 
                 const optionNode = `
-                    <label class="option-label ${selectedClass}" id="label-${letter}">
+                    <label class="option-label inner-glass ${selectedClass}" id="label-${letter}">
                         <div class="flex items-center h-5 mt-0.5 shrink-0">
-                            <input type="radio" name="mock-answer" value="${letter}" onclick="recordOptionSelection('${letter}')" class="w-4 h-4 text-cyan-400 bg-slate-900 border-slate-700 focus:ring-cyan-400" ${isSelected ? 'checked' : ''}>
+                            <input type="radio" name="mock-answer" value="${letter}" onclick="recordOptionSelection('${letter}')" class="option-input w-4 h-4 text-blue-600 bg-white border-gray-300 focus:ring-blue-500" ${isSelected ? 'checked' : ''}>
                         </div>
-                        <div class="ml-3 sm:ml-4 text-xs sm:text-sm md:text-base opt-content-wrapper flex items-start gap-2.5">
-                            <span class="font-mono-code font-bold text-slate-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded-lg text-[11px] sm:text-xs mt-0.5 shrink-0">${letter}</span>
+                        <div class="ml-3 sm:ml-4 text-xs sm:text-sm md:text-base text-slate-800 opt-content-wrapper flex items-start gap-2.5">
+                            <span class="font-black text-slate-500 bg-white/95 border border-slate-200/90 px-2 py-0.5 rounded-lg shadow-sm text-[11px] sm:text-xs mt-0.5 shrink-0">${letter}</span>
                             <span class="leading-relaxed">${optionStr}</span>
                         </div>
                     </label>
@@ -705,11 +740,11 @@
             if(appState.questionStatus[appState.indexActive] === 'marked') {
                 markBtn.innerHTML = `<i class="fas fa-check text-xs"></i> <span class="hidden sm:inline">Marked</span>`;
                 markBtn.classList.add('bg-purple-600', 'text-white');
-                markBtn.classList.remove('text-purple-400');
+                markBtn.classList.remove('text-purple-600');
             } else {
                 markBtn.innerHTML = `<i class="fas fa-bookmark text-xs"></i> <span class="hidden sm:inline">Review</span>`;
                 markBtn.classList.remove('bg-purple-600', 'text-white');
-                markBtn.classList.add('text-purple-400');
+                markBtn.classList.add('text-purple-600');
             }
 
             document.getElementById('prev-btn').disabled = (appState.indexActive === 0);
@@ -717,13 +752,13 @@
             const actionWrapper = document.getElementById('action-btn-wrapper');
             if (appState.indexActive === appState.totalQuestions - 1) {
                 actionWrapper.innerHTML = `
-                    <button onclick="submitExamination()" class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold py-2.5 px-4 sm:py-3 sm:px-7 rounded-xl text-xs sm:text-sm hover:from-emerald-400 hover:to-teal-400 shadow-[0_0_20px_rgba(16,185,129,0.4)] transform transition active:scale-95 flex items-center justify-center gap-1.5 whitespace-nowrap">
+                    <button onclick="submitExamination()" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-2.5 px-4 sm:py-3 sm:px-7 rounded-xl text-xs sm:text-sm hover:from-emerald-700 hover:to-teal-700 shadow-lg transform transition active:scale-95 flex items-center justify-center gap-1.5 whitespace-nowrap">
                         <span>Submit Exam</span> <i class="fas fa-paper-plane text-[10px]"></i>
                     </button>
                 `;
             } else {
                 actionWrapper.innerHTML = `
-                    <button id="next-btn" onclick="navigateQuestion(1)" class="bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-bold py-2.5 px-4 sm:py-3 sm:px-7 rounded-xl text-xs sm:text-sm hover:from-cyan-400 hover:to-indigo-500 shadow-[0_0_20px_rgba(6,182,212,0.4)] transform transition active:scale-95 flex items-center justify-center gap-1.5 whitespace-nowrap">
+                    <button id="next-btn" onclick="navigateQuestion(1)" class="bg-gradient-to-r from-slate-900 to-slate-800 text-white font-bold py-2.5 px-4 sm:py-3 sm:px-7 rounded-xl text-xs sm:text-sm hover:from-blue-600 hover:to-indigo-600 shadow-md transform transition active:scale-95 flex items-center justify-center gap-1.5 whitespace-nowrap">
                         <span>Save & Next</span> <i class="fas fa-arrow-right text-[10px]"></i>
                     </button>
                 `;
@@ -746,7 +781,7 @@
 
         window.clearResponse = function() {
             delete appState.responsesUser[appState.indexActive];
-            document.querySelectorAll('input[name="mock-answer"]').forEach(input => input.checked = false);
+            document.querySelectorAll('.option-input').forEach(input => input.checked = false);
             document.querySelectorAll('.option-label').forEach(el => el.classList.remove('selected'));
             
             if (appState.questionStatus[appState.indexActive] !== 'marked') {
@@ -788,7 +823,7 @@
         }
 
         window.submitExamination = function() {
-            if (confirm("Are you ready to submit your Gemini 4 Argon assessment?")) {
+            if (confirm("Are you ready to submit your assessment?")) {
                 appState.isExamActive = false;
                 clearInterval(trackingInterval);
                 localStorage.removeItem(STORAGE_KEY); 
@@ -812,12 +847,12 @@
                     completedAt: new Date().toISOString()
                 });
                 
-                statusEl.innerHTML = `<i class="fas fa-check-circle text-emerald-400"></i> <span class="hidden sm:inline">Telemetry Saved</span><span class="sm:hidden">Saved</span>`;
-                statusEl.classList.add('text-emerald-400');
+                statusEl.innerHTML = `<i class="fas fa-check-circle text-emerald-500"></i> <span class="hidden sm:inline">Record Saved</span><span class="sm:hidden">Saved</span>`;
+                statusEl.classList.add('text-emerald-700');
             } catch (error) {
                 console.error("Firebase sync error: ", error);
-                statusEl.innerHTML = `<i class="fas fa-exclamation-circle text-rose-400"></i> <span class="hidden sm:inline">Sync Failed</span><span class="sm:hidden">Failed</span>`;
-                statusEl.classList.add('text-rose-400');
+                statusEl.innerHTML = `<i class="fas fa-exclamation-circle text-red-500"></i> <span class="hidden sm:inline">Sync Failed</span><span class="sm:hidden">Failed</span>`;
+                statusEl.classList.add('text-red-700');
             }
         }
 
@@ -861,20 +896,20 @@
             certTarget.innerText = appState.candidateEmail;
 
             if (accuracy >= 80) {
-                banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 argon-card border border-emerald-400/30 bg-emerald-500/10';
-                awardTxt.className = "text-xl sm:text-3xl font-black text-emerald-400";
-                awardTxt.innerText = `Mastery Grade (${accuracy}%)`;
+                banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass bg-emerald-100/60 border border-emerald-200 shimmer-card';
+                awardTxt.className = "text-xl sm:text-3xl font-black text-emerald-600";
+                awardTxt.innerText = `Mastery (${accuracy}%)`;
                 certMsg.innerText = "Congratulations! Your Certificate of Mastery will be dispatched to:";
             } else if (accuracy >= 50) {
-                banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 argon-card border border-cyan-400/30 bg-cyan-500/10';
-                awardTxt.className = "text-xl sm:text-3xl font-black text-cyan-300";
-                awardTxt.innerText = `Passing Grade (${accuracy}%)`;
+                banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass bg-blue-100/60 border border-blue-200 shimmer-card';
+                awardTxt.className = "text-xl sm:text-3xl font-black text-blue-600";
+                awardTxt.innerText = `Passed (${accuracy}%)`;
                 certMsg.innerText = "Well done! Your Certificate of Completion will be dispatched to:";
             } else {
-                banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 argon-card border border-rose-400/30 bg-rose-500/10';
-                awardTxt.className = "text-xl sm:text-3xl font-black text-rose-400";
+                banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass bg-rose-100/60 border border-rose-200';
+                awardTxt.className = "text-xl sm:text-3xl font-black text-rose-600";
                 awardTxt.innerText = `Needs Improvement (${accuracy}%)`;
-                certMsg.innerText = "Achieve 50% or higher to unlock certification. Registered email:";
+                certMsg.innerText = "Score 50% or more to qualify for a certificate. Registered email:";
             }
 
             saveResultToFirebase(appState.candidateName, appState.candidateEmail, correct, appState.totalQuestions, accuracy);
@@ -904,36 +939,36 @@
                 let wrapperClass = '';
                 
                 if (userAns === correctAns) {
-                    statusBadge = '<span class="bg-emerald-500/20 text-emerald-400 border border-emerald-400/30 px-2.5 py-0.5 rounded-md text-[10px] font-mono-code font-bold uppercase"><i class="fas fa-check-circle"></i> Correct</span>';
+                    statusBadge = '<span class="bg-emerald-100 text-emerald-700 px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase"><i class="fas fa-check-circle"></i> Correct</span>';
                     wrapperClass = 'border-l-4 border-emerald-500';
                 } else if (!userAns) {
-                    statusBadge = '<span class="bg-slate-700/50 text-slate-400 border border-slate-600 px-2.5 py-0.5 rounded-md text-[10px] font-mono-code font-bold uppercase"><i class="fas fa-minus-circle"></i> Skipped</span>';
-                    wrapperClass = 'border-l-4 border-slate-500';
+                    statusBadge = '<span class="bg-slate-200 text-slate-600 px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase"><i class="fas fa-minus-circle"></i> Skipped</span>';
+                    wrapperClass = 'border-l-4 border-slate-400';
                 } else {
-                    statusBadge = '<span class="bg-rose-500/20 text-rose-400 border border-rose-400/30 px-2.5 py-0.5 rounded-md text-[10px] font-mono-code font-bold uppercase"><i class="fas fa-times-circle"></i> Incorrect</span>';
+                    statusBadge = '<span class="bg-rose-100 text-rose-700 px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase"><i class="fas fa-times-circle"></i> Incorrect</span>';
                     wrapperClass = 'border-l-4 border-rose-500';
                 }
 
                 let optionsHTML = '';
                 item.o.forEach((optStr, optIdx) => {
                     const letter = indicesMap[optIdx];
-                    let optClass = "bg-slate-900/60 border-white/5 text-slate-300";
+                    let optClass = "bg-white/60 border-slate-200/90 text-slate-700";
                     let icon = "";
-                    let letterClass = "bg-white/5 text-slate-400 border-white/10";
+                    let letterClass = "bg-white text-slate-500 border-slate-200";
 
                     if (letter === correctAns) {
-                        optClass = "bg-emerald-500/15 border-emerald-400/50 text-emerald-300 font-bold shadow-[0_0_15px_rgba(16,185,129,0.2)]";
-                        letterClass = "bg-emerald-500 text-slate-950 font-black border-emerald-400";
-                        icon = "<i class='fas fa-check text-emerald-400 ml-auto text-xs'></i>";
+                        optClass = "bg-emerald-50/90 border-emerald-500 text-emerald-900 font-bold shadow-sm";
+                        letterClass = "bg-emerald-500 text-white border-emerald-600";
+                        icon = "<i class='fas fa-check text-emerald-600 ml-auto text-xs'></i>";
                     } else if (letter === userAns && userAns !== correctAns) {
-                        optClass = "bg-rose-500/15 border-rose-400/40 text-rose-300 line-through opacity-80";
-                        letterClass = "bg-rose-400 text-slate-950 font-black border-rose-400";
-                        icon = "<i class='fas fa-times text-rose-400 ml-auto text-xs'></i>";
+                        optClass = "bg-rose-50/90 border-rose-300 text-rose-800 line-through opacity-85";
+                        letterClass = "bg-rose-200 text-rose-800 border-rose-300";
+                        icon = "<i class='fas fa-times text-rose-500 ml-auto text-xs'></i>";
                     }
 
                     optionsHTML += `
                         <div class="p-2.5 sm:p-3.5 rounded-xl border flex items-center gap-2.5 sm:gap-3.5 ${optClass}">
-                            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex shrink-0 items-center justify-center font-mono-code font-bold text-xs border shadow-sm ${letterClass}">${letter}</span>
+                            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex shrink-0 items-center justify-center font-bold text-xs border shadow-sm ${letterClass}">${letter}</span>
                             <span class="text-xs sm:text-sm leading-relaxed">${optStr}</span>
                             ${icon}
                         </div>
@@ -941,10 +976,10 @@
                 });
 
                 const qHTML = `
-                    <div class="argon-card p-3.5 sm:p-5 rounded-2xl ${wrapperClass} shadow-sm">
+                    <div class="inner-glass p-3.5 sm:p-5 rounded-2xl ${wrapperClass} shadow-sm">
                         <div class="flex flex-col sm:flex-row justify-between items-start mb-2 gap-2">
-                            <h3 class="font-bold text-white text-xs sm:text-base flex-1 leading-snug">
-                                <span class="font-mono-code text-cyan-400 mr-1">${index + 1}.</span> ${item.q}
+                            <h3 class="font-bold text-slate-800 text-xs sm:text-base flex-1 leading-snug">
+                                <span class="text-slate-400 mr-1">${index + 1}.</span> ${item.q}
                             </h3>
                             <div class="shrink-0">${statusBadge}</div>
                         </div>
