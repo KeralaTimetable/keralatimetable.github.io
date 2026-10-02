@@ -1,33 +1,31 @@
 // --- Google Analytics 4 (GA4) Live Tracking ---
-// This runs automatically in the background without affecting your design
 (function() {
+    if (window._ga4Initialized) return;
+    window._ga4Initialized = true;
+
     const gaScript = document.createElement('script');
     gaScript.async = true;
     gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-TK5MBC372D';
     document.head.appendChild(gaScript);
 
-    const gaInlineScript = document.createElement('script');
-    gaInlineScript.innerHTML = `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-TK5MBC372D');
-    `;
-    document.head.appendChild(gaInlineScript);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-TK5MBC372D');
 })();
 // ----------------------------------------------
 
-// Added 'isBlog' which tells the header to add the "| Blog" text!
 function loadNavigation(activePage, basePath = '', isBlog = false) { 
-    
-    // If it's a blog, create the extra text. If not, leave it blank.
+    const container = document.getElementById('navigation-container');
+    if (!container) return;
+
     const logoExtension = isBlog ? ' <span class="text-slate-400 font-medium ml-1">| Blog</span>' : '';
 
     const navHTML = `
-        <div id="mobile-menu" class="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl transform -translate-x-full z-[60] flex flex-col border-r border-slate-100">
+        <div id="mobile-menu" aria-hidden="true" class="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl transform -translate-x-full z-[60] flex flex-col border-r border-slate-100 will-change-transform">
             <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
                 <h2 class="text-lg font-extrabold text-slate-900 tracking-tight">Menu</h2>
-                <button id="close-menu-btn" class="p-2 text-slate-400 hover:text-red-500 transition-colors rounded-full hover:bg-white shadow-sm focus:outline-none">
+                <button id="close-menu-btn" aria-label="Close menu" class="p-2 text-slate-400 hover:text-red-500 transition-colors rounded-full hover:bg-white shadow-sm focus:outline-none">
                     <i class="fas fa-times text-lg"></i>
                 </button>
             </div>
@@ -68,16 +66,16 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             </div>
         </div>
 
-        <div id="menu-overlay" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 opacity-0 pointer-events-none"></div>
+        <div id="menu-overlay" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 opacity-0 pointer-events-none will-change-[opacity]"></div>
 
         <header class="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all duration-300">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <button id="open-menu-btn" class="p-2 -ml-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none lg:hidden">
+                    <button id="open-menu-btn" aria-label="Open menu" class="p-2 -ml-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none lg:hidden">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                     <a href="/index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        <img src="/k.png" alt="Kerala Timetable Logo" class="w-6 h-6 sm:w-7 sm:h-7 object-contain shrink-0" />
+                        <img src="/k.png" alt="Kerala Timetable Logo" class="w-6 h-6 sm:w-7 sm:h-7 object-contain shrink-0" width="28" height="28" />
                         <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-none">Kerala <span class="text-indigo-600">Timetable</span>${logoExtension}</h1>
                     </a>
                 </div>
@@ -113,7 +111,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                 </div>
                 
                 <div class="lg:hidden">
-                    <a href="/updates.html" class="w-10 h-10 flex items-center justify-center bg-indigo-50 text-indigo-600 rounded-full border border-indigo-100 shadow-sm">
+                    <a href="/updates.html" aria-label="Notifications" class="w-10 h-10 flex items-center justify-center bg-indigo-50 text-indigo-600 rounded-full border border-indigo-100 shadow-sm">
                        <i class="fas fa-bell"></i>
                     </a>
                 </div>
@@ -121,84 +119,104 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
         </header>
     `;
 
-    document.getElementById('navigation-container').innerHTML = navHTML;
+    container.innerHTML = navHTML;
     
     const openBtn = document.getElementById('open-menu-btn');
     const closeBtn = document.getElementById('close-menu-btn');
     const menu = document.getElementById('mobile-menu');
     const overlay = document.getElementById('menu-overlay');
 
-    // Add the animations back dynamically after a tiny delay so the browser doesn't trigger them on load
-    setTimeout(() => {
-        if (menu) menu.classList.add('transition-transform', 'duration-300', 'ease-in-out');
-        if (overlay) overlay.classList.add('transition-opacity', 'duration-300');
-    }, 50);
+    if (!menu || !overlay) return;
 
-    function toggleMenu() {
-        menu.classList.toggle('-translate-x-full');
-        if (menu.classList.contains('-translate-x-full')) {
-            overlay.classList.remove('opacity-100', 'pointer-events-auto');
-            overlay.classList.add('opacity-0', 'pointer-events-none');
-            document.body.style.overflow = ''; 
-        } else {
+    // Use requestAnimationFrame so animations don't stutter or flash on mount
+    requestAnimationFrame(() => {
+        menu.classList.add('transition-transform', 'duration-300', 'ease-in-out');
+        overlay.classList.add('transition-opacity', 'duration-300');
+    });
+
+    function setMenuState(isOpen) {
+        if (isOpen) {
+            menu.classList.remove('-translate-x-full');
+            menu.setAttribute('aria-hidden', 'false');
             overlay.classList.remove('opacity-0', 'pointer-events-none');
             overlay.classList.add('opacity-100', 'pointer-events-auto');
-            document.body.style.overflow = 'hidden'; 
+            document.body.style.overflow = 'hidden';
+        } else {
+            menu.classList.add('-translate-x-full');
+            menu.setAttribute('aria-hidden', 'true');
+            overlay.classList.remove('opacity-100', 'pointer-events-auto');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = '';
         }
     }
 
-    openBtn.addEventListener('click', toggleMenu);
-    closeBtn.addEventListener('click', toggleMenu);
-    overlay.addEventListener('click', toggleMenu);
+    openBtn?.addEventListener('click', () => setMenuState(true));
+    closeBtn?.addEventListener('click', () => setMenuState(false));
+    overlay.addEventListener('click', () => setMenuState(false));
+
+    // Close on Escape key for better keyboard navigation
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !menu.classList.contains('-translate-x-full')) {
+            setMenuState(false);
+        }
+    });
 }
 
 // ----------------------------------------------
 // GLOBAL AD INJECTOR STRICTLY FOR NOTE PAGES
 // ----------------------------------------------
 function injectGlobalAd() {
-    // 1. Check if the current URL actually contains the word "notes"
-    const currentURL = window.location.href.toLowerCase();
-    const isNotePage = currentURL.includes('notes');
-    
-    // 2. Find the first module card on the page
+    // Avoid double injection
+    if (document.getElementById('global-note-ad')) return;
+
+    // Strict URL check on pathname only (ignores query params/hashes)
+    const isNotePage = window.location.pathname.toLowerCase().includes('notes');
     const firstModule = document.querySelector('.module-card');
     
-    // 3. STRICT CHECK: Only proceed if it is a notes page and a module card exists
-    if (isNotePage && firstModule) {
-        
-        const adImageUrl = '/images/Ad.png';
-        const adLink = 'https://forms.gle/VT8NGk9vi7gT7tgT7';
-        
-        // 4. Create an Image object to test if the file actually exists
-        const testImage = new Image();
-        
-        testImage.onload = function() {
-            // Image exists and loaded successfully! Inject the ad.
-            const moduleGridContainer = firstModule.parentElement; 
-            
-            const adHTML = `
-            <a href="${adLink}" target="_blank" rel="noopener noreferrer" class="block w-full md:max-w-xl lg:max-w-2xl mx-auto mb-10 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group border border-slate-100 bg-slate-50 fade-in-ad">
-                <img src="${adImageUrl}" alt="Vortex Tournament Registration" width="1881" height="836" class="w-full h-auto group-hover:scale-105 transition-transform duration-500 ease-out">
+    if (!isNotePage || !firstModule || !firstModule.parentElement) return;
+
+    const adImageUrl = '/images/Ad.png';
+    const adLink = 'https://forms.gle/VT8NGk9vi7gT7tgT7';
+    
+    const testImage = new Image();
+    testImage.src = adImageUrl;
+
+    const renderAd = () => {
+        const moduleGridContainer = firstModule.parentElement;
+        const adHTML = `
+            <a id="global-note-ad" href="${adLink}" target="_blank" rel="noopener noreferrer" class="fade-in-ad block w-full md:max-w-xl lg:max-w-2xl mx-auto mb-10 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group border border-slate-100 bg-slate-50">
+                <img src="${adImageUrl}" alt="Vortex Tournament Registration" width="1881" height="836" loading="lazy" decoding="async" class="w-full h-auto group-hover:scale-105 transition-transform duration-500 ease-out">
             </a>
             <style>
-                @keyframes fadeInAd { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-                .fade-in-ad { animation: fadeInAd 0.5s ease-out forwards; }
+                @keyframes fadeInAd { 
+                    from { opacity: 0; transform: translateY(12px); } 
+                    to { opacity: 1; transform: translateY(0); } 
+                }
+                .fade-in-ad { 
+                    animation: fadeInAd 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+                    will-change: opacity, transform; 
+                }
             </style>
-            `;
-            
-            moduleGridContainer.insertAdjacentHTML('beforebegin', adHTML);
+        `;
+        moduleGridContainer.insertAdjacentHTML('beforebegin', adHTML);
+    };
+
+    // Pre-decode the image off-thread to avoid frame drop when inserting
+    if ('decode' in testImage) {
+        testImage.decode().then(renderAd).catch(() => {
+            console.warn("Global ad image not found or decoding failed. Injection skipped.");
+        });
+    } else {
+        testImage.onload = renderAd;
+        testImage.onerror = () => {
+            console.warn("Global ad image not found. Injection skipped.");
         };
-        
-        testImage.onerror = function() {
-            // Image is missing or broken. 
-            // Do absolutely nothing. The HTML will not be injected.
-            console.warn("Global ad image not found. Ad injection skipped.");
-        };
-        
-        // Trigger the load test
-        testImage.src = adImageUrl;
     }
 }
 
-// Run the injector automatically when the page loads
-document.addEventListener('DOMContentLoaded', injectGlobalAd);
+// Safely execute whether script loads before or after DOMContentLoaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectGlobalAd);
+} else {
+    injectGlobalAd();
+}
