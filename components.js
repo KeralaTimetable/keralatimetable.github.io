@@ -221,8 +221,8 @@ function injectGlobalAd() {
 // ==============================================================================
 function initWhatsAppPopup() {
     const STORAGE_KEY = 'ktu_wa_popup_cooldown_until';
-    const CANCEL_DAYS = 3;   // Show again after 3 days if cancelled/closed
-    const FOLLOW_DAYS = 60;  // Show again after 60 days if user follows
+    const CANCEL_DAYS = 1;   // Show again after 1 day if closed/cancelled
+    const FOLLOW_DAYS = 20;  // Show again after 20 days if user clicks follow
     const CHANNEL_URL = 'https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D';
 
     // 1. Check if user is within the cooldown period
@@ -231,7 +231,7 @@ function initWhatsAppPopup() {
         return; 
     }
 
-    // 2. Delay slightly after page load so it doesn't interrupt reading
+    // 2. Delay slightly after page load so it doesn't disturb page entry
     setTimeout(() => {
         if (document.getElementById('ktu-wa-popup')) return;
 
@@ -295,11 +295,11 @@ function initWhatsAppPopup() {
             }, 300);
         }
 
-        // Cancel / Dismiss listeners
+        // Cancel / Dismiss listeners (1 Day)
         closeBtn?.addEventListener('click', () => dismissPopup(CANCEL_DAYS));
         laterBtn?.addEventListener('click', () => dismissPopup(CANCEL_DAYS));
 
-        // Follow listener
+        // Follow listener (20 Days)
         followBtn?.addEventListener('click', () => dismissPopup(FOLLOW_DAYS));
     }, 3500);
 }
