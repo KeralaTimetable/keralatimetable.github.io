@@ -11,81 +11,43 @@
     <meta name="keywords" content="is ktu down, ktu site status, ktu student portal not opening, ktu server down, ktu live status, ktu login error, ktu result site down, apjaktu server status, ktu website slow">
     <meta name="robots" content="index, follow">
     
-    <!-- Tailwind Local with CDN Fallback -->
-    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
+    <script src="/tailwind-local.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            overflow-x: hidden;
-            background: 
-                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.75) 0px, transparent 48%),
-                radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.6) 0px, transparent 45%),
-                radial-gradient(at 100% 100%, rgba(254, 243, 199, 0.5) 0px, transparent 45%),
-                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.65) 0px, transparent 48%),
-                #f8fafc;
-            min-height: 100vh;
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        
+        .bg-mesh {
+            background-color: #f8fafc;
         }
 
-        .font-mono-code { font-family: 'JetBrains Mono', monospace; }
-
-        /* Deluxe Crystalline Glassmorphism */
+        /* Authentic Glassmorphism */
         .real-glass {
-            background: rgba(255, 255, 255, 0.58);
-            backdrop-filter: blur(28px) saturate(190%);
-            -webkit-backdrop-filter: blur(28px) saturate(190%);
-            border: 1px solid rgba(255, 255, 255, 0.75);
-            border-top: 1px solid rgba(255, 255, 255, 0.98);
-            border-left: 1px solid rgba(255, 255, 255, 0.98);
-            box-shadow: 
-                0 20px 45px -12px rgba(15, 23, 42, 0.07),
-                0 1px 2px rgba(255, 255, 255, 0.9) inset;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.9);
+            border-left: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.05);
         }
 
         .inner-glass {
             background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.85);
-            box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.02);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .service-glass-card {
-            background: rgba(255, 255, 255, 0.68);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.8);
-            border-top: 1px solid rgba(255, 255, 255, 0.98);
-            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03);
-            transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-            touch-action: manipulation;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
 
-        .service-glass-card:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.92);
-            border-color: rgba(59, 130, 246, 0.35);
-            box-shadow: 0 16px 36px -8px rgba(37, 99, 235, 0.12), inset 0 1px 2px rgba(255, 255, 255, 1);
-        }
-
-        /* Pulsing Radar Aura */
-        @keyframes radar-ping {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            70% { transform: scale(1.6); opacity: 0; }
-            100% { transform: scale(1.6); opacity: 0; }
-        }
-        .radar-aura { animation: radar-ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite; }
-
-        /* Liquid Light Background Animations */
+        /* Orb Animations */
         @keyframes float-pulse {
-            0%, 100% { transform: scale(1) translateY(0); opacity: 0.45; }
-            50% { transform: scale(1.08) translateY(-10px); opacity: 0.7; }
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0.5; }
         }
         .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
 
+        /* Entry Animations */
         @keyframes fadeUpEntry {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -98,238 +60,134 @@
     
     <link rel="icon" href="/favicon.png" type="image/png">
     <meta property="og:site_name" content="Kerala Timetable">
-    <meta property="og:image" content="https://keralatimetable.in/social-preview.png">
+    <meta property="og:image" content="https://www.keralatimetable.in/social-preview.png">
     <meta property="og:type" content="website">
 </head>
 
-<body class="antialiased text-slate-800 flex flex-col min-h-screen relative selection:bg-blue-600 selection:text-white">
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
 
-    <!-- Global Header Navigation -->
     <div id="navigation-container" class="relative z-50"></div>
 
-    <!-- Fluid Ambient Orbs -->
+    <!-- Background Orbs -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div id="scroll-bg-1" class="absolute -top-14 -left-14 md:top-8 md:-left-10 w-72 h-72 md:w-[28rem] md:h-[28rem] transition-transform duration-100 ease-out">
-            <div id="mouse-orb-1" class="w-full h-full bg-blue-400/40 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out"></div>
+        <div id="scroll-bg-1" class="absolute -top-10 -left-20 md:top-10 md:-left-10 w-64 h-64 md:w-96 md:h-96 transition-transform duration-100 ease-out">
+            <div id="mouse-orb-1" class="w-full h-full bg-blue-400/50 md:bg-blue-400 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
         </div>
-        <div id="scroll-bg-2" class="absolute top-[40%] -right-14 md:top-[35%] md:-right-10 w-80 h-80 md:w-[32rem] md:h-[32rem] transition-transform duration-100 ease-out">
-            <div id="mouse-orb-2" class="w-full h-full bg-emerald-400/35 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[110px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2.2s;"></div>
+        <div id="scroll-bg-2" class="absolute top-[50%] -right-20 md:top-[40%] md:-right-10 w-72 h-72 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-2" class="w-full h-full bg-emerald-500/30 md:bg-emerald-500/40 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
         </div>
     </div>
 
-    <!-- MAIN BODY -->
     <main class="flex-grow max-w-3xl mx-auto px-3.5 sm:px-6 py-8 sm:py-12 md:py-16 w-full flex flex-col relative z-10">
         
-        <!-- Header Section -->
-        <div class="text-center mb-6 sm:mb-8 animate-fade-up">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md shadow-sm border border-slate-200/80 text-blue-600 text-xs font-black uppercase tracking-wider mb-4">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping inline-block"></span>
-                <i class="fas fa-satellite-dish text-blue-500"></i> Live Health Telemetry
-            </div>
-            
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-2.5">
-                KTU System Status
-            </h1>
-            
-            <p class="text-slate-600 text-xs sm:text-base font-medium max-w-lg mx-auto leading-relaxed">
-                Real-time uptime monitoring for official APJAKTU university servers, student login portal, and result networks.
-            </p>
+        <div class="text-center mb-6 sm:mb-8 md:mb-10 animate-fade-up">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">KTU System Status</h2>
         </div>
 
-        <!-- HERO STATUS RADAR CHAMBER -->
-        <div id="overall-banner" class="real-glass w-full rounded-[1.8rem] sm:rounded-[2.2rem] p-5 sm:p-7 mb-6 sm:mb-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 animate-fade-up delay-100 relative overflow-hidden transition-all duration-300">
-            <div class="relative shrink-0 mt-0.5">
-                <div id="overall-aura" class="absolute -inset-2 rounded-full bg-slate-300/40 opacity-0 pointer-events-none"></div>
-                <div id="overall-icon" class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-white/80 border border-slate-200/80 flex items-center justify-center text-slate-400 text-xl shadow-sm">
-                    <i class="fas fa-spinner fa-spin"></i>
-                </div>
-            </div>
-
-            <div class="text-center sm:text-left flex-1 min-w-0">
-                <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
-                    <h2 id="overall-text" class="text-lg sm:text-2xl font-black text-slate-900 leading-tight">
-                        Running diagnostic ping...
-                    </h2>
-                </div>
-                <p id="overall-time" class="text-xs sm:text-sm text-slate-500 font-medium">
-                    Probing APJAKTU production edge nodes right now
-                </p>
-            </div>
-            
-            <div class="sm:self-center shrink-0">
-                <span id="telemetry-badge" class="font-mono-code text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full bg-white/70 border border-slate-200/90 text-slate-600 shadow-sm inline-flex items-center gap-1.5">
-                    <i class="fas fa-bolt text-amber-500"></i> LIVE CHECK
-                </span>
+        <div id="overall-banner" class="real-glass w-full rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 mb-6 sm:mb-8 flex items-center gap-3.5 sm:gap-4 animate-fade-up delay-100">
+            <div id="overall-icon" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-200/50 animate-pulse border border-white/50 shrink-0"></div>
+            <div>
+                <h3 id="overall-text" class="text-base sm:text-lg md:text-xl font-bold text-slate-800 leading-snug">Running live check...</h3>
+                <p id="overall-time" class="text-xs sm:text-sm text-slate-500 font-medium">Pinging servers right now</p>
             </div>
         </div>
 
-        <!-- SSL Alert Notification Box -->
-        <div id="ssl-alert-banner" class="hidden w-full mb-6 sm:mb-8 bg-amber-950/80 text-amber-100 backdrop-blur-xl border border-amber-500/40 rounded-[1.6rem] p-4 sm:p-6 shadow-xl animate-fade-up delay-100">
-            <div class="flex items-start gap-3.5">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
-                    <i class="fas fa-shield-virus text-base sm:text-lg"></i>
-                </div>
+        <div id="ssl-alert-banner" class="hidden w-full mb-6 sm:mb-8 bg-[#2a1f1a]/85 backdrop-blur-md border border-[#d97706]/50 rounded-2xl sm:rounded-[1.5rem] p-4 sm:p-5 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] animate-fade-up delay-100">
+            <div class="flex items-start gap-3 sm:gap-4">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#f59e0b] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                 <div>
-                    <h3 class="text-sm sm:text-base font-black text-amber-300 mb-1">Portal SSL Certificate Alert</h3>
-                    <p class="text-xs sm:text-sm text-amber-100/90 leading-relaxed font-medium">
-                        The student portal SSL handshake is currently timing out on standard browsers. Access is currently functional via <strong>Mozilla Firefox</strong> or <strong>Chrome Incognito</strong> by selecting <code class="bg-black/40 px-1.5 py-0.5 rounded border border-amber-400/30 text-[11px] font-mono-code text-amber-200">Advanced &rarr; Proceed to app.ktu.edu.in</code>.
+                    <h3 class="text-sm sm:text-base md:text-lg font-bold text-[#f59e0b] mb-1">Portal SSL Certificate Issue</h3>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                        Login is currently available only via <strong>Mozilla Firefox</strong> or <strong>Chrome Incognito</strong>. Click <code class="bg-black/50 px-1.5 py-0.5 rounded border border-slate-700 text-[11px] sm:text-xs">Advanced -> Proceed</code>.
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Services Grid Header -->
-        <div class="flex items-center justify-between mb-3 px-1 animate-fade-up delay-200">
-            <h3 class="text-sm sm:text-base font-black text-slate-900 flex items-center gap-2">
-                <i class="fas fa-server text-blue-500 text-xs"></i> Monitored Endpoints
-            </h3>
-            <span class="text-[10px] sm:text-xs font-mono-code font-bold text-slate-400 uppercase tracking-widest">HTTP/HTTPS Probes</span>
+        <h3 class="text-base sm:text-lg font-bold text-slate-800 mb-3 sm:mb-4 animate-fade-up delay-200">Live Services</h3>
+        <div id="services-container" class="space-y-3 sm:space-y-4 mb-6 sm:mb-8 md:mb-10 animate-fade-up delay-200">
+            <!-- Dynamically populated via JS with glass classes -->
         </div>
 
-        <!-- Dynamically Populated Services -->
-        <div id="services-container" class="space-y-3 mb-6 sm:mb-8 animate-fade-up delay-200">
-            <!-- Skeleton Loading Placeholders -->
-            <div class="service-glass-card rounded-2xl p-4 sm:p-5 flex justify-between items-center animate-pulse">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-slate-200/70"></div>
-                    <div class="space-y-2">
-                        <div class="h-4 w-32 bg-slate-200/70 rounded"></div>
-                        <div class="h-3 w-24 bg-slate-200/50 rounded"></div>
-                    </div>
-                </div>
-                <div class="h-7 w-20 bg-slate-200/70 rounded-full"></div>
-            </div>
-        </div>
+        <button onclick="runLiveCheck()" class="animate-fade-up delay-200 mb-5 sm:mb-6 mx-auto real-glass hover:bg-white/70 text-slate-700 font-bold py-2.5 sm:py-3 px-6 sm:px-8 rounded-full transition-all flex items-center gap-2 shadow-sm text-xs sm:text-sm border-t border-l border-white/80 active:scale-95">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            Refresh Status
+        </button>
 
-        <!-- Refresh Action Trigger -->
-        <div class="flex justify-center mb-8 animate-fade-up delay-200">
-            <button onclick="runLiveCheck()" class="real-glass hover:bg-white text-slate-800 font-bold py-3 px-7 rounded-full transition-all flex items-center gap-2.5 shadow-sm text-xs sm:text-sm active:scale-95 group">
-                <i class="fas fa-sync-alt text-blue-500 group-hover:rotate-180 transition-transform duration-500"></i>
-                <span>Refresh Live Telemetry</span>
-            </button>
-        </div>
-
-        <!-- WhatsApp Channel Banner -->
-        <a href="https://chat.whatsapp.com/CD0wDNFlMDbKFQW1TWDg3l" target="_blank" rel="noopener noreferrer" class="animate-fade-up delay-200 mb-10 mx-auto real-glass hover:bg-white/85 text-slate-800 py-3 px-4 sm:px-5 rounded-2xl transition-all flex items-center justify-center gap-3.5 shadow-sm border border-[#25D366]/40 hover:border-[#25D366]/70 w-full max-w-sm group active:scale-95">
-            <div class="bg-[#25D366] text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 shrink-0">
+        <!-- WhatsApp Join Banner -->
+        <a href="https://chat.whatsapp.com/CD0wDNFlMDbKFQW1TWDg3l" target="_blank" class="animate-fade-up delay-200 mb-8 sm:mb-10 md:mb-12 mx-auto real-glass hover:bg-white/80 text-slate-800 py-3 px-4 sm:px-6 rounded-xl sm:rounded-2xl transition-all flex items-center justify-center gap-3 sm:gap-4 shadow-sm border border-[#25D366]/40 hover:border-[#25D366]/70 w-full max-w-sm group active:scale-95">
+            <div class="bg-[#25D366] text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                 <i class="fab fa-whatsapp text-lg sm:text-xl"></i>
             </div>
             <div class="flex flex-col text-left">
-                <span class="text-xs sm:text-sm font-black text-slate-800">Join KTU WhatsApp Channel</span>
-                <span class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wide">Instant Outage Alerts & Results</span>
+                <span class="text-xs sm:text-sm font-black text-slate-800">Join our WhatsApp group</span>
+                <span class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wide">For latest KTU Updates</span>
             </div>
         </a>
 
-        <!-- Incident History Timeline Section -->
-        <div class="border-t border-slate-200/70 pt-8 sm:pt-10 w-full animate-fade-up delay-300">
-            <div class="flex items-center justify-between mb-4 px-1">
-                <h3 class="text-sm sm:text-base font-black text-slate-900 flex items-center gap-2">
-                    <i class="fas fa-history text-indigo-500 text-xs"></i> Incident Logbook (Last 12 Hours)
-                </h3>
-                <span class="text-[10px] sm:text-xs font-mono-code font-bold text-slate-400">Automated Ping History</span>
-            </div>
-
-            <ul id="history-list" class="space-y-2.5">
-                <li class="text-xs font-bold text-slate-500 text-center py-4 animate-pulse real-glass rounded-2xl">
-                    Loading historical telemetry...
-                </li>
+        <div class="border-t border-slate-200/60 pt-6 sm:pt-8 md:pt-10 w-full animate-fade-up delay-300">
+            <h3 class="text-base sm:text-lg font-black text-slate-800 mb-3 sm:mb-5">Past Incidents (Last 12 Hours)</h3>
+            <ul id="history-list" class="space-y-2.5 sm:space-y-3">
+                <li class="text-xs font-bold text-slate-500 text-center py-3.5 animate-pulse real-glass rounded-xl">Loading history...</li>
             </ul>
         </div>
 
-        <!-- FAQ Knowledge Base -->
-        <div class="w-full text-left mt-10 pt-8 border-t border-slate-200/70 animate-fade-up delay-300">
-            <h3 class="text-base sm:text-lg font-black text-slate-900 mb-4 px-1">Frequently Asked Questions</h3>
-            
-            <div class="grid md:grid-cols-2 gap-3.5 sm:gap-4 mb-6">
-                <div class="real-glass p-4 sm:p-5 rounded-2xl">
-                    <h4 class="font-bold text-slate-900 text-xs sm:text-sm mb-2 flex items-center gap-2">
+        <div class="w-full text-left mt-8 sm:mt-10 md:mt-12 pt-6 sm:pt-8 md:pt-10 border-t border-slate-200/60 animate-fade-up delay-300">
+            <h3 class="text-lg sm:text-xl font-black text-slate-800 mb-4 sm:mb-6">Frequently Asked Questions</h3>
+            <div class="grid md:grid-cols-2 gap-3.5 sm:gap-5">
+                <div class="real-glass p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-[1.5rem]">
+                    <h4 class="font-bold text-slate-900 text-xs sm:text-sm mb-2 sm:mb-3 flex items-center gap-2">
                         <i class="fas fa-server text-rose-500 text-xs"></i>
-                        Why is the Student Portal not opening?
+                        Student portal not opening?
                     </h4>
-                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-                        During peak announcement windows (such as B.Tech semester results or revaluation schedules), APJAKTU servers face severe traffic spikes, leading to 504 Gateway Timeouts or connection resets.
-                    </p>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">During peak times, especially when B.Tech exam results or timetables are published, the APJAKTU servers experience extreme traffic spikes causing the login page to timeout or show a 504 Gateway error.</p>
                 </div>
-                
-                <div class="real-glass p-4 sm:p-5 rounded-2xl">
-                    <h4 class="font-bold text-slate-900 text-xs sm:text-sm mb-2 flex items-center gap-2">
+                <div class="real-glass p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-[1.5rem]">
+                    <h4 class="font-bold text-slate-900 text-xs sm:text-sm mb-2 sm:mb-3 flex items-center gap-2">
                         <i class="fas fa-globe text-emerald-500 text-xs"></i>
-                        How does this live ping tool work?
+                        Is the result site down?
                     </h4>
-                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-                        Our cloud monitor dispatches active HTTP/HTTPS HEAD requests directly against official university gateways to measure true response latency and detect server-side outages in real time.
-                    </p>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">You can use the live ping tool above to verify if the main KTU website is down globally. If the tool says "Offline," the university servers are down and you will need to wait.</p>
                 </div>
             </div>
             
-            <div>
-                <h4 class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest mb-2.5 ml-1">Live Trend Tags</h4>
-                <div class="flex flex-wrap gap-2">
-                    <span class="inner-glass text-slate-600 font-bold text-[10px] sm:text-xs px-3 py-1 rounded-lg">KTU Server Status</span>
-                    <span class="inner-glass text-slate-600 font-bold text-[10px] sm:text-xs px-3 py-1 rounded-lg">Student Login Error</span>
-                    <span class="inner-glass text-slate-600 font-bold text-[10px] sm:text-xs px-3 py-1 rounded-lg">Is KTU Down Today</span>
-                    <span class="inner-glass text-slate-600 font-bold text-[10px] sm:text-xs px-3 py-1 rounded-lg">APJAKTU Result Portal Crash</span>
+            <div class="mt-6 sm:mt-8">
+                <h3 class="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest mb-2.5 ml-1">Live Search Trends</h3>
+                <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                    <span class="inner-glass text-slate-600 font-medium text-[11px] sm:text-xs px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-lg">KTU Server Status</span>
+                    <span class="inner-glass text-slate-600 font-medium text-[11px] sm:text-xs px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-lg">Student Login Error</span>
+                    <span class="inner-glass text-slate-600 font-medium text-[11px] sm:text-xs px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-lg">Is KTU Down</span>
+                    <span class="inner-glass text-slate-600 font-medium text-[11px] sm:text-xs px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-lg">Result Portal Crash</span>
                 </div>
             </div>
         </div>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-6 sm:py-8 text-center relative z-10">
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/40 backdrop-blur-md py-6 sm:py-8 text-center relative z-10">
         <div class="max-w-3xl mx-auto px-4">
-            <h3 class="text-slate-800 font-bold text-base sm:text-lg mb-1">Kerala Timetable</h3>
-            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto font-medium">
-                Independent server diagnostic hub providing fast public resources. Not officially affiliated with APJ Abdul Kalam Technological University.
-            </p>
+            <h3 class="text-slate-800 font-bold text-base sm:text-lg mb-1.5">Kerala Timetable</h3>
+            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto font-medium">Providing fast and direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
             <div class="mt-3.5 space-x-4">
-                <a href="about.html" class="text-blue-600 text-xs font-bold hover:underline">About Us</a>
-                <a href="https://keralatimetable.stck.me/profile" target="_blank" class="text-blue-600 text-xs font-bold hover:underline">Support Us</a>
+                <a href="about.html" class="text-indigo-600 text-xs font-bold hover:underline">About Us</a>
+                <a href="https://keralatimetable.stck.me/profile" target="_blank" class="text-indigo-600 text-xs font-bold hover:underline">Support Us</a>
             </div>
         </div>
     </footer>
 
-    <!-- Safe Navigation Script Loading -->
-    <script src="components.js" onerror="this.onerror=null;this.src='/components.js?v=16';"></script>
+    <script src="components.js"></script>
     <script>
-        function initNav() {
-            if (typeof loadNavigation === 'function') {
-                loadNavigation('status');
-            } else {
-                setTimeout(() => {
-                    if (typeof loadNavigation === 'function') loadNavigation('status');
-                }, 300);
-            }
-        }
-        initNav();
+        loadNavigation('status');
     </script>
 
-    <!-- SERVER HEALTH MONITORING ENGINE -->
     <script>
+        // API Base URL Setup 
         const API_URL = "https://keralatimetable-ktu-papers-api.hf.space";
 
         const TARGET_SERVICES = [
-            { 
-                id: "main", 
-                name: "KTU Main Portal", 
-                url: "https://ktu.edu.in", 
-                host: "ktu.edu.in",
-                icon: "fa-globe" 
-            },
-            { 
-                id: "app", 
-                name: "Student Login Portal", 
-                url: "https://app.ktu.edu.in", 
-                host: "app.ktu.edu.in",
-                icon: "fa-user-shield" 
-            },
-            { 
-                id: "api", 
-                name: "KTU Backend Gateway", 
-                url: "https://api.ktu.edu.in", 
-                host: "api.ktu.edu.in",
-                icon: "fa-network-wired" 
-            }
+            { id: "main", name: "KTU Main Website", url: "https://ktu.edu.in" },
+            { id: "app", name: "KTU Login Portal", url: "https://app.ktu.edu.in" },
+            { id: "api", name: "KTU API Server", url: "https://api.ktu.edu.in" }
         ];
 
         async function runLiveCheck() {
@@ -339,44 +197,30 @@
             updateOverallBanner("Running live check...", null);
             servicesContainer.innerHTML = '';
             
-            // Build dynamic skeleton cards
             TARGET_SERVICES.forEach(svc => {
                 servicesContainer.innerHTML += `
-                    <div class="service-glass-card rounded-2xl p-3.5 sm:p-5 flex justify-between items-center">
-                        <div class="flex items-center gap-3 sm:gap-4 min-w-0">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-sm shrink-0">
-                                <i class="fas ${svc.icon} text-base sm:text-lg"></i>
-                            </div>
-                            <div class="min-w-0">
-                                <span class="font-black text-slate-800 text-xs sm:text-base truncate block leading-tight">${svc.name}</span>
-                                <div class="flex items-center gap-1.5 mt-1 font-mono-code text-[10px] sm:text-xs text-slate-400 truncate">
-                                    <i class="fas fa-lock text-[9px] text-slate-400"></i>
-                                    <span>${svc.host}</span>
-                                </div>
-                            </div>
+                    <div class="real-glass rounded-xl sm:rounded-[1.5rem] p-3.5 sm:p-5 flex justify-between items-center transition-transform hover:-translate-y-0.5 duration-200">
+                        <div class="flex flex-col w-[60%]">
+                            <span class="font-black text-slate-800 text-xs sm:text-sm md:text-base truncate">${svc.name}</span>
+                            <span class="text-[11px] sm:text-xs text-slate-500 mt-0.5 sm:mt-1 font-medium" id="ping-${svc.id}">Connecting...</span>
                         </div>
-                        <div class="flex flex-col items-end gap-1 shrink-0 ml-2">
-                            <div class="h-6 sm:h-7 bg-slate-200/70 rounded-full w-20 sm:w-24 animate-pulse" id="status-${svc.id}"></div>
-                            <span class="font-mono-code text-[10px] sm:text-xs text-slate-400 font-bold" id="ping-${svc.id}">Pinging...</span>
-                        </div>
+                        <div class="h-6 sm:h-7 bg-white/50 border border-white/80 rounded-full w-20 sm:w-24 animate-pulse shrink-0" id="status-${svc.id}"></div>
                     </div>
                 `;
             });
 
-            // 1. Fetch 12-hour history log in parallel
+            // 1. Fetch historical logs in the background
             try {
                 const histRes = await fetch('status-history.json?t=' + new Date().getTime());
                 const data = await histRes.json();
                 if (data.length > 0) renderHistory(data);
-            } catch (e) {
-                console.log("Historical data not yet cached.");
-            }
+            } catch (e) { console.log("History logbook error"); }
 
             let onlineCount = 0;
             let offlineCount = 0;
             let sslCount = 0;
 
-            // 2. Dispatch Live Pings
+            // 2. Execute Precise Live Pings routed through your HF API Proxy
             const pingPromises = TARGET_SERVICES.map(async (svc) => {
                 try {
                     const res = await fetch(`${API_URL}/live-ping?url=${encodeURIComponent(svc.url)}`);
@@ -388,21 +232,21 @@
                         updateServiceCard(svc.id, "Online", `${result.ping}ms`);
                         onlineCount++;
                     } else if (result.status === "SSL Issue") {
-                        updateServiceCard(svc.id, "SSL Issue", result.detail || "Handshake Failed");
+                        updateServiceCard(svc.id, "SSL Issue", result.detail);
                         sslCount++;
                     } else {
-                        updateServiceCard(svc.id, "Offline", result.detail || "Timeout");
+                        updateServiceCard(svc.id, "Offline", result.detail);
                         offlineCount++;
                     }
                 } catch (error) {
-                    updateServiceCard(svc.id, "Offline", "Timeout (504)");
+                    updateServiceCard(svc.id, "Offline", "Timeout");
                     offlineCount++;
                 }
             });
 
             await Promise.all(pingPromises);
 
-            // 3. Compute overall system state
+            // 3. Set accurate overall banners based on real-time proxy results
             let finalStatus = "All Systems Operational";
             if (offlineCount === TARGET_SERVICES.length) {
                 finalStatus = "Major Outage";
@@ -424,51 +268,46 @@
         function updateServiceCard(id, status, pingText) {
             const pingEl = document.getElementById(`ping-${id}`);
             const statusEl = document.getElementById(`status-${id}`);
+            if (pingEl) pingEl.innerText = `Response: ${pingText}`;
             
-            if (pingEl) pingEl.innerText = `${pingText}`;
-            
-            let pillClass = "bg-rose-50 text-rose-700 border-rose-200/80 shadow-[0_0_10px_rgba(244,63,94,0.15)]";
+            let pillClass = "bg-red-100/80 backdrop-blur-sm text-red-700 border-red-200/80";
             let statusText = "Offline";
-            let dotColor = "bg-rose-500";
 
             if (status === "Online") {
-                pillClass = "bg-emerald-50 text-emerald-800 border-emerald-200 shadow-[0_0_10px_rgba(16,185,129,0.15)]";
+                pillClass = "bg-emerald-100/80 backdrop-blur-sm text-emerald-800 border-emerald-200/80";
                 statusText = "Operational";
-                dotColor = "bg-emerald-500";
             } else if (status === "SSL Issue") {
-                pillClass = "bg-amber-50 text-amber-800 border-amber-200 shadow-[0_0_10px_rgba(245,158,11,0.15)]";
+                pillClass = "bg-amber-100/80 backdrop-blur-sm text-amber-800 border-amber-200/80";
                 statusText = "SSL Error";
-                dotColor = "bg-amber-500";
             }
 
             if (statusEl) {
-                statusEl.className = `text-[10px] sm:text-xs font-bold px-3 py-1 text-center rounded-full border flex items-center justify-center gap-1.5 ${pillClass}`;
-                statusEl.innerHTML = `<span class="w-1.5 h-1.5 rounded-full ${dotColor}"></span> <span>${statusText}</span>`;
+                statusEl.className = `text-[10px] sm:text-xs font-bold px-2.5 py-1 sm:px-3 sm:py-1.5 text-center rounded-full border shadow-sm ${pillClass}`;
+                statusEl.innerText = statusText;
             }
         }
 
         function renderHistory(data) {
             const historyList = document.getElementById('history-list');
             historyList.innerHTML = '';
-            
-            data.forEach((record, index) => {
+            data.forEach(record => {
                 const recordTime = new Date(record.timestamp);
                 const diffMins = Math.floor((new Date() - recordTime) / 60000);
-                let timeText = diffMins < 1 ? "Just now" : diffMins < 60 ? `${diffMins}m ago` : `${Math.floor(diffMins/60)}h ago`;
+                let timeText = diffMins < 1 ? "Just now" : diffMins < 60 ? `${diffMins} mins ago` : `${Math.floor(diffMins/60)} hrs ago`;
                 const clockTime = recordTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 
-                let dotColor = record.overall_status === "All Systems Operational" ? "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.6)]" : 
-                               record.overall_status === "Major Outage" ? "bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.6)]" : "bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.6)]";
+                let dotColor = record.overall_status === "All Systems Operational" ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" : 
+                               record.overall_status === "Major Outage" ? "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]" : "bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]";
 
                 historyList.innerHTML += `
-                    <li class="flex justify-between items-center p-3 sm:p-4 rounded-xl inner-glass hover:bg-white/80 transition-all">
-                        <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
-                            <span class="w-2.5 h-2.5 rounded-full ${dotColor} shrink-0"></span>
+                    <li class="flex justify-between items-center p-3 sm:p-4 rounded-xl inner-glass mb-2.5 sm:mb-3 hover:bg-white/70 transition-colors">
+                        <div class="flex items-center gap-2.5 sm:gap-3 w-[55%]">
+                            <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full ${dotColor} flex-shrink-0"></span>
                             <span class="text-xs sm:text-sm font-bold text-slate-800 truncate">${record.overall_status}</span>
                         </div>
-                        <div class="flex items-center gap-2 text-right shrink-0">
-                            <span class="text-slate-700 font-black font-mono-code text-[11px] sm:text-xs">${timeText}</span>
-                            <span class="text-slate-400 font-mono-code text-[10px] hidden sm:inline">(${clockTime})</span>
+                        <div class="flex flex-col text-right w-[45%]">
+                            <span class="text-slate-700 font-black text-[11px] sm:text-xs">${timeText}</span>
+                            <span class="text-slate-500 font-medium text-[9px] sm:text-[10px]">${clockTime}</span>
                         </div>
                     </li>
                 `;
@@ -478,61 +317,50 @@
         function updateOverallBanner(status, timestamp) {
             const banner = document.getElementById('overall-banner');
             const icon = document.getElementById('overall-icon');
-            const aura = document.getElementById('overall-aura');
             const text = document.getElementById('overall-text');
             const timeEl = document.getElementById('overall-time');
-            const badge = document.getElementById('telemetry-badge');
 
             text.innerText = status;
             
             if (timestamp) {
-                const timeString = timestamp.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit' });
-                timeEl.innerText = `Last diagnostic synchronized at ${timeString}`;
+                const timeString = timestamp.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+                timeEl.innerText = `Live check completed at ${timeString}`;
             } else {
-                timeEl.innerText = "Probing APJAKTU production edge nodes right now";
+                timeEl.innerText = "Please wait...";
             }
 
+            icon.classList.remove('animate-pulse');
+            icon.innerHTML = ''; 
+
             if (status === "Running live check...") {
-                banner.className = "real-glass w-full rounded-[1.8rem] sm:rounded-[2.2rem] p-5 sm:p-7 mb-6 sm:mb-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 transition-all duration-300";
-                icon.className = "w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-white/80 border border-slate-200 flex items-center justify-center text-slate-400 text-xl shadow-sm shrink-0";
-                icon.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
-                aura.className = "hidden";
-                badge.className = "font-mono-code text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full bg-white/70 border border-slate-200 text-slate-600 shadow-sm inline-flex items-center gap-1.5";
-                badge.innerHTML = `<i class="fas fa-satellite-dish text-blue-500 animate-pulse"></i> CONNECTING`;
+                banner.className = "real-glass w-full rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 mb-6 sm:mb-8 flex items-center gap-3.5 sm:gap-4 transition-all";
+                text.className = "text-base sm:text-lg md:text-xl font-bold text-slate-800 leading-snug";
+                icon.className = "w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-200/50 animate-pulse flex-shrink-0 border border-white/50";
             }
             else if (status === "All Systems Operational") {
-                banner.className = "w-full rounded-[1.8rem] sm:rounded-[2.2rem] p-5 sm:p-7 mb-6 sm:mb-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 bg-emerald-50/80 backdrop-blur-2xl border border-emerald-300/80 shadow-sm transition-all duration-300";
-                text.className = "text-lg sm:text-2xl font-black text-emerald-950 leading-tight";
-                icon.className = "w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-emerald-500 flex items-center justify-center text-white text-xl shadow-[0_0_20px_rgba(16,185,129,0.4)] shrink-0";
-                icon.innerHTML = `<i class="fas fa-check"></i>`;
-                aura.className = "absolute -inset-2 rounded-full bg-emerald-400/40 radar-aura pointer-events-none";
-                badge.className = "font-mono-code text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 shadow-sm inline-flex items-center gap-1.5";
-                badge.innerHTML = `<i class="fas fa-circle text-[8px] text-emerald-600"></i> NORMAL`;
+                banner.className = "w-full rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 mb-6 sm:mb-8 flex items-center gap-3.5 sm:gap-4 bg-emerald-50/70 backdrop-blur-md border border-emerald-200/80 shadow-sm transition-all";
+                text.className = "text-base sm:text-lg md:text-xl font-black text-emerald-800 leading-snug";
+                icon.className = "w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-500 flex flex-shrink-0 items-center justify-center text-white shadow-[0_0_15px_rgba(16,185,129,0.4)]";
+                icon.innerHTML = `<svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>`;
             } 
             else if (status === "Partial Outage" || status === "SSL Issues Detected") {
-                banner.className = "w-full rounded-[1.8rem] sm:rounded-[2.2rem] p-5 sm:p-7 mb-6 sm:mb-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 bg-amber-50/80 backdrop-blur-2xl border border-amber-300/80 shadow-sm transition-all duration-300";
-                text.className = "text-lg sm:text-2xl font-black text-amber-950 leading-tight";
-                icon.className = "w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-amber-500 flex items-center justify-center text-white text-xl shadow-[0_0_20px_rgba(245,158,11,0.4)] shrink-0";
-                icon.innerHTML = `<i class="fas fa-exclamation-triangle"></i>`;
-                aura.className = "absolute -inset-2 rounded-full bg-amber-400/40 radar-aura pointer-events-none";
-                badge.className = "font-mono-code text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-300 shadow-sm inline-flex items-center gap-1.5";
-                badge.innerHTML = `<i class="fas fa-circle text-[8px] text-amber-600"></i> DEGRADED`;
+                banner.className = "w-full rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 mb-6 sm:mb-8 flex items-center gap-3.5 sm:gap-4 bg-amber-50/70 backdrop-blur-md border border-amber-200/80 shadow-sm transition-all";
+                text.className = "text-base sm:text-lg md:text-xl font-black text-amber-800 leading-snug";
+                icon.className = "w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-amber-500 flex flex-shrink-0 items-center justify-center text-white shadow-[0_0_15px_rgba(245,158,11,0.4)]";
+                icon.innerHTML = `<svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
             } 
             else {
-                banner.className = "w-full rounded-[1.8rem] sm:rounded-[2.2rem] p-5 sm:p-7 mb-6 sm:mb-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 bg-rose-50/80 backdrop-blur-2xl border border-rose-300/80 shadow-sm transition-all duration-300";
-                text.className = "text-lg sm:text-2xl font-black text-rose-950 leading-tight";
-                icon.className = "w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-rose-500 flex items-center justify-center text-white text-xl shadow-[0_0_20px_rgba(244,63,94,0.4)] shrink-0";
-                icon.innerHTML = `<i class="fas fa-times"></i>`;
-                aura.className = "absolute -inset-2 rounded-full bg-rose-400/40 radar-aura pointer-events-none";
-                badge.className = "font-mono-code text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full bg-rose-100 text-rose-800 border border-rose-300 shadow-sm inline-flex items-center gap-1.5";
-                badge.innerHTML = `<i class="fas fa-circle text-[8px] text-rose-600"></i> OUTAGE`;
+                banner.className = "w-full rounded-2xl sm:rounded-[2rem] p-4 sm:p-6 mb-6 sm:mb-8 flex items-center gap-3.5 sm:gap-4 bg-red-50/70 backdrop-blur-md border border-red-200/80 shadow-sm transition-all";
+                text.className = "text-base sm:text-lg md:text-xl font-black text-red-800 leading-snug";
+                icon.className = "w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-red-500 flex flex-shrink-0 items-center justify-center text-white shadow-[0_0_15px_rgba(239,68,68,0.4)]";
+                icon.innerHTML = `<svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>`;
             }
         }
 
-        // Automatic run on startup
+        // Run automatically on load
         window.onload = runLiveCheck;
 
-        // --- BUTTER-SMOOTH PARALLAX ENGINE (MOUSE & GYROSCOPE) ---
+        // --- 1. SMOOTH SCROLL PARALLAX ENGINE ---
         let lastScrollY = window.scrollY;
         let ticking = false;
 
@@ -543,14 +371,15 @@
                     const scrollBg1 = document.getElementById('scroll-bg-1');
                     const scrollBg2 = document.getElementById('scroll-bg-2');
                     
-                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.22}px)`;
-                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.15}px)`;
+                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.25}px)`;
+                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.16}px)`;
                     ticking = false;
                 });
                 ticking = true;
             }
         }, { passive: true });
 
+        // --- 2. 3D MOUSE PARALLAX (For PC layout viewports) ---
         function applyParallax(x, y) {
             const mouseOrb1 = document.getElementById('mouse-orb-1');
             const mouseOrb2 = document.getElementById('mouse-orb-2');
@@ -567,6 +396,7 @@
 
         document.addEventListener('mouseleave', () => applyParallax(0, 0));
 
+        // --- 3. GYROSCOPE TILT PARALLAX (For Mobile hardware) ---
         if (window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', (e) => {
                 if(e.gamma === null || e.beta === null) return;
