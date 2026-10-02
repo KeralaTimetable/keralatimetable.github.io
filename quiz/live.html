@@ -187,10 +187,10 @@
                     </div>
                     <div class="inner-glass p-4 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
                         <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-2 shadow-sm">
-                            <i class="fas fa-bullseye text-lg"></i>
+                            <i class="fas fa-award text-lg"></i>
                         </div>
-                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Pass Score</div>
-                        <div class="font-extrabold text-slate-800 text-base">50%</div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Certificate</div>
+                        <div class="font-extrabold text-slate-800 text-base">At 50%+</div>
                     </div>
                     <div class="inner-glass p-4 sm:p-5 rounded-2xl text-center flex flex-col items-center justify-center">
                         <div class="w-10 h-10 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600 mb-2 shadow-sm">
@@ -208,27 +208,32 @@
                     <ul class="space-y-3 text-xs md:text-sm text-slate-600 font-medium">
                         <li class="flex items-start gap-2.5">
                             <i class="fas fa-check-circle text-blue-500 mt-0.5 shrink-0 text-xs"></i> 
-                            <span>Tests key metrics: LVBench (91.7%), DeepSWE v1.1, Fairwind, Rust ports, and 1M single-pass output tokens.</span>
+                            <span>Scores of 50% or above earn a downloadable, verified completion certificate sent to your email.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <i class="fas fa-exclamation-triangle text-amber-500 mt-0.5 shrink-0 text-xs"></i> 
-                            <span><strong>Anti-Cheat Active:</strong> Switching tabs or windows will be logged as an anti-cheat event.</span>
+                            <span><strong>Anti-Cheat Active:</strong> Switching tabs or leaving the exam window triggers monitored warnings.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
                             <i class="fas fa-bookmark text-purple-500 mt-0.5 shrink-0 text-xs"></i> 
-                            <span>Mark questions for review anytime using the bottom question palette before final submission.</span>
+                            <span>You can mark and review questions anytime before clicking final submit.</span>
                         </li>
                     </ul>
                 </div>
 
+                <!-- Registration Details -->
                 <div class="space-y-4">
                     <div>
                         <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Candidate Full Name</label>
-                        <input type="text" id="candidate-name" placeholder="Enter your full name" class="inner-glass w-full text-slate-800 text-sm md:text-base rounded-xl px-5 py-4 transition-all">
+                        <input type="text" id="candidate-name" placeholder="Enter your full name (for certificate)" class="inner-glass w-full text-slate-800 text-sm md:text-base rounded-xl px-5 py-4 transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Email Address <span class="text-blue-600 lowercase">(certificate destination)</span></label>
+                        <input type="email" id="candidate-email" placeholder="name@example.com" class="inner-glass w-full text-slate-800 text-sm md:text-base rounded-xl px-5 py-4 transition-all">
                     </div>
                     <label class="flex items-center gap-3 cursor-pointer mt-4 group p-2 rounded-xl hover:bg-white/40 transition">
                         <input type="checkbox" id="consent-check" class="h-5 w-5 cursor-pointer rounded-lg border-gray-300 text-blue-600 focus:ring-blue-500 transition-colors bg-white/70">
-                        <span class="text-xs sm:text-sm font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">I am ready to begin the 30-minute Gemini 4 Argon assessment.</span>
+                        <span class="text-xs sm:text-sm font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">I confirm my details are correct and I am ready to start the 30-minute exam.</span>
                     </label>
                 </div>
 
@@ -326,24 +331,39 @@
                     <i class="fas fa-award text-blue-500"></i> Assessment Results
                 </h2>
                 
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                     <div class="inner-glass rounded-2xl p-3.5 sm:p-4 text-center">
                         <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Candidate</span>
                         <span id="res-name" class="text-base sm:text-lg font-black text-slate-800 truncate block">User</span>
                     </div>
                     <div class="inner-glass rounded-2xl p-3.5 sm:p-4 text-center">
+                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Email</span>
+                        <span id="res-email" class="text-xs sm:text-sm font-black text-slate-800 truncate block" title="Candidate Email">user@email.com</span>
+                    </div>
+                    <div class="inner-glass rounded-2xl p-3.5 sm:p-4 text-center">
                         <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Date</span>
                         <span id="res-date" class="text-base sm:text-lg font-black text-slate-800 block">--/--/----</span>
                     </div>
-                    <div class="inner-glass rounded-2xl p-3.5 sm:p-4 text-center col-span-2 md:col-span-1">
+                    <div class="inner-glass rounded-2xl p-3.5 sm:p-4 text-center">
                         <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Time Spent</span>
                         <span id="res-time" class="text-base sm:text-lg font-black text-slate-800 block">0m 0s</span>
                     </div>
                 </div>
 
-                <div id="award-banner" class="rounded-2xl p-4 sm:p-5 text-center mb-5 inner-glass shadow-sm">
+                <div id="award-banner" class="rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass shadow-sm">
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Score Result</div>
                     <div id="award-text" class="text-2xl sm:text-3xl font-black">Evaluating...</div>
+                </div>
+
+                <!-- Certificate Status Message -->
+                <div id="cert-notice-box" class="inner-glass rounded-2xl p-4 mb-5 flex items-center justify-center gap-3 border border-white">
+                    <div class="w-9 h-9 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 shrink-0">
+                        <i class="fas fa-certificate text-lg"></i>
+                    </div>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-700 leading-snug">
+                        <span id="cert-status-msg">Your certificate will be generated and dispatched to:</span>
+                        <strong id="cert-email-target" class="text-blue-600 block sm:inline"></strong>
+                    </p>
                 </div>
                 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6 text-center">
@@ -491,10 +511,11 @@
 
         // Anti-Cheat & Quiz Engine State (30 Mins = 1800s)
         const EXAM_DURATION = 1800;
-        const STORAGE_KEY = 'gemini4_argon_quiz_v2';
+        const STORAGE_KEY = 'gemini4_argon_quiz_v3';
 
         let appState = {
             candidateName: "",
+            candidateEmail: "",
             quizDataset: [],
             indexActive: 0,
             responsesUser: {},
@@ -551,12 +572,20 @@
 
         window.startExamination = function() {
             const nameInput = document.getElementById('candidate-name').value.trim();
+            const emailInput = document.getElementById('candidate-email').value.trim();
             const consent = document.getElementById('consent-check').checked;
 
-            if (!nameInput) return alert("Please enter your name.");
+            if (!nameInput) return alert("Please enter your full name.");
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailInput || !emailRegex.test(emailInput)) {
+                return alert("Please enter a valid email address to receive your certificate.");
+            }
+
             if (!consent) return alert("Please check the consent box to proceed.");
             
             appState.candidateName = nameInput;
+            appState.candidateEmail = emailInput;
             appState.quizDataset = [...masterQuestionPool];
             appState.totalQuestions = appState.quizDataset.length;
             
@@ -759,7 +788,7 @@
             }
         }
 
-        async function saveResultToFirebase(name, correct, total, accuracy) {
+        async function saveResultToFirebase(name, email, correct, total, accuracy) {
             const statusEl = document.getElementById('db-save-status');
             try {
                 const dbRef = ref(db, 'gemini4_quiz_results');
@@ -767,13 +796,15 @@
                 
                 await set(newRecordRef, {
                     candidateName: name,
+                    candidateEmail: email,
                     score: correct,
                     totalQuestions: total,
                     accuracyPercent: accuracy,
+                    certificateEligible: accuracy >= 50,
                     completedAt: new Date().toISOString()
                 });
                 
-                statusEl.innerHTML = `<i class="fas fa-check-circle text-emerald-500"></i> <span class="hidden sm:inline">Result Saved</span><span class="sm:hidden">Saved</span>`;
+                statusEl.innerHTML = `<i class="fas fa-check-circle text-emerald-500"></i> <span class="hidden sm:inline">Record Saved</span><span class="sm:hidden">Saved</span>`;
                 statusEl.classList.add('text-emerald-700');
             } catch (error) {
                 console.error("Firebase sync error: ", error);
@@ -802,6 +833,8 @@
             const accuracy = Math.round((correct / appState.totalQuestions) * 100);
 
             document.getElementById('res-name').innerText = appState.candidateName;
+            document.getElementById('res-email').innerText = appState.candidateEmail;
+            document.getElementById('res-email').title = appState.candidateEmail;
             document.getElementById('res-date').innerText = new Date().toLocaleDateString(); 
             
             const minsSpent = Math.floor(appState.timeSpent / 60);
@@ -815,22 +848,29 @@
 
             const banner = document.getElementById('award-banner');
             const awardTxt = document.getElementById('award-text');
+            const certMsg = document.getElementById('cert-status-msg');
+            const certTarget = document.getElementById('cert-email-target');
             
+            certTarget.innerText = appState.candidateEmail;
+
             if (accuracy >= 80) {
                 banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass bg-emerald-100/50 border border-emerald-200';
                 awardTxt.className = "text-2xl sm:text-3xl font-black text-emerald-600";
                 awardTxt.innerText = `Mastery (${accuracy}%)`;
+                certMsg.innerText = "Congratulations! Your Certificate of Mastery will be dispatched to:";
             } else if (accuracy >= 50) {
                 banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass bg-blue-100/50 border border-blue-200';
                 awardTxt.className = "text-2xl sm:text-3xl font-black text-blue-600";
                 awardTxt.innerText = `Passed (${accuracy}%)`;
+                certMsg.innerText = "Well done! Your Certificate of Completion will be dispatched to:";
             } else {
                 banner.className = 'rounded-2xl p-4 sm:p-5 text-center mb-4 inner-glass bg-rose-100/50 border border-rose-200';
                 awardTxt.className = "text-2xl sm:text-3xl font-black text-rose-600";
                 awardTxt.innerText = `Needs Improvement (${accuracy}%)`;
+                certMsg.innerText = "Minimum passing mark is 50% for a certificate. Retake available. Registered email:";
             }
 
-            saveResultToFirebase(appState.candidateName, correct, appState.totalQuestions, accuracy);
+            saveResultToFirebase(appState.candidateName, appState.candidateEmail, correct, appState.totalQuestions, accuracy);
         }
 
         window.showReviewView = function() {
