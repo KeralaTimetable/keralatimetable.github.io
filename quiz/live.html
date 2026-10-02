@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARGON 2026 — The Gemini 4 Quiz</title>
+    <title>ARGON 2026 — The Gemini 4 Quiz | Kerala Timetable</title>
     
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Local with CDN Fallback -->
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
@@ -46,6 +47,7 @@
         }
         .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
 
+        /* General UI animations */
         @keyframes fadeUpEntry {
             0% { opacity: 0; transform: translateY(30px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -54,6 +56,7 @@
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
 
+        /* Horizontal palette custom scrollbar */
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -91,6 +94,10 @@
 
 <body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
 
+    <!-- Global Navigation Container loaded by components.js -->
+    <div id="navigation-container" class="transition-opacity duration-300 relative z-50"></div>
+
+    <!-- Parallax Orb Background -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
         <div id="scroll-bg-1" class="absolute top-10 -left-32 md:-left-10 w-72 h-72 md:w-96 md:h-96 transition-transform duration-100 ease-out">
             <div id="mouse-orb-1" class="w-full h-full bg-blue-400/50 md:bg-blue-400 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
@@ -104,17 +111,17 @@
     </div>
 
     <!-- LANDING VIEW -->
-    <main id="main-container" class="flex-grow w-full max-w-6xl mx-auto px-4 py-12 md:py-16 relative z-10 flex flex-col justify-center min-h-[80vh]">
+    <main id="main-container" class="flex-grow w-full max-w-6xl mx-auto px-4 py-8 md:py-14 relative z-10 flex flex-col justify-center min-h-[80vh]">
         <div id="landing-view" class="max-w-3xl mx-auto w-full space-y-6">
-            <div class="text-center mb-10">
-                <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-slate-200 text-blue-600 text-xs font-black uppercase tracking-wider mb-5">
+            <div class="text-center mb-8">
+                <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white shadow-sm border border-slate-200 text-blue-600 text-xs font-black uppercase tracking-wider mb-5">
                     <i class="fas fa-atom text-blue-500"></i> Google DeepMind • Frontier AI
                 </div>
-                <h1 class="animate-fade-up delay-100 text-4xl md:text-5xl font-black tracking-tight mb-4 text-slate-900">
+                <h1 class="animate-fade-up delay-100 text-3xl md:text-5xl font-black tracking-tight mb-3 text-slate-900">
                     ARGON 2026 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">— The Gemini 4 Quiz</span>
                 </h1>
-                <p class="animate-fade-up delay-200 text-slate-600 text-base md:text-lg font-medium max-w-2xl mx-auto">
-                    Test your knowledge of Gemini 4 Argon: architectural capabilities, benchmarks, 1M output tokens, and real-world system migrations.
+                <p class="animate-fade-up delay-200 text-slate-600 text-sm md:text-base font-medium max-w-2xl mx-auto">
+                    Evaluate your knowledge of Google's Gemini 4 Argon model, architectural capabilities, 1M output tokens, benchmarks, and enterprise migrations.
                 </p>
             </div>
 
@@ -143,21 +150,21 @@
                 </div>
 
                 <div class="mb-8 real-glass rounded-2xl p-6">
-                    <h3 class="font-bold text-slate-900 mb-4 text-lg flex items-center gap-2 border-b border-white/50 pb-3">
-                        <i class="fas fa-info-circle text-indigo-500"></i> Instructions
+                    <h3 class="font-bold text-slate-900 mb-4 text-base md:text-lg flex items-center gap-2 border-b border-white/50 pb-3">
+                        <i class="fas fa-info-circle text-indigo-500"></i> Examination Guidelines
                     </h3>
-                    <ul class="space-y-3 text-sm text-slate-700 font-medium">
+                    <ul class="space-y-3 text-xs md:text-sm text-slate-700 font-medium">
                         <li class="flex items-start gap-3">
                             <i class="fas fa-circle text-[8px] text-blue-500 mt-1.5"></i> 
-                            <span>Covers release metrics, benchmark scores, agentic coding, security, and hardware migrations.</span>
+                            <span>Tests key metrics: LVBench, DeepSWE v1.1, Fairwind rollout, Rust ports, and 1M single-pass output tokens.</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <i class="fas fa-circle text-[8px] text-red-500 mt-1.5"></i> 
-                            <span>Tab focus is tracked during the active assessment session.</span>
+                            <span><strong>Anti-Cheat:</strong> Tab and browser focus are monitored. Leaving this window triggers an alert.</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <i class="fas fa-circle text-[8px] text-indigo-500 mt-1.5"></i> 
-                            <span>You can mark questions for review and jump back anytime before submitting.</span>
+                            <span>Mark questions for review anytime using the bottom palette.</span>
                         </li>
                     </ul>
                 </div>
@@ -169,7 +176,7 @@
                     </div>
                     <label class="flex items-center gap-3 cursor-pointer mt-4 group p-2">
                         <input type="checkbox" id="consent-check" class="h-5 w-5 cursor-pointer rounded border-gray-300 text-blue-600 focus:ring-blue-500 transition-colors bg-white/50">
-                        <span class="text-sm font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">I am ready to start the Gemini 4 Argon assessment.</span>
+                        <span class="text-sm font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">I have read the guidelines and am ready to start the quiz.</span>
                     </label>
                 </div>
 
@@ -254,6 +261,11 @@
     <div id="result-view" class="hidden absolute inset-0 bg-mesh z-[60] overflow-y-auto px-4 py-6 md:py-10 flex flex-col items-center">
         <div class="max-w-4xl mx-auto animate-fade-up w-full my-auto">
             <div class="real-glass rounded-[1.5rem] md:rounded-[2rem] p-5 sm:p-8 shadow-2xl border border-white relative">
+                
+                <div id="db-save-status" class="absolute top-4 right-4 sm:top-6 sm:right-6 text-[10px] sm:text-xs font-bold text-slate-500 flex items-center gap-1.5 bg-white/60 px-3 py-1.5 rounded-full shadow-sm border border-white">
+                    <i class="fas fa-spinner fa-spin text-blue-500"></i> <span class="hidden sm:inline">Saving Result...</span><span class="sm:hidden">Saving...</span>
+                </div>
+
                 <h2 class="text-2xl md:text-3xl font-black text-slate-900 border-b border-white/50 pb-4 mb-4 text-center flex items-center justify-center gap-3">
                     <i class="fas fa-award text-blue-500"></i> Assessment Results
                 </h2>
@@ -297,6 +309,12 @@
                     </div>
                 </div>
 
+                <div class="flex justify-center mb-5 px-1 sm:px-0">
+                    <a href="https://chat.whatsapp.com/Dai125BQnk296l1NNVjzrj" target="_blank" class="w-full md:w-3/4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 sm:px-6 rounded-xl shadow-md transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2 text-sm sm:text-base border border-emerald-400">
+                        <i class="fab fa-whatsapp text-xl sm:text-2xl"></i> Join Kerala Timetable WhatsApp Group
+                    </a>
+                </div>
+
                 <div class="flex flex-col sm:flex-row flex-wrap gap-3 justify-center pt-5 border-t border-white/50">
                     <button onclick="showReviewView()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-md transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2 text-sm">
                         <i class="fas fa-search-plus text-sm"></i> Review Answers & Keys
@@ -305,6 +323,10 @@
                     <button onclick="clearStateAndReload()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-xl shadow-md transition transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2 text-sm">
                         <i class="fas fa-redo text-sm"></i> Retake Assessment
                     </button>
+                    
+                    <a href="/" class="w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-sm text-slate-600 hover:text-slate-900 hover:bg-white inner-glass transition-all text-center flex items-center justify-center">
+                        Return Home
+                    </a>
                 </div>
             </div>
         </div>
@@ -337,19 +359,89 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="questions.js"></script> 
+    <!-- Fallback-enabled components.js loading -->
+    <script src="/components.js?v=16" onerror="this.onerror=null;this.src='../components.js';"></script>
+    <script src="questions.js"></script>
 
-    <script>
-        const STORAGE_KEY = 'gemini4_argon_quiz_state_v1';
+    <!-- Main Controller Module -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
+            authDomain: "kerala-timetable-db.firebaseapp.com",
+            databaseURL: "https://kerala-timetable-db-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "kerala-timetable-db",
+            storageBucket: "kerala-timetable-db.firebasestorage.app",
+            messagingSenderId: "527439836518",
+            appId: "1:527439836518:web:af7725a5bf07d6a4f584a7"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Safe Navigation Loader (handles async components.js load)
+        function initNav() {
+            if (typeof loadNavigation === 'function') {
+                loadNavigation('', '/', false);
+            } else {
+                setTimeout(() => {
+                    if (typeof loadNavigation === 'function') {
+                        loadNavigation('', '/', false);
+                    }
+                }, 400);
+            }
+        }
+        initNav();
+
+        // Parallax Effect
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollBg1 = document.getElementById('scroll-bg-1');
+                    const scrollBg2 = document.getElementById('scroll-bg-2');
+                    const scrollBg3 = document.getElementById('scroll-bg-3');
+                    
+                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.3}px)`;
+                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                    if(scrollBg3) scrollBg3.style.transform = `translateY(${lastScrollY * 0.15}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        function applyParallax(x, y) {
+            const mouseOrb1 = document.getElementById('mouse-orb-1');
+            const mouseOrb2 = document.getElementById('mouse-orb-2');
+            const mouseOrb3 = document.getElementById('mouse-orb-3');
+            
+            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+            if(mouseOrb3) mouseOrb3.style.transform = `translate(${x * -20}px, ${y * 30}px)`;
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 2; 
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            applyParallax(x, y);
+        });
+
+        // Anti-Cheat & Quiz Engine State
+        const STORAGE_KEY = 'gemini4_argon_quiz_v1';
         let appState = {
             candidateName: "",
             quizDataset: [],
             indexActive: 0,
             responsesUser: {},
             questionStatus: {},
-            timeRemaining: 2700, // 45 mins
+            timeRemaining: 2700, 
             timeSpent: 0,
             isExamActive: false,
             cheatWarnings: 0,
@@ -361,18 +453,19 @@
         window.addEventListener('blur', () => {
             if(appState.isExamActive) {
                 appState.cheatWarnings++;
-                alert(`ANTI-CHEAT WARNING: Focus lost. Please stay on the active exam window.\n\nWarnings: ${appState.cheatWarnings}`);
+                alert(`ANTI-CHEAT WARNING: Browser focus lost.\n\nWarnings logged: ${appState.cheatWarnings}`);
             }
         });
 
         function loadOrInitializeState() {
             if (typeof masterQuestionPool === 'undefined' || masterQuestionPool.length === 0) {
-                alert("questions.js failed to load. Please make sure questions.js is in the same folder.");
+                console.error("questions.js not detected.");
                 return;
             }
 
             appState.totalQuestions = masterQuestionPool.length;
-            document.getElementById('total-q-display').innerText = `${appState.totalQuestions} MCQs`;
+            const qCountEl = document.getElementById('total-q-display');
+            if (qCountEl) qCountEl.innerText = `${appState.totalQuestions} MCQs`;
 
             const savedState = localStorage.getItem(STORAGE_KEY);
             if (savedState) {
@@ -406,12 +499,10 @@
             if (!consent) return alert("Please check the consent box to proceed.");
             
             appState.candidateName = nameInput;
-
-            // Load and keep all 30 questions
             appState.quizDataset = [...masterQuestionPool];
             appState.totalQuestions = appState.quizDataset.length;
             
-            for(let i = 0; i < appState.totalQuestions; i++) {
+            for(let i=0; i < appState.totalQuestions; i++) {
                 appState.questionStatus[i] = 'unvisited';
             }
             appState.questionStatus[0] = 'not-answered';
@@ -428,6 +519,9 @@
 
         function resumeExamination() {
             document.getElementById('main-container').classList.add('hidden');
+            const nav = document.getElementById('navigation-container');
+            if(nav) nav.classList.add('hidden');
+            
             document.getElementById('quiz-view').classList.remove('hidden');
             
             buildPalette();
@@ -552,7 +646,6 @@
             
             document.querySelectorAll('.option-label').forEach(el => el.classList.remove('selected', 'font-bold'));
             document.getElementById(`label-${val}`).classList.add('selected', 'font-bold');
-            
             buildPalette();
         }
 
@@ -564,7 +657,6 @@
             if (appState.questionStatus[appState.indexActive] !== 'marked') {
                 appState.questionStatus[appState.indexActive] = 'not-answered';
             }
-            
             saveState();
             buildPalette();
         }
@@ -609,9 +701,35 @@
             }
         }
 
+        async function saveResultToFirebase(name, correct, total, accuracy) {
+            const statusEl = document.getElementById('db-save-status');
+            try {
+                const dbRef = ref(db, 'gemini4_quiz_results');
+                const newRecordRef = push(dbRef);
+                
+                await set(newRecordRef, {
+                    candidateName: name,
+                    score: correct,
+                    totalQuestions: total,
+                    accuracyPercent: accuracy,
+                    completedAt: new Date().toISOString()
+                });
+                
+                statusEl.innerHTML = `<i class="fas fa-check-circle text-emerald-500"></i> <span class="hidden sm:inline">Result Saved</span><span class="sm:hidden">Saved</span>`;
+                statusEl.classList.add('text-emerald-700');
+            } catch (error) {
+                console.error("Firebase sync error: ", error);
+                statusEl.innerHTML = `<i class="fas fa-exclamation-circle text-red-500"></i> <span class="hidden sm:inline">Sync Failed</span><span class="sm:hidden">Failed</span>`;
+                statusEl.classList.add('text-red-700');
+            }
+        }
+
         function renderResults() {
             document.getElementById('quiz-view').classList.add('hidden');
             document.getElementById('result-view').classList.remove('hidden');
+
+            const nav = document.getElementById('navigation-container');
+            if(nav) nav.classList.remove('hidden');
 
             let correct = 0;
             let skipped = 0;
@@ -653,6 +771,8 @@
                 awardTxt.className = "text-2xl sm:text-3xl font-black text-red-600";
                 awardTxt.innerText = `Needs Improvement (${accuracy}%)`;
             }
+
+            saveResultToFirebase(appState.candidateName, correct, appState.totalQuestions, accuracy);
         }
 
         window.showReviewView = function() {
