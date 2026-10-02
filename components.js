@@ -1,4 +1,6 @@
-// --- Google Analytics 4 (GA4) Live Tracking ---
+// ==============================================================================
+// 1. GOOGLE ANALYTICS 4 (GA4) LIVE TRACKING
+// ==============================================================================
 (function() {
     if (window._ga4Initialized) return;
     window._ga4Initialized = true;
@@ -13,8 +15,10 @@
     gtag('js', new Date());
     gtag('config', 'G-TK5MBC372D');
 })();
-// ----------------------------------------------
 
+// ==============================================================================
+// 2. RESPONSIVE NAVIGATION LOADER
+// ==============================================================================
 function loadNavigation(activePage, basePath = '', isBlog = false) { 
     const container = document.getElementById('navigation-container');
     if (!container) return;
@@ -128,7 +132,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 
     if (!menu || !overlay) return;
 
-    // Use requestAnimationFrame so animations don't stutter or flash on mount
+    // Zero-lag transition setup using requestAnimationFrame
     requestAnimationFrame(() => {
         menu.classList.add('transition-transform', 'duration-300', 'ease-in-out');
         overlay.classList.add('transition-opacity', 'duration-300');
@@ -154,7 +158,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     closeBtn?.addEventListener('click', () => setMenuState(false));
     overlay.addEventListener('click', () => setMenuState(false));
 
-    // Close on Escape key for better keyboard navigation
+    // Keyboard support: Escape closes mobile drawer
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !menu.classList.contains('-translate-x-full')) {
             setMenuState(false);
@@ -162,14 +166,13 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     });
 }
 
-// ----------------------------------------------
-// GLOBAL AD INJECTOR STRICTLY FOR NOTE PAGES
-// ----------------------------------------------
+// ==============================================================================
+// 3. GLOBAL AD INJECTOR STRICTLY FOR NOTE PAGES
+// ==============================================================================
 function injectGlobalAd() {
-    // Avoid double injection
     if (document.getElementById('global-note-ad')) return;
 
-    // Strict URL check on pathname only (ignores query params/hashes)
+    // Strict pathname check
     const isNotePage = window.location.pathname.toLowerCase().includes('notes');
     const firstModule = document.querySelector('.module-card');
     
@@ -201,7 +204,6 @@ function injectGlobalAd() {
         moduleGridContainer.insertAdjacentHTML('beforebegin', adHTML);
     };
 
-    // Pre-decode the image off-thread to avoid frame drop when inserting
     if ('decode' in testImage) {
         testImage.decode().then(renderAd).catch(() => {
             console.warn("Global ad image not found or decoding failed. Injection skipped.");
@@ -214,9 +216,104 @@ function injectGlobalAd() {
     }
 }
 
-// Safely execute whether script loads before or after DOMContentLoaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', injectGlobalAd);
-} else {
+// ==============================================================================
+// 4. KTU WHATSAPP CHANNEL PROMO MINI POP-UP
+// ==============================================================================
+function initWhatsAppPopup() {
+    const STORAGE_KEY = 'ktu_wa_popup_cooldown_until';
+    const CANCEL_DAYS = 3;   // Show again after 3 days if cancelled/closed
+    const FOLLOW_DAYS = 60;  // Show again after 60 days if user follows
+    const CHANNEL_URL = 'https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D';
+
+    // 1. Check if user is within the cooldown period
+    const cooldownUntil = localStorage.getItem(STORAGE_KEY);
+    if (cooldownUntil && Date.now() < parseInt(cooldownUntil, 10)) {
+        return; 
+    }
+
+    // 2. Delay slightly after page load so it doesn't interrupt reading
+    setTimeout(() => {
+        if (document.getElementById('ktu-wa-popup')) return;
+
+        const popupHTML = `
+            <div id="ktu-wa-popup" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-[calc(100%-2rem)] sm:w-88 max-w-sm bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl rounded-2xl p-4 transition-all duration-300 ease-out transform translate-y-10 opacity-0 will-change-transform">
+                <button id="ktu-wa-close-btn" aria-label="Close" class="absolute top-3 right-3 text-slate-400 hover:text-slate-600 hover:bg-slate-100 p-1.5 rounded-full transition-colors focus:outline-none">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+
+                <div class="flex items-start gap-3.5 pr-6">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0 shadow-sm text-emerald-600">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.06c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.106 8.106 0 01-1.24-4.29c0-4.5 3.66-8.16 8.16-8.16 2.18 0 4.23.85 5.77 2.39 1.54 1.54 2.39 3.59 2.39 5.77 0 4.5-3.66 8.16-8.16 8.16zm4.47-6.11c-.24-.12-1.45-.71-1.68-.79-.22-.08-.39-.12-.55.12-.17.24-.63.79-.77.95-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.65-1.21-1.45-1.36-1.69-.14-.24-.02-.37.1-.49.11-.11.24-.28.37-.43.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.41-.41-.56-.42-.14-.01-.31-.01-.48-.01-.17 0-.45.06-.68.32-.24.25-.9.88-.9 2.15 0 1.27.93 2.5 1.06 2.67.13.18 1.82 2.78 4.41 3.9 0.62.27 1.1.43 1.48.55.62.2 1.19.17 1.63.11.5-.08 1.45-.59 1.66-1.17.2-.57.2-1.07.14-1.17-.06-.11-.22-.17-.46-.29z"/>
+                        </svg>
+                    </div>
+
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-900 leading-tight">Follow WhatsApp Channel</h3>
+                        <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                            Follow our channel for latest <b>KTU Updates</b>, alerts & verified <b>Study Notes</b>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-3.5 flex items-center gap-2">
+                    <button id="ktu-wa-later-btn" class="flex-1 py-2 px-3 text-xs font-semibold text-slate-600 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors">
+                        Maybe Later
+                    </button>
+                    <a id="ktu-wa-follow-btn" href="${CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm hover:shadow rounded-xl text-center transition-all flex items-center justify-center gap-1.5">
+                        Follow Channel
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', popupHTML);
+
+        const popup = document.getElementById('ktu-wa-popup');
+        const closeBtn = document.getElementById('ktu-wa-close-btn');
+        const laterBtn = document.getElementById('ktu-wa-later-btn');
+        const followBtn = document.getElementById('ktu-wa-follow-btn');
+
+        // Smooth GPU entrance
+        requestAnimationFrame(() => {
+            popup.classList.remove('translate-y-10', 'opacity-0');
+        });
+
+        // Dismiss helper function
+        function dismissPopup(days) {
+            const expireDate = Date.now() + days * 24 * 60 * 60 * 1000;
+            localStorage.setItem(STORAGE_KEY, expireDate.toString());
+
+            popup.classList.add('translate-y-10', 'opacity-0');
+            setTimeout(() => {
+                popup.remove();
+            }, 300);
+        }
+
+        // Cancel / Dismiss listeners
+        closeBtn?.addEventListener('click', () => dismissPopup(CANCEL_DAYS));
+        laterBtn?.addEventListener('click', () => dismissPopup(CANCEL_DAYS));
+
+        // Follow listener
+        followBtn?.addEventListener('click', () => dismissPopup(FOLLOW_DAYS));
+    }, 3500);
+}
+
+// ==============================================================================
+// 5. SAFE AUTO-INIT
+// ==============================================================================
+function runInitializers() {
     injectGlobalAd();
+    initWhatsAppPopup();
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runInitializers);
+} else {
+    runInitializers();
 }
