@@ -1,0 +1,5641 @@
+{
+  "source": "https://www.pyq.ktunotes.live/",
+  "extracted_on": "2026-10-03",
+  "lab_filter": "Excluded records whose subject name contains LAB (case-insensitive).",
+  "scheme_inference": {
+    "8-character codes": "2024",
+    "6-character codes": "2019",
+    "5-character codes": "2015"
+  },
+  "branches": {
+    "CIVIL": "Civil Engineering",
+    "CSE": "Computer Science and Engineering",
+    "ECE": "Electronics and Communication Engineering",
+    "EEE": "Electrical and Electronics Engineering",
+    "MECH": "Mechanical Engineering",
+    "CHEMICAL": "Chemical Engineering",
+    "AIDS": "AIDS",
+    "CSAIML": "CSAIML",
+    "CSDS": "CSDS",
+    "EI": "EI",
+    "IT": "IT"
+  },
+  "catalog": {
+    "2024": {
+      "CIVIL": {
+        "S1": [
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "UCEST105"
+          },
+          {
+            "subject_name": "Chemistry for Physical Science",
+            "course_code": "GCCYT122"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GBEST213"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GCEST103"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "UCHWT127"
+          },
+          {
+            "subject_name": "Introduction to Mechanical Engineering & Civil Engineering",
+            "course_code": "GCEST104"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "UCHUT128"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 1",
+            "course_code": "GYMAT101"
+          },
+          {
+            "subject_name": "Physics for Physical Science and Life Science",
+            "course_code": "GZPHT121"
+          },
+          {
+            "subject_name": "Skill Enhancement Course: Digital 101 (30 Hours NASSCOM)",
+            "course_code": "UCSEM129"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Basic Electrical & Electronics Engineering",
+            "course_code": "GZEST204"
+          },
+          {
+            "subject_name": "Basic Ship Theory",
+            "course_code": "PCNST205"
+          },
+          {
+            "subject_name": "Chemistry for Physical Science",
+            "course_code": "GCCYT122"
+          },
+          {
+            "subject_name": "Crop Production & Protection Technologies",
+            "course_code": "PCAGT205"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "UCEST206"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GBEST213"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GCEST103"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "UCHWT127"
+          },
+          {
+            "subject_name": "Internal Combustion Engines",
+            "course_code": "PCAUT205"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "UCHUT128"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "GYMAT201"
+          },
+          {
+            "subject_name": "Mechanics of Solids (Civil Engineering)",
+            "course_code": "PCCET205"
+          },
+          {
+            "subject_name": "Physics for Physical Science and Life Science",
+            "course_code": "GZPHT121"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "GCEST203"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Economics for Engineers",
+            "course_code": "UCHUT346"
+          },
+          {
+            "subject_name": "Engineering Ethics and Sustainable Development",
+            "course_code": "UCHUT347"
+          },
+          {
+            "subject_name": "Fluid Mechanics",
+            "course_code": "PCCET302"
+          },
+          {
+            "subject_name": "Introduction to Artificial Intelligence and Data Science",
+            "course_code": "GNEST305"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 3",
+            "course_code": "GYMAT301"
+          },
+          {
+            "subject_name": "Structural Analysis – I",
+            "course_code": "PCCET303"
+          },
+          {
+            "subject_name": "Surveying & Geomatics",
+            "course_code": "PBCET304"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Advanced Solid Mechanics",
+            "course_code": "PECET411"
+          },
+          {
+            "subject_name": "Architecture and Building Services",
+            "course_code": "PECET415"
+          },
+          {
+            "subject_name": "Cartography and GIS",
+            "course_code": "PECET414"
+          },
+          {
+            "subject_name": "Concrete Technology",
+            "course_code": "PECET412"
+          },
+          {
+            "subject_name": "Design of Concrete Structures",
+            "course_code": "PBCET404"
+          },
+          {
+            "subject_name": "Engineering Geology",
+            "course_code": "PECET416"
+          },
+          {
+            "subject_name": "Mathematics for Physical Science - 4",
+            "course_code": "GCMAT401"
+          },
+          {
+            "subject_name": "Mechanics of Fluid Flow",
+            "course_code": "PECET413"
+          },
+          {
+            "subject_name": "Numerical Methods for Engineers",
+            "course_code": "PECET417"
+          },
+          {
+            "subject_name": "Soil Mechanics",
+            "course_code": "PCCET402"
+          },
+          {
+            "subject_name": "Structural Analysis – II",
+            "course_code": "PCCET403"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Advanced Structural Analysis",
+            "course_code": "PECET521"
+          },
+          {
+            "subject_name": "Applied Hydrology and Climatology",
+            "course_code": "PECET526"
+          },
+          {
+            "subject_name": "Design of Prestressed Concrete",
+            "course_code": "PECET525"
+          },
+          {
+            "subject_name": "Disaster Management",
+            "course_code": "PECET524"
+          },
+          {
+            "subject_name": "Environmental Engineering",
+            "course_code": "PCCET503"
+          },
+          {
+            "subject_name": "Foundation Engineering",
+            "course_code": "PBCET504"
+          },
+          {
+            "subject_name": "Hydrology and Water Resources Engineering",
+            "course_code": "PCCET501"
+          },
+          {
+            "subject_name": "Modern Construction Technology",
+            "course_code": "PECET522"
+          },
+          {
+            "subject_name": "Open Channel Hydraulics",
+            "course_code": "PECET523"
+          },
+          {
+            "subject_name": "Optimization Techniques and Operational Research",
+            "course_code": "PECET528"
+          },
+          {
+            "subject_name": "Town Planning",
+            "course_code": "PECET527"
+          },
+          {
+            "subject_name": "Transportation Engineering",
+            "course_code": "PCCET502"
+          },
+          {
+            "subject_name": "Geotechnical Engineering-II",
+            "course_code": "CET305"
+          }
+        ]
+      },
+      "CSE": {
+        "S1": [
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "GXCYT122"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "GMEST103"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "UCHWT127"
+          },
+          {
+            "subject_name": "Introduction to Electrical and Electronics Engineering",
+            "course_code": "GXEST104"
+          },
+          {
+            "subject_name": "Mathematics for Information Science - 1",
+            "course_code": "GAMAT101"
+          },
+          {
+            "subject_name": "Personal and Professional Development",
+            "course_code": "UCHUT128"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "GAPHT121"
+          },
+          {
+            "subject_name": "Problem-Solving Strategies and Python Programming",
+            "course_code": "UCEST105"
+          },
+          {
+            "subject_name": "Skill Enhancement Course: Digital 101 (30 Hours NASSCOM)",
+            "course_code": "UCSEM129"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "GXCYT122"
+          },
+          {
+            "subject_name": "Discrete Mathematical Structures",
+            "course_code": "PCCST205"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "UCEST206"
+          },
+          {
+            "subject_name": "Foundations of Computing: From Hardware Essentials to Web Design",
+            "course_code": "GXEST203"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "UCHWT127"
+          },
+          {
+            "subject_name": "Mathematics for Information Science - 2",
+            "course_code": "GAMAT201"
+          },
+          {
+            "subject_name": "Personal and Professional Development",
+            "course_code": "UCHUT128"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "GAPHT121"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "GXEST204"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Data Structures and Algorithms",
+            "course_code": "PCCST303"
+          },
+          {
+            "subject_name": "Digital Electronics and Logic Design",
+            "course_code": "GAEST305"
+          },
+          {
+            "subject_name": "Economics for Engineers",
+            "course_code": "UCHUT346"
+          },
+          {
+            "subject_name": "Ethics and Sustainable Engineering",
+            "course_code": "UCHUT347"
+          },
+          {
+            "subject_name": "Mathematics for Computer and Information Science - 3",
+            "course_code": "GAMAT301"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PBCST304"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PEECT414"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PEEET419"
+          },
+          {
+            "subject_name": "Theory of Computation",
+            "course_code": "PCCST302"
+          },
+          {
+            "subject_name": "Theory of Computation",
+            "course_code": "PEEET414"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Coding Theory",
+            "course_code": "PECST414"
+          },
+          {
+            "subject_name": "Computational Geometry",
+            "course_code": "PECST418"
+          },
+          {
+            "subject_name": "Computer Organization and Architecture",
+            "course_code": "PBCST404"
+          },
+          {
+            "subject_name": "Cyber Ethics, Privacy and Legal Issues",
+            "course_code": "PECST419"
+          },
+          {
+            "subject_name": "Database Management Systems",
+            "course_code": "PCCST402"
+          },
+          {
+            "subject_name": "Functional Programming",
+            "course_code": "PECST413"
+          },
+          {
+            "subject_name": "Mathematics for Computer and Information Science - 4",
+            "course_code": "GAMAT401"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PBCST304"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PEECT414"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PEEET419"
+          },
+          {
+            "subject_name": "Operating Systems",
+            "course_code": "PCCST403"
+          },
+          {
+            "subject_name": "Pattern Recognition",
+            "course_code": "PECST412"
+          },
+          {
+            "subject_name": "Signals and Systems",
+            "course_code": "PCECT402"
+          },
+          {
+            "subject_name": "Signals and Systems",
+            "course_code": "PECST416"
+          },
+          {
+            "subject_name": "Soft Computing",
+            "course_code": "PECST417"
+          },
+          {
+            "subject_name": "Software Engineering",
+            "course_code": "PECST411"
+          },
+          {
+            "subject_name": "Theory of Computation",
+            "course_code": "PCCST302"
+          },
+          {
+            "subject_name": "Theory of Computation",
+            "course_code": "PEEET414"
+          },
+          {
+            "subject_name": "VLSI Design",
+            "course_code": "PECST415"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Advanced Java Programming",
+            "course_code": "PECST528"
+          },
+          {
+            "subject_name": "Artificial Intelligence",
+            "course_code": "PECST522"
+          },
+          {
+            "subject_name": "Computer Graphics & Multimedia",
+            "course_code": "PECST527"
+          },
+          {
+            "subject_name": "Computer Networks",
+            "course_code": "PCCST501"
+          },
+          {
+            "subject_name": "Data Analytics",
+            "course_code": "PECST523"
+          },
+          {
+            "subject_name": "Data Compression",
+            "course_code": "PECST524"
+          },
+          {
+            "subject_name": "Data Mining",
+            "course_code": "PECST525"
+          },
+          {
+            "subject_name": "Design and Analysis of Algorithms",
+            "course_code": "PCCST502"
+          },
+          {
+            "subject_name": "Digital Signal Processing",
+            "course_code": "PECST526"
+          },
+          {
+            "subject_name": "Machine Learning",
+            "course_code": "PCCST503"
+          },
+          {
+            "subject_name": "Microcontrollers",
+            "course_code": "PBCST504"
+          },
+          {
+            "subject_name": "Software Project Management",
+            "course_code": "PECST521"
+          }
+        ]
+      },
+      "ECE": {
+        "S1": [
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "UCEST105"
+          },
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "GXCYT122"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "GMEST103"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GBEST213"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GCEST103"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "UCHWT127"
+          },
+          {
+            "subject_name": "Introduction to Electrical and Electronics Engineering",
+            "course_code": "GXEST104"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "UCHUT128"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 1",
+            "course_code": "GYMAT101"
+          },
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "GBPHT121"
+          },
+          {
+            "subject_name": "Skill Enhancement Course: Digital 101 (30 Hours NASSCOM)",
+            "course_code": "UCSEM129"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "GXCYT122"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "UCEST206"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GBEST213"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GCEST103"
+          },
+          {
+            "subject_name": "Foundations of Computing: From Hardware Essentials to Web Design",
+            "course_code": "GXEST203"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "UCHWT127"
+          },
+          {
+            "subject_name": "IT Workshop",
+            "course_code": "GXESL208"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "UCHUT128"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "GYMAT201"
+          },
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "GBPHT121"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "GXEST204"
+          },
+          {
+            "subject_name": "Network Theory",
+            "course_code": "PCECT205"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Analog Circuits",
+            "course_code": "PCECT303"
+          },
+          {
+            "subject_name": "Economics for Engineers",
+            "course_code": "UCHUT346"
+          },
+          {
+            "subject_name": "Ethics and Sustainable Engineering",
+            "course_code": "UCHUT347"
+          },
+          {
+            "subject_name": "Introduction to Artificial Intelligence and Data Science",
+            "course_code": "GNEST305"
+          },
+          {
+            "subject_name": "Logic Circuit Design",
+            "course_code": "PBECT304"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 3",
+            "course_code": "GYMAT301"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PBCST304"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PEECT414"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PEEET419"
+          },
+          {
+            "subject_name": "Solid State Devices",
+            "course_code": "PCECT302"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Digital System Design",
+            "course_code": "PEECT415"
+          },
+          {
+            "subject_name": "Instrumentation",
+            "course_code": "PEECT411"
+          },
+          {
+            "subject_name": "Linear Integrated Circuits",
+            "course_code": "PCECT403"
+          },
+          {
+            "subject_name": "Machine Learning",
+            "course_code": "PEECT413"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science - 4",
+            "course_code": "GBMAT401"
+          },
+          {
+            "subject_name": "Microcontrollers",
+            "course_code": "PBECT404"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PBCST304"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PEECT414"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PEEET419"
+          },
+          {
+            "subject_name": "Power Electronics",
+            "course_code": "PEECT412"
+          },
+          {
+            "subject_name": "Signals and Systems",
+            "course_code": "PCECT402"
+          },
+          {
+            "subject_name": "Signals and Systems",
+            "course_code": "PECST416"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Analog and Digital Communication",
+            "course_code": "PCECT502"
+          },
+          {
+            "subject_name": "ARM Architecture and Programming",
+            "course_code": "PEECT524"
+          },
+          {
+            "subject_name": "ARM Architecture, Programming and Interfacing",
+            "course_code": "PEECT525"
+          },
+          {
+            "subject_name": "Biomedical Engineering",
+            "course_code": "PEECT521"
+          },
+          {
+            "subject_name": "Control Systems",
+            "course_code": "PCECT503"
+          },
+          {
+            "subject_name": "Data Structures",
+            "course_code": "PEECT522"
+          },
+          {
+            "subject_name": "Digital Signal Processing",
+            "course_code": "PBECT504"
+          },
+          {
+            "subject_name": "Electromagnetics",
+            "course_code": "PCECT501"
+          },
+          {
+            "subject_name": "Estimation and Detection",
+            "course_code": "PEECT527"
+          },
+          {
+            "subject_name": "High Speed Digital Design",
+            "course_code": "PEECT526"
+          },
+          {
+            "subject_name": "Sensors and Actuators",
+            "course_code": "PEECT523"
+          }
+        ]
+      },
+      "EEE": {
+        "S1": [
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "GXCYT122"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "GMEST103"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GBEST213"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GCEST103"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "UCHWT127"
+          },
+          {
+            "subject_name": "Introduction to Electrical and Electronics Engineering",
+            "course_code": "GXEST104"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 1",
+            "course_code": "GYMAT101"
+          },
+          {
+            "subject_name": "Personal and Professional Development",
+            "course_code": "UCHUT128"
+          },
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "GBPHT121"
+          },
+          {
+            "subject_name": "Problem-Solving Strategies and Python Programming",
+            "course_code": "UCEST105"
+          },
+          {
+            "subject_name": "Skill Enhancement Course: Digital 101 (30 Hours NASSCOM)",
+            "course_code": "UCSEM129"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "GXCYT122"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "UCEST206"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GBEST213"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GCEST103"
+          },
+          {
+            "subject_name": "Foundations of Computing: From Hardware Essentials to Web Design",
+            "course_code": "GXEST203"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "UCHWT127"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "GYMAT201"
+          },
+          {
+            "subject_name": "Personal and Professional Development",
+            "course_code": "UCHUT128"
+          },
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "GBPHT121"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "GXEST204"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Analog Electronics",
+            "course_code": "PBEET304"
+          },
+          {
+            "subject_name": "Circuits & Networks",
+            "course_code": "PCEET302"
+          },
+          {
+            "subject_name": "DC Machines & Transformers",
+            "course_code": "PCEET303"
+          },
+          {
+            "subject_name": "Economics for Engineers",
+            "course_code": "UCHUT346"
+          },
+          {
+            "subject_name": "Engineering Ethics and Sustainable Development",
+            "course_code": "UCHUT347"
+          },
+          {
+            "subject_name": "Introduction to Artificial Intelligence and Data Science",
+            "course_code": "GNEST305"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 3",
+            "course_code": "GYMAT301"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PBCST304"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PEECT414"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PEEET419"
+          },
+          {
+            "subject_name": "Theory of Computation",
+            "course_code": "PCCST302"
+          },
+          {
+            "subject_name": "Theory of Computation",
+            "course_code": "PEEET414"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Analog Integrated Circuits",
+            "course_code": "PEEET417"
+          },
+          {
+            "subject_name": "Computer Organization",
+            "course_code": "PEEET416"
+          },
+          {
+            "subject_name": "Digital Electronics",
+            "course_code": "PBEET404"
+          },
+          {
+            "subject_name": "Electronic Instrumentation",
+            "course_code": "PEEET411"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science - 4",
+            "course_code": "GBMAT401"
+          },
+          {
+            "subject_name": "Mathematics for Machine Learning",
+            "course_code": "PEEET413"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PBCST304"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PEECT414"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PEEET419"
+          },
+          {
+            "subject_name": "Power Electronics and Drives",
+            "course_code": "PCEET403"
+          },
+          {
+            "subject_name": "Renewable Energy Sources",
+            "course_code": "PEEET412"
+          },
+          {
+            "subject_name": "Synchronous & Induction Machines",
+            "course_code": "PCEET402"
+          },
+          {
+            "subject_name": "Theory of Computation",
+            "course_code": "PCCST302"
+          },
+          {
+            "subject_name": "Theory of Computation",
+            "course_code": "PEEET414"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Computer Network Systems",
+            "course_code": "PEEET528"
+          },
+          {
+            "subject_name": "Data Structures",
+            "course_code": "PEEET526"
+          },
+          {
+            "subject_name": "Digital System Design",
+            "course_code": "PEEET523"
+          },
+          {
+            "subject_name": "Electric Vehicles",
+            "course_code": "PEEET522"
+          },
+          {
+            "subject_name": "Electromagnetic Theory",
+            "course_code": "PCEET502"
+          },
+          {
+            "subject_name": "Energy Storage Systems",
+            "course_code": "PEEET521"
+          },
+          {
+            "subject_name": "Introduction to Machine Learning",
+            "course_code": "PEEET527"
+          },
+          {
+            "subject_name": "Microprocessors and Embedded Systems",
+            "course_code": "PBEET504"
+          },
+          {
+            "subject_name": "Power Generation, Transmission and Protection",
+            "course_code": "PCEET501"
+          },
+          {
+            "subject_name": "Signals and Systems",
+            "course_code": "PCEET503"
+          },
+          {
+            "subject_name": "Software Engineering",
+            "course_code": "PEEET524"
+          }
+        ]
+      },
+      "MECH": {
+        "S1": [
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "UCEST105"
+          },
+          {
+            "subject_name": "Chemistry for Physical Science",
+            "course_code": "GCCYT122"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GBEST213"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GCEST103"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "UCHWT127"
+          },
+          {
+            "subject_name": "Introduction to Mechanical Engineering & Civil Engineering",
+            "course_code": "GCEST104"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "UCHUT128"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 1",
+            "course_code": "GYMAT101"
+          },
+          {
+            "subject_name": "Physics for Physical Science and Life Science",
+            "course_code": "GZPHT121"
+          },
+          {
+            "subject_name": "Skill Enhancement Course: Digital 101 (30 Hours NASSCOM)",
+            "course_code": "UCSEM129"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Basic Electrical & Electronics Engineering",
+            "course_code": "GZEST204"
+          },
+          {
+            "subject_name": "Basic Ship Theory",
+            "course_code": "PCNST205"
+          },
+          {
+            "subject_name": "Chemistry for Physical Science",
+            "course_code": "GCCYT122"
+          },
+          {
+            "subject_name": "Crop Production & Protection Technologies",
+            "course_code": "PCAGT205"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "UCEST206"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GBEST213"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GCEST103"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "UCHWT127"
+          },
+          {
+            "subject_name": "Internal Combustion Engines",
+            "course_code": "PCAUT205"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "UCHUT128"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "GYMAT201"
+          },
+          {
+            "subject_name": "Mechanics of Solids (Civil Engineering)",
+            "course_code": "PCCET205"
+          },
+          {
+            "subject_name": "Physics for Physical Science and Life Science",
+            "course_code": "GZPHT121"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "GCEST203"
+          },
+          {
+            "subject_name": "Material Science and Engineering",
+            "course_code": "PCMET205"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Computer Aided Machine Drawing & Modelling",
+            "course_code": "PCMEL307"
+          },
+          {
+            "subject_name": "Economics for Engineers",
+            "course_code": "UCHUT346"
+          },
+          {
+            "subject_name": "Engineering Ethics and Sustainable Development",
+            "course_code": "UCHUT347"
+          },
+          {
+            "subject_name": "Fluid Mechanics and Machinery",
+            "course_code": "PCMET303"
+          },
+          {
+            "subject_name": "Introduction to Artificial Intelligence and Data Science",
+            "course_code": "GNEST305"
+          },
+          {
+            "subject_name": "Manufacturing Processes",
+            "course_code": "PBMET304"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 3",
+            "course_code": "GYMAT301"
+          },
+          {
+            "subject_name": "Mechanics of Solids",
+            "course_code": "PCMET302"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Advanced Mechanics of Solids",
+            "course_code": "PEMET415"
+          },
+          {
+            "subject_name": "Advanced Welding Technology",
+            "course_code": "PEMET416"
+          },
+          {
+            "subject_name": "Components of Intelligent Systems",
+            "course_code": "PEMET414"
+          },
+          {
+            "subject_name": "Composite Materials",
+            "course_code": "PEMET413"
+          },
+          {
+            "subject_name": "Engineering Thermodynamics",
+            "course_code": "PCMET403"
+          },
+          {
+            "subject_name": "Machine Tools and Metrology",
+            "course_code": "PCMET402"
+          },
+          {
+            "subject_name": "Mathematics for Physical Science - 4",
+            "course_code": "GCMAT401"
+          },
+          {
+            "subject_name": "Mechanics of Machinery",
+            "course_code": "PBMET404"
+          },
+          {
+            "subject_name": "Nuclear Energy",
+            "course_code": "PEMET412"
+          },
+          {
+            "subject_name": "Technology Management",
+            "course_code": "PEMET417"
+          },
+          {
+            "subject_name": "Turbo Machinery",
+            "course_code": "PEMET411"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Additive Manufacturing",
+            "course_code": "PEMET524"
+          },
+          {
+            "subject_name": "Advanced Manufacturing Engineering",
+            "course_code": "PCMET502"
+          },
+          {
+            "subject_name": "Computational Fluid Dynamics",
+            "course_code": "PEMET521"
+          },
+          {
+            "subject_name": "Computer Aided Design and Analysis",
+            "course_code": "PEMET523"
+          },
+          {
+            "subject_name": "Design for Manufacture and Assembly",
+            "course_code": "PEMET522"
+          },
+          {
+            "subject_name": "Dynamics of Machinery",
+            "course_code": "PCMET501"
+          },
+          {
+            "subject_name": "Energy Economics and Policy",
+            "course_code": "PEMET526"
+          },
+          {
+            "subject_name": "Heat and Mass Transfer",
+            "course_code": "PCMET503"
+          },
+          {
+            "subject_name": "Human Resources Management",
+            "course_code": "PEMET527"
+          },
+          {
+            "subject_name": "Instrumentation and Control Systems",
+            "course_code": "PEMET525"
+          },
+          {
+            "subject_name": "Management for Engineers",
+            "course_code": "PBMET504"
+          },
+          {
+            "subject_name": "Operations Research",
+            "course_code": "PEMET528"
+          }
+        ]
+      },
+      "CHEMICAL": {
+        "S1": [
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "UCEST105"
+          },
+          {
+            "subject_name": "Chemistry for Physical Science",
+            "course_code": "GCCYT122"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GBEST213"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GCEST103"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "UCHWT127"
+          },
+          {
+            "subject_name": "Introduction to Mechanical Engineering & Civil Engineering",
+            "course_code": "GCEST104"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "UCHUT128"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 1",
+            "course_code": "GYMAT101"
+          },
+          {
+            "subject_name": "Physics for Physical Science and Life Science",
+            "course_code": "GZPHT121"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Basic Electrical & Electronics Engineering",
+            "course_code": "GZEST204"
+          },
+          {
+            "subject_name": "Chemical Process Calculations",
+            "course_code": "PCCHT206"
+          },
+          {
+            "subject_name": "Chemistry for Physical Science",
+            "course_code": "GCCYT122"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "UCEST206"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GBEST213"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "GCEST103"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "UCHWT127"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "UCHUT128"
+          },
+          {
+            "subject_name": "Material Science",
+            "course_code": "PCCHT205"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "GYMAT201"
+          },
+          {
+            "subject_name": "Physics for Physical Science and Life Science",
+            "course_code": "GZPHT121"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Chemical Engineering Thermodynamics - I",
+            "course_code": "PCCHT303"
+          },
+          {
+            "subject_name": "Economics for Engineers",
+            "course_code": "UCHUT346"
+          },
+          {
+            "subject_name": "Engineering Ethics and Sustainable Development",
+            "course_code": "UCHUT347"
+          },
+          {
+            "subject_name": "Fluid Mechanics",
+            "course_code": "PCCET302"
+          },
+          {
+            "subject_name": "Introduction to Artificial Intelligence and Data Science",
+            "course_code": "GNEST305"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 3",
+            "course_code": "GYMAT301"
+          },
+          {
+            "subject_name": "Mechanical Operations",
+            "course_code": "PBCHT304"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Chemical Engineering Thermodynamics - II",
+            "course_code": "PECHT413"
+          },
+          {
+            "subject_name": "Chemical Reaction Engineering - I",
+            "course_code": "PCCHT403"
+          },
+          {
+            "subject_name": "Environmental Engineering",
+            "course_code": "PECHT412"
+          },
+          {
+            "subject_name": "Heat Transfer",
+            "course_code": "PCCHT402"
+          },
+          {
+            "subject_name": "Instrumentation and Process Control",
+            "course_code": "PECHT411"
+          },
+          {
+            "subject_name": "Mass Transfer - I",
+            "course_code": "PBCHT404"
+          },
+          {
+            "subject_name": "Mathematics for Physical Science - 4",
+            "course_code": "GCMAT401"
+          },
+          {
+            "subject_name": "Numerical Methods for Chemical Engineers",
+            "course_code": "PECHT414"
+          }
+        ]
+      },
+      "AIDS": {
+        "S1": [
+          {
+            "subject_name": "Mathematics for Information Science-1",
+            "course_code": "GAMAT101"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "GAPHT121"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "GMEST103"
+          },
+          {
+            "subject_name": "Introduction to Electrical and Electronics Engineering",
+            "course_code": "GXEST104"
+          },
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "UCEST105"
+          },
+          {
+            "subject_name": "Skill Enhancement Course: Digital 101 (30 Hours NASSCOM)",
+            "course_code": "UCSEM129"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Mathematics for Information Science-2",
+            "course_code": "GAMAT201"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "GAPHT121"
+          },
+          {
+            "subject_name": "Chemistry for Information/Electrical Science",
+            "course_code": "GXCYT122"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "GXEST204"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "UCEST206"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Mathematics for Information Science-3",
+            "course_code": "GAMAT301"
+          },
+          {
+            "subject_name": "Data Structures and Algorithms",
+            "course_code": "PCCST303"
+          }
+        ]
+      },
+      "CSAIML": {
+        "S1": [
+          {
+            "subject_name": "Mathematics for Information Science-1",
+            "course_code": "GAMAT101"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "GAPHT121"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "GMEST103"
+          },
+          {
+            "subject_name": "Introduction to Electrical and Electronics Engineering",
+            "course_code": "GXEST104"
+          },
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "UCEST105"
+          },
+          {
+            "subject_name": "Skill Enhancement Course: Digital 101 (30 Hours NASSCOM)",
+            "course_code": "UCSEM129"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Mathematics for Information Science-2",
+            "course_code": "GAMAT201"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "GAPHT121"
+          },
+          {
+            "subject_name": "Chemistry for Information/Electrical Science",
+            "course_code": "GXCYT122"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "GXEST204"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "UCEST206"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Mathematics for Information Science-3",
+            "course_code": "GAMAT301"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PBCST304"
+          },
+          {
+            "subject_name": "Data Structures and Algorithms",
+            "course_code": "PCCST303"
+          }
+        ]
+      },
+      "CSDS": {
+        "S1": [
+          {
+            "subject_name": "Mathematics for Information Science-1",
+            "course_code": "GAMAT101"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "GAPHT121"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "GMEST103"
+          },
+          {
+            "subject_name": "Introduction to Electrical and Electronics Engineering",
+            "course_code": "GXEST104"
+          },
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "UCEST105"
+          },
+          {
+            "subject_name": "Skill Enhancement Course: Digital 101 (30 Hours NASSCOM)",
+            "course_code": "UCSEM129"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Mathematics for Information Science-2",
+            "course_code": "GAMAT201"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "GAPHT121"
+          },
+          {
+            "subject_name": "Chemistry for Information/Electrical Science",
+            "course_code": "GXCYT122"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "UCEST206"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Mathematics for Information Science-3",
+            "course_code": "GAMAT301"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "PBCST304"
+          },
+          {
+            "subject_name": "Theory of Computation",
+            "course_code": "PCCST302"
+          },
+          {
+            "subject_name": "Data Structures and Algorithms",
+            "course_code": "PCCST303"
+          }
+        ]
+      },
+      "EI": {
+        "S1": [
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "GBPHT121"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "GMEST103"
+          },
+          {
+            "subject_name": "Introduction to Electrical and Electronics Engineering",
+            "course_code": "GXEST104"
+          },
+          {
+            "subject_name": "Mathematics for Science-1",
+            "course_code": "GYMAT101"
+          },
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "UCEST105"
+          },
+          {
+            "subject_name": "Skill Enhancement Course: Digital 101 (30 Hours NASSCOM)",
+            "course_code": "UCSEM129"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Chemistry for Information/Electrical Science",
+            "course_code": "GXCYT122"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "GXEST204"
+          },
+          {
+            "subject_name": "Mathematics for Science-2",
+            "course_code": "GYMAT201"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "UCEST206"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Mathematics for Science-3",
+            "course_code": "GYMAT301"
+          }
+        ]
+      },
+      "IT": {
+        "S1": [
+          {
+            "subject_name": "Mathematics for Information Science-1",
+            "course_code": "GAMAT101"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "GAPHT121"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "GMEST103"
+          },
+          {
+            "subject_name": "Introduction to Electrical and Electronics Engineering",
+            "course_code": "GXEST104"
+          },
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "UCEST105"
+          },
+          {
+            "subject_name": "Skill Enhancement Course: Digital 101 (30 Hours NASSCOM)",
+            "course_code": "UCSEM129"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Mathematics for Information Science-2",
+            "course_code": "GAMAT201"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "GAPHT121"
+          },
+          {
+            "subject_name": "Chemistry for Information/Electrical Science",
+            "course_code": "GXCYT122"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "GXEST204"
+          },
+          {
+            "subject_name": "Discrete Mathematical Structures",
+            "course_code": "PCITT205"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "UCEST206"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Mathematics for Information Science-3",
+            "course_code": "GAMAT301"
+          }
+        ]
+      }
+    },
+    "2019": {
+      "CIVIL": {
+        "S2": [
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "MAT102"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CYT100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "EST100"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "EST102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "EST110"
+          },
+          {
+            "subject_name": "Basics of Civil and Mechanical Engineering",
+            "course_code": "EST120"
+          },
+          {
+            "subject_name": "Basics of Electrical and Electronics Engineering",
+            "course_code": "EST130"
+          },
+          {
+            "subject_name": "Professional Communication",
+            "course_code": "HUN102"
+          },
+          {
+            "subject_name": "Engineering Physics B",
+            "course_code": "PHT110"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Advanced Structural Analysis",
+            "course_code": "CET312"
+          },
+          {
+            "subject_name": "Applied Hydrology and Climatology",
+            "course_code": "CET362"
+          },
+          {
+            "subject_name": "Applied Hydrology and Climatology",
+            "course_code": "CET435"
+          },
+          {
+            "subject_name": "Design of Prestressed Concrete",
+            "course_code": "CET413"
+          },
+          {
+            "subject_name": "Disaster Management",
+            "course_code": "CET415"
+          },
+          {
+            "subject_name": "Disaster Management",
+            "course_code": "MCN301"
+          },
+          {
+            "subject_name": "Environmental Engineering",
+            "course_code": "CET309"
+          },
+          {
+            "subject_name": "Foundation Engineering",
+            "course_code": "CET303"
+          },
+          {
+            "subject_name": "Hydrology and Water Resources Engineering",
+            "course_code": "CET301"
+          },
+          {
+            "subject_name": "Modern Construction Technology",
+            "course_code": "CET322"
+          },
+          {
+            "subject_name": "Modern Construction Technology",
+            "course_code": "CET423"
+          },
+          {
+            "subject_name": "Open Channel Hydraulics",
+            "course_code": "CET332"
+          },
+          {
+            "subject_name": "Optimization Techniques and Operational Research",
+            "course_code": "CET342"
+          },
+          {
+            "subject_name": "Optimization Techniques and Operational Research",
+            "course_code": "CET463"
+          },
+          {
+            "subject_name": "Town Planning",
+            "course_code": "CET352"
+          },
+          {
+            "subject_name": "Town Planning",
+            "course_code": "CET443"
+          },
+          {
+            "subject_name": "Transportation Engineering",
+            "course_code": "CET305"
+          },
+          {
+            "subject_name": "Hydrology And Water Resources Engineering",
+            "course_code": "CET307"
+          }
+        ],
+        "S1": [
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CYT100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "EST100"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "EST110"
+          },
+          {
+            "subject_name": "Basics of Civil and Mechanical Engineering",
+            "course_code": "EST120"
+          },
+          {
+            "subject_name": "Basics of Electrical and Electronics Engineering",
+            "course_code": "EST130"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HUN101"
+          },
+          {
+            "subject_name": "Linear Algebra and Calculus",
+            "course_code": "MAT101"
+          },
+          {
+            "subject_name": "Engineering Physics B",
+            "course_code": "PHT110"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Mechanics Of Solids",
+            "course_code": "CET201"
+          },
+          {
+            "subject_name": "Fluid Mechanics And Hydraulics",
+            "course_code": "CET203"
+          },
+          {
+            "subject_name": "Surveying And Geomatics",
+            "course_code": "CET205"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "EST200"
+          },
+          {
+            "subject_name": "Professional Ethics",
+            "course_code": "HUT200"
+          },
+          {
+            "subject_name": "Partial Differential Equation And Complex Analysis",
+            "course_code": "MAT201"
+          },
+          {
+            "subject_name": "Sustainable Engineering",
+            "course_code": "MCN201"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Engineering Geology",
+            "course_code": "CET202"
+          },
+          {
+            "subject_name": "Geotechnical Engineering I",
+            "course_code": "CET204"
+          },
+          {
+            "subject_name": "Transportation Engineering",
+            "course_code": "CET206"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "EST200"
+          },
+          {
+            "subject_name": "Professional Ethics",
+            "course_code": "HUT200"
+          },
+          {
+            "subject_name": "Probability Statistics And Numerical Methods",
+            "course_code": "MAT202"
+          },
+          {
+            "subject_name": "Constitution of India",
+            "course_code": "MCN202"
+          }
+        ],
+        "S6": [
+          {
+            "subject_name": "Structural Analysis II",
+            "course_code": "CET302"
+          },
+          {
+            "subject_name": "Environmental Engineering",
+            "course_code": "CET304"
+          },
+          {
+            "subject_name": "Design Of Hydraulic Structures",
+            "course_code": "CET306"
+          },
+          {
+            "subject_name": "Advanced Concrete Technology",
+            "course_code": "CET352"
+          },
+          {
+            "subject_name": "Environmental Impact Assessment",
+            "course_code": "CET362"
+          },
+          {
+            "subject_name": "Industrial Economics and Foreign Trade",
+            "course_code": "HUT300"
+          }
+        ],
+        "S7": [
+          {
+            "subject_name": "Design Of Steel Structures",
+            "course_code": "CET401"
+          },
+          {
+            "subject_name": "Environmental Impact Assessment",
+            "course_code": "CET415"
+          },
+          {
+            "subject_name": "Ground Improvement Techniques",
+            "course_code": "CET423"
+          },
+          {
+            "subject_name": "Natural Disasters And Mitigation",
+            "course_code": "CET445"
+          }
+        ]
+      },
+      "CSE": {
+        "S4": [
+          {
+            "subject_name": "Database Management Systems",
+            "course_code": "CST204"
+          },
+          {
+            "subject_name": "Computer Organisation and Architecture",
+            "course_code": "CST202"
+          },
+          {
+            "subject_name": "Operating Systems",
+            "course_code": "CST206"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "EST200"
+          },
+          {
+            "subject_name": "Professional Ethics",
+            "course_code": "HUT200"
+          },
+          {
+            "subject_name": "Graph Theory",
+            "course_code": "MAT206"
+          },
+          {
+            "subject_name": "Constitution of India",
+            "course_code": "MCN202"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Advanced Java Programming",
+            "course_code": "CST383"
+          },
+          {
+            "subject_name": "Artificial Intelligence",
+            "course_code": "CST401"
+          },
+          {
+            "subject_name": "Computer Graphics & Multimedia",
+            "course_code": "CST304"
+          },
+          {
+            "subject_name": "Computer Networks",
+            "course_code": "CST303"
+          },
+          {
+            "subject_name": "Data Analytics",
+            "course_code": "CST325"
+          },
+          {
+            "subject_name": "Data Compression",
+            "course_code": "CST443"
+          },
+          {
+            "subject_name": "Data Mining",
+            "course_code": "CST362"
+          },
+          {
+            "subject_name": "Design and Analysis of Algorithms",
+            "course_code": "CST306"
+          },
+          {
+            "subject_name": "Digital Signal Processing",
+            "course_code": "CST352"
+          },
+          {
+            "subject_name": "Formal Languages and Automata Theory",
+            "course_code": "CST301"
+          },
+          {
+            "subject_name": "Machine Learning",
+            "course_code": "CST312"
+          },
+          {
+            "subject_name": "Machine Learning",
+            "course_code": "CST413"
+          },
+          {
+            "subject_name": "Management of Software Systems",
+            "course_code": "CST309"
+          },
+          {
+            "subject_name": "Microcontrollers",
+            "course_code": "CST307"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "ECT303"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "EET303"
+          },
+          {
+            "subject_name": "Software Project Management",
+            "course_code": "CST321"
+          },
+          {
+            "subject_name": "System Software",
+            "course_code": "CST305"
+          },
+          {
+            "subject_name": "Disaster Management",
+            "course_code": "MCN301"
+          }
+        ],
+        "S6": [
+          {
+            "subject_name": "Algorithm Analysis and Design",
+            "course_code": "CST306"
+          },
+          {
+            "subject_name": "Compiler Design",
+            "course_code": "CST302"
+          },
+          {
+            "subject_name": "Computer Graphics and Image Processing",
+            "course_code": "CST304"
+          },
+          {
+            "subject_name": "Data Analytics",
+            "course_code": "CST322"
+          },
+          {
+            "subject_name": "Programming in Python",
+            "course_code": "CST362"
+          },
+          {
+            "subject_name": "Industrial Economics and Foreign Trade",
+            "course_code": "HUT300"
+          }
+        ],
+        "S7": [
+          {
+            "subject_name": "Artificial Intelligence",
+            "course_code": "CST401"
+          },
+          {
+            "subject_name": "Cryptography and Network Security",
+            "course_code": "CST405"
+          },
+          {
+            "subject_name": "Distributed Computing",
+            "course_code": "CST403"
+          },
+          {
+            "subject_name": "Cloud Computing",
+            "course_code": "CST423"
+          },
+          {
+            "subject_name": "Security in Computing",
+            "course_code": "CST433"
+          },
+          {
+            "subject_name": "Web Programming",
+            "course_code": "CST463"
+          },
+          {
+            "subject_name": "Natural Language Processing",
+            "course_code": "CST473"
+          }
+        ],
+        "S8": [
+          {
+            "subject_name": "Data Mining and Warehousing",
+            "course_code": "CST402"
+          },
+          {
+            "subject_name": "Embedded Systems",
+            "course_code": "CST404"
+          }
+        ],
+        "S1": [
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CYT100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "EST100"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "EST110"
+          },
+          {
+            "subject_name": "Basics of Civil and Mechanical Engineering",
+            "course_code": "EST120"
+          },
+          {
+            "subject_name": "Basics of Electrical and Electronics Engineering",
+            "course_code": "EST130"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HUN101"
+          },
+          {
+            "subject_name": "Linear Algebra and Calculus",
+            "course_code": "MAT101"
+          },
+          {
+            "subject_name": "Engineering Physics A",
+            "course_code": "PHT100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CYT100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "EST100"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "EST102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "EST110"
+          },
+          {
+            "subject_name": "Basics of Civil and Mechanical Engineering",
+            "course_code": "EST120"
+          },
+          {
+            "subject_name": "Basics of Electrical and Electronics Engineering",
+            "course_code": "EST130"
+          },
+          {
+            "subject_name": "Professional Communication",
+            "course_code": "HUN102"
+          },
+          {
+            "subject_name": "Vector Calculus Differential Equations and Transforms",
+            "course_code": "MAT102"
+          },
+          {
+            "subject_name": "Engineering Physics A",
+            "course_code": "PHT100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Data Structures",
+            "course_code": "CST201"
+          },
+          {
+            "subject_name": "Logic System Design",
+            "course_code": "CST203"
+          },
+          {
+            "subject_name": "Object Oriented Programming Using Java",
+            "course_code": "CST205"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "EST200"
+          },
+          {
+            "subject_name": "Professional Ethics",
+            "course_code": "HUT200"
+          },
+          {
+            "subject_name": "Discrete Mathematical Structures",
+            "course_code": "MAT203"
+          },
+          {
+            "subject_name": "Sustainable Engineering",
+            "course_code": "MCN201"
+          }
+        ]
+      },
+      "ECE": {
+        "S2": [
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "MAT102"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CYT100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "EST100"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "EST102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "EST110"
+          },
+          {
+            "subject_name": "Basics of Civil and Mechanical Engineering",
+            "course_code": "EST120"
+          },
+          {
+            "subject_name": "Basics of Electrical and Electronics Engineering",
+            "course_code": "EST130"
+          },
+          {
+            "subject_name": "Professional Communication",
+            "course_code": "HUN102"
+          },
+          {
+            "subject_name": "Engineering Physics A",
+            "course_code": "PHT100"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Analog and Digital Communication",
+            "course_code": "ECT305"
+          },
+          {
+            "subject_name": "ARM Architecture and Programming",
+            "course_code": "ECT352"
+          },
+          {
+            "subject_name": "ARM Architecture and Programming",
+            "course_code": "ECT415"
+          },
+          {
+            "subject_name": "Biomedical Engineering",
+            "course_code": "ECT425"
+          },
+          {
+            "subject_name": "Control Systems",
+            "course_code": "ECT307"
+          },
+          {
+            "subject_name": "Data Structures",
+            "course_code": "CST206"
+          },
+          {
+            "subject_name": "Data Structures",
+            "course_code": "ECT206"
+          },
+          {
+            "subject_name": "Digital Communication",
+            "course_code": "ECT301"
+          },
+          {
+            "subject_name": "Digital Signal Processing",
+            "course_code": "ECT303"
+          },
+          {
+            "subject_name": "Estimation and Detection",
+            "course_code": "ECT473"
+          },
+          {
+            "subject_name": "High Speed Digital Design",
+            "course_code": "ECT465"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "CST307"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "EET303"
+          },
+          {
+            "subject_name": "Sensors and Actuators",
+            "course_code": "ECT342"
+          },
+          {
+            "subject_name": "Sensors and Actuators",
+            "course_code": "ECT453"
+          },
+          {
+            "subject_name": "Industrial Economics And Foreign Trade",
+            "course_code": "HUT300"
+          },
+          {
+            "subject_name": "Management For Engineers",
+            "course_code": "HUT310"
+          },
+          {
+            "subject_name": "Disaster Management",
+            "course_code": "MCN301"
+          }
+        ],
+        "S6": [
+          {
+            "subject_name": "Control Systems",
+            "course_code": "ECT307"
+          },
+          {
+            "subject_name": "Control Systems",
+            "course_code": "EET302"
+          },
+          {
+            "subject_name": "Electromagnetics",
+            "course_code": "ECT302"
+          },
+          {
+            "subject_name": "VLSI Design",
+            "course_code": "ECT304"
+          },
+          {
+            "subject_name": "Information Theory And Coding",
+            "course_code": "ECT306"
+          },
+          {
+            "subject_name": "Power Electronics",
+            "course_code": "ECT322"
+          },
+          {
+            "subject_name": "Digital Image Processing",
+            "course_code": "ECT352"
+          },
+          {
+            "subject_name": "Industrial Economics and Foreign Trade",
+            "course_code": "HUT300"
+          },
+          {
+            "subject_name": "Management For Engineers",
+            "course_code": "HUT310"
+          }
+        ],
+        "S7": [
+          {
+            "subject_name": "Microwaves and Antennas",
+            "course_code": "ECT401"
+          },
+          {
+            "subject_name": "Optical Fiber Communication",
+            "course_code": "ECT413"
+          },
+          {
+            "subject_name": "Computer Networks",
+            "course_code": "ECT423"
+          }
+        ],
+        "S1": [
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CYT100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "EST100"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "EST110"
+          },
+          {
+            "subject_name": "Basics of Civil and Mechanical Engineering",
+            "course_code": "EST120"
+          },
+          {
+            "subject_name": "Basics of Electrical and Electronics Engineering",
+            "course_code": "EST130"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HUN101"
+          },
+          {
+            "subject_name": "Linear Algebra and Calculus",
+            "course_code": "MAT101"
+          },
+          {
+            "subject_name": "Engineering Physics A",
+            "course_code": "PHT100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Solid State Devices",
+            "course_code": "ECT201"
+          },
+          {
+            "subject_name": "Logic Circuit Design",
+            "course_code": "ECT203"
+          },
+          {
+            "subject_name": "Network Theory",
+            "course_code": "ECT205"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "EST200"
+          },
+          {
+            "subject_name": "Professional Ethics",
+            "course_code": "HUT200"
+          },
+          {
+            "subject_name": "Partial Differential Equation And Complex Analysis",
+            "course_code": "MAT201"
+          },
+          {
+            "subject_name": "Sustainable Engineering",
+            "course_code": "MCN201"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Analog Circuits",
+            "course_code": "ECT202"
+          },
+          {
+            "subject_name": "Signals And Systems",
+            "course_code": "ECT204"
+          },
+          {
+            "subject_name": "Computer Architecture And Microcontrollers",
+            "course_code": "ECT206"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "EST200"
+          },
+          {
+            "subject_name": "Professional Ethics",
+            "course_code": "HUT200"
+          },
+          {
+            "subject_name": "Probability Random Process And Numerical Methods",
+            "course_code": "MAT204"
+          },
+          {
+            "subject_name": "Constitution of India",
+            "course_code": "MCN202"
+          }
+        ]
+      },
+      "EEE": {
+        "S2": [
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "MAT102"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CYT100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "EST100"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "EST102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "EST110"
+          },
+          {
+            "subject_name": "Basics of Civil and Mechanical Engineering",
+            "course_code": "EST120"
+          },
+          {
+            "subject_name": "Basics of Electrical and Electronics Engineering",
+            "course_code": "EST130"
+          },
+          {
+            "subject_name": "Professional Communication",
+            "course_code": "HUN102"
+          },
+          {
+            "subject_name": "Engineering Physics A",
+            "course_code": "PHT100"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Computer Network Systems",
+            "course_code": "CST303"
+          },
+          {
+            "subject_name": "Data Structures",
+            "course_code": "CST206"
+          },
+          {
+            "subject_name": "Digital System Design",
+            "course_code": "EET312"
+          },
+          {
+            "subject_name": "Electric Vehicles",
+            "course_code": "EET415"
+          },
+          {
+            "subject_name": "Electromagnetic Theory",
+            "course_code": "EET203"
+          },
+          {
+            "subject_name": "Energy Storage Systems",
+            "course_code": "EET333"
+          },
+          {
+            "subject_name": "Energy Storage Systems",
+            "course_code": "EET445"
+          },
+          {
+            "subject_name": "Introduction to Machine Learning",
+            "course_code": "CST312"
+          },
+          {
+            "subject_name": "Introduction to Machine Learning",
+            "course_code": "CST413"
+          },
+          {
+            "subject_name": "Microprocessors and Embedded Systems",
+            "course_code": "EET307"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "CST307"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "ECT303"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "EET303"
+          },
+          {
+            "subject_name": "Power Generation Transmission and Protection",
+            "course_code": "EET301"
+          },
+          {
+            "subject_name": "Signals and Systems",
+            "course_code": "EET305"
+          },
+          {
+            "subject_name": "Software Engineering",
+            "course_code": "CST309"
+          },
+          {
+            "subject_name": "Industrial Economics And Foreign Trade",
+            "course_code": "HUT300"
+          },
+          {
+            "subject_name": "Management For Engineers",
+            "course_code": "HUT310"
+          },
+          {
+            "subject_name": "Disaster Management",
+            "course_code": "MCN301"
+          }
+        ],
+        "S6": [
+          {
+            "subject_name": "Control Systems",
+            "course_code": "ECT307"
+          },
+          {
+            "subject_name": "Control Systems",
+            "course_code": "EET302"
+          },
+          {
+            "subject_name": "Power Electronics",
+            "course_code": "EET304"
+          },
+          {
+            "subject_name": "Power Electronics",
+            "course_code": "EET306"
+          },
+          {
+            "subject_name": "Biomedical Instrumentation",
+            "course_code": "EET312"
+          },
+          {
+            "subject_name": "Industrial Economics and Foreign Trade",
+            "course_code": "HUT300"
+          },
+          {
+            "subject_name": "Management For Engineers",
+            "course_code": "HUT310"
+          }
+        ],
+        "S7": [
+          {
+            "subject_name": "Power System Analysis",
+            "course_code": "EET401"
+          },
+          {
+            "subject_name": "Electric Drives",
+            "course_code": "EET413"
+          },
+          {
+            "subject_name": "Illumination Technology",
+            "course_code": "EET463"
+          }
+        ],
+        "S1": [
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CYT100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "EST100"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "EST110"
+          },
+          {
+            "subject_name": "Basics of Civil and Mechanical Engineering",
+            "course_code": "EST120"
+          },
+          {
+            "subject_name": "Basics of Electrical and Electronics Engineering",
+            "course_code": "EST130"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HUN101"
+          },
+          {
+            "subject_name": "Linear Algebra and Calculus",
+            "course_code": "MAT101"
+          },
+          {
+            "subject_name": "Engineering Physics A",
+            "course_code": "PHT100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Circuits And Networks",
+            "course_code": "EET201"
+          },
+          {
+            "subject_name": "Measurements And Instrumentation",
+            "course_code": "EET203"
+          },
+          {
+            "subject_name": "Analog Electronics",
+            "course_code": "EET205"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "EST200"
+          },
+          {
+            "subject_name": "Professional Ethics",
+            "course_code": "HUT200"
+          },
+          {
+            "subject_name": "Partial Differential Equation And Complex Analysis",
+            "course_code": "MAT201"
+          },
+          {
+            "subject_name": "Sustainable Engineering",
+            "course_code": "MCN201"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "DC Machines And Transformers",
+            "course_code": "EET202"
+          },
+          {
+            "subject_name": "Electromagnetic Theory",
+            "course_code": "EET204"
+          },
+          {
+            "subject_name": "Digital Electronics",
+            "course_code": "EET206"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "EST200"
+          },
+          {
+            "subject_name": "Professional Ethics",
+            "course_code": "HUT200"
+          },
+          {
+            "subject_name": "Probability Random Process And Numerical Methods",
+            "course_code": "MAT204"
+          },
+          {
+            "subject_name": "Constitution of India",
+            "course_code": "MCN202"
+          }
+        ]
+      },
+      "MECH": {
+        "S2": [
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "MAT102"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CYT100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "EST100"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "EST102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "EST110"
+          },
+          {
+            "subject_name": "Basics of Civil and Mechanical Engineering",
+            "course_code": "EST120"
+          },
+          {
+            "subject_name": "Basics of Electrical and Electronics Engineering",
+            "course_code": "EST130"
+          },
+          {
+            "subject_name": "Professional Communication",
+            "course_code": "HUN102"
+          },
+          {
+            "subject_name": "Engineering Physics B",
+            "course_code": "PHT110"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Additive Manufacturing",
+            "course_code": "MET342"
+          },
+          {
+            "subject_name": "Additive Manufacturing",
+            "course_code": "MET445"
+          },
+          {
+            "subject_name": "Advanced Manufacturing Engineering",
+            "course_code": "MET303"
+          },
+          {
+            "subject_name": "Computational Fluid Dynamics",
+            "course_code": "MET312"
+          },
+          {
+            "subject_name": "Computational Fluid Dynamics",
+            "course_code": "MET413"
+          },
+          {
+            "subject_name": "Computer Aided Design and Analysis",
+            "course_code": "MET332"
+          },
+          {
+            "subject_name": "Computer Aided Design and Analysis",
+            "course_code": "MET435"
+          },
+          {
+            "subject_name": "Design for Manufacture and Assembly",
+            "course_code": "MET322"
+          },
+          {
+            "subject_name": "Design for Manufacture and Assembly",
+            "course_code": "MET425"
+          },
+          {
+            "subject_name": "Dynamics of Machinery",
+            "course_code": "MET301"
+          },
+          {
+            "subject_name": "Energy Economics and Policy",
+            "course_code": "MET362"
+          },
+          {
+            "subject_name": "Energy Economics and Policy",
+            "course_code": "MET465"
+          },
+          {
+            "subject_name": "Heat and Mass Transfer",
+            "course_code": "MET302"
+          },
+          {
+            "subject_name": "Human Resources Management",
+            "course_code": "HUT302"
+          },
+          {
+            "subject_name": "Human Resources Management",
+            "course_code": "MET372"
+          },
+          {
+            "subject_name": "Instrumentation and Control Systems",
+            "course_code": "MET352"
+          },
+          {
+            "subject_name": "Instrumentation and Control Systems",
+            "course_code": "MET455"
+          },
+          {
+            "subject_name": "Management for Engineers",
+            "course_code": "HUT300"
+          },
+          {
+            "subject_name": "Management for Engineers",
+            "course_code": "HUT310"
+          },
+          {
+            "subject_name": "Operations Research",
+            "course_code": "MET382"
+          },
+          {
+            "subject_name": "Operations Research",
+            "course_code": "MET415"
+          },
+          {
+            "subject_name": "Disaster Management",
+            "course_code": "MCN301"
+          },
+          {
+            "subject_name": "Industrial And Systems Engineering",
+            "course_code": "MET305"
+          },
+          {
+            "subject_name": "Machine Tools And Metrology",
+            "course_code": "MET307"
+          }
+        ],
+        "S1": [
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CYT100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "EST100"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "EST110"
+          },
+          {
+            "subject_name": "Basics of Civil and Mechanical Engineering",
+            "course_code": "EST120"
+          },
+          {
+            "subject_name": "Basics of Electrical and Electronics Engineering",
+            "course_code": "EST130"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HUN101"
+          },
+          {
+            "subject_name": "Linear Algebra and Calculus",
+            "course_code": "MAT101"
+          },
+          {
+            "subject_name": "Engineering Physics B",
+            "course_code": "PHT110"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "EST200"
+          },
+          {
+            "subject_name": "Professional Ethics",
+            "course_code": "HUT200"
+          },
+          {
+            "subject_name": "Partial Differential Equation And Complex Analysis",
+            "course_code": "MAT201"
+          },
+          {
+            "subject_name": "Sustainable Engineering",
+            "course_code": "MCN201"
+          },
+          {
+            "subject_name": "Mechanics Of Solids",
+            "course_code": "MET201"
+          },
+          {
+            "subject_name": "Mechanics Of Fluids",
+            "course_code": "MET203"
+          },
+          {
+            "subject_name": "Metallurgy And Material Science",
+            "course_code": "MET205"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "EST200"
+          },
+          {
+            "subject_name": "Professional Ethics",
+            "course_code": "HUT200"
+          },
+          {
+            "subject_name": "Probability Statistics And Numerical Methods",
+            "course_code": "MAT202"
+          },
+          {
+            "subject_name": "Constitution of India",
+            "course_code": "MCN202"
+          },
+          {
+            "subject_name": "Engineering Thermodynamics",
+            "course_code": "MET202"
+          },
+          {
+            "subject_name": "Manufacturing Process",
+            "course_code": "MET204"
+          },
+          {
+            "subject_name": "Fluid Machinery",
+            "course_code": "MET206"
+          }
+        ],
+        "S6": [
+          {
+            "subject_name": "Industrial Economics and Foreign Trade",
+            "course_code": "HUT300"
+          },
+          {
+            "subject_name": "Management For Engineers",
+            "course_code": "HUT310"
+          },
+          {
+            "subject_name": "Heat And Mass Transfer",
+            "course_code": "MET302"
+          },
+          {
+            "subject_name": "Dynamics Of Machinery And Machine Design",
+            "course_code": "MET304"
+          },
+          {
+            "subject_name": "Advanced Manufacturing Engineering",
+            "course_code": "MET306"
+          },
+          {
+            "subject_name": "Advanced Metal Joining Techniques",
+            "course_code": "MET372"
+          }
+        ],
+        "S7": [
+          {
+            "subject_name": "Design Of Machine Elements",
+            "course_code": "MET401"
+          },
+          {
+            "subject_name": "Advanced Methods In Nondestructive Testing",
+            "course_code": "MET413"
+          },
+          {
+            "subject_name": "Renewable Energy Engineering",
+            "course_code": "MET445"
+          },
+          {
+            "subject_name": "Operations Management",
+            "course_code": "MET463"
+          }
+        ]
+      },
+      "CHEMICAL": {
+        "S2": [
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "MAT102"
+          }
+        ]
+      },
+      "IT": {
+        "S1": [
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CYT100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "EST100"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "EST110"
+          },
+          {
+            "subject_name": "Basics of Civil and Mechanical Engineering",
+            "course_code": "EST120"
+          },
+          {
+            "subject_name": "Basics of Electrical and Electronics Engineering",
+            "course_code": "EST130"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HUN101"
+          },
+          {
+            "subject_name": "Linear Algebra and Calculus",
+            "course_code": "MAT101"
+          },
+          {
+            "subject_name": "Engineering Physics A",
+            "course_code": "PHT100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CYT100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "EST100"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "EST102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "EST110"
+          },
+          {
+            "subject_name": "Basics of Civil and Mechanical Engineering",
+            "course_code": "EST120"
+          },
+          {
+            "subject_name": "Basics of Electrical and Electronics Engineering",
+            "course_code": "EST130"
+          },
+          {
+            "subject_name": "Professional Communication",
+            "course_code": "HUN102"
+          },
+          {
+            "subject_name": "Vector Calculus Differential Equations and Transforms",
+            "course_code": "MAT102"
+          },
+          {
+            "subject_name": "Engineering Physics A",
+            "course_code": "PHT100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "EST200"
+          },
+          {
+            "subject_name": "Professional Ethics",
+            "course_code": "HUT200"
+          },
+          {
+            "subject_name": "Discrete Mathematical Structures",
+            "course_code": "MAT203"
+          },
+          {
+            "subject_name": "Sustainable Engineering",
+            "course_code": "MCN201"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "EST200"
+          },
+          {
+            "subject_name": "Professional Ethics",
+            "course_code": "HUT200"
+          },
+          {
+            "subject_name": "Constitution of India",
+            "course_code": "MCN202"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Disaster Management",
+            "course_code": "MCN301"
+          }
+        ],
+        "S6": [
+          {
+            "subject_name": "Industrial Economics and Foreign Trade",
+            "course_code": "HUT300"
+          }
+        ]
+      }
+    },
+    "2015": {
+      "CIVIL": {
+        "S1": [
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "CS100"
+          },
+          {
+            "subject_name": "Chemistry for Physical Science",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME101"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "HS101"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "HS100"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 1",
+            "course_code": "MA101"
+          },
+          {
+            "subject_name": "Physics for Physical Science and Life Science",
+            "course_code": "PH100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Introduction to Civil Engineering",
+            "course_code": "BE101-01"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Basic Electrical & Electronics Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Basic Ship Theory",
+            "course_code": "NS201"
+          },
+          {
+            "subject_name": "Chemistry for Physical Science",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Crop Production & Protection Technologies",
+            "course_code": "AG201"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME101"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "HS101"
+          },
+          {
+            "subject_name": "Internal Combustion Engines",
+            "course_code": "ME202"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "HS100"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "MA102"
+          },
+          {
+            "subject_name": "Mechanics of Solids (Civil Engineering)",
+            "course_code": "CE201"
+          },
+          {
+            "subject_name": "Physics for Physical Science and Life Science",
+            "course_code": "PH100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "BE102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Economics for Engineers",
+            "course_code": "HS300"
+          },
+          {
+            "subject_name": "Engineering Ethics and Sustainable Development",
+            "course_code": "HS301"
+          },
+          {
+            "subject_name": "Fluid Mechanics",
+            "course_code": "CE201"
+          },
+          {
+            "subject_name": "Introduction to Artificial Intelligence and Data Science",
+            "course_code": "CS201"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 3",
+            "course_code": "MA201"
+          },
+          {
+            "subject_name": "Structural Analysis – I",
+            "course_code": "CE202"
+          },
+          {
+            "subject_name": "Surveying & Geomatics",
+            "course_code": "CE203"
+          },
+          {
+            "subject_name": "Engineering Geology",
+            "course_code": "CE205"
+          },
+          {
+            "subject_name": "Surveying",
+            "course_code": "CE207"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Advanced Solid Mechanics",
+            "course_code": "CE304"
+          },
+          {
+            "subject_name": "Architecture and Building Services",
+            "course_code": "CE308"
+          },
+          {
+            "subject_name": "Cartography and GIS",
+            "course_code": "CE307"
+          },
+          {
+            "subject_name": "Concrete Technology",
+            "course_code": "CE305"
+          },
+          {
+            "subject_name": "Design of Concrete Structures",
+            "course_code": "CE303"
+          },
+          {
+            "subject_name": "Engineering Geology",
+            "course_code": "CE309"
+          },
+          {
+            "subject_name": "Mathematics for Physical Science - 4",
+            "course_code": "MA202"
+          },
+          {
+            "subject_name": "Mechanics of Fluid Flow",
+            "course_code": "CE306"
+          },
+          {
+            "subject_name": "Numerical Methods for Engineers",
+            "course_code": "CE310"
+          },
+          {
+            "subject_name": "Soil Mechanics",
+            "course_code": "CE301"
+          },
+          {
+            "subject_name": "Structural Analysis – II",
+            "course_code": "CE302"
+          },
+          {
+            "subject_name": "Structural Analysis I",
+            "course_code": "CE202"
+          },
+          {
+            "subject_name": "Construction Technology",
+            "course_code": "CE204"
+          },
+          {
+            "subject_name": "Fluid Mechanics II",
+            "course_code": "CE206"
+          },
+          {
+            "subject_name": "Geotechnical Engineering I",
+            "course_code": "CE208"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Design of Concrete Structures I",
+            "course_code": "CE301"
+          },
+          {
+            "subject_name": "Structural Analysis - II",
+            "course_code": "CE303"
+          },
+          {
+            "subject_name": "Geotechnical Engineering - II",
+            "course_code": "CE305"
+          },
+          {
+            "subject_name": "Geomatics",
+            "course_code": "CE307"
+          },
+          {
+            "subject_name": "Water Resources Engineering",
+            "course_code": "CE309"
+          },
+          {
+            "subject_name": "Advanced Concrete Technology",
+            "course_code": "CE361"
+          },
+          {
+            "subject_name": "Geotechnical Investigation",
+            "course_code": "CE363"
+          },
+          {
+            "subject_name": "Functional Design of Buildings",
+            "course_code": "CE365"
+          }
+        ],
+        "S7": [
+          {
+            "subject_name": "Design of Steel Structures",
+            "course_code": "CE401"
+          },
+          {
+            "subject_name": "Structural Analysis - III",
+            "course_code": "CE403"
+          },
+          {
+            "subject_name": "Environmental Engineering - I",
+            "course_code": "CE405"
+          },
+          {
+            "subject_name": "Transportation Engineering - II",
+            "course_code": "CE407"
+          },
+          {
+            "subject_name": "Quantity Surveying and Valuation",
+            "course_code": "CE409"
+          },
+          {
+            "subject_name": "Geo-Environmental Engineering",
+            "course_code": "CE465"
+          },
+          {
+            "subject_name": "Highway Pavement Design",
+            "course_code": "CE467"
+          },
+          {
+            "subject_name": "Environmental Impact Assessment",
+            "course_code": "CE469"
+          },
+          {
+            "subject_name": "Advanced Computational Techniques and Optimization",
+            "course_code": "CE473"
+          }
+        ]
+      },
+      "CSE": {
+        "S1": [
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "CY101"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "HS101"
+          },
+          {
+            "subject_name": "Introduction to Electrical and Electronics Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Mathematics for Information Science - 1",
+            "course_code": "MA101"
+          },
+          {
+            "subject_name": "Personal and Professional Development",
+            "course_code": "HS100"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "PH100"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "PH101"
+          },
+          {
+            "subject_name": "Problem-Solving Strategies and Python Programming",
+            "course_code": "CS100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Introduction to Computing and Problem Solving",
+            "course_code": "BE101-05"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "CY101"
+          },
+          {
+            "subject_name": "Discrete Mathematical Structures",
+            "course_code": "MA201"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Foundations of Computing: From Hardware Essentials to Web Design",
+            "course_code": "CS102"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "HS101"
+          },
+          {
+            "subject_name": "Mathematics for Information Science - 2",
+            "course_code": "MA102"
+          },
+          {
+            "subject_name": "Personal and Professional Development",
+            "course_code": "HS100"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "PH100"
+          },
+          {
+            "subject_name": "Physics for Information Science",
+            "course_code": "PH101"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "CS101"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "BE102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Computer Programming",
+            "course_code": "CS100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Basics of Mechanical Engineering",
+            "course_code": "ME100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Data Structures and Algorithms",
+            "course_code": "CS201"
+          },
+          {
+            "subject_name": "Digital Electronics and Logic Design",
+            "course_code": "EC201"
+          },
+          {
+            "subject_name": "Economics for Engineers",
+            "course_code": "HS300"
+          },
+          {
+            "subject_name": "Ethics and Sustainable Engineering",
+            "course_code": "HS301"
+          },
+          {
+            "subject_name": "Mathematics for Computer and Information Science - 3",
+            "course_code": "MA201"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "CS203"
+          },
+          {
+            "subject_name": "Theory of Computation",
+            "course_code": "CS301"
+          },
+          {
+            "subject_name": "Data Structures",
+            "course_code": "CS205"
+          },
+          {
+            "subject_name": "Electronics Devices and Circuits",
+            "course_code": "CS207"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Coding Theory",
+            "course_code": "CS308"
+          },
+          {
+            "subject_name": "Computational Geometry",
+            "course_code": "CS312"
+          },
+          {
+            "subject_name": "Computer Organization and Architecture",
+            "course_code": "CS304"
+          },
+          {
+            "subject_name": "Cyber Ethics, Privacy and Legal Issues",
+            "course_code": "CS313"
+          },
+          {
+            "subject_name": "Database Management Systems",
+            "course_code": "CS208"
+          },
+          {
+            "subject_name": "Functional Programming",
+            "course_code": "CS307"
+          },
+          {
+            "subject_name": "Mathematics for Computer and Information Science - 4",
+            "course_code": "MA202"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "CS203"
+          },
+          {
+            "subject_name": "Operating Systems",
+            "course_code": "CS303"
+          },
+          {
+            "subject_name": "Pattern Recognition",
+            "course_code": "CS306"
+          },
+          {
+            "subject_name": "Signals and Systems",
+            "course_code": "CS310"
+          },
+          {
+            "subject_name": "Signals and Systems",
+            "course_code": "EC301"
+          },
+          {
+            "subject_name": "Soft Computing",
+            "course_code": "CS311"
+          },
+          {
+            "subject_name": "Software Engineering",
+            "course_code": "CS305"
+          },
+          {
+            "subject_name": "Theory of Computation",
+            "course_code": "CS301"
+          },
+          {
+            "subject_name": "VLSI Design",
+            "course_code": "CS309"
+          },
+          {
+            "subject_name": "Computer Organization and Architecture",
+            "course_code": "CS202"
+          },
+          {
+            "subject_name": "Operating Systems",
+            "course_code": "CS204"
+          },
+          {
+            "subject_name": "Object Oriented Design and Programming",
+            "course_code": "CS206"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Computer Networks",
+            "course_code": "CS306"
+          },
+          {
+            "subject_name": "Formal Languages and Automata Theory",
+            "course_code": "CS301"
+          },
+          {
+            "subject_name": "Management of Software Systems",
+            "course_code": "CS308"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "CS305"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "EC305"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "EE307"
+          },
+          {
+            "subject_name": "System Software",
+            "course_code": "CS303"
+          },
+          {
+            "subject_name": "Data Communication",
+            "course_code": "CS307"
+          },
+          {
+            "subject_name": "Graph Theory and Combinatorics",
+            "course_code": "CS309"
+          },
+          {
+            "subject_name": "Soft Computing",
+            "course_code": "CS361"
+          }
+        ],
+        "S6": [
+          {
+            "subject_name": "Algorithm Analysis and Design",
+            "course_code": "CS302"
+          },
+          {
+            "subject_name": "Compiler Design",
+            "course_code": "CS304"
+          },
+          {
+            "subject_name": "Computer Graphics and Image Processing",
+            "course_code": "CS401"
+          },
+          {
+            "subject_name": "Computer Graphics and Image Processing",
+            "course_code": "CS463"
+          }
+        ],
+        "S7": [
+          {
+            "subject_name": "Artificial Intelligence",
+            "course_code": "CS461"
+          },
+          {
+            "subject_name": "Cryptography and Network Security",
+            "course_code": "CS409"
+          },
+          {
+            "subject_name": "Distributed Computing",
+            "course_code": "CS407"
+          },
+          {
+            "subject_name": "Computer Graphics",
+            "course_code": "CS401"
+          },
+          {
+            "subject_name": "Programming Paradigms",
+            "course_code": "CS403"
+          },
+          {
+            "subject_name": "Computer System Architecture",
+            "course_code": "CS405"
+          },
+          {
+            "subject_name": "Bio Informatics",
+            "course_code": "CS465"
+          },
+          {
+            "subject_name": "Machine Learning",
+            "course_code": "CS467"
+          }
+        ],
+        "S8": [
+          {
+            "subject_name": "Data Mining and Warehousing",
+            "course_code": "CS402"
+          },
+          {
+            "subject_name": "Embedded Systems",
+            "course_code": "CS404"
+          }
+        ]
+      },
+      "ECE": {
+        "S1": [
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "CS100"
+          },
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "CY101"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME101"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "HS101"
+          },
+          {
+            "subject_name": "Introduction to Electrical and Electronics Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "HS100"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 1",
+            "course_code": "MA101"
+          },
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "PH100"
+          },
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "PH101"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Introduction to Electronics Engineering",
+            "course_code": "BE101-04"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "CY101"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME101"
+          },
+          {
+            "subject_name": "Foundations of Computing: From Hardware Essentials to Web Design",
+            "course_code": "CS102"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "HS101"
+          },
+          {
+            "subject_name": "IT Workshop",
+            "course_code": "CS103"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "HS100"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "MA102"
+          },
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "PH100"
+          },
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "PH101"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "CS101"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "BE102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Analog Circuits",
+            "course_code": "EC202"
+          },
+          {
+            "subject_name": "Economics for Engineers",
+            "course_code": "HS300"
+          },
+          {
+            "subject_name": "Ethics and Sustainable Engineering",
+            "course_code": "HS301"
+          },
+          {
+            "subject_name": "Introduction to Artificial Intelligence and Data Science",
+            "course_code": "CS201"
+          },
+          {
+            "subject_name": "Logic Circuit Design",
+            "course_code": "EC203"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 3",
+            "course_code": "MA201"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "CS203"
+          },
+          {
+            "subject_name": "Solid State Devices",
+            "course_code": "EC201"
+          },
+          {
+            "subject_name": "Electronic Circuits",
+            "course_code": "EC205"
+          },
+          {
+            "subject_name": "Logic Circuit Design",
+            "course_code": "EC207"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Digital System Design",
+            "course_code": "EC306"
+          },
+          {
+            "subject_name": "Instrumentation",
+            "course_code": "EC304"
+          },
+          {
+            "subject_name": "Linear Integrated Circuits",
+            "course_code": "EC302"
+          },
+          {
+            "subject_name": "Machine Learning",
+            "course_code": "CS301"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science - 4",
+            "course_code": "MA202"
+          },
+          {
+            "subject_name": "Microcontrollers",
+            "course_code": "EC303"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "CS203"
+          },
+          {
+            "subject_name": "Power Electronics",
+            "course_code": "EC305"
+          },
+          {
+            "subject_name": "Signals and Systems",
+            "course_code": "CS310"
+          },
+          {
+            "subject_name": "Signals and Systems",
+            "course_code": "EC301"
+          },
+          {
+            "subject_name": "Signals and Systems",
+            "course_code": "EC202"
+          },
+          {
+            "subject_name": "Analog Integrated Circuits",
+            "course_code": "EC204"
+          },
+          {
+            "subject_name": "Computer Organization",
+            "course_code": "EC206"
+          },
+          {
+            "subject_name": "Analog Communication Engineering",
+            "course_code": "EC208"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          },
+          {
+            "subject_name": "Probability Random Processes and Numerical Methods",
+            "course_code": "MA204"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Digital Communication",
+            "course_code": "EC301"
+          },
+          {
+            "subject_name": "Digital Signal Processing",
+            "course_code": "EC303"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "CS305"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "EC305"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "EE307"
+          },
+          {
+            "subject_name": "Power Electronics & Instrumentation",
+            "course_code": "EC307"
+          },
+          {
+            "subject_name": "Soft Computing",
+            "course_code": "EC360"
+          },
+          {
+            "subject_name": "Biomedical Engineering",
+            "course_code": "EC365"
+          }
+        ],
+        "S6": [
+          {
+            "subject_name": "Control Systems",
+            "course_code": "EE304"
+          },
+          {
+            "subject_name": "Electromagnetics",
+            "course_code": "EC302"
+          },
+          {
+            "subject_name": "VLSI Design",
+            "course_code": "EC304"
+          },
+          {
+            "subject_name": "Antenna & Wave Propagation",
+            "course_code": "EC306"
+          },
+          {
+            "subject_name": "Embedded System",
+            "course_code": "EC308"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "EC312"
+          },
+          {
+            "subject_name": "Robotics",
+            "course_code": "EC368"
+          },
+          {
+            "subject_name": "Digital Image Processing",
+            "course_code": "EC370"
+          }
+        ],
+        "S7": [
+          {
+            "subject_name": "Microwaves and Antennas",
+            "course_code": "EC401"
+          },
+          {
+            "subject_name": "Microwave & Radar Engg",
+            "course_code": "EC403"
+          },
+          {
+            "subject_name": "Optical Communication",
+            "course_code": "EC405"
+          },
+          {
+            "subject_name": "Computer Communication",
+            "course_code": "EC407"
+          },
+          {
+            "subject_name": "Control Systems",
+            "course_code": "EC409"
+          },
+          {
+            "subject_name": "Microwave Devices and Circuits",
+            "course_code": "EC461"
+          },
+          {
+            "subject_name": "Speech and Audio Signal Processing",
+            "course_code": "EC463"
+          },
+          {
+            "subject_name": "Opto Electronic Devices",
+            "course_code": "EC469"
+          }
+        ]
+      },
+      "EEE": {
+        "S1": [
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "CY101"
+          },
+          {
+            "subject_name": "Engineering Graphics and Computer Aided Drawing",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME101"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "HS101"
+          },
+          {
+            "subject_name": "Introduction to Electrical and Electronics Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 1",
+            "course_code": "MA101"
+          },
+          {
+            "subject_name": "Personal and Professional Development",
+            "course_code": "HS100"
+          },
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "PH100"
+          },
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "PH101"
+          },
+          {
+            "subject_name": "Problem-Solving Strategies and Python Programming",
+            "course_code": "CS100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Introduction to Electrical Engineering",
+            "course_code": "BE101-03"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Chemistry for Information Science and Electrical Science",
+            "course_code": "CY101"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME101"
+          },
+          {
+            "subject_name": "Foundations of Computing: From Hardware Essentials to Web Design",
+            "course_code": "CS102"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "HS101"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "MA102"
+          },
+          {
+            "subject_name": "Personal and Professional Development",
+            "course_code": "HS100"
+          },
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "PH100"
+          },
+          {
+            "subject_name": "Physics for Electrical Science",
+            "course_code": "PH101"
+          },
+          {
+            "subject_name": "Programming in C",
+            "course_code": "CS101"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "BE102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Analog Electronics",
+            "course_code": "EE203"
+          },
+          {
+            "subject_name": "Circuits & Networks",
+            "course_code": "EE201"
+          },
+          {
+            "subject_name": "DC Machines & Transformers",
+            "course_code": "EE202"
+          },
+          {
+            "subject_name": "Economics for Engineers",
+            "course_code": "HS300"
+          },
+          {
+            "subject_name": "Engineering Ethics and Sustainable Development",
+            "course_code": "HS301"
+          },
+          {
+            "subject_name": "Introduction to Artificial Intelligence and Data Science",
+            "course_code": "CS201"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 3",
+            "course_code": "MA201"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "CS203"
+          },
+          {
+            "subject_name": "Theory of Computation",
+            "course_code": "CS301"
+          },
+          {
+            "subject_name": "DC Machines and Transformers",
+            "course_code": "EE205"
+          },
+          {
+            "subject_name": "Computer Programming",
+            "course_code": "EE207"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Analog Integrated Circuits",
+            "course_code": "EE306"
+          },
+          {
+            "subject_name": "Computer Organization",
+            "course_code": "CS303"
+          },
+          {
+            "subject_name": "Digital Electronics",
+            "course_code": "EE303"
+          },
+          {
+            "subject_name": "Electronic Instrumentation",
+            "course_code": "EE304"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science - 4",
+            "course_code": "MA202"
+          },
+          {
+            "subject_name": "Mathematics for Machine Learning",
+            "course_code": "CS301"
+          },
+          {
+            "subject_name": "Object Oriented Programming",
+            "course_code": "CS203"
+          },
+          {
+            "subject_name": "Power Electronics and Drives",
+            "course_code": "EE302"
+          },
+          {
+            "subject_name": "Renewable Energy Sources",
+            "course_code": "EE305"
+          },
+          {
+            "subject_name": "Synchronous & Induction Machines",
+            "course_code": "EE301"
+          },
+          {
+            "subject_name": "Synchronous and Induction Machines",
+            "course_code": "EE202"
+          },
+          {
+            "subject_name": "Digital Electronics and Logic Design",
+            "course_code": "EE204"
+          },
+          {
+            "subject_name": "Material Science",
+            "course_code": "EE206"
+          },
+          {
+            "subject_name": "Measurements and Instrumentation",
+            "course_code": "EE208"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "CS305"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "EC305"
+          },
+          {
+            "subject_name": "Microprocessors and Microcontrollers",
+            "course_code": "EE307"
+          },
+          {
+            "subject_name": "Power Generation Transmission and Protection",
+            "course_code": "EE301"
+          },
+          {
+            "subject_name": "Linear Control Systems",
+            "course_code": "EE303"
+          },
+          {
+            "subject_name": "Power Electronics",
+            "course_code": "EE305"
+          },
+          {
+            "subject_name": "Microprocessor and Embedded Systems",
+            "course_code": "EE309"
+          },
+          {
+            "subject_name": "New and Renewable Energy Systems",
+            "course_code": "EE367"
+          },
+          {
+            "subject_name": "High Voltage Engineering",
+            "course_code": "EE369"
+          }
+        ],
+        "S6": [
+          {
+            "subject_name": "Control Systems",
+            "course_code": "EE304"
+          },
+          {
+            "subject_name": "Power Electronics",
+            "course_code": "EE306"
+          }
+        ],
+        "S7": [
+          {
+            "subject_name": "Power System Analysis",
+            "course_code": "EE401"
+          },
+          {
+            "subject_name": "Distributed Generation and Smart Grids",
+            "course_code": "EE403"
+          },
+          {
+            "subject_name": "Electrical System Design",
+            "course_code": "EE405"
+          },
+          {
+            "subject_name": "Digital Signal Processing",
+            "course_code": "EE407"
+          },
+          {
+            "subject_name": "Electrical Machine Design",
+            "course_code": "EE409"
+          },
+          {
+            "subject_name": "Electric and Hybrid Vehicles",
+            "course_code": "EE469"
+          }
+        ]
+      },
+      "MECH": {
+        "S1": [
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "CS100"
+          },
+          {
+            "subject_name": "Chemistry for Physical Science",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME101"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "HS101"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "HS100"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 1",
+            "course_code": "MA101"
+          },
+          {
+            "subject_name": "Physics for Physical Science and Life Science",
+            "course_code": "PH100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Introduction to Mechanical Engineering Sciences",
+            "course_code": "BE101-02"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Basic Electrical & Electronics Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Basic Ship Theory",
+            "course_code": "NS201"
+          },
+          {
+            "subject_name": "Chemistry for Physical Science",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Crop Production & Protection Technologies",
+            "course_code": "AG201"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME101"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "HS101"
+          },
+          {
+            "subject_name": "Internal Combustion Engines",
+            "course_code": "ME202"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "HS100"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "MA102"
+          },
+          {
+            "subject_name": "Mechanics of Solids (Civil Engineering)",
+            "course_code": "CE201"
+          },
+          {
+            "subject_name": "Physics for Physical Science and Life Science",
+            "course_code": "PH100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "BE102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Computer Aided Machine Drawing & Modelling",
+            "course_code": "ME206"
+          },
+          {
+            "subject_name": "Economics for Engineers",
+            "course_code": "HS300"
+          },
+          {
+            "subject_name": "Engineering Ethics and Sustainable Development",
+            "course_code": "HS301"
+          },
+          {
+            "subject_name": "Fluid Mechanics and Machinery",
+            "course_code": "ME204"
+          },
+          {
+            "subject_name": "Introduction to Artificial Intelligence and Data Science",
+            "course_code": "CS201"
+          },
+          {
+            "subject_name": "Manufacturing Processes",
+            "course_code": "ME205"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 3",
+            "course_code": "MA201"
+          },
+          {
+            "subject_name": "Mechanics of Solids",
+            "course_code": "ME203"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          },
+          {
+            "subject_name": "Mechanics of Solids",
+            "course_code": "ME201"
+          },
+          {
+            "subject_name": "Metallurgy and Materials Engineering",
+            "course_code": "ME210"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Advanced Mechanics of Solids",
+            "course_code": "ME308"
+          },
+          {
+            "subject_name": "Advanced Welding Technology",
+            "course_code": "ME309"
+          },
+          {
+            "subject_name": "Components of Intelligent Systems",
+            "course_code": "ME307"
+          },
+          {
+            "subject_name": "Composite Materials",
+            "course_code": "ME306"
+          },
+          {
+            "subject_name": "Engineering Thermodynamics",
+            "course_code": "ME302"
+          },
+          {
+            "subject_name": "Machine Tools and Metrology",
+            "course_code": "ME301"
+          },
+          {
+            "subject_name": "Mathematics for Physical Science - 4",
+            "course_code": "MA202"
+          },
+          {
+            "subject_name": "Mechanics of Machinery",
+            "course_code": "ME303"
+          },
+          {
+            "subject_name": "Nuclear Energy",
+            "course_code": "ME305"
+          },
+          {
+            "subject_name": "Technology Management",
+            "course_code": "ME310"
+          },
+          {
+            "subject_name": "Turbo Machinery",
+            "course_code": "ME304"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          },
+          {
+            "subject_name": "Advanced Mechanics of Solids",
+            "course_code": "ME202"
+          },
+          {
+            "subject_name": "Thermal Engineering",
+            "course_code": "ME204"
+          },
+          {
+            "subject_name": "Fluid Machinery",
+            "course_code": "ME206"
+          },
+          {
+            "subject_name": "Manufacturing Technology",
+            "course_code": "ME220"
+          }
+        ],
+        "S5": [
+          {
+            "subject_name": "Mechanics of Machinery",
+            "course_code": "ME301"
+          },
+          {
+            "subject_name": "Machine Tools and Digital Manufacturing",
+            "course_code": "ME303"
+          },
+          {
+            "subject_name": "Computer Programming & Numerical Methods",
+            "course_code": "ME305"
+          },
+          {
+            "subject_name": "Non-Destructive Testing",
+            "course_code": "ME367"
+          },
+          {
+            "subject_name": "Nuclear Engineering",
+            "course_code": "ME371"
+          }
+        ],
+        "S6": [
+          {
+            "subject_name": "Heat & Mass Transfer",
+            "course_code": "ME302"
+          },
+          {
+            "subject_name": "Dynamics of Machinery",
+            "course_code": "ME304"
+          },
+          {
+            "subject_name": "Computer Aided Design and Analysis",
+            "course_code": "ME308"
+          }
+        ],
+        "S7": [
+          {
+            "subject_name": "Design of Machine Elements I",
+            "course_code": "ME401"
+          },
+          {
+            "subject_name": "Advanced Energy Engineering",
+            "course_code": "ME403"
+          },
+          {
+            "subject_name": "Refrigeration and Air Conditioning",
+            "course_code": "ME405"
+          },
+          {
+            "subject_name": "Mechatronics",
+            "course_code": "ME407"
+          },
+          {
+            "subject_name": "Compressible Fluid Flow",
+            "course_code": "ME409"
+          },
+          {
+            "subject_name": "Automobile Engineering",
+            "course_code": "ME463"
+          },
+          {
+            "subject_name": "Cryogenic Engineering",
+            "course_code": "ME467"
+          }
+        ]
+      },
+      "CHEMICAL": {
+        "S1": [
+          {
+            "subject_name": "Algorithmic Thinking with Python",
+            "course_code": "CS100"
+          },
+          {
+            "subject_name": "Chemistry for Physical Science",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME101"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "HS101"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "HS100"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 1",
+            "course_code": "MA101"
+          },
+          {
+            "subject_name": "Physics for Physical Science and Life Science",
+            "course_code": "PH100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Basic Electrical & Electronics Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Chemical Process Calculations",
+            "course_code": "CH202"
+          },
+          {
+            "subject_name": "Chemistry for Physical Science",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Engineering Entrepreneurship and IPR",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "ME101"
+          },
+          {
+            "subject_name": "Health and Wellness",
+            "course_code": "HS101"
+          },
+          {
+            "subject_name": "Life Skills and Professional Communication",
+            "course_code": "HS100"
+          },
+          {
+            "subject_name": "Material Science",
+            "course_code": "CH201"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 2",
+            "course_code": "MA102"
+          },
+          {
+            "subject_name": "Physics for Physical Science and Life Science",
+            "course_code": "PH100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Chemical Engineering Thermodynamics - I",
+            "course_code": "CH302"
+          },
+          {
+            "subject_name": "Economics for Engineers",
+            "course_code": "HS300"
+          },
+          {
+            "subject_name": "Engineering Ethics and Sustainable Development",
+            "course_code": "HS301"
+          },
+          {
+            "subject_name": "Fluid Mechanics",
+            "course_code": "CE201"
+          },
+          {
+            "subject_name": "Introduction to Artificial Intelligence and Data Science",
+            "course_code": "CS201"
+          },
+          {
+            "subject_name": "Mathematics for Electrical Science and Physical Science - 3",
+            "course_code": "MA201"
+          },
+          {
+            "subject_name": "Mechanical Operations",
+            "course_code": "CH303"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Chemical Engineering Thermodynamics - II",
+            "course_code": "CH406"
+          },
+          {
+            "subject_name": "Chemical Reaction Engineering - I",
+            "course_code": "CH402"
+          },
+          {
+            "subject_name": "Environmental Engineering",
+            "course_code": "CH405"
+          },
+          {
+            "subject_name": "Heat Transfer",
+            "course_code": "CH401"
+          },
+          {
+            "subject_name": "Instrumentation and Process Control",
+            "course_code": "CH404"
+          },
+          {
+            "subject_name": "Mass Transfer - I",
+            "course_code": "CH403"
+          },
+          {
+            "subject_name": "Mathematics for Physical Science - 4",
+            "course_code": "MA202"
+          },
+          {
+            "subject_name": "Numerical Methods for Chemical Engineers",
+            "course_code": "CH407"
+          }
+        ]
+      },
+      "AIDS": {
+        "S1": [
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Introduction to Computing and Problem Solving",
+            "course_code": "BE101-05"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Calculus",
+            "course_code": "MA101"
+          },
+          {
+            "subject_name": "Basics of Mechanical Engineering",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Physics",
+            "course_code": "PH100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "BE102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Computer Programming",
+            "course_code": "CS100"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Differential Equations",
+            "course_code": "MA102"
+          },
+          {
+            "subject_name": "Basics of Mechanical Engineering",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Physics",
+            "course_code": "PH100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Discrete Computational Structures",
+            "course_code": "CS201"
+          },
+          {
+            "subject_name": "Switching Theory and Logic Design",
+            "course_code": "CS203"
+          },
+          {
+            "subject_name": "Data Structures",
+            "course_code": "CS205"
+          },
+          {
+            "subject_name": "Electronics Devices and Circuits",
+            "course_code": "CS207"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          },
+          {
+            "subject_name": "Linear Algebra and Complex Analysis",
+            "course_code": "MA201"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Computer Organization and Architecture",
+            "course_code": "CS202"
+          },
+          {
+            "subject_name": "Operating Systems",
+            "course_code": "CS204"
+          },
+          {
+            "subject_name": "Object Oriented Design and Programming",
+            "course_code": "CS206"
+          },
+          {
+            "subject_name": "Principles of Database Design",
+            "course_code": "CS208"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          },
+          {
+            "subject_name": "Probability Distributions Transforms and Numerical Methods",
+            "course_code": "MA202"
+          }
+        ]
+      },
+      "CSAIML": {
+        "S1": [
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Introduction to Computing and Problem Solving",
+            "course_code": "BE101-05"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Calculus",
+            "course_code": "MA101"
+          },
+          {
+            "subject_name": "Basics of Mechanical Engineering",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Physics",
+            "course_code": "PH100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "BE102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Computer Programming",
+            "course_code": "CS100"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Differential Equations",
+            "course_code": "MA102"
+          },
+          {
+            "subject_name": "Basics of Mechanical Engineering",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Physics",
+            "course_code": "PH100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Discrete Computational Structures",
+            "course_code": "CS201"
+          },
+          {
+            "subject_name": "Switching Theory and Logic Design",
+            "course_code": "CS203"
+          },
+          {
+            "subject_name": "Data Structures",
+            "course_code": "CS205"
+          },
+          {
+            "subject_name": "Electronics Devices and Circuits",
+            "course_code": "CS207"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          },
+          {
+            "subject_name": "Linear Algebra and Complex Analysis",
+            "course_code": "MA201"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Computer Organization and Architecture",
+            "course_code": "CS202"
+          },
+          {
+            "subject_name": "Operating Systems",
+            "course_code": "CS204"
+          },
+          {
+            "subject_name": "Object Oriented Design and Programming",
+            "course_code": "CS206"
+          },
+          {
+            "subject_name": "Principles of Database Design",
+            "course_code": "CS208"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          },
+          {
+            "subject_name": "Probability Distributions Transforms and Numerical Methods",
+            "course_code": "MA202"
+          }
+        ]
+      },
+      "CSDS": {
+        "S1": [
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Introduction to Computing and Problem Solving",
+            "course_code": "BE101-05"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Calculus",
+            "course_code": "MA101"
+          },
+          {
+            "subject_name": "Basics of Mechanical Engineering",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Physics",
+            "course_code": "PH100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "BE102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Computer Programming",
+            "course_code": "CS100"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Differential Equations",
+            "course_code": "MA102"
+          },
+          {
+            "subject_name": "Basics of Mechanical Engineering",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Physics",
+            "course_code": "PH100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Discrete Computational Structures",
+            "course_code": "CS201"
+          },
+          {
+            "subject_name": "Switching Theory and Logic Design",
+            "course_code": "CS203"
+          },
+          {
+            "subject_name": "Data Structures",
+            "course_code": "CS205"
+          },
+          {
+            "subject_name": "Electronics Devices and Circuits",
+            "course_code": "CS207"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          },
+          {
+            "subject_name": "Linear Algebra and Complex Analysis",
+            "course_code": "MA201"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Computer Organization and Architecture",
+            "course_code": "CS202"
+          },
+          {
+            "subject_name": "Operating Systems",
+            "course_code": "CS204"
+          },
+          {
+            "subject_name": "Object Oriented Design and Programming",
+            "course_code": "CS206"
+          },
+          {
+            "subject_name": "Principles of Database Design",
+            "course_code": "CS208"
+          },
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          },
+          {
+            "subject_name": "Probability Distributions Transforms and Numerical Methods",
+            "course_code": "MA202"
+          }
+        ]
+      },
+      "EI": {
+        "S1": [
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Introduction to Electronics Engineering",
+            "course_code": "BE101-04"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Calculus",
+            "course_code": "MA101"
+          },
+          {
+            "subject_name": "Basics of Mechanical Engineering",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Physics",
+            "course_code": "PH100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "BE102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Differential Equations",
+            "course_code": "MA102"
+          },
+          {
+            "subject_name": "Basics of Mechanical Engineering",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Physics",
+            "course_code": "PH100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          },
+          {
+            "subject_name": "Linear Algebra and Complex Analysis",
+            "course_code": "MA201"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          }
+        ]
+      },
+      "IT": {
+        "S1": [
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Introduction to Computing and Problem Solving",
+            "course_code": "BE101-05"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Calculus",
+            "course_code": "MA101"
+          },
+          {
+            "subject_name": "Basics of Mechanical Engineering",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Physics",
+            "course_code": "PH100"
+          }
+        ],
+        "S2": [
+          {
+            "subject_name": "Engineering Mechanics",
+            "course_code": "BE100"
+          },
+          {
+            "subject_name": "Design and Engineering",
+            "course_code": "BE102"
+          },
+          {
+            "subject_name": "Engineering Graphics",
+            "course_code": "BE110"
+          },
+          {
+            "subject_name": "Basics of Civil Engineering",
+            "course_code": "CE100"
+          },
+          {
+            "subject_name": "Computer Programming",
+            "course_code": "CS100"
+          },
+          {
+            "subject_name": "Engineering Chemistry",
+            "course_code": "CY100"
+          },
+          {
+            "subject_name": "Basics of Electronics Engineering",
+            "course_code": "EC100"
+          },
+          {
+            "subject_name": "Basics of Electrical Engineering",
+            "course_code": "EE100"
+          },
+          {
+            "subject_name": "Differential Equations",
+            "course_code": "MA102"
+          },
+          {
+            "subject_name": "Basics of Mechanical Engineering",
+            "course_code": "ME100"
+          },
+          {
+            "subject_name": "Engineering Physics",
+            "course_code": "PH100"
+          }
+        ],
+        "S3": [
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          },
+          {
+            "subject_name": "Linear Algebra and Complex Analysis",
+            "course_code": "MA201"
+          }
+        ],
+        "S4": [
+          {
+            "subject_name": "Business Economics",
+            "course_code": "HS200"
+          },
+          {
+            "subject_name": "Life Skills",
+            "course_code": "HS210"
+          }
+        ]
+      }
+    }
+  }
+}
