@@ -99,13 +99,36 @@
                 </div>
             </div>
 
-            <!-- Quick Jump Link -->
-            <div class="flex justify-center mb-6 sm:mb-8 animate-fade-up delay-200 w-full">
-                <a href="#semester-vault" class="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-200 hover:shadow-sm rounded-full text-xs sm:text-sm font-bold transition-all group active:scale-95">
+            <!-- Search Specific Timetables / Filter Toggle Section -->
+            <div class="flex flex-col items-center mb-6 sm:mb-8 animate-fade-up delay-200 w-full">
+                <button type="button" onclick="toggleFilterDrawer()" id="filter-toggle-btn" class="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-200 hover:shadow-sm rounded-full text-xs sm:text-sm font-bold transition-all group active:scale-95 shadow-sm cursor-pointer">
                     <i class="fas fa-search text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
-                    <span>Search specific timetables</span>
-                    <i class="fas fa-arrow-down text-[10px] ml-0.5 opacity-50 group-hover:animate-bounce"></i>
-                </a>
+                    <span>Search Specific Timetables / Filter</span>
+                    <i id="filter-chevron" class="fas fa-chevron-down text-[10px] ml-0.5 text-slate-400 group-hover:text-indigo-500 transition-transform duration-300"></i>
+                </button>
+
+                <!-- Filter Drawer (Smooth Slide Down) -->
+                <div id="filter-drawer" class="w-full max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out pointer-events-none">
+                    <div class="pt-4 sm:pt-5 pb-1 sm:pb-2 w-full flex flex-col items-center">
+                        <!-- Course Filters (Horizontally Scrollable) -->
+                        <div class="flex overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 w-full justify-start sm:justify-center px-1" id="course-filters">
+                            <button class="course-btn active bg-indigo-600 text-white font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm shadow-sm" data-course="BTECH">B.Tech</button>
+                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="MTECH">M.Tech</button>
+                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="MCA">MCA</button>
+                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="MBA">MBA</button>
+                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="OTHER">Others</button>
+                        </div>
+
+                        <!-- Semester Filters (Horizontally Scrollable) -->
+                        <div class="flex overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 mb-2 sm:mb-3 pb-2 sm:pb-3 border-b border-slate-200/60 w-full justify-start sm:justify-center px-1" id="semester-filters">
+                            <button class="sem-btn active bg-slate-800 text-white font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="ALL">All Sems</button>
+                            <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="S1/S2">S1 / S2</button>
+                            <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="S3/S4">S3 / S4</button>
+                            <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="S5/S6">S5 / S6</button>
+                            <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="S7/S8">S7 / S8</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Ongoing Section -->
@@ -129,33 +152,8 @@
                 <div id="upcoming-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5"></div>
             </div>
 
-            <!-- Semester Vault Section -->
+            <!-- Timetables Cards Grid Section -->
             <div id="semester-vault" class="animate-fade-up delay-300 scroll-mt-20 sm:scroll-mt-24">
-                <div class="flex items-center justify-between gap-3 mb-3.5 sm:mb-4">
-                    <div class="flex items-center gap-2.5 sm:gap-3">
-                        <i class="fas fa-layer-group text-indigo-500 text-lg sm:text-xl"></i>
-                        <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Semester Vault</h2>
-                    </div>
-                </div>
-
-                <!-- Course Filters (Horizontally Scrollable) -->
-                <div class="flex overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 w-full" id="course-filters">
-                    <button class="course-btn active bg-indigo-600 text-white font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm shadow-sm" data-course="BTECH">B.Tech</button>
-                    <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="MTECH">M.Tech</button>
-                    <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="MCA">MCA</button>
-                    <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="MBA">MBA</button>
-                    <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="OTHER">Others</button>
-                </div>
-
-                <!-- Semester Filters (Horizontally Scrollable) -->
-                <div class="flex overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 mb-6 sm:mb-8 pb-2 sm:pb-3 border-b border-slate-200/60 w-full" id="semester-filters">
-                    <button class="sem-btn active bg-slate-800 text-white font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="ALL">All Sems</button>
-                    <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="S1/S2">S1 / S2</button>
-                    <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="S3/S4">S3 / S4</button>
-                    <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="S5/S6">S5 / S6</button>
-                    <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="S7/S8">S7 / S8</button>
-                </div>
-
                 <!-- Vault Cards Grid -->
                 <div id="vault-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5"></div>
                 
@@ -194,6 +192,24 @@
         loadNavigation('timetable', '', false);
 
         const timetablesData = window.timetablesData || [];
+
+        function toggleFilterDrawer() {
+            const drawer = document.getElementById('filter-drawer');
+            const chevron = document.getElementById('filter-chevron');
+            if (!drawer) return;
+
+            const isOpen = drawer.classList.contains('max-h-96');
+            if (isOpen) {
+                drawer.classList.remove('max-h-96', 'opacity-100');
+                drawer.classList.add('max-h-0', 'opacity-0', 'pointer-events-none');
+                if (chevron) chevron.classList.remove('rotate-180');
+            } else {
+                drawer.classList.remove('max-h-0', 'opacity-0', 'pointer-events-none');
+                drawer.classList.add('max-h-96', 'opacity-100');
+                if (chevron) chevron.classList.add('rotate-180');
+            }
+        }
+        window.toggleFilterDrawer = toggleFilterDrawer;
 
         function getSemesterStyles(semesterStr) {
             const sem = semesterStr.toUpperCase();
@@ -417,6 +433,11 @@
                     btn.classList.add('bg-slate-800', 'text-white', 'active');
                     
                     applyCombinedFilters();
+
+                    const vaultSection = document.getElementById('semester-vault');
+                    if (vaultSection) {
+                        vaultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
                 });
             });
         }
