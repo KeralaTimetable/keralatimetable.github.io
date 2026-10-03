@@ -112,7 +112,8 @@
                     <div class="pt-4 sm:pt-5 pb-1 sm:pb-2 w-full flex flex-col items-center">
                         <!-- Course Filters (Horizontally Scrollable) -->
                         <div class="flex overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 w-full justify-start sm:justify-center px-1" id="course-filters">
-                            <button class="course-btn active bg-indigo-600 text-white font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm shadow-sm" data-course="BTECH">B.Tech</button>
+                            <button class="course-btn active bg-indigo-600 text-white font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm shadow-sm" data-course="ALL">All</button>
+                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="BTECH">B.Tech</button>
                             <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="MTECH">M.Tech</button>
                             <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="MCA">MCA</button>
                             <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="MBA">MBA</button>
@@ -152,17 +153,11 @@
                 <div id="upcoming-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5"></div>
             </div>
 
-            <!-- Timetables Cards Grid Section -->
-            <div id="semester-vault" class="animate-fade-up delay-300 scroll-mt-20 sm:scroll-mt-24">
-                <!-- Vault Cards Grid -->
-                <div id="vault-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5"></div>
-                
-                <!-- Empty Search Fallback -->
-                <div id="empty-state" class="hidden text-center py-10 sm:py-12 bg-white/50 border border-slate-200 border-dashed rounded-2xl sm:rounded-3xl">
-                    <i class="fas fa-folder-open text-3xl sm:text-4xl text-slate-300 mb-2 sm:mb-3"></i>
-                    <h3 class="text-base sm:text-lg font-bold text-slate-700">No matching timetables</h3>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Try adjusting your course or semester filters.</p>
-                </div>
+            <!-- Empty Search Fallback -->
+            <div id="empty-state" class="hidden text-center py-12 sm:py-16 bg-white/60 border border-slate-200 border-dashed rounded-2xl sm:rounded-3xl">
+                <i class="fas fa-folder-open text-3xl sm:text-4xl text-slate-300 mb-2 sm:mb-3"></i>
+                <h3 class="text-base sm:text-lg font-bold text-slate-700">No matching exams</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">There are no ongoing or upcoming exams matching this filter.</p>
             </div>
 
         </div>
@@ -212,7 +207,7 @@
         window.toggleFilterDrawer = toggleFilterDrawer;
 
         function getSemesterStyles(semesterStr) {
-            const sem = semesterStr.toUpperCase();
+            const sem = (semesterStr || '').toUpperCase();
             if (sem.includes('S1') || sem.includes('S2')) return { bg: 'bg-indigo-100', text: 'text-indigo-700', border: 'border-indigo-200' };
             if (sem.includes('S3') || sem.includes('S4')) return { bg: 'bg-emerald-100', text: 'text-emerald-700', border: 'border-emerald-200' };
             if (sem.includes('S5') || sem.includes('S6')) return { bg: 'bg-amber-100', text: 'text-amber-700', border: 'border-amber-200' };
@@ -221,7 +216,7 @@
         }
 
         function getCourseFromTitle(title) {
-            const t = title.toUpperCase();
+            const t = (title || '').toUpperCase();
             if (t.includes('B.TECH')) return 'BTECH';
             if (t.includes('M.TECH')) return 'MTECH';
             if (t.includes('MCA')) return 'MCA';
@@ -230,7 +225,7 @@
         }
 
         function generateCardHTML(item, statusText = '', isCountdown = false) {
-            const styles = getSemesterStyles(item.semester);
+            const styles = getSemesterStyles(item.semester || '');
             const startObj = new Date(item.startDate);
             const endObj = new Date(item.endDate);
             
@@ -256,8 +251,11 @@
                 statusHTML = `<div class="w-full bg-slate-100 border-t border-slate-200 p-2.5 sm:p-3 text-center text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest z-10">Exam Completed</div>`;
             }
 
+            const catAttr = (item.categoryBadge || item.semester || '').toUpperCase();
+            const semAttr = (item.semester || '').toUpperCase();
+
             return `
-                <div class="timetable-card bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm flex flex-col relative overflow-hidden h-full group" data-category="${item.categoryBadge}" data-course="${courseTag}">
+                <div class="timetable-card bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm flex flex-col relative overflow-hidden h-full group" data-category="${catAttr}" data-sem="${semAttr}" data-course="${courseTag}">
                     
                     <div class="absolute top-1 right-2 text-5xl sm:text-7xl font-black text-slate-900 opacity-20 pointer-events-none select-none z-0 leading-none">
                         ${item.semester}
@@ -299,18 +297,17 @@
 
         function renderDashboard() {
             if (!timetablesData || timetablesData.length === 0) {
-                document.getElementById('empty-state').style.display = 'block';
+                const emptyState = document.getElementById('empty-state');
+                if (emptyState) emptyState.style.display = 'block';
                 return;
             }
 
             const now = new Date();
             const ongoingGrid = document.getElementById('ongoing-grid');
             const upcomingGrid = document.getElementById('upcoming-grid');
-            const vaultGrid = document.getElementById('vault-grid');
             
             let ongoingItems = [];
             let upcomingItems = [];
-            let vaultItems = [];
 
             const validData = timetablesData.filter(item => {
                 const end = new Date(item.endDate);
@@ -325,14 +322,9 @@
                 
                 if (now >= start && now <= end) {
                     ongoingItems.push(item);
-                    vaultItems.push({...item, status: 'LIVE'});
                 } 
                 else if (now < start) {
                     upcomingItems.push(item);
-                    vaultItems.push({...item, status: 'UPCOMING'});
-                } 
-                else {
-                    vaultItems.push({...item, status: 'PAST'});
                 }
             });
             
@@ -352,14 +344,9 @@
 
             ongoingItems.sort(prioritySort);
             upcomingItems.sort(chronologicalSort); 
-            vaultItems.sort(prioritySort);
 
             ongoingGrid.innerHTML = ongoingItems.map(item => generateCardHTML(item, 'LIVE', false)).join('');
             upcomingGrid.innerHTML = upcomingItems.map(item => generateCardHTML(item, '', true)).join('');
-            vaultGrid.innerHTML = vaultItems.map(item => generateCardHTML(item, item.status, item.status === 'UPCOMING')).join('');
-
-            document.getElementById('ongoing-section').style.display = ongoingItems.length ? 'block' : 'none';
-            document.getElementById('upcoming-section').style.display = upcomingItems.length ? 'block' : 'none';
 
             applyCombinedFilters(); 
         }
@@ -368,42 +355,68 @@
             const activeCourseBtn = document.querySelector('.course-btn.active');
             const activeSemBtn = document.querySelector('.sem-btn.active');
             
-            const activeCourse = activeCourseBtn ? activeCourseBtn.getAttribute('data-course') : 'BTECH';
+            const activeCourse = activeCourseBtn ? activeCourseBtn.getAttribute('data-course') : 'ALL';
             const activeSem = activeSemBtn ? activeSemBtn.getAttribute('data-filter') : 'ALL';
 
             const targetSemesters = activeSem !== 'ALL' ? activeSem.split('/').map(s => s.trim().toUpperCase()) : [];
 
-            const cards = document.getElementById('vault-grid').children;
+            const ongoingGrid = document.getElementById('ongoing-grid');
+            const upcomingGrid = document.getElementById('upcoming-grid');
             const emptyState = document.getElementById('empty-state');
-            let visibleCount = 0;
 
-            for (let i = 0; i < cards.length; i++) {
-                const card = cards[i];
-                const cardCategoryStr = (card.getAttribute('data-category') || "").toUpperCase();
-                const cardCourseStr = (card.getAttribute('data-course') || "").toUpperCase();
+            function filterCardList(grid) {
+                if (!grid) return 0;
+                const cards = grid.children;
+                let visibleCount = 0;
 
-                let courseMatch = false;
-                if (activeCourse === 'OTHER') {
-                    courseMatch = !['BTECH', 'MTECH', 'MCA', 'MBA'].includes(cardCourseStr);
-                } else {
-                    courseMatch = cardCourseStr === activeCourse;
+                for (let i = 0; i < cards.length; i++) {
+                    const card = cards[i];
+                    const cardCategoryStr = (card.getAttribute('data-category') || "").toUpperCase();
+                    const cardSemStr = (card.getAttribute('data-sem') || "").toUpperCase();
+                    const cardCourseStr = (card.getAttribute('data-course') || "").toUpperCase();
+
+                    let courseMatch = false;
+                    if (activeCourse === 'ALL') {
+                        courseMatch = true;
+                    } else if (activeCourse === 'OTHER') {
+                        courseMatch = !['BTECH', 'MTECH', 'MCA', 'MBA'].includes(cardCourseStr);
+                    } else {
+                        courseMatch = cardCourseStr === activeCourse;
+                    }
+
+                    let semMatch = true;
+                    if (activeSem !== 'ALL') {
+                        semMatch = targetSemesters.some(sem => {
+                            return cardCategoryStr.includes(sem) || cardSemStr.includes(sem);
+                        });
+                    }
+
+                    if (courseMatch && semMatch) {
+                        card.style.display = 'flex'; 
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
                 }
-
-                let semMatch = true;
-                if (activeSem !== 'ALL') {
-                     semMatch = targetSemesters.some(sem => {
-                        return cardCategoryStr.includes(sem) || cardCategoryStr === sem;
-                     });
-                }
-
-                if (courseMatch && semMatch) {
-                    card.style.display = 'flex'; 
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
+                return visibleCount;
             }
-            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+
+            const ongoingCount = filterCardList(ongoingGrid);
+            const upcomingCount = filterCardList(upcomingGrid);
+
+            const ongoingSection = document.getElementById('ongoing-section');
+            const upcomingSection = document.getElementById('upcoming-section');
+
+            if (ongoingSection) {
+                ongoingSection.style.display = ongoingCount > 0 ? 'block' : 'none';
+            }
+            if (upcomingSection) {
+                upcomingSection.style.display = upcomingCount > 0 ? 'block' : 'none';
+            }
+
+            if (emptyState) {
+                emptyState.style.display = (ongoingCount === 0 && upcomingCount === 0) ? 'block' : 'none';
+            }
         }
 
         function setupFilters() {
@@ -433,11 +446,6 @@
                     btn.classList.add('bg-slate-800', 'text-white', 'active');
                     
                     applyCombinedFilters();
-
-                    const vaultSection = document.getElementById('semester-vault');
-                    if (vaultSection) {
-                        vaultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
                 });
             });
         }
