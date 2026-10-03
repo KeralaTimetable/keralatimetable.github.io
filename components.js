@@ -25,8 +25,9 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 
     const logoExtension = isBlog ? ' <span class="text-slate-400 font-medium ml-1">| Blog</span>' : '';
 
+    // Added style="visibility: hidden;" to prevent any flash-on-load
     const navHTML = `
-        <div id="mobile-menu" aria-hidden="true" class="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl transform -translate-x-full z-[60] flex flex-col border-r border-slate-100 will-change-transform">
+        <div id="mobile-menu" aria-hidden="true" style="visibility: hidden;" class="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl transform -translate-x-full z-[60] flex flex-col border-r border-slate-100 will-change-transform">
             <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
                 <h2 class="text-lg font-extrabold text-slate-900 tracking-tight">Menu</h2>
                 <button id="close-menu-btn" aria-label="Close menu" class="p-2 text-slate-400 hover:text-red-500 transition-colors rounded-full hover:bg-white shadow-sm focus:outline-none">
@@ -70,7 +71,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             </div>
         </div>
 
-        <div id="menu-overlay" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 opacity-0 pointer-events-none will-change-[opacity]"></div>
+        <div id="menu-overlay" style="visibility: hidden;" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 opacity-0 pointer-events-none will-change-[opacity]"></div>
 
         <header class="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all duration-300">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
@@ -132,25 +133,44 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 
     if (!menu || !overlay) return;
 
-    // Zero-lag transition setup using requestAnimationFrame
-    requestAnimationFrame(() => {
-        menu.classList.add('transition-transform', 'duration-300', 'ease-in-out');
-        overlay.classList.add('transition-opacity', 'duration-300');
-    });
+    let menuTransitionTimeout = null;
 
     function setMenuState(isOpen) {
+        clearTimeout(menuTransitionTimeout);
+
         if (isOpen) {
+            // 1. Make visible to DOM
+            menu.style.visibility = 'visible';
+            overlay.style.visibility = 'visible';
+
+            // 2. Attach transition classes only when action starts
+            menu.classList.add('transition-transform', 'duration-300', 'ease-in-out');
+            overlay.classList.add('transition-opacity', 'duration-300');
+
+            // 3. Force reflow so starting state (-translate-x-full) is recognized
+            void menu.offsetWidth;
+
+            // 4. Trigger slide in
             menu.classList.remove('-translate-x-full');
             menu.setAttribute('aria-hidden', 'false');
             overlay.classList.remove('opacity-0', 'pointer-events-none');
             overlay.classList.add('opacity-100', 'pointer-events-auto');
             document.body.style.overflow = 'hidden';
         } else {
+            // Trigger slide out
             menu.classList.add('-translate-x-full');
             menu.setAttribute('aria-hidden', 'true');
             overlay.classList.remove('opacity-100', 'pointer-events-auto');
             overlay.classList.add('opacity-0', 'pointer-events-none');
             document.body.style.overflow = '';
+
+            // Once the 300ms transition finishes, hide from view again
+            menuTransitionTimeout = setTimeout(() => {
+                if (menu.getAttribute('aria-hidden') === 'true') {
+                    menu.style.visibility = 'hidden';
+                    overlay.style.visibility = 'hidden';
+                }
+            }, 300);
         }
     }
 
