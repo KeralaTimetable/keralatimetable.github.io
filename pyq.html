@@ -456,10 +456,15 @@
                 alert("Please select a subject first.");
                 return;
             }
-            quickSearch(selectedCode);
+            // Update the search bar invisibly so the PDF namer and fetch logic stay the exact same
+            document.getElementById('searchInput').value = selectedCode;
+            
+            // Execute search directly without swapping UI tabs
+            executeSearch(null);
         }
 
         function quickSearch(code) {
+            // Used by trending buttons only - switch to search tab
             toggleTab('search');
             const input = document.getElementById('searchInput');
             input.value = code;
