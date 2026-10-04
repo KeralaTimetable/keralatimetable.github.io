@@ -106,19 +106,19 @@
             </p>
         </div>
 
-        <!-- Action Card CTA (Mobile & Desktop Optimized) -->
+        <!-- Action Card CTA -->
         <div class="w-full mb-8">
-            <button onclick="openAskModal()" class="w-full real-glass p-4 sm:p-6 rounded-2xl flex items-center justify-between group hover:border-blue-300 transition-all shadow-sm active:scale-[0.99] text-left gap-3">
-                <div class="flex items-center gap-3 sm:gap-4">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center text-lg sm:text-xl shadow-md group-hover:scale-105 transition-transform shrink-0">
+            <button onclick="openAskModal()" class="w-full real-glass p-5 sm:p-6 rounded-2xl flex items-center justify-between group hover:border-blue-300 transition-all shadow-sm active:scale-[0.99] text-left">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition-transform">
                         <i class="fas fa-paper-plane"></i>
                     </div>
                     <div>
-                        <h2 class="font-black text-slate-800 text-sm sm:text-lg leading-tight">Ask a Question</h2>
-                        <p class="text-[10px] sm:text-xs text-slate-500 font-semibold mt-0.5">Post anonymously or with your name</p>
+                        <h2 class="font-black text-slate-800 text-base sm:text-lg">Ask a Question</h2>
+                        <p class="text-xs text-slate-500 font-semibold">Post anonymously or with your name</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-1.5 sm:gap-2 text-blue-600 font-bold text-[11px] sm:text-sm bg-blue-50/50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border border-blue-100 group-hover:bg-blue-100 transition-colors shrink-0">
+                <div class="flex items-center gap-2 text-blue-600 font-bold text-xs sm:text-sm">
                     <span>Submit</span>
                     <i class="fas fa-chevron-right group-hover:translate-x-1 transition-transform"></i>
                 </div>
@@ -142,7 +142,7 @@
             </div>
         </div>
 
-        <!-- Approved & User Questions Feed -->
+        <!-- Approved Questions Feed -->
         <div id="public-questions-container" class="w-full space-y-4 min-h-[250px]">
             <div id="loading-spinner" class="flex flex-col items-center justify-center py-12">
                 <i class="fas fa-spinner fa-spin text-2xl text-blue-600 mb-2"></i>
@@ -150,7 +150,7 @@
             </div>
         </div>
 
-        <!-- Admin Drawer / Section (Hidden by default, triggered from footer) -->
+        <!-- Admin Moderation Panel -->
         <div id="admin-panel" class="hidden w-full mt-10 pt-8 border-t border-slate-300/60 fade-in">
             <div class="real-glass p-6 sm:p-8 rounded-[2rem] border-2 border-purple-200">
                 <div class="flex justify-between items-center mb-6">
@@ -163,11 +163,21 @@
                     <button onclick="toggleAdminPanel()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fas fa-times"></i></button>
                 </div>
 
-                <div id="admin-auth-box" class="mb-6 inner-glass p-4 rounded-xl flex gap-3 items-center">
-                    <input type="password" id="admin-pass" placeholder="Enter admin key" class="glass-input px-4 py-2 rounded-lg text-sm flex-1">
-                    <button onclick="verifyAdminAccess()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-5 py-2 rounded-lg text-xs shadow-md">Unlock Queue</button>
+                <!-- Google Auth Box -->
+                <div id="admin-auth-box" class="mb-6 inner-glass p-5 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-3">
+                    <p class="text-xs font-bold text-slate-600">Authenticate with <b class="text-purple-700">keralatimetable@gmail.com</b> to access moderation.</p>
+                    <button onclick="adminGoogleLogin()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow-md flex items-center gap-2 transition-all">
+                        <i class="fab fa-google"></i> Sign In with Google
+                    </button>
                 </div>
 
+                <!-- Logged In Status Banner -->
+                <div id="admin-logged-box" class="hidden mb-6 inner-glass p-4 rounded-xl flex justify-between items-center bg-purple-50/50 border border-purple-200">
+                    <span id="admin-user-info" class="text-xs font-bold text-purple-800"></span>
+                    <button onclick="adminLogout()" class="text-xs font-bold text-rose-600 hover:underline">Log Out</button>
+                </div>
+
+                <!-- Moderation Queue -->
                 <div id="admin-queue-list" class="hidden space-y-4">
                     <p class="text-xs font-bold text-slate-400 text-center py-4">No pending questions in queue.</p>
                 </div>
@@ -178,7 +188,7 @@
 
     <!-- ASK QUESTION MODAL -->
     <div id="askModal" class="hidden fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="real-glass bg-white/90 rounded-[2rem] p-5 sm:p-8 w-full max-w-lg shadow-2xl relative fade-in border border-white max-h-[90vh] overflow-y-auto hide-scrollbar">
+        <div class="real-glass bg-white/90 rounded-[2rem] p-6 sm:p-8 w-full max-w-lg shadow-2xl relative fade-in border border-white">
             <button onclick="closeAskModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 text-lg"><i class="fas fa-times"></i></button>
             
             <h2 class="text-xl font-black text-slate-900 mb-1 flex items-center gap-2">
@@ -186,10 +196,10 @@
             </h2>
             <p class="text-xs text-slate-500 font-bold mb-5">Your query will be answered by our team and published once reviewed.</p>
 
-            <form id="qaForm" onsubmit="submitQuestion(event)" class="space-y-3 sm:space-y-4">
+            <form id="qaForm" onsubmit="submitQuestion(event)" class="space-y-4">
                 <div>
                     <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Category</label>
-                    <select id="qaCategory" class="glass-input w-full rounded-xl px-4 py-2.5 sm:py-3 text-sm font-semibold">
+                    <select id="qaCategory" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-semibold">
                         <option value="Academics">Academics & Syllabus</option>
                         <option value="Exams">Exams & Valuation Rules</option>
                         <option value="General">General / Advice</option>
@@ -198,18 +208,18 @@
 
                 <div>
                     <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Question / Doubt Title</label>
-                    <input type="text" id="qaTitle" placeholder="e.g. Is 2024 Scheme passing mark separate for internal & end sem?" class="glass-input w-full rounded-xl px-4 py-2.5 sm:py-3 text-sm font-semibold" required>
+                    <input type="text" id="qaTitle" placeholder="e.g. Is 2024 Scheme passing mark separate for internal & end sem?" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-semibold" required>
                 </div>
 
                 <div>
                     <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Detailed Explanation (Optional)</label>
-                    <textarea id="qaDetail" rows="2" placeholder="Provide extra context if needed..." class="glass-input w-full rounded-xl p-4 text-sm font-semibold"></textarea>
+                    <textarea id="qaDetail" rows="3" placeholder="Provide extra context if needed..." class="glass-input w-full rounded-xl p-4 text-sm font-semibold"></textarea>
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Your Name</label>
-                        <input type="text" id="qaAuthor" placeholder="Anonymous" class="glass-input w-full rounded-xl px-4 py-2.5 text-xs font-semibold">
+                        <input type="text" id="qaAuthor" placeholder="Anonymous Student" class="glass-input w-full rounded-xl px-4 py-2.5 text-xs font-semibold">
                     </div>
                     <div>
                         <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Branch / Sem</label>
@@ -217,35 +227,27 @@
                     </div>
                 </div>
 
-                <!-- Optional WhatsApp Number -->
-                <div>
-                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
-                        WhatsApp Number <span class="text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded ml-1 lowercase tracking-normal">Optional</span>
-                    </label>
-                    <input type="tel" id="qaPhone" placeholder="Not required. Add only if you need 1-on-1 assistance." class="glass-input w-full rounded-xl px-4 py-2.5 text-xs font-semibold">
-                </div>
-
-                <!-- Bell Button Notification Toggle -->
+                <!-- Bell Notification Preference Toggle -->
                 <div class="inner-glass p-3.5 rounded-xl flex items-center justify-between border border-blue-100">
                     <div class="flex items-center gap-3">
-                        <button type="button" id="bell-toggle-btn" onclick="toggleModalNotification()" class="w-9 h-9 shrink-0 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center transition-all">
+                        <button type="button" id="bell-toggle-btn" onclick="toggleModalNotification()" class="w-9 h-9 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center transition-all">
                             <i class="fas fa-bell"></i>
                         </button>
                         <div class="flex flex-col">
                             <span class="text-xs font-bold text-slate-800">Reply Alert Bell</span>
-                            <span id="bell-status-text" class="text-[10px] text-slate-500 font-semibold leading-tight mt-0.5">Get browser notification when answered</span>
+                            <span id="bell-status-text" class="text-[10px] text-slate-500 font-semibold">Get browser notification when answered</span>
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" id="qaSubmitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 sm:py-3.5 rounded-xl shadow-lg transition-all text-sm flex items-center justify-center gap-2 mt-2">
+                <button type="submit" id="qaSubmitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all text-sm flex items-center justify-center gap-2">
                     Submit Doubt <i class="fas fa-paper-plane text-xs"></i>
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- Footer with Subtle Admin Portal Link -->
+    <!-- Footer with Admin Portal Link -->
     <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-6 sm:py-8 text-center relative z-10">
         <div class="max-w-3xl mx-auto px-4 flex flex-col items-center gap-2">
             <h3 class="text-slate-800 font-bold text-base sm:text-lg">Kerala Timetable</h3>
@@ -267,40 +269,53 @@
     
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, push, set, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, push, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // --- FIREBASE CONFIGURATION ---
+        // --- NEW FIREBASE PROJECT CONFIGURATION ---
         const firebaseConfig = {
-            apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
-            authDomain: "kerala-timetable-db.firebaseapp.com",
-            databaseURL: "https://kerala-timetable-db-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "kerala-timetable-db",
-            storageBucket: "kerala-timetable-db.firebasestorage.app",
-            messagingSenderId: "527439836518",
-            appId: "1:527439836518:web:af7725a5bf07d6a4f584a7"
+            apiKey: "AIzaSyAqJ6wDmjJKCVip3dhgBDi35BzxC0QhIac",
+            authDomain: "keralatimetable-5e155.firebaseapp.com",
+            databaseURL: "https://keralatimetable-5e155-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "keralatimetable-5e155",
+            storageBucket: "keralatimetable-5e155.firebasestorage.app",
+            messagingSenderId: "95059742429",
+            appId: "1:95059742429:web:6ebcae342db9179b509534",
+            measurementId: "G-G2WYE8SQ4S"
         };
+
+        // Verified Admin Email
+        const ADMIN_EMAIL = "keralatimetable@gmail.com";
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
 
         // State Variables
-        let allQuestions = [];
+        let approvedQuestions = [];
+        let pendingAdminList = [];
         let activeCategory = 'All';
         let isModalBellActive = false;
-        let isAdminUnlocked = false;
-
-        // SHA-256 Hash of admin key "ktuadmin55"
-        const ADMIN_KEY_HASH = "398faef44c330df351fa5674c10c14b1f6dd64b589a2e63a137e1ba7d566371c";
+        let isAdminLoggedIn = false;
 
         if (typeof loadNavigation === 'function') loadNavigation('qa', '', false);
 
-        // --- LOCAL STORAGE FOR USER QUESTIONS ---
+        // --- LOCAL STORAGE FOR PERSONAL SUBMISSIONS ---
+        function getMyLocalPending() {
+            try { return JSON.parse(localStorage.getItem('kt_my_pending_doubts') || '[]'); }
+            catch (e) { return []; }
+        }
+
+        function saveMyLocalPending(doubt) {
+            const list = getMyLocalPending();
+            list.push(doubt);
+            localStorage.setItem('kt_my_pending_doubts', JSON.stringify(list));
+        }
+
         function getMyQuestionIds() {
-            try {
-                return JSON.parse(localStorage.getItem('kt_my_questions') || '[]');
-            } catch (e) {
-                return [];
-            }
+            try { return JSON.parse(localStorage.getItem('kt_my_questions') || '[]'); }
+            catch (e) { return []; }
         }
 
         function saveMyQuestionId(id) {
@@ -312,15 +327,9 @@
         }
 
         // --- MODAL CONTROLS ---
-        window.openAskModal = function() {
-            document.getElementById('askModal').classList.remove('hidden');
-        }
+        window.openAskModal = function() { document.getElementById('askModal').classList.remove('hidden'); }
+        window.closeAskModal = function() { document.getElementById('askModal').classList.add('hidden'); }
 
-        window.closeAskModal = function() {
-            document.getElementById('askModal').classList.add('hidden');
-        }
-
-        // --- MODAL BELL NOTIFICATION PREFERENCE ---
         window.toggleModalNotification = async function() {
             const bellBtn = document.getElementById('bell-toggle-btn');
             const statusText = document.getElementById('bell-status-text');
@@ -330,89 +339,54 @@
                     const permission = await Notification.requestPermission();
                     if (permission === "granted") {
                         isModalBellActive = true;
-                        bellBtn.className = "w-9 h-9 shrink-0 rounded-full bg-amber-500 text-white flex items-center justify-center shadow-md animate-bounce";
+                        bellBtn.className = "w-9 h-9 rounded-full bg-amber-500 text-white flex items-center justify-center shadow-md animate-bounce";
                         statusText.innerText = "Alerts Enabled! We'll notify you on reply.";
                         statusText.classList.add("text-amber-600", "font-bold");
                     } else {
-                        alert("Please allow notification permissions in your browser to receive reply alerts.");
+                        alert("Please allow notification permissions in your browser.");
                     }
                 } else {
                     alert("Browser notifications are not supported on this device.");
                 }
             } else {
                 isModalBellActive = false;
-                bellBtn.className = "w-9 h-9 shrink-0 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center";
+                bellBtn.className = "w-9 h-9 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center";
                 statusText.innerText = "Get browser notification when answered";
                 statusText.classList.remove("text-amber-600", "font-bold");
             }
-        }
+        };
 
-        // --- TOGGLE BELL PER QUESTION CARD ---
-        window.toggleQuestionBell = async function(id) {
-            const myIds = getMyQuestionIds();
-            if (!myIds.includes(id)) return;
-
-            const q = allQuestions.find(item => item.id === id);
-            if (!q) return;
-
-            let newNotifyState = !q.notifyEnabled;
-
-            if (newNotifyState && "Notification" in window) {
-                const permission = await Notification.requestPermission();
-                if (permission !== "granted") {
-                    alert("Please allow notification permissions in your browser.");
-                    return;
-                }
-            }
-
-            try {
-                const itemRef = ref(db, `qa_threads/${id}`);
-                await update(itemRef, { notifyEnabled: newNotifyState });
-            } catch (err) {
-                console.error("Error updating bell preference:", err);
-            }
-        }
-
-        // --- SUBMIT QUESTION TO FIREBASE ---
+        // --- SUBMIT QUESTION TO FIREBASE (/qa_pending) ---
         window.submitQuestion = async function(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('qaSubmitBtn');
             submitBtn.disabled = true;
             submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin text-xs"></i> Submitting...`;
 
-            const category = document.getElementById('qaCategory').value;
-            const title = document.getElementById('qaTitle').value.trim();
-            const detail = document.getElementById('qaDetail').value.trim();
-            const author = document.getElementById('qaAuthor').value.trim() || "Anonymous Student";
-            const branch = document.getElementById('qaBranch').value.trim() || "KTU Student";
-            const phone = document.getElementById('qaPhone').value.trim();
+            const newDoubt = {
+                category: document.getElementById('qaCategory').value,
+                title: document.getElementById('qaTitle').value.trim(),
+                detail: document.getElementById('qaDetail').value.trim(),
+                author: document.getElementById('qaAuthor').value.trim() || "Anonymous Student",
+                branch: document.getElementById('qaBranch').value.trim() || "KTU Student",
+                status: "pending",
+                createdAt: new Date().toISOString()
+            };
 
             try {
-                const qaRef = ref(db, 'qa_threads');
-                const newQaRef = push(qaRef);
+                const pendingRef = ref(db, 'qa_pending');
+                const newRef = push(pendingRef);
+                await set(newRef, newDoubt);
 
-                await set(newQaRef, {
-                    category: category,
-                    title: title,
-                    detail: detail,
-                    author: author,
-                    branch: branch,
-                    phone: phone, // Saved securely in DB, not visible in public feed
-                    status: "pending",
-                    notifyEnabled: isModalBellActive,
-                    createdAt: new Date().toISOString(),
-                    answer: ""
-                });
-
-                // Save ID to local storage so user sees it in "By You"
-                saveMyQuestionId(newQaRef.key);
+                // Save to local storage for "By You" view
+                saveMyQuestionId(newRef.key);
+                saveMyLocalPending({ id: newRef.key, ...newDoubt });
 
                 document.getElementById('qaForm').reset();
                 closeAskModal();
-
-                // Automatically switch view to "By You" tab so user sees their pending question
+                updateMyBadgeCount();
                 setCategoryFilter('My');
-
+                alert("Question submitted! It will appear publicly once verified by our team.");
             } catch (err) {
                 console.error("Error submitting question:", err);
                 alert("Failed to submit question. Please try again.");
@@ -420,22 +394,21 @@
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = `Submit Doubt <i class="fas fa-paper-plane text-xs"></i>`;
             }
-        }
+        };
 
-        // --- FETCH & REALTIME LISTENERS ---
-        function listenToQuestions() {
-            const qaRef = ref(db, 'qa_threads');
-            onValue(qaRef, (snapshot) => {
+        // --- PUBLIC REALTIME LISTENER (Only reads /qa_approved) ---
+        function listenToApprovedQuestions() {
+            const approvedRef = ref(db, 'qa_approved');
+            onValue(approvedRef, (snapshot) => {
                 const data = snapshot.val();
-                allQuestions = [];
+                approvedQuestions = [];
                 if (data) {
                     Object.keys(data).forEach(id => {
-                        allQuestions.push({ id, ...data[id] });
+                        approvedQuestions.push({ id, ...data[id] });
                     });
                 }
                 updateMyBadgeCount();
                 renderPublicFeed();
-                if (isAdminUnlocked) renderAdminQueue();
             });
         }
 
@@ -443,8 +416,9 @@
             const myIds = getMyQuestionIds();
             const countBadge = document.getElementById('my-count-badge');
             if (countBadge) {
-                const myCount = allQuestions.filter(q => myIds.includes(q.id)).length;
-                countBadge.innerText = myCount;
+                const myLocalPending = getMyLocalPending().filter(p => !approvedQuestions.some(a => a.id === p.id));
+                const myApproved = approvedQuestions.filter(q => myIds.includes(q.id));
+                countBadge.innerText = myLocalPending.length + myApproved.length;
             }
         }
 
@@ -452,51 +426,44 @@
             activeCategory = cat;
             ['all', 'my', 'academics', 'exams', 'general'].forEach(c => {
                 const btn = document.getElementById(`cat-${c}`);
-                if (btn) {
-                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white/60 whitespace-nowrap flex items-center gap-1.5";
-                }
+                if (btn) btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white/60 whitespace-nowrap flex items-center gap-1.5";
             });
             const activeBtn = document.getElementById(`cat-${cat.toLowerCase()}`);
             if (activeBtn) activeBtn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 whitespace-nowrap flex items-center gap-1.5";
-
             renderPublicFeed();
-        }
+        };
 
-        window.filterQuestions = function() {
-            renderPublicFeed();
-        }
+        window.filterQuestions = function() { renderPublicFeed(); };
 
         function renderPublicFeed() {
             const container = document.getElementById('public-questions-container');
             const searchVal = document.getElementById('filterInput').value.toLowerCase().trim();
             const myIds = getMyQuestionIds();
 
-            let filtered = [];
+            let feedList = [];
 
             if (activeCategory === 'My') {
-                // Show all questions created on this device (Pending + Approved)
-                filtered = allQuestions.filter(q => myIds.includes(q.id));
+                // Combine locally remembered pending questions + approved ones
+                const myLocalPending = getMyLocalPending().filter(p => !approvedQuestions.some(a => a.id === p.id));
+                const myApproved = approvedQuestions.filter(q => myIds.includes(q.id));
+                feedList = [...myLocalPending, ...myApproved];
             } else {
-                // Show approved public questions
-                filtered = allQuestions.filter(q => q.status === "approved");
+                feedList = approvedQuestions;
                 if (activeCategory !== 'All') {
-                    filtered = filtered.filter(q => q.category === activeCategory);
+                    feedList = feedList.filter(q => q.category === activeCategory);
                 }
             }
 
             if (searchVal) {
-                filtered = filtered.filter(q => 
+                feedList = feedList.filter(q => 
                     q.title.toLowerCase().includes(searchVal) || 
                     (q.detail && q.detail.toLowerCase().includes(searchVal)) ||
                     (q.answer && q.answer.toLowerCase().includes(searchVal))
                 );
             }
 
-            if (filtered.length === 0) {
-                let msg = activeCategory === 'My' 
-                    ? "You haven't submitted any doubts yet." 
-                    : "No answered doubts found in this category.";
-                
+            if (feedList.length === 0) {
+                let msg = activeCategory === 'My' ? "You haven't submitted any doubts yet." : "No doubts found in this category.";
                 container.innerHTML = `
                     <div class="real-glass rounded-2xl p-8 text-center text-slate-500">
                         <i class="fas fa-comments text-3xl text-slate-300 mb-2"></i>
@@ -508,30 +475,15 @@
             }
 
             container.innerHTML = '';
-            filtered.reverse().forEach(q => {
+            feedList.slice().reverse().forEach(q => {
                 const dateStr = new Date(q.createdAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' });
                 const isMyQuestion = myIds.includes(q.id);
 
-                // Status Badges
-                let statusBadge = '';
-                if (q.status === 'pending') {
-                    statusBadge = `<span class="px-2.5 py-0.5 bg-amber-50 border border-amber-200 text-amber-700 text-[10px] font-extrabold uppercase rounded-md flex items-center gap-1"><i class="fas fa-hourglass-half"></i> Pending Review</span>`;
-                } else {
-                    statusBadge = `<span class="px-2.5 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-extrabold uppercase rounded-md flex items-center gap-1"><i class="fas fa-check-circle"></i> Answered</span>`;
-                }
+                let statusBadge = q.status === 'pending'
+                    ? `<span class="px-2.5 py-0.5 bg-amber-50 border border-amber-200 text-amber-700 text-[10px] font-extrabold uppercase rounded-md flex items-center gap-1"><i class="fas fa-hourglass-half"></i> Pending Review</span>`
+                    : `<span class="px-2.5 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-extrabold uppercase rounded-md flex items-center gap-1"><i class="fas fa-check-circle"></i> Answered</span>`;
 
                 const categoryBadge = `<span class="px-2 py-0.5 bg-blue-50 border border-blue-200 text-blue-700 text-[9px] font-bold uppercase rounded-md">${q.category}</span>`;
-
-                let bellButtonHTML = '';
-                if (isMyQuestion) {
-                    const bellClass = q.notifyEnabled ? 'bg-amber-500 text-white' : 'bg-slate-200 text-slate-500';
-                    const bellTitle = q.notifyEnabled ? 'Alerts active for this doubt' : 'Enable reply alert';
-                    bellButtonHTML = `
-                        <button onclick="toggleQuestionBell('${q.id}')" title="${bellTitle}" class="w-7 h-7 shrink-0 rounded-full ${bellClass} flex items-center justify-center text-xs transition-all shadow-sm">
-                            <i class="fas fa-bell"></i>
-                        </button>
-                    `;
-                }
 
                 container.innerHTML += `
                     <div class="real-glass rounded-2xl p-5 sm:p-6 transition-all duration-200 hover:border-blue-200 shadow-sm relative">
@@ -541,10 +493,7 @@
                                 ${categoryBadge}
                                 ${isMyQuestion ? `<span class="px-2 py-0.5 bg-purple-50 border border-purple-200 text-purple-700 text-[9px] font-bold rounded">Submitted By You</span>` : ''}
                             </div>
-                            <div class="flex items-center gap-2">
-                                ${bellButtonHTML}
-                                <span class="text-[10px] font-bold text-slate-400 font-mono-code"><i class="far fa-clock"></i> ${dateStr}</span>
-                            </div>
+                            <span class="text-[10px] font-bold text-slate-400 font-mono-code"><i class="far fa-clock"></i> ${dateStr}</span>
                         </div>
 
                         <h3 class="font-black text-slate-800 text-base sm:text-lg leading-snug mb-2">${q.title}</h3>
@@ -553,15 +502,15 @@
                         ${q.status === 'approved' ? `
                             <div class="inner-glass p-4 rounded-xl border border-emerald-100/80 mt-3 bg-emerald-50/30">
                                 <div class="flex items-center gap-2 mb-1.5">
-                                    <span class="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px] shrink-0"><i class="fas fa-check"></i></span>
+                                    <span class="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px]"><i class="fas fa-check"></i></span>
                                     <span class="text-xs font-black text-emerald-900">Admin Answer</span>
                                 </div>
                                 <p class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">${q.answer}</p>
                             </div>
                         ` : `
                             <div class="inner-glass p-3 rounded-xl border border-amber-200/60 mt-3 bg-amber-50/40 text-amber-800 text-xs font-medium flex items-center gap-2">
-                                <i class="fas fa-info-circle text-amber-500 shrink-0"></i>
-                                <span>Submitted! An admin will review and publish the answer here shortly.</span>
+                                <i class="fas fa-info-circle text-amber-500"></i>
+                                <span>Submitted! An admin will review and verify the answer shortly.</span>
                             </div>
                         `}
 
@@ -574,56 +523,78 @@
             });
         }
 
-        // --- ADMIN MODERATION QUEUE & HASH AUTH ---
+        // --- ADMIN AUTH & MODERATION ---
         window.toggleAdminPanel = function() {
             const panel = document.getElementById('admin-panel');
             panel.classList.toggle('hidden');
             if (!panel.classList.contains('hidden')) {
                 panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-        }
+        };
 
-        async function hashString(str) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(str);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        window.verifyAdminAccess = async function() {
-            const pass = document.getElementById('admin-pass').value.trim();
-            const userHash = await hashString(pass);
-
-            if (userHash === ADMIN_KEY_HASH) {
-                isAdminUnlocked = true;
-                document.getElementById('admin-auth-box').classList.add('hidden');
-                document.getElementById('admin-queue-list').classList.remove('hidden');
-                renderAdminQueue();
-            } else {
-                alert("Incorrect admin key.");
+        window.adminGoogleLogin = async function() {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                if (result.user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                    setAdminLoggedInUI(result.user);
+                } else {
+                    alert(`Unauthorized email (${result.user.email}). Only ${ADMIN_EMAIL} can access.`);
+                    await signOut(auth);
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Login Error: " + err.message);
             }
+        };
+
+        window.adminLogout = async function() {
+            await signOut(auth);
+            location.reload();
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            if (user && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                setAdminLoggedInUI(user);
+            }
+        });
+
+        function setAdminLoggedInUI(user) {
+            isAdminLoggedIn = true;
+            document.getElementById('admin-auth-box').classList.add('hidden');
+            document.getElementById('admin-logged-box').classList.remove('hidden');
+            document.getElementById('admin-user-info').innerText = `Logged in as: ${user.email}`;
+            document.getElementById('admin-queue-list').classList.remove('hidden');
+            listenToAdminQueue();
+        }
+
+        function listenToAdminQueue() {
+            const pendingRef = ref(db, 'qa_pending');
+            onValue(pendingRef, (snapshot) => {
+                const data = snapshot.val();
+                pendingAdminList = [];
+                if (data) {
+                    Object.keys(data).forEach(id => {
+                        pendingAdminList.push({ id, ...data[id] });
+                    });
+                }
+                renderAdminQueue();
+            });
         }
 
         function renderAdminQueue() {
             const queueList = document.getElementById('admin-queue-list');
-            const pending = allQuestions.filter(q => q.status === "pending");
-
-            if (pending.length === 0) {
+            if (pendingAdminList.length === 0) {
                 queueList.innerHTML = `<p class="text-xs font-bold text-slate-400 text-center py-4">No pending questions in queue.</p>`;
                 return;
             }
 
             queueList.innerHTML = '';
-            pending.forEach(q => {
+            pendingAdminList.forEach(q => {
                 queueList.innerHTML += `
                     <div class="inner-glass p-4 rounded-xl space-y-3 bg-white/80">
                         <div class="flex justify-between items-start">
                             <span class="text-[10px] font-black text-purple-600 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">${q.category}</span>
-                            <div class="text-right">
-                                <span class="text-[10px] text-slate-400 font-bold block">${q.author} (${q.branch})</span>
-                                ${q.phone ? `<span class="text-[10px] text-emerald-600 font-bold block mt-0.5" title="Only visible to admin"><i class="fab fa-whatsapp"></i> ${q.phone}</span>` : ''}
-                            </div>
+                            <span class="text-[10px] text-slate-400 font-bold">${q.author} (${q.branch})</span>
                         </div>
                         <h4 class="font-bold text-slate-800 text-sm">${q.title}</h4>
                         ${q.detail ? `<p class="text-xs text-slate-600">${q.detail}</p>` : ''}
@@ -646,40 +617,44 @@
                 return;
             }
 
+            const targetQ = pendingAdminList.find(q => q.id === id);
+            if (!targetQ) return;
+
             try {
-                const itemRef = ref(db, `qa_threads/${id}`);
-                await update(itemRef, {
+                // 1. Write to approved
+                await set(ref(db, `qa_approved/${id}`), {
+                    category: targetQ.category,
+                    title: targetQ.title,
+                    detail: targetQ.detail || "",
+                    author: targetQ.author,
+                    branch: targetQ.branch,
                     status: "approved",
                     answer: replyText,
+                    createdAt: targetQ.createdAt,
                     answeredAt: new Date().toISOString()
                 });
 
-                // Web Notification alert if user enabled bell
-                const targetQ = allQuestions.find(q => q.id === id);
-                if (targetQ && targetQ.notifyEnabled && "Notification" in window && Notification.permission === "granted") {
-                    new Notification("Kerala Timetable Q&A", {
-                        body: `Your doubt "${targetQ.title}" has been answered!`,
-                        icon: "https://keralatimetable.in/favicon.png"
-                    });
-                }
+                // 2. Remove from pending queue
+                await remove(ref(db, `qa_pending/${id}`));
+                alert("Question approved and published successfully!");
             } catch (err) {
                 console.error("Error approving question:", err);
+                alert("Approval failed: " + err.message);
             }
-        }
+        };
 
         window.deleteQuestion = async function(id) {
             if (confirm("Are you sure you want to delete this question?")) {
                 try {
-                    const itemRef = ref(db, `qa_threads/${id}`);
-                    await remove(itemRef);
+                    await remove(ref(db, `qa_pending/${id}`));
                 } catch (err) {
                     console.error("Error deleting question:", err);
                 }
             }
-        }
+        };
 
-        // Initialize Realtime Data
-        listenToQuestions();
+        // Start listening to approved feed on page load
+        listenToApprovedQuestions();
     </script>
 </body>
 </html>
