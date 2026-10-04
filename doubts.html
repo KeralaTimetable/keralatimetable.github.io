@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>KTU Student Q&A & Community Doubts | Kerala Timetable</title>
+    <meta name="description" content="Ask questions and clear doubts anonymously or with your name about KTU B.Tech exams, syllabus, 2024 scheme rules, and academic guidelines.">
+    <link rel="icon" href="https://keralatimetable.in/favicon.png" type="image/png">
+
+    <!-- Tailwind CSS with CDN Fallback -->
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow-x: hidden;
+            background: 
+                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.65) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(254, 243, 199, 0.5) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(219, 234, 254, 0.6) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.5) 0px, transparent 50%),
+                #f8fafc;
+            min-height: 100vh;
+        }
+
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        .real-glass {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.95);
+            border-left: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 20px 40px -15px rgba(31, 38, 135, 0.06), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1.5px solid rgba(203, 213, 225, 0.8);
+            color: #0f172a;
+            transition: all 0.25s ease;
+        }
+
+        .glass-input:focus {
+            outline: none;
+            background: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
+        }
+
+        @keyframes float-pulse {
+            0%, 100% { transform: scale(1) translateY(0); opacity: 0.45; }
+            50% { transform: scale(1.08) translateY(-10px); opacity: 0.65; }
+        }
+        .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .fade-in { animation: fadeIn 0.3s ease-in-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen flex flex-col relative text-slate-800 selection:bg-blue-600 selection:text-white">
+
+    <!-- Global Header Navigation -->
+    <div id="navigation-container" class="z-50 relative"></div>
+
+    <!-- Parallax Ambient Lights -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div id="scroll-bg-1" class="absolute -top-10 -left-10 w-72 h-72 md:w-96 md:h-96">
+            <div class="w-full h-full bg-blue-300/40 rounded-full mix-blend-multiply filter blur-[80px] orb-pulse"></div>
+        </div>
+        <div id="scroll-bg-2" class="absolute top-[40%] -right-10 w-80 h-80 md:w-[30rem] md:h-[30rem]">
+            <div class="w-full h-full bg-purple-300/40 rounded-full mix-blend-multiply filter blur-[90px] orb-pulse" style="animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+    <!-- MAIN BODY -->
+    <main class="flex-grow w-full max-w-4xl mx-auto px-3.5 sm:px-6 pt-8 sm:pt-12 pb-16 relative z-10 flex flex-col items-center">
+        
+        <!-- Hero Header -->
+        <div class="text-center mb-8 max-w-2xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md shadow-sm border border-slate-200/80 text-blue-600 text-xs font-black uppercase tracking-wider mb-4">
+                <i class="fas fa-comments text-blue-500"></i> KTU Student Doubt Vault
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight mb-3">
+                Ask Questions. <br class="hidden sm:inline">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">Get Verified KTU Answers.</span>
+            </h1>
+            <p class="text-slate-600 font-medium text-sm sm:text-base">
+                Submit your doubts about schemes, exams, evaluations, or B.Tech subjects. Choose to remain anonymous or post with your name.
+            </p>
+        </div>
+
+        <!-- Action Cards Bar -->
+        <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            <button onclick="openAskModal()" class="real-glass p-5 rounded-2xl flex items-center justify-between group hover:border-blue-300 transition-all shadow-sm active:scale-[0.99] text-left">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-black text-slate-800 text-base">Ask a Question</h2>
+                        <p class="text-xs text-slate-500 font-semibold">Post anonymously or with name</p>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+            </button>
+
+            <button onclick="toggleAdminPanel()" class="real-glass p-5 rounded-2xl flex items-center justify-between group hover:border-purple-300 transition-all shadow-sm active:scale-[0.99] text-left">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-slate-900 text-white rounded-xl flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fas fa-user-shield text-purple-400"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-black text-slate-800 text-base">Admin Moderation</h2>
+                        <p class="text-xs text-slate-500 font-semibold">Review & approve pending doubts</p>
+                    </div>
+                </div>
+                <i class="fas fa-lock text-slate-400 group-hover:text-purple-600 transition-colors"></i>
+            </button>
+        </div>
+
+        <!-- Category Search & Filter -->
+        <div class="w-full real-glass rounded-2xl p-3 mb-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="relative w-full sm:w-72">
+                <i class="fas fa-search absolute left-3.5 top-3 text-slate-400 text-sm"></i>
+                <input type="text" id="filterInput" onkeyup="filterQuestions()" placeholder="Search doubts..." class="glass-input w-full rounded-xl py-2 pl-9 pr-4 text-xs sm:text-sm">
+            </div>
+            <div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto hide-scrollbar">
+                <button onclick="setCategoryFilter('All')" id="cat-all" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 whitespace-nowrap">All Doubts</button>
+                <button onclick="setCategoryFilter('Academics')" id="cat-academics" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white/60 whitespace-nowrap">Academics</button>
+                <button onclick="setCategoryFilter('Exams')" id="cat-exams" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white/60 whitespace-nowrap">Exams & Valuation</button>
+                <button onclick="setCategoryFilter('General')" id="cat-general" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white/60 whitespace-nowrap">General</button>
+            </div>
+        </div>
+
+        <!-- Approved Public Questions Feed -->
+        <div id="public-questions-container" class="w-full space-y-4 min-h-[250px]">
+            <div id="loading-spinner" class="flex flex-col items-center justify-center py-12">
+                <i class="fas fa-spinner fa-spin text-2xl text-blue-600 mb-2"></i>
+                <p class="text-xs font-bold text-slate-500 font-mono-code">Fetching community questions...</p>
+            </div>
+        </div>
+
+        <!-- Admin Drawer / Section (Hidden by default) -->
+        <div id="admin-panel" class="hidden w-full mt-10 pt-8 border-t border-slate-300/60 fade-in">
+            <div class="real-glass p-6 sm:p-8 rounded-[2rem] border-2 border-purple-200">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-xl font-black text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-shield-halved text-purple-600"></i> Admin Moderation Queue
+                        </h2>
+                        <p class="text-xs font-bold text-slate-500">Approve pending questions or publish replies</p>
+                    </div>
+                    <button onclick="toggleAdminPanel()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fas fa-times"></i></button>
+                </div>
+
+                <div id="admin-auth-box" class="mb-6 inner-glass p-4 rounded-xl flex gap-3 items-center">
+                    <input type="password" id="admin-pass" placeholder="Enter admin key" class="glass-input px-4 py-2 rounded-lg text-sm flex-1">
+                    <button onclick="verifyAdminAccess()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-5 py-2 rounded-lg text-xs shadow-md">Unlock Queue</button>
+                </div>
+
+                <div id="admin-queue-list" class="hidden space-y-4">
+                    <p class="text-xs font-bold text-slate-400 text-center py-4">No pending questions in queue.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ASK QUESTION MODAL -->
+    <div id="askModal" class="hidden fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="real-glass bg-white/90 rounded-[2rem] p-6 sm:p-8 w-full max-w-lg shadow-2xl relative fade-in border border-white">
+            <button onclick="closeAskModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 text-lg"><i class="fas fa-times"></i></button>
+            
+            <h2 class="text-xl font-black text-slate-900 mb-1 flex items-center gap-2">
+                <i class="fas fa-question-circle text-blue-600"></i> Submit Your KTU Doubt
+            </h2>
+            <p class="text-xs text-slate-500 font-bold mb-5">Your query will be answered by our team and published once reviewed.</p>
+
+            <form id="qaForm" onsubmit="submitQuestion(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Category</label>
+                    <select id="qaCategory" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-semibold">
+                        <option value="Academics">Academics & Syllabus</option>
+                        <option value="Exams">Exams & Valuation Rules</option>
+                        <option value="General">General / Advice</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Question / Doubt Title</label>
+                    <input type="text" id="qaTitle" placeholder="e.g. Is 2024 Scheme passing mark separate for internal & end sem?" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-semibold" required>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Detailed Explanation (Optional)</label>
+                    <textarea id="qaDetail" rows="3" placeholder="Provide extra context if needed..." class="glass-input w-full rounded-xl p-4 text-sm font-semibold"></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Your Name</label>
+                        <input type="text" id="qaAuthor" placeholder="Anonymous Student" class="glass-input w-full rounded-xl px-4 py-2.5 text-xs font-semibold">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Branch / Sem</label>
+                        <input type="text" id="qaBranch" placeholder="e.g. S2 CSE" class="glass-input w-full rounded-xl px-4 py-2.5 text-xs font-semibold">
+                    </div>
+                </div>
+
+                <!-- Bell Button Notification Toggle -->
+                <div class="inner-glass p-3.5 rounded-xl flex items-center justify-between border border-blue-100">
+                    <div class="flex items-center gap-3">
+                        <button type="button" id="bell-toggle-btn" onclick="toggleNotificationPreference()" class="w-9 h-9 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center transition-all">
+                            <i class="fas fa-bell"></i>
+                        </button>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-bold text-slate-800">Reply Alert Bell</span>
+                            <span id="bell-status-text" class="text-[10px] text-slate-500 font-semibold">Get browser notification when answered</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" id="qaSubmitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all text-sm flex items-center justify-center gap-2">
+                    Submit Doubt <i class="fas fa-paper-plane text-xs"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/components.js?v=16" onerror="this.onerror=null;this.src='components.js';"></script>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // --- FIREBASE CONFIGURATION ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
+            authDomain: "kerala-timetable-db.firebaseapp.com",
+            databaseURL: "https://kerala-timetable-db-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "kerala-timetable-db",
+            storageBucket: "kerala-timetable-db.firebasestorage.app",
+            messagingSenderId: "527439836518",
+            appId: "1:527439836518:web:af7725a5bf07d6a4f584a7"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // State Variables
+        let allQuestions = [];
+        let activeCategory = 'All';
+        let isBellActive = false;
+        let isAdminUnlocked = false;
+
+        if (typeof loadNavigation === 'function') loadNavigation('qa', '', false);
+
+        // --- MODAL CONTROLS ---
+        window.openAskModal = function() {
+            document.getElementById('askModal').classList.remove('hidden');
+        }
+
+        window.closeAskModal = function() {
+            document.getElementById('askModal').classList.add('hidden');
+        }
+
+        // --- BELL NOTIFICATION PREFERENCE ---
+        window.toggleNotificationPreference = async function() {
+            const bellBtn = document.getElementById('bell-toggle-btn');
+            const statusText = document.getElementById('bell-status-text');
+
+            if (!isBellActive) {
+                if ("Notification" in window) {
+                    const permission = await Notification.requestPermission();
+                    if (permission === "granted") {
+                        isBellActive = true;
+                        bellBtn.className = "w-9 h-9 rounded-full bg-amber-500 text-white flex items-center justify-center shadow-md animate-bounce";
+                        statusText.innerText = "Alerts Enabled! We'll notify you on reply.";
+                        statusText.classList.add("text-amber-600", "font-bold");
+                    } else {
+                        alert("Please allow notification permissions in your browser to receive reply alerts.");
+                    }
+                } else {
+                    alert("Browser notifications are not supported on this device.");
+                }
+            } else {
+                isBellActive = false;
+                bellBtn.className = "w-9 h-9 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center";
+                statusText.innerText = "Get browser notification when answered";
+                statusText.classList.remove("text-amber-600", "font-bold");
+            }
+        }
+
+        // --- SUBMIT QUESTION TO FIREBASE ---
+        window.submitQuestion = async function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('qaSubmitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin text-xs"></i> Submitting...`;
+
+            const category = document.getElementById('qaCategory').value;
+            const title = document.getElementById('qaTitle').value.trim();
+            const detail = document.getElementById('qaDetail').value.trim();
+            const author = document.getElementById('qaAuthor').value.trim() || "Anonymous Student";
+            const branch = document.getElementById('qaBranch').value.trim() || "KTU Student";
+
+            try {
+                const qaRef = ref(db, 'qa_threads');
+                const newQaRef = push(qaRef);
+
+                await set(newQaRef, {
+                    category: category,
+                    title: title,
+                    detail: detail,
+                    author: author,
+                    branch: branch,
+                    status: "pending",
+                    notifyEnabled: isBellActive,
+                    createdAt: new Date().toISOString(),
+                    answer: ""
+                });
+
+                alert("Your question has been submitted successfully! It will appear on the feed once verified by an admin.");
+                document.getElementById('qaForm').reset();
+                closeAskModal();
+            } catch (err) {
+                console.error("Error submitting question:", err);
+                alert("Failed to submit question. Please try again.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `Submit Doubt <i class="fas fa-paper-plane text-xs"></i>`;
+            }
+        }
+
+        // --- FETCH & REALTIME LISTENERS ---
+        function listenToQuestions() {
+            const qaRef = ref(db, 'qa_threads');
+            onValue(qaRef, (snapshot) => {
+                const data = snapshot.val();
+                allQuestions = [];
+                if (data) {
+                    Object.keys(data).forEach(id => {
+                        allQuestions.push({ id, ...data[id] });
+                    });
+                }
+                renderPublicFeed();
+                if (isAdminUnlocked) renderAdminQueue();
+            });
+        }
+
+        window.setCategoryFilter = function(cat) {
+            activeCategory = cat;
+            ['all', 'academics', 'exams', 'general'].forEach(c => {
+                const btn = document.getElementById(`cat-${c}`);
+                if (btn) {
+                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-white/60 whitespace-nowrap";
+                }
+            });
+            const activeBtn = document.getElementById(`cat-${cat.toLowerCase()}`);
+            if (activeBtn) activeBtn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 whitespace-nowrap";
+
+            renderPublicFeed();
+        }
+
+        window.filterQuestions = function() {
+            renderPublicFeed();
+        }
+
+        function renderPublicFeed() {
+            const container = document.getElementById('public-questions-container');
+            const searchVal = document.getElementById('filterInput').value.toLowerCase().trim();
+
+            let approved = allQuestions.filter(q => q.status === "approved");
+
+            if (activeCategory !== 'All') {
+                approved = approved.filter(q => q.category === activeCategory);
+            }
+
+            if (searchVal) {
+                approved = approved.filter(q => 
+                    q.title.toLowerCase().includes(searchVal) || 
+                    (q.detail && q.detail.toLowerCase().includes(searchVal)) ||
+                    (q.answer && q.answer.toLowerCase().includes(searchVal))
+                );
+            }
+
+            if (approved.length === 0) {
+                container.innerHTML = `
+                    <div class="real-glass rounded-2xl p-8 text-center text-slate-500">
+                        <i class="fas fa-comments text-3xl text-slate-300 mb-2"></i>
+                        <p class="font-bold text-sm">No answered doubts found in this category.</p>
+                        <button onclick="openAskModal()" class="mt-3 text-xs text-blue-600 font-bold hover:underline">Be the first to ask!</button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+            approved.reverse().forEach(q => {
+                const dateStr = new Date(q.createdAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' });
+                
+                container.innerHTML += `
+                    <div class="real-glass rounded-2xl p-5 sm:p-6 transition-all duration-200 hover:border-blue-200 shadow-sm">
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <span class="px-2.5 py-0.5 bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-extrabold uppercase rounded-md">${q.category}</span>
+                            <span class="text-[10px] font-bold text-slate-400 font-mono-code"><i class="far fa-clock"></i> ${dateStr}</span>
+                        </div>
+                        <h3 class="font-black text-slate-800 text-base sm:text-lg leading-snug mb-2">${q.title}</h3>
+                        ${q.detail ? `<p class="text-xs sm:text-sm text-slate-600 mb-4 leading-relaxed">${q.detail}</p>` : ''}
+                        
+                        <div class="inner-glass p-4 rounded-xl border border-blue-100/80 mt-3 bg-white/70">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center text-[10px]"><i class="fas fa-check"></i></span>
+                                <span class="text-xs font-black text-slate-800">Admin Answer</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">${q.answer}</p>
+                        </div>
+
+                        <div class="mt-3 flex justify-between items-center text-[10px] font-bold text-slate-400 pt-2 border-t border-white/60">
+                            <span><i class="fas fa-user-circle text-slate-400"></i> ${q.author} (${q.branch})</span>
+                            <span class="text-emerald-600"><i class="fas fa-shield-check"></i> Verified Answer</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- ADMIN MODERATION QUEUE ---
+        window.toggleAdminPanel = function() {
+            const panel = document.getElementById('admin-panel');
+            panel.classList.toggle('hidden');
+        }
+
+        window.verifyAdminAccess = function() {
+            const pass = document.getElementById('admin-pass').value;
+            // Basic client key check for moderation view
+            if (pass === "ktuadmin55") {
+                isAdminUnlocked = true;
+                document.getElementById('admin-auth-box').classList.add('hidden');
+                document.getElementById('admin-queue-list').classList.remove('hidden');
+                renderAdminQueue();
+            } else {
+                alert("Incorrect admin key.");
+            }
+        }
+
+        function renderAdminQueue() {
+            const queueList = document.getElementById('admin-queue-list');
+            const pending = allQuestions.filter(q => q.status === "pending");
+
+            if (pending.length === 0) {
+                queueList.innerHTML = `<p class="text-xs font-bold text-slate-400 text-center py-4">No pending questions in queue.</p>`;
+                return;
+            }
+
+            queueList.innerHTML = '';
+            pending.forEach(q => {
+                queueList.innerHTML += `
+                    <div class="inner-glass p-4 rounded-xl space-y-3 bg-white/80">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[10px] font-black text-purple-600 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">${q.category}</span>
+                            <span class="text-[10px] text-slate-400 font-bold">${q.author} (${q.branch})</span>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-sm">${q.title}</h4>
+                        ${q.detail ? `<p class="text-xs text-slate-600">${q.detail}</p>` : ''}
+                        
+                        <textarea id="reply-${q.id}" rows="2" placeholder="Type verified admin answer here..." class="glass-input w-full p-2.5 text-xs rounded-lg"></textarea>
+                        
+                        <div class="flex gap-2 justify-end">
+                            <button onclick="deleteQuestion('${q.id}')" class="px-3 py-1.5 bg-rose-100 hover:bg-rose-200 text-rose-700 text-xs font-bold rounded-lg transition-colors">Delete</button>
+                            <button onclick="approveQuestion('${q.id}')" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg shadow transition-colors">Approve & Publish</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        window.approveQuestion = async function(id) {
+            const replyText = document.getElementById(`reply-${id}`).value.trim();
+            if (!replyText) {
+                alert("Please write an answer before approving.");
+                return;
+            }
+
+            try {
+                const itemRef = ref(db, `qa_threads/${id}`);
+                await update(itemRef, {
+                    status: "approved",
+                    answer: replyText,
+                    answeredAt: new Date().toISOString()
+                });
+                
+                // Trigger Web Notification alert if user enabled bell
+                const targetQ = allQuestions.find(q => q.id === id);
+                if (targetQ && targetQ.notifyEnabled && "Notification" in window && Notification.permission === "granted") {
+                    new Notification("Kerala Timetable Q&A", {
+                        body: `Your doubt "${targetQ.title}" has been answered!`,
+                        icon: "https://keralatimetable.in/favicon.png"
+                    });
+                }
+            } catch (err) {
+                console.error("Error approving question:", err);
+            }
+        }
+
+        window.deleteQuestion = async function(id) {
+            if (confirm("Are you sure you want to delete this question?")) {
+                try {
+                    const itemRef = ref(db, `qa_threads/${id}`);
+                    await remove(itemRef);
+                } catch (err) {
+                    console.error("Error deleting question:", err);
+                }
+            }
+        }
+
+        // Initialize Realtime Data
+        listenToQuestions();
+    </script>
+</body>
+</html>
