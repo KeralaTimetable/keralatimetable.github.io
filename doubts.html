@@ -163,9 +163,9 @@
                     <button onclick="toggleAdminPanel()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fas fa-times"></i></button>
                 </div>
 
-                <!-- Google Auth Box -->
+                <!-- Google Auth Box (Email Hidden) -->
                 <div id="admin-auth-box" class="mb-6 inner-glass p-5 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-3">
-                    <p class="text-xs font-bold text-slate-600">Authenticate with <b class="text-purple-700">keralatimetable@gmail.com</b> to access moderation.</p>
+                    <p class="text-xs font-bold text-slate-600">Admin sign-in required to access moderation queue.</p>
                     <button onclick="adminGoogleLogin()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow-md flex items-center gap-2 transition-all">
                         <i class="fab fa-google"></i> Sign In with Google
                     </button>
@@ -272,7 +272,7 @@
         import { getDatabase, ref, push, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // --- NEW FIREBASE PROJECT CONFIGURATION ---
+        // --- FIREBASE CONFIGURATION ---
         const firebaseConfig = {
             apiKey: "AIzaSyAqJ6wDmjJKCVip3dhgBDi35BzxC0QhIac",
             authDomain: "keralatimetable-5e155.firebaseapp.com",
@@ -284,7 +284,6 @@
             measurementId: "G-G2WYE8SQ4S"
         };
 
-        // Verified Admin Email
         const ADMIN_EMAIL = "keralatimetable@gmail.com";
 
         const app = initializeApp(firebaseConfig);
@@ -299,7 +298,11 @@
         let isModalBellActive = false;
         let isAdminLoggedIn = false;
 
-        if (typeof loadNavigation === 'function') loadNavigation('qa', '', false);
+        // Load Header Navigation
+        if (typeof loadNavigation === 'function') {
+            try { loadNavigation('doubts', '', false); } 
+            catch (e) { loadNavigation('qa', '', false); }
+        }
 
         // --- LOCAL STORAGE FOR PERSONAL SUBMISSIONS ---
         function getMyLocalPending() {
@@ -443,7 +446,6 @@
             let feedList = [];
 
             if (activeCategory === 'My') {
-                // Combine locally remembered pending questions + approved ones
                 const myLocalPending = getMyLocalPending().filter(p => !approvedQuestions.some(a => a.id === p.id));
                 const myApproved = approvedQuestions.filter(q => myIds.includes(q.id));
                 feedList = [...myLocalPending, ...myApproved];
@@ -538,7 +540,7 @@
                 if (result.user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
                     setAdminLoggedInUI(result.user);
                 } else {
-                    alert(`Unauthorized email (${result.user.email}). Only ${ADMIN_EMAIL} can access.`);
+                    alert("Access denied. This Google account is not authorized.");
                     await signOut(auth);
                 }
             } catch (err) {
@@ -562,7 +564,7 @@
             isAdminLoggedIn = true;
             document.getElementById('admin-auth-box').classList.add('hidden');
             document.getElementById('admin-logged-box').classList.remove('hidden');
-            document.getElementById('admin-user-info').innerText = `Logged in as: ${user.email}`;
+            document.getElementById('admin-user-info').innerText = "Admin Session Active";
             document.getElementById('admin-queue-list').classList.remove('hidden');
             listenToAdminQueue();
         }
@@ -621,7 +623,6 @@
             if (!targetQ) return;
 
             try {
-                // 1. Write to approved
                 await set(ref(db, `qa_approved/${id}`), {
                     category: targetQ.category,
                     title: targetQ.title,
@@ -634,7 +635,6 @@
                     answeredAt: new Date().toISOString()
                 });
 
-                // 2. Remove from pending queue
                 await remove(ref(db, `qa_pending/${id}`));
                 alert("Question approved and published successfully!");
             } catch (err) {
@@ -653,7 +653,6 @@
             }
         };
 
-        // Start listening to approved feed on page load
         listenToApprovedQuestions();
     </script>
 </body>
