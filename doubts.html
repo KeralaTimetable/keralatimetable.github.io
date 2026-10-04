@@ -69,8 +69,10 @@
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        .fade-in { animation: fadeIn 0.3s ease-in-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.25s ease-in-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+        .chevron-icon { transition: transform 0.25s ease; }
     </style>
 </head>
 
@@ -163,7 +165,7 @@
                     <button onclick="toggleAdminPanel()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fas fa-times"></i></button>
                 </div>
 
-                <!-- Google Auth Box (Email Hidden) -->
+                <!-- Google Auth Box -->
                 <div id="admin-auth-box" class="mb-6 inner-glass p-5 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-3">
                     <p class="text-xs font-bold text-slate-600">Admin sign-in required to access moderation queue.</p>
                     <button onclick="adminGoogleLogin()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow-md flex items-center gap-2 transition-all">
@@ -304,6 +306,58 @@
             catch (e) { loadNavigation('qa', '', false); }
         }
 
+        // --- AUTOMATIC LINK DETECTOR & PARAGRAPH FORMATTER ---
+        window.formatContent = function(rawText) {
+            if (!rawText) return "";
+
+            // 1. Sanitize HTML
+            const div = document.createElement('div');
+            div.textContent = rawText;
+            let text = div.innerHTML;
+
+            // 2. Detect and convert URLs into clickable blue links
+            const urlPattern = /(\b(?:https?:\/\/|www\.)[^\s<]+|\b[a-zA-Z0-9.-]+\.(?:in|com|org|net|edu|gov|co|me|tech)[^\s<]*)/gi;
+
+            text = text.replace(urlPattern, function(url) {
+                let cleanUrl = url;
+                let trailingPunctuation = '';
+                
+                // Don't include trailing periods/commas/brackets into the link
+                while (/[.,!?;:)\]]$/.test(cleanUrl)) {
+                    trailingPunctuation = cleanUrl.slice(-1) + trailingPunctuation;
+                    cleanUrl = cleanUrl.slice(0, -1);
+                }
+
+                let href = cleanUrl;
+                if (!/^https?:\/\//i.test(href)) {
+                    href = 'https://' + href;
+                }
+
+                return `<a href="${href}" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold underline hover:text-blue-800 break-all transition-colors">${cleanUrl}</a>${trailingPunctuation}`;
+            });
+
+            // 3. Preserve paragraph breaks
+            return text.replace(/\n/g, '<br>');
+        };
+
+        // --- SHOW / HIDE ANSWER TOGGLE ---
+        window.toggleAnswer = function(id) {
+            const answerBox = document.getElementById(`answer-box-${id}`);
+            const arrowIcon = document.getElementById(`arrow-${id}`);
+            const btnText = document.getElementById(`toggle-text-${id}`);
+            if (!answerBox) return;
+
+            if (answerBox.classList.contains('hidden')) {
+                answerBox.classList.remove('hidden');
+                if (arrowIcon) arrowIcon.style.transform = 'rotate(180deg)';
+                if (btnText) btnText.innerText = "Hide Answer";
+            } else {
+                answerBox.classList.add('hidden');
+                if (arrowIcon) arrowIcon.style.transform = 'rotate(0deg)';
+                if (btnText) btnText.innerText = "View Verified Answer";
+            }
+        };
+
         // --- LOCAL STORAGE FOR PERSONAL SUBMISSIONS ---
         function getMyLocalPending() {
             try { return JSON.parse(localStorage.getItem('kt_my_pending_doubts') || '[]'); }
@@ -381,7 +435,6 @@
                 const newRef = push(pendingRef);
                 await set(newRef, newDoubt);
 
-                // Save to local storage for "By You" view
                 saveMyQuestionId(newRef.key);
                 saveMyLocalPending({ id: newRef.key, ...newDoubt });
 
@@ -499,15 +552,29 @@
                         </div>
 
                         <h3 class="font-black text-slate-800 text-base sm:text-lg leading-snug mb-2">${q.title}</h3>
-                        ${q.detail ? `<p class="text-xs sm:text-sm text-slate-600 mb-3 leading-relaxed">${q.detail}</p>` : ''}
+                        ${q.detail ? `<div class="text-xs sm:text-sm text-slate-600 mb-3 leading-relaxed">${formatContent(q.detail)}</div>` : ''}
                         
                         ${q.status === 'approved' ? `
-                            <div class="inner-glass p-4 rounded-xl border border-emerald-100/80 mt-3 bg-emerald-50/30">
-                                <div class="flex items-center gap-2 mb-1.5">
-                                    <span class="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px]"><i class="fas fa-check"></i></span>
+                            <!-- Collapsible View Answer Button -->
+                            <button onclick="toggleAnswer('${q.id}')" class="w-full mt-3 py-2.5 px-4 rounded-xl bg-emerald-50/90 hover:bg-emerald-100/90 border border-emerald-200/90 text-emerald-800 text-xs font-bold flex items-center justify-between transition-all active:scale-[0.99] group shadow-sm">
+                                <span class="flex items-center gap-2">
+                                    <span class="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px] shadow-sm"><i class="fas fa-check"></i></span>
+                                    <span id="toggle-text-${q.id}" class="font-extrabold text-emerald-950">View Verified Answer</span>
+                                </span>
+                                <span class="flex items-center gap-1.5 text-xs text-emerald-700">
+                                    <i id="arrow-${q.id}" class="fas fa-chevron-down chevron-icon"></i>
+                                </span>
+                            </button>
+
+                            <!-- Hidden Collapsible Answer Container -->
+                            <div id="answer-box-${q.id}" class="hidden inner-glass p-4 rounded-xl border border-emerald-100/90 mt-2.5 bg-emerald-50/30 fade-in text-left">
+                                <div class="flex items-center gap-2 mb-2 pb-1.5 border-b border-emerald-100/80">
+                                    <span class="w-4 h-4 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[8px]"><i class="fas fa-shield-check"></i></span>
                                     <span class="text-xs font-black text-emerald-900">Admin Answer</span>
                                 </div>
-                                <p class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">${q.answer}</p>
+                                <div class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+                                    ${formatContent(q.answer)}
+                                </div>
                             </div>
                         ` : `
                             <div class="inner-glass p-3 rounded-xl border border-amber-200/60 mt-3 bg-amber-50/40 text-amber-800 text-xs font-medium flex items-center gap-2">
@@ -601,7 +668,7 @@
                         <h4 class="font-bold text-slate-800 text-sm">${q.title}</h4>
                         ${q.detail ? `<p class="text-xs text-slate-600">${q.detail}</p>` : ''}
                         
-                        <textarea id="reply-${q.id}" rows="2" placeholder="Type verified admin answer here..." class="glass-input w-full p-2.5 text-xs rounded-lg"></textarea>
+                        <textarea id="reply-${q.id}" rows="4" placeholder="Type verified admin answer here..." class="glass-input w-full p-2.5 text-xs rounded-lg"></textarea>
                         
                         <div class="flex gap-2 justify-end">
                             <button onclick="deleteQuestion('${q.id}')" class="px-3 py-1.5 bg-rose-100 hover:bg-rose-200 text-rose-700 text-xs font-bold rounded-lg transition-colors">Delete</button>
