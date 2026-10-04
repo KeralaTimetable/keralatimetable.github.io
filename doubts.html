@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <title>KTU Student Q&A & Community Doubts | Kerala Timetable</title>
     <meta name="description" content="Ask questions and clear doubts anonymously or with your name about KTU B.Tech exams, syllabus, 2024 scheme rules, and academic guidelines.">
-    <link rel="canonical" href="https://keralatimetable.in/qa.html" />
+    <link rel="canonical" href="https://keralatimetable.in/doubts.html" />
     <link rel="icon" href="https://keralatimetable.in/favicon.png" type="image/png">
 
     <!-- Tailwind CSS with CDN Fallback -->
@@ -106,19 +106,19 @@
             </p>
         </div>
 
-        <!-- Action Card CTA -->
+        <!-- Action Card CTA (Mobile & Desktop Optimized) -->
         <div class="w-full mb-8">
-            <button onclick="openAskModal()" class="w-full real-glass p-5 sm:p-6 rounded-2xl flex items-center justify-between group hover:border-blue-300 transition-all shadow-sm active:scale-[0.99] text-left">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition-transform">
+            <button onclick="openAskModal()" class="w-full real-glass p-4 sm:p-6 rounded-2xl flex items-center justify-between group hover:border-blue-300 transition-all shadow-sm active:scale-[0.99] text-left gap-3">
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center text-lg sm:text-xl shadow-md group-hover:scale-105 transition-transform shrink-0">
                         <i class="fas fa-paper-plane"></i>
                     </div>
                     <div>
-                        <h2 class="font-black text-slate-800 text-base sm:text-lg">Ask a Question</h2>
-                        <p class="text-xs text-slate-500 font-semibold">Post anonymously or with your name</p>
+                        <h2 class="font-black text-slate-800 text-sm sm:text-lg leading-tight">Ask a Question</h2>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-semibold mt-0.5">Post anonymously or with your name</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-2 text-blue-600 font-bold text-xs sm:text-sm">
+                <div class="flex items-center gap-1.5 sm:gap-2 text-blue-600 font-bold text-[11px] sm:text-sm bg-blue-50/50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border border-blue-100 group-hover:bg-blue-100 transition-colors shrink-0">
                     <span>Submit</span>
                     <i class="fas fa-chevron-right group-hover:translate-x-1 transition-transform"></i>
                 </div>
@@ -178,7 +178,7 @@
 
     <!-- ASK QUESTION MODAL -->
     <div id="askModal" class="hidden fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="real-glass bg-white/90 rounded-[2rem] p-6 sm:p-8 w-full max-w-lg shadow-2xl relative fade-in border border-white">
+        <div class="real-glass bg-white/90 rounded-[2rem] p-5 sm:p-8 w-full max-w-lg shadow-2xl relative fade-in border border-white max-h-[90vh] overflow-y-auto hide-scrollbar">
             <button onclick="closeAskModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 text-lg"><i class="fas fa-times"></i></button>
             
             <h2 class="text-xl font-black text-slate-900 mb-1 flex items-center gap-2">
@@ -186,10 +186,10 @@
             </h2>
             <p class="text-xs text-slate-500 font-bold mb-5">Your query will be answered by our team and published once reviewed.</p>
 
-            <form id="qaForm" onsubmit="submitQuestion(event)" class="space-y-4">
+            <form id="qaForm" onsubmit="submitQuestion(event)" class="space-y-3 sm:space-y-4">
                 <div>
                     <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Category</label>
-                    <select id="qaCategory" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-semibold">
+                    <select id="qaCategory" class="glass-input w-full rounded-xl px-4 py-2.5 sm:py-3 text-sm font-semibold">
                         <option value="Academics">Academics & Syllabus</option>
                         <option value="Exams">Exams & Valuation Rules</option>
                         <option value="General">General / Advice</option>
@@ -198,18 +198,18 @@
 
                 <div>
                     <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Question / Doubt Title</label>
-                    <input type="text" id="qaTitle" placeholder="e.g. Is 2024 Scheme passing mark separate for internal & end sem?" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-semibold" required>
+                    <input type="text" id="qaTitle" placeholder="e.g. Is 2024 Scheme passing mark separate for internal & end sem?" class="glass-input w-full rounded-xl px-4 py-2.5 sm:py-3 text-sm font-semibold" required>
                 </div>
 
                 <div>
                     <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Detailed Explanation (Optional)</label>
-                    <textarea id="qaDetail" rows="3" placeholder="Provide extra context if needed..." class="glass-input w-full rounded-xl p-4 text-sm font-semibold"></textarea>
+                    <textarea id="qaDetail" rows="2" placeholder="Provide extra context if needed..." class="glass-input w-full rounded-xl p-4 text-sm font-semibold"></textarea>
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Your Name</label>
-                        <input type="text" id="qaAuthor" placeholder="Anonymous Student" class="glass-input w-full rounded-xl px-4 py-2.5 text-xs font-semibold">
+                        <input type="text" id="qaAuthor" placeholder="Anonymous" class="glass-input w-full rounded-xl px-4 py-2.5 text-xs font-semibold">
                     </div>
                     <div>
                         <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Branch / Sem</label>
@@ -217,20 +217,28 @@
                     </div>
                 </div>
 
+                <!-- Optional WhatsApp Number -->
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
+                        WhatsApp Number <span class="text-blue-500 bg-blue-50 px-1.5 py-0.5 rounded ml-1 lowercase tracking-normal">Optional</span>
+                    </label>
+                    <input type="tel" id="qaPhone" placeholder="Not required. Add only if you need 1-on-1 assistance." class="glass-input w-full rounded-xl px-4 py-2.5 text-xs font-semibold">
+                </div>
+
                 <!-- Bell Button Notification Toggle -->
                 <div class="inner-glass p-3.5 rounded-xl flex items-center justify-between border border-blue-100">
                     <div class="flex items-center gap-3">
-                        <button type="button" id="bell-toggle-btn" onclick="toggleModalNotification()" class="w-9 h-9 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center transition-all">
+                        <button type="button" id="bell-toggle-btn" onclick="toggleModalNotification()" class="w-9 h-9 shrink-0 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center transition-all">
                             <i class="fas fa-bell"></i>
                         </button>
                         <div class="flex flex-col">
                             <span class="text-xs font-bold text-slate-800">Reply Alert Bell</span>
-                            <span id="bell-status-text" class="text-[10px] text-slate-500 font-semibold">Get browser notification when answered</span>
+                            <span id="bell-status-text" class="text-[10px] text-slate-500 font-semibold leading-tight mt-0.5">Get browser notification when answered</span>
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" id="qaSubmitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all text-sm flex items-center justify-center gap-2">
+                <button type="submit" id="qaSubmitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 sm:py-3.5 rounded-xl shadow-lg transition-all text-sm flex items-center justify-center gap-2 mt-2">
                     Submit Doubt <i class="fas fa-paper-plane text-xs"></i>
                 </button>
             </form>
@@ -322,7 +330,7 @@
                     const permission = await Notification.requestPermission();
                     if (permission === "granted") {
                         isModalBellActive = true;
-                        bellBtn.className = "w-9 h-9 rounded-full bg-amber-500 text-white flex items-center justify-center shadow-md animate-bounce";
+                        bellBtn.className = "w-9 h-9 shrink-0 rounded-full bg-amber-500 text-white flex items-center justify-center shadow-md animate-bounce";
                         statusText.innerText = "Alerts Enabled! We'll notify you on reply.";
                         statusText.classList.add("text-amber-600", "font-bold");
                     } else {
@@ -333,7 +341,7 @@
                 }
             } else {
                 isModalBellActive = false;
-                bellBtn.className = "w-9 h-9 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center";
+                bellBtn.className = "w-9 h-9 shrink-0 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center";
                 statusText.innerText = "Get browser notification when answered";
                 statusText.classList.remove("text-amber-600", "font-bold");
             }
@@ -377,6 +385,7 @@
             const detail = document.getElementById('qaDetail').value.trim();
             const author = document.getElementById('qaAuthor').value.trim() || "Anonymous Student";
             const branch = document.getElementById('qaBranch').value.trim() || "KTU Student";
+            const phone = document.getElementById('qaPhone').value.trim();
 
             try {
                 const qaRef = ref(db, 'qa_threads');
@@ -388,6 +397,7 @@
                     detail: detail,
                     author: author,
                     branch: branch,
+                    phone: phone, // Saved securely in DB, not visible in public feed
                     status: "pending",
                     notifyEnabled: isModalBellActive,
                     createdAt: new Date().toISOString(),
@@ -502,7 +512,7 @@
                 const dateStr = new Date(q.createdAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' });
                 const isMyQuestion = myIds.includes(q.id);
 
-                // Updated Badge Logic: Explicitly show "Answered" in green when replied
+                // Status Badges
                 let statusBadge = '';
                 if (q.status === 'pending') {
                     statusBadge = `<span class="px-2.5 py-0.5 bg-amber-50 border border-amber-200 text-amber-700 text-[10px] font-extrabold uppercase rounded-md flex items-center gap-1"><i class="fas fa-hourglass-half"></i> Pending Review</span>`;
@@ -517,7 +527,7 @@
                     const bellClass = q.notifyEnabled ? 'bg-amber-500 text-white' : 'bg-slate-200 text-slate-500';
                     const bellTitle = q.notifyEnabled ? 'Alerts active for this doubt' : 'Enable reply alert';
                     bellButtonHTML = `
-                        <button onclick="toggleQuestionBell('${q.id}')" title="${bellTitle}" class="w-7 h-7 rounded-full ${bellClass} flex items-center justify-center text-xs transition-all shadow-sm">
+                        <button onclick="toggleQuestionBell('${q.id}')" title="${bellTitle}" class="w-7 h-7 shrink-0 rounded-full ${bellClass} flex items-center justify-center text-xs transition-all shadow-sm">
                             <i class="fas fa-bell"></i>
                         </button>
                     `;
@@ -543,14 +553,14 @@
                         ${q.status === 'approved' ? `
                             <div class="inner-glass p-4 rounded-xl border border-emerald-100/80 mt-3 bg-emerald-50/30">
                                 <div class="flex items-center gap-2 mb-1.5">
-                                    <span class="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px]"><i class="fas fa-check"></i></span>
+                                    <span class="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px] shrink-0"><i class="fas fa-check"></i></span>
                                     <span class="text-xs font-black text-emerald-900">Admin Answer</span>
                                 </div>
                                 <p class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">${q.answer}</p>
                             </div>
                         ` : `
                             <div class="inner-glass p-3 rounded-xl border border-amber-200/60 mt-3 bg-amber-50/40 text-amber-800 text-xs font-medium flex items-center gap-2">
-                                <i class="fas fa-info-circle text-amber-500"></i>
+                                <i class="fas fa-info-circle text-amber-500 shrink-0"></i>
                                 <span>Submitted! An admin will review and publish the answer here shortly.</span>
                             </div>
                         `}
@@ -610,7 +620,10 @@
                     <div class="inner-glass p-4 rounded-xl space-y-3 bg-white/80">
                         <div class="flex justify-between items-start">
                             <span class="text-[10px] font-black text-purple-600 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">${q.category}</span>
-                            <span class="text-[10px] text-slate-400 font-bold">${q.author} (${q.branch})</span>
+                            <div class="text-right">
+                                <span class="text-[10px] text-slate-400 font-bold block">${q.author} (${q.branch})</span>
+                                ${q.phone ? `<span class="text-[10px] text-emerald-600 font-bold block mt-0.5" title="Only visible to admin"><i class="fab fa-whatsapp"></i> ${q.phone}</span>` : ''}
+                            </div>
                         </div>
                         <h4 class="font-bold text-slate-800 text-sm">${q.title}</h4>
                         ${q.detail ? `<p class="text-xs text-slate-600">${q.detail}</p>` : ''}
