@@ -66,18 +66,16 @@
                 box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
             }
             
-            /* Badges & Pills (Fixing the opaque backgrounds) */
+            /* Badges & Pills */
             html.dark .bg-indigo-50\\/80, html.dark .bg-indigo-50 { background-color: rgba(99, 102, 241, 0.15) !important; border-color: rgba(99, 102, 241, 0.3) !important; color: #a5b4fc !important; }
             html.dark .text-indigo-700, html.dark .text-indigo-600 { color: #a5b4fc !important; }
             
             html.dark .bg-emerald-50 { background-color: rgba(16, 185, 129, 0.15) !important; color: #6ee7b7 !important; }
             html.dark .bg-rose-50 { background-color: rgba(244, 63, 94, 0.15) !important; color: #fda4af !important; }
-            
             html.dark .bg-amber-50\\/80, html.dark .bg-amber-50 { background-color: rgba(245, 158, 11, 0.15) !important; color: #fcd34d !important; border-color: rgba(245, 158, 11, 0.3) !important; }
-            
             html.dark .bg-red-50\\/80, html.dark .bg-red-50 { background-color: rgba(239, 68, 68, 0.15) !important; color: #fca5a5 !important; border-color: rgba(239, 68, 68, 0.3) !important; }
 
-            /* General Backgrounds (Search Bar wrapper, etc.) */
+            /* General Backgrounds */
             html.dark .bg-white, html.dark .bg-white\\/70, html.dark .bg-white\\/80, html.dark .bg-white\\/90 { 
                 background-color: rgba(15, 23, 42, 0.5) !important; 
                 border-color: rgba(255,255,255,0.08) !important; 
@@ -110,8 +108,8 @@
                 background-color: rgba(2, 6, 23, 0.6) !important;
                 border-bottom-color: rgba(255, 255, 255, 0.05) !important;
             }
-            html.dark #mobile-menu { background-color: #020617 !important; border-color: #1e293b !important; }
-            html.dark #mobile-menu .bg-slate-50 { background-color: #0f172a !important; border-bottom-color: #1e293b !important; }
+            html.dark #mobile-menu { background-color: #0f172a !important; border-color: #1e293b !important; }
+            html.dark #mobile-menu .bg-slate-50 { background-color: #020617 !important; border-bottom-color: #1e293b !important; }
             html.dark #mobile-menu a { color: #cbd5e1 !important; }
             html.dark #mobile-menu a:hover { background-color: rgba(255, 255, 255, 0.05) !important; color: #f8fafc !important; }
             html.dark #mobile-menu a.bg-indigo-50 {
@@ -224,6 +222,10 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                 <a href="/blog/index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'blog' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
                     <i class="fas fa-feather-alt w-5 text-center ${activePage === 'blog' ? 'text-indigo-600' : 'text-slate-400'}"></i> Blog
                 </a>
+
+                <a href="/about.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'about' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
+                    <i class="fas fa-info-circle w-5 text-center ${activePage === 'about' ? 'text-indigo-600' : 'text-slate-400'}"></i> About
+                </a>
             </nav>
         </div>
 
@@ -281,7 +283,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 
     container.innerHTML = navHTML;
     
-    // Theme Toggle Logic Execution
+    // Theme Toggle Logic Execution with Beta Toast Message
     const themeBtns = document.querySelectorAll('.theme-toggle-btn');
     
     function updateThemeIcons() {
@@ -292,6 +294,29 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     }
     
     updateThemeIcons();
+
+    function showBetaToast() {
+        const existingToast = document.getElementById('beta-theme-toast');
+        if (existingToast) existingToast.remove();
+
+        const toast = document.createElement('div');
+        toast.id = 'beta-theme-toast';
+        toast.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-[100] bg-slate-900/90 dark:bg-slate-800/95 text-white text-xs font-bold py-2.5 px-4 rounded-full shadow-2xl backdrop-blur-md border border-slate-700/60 flex items-center gap-2.5 transition-all duration-300 transform translate-y-10 opacity-0';
+        toast.innerHTML = `
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></i></span>
+            <span>Dark Theme (Beta) enabled</span>
+        `;
+        document.body.appendChild(toast);
+
+        requestAnimationFrame(() => {
+            toast.classList.remove('translate-y-10', 'opacity-0');
+        });
+
+        setTimeout(() => {
+            toast.classList.add('translate-y-10', 'opacity-0');
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
     
     themeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -299,6 +324,10 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             const isDark = document.documentElement.classList.contains('dark');
             localStorage.setItem('kt_theme', isDark ? 'dark' : 'light');
             updateThemeIcons();
+            
+            if (isDark) {
+                showBetaToast();
+            }
         });
     });
 
