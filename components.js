@@ -1,5 +1,5 @@
 // ==============================================================================
-// 0. AUTO DARK THEME ENGINE & CSS INJECTION
+// 0. AUTO DARK THEME ENGINE & CSS INJECTION (ADVANCED GLASSMORPHISM)
 // ==============================================================================
 (function initTheme() {
     const savedTheme = localStorage.getItem('kt_theme') || 'light';
@@ -12,80 +12,145 @@
         const style = document.createElement('style');
         style.id = 'kt-dark-theme-styles';
         style.innerHTML = `
-            /* Beautiful Dark Mode Overrides for Glassmorphism & Tailwind */
+            /* Beautiful Aurora Dark Mode Background */
             html.dark body {
-                background-color: #020617 !important;
+                background-color: #0B0F19 !important; /* Deep space navy */
                 background-image: 
-                    radial-gradient(at 0% 0%, rgba(30, 27, 75, 0.85) 0px, transparent 50%),
-                    radial-gradient(at 100% 0%, rgba(15, 23, 42, 0.95) 0px, transparent 50%),
-                    radial-gradient(at 100% 100%, rgba(23, 37, 84, 0.75) 0px, transparent 50%),
-                    radial-gradient(at 0% 100%, rgba(49, 46, 129, 0.65) 0px, transparent 50%) !important;
+                    radial-gradient(at 0% 0%, rgba(67, 56, 202, 0.25) 0px, transparent 50%),
+                    radial-gradient(at 100% 0%, rgba(13, 148, 136, 0.25) 0px, transparent 50%),
+                    radial-gradient(at 100% 100%, rgba(3, 105, 161, 0.25) 0px, transparent 50%),
+                    radial-gradient(at 0% 100%, rgba(126, 34, 206, 0.25) 0px, transparent 50%) !important;
                 color: #f8fafc !important;
             }
             
-            /* Text Color Conversions */
-            html.dark .text-slate-900 { color: #f8fafc !important; }
+            /* Text Color Conversions for Optimal Contrast */
+            html.dark .text-slate-900 { color: #ffffff !important; }
             html.dark .text-slate-800 { color: #f1f5f9 !important; }
             html.dark .text-slate-700 { color: #e2e8f0 !important; }
             html.dark .text-slate-600 { color: #cbd5e1 !important; }
             html.dark .text-slate-500 { color: #94a3b8 !important; }
             html.dark .text-slate-400 { color: #64748b !important; }
             
-            /* Background Conversions */
-            html.dark .bg-white { background-color: rgba(15, 23, 42, 0.7) !important; border-color: rgba(255,255,255,0.08) !important; }
-            html.dark .bg-white\\/60, html.dark .bg-white\\/70, html.dark .bg-white\\/80, html.dark .bg-white\\/90 { 
-                background-color: rgba(15, 23, 42, 0.75) !important; 
-                border-color: rgba(255,255,255,0.08) !important; 
-            }
-            html.dark .bg-slate-50 { background-color: rgba(15, 23, 42, 0.5) !important; }
-            html.dark .bg-slate-100 { background-color: rgba(30, 41, 59, 0.7) !important; }
-            
-            /* Border Conversions */
-            html.dark .border-slate-100, html.dark .border-slate-200 { border-color: rgba(255,255,255,0.1) !important; }
-            html.dark .border-white { border-color: rgba(255,255,255,0.1) !important; }
-            
-            /* Premium Glass Panels in Dark Mode */
-            html.dark .glass-panel, html.dark .real-glass {
-                background: rgba(15, 23, 42, 0.6) !important;
-                border: 1px solid rgba(255, 255, 255, 0.1) !important;
-                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5) !important;
+            /* Main Glass Panels (Hero, Main Cards) */
+            html.dark .glass-panel, html.dark .real-glass, html.dark .inner-glass {
+                background: rgba(255, 255, 255, 0.03) !important;
+                backdrop-filter: blur(24px) saturate(150%) !important;
+                -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
             }
             html.dark .glass-panel-hover:hover {
-                background: rgba(30, 41, 59, 0.8) !important;
-                border: 1px solid rgba(255, 255, 255, 0.18) !important;
+                background: rgba(255, 255, 255, 0.06) !important;
+                border-color: rgba(255, 255, 255, 0.15) !important;
+                box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5) !important;
             }
+
+            /* The Animated Hero Folder Graphic */
             html.dark .glass-folder {
-                background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.5) 100%) !important;
-                border-color: rgba(255,255,255,0.12) !important;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+                border-color: rgba(255,255,255,0.1) !important;
                 box-shadow: inset 0 0 20px rgba(255,255,255,0.05), 0 10px 30px rgba(0,0,0,0.4) !important;
             }
-            
-            /* Compact Cards */
-            html.dark .hybrid-card, html.dark .inner-glass {
-                background: rgba(15, 23, 42, 0.5) !important;
-                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+
+            /* Compact Grid Cards (Quick Access) */
+            html.dark .hybrid-card {
+                background: rgba(255, 255, 255, 0.03) !important;
+                backdrop-filter: blur(16px) saturate(150%) !important;
+                -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.06) !important;
             }
             html.dark .hybrid-card:hover {
-                background: rgba(30, 41, 59, 0.85) !important;
-                border-color: rgba(255, 255, 255, 0.2) !important;
-                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45) !important;
+                background: rgba(255, 255, 255, 0.08) !important;
+                border-color: rgba(255, 255, 255, 0.15) !important;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
             }
             
-            /* Inputs and Forms */
+            /* Badges & Pills (Fixing the opaque backgrounds) */
+            html.dark .bg-indigo-50\\/80, html.dark .bg-indigo-50 { background-color: rgba(99, 102, 241, 0.15) !important; border-color: rgba(99, 102, 241, 0.3) !important; color: #a5b4fc !important; }
+            html.dark .text-indigo-700, html.dark .text-indigo-600 { color: #a5b4fc !important; }
+            
+            html.dark .bg-emerald-50 { background-color: rgba(16, 185, 129, 0.15) !important; color: #6ee7b7 !important; }
+            html.dark .bg-rose-50 { background-color: rgba(244, 63, 94, 0.15) !important; color: #fda4af !important; }
+            
+            html.dark .bg-amber-50\\/80, html.dark .bg-amber-50 { background-color: rgba(245, 158, 11, 0.15) !important; color: #fcd34d !important; border-color: rgba(245, 158, 11, 0.3) !important; }
+            
+            html.dark .bg-red-50\\/80, html.dark .bg-red-50 { background-color: rgba(239, 68, 68, 0.15) !important; color: #fca5a5 !important; border-color: rgba(239, 68, 68, 0.3) !important; }
+
+            /* General Backgrounds (Search Bar wrapper, etc.) */
+            html.dark .bg-white, html.dark .bg-white\\/70, html.dark .bg-white\\/80, html.dark .bg-white\\/90 { 
+                background-color: rgba(15, 23, 42, 0.5) !important; 
+                border-color: rgba(255,255,255,0.08) !important; 
+            }
+            
+            /* The "Explore" Button Fix */
+            html.dark a.bg-white\\/60, html.dark button.bg-white\\/60 {
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                border-color: rgba(255, 255, 255, 0.15) !important;
+                color: #f8fafc !important;
+            }
+            html.dark a.bg-white\\/60:hover, html.dark button.bg-white\\/60:hover {
+                background-color: rgba(255, 255, 255, 0.15) !important;
+            }
+
+            /* Inputs, Forms, and Search Fields */
             html.dark input, html.dark select, html.dark textarea, html.dark .glass-input {
                 color: #f8fafc !important;
-                background-color: rgba(30, 41, 59, 0.6) !important;
-                border-color: rgba(255,255,255,0.15) !important;
+                background-color: rgba(0, 0, 0, 0.2) !important;
+                border-color: rgba(255,255,255,0.1) !important;
             }
             html.dark input:focus, html.dark select:focus {
-                background-color: rgba(15, 23, 42, 0.9) !important;
+                background-color: rgba(0, 0, 0, 0.4) !important;
+                border-color: #818cf8 !important;
             }
+            html.dark input::placeholder { color: #64748b !important; }
             
-            /* Mobile Navigation Drawer */
+            /* Header & Mobile Menu Drawer */
+            html.dark header {
+                background-color: rgba(2, 6, 23, 0.6) !important;
+                border-bottom-color: rgba(255, 255, 255, 0.05) !important;
+            }
             html.dark #mobile-menu { background-color: #020617 !important; border-color: #1e293b !important; }
             html.dark #mobile-menu .bg-slate-50 { background-color: #0f172a !important; border-bottom-color: #1e293b !important; }
             html.dark #mobile-menu a { color: #cbd5e1 !important; }
-            html.dark #mobile-menu a:hover { background-color: rgba(30, 41, 59, 0.7) !important; color: #f8fafc !important; }
+            html.dark #mobile-menu a:hover { background-color: rgba(255, 255, 255, 0.05) !important; color: #f8fafc !important; }
+            html.dark #mobile-menu a.bg-indigo-50 {
+                background-color: rgba(99, 102, 241, 0.15) !important;
+                color: #a5b4fc !important;
+                border-color: rgba(99, 102, 241, 0.3) !important;
+            }
+            
+            /* Small circular hover chevrons inside Quick Access cards */
+            html.dark .hybrid-card .bg-white {
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                border-color: rgba(255, 255, 255, 0.05) !important;
+                color: #94a3b8 !important;
+            }
+            html.dark .hybrid-card:hover .bg-white {
+                background-color: rgba(255, 255, 255, 0.15) !important;
+                color: #fff !important;
+            }
+
+            /* Stats Pill Icon Backgrounds */
+            html.dark .bg-indigo-100 { background-color: rgba(99,102,241,0.2) !important; color: #818cf8 !important; }
+            html.dark .bg-emerald-100 { background-color: rgba(16,185,129,0.2) !important; color: #34d399 !important; }
+            html.dark .bg-blue-100 { background-color: rgba(59,130,246,0.2) !important; color: #60a5fa !important; }
+            html.dark .bg-orange-100 { background-color: rgba(249,115,22,0.2) !important; color: #fb923c !important; }
+            
+            /* Borders/Dividers */
+            html.dark .bg-slate-200\\/60, html.dark .border-slate-100, html.dark .border-slate-200 { 
+                background-color: rgba(255,255,255,0.1) !important; 
+                border-color: rgba(255,255,255,0.08) !important; 
+            }
+            
+            /* Theme Toggle Buttons */
+            html.dark .theme-toggle-btn {
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                border-color: rgba(255, 255, 255, 0.1) !important;
+            }
+            html.dark .theme-toggle-btn:hover {
+                background-color: rgba(255, 255, 255, 0.15) !important;
+            }
         `;
         document.head.appendChild(style);
     }
@@ -223,13 +288,6 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
         const isDark = document.documentElement.classList.contains('dark');
         themeBtns.forEach(btn => {
             btn.innerHTML = isDark ? '<i class="fas fa-sun text-[14px] text-amber-400"></i>' : '<i class="fas fa-moon text-[14px] text-slate-600"></i>';
-            if(isDark) {
-                btn.classList.remove('bg-slate-100', 'text-slate-600', 'border-slate-200');
-                btn.classList.add('bg-slate-800', 'border-slate-700', 'text-amber-400');
-            } else {
-                btn.classList.remove('bg-slate-800', 'border-slate-700', 'text-amber-400');
-                btn.classList.add('bg-slate-100', 'text-slate-600', 'border-slate-200');
-            }
         });
     }
     
