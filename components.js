@@ -1,5 +1,5 @@
 // ==============================================================================
-// 0. AUTO DARK THEME ENGINE & CSS INJECTION (ADVANCED GLASSMORPHISM)
+// 0. AUTO DARK THEME ENGINE & CSS INJECTION (ADVANCED GLASSMORPHISM + #368067)
 // ==============================================================================
 (function initTheme() {
     const savedTheme = localStorage.getItem('kt_theme') || 'light';
@@ -7,7 +7,7 @@
         document.documentElement.classList.add('dark');
     }
     
-    // Dynamically inject deep-dark glassmorphism CSS overrides for all pages
+    // Dynamically inject deep-dark glassmorphism CSS overrides with #368067 accents
     if (!document.getElementById('kt-dark-theme-styles')) {
         const style = document.createElement('style');
         style.id = 'kt-dark-theme-styles';
@@ -16,10 +16,10 @@
             html.dark body {
                 background-color: #0B0F19 !important; /* Deep space navy */
                 background-image: 
-                    radial-gradient(at 0% 0%, rgba(67, 56, 202, 0.25) 0px, transparent 50%),
+                    radial-gradient(at 0% 0%, rgba(54, 128, 103, 0.25) 0px, transparent 50%),
                     radial-gradient(at 100% 0%, rgba(13, 148, 136, 0.25) 0px, transparent 50%),
-                    radial-gradient(at 100% 100%, rgba(3, 105, 161, 0.25) 0px, transparent 50%),
-                    radial-gradient(at 0% 100%, rgba(126, 34, 206, 0.25) 0px, transparent 50%) !important;
+                    radial-gradient(at 100% 100%, rgba(45, 106, 85, 0.25) 0px, transparent 50%),
+                    radial-gradient(at 0% 100%, rgba(54, 128, 103, 0.2) 0px, transparent 50%) !important;
                 color: #f8fafc !important;
             }
             
@@ -42,15 +42,15 @@
             }
             html.dark .glass-panel-hover:hover {
                 background: rgba(255, 255, 255, 0.06) !important;
-                border-color: rgba(255, 255, 255, 0.15) !important;
+                border-color: rgba(54, 128, 103, 0.4) !important;
                 box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5) !important;
             }
 
             /* The Animated Hero Folder Graphic */
             html.dark .glass-folder {
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
-                border-color: rgba(255,255,255,0.1) !important;
-                box-shadow: inset 0 0 20px rgba(255,255,255,0.05), 0 10px 30px rgba(0,0,0,0.4) !important;
+                background: linear-gradient(135deg, rgba(54, 128, 103, 0.15) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+                border-color: rgba(54, 128, 103, 0.2) !important;
+                box-shadow: inset 0 0 20px rgba(54, 128, 103, 0.1), 0 10px 30px rgba(0,0,0,0.4) !important;
             }
 
             /* Compact Grid Cards (Quick Access) */
@@ -61,14 +61,14 @@
                 border: 1px solid rgba(255, 255, 255, 0.06) !important;
             }
             html.dark .hybrid-card:hover {
-                background: rgba(255, 255, 255, 0.08) !important;
-                border-color: rgba(255, 255, 255, 0.15) !important;
+                background: rgba(54, 128, 103, 0.08) !important;
+                border-color: rgba(54, 128, 103, 0.4) !important;
                 box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
             }
             
-            /* Badges & Pills */
-            html.dark .bg-indigo-50\\/80, html.dark .bg-indigo-50 { background-color: rgba(99, 102, 241, 0.15) !important; border-color: rgba(99, 102, 241, 0.3) !important; color: #a5b4fc !important; }
-            html.dark .text-indigo-700, html.dark .text-indigo-600 { color: #a5b4fc !important; }
+            /* Badges & Accents replaced with #368067 */
+            html.dark .bg-indigo-50\\/80, html.dark .bg-indigo-50, html.dark .bg-blue-50 { background-color: rgba(54, 128, 103, 0.15) !important; border-color: rgba(54, 128, 103, 0.3) !important; color: #5cb895 !important; }
+            html.dark .text-indigo-700, html.dark .text-indigo-600, html.dark .text-blue-600, html.dark .text-blue-700 { color: #5cb895 !important; }
             
             html.dark .bg-emerald-50 { background-color: rgba(16, 185, 129, 0.15) !important; color: #6ee7b7 !important; }
             html.dark .bg-rose-50 { background-color: rgba(244, 63, 94, 0.15) !important; color: #fda4af !important; }
@@ -84,11 +84,11 @@
             /* The "Explore" Button Fix */
             html.dark a.bg-white\\/60, html.dark button.bg-white\\/60 {
                 background-color: rgba(255, 255, 255, 0.05) !important;
-                border-color: rgba(255, 255, 255, 0.15) !important;
+                border-color: rgba(54, 128, 103, 0.3) !important;
                 color: #f8fafc !important;
             }
             html.dark a.bg-white\\/60:hover, html.dark button.bg-white\\/60:hover {
-                background-color: rgba(255, 255, 255, 0.15) !important;
+                background-color: rgba(54, 128, 103, 0.2) !important;
             }
 
             /* Inputs, Forms, and Search Fields */
@@ -99,23 +99,24 @@
             }
             html.dark input:focus, html.dark select:focus {
                 background-color: rgba(0, 0, 0, 0.4) !important;
-                border-color: #818cf8 !important;
+                border-color: #368067 !important;
+                box-shadow: 0 0 0 3px rgba(54, 128, 103, 0.25) !important;
             }
             html.dark input::placeholder { color: #64748b !important; }
             
             /* Header & Mobile Menu Drawer */
             html.dark header {
-                background-color: rgba(2, 6, 23, 0.6) !important;
+                background-color: rgba(11, 15, 25, 0.75) !important;
                 border-bottom-color: rgba(255, 255, 255, 0.05) !important;
             }
             html.dark #mobile-menu { background-color: #0f172a !important; border-color: #1e293b !important; }
-            html.dark #mobile-menu .bg-slate-50 { background-color: #020617 !important; border-bottom-color: #1e293b !important; }
+            html.dark #mobile-menu .bg-slate-50 { background-color: #0B0F19 !important; border-bottom-color: #1e293b !important; }
             html.dark #mobile-menu a { color: #cbd5e1 !important; }
-            html.dark #mobile-menu a:hover { background-color: rgba(255, 255, 255, 0.05) !important; color: #f8fafc !important; }
+            html.dark #mobile-menu a:hover { background-color: rgba(54, 128, 103, 0.15) !important; color: #f8fafc !important; }
             html.dark #mobile-menu a.bg-indigo-50 {
-                background-color: rgba(99, 102, 241, 0.15) !important;
-                color: #a5b4fc !important;
-                border-color: rgba(99, 102, 241, 0.3) !important;
+                background-color: rgba(54, 128, 103, 0.2) !important;
+                color: #5cb895 !important;
+                border-color: rgba(54, 128, 103, 0.4) !important;
             }
             
             /* Small circular hover chevrons inside Quick Access cards */
@@ -125,14 +126,14 @@
                 color: #94a3b8 !important;
             }
             html.dark .hybrid-card:hover .bg-white {
-                background-color: rgba(255, 255, 255, 0.15) !important;
+                background-color: rgba(54, 128, 103, 0.3) !important;
                 color: #fff !important;
             }
 
             /* Stats Pill Icon Backgrounds */
-            html.dark .bg-indigo-100 { background-color: rgba(99,102,241,0.2) !important; color: #818cf8 !important; }
+            html.dark .bg-indigo-100 { background-color: rgba(54, 128, 103, 0.2) !important; color: #5cb895 !important; }
             html.dark .bg-emerald-100 { background-color: rgba(16,185,129,0.2) !important; color: #34d399 !important; }
-            html.dark .bg-blue-100 { background-color: rgba(59,130,246,0.2) !important; color: #60a5fa !important; }
+            html.dark .bg-blue-100 { background-color: rgba(54, 128, 103, 0.2) !important; color: #5cb895 !important; }
             html.dark .bg-orange-100 { background-color: rgba(249,115,22,0.2) !important; color: #fb923c !important; }
             
             /* Borders/Dividers */
@@ -147,7 +148,8 @@
                 border-color: rgba(255, 255, 255, 0.1) !important;
             }
             html.dark .theme-toggle-btn:hover {
-                background-color: rgba(255, 255, 255, 0.15) !important;
+                background-color: rgba(54, 128, 103, 0.2) !important;
+                border-color: rgba(54, 128, 103, 0.4) !important;
             }
         `;
         document.head.appendChild(style);
@@ -191,40 +193,40 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             </div>
             
             <nav class="flex-grow py-6 px-4 flex flex-col gap-2 overflow-y-auto">
-                <a href="/index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'home' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-home w-5 text-center ${activePage === 'home' ? 'text-indigo-600' : 'text-slate-400'}"></i> Home
+                <a href="/index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'home' ? 'bg-[#368067]/10 text-[#368067] font-bold border border-[#368067]/20' : 'text-slate-600 hover:text-[#368067] hover:bg-[#368067]/10 font-semibold'}">
+                    <i class="fas fa-home w-5 text-center ${activePage === 'home' ? 'text-[#368067]' : 'text-slate-400'}"></i> Home
                 </a>
                 
-                <a href="/timetable.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'timetable' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-calendar-day w-5 text-center ${activePage === 'timetable' ? 'text-indigo-600' : 'text-slate-400'}"></i> Timetables
+                <a href="/timetable.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'timetable' ? 'bg-[#368067]/10 text-[#368067] font-bold border border-[#368067]/20' : 'text-slate-600 hover:text-[#368067] hover:bg-[#368067]/10 font-semibold'}">
+                    <i class="fas fa-calendar-day w-5 text-center ${activePage === 'timetable' ? 'text-[#368067]' : 'text-slate-400'}"></i> Timetables
                 </a>
                 
-                <a href="/notes.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'notes' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-book-open w-5 text-center ${activePage === 'notes' ? 'text-indigo-600' : 'text-slate-400'}"></i> Study Notes
+                <a href="/notes.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'notes' ? 'bg-[#368067]/10 text-[#368067] font-bold border border-[#368067]/20' : 'text-slate-600 hover:text-[#368067] hover:bg-[#368067]/10 font-semibold'}">
+                    <i class="fas fa-book-open w-5 text-center ${activePage === 'notes' ? 'text-[#368067]' : 'text-slate-400'}"></i> Study Notes
                 </a>
 
-                <a href="/pyq.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'pyq' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-file-alt w-5 text-center ${activePage === 'pyq' ? 'text-indigo-600' : 'text-slate-400'}"></i> Previous Papers
+                <a href="/pyq.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'pyq' ? 'bg-[#368067]/10 text-[#368067] font-bold border border-[#368067]/20' : 'text-slate-600 hover:text-[#368067] hover:bg-[#368067]/10 font-semibold'}">
+                    <i class="fas fa-file-alt w-5 text-center ${activePage === 'pyq' ? 'text-[#368067]' : 'text-slate-400'}"></i> Previous Papers
                 </a>
 
-                <a href="/doubts.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'qa' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-comments w-5 text-center ${activePage === 'qa' ? 'text-indigo-600' : 'text-slate-400'}"></i> Q&A Hub
+                <a href="/doubts.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'qa' ? 'bg-[#368067]/10 text-[#368067] font-bold border border-[#368067]/20' : 'text-slate-600 hover:text-[#368067] hover:bg-[#368067]/10 font-semibold'}">
+                    <i class="fas fa-comments w-5 text-center ${activePage === 'qa' ? 'text-[#368067]' : 'text-slate-400'}"></i> Q&A Hub
                 </a>
 
-                <a href="/status.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'status' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-server w-5 text-center ${activePage === 'status' ? 'text-indigo-600' : 'text-slate-400'}"></i> Server Status
+                <a href="/status.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'status' ? 'bg-[#368067]/10 text-[#368067] font-bold border border-[#368067]/20' : 'text-slate-600 hover:text-[#368067] hover:bg-[#368067]/10 font-semibold'}">
+                    <i class="fas fa-server w-5 text-center ${activePage === 'status' ? 'text-[#368067]' : 'text-slate-400'}"></i> Server Status
                 </a>
                 
-                <a href="/updates.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'updates' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-bullhorn w-5 text-center ${activePage === 'updates' ? 'text-indigo-600' : 'text-slate-400'}"></i> Latest Updates
+                <a href="/updates.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'updates' ? 'bg-[#368067]/10 text-[#368067] font-bold border border-[#368067]/20' : 'text-slate-600 hover:text-[#368067] hover:bg-[#368067]/10 font-semibold'}">
+                    <i class="fas fa-bullhorn w-5 text-center ${activePage === 'updates' ? 'text-[#368067]' : 'text-slate-400'}"></i> Latest Updates
                 </a>
                 
-                <a href="/blog/index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'blog' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-feather-alt w-5 text-center ${activePage === 'blog' ? 'text-indigo-600' : 'text-slate-400'}"></i> Blog
+                <a href="/blog/index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'blog' ? 'bg-[#368067]/10 text-[#368067] font-bold border border-[#368067]/20' : 'text-slate-600 hover:text-[#368067] hover:bg-[#368067]/10 font-semibold'}">
+                    <i class="fas fa-feather-alt w-5 text-center ${activePage === 'blog' ? 'text-[#368067]' : 'text-slate-400'}"></i> Blog
                 </a>
 
-                <a href="/about.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'about' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-info-circle w-5 text-center ${activePage === 'about' ? 'text-indigo-600' : 'text-slate-400'}"></i> About
+                <a href="/about.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'about' ? 'bg-[#368067]/10 text-[#368067] font-bold border border-[#368067]/20' : 'text-slate-600 hover:text-[#368067] hover:bg-[#368067]/10 font-semibold'}">
+                    <i class="fas fa-info-circle w-5 text-center ${activePage === 'about' ? 'text-[#368067]' : 'text-slate-400'}"></i> About
                 </a>
             </nav>
         </div>
@@ -234,31 +236,31 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
         <header class="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all duration-300">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <button id="open-menu-btn" aria-label="Open menu" class="p-2 -ml-2 text-slate-600 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none lg:hidden">
+                    <button id="open-menu-btn" aria-label="Open menu" class="p-2 -ml-2 text-slate-600 hover:text-[#368067] hover:bg-slate-100 rounded-lg transition-colors focus:outline-none lg:hidden">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                     <a href="/index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
                         <img src="/k.png" alt="Kerala Timetable Logo" class="w-6 h-6 sm:w-7 sm:h-7 object-contain shrink-0" width="28" height="28" />
-                        <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-none">Kerala <span class="text-indigo-600">Timetable</span>${logoExtension}</h1>
+                        <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-none">Kerala <span style="color: #368067;">Timetable</span>${logoExtension}</h1>
                     </a>
                 </div>
 
                 <div class="hidden lg:flex gap-2 items-center">
-                    <a href="/notes.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'notes' ? 'font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 shadow-sm' : 'font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-100'}">
+                    <a href="/notes.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'notes' ? 'font-bold text-[#368067] bg-[#368067]/10 border border-[#368067]/20 shadow-sm' : 'font-bold text-slate-600 hover:text-[#368067] hover:bg-slate-100'}">
                         <i class="fas fa-book-open text-[10px]"></i> Study Notes
                     </a>
                     
-                    <a href="/pyq.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'pyq' ? 'font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 shadow-sm' : 'font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-100'}">
+                    <a href="/pyq.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'pyq' ? 'font-bold text-[#368067] bg-[#368067]/10 border border-[#368067]/20 shadow-sm' : 'font-bold text-slate-600 hover:text-[#368067] hover:bg-slate-100'}">
                         <i class="fas fa-file-alt text-[10px]"></i> PYQs
                     </a>
 
-                    <a href="/doubts.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'qa' ? 'font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 shadow-sm' : 'font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-100'}">
+                    <a href="/doubts.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'qa' ? 'font-bold text-[#368067] bg-[#368067]/10 border border-[#368067]/20 shadow-sm' : 'font-bold text-slate-600 hover:text-[#368067] hover:bg-slate-100'}">
                         <i class="fas fa-comments text-[10px]"></i> Q&A
                     </a>
                     
                     <div class="w-px h-5 bg-slate-200 mx-1"></div>
                     
-                    <a href="/updates.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'updates' ? 'font-bold text-white bg-indigo-600 shadow-md' : 'font-bold text-slate-600 bg-slate-100 hover:bg-indigo-600 hover:text-white'}">
+                    <a href="/updates.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'updates' ? 'font-bold text-white shadow-md' : 'font-bold text-slate-600 bg-slate-100 hover:text-white'}" style="${activePage === 'updates' ? 'background-color: #368067;' : ''}" onmouseover="if('${activePage}'!=='updates')this.style.backgroundColor='#368067';this.style.color='#fff';" onmouseout="if('${activePage}'!=='updates'){this.style.backgroundColor='';this.style.color='';}">
                         <i class="fas fa-bullhorn text-[10px]"></i> Notice Board
                     </a>
 
@@ -273,7 +275,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                     <button class="theme-toggle-btn w-10 h-10 flex items-center justify-center bg-slate-100 text-slate-600 rounded-full border border-slate-200 shadow-sm transition-colors focus:outline-none" aria-label="Toggle Theme">
                         <i class="fas fa-moon text-[14px]"></i>
                     </button>
-                    <a href="/updates.html" aria-label="Notifications" class="w-10 h-10 flex items-center justify-center bg-indigo-50 text-indigo-600 rounded-full border border-indigo-100 shadow-sm">
+                    <a href="/updates.html" aria-label="Notifications" class="w-10 h-10 flex items-center justify-center bg-[#368067]/10 text-[#368067] rounded-full border border-[#368067]/20 shadow-sm">
                        <i class="fas fa-bell"></i>
                     </a>
                 </div>
@@ -303,7 +305,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
         toast.id = 'beta-theme-toast';
         toast.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-[100] bg-slate-900/90 dark:bg-slate-800/95 text-white text-xs font-bold py-2.5 px-4 rounded-full shadow-2xl backdrop-blur-md border border-slate-700/60 flex items-center gap-2.5 transition-all duration-300 transform translate-y-10 opacity-0';
         toast.innerHTML = `
-            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></i></span>
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
             <span>Dark Theme (Beta) enabled</span>
         `;
         document.body.appendChild(toast);
