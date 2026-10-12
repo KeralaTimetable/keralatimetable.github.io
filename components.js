@@ -1,5 +1,5 @@
 // ==============================================================================
-// 0. AUTO DARK THEME ENGINE & CSS INJECTION (ADVANCED GLASSMORPHISM + BRAND GREEN)
+// 0. AUTO DARK THEME ENGINE & ADAPTIVE GLASSMORPHISM
 // ==============================================================================
 (function initTheme() {
     const savedTheme = localStorage.getItem('kt_theme') || 'light';
@@ -7,184 +7,281 @@
         document.documentElement.classList.add('dark');
     }
     
-    // Dynamically inject deep-dark glassmorphism and #368067 brand overrides
     if (!document.getElementById('kt-dark-theme-styles')) {
         const style = document.createElement('style');
         style.id = 'kt-dark-theme-styles';
         style.innerHTML = `
-            /* Beautiful Aurora Dark Mode Background */
-            html.dark body {
-                background-color: #0B0F19 !important; /* Deep space navy */
+            /* 1. Canvas & Aurora Glow Background */
+            html.dark body,
+            html.dark .bg-mesh {
+                background-color: #070B14 !important;
                 background-image: 
-                    radial-gradient(at 0% 0%, rgba(54, 128, 103, 0.22) 0px, transparent 50%),
-                    radial-gradient(at 100% 0%, rgba(13, 148, 136, 0.2) 0px, transparent 50%),
-                    radial-gradient(at 100% 100%, rgba(54, 128, 103, 0.18) 0px, transparent 50%),
-                    radial-gradient(at 0% 100%, rgba(30, 41, 59, 0.4) 0px, transparent 50%) !important;
+                    radial-gradient(at 0% 0%, rgba(54, 128, 103, 0.18) 0px, transparent 50%),
+                    radial-gradient(at 100% 0%, rgba(37, 99, 235, 0.18) 0px, transparent 50%),
+                    radial-gradient(at 100% 100%, rgba(54, 128, 103, 0.15) 0px, transparent 50%),
+                    radial-gradient(at 0% 100%, rgba(15, 23, 42, 0.6) 0px, transparent 50%) !important;
+                color: #f1f5f9 !important;
+            }
+            
+            /* 2. Preserve Gradient Text (Crucial: prevents solid color override) */
+            html.dark .text-transparent {
+                color: transparent !important;
+                -webkit-text-fill-color: transparent !important;
+            }
+
+            /* 3. Text Color Conversions */
+            html.dark .text-slate-900:not(.text-transparent) { color: #ffffff !important; }
+            html.dark .text-slate-800:not(.text-transparent) { color: #f1f5f9 !important; }
+            html.dark .text-slate-700:not(.text-transparent) { color: #e2e8f0 !important; }
+            html.dark .text-slate-600:not(.text-transparent) { color: #94a3b8 !important; }
+            html.dark .text-slate-500:not(.text-transparent) { color: #64748b !important; }
+            html.dark .text-slate-400:not(.text-transparent) { color: #475569 !important; }
+
+            /* 4. Brand Accent (#368067) overrides without breaking buttons */
+            html.dark a.text-indigo-600:not(.text-transparent),
+            html.dark a.text-blue-600:not(.text-transparent),
+            html.dark span.text-indigo-600:not(.text-transparent) {
+                color: #4ade80 !important;
+            }
+
+            /* 5. NOTES.HTML FIX: Parallax Orbs (Screen mode prevents turning pitch black) */
+            html.dark #mouse-orb-1,
+            html.dark #mouse-orb-2 {
+                mix-blend-mode: screen !important;
+                opacity: 0.35 !important;
+            }
+
+            /* 6. NOTES.HTML FIX: Branch Cards */
+            html.dark .branch-card {
+                background: rgba(255, 255, 255, 0.04) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.16) !important;
+                box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35) !important;
+            }
+            html.dark .branch-card:hover {
+                background: rgba(255, 255, 255, 0.08) !important;
+                border-color: rgba(54, 128, 103, 0.6) !important;
+                box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5) !important;
+            }
+            html.dark .branch-card .bg-white\\/80 {
+                background-color: rgba(255, 255, 255, 0.07) !important;
+                border-color: rgba(255, 255, 255, 0.1) !important;
+            }
+            html.dark .branch-card .bg-indigo-100 { background-color: rgba(99, 102, 241, 0.15) !important; }
+            html.dark .branch-card .bg-emerald-100 { background-color: rgba(16, 185, 129, 0.15) !important; }
+
+            /* 7. NOTES.HTML FIX: 3D Real-Glass & Inner-Glass Search Card */
+            html.dark .real-glass {
+                background: rgba(15, 23, 42, 0.65) !important;
+                backdrop-filter: blur(28px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.22) !important;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+            }
+            html.dark .inner-glass {
+                background: rgba(0, 0, 0, 0.35) !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
                 color: #f8fafc !important;
             }
-            
-            /* Text Color Conversions for Optimal Contrast */
-            html.dark .text-slate-900 { color: #ffffff !important; }
-            html.dark .text-slate-800 { color: #f1f5f9 !important; }
-            html.dark .text-slate-700 { color: #e2e8f0 !important; }
-            html.dark .text-slate-600 { color: #cbd5e1 !important; }
-            html.dark .text-slate-500 { color: #94a3b8 !important; }
-            html.dark .text-slate-400 { color: #64748b !important; }
 
-            /* OVERRIDE ALL BLUE SHADES TO #368067 IN DARK MODE */
-            html.dark .text-blue-600, 
-            html.dark .text-blue-500, 
-            html.dark .text-blue-700,
-            html.dark .text-indigo-600, 
-            html.dark .text-indigo-500, 
-            html.dark .text-indigo-700,
-            html.dark .text-sky-600 {
-                color: #368067 !important;
-            }
-
-            html.dark .bg-blue-600, 
-            html.dark .bg-blue-500, 
-            html.dark .bg-indigo-600, 
-            html.dark .bg-indigo-500 {
-                background-color: #368067 !important;
-            }
-
-            html.dark .bg-blue-600:hover, 
-            html.dark .bg-blue-500:hover, 
-            html.dark .bg-indigo-600:hover, 
-            html.dark .bg-indigo-500:hover {
-                background-color: #2e6d57 !important;
-            }
-
-            html.dark .bg-blue-50, 
-            html.dark .bg-indigo-50, 
-            html.dark .bg-sky-50 {
-                background-color: rgba(54, 128, 103, 0.15) !important;
-                border-color: rgba(54, 128, 103, 0.3) !important;
-            }
-
-            html.dark .border-blue-200, 
-            html.dark .border-indigo-100, 
-            html.dark .border-indigo-200,
-            html.dark .ring-indigo-400 {
-                border-color: rgba(54, 128, 103, 0.4) !important;
-            }
-
-            html.dark input:focus, html.dark select:focus {
-                border-color: #368067 !important;
-                box-shadow: 0 0 0 4px rgba(54, 128, 103, 0.25) !important;
-            }
-            
-            /* Main Glass Panels (Hero, Main Cards) */
-            html.dark .glass-panel, html.dark .real-glass, html.dark .inner-glass {
-                background: rgba(255, 255, 255, 0.03) !important;
-                backdrop-filter: blur(24px) saturate(150%) !important;
-                -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
-                border: 1px solid rgba(255, 255, 255, 0.08) !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
-                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
+            /* 8. INDEX.HTML FIX: Clear Glass Panels & Dark Border conversion */
+            html.dark .glass-panel {
+                background: rgba(255, 255, 255, 0.035) !important;
+                backdrop-filter: blur(24px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.09) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+                box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5) !important;
             }
             html.dark .glass-panel-hover:hover {
-                background: rgba(255, 255, 255, 0.06) !important;
-                border-color: rgba(54, 128, 103, 0.4) !important;
-                box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5) !important;
+                background: rgba(255, 255, 255, 0.075) !important;
+                border-color: rgba(54, 128, 103, 0.5) !important;
+                box-shadow: 0 18px 48px rgba(0, 0, 0, 0.6) !important;
             }
 
-            /* The Animated Hero Folder Graphic */
-            html.dark .glass-folder {
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
-                border-color: rgba(255,255,255,0.1) !important;
-                box-shadow: inset 0 0 20px rgba(255,255,255,0.05), 0 10px 30px rgba(0,0,0,0.4) !important;
-            }
-
-            /* Compact Grid Cards (Quick Access) */
+            /* 9. INDEX.HTML FIX: Quick Access Hybrid Cards */
             html.dark .hybrid-card {
-                background: rgba(255, 255, 255, 0.03) !important;
-                backdrop-filter: blur(16px) saturate(150%) !important;
-                -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
-                border: 1px solid rgba(255, 255, 255, 0.06) !important;
+                background: rgba(255, 255, 255, 0.035) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
             }
             html.dark .hybrid-card:hover {
                 background: rgba(255, 255, 255, 0.08) !important;
-                border-color: rgba(54, 128, 103, 0.4) !important;
-                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+                border-color: rgba(54, 128, 103, 0.6) !important;
+                box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5) !important;
             }
-            
-            /* Other Badges & Pills */
-            html.dark .bg-emerald-50 { background-color: rgba(16, 185, 129, 0.15) !important; color: #6ee7b7 !important; }
-            html.dark .bg-rose-50 { background-color: rgba(244, 63, 94, 0.15) !important; color: #fda4af !important; }
-            html.dark .bg-amber-50\\/80, html.dark .bg-amber-50 { background-color: rgba(245, 158, 11, 0.15) !important; color: #fcd34d !important; border-color: rgba(245, 158, 11, 0.3) !important; }
-            html.dark .bg-red-50\\/80, html.dark .bg-red-50 { background-color: rgba(239, 68, 68, 0.15) !important; color: #fca5a5 !important; border-color: rgba(239, 68, 68, 0.3) !important; }
-
-            /* General Backgrounds */
-            html.dark .bg-white, html.dark .bg-white\\/70, html.dark .bg-white\\/80, html.dark .bg-white\\/90 { 
-                background-color: rgba(15, 23, 42, 0.5) !important; 
-                border-color: rgba(255,255,255,0.08) !important; 
-            }
-            
-            /* The "Explore" Button Fix */
-            html.dark a.bg-white\\/60, html.dark button.bg-white\\/60 {
-                background-color: rgba(255, 255, 255, 0.05) !important;
-                border-color: rgba(255, 255, 255, 0.15) !important;
-                color: #f8fafc !important;
-            }
-            html.dark a.bg-white\\/60:hover, html.dark button.bg-white\\/60:hover {
-                background-color: rgba(255, 255, 255, 0.15) !important;
-            }
-
-            /* Inputs, Forms, and Search Fields */
-            html.dark input, html.dark select, html.dark textarea, html.dark .glass-input {
-                color: #f8fafc !important;
-                background-color: rgba(0, 0, 0, 0.2) !important;
-                border-color: rgba(255,255,255,0.1) !important;
-            }
-            html.dark input::placeholder { color: #64748b !important; }
-            
-            /* Header & Mobile Menu Drawer */
-            html.dark header {
-                background-color: rgba(2, 6, 23, 0.6) !important;
-                border-bottom-color: rgba(255, 255, 255, 0.05) !important;
-            }
-            html.dark #mobile-menu { background-color: #0f172a !important; border-color: #1e293b !important; }
-            html.dark #mobile-menu .bg-slate-50 { background-color: #020617 !important; border-bottom-color: #1e293b !important; }
-            html.dark #mobile-menu a { color: #cbd5e1 !important; }
-            html.dark #mobile-menu a:hover { background-color: rgba(255, 255, 255, 0.05) !important; color: #f8fafc !important; }
-            html.dark #mobile-menu a.bg-indigo-50 {
-                background-color: rgba(54, 128, 103, 0.15) !important;
-                color: #368067 !important;
-                border-color: rgba(54, 128, 103, 0.3) !important;
-            }
-            
-            /* Small circular hover chevrons inside Quick Access cards */
             html.dark .hybrid-card .bg-white {
-                background-color: rgba(255, 255, 255, 0.05) !important;
-                border-color: rgba(255, 255, 255, 0.05) !important;
-                color: #94a3b8 !important;
+                background-color: rgba(255, 255, 255, 0.07) !important;
+                border-color: rgba(255, 255, 255, 0.1) !important;
+                color: #cbd5e1 !important;
             }
             html.dark .hybrid-card:hover .bg-white {
-                background-color: rgba(255, 255, 255, 0.15) !important;
-                color: #fff !important;
+                background-color: #368067 !important;
+                color: #ffffff !important;
+                border-color: #368067 !important;
             }
 
-            /* Stats Pill Icon Backgrounds */
-            html.dark .bg-indigo-100 { background-color: rgba(54, 128, 103, 0.2) !important; color: #368067 !important; }
-            html.dark .bg-emerald-100 { background-color: rgba(16,185,129,0.2) !important; color: #34d399 !important; }
-            html.dark .bg-blue-100 { background-color: rgba(54, 128, 103, 0.2) !important; color: #368067 !important; }
-            html.dark .bg-orange-100 { background-color: rgba(249,115,22,0.2) !important; color: #fb923c !important; }
-            
-            /* Borders/Dividers */
-            html.dark .bg-slate-200\\/60, html.dark .border-slate-100, html.dark .border-slate-200 { 
-                background-color: rgba(255,255,255,0.1) !important; 
-                border-color: rgba(255,255,255,0.08) !important; 
+            /* 10. INDEX.HTML FIX: Liquid Glass Search Bar */
+            html.dark div[class*="bg-white/75"],
+            html.dark div[class*="bg-white/60"],
+            html.dark .glass-panel.bg-white\\/95 {
+                background: rgba(15, 23, 42, 0.7) !important;
+                border-color: rgba(255, 255, 255, 0.12) !important;
+                box-shadow: inset 0 1px 1px rgba(255,255,255,0.1), 0 12px 36px rgba(0, 0, 0, 0.5) !important;
             }
-            
-            /* Theme Toggle Buttons */
-            html.dark .theme-toggle-btn {
+            html.dark div[class*="focus-within:border-black"]:focus-within {
+                border-color: #368067 !important;
+            }
+
+            /* 11. Cross-Browser Dropdown <select> & <option> readability */
+            html.dark select, 
+            html.dark select.custom-select {
+                color: #f8fafc !important;
+                background-color: rgba(15, 23, 42, 0.75) !important;
+                border-color: rgba(255, 255, 255, 0.12) !important;
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+            }
+            html.dark select option {
+                background-color: #0f172a !important;
+                color: #f8fafc !important;
+            }
+            html.dark select option:disabled {
+                color: #64748b !important;
+            }
+            html.dark input[type="search"], 
+            html.dark input[type="text"] {
+                color: #f8fafc !important;
+            }
+            html.dark input::placeholder {
+                color: #64748b !important;
+            }
+
+            /* 12. Animated Hero Folder Graphic */
+            html.dark .glass-folder {
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+                border-color: rgba(255, 255, 255, 0.12) !important;
+                box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05), 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+            }
+            html.dark .glass-folder div[class*="bg-white/"] {
+                background-color: rgba(255, 255, 255, 0.08) !important;
+                border-color: rgba(255, 255, 255, 0.12) !important;
+            }
+
+            /* 13. Ambient Blur Blobs on index.html */
+            html.dark .fixed.top-12.left-1\\/4,
+            html.dark .fixed.top-1\\/3.right-10,
+            html.dark .fixed.bottom-20.left-10 {
+                opacity: 0.15 !important;
+                mix-blend-mode: screen !important;
+            }
+
+            /* 14. Badges, Pills & Trending Tags */
+            html.dark span.bg-white\\/80 {
                 background-color: rgba(255, 255, 255, 0.05) !important;
-                border-color: rgba(255, 255, 255, 0.1) !important;
+                border-color: rgba(255, 255, 255, 0.10) !important;
+                color: #cbd5e1 !important;
+            }
+            html.dark span.bg-white\\/80:hover {
+                background-color: rgba(54, 128, 103, 0.2) !important;
+                border-color: rgba(54, 128, 103, 0.5) !important;
+                color: #6ee7b7 !important;
+            }
+
+            html.dark .bg-indigo-50 {
+                background-color: rgba(54, 128, 103, 0.15) !important;
+                color: #6ee7b7 !important;
+                border-color: rgba(54, 128, 103, 0.3) !important;
+            }
+            html.dark .bg-emerald-50\\/90,
+            html.dark .bg-emerald-50 {
+                background-color: rgba(16, 185, 129, 0.15) !important;
+                color: #6ee7b7 !important;
+                border-color: rgba(16, 185, 129, 0.3) !important;
+            }
+            html.dark .bg-rose-50\\/90,
+            html.dark .bg-rose-50 {
+                background-color: rgba(244, 63, 94, 0.15) !important;
+                color: #fda4af !important;
+                border-color: rgba(244, 63, 94, 0.3) !important;
+            }
+            html.dark .bg-amber-50 {
+                background-color: rgba(245, 158, 11, 0.15) !important;
+                color: #fcd34d !important;
+                border-color: rgba(245, 158, 11, 0.3) !important;
+            }
+            html.dark .bg-red-50 {
+                background-color: rgba(239, 68, 68, 0.15) !important;
+                color: #fca5a5 !important;
+                border-color: rgba(239, 68, 68, 0.3) !important;
+            }
+
+            /* 15. Stats Pill on index.html */
+            html.dark .bg-indigo-100 { background-color: rgba(54, 128, 103, 0.2) !important; color: #34d399 !important; border-color: rgba(54, 128, 103, 0.3) !important; }
+            html.dark .bg-emerald-100 { background-color: rgba(16, 185, 129, 0.2) !important; color: #34d399 !important; border-color: rgba(16, 185, 129, 0.3) !important; }
+            html.dark .bg-blue-100 { background-color: rgba(59, 130, 246, 0.2) !important; color: #60a5fa !important; border-color: rgba(59, 130, 246, 0.3) !important; }
+            html.dark .bg-orange-100 { background-color: rgba(249, 115, 22, 0.2) !important; color: #fb923c !important; border-color: rgba(249, 115, 22, 0.3) !important; }
+            html.dark div[class*="bg-slate-900/20"],
+            html.dark .border-slate-200\\/60,
+            html.dark .border-slate-200\\/50 {
+                background-color: rgba(255, 255, 255, 0.08) !important;
+                border-color: rgba(255, 255, 255, 0.08) !important;
+            }
+
+            /* 16. Header, Mobile Menu & Footer */
+            html.dark header {
+                background-color: rgba(7, 11, 20, 0.85) !important;
+                border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+            }
+            html.dark #mobile-menu {
+                background-color: #0b0f19 !important;
+                border-color: rgba(255, 255, 255, 0.08) !important;
+            }
+            html.dark #mobile-menu .bg-slate-50 {
+                background-color: #070b14 !important;
+                border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+            }
+            html.dark #mobile-menu a {
+                color: #cbd5e1 !important;
+            }
+            html.dark #mobile-menu a:hover {
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                color: #ffffff !important;
+            }
+            html.dark #mobile-menu a.bg-indigo-50 {
+                background-color: rgba(54, 128, 103, 0.2) !important;
+                color: #34d399 !important;
+                border-color: rgba(54, 128, 103, 0.4) !important;
+            }
+            html.dark footer {
+                background-color: rgba(7, 11, 20, 0.7) !important;
+                border-top-color: rgba(255, 255, 255, 0.08) !important;
+            }
+
+            /* 17. Theme Toggle & Carousel Arrows */
+            html.dark .theme-toggle-btn {
+                background-color: rgba(255, 255, 255, 0.07) !important;
+                border-color: rgba(255, 255, 255, 0.12) !important;
+                color: #f1f5f9 !important;
             }
             html.dark .theme-toggle-btn:hover {
                 background-color: rgba(255, 255, 255, 0.15) !important;
+            }
+            html.dark #btn-prev,
+            html.dark #btn-next {
+                background-color: rgba(15, 23, 42, 0.75) !important;
+                border-color: rgba(255, 255, 255, 0.15) !important;
+                color: #e2e8f0 !important;
+            }
+            html.dark #btn-prev:hover,
+            html.dark #btn-next:hover {
+                background-color: rgba(54, 128, 103, 0.4) !important;
+                color: #ffffff !important;
             }
         `;
         document.head.appendChild(style);
@@ -266,7 +363,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             </nav>
         </div>
 
-        <div id="menu-overlay" style="visibility: hidden;" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-50 opacity-0 pointer-events-none will-change-[opacity]"></div>
+        <div id="menu-overlay" style="visibility: hidden;" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 opacity-0 pointer-events-none will-change-[opacity]"></div>
 
         <header class="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all duration-300">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
@@ -320,7 +417,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 
     container.innerHTML = navHTML;
     
-    // Theme Toggle Logic Execution with Beta Toast Message
+    // Theme Toggle Logic
     const themeBtns = document.querySelectorAll('.theme-toggle-btn');
     
     function updateThemeIcons() {
@@ -332,16 +429,19 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     
     updateThemeIcons();
 
-    function showBetaToast() {
+    function showBetaToast(isDark) {
         const existingToast = document.getElementById('beta-theme-toast');
         if (existingToast) existingToast.remove();
 
         const toast = document.createElement('div');
         toast.id = 'beta-theme-toast';
-        toast.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-[100] bg-slate-900/90 dark:bg-slate-800/95 text-white text-xs font-bold py-2.5 px-4 rounded-full shadow-2xl backdrop-blur-md border border-slate-700/60 flex items-center gap-2.5 transition-all duration-300 transform translate-y-10 opacity-0';
-        toast.innerHTML = `
-            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-            <span>Dark Theme (Beta) enabled</span>
+        toast.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-[100] bg-slate-900/95 dark:bg-slate-800/95 text-white text-xs font-bold py-2.5 px-4 rounded-full shadow-2xl backdrop-blur-md border border-slate-700/60 flex items-center gap-2.5 transition-all duration-300 transform translate-y-10 opacity-0';
+        toast.innerHTML = isDark ? `
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Dark Theme enabled</span>
+        ` : `
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            <span>Light Theme enabled</span>
         `;
         document.body.appendChild(toast);
 
@@ -352,7 +452,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
         setTimeout(() => {
             toast.classList.add('translate-y-10', 'opacity-0');
             setTimeout(() => toast.remove(), 300);
-        }, 2500);
+        }, 2000);
     }
     
     themeBtns.forEach(btn => {
@@ -361,10 +461,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             const isDark = document.documentElement.classList.contains('dark');
             localStorage.setItem('kt_theme', isDark ? 'dark' : 'light');
             updateThemeIcons();
-            
-            if (isDark) {
-                showBetaToast();
-            }
+            showBetaToast(isDark);
         });
     });
 
@@ -471,7 +568,7 @@ function injectGlobalAd() {
 }
 
 // ==============================================================================
-// 4. KTU WHATSAPP CHANNEL PROMO MINI POP-UP
+// 4. KTU WHATSAPP CHANNEL PROMO MINI POP-UP (LIQUID GLASS ADAPTED)
 // ==============================================================================
 function initWhatsAppPopup() {
     const STORAGE_KEY = 'ktu_wa_popup_cooldown_until';
@@ -488,33 +585,31 @@ function initWhatsAppPopup() {
         if (document.getElementById('ktu-wa-popup')) return;
 
         const popupHTML = `
-            <div id="ktu-wa-popup" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-[calc(100%-2rem)] sm:w-88 max-w-sm bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl rounded-2xl p-4 transition-all duration-300 ease-out transform translate-y-10 opacity-0 will-change-transform dark:bg-slate-900/95 dark:border-slate-700">
-                <button id="ktu-wa-close-btn" aria-label="Close" class="absolute top-3 right-3 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-slate-300 p-1.5 rounded-full transition-colors focus:outline-none">
+            <div id="ktu-wa-popup" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-[calc(100%-2rem)] sm:w-88 max-w-sm bg-white/90 dark:bg-slate-900/80 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl rounded-3xl p-4 transition-all duration-300 ease-out transform translate-y-10 opacity-0 will-change-transform">
+                <button id="ktu-wa-close-btn" aria-label="Close" class="absolute top-3.5 right-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-full transition-colors focus:outline-none">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
 
                 <div class="flex items-start gap-3.5 pr-6">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/40 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center shrink-0 shadow-sm text-emerald-600 dark:text-emerald-400">
-                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.06c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.106 8.106 0 01-1.24-4.29c0-4.5 3.66-8.16 8.16-8.16 2.18 0 4.23.85 5.77 2.39 1.54 1.54 2.39 3.59 2.39 5.77 0 4.5-3.66 8.16-8.16 8.16zm4.47-6.11c-.24-.12-1.45-.71-1.68-.79-.22-.08-.39-.12-.55.12-.17.24-.63.79-.77.95-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.65-1.21-1.45-1.36-1.69-.14-.24-.02-.37.1-.49.11-.11.24-.28.37-.43.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.43-.06-.12-.55-1.33-.76-1.82-.2-.48-.41-.41-.56-.42-.14-.01-.31-.01-.48-.01-.17 0-.45.06-.68.32-.24.25-.9.88-.9 2.15 0 1.27.93 2.5 1.06 2.67.13.18 1.82 2.78 4.41 3.9 0.62.27 1.1.43 1.48.55.62.2 1.19.17 1.63.11.5-.08 1.45-.59 1.66-1.17.2-.57.2-1.07.14-1.17-.06-.11-.22-.17-.46-.29z"/>
-                        </svg>
+                    <div class="w-11 h-11 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-100 dark:border-emerald-500/30 flex items-center justify-center shrink-0 shadow-sm text-emerald-600 dark:text-emerald-400 text-xl">
+                        <i class="fab fa-whatsapp"></i>
                     </div>
 
                     <div>
-                        <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100 leading-tight">Follow WhatsApp Channel</h3>
+                        <h3 class="text-sm font-extrabold text-slate-900 dark:text-white leading-tight">Follow WhatsApp Channel</h3>
                         <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-                            Follow our channel for latest <b>KTU Updates</b>, alerts & verified <b>Study Notes</b>.
+                            Get latest <b>KTU Updates</b>, circular alerts & verified <b>Study Notes</b>.
                         </p>
                     </div>
                 </div>
 
                 <div class="mt-3.5 flex items-center gap-2">
-                    <button id="ktu-wa-later-btn" class="flex-1 py-2 px-3 text-xs font-semibold text-slate-600 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 rounded-xl transition-colors">
+                    <button id="ktu-wa-later-btn" class="flex-1 py-2 px-3 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full transition-colors border border-transparent dark:border-white/5">
                         Maybe Later
                     </button>
-                    <a id="ktu-wa-follow-btn" href="${CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm hover:shadow rounded-xl text-center transition-all flex items-center justify-center gap-1.5">
+                    <a id="ktu-wa-follow-btn" href="${CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 shadow-md rounded-full text-center transition-all flex items-center justify-center gap-1.5">
                         Follow Channel
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
