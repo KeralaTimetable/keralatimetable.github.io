@@ -11,7 +11,33 @@
         const style = document.createElement('style');
         style.id = 'kt-dark-theme-styles';
         style.innerHTML = `
-            /* 1. Canvas & Aurora Glow Background */
+            /* ==================================================================
+               A. LIGHT MODE ENHANCEMENTS (Fixes laptop washing out in notes.html)
+               ================================================================== */
+            html:not(.dark) .branch-card {
+                border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
+                background: rgba(255, 255, 255, 0.85) !important;
+                box-shadow: 0 4px 18px -2px rgba(31, 38, 135, 0.06) !important;
+            }
+            html:not(.dark) .branch-card:hover {
+                border-color: #000000 !important;
+                background: #ffffff !important;
+            }
+            html:not(.dark) .real-glass {
+                border: 1.5px solid rgba(0, 0, 0, 0.14) !important;
+                box-shadow: inset 0 1px 1px #fff, 0 16px 40px rgba(31, 38, 135, 0.08) !important;
+            }
+            html:not(.dark) select.custom-select {
+                border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
+            }
+            html:not(.dark) span.bg-white\\/80 {
+                border: 1px solid rgba(0, 0, 0, 0.12) !important;
+            }
+
+            /* ==================================================================
+               B. DARK MODE ENGINE (Fixes all notes.html & index.html issues)
+               ================================================================== */
+            /* 1. Base Canvas */
             html.dark body,
             html.dark .bg-mesh {
                 background-color: #070B14 !important;
@@ -23,41 +49,68 @@
                 color: #f1f5f9 !important;
             }
             
-            /* 2. Preserve Gradient Text (Crucial: prevents solid color override) */
+            /* 2. Text Transparency Fix (Protects multi-color gradients) */
             html.dark .text-transparent {
                 color: transparent !important;
                 -webkit-text-fill-color: transparent !important;
             }
 
-            /* 3. Text Color Conversions */
+            /* 3. Text Hierarchy & Readability Fixes */
             html.dark .text-slate-900:not(.text-transparent) { color: #ffffff !important; }
             html.dark .text-slate-800:not(.text-transparent) { color: #f1f5f9 !important; }
             html.dark .text-slate-700:not(.text-transparent) { color: #e2e8f0 !important; }
-            html.dark .text-slate-600:not(.text-transparent) { color: #94a3b8 !important; }
-            html.dark .text-slate-500:not(.text-transparent) { color: #64748b !important; }
-            html.dark .text-slate-400:not(.text-transparent) { color: #475569 !important; }
+            html.dark .text-slate-600:not(.text-transparent) { color: #cbd5e1 !important; }
+            html.dark .text-slate-500:not(.text-transparent) { color: #94a3b8 !important; }
+            html.dark .text-slate-400:not(.text-transparent) { color: #94a3b8 !important; } /* Fixed: Was #475569 */
 
-            /* 4. Brand Accent (#368067) overrides without breaking buttons */
-            html.dark a.text-indigo-600:not(.text-transparent),
-            html.dark a.text-blue-600:not(.text-transparent),
-            html.dark span.text-indigo-600:not(.text-transparent) {
-                color: #4ade80 !important;
-            }
-
-            /* 5. NOTES.HTML FIX: Parallax Orbs (Screen mode prevents turning pitch black) */
+            /* 4. NOTES.HTML FIX: Parallax Orbs (Screen mode prevents pitch-black orbs) */
             html.dark #mouse-orb-1,
             html.dark #mouse-orb-2 {
                 mix-blend-mode: screen !important;
                 opacity: 0.35 !important;
+                filter: blur(80px) !important;
             }
 
-            /* 6. NOTES.HTML FIX: Branch Cards */
+            /* 5. NOTES.HTML FIX: 3D Real-Glass Finder Card */
+            html.dark .real-glass {
+                background: rgba(15, 23, 42, 0.7) !important;
+                backdrop-filter: blur(28px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.25) !important;
+                border-left: 1px solid rgba(255, 255, 255, 0.15) !important;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+            }
+
+            /* 6. NOTES.HTML FIX: Dropdown Inputs (Prevents hover:bg-white/70 whiteout) */
+            html.dark .inner-glass,
+            html.dark select.custom-select {
+                background-color: rgba(0, 0, 0, 0.4) !important;
+                border: 1px solid rgba(255, 255, 255, 0.12) !important;
+                color: #f8fafc !important;
+                background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E") !important;
+            }
+            html.dark select.custom-select:hover,
+            html.dark .inner-glass:hover {
+                background-color: rgba(255, 255, 255, 0.08) !important;
+                border-color: rgba(54, 128, 103, 0.5) !important;
+            }
+            html.dark select.custom-select option,
+            html.dark select option {
+                background-color: #0f172a !important;
+                color: #f8fafc !important;
+            }
+            html.dark select option:disabled {
+                color: #64748b !important;
+            }
+
+            /* 7. NOTES.HTML FIX: Branch Cards */
             html.dark .branch-card {
-                background: rgba(255, 255, 255, 0.04) !important;
+                background: rgba(255, 255, 255, 0.035) !important;
                 backdrop-filter: blur(20px) saturate(180%) !important;
                 -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
                 border: 1px solid rgba(255, 255, 255, 0.08) !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.16) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
                 box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35) !important;
             }
             html.dark .branch-card:hover {
@@ -65,29 +118,52 @@
                 border-color: rgba(54, 128, 103, 0.6) !important;
                 box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5) !important;
             }
-            html.dark .branch-card .bg-white\\/80 {
-                background-color: rgba(255, 255, 255, 0.07) !important;
-                border-color: rgba(255, 255, 255, 0.1) !important;
+            html.dark .branch-card:hover h3 {
+                color: #4ade80 !important;
             }
             html.dark .branch-card .bg-indigo-100 { background-color: rgba(99, 102, 241, 0.15) !important; }
             html.dark .branch-card .bg-emerald-100 { background-color: rgba(16, 185, 129, 0.15) !important; }
 
-            /* 7. NOTES.HTML FIX: 3D Real-Glass & Inner-Glass Search Card */
-            html.dark .real-glass {
-                background: rgba(15, 23, 42, 0.65) !important;
-                backdrop-filter: blur(28px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-                border: 1px solid rgba(255, 255, 255, 0.08) !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.22) !important;
-                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+            /* 8. NOTES.HTML FIX: Disabled / Coming Soon Cards */
+            html.dark .cursor-not-allowed {
+                opacity: 0.55 !important;
             }
-            html.dark .inner-glass {
-                background: rgba(0, 0, 0, 0.35) !important;
-                border: 1px solid rgba(255, 255, 255, 0.1) !important;
-                color: #f8fafc !important;
+            html.dark .cursor-not-allowed .text-slate-700 {
+                color: #94a3b8 !important;
+            }
+            html.dark .cursor-not-allowed .text-slate-400 {
+                color: #64748b !important;
             }
 
-            /* 8. INDEX.HTML FIX: Clear Glass Panels & Dark Border conversion */
+            /* 9. NOTES.HTML FIX: Remove Harsh White Outlines */
+            html.dark .border-white {
+                border-color: rgba(255, 255, 255, 0.1) !important;
+            }
+            html.dark .bg-white\\/80,
+            html.dark .bg-white\\/70 {
+                background-color: rgba(255, 255, 255, 0.06) !important;
+            }
+
+            /* 10. NOTES.HTML FIX: Trending Searches Tags */
+            html.dark span.bg-white\\/80 {
+                background-color: rgba(255, 255, 255, 0.04) !important;
+                border-color: rgba(255, 255, 255, 0.08) !important;
+                color: #cbd5e1 !important;
+            }
+            html.dark span.bg-white\\/80:hover {
+                background-color: rgba(54, 128, 103, 0.2) !important;
+                border-color: rgba(54, 128, 103, 0.5) !important;
+                color: #6ee7b7 !important;
+            }
+
+            /* 11. NOTES.HTML FIX: Footer (Prevents milky white slab) */
+            html.dark footer,
+            html.dark footer.bg-white\\/50 {
+                background-color: rgba(7, 11, 20, 0.85) !important;
+                border-top-color: rgba(255, 255, 255, 0.08) !important;
+            }
+
+            /* 12. INDEX.HTML GLASS & HYBRID CARD INTEGRATION */
             html.dark .glass-panel {
                 background: rgba(255, 255, 255, 0.035) !important;
                 backdrop-filter: blur(24px) saturate(180%) !important;
@@ -101,8 +177,6 @@
                 border-color: rgba(54, 128, 103, 0.5) !important;
                 box-shadow: 0 18px 48px rgba(0, 0, 0, 0.6) !important;
             }
-
-            /* 9. INDEX.HTML FIX: Quick Access Hybrid Cards */
             html.dark .hybrid-card {
                 background: rgba(255, 255, 255, 0.035) !important;
                 backdrop-filter: blur(20px) saturate(180%) !important;
@@ -127,7 +201,7 @@
                 border-color: #368067 !important;
             }
 
-            /* 10. INDEX.HTML FIX: Liquid Glass Search Bar */
+            /* 13. Search bar on index.html */
             html.dark div[class*="bg-white/75"],
             html.dark div[class*="bg-white/60"],
             html.dark .glass-panel.bg-white\\/95 {
@@ -139,101 +213,13 @@
                 border-color: #368067 !important;
             }
 
-            /* 11. Cross-Browser Dropdown <select> & <option> readability */
-            html.dark select, 
-            html.dark select.custom-select {
-                color: #f8fafc !important;
-                background-color: rgba(15, 23, 42, 0.75) !important;
-                border-color: rgba(255, 255, 255, 0.12) !important;
-                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
-            }
-            html.dark select option {
-                background-color: #0f172a !important;
-                color: #f8fafc !important;
-            }
-            html.dark select option:disabled {
-                color: #64748b !important;
-            }
-            html.dark input[type="search"], 
-            html.dark input[type="text"] {
-                color: #f8fafc !important;
-            }
-            html.dark input::placeholder {
-                color: #64748b !important;
-            }
-
-            /* 12. Animated Hero Folder Graphic */
-            html.dark .glass-folder {
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
-                border-color: rgba(255, 255, 255, 0.12) !important;
-                box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05), 0 10px 30px rgba(0, 0, 0, 0.5) !important;
-            }
-            html.dark .glass-folder div[class*="bg-white/"] {
-                background-color: rgba(255, 255, 255, 0.08) !important;
-                border-color: rgba(255, 255, 255, 0.12) !important;
-            }
-
-            /* 13. Ambient Blur Blobs on index.html */
-            html.dark .fixed.top-12.left-1\\/4,
-            html.dark .fixed.top-1\\/3.right-10,
-            html.dark .fixed.bottom-20.left-10 {
-                opacity: 0.15 !important;
-                mix-blend-mode: screen !important;
-            }
-
-            /* 14. Badges, Pills & Trending Tags */
-            html.dark span.bg-white\\/80 {
-                background-color: rgba(255, 255, 255, 0.05) !important;
-                border-color: rgba(255, 255, 255, 0.10) !important;
-                color: #cbd5e1 !important;
-            }
-            html.dark span.bg-white\\/80:hover {
-                background-color: rgba(54, 128, 103, 0.2) !important;
-                border-color: rgba(54, 128, 103, 0.5) !important;
-                color: #6ee7b7 !important;
-            }
-
-            html.dark .bg-indigo-50 {
-                background-color: rgba(54, 128, 103, 0.15) !important;
-                color: #6ee7b7 !important;
-                border-color: rgba(54, 128, 103, 0.3) !important;
-            }
-            html.dark .bg-emerald-50\\/90,
-            html.dark .bg-emerald-50 {
-                background-color: rgba(16, 185, 129, 0.15) !important;
-                color: #6ee7b7 !important;
-                border-color: rgba(16, 185, 129, 0.3) !important;
-            }
-            html.dark .bg-rose-50\\/90,
-            html.dark .bg-rose-50 {
-                background-color: rgba(244, 63, 94, 0.15) !important;
-                color: #fda4af !important;
-                border-color: rgba(244, 63, 94, 0.3) !important;
-            }
-            html.dark .bg-amber-50 {
-                background-color: rgba(245, 158, 11, 0.15) !important;
-                color: #fcd34d !important;
-                border-color: rgba(245, 158, 11, 0.3) !important;
-            }
-            html.dark .bg-red-50 {
-                background-color: rgba(239, 68, 68, 0.15) !important;
-                color: #fca5a5 !important;
-                border-color: rgba(239, 68, 68, 0.3) !important;
-            }
-
-            /* 15. Stats Pill on index.html */
-            html.dark .bg-indigo-100 { background-color: rgba(54, 128, 103, 0.2) !important; color: #34d399 !important; border-color: rgba(54, 128, 103, 0.3) !important; }
-            html.dark .bg-emerald-100 { background-color: rgba(16, 185, 129, 0.2) !important; color: #34d399 !important; border-color: rgba(16, 185, 129, 0.3) !important; }
-            html.dark .bg-blue-100 { background-color: rgba(59, 130, 246, 0.2) !important; color: #60a5fa !important; border-color: rgba(59, 130, 246, 0.3) !important; }
-            html.dark .bg-orange-100 { background-color: rgba(249, 115, 22, 0.2) !important; color: #fb923c !important; border-color: rgba(249, 115, 22, 0.3) !important; }
-            html.dark div[class*="bg-slate-900/20"],
-            html.dark .border-slate-200\\/60,
-            html.dark .border-slate-200\\/50 {
-                background-color: rgba(255, 255, 255, 0.08) !important;
+            /* 14. Global Note Ad in Dark Mode */
+            html.dark #global-note-ad {
+                background-color: rgba(255, 255, 255, 0.03) !important;
                 border-color: rgba(255, 255, 255, 0.08) !important;
             }
 
-            /* 16. Header, Mobile Menu & Footer */
+            /* 15. Header, Theme Toggles & Navigation */
             html.dark header {
                 background-color: rgba(7, 11, 20, 0.85) !important;
                 border-bottom-color: rgba(255, 255, 255, 0.08) !important;
@@ -246,9 +232,7 @@
                 background-color: #070b14 !important;
                 border-bottom-color: rgba(255, 255, 255, 0.08) !important;
             }
-            html.dark #mobile-menu a {
-                color: #cbd5e1 !important;
-            }
+            html.dark #mobile-menu a { color: #cbd5e1 !important; }
             html.dark #mobile-menu a:hover {
                 background-color: rgba(255, 255, 255, 0.05) !important;
                 color: #ffffff !important;
@@ -258,12 +242,6 @@
                 color: #34d399 !important;
                 border-color: rgba(54, 128, 103, 0.4) !important;
             }
-            html.dark footer {
-                background-color: rgba(7, 11, 20, 0.7) !important;
-                border-top-color: rgba(255, 255, 255, 0.08) !important;
-            }
-
-            /* 17. Theme Toggle & Carousel Arrows */
             html.dark .theme-toggle-btn {
                 background-color: rgba(255, 255, 255, 0.07) !important;
                 border-color: rgba(255, 255, 255, 0.12) !important;
@@ -271,17 +249,6 @@
             }
             html.dark .theme-toggle-btn:hover {
                 background-color: rgba(255, 255, 255, 0.15) !important;
-            }
-            html.dark #btn-prev,
-            html.dark #btn-next {
-                background-color: rgba(15, 23, 42, 0.75) !important;
-                border-color: rgba(255, 255, 255, 0.15) !important;
-                color: #e2e8f0 !important;
-            }
-            html.dark #btn-prev:hover,
-            html.dark #btn-next:hover {
-                background-color: rgba(54, 128, 103, 0.4) !important;
-                color: #ffffff !important;
             }
         `;
         document.head.appendChild(style);
@@ -568,7 +535,7 @@ function injectGlobalAd() {
 }
 
 // ==============================================================================
-// 4. KTU WHATSAPP CHANNEL PROMO MINI POP-UP (LIQUID GLASS ADAPTED)
+// 4. AUTHENTIC LIQUID GLASS WHATSAPP CHANNEL PROMPT (MATCHING SCREENSHOT 1:1)
 // ==============================================================================
 function initWhatsAppPopup() {
     const STORAGE_KEY = 'ktu_wa_popup_cooldown_until';
@@ -585,36 +552,58 @@ function initWhatsAppPopup() {
         if (document.getElementById('ktu-wa-popup')) return;
 
         const popupHTML = `
-            <div id="ktu-wa-popup" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-[calc(100%-2rem)] sm:w-88 max-w-sm bg-white/90 dark:bg-slate-900/80 backdrop-blur-2xl border border-slate-200/80 dark:border-white/10 shadow-2xl rounded-3xl p-4 transition-all duration-300 ease-out transform translate-y-10 opacity-0 will-change-transform">
-                <button id="ktu-wa-close-btn" aria-label="Close" class="absolute top-3.5 right-3.5 text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-full transition-colors focus:outline-none">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </button>
+            <div id="ktu-wa-popup" class="fixed bottom-5 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-[100] w-[calc(100%-2rem)] max-w-[430px] p-5 sm:p-6 rounded-[2rem] text-white shadow-2xl transition-all duration-500 ease-out transform translate-y-12 opacity-0 overflow-hidden will-change-transform"
+                 style="
+                    background: rgba(18, 24, 38, 0.78);
+                    backdrop-filter: blur(32px) saturate(190%);
+                    -webkit-backdrop-filter: blur(32px) saturate(190%);
+                    border: 1px solid rgba(255, 255, 255, 0.12);
+                    box-shadow: 
+                        inset 0 1px 1px 0 rgba(255, 255, 255, 0.25),
+                        0 24px 48px -12px rgba(0, 0, 0, 0.6);
+                 ">
+                 
+                <!-- Ambient glowing refraction orbs inside the clear glass -->
+                <div class="absolute -bottom-6 -left-6 w-36 h-36 bg-sky-500/25 blur-[40px] rounded-full pointer-events-none"></div>
+                <div class="absolute -top-6 -right-6 w-36 h-36 bg-emerald-500/20 blur-[40px] rounded-full pointer-events-none"></div>
+                <div class="absolute bottom-4 right-12 w-28 h-28 bg-emerald-400/20 blur-[35px] rounded-full pointer-events-none"></div>
 
-                <div class="flex items-start gap-3.5 pr-6">
-                    <div class="w-11 h-11 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-100 dark:border-emerald-500/30 flex items-center justify-center shrink-0 shadow-sm text-emerald-600 dark:text-emerald-400 text-xl">
-                        <i class="fab fa-whatsapp"></i>
+                <div class="relative z-10 flex flex-col gap-3.5 sm:gap-4">
+                    <!-- Top Row -->
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex items-center gap-3.5">
+                            <!-- WhatsApp Badge -->
+                            <div class="w-12 h-12 rounded-2xl bg-[#0f2c25]/90 border border-emerald-400/60 flex items-center justify-center text-emerald-400 text-2xl shadow-inner shrink-0">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-white text-base sm:text-lg tracking-tight leading-snug">Follow WhatsApp Channel</h3>
+                            </div>
+                        </div>
+                        
+                        <!-- Close 'X' Button -->
+                        <button id="ktu-wa-close-btn" aria-label="Close" class="text-slate-400 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10 focus:outline-none shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
                     </div>
 
-                    <div>
-                        <h3 class="text-sm font-extrabold text-slate-900 dark:text-white leading-tight">Follow WhatsApp Channel</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-                            Get latest <b>KTU Updates</b>, circular alerts & verified <b>Study Notes</b>.
-                        </p>
-                    </div>
-                </div>
+                    <!-- Description with Glowing Accents -->
+                    <p class="text-slate-300 text-xs sm:text-sm font-medium leading-relaxed pl-0.5">
+                        Follow our channel for latest <strong class="text-sky-300 font-bold">KTU Updates</strong>, alerts & verified <strong class="text-emerald-300 font-bold">Study Notes</strong>.
+                    </p>
 
-                <div class="mt-3.5 flex items-center gap-2">
-                    <button id="ktu-wa-later-btn" class="flex-1 py-2 px-3 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full transition-colors border border-transparent dark:border-white/5">
-                        Maybe Later
-                    </button>
-                    <a id="ktu-wa-follow-btn" href="${CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 shadow-md rounded-full text-center transition-all flex items-center justify-center gap-1.5">
-                        Follow Channel
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
-                        </svg>
-                    </a>
+                    <!-- Pill Action Buttons -->
+                    <div class="grid grid-cols-2 gap-3 pt-1">
+                        <button id="ktu-wa-later-btn" class="w-full py-3 px-4 rounded-full bg-white/10 hover:bg-white/15 text-slate-200 font-bold text-xs sm:text-sm transition-all border border-white/5 active:scale-95 text-center">
+                            Maybe Later
+                        </button>
+                        <a id="ktu-wa-follow-btn" href="${CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs sm:text-sm transition-all shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2 active:scale-95 text-center">
+                            <span>Follow Channel</span>
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         `;
@@ -627,17 +616,17 @@ function initWhatsAppPopup() {
         const followBtn = document.getElementById('ktu-wa-follow-btn');
 
         requestAnimationFrame(() => {
-            popup.classList.remove('translate-y-10', 'opacity-0');
+            popup.classList.remove('translate-y-12', 'opacity-0');
         });
 
         function dismissPopup(days) {
             const expireDate = Date.now() + days * 24 * 60 * 60 * 1000;
             localStorage.setItem(STORAGE_KEY, expireDate.toString());
 
-            popup.classList.add('translate-y-10', 'opacity-0');
+            popup.classList.add('translate-y-12', 'opacity-0');
             setTimeout(() => {
                 popup.remove();
-            }, 300);
+            }, 350);
         }
 
         closeBtn?.addEventListener('click', () => dismissPopup(CANCEL_DAYS));
