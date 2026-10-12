@@ -2,169 +2,375 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KTU Notification and Announcements | KTU Latest Updates</title>
-    
-    <script src="/tailwind-local.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>KTU Notifications & Announcements | Kerala Timetable</title>
+    <meta name="description" content="Instant, wait-free official KTU exam timetables, circulars, notifications, and B.Tech academic announcements for the 2024 & 2019 schemes.">
+    <link rel="canonical" href="https://keralatimetable.in/updates.html" />
+    <link rel="icon" href="/favicon.png" type="image/png">
+
+    <!-- Tailwind CSS with Fallback -->
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        /* Hide scrollbar for the filter bar */
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow-x: hidden;
+            background: 
+                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.55) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.45) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(224, 231, 255, 0.5) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.45) 0px, transparent 50%),
+                #f8fafc;
+            min-height: 100vh;
+        }
+
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        /* Liquid Clear Glass Elements */
+        .real-glass {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1.5px solid rgba(0, 0, 0, 0.12);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95), 0 10px 28px -6px rgba(31, 38, 135, 0.05);
+        }
+
+        .notice-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(0, 0, 0, 0.10);
+            box-shadow: 0 4px 16px -2px rgba(31, 38, 135, 0.04);
+            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .notice-card:hover {
+            transform: translateY(-2px);
+            background: #ffffff;
+            border-color: rgba(54, 128, 103, 0.5);
+            box-shadow: 0 12px 28px -4px rgba(31, 38, 135, 0.08);
+        }
+
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1.5px solid rgba(203, 213, 225, 0.85);
+            color: #0f172a;
+            transition: all 0.2s ease;
+        }
+        .glass-input:focus {
+            outline: none;
+            background: #ffffff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        .filter-btn { transition: all 0.3s ease; }
+        .fade-in { animation: fadeIn 0.25s ease-in-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
     </style>
-    
-    <link rel="icon" href="/favicon.png" type="image/png">
-    <meta property="og:site_name" content="Kerala Timetable">
-    <meta property="og:image" content="https://www.keralatimetable.in/social-preview.png">
-    <meta property="og:type" content="website">
 </head>
 
-<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+<body class="antialiased min-h-screen flex flex-col relative text-slate-800 selection:bg-indigo-600 selection:text-white">
 
-    <div id="navigation-container"></div>
+    <!-- Global Header Navigation -->
+    <div id="navigation-container" class="z-50 relative"></div>
 
-    <main class="max-w-3xl mx-auto px-4 pt-8 pb-12 w-full flex-grow relative z-10">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl font-black text-slate-900 mb-2">KTU Latest Updates</h2>
-            <p class="text-slate-500 font-medium">Fast, ad-free updates directly from KTU.</p>
+    <!-- MAIN BODY -->
+    <main class="max-w-3xl mx-auto px-3.5 sm:px-6 pt-6 sm:pt-8 pb-14 w-full flex-grow relative z-10">
+        
+        <!-- Compact Header -->
+        <div class="text-center mb-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-[10px] sm:text-xs font-black uppercase tracking-wider mb-2.5 shadow-sm">
+                <i class="fas fa-bullhorn text-indigo-500"></i> Official Notice Board
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug mb-1.5">
+                KTU Latest Updates
+            </h1>
+            <p class="text-slate-500 font-medium text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+                Fast, verified academic circulars & live exam timetables directly from APJAKTU.
+            </p>
+        </div>
+
+        <!-- ADMIN CONTROLS BAR (Appears automatically when Admin logs in) -->
+        <div id="admin-actions-bar" class="hidden mb-5 real-glass p-3 rounded-2xl flex flex-wrap items-center justify-between gap-3 border border-emerald-300 bg-emerald-50/50 fade-in">
+            <div class="flex items-center gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-extrabold text-emerald-900">Admin Mode Active</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="openNoticeEditor()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                    <i class="fas fa-plus"></i> Post Notice
+                </button>
+                <button id="btn-seed-data" onclick="seedNoticesToFirebase()" class="px-3 py-1.5 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold transition-all">
+                    Sync notices-data.js
+                </button>
+                <button onclick="adminLogout()" class="px-3 py-1.5 text-xs font-bold text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
+                    Sign Out
+                </button>
+            </div>
         </div>
 
         <!-- Search Bar -->
-        <div class="relative mb-5">
-            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <i class="fas fa-search text-slate-400"></i>
+        <div class="relative mb-3.5">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fas fa-search text-xs sm:text-sm"></i>
             </div>
-            <input type="text" id="searchInput" class="block w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-sm transition-all" placeholder="Search for timetables, exams, or keywords...">
+            <input type="search" id="searchInput" class="glass-input block w-full pl-9 pr-3.5 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold text-slate-700 placeholder-slate-400 shadow-sm" placeholder="Search notices, branch, or keywords...">
         </div>
 
-        <!-- Horizontal Scrolling Filter Bar (Updated for all Semesters) -->
-        <div class="flex gap-2 overflow-x-auto pb-4 mb-2 hide-scrollbar whitespace-nowrap" id="filter-container">
-            <button class="filter-btn active bg-indigo-600 text-white font-bold px-5 py-2 rounded-full shadow-md text-sm border border-indigo-600 shrink-0" data-filter="All">
+        <!-- Filter Tags Bar -->
+        <div class="flex gap-1.5 sm:gap-2 overflow-x-auto pb-3 mb-3 hide-scrollbar whitespace-nowrap" id="filter-container">
+            <button class="filter-btn active bg-indigo-600 text-white font-bold px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs shadow-sm border border-indigo-600 shrink-0" data-filter="All">
                 All Updates
             </button>
-            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="1st Year">
+            <button class="filter-btn bg-white/80 text-slate-600 font-bold hover:bg-white px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs border border-slate-900/10 shrink-0" data-filter="1st Year">
                 1st Year (S1/S2)
             </button>
-            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="2nd Year">
+            <button class="filter-btn bg-white/80 text-slate-600 font-bold hover:bg-white px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs border border-slate-900/10 shrink-0" data-filter="2nd Year">
                 2nd Year (S3/S4)
             </button>
-            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="3rd Year">
+            <button class="filter-btn bg-white/80 text-slate-600 font-bold hover:bg-white px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs border border-slate-900/10 shrink-0" data-filter="3rd Year">
                 3rd Year (S5/S6)
             </button>
-            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="4th Year">
+            <button class="filter-btn bg-white/80 text-slate-600 font-bold hover:bg-white px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs border border-slate-900/10 shrink-0" data-filter="4th Year">
                 4th Year (S7/S8)
             </button>
-            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="2024 Scheme">
+            <button class="filter-btn bg-white/80 text-slate-600 font-bold hover:bg-white px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs border border-slate-900/10 shrink-0" data-filter="2024 Scheme">
                 2024 Scheme
             </button>
-            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="2019 Scheme">
+            <button class="filter-btn bg-white/80 text-slate-600 font-bold hover:bg-white px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs border border-slate-900/10 shrink-0" data-filter="2019 Scheme">
                 2019 Scheme
             </button>
-            <button class="filter-btn bg-white text-slate-600 font-semibold hover:bg-slate-100 px-5 py-2 rounded-full shadow-sm text-sm border border-slate-200 shrink-0" data-filter="General">
+            <button class="filter-btn bg-white/80 text-slate-600 font-bold hover:bg-white px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs border border-slate-900/10 shrink-0" data-filter="General">
                 General
             </button>
         </div>
 
-        <div id="notices-container" class="flex flex-col gap-4">
-            <div class="text-center py-10">
-                <i class="fas fa-circle-notch fa-spin text-indigo-500 text-3xl mb-3"></i>
-                <p class="text-slate-500 font-medium">Loading latest notices...</p>
+        <!-- Notices Container -->
+        <div id="notices-container" class="flex flex-col gap-3 min-h-[300px]">
+            <div class="text-center py-12">
+                <i class="fas fa-circle-notch fa-spin text-indigo-500 text-2xl mb-2"></i>
+                <p class="text-slate-500 text-xs font-semibold font-mono-code">Connecting to KTU Notice Feed...</p>
             </div>
         </div>
+
+        <!-- Admin Login Drawer (Toggled from Footer) -->
+        <div id="admin-panel" class="hidden w-full mt-8 pt-6 border-t border-slate-200/80 fade-in">
+            <div class="real-glass p-5 sm:p-6 rounded-2xl border border-purple-200">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h2 class="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-shield-halved text-purple-600"></i> Admin Access
+                        </h2>
+                        <p class="text-xs text-slate-500 font-medium">Publish, edit, and delete official announcements</p>
+                    </div>
+                    <button onclick="toggleAdminPanel()" class="text-slate-400 hover:text-slate-600 p-1"><i class="fas fa-times text-sm"></i></button>
+                </div>
+
+                <div id="admin-auth-box" class="inner-glass p-4 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-3">
+                    <p class="text-xs font-bold text-slate-600 text-center sm:text-left">Google authentication required for authorized editors.</p>
+                    <button onclick="adminGoogleLogin()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition-all flex items-center justify-center gap-2 shrink-0">
+                        <i class="fab fa-google"></i> Sign In with Google
+                    </button>
+                </div>
+            </div>
+        </div>
+
     </main>
 
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center relative z-10">
-        <div class="max-w-3xl mx-auto px-4">
-            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
-            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast and direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
-            <div class="mt-4 space-x-4">
-                <a href="about.html" class="text-indigo-600 text-xs font-bold hover:underline">About Us</a>
-                <a href="https://keralatimetable.stck.me/profile" target="_blank" class="text-indigo-600 text-xs font-bold hover:underline">Support Us</a>
+    <!-- FOOTER -->
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-6 sm:py-7 text-center relative z-10">
+        <div class="max-w-3xl mx-auto px-4 flex flex-col items-center gap-2">
+            <h3 class="text-slate-800 font-bold text-sm sm:text-base">Kerala Timetable</h3>
+            <p class="text-slate-500 text-xs leading-relaxed max-w-lg mx-auto">
+                Independent academic hub providing rapid university schedules and syllabus resources. Not officially affiliated with APJ Abdul Kalam Technological University.
+            </p>
+            <div class="mt-1 text-xs text-slate-400 flex items-center gap-3">
+                <span>© Kerala Timetable</span>
+                <span>•</span>
+                <button onclick="toggleAdminPanel()" class="hover:text-slate-600 transition-colors flex items-center gap-1 font-bold">
+                    <i class="fas fa-lock text-[10px]"></i> Admin Portal
+                </button>
             </div>
         </div>
     </footer>
 
-    <!-- ========================================== -->
-    <!-- GLASSMORPHISM DETAILED NOTIFICATION MODAL  -->
-    <!-- ========================================== -->
-    <div id="notice-modal" class="fixed inset-0 z-[100] flex items-center justify-center px-4 opacity-0 pointer-events-none transition-opacity duration-300">
-        <!-- Blurred Dark Background Overlay -->
-        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-md transition-opacity" onclick="closeNoticeModal()"></div>
+    <!-- ======================================================== -->
+    <!-- READ NOTICE POPUP MODAL (Clean, Scaled for Mobile/Laptop) -->
+    <!-- ======================================================== -->
+    <div id="notice-modal" class="fixed inset-0 z-[100] flex items-center justify-center px-3.5 opacity-0 pointer-events-none transition-opacity duration-250">
+        <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity" onclick="closeNoticeModal()"></div>
         
-        <!-- Glassmorphism Modal Content -->
-        <div id="notice-modal-content" class="relative w-full max-w-lg bg-white/85 backdrop-blur-2xl border border-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] p-6 md:p-8 transform scale-95 transition-all duration-300 flex flex-col max-h-[90vh]">
+        <div id="notice-modal-content" class="relative w-full max-w-lg bg-white/95 backdrop-blur-2xl border border-slate-900/10 rounded-2xl sm:rounded-3xl shadow-2xl p-5 sm:p-7 transform scale-95 transition-all duration-250 flex flex-col max-h-[88vh]">
             
-            <!-- Close 'X' Button -->
-            <button onclick="closeNoticeModal()" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-slate-100/50 hover:bg-red-50 text-slate-500 hover:text-red-500 rounded-full transition-colors focus:outline-none">
-                <i class="fas fa-times text-lg"></i>
+            <button onclick="closeNoticeModal()" class="absolute top-3.5 right-3.5 w-8 h-8 flex items-center justify-center text-slate-400 hover:text-slate-700 rounded-full hover:bg-slate-100 transition-colors focus:outline-none">
+                <i class="fas fa-times text-sm"></i>
             </button>
             
-            <div id="modal-tags" class="flex flex-wrap gap-1.5 mb-4 pr-10"></div>
+            <div id="modal-tags" class="flex flex-wrap gap-1 mb-2.5 pr-8"></div>
             
-            <h2 id="modal-title" class="text-xl md:text-2xl font-black text-slate-900 mb-4 leading-tight"></h2>
+            <h2 id="modal-title" class="text-base sm:text-lg font-black text-slate-900 mb-2.5 leading-snug"></h2>
             
-            <div class="flex items-center gap-3 mb-6">
-                <div class="flex items-center text-slate-600 text-xs font-bold bg-white/60 px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+            <div class="flex items-center gap-2.5 mb-3.5">
+                <div class="flex items-center text-slate-600 text-[11px] font-bold bg-slate-50 px-2.5 py-1 rounded-md border border-slate-200">
                     <i class="far fa-calendar-alt mr-1.5 text-indigo-500"></i> <span id="modal-date"></span>
                 </div>
                 <div id="modal-new-badge"></div>
             </div>
             
-            <!-- Detailed Explanation Area -->
-            <div class="bg-white/60 rounded-2xl p-5 border border-white shadow-inner mb-6 overflow-y-auto hide-scrollbar">
-                <p id="modal-details" class="text-slate-600 text-sm md:text-base font-medium leading-relaxed"></p>
+            <div class="bg-slate-50/80 rounded-xl p-3.5 border border-slate-200 shadow-inner mb-4 overflow-y-auto hide-scrollbar">
+                <p id="modal-details" class="text-slate-700 text-xs sm:text-sm font-medium leading-relaxed"></p>
             </div>
             
-            <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold px-6 py-4 rounded-xl transition-all shadow-[0_8px_20px_rgba(79,70,229,0.3)] hover:-translate-y-0.5 gap-2 mt-auto">
-                <i class="fas fa-external-link-alt"></i> View Official Notification
+            <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold px-4 py-3 rounded-xl transition-all shadow-md gap-2 mt-auto">
+                <i class="fas fa-external-link-alt text-xs"></i> View Official Notification / PDF
             </a>
         </div>
     </div>
 
-    <!-- Load Components and Notification Data -->
+    <!-- ======================================================== -->
+    <!-- ADMIN CREATE / EDIT NOTICE MODAL                         -->
+    <!-- ======================================================== -->
+    <div id="editorModal" class="hidden fixed inset-0 z-[110] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3.5">
+        <div class="real-glass bg-white/95 rounded-2xl sm:rounded-3xl p-5 sm:p-7 w-full max-w-lg shadow-2xl relative fade-in border border-slate-900/10 max-h-[90vh] overflow-y-auto hide-scrollbar">
+            <button onclick="closeNoticeEditor()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-base"><i class="fas fa-times"></i></button>
+            
+            <h2 id="editorModalTitle" class="text-base sm:text-lg font-black text-slate-900 mb-1 flex items-center gap-2">
+                <i class="fas fa-pen text-indigo-600"></i> Create Announcement
+            </h2>
+            <p class="text-xs text-slate-500 font-semibold mb-4">Post directly to the live student notice board.</p>
+
+            <form id="noticeEditorForm" onsubmit="saveNotice(event)" class="space-y-3">
+                <input type="hidden" id="editNoticeId" value="">
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Notice Headline</label>
+                    <input type="text" id="formTitle" placeholder="e.g. S2 Regular & Supplementary Exam Timetable Published" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold" required>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Date</label>
+                        <input type="date" id="formDate" class="glass-input w-full rounded-xl px-3 py-2 text-xs font-semibold" required>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Primary Tag</label>
+                        <select id="formPrimaryTag" class="glass-input w-full rounded-xl px-3 py-2 text-xs font-semibold">
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                            <option value="4th Year">4th Year</option>
+                            <option value="2024 Scheme">2024 Scheme</option>
+                            <option value="2019 Scheme">2019 Scheme</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Tags (Comma-separated)</label>
+                    <input type="text" id="formTags" placeholder="e.g. 1st Year, 2024 Scheme, Exams" class="glass-input w-full rounded-xl px-3.5 py-2 text-xs font-semibold">
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Official KTU URL or PDF Link</label>
+                    <input type="url" id="formLink" placeholder="https://ktu.edu.in/... or PDF link" class="glass-input w-full rounded-xl px-3.5 py-2 text-xs font-semibold" required>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Details / Summary</label>
+                    <textarea id="formDetails" rows="3" placeholder="Briefly explain the notice changes, registration deadlines, or subject codes affected..." class="glass-input w-full rounded-xl p-3 text-xs sm:text-sm font-medium leading-relaxed"></textarea>
+                </div>
+
+                <button type="submit" id="btnSubmitNotice" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl shadow transition-all text-xs sm:text-sm flex items-center justify-center gap-2 mt-2">
+                    <i class="fas fa-check"></i> Publish to Feed
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (Modular v10.8.0) -->
     <script src="components.js"></script>
     <script src="notices-data.js"></script>
     
-    <script>
-        loadNavigation('updates');
-    </script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-    <script>
+        // --- FIREBASE CONFIGURATION ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyAqJ6wDmjJKCVip3dhgBDi35BzxC0QhIac",
+            authDomain: "keralatimetable-5e155.firebaseapp.com",
+            databaseURL: "https://keralatimetable-5e155-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "keralatimetable-5e155",
+            storageBucket: "keralatimetable-5e155.firebasestorage.app",
+            messagingSenderId: "95059742429",
+            appId: "1:95059742429:web:6ebcae342db9179b509534",
+            measurementId: "G-G2WYE8SQ4S"
+        };
+
+        const ADMIN_EMAIL = "keralatimetable@gmail.com";
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // State Variables
+        let allNotices = [];
+        let currentRenderedNotices = [];
         let currentFilter = 'All';
-        let currentRenderedNotices = []; 
+        let isAdminLoggedIn = false;
 
-        function initializeNotices() {
-            try {
-                if (!window.KTU_NOTICES || window.KTU_NOTICES.length === 0) {
-                    throw new Error("No data found in notices-data.js");
+        // Auto Load Header
+        if (typeof loadNavigation === 'function') loadNavigation('updates', '', false);
+
+        // --- REALTIME DATABASE LISTENER (/ktu_notices) ---
+        function listenToNotices() {
+            const noticesRef = ref(db, 'ktu_notices');
+            onValue(noticesRef, (snapshot) => {
+                const data = snapshot.val();
+                allNotices = [];
+                
+                if (data) {
+                    Object.keys(data).forEach(id => {
+                        allNotices.push({ id, ...data[id] });
+                    });
+                } else if (window.KTU_NOTICES && window.KTU_NOTICES.length > 0) {
+                    // Fallback to local notices-data.js if Firebase is empty
+                    allNotices = window.KTU_NOTICES.map((n, i) => ({ id: `local-${i}`, ...n }));
                 }
-                // Sort by Date (Newest First)
-                window.KTU_NOTICES.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                // Sort by Date (Newest first)
+                allNotices.sort((a, b) => new Date(b.date) - new Date(a.date));
                 filterAndRender();
-            } catch (error) {
-                console.error("Error loading notices:", error);
-                document.getElementById('notices-container').innerHTML = `
-                    <div class="text-center py-10 text-red-500 font-medium bg-red-50 rounded-2xl border border-red-100">
-                        <i class="fas fa-exclamation-triangle mb-2 text-xl"></i><br>
-                        Failed to load notices. Please check notices-data.js formatting.
-                    </div>`;
-            }
+            });
         }
 
-        function filterAndRender() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        // --- RENDER NOTICE CARDS ---
+        window.filterAndRender = function() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
             const container = document.getElementById('notices-container');
-            
-            // Filter Logic
-            currentRenderedNotices = window.KTU_NOTICES.filter(notice => {
-                const matchesSearch = notice.title.toLowerCase().includes(searchTerm);
-                const matchesFilter = currentFilter === 'All' || (notice.tags && notice.tags.includes(currentFilter));
+
+            currentRenderedNotices = allNotices.filter(notice => {
+                const matchesSearch = notice.title.toLowerCase().includes(searchTerm) || 
+                                      (notice.details && notice.details.toLowerCase().includes(searchTerm));
+                
+                let matchesFilter = currentFilter === 'All';
+                if (!matchesFilter && notice.tags) {
+                    const tagArr = Array.isArray(notice.tags) ? notice.tags : notice.tags.split(',').map(t => t.trim());
+                    matchesFilter = tagArr.some(t => t.toLowerCase() === currentFilter.toLowerCase());
+                }
                 return matchesSearch && matchesFilter;
             });
 
@@ -172,9 +378,9 @@
 
             if (currentRenderedNotices.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center py-10 text-slate-500 font-medium bg-white rounded-2xl border border-slate-200 shadow-sm">
-                        <i class="fas fa-search mb-2 text-2xl text-slate-300"></i><br>
-                        No notices found for this category or search.
+                    <div class="real-glass rounded-2xl p-8 text-center text-slate-500">
+                        <i class="fas fa-search text-2xl text-slate-300 mb-2"></i>
+                        <p class="font-bold text-xs sm:text-sm">No announcements found matching this filter.</p>
                     </div>`;
                 return;
             }
@@ -184,134 +390,299 @@
             currentRenderedNotices.forEach((notice, index) => {
                 const noticeDateObj = new Date(notice.date);
                 const options = { day: 'numeric', month: 'short', year: 'numeric' };
-                const formattedDate = noticeDateObj.toLocaleDateString('en-GB', options);
+                const formattedDate = !isNaN(noticeDateObj) 
+                    ? noticeDateObj.toLocaleDateString('en-GB', options) 
+                    : notice.date;
 
-                const diffTime = Math.abs(today - noticeDateObj);
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                const diffDays = Math.ceil(Math.abs(today - noticeDateObj) / (1000 * 60 * 60 * 24));
                 const isNew = diffDays <= 7;
-                
-                let newBadge = isNew 
-                    ? `<span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-600 border border-emerald-100 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider animate-pulse">
-                            <i class="fas fa-star text-[10px]"></i> New
+
+                const newBadge = isNew 
+                    ? `<span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider animate-pulse">
+                            <i class="fas fa-star text-[8px]"></i> New
                        </span>`
-                    : `<span class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-600 border border-indigo-100 text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">
-                           <i class="fas fa-bullhorn text-[10px]"></i> KTU
+                    : `<span class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 border border-indigo-200 text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider">
+                           KTU
                        </span>`;
 
+                // Tag HTML
                 let tagsHTML = '';
-                if (notice.tags && notice.tags.length > 0) {
-                    tagsHTML = `<div class="flex flex-wrap gap-1.5 mb-2 mt-1">`;
-                    notice.tags.forEach(tag => {
-                        tagsHTML += `<span class="bg-slate-100 text-slate-500 border border-slate-200 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">${tag}</span>`;
+                const tagArr = Array.isArray(notice.tags) ? notice.tags : (notice.tags ? notice.tags.split(',').map(t => t.trim()) : []);
+                if (tagArr.length > 0) {
+                    tagsHTML = `<div class="flex flex-wrap gap-1 mb-1.5">`;
+                    tagArr.forEach(t => {
+                        tagsHTML += `<span class="bg-slate-100 text-slate-600 border border-slate-200 text-[9px] font-bold px-2 py-0.5 rounded uppercase">${t}</span>`;
                     });
                     tagsHTML += `</div>`;
                 }
 
-                // Make the entire card clickable, triggering openNoticeModal(index)
-                const card = `
-                    <div onclick="openNoticeModal(${index})" class="cursor-pointer bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-indigo-300 hover:-translate-y-0.5 transition-all duration-300 flex flex-col gap-3 group">
-                        
-                        <div class="flex-grow">
-                            ${tagsHTML}
-                            <h3 class="text-slate-800 font-bold text-base md:text-lg leading-snug group-hover:text-indigo-600 transition-colors">${notice.title}</h3>
+                // Admin Edit / Delete Actions (if signed in)
+                const adminButtons = isAdminLoggedIn ? `
+                    <div class="flex items-center gap-1.5 z-20" onclick="event.stopPropagation()">
+                        <button onclick="editNoticeModal('${notice.id}')" title="Edit Announcement" class="p-1.5 text-xs bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg text-slate-500 transition-colors">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                        <button onclick="deleteNotice('${notice.id}')" title="Delete Announcement" class="p-1.5 text-xs bg-slate-100 hover:bg-rose-50 hover:text-rose-600 rounded-lg text-slate-500 transition-colors">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                ` : '';
+
+                const cardHTML = `
+                    <div onclick="openNoticeModal(${index})" class="notice-card p-4 sm:p-5 rounded-2xl cursor-pointer flex flex-col justify-between gap-3 group relative">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-1">
+                                ${tagsHTML}
+                                ${adminButtons}
+                            </div>
+                            <h3 class="text-slate-800 font-extrabold text-sm sm:text-base leading-snug group-hover:text-indigo-600 transition-colors">
+                                ${notice.title}
+                            </h3>
                         </div>
-                        
-                        <div class="flex flex-wrap items-center justify-between mt-auto pt-4 border-t border-slate-100 gap-3">
-                            <div class="flex items-center gap-3">
-                                <div class="flex items-center text-slate-500 text-xs font-semibold bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200">
-                                    <i class="far fa-calendar-alt mr-1.5 text-slate-400"></i> ${formattedDate}
-                                </div>
+
+                        <div class="flex items-center justify-between pt-2.5 border-t border-slate-100 gap-2">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] sm:text-xs text-slate-500 font-bold flex items-center gap-1">
+                                    <i class="far fa-calendar-alt text-slate-400"></i> ${formattedDate}
+                                </span>
                                 ${newBadge}
                             </div>
-                            
-                            <div class="inline-flex items-center justify-center bg-indigo-50 text-indigo-600 text-xs font-bold px-4 py-2 rounded-lg transition-colors border border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white">
-                                Read More <i class="fas fa-chevron-right ml-1 text-[10px]"></i>
+                            <div class="text-[11px] font-bold text-indigo-600 group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
+                                <span>Read details</span>
+                                <i class="fas fa-chevron-right text-[9px]"></i>
                             </div>
                         </div>
                     </div>
                 `;
-                container.innerHTML += card;
+
+                container.innerHTML += cardHTML;
             });
-        }
+        };
 
-        // --- MODAL LOGIC ---
-        function openNoticeModal(index) {
+        // --- READ MODAL HANDLERS ---
+        window.openNoticeModal = function(index) {
             const notice = currentRenderedNotices[index];
-            const noticeDateObj = new Date(notice.date);
-            const formattedDate = noticeDateObj.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-            
-            const diffTime = Math.abs(new Date() - noticeDateObj);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            const isNew = diffDays <= 7;
+            if (!notice) return;
 
-            // Populate Modal Data
+            const noticeDateObj = new Date(notice.date);
+            const formattedDate = !isNaN(noticeDateObj) 
+                ? noticeDateObj.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+                : notice.date;
+
             document.getElementById('modal-title').innerText = notice.title;
             document.getElementById('modal-date').innerText = formattedDate;
-            document.getElementById('modal-details').innerText = notice.details || "Click the link below to view the full official announcement on the KTU portal.";
+            document.getElementById('modal-details').innerText = notice.details || "Official KTU announcement details. Open the link below to access circulars or PDF downloads.";
             document.getElementById('modal-link').href = notice.link || "https://ktu.edu.in/Menu/announcements";
 
-            document.getElementById('modal-new-badge').innerHTML = isNew 
-                ? `<span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-600 border border-emerald-200 shadow-sm text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider animate-pulse"><i class="fas fa-star text-[10px]"></i> New</span>`
-                : `<span class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-600 border border-indigo-200 shadow-sm text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wider"><i class="fas fa-bullhorn text-[10px]"></i> KTU</span>`;
-
             let tagsHTML = '';
-            if (notice.tags && notice.tags.length > 0) {
-                notice.tags.forEach(tag => {
-                    tagsHTML += `<span class="bg-white text-slate-500 border border-slate-200 shadow-sm text-[10px] font-bold px-2.5 py-1 rounded uppercase tracking-wider">${tag}</span>`;
-                });
-            }
+            const tagArr = Array.isArray(notice.tags) ? notice.tags : (notice.tags ? notice.tags.split(',').map(t => t.trim()) : []);
+            tagArr.forEach(t => {
+                tagsHTML += `<span class="bg-slate-100 text-slate-600 border border-slate-200 text-[10px] font-bold px-2 py-0.5 rounded uppercase">${t}</span>`;
+            });
             document.getElementById('modal-tags').innerHTML = tagsHTML;
 
-            // Show Modal with Animations
             const modal = document.getElementById('notice-modal');
             const modalContent = document.getElementById('notice-modal-content');
             
             modal.classList.remove('opacity-0', 'pointer-events-none');
             modal.classList.add('opacity-100', 'pointer-events-auto');
-            
             modalContent.classList.remove('scale-95');
             modalContent.classList.add('scale-100');
 
-            // Prevent background scrolling
             document.body.style.overflow = 'hidden';
-        }
+        };
 
-        function closeNoticeModal() {
+        window.closeNoticeModal = function() {
             const modal = document.getElementById('notice-modal');
             const modalContent = document.getElementById('notice-modal-content');
             
             modal.classList.remove('opacity-100', 'pointer-events-auto');
             modal.classList.add('opacity-0', 'pointer-events-none');
-            
             modalContent.classList.remove('scale-100');
             modalContent.classList.add('scale-95');
 
-            // Restore background scrolling
             document.body.style.overflow = '';
+        };
+
+        // --- ADMIN MODAL & ACTIONS ---
+        window.openNoticeEditor = function(isEdit = false) {
+            document.getElementById('editorModal').classList.remove('hidden');
+            if (!isEdit) {
+                document.getElementById('noticeEditorForm').reset();
+                document.getElementById('editNoticeId').value = '';
+                document.getElementById('formDate').value = new Date().toISOString().split('T')[0];
+                document.getElementById('editorModalTitle').innerHTML = `<i class="fas fa-plus text-indigo-600"></i> Post New Announcement`;
+            }
+        };
+
+        window.closeNoticeEditor = function() {
+            document.getElementById('editorModal').classList.add('hidden');
+        };
+
+        window.editNoticeModal = function(id) {
+            const target = allNotices.find(n => n.id === id);
+            if (!target) return;
+
+            document.getElementById('editNoticeId').value = id;
+            document.getElementById('formTitle').value = target.title;
+            document.getElementById('formDate').value = target.date.includes('T') ? target.date.split('T')[0] : target.date;
+            document.getElementById('formLink').value = target.link || '';
+            document.getElementById('formDetails').value = target.details || '';
+            
+            const tagStr = Array.isArray(target.tags) ? target.tags.join(', ') : target.tags;
+            document.getElementById('formTags').value = tagStr || '';
+
+            document.getElementById('editorModalTitle').innerHTML = `<i class="fas fa-pen text-indigo-600"></i> Edit Announcement`;
+            document.getElementById('editorModal').classList.remove('hidden');
+        };
+
+        window.saveNotice = async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmitNotice');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Saving...`;
+
+            const editId = document.getElementById('editNoticeId').value;
+            const title = document.getElementById('formTitle').value.trim();
+            const date = document.getElementById('formDate').value;
+            const link = document.getElementById('formLink').value.trim();
+            const details = document.getElementById('formDetails').value.trim();
+            const tagsInput = document.getElementById('formTags').value.trim();
+
+            const tags = tagsInput ? tagsInput.split(',').map(t => t.trim()).filter(Boolean) : [document.getElementById('formPrimaryTag').value];
+
+            const noticeData = {
+                title,
+                date,
+                link,
+                details,
+                tags,
+                updatedAt: new Date().toISOString()
+            };
+
+            try {
+                if (editId && !editId.startsWith('local-')) {
+                    // Update existing
+                    await set(ref(db, `ktu_notices/${editId}`), noticeData);
+                } else {
+                    // Create new
+                    const newRef = push(ref(db, 'ktu_notices'));
+                    await set(newRef, { ...noticeData, createdAt: new Date().toISOString() });
+                }
+                closeNoticeEditor();
+                alert("Announcement saved successfully!");
+            } catch (err) {
+                console.error("Error saving notice:", err);
+                alert("Failed to save: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fas fa-check"></i> Publish to Feed`;
+            }
+        };
+
+        window.deleteNotice = async function(id) {
+            if (id.startsWith('local-')) {
+                alert("This notice is loaded locally from notices-data.js. Sync to Firebase first to manage online.");
+                return;
+            }
+            if (confirm("Are you sure you want to delete this announcement?")) {
+                try {
+                    await remove(ref(db, `ktu_notices/${id}`));
+                } catch (err) {
+                    alert("Delete failed: " + err.message);
+                }
+            }
+        };
+
+        // 1-Click Database Migration Tool for Admins
+        window.seedNoticesToFirebase = async function() {
+            if (!confirm("This will import notices from notices-data.js into Firebase. Continue?")) return;
+            if (!window.KTU_NOTICES || window.KTU_NOTICES.length === 0) {
+                alert("No notices found in notices-data.js.");
+                return;
+            }
+
+            try {
+                for (const item of window.KTU_NOTICES) {
+                    const newRef = push(ref(db, 'ktu_notices'));
+                    await set(newRef, {
+                        title: item.title,
+                        date: item.date,
+                        link: item.link || "https://ktu.edu.in",
+                        details: item.details || "",
+                        tags: item.tags || ["General"],
+                        createdAt: new Date().toISOString()
+                    });
+                }
+                alert("All notices successfully synced to Firebase!");
+            } catch (err) {
+                alert("Migration error: " + err.message);
+            }
+        };
+
+        // --- ADMIN AUTH ---
+        window.toggleAdminPanel = function() {
+            const panel = document.getElementById('admin-panel');
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
+                panel.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+
+        window.adminGoogleLogin = async function() {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                if (result.user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                    setAdminLoggedInUI();
+                } else {
+                    alert("Access denied. Authorized administrator only.");
+                    await signOut(auth);
+                }
+            } catch (err) {
+                alert("Login Error: " + err.message);
+            }
+        };
+
+        window.adminLogout = async function() {
+            await signOut(auth);
+            location.reload();
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            if (user && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                setAdminLoggedInUI();
+            }
+        });
+
+        function setAdminLoggedInUI() {
+            isAdminLoggedIn = true;
+            document.getElementById('admin-actions-bar').classList.remove('hidden');
+            document.getElementById('admin-panel').classList.add('hidden');
+            filterAndRender();
         }
 
-        // Input and Filter Listeners
-        document.getElementById('searchInput').addEventListener('input', filterAndRender);
-
+        // --- FILTER PILL CLICK HANDLERS ---
         const filterBtns = document.querySelectorAll('.filter-btn');
         filterBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 filterBtns.forEach(b => {
-                    b.classList.remove('active', 'bg-indigo-600', 'text-white', 'border-indigo-600', 'shadow-md');
-                    b.classList.add('bg-white', 'text-slate-600', 'border-slate-200', 'shadow-sm');
+                    b.classList.remove('active', 'bg-indigo-600', 'text-white', 'border-indigo-600');
+                    b.classList.add('bg-white/80', 'text-slate-600', 'border-slate-900/10');
                 });
                 
-                const clickedBtn = e.target;
-                clickedBtn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200', 'shadow-sm');
-                clickedBtn.classList.add('active', 'bg-indigo-600', 'text-white', 'border-indigo-600', 'shadow-md');
+                const target = e.currentTarget;
+                target.classList.remove('bg-white/80', 'text-slate-600', 'border-slate-900/10');
+                target.classList.add('active', 'bg-indigo-600', 'text-white', 'border-indigo-600');
                 
-                currentFilter = clickedBtn.getAttribute('data-filter');
+                currentFilter = target.getAttribute('data-filter');
                 filterAndRender();
             });
         });
 
-        // Initialize script
-        initializeNotices();
+        document.getElementById('searchInput').addEventListener('input', filterAndRender);
+
+        // Start Realtime Database
+        listenToNotices();
     </script>
 </body>
 </html>
