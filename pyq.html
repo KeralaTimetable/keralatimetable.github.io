@@ -16,304 +16,345 @@
     <!-- Tailwind Local with CDN Fallback -->
     <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.62);
+            --glass-bg-hover: rgba(255, 255, 255, 0.82);
+            --glass-border: rgba(255, 255, 255, 0.85);
+            --glass-subtle-border: rgba(226, 232, 240, 0.7);
+            --glass-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.02), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+        }
+
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; 
             overflow-x: hidden;
-            background: 
-                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.65) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(254, 243, 199, 0.5) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(219, 234, 254, 0.6) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.5) 0px, transparent 50%),
-                #f8fafc;
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 15% 10%, rgba(224, 231, 255, 0.55) 0px, transparent 45%),
+                radial-gradient(at 85% 15%, rgba(224, 242, 254, 0.5) 0px, transparent 45%),
+                radial-gradient(at 50% 90%, rgba(241, 245, 249, 0.8) 0px, transparent 50%);
             min-height: 100vh;
+            color: #0f172a;
+        }
+
+        /* Subtle Architectural Grid Overlay */
+        .bg-grid-pattern {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 25%, #000 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 25%, #000 40%, transparent 100%);
         }
 
         .font-mono-code { font-family: 'Fira Code', monospace; }
 
-        /* Deluxe Glassmorphism */
-        .real-glass {
-            background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(28px) saturate(180%);
-            -webkit-backdrop-filter: blur(28px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            border-top: 1px solid rgba(255, 255, 255, 0.95);
-            border-left: 1px solid rgba(255, 255, 255, 0.95);
-            box-shadow: 
-                0 20px 40px -15px rgba(31, 38, 135, 0.06),
-                0 1px 2px rgba(255, 255, 255, 0.8) inset;
-            transform-style: preserve-3d;
-            transition: transform 0.15s ease-out, box-shadow 0.2s ease;
-            will-change: transform;
+        /* Minimal Frosted Glass Tiers */
+        .frosted-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(28px) saturate(160%);
+            -webkit-backdrop-filter: blur(28px) saturate(160%);
+            border: 1px solid var(--glass-subtle-border);
+            box-shadow: var(--glass-shadow);
         }
 
-        .result-glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.85);
-            border-top: 1px solid rgba(255, 255, 255, 0.95);
+        .frosted-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid rgba(226, 232, 240, 0.75);
             box-shadow: 
-                0 8px 24px -4px rgba(31, 38, 135, 0.04),
-                inset 0 1px 2px rgba(255, 255, 255, 0.9);
+                0 4px 16px -4px rgba(15, 23, 42, 0.03),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .result-glass:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.92);
-            border-color: rgba(37, 99, 235, 0.35); 
-            box-shadow: 0 16px 32px -8px rgba(37, 99, 235, 0.14), inset 0 1px 2px rgba(255, 255, 255, 1);
+        .frosted-card:hover {
+            transform: translateY(-2px);
+            background: var(--glass-bg-hover);
+            border-color: rgba(148, 163, 184, 0.45);
+            box-shadow: 
+                0 14px 28px -8px rgba(15, 23, 42, 0.06),
+                0 4px 10px -2px rgba(15, 23, 42, 0.02),
+                inset 0 1px 0 0 rgba(255, 255, 255, 1);
         }
 
-        .inner-glass {
-            background: rgba(255, 255, 255, 0.58);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.75);
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+        .frosted-pill {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
         }
 
+        .frosted-pill:hover {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(203, 213, 225, 0.95);
+            transform: translateY(-1px);
+        }
+
+        /* Recessed Frosted Track for Segmented Controls */
+        .frosted-track {
+            background: rgba(241, 245, 249, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.75);
+            box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.03);
+        }
+
+        /* Minimalist Frosted Inputs */
         .glass-input {
-            background: rgba(255, 255, 255, 0.75);
-            border: 1.5px solid rgba(203, 213, 225, 0.8);
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(203, 213, 225, 0.75);
             color: #0f172a; 
-            box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.03);
-            transition: all 0.25s ease;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         select.glass-input {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 600;
+            font-weight: 500;
+        }
+
+        .glass-input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
         }
 
         .glass-input:focus {
             outline: none;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.95);
             border-color: #3b82f6; 
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18), 0 8px 20px -4px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
         }
 
         .glass-input:disabled {
-            background: rgba(241, 245, 249, 0.5);
+            background: rgba(241, 245, 249, 0.45);
             color: #94a3b8;
             cursor: not-allowed;
-            border-color: rgba(203, 213, 225, 0.4);
+            border-color: rgba(226, 232, 240, 0.6);
+            box-shadow: none;
         }
 
-        /* Ambient Orbs */
-        @keyframes float-pulse {
-            0%, 100% { transform: scale(1) translateY(0); opacity: 0.45; }
-            50% { transform: scale(1.08) translateY(-10px); opacity: 0.65; }
+        /* Subtle Ambient Light Breathing */
+        @keyframes subtle-breathe {
+            0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.45; }
+            50% { transform: scale(1.05) translate(8px, -8px); opacity: 0.6; }
         }
-        .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
+        .ambient-orb { animation: subtle-breathe 10s ease-in-out infinite; }
 
+        /* Minimal Typewriter Cursor */
         .cursor::after {
-            content: '|';
-            animation: blink 1s step-start infinite;
-            color: #2563eb; 
-            font-weight: 700;
+            content: '';
+            display: inline-block;
+            width: 1.5px;
+            height: 0.9em;
+            background-color: #2563eb;
+            margin-left: 3px;
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
         }
         @keyframes blink { 50% { opacity: 0; } }
 
+        /* Minimal Spinner */
         .loader {
-            border: 3px solid rgba(59, 130, 246, 0.15);
-            border-top: 3px solid #2563eb; 
+            border: 2px solid rgba(148, 163, 184, 0.2);
+            border-top: 2px solid #0f172a; 
             border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            animation: spin 0.8s linear infinite;
+            width: 24px;
+            height: 24px;
+            animation: spin 0.7s linear infinite;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        .fade-in { animation: fadeIn 0.3s ease-in-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 
-<body class="antialiased min-h-screen flex flex-col relative text-slate-800 selection:bg-blue-600 selection:text-white">
+<body class="antialiased min-h-screen flex flex-col relative text-slate-900 selection:bg-slate-900 selection:text-white">
 
     <!-- Global Header Container -->
     <div id="navigation-container" class="z-50 relative"></div>
 
-    <!-- Parallax Ambient Lights -->
+    <!-- Minimal Ambient Background & Grid -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div id="scroll-bg-1" class="absolute -top-10 -left-10 md:top-8 md:-left-10 w-72 h-72 md:w-96 md:h-96 transition-transform duration-100 ease-out">
-            <div id="mouse-orb-1" class="w-full h-full bg-amber-300/40 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out"></div>
+        <div class="absolute inset-0 bg-grid-pattern"></div>
+        <div id="scroll-bg-1" class="absolute -top-24 left-1/4 w-96 h-96 transition-transform duration-300 ease-out">
+            <div id="mouse-orb-1" class="w-full h-full bg-blue-200/40 rounded-full filter blur-[110px] ambient-orb"></div>
         </div>
-        <div id="scroll-bg-2" class="absolute top-[35%] -right-10 md:top-80 md:-right-20 w-80 h-80 md:w-[32rem] md:h-[32rem] transition-transform duration-100 ease-out">
-            <div id="mouse-orb-2" class="w-full h-full bg-indigo-400/40 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[110px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2.2s;"></div>
+        <div id="scroll-bg-2" class="absolute top-1/3 right-1/4 w-[28rem] h-[28rem] transition-transform duration-300 ease-out">
+            <div id="mouse-orb-2" class="w-full h-full bg-indigo-200/35 rounded-full filter blur-[120px] ambient-orb" style="animation-delay: 4s;"></div>
         </div>
     </div>
 
     <!-- MAIN BODY -->
-    <main class="flex-grow w-full max-w-5xl mx-auto px-3.5 sm:px-6 pt-10 sm:pt-14 md:pt-16 pb-16 relative z-10 flex flex-col items-center">
+    <main class="flex-grow w-full max-w-4xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 md:pt-20 pb-20 relative z-10 flex flex-col items-center">
         
-        <!-- Hero Header -->
-        <div class="text-center mb-6 sm:mb-8 max-w-3xl mx-auto">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md shadow-sm border border-slate-200/80 text-blue-600 text-xs font-black uppercase tracking-wider mb-4 sm:mb-5">
-                <i class="fas fa-university text-blue-500"></i> APJAKTU B.Tech Repository
+        <!-- Minimal Hero Header -->
+        <div class="text-center mb-8 sm:mb-10 max-w-2xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full frosted-pill text-slate-600 text-[11px] font-semibold tracking-wide mb-5">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                APJAKTU B.Tech Archive
             </div>
             
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-3">
-                KTU Previous Year Question Papers <br class="hidden sm:inline">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">Downloaded Instantly.</span>
+            <h1 class="text-3xl sm:text-4xl md:text-[2.75rem] font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-3.5">
+                Previous Year Question Papers, <br class="hidden sm:inline">
+                <span class="text-slate-500 font-semibold">retrieved instantly.</span>
             </h1>
             
-            <p class="text-slate-600 font-medium text-xs sm:text-base md:text-lg mb-2 max-w-2xl mx-auto leading-relaxed">
-                Access thousands of <span class="font-bold text-slate-800">B.Tech PYQs</span> synchronized from university vaults.<br>
-                <span class="inline-block mt-1">Explore <span id="typewriter" class="text-blue-600 font-bold cursor font-mono-code"></span></span>
+            <p class="text-slate-500 font-normal text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+                Search across thousands of verified university question papers by course code or subject hierarchy. 
+                <span class="inline-block mt-1 text-slate-700">Try <span id="typewriter" class="text-blue-600 font-medium cursor font-mono-code text-xs sm:text-sm"></span></span>
             </p>
         </div>
 
-        <!-- 3D Perspective Search Box with Tabs -->
-        <div id="parallax-container" class="w-full max-w-2xl relative perspective-1000 mb-6 sm:mb-8">
-            <div id="search-card" class="real-glass rounded-[1.8rem] sm:rounded-[2.2rem] p-4 sm:p-6 md:p-8 w-full flex flex-col relative z-20 transition-all duration-300">
+        <!-- Primary Frosted Glass Workspace -->
+        <div id="parallax-container" class="w-full max-w-xl relative mb-6">
+            <div id="search-card" class="frosted-panel rounded-3xl p-5 sm:p-7 w-full flex flex-col relative z-20">
                 
-                <!-- Tab Switcher -->
-                <div class="flex justify-center gap-1.5 mb-5 bg-slate-200/50 p-1.5 rounded-xl w-fit mx-auto border border-slate-200/50 shadow-inner">
-                    <button id="tab-search" onclick="toggleTab('search')" class="px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold transition-all bg-white text-blue-600 shadow-sm border border-slate-200">
-                        <i class="fas fa-search mr-1"></i> Search Code
+                <!-- Minimal Segmented Tab Switcher -->
+                <div class="flex justify-center gap-1 mb-6 frosted-track p-1 rounded-xl w-fit mx-auto">
+                    <button id="tab-search" onclick="toggleTab('search')" class="px-4 py-1.5 rounded-lg text-xs font-semibold transition-all bg-white/95 text-slate-900 shadow-sm border border-slate-200/70">
+                        <i class="fas fa-search mr-1.5 text-[11px] text-slate-500"></i>Course Code
                     </button>
-                    <button id="tab-browse" onclick="toggleTab('browse')" class="px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold transition-all text-slate-500 hover:text-slate-800 hover:bg-white/40 border border-transparent">
-                        <i class="fas fa-list mr-1"></i> Browse by subject
+                    <button id="tab-browse" onclick="toggleTab('browse')" class="px-4 py-1.5 rounded-lg text-xs font-medium transition-all text-slate-500 hover:text-slate-800 border border-transparent">
+                        <i class="fas fa-sliders-h mr-1.5 text-[11px]"></i>Browse Catalog
                     </button>
                 </div>
                 
                 <!-- View 1: Search by Code -->
-                <div id="view-search" class="fade-in w-full flex flex-col gap-3">
-                    <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider text-center">
-                        Enter course code (e.g. MAT101) or Subject Name
-                    </p>
+                <div id="view-search" class="fade-in w-full flex flex-col gap-2.5">
                     <form id="searchForm" onsubmit="executeSearch(event)" class="relative flex items-center">
-                        <i class="fas fa-search absolute left-4 sm:left-5 text-slate-400 text-base sm:text-lg"></i>
-                        <input type="text" id="searchInput" autocomplete="off" placeholder="e.g. MAT101, UCEST105..." 
-                               class="glass-input w-full font-mono-code rounded-2xl py-3.5 sm:py-4 md:py-5 pl-11 sm:pl-14 pr-14 sm:pr-16 text-base sm:text-lg" required>
-                        <button type="submit" aria-label="Search Question Papers" class="absolute right-2 sm:right-3 w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 hover:bg-blue-500 text-white rounded-xl flex items-center justify-center transition-all shadow-[0_4px_14px_rgba(37,99,235,0.3)] active:scale-95">
-                            <i class="fas fa-arrow-right sm:fa-paper-plane text-xs sm:text-base"></i>
+                        <i class="fas fa-search absolute left-4 text-slate-400 text-sm pointer-events-none"></i>
+                        <input type="text" id="searchInput" autocomplete="off" placeholder="Enter code or subject (e.g. MAT101, UCEST105)..." 
+                               class="glass-input w-full font-mono-code rounded-2xl py-3.5 sm:py-4 pl-11 pr-14 text-sm sm:text-base" required>
+                        <button type="submit" aria-label="Search Question Papers" class="absolute right-2 w-9 h-9 sm:w-10 sm:h-10 bg-slate-900 hover:bg-blue-600 text-white rounded-xl flex items-center justify-center transition-colors shadow-sm active:scale-95">
+                            <i class="fas fa-arrow-right text-xs"></i>
                         </button>
                     </form>
                 </div>
 
                 <!-- View 2: Browse Cascading Dropdowns -->
                 <div id="view-browse" class="hidden fade-in w-full flex-col gap-3">
-                    <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider text-center mb-1">
-                        Select hierarchy to find your subject
-                    </p>
-                    
                     <!-- Row 1: Scheme and Branch -->
-                    <div class="grid grid-cols-2 gap-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                         <div class="relative">
-                            <select id="sel-scheme" onchange="handleSchemeChange()" class="glass-input w-full rounded-xl py-3.5 pl-4 pr-8 text-sm sm:text-base appearance-none cursor-pointer">
-                                <option value="" disabled selected>Scheme</option>
+                            <select id="sel-scheme" onchange="handleSchemeChange()" class="glass-input w-full rounded-xl py-3 pl-3.5 pr-8 text-xs sm:text-sm appearance-none cursor-pointer">
+                                <option value="" disabled selected>Select Scheme</option>
                             </select>
-                            <i class="fas fa-chevron-down absolute right-3.5 top-4 text-slate-400 text-xs pointer-events-none"></i>
+                            <i class="fas fa-chevron-down absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
                         </div>
                         <div class="relative">
-                            <select id="sel-branch" onchange="handleBranchChange()" class="glass-input w-full rounded-xl py-3.5 pl-4 pr-8 text-sm sm:text-base appearance-none cursor-pointer" disabled>
-                                <option value="" disabled selected>Branch</option>
+                            <select id="sel-branch" onchange="handleBranchChange()" class="glass-input w-full rounded-xl py-3 pl-3.5 pr-8 text-xs sm:text-sm appearance-none cursor-pointer" disabled>
+                                <option value="" disabled selected>Select Branch</option>
                             </select>
-                            <i class="fas fa-chevron-down absolute right-3.5 top-4 text-slate-400 text-xs pointer-events-none"></i>
+                            <i class="fas fa-chevron-down absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
                         </div>
                     </div>
 
                     <!-- Row 2: Semester and Subject -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                         <div class="relative sm:col-span-1">
-                            <select id="sel-sem" onchange="handleSemChange()" class="glass-input w-full rounded-xl py-3.5 pl-4 pr-8 text-sm sm:text-base appearance-none cursor-pointer" disabled>
-                                <option value="" disabled selected>Sem</option>
+                            <select id="sel-sem" onchange="handleSemChange()" class="glass-input w-full rounded-xl py-3 pl-3.5 pr-8 text-xs sm:text-sm appearance-none cursor-pointer" disabled>
+                                <option value="" disabled selected>Semester</option>
                             </select>
-                            <i class="fas fa-chevron-down absolute right-3.5 top-4 text-slate-400 text-xs pointer-events-none"></i>
+                            <i class="fas fa-chevron-down absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
                         </div>
                         <div class="relative sm:col-span-2">
-                            <select id="sel-subject" class="glass-input w-full rounded-xl py-3.5 pl-4 pr-8 text-sm sm:text-base appearance-none cursor-pointer" disabled>
-                                <option value="" disabled selected>Subject</option>
+                            <select id="sel-subject" class="glass-input w-full rounded-xl py-3 pl-3.5 pr-8 text-xs sm:text-sm appearance-none cursor-pointer" disabled>
+                                <option value="" disabled selected>Select Subject</option>
                             </select>
-                            <i class="fas fa-chevron-down absolute right-3.5 top-4 text-slate-400 text-xs pointer-events-none"></i>
+                            <i class="fas fa-chevron-down absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
                         </div>
                     </div>
 
                     <!-- Action Button -->
-                    <button onclick="executeBrowseSearch()" class="w-full mt-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl py-3.5 text-sm sm:text-base font-bold transition-all shadow-[0_4px_14px_rgba(37,99,235,0.3)] active:scale-95 flex items-center justify-center gap-2">
-                        Find Question Papers <i class="fas fa-file-pdf"></i>
+                    <button onclick="executeBrowseSearch()" class="w-full mt-1.5 bg-slate-900 hover:bg-blue-600 text-white rounded-xl py-3 text-xs sm:text-sm font-semibold transition-colors shadow-sm active:scale-[0.99] flex items-center justify-center gap-2">
+                        <span>Retrieve Question Papers</span>
+                        <i class="fas fa-arrow-right text-[11px]"></i>
                     </button>
                 </div>
 
+                <!-- Integrated Quick Searches Footer -->
+                <div id="trending-searches" class="mt-5 pt-4 border-t border-slate-200/60 flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-[11px] font-medium text-slate-400">Popular:</span>
+                    <div class="flex flex-wrap items-center gap-1.5">
+                        <button onclick="quickSearch('MAT101')" class="px-2.5 py-1 frosted-pill rounded-lg text-[11px] font-mono-code font-medium text-slate-600 hover:text-blue-600 active:scale-95">
+                            MAT101
+                        </button>
+                        <button onclick="quickSearch('UCEST105')" class="px-2.5 py-1 frosted-pill rounded-lg text-[11px] font-mono-code font-medium text-slate-600 hover:text-blue-600 active:scale-95">
+                            UCEST105
+                        </button>
+                        <button onclick="quickSearch('GAMAT101')" class="px-2.5 py-1 frosted-pill rounded-lg text-[11px] font-mono-code font-medium text-slate-600 hover:text-blue-600 active:scale-95">
+                            GAMAT101
+                        </button>
+                        <button onclick="quickSearch('EST110')" class="px-2.5 py-1 frosted-pill rounded-lg text-[11px] font-mono-code font-medium text-slate-600 hover:text-blue-600 active:scale-95">
+                            EST110
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-        <!-- WhatsApp Community Banner -->
-        <a href="https://chat.whatsapp.com/CD0wDNFlMDbKFQW1TWDg3l" target="_blank" rel="noopener noreferrer" class="w-full max-w-sm mx-auto mb-8 sm:mb-10 real-glass hover:bg-white/80 text-slate-800 py-2.5 px-4 sm:py-3 sm:px-5 rounded-2xl transition-all flex items-center justify-center gap-3.5 shadow-sm border border-[#25D366]/40 hover:border-[#25D366]/70 group z-20 relative active:scale-95">
-            <div class="bg-[#25D366] text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 shrink-0">
-                <i class="fab fa-whatsapp text-lg sm:text-xl"></i>
-            </div>
-            <div class="flex flex-col text-left">
-                <span class="text-xs sm:text-sm font-black text-slate-800">Join KTU WhatsApp Group</span>
-                <span class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase tracking-wide">Instant Timetable & Exam Updates</span>
-            </div>
+        <!-- Minimal Frosted WhatsApp Pill -->
+        <a href="https://chat.whatsapp.com/CD0wDNFlMDbKFQW1TWDg3l" target="_blank" rel="noopener noreferrer" class="mb-12 frosted-pill px-4 py-2 rounded-full flex items-center gap-3 group z-20 relative active:scale-98">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center text-xs group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                <i class="fab fa-whatsapp"></i>
+            </span>
+            <span class="text-xs font-medium text-slate-600 group-hover:text-slate-900 transition-colors">
+                Join KTU Updates Community <span class="text-slate-400 mx-1">&middot;</span> <span class="text-[11px] text-emerald-600 font-semibold">WhatsApp</span>
+            </span>
+            <i class="fas fa-chevron-right text-[9px] text-slate-400 group-hover:translate-x-0.5 transition-transform"></i>
         </a>
-
-        <!-- Trending Quick Searches -->
-        <div id="trending-searches" class="w-full max-w-2xl text-center mb-8 transition-opacity duration-300">
-            <p class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Trending Courses</p>
-            <div class="flex flex-wrap justify-center gap-2 sm:gap-2.5">
-                <button onclick="quickSearch('MAT101')" class="px-3.5 py-1.5 sm:px-4 sm:py-2 real-glass rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm active:scale-95">
-                    <i class="fas fa-bolt text-amber-500 mr-1"></i> MAT101
-                </button>
-                <button onclick="quickSearch('UCEST105')" class="px-3.5 py-1.5 sm:px-4 sm:py-2 real-glass rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm active:scale-95">
-                    UCEST105
-                </button>
-                <button onclick="quickSearch('GAMAT101')" class="px-3.5 py-1.5 sm:px-4 sm:py-2 real-glass rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm active:scale-95">
-                    GAMAT101
-                </button>
-                <button onclick="quickSearch('EST110')" class="px-3.5 py-1.5 sm:px-4 sm:py-2 real-glass rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm active:scale-95">
-                    EST110
-                </button>
-            </div>
-        </div>
 
         <!-- ==================== RESULTS AREA ==================== -->
         <div id="results-area" class="w-full max-w-4xl hidden flex-col items-center relative z-20 mb-12">
+            
             <!-- Loading State -->
-            <div id="loading-state" class="hidden flex-col items-center justify-center py-12">
-                <div class="loader mb-4"></div>
-                <p class="text-sm font-bold text-slate-600 animate-pulse font-mono-code">Connecting to APJAKTU Vault...</p>
+            <div id="loading-state" class="hidden flex-col items-center justify-center py-14">
+                <div class="loader mb-3"></div>
+                <p class="text-xs font-medium text-slate-500 font-mono-code">Querying APJAKTU repository...</p>
             </div>
 
             <!-- Results Header & Scheme Filters -->
-            <div id="results-header" class="w-full flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-200/70 pb-4 mb-6 hidden gap-3.5 scroll-mt-6">
-                <div>
-                    <h2 class="text-lg sm:text-xl font-black text-slate-800">
-                        <span id="search-term-display" class="text-blue-600 font-mono-code"></span> PYQs
+            <div id="results-header" class="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200/70 pb-4 mb-6 hidden gap-4 scroll-mt-8">
+                <div class="flex items-baseline gap-2.5">
+                    <h2 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
+                        <span id="search-term-display" class="font-mono-code text-blue-600"></span>
                     </h2>
-                    <span id="result-count" class="text-[11px] sm:text-xs font-bold text-slate-600 bg-white/90 backdrop-blur px-3 py-1 rounded-full border border-slate-200/80 mt-1.5 inline-block shadow-sm"></span>
+                    <span id="result-count" class="text-xs font-medium text-slate-400 font-mono-code"></span>
                 </div>
                 
-                <div id="scheme-filters" class="w-full md:w-auto overflow-x-auto hide-scrollbar flex gap-1.5 bg-slate-200/60 p-1.5 rounded-xl border border-slate-200/80">
-                    <button onclick="setSchemeFilter('All')" id="btn-filter-all" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 whitespace-nowrap transition-all">All Schemes</button>
-                    <button onclick="setSchemeFilter(8)" id="btn-filter-2024" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-white/60 whitespace-nowrap transition-all">2024 Scheme</button>
-                    <button onclick="setSchemeFilter(6)" id="btn-filter-2019" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-white/60 whitespace-nowrap transition-all">2019 Scheme</button>
-                    <button onclick="setSchemeFilter(5)" id="btn-filter-2015" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-white/60 whitespace-nowrap transition-all">2015 Scheme</button>
+                <div id="scheme-filters" class="w-full sm:w-auto overflow-x-auto hide-scrollbar flex gap-1 frosted-track p-1 rounded-xl">
+                    <button onclick="setSchemeFilter('All')" id="btn-filter-all" class="px-3 py-1 rounded-lg text-xs font-semibold bg-white/95 text-slate-900 shadow-sm border border-slate-200/70 whitespace-nowrap transition-all">All</button>
+                    <button onclick="setSchemeFilter(8)" id="btn-filter-2024" class="px-3 py-1 rounded-lg text-xs font-medium text-slate-500 hover:text-slate-800 whitespace-nowrap transition-all">2024 Scheme</button>
+                    <button onclick="setSchemeFilter(6)" id="btn-filter-2019" class="px-3 py-1 rounded-lg text-xs font-medium text-slate-500 hover:text-slate-800 whitespace-nowrap transition-all">2019 Scheme</button>
+                    <button onclick="setSchemeFilter(5)" id="btn-filter-2015" class="px-3 py-1 rounded-lg text-xs font-medium text-slate-500 hover:text-slate-800 whitespace-nowrap transition-all">2015 Scheme</button>
                 </div>
             </div>
 
             <!-- Results Grid -->
-            <div id="results-grid" class="w-full grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4"></div>
+            <div id="results-grid" class="w-full grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4"></div>
         </div>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-6 sm:py-8 text-center relative z-10">
-        <div class="max-w-3xl mx-auto px-4">
-            <h3 class="text-slate-800 font-bold text-base sm:text-lg mb-1.5">Kerala Timetable</h3>
-            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto">
-                Independent educational utility providing fast university resources. Not officially affiliated with APJ Abdul Kalam Technological University.
+    <!-- Minimal Frosted Footer -->
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/40 backdrop-blur-md py-6 text-center relative z-10">
+        <div class="max-w-3xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
+            <span class="font-semibold text-slate-600">Kerala Timetable</span>
+            <p class="text-[11px] text-slate-400">
+                Independent educational archive. Not officially affiliated with APJAKTU.
             </p>
         </div>
     </footer>
@@ -337,7 +378,7 @@
             if (rawJsonData) return true;
 
             const schemeSel = document.getElementById('sel-scheme');
-            schemeSel.innerHTML = '<option value="" disabled selected>Loading subjects...</option>';
+            schemeSel.innerHTML = '<option value="" disabled selected>Loading catalog...</option>';
             
             try {
                 const response = await fetch('ktu_subjects_no_lab.json');
@@ -347,7 +388,7 @@
                 return true;
             } catch (error) {
                 console.error("Error loading catalog:", error);
-                schemeSel.innerHTML = '<option value="" disabled selected>Error loading data</option>';
+                schemeSel.innerHTML = '<option value="" disabled selected>Catalog unavailable</option>';
                 alert("Failed to load the subject catalog. Please check your connection or file path.");
                 return false;
             }
@@ -368,8 +409,8 @@
             const semSel = document.getElementById('sel-sem');
             const subjSel = document.getElementById('sel-subject');
             
-            semSel.disabled = true; semSel.innerHTML = '<option value="" disabled selected>Sem</option>';
-            subjSel.disabled = true; subjSel.innerHTML = '<option value="" disabled selected>Subject</option>';
+            semSel.disabled = true; semSel.innerHTML = '<option value="" disabled selected>Semester</option>';
+            subjSel.disabled = true; subjSel.innerHTML = '<option value="" disabled selected>Select Subject</option>';
             
             if(scheme) {
                 branchSel.disabled = false;
@@ -386,11 +427,11 @@
             const semSel = document.getElementById('sel-sem');
             const subjSel = document.getElementById('sel-subject');
             
-            subjSel.disabled = true; subjSel.innerHTML = '<option value="" disabled selected>Subject</option>';
+            subjSel.disabled = true; subjSel.innerHTML = '<option value="" disabled selected>Select Subject</option>';
             
             if(scheme && branch) {
                 semSel.disabled = false;
-                semSel.innerHTML = '<option value="" disabled selected>Sem</option>';
+                semSel.innerHTML = '<option value="" disabled selected>Semester</option>';
                 Object.keys(rawJsonData.catalog[scheme][branch]).sort().forEach(s => {
                     semSel.add(new Option(s, s));
                 });
@@ -410,7 +451,7 @@
                 const subjects = rawJsonData.catalog[scheme][branch][sem] || [];
                 subjects.sort((a,b) => a.subject_name.localeCompare(b.subject_name)).forEach(subj => {
                     let displayName = subj.subject_name;
-                    if(displayName.length > 35) displayName = displayName.substring(0, 32) + "...";
+                    if(displayName.length > 38) displayName = displayName.substring(0, 35) + "...";
                     subjSel.add(new Option(`${displayName} (${subj.course_code})`, subj.course_code));
                 });
             }
@@ -423,23 +464,25 @@
             const btnSearch = document.getElementById('tab-search');
             const btnBrowse = document.getElementById('tab-browse');
 
-            const activeClass = "px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold transition-all bg-white text-blue-600 shadow-sm border border-slate-200";
-            const inactiveClass = "px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold transition-all text-slate-500 hover:text-slate-800 hover:bg-white/40 border border-transparent";
+            const activeClass = "px-4 py-1.5 rounded-lg text-xs font-semibold transition-all bg-white/95 text-slate-900 shadow-sm border border-slate-200/70";
+            const inactiveClass = "px-4 py-1.5 rounded-lg text-xs font-medium transition-all text-slate-500 hover:text-slate-800 border border-transparent";
 
             if(tabId === 'search') {
                 searchView.classList.remove('hidden');
                 browseView.classList.add('hidden');
+                browseView.classList.remove('flex');
                 btnSearch.className = activeClass;
-                btnSearch.innerHTML = '<i class="fas fa-search mr-1"></i> Search Code';
+                btnSearch.innerHTML = '<i class="fas fa-search mr-1.5 text-[11px] text-slate-500"></i>Course Code';
                 btnBrowse.className = inactiveClass;
-                btnBrowse.innerHTML = '<i class="fas fa-list mr-1"></i> Browse by subject';
+                btnBrowse.innerHTML = '<i class="fas fa-sliders-h mr-1.5 text-[11px]"></i>Browse Catalog';
             } else {
                 searchView.classList.add('hidden');
                 browseView.classList.remove('hidden');
+                browseView.classList.add('flex');
                 btnBrowse.className = activeClass;
-                btnBrowse.innerHTML = '<i class="fas fa-list mr-1"></i> Browse by subject';
+                btnBrowse.innerHTML = '<i class="fas fa-sliders-h mr-1.5 text-[11px] text-slate-500"></i>Browse Catalog';
                 btnSearch.className = inactiveClass;
-                btnSearch.innerHTML = '<i class="fas fa-search mr-1"></i> Search Code';
+                btnSearch.innerHTML = '<i class="fas fa-search mr-1.5 text-[11px]"></i>Course Code';
                 
                 if (!rawJsonData) {
                     const loaded = await fetchCatalogData();
@@ -456,22 +499,18 @@
                 alert("Please select a subject first.");
                 return;
             }
-            // Update the search bar invisibly so the PDF namer and fetch logic stay the exact same
             document.getElementById('searchInput').value = selectedCode;
-            
-            // Execute search directly without swapping UI tabs
             executeSearch(null);
         }
 
         function quickSearch(code) {
-            // Used by trending buttons only - switch to search tab
             toggleTab('search');
             const input = document.getElementById('searchInput');
             input.value = code;
             executeSearch(new Event('submit', { cancelable: true }));
         }
 
-        // --- Original Search API Logic ---
+        // --- Search API Logic ---
         const API_URL = "https://keralatimetable-ktu-papers-api.hf.space"; 
         let currentSearchData = [];
         let activeSchemeFilter = 'All';
@@ -500,9 +539,9 @@
                 const el = document.getElementById(btnInfo.id);
                 if(!el) return;
                 if(activeSchemeFilter === btnInfo.val) {
-                    el.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 whitespace-nowrap transition-all";
+                    el.className = "px-3 py-1 rounded-lg text-xs font-semibold bg-white/95 text-slate-900 shadow-sm border border-slate-200/70 whitespace-nowrap transition-all";
                 } else {
-                    el.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-white/60 whitespace-nowrap transition-all";
+                    el.className = "px-3 py-1 rounded-lg text-xs font-medium text-slate-500 hover:text-slate-800 whitespace-nowrap transition-all";
                 }
             });
         }
@@ -517,9 +556,6 @@
             const grid = document.getElementById('results-grid');
             const header = document.getElementById('results-header');
             const schemeFilters = document.getElementById('scheme-filters');
-            const trending = document.getElementById('trending-searches');
-
-            if(trending) trending.style.display = 'none';
 
             resultsArea.classList.remove('hidden');
             resultsArea.classList.add('flex');
@@ -552,10 +588,10 @@
                 loader.classList.remove('flex');
                 loader.classList.add('hidden');
                 grid.innerHTML = `
-                    <div class="col-span-full py-8 px-4 text-center text-rose-600 bg-rose-50/80 border border-rose-200 rounded-[1.5rem]">
-                        <i class="fas fa-exclamation-triangle text-lg mb-2"></i>
-                        <p class="text-sm font-bold">Could not fetch question papers right now.</p>
-                        <p class="text-xs text-rose-500 mt-1">Please verify your course code or try again in a moment.</p>
+                    <div class="col-span-full py-10 px-6 text-center frosted-panel rounded-2xl border-rose-200/70">
+                        <i class="fas fa-exclamation-circle text-rose-500 text-base mb-2"></i>
+                        <p class="text-xs sm:text-sm font-semibold text-slate-800">Unable to reach the question paper repository.</p>
+                        <p class="text-xs text-slate-500 mt-1">Please verify the course code or try again shortly.</p>
                     </div>
                 `;
             }
@@ -572,13 +608,13 @@
             });
             
             document.getElementById('search-term-display').innerText = query;
-            document.getElementById('result-count').innerText = `${filteredData.length} papers found`;
+            document.getElementById('result-count').innerText = `${filteredData.length} ${filteredData.length === 1 ? 'paper' : 'papers'}`;
 
             if (filteredData.length === 0) {
                 grid.innerHTML = `
-                    <div class="col-span-full py-10 px-4 text-center real-glass rounded-[1.8rem]">
-                        <i class="fas fa-file-excel text-3xl text-slate-300 mb-3"></i>
-                        <h3 class="text-slate-700 font-bold text-sm sm:text-base">No papers available under this scheme.</h3>
+                    <div class="col-span-full py-12 px-4 text-center frosted-panel rounded-2xl">
+                        <i class="far fa-folder-open text-xl text-slate-400 mb-2.5"></i>
+                        <h3 class="text-slate-600 font-medium text-xs sm:text-sm">No question papers found matching this filter.</h3>
                     </div>
                 `;
                 return;
@@ -587,26 +623,26 @@
             filteredData.forEach(paper => {
                 let schemeBadge = '';
                 const codeLength = paper.course_code ? paper.course_code.trim().length : 0;
-                if (codeLength === 5) schemeBadge = `<span class="inline-block px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-700 text-[9px] font-bold uppercase tracking-wider rounded-md">2015 Scheme</span>`;
-                else if (codeLength === 6) schemeBadge = `<span class="inline-block px-2 py-0.5 bg-purple-50 border border-purple-200 text-purple-700 text-[9px] font-bold uppercase tracking-wider rounded-md">2019 Scheme</span>`;
-                else if (codeLength === 8) schemeBadge = `<span class="inline-block px-2 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[9px] font-bold uppercase tracking-wider rounded-md">2024 Scheme</span>`;
+                if (codeLength === 5) schemeBadge = `<span class="px-2 py-0.5 bg-amber-500/10 border border-amber-500/20 text-amber-700 text-[10px] font-medium rounded-md">2015</span>`;
+                else if (codeLength === 6) schemeBadge = `<span class="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-700 text-[10px] font-medium rounded-md">2019</span>`;
+                else if (codeLength === 8) schemeBadge = `<span class="px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 text-[10px] font-medium rounded-md">2024</span>`;
 
                 grid.innerHTML += `
-                    <div class="result-glass rounded-[1.4rem] sm:rounded-[1.6rem] p-4 sm:p-5 flex flex-col justify-between h-full group">
+                    <div class="frosted-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between h-full group">
                         <div>
-                            <div class="flex justify-between items-start mb-2.5 gap-2">
-                                <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                                    <span class="inline-block px-2.5 py-0.5 bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-bold font-mono-code rounded-md">${paper.course_code}</span>
+                            <div class="flex justify-between items-center mb-3 gap-2">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="px-2 py-0.5 bg-slate-900/5 border border-slate-900/10 text-slate-800 text-[11px] font-semibold font-mono-code rounded-md">${paper.course_code}</span>
                                     ${schemeBadge}
                                 </div>
-                                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider shrink-0 mt-0.5 font-mono-code">
-                                    <i class="far fa-calendar-alt text-slate-400"></i> ${paper.exam_session}
+                                <span class="text-[11px] font-medium text-slate-400 font-mono-code shrink-0">
+                                    ${paper.exam_session}
                                 </span>
                             </div>
-                            <h3 class="text-xs sm:text-sm font-bold text-slate-800 leading-snug mb-4 line-clamp-2" title="${paper.title}">${paper.title}</h3>
+                            <h3 class="text-xs sm:text-sm font-semibold text-slate-800 leading-snug mb-5 line-clamp-2" title="${paper.title}">${paper.title}</h3>
                         </div>
-                        <button onclick="downloadPaper('${paper.handle}', '${paper.exam_session}', this)" class="w-full bg-white hover:bg-blue-600 text-slate-700 hover:text-white border border-slate-200 hover:border-blue-600 text-xs font-bold py-2.5 sm:py-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm active:scale-[0.98]">
-                            <i class="fas fa-file-pdf transition-transform"></i><span>Download PDF</span>
+                        <button onclick="downloadPaper('${paper.handle}', '${paper.exam_session}', this)" class="w-full bg-white/80 hover:bg-slate-900 text-slate-700 hover:text-white border border-slate-200/90 hover:border-slate-900 text-xs font-semibold py-2.5 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm active:scale-[0.99]">
+                            <i class="far fa-arrow-alt-circle-down text-xs"></i><span>Download PDF</span>
                         </button>
                     </div>
                 `;
@@ -615,9 +651,9 @@
 
         async function downloadPaper(handle, examSession, btnElement) {
             const originalHTML = btnElement.innerHTML;
-            btnElement.innerHTML = `<i class="fas fa-spinner fa-spin text-xs"></i> Generating PDF...`;
+            btnElement.innerHTML = `<i class="fas fa-circle-notch fa-spin text-xs"></i><span>Preparing...</span>`;
             btnElement.disabled = true;
-            btnElement.classList.add('bg-blue-50', 'text-blue-600', 'border-blue-200', 'cursor-not-allowed');
+            btnElement.classList.add('opacity-70', 'cursor-not-allowed');
 
             try {
                 const response = await fetch(`${API_URL}/download`, {
@@ -635,16 +671,22 @@
                 a.click();
                 a.remove();
                 
-                btnElement.innerHTML = `<i class="fas fa-check text-emerald-600"></i> Saved!`;
-                setTimeout(() => { btnElement.innerHTML = originalHTML; btnElement.disabled = false; btnElement.classList.remove('bg-blue-50', 'text-blue-600', 'border-blue-200', 'cursor-not-allowed'); }, 2000);
+                btnElement.innerHTML = `<i class="fas fa-check text-emerald-500 text-xs"></i><span>Downloaded</span>`;
+                setTimeout(() => { 
+                    btnElement.innerHTML = originalHTML; 
+                    btnElement.disabled = false; 
+                    btnElement.classList.remove('opacity-70', 'cursor-not-allowed'); 
+                }, 2000);
             } catch (error) {
                 alert("Download failed. The university storage server might be busy.");
-                btnElement.innerHTML = originalHTML; btnElement.disabled = false; btnElement.classList.remove('bg-blue-50', 'text-blue-600', 'border-blue-200', 'cursor-not-allowed');
+                btnElement.innerHTML = originalHTML; 
+                btnElement.disabled = false; 
+                btnElement.classList.remove('opacity-70', 'cursor-not-allowed');
             }
         }
 
-        // --- Aesthetic Scripts ---
-        const words = ["MAT101 PYQs...", "UCEST105 Papers...", "EST110...", "GAMAT101...", "Previous Papers..."];
+        // --- Minimal Typewriter & Subtle Ambient Drift ---
+        const words = ["MAT101", "UCEST105", "EST110", "GAMAT101", "CST201"];
         let wordIndex = 0, charIndex = 0, isDeleting = false;
         function type() {
             const typeTarget = document.getElementById("typewriter");
@@ -652,12 +694,12 @@
             const currentWord = words[wordIndex];
             typeTarget.innerText = isDeleting ? currentWord.substring(0, charIndex - 1) : currentWord.substring(0, charIndex + 1);
             isDeleting ? charIndex-- : charIndex++;
-            let typeSpeed = isDeleting ? 45 : 90;
-            if (!isDeleting && charIndex === currentWord.length) { typeSpeed = 2200; isDeleting = true; } 
+            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === currentWord.length) { typeSpeed = 2400; isDeleting = true; } 
             else if (isDeleting && charIndex === 0) { isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 400; }
             setTimeout(type, typeSpeed);
         }
-        setTimeout(type, 800);
+        setTimeout(type, 600);
 
         let lastScrollY = window.scrollY, ticking = false;
         window.addEventListener('scroll', () => {
@@ -665,37 +707,13 @@
             if (!ticking) {
                 window.requestAnimationFrame(() => {
                     const scrollBg1 = document.getElementById('scroll-bg-1'), scrollBg2 = document.getElementById('scroll-bg-2');
-                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.25}px)`;
-                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.15}px)`;
+                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.15}px)`;
+                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.1}px)`;
                     ticking = false;
                 });
                 ticking = true;
             }
         }, { passive: true });
-
-        function applyParallax(x, y) {
-            const mouseOrb1 = document.getElementById('mouse-orb-1'), mouseOrb2 = document.getElementById('mouse-orb-2');
-            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -25}px, ${y * -25}px)`;
-            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 35}px, ${y * 35}px)`;
-            const glassCard = document.getElementById('search-card');
-            if(glassCard && window.innerWidth > 768) {
-                glassCard.style.transform = `perspective(1000px) rotateX(${y * -4}deg) rotateY(${x * 4}deg) scale3d(1.01, 1.01, 1.01)`;
-            }
-        }
-        document.addEventListener('mousemove', (e) => {
-            applyParallax((e.clientX / window.innerWidth - 0.5) * 2, (e.clientY / window.innerHeight - 0.5) * 2);
-        });
-        document.addEventListener('mouseleave', () => {
-            applyParallax(0, 0);
-            const glassCard = document.getElementById('search-card');
-            if(glassCard) glassCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-        });
-        if (window.DeviceOrientationEvent && window.innerWidth <= 768) {
-            window.addEventListener('deviceorientation', (e) => {
-                if(e.gamma === null || e.beta === null) return;
-                applyParallax(Math.max(-1, Math.min(1, e.gamma / 35)) * 0.5, Math.max(-1, Math.min(1, (e.beta - 45) / 35)) * 0.5);
-            }, true);
-        }
     </script>
 </body>
 </html>
