@@ -160,7 +160,7 @@
     <script>
         if(typeof loadNavigation === 'function') loadNavigation('', '/', false);
 
-        // --- DISCORD WEBHOOK LOGIC ---
+        // --- TELEGRAM BOT LOGIC ---
         async function submitReport(e) {
             e.preventDefault();
             
@@ -170,7 +170,6 @@
             const fileInput = document.getElementById('screenshot');
             const files = fileInput.files;
 
-            // Discord has a strict limit of 10 attachments per message
             if (files.length > 10) {
                 alert("Please select a maximum of 10 screenshots per report.");
                 return;
@@ -179,28 +178,47 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading Proof...';
             btn.disabled = true;
 
-            // Your live Discord Webhook
-            const webhookUrl = "https://discord.com/api/webhooks/1515231063708926084/_WXcXTorXre0eI01oJfNw0LB_NrbiVN6AHc_29w_jPjdiyqf6F9PVWB4MnHslYRSddUB"; 
+            // Live Telegram Credentials
+            const botToken = "8925601104:AAFYeC5Qbc-UAHCgZD8jfzQqOXM2B88gLvM"; 
+            const chatId = "-1004463800271"; 
+            
+            const apiUrl = `https://api.telegram.org/bot${botToken}/sendMediaGroup`;
             
             const groupName = document.getElementById('groupName').value;
             const number = document.getElementById('offenderNumber').value;
             const type = document.getElementById('violationType').value;
             
-            // Handle empty optional description
             const descriptionValue = document.getElementById('description').value.trim();
             const description = descriptionValue ? descriptionValue : "No additional details provided.";
 
-            // Package the data for Discord
+            const captionText = `🚨 <b>NEW REPORT RECEIVED</b> 🚨\n<b>Group:</b> ${groupName}\n<b>Offender Number:</b> ${number}\n<b>Violation Type:</b> ${type}\n<b>Details:</b> ${description}`;
+
             const formData = new FormData();
-            formData.append('content', `🚨 **NEW REPORT RECEIVED** 🚨\n**Group:** ${groupName}\n**Offender Number:** ${number}\n**Violation Type:** ${type}\n**Details:** ${description}`);
-            
-            // Loop through selected files and append them to formData
+            formData.append('chat_id', chatId);
+
+            const mediaArray = [];
+
             for (let i = 0; i < files.length; i++) {
-                formData.append(`file[${i}]`, files[i]);
+                const fileKey = `file${i}`;
+                formData.append(fileKey, files[i]);
+                
+                const mediaItem = {
+                    type: 'photo',
+                    media: `attach://${fileKey}`
+                };
+                
+                if (i === 0) {
+                    mediaItem.caption = captionText;
+                    mediaItem.parse_mode = 'HTML';
+                }
+                
+                mediaArray.push(mediaItem);
             }
 
+            formData.append('media', JSON.stringify(mediaArray));
+
             try {
-                const response = await fetch(webhookUrl, {
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     body: formData
                 });
@@ -209,11 +227,14 @@
                     document.getElementById('success-state').classList.remove('hidden');
                     document.getElementById('reportForm').reset();
                 } else {
-                    throw new Error('Failed to send to Discord');
+                    const errorText = await response.text();
+                    console.error("Telegram API Error:", errorText);
+                    throw new Error('Failed to send to Telegram');
                 }
             } catch (error) {
                 console.error("Error sending report:", error);
                 alert("Failed to submit report. Ensure your internet connection is stable and the files aren't too large.");
+            } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             }
