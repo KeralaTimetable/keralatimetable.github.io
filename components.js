@@ -1,10 +1,105 @@
 // ==============================================================================
-// 0. AUTO DARK THEME ENGINE & ADAPTIVE GLASSMORPHISM
+// 0. FLOW CORE ENGINE (Global State, Zero-Latency Cache & UI Toasts)
+// ==============================================================================
+window.KTUFlow = (function() {
+    const PROFILE_KEY = 'ktu_flow_profile_v2';
+    const RECENT_KEY = 'ktu_flow_recent_v2';
+    const CATALOG_CACHE_KEY = 'ktu_flow_catalog_cache_v2';
+    let memoryCatalog = null;
+
+    return {
+        // 1. Student Profile Sync (Scheme, Branch, Semester across all pages)
+        getProfile() {
+            try {
+                return JSON.parse(localStorage.getItem(PROFILE_KEY)) || { scheme: '', branch: '', sem: '' };
+            } catch (e) {
+                return { scheme: '', branch: '', sem: '' };
+            }
+        },
+        setProfile(updates) {
+            try {
+                const current = this.getProfile();
+                const next = { ...current, ...updates };
+                localStorage.setItem(PROFILE_KEY, JSON.stringify(next));
+                window.dispatchEvent(new CustomEvent('ktu:profile-updated', { detail: next }));
+                return next;
+            } catch (e) {}
+        },
+
+        // 2. Recent Course Queries Memory
+        getRecent() {
+            try {
+                return JSON.parse(localStorage.getItem(RECENT_KEY)) || [];
+            } catch (e) {
+                return [];
+            }
+        },
+        addRecent(code) {
+            if (!code) return;
+            try {
+                const clean = code.trim().toUpperCase();
+                const list = [clean, ...this.getRecent().filter(item => item !== clean)].slice(0, 6);
+                localStorage.setItem(RECENT_KEY, JSON.stringify(list));
+                return list;
+            } catch (e) {}
+        },
+
+        // 3. Zero-Latency Subject Catalog Loader (Memory + SessionStorage)
+        async getCatalog(url = '/ktu_subjects_no_lab.json') {
+            if (memoryCatalog) return memoryCatalog;
+            try {
+                const cached = sessionStorage.getItem(CATALOG_CACHE_KEY);
+                if (cached) {
+                    memoryCatalog = JSON.parse(cached);
+                    return memoryCatalog;
+                }
+            } catch (e) {}
+
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Catalog fetch failed');
+            memoryCatalog = await response.json();
+            try {
+                sessionStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(memoryCatalog));
+            } catch (e) {}
+            return memoryCatalog;
+        },
+
+        // 4. Global Liquid Glass Toast Notification (Replaces native alert())
+        toast(message, type = 'success') {
+            const existing = document.getElementById('ktu-flow-toast');
+            if (existing) existing.remove();
+
+            const dotColor = type === 'error' ? 'bg-rose-400' : type === 'amber' ? 'bg-amber-400' : 'bg-emerald-400 animate-pulse';
+            const toast = document.createElement('div');
+            toast.id = 'ktu-flow-toast';
+            toast.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-[110] bg-slate-900/95 dark:bg-slate-800/95 text-white text-xs font-bold py-2.5 px-4 rounded-full shadow-2xl backdrop-blur-md border border-slate-700/60 flex items-center gap-2.5 transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none whitespace-nowrap';
+            toast.innerHTML = `
+                <span class="w-2 h-2 rounded-full ${dotColor} shrink-0"></span>
+                <span>${message}</span>
+            `;
+            document.body.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 2200);
+        }
+    };
+})();
+
+// ==============================================================================
+// 1. AUTO THEME ENGINE & ADAPTIVE GLASSMORPHISM (Light Mode Default)
 // ==============================================================================
 (function initTheme() {
     const savedTheme = localStorage.getItem('kt_theme') || 'light';
     if (savedTheme === 'dark') {
         document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
     }
     
     if (!document.getElementById('kt-dark-theme-styles')) {
@@ -12,7 +107,7 @@
         style.id = 'kt-dark-theme-styles';
         style.innerHTML = `
             /* ==================================================================
-               A. LIGHT MODE ENHANCEMENTS (Fixes laptop washing out in notes.html)
+               A. LIGHT MODE ENHANCEMENTS (Crisp glass borders across laptops/phones)
                ================================================================== */
             html:not(.dark) .branch-card {
                 border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
@@ -24,8 +119,8 @@
                 background: #ffffff !important;
             }
             html:not(.dark) .real-glass {
-                border: 1.5px solid rgba(0, 0, 0, 0.14) !important;
-                box-shadow: inset 0 1px 1px #fff, 0 16px 40px rgba(31, 38, 135, 0.08) !important;
+                border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
+                box-shadow: inset 0 1px 1px #fff, 0 16px 40px rgba(31, 38, 135, 0.07) !important;
             }
             html:not(.dark) select.custom-select {
                 border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
@@ -35,7 +130,7 @@
             }
 
             /* ==================================================================
-               B. DARK MODE ENGINE (Fixes all notes.html & index.html issues)
+               B. DARK MODE ENGINE (Unified across index.html, notes.html & pyq.html)
                ================================================================== */
             /* 1. Base Canvas */
             html.dark body,
@@ -61,9 +156,9 @@
             html.dark .text-slate-700:not(.text-transparent) { color: #e2e8f0 !important; }
             html.dark .text-slate-600:not(.text-transparent) { color: #cbd5e1 !important; }
             html.dark .text-slate-500:not(.text-transparent) { color: #94a3b8 !important; }
-            html.dark .text-slate-400:not(.text-transparent) { color: #94a3b8 !important; } /* Fixed: Was #475569 */
+            html.dark .text-slate-400:not(.text-transparent) { color: #94a3b8 !important; }
 
-            /* 4. NOTES.HTML FIX: Parallax Orbs (Screen mode prevents pitch-black orbs) */
+            /* 4. Ambient Parallax Orbs (Screen mode prevents pitch-black orbs) */
             html.dark #mouse-orb-1,
             html.dark #mouse-orb-2 {
                 mix-blend-mode: screen !important;
@@ -71,24 +166,50 @@
                 filter: blur(80px) !important;
             }
 
-            /* 5. NOTES.HTML FIX: 3D Real-Glass Finder Card */
+            /* 5. 3D Real-Glass & PYQ Result-Glass Cards */
             html.dark .real-glass {
-                background: rgba(15, 23, 42, 0.7) !important;
+                background: rgba(15, 23, 42, 0.72) !important;
                 backdrop-filter: blur(28px) saturate(180%) !important;
                 -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
                 border: 1px solid rgba(255, 255, 255, 0.1) !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.25) !important;
-                border-left: 1px solid rgba(255, 255, 255, 0.15) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.22) !important;
+                border-left: 1px solid rgba(255, 255, 255, 0.14) !important;
                 box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
             }
+            html.dark .result-glass {
+                background: rgba(15, 23, 42, 0.68) !important;
+                backdrop-filter: blur(20px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.09) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+                box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4) !important;
+            }
+            html.dark .result-glass:hover {
+                background: rgba(30, 41, 59, 0.85) !important;
+                border-color: rgba(59, 130, 246, 0.45) !important;
+                box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55) !important;
+            }
 
-            /* 6. NOTES.HTML FIX: Dropdown Inputs (Prevents hover:bg-white/70 whiteout) */
+            /* 6. Inputs & Dropdowns (Notes & PYQ) */
             html.dark .inner-glass,
+            html.dark .glass-input,
             html.dark select.custom-select {
-                background-color: rgba(0, 0, 0, 0.4) !important;
-                border: 1px solid rgba(255, 255, 255, 0.12) !important;
+                background-color: rgba(9, 14, 26, 0.65) !important;
+                border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
                 color: #f8fafc !important;
+            }
+            html.dark select.custom-select {
                 background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E") !important;
+            }
+            html.dark .glass-input:focus {
+                background-color: rgba(15, 23, 42, 0.9) !important;
+                border-color: #3b82f6 !important;
+                box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2) !important;
+            }
+            html.dark .glass-input:disabled {
+                background-color: rgba(15, 23, 42, 0.35) !important;
+                color: #475569 !important;
+                border-color: rgba(255, 255, 255, 0.05) !important;
             }
             html.dark select.custom-select:hover,
             html.dark .inner-glass:hover {
@@ -104,7 +225,7 @@
                 color: #64748b !important;
             }
 
-            /* 7. NOTES.HTML FIX: Branch Cards */
+            /* 7. Branch Cards */
             html.dark .branch-card {
                 background: rgba(255, 255, 255, 0.035) !important;
                 backdrop-filter: blur(20px) saturate(180%) !important;
@@ -124,7 +245,7 @@
             html.dark .branch-card .bg-indigo-100 { background-color: rgba(99, 102, 241, 0.15) !important; }
             html.dark .branch-card .bg-emerald-100 { background-color: rgba(16, 185, 129, 0.15) !important; }
 
-            /* 8. NOTES.HTML FIX: Disabled / Coming Soon Cards */
+            /* 8. Disabled / Coming Soon Cards */
             html.dark .cursor-not-allowed {
                 opacity: 0.55 !important;
             }
@@ -135,16 +256,23 @@
                 color: #64748b !important;
             }
 
-            /* 9. NOTES.HTML FIX: Remove Harsh White Outlines */
+            /* 9. Subtle Surface Overrides for White Utility Classes */
             html.dark .border-white {
                 border-color: rgba(255, 255, 255, 0.1) !important;
             }
             html.dark .bg-white\\/80,
-            html.dark .bg-white\\/70 {
+            html.dark .bg-white\\/70,
+            html.dark .bg-white\\/90 {
                 background-color: rgba(255, 255, 255, 0.06) !important;
+                border-color: rgba(255, 255, 255, 0.1) !important;
+            }
+            html.dark .bg-slate-200\\/50,
+            html.dark .bg-slate-200\\/60 {
+                background-color: rgba(15, 23, 42, 0.75) !important;
+                border-color: rgba(255, 255, 255, 0.08) !important;
             }
 
-            /* 10. NOTES.HTML FIX: Trending Searches Tags */
+            /* 10. Trending Searches Tags */
             html.dark span.bg-white\\/80 {
                 background-color: rgba(255, 255, 255, 0.04) !important;
                 border-color: rgba(255, 255, 255, 0.08) !important;
@@ -156,14 +284,15 @@
                 color: #6ee7b7 !important;
             }
 
-            /* 11. NOTES.HTML FIX: Footer (Prevents milky white slab) */
+            /* 11. Footer */
             html.dark footer,
-            html.dark footer.bg-white\\/50 {
+            html.dark footer.bg-white\\/50,
+            html.dark footer.bg-white\\/60 {
                 background-color: rgba(7, 11, 20, 0.85) !important;
                 border-top-color: rgba(255, 255, 255, 0.08) !important;
             }
 
-            /* 12. INDEX.HTML GLASS & HYBRID CARD INTEGRATION */
+            /* 12. INDEX.HTML Glass & Hybrid Cards */
             html.dark .glass-panel {
                 background: rgba(255, 255, 255, 0.035) !important;
                 backdrop-filter: blur(24px) saturate(180%) !important;
@@ -219,28 +348,28 @@
                 border-color: rgba(255, 255, 255, 0.08) !important;
             }
 
-            /* 15. Header, Theme Toggles & Navigation */
+            /* 15. Header, Theme Toggles & Liquid Glass Mobile Menu */
             html.dark header {
-                background-color: rgba(7, 11, 20, 0.85) !important;
+                background-color: rgba(7, 11, 20, 0.82) !important;
                 border-bottom-color: rgba(255, 255, 255, 0.08) !important;
             }
             html.dark #mobile-menu {
-                background-color: #0b0f19 !important;
-                border-color: rgba(255, 255, 255, 0.08) !important;
+                background: rgba(11, 15, 25, 0.92) !important;
+                border-right-color: rgba(255, 255, 255, 0.08) !important;
             }
-            html.dark #mobile-menu .bg-slate-50 {
-                background-color: #070b14 !important;
+            html.dark #mobile-menu .drawer-header {
+                background: rgba(7, 11, 20, 0.6) !important;
                 border-bottom-color: rgba(255, 255, 255, 0.08) !important;
             }
             html.dark #mobile-menu a { color: #cbd5e1 !important; }
             html.dark #mobile-menu a:hover {
-                background-color: rgba(255, 255, 255, 0.05) !important;
+                background-color: rgba(255, 255, 255, 0.06) !important;
                 color: #ffffff !important;
             }
             html.dark #mobile-menu a.bg-indigo-50 {
-                background-color: rgba(54, 128, 103, 0.2) !important;
-                color: #34d399 !important;
-                border-color: rgba(54, 128, 103, 0.4) !important;
+                background-color: rgba(79, 70, 229, 0.18) !important;
+                color: #818cf8 !important;
+                border-color: rgba(99, 102, 241, 0.35) !important;
             }
             html.dark .theme-toggle-btn {
                 background-color: rgba(255, 255, 255, 0.07) !important;
@@ -256,7 +385,7 @@
 })();
 
 // ==============================================================================
-// 1. GOOGLE ANALYTICS 4 (GA4) LIVE TRACKING
+// 2. GOOGLE ANALYTICS 4 (GA4) LIVE TRACKING
 // ==============================================================================
 (function() {
     if (window._ga4Initialized) return;
@@ -274,7 +403,7 @@
 })();
 
 // ==============================================================================
-// 2. RESPONSIVE NAVIGATION LOADER
+// 3. RESPONSIVE NAVIGATION LOADER (Exact Branding Lockup + Liquid Glass Drawer)
 // ==============================================================================
 function loadNavigation(activePage, basePath = '', isBlog = false) { 
     const container = document.getElementById('navigation-container');
@@ -282,56 +411,73 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 
     const logoExtension = isBlog ? ' <span class="text-slate-400 font-medium ml-1">| Blog</span>' : '';
 
+    const navItemClass = (key) => activePage === key
+        ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100 shadow-sm'
+        : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50/60 font-semibold border border-transparent';
+
+    const navIconClass = (key) => activePage === key ? 'text-indigo-600' : 'text-slate-400';
+
     const navHTML = `
-        <div id="mobile-menu" aria-hidden="true" style="visibility: hidden;" class="fixed inset-y-0 left-0 w-64 bg-white shadow-2xl transform -translate-x-full z-[60] flex flex-col border-r border-slate-100 will-change-transform">
-            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
-                <h2 class="text-lg font-extrabold text-slate-900 tracking-tight">Menu</h2>
-                <button id="close-menu-btn" aria-label="Close menu" class="p-2 text-slate-400 hover:text-red-500 transition-colors rounded-full hover:bg-white shadow-sm focus:outline-none">
-                    <i class="fas fa-times text-lg"></i>
+        <!-- Liquid Glass Mobile Drawer -->
+        <div id="mobile-menu" aria-hidden="true" style="visibility: hidden; backdrop-filter: blur(28px) saturate(180%); -webkit-backdrop-filter: blur(28px) saturate(180%);" 
+             class="fixed inset-y-0 left-0 w-72 bg-white/95 shadow-2xl transform -translate-x-full z-[60] flex flex-col border-r border-slate-200/80 will-change-transform">
+            
+            <div class="drawer-header p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/70">
+                <div class="flex items-center gap-2">
+                    <img src="/k.png" alt="Kerala Timetable Logo" class="w-6 h-6 object-contain shrink-0" width="24" height="24" />
+                    <span class="text-base font-extrabold text-slate-900 tracking-tight leading-none">Kerala <span class="text-indigo-600">Timetable</span></span>
+                </div>
+                <button id="close-menu-btn" aria-label="Close menu" class="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-rose-500 transition-all rounded-full hover:bg-white shadow-sm active:scale-95 focus:outline-none">
+                    <i class="fas fa-times text-base"></i>
                 </button>
             </div>
             
-            <nav class="flex-grow py-6 px-4 flex flex-col gap-2 overflow-y-auto">
-                <a href="/index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'home' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-home w-5 text-center ${activePage === 'home' ? 'text-indigo-600' : 'text-slate-400'}"></i> Home
+            <nav class="flex-grow py-4 px-3.5 flex flex-col gap-1 overflow-y-auto">
+                <p class="px-3 pt-1 pb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Academics</p>
+                
+                <a href="/index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm transition-all active:scale-[0.98] ${navItemClass('home')}">
+                    <i class="fas fa-home w-5 text-center ${navIconClass('home')}"></i> Home
                 </a>
                 
-                <a href="/timetable.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'timetable' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-calendar-day w-5 text-center ${activePage === 'timetable' ? 'text-indigo-600' : 'text-slate-400'}"></i> Timetables
+                <a href="/timetable.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm transition-all active:scale-[0.98] ${navItemClass('timetable')}">
+                    <i class="fas fa-calendar-day w-5 text-center ${navIconClass('timetable')}"></i> Timetables
                 </a>
                 
-                <a href="/notes.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'notes' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-book-open w-5 text-center ${activePage === 'notes' ? 'text-indigo-600' : 'text-slate-400'}"></i> Study Notes
+                <a href="/notes.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm transition-all active:scale-[0.98] ${navItemClass('notes')}">
+                    <i class="fas fa-book-open w-5 text-center ${navIconClass('notes')}"></i> Study Notes
                 </a>
 
-                <a href="/pyq.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'pyq' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-file-alt w-5 text-center ${activePage === 'pyq' ? 'text-indigo-600' : 'text-slate-400'}"></i> Previous Papers
+                <a href="/pyq.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm transition-all active:scale-[0.98] ${navItemClass('pyq')}">
+                    <i class="fas fa-file-alt w-5 text-center ${navIconClass('pyq')}"></i> Previous Papers
                 </a>
 
-                <a href="/doubts.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'qa' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-comments w-5 text-center ${activePage === 'qa' ? 'text-indigo-600' : 'text-slate-400'}"></i> Q&A Hub
-                </a>
+                <p class="px-3 pt-4 pb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Community & Updates</p>
 
-                <a href="/status.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'status' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-server w-5 text-center ${activePage === 'status' ? 'text-indigo-600' : 'text-slate-400'}"></i> Server Status
+                <a href="/doubts.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm transition-all active:scale-[0.98] ${navItemClass('qa')}">
+                    <i class="fas fa-comments w-5 text-center ${navIconClass('qa')}"></i> Q&A Hub
                 </a>
                 
-                <a href="/updates.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'updates' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-bullhorn w-5 text-center ${activePage === 'updates' ? 'text-indigo-600' : 'text-slate-400'}"></i> Latest Updates
+                <a href="/updates.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm transition-all active:scale-[0.98] ${navItemClass('updates')}">
+                    <i class="fas fa-bullhorn w-5 text-center ${navIconClass('updates')}"></i> Latest Updates
                 </a>
                 
-                <a href="/blog/index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'blog' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-feather-alt w-5 text-center ${activePage === 'blog' ? 'text-indigo-600' : 'text-slate-400'}"></i> Blog
+                <a href="/blog/index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm transition-all active:scale-[0.98] ${navItemClass('blog')}">
+                    <i class="fas fa-feather-alt w-5 text-center ${navIconClass('blog')}"></i> Blog
                 </a>
 
-                <a href="/about.html" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${activePage === 'about' ? 'bg-indigo-50 text-indigo-700 font-bold border border-indigo-100' : 'text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 font-semibold'}">
-                    <i class="fas fa-info-circle w-5 text-center ${activePage === 'about' ? 'text-indigo-600' : 'text-slate-400'}"></i> About
+                <a href="/status.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm transition-all active:scale-[0.98] ${navItemClass('status')}">
+                    <i class="fas fa-server w-5 text-center ${navIconClass('status')}"></i> Server Status
+                </a>
+
+                <a href="/about.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-sm transition-all active:scale-[0.98] ${navItemClass('about')}">
+                    <i class="fas fa-info-circle w-5 text-center ${navIconClass('about')}"></i> About
                 </a>
             </nav>
         </div>
 
         <div id="menu-overlay" style="visibility: hidden;" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 opacity-0 pointer-events-none will-change-[opacity]"></div>
 
+        <!-- EXACT BRAND HEADER (Font, Size, Alignment Locked 1:1) -->
         <header class="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all duration-300">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
                 <div class="flex items-center gap-3">
@@ -345,36 +491,36 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                 </div>
 
                 <div class="hidden lg:flex gap-2 items-center">
-                    <a href="/notes.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'notes' ? 'font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 shadow-sm' : 'font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-100'}">
+                    <a href="/notes.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-all active:scale-95 ${activePage === 'notes' ? 'font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 shadow-sm' : 'font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-100'}">
                         <i class="fas fa-book-open text-[10px]"></i> Study Notes
                     </a>
                     
-                    <a href="/pyq.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'pyq' ? 'font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 shadow-sm' : 'font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-100'}">
+                    <a href="/pyq.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-all active:scale-95 ${activePage === 'pyq' ? 'font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 shadow-sm' : 'font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-100'}">
                         <i class="fas fa-file-alt text-[10px]"></i> PYQs
                     </a>
 
-                    <a href="/doubts.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'qa' ? 'font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 shadow-sm' : 'font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-100'}">
+                    <a href="/doubts.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-all active:scale-95 ${activePage === 'qa' ? 'font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 shadow-sm' : 'font-bold text-slate-600 hover:text-indigo-600 hover:bg-slate-100'}">
                         <i class="fas fa-comments text-[10px]"></i> Q&A
                     </a>
                     
                     <div class="w-px h-5 bg-slate-200 mx-1"></div>
                     
-                    <a href="/updates.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-colors ${activePage === 'updates' ? 'font-bold text-white bg-indigo-600 shadow-md' : 'font-bold text-slate-600 bg-slate-100 hover:bg-indigo-600 hover:text-white'}">
+                    <a href="/updates.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-all active:scale-95 ${activePage === 'updates' ? 'font-bold text-white bg-indigo-600 shadow-md' : 'font-bold text-slate-600 bg-slate-100 hover:bg-indigo-600 hover:text-white'}">
                         <i class="fas fa-bullhorn text-[10px]"></i> Notice Board
                     </a>
 
                     <!-- Desktop Theme Toggle -->
-                    <button class="theme-toggle-btn w-9 h-9 ml-1 rounded-full flex items-center justify-center bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200 transition-colors shadow-inner focus:outline-none" aria-label="Toggle Theme">
+                    <button class="theme-toggle-btn w-9 h-9 ml-1 rounded-full flex items-center justify-center bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200 transition-all active:scale-95 shadow-inner focus:outline-none" aria-label="Toggle Theme">
                         <i class="fas fa-moon text-[13px]"></i>
                     </button>
                 </div>
                 
                 <div class="lg:hidden flex items-center gap-2">
                     <!-- Mobile Theme Toggle -->
-                    <button class="theme-toggle-btn w-10 h-10 flex items-center justify-center bg-slate-100 text-slate-600 rounded-full border border-slate-200 shadow-sm transition-colors focus:outline-none" aria-label="Toggle Theme">
+                    <button class="theme-toggle-btn w-10 h-10 flex items-center justify-center bg-slate-100 text-slate-600 rounded-full border border-slate-200 shadow-sm transition-all active:scale-95 focus:outline-none" aria-label="Toggle Theme">
                         <i class="fas fa-moon text-[14px]"></i>
                     </button>
-                    <a href="/updates.html" aria-label="Notifications" class="w-10 h-10 flex items-center justify-center bg-indigo-50 text-indigo-600 rounded-full border border-indigo-100 shadow-sm">
+                    <a href="/updates.html" aria-label="Notifications" class="w-10 h-10 flex items-center justify-center bg-indigo-50 text-indigo-600 rounded-full border border-indigo-100 shadow-sm transition-all active:scale-95">
                        <i class="fas fa-bell"></i>
                     </a>
                 </div>
@@ -390,37 +536,13 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     function updateThemeIcons() {
         const isDark = document.documentElement.classList.contains('dark');
         themeBtns.forEach(btn => {
-            btn.innerHTML = isDark ? '<i class="fas fa-sun text-[14px] text-amber-400"></i>' : '<i class="fas fa-moon text-[14px] text-slate-600"></i>';
+            btn.innerHTML = isDark 
+                ? '<i class="fas fa-sun text-[14px] text-amber-400"></i>' 
+                : '<i class="fas fa-moon text-[14px] text-slate-600"></i>';
         });
     }
     
     updateThemeIcons();
-
-    function showBetaToast(isDark) {
-        const existingToast = document.getElementById('beta-theme-toast');
-        if (existingToast) existingToast.remove();
-
-        const toast = document.createElement('div');
-        toast.id = 'beta-theme-toast';
-        toast.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-[100] bg-slate-900/95 dark:bg-slate-800/95 text-white text-xs font-bold py-2.5 px-4 rounded-full shadow-2xl backdrop-blur-md border border-slate-700/60 flex items-center gap-2.5 transition-all duration-300 transform translate-y-10 opacity-0';
-        toast.innerHTML = isDark ? `
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Dark Theme enabled</span>
-        ` : `
-            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-            <span>Light Theme enabled</span>
-        `;
-        document.body.appendChild(toast);
-
-        requestAnimationFrame(() => {
-            toast.classList.remove('translate-y-10', 'opacity-0');
-        });
-
-        setTimeout(() => {
-            toast.classList.add('translate-y-10', 'opacity-0');
-            setTimeout(() => toast.remove(), 300);
-        }, 2000);
-    }
     
     themeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -428,7 +550,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             const isDark = document.documentElement.classList.contains('dark');
             localStorage.setItem('kt_theme', isDark ? 'dark' : 'light');
             updateThemeIcons();
-            showBetaToast(isDark);
+            window.KTUFlow.toast(isDark ? 'Dark Theme enabled' : 'Light Theme enabled', isDark ? 'success' : 'amber');
         });
     });
 
@@ -448,7 +570,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             menu.style.visibility = 'visible';
             overlay.style.visibility = 'visible';
 
-            menu.classList.add('transition-transform', 'duration-300', 'ease-in-out');
+            menu.style.transition = 'transform 0.32s cubic-bezier(0.22, 1, 0.36, 1)';
             overlay.classList.add('transition-opacity', 'duration-300');
 
             void menu.offsetWidth;
@@ -470,13 +592,25 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                     menu.style.visibility = 'hidden';
                     overlay.style.visibility = 'hidden';
                 }
-            }, 300);
+            }, 320);
         }
     }
 
     openBtn?.addEventListener('click', () => setMenuState(true));
     closeBtn?.addEventListener('click', () => setMenuState(false));
     overlay.addEventListener('click', () => setMenuState(false));
+
+    // Touch Swipe-Left to Close Mobile Drawer
+    let touchStartX = 0;
+    menu.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    menu.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 50) {
+            setMenuState(false);
+        }
+    }, { passive: true });
 
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !menu.classList.contains('-translate-x-full')) {
@@ -486,7 +620,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 }
 
 // ==============================================================================
-// 3. GLOBAL AD INJECTOR STRICTLY FOR NOTE PAGES
+// 4. GLOBAL AD INJECTOR STRICTLY FOR NOTE PAGES
 // ==============================================================================
 function injectGlobalAd() {
     if (document.getElementById('global-note-ad')) return;
@@ -523,19 +657,14 @@ function injectGlobalAd() {
     };
 
     if ('decode' in testImage) {
-        testImage.decode().then(renderAd).catch(() => {
-            console.warn("Global ad image not found or decoding failed. Injection skipped.");
-        });
+        testImage.decode().then(renderAd).catch(() => {});
     } else {
         testImage.onload = renderAd;
-        testImage.onerror = () => {
-            console.warn("Global ad image not found. Injection skipped.");
-        };
     }
 }
 
 // ==============================================================================
-// 4. AUTHENTIC LIQUID GLASS WHATSAPP CHANNEL PROMPT (MATCHING SCREENSHOT 1:1)
+// 5. AUTHENTIC LIQUID GLASS WHATSAPP CHANNEL PROMPT
 // ==============================================================================
 function initWhatsAppPopup() {
     const STORAGE_KEY = 'ktu_wa_popup_cooldown_until';
@@ -563,16 +692,13 @@ function initWhatsAppPopup() {
                         0 24px 48px -12px rgba(0, 0, 0, 0.6);
                  ">
                  
-                <!-- Ambient glowing refraction orbs inside the clear glass -->
                 <div class="absolute -bottom-6 -left-6 w-36 h-36 bg-sky-500/25 blur-[40px] rounded-full pointer-events-none"></div>
                 <div class="absolute -top-6 -right-6 w-36 h-36 bg-emerald-500/20 blur-[40px] rounded-full pointer-events-none"></div>
                 <div class="absolute bottom-4 right-12 w-28 h-28 bg-emerald-400/20 blur-[35px] rounded-full pointer-events-none"></div>
 
                 <div class="relative z-10 flex flex-col gap-3.5 sm:gap-4">
-                    <!-- Top Row -->
                     <div class="flex items-start justify-between gap-3">
                         <div class="flex items-center gap-3.5">
-                            <!-- WhatsApp Badge -->
                             <div class="w-12 h-12 rounded-2xl bg-[#0f2c25]/90 border border-emerald-400/60 flex items-center justify-center text-emerald-400 text-2xl shadow-inner shrink-0">
                                 <i class="fab fa-whatsapp"></i>
                             </div>
@@ -581,7 +707,6 @@ function initWhatsAppPopup() {
                             </div>
                         </div>
                         
-                        <!-- Close 'X' Button -->
                         <button id="ktu-wa-close-btn" aria-label="Close" class="text-slate-400 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10 focus:outline-none shrink-0">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
@@ -589,12 +714,10 @@ function initWhatsAppPopup() {
                         </button>
                     </div>
 
-                    <!-- Description with Glowing Accents -->
                     <p class="text-slate-300 text-xs sm:text-sm font-medium leading-relaxed pl-0.5">
                         Follow our channel for latest <strong class="text-sky-300 font-bold">KTU Updates</strong>, alerts & verified <strong class="text-emerald-300 font-bold">Study Notes</strong>.
                     </p>
 
-                    <!-- Pill Action Buttons -->
                     <div class="grid grid-cols-2 gap-3 pt-1">
                         <button id="ktu-wa-later-btn" class="w-full py-3 px-4 rounded-full bg-white/10 hover:bg-white/15 text-slate-200 font-bold text-xs sm:text-sm transition-all border border-white/5 active:scale-95 text-center">
                             Maybe Later
@@ -636,7 +759,7 @@ function initWhatsAppPopup() {
 }
 
 // ==============================================================================
-// 5. SAFE AUTO-INIT
+// 6. SAFE AUTO-INIT
 // ==============================================================================
 function runInitializers() {
     injectGlobalAd();
