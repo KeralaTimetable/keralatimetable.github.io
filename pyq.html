@@ -58,7 +58,7 @@
             box-shadow: 
                 0 8px 24px -4px rgba(31, 38, 135, 0.04),
                 inset 0 1px 2px rgba(255, 255, 255, 0.9);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .result-glass:hover {
@@ -69,9 +69,16 @@
         }
 
         .result-glass.selected-card {
-            background: rgba(239, 246, 255, 0.92);
-            border-color: rgba(37, 99, 235, 0.65);
-            box-shadow: 0 12px 28px -6px rgba(37, 99, 235, 0.18), inset 0 0 0 1px rgba(37, 99, 235, 0.25);
+            background: rgba(239, 246, 255, 0.94) !important;
+            border-color: rgba(37, 99, 235, 0.7) !important;
+            box-shadow: 0 14px 30px -6px rgba(37, 99, 235, 0.2), inset 0 0 0 1px rgba(37, 99, 235, 0.25) !important;
+            transform: translateY(-2px);
+        }
+
+        html.dark .result-glass.selected-card {
+            background: rgba(30, 58, 138, 0.38) !important;
+            border-color: rgba(96, 165, 250, 0.65) !important;
+            box-shadow: 0 14px 32px -6px rgba(37, 99, 235, 0.35), inset 0 0 0 1px rgba(96, 165, 250, 0.25) !important;
         }
 
         .glass-input {
@@ -108,6 +115,107 @@
             -webkit-backdrop-filter: blur(24px) saturate(190%);
             border: 1px solid rgba(203, 213, 225, 0.85);
             box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.15);
+        }
+        html.dark .autocomplete-glass {
+            background: rgba(15, 23, 42, 0.95);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.65);
+        }
+
+        /* ==================== COLOROS LIVE CAPSULE ==================== */
+        #coloros-live-capsule {
+            position: fixed;
+            top: 4.65rem;
+            left: 50%;
+            z-index: 65;
+            transform: translate3d(-50%, -26px, 0) scale(0.82);
+            opacity: 0;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0.86);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                0 16px 36px -8px rgba(31, 38, 135, 0.18),
+                0 4px 12px -2px rgba(37, 99, 235, 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 1);
+            transition: 
+                transform 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                width 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform, opacity, width;
+        }
+        #coloros-live-capsule.capsule-active {
+            transform: translate3d(-50%, 0, 0) scale(1);
+            opacity: 1;
+        }
+        html.dark #coloros-live-capsule {
+            background: rgba(15, 23, 42, 0.86);
+            border-color: rgba(255, 255, 255, 0.16);
+            color: #f8fafc;
+            box-shadow: 
+                0 18px 40px -8px rgba(0, 0, 0, 0.7),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+        }
+
+        @keyframes capsule-shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .capsule-shimmer-bg {
+            background-image: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(59, 130, 246, 0.14) 50%,
+                transparent 100%
+            );
+            background-size: 200% 100%;
+            animation: capsule-shimmer 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        html.dark .capsule-shimmer-bg {
+            background-image: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(96, 165, 250, 0.2) 50%,
+                transparent 100%
+            );
+        }
+
+        /* ==================== BOTTOM FLOATING MERGE DOCK ==================== */
+        #floating-merge-dock {
+            position: fixed;
+            bottom: 1.25rem;
+            left: 50%;
+            z-index: 55;
+            width: calc(100% - 1.75rem);
+            max-width: 30rem;
+            transform: translate3d(-50%, 140%, 0) scale(0.92);
+            opacity: 0;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0.86);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                0 22px 48px -12px rgba(15, 23, 42, 0.22),
+                0 4px 16px -2px rgba(37, 99, 235, 0.14),
+                inset 0 1px 0 0 rgba(255, 255, 255, 1);
+            transition: 
+                transform 0.46s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform, opacity;
+        }
+        #floating-merge-dock.dock-active {
+            transform: translate3d(-50%, 0, 0) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        html.dark #floating-merge-dock {
+            background: rgba(15, 23, 42, 0.88);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 24px 50px -12px rgba(0, 0, 0, 0.75),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
         }
 
         /* Ambient Orbs */
@@ -146,7 +254,15 @@
 <body class="antialiased min-h-screen flex flex-col relative text-slate-800 selection:bg-blue-600 selection:text-white">
 
     <!-- Global Header Container -->
-    <div id="navigation-container" class="z-50 relative"></div>
+    <div id="navigation-container" class="z-50 sticky top-0"></div>
+
+    <!-- ColorOS Elastic Live Capsule (Auto-morphs width & slides smoothly) -->
+    <div id="coloros-live-capsule" class="rounded-full overflow-hidden">
+        <div id="capsule-inner" class="px-4 py-2 flex items-center justify-center gap-2.5 whitespace-nowrap text-xs font-extrabold text-slate-800 dark:text-slate-100">
+            <span id="capsule-icon" class="flex items-center justify-center shrink-0"></span>
+            <span id="capsule-text" class="tracking-tight"></span>
+        </div>
+    </div>
 
     <!-- Parallax Ambient Lights -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
@@ -159,15 +275,10 @@
     </div>
 
     <!-- MAIN BODY -->
-    <main class="flex-grow w-full max-w-5xl mx-auto px-3.5 sm:px-6 pt-8 sm:pt-12 md:pt-14 pb-16 relative z-10 flex flex-col items-center">
+    <main class="flex-grow w-full max-w-5xl mx-auto px-3.5 sm:px-6 pt-7 sm:pt-11 md:pt-14 pb-24 relative z-10 flex flex-col items-center">
         
-        <!-- Hero Header -->
+        <!-- Hero Header (Clean, Zero Dramatic Copy) -->
         <div class="text-center mb-6 sm:mb-8 max-w-3xl mx-auto">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md shadow-sm border border-slate-200/80 text-blue-600 text-xs font-black uppercase tracking-wider mb-4">
-                <i class="fas fa-university text-blue-500"></i> APJAKTU B.Tech Vault
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping ml-0.5"></span>
-            </div>
-            
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-3">
                 KTU Previous Year Question Papers <br class="hidden sm:inline">
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">Downloaded Instantly.</span>
@@ -183,13 +294,15 @@
         <div id="parallax-container" class="w-full max-w-2xl relative perspective-1000 mb-6 sm:mb-7 z-30">
             <div id="search-card" class="real-glass rounded-[1.8rem] sm:rounded-[2.2rem] p-4 sm:p-6 md:p-8 w-full flex flex-col relative transition-all duration-300">
                 
-                <!-- Tab Switcher -->
-                <div class="flex justify-center gap-1.5 mb-5 bg-slate-200/55 p-1.5 rounded-xl w-fit mx-auto border border-slate-200/60 shadow-inner">
-                    <button id="tab-search" type="button" onclick="toggleTab('search')" class="px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold transition-all bg-white text-blue-600 shadow-sm border border-slate-200">
-                        <i class="fas fa-search mr-1"></i> Search Code / Name
+                <!-- Tab Switcher (Single-Line Non-Wrapping on Mobile) -->
+                <div class="grid grid-cols-2 gap-1.5 mb-5 bg-slate-200/55 p-1.5 rounded-2xl w-full max-w-sm mx-auto border border-slate-200/60 shadow-inner">
+                    <button id="tab-search" type="button" onclick="toggleTab('search')" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white text-blue-600 shadow-sm border border-slate-200 whitespace-nowrap flex items-center justify-center gap-1.5">
+                        <i class="fas fa-search text-[11px]"></i>
+                        <span>Search Code</span>
                     </button>
-                    <button id="tab-browse" type="button" onclick="toggleTab('browse')" class="px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold transition-all text-slate-500 hover:text-slate-800 hover:bg-white/40 border border-transparent">
-                        <i class="fas fa-layer-group mr-1"></i> Browse Semester
+                    <button id="tab-browse" type="button" onclick="toggleTab('browse')" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-500 hover:text-slate-800 hover:bg-white/40 border border-transparent whitespace-nowrap flex items-center justify-center gap-1.5">
+                        <i class="fas fa-layer-group text-[11px]"></i>
+                        <span>Browse Semester</span>
                     </button>
                 </div>
                 
@@ -210,7 +323,7 @@
                                class="glass-input w-full font-mono-code rounded-2xl py-3.5 sm:py-4 md:py-4.5 pl-11 sm:pl-14 pr-24 sm:pr-28 text-sm sm:text-base md:text-lg" required>
                         
                         <!-- Clear Input Button -->
-                        <button type="button" id="clearSearchBtn" onclick="clearSearchInput()" aria-label="Clear search" class="hidden absolute right-14 sm:right-16 w-7 h-7 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 items-center justify-center transition-all">
+                        <button type="button" id="clearSearchBtn" onclick="clearSearchInput()" aria-label="Clear search" class="hidden absolute right-14 sm:right-24 w-7 h-7 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 items-center justify-center transition-all">
                             <i class="fas fa-times text-xs"></i>
                         </button>
 
@@ -221,7 +334,7 @@
                     </form>
 
                     <!-- Instant Autocomplete Suggestions Dropdown -->
-                    <div id="autocomplete-dropdown" class="hidden autocomplete-glass rounded-2xl mt-1 max-h-64 overflow-y-auto divide-y divide-slate-100 z-50"></div>
+                    <div id="autocomplete-dropdown" class="hidden autocomplete-glass rounded-2xl mt-1 max-h-64 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800 z-50"></div>
                 </div>
 
                 <!-- View 2: Browse Cascading Dropdowns (with localStorage persistence) -->
@@ -328,14 +441,14 @@
             <!-- Loading State -->
             <div id="loading-state" class="hidden flex-col items-center justify-center py-12">
                 <div class="loader mb-4"></div>
-                <p class="text-sm font-bold text-slate-600 animate-pulse font-mono-code">Connecting to APJAKTU Vault...</p>
+                <p class="text-sm font-bold text-slate-600 animate-pulse font-mono-code">Fetching question papers...</p>
             </div>
 
-            <!-- Results Header, Bulk Actions & Scheme Filters -->
-            <div id="results-header" class="w-full flex flex-col gap-4 border-b border-slate-200/80 pb-4 mb-6 hidden scroll-mt-6">
+            <!-- Results Header & Scheme Filters -->
+            <div id="results-header" class="w-full flex flex-col gap-3.5 border-b border-slate-200/80 pb-4 mb-6 hidden scroll-mt-20">
                 
-                <!-- Top Row: Title + Share & Bulk Merge Buttons -->
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <!-- Top Row: Title + Share & Select All Actions -->
+                <div class="flex flex-wrap justify-between items-center gap-3">
                     <div class="flex flex-wrap items-center gap-2.5">
                         <h2 class="text-xl sm:text-2xl font-black text-slate-900">
                             <span id="search-term-display" class="text-blue-600 font-mono-code"></span> PYQs
@@ -343,22 +456,22 @@
                         <span id="result-count" class="text-[11px] sm:text-xs font-bold text-slate-600 bg-white/90 backdrop-blur px-3 py-1 rounded-full border border-slate-200/80 shadow-sm"></span>
                     </div>
 
-                    <!-- Action Toolbar: Copy Link & Merge All PDFs -->
-                    <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-                        <button type="button" onclick="shareSearchLink()" class="px-3 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/90 text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95" title="Copy direct link to these question papers">
-                            <i class="fas fa-share-alt text-blue-600"></i>
-                            <span>Share Link</span>
+                    <!-- Right Quick Actions -->
+                    <div class="flex items-center gap-2">
+                        <button type="button" id="btn-select-all" onclick="toggleSelectAllPapers()" class="px-3 py-1.5 rounded-xl bg-white/90 hover:bg-white text-slate-700 border border-slate-200/90 text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all active:scale-95">
+                            <i class="far fa-check-square text-blue-600"></i>
+                            <span id="select-all-label">Select All</span>
                         </button>
 
-                        <button type="button" id="btn-merge-download" onclick="downloadMergedPapers(this)" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-[0_4px_12px_rgba(37,99,235,0.25)] transition-all active:scale-95">
-                            <i class="fas fa-layer-group"></i>
-                            <span id="merge-btn-label">Merge & Download All</span>
+                        <button type="button" onclick="shareSearchLink()" class="px-3 py-1.5 rounded-xl bg-white/90 hover:bg-white text-slate-700 border border-slate-200/90 text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all active:scale-95" title="Copy direct link to these question papers">
+                            <i class="fas fa-share-alt text-blue-600"></i>
+                            <span>Share</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Bottom Row: Scheme Filter Pills + Filter Within Results -->
-                <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-3">
+                <!-- Bottom Row: Scheme Filter Pills + Subtle Merge Hint -->
+                <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-2.5">
                     <div id="scheme-filters" class="w-full md:w-auto overflow-x-auto hide-scrollbar flex gap-1.5 bg-slate-200/60 p-1.5 rounded-xl border border-slate-200/80">
                         <button onclick="setSchemeFilter('All')" id="btn-filter-all" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 whitespace-nowrap transition-all">All Schemes</button>
                         <button onclick="setSchemeFilter('2024')" id="btn-filter-2024" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-white/60 whitespace-nowrap transition-all">2024 Scheme</button>
@@ -366,14 +479,10 @@
                         <button onclick="setSchemeFilter('2015')" id="btn-filter-2015" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-white/60 whitespace-nowrap transition-all">2015 Scheme</button>
                     </div>
 
-                    <div class="flex items-center justify-between md:justify-end gap-2">
-                        <span class="text-[11px] font-semibold text-slate-500">
-                            <i class="far fa-check-square text-blue-500 mr-1"></i>Tip: Select cards to merge specific papers
-                        </span>
-                        <button type="button" id="clear-selection-btn" onclick="clearSelectedPapers()" class="hidden text-[11px] font-bold text-blue-600 hover:underline">
-                            Clear selection
-                        </button>
-                    </div>
+                    <p class="text-[11px] font-semibold text-slate-500 flex items-center gap-1.5">
+                        <i class="fas fa-layer-group text-blue-500 text-[10px]"></i>
+                        <span>Tick papers below to merge & download as 1 PDF</span>
+                    </p>
                 </div>
             </div>
 
@@ -383,10 +492,32 @@
 
     </main>
 
+    <!-- ==================== FLOATING BOTTOM MERGE BAR (Appears when >= 1 paper ticked) ==================== -->
+    <div id="floating-merge-dock" class="rounded-[1.75rem] p-2.5 sm:p-3 flex items-center justify-between gap-2.5">
+        <div class="flex items-center gap-2.5 pl-1.5">
+            <span id="dock-count-badge" class="w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-black flex items-center justify-center shadow-sm shrink-0">
+                1
+            </span>
+            <div class="flex flex-col text-left">
+                <span id="dock-title-text" class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">1 Paper Selected</span>
+                <div class="flex items-center gap-2 mt-0.5">
+                    <button type="button" onclick="toggleSelectAllPapers()" id="dock-select-all-btn" class="text-[10px] font-bold text-blue-600 hover:underline">Select All</button>
+                    <span class="text-slate-300 text-[10px]">•</span>
+                    <button type="button" onclick="clearSelectedPapers()" class="text-[10px] font-bold text-rose-500 hover:underline">Clear</button>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" id="btn-floating-merge" onclick="downloadMergedPapers(this)" class="px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 shadow-[0_8px_20px_-4px_rgba(37,99,235,0.45)] transition-all active:scale-95 shrink-0">
+            <i class="fas fa-layer-group text-xs"></i>
+            <span id="floating-merge-label">Merge & Download</span>
+        </button>
+    </div>
+
     <!-- PDF Quick Preview Modal -->
     <div id="pdf-preview-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-3 sm:p-6">
-        <div class="bg-white rounded-3xl w-full max-w-4xl h-[85vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden animate-fadeIn">
-            <div class="px-4 sm:px-6 py-3.5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-4xl h-[85vh] flex flex-col shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden fade-in">
+            <div class="px-4 sm:px-6 py-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-900">
                 <div class="flex items-center gap-2.5 truncate pr-3">
                     <i class="fas fa-file-pdf text-rose-500 text-lg"></i>
                     <div class="truncate">
@@ -399,19 +530,16 @@
                         <i class="fas fa-download"></i>
                         <span>Save PDF</span>
                     </a>
-                    <button type="button" onclick="closePreviewModal()" class="w-8 h-8 rounded-xl bg-slate-200/70 hover:bg-rose-100 text-slate-600 hover:text-rose-600 flex items-center justify-center transition-colors">
+                    <button type="button" onclick="closePreviewModal()" class="w-8 h-8 rounded-xl bg-slate-200/70 dark:bg-slate-800 hover:bg-rose-100 text-slate-600 hover:text-rose-600 flex items-center justify-center transition-colors">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
             </div>
-            <div class="flex-grow bg-slate-100 relative">
+            <div class="flex-grow bg-slate-100 dark:bg-slate-950 relative">
                 <iframe id="preview-iframe" class="w-full h-full border-0" title="PDF Preview"></iframe>
             </div>
         </div>
     </div>
-
-    <!-- Glassmorphic Toast Container -->
-    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-xs sm:max-w-sm pointer-events-none"></div>
 
     <!-- Footer -->
     <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-6 sm:py-8 text-center relative z-10">
@@ -435,33 +563,68 @@
         }
         initNav();
 
-        // --- Glassmorphic Toast Notification ---
+        // --- ColorOS Elastic Live Capsule Controller ---
+        let capsuleHideTimeout = null;
+        function triggerCapsule(state, message) {
+            const capsule = document.getElementById('coloros-live-capsule');
+            const inner = document.getElementById('capsule-inner');
+            const iconEl = document.getElementById('capsule-icon');
+            const textEl = document.getElementById('capsule-text');
+            if (!capsule || !inner || !iconEl || !textEl) return;
+
+            clearTimeout(capsuleHideTimeout);
+
+            if (state === 'hide' || state === 'idle') {
+                capsule.classList.remove('capsule-active');
+                inner.classList.remove('capsule-shimmer-bg');
+                return;
+            }
+
+            // Measure current width before content update for smooth elastic width transition
+            const startWidth = capsule.classList.contains('capsule-active') ? capsule.offsetWidth : 120;
+
+            let iconHTML = '<span class="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>';
+            if (state === 'loading') {
+                iconHTML = '<i class="fas fa-circle-notch fa-spin text-blue-600 dark:text-blue-400 text-xs"></i>';
+                inner.classList.add('capsule-shimmer-bg');
+            } else if (state === 'success') {
+                iconHTML = '<i class="fas fa-check-circle text-emerald-500 text-xs"></i>';
+                inner.classList.remove('capsule-shimmer-bg');
+            } else if (state === 'error') {
+                iconHTML = '<i class="fas fa-exclamation-circle text-rose-500 text-xs"></i>';
+                inner.classList.remove('capsule-shimmer-bg');
+            } else {
+                inner.classList.remove('capsule-shimmer-bg');
+            }
+
+            iconEl.innerHTML = iconHTML;
+            textEl.innerText = message;
+
+            // Animate width smoothly
+            capsule.style.width = 'auto';
+            const targetWidth = capsule.scrollWidth;
+            capsule.style.width = `${startWidth}px`;
+            void capsule.offsetWidth; // Force reflow
+            capsule.style.width = `${targetWidth}px`;
+
+            capsule.classList.add('capsule-active');
+
+            if (state === 'success' || state === 'error' || state === 'info') {
+                capsuleHideTimeout = setTimeout(() => {
+                    capsule.classList.remove('capsule-active');
+                    inner.classList.remove('capsule-shimmer-bg');
+                }, 2500);
+            }
+        }
+
         function showToast(message, type = 'info') {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
-
-            const iconMap = {
-                success: '<i class="fas fa-check-circle text-emerald-500 text-base"></i>',
-                error: '<i class="fas fa-exclamation-circle text-rose-500 text-base"></i>',
-                info: '<i class="fas fa-info-circle text-blue-500 text-base"></i>'
-            };
-
-            const toast = document.createElement('div');
-            toast.className = "pointer-events-auto real-glass bg-white/90 px-4 py-3 rounded-2xl shadow-lg border border-slate-200/90 flex items-center gap-3 text-xs sm:text-sm font-bold text-slate-800 fade-in";
-            toast.innerHTML = `${iconMap[type] || iconMap.info}<span>${message}</span>`;
-
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateY(8px)';
-                toast.style.transition = 'all 0.25s ease';
-                setTimeout(() => toast.remove(), 250);
-            }, 3200);
+            const capsuleState = type === 'error' ? 'error' : type === 'success' ? 'success' : 'info';
+            triggerCapsule(capsuleState, message);
         }
 
         // --- Data Catalog & Flat Autocomplete Index ---
         let rawJsonData = null;
-        let flatSubjectIndex = []; // [{ course_code, subject_name, scheme }]
+        let flatSubjectIndex = [];
         const PROFILE_STORAGE_KEY = 'ktu_pyq_browse_profile_v1';
         const RECENT_SEARCH_KEY = 'ktu_pyq_recent_searches_v1';
 
@@ -472,10 +635,13 @@
             if (schemeSel) schemeSel.innerHTML = '<option value="" disabled selected>Loading subjects...</option>';
             
             try {
-                const response = await fetch('ktu_subjects_no_lab.json');
-                if (!response.ok) throw new Error("Failed to fetch catalog");
-                
-                rawJsonData = await response.json();
+                if (window.KTUFlow && typeof window.KTUFlow.getCatalog === 'function') {
+                    rawJsonData = await window.KTUFlow.getCatalog('ktu_subjects_no_lab.json');
+                } else {
+                    const response = await fetch('ktu_subjects_no_lab.json');
+                    if (!response.ok) throw new Error("Failed to fetch catalog");
+                    rawJsonData = await response.json();
+                }
                 buildFlatSubjectIndex();
                 return true;
             } catch (error) {
@@ -522,6 +688,7 @@
                 subject: document.getElementById('sel-subject').value
             };
             localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
+            if (window.KTUFlow) window.KTUFlow.setProfile(profile);
             updateResetProfileBtn();
         }
 
@@ -555,7 +722,6 @@
                 schemeSel.add(new Option(`${year} Scheme`, year));
             });
 
-            // Restore from localStorage if available
             try {
                 const saved = JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY) || 'null');
                 if (saved && saved.scheme && rawJsonData.catalog[saved.scheme]) {
@@ -573,9 +739,7 @@
                         }
                     }
                 }
-            } catch (e) {
-                console.warn("Could not restore browse profile", e);
-            }
+            } catch (e) {}
             updateResetProfileBtn();
         }
 
@@ -678,7 +842,7 @@
 
             wrap.classList.remove('hidden');
             container.innerHTML = list.map(code => `
-                <button onclick="quickSearch('${code.replace(/'/g, "\'")}')" class="px-3 py-1 real-glass rounded-lg text-xs font-bold font-mono-code text-blue-700 bg-blue-50/60 hover:bg-blue-100 border border-blue-200/80 transition-all active:scale-95 flex items-center gap-1.5">
+                <button onclick="quickSearch('${code.replace(/'/g, "\\'")}')" class="px-3 py-1 real-glass rounded-lg text-xs font-bold font-mono-code text-blue-700 bg-blue-50/60 hover:bg-blue-100 border border-blue-200/80 transition-all active:scale-95 flex items-center gap-1.5">
                     <i class="fas fa-history text-[10px] text-blue-400"></i> ${code}
                 </button>
             `).join('');
@@ -724,12 +888,12 @@
             }
 
             autocompleteDropdown.innerHTML = matches.map(item => `
-                <button type="button" onclick="selectAutocomplete('${item.course_code}')" class="w-full text-left px-4 py-2.5 hover:bg-blue-50/90 transition-colors flex items-center justify-between gap-2">
+                <button type="button" onclick="selectAutocomplete('${item.course_code}')" class="w-full text-left px-4 py-2.5 hover:bg-blue-50/90 dark:hover:bg-slate-800/80 transition-colors flex items-center justify-between gap-2">
                     <div class="truncate">
                         <span class="font-mono-code font-bold text-xs sm:text-sm text-blue-600 mr-2">${item.course_code}</span>
                         <span class="text-xs sm:text-sm font-semibold text-slate-700">${item.subject_name}</span>
                     </div>
-                    <span class="shrink-0 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">${item.scheme} Scheme</span>
+                    <span class="shrink-0 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 border border-slate-200 dark:border-slate-700">${item.scheme} Scheme</span>
                 </button>
             `).join('');
             autocompleteDropdown.classList.remove('hidden');
@@ -778,8 +942,8 @@
             const btnSearch = document.getElementById('tab-search');
             const btnBrowse = document.getElementById('tab-browse');
 
-            const activeClass = "px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold transition-all bg-white text-blue-600 shadow-sm border border-slate-200";
-            const inactiveClass = "px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-bold transition-all text-slate-500 hover:text-slate-800 hover:bg-white/40 border border-transparent";
+            const activeClass = "px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white text-blue-600 shadow-sm border border-slate-200 whitespace-nowrap flex items-center justify-center gap-1.5";
+            const inactiveClass = "px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-500 hover:text-slate-800 hover:bg-white/40 border border-transparent whitespace-nowrap flex items-center justify-center gap-1.5";
 
             if (tabId === 'search') {
                 searchView.classList.remove('hidden');
@@ -794,7 +958,6 @@
                 btnBrowse.className = activeClass;
                 btnSearch.className = inactiveClass;
 
-                // Reset card 3D tilt so dropdowns are rock-steady
                 const glassCard = document.getElementById('search-card');
                 if (glassCard) glassCard.style.transform = 'none';
                 
@@ -810,7 +973,7 @@
         function executeBrowseSearch() {
             const selectedCode = document.getElementById('sel-subject').value;
             if (!selectedCode) {
-                showToast("Please select your Scheme, Branch, Semester, and Subject first.", "error");
+                showToast("Please select a subject first", "error");
                 return;
             }
             document.getElementById('searchInput').value = selectedCode;
@@ -881,7 +1044,6 @@
             const query = document.getElementById('searchInput').value.trim().toUpperCase();
             if (!query) return;
 
-            // Update URL for WhatsApp Deep-Linking
             const newUrl = `${window.location.pathname}?q=${encodeURIComponent(query)}`;
             window.history.replaceState({ path: newUrl }, '', newUrl);
             addRecentSearch(query);
@@ -893,12 +1055,16 @@
             const schemeFilters = document.getElementById('scheme-filters');
 
             selectedHandles.clear();
+            updateFloatingDockState();
+
             resultsArea.classList.remove('hidden');
             resultsArea.classList.add('flex');
             loader.classList.remove('hidden');
             loader.classList.add('flex');
             grid.innerHTML = '';
             header.classList.add('hidden');
+
+            triggerCapsule('loading', `Searching ${query} papers...`);
 
             try {
                 const response = await fetch(`${API_URL}/search?q=${encodeURIComponent(query)}`);
@@ -917,12 +1083,14 @@
                 header.classList.remove('hidden');
                 
                 renderGrid(query);
+                triggerCapsule('success', `Found ${currentSearchData.length} ${currentSearchData.length === 1 ? 'paper' : 'papers'} for ${query}`);
                 setTimeout(() => { header.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
 
             } catch (error) {
                 console.error(error);
                 loader.classList.remove('flex');
                 loader.classList.add('hidden');
+                triggerCapsule('error', 'Could not fetch question papers');
                 grid.innerHTML = `
                     <div class="col-span-full py-8 px-4 text-center text-rose-600 bg-rose-50/90 border border-rose-200 rounded-[1.5rem]">
                         <i class="fas fa-exclamation-triangle text-lg mb-2"></i>
@@ -950,7 +1118,20 @@
             const checkboxEl = document.getElementById(`chk-${cardId}`);
             if (cardEl) cardEl.classList.toggle('selected-card', selectedHandles.has(handle));
             if (checkboxEl) checkboxEl.checked = selectedHandles.has(handle);
-            updateMergeButtonState();
+            updateFloatingDockState();
+        }
+
+        function toggleSelectAllPapers() {
+            const filtered = getFilteredPapers();
+            if (!filtered.length) return;
+
+            if (selectedHandles.size === filtered.length) {
+                selectedHandles.clear();
+            } else {
+                filtered.forEach(p => selectedHandles.add(p.handle));
+            }
+            const query = document.getElementById('searchInput').value.trim().toUpperCase();
+            renderGrid(query);
         }
 
         function clearSelectedPapers() {
@@ -959,27 +1140,35 @@
             renderGrid(query);
         }
 
-        function updateMergeButtonState() {
-            const label = document.getElementById('merge-btn-label');
-            const clearBtn = document.getElementById('clear-selection-btn');
-            const mergeBtn = document.getElementById('btn-merge-download');
+        function updateFloatingDockState() {
+            const dock = document.getElementById('floating-merge-dock');
+            const badge = document.getElementById('dock-count-badge');
+            const titleText = document.getElementById('dock-title-text');
+            const btnLabel = document.getElementById('floating-merge-label');
+            const topSelectAllLabel = document.getElementById('select-all-label');
+            const dockSelectAllBtn = document.getElementById('dock-select-all-btn');
             const filtered = getFilteredPapers();
+            const count = selectedHandles.size;
 
-            if (!label || !mergeBtn) return;
+            const allSelected = filtered.length > 0 && count === filtered.length;
+            if (topSelectAllLabel) topSelectAllLabel.innerText = allSelected ? 'Deselect All' : 'Select All';
+            if (dockSelectAllBtn) dockSelectAllBtn.innerText = allSelected ? 'Deselect All' : `Select All (${filtered.length})`;
 
-            if (filtered.length === 0) {
-                mergeBtn.classList.add('hidden');
-                return;
+            if (!dock) return;
+
+            if (count > 0) {
+                badge.innerText = count;
+                titleText.innerText = count === 1 ? '1 Paper Selected' : `${count} Papers Selected`;
+                btnLabel.innerText = count === 1 ? 'Download Selected PDF' : `Merge & Download (${count})`;
+                dock.classList.add('dock-active');
+                if (window.KTUFlow && typeof window.KTUFlow.setBottomDockActive === 'function') {
+                    window.KTUFlow.setBottomDockActive(true);
+                }
             } else {
-                mergeBtn.classList.remove('hidden');
-            }
-
-            if (selectedHandles.size > 0) {
-                label.innerText = `Merge Selected (${selectedHandles.size}) PDFs`;
-                if (clearBtn) clearBtn.classList.remove('hidden');
-            } else {
-                label.innerText = `Merge All (${filtered.length}) PDFs`;
-                if (clearBtn) clearBtn.classList.add('hidden');
+                dock.classList.remove('dock-active');
+                if (window.KTUFlow && typeof window.KTUFlow.setBottomDockActive === 'function') {
+                    window.KTUFlow.setBottomDockActive(false);
+                }
             }
         }
 
@@ -991,7 +1180,7 @@
             
             document.getElementById('search-term-display').innerText = query;
             document.getElementById('result-count').innerText = `${filteredData.length} ${filteredData.length === 1 ? 'paper' : 'papers'} found`;
-            updateMergeButtonState();
+            updateFloatingDockState();
 
             if (filteredData.length === 0) {
                 grid.innerHTML = `
@@ -1013,17 +1202,17 @@
 
                 const cardId = `paper-card-${idx}`;
                 const isSelected = selectedHandles.has(paper.handle);
-                const safeCode = (paper.course_code || query || 'KTU').replace(/'/g, "\'");
-                const safeSession = (paper.exam_session || 'KTU').replace(/'/g, "\'");
-                const safeTitle = (paper.title || 'Question Paper').replace(/'/g, "\'");
+                const safeCode = (paper.course_code || query || 'KTU').replace(/'/g, "\\'");
+                const safeSession = (paper.exam_session || 'KTU').replace(/'/g, "\\'");
+                const safeTitle = (paper.title || 'Question Paper').replace(/'/g, "\\'");
 
                 grid.innerHTML += `
                     <div id="${cardId}" class="result-glass ${isSelected ? 'selected-card' : ''} rounded-[1.4rem] sm:rounded-[1.6rem] p-4 sm:p-5 flex flex-col justify-between h-full group">
                         <div>
                             <div class="flex justify-between items-start mb-2.5 gap-2">
                                 <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                                    <label class="inline-flex items-center cursor-pointer mr-0.5" title="Select paper for merged PDF">
-                                        <input type="checkbox" id="chk-${cardId}" ${isSelected ? 'checked' : ''} onchange="toggleSelectPaper('${paper.handle}', '${cardId}')" class="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer">
+                                    <label class="inline-flex items-center cursor-pointer mr-0.5" title="Tick to select for merge">
+                                        <input type="checkbox" id="chk-${cardId}" ${isSelected ? 'checked' : ''} onchange="toggleSelectPaper('${paper.handle}', '${cardId}')" class="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer transition-transform active:scale-90">
                                     </label>
                                     <span class="inline-block px-2.5 py-0.5 bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-bold font-mono-code rounded-md">${paper.course_code || query}</span>
                                     ${schemeBadge}
@@ -1032,7 +1221,7 @@
                                     <i class="far fa-calendar-alt text-slate-400 mr-0.5"></i> ${paper.exam_session || 'University Exam'}
                                 </span>
                             </div>
-                            <h3 onclick="toggleSelectPaper('${paper.handle}', '${cardId}')" class="text-xs sm:text-sm font-bold text-slate-800 leading-snug mb-4 line-clamp-2 cursor-pointer" title="${paper.title}">${paper.title}</h3>
+                            <h3 onclick="toggleSelectPaper('${paper.handle}', '${cardId}')" class="text-xs sm:text-sm font-bold text-slate-800 leading-snug mb-4 line-clamp-2 cursor-pointer select-none" title="${paper.title}">${paper.title}</h3>
                         </div>
 
                         <div class="flex items-center gap-2">
@@ -1056,6 +1245,8 @@
             btnElement.disabled = true;
             btnElement.classList.add('bg-blue-50', 'text-blue-600', 'border-blue-200', 'cursor-not-allowed');
 
+            triggerCapsule('loading', `Building ${courseCode} (${examSession}) PDF...`);
+
             try {
                 const response = await fetch(`${API_URL}/download`, {
                     method: "POST",
@@ -1075,35 +1266,30 @@
                 a.remove();
                 
                 btnElement.innerHTML = `<i class="fas fa-check text-emerald-600"></i> Saved!`;
-                showToast(`Downloaded ${fileName}`, "success");
+                triggerCapsule('success', `Saved ${courseCode} (${examSession}) PDF!`);
                 setTimeout(() => {
                     btnElement.innerHTML = originalHTML;
                     btnElement.disabled = false;
                     btnElement.classList.remove('bg-blue-50', 'text-blue-600', 'border-blue-200', 'cursor-not-allowed');
                 }, 2000);
             } catch (error) {
-                showToast("Download failed. The university storage server might be busy.", "error");
+                triggerCapsule('error', 'Download failed. Server busy.');
                 btnElement.innerHTML = originalHTML;
                 btnElement.disabled = false;
                 btnElement.classList.remove('bg-blue-50', 'text-blue-600', 'border-blue-200', 'cursor-not-allowed');
             }
         }
 
-        // --- Bulk Merge & Download All / Selected PDFs ---
+        // --- Floating Bar Merge & Download Selected PDFs ---
         async function downloadMergedPapers(btnElement) {
-            const filtered = getFilteredPapers();
-            const handlesToMerge = selectedHandles.size > 0 
-                ? Array.from(selectedHandles) 
-                : filtered.map(p => p.handle);
-
-            if (handlesToMerge.length === 0) {
-                showToast("No question papers available to merge.", "error");
-                return;
-            }
+            const handlesToMerge = Array.from(selectedHandles);
+            if (handlesToMerge.length === 0) return;
 
             const originalHTML = btnElement.innerHTML;
-            btnElement.innerHTML = `<i class="fas fa-spinner fa-spin text-xs"></i> Merging ${handlesToMerge.length} PDFs...`;
+            btnElement.innerHTML = `<i class="fas fa-circle-notch fa-spin text-xs"></i> <span>Merging ${handlesToMerge.length}...</span>`;
             btnElement.disabled = true;
+
+            triggerCapsule('loading', handlesToMerge.length === 1 ? 'Preparing selected PDF...' : `Merging ${handlesToMerge.length} question papers into 1 PDF...`);
 
             try {
                 const response = await fetch(`${API_URL}/download`, {
@@ -1116,7 +1302,9 @@
 
                 const blob = await response.blob();
                 const query = document.getElementById('searchInput').value.trim().toUpperCase() || 'KTU';
-                const fileName = `KTU_PYQ_${query.replace(/\s+/g, '_')}_MERGED_${handlesToMerge.length}_PAPERS.pdf`;
+                const fileName = handlesToMerge.length === 1
+                    ? `KTU_PYQ_${query.replace(/\s+/g, '_')}_PAPER.pdf`
+                    : `KTU_PYQ_${query.replace(/\s+/g, '_')}_MERGED_${handlesToMerge.length}_PAPERS.pdf`;
 
                 const a = document.createElement("a");
                 a.href = window.URL.createObjectURL(blob);
@@ -1125,14 +1313,14 @@
                 a.click();
                 a.remove();
 
-                showToast(`Merged ${handlesToMerge.length} papers into a single PDF!`, "success");
+                triggerCapsule('success', handlesToMerge.length === 1 ? 'PDF Downloaded!' : `Merged ${handlesToMerge.length} papers into 1 PDF!`);
             } catch (error) {
                 console.error(error);
-                showToast("Could not merge PDFs right now. Try selecting fewer papers.", "error");
+                triggerCapsule('error', 'Could not merge PDFs right now');
             } finally {
                 btnElement.innerHTML = originalHTML;
                 btnElement.disabled = false;
-                updateMergeButtonState();
+                updateFloatingDockState();
             }
         }
 
@@ -1142,6 +1330,8 @@
             const originalHTML = btnElement.innerHTML;
             btnElement.innerHTML = `<i class="fas fa-spinner fa-spin text-xs"></i>`;
             btnElement.disabled = true;
+
+            triggerCapsule('loading', `Opening ${courseCode} preview...`);
 
             try {
                 const response = await fetch(`${API_URL}/download`, {
@@ -1168,8 +1358,9 @@
                 const modal = document.getElementById('pdf-preview-modal');
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
+                triggerCapsule('hide');
             } catch (error) {
-                showToast("Unable to load preview. Please use Download PDF instead.", "error");
+                triggerCapsule('error', 'Preview unavailable. Use Download PDF.');
             } finally {
                 btnElement.innerHTML = originalHTML;
                 btnElement.disabled = false;
@@ -1197,7 +1388,7 @@
                 }).catch(() => {});
             } else if (navigator.clipboard) {
                 navigator.clipboard.writeText(shareUrl).then(() => {
-                    showToast("Direct link copied to clipboard!", "success");
+                    triggerCapsule('success', 'Direct link copied to clipboard!');
                 });
             }
         }
@@ -1237,7 +1428,6 @@
             if (mouseOrb1) mouseOrb1.style.transform = `translate(${x * -25}px, ${y * -25}px)`;
             if (mouseOrb2) mouseOrb2.style.transform = `translate(${x * 35}px, ${y * 35}px)`;
             
-            // Disable 3D card tilt when browsing dropdowns or when an input/select is focused
             const isFormFocused = ['INPUT', 'SELECT'].includes(document.activeElement?.tagName);
             const glassCard = document.getElementById('search-card');
             if (glassCard && window.innerWidth > 768 && currentActiveTab === 'search' && !isFormFocused) {
