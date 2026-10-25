@@ -122,40 +122,46 @@
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.65);
         }
 
-        /* ==================== COLOROS LIVE CAPSULE ==================== */
+        /* ==================== COLOROS DOT-TO-CAPSULE ENGINE ==================== */
         #coloros-live-capsule {
             position: fixed;
-            top: 4.65rem;
+            top: 5.4rem; /* Safe breathing gap below the sticky header */
             left: 50%;
             z-index: 65;
-            transform: translate3d(-50%, -26px, 0) scale(0.82);
+            height: 38px;
+            width: 38px;
+            border-radius: 9999px;
+            transform: translate3d(-50%, 0, 0) scale(0);
             opacity: 0;
             pointer-events: none;
-            background: rgba(255, 255, 255, 0.86);
+            overflow: hidden;
+            background: rgba(11, 15, 25, 0.94);
             backdrop-filter: blur(28px) saturate(200%);
             -webkit-backdrop-filter: blur(28px) saturate(200%);
-            border: 1px solid rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #ffffff;
             box-shadow: 
-                0 16px 36px -8px rgba(31, 38, 135, 0.18),
-                0 4px 12px -2px rgba(37, 99, 235, 0.1),
-                inset 0 1px 0 0 rgba(255, 255, 255, 1);
+                0 18px 40px -8px rgba(0, 0, 0, 0.45),
+                0 4px 14px -2px rgba(37, 99, 235, 0.22),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
             transition: 
-                transform 0.48s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
-                width 0.38s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: transform, opacity, width;
+                width 0.44s cubic-bezier(0.18, 1.12, 0.32, 1),
+                transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.2s ease;
+            will-change: width, transform, opacity;
         }
-        #coloros-live-capsule.capsule-active {
+        #coloros-live-capsule.capsule-dot {
             transform: translate3d(-50%, 0, 0) scale(1);
             opacity: 1;
         }
-        html.dark #coloros-live-capsule {
-            background: rgba(15, 23, 42, 0.86);
-            border-color: rgba(255, 255, 255, 0.16);
-            color: #f8fafc;
-            box-shadow: 
-                0 18px 40px -8px rgba(0, 0, 0, 0.7),
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+        #capsule-text {
+            opacity: 0;
+            transform: scale(0.94);
+            transition: opacity 0.22s ease 0.08s, transform 0.26s ease 0.08s;
+        }
+        #coloros-live-capsule.capsule-expanded #capsule-text {
+            opacity: 1;
+            transform: scale(1);
         }
 
         @keyframes capsule-shimmer {
@@ -166,19 +172,11 @@
             background-image: linear-gradient(
                 90deg,
                 transparent 0%,
-                rgba(59, 130, 246, 0.14) 50%,
+                rgba(96, 165, 250, 0.22) 50%,
                 transparent 100%
             );
             background-size: 200% 100%;
             animation: capsule-shimmer 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        html.dark .capsule-shimmer-bg {
-            background-image: linear-gradient(
-                90deg,
-                transparent 0%,
-                rgba(96, 165, 250, 0.2) 50%,
-                transparent 100%
-            );
         }
 
         /* ==================== BOTTOM FLOATING MERGE DOCK ==================== */
@@ -256,11 +254,11 @@
     <!-- Global Header Container -->
     <div id="navigation-container" class="z-50 sticky top-0"></div>
 
-    <!-- ColorOS Elastic Live Capsule (Auto-morphs width & slides smoothly) -->
-    <div id="coloros-live-capsule" class="rounded-full overflow-hidden">
-        <div id="capsule-inner" class="px-4 py-2 flex items-center justify-center gap-2.5 whitespace-nowrap text-xs font-extrabold text-slate-800 dark:text-slate-100">
+    <!-- ColorOS Dot-to-Capsule (Starts as dot, expands bilaterally) -->
+    <div id="coloros-live-capsule">
+        <div id="capsule-inner" class="h-full px-3.5 flex items-center justify-center gap-2.5 whitespace-nowrap text-xs font-extrabold text-white">
             <span id="capsule-icon" class="flex items-center justify-center shrink-0"></span>
-            <span id="capsule-text" class="tracking-tight"></span>
+            <span id="capsule-text" class="tracking-tight text-white"></span>
         </div>
     </div>
 
@@ -277,7 +275,7 @@
     <!-- MAIN BODY -->
     <main class="flex-grow w-full max-w-5xl mx-auto px-3.5 sm:px-6 pt-7 sm:pt-11 md:pt-14 pb-24 relative z-10 flex flex-col items-center">
         
-        <!-- Hero Header (Clean, Zero Dramatic Copy) -->
+        <!-- Hero Header -->
         <div class="text-center mb-6 sm:mb-8 max-w-3xl mx-auto">
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-3">
                 KTU Previous Year Question Papers <br class="hidden sm:inline">
@@ -392,7 +390,7 @@
 
         <!-- Trending & Recent Quick Searches -->
         <div id="quick-chips-container" class="w-full max-w-2xl text-center mb-6 transition-opacity duration-300 z-20">
-            <!-- Recent Searches (Populated dynamically from localStorage) -->
+            <!-- Recent Searches -->
             <div id="recent-searches-wrap" class="hidden mb-4">
                 <div class="flex items-center justify-center gap-2 mb-2">
                     <p class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest">Recent Searches</p>
@@ -492,7 +490,7 @@
 
     </main>
 
-    <!-- ==================== FLOATING BOTTOM MERGE BAR (Appears when >= 1 paper ticked) ==================== -->
+    <!-- ==================== FLOATING BOTTOM MERGE DOCK (Appears when >= 1 paper ticked) ==================== -->
     <div id="floating-merge-dock" class="rounded-[1.75rem] p-2.5 sm:p-3 flex items-center justify-between gap-2.5">
         <div class="flex items-center gap-2.5 pl-1.5">
             <span id="dock-count-badge" class="w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-black flex items-center justify-center shadow-sm shrink-0">
@@ -563,8 +561,11 @@
         }
         initNav();
 
-        // --- ColorOS Elastic Live Capsule Controller ---
+        // --- ColorOS Dot-to-Sides Live Capsule Controller ---
         let capsuleHideTimeout = null;
+        let capsuleExpandTimeout = null;
+        let capsuleCollapseTimeout = null;
+
         function triggerCapsule(state, message) {
             const capsule = document.getElementById('coloros-live-capsule');
             const inner = document.getElementById('capsule-inner');
@@ -573,47 +574,66 @@
             if (!capsule || !inner || !iconEl || !textEl) return;
 
             clearTimeout(capsuleHideTimeout);
+            clearTimeout(capsuleExpandTimeout);
+            clearTimeout(capsuleCollapseTimeout);
 
             if (state === 'hide' || state === 'idle') {
-                capsule.classList.remove('capsule-active');
+                capsule.classList.remove('capsule-expanded');
                 inner.classList.remove('capsule-shimmer-bg');
+                capsule.style.width = '38px';
+                capsuleCollapseTimeout = setTimeout(() => {
+                    capsule.classList.remove('capsule-dot');
+                }, 320);
                 return;
             }
 
-            // Measure current width before content update for smooth elastic width transition
-            const startWidth = capsule.classList.contains('capsule-active') ? capsule.offsetWidth : 120;
-
-            let iconHTML = '<span class="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>';
+            let iconHTML = '<span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>';
             if (state === 'loading') {
-                iconHTML = '<i class="fas fa-circle-notch fa-spin text-blue-600 dark:text-blue-400 text-xs"></i>';
+                iconHTML = '<i class="fas fa-circle-notch fa-spin text-sky-400 text-xs"></i>';
                 inner.classList.add('capsule-shimmer-bg');
             } else if (state === 'success') {
-                iconHTML = '<i class="fas fa-check-circle text-emerald-500 text-xs"></i>';
+                iconHTML = '<i class="fas fa-check-circle text-emerald-400 text-xs"></i>';
                 inner.classList.remove('capsule-shimmer-bg');
             } else if (state === 'error') {
-                iconHTML = '<i class="fas fa-exclamation-circle text-rose-500 text-xs"></i>';
+                iconHTML = '<i class="fas fa-exclamation-circle text-rose-400 text-xs"></i>';
                 inner.classList.remove('capsule-shimmer-bg');
             } else {
                 inner.classList.remove('capsule-shimmer-bg');
             }
 
-            iconEl.innerHTML = iconHTML;
+            const isAlreadyOpen = capsule.classList.contains('capsule-expanded');
+
             textEl.innerText = message;
-
-            // Animate width smoothly
+            iconEl.innerHTML = iconHTML;
+            const prevWidth = capsule.style.width;
             capsule.style.width = 'auto';
-            const targetWidth = capsule.scrollWidth;
-            capsule.style.width = `${startWidth}px`;
-            void capsule.offsetWidth; // Force reflow
-            capsule.style.width = `${targetWidth}px`;
+            const targetWidth = Math.max(capsule.scrollWidth + 6, 140);
 
-            capsule.classList.add('capsule-active');
+            if (!isAlreadyOpen) {
+                // STAGE 1: Pop in as 38px center dot
+                capsule.style.width = '38px';
+                textEl.classList.add('hidden');
+                void capsule.offsetWidth;
+                capsule.classList.add('capsule-dot');
+
+                // STAGE 2: Expand bilaterally
+                capsuleExpandTimeout = setTimeout(() => {
+                    textEl.classList.remove('hidden');
+                    void capsule.offsetWidth;
+                    capsule.style.width = `${targetWidth}px`;
+                    capsule.classList.add('capsule-expanded');
+                }, 130);
+            } else {
+                textEl.classList.remove('hidden');
+                capsule.style.width = prevWidth;
+                void capsule.offsetWidth;
+                capsule.style.width = `${targetWidth}px`;
+            }
 
             if (state === 'success' || state === 'error' || state === 'info') {
                 capsuleHideTimeout = setTimeout(() => {
-                    capsule.classList.remove('capsule-active');
-                    inner.classList.remove('capsule-shimmer-bg');
-                }, 2500);
+                    triggerCapsule('hide');
+                }, 2400);
             }
         }
 
