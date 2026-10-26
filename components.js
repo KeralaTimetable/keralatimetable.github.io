@@ -25,9 +25,9 @@ window.KTUFlow = (function() {
         }
         if (capsule && !capsule.querySelector('#capsule-actions')) {
             capsule.innerHTML = `
-                <div id="capsule-inner" class="h-full px-3 flex items-center justify-between gap-2 whitespace-nowrap text-xs font-extrabold text-white overflow-hidden">
+                <div id="capsule-inner" class="h-full px-3 flex items-center justify-center gap-2 whitespace-nowrap text-xs font-extrabold text-white overflow-hidden">
                     <span id="capsule-icon" class="flex items-center justify-center shrink-0 z-10"></span>
-                    <div id="capsule-text-viewport" class="overflow-hidden flex-1 flex items-center min-w-0">
+                    <div id="capsule-text-viewport" class="hidden overflow-hidden flex-1 flex items-center min-w-0">
                         <span id="capsule-text" class="tracking-tight text-white inline-block whitespace-nowrap"></span>
                     </div>
                     <div id="capsule-actions" class="hidden items-center gap-1.5 shrink-0 pl-1.5 z-10">
@@ -43,6 +43,40 @@ window.KTUFlow = (function() {
             `;
         }
         return capsule;
+    }
+
+    // Small center circle shown inside the 38px black circle during incoming/outgoing dot stages
+    function getDotStageIcon(state) {
+        if (state === 'alert' || state === 'error') {
+            return '<span class="w-3 h-3 rounded-full bg-rose-500 shadow-[0_0_10px_#f43f5e] animate-pulse"></span>';
+        }
+        if (state === 'success') {
+            return '<span class="w-3 h-3 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]"></span>';
+        }
+        if (state === 'amber') {
+            return '<span class="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_10px_#fbbf24]"></span>';
+        }
+        return '<span class="w-3 h-3 rounded-full bg-sky-400 shadow-[0_0_10px_#38bdf8] animate-pulse"></span>';
+    }
+
+    // Full icon/badge shown only AFTER the black circle starts expanding bilaterally
+    function getExpandedStageIcon(state) {
+        if (state === 'loading') {
+            return '<i class="fas fa-circle-notch fa-spin text-sky-400 text-xs"></i>';
+        }
+        if (state === 'success') {
+            return '<i class="fas fa-check-circle text-emerald-400 text-xs"></i>';
+        }
+        if (state === 'error') {
+            return '<i class="fas fa-exclamation-circle text-rose-400 text-xs"></i>';
+        }
+        if (state === 'amber') {
+            return '<span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>';
+        }
+        if (state === 'alert') {
+            return '<span class="px-1.5 py-0.5 rounded-full bg-rose-500 text-[9px] font-black uppercase tracking-wider text-white flex items-center gap-1 shadow-sm"><span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>ALERT:</span>';
+        }
+        return '<span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>';
     }
 
     const engine = {
@@ -171,29 +205,38 @@ window.KTUFlow = (function() {
             const actionsEl = capsule.querySelector('#capsule-actions');
             const openBtn = capsule.querySelector('#capsule-open-btn');
             const closeBtn = capsule.querySelector('#capsule-close-btn');
-            if (!inner || !iconEl || !textEl) return;
+            if (!inner || !iconEl || !textEl || !viewportEl) return;
 
             clearTimeout(capsuleHideTimeout);
             clearTimeout(capsuleExpandTimeout);
             clearTimeout(capsuleCollapseTimeout);
 
-            // STAGE 3: Retract both sides into 38px center dot, then scale down
+            // STAGE 3 (GOING ANIMATION):
+            // First swap badge back to small center circle & hide text, retract both sides into 38px black circle, then scale down
             if (state === 'hide' || state === 'idle') {
+                const lastState = capsule.getAttribute('data-last-state') || 'alert';
                 capsule.classList.remove('capsule-expanded', 'capsule-paused');
                 inner.classList.remove('capsule-shimmer-bg');
                 textEl.classList.remove('capsule-marquee-active');
-                if (viewportEl) viewportEl.classList.remove('capsule-viewport-mask');
+                viewportEl.classList.remove('capsule-viewport-mask');
+                viewportEl.classList.add('hidden');
                 if (actionsEl) {
                     actionsEl.classList.add('hidden');
                     actionsEl.classList.remove('flex');
                 }
+                // Show only the small glowing circle inside the shrinking black circle!
+                iconEl.innerHTML = getDotStageIcon(lastState);
                 capsule.style.pointerEvents = 'none';
                 capsule.style.width = '38px';
+
+                // Wait for sides to retract into the 38px circle (550ms), hold the circle briefly, then scale down
                 capsuleCollapseTimeout = setTimeout(() => {
                     capsule.classList.remove('capsule-dot');
-                }, 320);
+                }, 620);
                 return;
             }
+
+            capsule.setAttribute('data-last-state', state);
 
             // Reset interactive state before new message
             capsule.classList.remove('capsule-paused');
@@ -204,22 +247,8 @@ window.KTUFlow = (function() {
             capsule.onpointerdown = null;
             capsule.onclick = null;
 
-            let iconHTML = '<span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>';
             if (state === 'loading') {
-                iconHTML = '<i class="fas fa-circle-notch fa-spin text-sky-400 text-xs"></i>';
                 inner.classList.add('capsule-shimmer-bg');
-            } else if (state === 'success') {
-                iconHTML = '<i class="fas fa-check-circle text-emerald-400 text-xs"></i>';
-                inner.classList.remove('capsule-shimmer-bg');
-            } else if (state === 'error') {
-                iconHTML = '<i class="fas fa-exclamation-circle text-rose-400 text-xs"></i>';
-                inner.classList.remove('capsule-shimmer-bg');
-            } else if (state === 'amber') {
-                iconHTML = '<span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>';
-                inner.classList.remove('capsule-shimmer-bg');
-            } else if (state === 'alert') {
-                iconHTML = '<span class="px-1.5 py-0.5 rounded-full bg-rose-500 text-[9px] font-black uppercase tracking-wider text-white flex items-center gap-1 shadow-sm"><span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>ALERT:</span>';
-                inner.classList.remove('capsule-shimmer-bg');
             } else {
                 inner.classList.remove('capsule-shimmer-bg');
             }
@@ -230,38 +259,34 @@ window.KTUFlow = (function() {
             textEl.classList.remove('capsule-marquee-active');
             textEl.style.removeProperty('--marquee-distance');
             textEl.style.removeProperty('--marquee-duration');
-            if (viewportEl) viewportEl.classList.remove('capsule-viewport-mask');
+            viewportEl.classList.remove('capsule-viewport-mask');
 
-            textEl.innerText = message;
-            iconEl.innerHTML = iconHTML;
-
+            // Temporarily set expanded icon & text to measure exact expanded width
             const prevWidth = capsule.style.width;
+            iconEl.innerHTML = getExpandedStageIcon(state);
+            textEl.innerText = message;
+            viewportEl.classList.remove('hidden');
             capsule.style.width = 'auto';
-            textEl.classList.remove('hidden');
 
-            // Max width of capsule before right-to-left running ticker kicks in
             const maxCapsuleWidth = Math.min(window.innerWidth - 24, 340);
-            const naturalWidth = Math.max(capsule.scrollWidth + 8, 140);
-            const targetWidth = state === 'alert' ? Math.min(naturalWidth, 300) : Math.min(naturalWidth, maxCapsuleWidth);
+            const naturalWidth = Math.max(capsule.scrollWidth + 10, 145);
+            const targetWidth = state === 'alert' ? Math.min(naturalWidth, 305) : Math.min(naturalWidth, maxCapsuleWidth);
 
-            // Calculate if text overflows or if state === 'alert' needs running ticker
-            const iconWidth = iconEl.offsetWidth || 54;
+            const iconWidth = iconEl.offsetWidth || 56;
             const availableTextViewport = targetWidth - iconWidth - 28;
             const fullTextWidth = textEl.scrollWidth;
             const overflowPx = fullTextWidth - availableTextViewport;
             const shouldMarquee = state === 'alert' || overflowPx > 4;
 
-            let holdDuration = state === 'alert' ? 5500 : 2400;
+            // Default hold duration: 22 seconds (22000ms) for alerts as requested!
+            let holdDuration = state === 'alert' ? 22000 : 2800;
 
             if (shouldMarquee) {
-                const scrollDist = Math.max(overflowPx + 36, 75);
-                // Smooth ~40px per second reading speed
-                const scrollSeconds = Math.max(4.0, Math.min(scrollDist / 36, 10.0));
+                const scrollDist = Math.max(overflowPx + 42, 80);
+                // Smooth, unhurried reading speed (~32px/sec)
+                const scrollSeconds = Math.max(5.5, Math.min(scrollDist / 30, 11.0));
                 textEl.style.setProperty('--marquee-distance', `-${scrollDist}px`);
                 textEl.style.setProperty('--marquee-duration', `${scrollSeconds.toFixed(2)}s`);
-                if (viewportEl) viewportEl.classList.add('capsule-viewport-mask');
-                // Automatically disappear right after finishing the running text
-                holdDuration = Math.round((scrollSeconds + 1.0) * 1000);
             }
 
             // Interactive Touch / Click Handler for Alert Capsule:
@@ -294,14 +319,14 @@ window.KTUFlow = (function() {
                         }
 
                         // Expand capsule slightly to fit the "Open" button comfortably
-                        const pausedMaxWidth = Math.min(window.innerWidth - 20, 410);
-                        const newWidth = Math.min(targetWidth + 82, pausedMaxWidth);
+                        const pausedMaxWidth = Math.min(window.innerWidth - 20, 415);
+                        const newWidth = Math.min(targetWidth + 84, pausedMaxWidth);
                         capsule.style.width = `${newWidth}px`;
 
-                        // Auto-hide after 10 seconds if user doesn't click Open
+                        // Keep open for 15 more seconds after touch if user doesn't click Open
                         capsuleHideTimeout = setTimeout(() => {
                             this.capsule('hide');
-                        }, 10000);
+                        }, 15000);
                     } else {
                         // If already paused and tapped again, redirect directly to updates.html
                         window.location.href = targetRedirectUrl;
@@ -313,24 +338,35 @@ window.KTUFlow = (function() {
             }
 
             if (!isAlreadyOpen) {
-                // STAGE 1: Pop in as 38px center dot
+                // STAGE 1 (INCOMING DOT):
+                // Hide text and show ONLY the small red circle inside the 38px black circle!
                 capsule.style.width = '38px';
-                textEl.classList.add('hidden');
+                viewportEl.classList.add('hidden');
+                iconEl.innerHTML = getDotStageIcon(state);
                 void capsule.offsetWidth;
                 capsule.classList.add('capsule-dot');
 
-                // STAGE 2: Expand bilaterally from center dot to both sides
+                // Hold as a pure black circle with the small red center circle for 480ms
+                // so the incoming dot animation is clearly visible before expanding!
                 capsuleExpandTimeout = setTimeout(() => {
-                    textEl.classList.remove('hidden');
+                    iconEl.innerHTML = getExpandedStageIcon(state);
+                    viewportEl.classList.remove('hidden');
+                    if (shouldMarquee) {
+                        viewportEl.classList.add('capsule-viewport-mask');
+                    }
                     void capsule.offsetWidth;
                     capsule.style.width = `${targetWidth}px`;
                     capsule.classList.add('capsule-expanded');
                     if (shouldMarquee) {
                         textEl.classList.add('capsule-marquee-active');
                     }
-                }, 130);
+                }, 480);
             } else {
-                textEl.classList.remove('hidden');
+                iconEl.innerHTML = getExpandedStageIcon(state);
+                viewportEl.classList.remove('hidden');
+                if (shouldMarquee) {
+                    viewportEl.classList.add('capsule-viewport-mask');
+                }
                 capsule.style.width = prevWidth;
                 void capsule.offsetWidth;
                 capsule.style.width = `${targetWidth}px`;
@@ -358,7 +394,7 @@ window.KTUFlow = (function() {
             this.capsule(stateMap[type] || 'info', message, actionUrl);
         },
 
-        // 8. Global Live Notice Alert (Appears 12s after EVERY page load/reload for ALL users)
+        // 8. Global Live Notice Alert (Appears 12s after EVERY page load/reload for ALL users, runs for 22s)
         initNoticeWatcher() {
             if (this._noticeWatcherStarted) return;
             this._noticeWatcherStarted = true;
@@ -558,23 +594,24 @@ window.showToast = function(message, type = 'info') {
                 height: 38px;
                 width: 38px;
                 border-radius: 9999px;
-                transform: translate3d(-50%, 0, 0) scale(0);
+                transform: translate3d(-50%, -6px, 0) scale(0);
                 opacity: 0;
                 pointer-events: none;
                 overflow: hidden;
-                background: rgba(11, 15, 25, 0.94) !important;
+                background: rgba(11, 15, 25, 0.95) !important;
                 backdrop-filter: blur(28px) saturate(200%) !important;
                 -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
                 border: 1px solid rgba(255, 255, 255, 0.16) !important;
                 color: #ffffff !important;
                 box-shadow: 
-                    0 18px 40px -8px rgba(0, 0, 0, 0.45),
+                    0 18px 40px -8px rgba(0, 0, 0, 0.5),
                     0 4px 14px -2px rgba(37, 99, 235, 0.22),
                     inset 0 1px 0 0 rgba(255, 255, 255, 0.22) !important;
+                /* Slower, clearly visible dot pop-in (0.46s) and bilateral width expansion (0.68s) */
                 transition: 
-                    width 0.44s cubic-bezier(0.18, 1.12, 0.32, 1),
-                    transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
-                    opacity 0.2s ease;
+                    width 0.68s cubic-bezier(0.16, 1.12, 0.3, 1),
+                    transform 0.46s cubic-bezier(0.22, 1.35, 0.36, 1),
+                    opacity 0.32s ease;
                 will-change: width, transform, opacity;
             }
             #coloros-live-capsule.capsule-dot,
@@ -584,8 +621,8 @@ window.showToast = function(message, type = 'info') {
             }
             #capsule-text {
                 opacity: 0;
-                transform: scale(0.94);
-                transition: opacity 0.22s ease 0.08s, transform 0.26s ease 0.08s;
+                transform: scale(0.95);
+                transition: opacity 0.28s ease 0.14s, transform 0.32s ease 0.14s;
             }
             #coloros-live-capsule.capsule-expanded #capsule-text,
             #ktu-live-capsule.capsule-expanded #capsule-text {
@@ -599,13 +636,13 @@ window.showToast = function(message, type = 'info') {
                 mask-image: linear-gradient(to right, transparent 0%, black 5%, black 93%, transparent 100%);
             }
 
-            /* Right-to-Left Running Text Ticker Animation */
+            /* Right-to-Left Running Text Ticker Animation (Loops smoothly during the 22s window) */
             @keyframes capsuleMarqueeRTL {
-                0%, 12% { transform: translate3d(0, 0, 0); }
-                88%, 100% { transform: translate3d(var(--marquee-distance, -140px), 0, 0); }
+                0%, 10% { transform: translate3d(0, 0, 0); }
+                85%, 100% { transform: translate3d(var(--marquee-distance, -140px), 0, 0); }
             }
             #coloros-live-capsule.capsule-expanded #capsule-text.capsule-marquee-active {
-                animation: capsuleMarqueeRTL var(--marquee-duration, 4.5s) linear 0.4s forwards;
+                animation: capsuleMarqueeRTL var(--marquee-duration, 6.5s) linear 0.55s infinite alternate;
                 will-change: transform;
             }
             /* Freeze running text immediately when user touches/clicks the capsule */
