@@ -70,7 +70,7 @@
             will-change: transform;
         }
         .notice-card:hover {
-            transform: translateY(-3px) scale(1.004);
+            transform: translate3d(0, -3px, 0) scale(1.004);
             background: rgba(255, 255, 255, 0.96);
             border-color: rgba(79, 70, 229, 0.35);
             box-shadow: 
@@ -79,7 +79,7 @@
                 0 4px 12px -2px rgba(15, 23, 42, 0.04);
         }
         .notice-card:active {
-            transform: translateY(-1px) scale(0.995);
+            transform: translate3d(0, -1px, 0) scale(0.995);
         }
 
         .inner-glass {
@@ -157,18 +157,17 @@
         <div id="mouse-orb-2" class="ambient-orb-delayed absolute top-1/3 -right-24 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-emerald-400/20 blur-[95px]"></div>
     </div>
 
-    <!-- Global Header Navigation -->
-    <div id="navigation-container" class="z-50 relative"></div>
+    <!-- Global Sticky Header Navigation -->
+    <div id="navigation-container" class="z-50 sticky top-0"></div>
+
+    <!-- Pre-mounted ColorOS Obsidian Dot-to-Sides Live Capsule -->
+    <div id="coloros-live-capsule"></div>
 
     <!-- MAIN BODY -->
-    <main class="max-w-3xl mx-auto px-3.5 sm:px-6 pt-6 sm:pt-8 pb-16 w-full flex-grow relative z-10">
+    <main class="max-w-3xl mx-auto px-3.5 sm:px-6 pt-8 sm:pt-11 pb-16 w-full flex-grow relative z-10">
         
-        <!-- Compact Hero Header -->
-        <div class="text-center mb-6">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/75 dark:bg-indigo-950/60 backdrop-blur-md border border-indigo-200/80 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-300 text-[10px] sm:text-xs font-extrabold uppercase tracking-wider mb-2.5 shadow-sm">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                <i class="fas fa-bullhorn text-indigo-500"></i> Official Notice Board
-            </div>
+        <!-- Clean Minimalist Hero Header -->
+        <div class="text-center mb-6 sm:mb-7">
             <h1 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug mb-1.5">
                 KTU <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-600">Latest Updates</span>
             </h1>
@@ -405,7 +404,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="components.js"></script>
+    <script src="/components.js?v=16" onerror="this.onerror=null;this.src='components.js';"></script>
     <script src="notices-data.js"></script>
     
     <script type="module">
@@ -486,9 +485,27 @@
                 allNotices.sort((a, b) => new Date(b.date) - new Date(a.date));
                 filterAndRender();
 
+                // Mark latest notice as seen in localStorage so Live Capsule won't repeat it on other pages
+                if (allNotices.length > 0) {
+                    const latest = allNotices[0];
+                    const latestKey = `${latest.id}_${latest.updatedAt || latest.date}`;
+                    localStorage.setItem('ktu_flow_last_seen_notice_v2', latestKey);
+                }
+
                 if (!initialLoadComplete) {
                     initialLoadComplete = true;
-                    window.KTUFlow?.capsule('success', `${allNotices.length} Official Notices Ready`);
+                    const params = new URLSearchParams(window.location.search);
+                    const targetId = params.get('id');
+                    const openLatest = params.get('open');
+
+                    if (targetId) {
+                        const idx = currentRenderedNotices.findIndex(n => n.id === targetId);
+                        if (idx !== -1) setTimeout(() => openNoticeModal(idx), 250);
+                    } else if (openLatest === 'latest' && currentRenderedNotices.length > 0) {
+                        setTimeout(() => openNoticeModal(0), 250);
+                    } else {
+                        window.KTUFlow?.capsule('success', `${allNotices.length} Official Notices Ready`);
+                    }
                 }
             });
         }
@@ -662,16 +679,17 @@
             // Share / Copy Button
             const shareBtn = document.getElementById('modal-share-btn');
             shareBtn.onclick = async () => {
+                const shareUrl = `${window.location.origin}${window.location.pathname}?id=${encodeURIComponent(notice.id)}`;
                 const shareData = {
                     title: notice.title,
                     text: `${notice.title} — KTU Notice on Kerala Timetable`,
-                    url: window.location.href
+                    url: shareUrl
                 };
                 if (navigator.share) {
                     try { await navigator.share(shareData); } catch (e) {}
                 } else {
-                    navigator.clipboard?.writeText(`${notice.title} - ${targetUrl}`);
-                    window.KTUFlow?.toast('Notice link copied to clipboard!', 'success');
+                    navigator.clipboard?.writeText(`${notice.title} - ${shareUrl}`);
+                    window.KTUFlow?.toast('Direct notice link copied!', 'success');
                 }
             };
 
@@ -771,7 +789,8 @@
                     await set(newRef, { ...noticeData, createdAt: new Date().toISOString() });
                 }
                 closeNoticeEditor();
-                window.KTUFlow?.capsule('alert', `Published: ${title.slice(0, 34)}...`);
+                // Preview the full untruncated headline running right-to-left in the Live Capsule
+                window.KTUFlow?.capsule('alert', title);
             } catch (err) {
                 console.error("Error saving notice:", err);
                 window.KTUFlow?.toast("Failed to publish notice", "error");
