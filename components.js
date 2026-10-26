@@ -5,7 +5,6 @@ window.KTUFlow = (function() {
     const PROFILE_KEY = 'ktu_flow_profile_v2';
     const RECENT_KEY = 'ktu_flow_recent_v2';
     const CATALOG_CACHE_KEY = 'ktu_flow_catalog_cache_v2';
-    const SEEN_NOTICE_KEY = 'ktu_flow_last_seen_notice_v2';
     const FIREBASE_NOTICES_URL = 'https://keralatimetable-5e155-default-rtdb.asia-southeast1.firebasedatabase.app/ktu_notices.json';
 
     let memoryCatalog = null;
@@ -241,28 +240,28 @@ window.KTUFlow = (function() {
             textEl.classList.remove('hidden');
 
             // Max width of capsule before right-to-left running ticker kicks in
-            const maxCapsuleWidth = Math.min(window.innerWidth - 24, 370);
+            const maxCapsuleWidth = Math.min(window.innerWidth - 24, 340);
             const naturalWidth = Math.max(capsule.scrollWidth + 8, 140);
-            const targetWidth = Math.min(naturalWidth, maxCapsuleWidth);
+            const targetWidth = state === 'alert' ? Math.min(naturalWidth, 300) : Math.min(naturalWidth, maxCapsuleWidth);
 
             // Calculate if text overflows or if state === 'alert' needs running ticker
             const iconWidth = iconEl.offsetWidth || 54;
             const availableTextViewport = targetWidth - iconWidth - 28;
             const fullTextWidth = textEl.scrollWidth;
             const overflowPx = fullTextWidth - availableTextViewport;
-            const shouldMarquee = overflowPx > 4 || (state === 'alert' && fullTextWidth > 160);
+            const shouldMarquee = state === 'alert' || overflowPx > 4;
 
             let holdDuration = state === 'alert' ? 5500 : 2400;
 
             if (shouldMarquee) {
-                const scrollDist = Math.max(overflowPx + 24, 48);
+                const scrollDist = Math.max(overflowPx + 36, 75);
                 // Smooth ~40px per second reading speed
-                const scrollSeconds = Math.max(3.8, Math.min(scrollDist / 38, 10.0));
+                const scrollSeconds = Math.max(4.0, Math.min(scrollDist / 36, 10.0));
                 textEl.style.setProperty('--marquee-distance', `-${scrollDist}px`);
                 textEl.style.setProperty('--marquee-duration', `${scrollSeconds.toFixed(2)}s`);
                 if (viewportEl) viewportEl.classList.add('capsule-viewport-mask');
                 // Automatically disappear right after finishing the running text
-                holdDuration = Math.round((scrollSeconds + 1.1) * 1000);
+                holdDuration = Math.round((scrollSeconds + 1.0) * 1000);
             }
 
             // Interactive Touch / Click Handler for Alert Capsule:
@@ -359,25 +358,36 @@ window.KTUFlow = (function() {
             this.capsule(stateMap[type] || 'info', message, actionUrl);
         },
 
-        // 8. Global Firebase Live Notice Watcher (Appears after 12 seconds, runs text, & disappears)
+        // 8. Global Live Notice Alert (Appears 12s after EVERY page load/reload for ALL users)
         initNoticeWatcher() {
-            // Do not pop up alert if user is already viewing updates.html
-            if (window.location.pathname.toLowerCase().includes('updates')) return;
+            if (this._noticeWatcherStarted) return;
+            this._noticeWatcherStarted = true;
 
-            let initialCheckDone = false;
+            const showLatestNoticeAlert = async () => {
+                if (this.isInputFocused) {
+                    setTimeout(showLatestNoticeAlert, 4000);
+                    return;
+                }
 
-            const checkLatestNotice = async () => {
-                if (this.isPaused || this.isInputFocused) return;
                 try {
-                    const res = await fetch(FIREBASE_NOTICES_URL);
-                    if (!res.ok) return;
-                    const data = await res.json();
-                    if (!data) return;
+                    const res = await fetch(FIREBASE_NOTICES_URL, { cache: 'no-store' });
+                    let notices = [];
 
-                    // Convert Firebase object into sorted array (newest first)
-                    const notices = Object.keys(data).map(id => ({ id, ...data[id] }));
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data && typeof data === 'object') {
+                            notices = Object.keys(data).map(id => ({ id, ...data[id] }));
+                        }
+                    }
+
+                    // Fallback to local window.KTU_NOTICES if Firebase is empty
+                    if (notices.length === 0 && Array.isArray(window.KTU_NOTICES) && window.KTU_NOTICES.length > 0) {
+                        notices = window.KTU_NOTICES.map((n, i) => ({ id: `local-${i}`, ...n }));
+                    }
+
                     if (notices.length === 0) return;
 
+                    // Sort newest first by updatedAt / createdAt / date
                     notices.sort((a, b) => {
                         const tA = new Date(a.updatedAt || a.createdAt || a.date).getTime() || 0;
                         const tB = new Date(b.updatedAt || b.createdAt || b.date).getTime() || 0;
@@ -385,30 +395,15 @@ window.KTUFlow = (function() {
                     });
 
                     const latest = notices[0];
-                    const latestKey = `${latest.id}_${latest.updatedAt || latest.date}`;
-                    const lastSeenKey = localStorage.getItem(SEEN_NOTICE_KEY);
-
-                    if (latestKey !== lastSeenKey) {
-                        localStorage.setItem(SEEN_NOTICE_KEY, latestKey);
-
-                        const noticeDate = new Date(latest.date || latest.createdAt);
-                        const ageDays = (Date.now() - noticeDate.getTime()) / (1000 * 60 * 60 * 24);
-
-                        if (!initialCheckDone && ageDays <= 7) {
-                            this.capsule('alert', latest.title, '/updates.html');
-                        } else if (initialCheckDone) {
-                            // Admin just published a notice live while the student is browsing!
-                            this.capsule('alert', latest.title, '/updates.html');
-                        }
+                    if (latest && latest.title) {
+                        const redirectUrl = `/updates.html?id=${encodeURIComponent(latest.id)}`;
+                        this.capsule('alert', latest.title, redirectUrl);
                     }
-                    initialCheckDone = true;
                 } catch (e) {}
             };
 
-            // Appear after 12 seconds (12000ms) as requested
-            setTimeout(checkLatestNotice, 12000);
-            // Poll gently every 45s to catch live Admin posts while students are browsing
-            setInterval(checkLatestNotice, 45000);
+            // Appears 12 seconds after every page load / reload for all users
+            setTimeout(showLatestNoticeAlert, 12000);
         },
 
         // 9. Hugging Face Space SSE Connector for Real-Time Pulse & Merge Progress
