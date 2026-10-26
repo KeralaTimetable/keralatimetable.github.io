@@ -28,7 +28,7 @@ window.KTUFlow = (function() {
                 <div id="capsule-inner" class="h-full px-3 flex items-center justify-center gap-2 whitespace-nowrap text-xs font-extrabold text-white overflow-hidden">
                     <span id="capsule-icon" class="flex items-center justify-center shrink-0 z-10"></span>
                     <div id="capsule-text-viewport" class="hidden overflow-hidden flex-1 flex items-center min-w-0">
-                        <span id="capsule-text" class="tracking-tight text-white inline-block whitespace-nowrap"></span>
+                        <span id="capsule-text" class="tracking-tight text-white inline-flex items-center whitespace-nowrap"></span>
                     </div>
                     <div id="capsule-actions" class="hidden items-center gap-1.5 shrink-0 pl-1.5 z-10">
                         <a id="capsule-open-btn" href="/updates.html" class="px-2.5 py-1 rounded-full bg-indigo-500 hover:bg-indigo-400 active:scale-95 text-[10px] font-black text-white flex items-center gap-1 shadow-sm transition-all">
@@ -212,7 +212,7 @@ window.KTUFlow = (function() {
             clearTimeout(capsuleCollapseTimeout);
 
             // STAGE 3 (GOING ANIMATION):
-            // First swap badge back to small center circle & hide text, retract both sides into 38px black circle, then scale down
+            // Swap badge back to small center circle & hide text, retract both sides into 38px black circle, then scale down
             if (state === 'hide' || state === 'idle') {
                 const lastState = capsule.getAttribute('data-last-state') || 'alert';
                 capsule.classList.remove('capsule-expanded', 'capsule-paused');
@@ -229,7 +229,7 @@ window.KTUFlow = (function() {
                 capsule.style.pointerEvents = 'none';
                 capsule.style.width = '38px';
 
-                // Wait for sides to retract into the 38px circle (550ms), hold the circle briefly, then scale down
+                // Wait for sides to retract into the 38px circle, hold briefly, then scale down
                 capsuleCollapseTimeout = setTimeout(() => {
                     capsule.classList.remove('capsule-dot');
                 }, 620);
@@ -255,38 +255,49 @@ window.KTUFlow = (function() {
 
             const isAlreadyOpen = capsule.classList.contains('capsule-expanded');
 
-            // Reset marquee before measuring natural width
+            // Reset marquee before measuring natural single-copy width
             textEl.classList.remove('capsule-marquee-active');
-            textEl.style.removeProperty('--marquee-distance');
             textEl.style.removeProperty('--marquee-duration');
             viewportEl.classList.remove('capsule-viewport-mask');
 
-            // Temporarily set expanded icon & text to measure exact expanded width
+            // Measure single-copy width first
             const prevWidth = capsule.style.width;
             iconEl.innerHTML = getExpandedStageIcon(state);
-            textEl.innerText = message;
+            textEl.textContent = message;
             viewportEl.classList.remove('hidden');
             capsule.style.width = 'auto';
 
             const maxCapsuleWidth = Math.min(window.innerWidth - 24, 340);
+            const singleCopyWidth = textEl.scrollWidth;
             const naturalWidth = Math.max(capsule.scrollWidth + 10, 145);
             const targetWidth = state === 'alert' ? Math.min(naturalWidth, 305) : Math.min(naturalWidth, maxCapsuleWidth);
 
             const iconWidth = iconEl.offsetWidth || 56;
             const availableTextViewport = targetWidth - iconWidth - 28;
-            const fullTextWidth = textEl.scrollWidth;
-            const overflowPx = fullTextWidth - availableTextViewport;
+            const overflowPx = singleCopyWidth - availableTextViewport;
             const shouldMarquee = state === 'alert' || overflowPx > 4;
 
-            // Default hold duration: 22 seconds (22000ms) for alerts as requested!
+            // Hold duration: 22 seconds (22000ms) for alerts
             let holdDuration = state === 'alert' ? 22000 : 2800;
 
             if (shouldMarquee) {
-                const scrollDist = Math.max(overflowPx + 42, 80);
-                // Smooth, unhurried reading speed (~32px/sec)
-                const scrollSeconds = Math.max(5.5, Math.min(scrollDist / 30, 11.0));
-                textEl.style.setProperty('--marquee-distance', `-${scrollDist}px`);
-                textEl.style.setProperty('--marquee-duration', `${scrollSeconds.toFixed(2)}s`);
+                // Build seamless 2-copy track so it scrolls continuously to the left like a TV news ticker
+                // without ever bouncing back to the right!
+                textEl.innerHTML = '';
+                const copy1 = document.createElement('span');
+                copy1.className = 'pr-10';
+                copy1.textContent = `${message}   •   `;
+                const copy2 = document.createElement('span');
+                copy2.className = 'pr-10';
+                copy2.setAttribute('aria-hidden', 'true');
+                copy2.textContent = `${message}   •   `;
+                textEl.appendChild(copy1);
+                textEl.appendChild(copy2);
+
+                // Consistent news-ticker speed (~55px per second)
+                const oneLoopPx = Math.max(singleCopyWidth + 48, 180);
+                const loopSeconds = Math.max(5.5, Math.min(oneLoopPx / 52, 14.0));
+                textEl.style.setProperty('--marquee-duration', `${loopSeconds.toFixed(2)}s`);
             }
 
             // Interactive Touch / Click Handler for Alert Capsule:
@@ -584,7 +595,7 @@ window.showToast = function(message, type = 'info') {
                 box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
             }
 
-            /* ==================== COLOROS DOT-TO-CAPSULE + RUNNING MARQUEE ==================== */
+            /* ==================== COLOROS DOT-TO-CAPSULE + NEWS CHANNEL LEFT TICKER ==================== */
             #coloros-live-capsule,
             #ktu-live-capsule {
                 position: fixed;
@@ -621,13 +632,11 @@ window.showToast = function(message, type = 'info') {
             }
             #capsule-text {
                 opacity: 0;
-                transform: scale(0.95);
-                transition: opacity 0.28s ease 0.14s, transform 0.32s ease 0.14s;
+                transition: opacity 0.28s ease 0.14s;
             }
             #coloros-live-capsule.capsule-expanded #capsule-text,
             #ktu-live-capsule.capsule-expanded #capsule-text {
                 opacity: 1;
-                transform: scale(1);
             }
 
             /* Soft edge fade mask when running text ticker is active */
@@ -636,13 +645,13 @@ window.showToast = function(message, type = 'info') {
                 mask-image: linear-gradient(to right, transparent 0%, black 5%, black 93%, transparent 100%);
             }
 
-            /* Right-to-Left Running Text Ticker Animation (Loops smoothly during the 22s window) */
-            @keyframes capsuleMarqueeRTL {
-                0%, 10% { transform: translate3d(0, 0, 0); }
-                85%, 100% { transform: translate3d(var(--marquee-distance, -140px), 0, 0); }
+            /* Continuous News-Channel Left Ticker (Never moves back to right!) */
+            @keyframes capsuleNewsTickerLeft {
+                0% { transform: translate3d(0, 0, 0); }
+                100% { transform: translate3d(-50%, 0, 0); }
             }
             #coloros-live-capsule.capsule-expanded #capsule-text.capsule-marquee-active {
-                animation: capsuleMarqueeRTL var(--marquee-duration, 6.5s) linear 0.55s infinite alternate;
+                animation: capsuleNewsTickerLeft var(--marquee-duration, 8s) linear 0.45s infinite;
                 will-change: transform;
             }
             /* Freeze running text immediately when user touches/clicks the capsule */
