@@ -7,7 +7,9 @@ window.KTUFlow = (function() {
     const CATALOG_CACHE_KEY = 'ktu_flow_catalog_cache_v2';
     let memoryCatalog = null;
     let prefetchedUrls = new Set();
-    let capsuleTimer = null;
+    let capsuleHideTimer = null;
+    let capsuleExpandTimer = null;
+    let capsuleCollapseTimer = null;
     let bottomDockActive = false;
 
     const engine = {
@@ -114,7 +116,7 @@ window.KTUFlow = (function() {
             });
         },
 
-        // 6. Bottom UI Collision Manager & Dynamic Live Capsule
+        // 6. Bottom UI Collision Manager & Global ColorOS Dot-to-Sides Live Capsule
         setBottomDockActive(isActive) {
             bottomDockActive = isActive;
             const waPopup = document.getElementById('ktu-wa-popup');
@@ -123,68 +125,164 @@ window.KTUFlow = (function() {
             }
         },
 
-        capsule(state = 'idle', message = '') {
-            let cap = document.getElementById('ktu-live-capsule');
+        capsule(state = 'idle', message = '', actionUrl = null) {
+            let cap = document.getElementById('coloros-live-capsule') || document.getElementById('ktu-live-capsule');
             if (!cap) {
                 cap = document.createElement('div');
-                cap.id = 'ktu-live-capsule';
-                cap.className = 'fixed top-[4.6rem] left-1/2 -translate-x-1/2 z-[55] px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2.5 shadow-xl transition-all duration-300 transform -translate-y-8 opacity-0 pointer-events-none whitespace-nowrap';
+                cap.id = 'coloros-live-capsule';
+                cap.innerHTML = `
+                    <div id="capsule-inner" class="h-full px-3.5 flex items-center justify-center gap-2.5 whitespace-nowrap text-xs font-extrabold text-white">
+                        <span id="capsule-icon" class="flex items-center justify-center shrink-0"></span>
+                        <span id="capsule-text" class="tracking-tight text-white"></span>
+                    </div>
+                `;
                 document.body.appendChild(cap);
             }
 
-            clearTimeout(capsuleTimer);
+            const inner = cap.querySelector('#capsule-inner') || cap;
+            const iconEl = cap.querySelector('#capsule-icon');
+            const textEl = cap.querySelector('#capsule-text');
 
+            clearTimeout(capsuleHideTimer);
+            clearTimeout(capsuleExpandTimer);
+            clearTimeout(capsuleCollapseTimer);
+
+            // Stage 3: Retract both sides into center dot, then scale down
             if (state === 'hide' || state === 'idle') {
-                cap.classList.add('-translate-y-8', 'opacity-0');
+                cap.classList.remove('capsule-expanded');
+                inner.classList.remove('capsule-shimmer-bg');
+                cap.style.pointerEvents = 'none';
+                cap.style.width = '38px';
+                capsuleCollapseTimer = setTimeout(() => {
+                    cap.classList.remove('capsule-dot');
+                }, 320);
                 return;
             }
 
-            let iconHTML = '<span class="w-2 h-2 rounded-full bg-indigo-500 animate-ping"></span>';
-            if (state === 'loading') {
-                iconHTML = '<i class="fas fa-circle-notch fa-spin text-indigo-600 dark:text-indigo-400 text-xs"></i>';
-            } else if (state === 'success') {
-                iconHTML = '<i class="fas fa-check-circle text-emerald-500 text-xs"></i>';
-            } else if (state === 'error') {
-                iconHTML = '<i class="fas fa-exclamation-circle text-rose-500 text-xs"></i>';
+            // Optional Click Action (e.g. clicking a Live Notice alert opens /updates.html)
+            if (actionUrl) {
+                cap.style.pointerEvents = 'auto';
+                cap.style.cursor = 'pointer';
+                cap.onclick = () => { window.location.href = actionUrl; };
+            } else {
+                cap.style.pointerEvents = 'none';
+                cap.style.cursor = 'default';
+                cap.onclick = null;
             }
 
-            cap.innerHTML = `${iconHTML}<span>${message}</span>`;
-            requestAnimationFrame(() => {
-                cap.classList.remove('-translate-y-8', 'opacity-0');
-            });
+            let iconHTML = '<span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>';
+            if (state === 'loading') {
+                iconHTML = '<i class="fas fa-circle-notch fa-spin text-sky-400 text-xs"></i>';
+                inner.classList.add('capsule-shimmer-bg');
+            } else if (state === 'success') {
+                iconHTML = '<i class="fas fa-check-circle text-emerald-400 text-xs"></i>';
+                inner.classList.remove('capsule-shimmer-bg');
+            } else if (state === 'error') {
+                iconHTML = '<i class="fas fa-exclamation-circle text-rose-400 text-xs"></i>';
+                inner.classList.remove('capsule-shimmer-bg');
+            } else if (state === 'amber') {
+                iconHTML = '<span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>';
+                inner.classList.remove('capsule-shimmer-bg');
+            } else if (state === 'alert') {
+                iconHTML = '<span class="px-1.5 py-0.5 rounded-full bg-rose-500 text-[9px] font-black uppercase tracking-wider text-white animate-pulse">LIVE</span>';
+                inner.classList.remove('capsule-shimmer-bg');
+            } else {
+                inner.classList.remove('capsule-shimmer-bg');
+            }
 
-            if (state === 'success' || state === 'error' || state === 'info') {
-                capsuleTimer = setTimeout(() => {
-                    cap.classList.add('-translate-y-8', 'opacity-0');
-                }, 2400);
+            const isAlreadyOpen = cap.classList.contains('capsule-expanded');
+
+            if (iconEl && textEl) {
+                textEl.innerText = message;
+                iconEl.innerHTML = iconHTML;
+                const prevWidth = cap.style.width;
+                cap.style.width = 'auto';
+                const maxAllowedWidth = Math.min(window.innerWidth - 28, 420);
+                const targetWidth = Math.min(Math.max(cap.scrollWidth + 8, 140), maxAllowedWidth);
+
+                if (!isAlreadyOpen) {
+                    // Stage 1: Pop in as 38px center dot
+                    cap.style.width = '38px';
+                    textEl.classList.add('hidden');
+                    void cap.offsetWidth;
+                    cap.classList.add('capsule-dot');
+
+                    // Stage 2: Expand outward to both sides with spring physics
+                    capsuleExpandTimer = setTimeout(() => {
+                        textEl.classList.remove('hidden');
+                        void cap.offsetWidth;
+                        cap.style.width = `${targetWidth}px`;
+                        cap.classList.add('capsule-expanded');
+                    }, 125);
+                } else {
+                    textEl.classList.remove('hidden');
+                    cap.style.width = prevWidth;
+                    void cap.offsetWidth;
+                    cap.style.width = `${targetWidth}px`;
+                }
+            }
+
+            if (state !== 'loading') {
+                const holdTime = state === 'alert' ? 4200 : 2500;
+                capsuleHideTimer = setTimeout(() => {
+                    this.capsule('hide');
+                }, holdTime);
             }
         },
 
-        // 7. Global Liquid Glass Toast Notification (Replaces native alert())
-        toast(message, type = 'success') {
-            const existing = document.getElementById('ktu-flow-toast');
-            if (existing) existing.remove();
+        // 7. Global Notification (Routes through the ColorOS Live Capsule)
+        toast(message, type = 'success', actionUrl = null) {
+            const stateMap = {
+                error: 'error',
+                amber: 'amber',
+                alert: 'alert',
+                info: 'info',
+                success: 'success'
+            };
+            this.capsule(stateMap[type] || 'success', message, actionUrl);
+        },
 
-            const dotColor = type === 'error' ? 'bg-rose-400' : type === 'amber' ? 'bg-amber-400' : 'bg-emerald-400 animate-pulse';
-            const bottomPos = bottomDockActive ? 'bottom-24' : 'bottom-5';
+        // 8. Hugging Face Space SSE Connector for Real-Time Pulse & Merge Progress
+        initLiveStream(hfSpaceUrl) {
+            if (!hfSpaceUrl || this._sseSource || typeof EventSource === 'undefined') return;
 
-            const toast = document.createElement('div');
-            toast.id = 'ktu-flow-toast';
-            toast.className = `fixed ${bottomPos} left-1/2 -translate-x-1/2 z-[110] bg-slate-900/95 dark:bg-slate-800/95 text-white text-xs font-bold py-2.5 px-4 rounded-full shadow-2xl backdrop-blur-md border border-slate-700/60 flex items-center gap-2.5 transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none whitespace-nowrap`;
-            toast.innerHTML = `
-                <span class="w-2 h-2 rounded-full ${dotColor} shrink-0"></span>
-                <span>${message}</span>
-            `;
-            document.body.appendChild(toast);
+            const connect = () => {
+                const profile = this.getProfile();
+                const params = new URLSearchParams({
+                    scheme: profile.scheme || 'ALL',
+                    branch: profile.branch || 'ALL',
+                    sem: profile.sem || 'ALL'
+                });
 
-            requestAnimationFrame(() => {
-                toast.classList.remove('translate-y-10', 'opacity-0');
+                const es = new EventSource(`${hfSpaceUrl.replace(/\/$/, '')}/api/capsule/stream?${params.toString()}`);
+                this._sseSource = es;
+
+                es.onmessage = (event) => {
+                    if (this.isPaused || this.isInputFocused) return;
+                    try {
+                        const data = JSON.parse(event.data);
+                        if (data && data.message) {
+                            this.capsule(data.state || 'info', data.message, data.url || null);
+                        }
+                    } catch (e) {}
+                };
+
+                es.onerror = () => {
+                    es.close();
+                    this._sseSource = null;
+                    setTimeout(connect, 25000);
+                };
+            };
+
+            window.addEventListener('ktu:profile-updated', () => {
+                if (this._sseSource) {
+                    this._sseSource.close();
+                    this._sseSource = null;
+                    connect();
+                }
             });
 
-            setTimeout(() => {
-                toast.classList.add('translate-y-10', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 2200);
+            setTimeout(connect, 2000);
         }
     };
 
@@ -209,7 +307,7 @@ window.KTUFlow = (function() {
         style.id = 'kt-dark-theme-styles';
         style.innerHTML = `
             /* ==================================================================
-               0. STICKY FROSTED TOP BAR & HIGH-CONTRAST FROSTED MOBILE DRAWER
+               0. STICKY FROSTED TOP BAR, MOBILE DRAWER & COLOROS LIVE CAPSULE
                ================================================================== */
             #navigation-container {
                 position: sticky !important;
@@ -278,20 +376,65 @@ window.KTUFlow = (function() {
                 box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
             }
 
-            /* Live Capsule Styling */
+            /* Global Deep Obsidian ColorOS Dot-to-Sides Live Capsule */
+            #coloros-live-capsule,
             #ktu-live-capsule {
-                background: rgba(255, 255, 255, 0.82);
-                backdrop-filter: blur(24px) saturate(200%);
-                -webkit-backdrop-filter: blur(24px) saturate(200%);
-                border: 1px solid rgba(255, 255, 255, 0.9);
-                color: #0f172a;
-                box-shadow: 0 12px 32px -6px rgba(31, 38, 135, 0.15);
+                position: fixed;
+                top: 5.4rem;
+                left: 50%;
+                z-index: 65;
+                height: 38px;
+                width: 38px;
+                border-radius: 9999px;
+                transform: translate3d(-50%, 0, 0) scale(0);
+                opacity: 0;
+                pointer-events: none;
+                overflow: hidden;
+                background: rgba(11, 15, 25, 0.94) !important;
+                backdrop-filter: blur(28px) saturate(200%) !important;
+                -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.16) !important;
+                color: #ffffff !important;
+                box-shadow: 
+                    0 18px 40px -8px rgba(0, 0, 0, 0.45),
+                    0 4px 14px -2px rgba(37, 99, 235, 0.22),
+                    inset 0 1px 0 0 rgba(255, 255, 255, 0.22) !important;
+                transition: 
+                    width 0.44s cubic-bezier(0.18, 1.12, 0.32, 1),
+                    transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity 0.2s ease;
+                will-change: width, transform, opacity;
             }
-            html.dark #ktu-live-capsule {
-                background: rgba(15, 23, 42, 0.82);
-                border: 1px solid rgba(255, 255, 255, 0.14);
-                color: #f8fafc;
-                box-shadow: 0 12px 32px -6px rgba(0, 0, 0, 0.65);
+            #coloros-live-capsule.capsule-dot,
+            #ktu-live-capsule.capsule-dot {
+                transform: translate3d(-50%, 0, 0) scale(1);
+                opacity: 1;
+            }
+            #capsule-text {
+                opacity: 0;
+                transform: scale(0.94);
+                transition: opacity 0.22s ease 0.08s, transform 0.26s ease 0.08s;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            #coloros-live-capsule.capsule-expanded #capsule-text,
+            #ktu-live-capsule.capsule-expanded #capsule-text {
+                opacity: 1;
+                transform: scale(1);
+            }
+            @keyframes capsule-shimmer {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+            }
+            .capsule-shimmer-bg {
+                background-image: linear-gradient(
+                    90deg,
+                    transparent 0%,
+                    rgba(96, 165, 250, 0.22) 50%,
+                    transparent 100%
+                );
+                background-size: 200% 100%;
+                animation: capsule-shimmer 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
             }
 
             /* Pause background orb animations when browser tab is inactive */
@@ -325,7 +468,7 @@ window.KTUFlow = (function() {
             }
 
             /* ==================================================================
-               B. DARK MODE ENGINE (Unified across index.html, notes.html & pyq.html)
+               B. DARK MODE ENGINE (Unified across index, notes, pyq & updates)
                ================================================================== */
             /* 1. Base Canvas */
             html.dark body,
@@ -353,7 +496,7 @@ window.KTUFlow = (function() {
             html.dark .text-slate-500:not(.text-transparent) { color: #94a3b8 !important; }
             html.dark .text-slate-400:not(.text-transparent) { color: #94a3b8 !important; }
 
-            /* 4. Ambient Parallax Orbs (Screen mode prevents pitch-black orbs) */
+            /* 4. Ambient Parallax Orbs */
             html.dark #mouse-orb-1,
             html.dark #mouse-orb-2 {
                 mix-blend-mode: screen !important;
@@ -363,7 +506,7 @@ window.KTUFlow = (function() {
 
             /* 5. 3D Real-Glass & PYQ Result-Glass Cards */
             html.dark .real-glass {
-                background: rgba(15, 23, 42, 0.72) !important;
+                background: rgba(15, 23, 42, 0.74) !important;
                 backdrop-filter: blur(28px) saturate(180%) !important;
                 -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
                 border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -385,21 +528,22 @@ window.KTUFlow = (function() {
                 box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55) !important;
             }
 
-            /* 6. Inputs & Dropdowns (Notes & PYQ) */
+            /* 6. Inputs & Dropdowns */
             html.dark .inner-glass,
             html.dark .glass-input,
             html.dark select.custom-select {
-                background-color: rgba(9, 14, 26, 0.65) !important;
+                background-color: rgba(9, 14, 26, 0.68) !important;
                 border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
                 color: #f8fafc !important;
             }
             html.dark select.custom-select {
                 background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E") !important;
             }
             html.dark .glass-input:focus {
-                background-color: rgba(15, 23, 42, 0.9) !important;
-                border-color: #3b82f6 !important;
-                box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2) !important;
+                background-color: rgba(15, 23, 42, 0.92) !important;
+                border-color: #6366f1 !important;
+                box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.22) !important;
             }
             html.dark .glass-input:disabled {
                 background-color: rgba(15, 23, 42, 0.35) !important;
@@ -587,6 +731,35 @@ window.KTUFlow = (function() {
             html.dark .theme-toggle-btn:hover {
                 background-color: rgba(255, 255, 255, 0.16) !important;
             }
+
+            /* 16. UPDATES.HTML Liquid Glass & Dark Mode Overrides */
+            html.dark .notice-card {
+                background: linear-gradient(135deg, rgba(15, 23, 42, 0.78) 0%, rgba(15, 23, 42, 0.62) 100%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.09) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+                box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.45) !important;
+            }
+            html.dark .notice-card:hover {
+                background: linear-gradient(135deg, rgba(30, 41, 59, 0.88) 0%, rgba(15, 23, 42, 0.82) 100%) !important;
+                border-color: rgba(99, 102, 241, 0.5) !important;
+                box-shadow: 0 18px 38px -6px rgba(0, 0, 0, 0.65), 0 0 20px -4px rgba(99, 102, 241, 0.2) !important;
+            }
+            html.dark .filter-btn:not(.active) {
+                background: rgba(15, 23, 42, 0.65) !important;
+                border-color: rgba(255, 255, 255, 0.1) !important;
+                color: #cbd5e1 !important;
+            }
+            html.dark .filter-btn:not(.active):hover {
+                background: rgba(30, 41, 59, 0.85) !important;
+                border-color: rgba(99, 102, 241, 0.4) !important;
+                color: #ffffff !important;
+            }
+            html.dark #notice-modal-content,
+            html.dark #editorModal > div {
+                background: rgba(15, 23, 42, 0.92) !important;
+                border: 1px solid rgba(255, 255, 255, 0.15) !important;
+                box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.75) !important;
+            }
         `;
         document.head.appendChild(style);
     }
@@ -617,7 +790,6 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     const container = document.getElementById('navigation-container');
     if (!container) return;
 
-    // Make outer wrapper sticky at the top of the viewport while scrolling
     container.classList.remove('relative');
     container.classList.add('sticky', 'top-0', 'z-50', 'w-full');
 
@@ -1001,6 +1173,8 @@ function initWhatsAppPopup() {
 function runInitializers() {
     injectGlobalAd();
     initWhatsAppPopup();
+    // Optional: Uncomment and add your Hugging Face Space URL once your SSE endpoint is live:
+    // window.KTUFlow.initLiveStream('https://YOUR-SPACE-NAME.hf.space');
 }
 
 if (document.readyState === 'loading') {
