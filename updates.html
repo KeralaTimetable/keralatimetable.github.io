@@ -18,57 +18,127 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             overflow-x: hidden;
             background: 
-                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.55) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.45) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(224, 231, 255, 0.5) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.45) 0px, transparent 50%),
+                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.65) 0px, transparent 52%),
+                radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.55) 0px, transparent 52%),
+                radial-gradient(at 100% 100%, rgba(224, 231, 255, 0.55) 0px, transparent 52%),
+                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.5) 0px, transparent 52%),
                 #f8fafc;
             min-height: 100vh;
         }
 
         .font-mono-code { font-family: 'Fira Code', monospace; }
 
-        /* Liquid Clear Glass Elements */
-        .real-glass {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border: 1.5px solid rgba(0, 0, 0, 0.12);
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95), 0 10px 28px -6px rgba(31, 38, 135, 0.05);
+        /* Ambient Liquid Background Orbs */
+        @keyframes floatOrb {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(25px, -20px, 0) scale(1.06); }
+        }
+        .ambient-orb {
+            animation: floatOrb 14s ease-in-out infinite;
+            will-change: transform;
+        }
+        .ambient-orb-delayed {
+            animation: floatOrb 18s ease-in-out 3s infinite reverse;
+            will-change: transform;
         }
 
+        /* Liquid Clear Glass Elements */
+        .real-glass {
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(28px) saturate(190%);
+            -webkit-backdrop-filter: blur(28px) saturate(190%);
+            border: 1.5px solid rgba(15, 23, 42, 0.1);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.95),
+                0 14px 34px -8px rgba(31, 38, 135, 0.06);
+        }
+
+        /* Specular Liquid Glass Notice Cards with Spring Physics */
         .notice-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1.5px solid rgba(0, 0, 0, 0.10);
-            box-shadow: 0 4px 16px -2px rgba(31, 38, 135, 0.04);
-            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0.72) 100%);
+            backdrop-filter: blur(22px) saturate(190%);
+            -webkit-backdrop-filter: blur(22px) saturate(190%);
+            border: 1.5px solid rgba(15, 23, 42, 0.09);
+            box-shadow: 
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+                0 6px 20px -4px rgba(15, 23, 42, 0.04);
+            transition: 
+                transform 0.34s cubic-bezier(0.22, 1.28, 0.36, 1),
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.25s ease,
+                background 0.25s ease;
+            will-change: transform;
         }
         .notice-card:hover {
-            transform: translateY(-2px);
-            background: #ffffff;
-            border-color: rgba(54, 128, 103, 0.5);
-            box-shadow: 0 12px 28px -4px rgba(31, 38, 135, 0.08);
+            transform: translateY(-3px) scale(1.004);
+            background: rgba(255, 255, 255, 0.96);
+            border-color: rgba(79, 70, 229, 0.35);
+            box-shadow: 
+                inset 0 1px 0 0 #ffffff,
+                0 16px 34px -6px rgba(79, 70, 229, 0.10),
+                0 4px 12px -2px rgba(15, 23, 42, 0.04);
+        }
+        .notice-card:active {
+            transform: translateY(-1px) scale(0.995);
         }
 
         .inner-glass {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(15, 23, 42, 0.1);
         }
 
         .glass-input {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1.5px solid rgba(203, 213, 225, 0.85);
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1.5px solid rgba(15, 23, 42, 0.12);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 4px 14px rgba(15, 23, 42, 0.03);
             color: #0f172a;
-            transition: all 0.2s ease;
+            transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .glass-input:focus {
             outline: none;
-            background: #ffffff;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+            background: rgba(255, 255, 255, 0.98);
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.14), 0 8px 24px -4px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Filter Pill Spring Physics */
+        .filter-btn {
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transition: all 0.26s cubic-bezier(0.22, 1.25, 0.36, 1);
+        }
+        .filter-btn:active {
+            transform: scale(0.94);
+        }
+
+        /* Staggered Card Entrance Animation */
+        @keyframes cardSlideUp {
+            from { opacity: 0; transform: translate3d(0, 14px, 0) scale(0.985); }
+            to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+        }
+        .card-animate-in {
+            opacity: 0;
+            animation: cardSlideUp 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* Shimmer Skeleton Loader */
+        @keyframes glassShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .skeleton-shimmer {
+            background: linear-gradient(90deg, rgba(148, 163, 184, 0.12) 25%, rgba(148, 163, 184, 0.24) 50%, rgba(148, 163, 184, 0.12) 75%);
+            background-size: 200% 100%;
+            animation: glassShimmer 1.6s infinite linear;
+        }
+
+        /* Spring Modal Backdrop & Dialog */
+        #notice-modal-content {
+            transition: transform 0.34s cubic-bezier(0.22, 1.25, 0.36, 1), opacity 0.22s ease;
         }
 
         .hide-scrollbar::-webkit-scrollbar { display: none; }
@@ -81,56 +151,76 @@
 
 <body class="antialiased min-h-screen flex flex-col relative text-slate-800 selection:bg-indigo-600 selection:text-white">
 
+    <!-- Ambient Liquid Glass Glow Orbs -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+        <div id="mouse-orb-1" class="ambient-orb absolute -top-20 -left-20 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-indigo-400/20 blur-[90px]"></div>
+        <div id="mouse-orb-2" class="ambient-orb-delayed absolute top-1/3 -right-24 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-emerald-400/20 blur-[95px]"></div>
+    </div>
+
     <!-- Global Header Navigation -->
     <div id="navigation-container" class="z-50 relative"></div>
 
     <!-- MAIN BODY -->
-    <main class="max-w-3xl mx-auto px-3.5 sm:px-6 pt-6 sm:pt-8 pb-14 w-full flex-grow relative z-10">
+    <main class="max-w-3xl mx-auto px-3.5 sm:px-6 pt-6 sm:pt-8 pb-16 w-full flex-grow relative z-10">
         
-        <!-- Compact Header -->
+        <!-- Compact Hero Header -->
         <div class="text-center mb-6">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-[10px] sm:text-xs font-black uppercase tracking-wider mb-2.5 shadow-sm">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/75 dark:bg-indigo-950/60 backdrop-blur-md border border-indigo-200/80 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-300 text-[10px] sm:text-xs font-extrabold uppercase tracking-wider mb-2.5 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
                 <i class="fas fa-bullhorn text-indigo-500"></i> Official Notice Board
             </div>
-            <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-snug mb-1.5">
-                KTU Latest Updates
+            <h1 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug mb-1.5">
+                KTU <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-600">Latest Updates</span>
             </h1>
             <p class="text-slate-500 font-medium text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
-                Fast, verified academic circulars & live exam timetables directly from APJAKTU.
+                Instant, verified academic circulars & live exam timetables directly from APJAKTU.
             </p>
         </div>
 
         <!-- ADMIN CONTROLS BAR (Appears automatically when Admin logs in) -->
-        <div id="admin-actions-bar" class="hidden mb-5 real-glass p-3 rounded-2xl flex flex-wrap items-center justify-between gap-3 border border-emerald-300 bg-emerald-50/50 fade-in">
+        <div id="admin-actions-bar" class="hidden mb-5 real-glass p-3.5 rounded-2xl flex flex-wrap items-center justify-between gap-3 border border-emerald-300/80 fade-in">
             <div class="flex items-center gap-2.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-xs font-extrabold text-emerald-900">Admin Mode Active</span>
+                <span class="text-xs font-extrabold text-emerald-900 dark:text-emerald-300">Admin Mode Active</span>
             </div>
             <div class="flex items-center gap-2">
-                <button onclick="openNoticeEditor()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                <button onclick="openNoticeEditor()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
                     <i class="fas fa-plus"></i> Post Notice
                 </button>
-                <button id="btn-seed-data" onclick="seedNoticesToFirebase()" class="px-3 py-1.5 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold transition-all">
+                <button id="btn-seed-data" onclick="seedNoticesToFirebase()" class="px-3 py-1.5 bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-white border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold transition-all active:scale-95">
                     Sync notices-data.js
                 </button>
-                <button onclick="adminLogout()" class="px-3 py-1.5 text-xs font-bold text-rose-600 hover:bg-rose-50 rounded-xl transition-all">
+                <button onclick="adminLogout()" class="px-3 py-1.5 text-xs font-bold text-rose-600 hover:bg-rose-500/10 rounded-xl transition-all">
                     Sign Out
                 </button>
             </div>
         </div>
 
-        <!-- Search Bar -->
-        <div class="relative mb-3.5">
-            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+        <!-- Liquid Glass Search Bar with Keyboard Shortcut & Clear Button -->
+        <div class="relative mb-3.5 group">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-indigo-500 transition-colors">
                 <i class="fas fa-search text-xs sm:text-sm"></i>
             </div>
-            <input type="search" id="searchInput" class="glass-input block w-full pl-9 pr-3.5 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold text-slate-700 placeholder-slate-400 shadow-sm" placeholder="Search notices, branch, or keywords...">
+            <input type="search" id="searchInput" class="glass-input block w-full pl-10 pr-20 py-3 sm:py-3.5 rounded-2xl text-xs sm:text-sm font-bold text-slate-800 placeholder-slate-400" placeholder="Search timetables, S1-S8, 2024 scheme, circulars...">
+            
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center gap-1.5">
+                <button id="clearSearchBtn" onclick="clearSearch()" type="button" class="hidden w-6 h-6 rounded-full bg-slate-200/80 dark:bg-slate-700 text-slate-500 hover:text-slate-800 items-center justify-center text-xs transition-all" aria-label="Clear search">
+                    <i class="fas fa-times text-[10px]"></i>
+                </button>
+                <span id="noticeCountBadge" class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-md bg-slate-100/90 dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700 text-[10px] font-mono-code font-bold text-slate-400">
+                    /
+                </span>
+            </div>
         </div>
 
         <!-- Filter Tags Bar -->
-        <div class="flex gap-1.5 sm:gap-2 overflow-x-auto pb-3 mb-3 hide-scrollbar whitespace-nowrap" id="filter-container">
-            <button class="filter-btn active bg-indigo-600 text-white font-bold px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs shadow-sm border border-indigo-600 shrink-0" data-filter="All">
-                All Updates
+        <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-3 mb-3.5 hide-scrollbar whitespace-nowrap" id="filter-container">
+            <button class="filter-btn active bg-indigo-600 text-white font-bold px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs shadow-sm border border-indigo-600 shrink-0 flex items-center gap-1.5" data-filter="All">
+                <span>All Updates</span>
+            </button>
+            <!-- Dynamic KTUFlow Profile Pill (Auto-revealed if student has profile saved) -->
+            <button id="for-you-filter-btn" class="filter-btn hidden bg-white/80 text-indigo-600 font-extrabold hover:bg-white px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs border border-indigo-200 shrink-0 items-center gap-1.5" data-filter="ForYou">
+                <i class="fas fa-sparkles text-[10px]"></i> <span id="for-you-label">For You</span>
             </button>
             <button class="filter-btn bg-white/80 text-slate-600 font-bold hover:bg-white px-3.5 sm:px-4 py-1.5 rounded-full text-[11px] sm:text-xs border border-slate-900/10 shrink-0" data-filter="1st Year">
                 1st Year (S1/S2)
@@ -155,16 +245,27 @@
             </button>
         </div>
 
-        <!-- Notices Container -->
-        <div id="notices-container" class="flex flex-col gap-3 min-h-[300px]">
-            <div class="text-center py-12">
-                <i class="fas fa-circle-notch fa-spin text-indigo-500 text-2xl mb-2"></i>
-                <p class="text-slate-500 text-xs font-semibold font-mono-code">Connecting to KTU Notice Feed...</p>
+        <!-- Notices Container (Starts with Glass Shimmer Skeletons) -->
+        <div id="notices-container" class="flex flex-col gap-3 min-h-[320px]">
+            <div class="notice-card p-5 rounded-2xl flex flex-col gap-3">
+                <div class="flex gap-2"><div class="w-16 h-4 rounded skeleton-shimmer"></div><div class="w-20 h-4 rounded skeleton-shimmer"></div></div>
+                <div class="w-4/5 h-5 rounded-lg skeleton-shimmer"></div>
+                <div class="w-2/3 h-4 rounded-lg skeleton-shimmer"></div>
+            </div>
+            <div class="notice-card p-5 rounded-2xl flex flex-col gap-3">
+                <div class="flex gap-2"><div class="w-20 h-4 rounded skeleton-shimmer"></div></div>
+                <div class="w-3/4 h-5 rounded-lg skeleton-shimmer"></div>
+                <div class="w-1/2 h-4 rounded-lg skeleton-shimmer"></div>
+            </div>
+            <div class="notice-card p-5 rounded-2xl flex flex-col gap-3">
+                <div class="flex gap-2"><div class="w-14 h-4 rounded skeleton-shimmer"></div></div>
+                <div class="w-5/6 h-5 rounded-lg skeleton-shimmer"></div>
+                <div class="w-1/3 h-4 rounded-lg skeleton-shimmer"></div>
             </div>
         </div>
 
         <!-- Admin Login Drawer (Toggled from Footer) -->
-        <div id="admin-panel" class="hidden w-full mt-8 pt-6 border-t border-slate-200/80 fade-in">
+        <div id="admin-panel" class="hidden w-full mt-8 pt-6 border-t border-slate-200/80 dark:border-slate-800 fade-in">
             <div class="real-glass p-5 sm:p-6 rounded-2xl border border-purple-200">
                 <div class="flex justify-between items-center mb-4">
                     <div>
@@ -178,7 +279,7 @@
 
                 <div id="admin-auth-box" class="inner-glass p-4 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-3">
                     <p class="text-xs font-bold text-slate-600 text-center sm:text-left">Google authentication required for authorized editors.</p>
-                    <button onclick="adminGoogleLogin()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition-all flex items-center justify-center gap-2 shrink-0">
+                    <button onclick="adminGoogleLogin()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 active:scale-95 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition-all flex items-center justify-center gap-2 shrink-0">
                         <i class="fab fa-google"></i> Sign In with Google
                     </button>
                 </div>
@@ -205,49 +306,54 @@
     </footer>
 
     <!-- ======================================================== -->
-    <!-- READ NOTICE POPUP MODAL (Clean, Scaled for Mobile/Laptop) -->
+    <!-- READ NOTICE POPUP MODAL (Liquid Glass + Spring Physics)  -->
     <!-- ======================================================== -->
     <div id="notice-modal" class="fixed inset-0 z-[100] flex items-center justify-center px-3.5 opacity-0 pointer-events-none transition-opacity duration-250">
-        <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity" onclick="closeNoticeModal()"></div>
+        <div class="absolute inset-0 bg-slate-950/55 backdrop-blur-md transition-opacity" onclick="closeNoticeModal()"></div>
         
-        <div id="notice-modal-content" class="relative w-full max-w-lg bg-white/95 backdrop-blur-2xl border border-slate-900/10 rounded-2xl sm:rounded-3xl shadow-2xl p-5 sm:p-7 transform scale-95 transition-all duration-250 flex flex-col max-h-[88vh]">
+        <div id="notice-modal-content" class="real-glass relative w-full max-w-lg bg-white/92 rounded-3xl shadow-2xl p-5 sm:p-7 transform scale-90 flex flex-col max-h-[88vh]">
             
-            <button onclick="closeNoticeModal()" class="absolute top-3.5 right-3.5 w-8 h-8 flex items-center justify-center text-slate-400 hover:text-slate-700 rounded-full hover:bg-slate-100 transition-colors focus:outline-none">
+            <button onclick="closeNoticeModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white rounded-full bg-slate-100/80 dark:bg-white/10 hover:bg-slate-200 transition-all active:scale-90 focus:outline-none">
                 <i class="fas fa-times text-sm"></i>
             </button>
             
-            <div id="modal-tags" class="flex flex-wrap gap-1 mb-2.5 pr-8"></div>
+            <div id="modal-tags" class="flex flex-wrap gap-1.5 mb-2.5 pr-8"></div>
             
-            <h2 id="modal-title" class="text-base sm:text-lg font-black text-slate-900 mb-2.5 leading-snug"></h2>
+            <h2 id="modal-title" class="text-base sm:text-xl font-black text-slate-900 mb-3 leading-snug"></h2>
             
             <div class="flex items-center gap-2.5 mb-3.5">
-                <div class="flex items-center text-slate-600 text-[11px] font-bold bg-slate-50 px-2.5 py-1 rounded-md border border-slate-200">
+                <div class="flex items-center text-slate-600 text-[11px] font-bold bg-slate-100/80 dark:bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-200/80 dark:border-white/10">
                     <i class="far fa-calendar-alt mr-1.5 text-indigo-500"></i> <span id="modal-date"></span>
                 </div>
                 <div id="modal-new-badge"></div>
             </div>
             
-            <div class="bg-slate-50/80 rounded-xl p-3.5 border border-slate-200 shadow-inner mb-4 overflow-y-auto hide-scrollbar">
-                <p id="modal-details" class="text-slate-700 text-xs sm:text-sm font-medium leading-relaxed"></p>
+            <div class="inner-glass rounded-2xl p-4 mb-5 overflow-y-auto hide-scrollbar">
+                <p id="modal-details" class="text-slate-700 text-xs sm:text-sm font-medium leading-relaxed whitespace-pre-line"></p>
             </div>
             
-            <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold px-4 py-3 rounded-xl transition-all shadow-md gap-2 mt-auto">
-                <i class="fas fa-external-link-alt text-xs"></i> View Official Notification / PDF
-            </a>
+            <div class="flex items-center gap-2.5 mt-auto">
+                <button id="modal-share-btn" type="button" class="px-4 py-3 rounded-xl inner-glass hover:bg-slate-100 dark:hover:bg-white/10 text-slate-700 font-bold text-xs sm:text-sm transition-all active:scale-95 flex items-center justify-center gap-1.5 shrink-0" title="Share Notice">
+                    <i class="fas fa-share-nodes text-indigo-500"></i> <span>Share</span>
+                </button>
+                <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-white text-xs sm:text-sm font-bold px-4 py-3 rounded-xl transition-all shadow-lg shadow-indigo-500/25 gap-2">
+                    <i class="fas fa-external-link-alt text-xs"></i> <span>Official Circular / PDF</span>
+                </a>
+            </div>
         </div>
     </div>
 
     <!-- ======================================================== -->
     <!-- ADMIN CREATE / EDIT NOTICE MODAL                         -->
     <!-- ======================================================== -->
-    <div id="editorModal" class="hidden fixed inset-0 z-[110] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3.5">
-        <div class="real-glass bg-white/95 rounded-2xl sm:rounded-3xl p-5 sm:p-7 w-full max-w-lg shadow-2xl relative fade-in border border-slate-900/10 max-h-[90vh] overflow-y-auto hide-scrollbar">
-            <button onclick="closeNoticeEditor()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-base"><i class="fas fa-times"></i></button>
+    <div id="editorModal" class="hidden fixed inset-0 z-[110] bg-slate-950/60 backdrop-blur-md flex items-center justify-center p-3.5">
+        <div class="real-glass bg-white/95 rounded-3xl p-5 sm:p-7 w-full max-w-lg shadow-2xl relative fade-in border border-slate-900/10 max-h-[90vh] overflow-y-auto hide-scrollbar">
+            <button onclick="closeNoticeEditor()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-white/10 flex items-center justify-center text-slate-400 hover:text-slate-700 text-sm"><i class="fas fa-times"></i></button>
             
             <h2 id="editorModalTitle" class="text-base sm:text-lg font-black text-slate-900 mb-1 flex items-center gap-2">
                 <i class="fas fa-pen text-indigo-600"></i> Create Announcement
             </h2>
-            <p class="text-xs text-slate-500 font-semibold mb-4">Post directly to the live student notice board.</p>
+            <p class="text-xs text-slate-500 font-semibold mb-4">Post directly to the live student notice board & Live Capsule.</p>
 
             <form id="noticeEditorForm" onsubmit="saveNotice(event)" class="space-y-3">
                 <input type="hidden" id="editNoticeId" value="">
@@ -291,14 +397,14 @@
                     <textarea id="formDetails" rows="3" placeholder="Briefly explain the notice changes, registration deadlines, or subject codes affected..." class="glass-input w-full rounded-xl p-3 text-xs sm:text-sm font-medium leading-relaxed"></textarea>
                 </div>
 
-                <button type="submit" id="btnSubmitNotice" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl shadow transition-all text-xs sm:text-sm flex items-center justify-center gap-2 mt-2">
+                <button type="submit" id="btnSubmitNotice" class="w-full bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] text-white font-bold py-3 rounded-xl shadow-lg shadow-indigo-500/25 transition-all text-xs sm:text-sm flex items-center justify-center gap-2 mt-2">
                     <i class="fas fa-check"></i> Publish to Feed
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- Firebase SDK (Modular v10.8.0) -->
+    <!-- Scripts -->
     <script src="components.js"></script>
     <script src="notices-data.js"></script>
     
@@ -331,9 +437,35 @@
         let currentRenderedNotices = [];
         let currentFilter = 'All';
         let isAdminLoggedIn = false;
+        let initialLoadComplete = false;
+
+        // Safe HTML Escaping Helper
+        function escapeHTML(str = '') {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
 
         // Auto Load Header
         if (typeof loadNavigation === 'function') loadNavigation('updates', '', false);
+
+        // Reveal "For You" filter pill if KTUFlow has student profile
+        function syncKTUFlowProfilePill() {
+            if (!window.KTUFlow) return;
+            const profile = window.KTUFlow.getProfile();
+            const btn = document.getElementById('for-you-filter-btn');
+            const label = document.getElementById('for-you-label');
+            if (profile && (profile.scheme || profile.sem)) {
+                const parts = [profile.sem ? `S${String(profile.sem).replace(/^S/i, '')}` : '', profile.scheme ? `${profile.scheme}` : ''].filter(Boolean);
+                label.innerText = `For You (${parts.join(' • ')})`;
+                btn.classList.remove('hidden');
+                btn.classList.add('inline-flex');
+            }
+        }
+        syncKTUFlowProfilePill();
 
         // --- REALTIME DATABASE LISTENER (/ktu_notices) ---
         function listenToNotices() {
@@ -347,117 +479,169 @@
                         allNotices.push({ id, ...data[id] });
                     });
                 } else if (window.KTU_NOTICES && window.KTU_NOTICES.length > 0) {
-                    // Fallback to local notices-data.js if Firebase is empty
                     allNotices = window.KTU_NOTICES.map((n, i) => ({ id: `local-${i}`, ...n }));
                 }
 
                 // Sort by Date (Newest first)
                 allNotices.sort((a, b) => new Date(b.date) - new Date(a.date));
                 filterAndRender();
+
+                if (!initialLoadComplete) {
+                    initialLoadComplete = true;
+                    window.KTUFlow?.capsule('success', `${allNotices.length} Official Notices Ready`);
+                }
             });
         }
 
         // --- RENDER NOTICE CARDS ---
         window.filterAndRender = function() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const searchInputEl = document.getElementById('searchInput');
+            const searchTerm = searchInputEl.value.toLowerCase().trim();
+            const clearBtn = document.getElementById('clearSearchBtn');
+            const countBadge = document.getElementById('noticeCountBadge');
             const container = document.getElementById('notices-container');
 
+            if (searchTerm.length > 0) {
+                clearBtn.classList.remove('hidden');
+                clearBtn.classList.add('flex');
+            } else {
+                clearBtn.classList.add('hidden');
+                clearBtn.classList.remove('flex');
+            }
+
+            const profile = window.KTUFlow ? window.KTUFlow.getProfile() : {};
+
             currentRenderedNotices = allNotices.filter(notice => {
-                const matchesSearch = notice.title.toLowerCase().includes(searchTerm) || 
-                                      (notice.details && notice.details.toLowerCase().includes(searchTerm));
+                const titleText = (notice.title || '').toLowerCase();
+                const detailsText = (notice.details || '').toLowerCase();
+                const tagArr = Array.isArray(notice.tags) ? notice.tags : (notice.tags ? notice.tags.split(',').map(t => t.trim()) : []);
+                const tagsJoined = tagArr.join(' ').toLowerCase();
+
+                const matchesSearch = !searchTerm || titleText.includes(searchTerm) || detailsText.includes(searchTerm) || tagsJoined.includes(searchTerm);
                 
                 let matchesFilter = currentFilter === 'All';
-                if (!matchesFilter && notice.tags) {
-                    const tagArr = Array.isArray(notice.tags) ? notice.tags : notice.tags.split(',').map(t => t.trim());
+                if (currentFilter === 'ForYou') {
+                    const schemeMatch = profile.scheme && (tagsJoined.includes(String(profile.scheme).toLowerCase()) || titleText.includes(String(profile.scheme).toLowerCase()));
+                    const semClean = profile.sem ? `s${String(profile.sem).replace(/^s/i, '').toLowerCase()}` : '';
+                    const semMatch = semClean && (titleText.includes(semClean) || detailsText.includes(semClean) || tagsJoined.includes(semClean));
+                    matchesFilter = Boolean(schemeMatch || semMatch || tagsJoined.includes('general'));
+                } else if (!matchesFilter) {
                     matchesFilter = tagArr.some(t => t.toLowerCase() === currentFilter.toLowerCase());
                 }
                 return matchesSearch && matchesFilter;
             });
 
+            if (countBadge) {
+                countBadge.innerText = `${currentRenderedNotices.length}`;
+            }
+
             container.innerHTML = '';
 
             if (currentRenderedNotices.length === 0) {
                 container.innerHTML = `
-                    <div class="real-glass rounded-2xl p-8 text-center text-slate-500">
-                        <i class="fas fa-search text-2xl text-slate-300 mb-2"></i>
-                        <p class="font-bold text-xs sm:text-sm">No announcements found matching this filter.</p>
+                    <div class="real-glass rounded-3xl p-10 text-center text-slate-500 fade-in">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-search text-lg"></i>
+                        </div>
+                        <p class="font-extrabold text-slate-800 dark:text-slate-200 text-sm mb-1">No matching announcements</p>
+                        <p class="text-xs text-slate-400">Try clearing your search filter or switching tabs above.</p>
                     </div>`;
                 return;
             }
 
             const today = new Date();
+            let cardsMarkup = '';
 
             currentRenderedNotices.forEach((notice, index) => {
                 const noticeDateObj = new Date(notice.date);
                 const options = { day: 'numeric', month: 'short', year: 'numeric' };
                 const formattedDate = !isNaN(noticeDateObj) 
                     ? noticeDateObj.toLocaleDateString('en-GB', options) 
-                    : notice.date;
+                    : escapeHTML(notice.date);
 
                 const diffDays = Math.ceil(Math.abs(today - noticeDateObj) / (1000 * 60 * 60 * 24));
                 const isNew = diffDays <= 7;
 
                 const newBadge = isNew 
-                    ? `<span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider animate-pulse">
-                            <i class="fas fa-star text-[8px]"></i> New
+                    ? `<span class="inline-flex items-center gap-1 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25 text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> New
                        </span>`
-                    : `<span class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 border border-indigo-200 text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider">
-                           KTU
+                    : `<span class="inline-flex items-center gap-1 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20 text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
+                           Official
                        </span>`;
 
                 // Tag HTML
                 let tagsHTML = '';
                 const tagArr = Array.isArray(notice.tags) ? notice.tags : (notice.tags ? notice.tags.split(',').map(t => t.trim()) : []);
                 if (tagArr.length > 0) {
-                    tagsHTML = `<div class="flex flex-wrap gap-1 mb-1.5">`;
+                    tagsHTML = `<div class="flex flex-wrap gap-1.5 mb-1.5">`;
                     tagArr.forEach(t => {
-                        tagsHTML += `<span class="bg-slate-100 text-slate-600 border border-slate-200 text-[9px] font-bold px-2 py-0.5 rounded uppercase">${t}</span>`;
+                        tagsHTML += `<span class="notice-tag-pill bg-slate-100/90 dark:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 text-[9px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wide">${escapeHTML(t)}</span>`;
                     });
                     tagsHTML += `</div>`;
                 }
 
-                // Admin Edit / Delete Actions (if signed in)
+                // Admin Edit / Delete Actions
                 const adminButtons = isAdminLoggedIn ? `
                     <div class="flex items-center gap-1.5 z-20" onclick="event.stopPropagation()">
-                        <button onclick="editNoticeModal('${notice.id}')" title="Edit Announcement" class="p-1.5 text-xs bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg text-slate-500 transition-colors">
+                        <button onclick="editNoticeModal('${escapeHTML(notice.id)}')" title="Edit Announcement" class="p-1.5 text-xs bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg text-slate-500 transition-colors">
                             <i class="fas fa-pen"></i>
                         </button>
-                        <button onclick="deleteNotice('${notice.id}')" title="Delete Announcement" class="p-1.5 text-xs bg-slate-100 hover:bg-rose-50 hover:text-rose-600 rounded-lg text-slate-500 transition-colors">
+                        <button onclick="deleteNotice('${escapeHTML(notice.id)}')" title="Delete Announcement" class="p-1.5 text-xs bg-slate-100 dark:bg-slate-800 hover:bg-rose-50 hover:text-rose-600 rounded-lg text-slate-500 transition-colors">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
                 ` : '';
 
-                const cardHTML = `
-                    <div onclick="openNoticeModal(${index})" class="notice-card p-4 sm:p-5 rounded-2xl cursor-pointer flex flex-col justify-between gap-3 group relative">
+                const staggerDelay = Math.min(index * 35, 280);
+
+                cardsMarkup += `
+                    <div onclick="openNoticeModal(${index})" style="animation-delay: ${staggerDelay}ms" class="notice-card card-animate-in p-4 sm:p-5 rounded-2xl cursor-pointer flex flex-col justify-between gap-3 group relative">
                         <div>
                             <div class="flex items-center justify-between gap-2 mb-1">
                                 ${tagsHTML}
                                 ${adminButtons}
                             </div>
-                            <h3 class="text-slate-800 font-extrabold text-sm sm:text-base leading-snug group-hover:text-indigo-600 transition-colors">
-                                ${notice.title}
+                            <h3 class="text-slate-800 font-extrabold text-sm sm:text-base leading-snug group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                ${escapeHTML(notice.title)}
                             </h3>
                         </div>
 
-                        <div class="flex items-center justify-between pt-2.5 border-t border-slate-100 gap-2">
+                        <div class="flex items-center justify-between pt-2.5 border-t border-slate-200/60 dark:border-white/10 gap-2">
                             <div class="flex items-center gap-2">
-                                <span class="text-[10px] sm:text-xs text-slate-500 font-bold flex items-center gap-1">
-                                    <i class="far fa-calendar-alt text-slate-400"></i> ${formattedDate}
+                                <span class="text-[10px] sm:text-xs text-slate-500 font-bold flex items-center gap-1.5">
+                                    <i class="far fa-calendar-alt text-indigo-500/80"></i> ${formattedDate}
                                 </span>
                                 ${newBadge}
                             </div>
-                            <div class="text-[11px] font-bold text-indigo-600 group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
-                                <span>Read details</span>
-                                <i class="fas fa-chevron-right text-[9px]"></i>
+                            <div class="text-[11px] font-extrabold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                                <span>View Circular</span>
+                                <i class="fas fa-arrow-right text-[9px]"></i>
                             </div>
                         </div>
                     </div>
                 `;
-
-                container.innerHTML += cardHTML;
             });
+
+            container.innerHTML = cardsMarkup;
         };
+
+        window.clearSearch = function() {
+            const input = document.getElementById('searchInput');
+            input.value = '';
+            filterAndRender();
+            input.focus();
+        };
+
+        // Press '/' to quickly focus search bar
+        window.addEventListener('keydown', (e) => {
+            if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                document.getElementById('searchInput')?.focus();
+            } else if (e.key === 'Escape') {
+                closeNoticeModal();
+            }
+        });
 
         // --- READ MODAL HANDLERS ---
         window.openNoticeModal = function(index) {
@@ -472,12 +656,29 @@
             document.getElementById('modal-title').innerText = notice.title;
             document.getElementById('modal-date').innerText = formattedDate;
             document.getElementById('modal-details').innerText = notice.details || "Official KTU announcement details. Open the link below to access circulars or PDF downloads.";
-            document.getElementById('modal-link').href = notice.link || "https://ktu.edu.in/Menu/announcements";
+            const targetUrl = notice.link || "https://ktu.edu.in/Menu/announcements";
+            document.getElementById('modal-link').href = targetUrl;
+
+            // Share / Copy Button
+            const shareBtn = document.getElementById('modal-share-btn');
+            shareBtn.onclick = async () => {
+                const shareData = {
+                    title: notice.title,
+                    text: `${notice.title} — KTU Notice on Kerala Timetable`,
+                    url: window.location.href
+                };
+                if (navigator.share) {
+                    try { await navigator.share(shareData); } catch (e) {}
+                } else {
+                    navigator.clipboard?.writeText(`${notice.title} - ${targetUrl}`);
+                    window.KTUFlow?.toast('Notice link copied to clipboard!', 'success');
+                }
+            };
 
             let tagsHTML = '';
             const tagArr = Array.isArray(notice.tags) ? notice.tags : (notice.tags ? notice.tags.split(',').map(t => t.trim()) : []);
             tagArr.forEach(t => {
-                tagsHTML += `<span class="bg-slate-100 text-slate-600 border border-slate-200 text-[10px] font-bold px-2 py-0.5 rounded uppercase">${t}</span>`;
+                tagsHTML += `<span class="bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20 text-[10px] font-extrabold px-2.5 py-0.5 rounded-md uppercase">${escapeHTML(t)}</span>`;
             });
             document.getElementById('modal-tags').innerHTML = tagsHTML;
 
@@ -486,7 +687,7 @@
             
             modal.classList.remove('opacity-0', 'pointer-events-none');
             modal.classList.add('opacity-100', 'pointer-events-auto');
-            modalContent.classList.remove('scale-95');
+            modalContent.classList.remove('scale-90');
             modalContent.classList.add('scale-100');
 
             document.body.style.overflow = 'hidden';
@@ -495,11 +696,12 @@
         window.closeNoticeModal = function() {
             const modal = document.getElementById('notice-modal');
             const modalContent = document.getElementById('notice-modal-content');
+            if (!modal || modal.classList.contains('pointer-events-none')) return;
             
             modal.classList.remove('opacity-100', 'pointer-events-auto');
             modal.classList.add('opacity-0', 'pointer-events-none');
             modalContent.classList.remove('scale-100');
-            modalContent.classList.add('scale-95');
+            modalContent.classList.add('scale-90');
 
             document.body.style.overflow = '';
         };
@@ -540,7 +742,8 @@
             e.preventDefault();
             const btn = document.getElementById('btnSubmitNotice');
             btn.disabled = true;
-            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Saving...`;
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Publishing...`;
+            window.KTUFlow?.capsule('loading', 'Publishing Notice to Live Feed...');
 
             const editId = document.getElementById('editNoticeId').value;
             const title = document.getElementById('formTitle').value.trim();
@@ -562,18 +765,16 @@
 
             try {
                 if (editId && !editId.startsWith('local-')) {
-                    // Update existing
                     await set(ref(db, `ktu_notices/${editId}`), noticeData);
                 } else {
-                    // Create new
                     const newRef = push(ref(db, 'ktu_notices'));
                     await set(newRef, { ...noticeData, createdAt: new Date().toISOString() });
                 }
                 closeNoticeEditor();
-                alert("Announcement saved successfully!");
+                window.KTUFlow?.capsule('alert', `Published: ${title.slice(0, 34)}...`);
             } catch (err) {
                 console.error("Error saving notice:", err);
-                alert("Failed to save: " + err.message);
+                window.KTUFlow?.toast("Failed to publish notice", "error");
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = `<i class="fas fa-check"></i> Publish to Feed`;
@@ -582,14 +783,15 @@
 
         window.deleteNotice = async function(id) {
             if (id.startsWith('local-')) {
-                alert("This notice is loaded locally from notices-data.js. Sync to Firebase first to manage online.");
+                window.KTUFlow?.toast("Sync to Firebase first to manage online", "amber");
                 return;
             }
             if (confirm("Are you sure you want to delete this announcement?")) {
                 try {
                     await remove(ref(db, `ktu_notices/${id}`));
+                    window.KTUFlow?.toast("Announcement deleted", "amber");
                 } catch (err) {
-                    alert("Delete failed: " + err.message);
+                    window.KTUFlow?.toast("Delete failed", "error");
                 }
             }
         };
@@ -598,10 +800,11 @@
         window.seedNoticesToFirebase = async function() {
             if (!confirm("This will import notices from notices-data.js into Firebase. Continue?")) return;
             if (!window.KTU_NOTICES || window.KTU_NOTICES.length === 0) {
-                alert("No notices found in notices-data.js.");
+                window.KTUFlow?.toast("No notices found in notices-data.js", "error");
                 return;
             }
 
+            window.KTUFlow?.capsule('loading', 'Syncing notices-data.js to Firebase...');
             try {
                 for (const item of window.KTU_NOTICES) {
                     const newRef = push(ref(db, 'ktu_notices'));
@@ -614,9 +817,9 @@
                         createdAt: new Date().toISOString()
                     });
                 }
-                alert("All notices successfully synced to Firebase!");
+                window.KTUFlow?.toast("All notices synced to Firebase!", "success");
             } catch (err) {
-                alert("Migration error: " + err.message);
+                window.KTUFlow?.toast("Migration error", "error");
             }
         };
 
@@ -634,12 +837,13 @@
                 const result = await signInWithPopup(auth, provider);
                 if (result.user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
                     setAdminLoggedInUI();
+                    window.KTUFlow?.toast("Admin Mode Activated", "success");
                 } else {
-                    alert("Access denied. Authorized administrator only.");
+                    window.KTUFlow?.toast("Access denied: Admin only", "error");
                     await signOut(auth);
                 }
             } catch (err) {
-                alert("Login Error: " + err.message);
+                window.KTUFlow?.toast("Google Sign-In cancelled", "amber");
             }
         };
 
