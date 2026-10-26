@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
@@ -12,90 +12,138 @@
 
     <meta name="description" content="The fastest, ad-free platform for KTU B.Tech students. Access wait-free PDF notes, live exam timetables, syllabus, and university updates for the 2024 Scheme.">
     
-    <script src="/tailwind-local.js"></script>
+    <!-- Tailwind Local with CDN Fallback -->
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
     
     <style>
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: #f1f5fb;
             background-image: 
-                radial-gradient(at 0% 0%, hsla(253, 100%, 93%, 1) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(189, 100%, 90%, 1) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, hsla(208, 100%, 94%, 1) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, hsla(283, 100%, 94%, 1) 0px, transparent 50%);
-            background-attachment: fixed;
+                radial-gradient(at 0% 0%, hsla(253, 100%, 93%, 0.85) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(189, 100%, 90%, 0.8) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(208, 100%, 94%, 0.85) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(283, 100%, 94%, 0.8) 0px, transparent 50%);
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* --- VISIBLE HIGH-DEFINITION GLASS PANELS --- */
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        /* Ambient GPU-Accelerated Floating Orbs */
+        @keyframes orbDrift {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(24px, -18px, 0) scale(1.06); }
+        }
+        .ambient-orb-1 { animation: orbDrift 15s ease-in-out infinite; will-change: transform; }
+        .ambient-orb-2 { animation: orbDrift 19s ease-in-out 2s infinite reverse; will-change: transform; }
+
+        /* --- SPECULAR LIQUID GLASS PANELS --- */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            /* Clearly visible dark border for laptop screens */
-            border: 1.5px solid rgba(0, 0, 0, 0.22);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.58) 100%);
+            backdrop-filter: blur(24px) saturate(190%);
+            -webkit-backdrop-filter: blur(24px) saturate(190%);
+            border: 1.5px solid rgba(15, 23, 42, 0.14);
             box-shadow: 
-                inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
-                0 10px 30px -6px rgba(0, 0, 0, 0.08);
+                inset 0 1px 1px 0 rgba(255, 255, 255, 0.98),
+                0 12px 32px -8px rgba(15, 23, 42, 0.07);
+            transition: 
+                transform 0.32s cubic-bezier(0.22, 1.25, 0.36, 1),
+                box-shadow 0.3s ease,
+                border-color 0.25s ease,
+                background 0.25s ease;
         }
         
         .glass-panel-hover:hover {
-            background: rgba(255, 255, 255, 0.88);
-            transform: translateY(-2px);
-            border-color: rgba(0, 0, 0, 0.65); /* Darkens on hover */
+            background: rgba(255, 255, 255, 0.94);
+            transform: translate3d(0, -3px, 0);
+            border-color: rgba(79, 70, 229, 0.45);
             box-shadow: 
                 inset 0 1px 1px 0 #ffffff,
-                0 16px 36px -6px rgba(0, 0, 0, 0.12);
+                0 18px 38px -8px rgba(79, 70, 229, 0.12);
         }
 
+        /* GPU-Friendly Hero Artwork Folder (No nested backdrop-filter lag during slide!) */
         .glass-folder {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.35) 100%);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1.5px solid rgba(0, 0, 0, 0.18);
-            box-shadow: inset 0 1px 1px 0 rgba(255,255,255,0.9), 0 10px 30px rgba(0,0,0,0.06);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.52) 100%);
+            border: 1.5px solid rgba(15, 23, 42, 0.14);
+            box-shadow: 
+                inset 0 1px 2px 0 rgba(255, 255, 255, 0.95),
+                0 16px 36px -8px rgba(15, 23, 42, 0.10);
+            transform: rotate(6deg) translateZ(0);
+            transition: transform 0.5s cubic-bezier(0.22, 1.2, 0.36, 1);
+        }
+        html.dark .glass-folder {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.65) 100%);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 16px 36px rgba(0, 0, 0, 0.5);
+        }
+        .glass-folder-inner {
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.82) 100%);
+            border: 1.5px solid rgba(15, 23, 42, 0.14);
+            box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.12);
+        }
+        html.dark .glass-folder-inner {
+            background: linear-gradient(160deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.88) 100%);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
+        /* Expandable Search Filter Panel with Spring Easing */
         .expand-panel {
             max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            transform: translate3d(0, -8px, 0) scale(0.98);
+            transform-origin: top center;
+            pointer-events: none;
+            transition: 
+                max-height 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.24s ease,
+                transform 0.32s cubic-bezier(0.22, 1.2, 0.36, 1);
         }
         .expand-panel.active {
-            max-height: 400px; 
+            max-height: 440px; 
             opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+            pointer-events: auto;
             overflow: visible;
         }
 
-        /* --- VISIBLE CLEAR GLASS HYBRID CARDS --- */
+        /* --- LIQUID GLASS HYBRID CARDS --- */
         .hybrid-card {
-            background: rgba(255, 255, 255, 0.68);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            /* Crisp, clearly defined black border */
-            border: 1.5px solid rgba(0, 0, 0, 0.20);
-            border-radius: 1rem;
-            padding: 0.85rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.62) 100%);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border: 1.5px solid rgba(15, 23, 42, 0.14);
+            border-radius: 1.15rem;
+            padding: 0.9rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: 
+                transform 0.32s cubic-bezier(0.22, 1.28, 0.36, 1),
+                background 0.22s ease,
+                border-color 0.22s ease,
+                box-shadow 0.28s ease;
             text-decoration: none;
             box-shadow: 
-                inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
-                0 6px 18px -3px rgba(0, 0, 0, 0.06);
+                inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
+                0 6px 18px -4px rgba(15, 23, 42, 0.05);
+            will-change: transform;
         }
         .hybrid-card:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.95);
-            border-color: #000000; /* Solid black on hover */
+            transform: translate3d(0, -3px, 0) scale(1.008);
+            background: rgba(255, 255, 255, 0.96);
+            border-color: rgba(15, 23, 42, 0.65);
             box-shadow: 
                 inset 0 1px 1px 0 #ffffff,
-                0 12px 26px -4px rgba(0, 0, 0, 0.12);
+                0 14px 28px -6px rgba(15, 23, 42, 0.10);
+        }
+        .hybrid-card:active {
+            transform: translate3d(0, -1px, 0) scale(0.985);
         }
         
         @media (min-width: 768px) {
@@ -105,53 +153,66 @@
                 text-align: left;
                 padding: 1rem 1.25rem;
                 border-radius: 1.5rem;
-                border: 1.5px solid rgba(0, 0, 0, 0.20);
             }
         }
 
+        /* --- 120FPS HARDWARE-ACCELERATED HERO CAROUSEL SLIDES --- */
         .hero-slide {
             position: absolute;
             inset: 1.25rem;
-            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.7s ease;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate3d(36px, 0, 0) scale(0.985);
+            transition: 
+                transform 0.56s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0.56s;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .hero-slide.slide-active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate3d(0, 0, 0) scale(1);
+            z-index: 20;
+        }
+        .hero-slide.slide-exit-left {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate3d(-36px, 0, 0) scale(0.985);
+            z-index: 10;
+        }
+        .hero-slide.slide-exit-right {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate3d(36px, 0, 0) scale(0.985);
+            z-index: 10;
         }
         @media (min-width: 768px) {
             .hero-slide { inset: 2rem; }
         }
 
-        @keyframes slideRightToLeft {
-            0% { opacity: 0; transform: translateX(60px); }
-            100% { opacity: 1; transform: translateX(0); }
+        /* Smooth Vertical Spring Entrance (Replaces heavy 60px horizontal layout thrashing) */
+        @keyframes springFadeUp {
+            0% { opacity: 0; transform: translate3d(0, 14px, 0) scale(0.99); }
+            100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
         }
-        .slide-rtl {
+        .spring-enter {
             opacity: 0;
-            animation: slideRightToLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: springFadeUp 0.52s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            will-change: transform, opacity;
         }
-
-        .delay-100 { animation-delay: 100ms; }
-        .delay-200 { animation-delay: 200ms; }
-        .delay-300 { animation-delay: 300ms; }
-        .delay-[350ms] { animation-delay: 350ms; }
-        .delay-[400ms] { animation-delay: 400ms; }
-        .delay-[450ms] { animation-delay: 450ms; }
-        .delay-[500ms] { animation-delay: 500ms; }
-        .delay-[550ms] { animation-delay: 550ms; }
-        .delay-[600ms] { animation-delay: 600ms; }
-        .delay-[650ms] { animation-delay: 650ms; }
-        .delay-[700ms] { animation-delay: 700ms; }
-        .delay-[750ms] { animation-delay: 750ms; }
-        .delay-[800ms] { animation-delay: 800ms; }
-        .delay-[850ms] { animation-delay: 850ms; }
-        .delay-[900ms] { animation-delay: 900ms; }
-        .delay-[950ms] { animation-delay: 950ms; }
-        .delay-[1000ms] { animation-delay: 1000ms; }
-        .delay-[1050ms] { animation-delay: 1050ms; }
-        .delay-[1100ms] { animation-delay: 1100ms; }
 
         select {
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e293b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 1rem center;
             background-size: 1em;
@@ -165,7 +226,7 @@
       "url": "https://keralatimetable.in/",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://keralatimetable.in/search?q={search_term_string}",
+        "target": "https://keralatimetable.in/pyq.html?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
@@ -179,26 +240,36 @@
     <meta property="og:type" content="website">
 </head>
 
-<body class="text-slate-800 antialiased flex flex-col relative overflow-x-hidden">
+<body class="text-slate-800 antialiased flex flex-col relative overflow-x-hidden selection:bg-indigo-600 selection:text-white">
 
-    <!-- AMBIENT REFRACTION LIGHTS BEHIND GLASS -->
-    <div class="fixed top-12 left-1/4 w-80 h-80 bg-blue-400/25 rounded-full blur-[80px] pointer-events-none -z-10"></div>
-    <div class="fixed top-1/3 right-10 w-96 h-96 bg-emerald-400/25 rounded-full blur-[90px] pointer-events-none -z-10"></div>
-    <div class="fixed bottom-20 left-10 w-80 h-80 bg-purple-400/25 rounded-full blur-[80px] pointer-events-none -z-10"></div>
+    <!-- AMBIENT REFRACTION LIGHTS BEHIND GLASS (GPU Layer) -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
+        <div id="mouse-orb-1" class="ambient-orb-1 absolute top-10 left-1/4 w-80 h-80 bg-blue-400/25 rounded-full blur-[85px]"></div>
+        <div id="mouse-orb-2" class="ambient-orb-2 absolute top-1/3 right-10 w-96 h-96 bg-emerald-400/20 rounded-full blur-[95px]"></div>
+        <div class="ambient-orb-1 absolute bottom-16 left-10 w-80 h-80 bg-purple-400/20 rounded-full blur-[85px]"></div>
+    </div>
 
-    <div id="navigation-container" class="min-h-[73px] w-full z-50 relative"></div>
+    <!-- Global Sticky Frosted Header -->
+    <div id="navigation-container" class="min-h-[73px] w-full z-50 sticky top-0"></div>
+
+    <!-- Pre-mounted ColorOS Obsidian Dot-to-Sides Live Capsule -->
+    <div id="coloros-live-capsule">
+        <div id="capsule-inner" class="h-full px-3.5 flex items-center justify-center gap-2.5 whitespace-nowrap text-xs font-extrabold text-white">
+            <span id="capsule-icon" class="flex items-center justify-center shrink-0"></span>
+            <span id="capsule-text" class="tracking-tight text-white"></span>
+        </div>
+    </div>
 
     <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-4 md:py-6 flex flex-col items-center relative z-10 space-y-6">
         
-        <!-- HERO CAROUSEL SECTION -->
-        <div class="glass-panel rounded-[2.5rem] w-full relative overflow-hidden flex flex-col min-h-[380px] md:min-h-[340px] slide-rtl delay-100">
+        <!-- HERO CAROUSEL SECTION (120FPS GPU Transform + Touch Swipe) -->
+        <div id="hero-carousel" class="glass-panel rounded-[2.25rem] md:rounded-[2.5rem] w-full relative overflow-hidden flex flex-col min-h-[380px] md:min-h-[340px] spring-enter select-none" style="animation-delay: 40ms;">
             
             <!-- SLIDE 1: General Resources -->
-            <div class="hero-slide flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 z-20" style="opacity: 1; transform: translateX(0);">
-                
-                <div class="w-full md:w-[55%] relative z-10 text-center md:text-left mt-2 md:mt-0">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-300 text-indigo-700 text-[10px] md:text-xs font-black uppercase tracking-wider mb-3 md:mb-4 shadow-sm backdrop-blur-sm">
-                        <i class="fas fa-users text-indigo-500"></i> 2 Lakh+ Trusted KTU STUDENTS
+            <div class="hero-slide slide-active flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
+                <div class="w-full md:w-[56%] relative z-10 text-center md:text-left mt-2 md:mt-0">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50/90 dark:bg-indigo-950/60 border border-indigo-300 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-300 text-[10px] md:text-xs font-black uppercase tracking-wider mb-3 md:mb-4 shadow-sm">
+                        <i class="fas fa-users text-indigo-500"></i> 2 Lakh+ Trusted KTU Students
                     </div>
 
                     <h1 class="text-[32px] md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.08] mb-2 md:mb-3">
@@ -211,23 +282,23 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 pb-6 md:pb-0">
-                        <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-400 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 hover:scale-105 transition-transform flex items-center justify-center gap-2">
+                        <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-400 text-white font-bold text-sm shadow-lg shadow-indigo-500/25 hover:scale-[1.03] active:scale-95 transition-transform flex items-center justify-center gap-2">
                             <i class="fab fa-whatsapp text-lg"></i> Join WhatsApp Community
                         </a>
                         
-                        <a href="#quick-access" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-white/80 border-[1.5px] border-slate-900/30 hover:bg-white hover:border-black text-slate-800 font-bold text-sm shadow-sm transition-colors flex items-center justify-center gap-2">
+                        <a href="#quick-access" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-white/85 dark:bg-white/10 border-[1.5px] border-slate-900/25 dark:border-white/15 hover:bg-white hover:border-black text-slate-800 font-bold text-sm shadow-sm active:scale-95 transition-all flex items-center justify-center gap-2">
                             Explore <i class="fas fa-chevron-right text-xs"></i>
                         </a>
                     </div>
                 </div>
 
-                <div class="absolute top-1/2 -translate-y-1/2 -right-8 md:relative md:top-auto md:-translate-y-0 md:right-auto w-[100%] md:w-[45%] h-auto md:h-64 flex items-center justify-center opacity-20 md:opacity-100 transform scale-[0.45] md:scale-90 z-0 pointer-events-none md:pointer-events-auto">
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-blue-400/30 blur-[40px] rounded-full"></div>
-                    <div class="glass-folder w-60 h-44 rounded-2xl relative transform rotate-6 z-10 flex flex-col items-center justify-center text-indigo-300">
-                        <div class="absolute -top-8 -left-5 w-28 h-36 bg-white/60 backdrop-blur-md border-[1.5px] border-slate-900/20 rounded-xl shadow-xl transform -rotate-12 flex flex-col p-3 gap-2">
-                            <div class="w-full h-1.5 bg-slate-900/20 rounded"></div>
-                            <div class="w-3/4 h-1.5 bg-slate-900/20 rounded"></div>
-                            <div class="w-5/6 h-1.5 bg-slate-900/20 rounded"></div>
+                <div class="absolute top-1/2 -translate-y-1/2 -right-8 md:relative md:top-auto md:-translate-y-0 md:right-auto w-full md:w-[44%] h-auto md:h-64 flex items-center justify-center opacity-15 md:opacity-100 transform scale-[0.45] md:scale-90 z-0 pointer-events-none">
+                    <div class="absolute w-48 h-48 bg-blue-400/25 blur-[36px] rounded-full"></div>
+                    <div class="glass-folder w-60 h-44 rounded-2xl relative z-10 flex flex-col items-center justify-center text-indigo-400">
+                        <div class="glass-folder-inner absolute -top-8 -left-5 w-28 h-36 rounded-xl transform -rotate-12 flex flex-col p-3 gap-2">
+                            <div class="w-full h-1.5 bg-slate-900/20 dark:bg-white/20 rounded"></div>
+                            <div class="w-3/4 h-1.5 bg-slate-900/20 dark:bg-white/20 rounded"></div>
+                            <div class="w-5/6 h-1.5 bg-slate-900/20 dark:bg-white/20 rounded"></div>
                         </div>
                         <div class="absolute -top-12 -right-3 text-6xl text-indigo-500 drop-shadow-xl transform rotate-12">
                             <i class="fas fa-graduation-cap"></i>
@@ -238,34 +309,33 @@
             </div>
 
             <!-- SLIDE 2: PYQ Hub (Red/Rose Theme) -->
-            <div class="hero-slide flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 z-10 pointer-events-none" style="opacity: 0; transform: translateX(50px);">
-                
-                <div class="w-full md:w-[55%] relative z-10 text-center md:text-left mt-2 md:mt-0">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-50 border border-red-300 text-red-700 text-[10px] md:text-xs font-black uppercase tracking-wider mb-3 md:mb-4 shadow-sm backdrop-blur-sm">
+            <div class="hero-slide flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
+                <div class="w-full md:w-[56%] relative z-10 text-center md:text-left mt-2 md:mt-0">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-50/90 dark:bg-rose-950/60 border border-red-300 dark:border-rose-500/30 text-red-700 dark:text-rose-300 text-[10px] md:text-xs font-black uppercase tracking-wider mb-3 md:mb-4 shadow-sm">
                         <i class="fas fa-rocket text-red-500"></i> Fastest PYQ Tool
                     </div>
 
-                    <h2 class="text-[35px] md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.05] mb-2 md:mb-3 uppercase">
+                    <h2 class="text-[34px] md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.05] mb-2 md:mb-3 uppercase">
                         THE ULTIMATE <br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-rose-500">KTU PYQ SEARCH</span><br>
                         TOOL!
                     </h2>
                     
                     <p class="text-slate-600 font-bold text-xs md:text-sm max-w-md mx-auto md:mx-0 mb-5 leading-relaxed">
-                        Find any KTU Previous Year Question instantly! No waiting, no ads, just lightning-fast downloads.
+                        Find & merge any KTU Previous Year Question Paper instantly! No waiting, no ads, lightning-fast PDF downloads.
                     </p>
                     
                     <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 pb-6 md:pb-0">
-                        <a href="pyq.html" class="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-red-500 to-rose-600 text-white font-bold text-sm shadow-lg shadow-red-500/20 hover:scale-105 transition-transform flex items-center justify-center gap-2">
-                            <i class="fas fa-search text-lg"></i> Find Paper
+                        <a href="pyq.html" class="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-red-500 to-rose-600 text-white font-bold text-sm shadow-lg shadow-red-500/25 hover:scale-[1.03] active:scale-95 transition-transform flex items-center justify-center gap-2">
+                            <i class="fas fa-search text-base"></i> Find Question Papers
                         </a>
                     </div>
                 </div>
 
-                <div class="absolute top-1/2 -translate-y-1/2 -right-8 md:relative md:top-auto md:-translate-y-0 md:right-auto w-[100%] md:w-[45%] h-auto md:h-64 flex items-center justify-center opacity-20 md:opacity-100 transform scale-[0.45] md:scale-90 z-0 pointer-events-none md:pointer-events-auto">
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-rose-400/20 blur-[40px] rounded-full"></div>
-                    <div class="glass-folder w-60 h-44 rounded-2xl relative transform rotate-6 z-10 flex flex-col items-center justify-center text-rose-300">
-                        <div class="absolute -top-8 -left-5 w-28 h-36 bg-white/60 backdrop-blur-md border-[1.5px] border-slate-900/20 rounded-xl shadow-xl transform -rotate-12 flex items-center justify-center">
+                <div class="absolute top-1/2 -translate-y-1/2 -right-8 md:relative md:top-auto md:-translate-y-0 md:right-auto w-full md:w-[44%] h-auto md:h-64 flex items-center justify-center opacity-15 md:opacity-100 transform scale-[0.45] md:scale-90 z-0 pointer-events-none">
+                    <div class="absolute w-48 h-48 bg-rose-400/20 blur-[36px] rounded-full"></div>
+                    <div class="glass-folder w-60 h-44 rounded-2xl relative z-10 flex flex-col items-center justify-center text-rose-300">
+                        <div class="glass-folder-inner absolute -top-8 -left-5 w-28 h-36 rounded-xl transform -rotate-12 flex items-center justify-center">
                             <i class="fas fa-file-pdf text-6xl text-red-500/80"></i>
                         </div>
                         <div class="absolute -top-12 -right-3 text-6xl text-red-500 drop-shadow-xl transform rotate-12">
@@ -277,14 +347,13 @@
             </div>
 
             <!-- SLIDE 3: B.Tech Study Notes (Yellow/Amber Theme) -->
-            <div class="hero-slide flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 z-10 pointer-events-none" style="opacity: 0; transform: translateX(50px);">
-                
-                <div class="w-full md:w-[55%] relative z-10 text-center md:text-left mt-2 md:mt-0">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-300 text-amber-700 text-[10px] md:text-xs font-black uppercase tracking-wider mb-3 md:mb-4 shadow-sm backdrop-blur-sm">
+            <div class="hero-slide flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
+                <div class="w-full md:w-[56%] relative z-10 text-center md:text-left mt-2 md:mt-0">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50/90 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-500/30 text-amber-700 dark:text-amber-300 text-[10px] md:text-xs font-black uppercase tracking-wider mb-3 md:mb-4 shadow-sm">
                         <i class="fas fa-book text-amber-600"></i> Latest Materials
                     </div>
 
-                    <h2 class="text-[35px] md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.05] mb-2 md:mb-3 uppercase">
+                    <h2 class="text-[34px] md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.05] mb-2 md:mb-3 uppercase">
                         LATEST 2024 SCHEME <br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-yellow-500">B.TECH STUDY NOTES.</span>
                     </h2>
@@ -294,16 +363,16 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 pb-6 md:pb-0">
-                        <a href="notes.html" class="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-white font-bold text-sm shadow-lg shadow-amber-500/20 hover:scale-105 transition-transform flex items-center justify-center gap-2">
-                            <i class="fas fa-book-open text-lg"></i> Browse Notes
+                        <a href="notes.html" class="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-white font-bold text-sm shadow-lg shadow-amber-500/25 hover:scale-[1.03] active:scale-95 transition-transform flex items-center justify-center gap-2">
+                            <i class="fas fa-book-open text-base"></i> Browse Notes
                         </a>
                     </div>
                 </div>
 
-                <div class="absolute top-1/2 -translate-y-1/2 -right-8 md:relative md:top-auto md:-translate-y-0 md:right-auto w-[100%] md:w-[45%] h-auto md:h-64 flex items-center justify-center opacity-20 md:opacity-100 transform scale-[0.45] md:scale-90 z-0 pointer-events-none md:pointer-events-auto">
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-amber-400/20 blur-[40px] rounded-full"></div>
-                    <div class="glass-folder w-60 h-44 rounded-2xl relative transform rotate-6 z-10 flex flex-col items-center justify-center text-amber-300">
-                        <div class="absolute -top-8 -left-5 w-28 h-36 bg-white/60 backdrop-blur-md border-[1.5px] border-slate-900/20 rounded-xl shadow-xl transform -rotate-12 flex flex-col items-center justify-center p-3">
+                <div class="absolute top-1/2 -translate-y-1/2 -right-8 md:relative md:top-auto md:-translate-y-0 md:right-auto w-full md:w-[44%] h-auto md:h-64 flex items-center justify-center opacity-15 md:opacity-100 transform scale-[0.45] md:scale-90 z-0 pointer-events-none">
+                    <div class="absolute w-48 h-48 bg-amber-400/20 blur-[36px] rounded-full"></div>
+                    <div class="glass-folder w-60 h-44 rounded-2xl relative z-10 flex flex-col items-center justify-center text-amber-300">
+                        <div class="glass-folder-inner absolute -top-8 -left-5 w-28 h-36 rounded-xl transform -rotate-12 flex flex-col items-center justify-center p-3">
                             <i class="fas fa-book-reader text-5xl text-amber-500/80 mb-2"></i>
                         </div>
                         <div class="absolute -top-12 -right-3 text-6xl text-amber-500 drop-shadow-xl transform rotate-12">
@@ -315,14 +384,13 @@
             </div>
 
             <!-- SLIDE 4: KTU Updates (Emerald/Teal Theme) -->
-            <div class="hero-slide flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 z-10 pointer-events-none" style="opacity: 0; transform: translateX(50px);">
-                
-                <div class="w-full md:w-[55%] relative z-10 text-center md:text-left mt-2 md:mt-0">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 text-[10px] md:text-xs font-black uppercase tracking-wider mb-3 md:mb-4 shadow-sm backdrop-blur-sm">
+            <div class="hero-slide flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
+                <div class="w-full md:w-[56%] relative z-10 text-center md:text-left mt-2 md:mt-0">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50/90 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-[10px] md:text-xs font-black uppercase tracking-wider mb-3 md:mb-4 shadow-sm">
                         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Official Announcements
                     </div>
 
-                    <h2 class="text-[35px] md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.05] mb-2 md:mb-3 uppercase">
+                    <h2 class="text-[34px] md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.05] mb-2 md:mb-3 uppercase">
                         LATEST KTU <br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500">UPDATES & NEWS.</span>
                     </h2>
@@ -332,16 +400,16 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 pb-6 md:pb-0">
-                        <a href="updates.html" class="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-sm shadow-lg shadow-emerald-500/20 hover:scale-105 transition-transform flex items-center justify-center gap-2">
-                            <i class="fas fa-bullhorn text-lg"></i> View Updates
+                        <a href="updates.html" class="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-sm shadow-lg shadow-emerald-500/25 hover:scale-[1.03] active:scale-95 transition-transform flex items-center justify-center gap-2">
+                            <i class="fas fa-bullhorn text-base"></i> View Updates
                         </a>
                     </div>
                 </div>
 
-                <div class="absolute top-1/2 -translate-y-1/2 -right-8 md:relative md:top-auto md:-translate-y-0 md:right-auto w-[100%] md:w-[45%] h-auto md:h-64 flex items-center justify-center opacity-20 md:opacity-100 transform scale-[0.45] md:scale-90 z-0 pointer-events-none md:pointer-events-auto">
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-emerald-400/20 blur-[40px] rounded-full"></div>
-                    <div class="glass-folder w-60 h-44 rounded-2xl relative transform rotate-6 z-10 flex flex-col items-center justify-center text-emerald-300">
-                        <div class="absolute -top-8 -left-5 w-28 h-36 bg-white/60 backdrop-blur-md border-[1.5px] border-slate-900/20 rounded-xl shadow-xl transform -rotate-12 flex flex-col items-center justify-center p-3">
+                <div class="absolute top-1/2 -translate-y-1/2 -right-8 md:relative md:top-auto md:-translate-y-0 md:right-auto w-full md:w-[44%] h-auto md:h-64 flex items-center justify-center opacity-15 md:opacity-100 transform scale-[0.45] md:scale-90 z-0 pointer-events-none">
+                    <div class="absolute w-48 h-48 bg-emerald-400/20 blur-[36px] rounded-full"></div>
+                    <div class="glass-folder w-60 h-44 rounded-2xl relative z-10 flex flex-col items-center justify-center text-emerald-300">
+                        <div class="glass-folder-inner absolute -top-8 -left-5 w-28 h-36 rounded-xl transform -rotate-12 flex flex-col items-center justify-center p-3">
                             <i class="fas fa-bell text-5xl text-emerald-500/80 mb-2"></i>
                         </div>
                         <div class="absolute -top-12 -right-3 text-6xl text-emerald-500 drop-shadow-xl transform rotate-12">
@@ -352,60 +420,75 @@
                 </div>
             </div>
 
-            <!-- Carousel Controls -->
-            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 md:left-8 md:-translate-x-0 flex items-center gap-2 z-30">
-                <button class="carousel-dot w-6 h-1.5 rounded-full bg-indigo-500 transition-all duration-300" data-index="0"></button>
-                <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-slate-400/60 hover:bg-slate-500 transition-all duration-300" data-index="1"></button>
-                <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-slate-400/60 hover:bg-slate-500 transition-all duration-300" data-index="2"></button>
-                <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-slate-400/60 hover:bg-slate-500 transition-all duration-300" data-index="3"></button>
+            <!-- Carousel Pill Indicators -->
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 md:left-8 md:translate-x-0 flex items-center gap-2 z-30">
+                <button aria-label="Slide 1" class="carousel-dot w-7 h-1.5 rounded-full bg-indigo-600 transition-all duration-300" data-index="0"></button>
+                <button aria-label="Slide 2" class="carousel-dot w-2 h-1.5 rounded-full bg-slate-400/60 hover:bg-slate-500 transition-all duration-300" data-index="1"></button>
+                <button aria-label="Slide 3" class="carousel-dot w-2 h-1.5 rounded-full bg-slate-400/60 hover:bg-slate-500 transition-all duration-300" data-index="2"></button>
+                <button aria-label="Slide 4" class="carousel-dot w-2 h-1.5 rounded-full bg-slate-400/60 hover:bg-slate-500 transition-all duration-300" data-index="3"></button>
             </div>
 
             <!-- Carousel Arrows -->
-            <button id="btn-prev" class="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full items-center justify-center text-slate-700 hover:text-indigo-600 border-[1.5px] border-slate-900/25 shadow-sm transition-colors z-30">
-                <i class="fas fa-chevron-left text-sm"></i>
+            <button id="btn-prev" aria-label="Previous slide" class="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 dark:bg-slate-900/70 hover:bg-white rounded-full items-center justify-center text-slate-700 hover:text-indigo-600 border-[1.5px] border-slate-900/20 shadow-sm active:scale-90 transition-all z-30">
+                <i class="fas fa-chevron-left text-xs"></i>
             </button>
-            <button id="btn-next" class="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 hover:bg-white rounded-full items-center justify-center text-slate-700 hover:text-indigo-600 border-[1.5px] border-slate-900/25 shadow-sm transition-colors z-30">
-                <i class="fas fa-chevron-right text-sm"></i>
+            <button id="btn-next" aria-label="Next slide" class="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 dark:bg-slate-900/70 hover:bg-white rounded-full items-center justify-center text-slate-700 hover:text-indigo-600 border-[1.5px] border-slate-900/20 shadow-sm active:scale-90 transition-all z-30">
+                <i class="fas fa-chevron-right text-xs"></i>
             </button>
         </div>
 
-        <!-- SEARCH BAR (With Solid Defined Border) -->
-        <div class="w-full relative z-40 mt-2 md:mt-4 slide-rtl delay-200">
-            <div class="bg-white/75 backdrop-blur-2xl border-[1.5px] border-slate-900/25 focus-within:border-black rounded-2xl md:rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_10px_30px_rgba(0,0,0,0.06)] relative group transition-colors">
+        <!-- SMART SEARCH BAR (Direct Course Search + Expandable Branch/Semester Drawer) -->
+        <div id="search-wrapper" class="w-full relative z-40 mt-1 md:mt-2 spring-enter" style="animation-delay: 90ms;">
+            <div class="bg-white/80 backdrop-blur-2xl border-[1.5px] border-slate-900/20 focus-within:border-indigo-600 rounded-2xl md:rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.95),0_12px_32px_rgba(15,23,42,0.06)] relative transition-all">
                 
                 <form id="quick-search-form" class="flex items-center w-full p-1 md:p-1.5">
-                    <button type="submit" class="w-12 h-12 flex-shrink-0 text-slate-500 hover:text-indigo-600 transition-colors rounded-full focus:outline-none flex items-center justify-center">
-                        <i class="fas fa-search text-lg"></i>
+                    <button type="submit" aria-label="Search" class="w-11 h-11 md:w-12 md:h-12 flex-shrink-0 text-slate-500 hover:text-indigo-600 transition-colors rounded-full focus:outline-none flex items-center justify-center">
+                        <i class="fas fa-search text-base md:text-lg"></i>
                     </button>
                     
-                    <input type="search" id="quick-search-input" placeholder="Search subjects (e.g. GAMAT401)" class="w-full bg-transparent border-none focus:outline-none text-slate-800 font-bold placeholder-slate-400 text-sm md:text-base px-2 h-12" autocomplete="off">
+                    <input type="search" id="quick-search-input" placeholder="Search course code or subject (e.g. GAMAT101, CST201)..." class="w-full bg-transparent border-none focus:outline-none text-slate-800 font-bold placeholder-slate-400 text-xs sm:text-sm md:text-base px-2 h-11 md:h-12" autocomplete="off">
                     
-                    <div id="chevron-trigger" class="w-12 h-12 flex-shrink-0 flex items-center justify-center text-slate-500 cursor-pointer hover:bg-indigo-50/80 hover:text-indigo-600 rounded-full transition-colors mr-1">
-                        <i id="chevron-icon" class="fas fa-chevron-down transition-transform duration-300"></i>
-                    </div>
+                    <button type="button" id="chevron-trigger" aria-label="Toggle branch filter" class="px-3.5 h-10 md:h-11 flex-shrink-0 flex items-center justify-center gap-1.5 text-slate-600 cursor-pointer bg-slate-100/80 dark:bg-white/10 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl md:rounded-full transition-all mr-1 text-xs font-bold border border-slate-200/80 dark:border-white/10">
+                        <span class="hidden sm:inline">Filter</span>
+                        <i id="chevron-icon" class="fas fa-chevron-down text-[11px] transition-transform duration-300"></i>
+                    </button>
                 </form>
 
-                <div id="filter-panel" class="expand-panel absolute top-full left-0 right-0 mt-3 z-50">
-                    <div class="glass-panel bg-white/95 rounded-[2rem] p-5 shadow-2xl border-[1.5px] border-slate-900/25">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Expandable Quick Filter & Live Autocomplete Drawer -->
+                <div id="filter-panel" class="expand-panel absolute top-full left-0 right-0 mt-2.5 z-50">
+                    <div class="glass-panel bg-white/95 rounded-[1.75rem] p-4 sm:p-5 shadow-2xl border-[1.5px] border-slate-900/20">
+                        
+                        <!-- Live Subject Matches (Revealed when typing) -->
+                        <div id="home-autocomplete-list" class="hidden mb-4 pb-3 border-b border-slate-200/70 dark:border-white/10 divide-y divide-slate-100 dark:divide-white/5 max-h-48 overflow-y-auto"></div>
+
+                        <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2.5 px-1">
+                            <i class="fas fa-compass text-indigo-500 mr-1"></i> Jump to Branch Study Notes
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                             <div>
-                                <select id="select-branch" class="w-full bg-white border-[1.5px] border-slate-900/20 text-slate-800 font-bold rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-400 shadow-sm">
-                                    <option value="" disabled selected>Branch</option>
+                                <select id="select-branch" class="w-full bg-white dark:bg-slate-900 border-[1.5px] border-slate-900/15 dark:border-white/15 text-slate-800 font-bold rounded-xl p-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm cursor-pointer">
+                                    <option value="" disabled selected>Select Branch</option>
                                     <option value="CSE">Computer Science (CSE)</option>
-                                    <option value="CE">Civil Engineering (CE)</option>
+                                    <option value="ECE">Electronics & Comm (ECE)</option>
+                                    <option value="EEE">Electrical & Electronics (EEE)</option>
                                     <option value="ME">Mechanical Engg (ME)</option>
+                                    <option value="CE">Civil Engineering (CE)</option>
                                 </select>
                             </div>
                             <div>
-                                <select id="select-sem" class="w-full bg-white border-[1.5px] border-slate-900/20 text-slate-800 font-bold rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-400 shadow-sm">
-                                    <option value="" disabled selected>Semester</option>
+                                <select id="select-sem" class="w-full bg-white dark:bg-slate-900 border-[1.5px] border-slate-900/15 dark:border-white/15 text-slate-800 font-bold rounded-xl p-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm cursor-pointer">
+                                    <option value="" disabled selected>Select Semester</option>
                                     <option value="S1">Semester 1 (S1)</option>
                                     <option value="S2">Semester 2 (S2)</option>
+                                    <option value="S3">Semester 3 (S3)</option>
+                                    <option value="S4">Semester 4 (S4)</option>
+                                    <option value="S5">Semester 5 (S5)</option>
+                                    <option value="S6">Semester 6 (S6)</option>
                                 </select>
                             </div>
-                            <button id="btn-find" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold py-3.5 px-6 rounded-xl transition-all shadow-[0_4px_15px_rgba(79,70,229,0.3)] flex items-center justify-center gap-2">
-                                <span>Find Resources</span>
-                                <i class="fas fa-arrow-right"></i>
+                            <button type="button" id="btn-find" class="w-full bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-extrabold py-3 px-5 rounded-xl transition-all shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2 text-xs sm:text-sm">
+                                <span>Open Notes Hub</span>
+                                <i class="fas fa-arrow-right text-xs"></i>
                             </button>
                         </div>
                     </div>
@@ -413,16 +496,16 @@
             </div>
         </div>
 
-        <!-- QUICK ACCESS HYBRID GRID (Visible Black Borders) -->
-        <div id="quick-access" class="w-full mt-4">
-            <div class="flex items-center justify-between mb-3 px-2 slide-rtl delay-300">
-                <h3 class="text-xs font-bold text-slate-600 uppercase tracking-widest">Quick Access</h3>
+        <!-- QUICK ACCESS HYBRID GRID -->
+        <div id="quick-access" class="w-full mt-2 spring-enter" style="animation-delay: 140ms;">
+            <div class="flex items-center justify-between mb-3 px-2">
+                <h3 class="text-xs font-extrabold text-slate-600 uppercase tracking-widest">Quick Access</h3>
             </div>
             
             <div class="grid grid-cols-2 lg:grid-cols-3 gap-2.5 md:gap-3.5">
                 
                 <!-- 1. Timetables -->
-                <a href="timetable.html" class="hybrid-card group slide-rtl delay-[350ms]">
+                <a href="timetable.html" class="hybrid-card group">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-orange-500/30 group-hover:scale-105 transition-transform shrink-0">
                             <i class="fas fa-calendar-day text-lg md:text-xl"></i>
@@ -438,7 +521,7 @@
                 </a>
 
                 <!-- 2. Study Notes -->
-                <a href="notes.html" class="hybrid-card group slide-rtl delay-[400ms]">
+                <a href="notes.html" class="hybrid-card group">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-indigo-500/30 group-hover:scale-105 transition-transform shrink-0">
                             <i class="fas fa-book-open text-lg md:text-xl"></i>
@@ -454,7 +537,7 @@
                 </a>
 
                 <!-- 3. Previous Papers -->
-                <a href="pyq.html" class="hybrid-card group slide-rtl delay-[450ms]">
+                <a href="pyq.html" class="hybrid-card group">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-fuchsia-500 to-pink-600 rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-fuchsia-500/30 group-hover:scale-105 transition-transform shrink-0">
                             <i class="fas fa-file-alt text-lg md:text-xl"></i>
@@ -470,7 +553,7 @@
                 </a>
 
                 <!-- 4. KTU Updates -->
-                <a href="updates.html" class="hybrid-card group slide-rtl delay-[500ms]">
+                <a href="updates.html" class="hybrid-card group">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-emerald-500/30 group-hover:scale-105 transition-transform shrink-0">
                             <i class="fas fa-bullhorn text-lg md:text-xl"></i>
@@ -486,7 +569,7 @@
                 </a>
 
                 <!-- 5. Server Status -->
-                <a href="status.html" class="hybrid-card group slide-rtl delay-[550ms]">
+                <a href="status.html" class="hybrid-card group">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-cyan-500/30 group-hover:scale-105 transition-transform relative shrink-0">
                             <span class="absolute -top-1 -right-1 flex h-3 w-3">
@@ -506,7 +589,7 @@
                 </a>
 
                 <!-- 6. KTU Blog -->
-                <a href="blog/index.html" class="hybrid-card group slide-rtl delay-[600ms]">
+                <a href="blog/index.html" class="hybrid-card group">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-violet-500/30 group-hover:scale-105 transition-transform shrink-0">
                             <i class="fas fa-feather-alt text-lg md:text-xl"></i>
@@ -522,7 +605,7 @@
                 </a>
 
                 <!-- 7. Exam Review Hub -->
-                <a href="polls.html" class="hybrid-card group slide-rtl delay-[650ms]">
+                <a href="polls.html" class="hybrid-card group">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-rose-500 to-red-600 rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-rose-500/30 group-hover:scale-105 transition-transform relative shrink-0">
                             <span class="absolute -top-1 -right-1 flex h-3 w-3">
@@ -542,7 +625,7 @@
                 </a>
 
                 <!-- 8. Academic Calendars -->
-                <a href="calendar.html" class="hybrid-card group slide-rtl delay-[700ms]">
+                <a href="calendar.html" class="hybrid-card group">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-pink-500 to-fuchsia-600 rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-pink-500/30 group-hover:scale-105 transition-transform shrink-0">
                             <i class="fas fa-calendar-alt text-lg md:text-xl"></i>
@@ -558,7 +641,7 @@
                 </a>
 
                 <!-- 9. Q&A Hub -->
-                <a href="doubts.html" class="hybrid-card group slide-rtl delay-[750ms]">
+                <a href="doubts.html" class="hybrid-card group">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-sky-400 to-blue-500 rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-sky-500/30 group-hover:scale-105 transition-transform relative shrink-0">
                             <span class="absolute -top-1 -right-1 flex h-3 w-3">
@@ -578,7 +661,7 @@
                 </a>
 
                 <!-- 10. WhatsApp Groups -->
-                <a href="groups.html" class="hybrid-card group slide-rtl delay-[800ms]">
+                <a href="groups.html" class="hybrid-card group">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#25D366] to-[#128C7E] rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-[#25D366]/30 group-hover:scale-105 transition-transform shrink-0">
                             <i class="fab fa-whatsapp text-lg md:text-xl"></i>
@@ -594,7 +677,7 @@
                 </a>
 
                 <!-- 11. Ambassador Program -->
-                <a href="https://keralatimetable.in/ambassador.html" class="hybrid-card group slide-rtl delay-[850ms]">
+                <a href="ambassador.html" class="hybrid-card group">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-yellow-500/30 group-hover:scale-105 transition-transform relative shrink-0">
                             <span class="absolute -top-1 -right-1 flex h-3 w-3">
@@ -614,7 +697,7 @@
                 </a>
 
                 <!-- 12. Report an Issue -->
-                <a href="https://keralatimetable.in/report.html" class="hybrid-card group slide-rtl delay-[900ms]">
+                <a href="report.html" class="hybrid-card group">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-slate-400 to-slate-500 rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-slate-500/30 group-hover:scale-105 transition-transform shrink-0">
                             <i class="fas fa-flag text-lg md:text-xl"></i>
@@ -630,7 +713,7 @@
                 </a>
 
                 <!-- 13. Vortex Tournament -->
-                <a href="https://keralatimetable.in/vortex.html" class="hybrid-card group lg:col-span-1 slide-rtl delay-[950ms]">
+                <a href="vortex.html" class="hybrid-card group lg:col-span-1">
                     <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-purple-500 to-fuchsia-600 rounded-xl flex items-center justify-center text-white shadow-sm md:shadow-md shadow-purple-500/30 group-hover:scale-105 transition-transform relative shrink-0">
                             <span class="absolute -top-1 -right-1 flex h-3 w-3">
@@ -653,17 +736,17 @@
         </div>
 
         <!-- TRENDING NOW SECTION -->
-        <div class="w-full mt-6 md:mt-8 slide-rtl delay-[1000ms]">
+        <div class="w-full mt-6 md:mt-8 spring-enter" style="animation-delay: 200ms;">
             <div class="flex items-center justify-between mb-4 px-2">
-                <h3 class="text-xs font-bold text-slate-600 uppercase tracking-widest flex items-center gap-2">
+                <h3 class="text-xs font-extrabold text-slate-600 uppercase tracking-widest flex items-center gap-2">
                     <i class="fas fa-fire text-orange-500"></i> Trending Now
                 </h3>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 
-                <a href="KTU/CSE/S1/notes/" class="glass-panel glass-panel-hover rounded-2xl p-5 flex items-center gap-4 transition-all group">
-                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-colors border border-indigo-200">
+                <a href="KTU/CSE/S1/notes/" class="glass-panel glass-panel-hover rounded-2xl p-5 flex items-center gap-4 group">
+                    <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-colors border border-indigo-200 dark:border-indigo-500/30">
                         <i class="fas fa-folder-open text-xl"></i>
                     </div>
                     <div>
@@ -672,8 +755,8 @@
                     </div>
                 </a>
 
-                <a href="notes-ucest206.html" class="glass-panel glass-panel-hover rounded-2xl p-5 flex items-center gap-4 transition-all group">
-                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors border border-emerald-200">
+                <a href="notes-ucest206.html" class="glass-panel glass-panel-hover rounded-2xl p-5 flex items-center gap-4 group">
+                    <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors border border-emerald-200 dark:border-emerald-500/30">
                         <i class="fas fa-chart-line text-xl"></i>
                     </div>
                     <div>
@@ -682,8 +765,8 @@
                     </div>
                 </a>
 
-                <a href="btech/s2/supply-2026.html" class="glass-panel glass-panel-hover rounded-2xl p-5 flex items-center gap-4 transition-all group">
-                    <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-rose-600 group-hover:text-white transition-colors border border-rose-200">
+                <a href="btech/s2/supply-2026.html" class="glass-panel glass-panel-hover rounded-2xl p-5 flex items-center gap-4 group">
+                    <div class="w-12 h-12 bg-rose-50 dark:bg-rose-500/15 text-rose-600 dark:text-rose-400 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-rose-600 group-hover:text-white transition-colors border border-rose-200 dark:border-rose-500/30">
                         <i class="fas fa-calendar-alt text-xl"></i>
                     </div>
                     <div>
@@ -696,11 +779,11 @@
         </div>
 
         <!-- STATS PILL -->
-        <div class="w-full mt-4 mb-4 slide-rtl delay-[1050ms]">
+        <div class="w-full mt-4 mb-4 spring-enter" style="animation-delay: 250ms;">
             <div class="glass-panel rounded-[2rem] md:rounded-full p-6 md:px-10 flex flex-wrap md:flex-nowrap items-center justify-between gap-6">
                 
                 <div class="flex items-center gap-3 w-[45%] md:w-auto">
-                    <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-lg shrink-0 border border-indigo-200">
+                    <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 flex items-center justify-center text-lg shrink-0 border border-indigo-200 dark:border-indigo-500/30">
                         <i class="fas fa-users"></i>
                     </div>
                     <div>
@@ -709,10 +792,10 @@
                     </div>
                 </div>
 
-                <div class="hidden md:block w-px h-10 bg-slate-900/20 shrink-0"></div>
+                <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0"></div>
 
                 <div class="flex items-center gap-3 w-[45%] md:w-auto">
-                    <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg shrink-0 border border-emerald-200">
+                    <div class="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 flex items-center justify-center text-lg shrink-0 border border-emerald-200 dark:border-emerald-500/30">
                         <i class="fas fa-file-alt"></i>
                     </div>
                     <div>
@@ -721,10 +804,10 @@
                     </div>
                 </div>
 
-                <div class="hidden md:block w-px h-10 bg-slate-900/20 shrink-0"></div>
+                <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0"></div>
 
                 <div class="flex items-center gap-3 w-[45%] md:w-auto">
-                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-lg shrink-0 border border-blue-200">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-300 flex items-center justify-center text-lg shrink-0 border border-blue-200 dark:border-blue-500/30">
                         <i class="fas fa-download"></i>
                     </div>
                     <div>
@@ -733,10 +816,10 @@
                     </div>
                 </div>
 
-                <div class="hidden md:block w-px h-10 bg-slate-900/20 shrink-0"></div>
+                <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0"></div>
 
                 <div class="flex items-center gap-3 w-[45%] md:w-auto">
-                    <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-lg shrink-0 border border-orange-200">
+                    <div class="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-500/20 text-orange-600 dark:text-orange-300 flex items-center justify-center text-lg shrink-0 border border-orange-200 dark:border-orange-500/30">
                         <i class="fas fa-star"></i>
                     </div>
                     <div>
@@ -751,7 +834,7 @@
     </main>
 
     <!-- MINIMAL FOOTER -->
-    <footer class="w-full max-w-6xl mx-auto px-4 pb-8 relative z-10 slide-rtl delay-[1100ms]">
+    <footer class="w-full max-w-6xl mx-auto px-4 pb-8 relative z-10 spring-enter" style="animation-delay: 290ms;">
         <div class="glass-panel rounded-full px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="text-xs md:text-sm font-medium text-slate-700">
                 Made with <i class="fas fa-heart text-rose-500 mx-1"></i> for KTU Students
@@ -762,46 +845,43 @@
         </div>
     </footer>
 
-    <script src="components.js?v=11"></script>
+    <script src="/components.js?v=16" onerror="this.onerror=null;this.src='components.js';"></script>
     <script>
-        if(typeof loadNavigation === 'function') loadNavigation('home', '', false);
+        if (typeof loadNavigation === 'function') loadNavigation('home', '', false);
 
         document.addEventListener('DOMContentLoaded', () => {
-            // --- CAROUSEL LOGIC ---
+            // --- 120FPS GPU CAROUSEL WITH TOUCH SWIPE & HOVER PAUSE ---
+            const carouselEl = document.getElementById('hero-carousel');
             const slides = document.querySelectorAll('.hero-slide');
             const dots = document.querySelectorAll('.carousel-dot');
             const prevBtn = document.getElementById('btn-prev');
             const nextBtn = document.getElementById('btn-next');
             
             let currentSlide = 0;
-            let slideTimer;
+            let slideTimer = null;
+            let isHovered = false;
 
             function updateCarousel(newIndex, direction = 'next') {
+                if (newIndex === currentSlide) return;
+
                 slides.forEach((slide, i) => {
+                    slide.classList.remove('slide-active', 'slide-exit-left', 'slide-exit-right');
                     if (i === newIndex) {
-                        slide.style.opacity = '1';
-                        slide.style.transform = 'translateX(0)';
-                        slide.style.zIndex = '20';
-                        slide.style.pointerEvents = 'auto';
+                        slide.classList.add('slide-active');
+                    } else if (i === currentSlide) {
+                        slide.classList.add(direction === 'next' ? 'slide-exit-left' : 'slide-exit-right');
                     } else {
-                        slide.style.opacity = '0';
-                        slide.style.zIndex = '10';
-                        slide.style.pointerEvents = 'none';
-                        if (direction === 'next') {
-                            slide.style.transform = (i === currentSlide) ? 'translateX(-50px)' : 'translateX(50px)';
-                        } else {
-                            slide.style.transform = (i === currentSlide) ? 'translateX(50px)' : 'translateX(-50px)';
-                        }
+                        slide.classList.add(direction === 'next' ? 'slide-exit-right' : 'slide-exit-left');
                     }
                 });
 
                 dots.forEach((dot, i) => {
                     if (i === newIndex) {
-                        dot.classList.remove('w-1.5', 'bg-slate-400/60', 'hover:bg-slate-500');
-                        dot.classList.add('w-6', 'bg-indigo-500');
+                        dot.classList.remove('w-2', 'bg-slate-400/60', 'hover:bg-slate-500');
+                        dot.classList.add('w-7', 'bg-indigo-600');
                     } else {
-                        dot.classList.remove('w-6', 'bg-indigo-500');
-                        dot.classList.add('w-1.5', 'bg-slate-400/60', 'hover:bg-slate-500');
+                        dot.classList.remove('w-7', 'bg-indigo-600');
+                        dot.classList.add('w-2', 'bg-slate-400/60', 'hover:bg-slate-500');
                     }
                 });
 
@@ -810,72 +890,188 @@
             }
 
             function nextSlide() {
-                let newIndex = (currentSlide + 1) % slides.length;
+                if (window.KTUFlow && window.KTUFlow.isPaused) {
+                    resetTimer();
+                    return;
+                }
+                const newIndex = (currentSlide + 1) % slides.length;
                 updateCarousel(newIndex, 'next');
             }
 
             function prevSlide() {
-                let newIndex = (currentSlide - 1 + slides.length) % slides.length;
+                const newIndex = (currentSlide - 1 + slides.length) % slides.length;
                 updateCarousel(newIndex, 'prev');
             }
 
             function resetTimer() {
                 clearTimeout(slideTimer);
-                let duration = (currentSlide === 0) ? 6000 : 4000;
+                if (isHovered) return;
+                const duration = (currentSlide === 0) ? 5800 : 4200;
                 slideTimer = setTimeout(nextSlide, duration);
             }
 
-            nextBtn.addEventListener('click', () => { 
-                let newIndex = (currentSlide + 1) % slides.length;
-                updateCarousel(newIndex, 'next'); 
-            });
-            
-            prevBtn.addEventListener('click', () => { 
-                let newIndex = (currentSlide - 1 + slides.length) % slides.length;
-                updateCarousel(newIndex, 'prev'); 
-            });
+            nextBtn?.addEventListener('click', nextSlide);
+            prevBtn?.addEventListener('click', prevSlide);
 
             dots.forEach(dot => {
                 dot.addEventListener('click', (e) => {
-                    let targetIndex = parseInt(e.target.getAttribute('data-index'));
-                    let direction = targetIndex > currentSlide ? 'next' : 'prev';
-                    if (targetIndex !== currentSlide) {
-                        updateCarousel(targetIndex, direction);
-                    }
+                    const targetIndex = parseInt(e.currentTarget.getAttribute('data-index'), 10);
+                    const direction = targetIndex > currentSlide ? 'next' : 'prev';
+                    updateCarousel(targetIndex, direction);
                 });
             });
 
+            // Pause auto-advance on desktop hover
+            carouselEl?.addEventListener('mouseenter', () => {
+                isHovered = true;
+                clearTimeout(slideTimer);
+            });
+            carouselEl?.addEventListener('mouseleave', () => {
+                isHovered = false;
+                resetTimer();
+            });
+
+            // Touch Swipe Support for Mobile Phones
+            let touchStartX = 0;
+            let touchStartY = 0;
+            carouselEl?.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+            }, { passive: true });
+
+            carouselEl?.addEventListener('touchend', (e) => {
+                const diffX = touchStartX - e.changedTouches[0].screenX;
+                const diffY = Math.abs(touchStartY - e.changedTouches[0].screenY);
+                if (Math.abs(diffX) > 45 && diffY < 60) {
+                    if (diffX > 0) nextSlide();
+                    else prevSlide();
+                }
+            }, { passive: true });
+
             resetTimer();
 
-            // --- SEARCH BAR DROPDOWN LOGIC ---
+            // --- SMART SEARCH BAR & KTUFLOW CATALOG AUTOCOMPLETE ---
+            const searchWrapper = document.getElementById('search-wrapper');
             const searchForm = document.getElementById('quick-search-form');
             const searchInput = document.getElementById('quick-search-input');
             const chevronTrigger = document.getElementById('chevron-trigger');
             const panel = document.getElementById('filter-panel');
             const chevronIcon = document.getElementById('chevron-icon');
+            const autocompleteList = document.getElementById('home-autocomplete-list');
+            const branchSel = document.getElementById('select-branch');
+            const semSel = document.getElementById('select-sem');
 
-            function togglePanel() {
-                panel.classList.toggle('active');
-                chevronIcon.classList.toggle('rotate-180');
+            // Pre-fill Branch & Semester from KTUFlow Profile if available
+            if (window.KTUFlow) {
+                const prof = window.KTUFlow.getProfile();
+                if (prof.branch && branchSel.querySelector(`option[value="${prof.branch}"]`)) {
+                    branchSel.value = prof.branch;
+                }
+                if (prof.sem && semSel.querySelector(`option[value="${prof.sem}"]`)) {
+                    semSel.value = prof.sem;
+                }
             }
 
-            searchInput.addEventListener('focus', () => {
-                if (!panel.classList.contains('active')) togglePanel();
+            function setPanelOpen(open) {
+                panel.classList.toggle('active', open);
+                chevronIcon.classList.toggle('rotate-180', open);
+            }
+
+            searchInput.addEventListener('focus', () => setPanelOpen(true));
+            chevronTrigger.addEventListener('click', () => setPanelOpen(!panel.classList.contains('active')));
+
+            // Close filter panel when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!searchWrapper.contains(e.target)) {
+                    setPanelOpen(false);
+                }
             });
-            
-            chevronTrigger.addEventListener('click', togglePanel);
-            
+
+            // Live subject autocomplete powered by KTUFlow catalog
+            let flatSubjects = null;
+            async function ensureFlatSubjects() {
+                if (flatSubjects) return flatSubjects;
+                try {
+                    const data = window.KTUFlow ? await window.KTUFlow.getCatalog() : null;
+                    if (!data || !data.catalog) return [];
+                    const seen = new Set();
+                    flatSubjects = [];
+                    Object.keys(data.catalog).forEach(scheme => {
+                        const branches = data.catalog[scheme] || {};
+                        Object.keys(branches).forEach(b => {
+                            const sems = branches[b] || {};
+                            Object.keys(sems).forEach(s => {
+                                (sems[s] || []).forEach(subj => {
+                                    if (!subj.course_code) return;
+                                    const code = subj.course_code.toUpperCase();
+                                    if (!seen.has(code)) {
+                                        seen.add(code);
+                                        flatSubjects.push({ code, name: subj.subject_name || '', scheme });
+                                    }
+                                });
+                            });
+                        });
+                    });
+                    return flatSubjects;
+                } catch (e) {
+                    return [];
+                }
+            }
+
+            searchInput.addEventListener('input', async (e) => {
+                const q = e.target.value.trim().toUpperCase();
+                if (!panel.classList.contains('active')) setPanelOpen(true);
+
+                if (q.length < 2) {
+                    autocompleteList.classList.add('hidden');
+                    autocompleteList.innerHTML = '';
+                    return;
+                }
+
+                const list = await ensureFlatSubjects();
+                const matches = list.filter(item => item.code.includes(q) || item.name.toUpperCase().includes(q)).slice(0, 5);
+
+                if (matches.length === 0) {
+                    autocompleteList.classList.add('hidden');
+                    return;
+                }
+
+                autocompleteList.innerHTML = matches.map(m => `
+                    <a href="pyq.html?q=${encodeURIComponent(m.code)}" class="flex items-center justify-between py-2 px-2.5 rounded-xl hover:bg-indigo-50/80 dark:hover:bg-slate-800/80 transition-colors">
+                        <div class="truncate pr-2">
+                            <span class="font-mono-code font-extrabold text-xs text-indigo-600 dark:text-indigo-400 mr-2">${m.code}</span>
+                            <span class="text-xs font-bold text-slate-700">${m.name}</span>
+                        </div>
+                        <span class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 shrink-0 flex items-center gap-1">
+                            PYQs <i class="fas fa-arrow-right text-[9px]"></i>
+                        </span>
+                    </a>
+                `).join('');
+                autocompleteList.classList.remove('hidden');
+            });
+
+            // Submitting a query in the search bar searches PYQs directly
             searchForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                if (!panel.classList.contains('active')) togglePanel();
+                const query = searchInput.value.trim();
+                if (query) {
+                    window.KTUFlow?.capsule('loading', `Searching ${query.toUpperCase()}...`);
+                    window.location.href = `pyq.html?q=${encodeURIComponent(query.toUpperCase())}`;
+                } else {
+                    setPanelOpen(!panel.classList.contains('active'));
+                }
             });
             
             document.getElementById('btn-find').addEventListener('click', (e) => {
                 e.preventDefault();
-                const branch = document.getElementById('select-branch').value;
-                const sem = document.getElementById('select-sem').value;
-                if(branch && sem) {
+                const branch = branchSel.value;
+                const sem = semSel.value;
+                if (branch && sem) {
+                    window.KTUFlow?.setProfile({ branch, sem });
+                    window.KTUFlow?.capsule('loading', `Opening ${branch} ${sem} Notes...`);
                     window.location.href = `KTU/${branch}/${sem}/notes/`;
+                } else {
+                    window.KTUFlow?.toast('Please select both Branch and Semester', 'amber');
                 }
             });
         });
