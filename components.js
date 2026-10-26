@@ -7,12 +7,32 @@ window.KTUFlow = (function() {
     const CATALOG_CACHE_KEY = 'ktu_flow_catalog_cache_v2';
     let memoryCatalog = null;
     let prefetchedUrls = new Set();
-    let capsuleHideTimer = null;
-    let capsuleExpandTimer = null;
-    let capsuleCollapseTimer = null;
+    let capsuleHideTimeout = null;
+    let capsuleExpandTimeout = null;
+    let capsuleCollapseTimeout = null;
     let bottomDockActive = false;
 
+    // Ensure #coloros-live-capsule is pre-mounted in DOM at scale(0) so the first
+    // Stage-1 dot pop-in transition never gets skipped by browser layout batching
+    function ensureCapsuleMounted() {
+        let capsule = document.getElementById('coloros-live-capsule');
+        if (!capsule && document.body) {
+            capsule = document.createElement('div');
+            capsule.id = 'coloros-live-capsule';
+            capsule.innerHTML = `
+                <div id="capsule-inner" class="h-full px-3.5 flex items-center justify-center gap-2.5 whitespace-nowrap text-xs font-extrabold text-white">
+                    <span id="capsule-icon" class="flex items-center justify-center shrink-0"></span>
+                    <span id="capsule-text" class="tracking-tight text-white"></span>
+                </div>
+            `;
+            document.body.appendChild(capsule);
+        }
+        return capsule;
+    }
+
     const engine = {
+        ensureCapsuleMounted,
+
         // 1. Student Profile Sync (Scheme, Branch, Semester across all pages)
         getProfile() {
             try {
@@ -116,7 +136,7 @@ window.KTUFlow = (function() {
             });
         },
 
-        // 6. Bottom UI Collision Manager & Global ColorOS Dot-to-Sides Live Capsule
+        // 6. Bottom UI Collision Manager & Exact PYQ ColorOS Dot-to-Sides Live Capsule
         setBottomDockActive(isActive) {
             bottomDockActive = isActive;
             const waPopup = document.getElementById('ktu-wa-popup');
@@ -126,48 +146,39 @@ window.KTUFlow = (function() {
         },
 
         capsule(state = 'idle', message = '', actionUrl = null) {
-            let cap = document.getElementById('coloros-live-capsule') || document.getElementById('ktu-live-capsule');
-            if (!cap) {
-                cap = document.createElement('div');
-                cap.id = 'coloros-live-capsule';
-                cap.innerHTML = `
-                    <div id="capsule-inner" class="h-full px-3.5 flex items-center justify-center gap-2.5 whitespace-nowrap text-xs font-extrabold text-white">
-                        <span id="capsule-icon" class="flex items-center justify-center shrink-0"></span>
-                        <span id="capsule-text" class="tracking-tight text-white"></span>
-                    </div>
-                `;
-                document.body.appendChild(cap);
-            }
+            const capsule = ensureCapsuleMounted();
+            if (!capsule) return;
 
-            const inner = cap.querySelector('#capsule-inner') || cap;
-            const iconEl = cap.querySelector('#capsule-icon');
-            const textEl = cap.querySelector('#capsule-text');
+            const inner = document.getElementById('capsule-inner') || capsule.querySelector('#capsule-inner');
+            const iconEl = document.getElementById('capsule-icon') || capsule.querySelector('#capsule-icon');
+            const textEl = document.getElementById('capsule-text') || capsule.querySelector('#capsule-text');
+            if (!inner || !iconEl || !textEl) return;
 
-            clearTimeout(capsuleHideTimer);
-            clearTimeout(capsuleExpandTimer);
-            clearTimeout(capsuleCollapseTimer);
+            clearTimeout(capsuleHideTimeout);
+            clearTimeout(capsuleExpandTimeout);
+            clearTimeout(capsuleCollapseTimeout);
 
-            // Stage 3: Retract both sides into center dot, then scale down
+            // STAGE 3: Retract both sides into 38px center dot, then scale down
             if (state === 'hide' || state === 'idle') {
-                cap.classList.remove('capsule-expanded');
+                capsule.classList.remove('capsule-expanded');
                 inner.classList.remove('capsule-shimmer-bg');
-                cap.style.pointerEvents = 'none';
-                cap.style.width = '38px';
-                capsuleCollapseTimer = setTimeout(() => {
-                    cap.classList.remove('capsule-dot');
+                capsule.style.pointerEvents = 'none';
+                capsule.style.width = '38px';
+                capsuleCollapseTimeout = setTimeout(() => {
+                    capsule.classList.remove('capsule-dot');
                 }, 320);
                 return;
             }
 
-            // Optional Click Action (e.g. clicking a Live Notice alert opens /updates.html)
+            // Optional Click Action
             if (actionUrl) {
-                cap.style.pointerEvents = 'auto';
-                cap.style.cursor = 'pointer';
-                cap.onclick = () => { window.location.href = actionUrl; };
+                capsule.style.pointerEvents = 'auto';
+                capsule.style.cursor = 'pointer';
+                capsule.onclick = () => { window.location.href = actionUrl; };
             } else {
-                cap.style.pointerEvents = 'none';
-                cap.style.cursor = 'default';
-                cap.onclick = null;
+                capsule.style.pointerEvents = 'none';
+                capsule.style.cursor = 'default';
+                capsule.onclick = null;
             }
 
             let iconHTML = '<span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>';
@@ -190,48 +201,45 @@ window.KTUFlow = (function() {
                 inner.classList.remove('capsule-shimmer-bg');
             }
 
-            const isAlreadyOpen = cap.classList.contains('capsule-expanded');
+            const isAlreadyOpen = capsule.classList.contains('capsule-expanded');
 
-            if (iconEl && textEl) {
-                textEl.innerText = message;
-                iconEl.innerHTML = iconHTML;
-                const prevWidth = cap.style.width;
-                cap.style.width = 'auto';
-                const maxAllowedWidth = Math.min(window.innerWidth - 28, 420);
-                const targetWidth = Math.min(Math.max(cap.scrollWidth + 8, 140), maxAllowedWidth);
+            textEl.innerText = message;
+            iconEl.innerHTML = iconHTML;
+            const prevWidth = capsule.style.width;
+            capsule.style.width = 'auto';
+            const targetWidth = Math.max(capsule.scrollWidth + 6, 140);
 
-                if (!isAlreadyOpen) {
-                    // Stage 1: Pop in as 38px center dot
-                    cap.style.width = '38px';
-                    textEl.classList.add('hidden');
-                    void cap.offsetWidth;
-                    cap.classList.add('capsule-dot');
+            if (!isAlreadyOpen) {
+                // STAGE 1: Pop in as 38px center dot
+                capsule.style.width = '38px';
+                textEl.classList.add('hidden');
+                void capsule.offsetWidth;
+                capsule.classList.add('capsule-dot');
 
-                    // Stage 2: Expand outward to both sides with spring physics
-                    capsuleExpandTimer = setTimeout(() => {
-                        textEl.classList.remove('hidden');
-                        void cap.offsetWidth;
-                        cap.style.width = `${targetWidth}px`;
-                        cap.classList.add('capsule-expanded');
-                    }, 125);
-                } else {
+                // STAGE 2: Expand bilaterally from center dot to both sides
+                capsuleExpandTimeout = setTimeout(() => {
                     textEl.classList.remove('hidden');
-                    cap.style.width = prevWidth;
-                    void cap.offsetWidth;
-                    cap.style.width = `${targetWidth}px`;
-                }
+                    void capsule.offsetWidth;
+                    capsule.style.width = `${targetWidth}px`;
+                    capsule.classList.add('capsule-expanded');
+                }, 130);
+            } else {
+                textEl.classList.remove('hidden');
+                capsule.style.width = prevWidth;
+                void capsule.offsetWidth;
+                capsule.style.width = `${targetWidth}px`;
             }
 
-            if (state !== 'loading') {
-                const holdTime = state === 'alert' ? 4200 : 2500;
-                capsuleHideTimer = setTimeout(() => {
+            if (state === 'success' || state === 'error' || state === 'info' || state === 'amber' || state === 'alert') {
+                const holdDuration = state === 'alert' ? 3800 : 2400;
+                capsuleHideTimeout = setTimeout(() => {
                     this.capsule('hide');
-                }, holdTime);
+                }, holdDuration);
             }
         },
 
         // 7. Global Notification (Routes through the ColorOS Live Capsule)
-        toast(message, type = 'success', actionUrl = null) {
+        toast(message, type = 'info', actionUrl = null) {
             const stateMap = {
                 error: 'error',
                 amber: 'amber',
@@ -239,7 +247,7 @@ window.KTUFlow = (function() {
                 info: 'info',
                 success: 'success'
             };
-            this.capsule(stateMap[type] || 'success', message, actionUrl);
+            this.capsule(stateMap[type] || 'info', message, actionUrl);
         },
 
         // 8. Hugging Face Space SSE Connector for Real-Time Pulse & Merge Progress
@@ -290,6 +298,14 @@ window.KTUFlow = (function() {
     engine.initScheduler();
     return engine;
 })();
+
+// Expose global helpers matching pyq.html so any page can call triggerCapsule() or showToast() directly
+window.triggerCapsule = function(state, message, actionUrl = null) {
+    window.KTUFlow.capsule(state, message, actionUrl);
+};
+window.showToast = function(message, type = 'info') {
+    window.KTUFlow.toast(message, type);
+};
 
 // ==============================================================================
 // 1. AUTO THEME ENGINE & ADAPTIVE GLASSMORPHISM (Light Mode Default)
@@ -376,11 +392,11 @@ window.KTUFlow = (function() {
                 box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
             }
 
-            /* Global Deep Obsidian ColorOS Dot-to-Sides Live Capsule */
+            /* ==================== COLOROS DOT-TO-CAPSULE ENGINE (1:1 FROM PYQ.HTML) ==================== */
             #coloros-live-capsule,
             #ktu-live-capsule {
                 position: fixed;
-                top: 5.4rem;
+                top: 5.4rem; /* Safe breathing gap below the sticky header */
                 left: 50%;
                 z-index: 65;
                 height: 38px;
@@ -414,8 +430,6 @@ window.KTUFlow = (function() {
                 opacity: 0;
                 transform: scale(0.94);
                 transition: opacity 0.22s ease 0.08s, transform 0.26s ease 0.08s;
-                overflow: hidden;
-                text-overflow: ellipsis;
             }
             #coloros-live-capsule.capsule-expanded #capsule-text,
             #ktu-live-capsule.capsule-expanded #capsule-text {
@@ -506,7 +520,7 @@ window.KTUFlow = (function() {
 
             /* 5. 3D Real-Glass & PYQ Result-Glass Cards */
             html.dark .real-glass {
-                background: rgba(15, 23, 42, 0.74) !important;
+                background: rgba(15, 23, 42, 0.72) !important;
                 backdrop-filter: blur(28px) saturate(180%) !important;
                 -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
                 border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -532,18 +546,17 @@ window.KTUFlow = (function() {
             html.dark .inner-glass,
             html.dark .glass-input,
             html.dark select.custom-select {
-                background-color: rgba(9, 14, 26, 0.68) !important;
+                background-color: rgba(9, 14, 26, 0.65) !important;
                 border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
-                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
                 color: #f8fafc !important;
             }
             html.dark select.custom-select {
                 background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E") !important;
             }
             html.dark .glass-input:focus {
-                background-color: rgba(15, 23, 42, 0.92) !important;
-                border-color: #6366f1 !important;
-                box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.22) !important;
+                background-color: rgba(15, 23, 42, 0.9) !important;
+                border-color: #3b82f6 !important;
+                box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2) !important;
             }
             html.dark .glass-input:disabled {
                 background-color: rgba(15, 23, 42, 0.35) !important;
@@ -790,6 +803,12 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     const container = document.getElementById('navigation-container');
     if (!container) return;
 
+    // Pre-mount the ColorOS Obsidian Capsule in DOM so its initial dot-to-sides
+    // transition works identically to pyq.html on every page
+    if (window.KTUFlow && typeof window.KTUFlow.ensureCapsuleMounted === 'function') {
+        window.KTUFlow.ensureCapsuleMounted();
+    }
+
     container.classList.remove('relative');
     container.classList.add('sticky', 'top-0', 'z-50', 'w-full');
 
@@ -959,7 +978,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             const isDark = document.documentElement.classList.contains('dark');
             localStorage.setItem('kt_theme', isDark ? 'dark' : 'light');
             updateThemeIcons();
-            window.KTUFlow.toast(isDark ? 'Dark Theme enabled' : 'Light Theme enabled', isDark ? 'success' : 'amber');
+            window.KTUFlow.capsule(isDark ? 'success' : 'amber', isDark ? 'Dark Theme enabled' : 'Light Theme enabled');
         });
     });
 
@@ -1171,10 +1190,11 @@ function initWhatsAppPopup() {
 // 6. SAFE AUTO-INIT
 // ==============================================================================
 function runInitializers() {
+    if (window.KTUFlow && typeof window.KTUFlow.ensureCapsuleMounted === 'function') {
+        window.KTUFlow.ensureCapsuleMounted();
+    }
     injectGlobalAd();
     initWhatsAppPopup();
-    // Optional: Uncomment and add your Hugging Face Space URL once your SSE endpoint is live:
-    // window.KTUFlow.initLiveStream('https://YOUR-SPACE-NAME.hf.space');
 }
 
 if (document.readyState === 'loading') {
