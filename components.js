@@ -5,6 +5,9 @@ window.KTUFlow = (function() {
     const PROFILE_KEY = 'ktu_flow_profile_v2';
     const RECENT_KEY = 'ktu_flow_recent_v2';
     const CATALOG_CACHE_KEY = 'ktu_flow_catalog_cache_v2';
+    const SEEN_NOTICE_KEY = 'ktu_flow_last_seen_notice_v2';
+    const FIREBASE_NOTICES_URL = 'https://keralatimetable-5e155-default-rtdb.asia-southeast1.firebasedatabase.app/ktu_notices.json';
+
     let memoryCatalog = null;
     let prefetchedUrls = new Set();
     let capsuleHideTimeout = null;
@@ -13,19 +16,32 @@ window.KTUFlow = (function() {
     let bottomDockActive = false;
 
     // Ensure #coloros-live-capsule is pre-mounted in DOM at scale(0) so the first
-    // Stage-1 dot pop-in transition never gets skipped by browser layout batching
+    // Stage-1 dot pop-in transition never gets skipped
     function ensureCapsuleMounted() {
         let capsule = document.getElementById('coloros-live-capsule');
         if (!capsule && document.body) {
             capsule = document.createElement('div');
             capsule.id = 'coloros-live-capsule';
+            document.body.appendChild(capsule);
+        }
+        if (capsule && !capsule.querySelector('#capsule-actions')) {
             capsule.innerHTML = `
-                <div id="capsule-inner" class="h-full px-3.5 flex items-center justify-center gap-2.5 whitespace-nowrap text-xs font-extrabold text-white">
-                    <span id="capsule-icon" class="flex items-center justify-center shrink-0"></span>
-                    <span id="capsule-text" class="tracking-tight text-white"></span>
+                <div id="capsule-inner" class="h-full px-3 flex items-center justify-between gap-2 whitespace-nowrap text-xs font-extrabold text-white overflow-hidden">
+                    <span id="capsule-icon" class="flex items-center justify-center shrink-0 z-10"></span>
+                    <div id="capsule-text-viewport" class="overflow-hidden flex-1 flex items-center min-w-0">
+                        <span id="capsule-text" class="tracking-tight text-white inline-block whitespace-nowrap"></span>
+                    </div>
+                    <div id="capsule-actions" class="hidden items-center gap-1.5 shrink-0 pl-1.5 z-10">
+                        <a id="capsule-open-btn" href="/updates.html" class="px-2.5 py-1 rounded-full bg-indigo-500 hover:bg-indigo-400 active:scale-95 text-[10px] font-black text-white flex items-center gap-1 shadow-sm transition-all">
+                            <span>Open</span>
+                            <i class="fas fa-arrow-up-right-from-square text-[8px]"></i>
+                        </a>
+                        <button type="button" id="capsule-close-btn" aria-label="Dismiss alert" class="w-5 h-5 rounded-full bg-white/15 hover:bg-white/25 text-white/80 hover:text-white flex items-center justify-center text-[10px] transition-colors">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
                 </div>
             `;
-            document.body.appendChild(capsule);
         }
         return capsule;
     }
@@ -136,7 +152,7 @@ window.KTUFlow = (function() {
             });
         },
 
-        // 6. Bottom UI Collision Manager & Exact PYQ ColorOS Dot-to-Sides Live Capsule
+        // 6. Bottom UI Collision Manager & Interactive ColorOS Dot-to-Sides Capsule
         setBottomDockActive(isActive) {
             bottomDockActive = isActive;
             const waPopup = document.getElementById('ktu-wa-popup');
@@ -149,9 +165,13 @@ window.KTUFlow = (function() {
             const capsule = ensureCapsuleMounted();
             if (!capsule) return;
 
-            const inner = document.getElementById('capsule-inner') || capsule.querySelector('#capsule-inner');
-            const iconEl = document.getElementById('capsule-icon') || capsule.querySelector('#capsule-icon');
-            const textEl = document.getElementById('capsule-text') || capsule.querySelector('#capsule-text');
+            const inner = capsule.querySelector('#capsule-inner');
+            const iconEl = capsule.querySelector('#capsule-icon');
+            const viewportEl = capsule.querySelector('#capsule-text-viewport');
+            const textEl = capsule.querySelector('#capsule-text');
+            const actionsEl = capsule.querySelector('#capsule-actions');
+            const openBtn = capsule.querySelector('#capsule-open-btn');
+            const closeBtn = capsule.querySelector('#capsule-close-btn');
             if (!inner || !iconEl || !textEl) return;
 
             clearTimeout(capsuleHideTimeout);
@@ -160,8 +180,14 @@ window.KTUFlow = (function() {
 
             // STAGE 3: Retract both sides into 38px center dot, then scale down
             if (state === 'hide' || state === 'idle') {
-                capsule.classList.remove('capsule-expanded');
+                capsule.classList.remove('capsule-expanded', 'capsule-paused');
                 inner.classList.remove('capsule-shimmer-bg');
+                textEl.classList.remove('capsule-marquee-active');
+                if (viewportEl) viewportEl.classList.remove('capsule-viewport-mask');
+                if (actionsEl) {
+                    actionsEl.classList.add('hidden');
+                    actionsEl.classList.remove('flex');
+                }
                 capsule.style.pointerEvents = 'none';
                 capsule.style.width = '38px';
                 capsuleCollapseTimeout = setTimeout(() => {
@@ -170,16 +196,14 @@ window.KTUFlow = (function() {
                 return;
             }
 
-            // Optional Click Action
-            if (actionUrl) {
-                capsule.style.pointerEvents = 'auto';
-                capsule.style.cursor = 'pointer';
-                capsule.onclick = () => { window.location.href = actionUrl; };
-            } else {
-                capsule.style.pointerEvents = 'none';
-                capsule.style.cursor = 'default';
-                capsule.onclick = null;
+            // Reset interactive state before new message
+            capsule.classList.remove('capsule-paused');
+            if (actionsEl) {
+                actionsEl.classList.add('hidden');
+                actionsEl.classList.remove('flex');
             }
+            capsule.onpointerdown = null;
+            capsule.onclick = null;
 
             let iconHTML = '<span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>';
             if (state === 'loading') {
@@ -195,7 +219,7 @@ window.KTUFlow = (function() {
                 iconHTML = '<span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>';
                 inner.classList.remove('capsule-shimmer-bg');
             } else if (state === 'alert') {
-                iconHTML = '<span class="px-1.5 py-0.5 rounded-full bg-rose-500 text-[9px] font-black uppercase tracking-wider text-white animate-pulse">LIVE</span>';
+                iconHTML = '<span class="px-1.5 py-0.5 rounded-full bg-rose-500 text-[9px] font-black uppercase tracking-wider text-white flex items-center gap-1 shadow-sm"><span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>ALERT:</span>';
                 inner.classList.remove('capsule-shimmer-bg');
             } else {
                 inner.classList.remove('capsule-shimmer-bg');
@@ -203,11 +227,91 @@ window.KTUFlow = (function() {
 
             const isAlreadyOpen = capsule.classList.contains('capsule-expanded');
 
+            // Reset marquee before measuring natural width
+            textEl.classList.remove('capsule-marquee-active');
+            textEl.style.removeProperty('--marquee-distance');
+            textEl.style.removeProperty('--marquee-duration');
+            if (viewportEl) viewportEl.classList.remove('capsule-viewport-mask');
+
             textEl.innerText = message;
             iconEl.innerHTML = iconHTML;
+
             const prevWidth = capsule.style.width;
             capsule.style.width = 'auto';
-            const targetWidth = Math.max(capsule.scrollWidth + 6, 140);
+            textEl.classList.remove('hidden');
+
+            // Max width of capsule before right-to-left running ticker kicks in
+            const maxCapsuleWidth = Math.min(window.innerWidth - 24, 370);
+            const naturalWidth = Math.max(capsule.scrollWidth + 8, 140);
+            const targetWidth = Math.min(naturalWidth, maxCapsuleWidth);
+
+            // Calculate if text overflows or if state === 'alert' needs running ticker
+            const iconWidth = iconEl.offsetWidth || 54;
+            const availableTextViewport = targetWidth - iconWidth - 28;
+            const fullTextWidth = textEl.scrollWidth;
+            const overflowPx = fullTextWidth - availableTextViewport;
+            const shouldMarquee = overflowPx > 4 || (state === 'alert' && fullTextWidth > 160);
+
+            let holdDuration = state === 'alert' ? 5500 : 2400;
+
+            if (shouldMarquee) {
+                const scrollDist = Math.max(overflowPx + 24, 48);
+                // Smooth ~40px per second reading speed
+                const scrollSeconds = Math.max(3.8, Math.min(scrollDist / 38, 10.0));
+                textEl.style.setProperty('--marquee-distance', `-${scrollDist}px`);
+                textEl.style.setProperty('--marquee-duration', `${scrollSeconds.toFixed(2)}s`);
+                if (viewportEl) viewportEl.classList.add('capsule-viewport-mask');
+                // Automatically disappear right after finishing the running text
+                holdDuration = Math.round((scrollSeconds + 1.1) * 1000);
+            }
+
+            // Interactive Touch / Click Handler for Alert Capsule:
+            // Touching stops the running text, cancels auto-hide, and reveals the "Open" button to redirect to updates.html
+            const targetRedirectUrl = actionUrl || (state === 'alert' ? '/updates.html' : null);
+            if (targetRedirectUrl) {
+                capsule.style.pointerEvents = 'auto';
+                capsule.style.cursor = 'pointer';
+                if (openBtn) openBtn.href = targetRedirectUrl;
+
+                if (closeBtn) {
+                    closeBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        this.capsule('hide');
+                    };
+                }
+
+                // First touch/click pauses the running text and shows the "Open" button
+                capsule.onclick = (e) => {
+                    if (e.target.closest('#capsule-open-btn') || e.target.closest('#capsule-close-btn')) return;
+
+                    if (!capsule.classList.contains('capsule-paused')) {
+                        // Stop running effect & cancel auto-hide timer
+                        clearTimeout(capsuleHideTimeout);
+                        capsule.classList.add('capsule-paused');
+
+                        if (actionsEl) {
+                            actionsEl.classList.remove('hidden');
+                            actionsEl.classList.add('flex');
+                        }
+
+                        // Expand capsule slightly to fit the "Open" button comfortably
+                        const pausedMaxWidth = Math.min(window.innerWidth - 20, 410);
+                        const newWidth = Math.min(targetWidth + 82, pausedMaxWidth);
+                        capsule.style.width = `${newWidth}px`;
+
+                        // Auto-hide after 10 seconds if user doesn't click Open
+                        capsuleHideTimeout = setTimeout(() => {
+                            this.capsule('hide');
+                        }, 10000);
+                    } else {
+                        // If already paused and tapped again, redirect directly to updates.html
+                        window.location.href = targetRedirectUrl;
+                    }
+                };
+            } else {
+                capsule.style.pointerEvents = 'none';
+                capsule.style.cursor = 'default';
+            }
 
             if (!isAlreadyOpen) {
                 // STAGE 1: Pop in as 38px center dot
@@ -222,16 +326,21 @@ window.KTUFlow = (function() {
                     void capsule.offsetWidth;
                     capsule.style.width = `${targetWidth}px`;
                     capsule.classList.add('capsule-expanded');
+                    if (shouldMarquee) {
+                        textEl.classList.add('capsule-marquee-active');
+                    }
                 }, 130);
             } else {
                 textEl.classList.remove('hidden');
                 capsule.style.width = prevWidth;
                 void capsule.offsetWidth;
                 capsule.style.width = `${targetWidth}px`;
+                if (shouldMarquee) {
+                    textEl.classList.add('capsule-marquee-active');
+                }
             }
 
-            if (state === 'success' || state === 'error' || state === 'info' || state === 'amber' || state === 'alert') {
-                const holdDuration = state === 'alert' ? 3800 : 2400;
+            if (state !== 'loading') {
                 capsuleHideTimeout = setTimeout(() => {
                     this.capsule('hide');
                 }, holdDuration);
@@ -250,7 +359,59 @@ window.KTUFlow = (function() {
             this.capsule(stateMap[type] || 'info', message, actionUrl);
         },
 
-        // 8. Hugging Face Space SSE Connector for Real-Time Pulse & Merge Progress
+        // 8. Global Firebase Live Notice Watcher (Appears after 12 seconds, runs text, & disappears)
+        initNoticeWatcher() {
+            // Do not pop up alert if user is already viewing updates.html
+            if (window.location.pathname.toLowerCase().includes('updates')) return;
+
+            let initialCheckDone = false;
+
+            const checkLatestNotice = async () => {
+                if (this.isPaused || this.isInputFocused) return;
+                try {
+                    const res = await fetch(FIREBASE_NOTICES_URL);
+                    if (!res.ok) return;
+                    const data = await res.json();
+                    if (!data) return;
+
+                    // Convert Firebase object into sorted array (newest first)
+                    const notices = Object.keys(data).map(id => ({ id, ...data[id] }));
+                    if (notices.length === 0) return;
+
+                    notices.sort((a, b) => {
+                        const tA = new Date(a.updatedAt || a.createdAt || a.date).getTime() || 0;
+                        const tB = new Date(b.updatedAt || b.createdAt || b.date).getTime() || 0;
+                        return tB - tA;
+                    });
+
+                    const latest = notices[0];
+                    const latestKey = `${latest.id}_${latest.updatedAt || latest.date}`;
+                    const lastSeenKey = localStorage.getItem(SEEN_NOTICE_KEY);
+
+                    if (latestKey !== lastSeenKey) {
+                        localStorage.setItem(SEEN_NOTICE_KEY, latestKey);
+
+                        const noticeDate = new Date(latest.date || latest.createdAt);
+                        const ageDays = (Date.now() - noticeDate.getTime()) / (1000 * 60 * 60 * 24);
+
+                        if (!initialCheckDone && ageDays <= 7) {
+                            this.capsule('alert', latest.title, '/updates.html');
+                        } else if (initialCheckDone) {
+                            // Admin just published a notice live while the student is browsing!
+                            this.capsule('alert', latest.title, '/updates.html');
+                        }
+                    }
+                    initialCheckDone = true;
+                } catch (e) {}
+            };
+
+            // Appear after 12 seconds (12000ms) as requested
+            setTimeout(checkLatestNotice, 12000);
+            // Poll gently every 45s to catch live Admin posts while students are browsing
+            setInterval(checkLatestNotice, 45000);
+        },
+
+        // 9. Hugging Face Space SSE Connector for Real-Time Pulse & Merge Progress
         initLiveStream(hfSpaceUrl) {
             if (!hfSpaceUrl || this._sseSource || typeof EventSource === 'undefined') return;
 
@@ -392,7 +553,7 @@ window.showToast = function(message, type = 'info') {
                 box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
             }
 
-            /* ==================== COLOROS DOT-TO-CAPSULE ENGINE (1:1 FROM PYQ.HTML) ==================== */
+            /* ==================== COLOROS DOT-TO-CAPSULE + RUNNING MARQUEE ==================== */
             #coloros-live-capsule,
             #ktu-live-capsule {
                 position: fixed;
@@ -436,6 +597,27 @@ window.showToast = function(message, type = 'info') {
                 opacity: 1;
                 transform: scale(1);
             }
+
+            /* Soft edge fade mask when running text ticker is active */
+            .capsule-viewport-mask {
+                -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 93%, transparent 100%);
+                mask-image: linear-gradient(to right, transparent 0%, black 5%, black 93%, transparent 100%);
+            }
+
+            /* Right-to-Left Running Text Ticker Animation */
+            @keyframes capsuleMarqueeRTL {
+                0%, 12% { transform: translate3d(0, 0, 0); }
+                88%, 100% { transform: translate3d(var(--marquee-distance, -140px), 0, 0); }
+            }
+            #coloros-live-capsule.capsule-expanded #capsule-text.capsule-marquee-active {
+                animation: capsuleMarqueeRTL var(--marquee-duration, 4.5s) linear 0.4s forwards;
+                will-change: transform;
+            }
+            /* Freeze running text immediately when user touches/clicks the capsule */
+            #coloros-live-capsule.capsule-paused #capsule-text.capsule-marquee-active {
+                animation-play-state: paused !important;
+            }
+
             @keyframes capsule-shimmer {
                 0% { background-position: -200% 0; }
                 100% { background-position: 200% 0; }
@@ -684,13 +866,15 @@ window.showToast = function(message, type = 'info') {
 
             /* 13. Search bar on index.html */
             html.dark div[class*="bg-white/75"],
+            html.dark div[class*="bg-white/80"],
             html.dark div[class*="bg-white/60"],
             html.dark .glass-panel.bg-white\\/95 {
-                background: rgba(15, 23, 42, 0.7) !important;
+                background: rgba(15, 23, 42, 0.72) !important;
                 border-color: rgba(255, 255, 255, 0.12) !important;
                 box-shadow: inset 0 1px 1px rgba(255,255,255,0.1), 0 12px 36px rgba(0, 0, 0, 0.5) !important;
             }
-            html.dark div[class*="focus-within:border-black"]:focus-within {
+            html.dark div[class*="focus-within:border-black"]:focus-within,
+            html.dark div[class*="focus-within:border-indigo-600"]:focus-within {
                 border-color: #368067 !important;
             }
 
@@ -803,8 +987,6 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     const container = document.getElementById('navigation-container');
     if (!container) return;
 
-    // Pre-mount the ColorOS Obsidian Capsule in DOM so its initial dot-to-sides
-    // transition works identically to pyq.html on every page
     if (window.KTUFlow && typeof window.KTUFlow.ensureCapsuleMounted === 'function') {
         window.KTUFlow.ensureCapsuleMounted();
     }
@@ -1192,6 +1374,9 @@ function initWhatsAppPopup() {
 function runInitializers() {
     if (window.KTUFlow && typeof window.KTUFlow.ensureCapsuleMounted === 'function') {
         window.KTUFlow.ensureCapsuleMounted();
+    }
+    if (window.KTUFlow && typeof window.KTUFlow.initNoticeWatcher === 'function') {
+        window.KTUFlow.initNoticeWatcher();
     }
     injectGlobalAd();
     initWhatsAppPopup();
