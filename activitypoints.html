@@ -3,78 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>KTU Activity Points Calculator & Tracker (2024 & 2019 Scheme) | Kerala Timetable</title>
-    <meta name="description" content="Official KTU B.Tech Activity Points Calculator, Tracker & Complete Points Table for 2024 Scheme (120 Points across Group I, II, III) and 2019 Scheme (100 Points).">
-    <meta name="keywords" content="ktu activity points, ktu 2024 scheme activity points, ktu activity points calculator, points ktunotes, ktu 120 activity points list, ktu nss activity points, ktu internship activity points">
+    <title>KTU Activity Points Calculator & Guide (2024 & 2019 Scheme) | Kerala Timetable</title>
+    <meta name="description" content="Easy-to-use KTU B.Tech Activity Points Calculator and official points table for the 2024 Scheme (120 Points across Group I, II, III) and 2019 Scheme (100 Points).">
+    <meta name="keywords" content="ktu activity points, ktu 2024 scheme activity points, ktu activity points calculator, ktu 120 activity points list, ktu nss activity points, ktu internship activity points">
     <link rel="canonical" href="https://keralatimetable.in/activity-points.html" />
     <link rel="icon" href="/favicon.png" type="image/png">
 
     <!-- Tailwind CSS with Fallback -->
     <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Clean, normal, high-readability Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             overflow-x: hidden;
             background: 
-                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.65) 0px, transparent 52%),
-                radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.55) 0px, transparent 52%),
-                radial-gradient(at 100% 100%, rgba(224, 231, 255, 0.55) 0px, transparent 52%),
-                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.5) 0px, transparent 52%),
+                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.6) 0px, transparent 52%),
+                radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.5) 0px, transparent 52%),
+                radial-gradient(at 100% 100%, rgba(224, 231, 255, 0.5) 0px, transparent 52%),
+                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.45) 0px, transparent 52%),
                 #f8fafc;
             min-height: 100vh;
+            letter-spacing: -0.01em;
         }
-
-        .font-mono-code { font-family: 'Fira Code', monospace; }
 
         /* Ambient GPU Orbs */
         @keyframes floatOrb {
             0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(24px, -18px, 0) scale(1.06); }
+            50% { transform: translate3d(22px, -16px, 0) scale(1.05); }
         }
         .ambient-orb { animation: floatOrb 15s ease-in-out infinite; will-change: transform; }
         .ambient-orb-delayed { animation: floatOrb 19s ease-in-out 3s infinite reverse; will-change: transform; }
 
-        /* Liquid Clear Glass Surfaces */
+        /* Liquid Glass Surfaces */
         .real-glass {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.60) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.80) 0%, rgba(255, 255, 255, 0.64) 100%);
             backdrop-filter: blur(28px) saturate(190%);
             -webkit-backdrop-filter: blur(28px) saturate(190%);
-            border: 1.5px solid rgba(15, 23, 42, 0.12);
+            border: 1.5px solid rgba(15, 23, 42, 0.11);
             box-shadow: 
                 inset 0 1px 1px rgba(255, 255, 255, 0.95),
                 0 14px 34px -8px rgba(31, 38, 135, 0.06);
         }
 
         .result-glass {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0.70) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.74) 100%);
             backdrop-filter: blur(20px) saturate(185%);
             -webkit-backdrop-filter: blur(20px) saturate(185%);
             border: 1.5px solid rgba(15, 23, 42, 0.10);
             box-shadow: 
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.92),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
                 0 6px 20px -4px rgba(15, 23, 42, 0.04);
             transition: 
-                transform 0.32s cubic-bezier(0.22, 1.28, 0.36, 1),
+                transform 0.3s cubic-bezier(0.22, 1.25, 0.36, 1),
                 box-shadow 0.28s ease,
                 border-color 0.22s ease,
                 background 0.22s ease;
-            will-change: transform;
         }
         .result-glass:hover {
             transform: translate3d(0, -3px, 0);
-            background: rgba(255, 255, 255, 0.96);
+            background: rgba(255, 255, 255, 0.97);
             border-color: rgba(79, 70, 229, 0.38);
             box-shadow: 
                 inset 0 1px 0 0 #ffffff,
                 0 16px 32px -6px rgba(79, 70, 229, 0.10);
         }
         .result-glass.added-card {
-            background: rgba(238, 242, 255, 0.92) !important;
+            background: rgba(238, 242, 255, 0.95) !important;
             border-color: rgba(79, 70, 229, 0.65) !important;
-            box-shadow: 0 12px 28px -6px rgba(79, 70, 229, 0.18), inset 0 0 0 1px rgba(79, 70, 229, 0.2) !important;
+            box-shadow: 0 12px 28px -6px rgba(79, 70, 229, 0.16), inset 0 0 0 1px rgba(79, 70, 229, 0.18) !important;
         }
         html.dark .result-glass.added-card {
             background: rgba(49, 46, 129, 0.32) !important;
@@ -82,17 +81,17 @@
         }
 
         .inner-glass {
-            background: rgba(255, 255, 255, 0.68);
+            background: rgba(255, 255, 255, 0.72);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(15, 23, 42, 0.1);
         }
 
         .glass-input {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1.5px solid rgba(15, 23, 42, 0.12);
+            border: 1.5px solid rgba(15, 23, 42, 0.14);
             box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 4px 14px rgba(15, 23, 42, 0.03);
             color: #0f172a;
             transition: all 0.22s ease;
@@ -102,6 +101,36 @@
             background: #ffffff;
             border-color: #4f46e5;
             box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.14);
+        }
+
+        /* Group Tab Cards Active State */
+        .group-tab-card {
+            transition: all 0.28s cubic-bezier(0.22, 1.2, 0.36, 1);
+        }
+        .group-tab-card.active-group-tab {
+            background: #ffffff !important;
+            border-color: #4f46e5 !important;
+            box-shadow: 0 12px 26px -6px rgba(79, 70, 229, 0.18), 0 0 0 1.5px #4f46e5 !important;
+            transform: translateY(-2px);
+        }
+        html.dark .group-tab-card.active-group-tab {
+            background: rgba(30, 41, 59, 0.95) !important;
+            border-color: #818cf8 !important;
+            box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.6), 0 0 0 1.5px #818cf8 !important;
+        }
+
+        /* Scroll-Reveal Animation Classes */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translate3d(0, 24px, 0) scale(0.985);
+            transition: 
+                opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.56s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+        .scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
         }
 
         /* Floating Bottom Tracker Dock */
@@ -115,7 +144,7 @@
             transform: translate3d(-50%, 140%, 0) scale(0.92);
             opacity: 0;
             pointer-events: none;
-            background: rgba(255, 255, 255, 0.88);
+            background: rgba(255, 255, 255, 0.90);
             backdrop-filter: blur(28px) saturate(200%);
             -webkit-backdrop-filter: blur(28px) saturate(200%);
             border: 1.5px solid rgba(15, 23, 42, 0.12);
@@ -134,24 +163,17 @@
             pointer-events: auto;
         }
         html.dark #floating-points-dock {
-            background: rgba(15, 23, 42, 0.90);
+            background: rgba(15, 23, 42, 0.92);
             border-color: rgba(255, 255, 255, 0.15);
             box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
         }
 
-        /* Smooth Progress Bar Fill */
         .progress-bar-fill {
             transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        @keyframes springUp {
-            from { opacity: 0; transform: translate3d(0, 12px, 0) scale(0.99); }
-            to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-        }
-        .spring-in { animation: springUp 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
     </style>
 </head>
 
@@ -167,149 +189,130 @@
     <div id="navigation-container" class="z-50 sticky top-0"></div>
 
     <!-- MAIN BODY -->
-    <main class="max-w-5xl mx-auto px-3.5 sm:px-6 pt-8 sm:pt-11 pb-24 w-full flex-grow relative z-10">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-8 sm:pt-10 pb-24 w-full flex-grow relative z-10">
 
-        <!-- Hero Heading -->
-        <div class="text-center mb-6 sm:mb-8 max-w-3xl mx-auto">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-2.5">
-                KTU <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points</span> Hub
+        <!-- Clean, Easy-to-Read Hero Heading -->
+        <div class="text-center mb-7 sm:mb-8 max-w-2xl mx-auto scroll-reveal is-visible">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-2.5">
+                KTU <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-600">Activity Points</span> Calculator
             </h1>
-            <p class="text-slate-600 font-medium text-xs sm:text-base max-w-2xl mx-auto leading-relaxed">
-                Complete official points directory, group-wise cap calculator, and personal progress tracker for the <strong>2024 Scheme (120 Pts)</strong> &amp; <strong>2019 Scheme (100 Pts)</strong>.
+            <p class="text-slate-600 font-normal text-sm sm:text-base leading-relaxed">
+                Select your scheme below, switch between the 3 groups, and tap any activity level to calculate your points for your B.Tech degree.
             </p>
         </div>
 
-        <!-- ==================== LIVE PROGRESS & STUDENT TYPE DASHBOARD ==================== -->
-        <section class="real-glass rounded-[2rem] p-4 sm:p-6 md:p-7 mb-6 sm:mb-8 spring-in">
+        <!-- ==================== STEP 1: YOUR PROGRESS & GROUP SELECTOR DASHBOARD ==================== -->
+        <section class="real-glass rounded-3xl p-4 sm:p-6 md:p-7 mb-7 scroll-reveal is-visible">
             
-            <!-- Top Row: Scheme & Student Type Switchers -->
-            <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3.5 pb-5 mb-5 border-b border-slate-200/70 dark:border-white/10">
+            <!-- Top Row: Simple Scheme & Student Type Switchers -->
+            <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3.5 pb-5 mb-5 border-b border-slate-200/70 dark:border-white/10">
                 
                 <!-- Scheme Switcher -->
-                <div class="flex items-center gap-2">
-                    <div class="grid grid-cols-2 gap-1 bg-slate-200/65 dark:bg-slate-900/80 p-1 rounded-2xl border border-slate-300/60 dark:border-white/10 w-full sm:w-auto">
-                        <button type="button" id="scheme-btn-2024" onclick="setSchemeMode('2024')" class="px-4 py-2 rounded-xl text-xs font-extrabold transition-all bg-white dark:bg-indigo-600 text-indigo-600 dark:text-white shadow-sm">
-                            2024 Scheme (120 Pts)
-                        </button>
-                        <button type="button" id="scheme-btn-2019" onclick="setSchemeMode('2019')" class="px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 dark:text-slate-300 hover:text-slate-900">
-                            2019 Scheme (100 Pts)
-                        </button>
-                    </div>
+                <div class="grid grid-cols-2 gap-1.5 bg-slate-200/70 dark:bg-slate-900/80 p-1.5 rounded-2xl border border-slate-300/60 dark:border-white/10 w-full md:w-auto">
+                    <button type="button" id="scheme-btn-2024" onclick="setSchemeMode('2024')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white dark:bg-indigo-600 text-indigo-600 dark:text-white shadow-sm">
+                        2024 Scheme (120 Pts)
+                    </button>
+                    <button type="button" id="scheme-btn-2019" onclick="setSchemeMode('2019')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all text-slate-600 dark:text-slate-300 hover:text-slate-900">
+                        2019 Scheme (100 Pts)
+                    </button>
                 </div>
 
-                <!-- Student Category Selector (Regular / Lateral Entry / PwD) -->
-                <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2">
-                    <span class="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mr-1">
-                        <i class="fas fa-user-graduate text-indigo-500 mr-1"></i> Category:
+                <!-- Student Category Selector -->
+                <div class="flex flex-wrap items-center justify-between md:justify-end gap-2">
+                    <span class="text-xs font-semibold text-slate-500 mr-1">
+                        Student Type:
                     </span>
-                    <div class="inline-flex bg-slate-200/65 dark:bg-slate-900/80 p-1 rounded-xl border border-slate-300/60 dark:border-white/10">
-                        <button type="button" id="cat-btn-regular" onclick="setStudentCategory('regular')" class="px-3 py-1.5 rounded-lg text-xs font-extrabold transition-all bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm">
-                            Regular
+                    <div class="inline-flex bg-slate-200/70 dark:bg-slate-900/80 p-1 rounded-xl border border-slate-300/60 dark:border-white/10">
+                        <button type="button" id="cat-btn-regular" onclick="setStudentCategory('regular')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm">
+                            Regular (120)
                         </button>
-                        <button type="button" id="cat-btn-lateral" onclick="setStudentCategory('lateral')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 dark:text-slate-400">
-                            Lateral Entry
+                        <button type="button" id="cat-btn-lateral" onclick="setStudentCategory('lateral')" class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all text-slate-600 dark:text-slate-400">
+                            Lateral Entry (90)
                         </button>
-                        <button type="button" id="cat-btn-pwd" onclick="setStudentCategory('pwd')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 dark:text-slate-400">
-                            PwD
+                        <button type="button" id="cat-btn-pwd" onclick="setStudentCategory('pwd')" class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all text-slate-600 dark:text-slate-400">
+                            PwD (60)
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Middle Row: Overall Score + 3 Group Progress Cards -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-                
-                <!-- Total Eligibility Card -->
-                <div class="lg:col-span-4 inner-glass rounded-2xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden">
-                    <div class="flex items-start justify-between gap-2 mb-3">
-                        <div>
-                            <span class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-600 dark:text-indigo-400 block mb-0.5">Your Eligible Total</span>
-                            <div class="flex items-baseline gap-1.5">
-                                <span id="total-counted-pts" class="text-3xl sm:text-4xl font-black text-slate-900 font-mono-code">0</span>
-                                <span class="text-sm font-extrabold text-slate-400 font-mono-code">/ <span id="total-target-pts">120</span> pts</span>
-                            </div>
+            <!-- Overall Progress Banner -->
+            <div class="inner-glass rounded-2xl p-4 sm:p-5 mb-5">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                    <div>
+                        <span class="text-xs font-semibold text-slate-500 block">Your Eligible Activity Points</span>
+                        <div class="flex items-baseline gap-1.5 mt-0.5">
+                            <span id="total-counted-pts" class="text-3xl sm:text-4xl font-extrabold text-slate-900">0</span>
+                            <span class="text-sm sm:text-base font-semibold text-slate-400">out of <span id="total-target-pts">120</span> points needed</span>
                         </div>
-                        <span id="eligibility-badge" class="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/25">
-                            In Progress
-                        </span>
                     </div>
-
-                    <!-- Overall Progress Bar -->
-                    <div class="w-full h-2.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden mb-2.5">
-                        <div id="overall-progress-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 via-blue-500 to-emerald-500 rounded-full" style="width: 0%"></div>
-                    </div>
-
-                    <div class="flex items-center justify-between text-[11px] font-bold text-slate-500">
-                        <span id="raw-pts-label">Raw Earned: 0 pts</span>
-                        <span id="credits-badge" class="text-indigo-600 dark:text-indigo-400 font-extrabold">3 Mandatory Credits</span>
-                    </div>
+                    <span id="eligibility-badge" class="px-3 py-1.5 rounded-full text-xs font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/25">
+                        120 points remaining
+                    </span>
                 </div>
 
-                <!-- 3 Group Breakdown Cards (2024 Scheme) / Category Summary (2019 Scheme) -->
-                <div id="group-breakdown-grid" class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <!-- Overall Progress Bar -->
+                <div class="w-full h-3 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden mb-2">
+                    <div id="overall-progress-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 via-blue-500 to-emerald-500 rounded-full" style="width: 0%"></div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 font-medium">
+                    <span id="rule-hint-text">Rule: You need 40 points in each of the 3 groups below (1 credit per group).</span>
+                    <span id="raw-pts-label" class="font-semibold text-slate-600 dark:text-slate-300">Total Earned: 0 pts</span>
+                </div>
+            </div>
+
+            <!-- 3 Interactive Group Selector Tabs (Replaces confusing "All" button) -->
+            <div class="mb-1">
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2.5 px-1">
+                    Select a Group to View &amp; Add Activities:
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     
-                    <!-- Group I Card -->
-                    <div onclick="filterByGroup('Group I')" class="inner-glass rounded-2xl p-4 cursor-pointer hover:border-indigo-400 transition-all flex flex-col justify-between">
+                    <!-- Group I Tab Card -->
+                    <button type="button" id="tab-card-g1" onclick="filterByGroup('Group I')" class="group-tab-card active-group-tab inner-glass rounded-2xl p-4 text-left flex flex-col justify-between cursor-pointer">
                         <div>
-                            <div class="flex items-center justify-between gap-1 mb-1">
-                                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/20">Group I</span>
-                                <span id="g1-status-icon" class="text-xs text-slate-400"><i class="fas fa-circle-dot"></i></span>
+                            <div class="flex items-center justify-between gap-1 mb-1.5">
+                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-md bg-blue-500/10 text-blue-700 dark:text-blue-300">Group I</span>
+                                <span id="g1-status-badge" class="text-xs font-bold text-blue-600 dark:text-blue-400">0 / 40 pts</span>
                             </div>
-                            <h3 class="text-xs font-extrabold text-slate-800 mt-1.5">Co-Curricular &amp; Social</h3>
-                            <p class="text-[10px] text-slate-500 font-medium mt-0.5 line-clamp-1">NSS, NCC, Sports, Arts, Blood Donation</p>
+                            <h3 class="text-sm font-bold text-slate-900">Sports, Arts, NSS &amp; Social</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Arts/Sports fests, NSS, NCC, Blood donation, Driving license</p>
                         </div>
-                        <div class="mt-3">
-                            <div class="flex justify-between text-xs font-extrabold font-mono-code mb-1">
-                                <span id="g1-pts-text" class="text-blue-600 dark:text-blue-400">0 / 40</span>
-                                <span class="text-[10px] text-slate-400">1 Credit</span>
-                            </div>
-                            <div class="w-full h-1.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
-                                <div id="g1-bar" class="progress-bar-fill h-full bg-blue-600 rounded-full" style="width: 0%"></div>
-                            </div>
+                        <div class="w-full h-2 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden mt-3.5">
+                            <div id="g1-bar" class="progress-bar-fill h-full bg-blue-600 rounded-full" style="width: 0%"></div>
                         </div>
-                    </div>
+                    </button>
 
-                    <!-- Group II Card -->
-                    <div onclick="filterByGroup('Group II')" class="inner-glass rounded-2xl p-4 cursor-pointer hover:border-purple-400 transition-all flex flex-col justify-between">
+                    <!-- Group II Tab Card -->
+                    <button type="button" id="tab-card-g2" onclick="filterByGroup('Group II')" class="group-tab-card inner-glass rounded-2xl p-4 text-left flex flex-col justify-between cursor-pointer">
                         <div>
-                            <div class="flex items-center justify-between gap-1 mb-1">
-                                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">Group II</span>
-                                <span id="g2-status-icon" class="text-xs text-slate-400"><i class="fas fa-circle-dot"></i></span>
+                            <div class="flex items-center justify-between gap-1 mb-1.5">
+                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-md bg-purple-500/10 text-purple-700 dark:text-purple-300">Group II</span>
+                                <span id="g2-status-badge" class="text-xs font-bold text-purple-600 dark:text-purple-400">0 / 40 pts</span>
                             </div>
-                            <h3 class="text-xs font-extrabold text-slate-800 mt-1.5">Professional Dev.</h3>
-                            <p class="text-[10px] text-slate-500 font-medium mt-0.5 line-clamp-1">Tech Fests, Internships, IEEE, Union, GATE</p>
+                            <h3 class="text-sm font-bold text-slate-900">Tech Fests, Internships &amp; Clubs</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Workshops, IEEE/ISTE, Short internships, Class Rep, GATE</p>
                         </div>
-                        <div class="mt-3">
-                            <div class="flex justify-between text-xs font-extrabold font-mono-code mb-1">
-                                <span id="g2-pts-text" class="text-purple-600 dark:text-purple-400">0 / 40</span>
-                                <span class="text-[10px] text-slate-400">1 Credit</span>
-                            </div>
-                            <div class="w-full h-1.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
-                                <div id="g2-bar" class="progress-bar-fill h-full bg-purple-600 rounded-full" style="width: 0%"></div>
-                            </div>
+                        <div class="w-full h-2 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden mt-3.5">
+                            <div id="g2-bar" class="progress-bar-fill h-full bg-purple-600 rounded-full" style="width: 0%"></div>
                         </div>
-                    </div>
+                    </button>
 
-                    <!-- Group III Card -->
-                    <div onclick="filterByGroup('Group III')" class="inner-glass rounded-2xl p-4 cursor-pointer hover:border-emerald-400 transition-all flex flex-col justify-between">
+                    <!-- Group III Tab Card -->
+                    <button type="button" id="tab-card-g3" onclick="filterByGroup('Group III')" class="group-tab-card inner-glass rounded-2xl p-4 text-left flex flex-col justify-between cursor-pointer">
                         <div>
-                            <div class="flex items-center justify-between gap-1 mb-1">
-                                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">Group III</span>
-                                <span id="g3-status-icon" class="text-xs text-slate-400"><i class="fas fa-circle-dot"></i></span>
+                            <div class="flex items-center justify-between gap-1 mb-1.5">
+                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">Group III</span>
+                                <span id="g3-status-badge" class="text-xs font-bold text-emerald-600 dark:text-emerald-400">0 / 40 pts</span>
                             </div>
-                            <h3 class="text-xs font-extrabold text-slate-800 mt-1.5">Advanced &amp; Skilling</h3>
-                            <p class="text-[10px] text-slate-500 font-medium mt-0.5 line-clamp-1">IV Report, Hackathons, Startups, Skilling</p>
+                            <h3 class="text-sm font-bold text-slate-900">IV Report, Hackathons &amp; Courses</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Industrial visit, NPTEL/Skilling courses, Hackathons, Startups</p>
                         </div>
-                        <div class="mt-3">
-                            <div class="flex justify-between text-xs font-extrabold font-mono-code mb-1">
-                                <span id="g3-pts-text" class="text-emerald-600 dark:text-emerald-400">0 / 40</span>
-                                <span class="text-[10px] text-slate-400">1 Credit</span>
-                            </div>
-                            <div class="w-full h-1.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
-                                <div id="g3-bar" class="progress-bar-fill h-full bg-emerald-600 rounded-full" style="width: 0%"></div>
-                            </div>
+                        <div class="w-full h-2 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden mt-3.5">
+                            <div id="g3-bar" class="progress-bar-fill h-full bg-emerald-600 rounded-full" style="width: 0%"></div>
                         </div>
-                    </div>
+                    </button>
 
                 </div>
             </div>
@@ -317,88 +320,57 @@
             <!-- Logged Activities Drawer (Reveals when user adds >= 1 activity) -->
             <div id="my-logged-panel" class="hidden mt-5 pt-4 border-t border-slate-200/70 dark:border-white/10">
                 <div class="flex items-center justify-between mb-2.5">
-                    <h4 class="text-xs font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                        <i class="fas fa-check-double text-emerald-500"></i> Your Added Activities (<span id="logged-count">0</span>)
+                    <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fas fa-check-circle text-emerald-500"></i> Your Selected Activities (<span id="logged-count">0</span>)
                     </h4>
-                    <button type="button" onclick="clearAllLogged()" class="text-[11px] font-bold text-rose-500 hover:underline flex items-center gap-1">
-                        <i class="fas fa-trash-alt text-[10px]"></i> Reset Tracker
+                    <button type="button" onclick="clearAllLogged()" class="text-xs font-semibold text-rose-600 hover:underline flex items-center gap-1">
+                        <i class="fas fa-trash-alt text-[11px]"></i> Clear All
                     </button>
                 </div>
                 <div id="logged-items-list" class="flex flex-wrap gap-2"></div>
             </div>
         </section>
 
-        <!-- ==================== SEARCH & GROUP FILTER BAR ==================== -->
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
-            <!-- Search Input -->
-            <div class="relative flex-grow">
-                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs sm:text-sm pointer-events-none"></i>
-                <input type="search" id="activitySearch" oninput="renderActivities()" placeholder="Search by code (e.g. 1.11, 2.23, 3.17) or keyword (NSS, Internship, Hackathon, Driving)..." class="glass-input w-full rounded-2xl pl-10 pr-10 py-3 text-xs sm:text-sm font-bold text-slate-800 placeholder-slate-400">
-                <button type="button" id="clearActSearch" onclick="clearActivitySearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-slate-200/80 dark:bg-slate-700 text-slate-500 items-center justify-center text-xs">
-                    <i class="fas fa-times text-[10px]"></i>
-                </button>
-            </div>
-
-            <!-- Group Filter Pills -->
-            <div id="group-filter-pills" class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar shrink-0 pb-1 sm:pb-0">
-                <button type="button" onclick="filterByGroup('All')" data-group="All" class="group-pill active px-3.5 py-2 rounded-xl text-xs font-extrabold bg-indigo-600 text-white shadow-sm shrink-0 transition-all">
-                    All (<span id="count-all">62</span>)
-                </button>
-                <button type="button" onclick="filterByGroup('Group I')" data-group="Group I" class="group-pill px-3.5 py-2 rounded-xl text-xs font-bold bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 shrink-0 transition-all">
-                    Group I
-                </button>
-                <button type="button" onclick="filterByGroup('Group II')" data-group="Group II" class="group-pill px-3.5 py-2 rounded-xl text-xs font-bold bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 shrink-0 transition-all">
-                    Group II
-                </button>
-                <button type="button" onclick="filterByGroup('Group III')" data-group="Group III" class="group-pill px-3.5 py-2 rounded-xl text-xs font-bold bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 shrink-0 transition-all">
-                    Group III
-                </button>
-            </div>
+        <!-- ==================== SEARCH BAR ==================== -->
+        <div class="relative mb-6 scroll-reveal is-visible">
+            <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none"></i>
+            <input type="search" id="activitySearch" oninput="renderActivities()" placeholder="Search any activity across all groups (e.g. NSS, Driving, Internship, NPTEL, IV Report)..." class="glass-input w-full rounded-2xl pl-11 pr-10 py-3.5 text-sm font-medium text-slate-800 placeholder-slate-400">
+            <button type="button" id="clearActSearch" onclick="clearActivitySearch()" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-slate-200/80 dark:bg-slate-700 text-slate-600 items-center justify-center text-xs">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
 
-        <!-- ==================== ACTIVITIES DIRECTORY GRID ==================== -->
-        <div id="activities-container" class="space-y-7 mb-12"></div>
+        <!-- ==================== ACTIVITIES DIRECTORY GRID (With Scroll-Reveal) ==================== -->
+        <div id="activities-container" class="space-y-8 mb-12"></div>
 
-        <!-- ==================== OFFICIAL HANDBOOK RULES & SUBMISSION GUIDE ==================== -->
-        <section class="real-glass rounded-[2rem] p-5 sm:p-7 mb-8">
-            <h2 class="text-lg sm:text-xl font-black text-slate-900 mb-4 flex items-center gap-2.5">
+        <!-- ==================== SIMPLE RULES SUMMARY ==================== -->
+        <section class="real-glass rounded-3xl p-5 sm:p-7 mb-8 scroll-reveal">
+            <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-4 flex items-center gap-2.5">
                 <span class="w-8 h-8 rounded-xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-sm">
-                    <i class="fas fa-scale-balanced"></i>
+                    <i class="fas fa-circle-info"></i>
                 </span>
-                <span>Official KTU Handbook Rules &amp; Verification</span>
+                <span>Important Rules to Remember</span>
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs sm:text-sm">
-                <div class="inner-glass rounded-2xl p-4 flex items-start gap-3">
-                    <i class="fas fa-layer-group text-indigo-500 mt-1"></i>
-                    <div>
-                        <h3 class="font-extrabold text-slate-800 mb-0.5">Balanced 3-Group Requirement (2024 Scheme)</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Regular students must earn <strong>120 points total</strong> with at least <strong>40 points in each of Group I, Group II, and Group III</strong> (1 credit per group = 3 credits). Excess points in one group cannot compensate for a shortfall in another group.</p>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div class="inner-glass rounded-2xl p-4">
+                    <h3 class="font-bold text-slate-900 mb-1">1. Equal Points in All 3 Groups (2024 Scheme)</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">Regular students need <strong>40 points in Group I</strong>, <strong>40 points in Group II</strong>, and <strong>40 points in Group III</strong> (Total 120 points = 3 credits). Extra points in one group won't carry over to another group.</p>
                 </div>
 
-                <div class="inner-glass rounded-2xl p-4 flex items-start gap-3">
-                    <i class="fas fa-trophy text-amber-500 mt-1"></i>
-                    <div>
-                        <h3 class="font-extrabold text-slate-800 mb-0.5">Participation + Winner Rule</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">If you win a prize in an event, <strong>only the higher achievement (Winner points)</strong> is counted—participation and winning points for the same event cannot be combined. Only the highest level achieved is awarded.</p>
-                    </div>
+                <div class="inner-glass rounded-2xl p-4">
+                    <h3 class="font-bold text-slate-900 mb-1">2. Participation vs. Winner Points</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">If you win a prize in an event, you get the <strong>Winner points</strong> (higher value). You cannot add both Participation and Winner points for the same competition.</p>
                 </div>
 
-                <div class="inner-glass rounded-2xl p-4 flex items-start gap-3">
-                    <i class="fas fa-laptop-code text-emerald-500 mt-1"></i>
-                    <div>
-                        <h3 class="font-extrabold text-slate-800 mb-0.5">Approved Skilling Courses (Code 3.17)</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">University-approved skilling courses carry <strong>1 Activity Point per hour of course duration</strong> (up to 40 points max). Keep your completion certificate with verifiable QR/URL ready for your Senior Faculty Advisor (SFA).</p>
-                    </div>
+                <div class="inner-glass rounded-2xl p-4">
+                    <h3 class="font-bold text-slate-900 mb-1">3. Online Skilling Courses (Code 3.17)</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">KTU-approved skilling courses give <strong>1 Activity Point per hour</strong> of course duration (up to 40 points in Group III).</p>
                 </div>
 
-                <div class="inner-glass rounded-2xl p-4 flex items-start gap-3">
-                    <i class="fas fa-folder-tree text-blue-500 mt-1"></i>
-                    <div>
-                        <h3 class="font-extrabold text-slate-800 mb-0.5">Personal Activity File &amp; SFA Signature</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed">Only activities completed <strong>during your B.Tech admission period</strong> are valid (e.g., Four-Wheeler Driving License must be issued after joining). Submit original certificates to your SFA at the end of every semester.</p>
-                    </div>
+                <div class="inner-glass rounded-2xl p-4">
+                    <h3 class="font-bold text-slate-900 mb-1">4. How to Submit Certificates</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">Keep all original certificates in your Personal Activity File and submit them to your <strong>Senior Faculty Advisor (SFA)</strong> at the end of each semester.</p>
                 </div>
             </div>
         </section>
@@ -406,38 +378,21 @@
     </main>
 
     <!-- ==================== FLOATING BOTTOM TRACKER DOCK ==================== -->
-    <div id="floating-points-dock" class="rounded-[1.75rem] p-2.5 sm:p-3 flex items-center justify-between gap-2.5">
-        <div class="flex items-center gap-2.5 pl-1.5">
-            <span id="dock-pts-badge" class="px-2.5 h-7 rounded-full bg-indigo-600 text-white text-xs font-black font-mono-code flex items-center justify-center shadow-sm shrink-0">
+    <div id="floating-points-dock" class="rounded-3xl p-3 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3 pl-1.5">
+            <span id="dock-pts-badge" class="px-3 h-8 rounded-full bg-indigo-600 text-white text-xs font-extrabold flex items-center justify-center shadow-sm shrink-0">
                 0/120
             </span>
             <div class="flex flex-col text-left">
-                <span id="dock-status-title" class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">0 Points Logged</span>
-                <span id="dock-sub-breakdown" class="text-[10px] font-bold text-slate-500 font-mono-code">G1: 0/40 • G2: 0/40 • G3: 0/40</span>
+                <span id="dock-status-title" class="text-xs sm:text-sm font-bold text-slate-900 leading-tight">0 Points Added</span>
+                <span id="dock-sub-breakdown" class="text-[11px] font-medium text-slate-500">Group I: 0/40 • Group II: 0/40 • Group III: 0/40</span>
             </div>
         </div>
 
-        <div class="flex items-center gap-1.5 shrink-0">
-            <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-3.5 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-extrabold flex items-center gap-1.5 shadow-md transition-all active:scale-95">
-                <i class="fas fa-chart-pie text-[11px]"></i>
-                <span>Summary</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- ==================== TIER / LEVEL SELECTION MODAL ==================== -->
-    <div id="tier-modal" class="fixed inset-0 z-[100] hidden items-center justify-center px-3.5 bg-slate-950/55 backdrop-blur-md">
-        <div class="real-glass bg-white/95 dark:bg-slate-900/95 w-full max-w-md rounded-3xl p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-white/15 relative spring-in">
-            <button type="button" onclick="closeTierModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-white/10 text-slate-500 hover:text-slate-800 flex items-center justify-center">
-                <i class="fas fa-times text-xs"></i>
-            </button>
-
-            <span id="modal-act-code" class="inline-block px-2.5 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-mono-code text-xs font-extrabold mb-1.5">1.1</span>
-            <h3 id="modal-act-title" class="text-base sm:text-lg font-black text-slate-900 leading-snug mb-1">Select Achievement Level</h3>
-            <p id="modal-act-proof" class="text-xs text-slate-500 font-medium mb-4"></p>
-
-            <div id="modal-tier-options" class="space-y-2 max-h-64 overflow-y-auto pr-1"></div>
-        </div>
+        <button type="button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-4 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-md transition-all active:scale-95 shrink-0">
+            <i class="fas fa-arrow-up text-[11px]"></i>
+            <span>View Summary</span>
+        </button>
     </div>
 
     <!-- Footer -->
@@ -445,7 +400,7 @@
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-bold text-base sm:text-lg mb-1">Kerala Timetable</h3>
             <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto">
-                Data compiled from the Official APJAKTU Activity Points Handbook (2024 &amp; 2019 Schemes).
+                Based on the Official APJAKTU Activity Points Handbook (2024 &amp; 2019 Schemes).
             </p>
         </div>
     </footer>
@@ -464,621 +419,635 @@
         const ACTIVITIES_2024 = [
             // ---------------- GROUP I: CO-CURRICULAR ACTIVITIES ----------------
             {
-                code: "1.1", group: "Group I", category: "Sports, Arts & Cultural Activities",
-                title: "Participation in Sports, Arts & Cultural Activities",
-                maxPoints: 40, proof: "Certificate of Participation",
+                code: "1.1", group: "Group I", category: "Sports, Arts & Cultural Events",
+                title: "Participation in Sports, Arts & Cultural Events",
+                maxPoints: 40, proof: "Participation Certificate",
                 tiers: [
-                    { label: "College Level Event", points: 3 },
-                    { label: "Zonal Level Event", points: 8 },
-                    { label: "State / University Level Event", points: 15 },
-                    { label: "National Level Event", points: 25 },
-                    { label: "International Level Event", points: 40 }
+                    { label: "College Level", points: 3 },
+                    { label: "Zonal Level", points: 8 },
+                    { label: "State / University", points: 15 },
+                    { label: "National Level", points: 25 },
+                    { label: "International", points: 40 }
                 ]
             },
             {
-                code: "1.2", group: "Group I", category: "Sports, Arts & Cultural Activities",
-                title: "Winners - Single Events (Sports, Arts & Cultural)",
+                code: "1.2", group: "Group I", category: "Sports, Arts & Cultural Events",
+                title: "Winners — Individual Events (Sports, Arts & Cultural)",
                 maxPoints: 40, proof: "Winner / Merit Certificate",
                 tiers: [
-                    { label: "College Level — 1st / 2nd / 3rd", points: 10 },
-                    { label: "Zonal Level — Winner / Runner-up", points: 20 },
-                    { label: "State / University Level — 1st (30 pts)", points: 30 },
-                    { label: "State / University Level — 2nd / 3rd (25 pts)", points: 25 },
-                    { label: "National / International Level — Winner", points: 40 }
+                    { label: "College Winner", points: 10 },
+                    { label: "Zonal Winner", points: 20 },
+                    { label: "State/Univ (2nd/3rd)", points: 25 },
+                    { label: "State/Univ (1st)", points: 30 },
+                    { label: "National / Int'l", points: 40 }
                 ]
             },
             {
-                code: "1.3", group: "Group I", category: "Sports, Arts & Cultural Activities",
-                title: "Winners - Group Events (Sports, Arts & Cultural)",
+                code: "1.3", group: "Group I", category: "Sports, Arts & Cultural Events",
+                title: "Winners — Group Events (Sports, Arts & Cultural)",
                 maxPoints: 40, proof: "Winner Certificate",
                 tiers: [
-                    { label: "College Level Group Winner", points: 8 },
-                    { label: "Zonal Level Group Winner", points: 15 },
-                    { label: "State / University Level Group Winner", points: 25 },
-                    { label: "National / International Level Group Winner", points: 40 }
+                    { label: "College Winner", points: 8 },
+                    { label: "Zonal Winner", points: 15 },
+                    { label: "State / University", points: 25 },
+                    { label: "National / Int'l", points: 40 }
                 ]
             },
             {
-                code: "1.4", group: "Group I", category: "College Magazine Publication",
-                title: "College Magazine Publication (Articles / Essays / Poems / Tech Writing)",
+                code: "1.4", group: "Group I", category: "Creative Writing & Everyday Skills",
+                title: "College Magazine Publication (Articles, Poems, Stories)",
                 maxPoints: 20, proof: "Copy of Published Magazine Page",
                 tiers: [
-                    { label: "1 Published Work (10 pts)", points: 10 },
-                    { label: "2 or More Published Works (20 pts max)", points: 20 }
+                    { label: "1 Published Work", points: 10 },
+                    { label: "2+ Published Works", points: 20 }
                 ]
             },
             {
-                code: "1.5", group: "Group I", category: "Driving License",
-                title: "Four-Wheeler Driving License (Obtained during course duration)",
-                maxPoints: 5, proof: "Valid Four-Wheeler Driving License issued after admission date",
+                code: "1.5", group: "Group I", category: "Creative Writing & Everyday Skills",
+                title: "Four-Wheeler Driving License (Obtained after joining B.Tech)",
+                maxPoints: 5, proof: "Driving License issued during course period",
                 tiers: [
-                    { label: "Four-Wheeler License Obtained", points: 5 }
+                    { label: "4-Wheeler License", points: 5 }
                 ]
             },
             {
-                code: "1.6", group: "Group I", category: "Community Service & Outreach",
-                title: "Community Service (Minimum 2 Days)",
-                maxPoints: 10, proof: "Certificate from Coordinator / Authority",
-                tiers: [
-                    { label: "2-Day Community Service", points: 5 },
-                    { label: "2 Activities (Max 10 pts)", points: 10 }
-                ]
-            },
-            {
-                code: "1.7", group: "Group I", category: "Community Service & Outreach",
-                title: "Community Service (Up to 1 Week)",
-                maxPoints: 10, proof: "Certificate from Organising Body",
-                tiers: [
-                    { label: "1-Week Community Outreach Camp", points: 10 }
-                ]
-            },
-            {
-                code: "1.8", group: "Group I", category: "Community Service & Outreach",
-                title: "Blood Donation",
-                maxPoints: 10, proof: "Certificate from Recognised Blood Bank",
-                tiers: [
-                    { label: "1st Blood Donation (5 pts)", points: 5 },
-                    { label: "2+ Blood Donations (10 pts max)", points: 10 }
-                ]
-            },
-            {
-                code: "1.9", group: "Group I", category: "Community Service & Outreach",
-                title: "THRIVE Project (Govt. of Kerala)",
-                maxPoints: 20, proof: "Official THRIVE Completion Certificate",
-                tiers: [
-                    { label: "THRIVE Project Participant", points: 20 }
-                ]
-            },
-            {
-                code: "1.10", group: "Group I", category: "Community Service & Outreach",
-                title: "Tree Planting (Geo-tagged)",
-                maxPoints: 5, proof: "Geo-tagged photos across semesters verified by SFA",
-                tiers: [
-                    { label: "Geo-Tagged Tree Plantation", points: 5 }
-                ]
-            },
-            {
-                code: "1.11", group: "Group I", category: "NSS / NCC / NSO",
-                title: "NSS Volunteer (2 Years Completion)",
-                maxPoints: 30, proof: "Official NSS 2-Year Completion Certificate",
-                tiers: [
-                    { label: "Completed 2 Years in NSS", points: 30 }
-                ]
-            },
-            {
-                code: "1.12", group: "Group I", category: "NSS / NCC / NSO",
-                title: "University Leadership Camp (100 Hours)",
-                maxPoints: 20, proof: "University Camp Certificate",
-                tiers: [
-                    { label: "100-Hour Leadership Camp", points: 20 }
-                ]
-            },
-            {
-                code: "1.13", group: "Group I", category: "NSS / NCC / NSO",
-                title: "Winners - State NSS Events",
-                maxPoints: 15, proof: "State NSS Winner Certificate",
-                tiers: [
-                    { label: "State Level NSS Winner", points: 15 }
-                ]
-            },
-            {
-                code: "1.14", group: "Group I", category: "NSS / NCC / NSO",
-                title: "Special Service / Appreciation Certificate (NSS/NCC)",
-                maxPoints: 40, proof: "Official Appreciation / Best Volunteer Certificate",
-                tiers: [
-                    { label: "University / State Appreciation", points: 40 }
-                ]
-            },
-            {
-                code: "1.15", group: "Group I", category: "NSS / NCC / NSO",
-                title: "State / National NSS & Youth Awards",
-                maxPoints: 40, proof: "State / National Award Certificate",
-                tiers: [
-                    { label: "State / National Award Recipient", points: 40 }
-                ]
-            },
-            {
-                code: "1.16", group: "Group I", category: "NSS / NCC / NSO",
-                title: "Approved National Camps / NIC / NYF",
-                maxPoints: 15, proof: "National Integration Camp / Youth Festival Certificate",
-                tiers: [
-                    { label: "National Camp / NIC / NYF", points: 15 }
-                ]
-            },
-            {
-                code: "1.17", group: "Group I", category: "NSS / NCC / NSO",
-                title: "10-Day Volunteer Service (50 Hours)",
-                maxPoints: 15, proof: "50-Hour Volunteer Certificate",
-                tiers: [
-                    { label: "10-Day / 50-Hour Camp", points: 15 }
-                ]
-            },
-            {
-                code: "1.18", group: "Group I", category: "NSS / NCC / NSO",
-                title: "RDC / IDC / International Events (Republic Day Camp)",
-                maxPoints: 25, proof: "RDC / Parade Certificate",
-                tiers: [
-                    { label: "RDC / International Youth Delegation", points: 25 }
-                ]
-            },
-            {
-                code: "1.19", group: "Group I", category: "NSS / NCC / NSO",
-                title: "NCC Certificates (B / C Certificate)",
-                maxPoints: 30, proof: "Official NCC Certificate",
-                tiers: [
-                    { label: "NCC 'B' Certificate (20 pts)", points: 20 },
-                    { label: "NCC 'C' Certificate / 2 Years (30 pts)", points: 30 }
-                ]
-            },
-            {
-                code: "1.20", group: "Group I", category: "Health & Life Skills",
+                code: "1.20", group: "Group I", category: "Creative Writing & Everyday Skills",
                 title: "First Aid / CPR / Fire Safety Training",
-                maxPoints: 10, proof: "Recognised Training Certificate (Red Cross / Fire Dept / Hospital)",
+                maxPoints: 10, proof: "Official Training Certificate",
                 tiers: [
-                    { label: "First Aid / CPR / Fire Safety Certified", points: 10 }
+                    { label: "Certified Training", points: 10 }
                 ]
             },
             {
-                code: "1.21", group: "Group I", category: "Health & Life Skills",
+                code: "1.21", group: "Group I", category: "Creative Writing & Everyday Skills",
                 title: "Swimming Proficiency",
                 maxPoints: 5, proof: "Swimming Proficiency Certificate",
                 tiers: [
-                    { label: "Swimming Proficiency Certified", points: 5 }
+                    { label: "Swimming Certified", points: 5 }
+                ]
+            },
+            {
+                code: "1.6", group: "Group I", category: "Social Outreach & Blood Donation",
+                title: "Community Service (Minimum 2 Days)",
+                maxPoints: 10, proof: "Certificate from Coordinator",
+                tiers: [
+                    { label: "1 Camp (2 Days)", points: 5 },
+                    { label: "2 Camps", points: 10 }
+                ]
+            },
+            {
+                code: "1.7", group: "Group I", category: "Social Outreach & Blood Donation",
+                title: "Community Service (Up to 1 Week)",
+                maxPoints: 10, proof: "Certificate from Organising Body",
+                tiers: [
+                    { label: "1-Week Outreach", points: 10 }
+                ]
+            },
+            {
+                code: "1.8", group: "Group I", category: "Social Outreach & Blood Donation",
+                title: "Blood Donation",
+                maxPoints: 10, proof: "Recognised Blood Bank Certificate",
+                tiers: [
+                    { label: "1st Donation", points: 5 },
+                    { label: "2 Donations (Max)", points: 10 }
+                ]
+            },
+            {
+                code: "1.9", group: "Group I", category: "Social Outreach & Blood Donation",
+                title: "THRIVE Project (Govt. of Kerala)",
+                maxPoints: 20, proof: "THRIVE Completion Certificate",
+                tiers: [
+                    { label: "Completed THRIVE", points: 20 }
+                ]
+            },
+            {
+                code: "1.10", group: "Group I", category: "Social Outreach & Blood Donation",
+                title: "Tree Planting (Geo-tagged)",
+                maxPoints: 5, proof: "Geo-tagged photos verified by SFA",
+                tiers: [
+                    { label: "Geo-Tagged Tree", points: 5 }
+                ]
+            },
+            {
+                code: "1.11", group: "Group I", category: "NSS, NCC & National Camps",
+                title: "NSS Volunteer (2 Years Completion)",
+                maxPoints: 30, proof: "Official NSS 2-Year Certificate",
+                tiers: [
+                    { label: "2 Years NSS Completed", points: 30 }
+                ]
+            },
+            {
+                code: "1.19", group: "Group I", category: "NSS, NCC & National Camps",
+                title: "NCC Certificates (B / C Certificate)",
+                maxPoints: 30, proof: "Official NCC Certificate",
+                tiers: [
+                    { label: "NCC 'B' Certificate", points: 20 },
+                    { label: "NCC 'C' Certificate", points: 30 }
+                ]
+            },
+            {
+                code: "1.12", group: "Group I", category: "NSS, NCC & National Camps",
+                title: "University Leadership Camp (100 Hours)",
+                maxPoints: 20, proof: "University Camp Certificate",
+                tiers: [
+                    { label: "100-Hr Camp", points: 20 }
+                ]
+            },
+            {
+                code: "1.13", group: "Group I", category: "NSS, NCC & National Camps",
+                title: "Winners — State NSS Events",
+                maxPoints: 15, proof: "State NSS Winner Certificate",
+                tiers: [
+                    { label: "State NSS Winner", points: 15 }
+                ]
+            },
+            {
+                code: "1.14", group: "Group I", category: "NSS, NCC & National Camps",
+                title: "Special Service / Best Volunteer Appreciation",
+                maxPoints: 40, proof: "University / State Appreciation Certificate",
+                tiers: [
+                    { label: "Appreciation Award", points: 40 }
+                ]
+            },
+            {
+                code: "1.15", group: "Group I", category: "NSS, NCC & National Camps",
+                title: "State / National NSS & Youth Awards",
+                maxPoints: 40, proof: "State / National Award Certificate",
+                tiers: [
+                    { label: "State / National Award", points: 40 }
+                ]
+            },
+            {
+                code: "1.16", group: "Group I", category: "NSS, NCC & National Camps",
+                title: "Approved National Camps / NIC / NYF",
+                maxPoints: 15, proof: "National Camp Certificate",
+                tiers: [
+                    { label: "NIC / NYF Camp", points: 15 }
+                ]
+            },
+            {
+                code: "1.17", group: "Group I", category: "NSS, NCC & National Camps",
+                title: "10-Day Volunteer Service (50 Hours)",
+                maxPoints: 15, proof: "50-Hour Volunteer Certificate",
+                tiers: [
+                    { label: "50-Hr Service", points: 15 }
+                ]
+            },
+            {
+                code: "1.18", group: "Group I", category: "NSS, NCC & National Camps",
+                title: "Republic Day Camp (RDC / IDC / International)",
+                maxPoints: 25, proof: "RDC / Parade Certificate",
+                tiers: [
+                    { label: "RDC / International", points: 25 }
                 ]
             },
 
             // ---------------- GROUP II: PROFESSIONAL DEVELOPMENT ----------------
             {
-                code: "2.1", group: "Group II", category: "Technical Events",
+                code: "2.1", group: "Group II", category: "Tech Fests & Professional Societies",
                 title: "Tech-Fest Participation",
                 maxPoints: 30, proof: "Participation Certificate",
                 tiers: [
-                    { label: "KTU / Other College Tech-Fest (5 pts)", points: 5 },
-                    { label: "NIT / IIT / Premier Institute Tech-Fest (10 pts)", points: 10 },
-                    { label: "Multiple Tech-Fests (20 pts)", points: 20 },
-                    { label: "Maximum Cap (30 pts)", points: 30 }
+                    { label: "College Tech-Fest", points: 5 },
+                    { label: "IIT / NIT Tech-Fest", points: 10 },
+                    { label: "Multiple Events", points: 20 },
+                    { label: "Max Cap", points: 30 }
                 ]
             },
             {
-                code: "2.2", group: "Group II", category: "Technical Events",
+                code: "2.2", group: "Group II", category: "Tech Fests & Professional Societies",
                 title: "Tech-Fest Winners",
                 maxPoints: 40, proof: "Winner Certificate",
                 tiers: [
-                    { label: "College Level Tech-Fest Winner (15 pts)", points: 15 },
-                    { label: "Zonal / State Level Winner (25 pts)", points: 25 },
-                    { label: "IIT / NIT / National Tech-Fest Winner (40 pts)", points: 40 }
+                    { label: "College Winner", points: 15 },
+                    { label: "Zonal / State Winner", points: 25 },
+                    { label: "IIT / NIT / National", points: 40 }
                 ]
             },
             {
-                code: "2.3", group: "Group II", category: "Technical Events",
-                title: "Professional Society Events - Participation (IEEE / ISTE / CSI / SAE / ASME)",
-                maxPoints: 20, proof: "Event Participation Certificate",
+                code: "2.3", group: "Group II", category: "Tech Fests & Professional Societies",
+                title: "Professional Society Events — Participation (IEEE, ISTE, CSI, SAE)",
+                maxPoints: 20, proof: "Participation Certificate",
                 tiers: [
-                    { label: "1 Event (5 pts)", points: 5 },
-                    { label: "2 Events (10 pts)", points: 10 },
-                    { label: "4+ Events (20 pts max)", points: 20 }
+                    { label: "1 Event", points: 5 },
+                    { label: "2 Events", points: 10 },
+                    { label: "4 Events (Max)", points: 20 }
                 ]
             },
             {
-                code: "2.4", group: "Group II", category: "Technical Events",
-                title: "Professional Society Events - Winners",
-                maxPoints: 35, proof: "Winner Certificate from Professional Body",
+                code: "2.4", group: "Group II", category: "Tech Fests & Professional Societies",
+                title: "Professional Society Events — Winners",
+                maxPoints: 35, proof: "Winner Certificate",
                 tiers: [
-                    { label: "Section / State Level Winner (20 pts)", points: 20 },
-                    { label: "National / International Society Winner (35 pts)", points: 35 }
+                    { label: "State / Section Winner", points: 20 },
+                    { label: "National / Int'l Winner", points: 35 }
                 ]
             },
             {
-                code: "2.5", group: "Group II", category: "Academic Presentations",
-                title: "Conferences / Workshops (IIT / NIT / Top Institutes)",
-                maxPoints: 15, proof: "Workshop / Seminar Attendance Certificate",
+                code: "2.5", group: "Group II", category: "Workshops, Seminars & Papers",
+                title: "Conferences / Workshops at IIT / NIT / Premier Institutes",
+                maxPoints: 15, proof: "Attendance Certificate",
                 tiers: [
-                    { label: "1 Workshop / Seminar at Top Institute", points: 15 }
+                    { label: "IIT / NIT Workshop", points: 15 }
                 ]
             },
             {
-                code: "2.6", group: "Group II", category: "Academic Presentations",
+                code: "2.6", group: "Group II", category: "Workshops, Seminars & Papers",
                 title: "Poster Presentation",
                 maxPoints: 40, proof: "Poster Presentation Certificate",
                 tiers: [
-                    { label: "Poster Presentation — Participation (15 pts)", points: 15 },
-                    { label: "Poster Presentation — Winner / Best Poster (40 pts)", points: 40 }
+                    { label: "Participation", points: 15 },
+                    { label: "Best Poster / Winner", points: 40 }
                 ]
             },
             {
-                code: "2.7", group: "Group II", category: "Academic Presentations",
-                title: "Paper Presentation (IIT / NIT / Top Institutes)",
-                maxPoints: 40, proof: "Certificate of Presentation",
+                code: "2.7", group: "Group II", category: "Workshops, Seminars & Papers",
+                title: "Paper Presentation at IIT / NIT / Premier Institutes",
+                maxPoints: 40, proof: "Presentation Certificate",
                 tiers: [
-                    { label: "Presented Paper at Premier Institute (25 pts)", points: 25 },
-                    { label: "With Recognition / Multiple (40 pts)", points: 40 }
+                    { label: "Paper Presented", points: 25 },
+                    { label: "With Recognition", points: 40 }
                 ]
             },
             {
-                code: "2.8", group: "Group II", category: "Academic Presentations",
-                title: "Paper Presentation - Winners",
-                maxPoints: 40, proof: "Best Paper / Winner Certificate",
+                code: "2.8", group: "Group II", category: "Workshops, Seminars & Papers",
+                title: "Paper Presentation — Best Paper Winner",
+                maxPoints: 40, proof: "Best Paper Award Certificate",
                 tiers: [
-                    { label: "Best Paper Award / Winner", points: 40 }
+                    { label: "Best Paper Winner", points: 40 }
                 ]
             },
             {
-                code: "2.9", group: "Group II", category: "Academic Presentations",
-                title: "Paper Presentation (KTU / Other Colleges)",
-                maxPoints: 40, proof: "Paper Presentation Certificate",
+                code: "2.9", group: "Group II", category: "Workshops, Seminars & Papers",
+                title: "Paper Presentation at KTU / Other Colleges",
+                maxPoints: 40, proof: "Presentation Certificate",
                 tiers: [
-                    { label: "1 Paper Presentation (10 pts)", points: 10 },
-                    { label: "2 Paper Presentations (20 pts)", points: 20 },
-                    { label: "Winner / Max Cap (40 pts)", points: 40 }
+                    { label: "1 Paper", points: 10 },
+                    { label: "2 Papers", points: 20 },
+                    { label: "Winner / Max", points: 40 }
                 ]
             },
             {
-                code: "2.11", group: "Group II", category: "Leadership & Roles",
-                title: "Professional Society Membership & Office Bearer (IEEE / CSI / SAE / ISTE)",
-                maxPoints: 15, proof: "Membership / Office Bearer Certificate",
+                code: "2.23", group: "Group II", category: "Internships, Open Source & Exams",
+                title: "Short-Term Internship (Minimum 2 Weeks)",
+                maxPoints: 10, proof: "Internship Certificate & Report",
                 tiers: [
-                    { label: "Active Member (5 pts)", points: 5 },
-                    { label: "Student Branch Office Bearer / Core Team (15 pts)", points: 15 }
+                    { label: "2-Week Internship", points: 10 }
                 ]
             },
             {
-                code: "2.12", group: "Group II", category: "Leadership & Roles",
-                title: "College / University Union (Elected Office Bearers)",
-                maxPoints: 30, proof: "Certificate from Principal / Dean",
+                code: "2.22", group: "Group II", category: "Internships, Open Source & Exams",
+                title: "FOSS / Open Source Contributions",
+                maxPoints: 20, proof: "Verified GitHub / ICFOSS Contribution",
                 tiers: [
-                    { label: "Sub-Committee / Council Member (15 pts)", points: 15 },
-                    { label: "Chairman / Secretary / Core Union Bearer (30 pts)", points: 30 }
+                    { label: "FOSS Contributor", points: 20 }
                 ]
             },
             {
-                code: "2.13", group: "Group II", category: "Leadership & Roles",
-                title: "Department Association (Office Bearer / Coordinator)",
-                maxPoints: 10, proof: "Certificate from HoD",
+                code: "2.25", group: "Group II", category: "Internships, Open Source & Exams",
+                title: "Qualifying GATE / GRE / CAT / GMAT",
+                maxPoints: 30, proof: "Official Qualifying Scorecard",
                 tiers: [
-                    { label: "Department Association Secretary / Core", points: 10 }
+                    { label: "Exam Qualified", points: 30 }
                 ]
             },
             {
-                code: "2.14", group: "Group II", category: "Leadership & Roles",
+                code: "2.24", group: "Group II", category: "Internships, Open Source & Exams",
+                title: "English Proficiency (TOEFL / IELTS / PTE / BEC)",
+                maxPoints: 30, proof: "Official Scorecard",
+                tiers: [
+                    { label: "Certified Score", points: 30 }
+                ]
+            },
+            {
+                code: "2.11", group: "Group II", category: "Student Leadership & Campus Roles",
+                title: "Professional Society Office Bearer (IEEE / ISTE / CSI / SAE)",
+                maxPoints: 15, proof: "Office Bearer Certificate",
+                tiers: [
+                    { label: "Active Member", points: 5 },
+                    { label: "Office Bearer", points: 15 }
+                ]
+            },
+            {
+                code: "2.12", group: "Group II", category: "Student Leadership & Campus Roles",
+                title: "College / University Union Elected Office Bearer",
+                maxPoints: 30, proof: "Principal Certificate",
+                tiers: [
+                    { label: "Council Member", points: 15 },
+                    { label: "Core Union Bearer", points: 30 }
+                ]
+            },
+            {
+                code: "2.13", group: "Group II", category: "Student Leadership & Campus Roles",
+                title: "Department Association Coordinator",
+                maxPoints: 10, proof: "HoD Certificate",
+                tiers: [
+                    { label: "Association Core", points: 10 }
+                ]
+            },
+            {
+                code: "2.14", group: "Group II", category: "Student Leadership & Campus Roles",
                 title: "Class Representative (CR)",
-                maxPoints: 10, proof: "Certificate from HoD / SFA",
+                maxPoints: 10, proof: "HoD / SFA Certificate",
                 tiers: [
-                    { label: "1 Semester / Year CR (5 pts)", points: 5 },
-                    { label: "2+ Semesters CR (10 pts max)", points: 10 }
+                    { label: "1 Semester CR", points: 5 },
+                    { label: "2+ Semesters CR", points: 10 }
                 ]
             },
             {
-                code: "2.15", group: "Group II", category: "Leadership & Roles",
+                code: "2.15", group: "Group II", category: "Student Leadership & Campus Roles",
                 title: "Industrial Visit (IV) Student Coordinator",
-                maxPoints: 5, proof: "Certificate from HoD / Faculty Coordinator",
+                maxPoints: 5, proof: "Faculty Coordinator Certificate",
                 tiers: [
-                    { label: "IV Student Coordinator", points: 5 }
+                    { label: "IV Coordinator", points: 5 }
                 ]
             },
             {
-                code: "2.16", group: "Group II", category: "Leadership & Roles",
-                title: "Placement Cell (CGPU Student Coordinator)",
-                maxPoints: 10, proof: "Certificate from Placement Officer",
+                code: "2.16", group: "Group II", category: "Student Leadership & Campus Roles",
+                title: "Placement Cell (CGPU) Coordinator",
+                maxPoints: 10, proof: "Placement Officer Certificate",
                 tiers: [
-                    { label: "Active Placement Cell Coordinator", points: 10 }
+                    { label: "CGPU Coordinator", points: 10 }
                 ]
             },
             {
-                code: "2.17", group: "Group II", category: "Leadership & Roles",
-                title: "IEDC Cell (Executive Committee / Coordinator)",
-                maxPoints: 10, proof: "Certificate from IEDC Nodal Officer",
+                code: "2.17", group: "Group II", category: "Student Leadership & Campus Roles",
+                title: "IEDC Executive Committee Member",
+                maxPoints: 10, proof: "IEDC Nodal Officer Certificate",
                 tiers: [
-                    { label: "IEDC Executive / Core Member", points: 10 }
+                    { label: "IEDC Execom", points: 10 }
                 ]
             },
             {
-                code: "2.18", group: "Group II", category: "Leadership & Roles",
-                title: "YIP (K-DISC) - Student Coordinator",
+                code: "2.18", group: "Group II", category: "Student Leadership & Campus Roles",
+                title: "YIP (K-DISC) Student Coordinator",
                 maxPoints: 5, proof: "YIP Coordinator Certificate",
                 tiers: [
-                    { label: "YIP Student Coordinator", points: 5 }
+                    { label: "YIP Coordinator", points: 5 }
                 ]
             },
             {
-                code: "2.19", group: "Group II", category: "Leadership & Roles",
-                title: "STRIDE (Coordinator / Volunteering)",
+                code: "2.19", group: "Group II", category: "Student Leadership & Campus Roles",
+                title: "STRIDE Coordinator / Volunteer",
                 maxPoints: 20, proof: "STRIDE Certificate",
                 tiers: [
-                    { label: "STRIDE Initiative Role", points: 20 }
+                    { label: "STRIDE Role", points: 20 }
                 ]
             },
             {
-                code: "2.20", group: "Group II", category: "Leadership & Roles",
+                code: "2.20", group: "Group II", category: "Student Leadership & Campus Roles",
                 title: "College Magazine Editorial Board",
-                maxPoints: 10, proof: "Certificate from Principal / Staff Editor",
+                maxPoints: 10, proof: "Principal / Staff Editor Certificate",
                 tiers: [
-                    { label: "Student Editor / Editorial Board Member", points: 10 }
+                    { label: "Editorial Board", points: 10 }
                 ]
             },
             {
-                code: "2.21", group: "Group II", category: "Leadership & Roles",
-                title: "Hobby Clubs (Executive / Convenor)",
-                maxPoints: 10, proof: "Certificate from Faculty-in-Charge",
+                code: "2.21", group: "Group II", category: "Student Leadership & Campus Roles",
+                title: "Hobby Clubs Convenor / Executive",
+                maxPoints: 10, proof: "Faculty-in-Charge Certificate",
                 tiers: [
-                    { label: "Club Convenor / Executive Member", points: 10 }
-                ]
-            },
-            {
-                code: "2.22", group: "Group II", category: "FOSS & Internships",
-                title: "FOSS / Open Source Contributions",
-                maxPoints: 20, proof: "Merged PRs / ICFOSS / GitHub Verification",
-                tiers: [
-                    { label: "Verified Open Source / FOSS Contribution", points: 20 }
-                ]
-            },
-            {
-                code: "2.23", group: "Group II", category: "FOSS & Internships",
-                title: "Short-Term Internship / Clinical Exposure (Minimum 2 Weeks)",
-                maxPoints: 10, proof: "Internship Completion Certificate & Report",
-                tiers: [
-                    { label: "Completed ≥ 2 Weeks Internship", points: 10 }
-                ]
-            },
-            {
-                code: "2.24", group: "Group II", category: "Certifications",
-                title: "English Proficiency (TOEFL / IELTS / PTE / BEC)",
-                maxPoints: 30, proof: "Official Score Card / Certificate",
-                tiers: [
-                    { label: "Valid English Proficiency Certification", points: 30 }
-                ]
-            },
-            {
-                code: "2.25", group: "Group II", category: "Certifications",
-                title: "Aptitude Tests (GRE / GATE / CAT / GMAT)",
-                maxPoints: 30, proof: "Valid Qualifying Score Card",
-                tiers: [
-                    { label: "Qualified GATE / GRE / CAT / GMAT", points: 30 }
+                    { label: "Club Executive", points: 10 }
                 ]
             },
 
             // ---------------- GROUP III: ADVANCED ACHIEVEMENTS ----------------
             {
-                code: "3.1", group: "Group III", category: "Reports & Projects",
-                title: "Industrial Visit / Industrial Training Report (S5 or S6)",
-                maxPoints: 20, proof: "IV Report (min 4 relevant industries) verified by Department",
+                code: "3.17", group: "Group III", category: "Skilling Courses, IV Report & Internships",
+                title: "University Approved Skilling Courses (1 Point per Hour)",
+                maxPoints: 40, proof: "NPTEL / Coursera / Approved Skilling Certificate",
                 tiers: [
-                    { label: "Approved Industrial Visit Report", points: 20 }
+                    { label: "15-Hr Course", points: 15 },
+                    { label: "20-Hr Course", points: 20 },
+                    { label: "30-Hr / NPTEL", points: 30 },
+                    { label: "40+ Hrs (Max)", points: 40 }
                 ]
             },
             {
-                code: "3.2", group: "Group III", category: "Reports & Projects",
-                title: "Best Project / Seminar Award",
-                maxPoints: 5, proof: "Department / College Best Project Certificate",
+                code: "3.1", group: "Group III", category: "Skilling Courses, IV Report & Internships",
+                title: "Industrial Visit (IV) / Training Report (S5 or S6)",
+                maxPoints: 20, proof: "Approved IV Report (min 4 relevant industries)",
                 tiers: [
-                    { label: "Best Project / Seminar Recognition", points: 5 }
+                    { label: "Approved IV Report", points: 20 }
                 ]
             },
             {
-                code: "3.3", group: "Group III", category: "Reports & Projects",
+                code: "3.3", group: "Group III", category: "Skilling Courses, IV Report & Internships",
                 title: "Long-Term Internship (Minimum 3.5 Months)",
-                maxPoints: 15, proof: "Long-Term Internship Completion Certificate",
+                maxPoints: 15, proof: "Long-Term Internship Certificate",
                 tiers: [
-                    { label: "Completed ≥ 3.5 Months Internship", points: 15 }
+                    { label: "3.5+ Month Internship", points: 15 }
                 ]
             },
             {
-                code: "3.4", group: "Group III", category: "Programs",
-                title: "LEAP (IIT Madras)",
-                maxPoints: 30, proof: "LEAP Programme Certificate",
+                code: "3.2", group: "Group III", category: "Skilling Courses, IV Report & Internships",
+                title: "Best Project / Seminar Award",
+                maxPoints: 5, proof: "Department / College Certificate",
                 tiers: [
-                    { label: "Completed LEAP (IIT Madras)", points: 30 }
+                    { label: "Best Project Award", points: 5 }
                 ]
             },
             {
-                code: "3.5", group: "Group III", category: "Programs",
-                title: "YIP (Young Innovators Programme - K-DISC)",
-                maxPoints: 35, proof: "YIP Official Stage Certificate",
+                code: "3.15", group: "Group III", category: "Hackathons & Innovation Programs",
+                title: "National Level Hackathons (SIH, etc.)",
+                maxPoints: 40, proof: "Finalist / Winner Certificate",
                 tiers: [
-                    { label: "Preliminary / District Level (15 pts)", points: 15 },
-                    { label: "State Level / Finalist Winner (35 pts)", points: 35 }
+                    { label: "Finalist", points: 20 },
+                    { label: "Winner", points: 40 }
                 ]
             },
             {
-                code: "3.6", group: "Group III", category: "Programs",
-                title: "STRIDE Project / Innovation",
-                maxPoints: 35, proof: "STRIDE Project Completion Certificate",
+                code: "3.16", group: "Group III", category: "Hackathons & Innovation Programs",
+                title: "International Level Hackathons",
+                maxPoints: 40, proof: "Finalist / Winner Certificate",
                 tiers: [
-                    { label: "Approved STRIDE Innovation Project", points: 35 }
+                    { label: "Finalist", points: 25 },
+                    { label: "Winner", points: 40 }
                 ]
             },
             {
-                code: "3.7", group: "Group III", category: "Programs",
+                code: "3.4", group: "Group III", category: "Hackathons & Innovation Programs",
+                title: "LEAP Programme (IIT Madras)",
+                maxPoints: 30, proof: "LEAP Completion Certificate",
+                tiers: [
+                    { label: "Completed LEAP", points: 30 }
+                ]
+            },
+            {
+                code: "3.5", group: "Group III", category: "Hackathons & Innovation Programs",
+                title: "YIP (Young Innovators Programme — K-DISC)",
+                maxPoints: 35, proof: "Official YIP Certificate",
+                tiers: [
+                    { label: "District Level", points: 15 },
+                    { label: "State Winner", points: 35 }
+                ]
+            },
+            {
+                code: "3.6", group: "Group III", category: "Hackathons & Innovation Programs",
+                title: "STRIDE Innovation Project",
+                maxPoints: 35, proof: "STRIDE Project Certificate",
+                tiers: [
+                    { label: "STRIDE Project", points: 35 }
+                ]
+            },
+            {
+                code: "3.7", group: "Group III", category: "Hackathons & Innovation Programs",
                 title: "GDC AI Workforce / Fellowship",
                 maxPoints: 35, proof: "GDC Completion Certificate",
                 tiers: [
-                    { label: "Completed GDC Programme", points: 35 }
+                    { label: "Completed GDC", points: 35 }
                 ]
             },
             {
-                code: "3.8", group: "Group III", category: "Programs",
+                code: "3.8", group: "Group III", category: "Hackathons & Innovation Programs",
                 title: "ICFOSS Certified Solution",
-                maxPoints: 25, proof: "ICFOSS Certification",
+                maxPoints: 25, proof: "ICFOSS Certificate",
                 tiers: [
-                    { label: "ICFOSS Certified Solution", points: 25 }
+                    { label: "ICFOSS Solution", points: 25 }
                 ]
             },
             {
-                code: "3.9", group: "Group III", category: "Innovation, Patents & Research",
-                title: "Registered Startup (DPIIT / KSUM)",
-                maxPoints: 30, proof: "Startup Incorporation / KSUM Registration",
+                code: "3.9", group: "Group III", category: "Startups, Patents & Research",
+                title: "Registered Student Startup (DPIIT / KSUM)",
+                maxPoints: 30, proof: "Startup Registration Certificate",
                 tiers: [
-                    { label: "Registered Student Startup", points: 30 }
+                    { label: "Registered Startup", points: 30 }
                 ]
             },
             {
-                code: "3.10", group: "Group III", category: "Innovation, Patents & Research",
+                code: "3.10", group: "Group III", category: "Startups, Patents & Research",
                 title: "Patents (Filed / Published / Granted)",
-                maxPoints: 40, proof: "Official Patent Application / Grant Number",
+                maxPoints: 40, proof: "Official Patent Document",
                 tiers: [
-                    { label: "Patent Filed (25 pts)", points: 25 },
-                    { label: "Patent Published (30 pts)", points: 30 },
-                    { label: "Patent Granted (40 pts)", points: 40 }
+                    { label: "Patent Filed", points: 25 },
+                    { label: "Published", points: 30 },
+                    { label: "Granted", points: 40 }
                 ]
             },
             {
-                code: "3.11", group: "Group III", category: "Innovation, Patents & Research",
+                code: "3.11", group: "Group III", category: "Startups, Patents & Research",
                 title: "Prototype Development / Industry Adoption",
-                maxPoints: 40, proof: "Prototype Approval / Industry Adoption Letter",
+                maxPoints: 40, proof: "Prototype Approval Letter",
                 tiers: [
-                    { label: "Working Prototype Developed (25 pts)", points: 25 },
-                    { label: "Industry Adopted Prototype (40 pts)", points: 40 }
+                    { label: "Working Prototype", points: 25 },
+                    { label: "Industry Adopted", points: 40 }
                 ]
             },
             {
-                code: "3.12", group: "Group III", category: "Innovation, Patents & Research",
-                title: "Venture Capital / Angel Funding / Idea Grant",
-                maxPoints: 40, proof: "Sanction Order / Grant Letter",
+                code: "3.12", group: "Group III", category: "Startups, Patents & Research",
+                title: "Idea Grant / Angel / Venture Funding",
+                maxPoints: 40, proof: "Grant Sanction Letter",
                 tiers: [
-                    { label: "Secured Innovation Grant / Seed Funding", points: 40 }
+                    { label: "Grant Secured", points: 40 }
                 ]
             },
             {
-                code: "3.13", group: "Group III", category: "Innovation, Patents & Research",
+                code: "3.13", group: "Group III", category: "Startups, Patents & Research",
                 title: "Societal Innovation Deployment",
-                maxPoints: 40, proof: "Verification from Local Body / Govt Dept",
+                maxPoints: 40, proof: "Local Body / Govt Verification",
                 tiers: [
-                    { label: "Deployed Societal Innovation", points: 40 }
+                    { label: "Deployed Solution", points: 40 }
                 ]
             },
             {
-                code: "3.14", group: "Group III", category: "Innovation, Patents & Research",
-                title: "Research Publications (Peer-Reviewed Journals / Scopus / IEEE)",
+                code: "3.14", group: "Group III", category: "Startups, Patents & Research",
+                title: "Research Paper Publication (Scopus / IEEE / Peer-Reviewed)",
                 maxPoints: 40, proof: "Published Paper DOI / Certificate",
                 tiers: [
-                    { label: "Conference Proceedings / UGC Care (25 pts)", points: 25 },
-                    { label: "Indexed International Journal (40 pts)", points: 40 }
-                ]
-            },
-            {
-                code: "3.15", group: "Group III", category: "Hackathons & Skilling",
-                title: "National Level Hackathons (SIH, etc.)",
-                maxPoints: 40, proof: "Hackathon Finalist / Winner Certificate",
-                tiers: [
-                    { label: "National Hackathon Finalist (20 pts)", points: 20 },
-                    { label: "National Hackathon Winner (40 pts)", points: 40 }
-                ]
-            },
-            {
-                code: "3.16", group: "Group III", category: "Hackathons & Skilling",
-                title: "International Level Hackathons",
-                maxPoints: 40, proof: "International Hackathon Certificate",
-                tiers: [
-                    { label: "International Hackathon Finalist (25 pts)", points: 25 },
-                    { label: "International Hackathon Winner (40 pts)", points: 40 }
-                ]
-            },
-            {
-                code: "3.17", group: "Group III", category: "Hackathons & Skilling",
-                title: "Skilling Courses (University Approved — 1 Point per Hour)",
-                maxPoints: 40, proof: "NPTEL / Coursera / University-Approved Skilling Certificate",
-                tiers: [
-                    { label: "15-Hour Approved Skilling Course (15 pts)", points: 15 },
-                    { label: "20-Hour Approved Skilling Course (20 pts)", points: 20 },
-                    { label: "30-Hour Approved Skilling Course / NPTEL (30 pts)", points: 30 },
-                    { label: "40+ Hour Approved Skilling Courses (40 pts max)", points: 40 }
+                    { label: "Conference / UGC", points: 25 },
+                    { label: "Indexed Journal", points: 40 }
                 ]
             }
         ];
 
         // =====================================================================
-        // 2. 2019 SCHEME DATASET (Classic 6 Segments — 100 Pts Regular / 75 LE)
+        // 2. 2019 SCHEME DATASET
         // =====================================================================
         const ACTIVITIES_2019 = [
             {
-                code: "N1", group: "Group I", category: "1. National Initiatives (NSS / NCC)",
+                code: "N1", group: "Group I", category: "National Initiatives & Sports/Arts",
                 title: "NSS / NCC (2 Years Completion)",
-                maxPoints: 60, proof: "2-Year NSS/NCC Certificate (+20 pts for C-Cert / National Camp)",
-                tiers: [
-                    { label: "Completed 2 Years NSS / NCC (60 pts)", points: 60 }
-                ]
+                maxPoints: 60, proof: "Official 2-Year Certificate",
+                tiers: [{ label: "2 Years Completed", points: 60 }]
             },
             {
-                code: "S1", group: "Group I", category: "2. Sports & Games / 3. Cultural",
-                title: "Sports, Games & Cultural Participation / Winners",
+                code: "S1", group: "Group I", category: "National Initiatives & Sports/Arts",
+                title: "Sports, Games & Cultural Events",
                 maxPoints: 60, proof: "Participation / Winner Certificate",
                 tiers: [
-                    { label: "College Level Participation (8 pts)", points: 8 },
-                    { label: "Zonal Level Participation (15 pts)", points: 15 },
-                    { label: "University / State Level (25 pts)", points: 25 },
-                    { label: "National / International Winner (60 pts)", points: 60 }
+                    { label: "College Level", points: 8 },
+                    { label: "Zonal Level", points: 15 },
+                    { label: "State / University", points: 25 },
+                    { label: "National Winner", points: 60 }
                 ]
             },
             {
-                code: "P1", group: "Group II", category: "4. Professional Self Initiatives",
+                code: "P1", group: "Group II", category: "MOOCs, Tech Fests & Internships",
                 title: "MOOC Courses (NPTEL / SWAYAM / Coursera)",
-                maxPoints: 50, proof: "Exam Pass Certificate",
+                maxPoints: 50, proof: "Course Pass Certificate",
                 tiers: [
-                    { label: "12-Week NPTEL / MOOC Course (50 pts)", points: 50 },
-                    { label: "8-Week MOOC Course (30 pts)", points: 30 },
-                    { label: "4-Week MOOC Course (20 pts)", points: 20 }
+                    { label: "4-Week Course", points: 20 },
+                    { label: "8-Week Course", points: 30 },
+                    { label: "12-Week NPTEL", points: 50 }
                 ]
             },
             {
-                code: "P2", group: "Group II", category: "4. Professional Self Initiatives",
-                title: "Tech Fest / Paper Presentation / Workshop (IIT / NIT / KTU)",
+                code: "P2", group: "Group II", category: "MOOCs, Tech Fests & Internships",
+                title: "Tech Fest / Workshop / Internship (≥ 5 Days)",
                 maxPoints: 40, proof: "Certificate",
                 tiers: [
-                    { label: "Tech Quiz / Seminar at KTU College (10 pts)", points: 10 },
-                    { label: "Workshop / Paper at IIT / NIT (20 pts)", points: 20 },
-                    { label: "Industrial Training / Internship ≥ 5 Days (20 pts)", points: 20 }
+                    { label: "KTU Tech Fest", points: 10 },
+                    { label: "IIT/NIT Workshop", points: 20 },
+                    { label: "Internship (5+ Days)", points: 20 }
                 ]
             },
             {
-                code: "E1", group: "Group III", category: "5. Entrepreneurship & Innovation",
-                title: "Startups, Patents & Prototype Development",
-                maxPoints: 60, proof: "Patent / Startup Certificate",
+                code: "E1", group: "Group III", category: "Innovation & Leadership",
+                title: "Startups, Patents & Prototypes",
+                maxPoints: 60, proof: "Official Certificate",
                 tiers: [
-                    { label: "Patent Filed (30 pts)", points: 30 },
-                    { label: "Patent Published / Startup Registered (60 pts)", points: 60 },
-                    { label: "Innovative Prototype Developed (40 pts)", points: 40 }
+                    { label: "Patent Filed", points: 30 },
+                    { label: "Prototype", points: 40 },
+                    { label: "Startup / Published", points: 60 }
                 ]
             },
             {
-                code: "L1", group: "Group III", category: "6. Leadership & Management",
-                title: "Student Societies, College Union, Elected Representatives",
+                code: "L1", group: "Group III", category: "Innovation & Leadership",
+                title: "Student Societies, Union & Elected Coordinators",
                 maxPoints: 30, proof: "HoD / Principal Certificate",
                 tiers: [
-                    { label: "Coordinator / Sub-Committee Member (10 pts)", points: 10 },
-                    { label: "Elected Chairman / Secretary / Core Coordinator (15 pts)", points: 15 },
-                    { label: "Multiple Leadership Roles (30 pts max)", points: 30 }
+                    { label: "Sub-Coordinator", points: 10 },
+                    { label: "Core Coordinator", points: 15 },
+                    { label: "Multiple Roles", points: 30 }
                 ]
             }
         ];
 
         // =====================================================================
-        // 3. STATE MANAGEMENT (Saved in localStorage)
+        // 3. STATE & SCROLL ANIMATION OBSERVER
         // =====================================================================
         const STORAGE_KEY = 'ktu_activity_points_tracker_v2';
-        let currentScheme = '2024'; // '2024' | '2019'
-        let studentCategory = 'regular'; // 'regular' | 'lateral' | 'pwd'
-        let activeGroupFilter = 'All';
-        let loggedActivities = []; // [{ id, code, title, group, tierLabel, points, scheme }]
-        let activeModalActivity = null;
+        let currentScheme = '2024';
+        let studentCategory = 'regular';
+        let activeGroupFilter = 'Group I'; // Default directly to Group I (No "All" clutter)
+        let loggedActivities = [];
+        let scrollObserver = null;
+
+        function initScrollAnimations() {
+            if (scrollObserver) scrollObserver.disconnect();
+            scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        scrollObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+            document.querySelectorAll('.scroll-reveal:not(.is-visible)').forEach(el => {
+                scrollObserver.observe(el);
+            });
+        }
 
         function loadSavedTracker() {
             try {
@@ -1119,7 +1088,7 @@
         }
 
         // =====================================================================
-        // 4. CALCULATE TOTALS & UPDATE DASHBOARD UI
+        // 4. UPDATE DASHBOARD & PROGRESS BARS
         // =====================================================================
         function updateDashboard() {
             const req = getRequirements();
@@ -1142,31 +1111,31 @@
                 ? (countedG1 + countedG2 + countedG3)
                 : Math.min(rawTotal, req.total);
 
-            // Update Total Numbers
             document.getElementById('total-counted-pts').innerText = countedTotal;
             document.getElementById('total-target-pts').innerText = req.total;
-            document.getElementById('raw-pts-label').innerText = `Raw Earned: ${rawTotal} pts`;
-            document.getElementById('credits-badge').innerText = currentScheme === '2024' ? '3 Mandatory Credits' : '2 Pass/Fail Credits';
+            document.getElementById('raw-pts-label').innerText = `Total Earned: ${rawTotal} pts`;
+            document.getElementById('rule-hint-text').innerText = currentScheme === '2024'
+                ? `Rule: You need ${cap} points in each of the 3 groups below (1 credit per group).`
+                : `Rule: Earn ${req.total} points total across any categories below.`;
 
             const overallPct = Math.min(100, Math.round((countedTotal / req.total) * 100));
             document.getElementById('overall-progress-bar').style.width = `${overallPct}%`;
 
-            // Eligibility Badge
             const badgeEl = document.getElementById('eligibility-badge');
             const isEligible = currentScheme === '2024'
                 ? (countedG1 >= cap && countedG2 >= cap && countedG3 >= cap)
                 : (countedTotal >= req.total);
 
             if (isEligible) {
-                badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30";
-                badgeEl.innerHTML = `<i class="fas fa-check-circle mr-1"></i> Degree Eligible!`;
+                badgeEl.className = "px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30";
+                badgeEl.innerHTML = `<i class="fas fa-check-circle mr-1"></i> Target Completed!`;
             } else {
                 const remaining = Math.max(0, req.total - countedTotal);
-                badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/25";
-                badgeEl.innerText = `${remaining} pts remaining`;
+                badgeEl.className = "px-3 py-1.5 rounded-full text-xs font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/25";
+                badgeEl.innerText = `${remaining} points remaining`;
             }
 
-            // Update 3 Group Cards
+            // Update 3 Group Tab Cards
             const gConfig = [
                 { id: 'g1', val: countedG1, raw: rawG1 },
                 { id: 'g2', val: countedG2, raw: rawG2 },
@@ -1175,17 +1144,14 @@
             gConfig.forEach(g => {
                 const target = currentScheme === '2024' ? cap : req.total;
                 const pct = Math.min(100, Math.round((g.val / target) * 100));
-                document.getElementById(`${g.id}-pts-text`).innerText = currentScheme === '2024' ? `${g.val} / ${cap}` : `${g.raw} pts`;
+                const badgeText = currentScheme === '2024'
+                    ? (g.val >= cap ? `✓ ${g.val} / ${cap} pts` : `${g.val} / ${cap} pts`)
+                    : `${g.raw} pts`;
+                document.getElementById(`${g.id}-status-badge`).innerText = badgeText;
                 document.getElementById(`${g.id}-bar`).style.width = `${pct}%`;
-                const iconEl = document.getElementById(`${g.id}-status-icon`);
-                if (g.val >= target && currentScheme === '2024') {
-                    iconEl.innerHTML = '<i class="fas fa-check-circle text-emerald-500"></i>';
-                } else {
-                    iconEl.innerHTML = '<i class="fas fa-circle-dot text-slate-300 dark:text-slate-600"></i>';
-                }
             });
 
-            // Logged Activities List
+            // Selected Activities List
             const loggedPanel = document.getElementById('my-logged-panel');
             const loggedList = document.getElementById('logged-items-list');
             document.getElementById('logged-count').innerText = schemeItems.length;
@@ -1193,12 +1159,12 @@
             if (schemeItems.length > 0) {
                 loggedPanel.classList.remove('hidden');
                 loggedList.innerHTML = schemeItems.map(item => `
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/90 dark:bg-slate-800 border border-indigo-200 dark:border-indigo-500/30 text-xs font-bold shadow-sm">
-                        <span class="font-mono-code text-indigo-600 dark:text-indigo-400 font-extrabold">${item.code}</span>
-                        <span class="text-slate-700 dark:text-slate-200 truncate max-w-[180px] sm:max-w-xs">${item.title}</span>
-                        <span class="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-mono-code text-[10px] font-black">+${item.points}</span>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-500/30 text-xs font-semibold shadow-sm">
+                        <span class="text-indigo-600 dark:text-indigo-400 font-bold">${item.code}</span>
+                        <span class="text-slate-700 dark:text-slate-200 truncate max-w-[190px] sm:max-w-xs">${item.title}</span>
+                        <span class="px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 text-xs font-bold">+${item.points}</span>
                         <button type="button" onclick="removeLoggedItem('${item.id}')" class="text-slate-400 hover:text-rose-500 ml-0.5" title="Remove">
-                            <i class="fas fa-times text-[10px]"></i>
+                            <i class="fas fa-times"></i>
                         </button>
                     </div>
                 `).join('');
@@ -1210,10 +1176,10 @@
             const dock = document.getElementById('floating-points-dock');
             if (schemeItems.length > 0) {
                 document.getElementById('dock-pts-badge').innerText = `${countedTotal}/${req.total}`;
-                document.getElementById('dock-status-title').innerText = isEligible ? '🎉 All Activity Credits Met!' : `${countedTotal} of ${req.total} Points Earned`;
+                document.getElementById('dock-status-title').innerText = isEligible ? '🎉 All Activity Credits Met!' : `${countedTotal} of ${req.total} Points Added`;
                 document.getElementById('dock-sub-breakdown').innerText = currentScheme === '2024'
-                    ? `G1: ${countedG1}/${cap} • G2: ${countedG2}/${cap} • G3: ${countedG3}/${cap}`
-                    : `${schemeItems.length} Activities Logged`;
+                    ? `Group I: ${countedG1}/${cap} • Group II: ${countedG2}/${cap} • Group III: ${countedG3}/${cap}`
+                    : `${schemeItems.length} Activities Added`;
                 dock.classList.add('dock-active');
                 window.KTUFlow?.setBottomDockActive(true);
             } else {
@@ -1223,7 +1189,7 @@
         }
 
         // =====================================================================
-        // 5. RENDER ACTIVITIES DIRECTORY
+        // 5. RENDER ACTIVITIES WITH INLINE ONE-TAP LEVEL PILLS + SCROLL REVEAL
         // =====================================================================
         function renderActivities() {
             const dataset = getActiveDataset();
@@ -1239,16 +1205,16 @@
                 clearBtn.classList.remove('flex');
             }
 
-            document.getElementById('count-all').innerText = dataset.length;
-
+            // If user types a search query, search across ALL groups so they find anything easily;
+            // otherwise show only the currently selected Group tab (Group I, II, or III)
             const filtered = dataset.filter(item => {
-                const matchGroup = activeGroupFilter === 'All' || item.group === activeGroupFilter;
-                const matchQuery = !query ||
-                    item.code.toLowerCase().includes(query) ||
-                    item.title.toLowerCase().includes(query) ||
-                    item.category.toLowerCase().includes(query) ||
-                    (item.proof && item.proof.toLowerCase().includes(query));
-                return matchGroup && matchQuery;
+                if (query) {
+                    return item.code.toLowerCase().includes(query) ||
+                           item.title.toLowerCase().includes(query) ||
+                           item.category.toLowerCase().includes(query) ||
+                           (item.proof && item.proof.toLowerCase().includes(query));
+                }
+                return item.group === activeGroupFilter;
             });
 
             const container = document.getElementById('activities-container');
@@ -1256,14 +1222,13 @@
                 container.innerHTML = `
                     <div class="real-glass rounded-3xl p-10 text-center">
                         <i class="fas fa-magnifying-glass text-2xl text-slate-300 mb-2"></i>
-                        <p class="text-sm font-extrabold text-slate-700">No activities match "${query}"</p>
-                        <p class="text-xs text-slate-400 mt-1">Try searching for NSS, Internship, Driving, Hackathon, or Paper.</p>
+                        <p class="text-sm font-bold text-slate-700">No activities found for "${query}"</p>
+                        <p class="text-xs text-slate-500 mt-1">Try searching for NSS, Internship, Driving, Hackathon, or Paper.</p>
                     </div>
                 `;
                 return;
             }
 
-            // Group by Category for clean visual sections
             const grouped = {};
             filtered.forEach(item => {
                 const key = `${item.group} — ${item.category}`;
@@ -1283,49 +1248,58 @@
                 if (section.group === 'Group III') badgeColor = 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/20';
 
                 html += `
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-2.5 px-1">
-                            <span class="px-2.5 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider border ${badgeColor}">
+                    <div class="space-y-3.5">
+                        <div class="scroll-reveal flex items-center gap-2.5 px-1">
+                            <span class="px-2.5 py-1 rounded-lg text-xs font-bold border ${badgeColor}">
                                 ${section.group}
                             </span>
-                            <h2 class="text-sm sm:text-base font-black text-slate-800 tracking-tight">${section.category}</h2>
+                            <h2 class="text-base sm:text-lg font-extrabold text-slate-900">${section.category}</h2>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 `;
 
-                section.list.forEach(act => {
+                section.list.forEach((act, idx) => {
                     const earnedForCode = loggedCodesMap[act.code] || 0;
                     const isAdded = earnedForCode > 0;
+                    const delayMs = (idx % 6) * 45;
+
+                    // Inline One-Tap Level Pills so everyone can see & tap points immediately
+                    const tiersHTML = act.tiers.map((tier, tIdx) => `
+                        <button type="button" onclick="addActivityTier('${act.code}', ${tIdx})" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-600 text-slate-700 dark:text-slate-200 border border-slate-200/90 dark:border-white/10 text-xs font-semibold transition-all active:scale-95 flex items-center gap-1.5 shadow-sm group/pill">
+                            <span>${tier.label}</span>
+                            <span class="px-1.5 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-500/20 group-hover/pill:bg-white/20 text-indigo-600 dark:text-indigo-300 group-hover/pill:text-white font-bold text-[11px]">
+                                +${tier.points} pts
+                            </span>
+                        </button>
+                    `).join('');
 
                     html += `
-                        <div class="result-glass ${isAdded ? 'added-card' : ''} rounded-2xl p-4 sm:p-5 flex flex-col justify-between gap-3">
+                        <div style="transition-delay: ${delayMs}ms" class="scroll-reveal result-glass ${isAdded ? 'added-card' : ''} rounded-2xl p-4 sm:p-5 flex flex-col justify-between gap-3.5">
                             <div>
                                 <div class="flex items-center justify-between gap-2 mb-2">
                                     <div class="flex items-center gap-2">
-                                        <span class="px-2.5 py-0.5 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-indigo-700 dark:text-indigo-300 font-mono-code text-xs font-extrabold">
-                                            ${act.code}
+                                        <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 text-xs font-bold">
+                                            Code ${act.code}
                                         </span>
-                                        ${isAdded ? `<span class="px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 text-[10px] font-black font-mono-code"><i class="fas fa-check mr-1"></i>+${earnedForCode} pts</span>` : ''}
+                                        ${isAdded ? `<span class="px-2.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 text-xs font-bold"><i class="fas fa-check mr-1"></i>Added ${earnedForCode} pts</span>` : ''}
                                     </div>
-                                    <span class="text-xs font-extrabold font-mono-code text-slate-600 dark:text-slate-300 bg-slate-100/90 dark:bg-white/10 px-2.5 py-0.5 rounded-lg border border-slate-200/80 dark:border-white/10">
-                                        Max: ${act.maxPoints} pts
+                                    <span class="text-xs font-semibold text-slate-500">
+                                        Max limit: <strong class="text-slate-800 dark:text-slate-200">${act.maxPoints} pts</strong>
                                     </span>
                                 </div>
-                                <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-snug mb-1.5">${act.title}</h3>
-                                <p class="text-[11px] text-slate-500 font-medium flex items-center gap-1.5">
-                                    <i class="far fa-file-lines text-indigo-400"></i>
-                                    <span>${act.proof}</span>
+
+                                <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug mb-1.5">${act.title}</h3>
+                                <p class="text-xs text-slate-500 flex items-center gap-1.5">
+                                    <i class="far fa-file-lines text-indigo-500"></i>
+                                    <span>Proof: ${act.proof}</span>
                                 </p>
                             </div>
 
-                            <div class="flex items-center justify-between pt-2.5 border-t border-slate-200/60 dark:border-white/10 gap-2">
-                                <span class="text-[10px] font-bold text-slate-400">
-                                    ${act.tiers.length > 1 ? `${act.tiers.length} Achievement Tiers` : `${act.tiers[0].points} Points`}
-                                </span>
-                                <button type="button" onclick="openAddActivity('${act.code}')" class="px-3.5 py-2 rounded-xl ${isAdded ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-slate-800 hover:bg-indigo-600 text-slate-700 dark:text-slate-200 hover:text-white border border-slate-200 dark:border-white/10'} text-xs font-extrabold transition-all active:scale-95 flex items-center gap-1.5 shadow-sm">
-                                    <i class="fas fa-plus text-[10px]"></i>
-                                    <span>${isAdded ? 'Add More' : 'Add Points'}</span>
-                                </button>
+                            <div class="pt-3 border-t border-slate-200/60 dark:border-white/10">
+                                <span class="text-[11px] font-semibold text-slate-400 block mb-2">Tap to add points:</span>
+                                <div class="flex flex-wrap gap-2">
+                                    ${tiersHTML}
+                                </div>
                             </div>
                         </div>
                     `;
@@ -1335,61 +1309,24 @@
             });
 
             container.innerHTML = html;
+            requestAnimationFrame(() => initScrollAnimations());
         }
 
         // =====================================================================
-        // 6. INTERACTIVE HANDLERS (ADD / REMOVE / SWITCH SCHEME / MODAL)
+        // 6. INTERACTIVE ACTIONS
         // =====================================================================
-        window.openAddActivity = function(code) {
+        window.addActivityTier = function(code, tierIdx) {
             const dataset = getActiveDataset();
             const act = dataset.find(a => a.code === code);
-            if (!act) return;
+            if (!act || !act.tiers[tierIdx]) return;
+            const tier = act.tiers[tierIdx];
 
-            if (act.tiers.length === 1) {
-                commitAddActivity(act, act.tiers[0]);
-                return;
-            }
-
-            activeModalActivity = act;
-            document.getElementById('modal-act-code').innerText = `${act.group} • Code ${act.code}`;
-            document.getElementById('modal-act-title').innerText = act.title;
-            document.getElementById('modal-act-proof').innerText = `Required Proof: ${act.proof} (Max Cap: ${act.maxPoints} pts)`;
-
-            const optionsEl = document.getElementById('modal-tier-options');
-            optionsEl.innerHTML = act.tiers.map((t, idx) => `
-                <button type="button" onclick="selectTierOption(${idx})" class="w-full p-3.5 rounded-2xl inner-glass hover:border-indigo-500 hover:bg-indigo-50/50 dark:hover:bg-indigo-950/40 flex items-center justify-between text-left transition-all active:scale-[0.99]">
-                    <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 pr-2">${t.label}</span>
-                    <span class="px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-mono-code text-xs font-extrabold shrink-0">+${t.points} pts</span>
-                </button>
-            `).join('');
-
-            const modal = document.getElementById('tier-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        };
-
-        window.selectTierOption = function(tierIdx) {
-            if (!activeModalActivity) return;
-            const tier = activeModalActivity.tiers[tierIdx];
-            if (tier) commitAddActivity(activeModalActivity, tier);
-            closeTierModal();
-        };
-
-        window.closeTierModal = function() {
-            const modal = document.getElementById('tier-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            activeModalActivity = null;
-        };
-
-        function commitAddActivity(act, tier) {
-            // Enforce per-activity maxPoints cap
             const existingForCode = loggedActivities
                 .filter(i => i.scheme === currentScheme && i.code === act.code)
                 .reduce((sum, i) => sum + i.points, 0);
 
             if (existingForCode >= act.maxPoints) {
-                window.KTUFlow?.capsule('amber', `Max cap (${act.maxPoints} pts) already reached for ${act.code}`);
+                window.KTUFlow?.capsule('amber', `Maximum limit (${act.maxPoints} pts) reached for Code ${act.code}`);
                 return;
             }
 
@@ -1406,15 +1343,15 @@
             saveTracker();
             updateDashboard();
             renderActivities();
-            window.KTUFlow?.capsule('success', `Added +${pointsToAdd} pts (${act.code} • ${act.group})`);
-        }
+            window.KTUFlow?.capsule('success', `Added +${pointsToAdd} pts (${act.group})`);
+        };
 
         window.removeLoggedItem = function(id) {
             loggedActivities = loggedActivities.filter(item => item.id !== id);
             saveTracker();
             updateDashboard();
             renderActivities();
-            window.KTUFlow?.capsule('amber', 'Activity removed from tracker');
+            window.KTUFlow?.capsule('amber', 'Activity removed');
         };
 
         window.clearAllLogged = function() {
@@ -1422,7 +1359,23 @@
             saveTracker();
             updateDashboard();
             renderActivities();
-            window.KTUFlow?.capsule('amber', 'Activity Points tracker reset');
+            window.KTUFlow?.capsule('amber', 'Calculator reset');
+        };
+
+        window.filterByGroup = function(group) {
+            activeGroupFilter = group;
+            const searchEl = document.getElementById('activitySearch');
+            if (searchEl && searchEl.value) {
+                searchEl.value = '';
+            }
+
+            const map = { 'Group I': 'tab-card-g1', 'Group II': 'tab-card-g2', 'Group III': 'tab-card-g3' };
+            Object.keys(map).forEach(g => {
+                const card = document.getElementById(map[g]);
+                if (card) card.classList.toggle('active-group-tab', g === group);
+            });
+
+            renderActivities();
         };
 
         window.setSchemeMode = function(scheme) {
@@ -1431,45 +1384,38 @@
             const btn19 = document.getElementById('scheme-btn-2019');
 
             if (scheme === '2024') {
-                btn24.className = "px-4 py-2 rounded-xl text-xs font-extrabold transition-all bg-white dark:bg-indigo-600 text-indigo-600 dark:text-white shadow-sm";
-                btn19.className = "px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 dark:text-slate-300 hover:text-slate-900";
+                btn24.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white dark:bg-indigo-600 text-indigo-600 dark:text-white shadow-sm";
+                btn19.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all text-slate-600 dark:text-slate-300 hover:text-slate-900";
             } else {
-                btn19.className = "px-4 py-2 rounded-xl text-xs font-extrabold transition-all bg-white dark:bg-indigo-600 text-indigo-600 dark:text-white shadow-sm";
-                btn24.className = "px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 dark:text-slate-300 hover:text-slate-900";
+                btn19.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white dark:bg-indigo-600 text-indigo-600 dark:text-white shadow-sm";
+                btn24.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all text-slate-600 dark:text-slate-300 hover:text-slate-900";
             }
 
+            updateCategoryButtonLabels();
             saveTracker();
             updateDashboard();
             renderActivities();
-            window.KTUFlow?.capsule('success', `Switched to ${scheme} Scheme Rules`);
         };
+
+        function updateCategoryButtonLabels() {
+            const is24 = currentScheme === '2024';
+            document.getElementById('cat-btn-regular').innerText = is24 ? 'Regular (120)' : 'Regular (100)';
+            document.getElementById('cat-btn-lateral').innerText = is24 ? 'Lateral Entry (90)' : 'Lateral Entry (75)';
+            document.getElementById('cat-btn-pwd').innerText = is24 ? 'PwD (60)' : 'PwD (50)';
+        }
 
         window.setStudentCategory = function(cat) {
             studentCategory = cat;
             ['regular', 'lateral', 'pwd'].forEach(c => {
                 const btn = document.getElementById(`cat-btn-${c}`);
                 if (c === cat) {
-                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-extrabold transition-all bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm";
+                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm";
                 } else {
-                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 dark:text-slate-400";
+                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-medium transition-all text-slate-600 dark:text-slate-400";
                 }
             });
             saveTracker();
             updateDashboard();
-            const req = getRequirements();
-            window.KTUFlow?.capsule('success', `Target set to ${req.total} Points (${cat.toUpperCase()})`);
-        };
-
-        window.filterByGroup = function(group) {
-            activeGroupFilter = group;
-            document.querySelectorAll('.group-pill').forEach(btn => {
-                if (btn.getAttribute('data-group') === group) {
-                    btn.className = "group-pill active px-3.5 py-2 rounded-xl text-xs font-extrabold bg-indigo-600 text-white shadow-sm shrink-0 transition-all";
-                } else {
-                    btn.className = "group-pill px-3.5 py-2 rounded-xl text-xs font-bold bg-white/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 shrink-0 transition-all";
-                }
-            });
-            renderActivities();
         };
 
         window.clearActivitySearch = function() {
@@ -1479,15 +1425,11 @@
             el.focus();
         };
 
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeTierModal();
-        });
-
-        // Initialize on Load
         window.addEventListener('DOMContentLoaded', () => {
             loadSavedTracker();
             setSchemeMode(currentScheme);
             setStudentCategory(studentCategory);
+            initScrollAnimations();
         });
     </script>
 </body>
