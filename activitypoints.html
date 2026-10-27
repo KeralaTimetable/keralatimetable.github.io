@@ -143,18 +143,18 @@
             transform: translate3d(0, 0, 0) scale(1);
         }
 
-        /* Floating Bottom Tracker Dock */
+        /* Sleek Floating Bottom Tracker Dock */
         #floating-points-dock {
             position: fixed;
             bottom: 1.25rem;
             left: 50%;
             z-index: 55;
-            width: calc(100% - 1.75rem);
-            max-width: 32rem;
+            width: calc(100% - 1.5rem);
+            max-width: 28rem;
             transform: translate3d(-50%, 140%, 0) scale(0.92);
             opacity: 0;
             pointer-events: none;
-            background: rgba(255, 255, 255, 0.90);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(28px) saturate(200%);
             -webkit-backdrop-filter: blur(28px) saturate(200%);
             border: 1.5px solid rgba(15, 23, 42, 0.12);
@@ -246,8 +246,8 @@
                 </div>
             </div>
 
-            <!-- Overall Progress Banner -->
-            <div class="inner-glass rounded-2xl p-4 sm:p-5 mb-5">
+            <!-- Overall Progress Banner (Scroll Target when touching the bottom dock) -->
+            <div id="points-summary-banner" class="inner-glass rounded-2xl p-4 sm:p-5 mb-5 scroll-mt-24 transition-all">
                 <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
                     <div>
                         <span class="text-xs font-semibold text-slate-500 block">Your Eligible Activity Points</span>
@@ -402,13 +402,13 @@
                     <!-- Active Group Progress + Quick Switch Pills -->
                     <div class="flex items-center gap-1.5">
                         <button type="button" id="quick-pill-g1" onclick="openGroupView('Group I')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all">
-                            Group I (<span id="pill-pts-g1">0/40</span>)
+                            G1 (<span id="pill-pts-g1">0/40</span>)
                         </button>
                         <button type="button" id="quick-pill-g2" onclick="openGroupView('Group II')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all">
-                            Group II (<span id="pill-pts-g2">0/40</span>)
+                            G2 (<span id="pill-pts-g2">0/40</span>)
                         </button>
                         <button type="button" id="quick-pill-g3" onclick="openGroupView('Group III')" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all">
-                            Group III (<span id="pill-pts-g3">0/40</span>)
+                            G3 (<span id="pill-pts-g3">0/40</span>)
                         </button>
                     </div>
                 </div>
@@ -465,21 +465,22 @@
 
     </main>
 
-    <!-- ==================== FLOATING BOTTOM TRACKER DOCK ==================== -->
-    <div id="floating-points-dock" class="rounded-3xl p-3 flex items-center justify-between gap-3">
-        <div class="flex items-center gap-3 pl-1.5">
+    <!-- ==================== SLEEK FLOATING BOTTOM TRACKER DOCK ==================== -->
+    <!-- Touching anywhere on this dock scrolls smoothly up to the Main Points / 120 Summary! -->
+    <div id="floating-points-dock" onclick="scrollToPointsSummary()" class="rounded-full px-3.5 py-2.5 flex items-center justify-between gap-3 cursor-pointer active:scale-[0.99]" title="Tap to scroll up to main points summary">
+        <div class="flex items-center gap-3 min-w-0">
             <span id="dock-pts-badge" class="px-3 h-8 rounded-full bg-indigo-600 text-white text-xs font-extrabold flex items-center justify-center shadow-sm shrink-0">
                 0/120
             </span>
-            <div class="flex flex-col text-left">
-                <span id="dock-status-title" class="text-xs sm:text-sm font-bold text-slate-900 leading-tight">0 Points Added</span>
-                <span id="dock-sub-breakdown" class="text-[11px] font-medium text-slate-500">Group I: 0/40 • Group II: 0/40 • Group III: 0/40</span>
+            <div class="flex flex-col text-left min-w-0">
+                <span id="dock-status-title" class="text-xs sm:text-sm font-bold text-slate-900 leading-tight truncate">0 of 120 Points Added</span>
+                <span id="dock-sub-breakdown" class="text-[11px] font-semibold text-slate-500 whitespace-nowrap truncate mt-0.5">G1: 0/40 • G2: 0/40 • G3: 0/40</span>
             </div>
         </div>
 
-        <button type="button" onclick="backToGroupPicker(true)" class="px-4 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-md transition-all active:scale-95 shrink-0">
-            <i class="fas fa-layer-group text-[11px]"></i>
-            <span>Groups</span>
+        <button type="button" onclick="event.stopPropagation(); clearAllLogged();" class="px-3 py-1.5 rounded-full bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-bold flex items-center gap-1 transition-all active:scale-95 shrink-0" title="Reset Calculator">
+            <i class="fas fa-rotate-left text-[10px]"></i>
+            <span>Reset</span>
         </button>
     </div>
 
@@ -1176,7 +1177,7 @@
         }
 
         // =====================================================================
-        // 4. IN-PLACE GROUP OPEN & BACK NAVIGATION (Minimizes Scrolling!)
+        // 4. IN-PLACE GROUP OPEN, BACK & DOCK SCROLL NAVIGATION
         // =====================================================================
         window.openGroupView = function(group) {
             activeGroupFilter = group;
@@ -1207,6 +1208,18 @@
             }
         };
 
+        // Touching anywhere on the floating bottom dock scrolls smoothly up to Main Points / 120
+        window.scrollToPointsSummary = function() {
+            const summaryEl = document.getElementById('points-summary-banner') || document.getElementById('calculator-stage');
+            if (summaryEl) {
+                summaryEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                summaryEl.classList.add('ring-2', 'ring-indigo-500/50');
+                setTimeout(() => summaryEl.classList.remove('ring-2', 'ring-indigo-500/50'), 1200);
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        };
+
         function updateQuickSwitchPills() {
             const map = [
                 { group: 'Group I', id: 'quick-pill-g1' },
@@ -1231,7 +1244,6 @@
             if (query.length > 0) {
                 clearBtn.classList.remove('hidden');
                 clearBtn.classList.add('flex');
-                // Switch in-place to detail view to show matching search results immediately
                 document.getElementById('group-picker-view').classList.add('hidden');
                 document.getElementById('group-detail-view').classList.remove('hidden');
                 updateQuickSwitchPills();
@@ -1335,14 +1347,14 @@
                 loggedPanel.classList.add('hidden');
             }
 
-            // Floating Dock
+            // Sleek Single-Line Floating Dock
             const dock = document.getElementById('floating-points-dock');
             if (schemeItems.length > 0) {
                 document.getElementById('dock-pts-badge').innerText = `${countedTotal}/${req.total}`;
                 document.getElementById('dock-status-title').innerText = isEligible ? '🎉 All Activity Credits Met!' : `${countedTotal} of ${req.total} Points Added`;
                 document.getElementById('dock-sub-breakdown').innerText = currentScheme === '2024'
-                    ? `Group I: ${countedG1}/${cap} • Group II: ${countedG2}/${cap} • Group III: ${countedG3}/${cap}`
-                    : `${schemeItems.length} Activities Added`;
+                    ? `G1: ${countedG1}/${cap} • G2: ${countedG2}/${cap} • G3: ${countedG3}/${cap}`
+                    : `${schemeItems.length} Activities Added • Tap for summary`;
                 dock.classList.add('dock-active');
                 window.KTUFlow?.setBottomDockActive(true);
             } else {
