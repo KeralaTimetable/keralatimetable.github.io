@@ -588,7 +588,7 @@ window.showToast = function(message, type = 'info') {
             /* ==================================================================
                B. 120FPS DARK MODE ENGINE (Zero Lag + Zero White Boxes)
                ================================================================== */
-            /* 1. Base Obsidian Canvas (No fixed background-attachment repaint lag) */
+            /* 1. Base Obsidian Canvas */
             html.dark body,
             html.dark .bg-mesh {
                 background-color: #070B14 !important;
@@ -600,7 +600,7 @@ window.showToast = function(message, type = 'info') {
                 color: #f1f5f9 !important;
             }
 
-            /* 2. GPU Fix: Disable expensive CSS blur filters & mix-blend-mode on background orbs in Dark Mode! */
+            /* 2. GPU Fix: Disable expensive CSS blur filters & mix-blend-mode on background orbs in Dark Mode */
             html.dark #mouse-orb-1,
             html.dark #mouse-orb-2,
             html.dark .ambient-orb,
@@ -630,7 +630,7 @@ window.showToast = function(message, type = 'info') {
             html.dark .text-slate-500:not(.text-transparent) { color: #94a3b8 !important; }
             html.dark .text-slate-400:not(.text-transparent) { color: #94a3b8 !important; }
 
-            /* 5. High-FPS Smoked Aurora Cards (No redundant per-card backdrop-filter lag!) */
+            /* 5. High-FPS Smoked Aurora Cards */
             html.dark .real-glass,
             html.dark .glass-panel {
                 background: linear-gradient(145deg, rgba(19, 27, 46, 0.94) 0%, rgba(11, 16, 30, 0.96) 100%) !important;
@@ -693,19 +693,17 @@ window.showToast = function(message, type = 'info') {
                 color: #f8fafc !important;
             }
 
-            /* 7. FIX WHITE BOXES: Segmented Tab Switcher Tracks (pyq.html & activity-points.html) */
+            /* 7. Segmented Tab Switcher Tracks */
             html.dark div[class*="bg-slate-200"] {
                 background-color: rgba(8, 12, 22, 0.9) !important;
                 border-color: rgba(255, 255, 255, 0.09) !important;
             }
-            /* Active Tab Button inside Switcher Track (e.g. "Search Code", "All Schemes", "2024 Scheme") */
             html.dark div[class*="bg-slate-200"] > button.bg-white {
                 background: linear-gradient(135deg, rgba(37, 99, 235, 0.28), rgba(79, 70, 229, 0.28)) !important;
                 color: #93c5fd !important;
                 border: 1px solid rgba(96, 165, 250, 0.4) !important;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
             }
-            /* Inactive Tab Button inside Switcher Track */
             html.dark div[class*="bg-slate-200"] > button:not(.bg-white) {
                 color: #94a3b8 !important;
             }
@@ -714,7 +712,7 @@ window.showToast = function(message, type = 'info') {
                 background-color: rgba(255, 255, 255, 0.06) !important;
             }
 
-            /* 8. FIX WHITE BOXES: Standalone White / Translucent-White Buttons & Pills ("Explore >", "Download PDF", "Select All", "Share", Chevron Filter) */
+            /* 8. Standalone White / Translucent-White Buttons & Pills */
             html.dark a[class*="bg-white"],
             html.dark button[class*="bg-white"],
             html.dark .result-glass button.bg-white,
@@ -743,7 +741,7 @@ window.showToast = function(message, type = 'info') {
                 border-color: rgba(255, 255, 255, 0.12) !important;
             }
 
-            /* 9. FIX WHITE BOXES: Pastel Badges & Icon Boxes (index.html Hero Badges, Trending Icons, PYQ Scheme Badges, Stats Icons) */
+            /* 9. Pastel Badges & Icon Boxes */
             html.dark [class*="bg-indigo-50"],
             html.dark [class*="bg-indigo-100"] {
                 background-color: rgba(79, 70, 229, 0.18) !important;
@@ -780,7 +778,7 @@ window.showToast = function(message, type = 'info') {
                 color: #fda4af !important;
             }
 
-            /* 10. Hero Glass Folder Illustration on index.html */
+            /* 10. Hero Glass Folder Illustration */
             html.dark .glass-folder {
                 background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.65) 100%) !important;
                 border-color: rgba(255, 255, 255, 0.15) !important;
@@ -874,7 +872,7 @@ window.showToast = function(message, type = 'info') {
 })();
 
 // ==============================================================================
-// 3. RESPONSIVE NAVIGATION LOADER
+// 3. RESPONSIVE NAVIGATION LOADER (With Dark-Mode Logo Swap & Contact Us Menu)
 // ==============================================================================
 function loadNavigation(activePage, basePath = '', isBlog = false) { 
     const container = document.getElementById('navigation-container');
@@ -886,6 +884,17 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 
     container.classList.remove('relative');
     container.classList.add('sticky', 'top-0', 'z-50', 'w-full');
+
+    const LIGHT_LOGO_SRC = '/k.png';
+    const DARK_LOGO_SRC  = '/assets/k-logo-darktheme.png';
+
+    // Preload dark logo so theme switching has 0ms delay
+    const preloadDarkLogo = new Image();
+    preloadDarkLogo.src = DARK_LOGO_SRC;
+
+    const initialLogoSrc = document.documentElement.classList.contains('dark')
+        ? DARK_LOGO_SRC
+        : LIGHT_LOGO_SRC;
 
     const logoExtension = isBlog ? ' <span class="text-slate-400 font-medium ml-1">| Blog</span>' : '';
 
@@ -899,7 +908,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             
             <div class="drawer-header p-5 flex justify-between items-center">
                 <div class="flex items-center gap-2">
-                    <img src="/k.png" alt="Kerala Timetable Logo" class="w-6 h-6 object-contain shrink-0" width="24" height="24" />
+                    <img src="${initialLogoSrc}" alt="Kerala Timetable Logo" class="kt-brand-logo w-6 h-6 object-contain shrink-0" width="24" height="24" />
                     <span class="text-base font-extrabold text-slate-900 tracking-tight leading-none">Kerala <span class="text-indigo-600">Timetable</span></span>
                 </div>
                 <button id="close-menu-btn" aria-label="Close menu" class="w-8 h-8 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-rose-500 transition-all rounded-full bg-white/70 dark:bg-white/10 shadow-sm active:scale-95 focus:outline-none">
@@ -930,7 +939,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                     <span>Previous Papers</span>
                 </a>
 
-                <a href="/activitypoints.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('activity')}">
+                <a href="/activity-points.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('activity')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-award text-xs"></i></span>
                     <span>Activity Points</span>
                 </a>
@@ -957,6 +966,11 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                     <span>Server Status</span>
                 </a>
 
+                <a href="/contact-us.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('contact')}">
+                    <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-envelope text-xs"></i></span>
+                    <span>Contact Us</span>
+                </a>
+
                 <a href="/about.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('about')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-info-circle text-xs"></i></span>
                     <span>About</span>
@@ -973,7 +987,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                     <a href="/index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        <img src="/k.png" alt="Kerala Timetable Logo" class="w-6 h-6 sm:w-7 sm:h-7 object-contain shrink-0" width="28" height="28" />
+                        <img src="${initialLogoSrc}" alt="Kerala Timetable Logo" class="kt-brand-logo w-6 h-6 sm:w-7 sm:h-7 object-contain shrink-0" width="28" height="28" />
                         <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-none">Kerala <span class="text-indigo-600">Timetable</span>${logoExtension}</h1>
                     </a>
                 </div>
@@ -1018,23 +1032,31 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     
     const themeBtns = document.querySelectorAll('.theme-toggle-btn');
     
-    function updateThemeIcons() {
+    function updateThemeIconsAndLogo() {
         const isDark = document.documentElement.classList.contains('dark');
         themeBtns.forEach(btn => {
             btn.innerHTML = isDark 
                 ? '<i class="fas fa-sun text-[14px] text-amber-400"></i>' 
                 : '<i class="fas fa-moon text-[14px] text-slate-600"></i>';
         });
+
+        // Swap K Logo between Light Mode (/k.png) and Dark Mode (/assets/k-logo-darktheme.png)
+        const targetLogo = isDark ? DARK_LOGO_SRC : LIGHT_LOGO_SRC;
+        document.querySelectorAll('.kt-brand-logo').forEach(img => {
+            if (img.getAttribute('src') !== targetLogo) {
+                img.setAttribute('src', targetLogo);
+            }
+        });
     }
     
-    updateThemeIcons();
+    updateThemeIconsAndLogo();
     
     themeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             document.documentElement.classList.toggle('dark');
             const isDark = document.documentElement.classList.contains('dark');
             localStorage.setItem('kt_theme', isDark ? 'dark' : 'light');
-            updateThemeIcons();
+            updateThemeIconsAndLogo();
             window.KTUFlow.capsule(isDark ? 'success' : 'amber', isDark ? 'Dark Theme enabled' : 'Light Theme enabled');
         });
     });
