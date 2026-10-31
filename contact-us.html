@@ -6,11 +6,10 @@
     <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
     
     <title>Contact Us | Kerala Timetable</title>
-    <link rel="canonical" href="https://keralatimetable.in/contact.html" />
+    <link rel="canonical" href="https://keralatimetable.in/contact-us.html" />
     <meta name="description" content="Get in touch with the Kerala Timetable team. Request missing KTU question papers, contribute study notes, report website bugs, or inquire about collaborations.">
     <link rel="icon" href="/favicon.png" type="image/png">
 
-    <!-- Tailwind CSS with Fallback -->
     <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -28,7 +27,6 @@
             min-height: 100vh;
         }
 
-        /* Ambient GPU Orbs */
         @keyframes floatOrb {
             0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
             50% { transform: translate3d(22px, -16px, 0) scale(1.05); }
@@ -36,15 +34,12 @@
         .ambient-orb { animation: floatOrb 15s ease-in-out infinite; will-change: transform; }
         .ambient-orb-delayed { animation: floatOrb 19s ease-in-out 3s infinite reverse; will-change: transform; }
 
-        /* Specular Liquid Glass */
         .real-glass {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.80) 0%, rgba(255, 255, 255, 0.62) 100%);
             backdrop-filter: blur(28px) saturate(190%);
             -webkit-backdrop-filter: blur(28px) saturate(190%);
             border: 1.5px solid rgba(15, 23, 42, 0.11);
-            box-shadow: 
-                inset 0 1px 1px rgba(255, 255, 255, 0.95),
-                0 16px 38px -10px rgba(31, 38, 135, 0.07);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95), 0 16px 38px -10px rgba(31, 38, 135, 0.07);
         }
 
         .inner-glass {
@@ -93,19 +88,15 @@
 
 <body class="text-slate-800 antialiased flex flex-col min-h-screen relative selection:bg-indigo-600 selection:text-white">
 
-    <!-- Global Sticky Header -->
     <div id="navigation-container" class="z-50 sticky top-0"></div>
 
-    <!-- Ambient Background Glow Orbs -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
         <div id="mouse-orb-1" class="ambient-orb absolute -top-12 -left-12 w-72 h-72 md:w-96 md:h-96 bg-indigo-400/25 rounded-full blur-[85px]"></div>
         <div id="mouse-orb-2" class="ambient-orb-delayed absolute top-1/3 -right-16 w-72 h-72 md:w-[28rem] md:h-[28rem] bg-emerald-400/20 rounded-full blur-[95px]"></div>
     </div>
 
-    <!-- MAIN CONTENT -->
     <main class="flex-grow w-full max-w-3xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-16 relative z-10">
         
-        <!-- Clean Minimalist Hero Header -->
         <div class="text-center mb-8 sm:mb-9 spring-enter" style="animation-delay: 40ms;">
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-3 tracking-tight leading-tight">
                 Get in <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Touch</span>
@@ -154,7 +145,6 @@
                 
                 <form id="contactForm" onsubmit="submitContactForm(event)" class="space-y-4 sm:space-y-5">
                     
-                    <!-- Row 1: Name & Contact Info -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                         <div>
                             <label for="senderName" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
@@ -171,7 +161,6 @@
                         </div>
                     </div>
 
-                    <!-- Row 2: Topic & Optional Course/Semester -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                         <div>
                             <label for="contactTopic" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
@@ -196,7 +185,6 @@
                         </div>
                     </div>
 
-                    <!-- Message Body -->
                     <div>
                         <label for="contactMessage" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
                             Your Message <span class="text-indigo-500">*</span>
@@ -204,7 +192,6 @@
                         <textarea id="contactMessage" rows="4" required placeholder="Tell us how we can help, or mention the subject code / exam session you need..." class="glass-input w-full text-sm font-medium rounded-xl px-4 py-3 resize-none leading-relaxed"></textarea>
                     </div>
 
-                    <!-- Optional File Attachment (Screenshots or PDF Notes/Papers) -->
                     <div>
                         <label for="contactFiles" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
                             Attach Screenshots or PDFs <span class="text-slate-400 normal-case font-medium">(Optional — Max 10 files)</span>
@@ -215,21 +202,19 @@
                         </p>
                     </div>
 
-                    <!-- Submit Button -->
                     <button type="submit" id="submitContactBtn" class="w-full mt-2 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 active:scale-[0.99] text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 text-sm">
                         <span>Send Message</span>
                         <i class="fas fa-paper-plane text-xs"></i>
                     </button>
                 </form>
                 
-                <!-- In-Card Success State Overlay -->
                 <div id="success-state" class="hidden absolute inset-0 real-glass bg-white/95 dark:bg-slate-900/95 rounded-[2rem] flex flex-col items-center justify-center p-8 text-center z-30">
                     <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mb-4 shadow-sm border border-emerald-200">
                         <i class="fas fa-check"></i>
                     </div>
                     <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">Message Delivered!</h3>
                     <p class="text-xs sm:text-sm text-slate-500 max-w-md leading-relaxed">
-                        Thank you for reaching out to Kerala Timetable. Our team has received your message on Telegram and will get back to you shortly.
+                        Thank you for reaching out to Kerala Timetable. Our team has received your message and will get back to you shortly.
                     </p>
                     <button type="button" onclick="resetContactView()" class="mt-6 px-5 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-md transition-all active:scale-95">
                         Send Another Message
@@ -240,7 +225,6 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-6 sm:py-8 text-center relative z-10">
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-bold text-sm sm:text-base mb-1">Kerala Timetable</h3>
@@ -250,14 +234,14 @@
         </div>
     </footer>
 
-    <!-- Global Components Script -->
     <script src="/components.js?v=17" onerror="this.onerror=null;this.src='components.js';"></script>
     <script>
         if (typeof loadNavigation === 'function') {
             loadNavigation('contact', '', false);
         }
 
-        // Pre-fill Course/Semester context from KTUFlow if student has a saved profile
+        const HF_RELAY_URL = "https://keralatimetable-ktu-papers-api.hf.space/telegram-relay";
+
         window.addEventListener('DOMContentLoaded', () => {
             if (window.KTUFlow && typeof window.KTUFlow.getProfile === 'function') {
                 const prof = window.KTUFlow.getProfile();
@@ -273,7 +257,6 @@
             }
         });
 
-        // Escape special HTML characters so Telegram's parse_mode: 'HTML' never fails
         function escapeTgHTML(str = '') {
             return String(str)
                 .replace(/&/g, '&amp;')
@@ -286,7 +269,6 @@
             document.getElementById('contactForm').reset();
         }
 
-        // --- TELEGRAM BOT SUBMISSION LOGIC ---
         async function submitContactForm(e) {
             e.preventDefault();
 
@@ -304,10 +286,6 @@
             btn.disabled = true;
             window.KTUFlow?.capsule('loading', 'Sending message to Kerala Timetable...');
 
-            // Live Telegram Credentials (same channel as report.html)
-            const botToken = "8925601104:AAFYeC5Qbc-UAHCgZD8jfzQqOXM2B88gLvM";
-            const chatId = "-1004463800271";
-
             const name = escapeTgHTML(document.getElementById('senderName').value.trim());
             const contact = escapeTgHTML(document.getElementById('senderContact').value.trim());
             const topic = escapeTgHTML(document.getElementById('contactTopic').value);
@@ -315,7 +293,7 @@
             const context = contextVal ? escapeTgHTML(contextVal) : "Not specified";
             const message = escapeTgHTML(document.getElementById('contactMessage').value.trim());
 
-            const textPayload =
+            const captionText =
                 `📬 <b>NEW CONTACT MESSAGE</b> 📬\n\n` +
                 `👤 <b>Name:</b> ${name}\n` +
                 `📱 <b>Contact:</b> ${contact}\n` +
@@ -323,56 +301,18 @@
                 `🎓 <b>Semester/Code:</b> ${context}\n` +
                 `💬 <b>Message:</b>\n${message}`;
 
+            const formData = new FormData();
+            formData.append('caption', captionText);
+
+            for (let i = 0; i < files.length; i++) {
+                formData.append('files', files[i]);
+            }
+
             try {
-                let response;
-
-                if (!files || files.length === 0) {
-                    // Case 1: Text-only message -> Send via /sendMessage
-                    const msgUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-                    response = await fetch(msgUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            chat_id: chatId,
-                            text: textPayload,
-                            parse_mode: 'HTML'
-                        })
-                    });
-                } else {
-                    // Case 2: 1 to 10 attachments (Images or PDFs) -> Send via /sendMediaGroup
-                    const mediaUrl = `https://api.telegram.org/bot${botToken}/sendMediaGroup`;
-                    const formData = new FormData();
-                    formData.append('chat_id', chatId);
-
-                    // Telegram requires all items in a media group to share compatible media types;
-                    // if any file is a PDF/document, send all as 'document', otherwise 'photo'
-                    const allImages = Array.from(files).every(f => f.type && f.type.startsWith('image/'));
-                    const mediaType = allImages ? 'photo' : 'document';
-                    const mediaArray = [];
-
-                    for (let i = 0; i < files.length; i++) {
-                        const fileKey = `file${i}`;
-                        formData.append(fileKey, files[i]);
-
-                        const mediaItem = {
-                            type: mediaType,
-                            media: `attach://${fileKey}`
-                        };
-
-                        if (i === 0) {
-                            mediaItem.caption = textPayload.slice(0, 1020);
-                            mediaItem.parse_mode = 'HTML';
-                        }
-
-                        mediaArray.push(mediaItem);
-                    }
-
-                    formData.append('media', JSON.stringify(mediaArray));
-                    response = await fetch(mediaUrl, {
-                        method: 'POST',
-                        body: formData
-                    });
-                }
+                const response = await fetch(HF_RELAY_URL, {
+                    method: 'POST',
+                    body: formData
+                });
 
                 if (response.ok) {
                     document.getElementById('success-state').classList.remove('hidden');
@@ -380,8 +320,8 @@
                     window.KTUFlow?.capsule('success', 'Message delivered to Kerala Timetable!');
                 } else {
                     const errorText = await response.text();
-                    console.error("Telegram API Error:", errorText);
-                    throw new Error('Telegram API rejected request');
+                    console.error("Relay Error:", errorText);
+                    throw new Error('Relay rejected request');
                 }
             } catch (error) {
                 console.error("Error sending contact message:", error);
