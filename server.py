@@ -1,12 +1,13 @@
 """
 server.py
 ---------
-FastAPI REST API exposing KTU paper search + branded download + live status pinging + secure Telegram auth.
+FastAPI REST API exposing KTU paper search + branded download + live status pinging + secure Telegram & Gemini auth.
 """
 
 from __future__ import annotations
 import io
 import os
+import random
 import time
 import httpx 
 
@@ -33,9 +34,10 @@ LOGO_PATH  = os.getenv("BRAND_LOGO_PATH", "keralattlogo.png")
 LOGO_BYTES = open(LOGO_PATH, "rb").read() if LOGO_PATH and os.path.exists(LOGO_PATH) else None
 ADMIN_KEY  = os.getenv("ADMIN_KEY", "change-me")
 
-# ---- Telegram Secrets (Stored in Hugging Face Space Secrets, NEVER in GitHub) ----
-TG_BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
-TG_CHAT_ID   = os.getenv("TG_CHAT_ID", "-1004463800271")
+# ---- Telegram & Gemini Secrets (Stored in Hugging Face Space Secrets, NEVER in GitHub) ----
+TG_BOT_TOKEN   = os.getenv("TG_BOT_TOKEN")
+TG_CHAT_ID     = os.getenv("TG_CHAT_ID", "-1004463800271")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 
 # ---- Hugging Face Vault URL ----
 DATASET_RAW_URL = "https://huggingface.co/datasets/KeralaTimetable/ktu-pyq-archive/resolve/main"
@@ -160,6 +162,24 @@ async def telegram_auth(request: Request):
         "t": [ord(c) ^ 42 for c in TG_BOT_TOKEN],
         "c": [ord(c) ^ 42 for c in TG_CHAT_ID]
     }
+
+
+@app.post("/gemini-auth")
+async def gemini_auth(request: Request):
+    """
+    Returns XOR-masked Gemini API key from Hugging Face Secrets ONLY to keralatimetable.in.
+    Supports a single key or comma-separated multiple keys (key1,key2) for automatic load balancing.
+    """
+    origin = (request.headers.get("origin") or request.headers.get("referer") or "").lower()
+    if "keralatimetable.in" not in origin and "localhost" not in origin and "127.0.0.1" not in origin:
+        raise HTTPException(403, "Forbidden origin")
+
+    keys = [k.strip() for k in GEMINI_API_KEY.split(",") if k.strip()]
+    if not keys:
+        raise HTTPException(500, "GEMINI_API_KEY secret not configured in Space")
+
+    chosen_key = random.choice(keys)
+    return {"k": [ord(c) ^ 42 for c in chosen_key]}
 
 
 @app.post("/admin/harvest")
