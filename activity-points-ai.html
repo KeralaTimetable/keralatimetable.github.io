@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>AI Activity Points Certificate Scanner | Kerala Timetable</title>
+    <meta name="description" content="Upload your B.Tech certificates (PDFs or photos) and let Kerala Timetable's AI Auditor automatically verify logos, apply KTU 2024 & 2019 handbook rules, and calculate your exact Activity Points.">
+    <link rel="canonical" href="https://keralatimetable.in/activity-points-ai.html" />
+    <link rel="icon" href="/favicon.png" type="image/png">
+
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- PDF.js for client-side PDF certificate rendering (so AI can see logos on PDF certificates!) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <style>
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
+            background: 
+                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.65) 0px, transparent 52%),
+                radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.55) 0px, transparent 52%),
+                radial-gradient(at 100% 100%, rgba(224, 231, 255, 0.5) 0px, transparent 52%),
+                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.45) 0px, transparent 52%),
+                #f8fafc;
+            min-height: 100vh;
+            letter-spacing: -0.01em;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(22px, -16px, 0) scale(1.05); }
+        }
+        .ambient-orb { animation: floatOrb 15s ease-in-out infinite; will-change: transform; }
+        .ambient-orb-delayed { animation: floatOrb 19s ease-in-out 3s infinite reverse; will-change: transform; }
+
+        .real-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.66) 100%);
+            backdrop-filter: blur(28px) saturate(190%);
+            -webkit-backdrop-filter: blur(28px) saturate(190%);
+            border: 1.5px solid rgba(15, 23, 42, 0.11);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95), 0 14px 34px -8px rgba(31, 38, 135, 0.06);
+        }
+
+        .result-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.90) 0%, rgba(255, 255, 255, 0.76) 100%);
+            backdrop-filter: blur(20px) saturate(185%);
+            -webkit-backdrop-filter: blur(20px) saturate(185%);
+            border: 1.5px solid rgba(15, 23, 42, 0.10);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.95), 0 6px 20px -4px rgba(15, 23, 42, 0.04);
+            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.74);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(15, 23, 42, 0.10);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.88);
+            border: 1.5px solid rgba(15, 23, 42, 0.14);
+            color: #0f172a;
+            transition: all 0.22s ease;
+        }
+        .glass-input:focus {
+            outline: none;
+            background: #ffffff;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.14);
+        }
+
+        .dropzone-border {
+            border: 2px dashed rgba(79, 70, 229, 0.35);
+            transition: all 0.25s ease;
+        }
+        .dropzone-border:hover, .dropzone-border.drag-over {
+            border-color: #4f46e5;
+            background: rgba(79, 70, 229, 0.04);
+        }
+
+        @keyframes springUp {
+            from { opacity: 0; transform: translate3d(0, 16px, 0) scale(0.99); }
+            to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+        }
+        .spring-in { animation: springUp 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+        .progress-bar-fill { transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen flex flex-col relative text-slate-800 selection:bg-indigo-600 selection:text-white">
+
+    <!-- Ambient Orbs -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+        <div id="mouse-orb-1" class="ambient-orb absolute -top-20 -left-20 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-indigo-400/20 blur-[90px]"></div>
+        <div id="mouse-orb-2" class="ambient-orb-delayed absolute top-1/3 -right-24 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-emerald-400/20 blur-[95px]"></div>
+    </div>
+
+    <!-- Global Sticky Header -->
+    <div id="navigation-container" class="z-50 sticky top-0"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-6 sm:pt-9 pb-24 w-full flex-grow relative z-10">
+
+        <!-- Top Back Navigation -->
+        <div class="flex items-center justify-between mb-5 spring-in">
+            <a href="/activity-points.html" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/85 dark:bg-slate-800 border border-slate-200/90 dark:border-white/10 text-xs sm:text-sm font-bold text-slate-700 hover:text-indigo-600 shadow-sm transition-all active:scale-95">
+                <i class="fas fa-arrow-left text-indigo-500 text-xs"></i>
+                <span>Back to Activity Points Table</span>
+            </a>
+
+            <span class="px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold flex items-center gap-1.5">
+                <i class="fas fa-wand-magic-sparkles text-indigo-500"></i>
+                <span>Powered by Gemini 3.8 Flash</span>
+            </span>
+        </div>
+
+        <!-- Hero Heading -->
+        <div class="text-center mb-7 max-w-2xl mx-auto spring-in">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-2">
+                AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Certificate Auditor</span>
+            </h1>
+            <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
+                Upload up to <strong>36 certificates at once</strong> (PDFs or photos). Our AI inspects official logos (IEEE, NIT, IIT, NSS, NPTEL, K-DISC), filters out ineligible certificates, and calculates your exact KTU Activity Points.
+            </p>
+        </div>
+
+        <!-- ==================== STEP 1: STUDENT SETTINGS & UPLOAD STAGE ==================== -->
+        <section class="real-glass rounded-3xl p-4 sm:p-6 md:p-7 mb-7 spring-in">
+            
+            <!-- Settings Bar: Scheme, Category, Admission Year -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pb-5 mb-5 border-b border-slate-200/70 dark:border-white/10">
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">KTU Scheme</label>
+                    <select id="ai-scheme" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold cursor-pointer">
+                        <option value="2024" selected>2024 Scheme (120 Points)</option>
+                        <option value="2019">2019 Scheme (100 Points)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Student Category</label>
+                    <select id="ai-category" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold cursor-pointer">
+                        <option value="regular" selected>Regular Student</option>
+                        <option value="lateral">Lateral Entry</option>
+                        <option value="pwd">PwD Student</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">B.Tech Admission Year</label>
+                    <select id="ai-admission-year" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold cursor-pointer">
+                        <option value="2026">2026 Admission</option>
+                        <option value="2025">2025 Admission</option>
+                        <option value="2024" selected>2024 Admission</option>
+                        <option value="2023">2023 Admission</option>
+                        <option value="2022">2022 Admission</option>
+                        <option value="2021">2021 Admission</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Drag & Drop Upload Zone -->
+            <div id="cert-dropzone" onclick="document.getElementById('cert-file-input').click()" class="dropzone-border inner-glass rounded-2xl p-6 sm:p-8 text-center cursor-pointer">
+                <input type="file" id="cert-file-input" accept="image/*,.pdf" multiple class="hidden" onchange="handleFilesSelected(this.files)">
+                
+                <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center mx-auto mb-3 text-2xl shadow-sm">
+                    <i class="fas fa-file-shield"></i>
+                </div>
+                <h3 class="text-sm sm:text-base font-extrabold text-slate-900 mb-1">
+                    Tap to Select or Drag &amp; Drop Certificates
+                </h3>
+                <p class="text-xs text-slate-500 max-w-md mx-auto leading-relaxed">
+                    Supports <strong>PDFs, JPG, PNG, WebP</strong> (Select 1 to 36 certificates at once). Processed in your browser memory—never stored on any server.
+                </p>
+            </div>
+
+            <!-- Queued Certificates Preview Grid -->
+            <div id="queued-files-section" class="hidden mt-5 pt-5 border-t border-slate-200/70 dark:border-white/10">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                        <i class="fas fa-layer-group text-indigo-500 mr-1"></i> Queued Certificates (<span id="queued-count">0</span>/36)
+                    </span>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="document.getElementById('cert-file-input').click()" class="px-3 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50">
+                            <i class="fas fa-plus mr-1 text-indigo-500"></i> Add More
+                        </button>
+                        <button type="button" onclick="clearQueuedFiles()" class="px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-600 text-xs font-bold hover:bg-rose-500/20">
+                            Clear All
+                        </button>
+                    </div>
+                </div>
+
+                <div id="queued-thumbnails-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5 max-h-64 overflow-y-auto p-1"></div>
+
+                <!-- Scan Progress Bar -->
+                <div id="scan-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4">
+                    <div class="flex items-center justify-between text-xs font-bold mb-2">
+                        <span id="scan-status-text" class="text-indigo-600 flex items-center gap-2">
+                            <i class="fas fa-circle-notch fa-spin"></i> Rendering certificates &amp; inspecting logos...
+                        </span>
+                        <span id="scan-pct-text" class="text-slate-600">0%</span>
+                    </div>
+                    <div class="w-full h-2 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
+                        <div id="scan-progress-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-full" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Primary Analyze Button -->
+                <button type="button" id="btn-run-audit" onclick="runAICertificateAudit()" class="w-full mt-4 bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-600 hover:from-indigo-500 hover:to-emerald-500 active:scale-[0.99] text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 text-sm">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    <span>Analyze Certificates &amp; Calculate KTU Points</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ==================== STEP 2: AI AUDIT RESULTS & SUMMARY ==================== -->
+        <section id="audit-results-section" class="hidden space-y-6 spring-in">
+            
+            <!-- Calculated Summary Card -->
+            <div class="real-glass rounded-3xl p-5 sm:p-6">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-5 mb-5 border-b border-slate-200/70 dark:border-white/10">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 block mb-0.5">AI Audit Summary</span>
+                        <div class="flex items-baseline gap-2">
+                            <span id="audit-total-pts" class="text-3xl sm:text-4xl font-extrabold text-slate-900">0</span>
+                            <span class="text-sm font-semibold text-slate-400">eligible points out of <span id="audit-target-pts">120</span></span>
+                        </div>
+                        <p id="audit-counts-summary" class="text-xs text-slate-500 font-medium mt-1">
+                            0 Accepted • 0 Capped/Duplicate • 0 Rejected
+                        </p>
+                    </div>
+
+                    <button type="button" onclick="syncVerifiedToMainCalculator()" class="w-full md:w-auto px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 transition-all">
+                        <i class="fas fa-check-double"></i>
+                        <span>Save Verified Points to My Calculator</span>
+                    </button>
+                </div>
+
+                <!-- 3 Group Breakdown Mini Bars -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="inner-glass rounded-2xl p-3.5">
+                        <div class="flex justify-between text-xs font-bold mb-1.5">
+                            <span class="text-blue-600">Group I (Co-Curricular)</span>
+                            <span id="audit-g1-text">0 / 40 pts</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div id="audit-g1-bar" class="progress-bar-fill h-full bg-blue-600 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="inner-glass rounded-2xl p-3.5">
+                        <div class="flex justify-between text-xs font-bold mb-1.5">
+                            <span class="text-purple-600">Group II (Professional)</span>
+                            <span id="audit-g2-text">0 / 40 pts</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div id="audit-g2-bar" class="progress-bar-fill h-full bg-purple-600 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="inner-glass rounded-2xl p-3.5">
+                        <div class="flex justify-between text-xs font-bold mb-1.5">
+                            <span class="text-emerald-600">Group III (Advanced/Skilling)</span>
+                            <span id="audit-g3-text">0 / 40 pts</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div id="audit-g3-bar" class="progress-bar-fill h-full bg-emerald-600 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificate-by-Certificate Audit Cards -->
+            <div class="space-y-3">
+                <h2 class="text-sm sm:text-base font-extrabold text-slate-900 px-1 flex items-center gap-2">
+                    <i class="fas fa-list-check text-indigo-500"></i>
+                    <span>Certificate-by-Certificate Audit Breakdown</span>
+                </h2>
+                <div id="audit-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-6 text-center relative z-10">
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="text-slate-800 font-bold text-sm sm:text-base mb-1">Kerala Timetable</h3>
+            <p class="text-slate-500 text-xs leading-relaxed max-w-lg mx-auto">
+                AI Certificate Auditor uses official APJAKTU 2024 &amp; 2019 Handbook rules. Final verification is subject to your college Senior Faculty Advisor (SFA).
+            </p>
+        </div>
+    </footer>
+
+    <!-- Global Components Script -->
+    <script src="/components.js?v=17" onerror="this.onerror=null;this.src='components.js';"></script>
+
+    <script>
+        if (typeof loadNavigation === 'function') {
+            loadNavigation('activity', '', false);
+        }
+
+        // Configure PDF.js Worker
+        if (window.pdfjsLib) {
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+
+        const HF_GEMINI_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/gemini-auth";
+        const STORAGE_KEY = 'ktu_activity_points_tracker_v2';
+
+        // 7-Model Auto-Rotation Cascade (Uses separate rate-limit buckets so 1 key = 60 RPM!)
+        const GEMINI_MODEL_CASCADE = [
+            "gemini-3.8-flash",
+            "gemini-3.5-flash-lite",
+            "gemini-3.6-flash",
+            "gemini-3.1-flash-lite",
+            "gemini-3-flash",
+            "gemini-2.5-flash-lite",
+            "gemini-2.5-flash"
+        ];
+
+        // Official KTU 2024 Caps & Exclusive (Non-Accumulative) Flags
+        const KTU_2024_RULES = {
+            "1.1": { group: "Group I", max: 40, exclusive: true, name: "Sports/Games/Arts Participation" },
+            "1.2": { group: "Group I", max: 40, exclusive: true, name: "Sports/Games/Arts Winner (Single)" },
+            "1.3": { group: "Group I", max: 40, exclusive: true, name: "Sports/Games/Arts Winner (Group)" },
+            "1.4": { group: "Group I", max: 20, exclusive: false, name: "College Magazine Publication" },
+            "1.5": { group: "Group I", max: 5,  exclusive: true, name: "Four-Wheeler Driving License" },
+            "1.6": { group: "Group I", max: 10, exclusive: false, name: "Community Service (2 Days)" },
+            "1.7": { group: "Group I", max: 10, exclusive: true, name: "Community Service (1 Week)" },
+            "1.8": { group: "Group I", max: 10, exclusive: false, name: "Blood Donation" },
+            "1.9": { group: "Group I", max: 20, exclusive: false, name: "THRIVE Project" },
+            "1.10": { group: "Group I", max: 5, exclusive: true, name: "Geo-Tagged Tree Planting" },
+            "1.11": { group: "Group I", max: 40, exclusive: true, name: "NSS Volunteer (2 Years)" },
+            "1.12": { group: "Group I", max: 40, exclusive: true, name: "University Leadership Camp (100 Hrs)" },
+            "1.13": { group: "Group I", max: 40, exclusive: true, name: "State NSS Winner" },
+            "1.14": { group: "Group I", max: 40, exclusive: true, name: "NSS/NCC Special Appreciation" },
+            "1.15": { group: "Group I", max: 40, exclusive: true, name: "State/National NSS/Youth Award" },
+            "1.16": { group: "Group I", max: 40, exclusive: true, name: "Approved National Camp / NIC / NYF" },
+            "1.17": { group: "Group I", max: 40, exclusive: true, name: "10-Day (50 Hrs) State Volunteer" },
+            "1.18": { group: "Group I", max: 40, exclusive: true, name: "RDC / IDC / Int'l NSS/NCC" },
+            "1.19": { group: "Group I", max: 40, exclusive: true, name: "NCC Certificate (1Yr / B / C)" },
+            "1.20": { group: "Group I", max: 10, exclusive: false, name: "First Aid / CPR / Fire Safety" },
+            "1.21": { group: "Group I", max: 10, exclusive: true, name: "Basic Swimming Proficiency" },
+
+            "2.1": { group: "Group II", max: 40, exclusive: true, name: "Tech-Fest Participation" },
+            "2.2": { group: "Group II", max: 40, exclusive: true, name: "Tech-Fest Winner" },
+            "2.3": { group: "Group II", max: 40, exclusive: true, name: "Prof. Society (IEEE/ISTE/SAE) Competition Participation" },
+            "2.4": { group: "Group II", max: 40, exclusive: true, name: "Prof. Society (IEEE/ISTE/SAE) Competition Winner" },
+            "2.5": { group: "Group II", max: 15, exclusive: false, name: "Workshop/Seminar/Conference at IIT/NIT/NIRF Top 100" },
+            "2.6": { group: "Group II", max: 40, exclusive: false, name: "Poster Presentation (KTU/IIT/NIT)" },
+            "2.7": { group: "Group II", max: 40, exclusive: false, name: "Paper Presentation Participation (KTU/IIT/NIT)" },
+            "2.8": { group: "Group II", max: 40, exclusive: true, name: "Paper Presentation Winner (KTU/IIT/NIT)" },
+            "2.9": { group: "Group II", max: 40, exclusive: false, name: "Paper Presentation Participation (KTU College)" },
+            "2.10": { group: "Group II", max: 40, exclusive: true, name: "Paper Presentation Winner (KTU College)" },
+            "2.11": { group: "Group II", max: 15, exclusive: true, name: "Prof. Society Membership / Execom / Chair / Event Coord" },
+            "2.12": { group: "Group II", max: 30, exclusive: true, name: "College / University Union Member / Bearer" },
+            "2.13": { group: "Group II", max: 10, exclusive: false, name: "Department Association Execom / Coordinator" },
+            "2.14": { group: "Group II", max: 10, exclusive: false, name: "Class Representative (CR)" },
+            "2.15": { group: "Group II", max: 5,  exclusive: true, name: "Industrial Visit (IV) Coordinator" },
+            "2.16": { group: "Group II", max: 10, exclusive: true, name: "Placement Cell (CGPU) Member / Coordinator" },
+            "2.17": { group: "Group II", max: 10, exclusive: false, name: "IEDC Cell Execom / Coordinator" },
+            "2.18": { group: "Group II", max: 10, exclusive: false, name: "YIP Student Coordinator" },
+            "2.19": { group: "Group II", max: 20, exclusive: true, name: "STRIDE Volunteer / Core / Project Lead" },
+            "2.20": { group: "Group II", max: 10, exclusive: false, name: "College Magazine Editorial Board" },
+            "2.21": { group: "Group II", max: 10, exclusive: false, name: "Hobby Club Execom / Convenor" },
+            "2.22": { group: "Group II", max: 20, exclusive: false, name: "ICFOSS / FOSS Club / Open Source" },
+            "2.23": { group: "Group II", max: 10, exclusive: true, name: "Short-Term Internship (Min 2 Weeks / 10 Days)" },
+            "2.24": { group: "Group II", max: 30, exclusive: true, name: "English Proficiency (TOEFL/IELTS/PTE/BEC)" },
+            "2.25": { group: "Group II", max: 30, exclusive: true, name: "Aptitude Proficiency (GATE/GRE/CAT/GMAT)" },
+
+            "3.1": { group: "Group III", max: 20, exclusive: true, name: "Industrial Visit (IV) Report (S5/S6)" },
+            "3.2": { group: "Group III", max: 20, exclusive: true, name: "Best Mini Project / Best Project / Best Seminar" },
+            "3.3": { group: "Group III", max: 20, exclusive: true, name: "Long-Term Internship (Min 3.5 Months)" },
+            "3.4": { group: "Group III", max: 30, exclusive: true, name: "LEAP (IIT Madras)" },
+            "3.5": { group: "Group III", max: 35, exclusive: true, name: "YIP (Young Innovators Programme - K-DISC)" },
+            "3.6": { group: "Group III", max: 35, exclusive: true, name: "STRIDE Innovation Project (K-DISC)" },
+            "3.7": { group: "Group III", max: 35, exclusive: true, name: "GDC AI Workforce Internship" },
+            "3.8": { group: "Group III", max: 25, exclusive: true, name: "ICFOSS Certified Working Solution" },
+            "3.9": { group: "Group III", max: 40, exclusive: true, name: "Legally Registered Start-up" },
+            "3.10": { group: "Group III", max: 40, exclusive: true, name: "Patents (Filed/Published/Granted/Licensed)" },
+            "3.11": { group: "Group III", max: 40, exclusive: true, name: "Validated Prototype / Industry Adopted Tech" },
+            "3.12": { group: "Group III", max: 40, exclusive: true, name: "Venture Capital / Angel Funding" },
+            "3.13": { group: "Group III", max: 40, exclusive: true, name: "Validated Societal Innovation" },
+            "3.14": { group: "Group III", max: 40, exclusive: true, name: "Research Publication (SCI/Scopus Q1-Q4)" },
+            "3.15": { group: "Group III", max: 40, exclusive: true, name: "National Level Hackathon Winner (SIH/KAVACH/MoE/AICTE)" },
+            "3.16": { group: "Group III", max: 40, exclusive: true, name: "International Hackathon (Space Apps/Imagine Cup/YESIST12)" },
+            "3.17": { group: "Group III", max: 40, exclusive: false, name: "KTU Approved Skilling Course (NPTEL/SWAYAM/K-DISC/Spoken Tutorial)" }
+        };
+
+        let queuedCerts = []; // [{ id, file, name, canvasDataUrl }]
+        let rawAIResults = []; // Raw items returned by Gemini
+        let processedAuditItems = []; // Final deterministic items after KTU caps & rules
+
+        // Drag and drop listeners
+        const dropzone = document.getElementById('cert-dropzone');
+        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
+        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('drag-over');
+            if (e.dataTransfer.files?.length) handleFilesSelected(e.dataTransfer.files);
+        });
+
+        async function handleFilesSelected(fileList) {
+            const incoming = Array.from(fileList);
+            if (queuedCerts.length + incoming.length > 36) {
+                window.KTUFlow?.capsule('amber', 'Maximum 36 certificates per batch');
+            }
+            const allowed = incoming.slice(0, 36 - queuedCerts.length);
+            if (!allowed.length) return;
+
+            window.KTUFlow?.capsule('loading', `Rendering ${allowed.length} certificate preview(s)...`);
+
+            for (const file of allowed) {
+                try {
+                    const thumbDataUrl = await renderFileToDataUrl(file);
+                    queuedCerts.push({
+                        id: `cert_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+                        file,
+                        name: file.name,
+                        canvasDataUrl: thumbDataUrl
+                    });
+                } catch (err) {
+                    console.error("Failed to render file:", file.name, err);
+                }
+            }
+
+            renderQueuedGrid();
+            window.KTUFlow?.capsule('success', `${queuedCerts.length} certificate(s) ready to scan`);
+        }
+
+        // Renders either an Image or the 1st page of a PDF onto an 850px canvas so logos are crisp
+        async function renderFileToDataUrl(file) {
+            if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                const page = await pdf.getPage(1);
+                const viewport = page.getViewport({ scale: 1.4 });
+                const canvas = document.createElement('canvas');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                await page.render({ canvasContext: ctx, viewport }).promise;
+                return canvas.toDataURL('image/jpeg', 0.82);
+            } else {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    const url = URL.createObjectURL(file);
+                    img.onload = () => {
+                        const maxDim = 900;
+                        let w = img.width, h = img.height;
+                        if (w > maxDim || h > maxDim) {
+                            if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
+                            else { w = Math.round((w * maxDim) / h); h = maxDim; }
+                        }
+                        const canvas = document.createElement('canvas');
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.fillStyle = '#FFFFFF';
+                        ctx.fillRect(0, 0, w, h);
+                        ctx.drawImage(img, 0, 0, w, h);
+                        URL.revokeObjectURL(url);
+                        resolve(canvas.toDataURL('image/jpeg', 0.82));
+                    };
+                    img.onerror = reject;
+                    img.src = url;
+                });
+            }
+        }
+
+        function renderQueuedGrid() {
+            const sec = document.getElementById('queued-files-section');
+            const grid = document.getElementById('queued-thumbnails-grid');
+            document.getElementById('queued-count').innerText = queuedCerts.length;
+
+            if (queuedCerts.length === 0) {
+                sec.classList.add('hidden');
+                return;
+            }
+            sec.classList.remove('hidden');
+
+            grid.innerHTML = queuedCerts.map((c, idx) => `
+                <div class="inner-glass rounded-xl p-2 relative group flex flex-col justify-between">
+                    <button type="button" onclick="removeQueuedCert('${c.id}')" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-slate-900/75 text-white text-[10px] flex items-center justify-center hover:bg-rose-600 transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <img src="${c.canvasDataUrl}" alt="${c.name}" class="w-full h-20 object-cover rounded-lg mb-1.5 bg-white">
+                    <span class="text-[10px] font-bold text-slate-700 truncate block">#${idx + 1} ${c.name}</span>
+                </div>
+            `).join('');
+        }
+
+        window.removeQueuedCert = function(id) {
+            queuedCerts = queuedCerts.filter(c => c.id !== id);
+            renderQueuedGrid();
+        };
+
+        window.clearQueuedFiles = function() {
+            queuedCerts = [];
+            renderQueuedGrid();
+            document.getElementById('audit-results-section').classList.add('hidden');
+        };
+
+        // Stitch up to 4 certificates into a single 2x2 Contact Sheet image so 1 Gemini call sees 4 certificates + logos!
+        async function createContactSheetBase64(batchItems) {
+            const tileW = 800, tileH = 620, headerH = 38;
+            const cols = batchItems.length === 1 ? 1 : 2;
+            const rows = Math.ceil(batchItems.length / 2);
+
+            const canvas = document.createElement('canvas');
+            canvas.width = cols * tileW;
+            canvas.height = rows * tileH;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < batchItems.length; i++) {
+                const item = batchItems[i];
+                const col = i % 2;
+                const row = Math.floor(i / 2);
+                const x = col * tileW;
+                const y = row * tileH;
+
+                ctx.fillStyle = '#1e1b4b';
+                ctx.fillRect(x, y, tileW, headerH);
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 18px Inter, sans-serif';
+                ctx.fillText(`CERTIFICATE #${item.globalIndex} (${item.name.slice(0, 38)})`, x + 14, y + 25);
+
+                const img = await new Promise((res) => {
+                    const im = new Image();
+                    im.onload = () => res(im);
+                    im.src = item.canvasDataUrl;
+                });
+
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(x + 4, y + headerH, tileW - 8, tileH - headerH - 4);
+
+                const availW = tileW - 16, availH = tileH - headerH - 12;
+                const scale = Math.min(availW / img.width, availH / img.height);
+                const drawW = img.width * scale, drawH = img.height * scale;
+                const dx = x + (tileW - drawW) / 2;
+                const dy = y + headerH + 4 + (availH - drawH) / 2;
+                ctx.drawImage(img, dx, dy, drawW, drawH);
+            }
+
+            return canvas.toDataURL('image/jpeg', 0.84).split(',')[1];
+        }
+
+        // Call Gemini with automatic 7-Model Cascade rotation
+        let currentModelIdx = 0;
+        async function callGeminiWithCascade(apiKey, partsPayload) {
+            for (let attempt = 0; attempt < GEMINI_MODEL_CASCADE.length; attempt++) {
+                const modelName = GEMINI_MODEL_CASCADE[(currentModelIdx + attempt) % GEMINI_MODEL_CASCADE.length];
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+
+                try {
+                    const res = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: partsPayload }],
+                            generationConfig: {
+                                temperature: 0.1,
+                                responseMimeType: "application/json"
+                            }
+                        })
+                    });
+
+                    if (res.status === 429 || res.status === 404 || res.status >= 500) {
+                        continue; // Rotate immediately to next model bucket!
+                    }
+
+                    if (!res.ok) {
+                        const errTxt = await res.text();
+                        throw new Error(errTxt);
+                    }
+
+                    currentModelIdx = (currentModelIdx + attempt + 1) % GEMINI_MODEL_CASCADE.length;
+                    const data = await res.json();
+                    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
+                    return JSON.parse(text);
+                } catch (e) {
+                    if (attempt === GEMINI_MODEL_CASCADE.length - 1) throw e;
+                }
+            }
+        }
+
+        // Main AI Audit Execution
+        window.runAICertificateAudit = async function() {
+            if (queuedCerts.length === 0) return;
+
+            const btn = document.getElementById('btn-run-audit');
+            const progWrap = document.getElementById('scan-progress-wrap');
+            const progBar = document.getElementById('scan-progress-bar');
+            const statusTxt = document.getElementById('scan-status-text');
+            const pctTxt = document.getElementById('scan-pct-text');
+
+            btn.disabled = true;
+            progWrap.classList.remove('hidden');
+            progBar.style.width = '8%';
+            pctTxt.innerText = '8%';
+
+            const admissionYear = parseInt(document.getElementById('ai-admission-year').value, 10) || 2024;
+            window.KTUFlow?.capsule('loading', `AI Auditing ${queuedCerts.length} certificate(s)...`);
+
+            try {
+                // 1. Fetch XOR-masked Gemini API key from Hugging Face Space Secrets
+                const authRes = await fetch(HF_GEMINI_AUTH_URL, { method: 'POST' });
+                if (!authRes.ok) throw new Error("Could not fetch Gemini auth from Space");
+                const authData = await authRes.json();
+                const apiKey = authData.k.map(b => String.fromCharCode(b ^ 42)).join('');
+
+                // 2. Group queued certificates into batches of 8 (2 contact sheets of 4 per Gemini call)
+                rawAIResults = [];
+                const batchSize = 8;
+                const totalBatches = Math.ceil(queuedCerts.length / batchSize);
+
+                for (let b = 0; b < totalBatches; b++) {
+                    const slice = queuedCerts.slice(b * batchSize, (b + 1) * batchSize).map((item, idx) => ({
+                        ...item,
+                        globalIndex: b * batchSize + idx + 1
+                    }));
+
+                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Gemini 3.8 Flash inspecting logos &amp; rules (Batch ${b + 1}/${totalBatches})...`;
+                    const pct = Math.round(((b + 0.3) / totalBatches) * 85);
+                    progBar.style.width = `${pct}%`;
+                    pctTxt.innerText = `${pct}%`;
+
+                    const parts = [];
+                    for (let s = 0; s < slice.length; s += 4) {
+                        const sheetItems = slice.slice(s, s + 4);
+                        const b64 = await createContactSheetBase64(sheetItems);
+                        parts.push({ inlineData: { mimeType: "image/jpeg", data: b64 } });
+                    }
+
+                    const promptText = `
+You are the Official APJAKTU (KTU) B.Tech Activity Points Academic Auditor (2024 Scheme).
+The student joined B.Tech in Admission Year: ${admissionYear}.
+Inspect each labeled certificate tile (CERTIFICATE #${slice[0].globalIndex} to CERTIFICATE #${slice[slice.length - 1].globalIndex}) in the image(s).
+Carefully inspect BOTH visual LOGOS/CRESTS (IEEE, ISTE, ACM, SAE, ASME, CSI, NSS, NCC, IIT, IIIT, NIT, NPTEL, SWAYAM, Spoken Tutorial, K-DISC, YIP, STRIDE, IEDC, ICFOSS) AND text.
+
+STRICT KTU 2024 HANDBOOK RULES & POINT ASSIGNMENTS:
+- 1.1 Sports/Games/Arts Participation: L1 College=1, L2 Zonal=5, L3 State/Univ=10, L4 National=20, L5 Int'l=40.
+- 1.2 Sports/Games/Arts Winner (Single): L1=5, L2=10, L3=20, L4=40, L5=40.
+- 1.3 Sports/Games/Arts Winner (Group): L1=3, L2=5, L3=15, L4=30, L5=40.
+- 1.4 College Magazine Publication: 5 pts.
+- 1.5 Four-Wheeler Driving License (LMV): 5 pts ONLY if LMV (4-wheeler) AND issued in or after ${admissionYear}. If only MCWG/2-wheeler or issued before ${admissionYear}, REJECT (0 pts).
+- 1.6 / 1.7 Community Service: 2 days=5 pts (1.6), 1 week=10 pts (1.7).
+- 1.8 Blood Donation: 5 pts.
+- 1.9 THRIVE Project: 10 pts.
+- 1.10 Geo-tagged Tree Planting: 5 pts.
+- 1.11 to 1.19 NSS/NCC: 2-Yr NSS=30 (1.11), 100-hr camp=20 (1.12), State NSS Winner=15 (1.13), Appreciation=15 (1.14), State Award=15 / National Award=25 (1.15), NIC/NYF/Pre-RDC=15 (1.16), 10-day/50-hr service=15 (1.17), RDC/IDC/Int'l=25 (1.18), NCC 1Yr=10 / B-Cert=20 / C-Cert=30 (1.19).
+- 1.20 First Aid / CPR / Fire Safety: 5 pts. 1.21 Basic Swimming: 5 pts.
+- 2.1 Tech-Fest Participation (KTU/Approved): L1 College=2, L2 Zonal=5, L3 State=10, L4 National (IIT/NIT)=20, L5 Int'l=30.
+- 2.2 Tech-Fest Winner: L1=5, L2=10, L3=20, L4=40, L5=40.
+- 2.3 Professional Society Competitions Participation (IEEE, IET, ASME, SAE, ACM, CSI, ISTE):
+  * IEEE Student Branch [College] = L1 College (2 pts)
+  * IEEE Hub (Travancore/Kochi/Malabar) = L2 Zonal (5 pts)
+  * IEEE Kerala Section / AKSC / State = L3 State (10 pts)
+  * IEEE India Council / AISYWLC / National = L4 National (15 pts)
+  * IEEE Global / Region 10 / Int'l = L5 Int'l (20 pts)
+- 2.4 Professional Society Competition Winner (IEEE, etc.): L1=3, L2=7, L3=15, L4=25, L5=35.
+- 2.5 Full-time Workshop/Seminar/Conference/Webinar/STTP at IITs, IIITs, NITs, Central Univ, INI, NIRF Top 100: 5 pts/event.
+  * CRITICAL REJECTION RULE FOR 2.5: Workshops conducted at regular colleges (not IIT/NIT/NIRF Top 100) OR workshops conducted as part of cultural fests like "Ragam" get 0 points (REJECT) unless it qualifies as Tech-Fest Participation (2.1 = 2 pts) or IEEE event (2.3 = 2 pts).
+- 2.6 Poster Presentation (KTU/IIT/NIT/NIRF100): 5 pts.
+- 2.7 Paper Presentation Participation (KTU/IIT/NIT/NIRF100): 10 pts. 2.8 Winner: 1st=20, 2nd/3rd=15.
+- 2.9 Paper Presentation Participation (KTU Affiliated College): 5 pts. 2.10 Winner: 1st=10, 2nd/3rd=7.
+- 2.11 Prof Society Role (IEEE/ISTE/ACM/SAE): Member=5, Event Coordinator=5, Execom=10, Secretary/Chair=15.
+- 2.12 Union: College Execom=15, College Bearer=20, Univ Member=25, Univ Bearer=30.
+- 2.13 Dept Association=5, 2.14 Class Rep=5, 2.15 IV Coord=5, 2.16 CGPU Execom=5/Coord=10, 2.17 IEDC=5, 2.18 YIP Coord=5, 2.19 STRIDE Role=5/10/15/20, 2.20 Magazine Board=5, 2.21 Hobby Club Execom=5.
+- 2.22 ICFOSS/FOSS Club: Member/2-day Workshop/Event=5, Lead/Open-Source/15-day Internship=10.
+- 2.23 Short-Term Internship: 10 pts ONLY if duration >= 2 weeks (10 working days). If < 2 weeks, REJECT (0 pts).
+- 2.24 TOEFL/IELTS/PTE/BEC: 15/20/25/30 pts. 2.25 GATE/GRE/CAT/GMAT: 20/25/30 pts.
+- 3.1 IV Report=5, 3.2 Best Project/Seminar=5, 3.3 Long Internship (>=3.5 mo)=15, 3.4 LEAP=10/15/20, 3.5 YIP=5/10/20/35, 3.6 STRIDE=5/10/20/35, 3.7 GDC=5/15/25/35, 3.8 ICFOSS Solution=25, 3.9 Startup=30, 3.10 Patent=20/30/40, 3.11 Prototype=40, 3.12 VC Funding=40, 3.13 Societal Innovation=40, 3.14 Journal Q1-Q2=40 / Q3-Q4=25.
+- 3.15 National Hackathon (SIH/KAVACH/MoE/AICTE): 1st=40, 2nd=35, 3rd=30. (If only participation in a national hackathon, classify under 2.1 or 2.3).
+- 3.16 International Hackathon (NASA Space Apps, Imagine Cup, Google Solution Challenge, IEEE YESIST12 Finals, AWS, Junction): Participation=30, 2nd/3rd=35, 1st=40.
+- 3.17 Skilling Certificates: 1 point per hour ONLY for KTU-approved courses (SWAYAM, NPTEL, K-DISC, IIT Bombay Spoken Tutorial). (e.g. 4-week NPTEL=12 pts, 8-week=24 pts, 12-week=30 pts). Unapproved private courses (Udemy, GreatLearning, Simplilearn, random 1-hr webinars) MUST be REJECTED (0 pts).
+
+Return a JSON array with one object per certificate (#${slice[0].globalIndex} to #${slice[slice.length - 1].globalIndex}):
+[
+  {
+    "certIndex": 1,
+    "detectedTitle": "Event & Organization Name",
+    "detectedLogo": "IEEE / NIT / NPTEL / None",
+    "eligible": true,
+    "code": "2.3",
+    "tierLabel": "L1: College (IEEE Student Branch)",
+    "points": 2,
+    "eventKey": "normalized_event_name_for_dedup",
+    "reason": "Brief explanation citing KTU Code & level"
+  }
+]`;
+                    parts.push({ text: promptText });
+
+                    const batchRes = await callGeminiWithCascade(apiKey, parts);
+                    if (Array.isArray(batchRes)) {
+                        rawAIResults.push(...batchRes);
+                    }
+                }
+
+                progBar.style.width = '100%';
+                pctTxt.innerText = '100%';
+                setTimeout(() => progWrap.classList.add('hidden'), 500);
+
+                recalculateAuditMath();
+                document.getElementById('audit-results-section').classList.remove('hidden');
+                document.getElementById('audit-results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                window.KTUFlow?.capsule('success', `Audited ${queuedCerts.length} certificate(s)!`);
+            } catch (err) {
+                console.error("AI Audit Error:", err);
+                progWrap.classList.add('hidden');
+                window.KTUFlow?.capsule('error', 'AI Audit failed. Check GEMINI_API_KEY in Space Secrets.');
+            } finally {
+                btn.disabled = false;
+            }
+        };
+
+        // Deterministic KTU Rules Post-Processor (Enforces Duplicate Rule i, Per-Code Caps, & 40/40/40 Group Caps)
+        window.recalculateAuditMath = function() {
+            if (!rawAIResults.length) return;
+
+            const scheme = document.getElementById('ai-scheme').value;
+            const category = document.getElementById('ai-category').value;
+            const groupCap = scheme === '2024' ? (category === 'lateral' ? 30 : category === 'pwd' ? 20 : 40) : 100;
+            const totalTarget = scheme === '2024' ? (category === 'lateral' ? 90 : category === 'pwd' ? 60 : 120) : (category === 'lateral' ? 75 : category === 'pwd' ? 50 : 100);
+
+            // Sort raw results by points descending so highest achievements win in non-accumulative / same-event checks
+            const indexed = rawAIResults.map((r, i) => ({
+                ...r,
+                certObj: queuedCerts[(r.certIndex || (i + 1)) - 1] || queuedCerts[i]
+            }));
+
+            const sortedByPts = [...indexed].sort((a, b) => (b.points || 0) - (a.points || 0));
+            const seenEvents = new Set();
+            const codeEarnedMap = {};
+            const codeSeenExclusive = new Set();
+            const auditMap = new Map();
+
+            sortedByPts.forEach(item => {
+                const code = String(item.code || '').trim();
+                const rule = KTU_2024_RULES[code];
+
+                if (!item.eligible || !rule || (item.points || 0) <= 0) {
+                    auditMap.set(item.certIndex, {
+                        ...item,
+                        status: 'rejected',
+                        awardedPoints: 0,
+                        group: rule?.group || 'Ineligible',
+                        auditNote: item.reason || 'Does not qualify under KTU Activity Points Handbook.'
+                    });
+                    return;
+                }
+
+                // 1. Check Same-Event Duplicate (Rule i: Participation + Winner cannot be combined)
+                const evKey = (item.eventKey || '').toLowerCase().trim();
+                if (evKey && evKey !== 'none' && seenEvents.has(evKey)) {
+                    auditMap.set(item.certIndex, {
+                        ...item,
+                        status: 'capped',
+                        awardedPoints: 0,
+                        group: rule.group,
+                        auditNote: `Rule i (Duplicate Event): Higher achievement for "${item.detectedTitle}" already counted.`
+                    });
+                    return;
+                }
+                if (evKey) seenEvents.add(evKey);
+
+                // 2. Check Non-Accumulative Exclusive Code
+                if (rule.exclusive && codeSeenExclusive.has(code)) {
+                    auditMap.set(item.certIndex, {
+                        ...item,
+                        status: 'capped',
+                        awardedPoints: 0,
+                        group: rule.group,
+                        auditNote: `Non-Accumulative (#${code}): Higher or equal tier already counted for ${rule.name}.`
+                    });
+                    return;
+                }
+
+                // 3. Check Per-Activity Max Cap
+                const currentForCode = codeEarnedMap[code] || 0;
+                if (currentForCode >= rule.max) {
+                    auditMap.set(item.certIndex, {
+                        ...item,
+                        status: 'capped',
+                        awardedPoints: 0,
+                        group: rule.group,
+                        auditNote: `Max Cap Reached: Code #${code} is limited to ${rule.max} points max.`
+                    });
+                    return;
+                }
+
+                const ptsToAward = Math.min(item.points, rule.max - currentForCode);
+                codeEarnedMap[code] = currentForCode + ptsToAward;
+                if (rule.exclusive) codeSeenExclusive.add(code);
+
+                auditMap.set(item.certIndex, {
+                    ...item,
+                    status: 'accepted',
+                    awardedPoints: ptsToAward,
+                    group: rule.group,
+                    auditNote: item.reason || `Verified under Code #${code} (${rule.name}).`
+                });
+            });
+
+            processedAuditItems = indexed.map(it => auditMap.get(it.certIndex) || it);
+
+            // Calculate Group Totals
+            let g1 = 0, g2 = 0, g3 = 0;
+            let acceptedCnt = 0, cappedCnt = 0, rejectedCnt = 0;
+
+            processedAuditItems.forEach(it => {
+                if (it.status === 'accepted') {
+                    acceptedCnt++;
+                    if (it.group === 'Group I') g1 += it.awardedPoints;
+                    else if (it.group === 'Group II') g2 += it.awardedPoints;
+                    else if (it.group === 'Group III') g3 += it.awardedPoints;
+                } else if (it.status === 'capped') {
+                    cappedCnt++;
+                } else {
+                    rejectedCnt++;
+                }
+            });
+
+            const cG1 = scheme === '2024' ? Math.min(g1, groupCap) : g1;
+            const cG2 = scheme === '2024' ? Math.min(g2, groupCap) : g2;
+            const cG3 = scheme === '2024' ? Math.min(g3, groupCap) : g3;
+            const totalEligible = scheme === '2024' ? (cG1 + cG2 + cG3) : Math.min(g1 + g2 + g3, totalTarget);
+
+            document.getElementById('audit-total-pts').innerText = totalEligible;
+            document.getElementById('audit-target-pts').innerText = totalTarget;
+            document.getElementById('audit-counts-summary').innerText = `${acceptedCnt} Accepted • ${cappedCnt} Capped/Duplicate • ${rejectedCnt} Rejected (0 pts)`;
+
+            document.getElementById('audit-g1-text').innerText = `${cG1} / ${groupCap} pts`;
+            document.getElementById('audit-g1-bar').style.width = `${Math.min(100, Math.round((cG1 / groupCap) * 100))}%`;
+
+            document.getElementById('audit-g2-text').innerText = `${cG2} / ${groupCap} pts`;
+            document.getElementById('audit-g2-bar').style.width = `${Math.min(100, Math.round((cG2 / groupCap) * 100))}%`;
+
+            document.getElementById('audit-g3-text').innerText = `${cG3} / ${groupCap} pts`;
+            document.getElementById('audit-g3-bar').style.width = `${Math.min(100, Math.round((cG3 / groupCap) * 100))}%`;
+
+            renderAuditCards();
+        };
+
+        function renderAuditCards() {
+            const listEl = document.getElementById('audit-cards-list');
+            listEl.innerHTML = processedAuditItems.map((item, idx) => {
+                let statusBadge = '';
+                let borderClass = '';
+                if (item.status === 'accepted') {
+                    statusBadge = `<span class="px-2.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-700 text-xs font-extrabold">+${item.awardedPoints} pts (${item.group})</span>`;
+                    borderClass = 'border-emerald-500/30';
+                } else if (item.status === 'capped') {
+                    statusBadge = `<span class="px-2.5 py-0.5 rounded-md bg-amber-500/15 text-amber-700 text-xs font-bold">0 pts (Capped / Duplicate)</span>`;
+                    borderClass = 'border-amber-500/30';
+                } else {
+                    statusBadge = `<span class="px-2.5 py-0.5 rounded-md bg-rose-500/15 text-rose-700 text-xs font-bold">0 pts (Ineligible)</span>`;
+                    borderClass = 'border-rose-500/30';
+                }
+
+                const thumb = item.certObj?.canvasDataUrl || '';
+
+                return `
+                    <div class="result-glass rounded-2xl p-4 flex flex-col justify-between gap-3 border ${borderClass}">
+                        <div class="flex items-start gap-3">
+                            ${thumb ? `<img src="${thumb}" class="w-16 h-16 object-cover rounded-xl border border-slate-200 shrink-0 bg-white">` : ''}
+                            <div class="min-w-0 flex-1">
+                                <div class="flex flex-wrap items-center justify-between gap-1.5 mb-1">
+                                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-[11px] font-bold">
+                                        ${item.code && item.code !== 'none' ? `Code #${item.code}` : 'No Code'}
+                                    </span>
+                                    ${statusBadge}
+                                </div>
+                                <h3 class="text-sm font-bold text-slate-900 leading-snug truncate">${item.detectedTitle || item.certObj?.name || `Certificate #${idx + 1}`}</h3>
+                                ${item.detectedLogo && item.detectedLogo !== 'None' ? `<span class="inline-block mt-1 text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200"><i class="fas fa-certificate mr-1"></i>Logo: ${item.detectedLogo}</span>` : ''}
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-slate-600 bg-slate-100/80 dark:bg-slate-800/70 p-2.5 rounded-xl leading-relaxed">
+                            ${item.auditNote}
+                        </p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Save Verified Items directly into main activity-points.html localStorage tracker!
+        window.syncVerifiedToMainCalculator = function() {
+            const accepted = processedAuditItems.filter(i => i.status === 'accepted' && i.awardedPoints > 0);
+            if (accepted.length === 0) {
+                window.KTUFlow?.capsule('amber', 'No eligible certificates to save');
+                return;
+            }
+
+            const scheme = document.getElementById('ai-scheme').value;
+            const category = document.getElementById('ai-category').value;
+
+            let existing = [];
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) existing = JSON.parse(raw).items || [];
+            } catch (e) {}
+
+            // Replace current scheme items with AI-verified items
+            const otherSchemeItems = existing.filter(i => i.scheme !== scheme);
+            const newItems = accepted.map(item => ({
+                id: `ai_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+                code: String(item.code),
+                title: `${item.detectedTitle} (${item.tierLabel || 'AI Verified'})`,
+                group: item.group,
+                points: item.awardedPoints,
+                scheme: scheme
+            }));
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                scheme,
+                category,
+                items: [...otherSchemeItems, ...newItems]
+            }));
+
+            window.KTUFlow?.capsule('success', `Saved ${accepted.length} verified certificates! Redirecting...`);
+            setTimeout(() => {
+                window.location.href = '/activity-points.html';
+            }, 1100);
+        };
+    </script>
+</body>
+</html>
