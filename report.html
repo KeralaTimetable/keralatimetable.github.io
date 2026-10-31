@@ -163,7 +163,7 @@
             loadNavigation('report', '', false);
         }
 
-        const HF_RELAY_URL = "https://keralatimetable-ktu-papers-api.hf.space/telegram-relay";
+        const HF_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/telegram-auth";
 
         function escapeTgHTML(str = '') {
             return String(str)
@@ -177,7 +177,6 @@
             document.getElementById('reportForm').reset();
         }
 
-        // --- SECURE HUGGING FACE RELAY SUBMISSION (Zero Token in Browser!) ---
         async function submitReport(e) {
             e.preventDefault();
             
@@ -208,15 +207,31 @@
                 `⚠️ <b>Violation Type:</b> ${type}\n` +
                 `📝 <b>Details:</b>\n${description}`;
 
-            const formData = new FormData();
-            formData.append('caption', captionText);
-
-            for (let i = 0; i < files.length; i++) {
-                formData.append('files', files[i]);
-            }
-
             try {
-                const response = await fetch(HF_RELAY_URL, {
+                // 1. Fetch XOR-masked credentials from Hugging Face Space Secrets
+                const authRes = await fetch(HF_AUTH_URL, { method: 'POST' });
+                if (!authRes.ok) throw new Error('Auth check failed');
+                const authData = await authRes.json();
+                const botToken = authData.t.map(b => String.fromCharCode(b ^ 42)).join('');
+                const chatId = authData.c.map(b => String.fromCharCode(b ^ 42)).join('');
+
+                const formData = new FormData();
+                formData.append('chat_id', chatId);
+                const mediaArray = [];
+
+                for (let i = 0; i < files.length; i++) {
+                    const fileKey = `file${i}`;
+                    formData.append(fileKey, files[i]);
+                    const mediaItem = { type: 'photo', media: `attach://${fileKey}` };
+                    if (i === 0) {
+                        mediaItem.caption = captionText.slice(0, 1020);
+                        mediaItem.parse_mode = 'HTML';
+                    }
+                    mediaArray.push(mediaItem);
+                }
+                formData.append('media', JSON.stringify(mediaArray));
+
+                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMediaGroup`, {
                     method: 'POST',
                     body: formData
                 });
@@ -226,9 +241,7 @@
                     document.getElementById('reportForm').reset();
                     window.KTUFlow?.capsule('success', 'Report submitted securely!');
                 } else {
-                    const errorText = await response.text();
-                    console.error("Relay Error:", errorText);
-                    throw new Error('Failed to send to Telegram relay');
+                    throw new Error('Failed to send to Telegram');
                 }
             } catch (error) {
                 console.error("Error sending report:", error);
