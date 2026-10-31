@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <title>AI Activity Points Certificate Scanner | Kerala Timetable</title>
-    <meta name="description" content="Upload your B.Tech certificates (PDFs or photos) and let Kerala Timetable's AI Auditor automatically verify logos, apply KTU 2024 & 2019 handbook rules, and calculate your exact Activity Points.">
+    <meta name="description" content="Upload your B.Tech certificates (Coursera, NPTEL, IEEE, NSS, Internships, Hackathons) and let Kerala Timetable's AI Auditor automatically calculate your exact KTU Activity Points.">
     <link rel="canonical" href="https://keralatimetable.in/activity-points-ai.html" />
     <link rel="icon" href="/favicon.png" type="image/png">
 
     <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- PDF.js for client-side PDF certificate rendering (so AI can see logos on PDF certificates!) -->
+    <!-- PDF.js for client-side PDF certificate rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
     <style>
@@ -114,7 +114,7 @@
 
             <span class="px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold flex items-center gap-1.5">
                 <i class="fas fa-wand-magic-sparkles text-indigo-500"></i>
-                <span>Powered by Gemini 3.8 Flash</span>
+                <span>Gemini 3.8 Flash Auditor</span>
             </span>
         </div>
 
@@ -124,7 +124,7 @@
                 AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Certificate Auditor</span>
             </h1>
             <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
-                Upload up to <strong>36 certificates at once</strong> (PDFs or photos). Our AI inspects official logos (IEEE, NIT, IIT, NSS, NPTEL, K-DISC), filters out ineligible certificates, and calculates your exact KTU Activity Points.
+                Upload up to <strong>36 certificates at once</strong> (PDFs or photos). Recognizes <strong>Coursera (K-DISC)</strong>, NPTEL, IEEE, NIT/IIT, NSS, and Hackathon certificates and calculates your exact KTU Activity Points.
             </p>
         </div>
 
@@ -304,7 +304,6 @@
             loadNavigation('activity', '', false);
         }
 
-        // Configure PDF.js Worker
         if (window.pdfjsLib) {
             window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
         }
@@ -312,7 +311,7 @@
         const HF_GEMINI_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/gemini-auth";
         const STORAGE_KEY = 'ktu_activity_points_tracker_v2';
 
-        // 7-Model Auto-Rotation Cascade (Uses separate rate-limit buckets so 1 key = 60 RPM!)
+        // 7-Model Auto-Rotation Cascade
         const GEMINI_MODEL_CASCADE = [
             "gemini-3.8-flash",
             "gemini-3.5-flash-lite",
@@ -389,14 +388,13 @@
             "3.14": { group: "Group III", max: 40, exclusive: true, name: "Research Publication (SCI/Scopus Q1-Q4)" },
             "3.15": { group: "Group III", max: 40, exclusive: true, name: "National Level Hackathon Winner (SIH/KAVACH/MoE/AICTE)" },
             "3.16": { group: "Group III", max: 40, exclusive: true, name: "International Hackathon (Space Apps/Imagine Cup/YESIST12)" },
-            "3.17": { group: "Group III", max: 40, exclusive: false, name: "KTU Approved Skilling Course (NPTEL/SWAYAM/K-DISC/Spoken Tutorial)" }
+            "3.17": { group: "Group III", max: 40, exclusive: false, name: "Approved Skilling Course (Coursera K-DISC / NPTEL / SWAYAM / Spoken Tutorial)" }
         };
 
-        let queuedCerts = []; // [{ id, file, name, canvasDataUrl }]
-        let rawAIResults = []; // Raw items returned by Gemini
-        let processedAuditItems = []; // Final deterministic items after KTU caps & rules
+        let queuedCerts = [];
+        let rawAIResults = [];
+        let processedAuditItems = [];
 
-        // Drag and drop listeners
         const dropzone = document.getElementById('cert-dropzone');
         dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
         dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
@@ -434,7 +432,6 @@
             window.KTUFlow?.capsule('success', `${queuedCerts.length} certificate(s) ready to scan`);
         }
 
-        // Renders either an Image or the 1st page of a PDF onto an 850px canvas so logos are crisp
         async function renderFileToDataUrl(file) {
             if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
                 const arrayBuffer = await file.arrayBuffer();
@@ -509,7 +506,6 @@
             document.getElementById('audit-results-section').classList.add('hidden');
         };
 
-        // Stitch up to 4 certificates into a single 2x2 Contact Sheet image so 1 Gemini call sees 4 certificates + logos!
         async function createContactSheetBase64(batchItems) {
             const tileW = 800, tileH = 620, headerH = 38;
             const cols = batchItems.length === 1 ? 1 : 2;
@@ -555,7 +551,6 @@
             return canvas.toDataURL('image/jpeg', 0.84).split(',')[1];
         }
 
-        // Call Gemini with automatic 7-Model Cascade rotation
         let currentModelIdx = 0;
         async function callGeminiWithCascade(apiKey, partsPayload) {
             for (let attempt = 0; attempt < GEMINI_MODEL_CASCADE.length; attempt++) {
@@ -576,7 +571,7 @@
                     });
 
                     if (res.status === 429 || res.status === 404 || res.status >= 500) {
-                        continue; // Rotate immediately to next model bucket!
+                        continue;
                     }
 
                     if (!res.ok) {
@@ -594,7 +589,6 @@
             }
         }
 
-        // Main AI Audit Execution
         window.runAICertificateAudit = async function() {
             if (queuedCerts.length === 0) return;
 
@@ -613,13 +607,11 @@
             window.KTUFlow?.capsule('loading', `AI Auditing ${queuedCerts.length} certificate(s)...`);
 
             try {
-                // 1. Fetch XOR-masked Gemini API key from Hugging Face Space Secrets
                 const authRes = await fetch(HF_GEMINI_AUTH_URL, { method: 'POST' });
                 if (!authRes.ok) throw new Error("Could not fetch Gemini auth from Space");
                 const authData = await authRes.json();
                 const apiKey = authData.k.map(b => String.fromCharCode(b ^ 42)).join('');
 
-                // 2. Group queued certificates into batches of 8 (2 contact sheets of 4 per Gemini call)
                 rawAIResults = [];
                 const batchSize = 8;
                 const totalBatches = Math.ceil(queuedCerts.length / batchSize);
@@ -646,7 +638,7 @@
 You are the Official APJAKTU (KTU) B.Tech Activity Points Academic Auditor (2024 Scheme).
 The student joined B.Tech in Admission Year: ${admissionYear}.
 Inspect each labeled certificate tile (CERTIFICATE #${slice[0].globalIndex} to CERTIFICATE #${slice[slice.length - 1].globalIndex}) in the image(s).
-Carefully inspect BOTH visual LOGOS/CRESTS (IEEE, ISTE, ACM, SAE, ASME, CSI, NSS, NCC, IIT, IIIT, NIT, NPTEL, SWAYAM, Spoken Tutorial, K-DISC, YIP, STRIDE, IEDC, ICFOSS) AND text.
+Carefully inspect BOTH visual LOGOS/CRESTS (Coursera, NPTEL, SWAYAM, K-DISC, IEEE, ISTE, ACM, SAE, ASME, CSI, NSS, NCC, IIT, IIIT, NIT, Spoken Tutorial, YIP, STRIDE, IEDC, ICFOSS) AND text.
 
 STRICT KTU 2024 HANDBOOK RULES & POINT ASSIGNMENTS:
 - 1.1 Sports/Games/Arts Participation: L1 College=1, L2 Zonal=5, L3 State/Univ=10, L4 National=20, L5 Int'l=40.
@@ -670,7 +662,7 @@ STRICT KTU 2024 HANDBOOK RULES & POINT ASSIGNMENTS:
   * IEEE Global / Region 10 / Int'l = L5 Int'l (20 pts)
 - 2.4 Professional Society Competition Winner (IEEE, etc.): L1=3, L2=7, L3=15, L4=25, L5=35.
 - 2.5 Full-time Workshop/Seminar/Conference/Webinar/STTP at IITs, IIITs, NITs, Central Univ, INI, NIRF Top 100: 5 pts/event.
-  * CRITICAL REJECTION RULE FOR 2.5: Workshops conducted at regular colleges (not IIT/NIT/NIRF Top 100) OR workshops conducted as part of cultural fests like "Ragam" get 0 points (REJECT) unless it qualifies as Tech-Fest Participation (2.1 = 2 pts) or IEEE event (2.3 = 2 pts).
+  * Note: Workshops conducted as part of cultural fests like "Ragam" are excluded under 2.5.
 - 2.6 Poster Presentation (KTU/IIT/NIT/NIRF100): 5 pts.
 - 2.7 Paper Presentation Participation (KTU/IIT/NIT/NIRF100): 10 pts. 2.8 Winner: 1st=20, 2nd/3rd=15.
 - 2.9 Paper Presentation Participation (KTU Affiliated College): 5 pts. 2.10 Winner: 1st=10, 2nd/3rd=7.
@@ -678,25 +670,28 @@ STRICT KTU 2024 HANDBOOK RULES & POINT ASSIGNMENTS:
 - 2.12 Union: College Execom=15, College Bearer=20, Univ Member=25, Univ Bearer=30.
 - 2.13 Dept Association=5, 2.14 Class Rep=5, 2.15 IV Coord=5, 2.16 CGPU Execom=5/Coord=10, 2.17 IEDC=5, 2.18 YIP Coord=5, 2.19 STRIDE Role=5/10/15/20, 2.20 Magazine Board=5, 2.21 Hobby Club Execom=5.
 - 2.22 ICFOSS/FOSS Club: Member/2-day Workshop/Event=5, Lead/Open-Source/15-day Internship=10.
-- 2.23 Short-Term Internship: 10 pts ONLY if duration >= 2 weeks (10 working days). If < 2 weeks, REJECT (0 pts).
+- 2.23 Short-Term Internship: 10 pts ONLY if duration >= 2 weeks (10 working days).
 - 2.24 TOEFL/IELTS/PTE/BEC: 15/20/25/30 pts. 2.25 GATE/GRE/CAT/GMAT: 20/25/30 pts.
 - 3.1 IV Report=5, 3.2 Best Project/Seminar=5, 3.3 Long Internship (>=3.5 mo)=15, 3.4 LEAP=10/15/20, 3.5 YIP=5/10/20/35, 3.6 STRIDE=5/10/20/35, 3.7 GDC=5/15/25/35, 3.8 ICFOSS Solution=25, 3.9 Startup=30, 3.10 Patent=20/30/40, 3.11 Prototype=40, 3.12 VC Funding=40, 3.13 Societal Innovation=40, 3.14 Journal Q1-Q2=40 / Q3-Q4=25.
-- 3.15 National Hackathon (SIH/KAVACH/MoE/AICTE): 1st=40, 2nd=35, 3rd=30. (If only participation in a national hackathon, classify under 2.1 or 2.3).
+- 3.15 National Hackathon (SIH/KAVACH/MoE/AICTE): 1st=40, 2nd=35, 3rd=30.
 - 3.16 International Hackathon (NASA Space Apps, Imagine Cup, Google Solution Challenge, IEEE YESIST12 Finals, AWS, Junction): Participation=30, 2nd/3rd=35, 1st=40.
-- 3.17 Skilling Certificates: 1 point per hour ONLY for KTU-approved courses (SWAYAM, NPTEL, K-DISC, IIT Bombay Spoken Tutorial). (e.g. 4-week NPTEL=12 pts, 8-week=24 pts, 12-week=30 pts). Unapproved private courses (Udemy, GreatLearning, Simplilearn, random 1-hr webinars) MUST be REJECTED (0 pts).
+- 3.17 Skilling Certificates (Approved by KTU / K-DISC — 1 Point per Hour, Max 40 pts):
+  * CRITICAL RULE FOR COURSERA & K-DISC: K-DISC (Kerala Development and Innovation Strategic Council) & KKEM provide free COURSERA licenses to KTU students! Even though Coursera certificates only print the "Coursera" logo and university/industry partner (Google, IBM, Meta, DeepLearning.AI, Microsoft, AWS, Stanford, Michigan, etc.) without printing "K-DISC", ALL COURSERA CERTIFICATES ARE 100% ELIGIBLE under Code 3.17!
+  * Also eligible under 3.17: NPTEL, SWAYAM, IIT Bombay Spoken Tutorial, K-DISC, KKEM, ICT Academy of Kerala (ICTAK), ASAP Kerala, NASSCOM FutureSkills, Infosys Springboard, AICTE Eduskills, edX.
+  * Points for 3.17: Award 1 point per hour of course duration (up to 40 pts). If the exact hours are not printed on a Coursera certificate, award 20 points for a standard Coursera course (or 30 points if it is a Specialization / Professional Certificate / 8-12 week course).
 
 Return a JSON array with one object per certificate (#${slice[0].globalIndex} to #${slice[slice.length - 1].globalIndex}):
 [
   {
     "certIndex": 1,
-    "detectedTitle": "Event & Organization Name",
-    "detectedLogo": "IEEE / NIT / NPTEL / None",
+    "detectedTitle": "Course / Event & Organization Name",
+    "detectedLogo": "Coursera / IEEE / NIT / NPTEL / None",
     "eligible": true,
-    "code": "2.3",
-    "tierLabel": "L1: College (IEEE Student Branch)",
-    "points": 2,
-    "eventKey": "normalized_event_name_for_dedup",
-    "reason": "Brief explanation citing KTU Code & level"
+    "code": "3.17",
+    "tierLabel": "Coursera (K-DISC Skilling - 20 Hrs)",
+    "points": 20,
+    "eventKey": "normalized_course_or_event_name",
+    "reason": "Eligible under Code 3.17 (K-DISC / KTU Approved Coursera Skilling Campaign — 1 pt/hr)."
   }
 ]`;
                     parts.push({ text: promptText });
@@ -724,7 +719,18 @@ Return a JSON array with one object per certificate (#${slice[0].globalIndex} to
             }
         };
 
-        // Deterministic KTU Rules Post-Processor (Enforces Duplicate Rule i, Per-Code Caps, & 40/40/40 Group Caps)
+        // Allow student to adjust hours/points on a 3.17 Skilling / Coursera card if hours weren't printed on the PDF
+        window.adjustCertPoints = function(certIndex, newPoints) {
+            const target = rawAIResults.find(r => r.certIndex === certIndex);
+            if (!target) return;
+            target.points = newPoints;
+            target.eligible = true;
+            if (!target.code || target.code === 'none') target.code = '3.17';
+            target.tierLabel = `${newPoints} Hours (${newPoints} pts)`;
+            recalculateAuditMath();
+            window.KTUFlow?.capsule('success', `Updated Certificate #${certIndex} to ${newPoints} pts`);
+        };
+
         window.recalculateAuditMath = function() {
             if (!rawAIResults.length) return;
 
@@ -733,7 +739,6 @@ Return a JSON array with one object per certificate (#${slice[0].globalIndex} to
             const groupCap = scheme === '2024' ? (category === 'lateral' ? 30 : category === 'pwd' ? 20 : 40) : 100;
             const totalTarget = scheme === '2024' ? (category === 'lateral' ? 90 : category === 'pwd' ? 60 : 120) : (category === 'lateral' ? 75 : category === 'pwd' ? 50 : 100);
 
-            // Sort raw results by points descending so highest achievements win in non-accumulative / same-event checks
             const indexed = rawAIResults.map((r, i) => ({
                 ...r,
                 certObj: queuedCerts[(r.certIndex || (i + 1)) - 1] || queuedCerts[i]
@@ -760,7 +765,6 @@ Return a JSON array with one object per certificate (#${slice[0].globalIndex} to
                     return;
                 }
 
-                // 1. Check Same-Event Duplicate (Rule i: Participation + Winner cannot be combined)
                 const evKey = (item.eventKey || '').toLowerCase().trim();
                 if (evKey && evKey !== 'none' && seenEvents.has(evKey)) {
                     auditMap.set(item.certIndex, {
@@ -774,7 +778,6 @@ Return a JSON array with one object per certificate (#${slice[0].globalIndex} to
                 }
                 if (evKey) seenEvents.add(evKey);
 
-                // 2. Check Non-Accumulative Exclusive Code
                 if (rule.exclusive && codeSeenExclusive.has(code)) {
                     auditMap.set(item.certIndex, {
                         ...item,
@@ -786,7 +789,6 @@ Return a JSON array with one object per certificate (#${slice[0].globalIndex} to
                     return;
                 }
 
-                // 3. Check Per-Activity Max Cap
                 const currentForCode = codeEarnedMap[code] || 0;
                 if (currentForCode >= rule.max) {
                     auditMap.set(item.certIndex, {
@@ -814,7 +816,6 @@ Return a JSON array with one object per certificate (#${slice[0].globalIndex} to
 
             processedAuditItems = indexed.map(it => auditMap.get(it.certIndex) || it);
 
-            // Calculate Group Totals
             let g1 = 0, g2 = 0, g3 = 0;
             let acceptedCnt = 0, cappedCnt = 0, rejectedCnt = 0;
 
@@ -869,6 +870,20 @@ Return a JSON array with one object per certificate (#${slice[0].globalIndex} to
                 }
 
                 const thumb = item.certObj?.canvasDataUrl || '';
+                const isSkilling = String(item.code) === '3.17' || (item.detectedLogo || '').toLowerCase().includes('coursera');
+
+                const hoursAdjusterHTML = isSkilling ? `
+                    <div class="pt-2 border-t border-slate-200/60 dark:border-white/10">
+                        <span class="text-[10px] font-bold text-slate-400 block mb-1">Adjust course duration (1 pt/hr under Code #3.17):</span>
+                        <div class="flex flex-wrap gap-1">
+                            ${[10, 15, 20, 25, 30, 40].map(hrs => `
+                                <button type="button" onclick="adjustCertPoints(${item.certIndex}, ${hrs})" class="px-2 py-1 rounded-lg text-[11px] font-bold transition-all ${item.points === hrs ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:border-indigo-400'}">
+                                    ${hrs} hrs (${hrs} pts)
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : '';
 
                 return `
                     <div class="result-glass rounded-2xl p-4 flex flex-col justify-between gap-3 border ${borderClass}">
@@ -889,12 +904,12 @@ Return a JSON array with one object per certificate (#${slice[0].globalIndex} to
                         <p class="text-xs text-slate-600 bg-slate-100/80 dark:bg-slate-800/70 p-2.5 rounded-xl leading-relaxed">
                             ${item.auditNote}
                         </p>
+                        ${hoursAdjusterHTML}
                     </div>
                 `;
             }).join('');
         }
 
-        // Save Verified Items directly into main activity-points.html localStorage tracker!
         window.syncVerifiedToMainCalculator = function() {
             const accepted = processedAuditItems.filter(i => i.status === 'accepted' && i.awardedPoints > 0);
             if (accepted.length === 0) {
@@ -911,7 +926,6 @@ Return a JSON array with one object per certificate (#${slice[0].globalIndex} to
                 if (raw) existing = JSON.parse(raw).items || [];
             } catch (e) {}
 
-            // Replace current scheme items with AI-verified items
             const otherSchemeItems = existing.filter(i => i.scheme !== scheme);
             const newItems = accepted.map(item => ({
                 id: `ai_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
