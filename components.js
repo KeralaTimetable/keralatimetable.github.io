@@ -930,7 +930,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                     <span>Previous Papers</span>
                 </a>
 
-                <a href="/activity-points.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('activity')}">
+                <a href="/activitypoints.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('activity')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-award text-xs"></i></span>
                     <span>Activity Points</span>
                 </a>
