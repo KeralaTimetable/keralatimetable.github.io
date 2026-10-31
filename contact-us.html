@@ -106,7 +106,6 @@
             </p>
         </div>
 
-        <!-- Quick Contact Channels Strip -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 spring-enter" style="animation-delay: 90ms;">
             <a href="mailto:keralatimetable@gmail.com" class="inner-glass hover:border-indigo-400 rounded-2xl p-3.5 flex items-center gap-3 group">
                 <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-200 group-hover:scale-105 transition-transform">
@@ -139,7 +138,6 @@
             </a>
         </div>
 
-        <!-- Contact Form Card -->
         <div class="spring-enter relative" style="animation-delay: 140ms;">
             <div class="real-glass rounded-[2rem] p-5 sm:p-8 md:p-10 relative overflow-hidden">
                 
@@ -240,7 +238,7 @@
             loadNavigation('contact', '', false);
         }
 
-        const HF_RELAY_URL = "https://keralatimetable-ktu-papers-api.hf.space/telegram-relay";
+        const HF_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/telegram-auth";
 
         window.addEventListener('DOMContentLoaded', () => {
             if (window.KTUFlow && typeof window.KTUFlow.getProfile === 'function') {
@@ -301,27 +299,59 @@
                 `🎓 <b>Semester/Code:</b> ${context}\n` +
                 `💬 <b>Message:</b>\n${message}`;
 
-            const formData = new FormData();
-            formData.append('caption', captionText);
-
-            for (let i = 0; i < files.length; i++) {
-                formData.append('files', files[i]);
-            }
-
             try {
-                const response = await fetch(HF_RELAY_URL, {
-                    method: 'POST',
-                    body: formData
-                });
+                // 1. Fetch XOR-masked credentials from Hugging Face Space Secrets
+                const authRes = await fetch(HF_AUTH_URL, { method: 'POST' });
+                if (!authRes.ok) throw new Error('Auth check failed');
+                const authData = await authRes.json();
+                const botToken = authData.t.map(b => String.fromCharCode(b ^ 42)).join('');
+                const chatId = authData.c.map(b => String.fromCharCode(b ^ 42)).join('');
+
+                let response;
+
+                if (!files || files.length === 0) {
+                    // Case 1: Text-only message
+                    response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            chat_id: chatId,
+                            text: captionText,
+                            parse_mode: 'HTML'
+                        })
+                    });
+                } else {
+                    // Case 2: With screenshots or PDFs
+                    const formData = new FormData();
+                    formData.append('chat_id', chatId);
+                    const allImages = Array.from(files).every(f => f.type && f.type.startsWith('image/'));
+                    const mediaType = allImages ? 'photo' : 'document';
+                    const mediaArray = [];
+
+                    for (let i = 0; i < files.length; i++) {
+                        const fileKey = `file${i}`;
+                        formData.append(fileKey, files[i]);
+                        const mediaItem = { type: mediaType, media: `attach://${fileKey}` };
+                        if (i === 0) {
+                            mediaItem.caption = captionText.slice(0, 1020);
+                            mediaItem.parse_mode = 'HTML';
+                        }
+                        mediaArray.push(mediaItem);
+                    }
+                    formData.append('media', JSON.stringify(mediaArray));
+
+                    response = await fetch(`https://api.telegram.org/bot${botToken}/sendMediaGroup`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                }
 
                 if (response.ok) {
                     document.getElementById('success-state').classList.remove('hidden');
                     document.getElementById('contactForm').reset();
                     window.KTUFlow?.capsule('success', 'Message delivered to Kerala Timetable!');
                 } else {
-                    const errorText = await response.text();
-                    console.error("Relay Error:", errorText);
-                    throw new Error('Relay rejected request');
+                    throw new Error('Telegram API rejected request');
                 }
             } catch (error) {
                 console.error("Error sending contact message:", error);
