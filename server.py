@@ -1,17 +1,18 @@
 """
 server.py
 ---------
-FastAPI REST API exposing KTU paper search + branded download + live status pinging.
+FastAPI REST API exposing KTU paper search + branded download + live status pinging + secure Telegram relay.
 This is the layer you call from your website frontend OR from another AI / agent.
 """
 
 from __future__ import annotations
 import io
 import os
+import json
 import time  # <--- Added for tracking response latency in the status check
 import httpx 
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, UploadFile, File, Form
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -34,6 +35,10 @@ BRAND_TEXT = os.getenv("BRAND_TEXT", "Downloaded from Keralatimetable.in")
 LOGO_PATH  = os.getenv("BRAND_LOGO_PATH", "keralattlogo.png")     
 LOGO_BYTES = open(LOGO_PATH, "rb").read() if LOGO_PATH and os.path.exists(LOGO_PATH) else None
 ADMIN_KEY  = os.getenv("ADMIN_KEY", "change-me")
+
+# ---- Telegram Relay Secrets (Set TG_BOT_TOKEN in Hugging Face Space Secrets) ----
+TG_BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
+TG_CHAT_ID   = os.getenv("TG_CHAT_ID", "-1004463800271")
 
 # ---- Hugging Face Vault URL ----
 DATASET_RAW_URL = "https://huggingface.co/datasets/KeralaTimetable/ktu-pyq-archive/resolve/main"
@@ -94,7 +99,7 @@ def paper(prefix: str, num: str):
 @app.get("/live-ping")
 async def live_ping(url: str):
     """
-    🆕 Bypasses browser CORS restrictions to run an completely transparent backend ping test to KTU.
+    🆕 Bypasses browser CORS restrictions to run a completely transparent backend ping test to KTU.
     Accurately isolates genuine 502/504 errors and SSL handshake blockages.
     """
     headers = {
@@ -154,6 +159,67 @@ async def download(req: DownloadReq):
     fname = "ktu_papers.pdf"
     return StreamingResponse(io.BytesIO(out), media_type="application/pdf",
                              headers={"Content-Disposition": f'attachment; filename="{fname}"'})
+
+
+@app.post("/telegram-relay")
+async def telegram_relay(
+    caption: str = Form(...),
+    files: list[UploadFile] = File(default=[])
+):
+    """
+    Secure backend proxy for report.html & contact.html.
+    Keeps TG_BOT_TOKEN hidden in Hugging Face Secrets so scrapers can never steal it.
+    """
+    if not TG_BOT_TOKEN:
+        raise HTTPException(500, "TG_BOT_TOKEN secret is not configured in Hugging Face Space")
+
+    base_url = f"https://api.telegram.org/bot{TG_BOT_TOKEN}"
+    valid_files = [f for f in (files or []) if f and getattr(f, "filename", None)]
+
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        # Case 1: Text-only message (contact.html without attachments)
+        if not valid_files:
+            r = await client.post(
+                f"{base_url}/sendMessage",
+                json={
+                    "chat_id": TG_CHAT_ID,
+                    "text": caption,
+                    "parse_mode": "HTML"
+                }
+            )
+            if r.status_code >= 400:
+                raise HTTPException(502, f"Telegram error: {r.text}")
+            return {"ok": True}
+
+        # Case 2: 1 to 10 attachments (screenshots or PDFs)
+        all_images = all((f.content_type or "").startswith("image/") for f in valid_files)
+        media_type = "photo" if all_images else "document"
+
+        media_array = []
+        multipart_files = {}
+
+        for i, f in enumerate(valid_files[:10]):
+            key = f"file{i}"
+            file_bytes = await f.read()
+            multipart_files[key] = (
+                f.filename or f"upload_{i}",
+                file_bytes,
+                f.content_type or "application/octet-stream"
+            )
+            item = {"type": media_type, "media": f"attach://{key}"}
+            if i == 0:
+                item["caption"] = caption[:1020]
+                item["parse_mode"] = "HTML"
+            media_array.append(item)
+
+        r = await client.post(
+            f"{base_url}/sendMediaGroup",
+            data={"chat_id": TG_CHAT_ID, "media": json.dumps(media_array)},
+            files=multipart_files
+        )
+        if r.status_code >= 400:
+            raise HTTPException(502, f"Telegram error: {r.text}")
+        return {"ok": True}
 
 
 @app.post("/admin/harvest")
