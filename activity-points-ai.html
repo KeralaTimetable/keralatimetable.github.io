@@ -433,13 +433,184 @@
         const HF_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/gemini-auth";
         const STORAGE_KEY = 'ktu_activity_points_tracker_v2';
 
-        // Internal Vision Endpoint Rotation (kept completely hidden from UI)
-        const VISION_ENDPOINTS = [
+        // 1. Google Gemini Vision Pool (Valid Production Vision Models)
+        const GEMINI_MODEL_CASCADE = [
             "gemini-2.5-flash",
             "gemini-2.5-flash-lite",
-            "gemini-2.0-flash",
-            "gemini-1.5-flash"
+            "gemini-2.0-flash"
         ];
+
+        // 2. Groq Vision Pool (Matches your Groq Console screenshot!)
+        const GROQ_VISION_MODELS = [
+            "qwen/qwen3.8-27b"
+        ];
+
+        // 3. OpenRouter Vision Pool (Qwen 2.5 VL 72B Instruct + Free Fallbacks)
+        const OPENROUTER_VISION_MODELS = [
+            "qwen/qwen2.5-vl-72b-instruct:free",
+            "qwen/qwen2.5-vl-72b-instruct",
+            "google/gemini-2.5-flash-lite",
+            "google/gemini-2.0-flash-001"
+        ];
+
+        // Safe JSON Array Extractor (strips <think> tags from Qwen3.8 & extracts [...])
+        function cleanJsonOutput(rawText) {
+            if (!rawText) return [];
+            // Strip any <think>...</think> reasoning blocks returned by Qwen 3.8
+            let cleaned = String(rawText).replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+
+            const firstBracket = cleaned.indexOf('[');
+            const lastBracket = cleaned.lastIndexOf(']');
+            if (firstBracket !== -1 && lastBracket !== -1 && lastBracket > firstBracket) {
+                return JSON.parse(cleaned.slice(firstBracket, lastBracket + 1));
+            }
+
+            const firstBrace = cleaned.indexOf('{');
+            const lastBrace = cleaned.lastIndexOf('}');
+            if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+                const parsedObj = JSON.parse(cleaned.slice(firstBrace, lastBrace + 1));
+                if (Array.isArray(parsedObj)) return parsedObj;
+                const arrVal = Object.values(parsedObj).find(v => Array.isArray(v));
+                if (arrVal) return arrVal;
+                return [parsedObj];
+            }
+
+            return JSON.parse(cleaned);
+        }
+
+        let currentEndpointIdx = 0;
+
+        async function analyzeVisionBatch(keys, base64Sheets, promptText) {
+            let lastError = null;
+
+            // ==================== POOL 1: GEMINI VISION ====================
+            if (keys.k) {
+                const partsPayload = base64Sheets.map(b64 => ({
+                    inlineData: { mimeType: "image/jpeg", data: b64 }
+                }));
+                partsPayload.push({ text: promptText });
+
+                for (let attempt = 0; attempt < GEMINI_MODEL_CASCADE.length; attempt++) {
+                    const modelName = GEMINI_MODEL_CASCADE[(currentEndpointIdx + attempt) % GEMINI_MODEL_CASCADE.length];
+                    const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${keys.k}`;
+
+                    try {
+                        const res = await fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                contents: [{ parts: partsPayload }],
+                                generationConfig: {
+                                    temperature: 0.1,
+                                    responseMimeType: "application/json"
+                                }
+                            })
+                        });
+
+                        if (!res.ok) {
+                            lastError = new Error(`Pool 1 HTTP ${res.status}`);
+                            continue;
+                        }
+
+                        const data = await res.json();
+                        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+                        const parsed = cleanJsonOutput(text);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            currentEndpointIdx = (currentEndpointIdx + attempt + 1) % GEMINI_MODEL_CASCADE.length;
+                            return parsed;
+                        }
+                    } catch (e) {
+                        lastError = e;
+                    }
+                }
+            }
+
+            // ==================== POOL 2: GROQ VISION (qwen/qwen3.8-27b) ====================
+            if (keys.g) {
+                const contentParts = base64Sheets.map(b64 => ({
+                    type: "image_url",
+                    image_url: { url: `data:image/jpeg;base64,${b64}` }
+                }));
+                contentParts.push({ type: "text", text: promptText });
+
+                for (const gModel of GROQ_VISION_MODELS) {
+                    try {
+                        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${keys.g}`
+                            },
+                            body: JSON.stringify({
+                                model: gModel,
+                                temperature: 0.1,
+                                reasoning_effort: "none",
+                                messages: [{ role: "user", content: contentParts }]
+                            })
+                        });
+
+                        if (!res.ok) {
+                            lastError = new Error(`Pool 2 HTTP ${res.status}`);
+                            continue;
+                        }
+
+                        const data = await res.json();
+                        const text = data.choices?.[0]?.message?.content || "";
+                        const parsed = cleanJsonOutput(text);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            return parsed;
+                        }
+                    } catch (e) {
+                        lastError = e;
+                    }
+                }
+            }
+
+            // ==================== POOL 3: OPENROUTER (qwen/qwen2.5-vl-72b-instruct) ====================
+            if (keys.o) {
+                const contentParts = base64Sheets.map(b64 => ({
+                    type: "image_url",
+                    image_url: { url: `data:image/jpeg;base64,${b64}` }
+                }));
+                contentParts.push({ type: "text", text: promptText });
+
+                for (const orModel of OPENROUTER_VISION_MODELS) {
+                    try {
+                        const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${keys.o}`,
+                                "HTTP-Referer": "https://keralatimetable.in",
+                                "X-Title": "Kerala Timetable AI Calculator"
+                            },
+                            body: JSON.stringify({
+                                model: orModel,
+                                temperature: 0.1,
+                                messages: [{ role: "user", content: contentParts }]
+                            })
+                        });
+
+                        if (!res.ok) {
+                            lastError = new Error(`Pool 3 HTTP ${res.status}`);
+                            continue;
+                        }
+
+                        const data = await res.json();
+                        const text = data.choices?.[0]?.message?.content || "";
+                        const parsed = cleanJsonOutput(text);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            return parsed;
+                        }
+                    } catch (e) {
+                        lastError = e;
+                    }
+                }
+            }
+
+            throw lastError || new Error("All Vision pools busy.");
+        }
+
 
         // Official KTU 2024 Caps & Exclusive (Non-Accumulative) Flags
         const KTU_2024_RULES = {
