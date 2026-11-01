@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <title>AI Activity Points Calculator | Kerala Timetable</title>
-    <meta name="description" content="Upload your B.Tech certificates (Coursera, NPTEL, IEEE, NSS, Internships, Hackathons) and let Kerala Timetable's AI automatically calculate your exact KTU Activity Points.">
+    <meta name="description" content="Upload your B.Tech certificates (Coursera, NPTEL, IEEE, NSS, Internships, Hackathons) and let Kerala Timetable's AI Activity Points Calculator automatically calculate your exact KTU Activity Points and % progress.">
     <link rel="canonical" href="https://keralatimetable.in/activity-points-ai.html" />
     <link rel="icon" href="/favicon.png" type="image/png">
 
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- PDF.js for client-side PDF certificate rendering -->
+    <!-- PDF.js for client-side PDF certificate rendering + text layer extraction -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
     <style>
@@ -145,12 +145,17 @@
                 <span>Back to Manual Calculator</span>
             </a>
 
-            <div class="px-3.5 py-1.5 rounded-full bg-indigo-50/80 border border-indigo-200/80 text-indigo-700 text-xs font-bold flex items-center gap-2 shadow-sm">
-                <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+            <div class="flex items-center gap-2">
+                <span id="cached-count-pill" class="hidden px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-extrabold">
+                    <i class="fas fa-bolt mr-1"></i><span id="cached-count-num">0</span> Instant Memory
                 </span>
-                <span>Powered by Multi-Engine Vision AI</span>
+                <div class="px-3.5 py-1.5 rounded-full bg-indigo-50/80 border border-indigo-200/80 text-indigo-700 text-xs font-bold flex items-center gap-2 shadow-sm">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                    </span>
+                    <span>Hybrid PDF-OCR + Vision AI</span>
+                </div>
             </div>
         </div>
 
@@ -160,7 +165,7 @@
                 AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points</span> Calculator
             </h1>
             <p class="text-slate-600 text-sm sm:text-base font-medium leading-relaxed">
-                Drop up to <strong>40 certificates</strong> at once. Our AI Calculator visually inspects logos (Coursera, IEEE, NPTEL, NITs), applies KTU Handbook rules, and calculates your exact points and <strong>% progress</strong> instantly.
+                Drop up to <strong>40 certificates</strong> at once. Extracts embedded PDF text, inspects visual logos (Coursera, IEEE, NPTEL, NITs), enforces official KTU Handbook caps, and calculates your exact points &amp; <strong>% progress</strong>.
             </p>
         </div>
 
@@ -188,7 +193,7 @@
 
                 <div>
                     <label class="block text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">B.Tech Admission Year</label>
-                    <select id="ai-admission-year" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-bold cursor-pointer shadow-sm">
+                    <select id="ai-admission-year" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-bold cursor-pointer shadow-sm">
                         <option value="2026">2026 Admission</option>
                         <option value="2025" selected>2025 Admission</option>
                         <option value="2024">2024 Admission</option>
@@ -211,7 +216,7 @@
                     Tap to Select or Drag &amp; Drop Certificates
                 </h3>
                 <p class="text-xs sm:text-sm font-medium text-slate-500 max-w-md mx-auto leading-relaxed">
-                    Upload <strong>PDFs, JPG, PNG, WebP</strong> (Select up to 40 files). <br>Processed privately in your browser.
+                    Upload <strong>PDFs, JPG, PNG, WebP</strong> (Select up to 40 files). <br>PDF text layers &amp; logos are extracted privately in your browser.
                 </p>
             </div>
 
@@ -238,7 +243,7 @@
                 <div id="scan-progress-wrap" class="hidden mt-5 inner-glass rounded-2xl p-5 shadow-sm">
                     <div class="flex items-center justify-between text-xs font-extrabold mb-2.5">
                         <span id="scan-status-text" class="text-indigo-600 flex items-center gap-2">
-                            <i class="fas fa-circle-notch fa-spin text-sm"></i> <span>Initializing Vision Engine...</span>
+                            <i class="fas fa-circle-notch fa-spin text-sm"></i> <span>Initializing Hybrid Vision + OCR Engine...</span>
                         </span>
                         <span id="scan-pct-text" class="text-slate-700 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-md font-black">0%</span>
                     </div>
@@ -318,15 +323,70 @@
             </div>
 
             <div class="space-y-4">
-                <h2 class="text-sm sm:text-base font-black text-slate-900 px-2 flex items-center gap-2">
-                    <i class="fas fa-file-invoice text-indigo-500"></i>
-                    <span>Certificate Breakdown &amp; Point Share (%)</span>
-                </h2>
+                <div class="flex flex-wrap items-center justify-between gap-2 px-2">
+                    <h2 class="text-sm sm:text-base font-black text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-file-invoice text-indigo-500"></i>
+                        <span>Certificate Breakdown &amp; Point Share (%)</span>
+                    </h2>
+                    <span class="text-[11px] font-bold text-slate-500">
+                        <i class="fas fa-sliders mr-1 text-indigo-500"></i>Spot a wrong rule? Click <strong>"Correct &amp; Train AI"</strong> on any card
+                    </span>
+                </div>
                 <div id="audit-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             </div>
 
         </section>
     </main>
+
+    <!-- ==================== TRAIN / CORRECT AI MODAL ==================== -->
+    <div id="train-ai-modal" onclick="closeTrainModal()" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="real-glass bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-slate-200" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200/80">
+                <div>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-indigo-600 block">Human-in-the-Loop Feedback</span>
+                    <h3 class="text-base sm:text-lg font-black text-slate-900">Correct Certificate &amp; Train AI</h3>
+                </div>
+                <button type="button" onclick="closeTrainModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-600 flex items-center justify-center">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <input type="hidden" id="train-cert-index">
+
+            <div class="space-y-3.5 text-xs sm:text-sm">
+                <div>
+                    <label class="block text-[11px] font-extrabold text-slate-500 uppercase mb-1">Certificate Title</label>
+                    <input type="text" id="train-cert-title" class="glass-input w-full rounded-xl px-3.5 py-2.5 font-bold">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-extrabold text-slate-500 uppercase mb-1">Correct KTU Rule Code</label>
+                        <select id="train-cert-code" onchange="autoSuggestPointsForRule()" class="glass-input w-full rounded-xl px-3 py-2.5 font-bold"></select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-extrabold text-slate-500 uppercase mb-1">Eligible Points</label>
+                        <input type="number" id="train-cert-points" min="0" max="40" class="glass-input w-full rounded-xl px-3.5 py-2.5 font-black text-indigo-600">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-extrabold text-slate-500 uppercase mb-1">Why should this rule apply? (Helps train our prompt)</label>
+                    <input type="text" id="train-cert-note" placeholder="e.g., IEEE Kerala Section State Event = 10 pts under 2.3" class="glass-input w-full rounded-xl px-3.5 py-2.5 font-medium">
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-2.5 mt-6 pt-4 border-t border-slate-200/80">
+                <button type="button" onclick="closeTrainModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold hover:bg-slate-200">
+                    Cancel
+                </button>
+                <button type="button" onclick="submitTrainCorrection()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black shadow-lg shadow-indigo-500/25 flex items-center gap-1.5">
+                    <i class="fas fa-bolt"></i>
+                    <span>Apply Fix &amp; Send Training Signal</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-6 text-center relative z-10">
         <div class="max-w-3xl mx-auto px-4">
@@ -344,14 +404,44 @@
         if (typeof loadNavigation === 'function') loadNavigation('activity', '', false);
         if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-        // Fixed URL constant (both names mapped so it never throws ReferenceError)
         const HF_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/gemini-auth";
         const HF_GEMINI_AUTH_URL = HF_AUTH_URL;
+        const HF_TG_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/telegram-auth";
         const STORAGE_KEY = 'ktu_activity_points_tracker_v2';
+        const CERT_CACHE_KEY = 'ktu_ai_cert_cache_v2';
 
         // --------------------------------------------------------------------------------
-        // 3-PROVIDER AI ROUTER (Google Gemini + Groq Vision + OpenRouter Vision)
-        // Hides exact model names from user UI and load-balances automatically.
+        // 1. LOCAL FINGERPRINT CACHE (Instant 0ms Re-Scans & Remembers Corrections)
+        // --------------------------------------------------------------------------------
+        function loadCertCache() {
+            try {
+                return JSON.parse(localStorage.getItem(CERT_CACHE_KEY) || '{}');
+            } catch (e) { return {}; }
+        }
+        function saveToCertCache(fingerprint, resultObj) {
+            try {
+                const cache = loadCertCache();
+                cache[fingerprint] = { ...resultObj, cachedAt: Date.now() };
+                localStorage.setItem(CERT_CACHE_KEY, JSON.stringify(cache));
+                updateCacheBadgeUI();
+            } catch (e) {}
+        }
+        function getFileFingerprint(file) {
+            return `${file.name.toLowerCase().trim()}_${file.size}_${file.lastModified || 0}`;
+        }
+        function updateCacheBadgeUI() {
+            const count = Object.keys(loadCertCache()).length;
+            const pill = document.getElementById('cached-count-pill');
+            const num = document.getElementById('cached-count-num');
+            if (count > 0 && pill && num) {
+                num.innerText = count;
+                pill.classList.remove('hidden');
+            }
+        }
+        updateCacheBadgeUI();
+
+        // --------------------------------------------------------------------------------
+        // 2. 3-PROVIDER AI ROUTER (Google Gemini + Groq Vision + OpenRouter Vision)
         // --------------------------------------------------------------------------------
         const GEMINI_MODELS = [
             "gemini-2.5-flash",
@@ -376,7 +466,6 @@
         let currentGeminiIdx = 0;
         let currentOrIdx = 0;
 
-        // Bulletproof JSON array extractor (strips <think> blocks & markdown fences)
         function extractJSONArray(rawText) {
             if (!rawText) return [];
             const cleaned = String(rawText).replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
@@ -408,7 +497,7 @@
 
             const imageList = Array.isArray(b64Images) ? b64Images : [b64Images];
 
-            // 1. Try Google Gemini Engine First
+            // Pool 1: Google Gemini
             if (gemKey) {
                 const partsPayload = imageList.map(b64 => ({
                     inlineData: { mimeType: "image/jpeg", data: b64 }
@@ -427,7 +516,6 @@
                                 generationConfig: { temperature: 0.1, responseMimeType: "application/json" }
                             })
                         });
-                        // If ANY model returns 404, 400, 429, or 500, smoothly continue to the next!
                         if (!res.ok) continue;
 
                         const data = await res.json();
@@ -437,13 +525,11 @@
                             currentGeminiIdx = (currentGeminiIdx + attempt + 1) % GEMINI_MODELS.length;
                             return parsed;
                         }
-                    } catch (e) {
-                        continue;
-                    }
+                    } catch (e) { continue; }
                 }
             }
 
-            // 2. Fallback to Groq Vision Engine (qwen/qwen3.8-27b)
+            // Pool 2: Groq Vision (qwen/qwen3.8-27b)
             if (groqKey) {
                 const contentParts = imageList.map(b64 => ({
                     type: "image_url",
@@ -474,16 +560,12 @@
                         const data = await res.json();
                         const rawText = data.choices?.[0]?.message?.content || "";
                         const parsed = extractJSONArray(rawText);
-                        if (Array.isArray(parsed) && parsed.length > 0) {
-                            return parsed;
-                        }
-                    } catch (e) {
-                        continue;
-                    }
+                        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                    } catch (e) { continue; }
                 }
             }
 
-            // 3. Fallback to OpenRouter Vision Engine (qwen/qwen2.5-vl-72b-instruct)
+            // Pool 3: OpenRouter Vision (qwen/qwen2.5-vl-72b-instruct)
             if (orKey) {
                 const contentParts = imageList.map(b64 => ({
                     type: "image_url",
@@ -520,9 +602,7 @@
                             currentOrIdx = (currentOrIdx + attempt + 1) % OPENROUTER_MODELS.length;
                             return parsed;
                         }
-                    } catch (e) {
-                        continue;
-                    }
+                    } catch (e) { continue; }
                 }
             }
 
@@ -530,88 +610,159 @@
         }
 
         // --------------------------------------------------------------------------------
-        // KTU RULES DATASET (Caps & Exclusive Flags)
+        // 3. KTU HANDBOOK RULES + DETERMINISTIC JS POINT SANITIZER MATRIX
         // --------------------------------------------------------------------------------
         const KTU_2024_RULES = {
-            "1.1": { group: "Group I", max: 40, exclusive: true, name: "Sports/Games/Arts Participation" },
-            "1.2": { group: "Group I", max: 40, exclusive: true, name: "Sports/Games/Arts Winner (Single)" },
-            "1.3": { group: "Group I", max: 40, exclusive: true, name: "Sports/Games/Arts Winner (Group)" },
-            "1.4": { group: "Group I", max: 20, exclusive: false, name: "College Magazine Publication" },
-            "1.5": { group: "Group I", max: 5,  exclusive: true, name: "Four-Wheeler Driving License" },
-            "1.6": { group: "Group I", max: 10, exclusive: false, name: "Community Service (2 Days)" },
-            "1.7": { group: "Group I", max: 10, exclusive: true, name: "Community Service (1 Week)" },
-            "1.8": { group: "Group I", max: 10, exclusive: false, name: "Blood Donation" },
-            "1.9": { group: "Group I", max: 20, exclusive: false, name: "THRIVE Project" },
-            "1.10": { group: "Group I", max: 5, exclusive: true, name: "Geo-Tagged Tree Planting" },
-            "1.11": { group: "Group I", max: 40, exclusive: true, name: "NSS Volunteer (2 Years)" },
-            "1.12": { group: "Group I", max: 40, exclusive: true, name: "University Leadership Camp (100 Hrs)" },
-            "1.13": { group: "Group I", max: 40, exclusive: true, name: "State NSS Winner" },
-            "1.14": { group: "Group I", max: 40, exclusive: true, name: "NSS/NCC Special Appreciation" },
-            "1.15": { group: "Group I", max: 40, exclusive: true, name: "State/National NSS/Youth Award" },
-            "1.16": { group: "Group I", max: 40, exclusive: true, name: "Approved National Camp / NIC / NYF" },
-            "1.17": { group: "Group I", max: 40, exclusive: true, name: "10-Day (50 Hrs) State Volunteer" },
-            "1.18": { group: "Group I", max: 40, exclusive: true, name: "RDC / IDC / Int'l NSS/NCC" },
-            "1.19": { group: "Group I", max: 40, exclusive: true, name: "NCC Certificate (1Yr / B / C)" },
-            "1.20": { group: "Group I", max: 10, exclusive: false, name: "First Aid / CPR / Fire Safety" },
-            "1.21": { group: "Group I", max: 10, exclusive: true, name: "Basic Swimming Proficiency" },
+            "1.1": { group: "Group I", max: 40, exclusive: true, defaultPts: 5,  name: "Sports/Games/Arts Participation" },
+            "1.2": { group: "Group I", max: 40, exclusive: true, defaultPts: 10, name: "Sports/Games/Arts Winner (Single)" },
+            "1.3": { group: "Group I", max: 40, exclusive: true, defaultPts: 5,  name: "Sports/Games/Arts Winner (Group)" },
+            "1.4": { group: "Group I", max: 20, exclusive: false, defaultPts: 5, name: "College Magazine Publication" },
+            "1.5": { group: "Group I", max: 5,  exclusive: true, defaultPts: 5,  name: "Four-Wheeler Driving License" },
+            "1.6": { group: "Group I", max: 10, exclusive: false, defaultPts: 5, name: "Community Service (2 Days)" },
+            "1.7": { group: "Group I", max: 10, exclusive: true, defaultPts: 10, name: "Community Service (1 Week)" },
+            "1.8": { group: "Group I", max: 10, exclusive: false, defaultPts: 5, name: "Blood Donation" },
+            "1.9": { group: "Group I", max: 20, exclusive: false, defaultPts: 10, name: "THRIVE Project" },
+            "1.10": { group: "Group I", max: 5, exclusive: true, defaultPts: 5,  name: "Geo-Tagged Tree Planting" },
+            "1.11": { group: "Group I", max: 40, exclusive: true, defaultPts: 30, name: "NSS Volunteer (2 Years)" },
+            "1.12": { group: "Group I", max: 40, exclusive: true, defaultPts: 20, name: "University Leadership Camp (100 Hrs)" },
+            "1.13": { group: "Group I", max: 40, exclusive: true, defaultPts: 15, name: "State NSS Winner" },
+            "1.14": { group: "Group I", max: 40, exclusive: true, defaultPts: 15, name: "NSS/NCC Special Appreciation" },
+            "1.15": { group: "Group I", max: 40, exclusive: true, defaultPts: 20, name: "State/National NSS/Youth Award" },
+            "1.16": { group: "Group I", max: 40, exclusive: true, defaultPts: 15, name: "Approved National Camp / NIC / NYF" },
+            "1.17": { group: "Group I", max: 40, exclusive: true, defaultPts: 15, name: "10-Day (50 Hrs) State Volunteer" },
+            "1.18": { group: "Group I", max: 40, exclusive: true, defaultPts: 25, name: "RDC / IDC / Int'l NSS/NCC" },
+            "1.19": { group: "Group I", max: 40, exclusive: true, defaultPts: 20, name: "NCC Certificate (1Yr / B / C)" },
+            "1.20": { group: "Group I", max: 10, exclusive: false, defaultPts: 5, name: "First Aid / CPR / Fire Safety" },
+            "1.21": { group: "Group I", max: 10, exclusive: true, defaultPts: 5,  name: "Basic Swimming Proficiency" },
 
-            "2.1": { group: "Group II", max: 40, exclusive: true, name: "Tech-Fest Participation" },
-            "2.2": { group: "Group II", max: 40, exclusive: true, name: "Tech-Fest Winner" },
-            "2.3": { group: "Group II", max: 40, exclusive: true, name: "Prof. Society Competition Participation" },
-            "2.4": { group: "Group II", max: 40, exclusive: true, name: "Prof. Society Competition Winner" },
-            "2.5": { group: "Group II", max: 15, exclusive: false, name: "Workshop/Seminar/Conference at IIT/NIT" },
-            "2.6": { group: "Group II", max: 40, exclusive: false, name: "Poster Presentation" },
-            "2.7": { group: "Group II", max: 40, exclusive: false, name: "Paper Presentation Participation (IIT/NIT)" },
-            "2.8": { group: "Group II", max: 40, exclusive: true, name: "Paper Presentation Winner (IIT/NIT)" },
-            "2.9": { group: "Group II", max: 40, exclusive: false, name: "Paper Presentation Participation (KTU)" },
-            "2.10": { group: "Group II", max: 40, exclusive: true, name: "Paper Presentation Winner (KTU)" },
-            "2.11": { group: "Group II", max: 15, exclusive: true, name: "Prof. Society Membership/Role" },
-            "2.12": { group: "Group II", max: 30, exclusive: true, name: "College / University Union Member" },
-            "2.13": { group: "Group II", max: 10, exclusive: false, name: "Dept Association Role" },
-            "2.14": { group: "Group II", max: 10, exclusive: false, name: "Class Representative (CR)" },
-            "2.15": { group: "Group II", max: 5,  exclusive: true, name: "Industrial Visit (IV) Coordinator" },
-            "2.16": { group: "Group II", max: 10, exclusive: true, name: "Placement Cell (CGPU)" },
-            "2.17": { group: "Group II", max: 10, exclusive: false, name: "IEDC Cell Role" },
-            "2.18": { group: "Group II", max: 10, exclusive: false, name: "YIP Student Coordinator" },
-            "2.19": { group: "Group II", max: 20, exclusive: true, name: "STRIDE Volunteer / Lead" },
-            "2.20": { group: "Group II", max: 10, exclusive: false, name: "College Magazine Editorial Board" },
-            "2.21": { group: "Group II", max: 10, exclusive: false, name: "Hobby Club Execom / Convenor" },
-            "2.22": { group: "Group II", max: 20, exclusive: false, name: "ICFOSS / FOSS Club / Open Source" },
-            "2.23": { group: "Group II", max: 10, exclusive: true, name: "Short-Term Internship (Min 2 Weeks)" },
-            "2.24": { group: "Group II", max: 30, exclusive: true, name: "English Proficiency (TOEFL/IELTS)" },
-            "2.25": { group: "Group II", max: 30, exclusive: true, name: "Aptitude (GATE/GRE/CAT/GMAT)" },
+            "2.1": { group: "Group II", max: 40, exclusive: true, defaultPts: 5,  name: "Tech-Fest Participation" },
+            "2.2": { group: "Group II", max: 40, exclusive: true, defaultPts: 10, name: "Tech-Fest Winner" },
+            "2.3": { group: "Group II", max: 40, exclusive: true, defaultPts: 5,  name: "Prof. Society Competition Participation" },
+            "2.4": { group: "Group II", max: 40, exclusive: true, defaultPts: 10, name: "Prof. Society Competition Winner" },
+            "2.5": { group: "Group II", max: 15, exclusive: false, defaultPts: 5, name: "Workshop/Seminar/Conference at IIT/NIT" },
+            "2.6": { group: "Group II", max: 40, exclusive: false, defaultPts: 5, name: "Poster Presentation" },
+            "2.7": { group: "Group II", max: 40, exclusive: false, defaultPts: 10, name: "Paper Presentation Participation (IIT/NIT)" },
+            "2.8": { group: "Group II", max: 40, exclusive: true, defaultPts: 15, name: "Paper Presentation Winner (IIT/NIT)" },
+            "2.9": { group: "Group II", max: 40, exclusive: false, defaultPts: 5, name: "Paper Presentation Participation (KTU)" },
+            "2.10": { group: "Group II", max: 40, exclusive: true, defaultPts: 10, name: "Paper Presentation Winner (KTU)" },
+            "2.11": { group: "Group II", max: 15, exclusive: true, defaultPts: 5,  name: "Prof. Society Membership/Role" },
+            "2.12": { group: "Group II", max: 30, exclusive: true, defaultPts: 15, name: "College / University Union Member" },
+            "2.13": { group: "Group II", max: 10, exclusive: false, defaultPts: 5, name: "Dept Association Role" },
+            "2.14": { group: "Group II", max: 10, exclusive: false, defaultPts: 5, name: "Class Representative (CR)" },
+            "2.15": { group: "Group II", max: 5,  exclusive: true, defaultPts: 5,  name: "Industrial Visit (IV) Coordinator" },
+            "2.16": { group: "Group II", max: 10, exclusive: true, defaultPts: 5,  name: "Placement Cell (CGPU)" },
+            "2.17": { group: "Group II", max: 10, exclusive: false, defaultPts: 5, name: "IEDC Cell Role" },
+            "2.18": { group: "Group II", max: 10, exclusive: false, defaultPts: 5, name: "YIP Student Coordinator" },
+            "2.19": { group: "Group II", max: 20, exclusive: true, defaultPts: 10, name: "STRIDE Volunteer / Lead" },
+            "2.20": { group: "Group II", max: 10, exclusive: false, defaultPts: 5, name: "College Magazine Editorial Board" },
+            "2.21": { group: "Group II", max: 10, exclusive: false, defaultPts: 5, name: "Hobby Club Execom / Convenor" },
+            "2.22": { group: "Group II", max: 20, exclusive: false, defaultPts: 5, name: "ICFOSS / FOSS Club / Open Source" },
+            "2.23": { group: "Group II", max: 10, exclusive: true, defaultPts: 10, name: "Short-Term Internship (Min 2 Weeks)" },
+            "2.24": { group: "Group II", max: 30, exclusive: true, defaultPts: 20, name: "English Proficiency (TOEFL/IELTS)" },
+            "2.25": { group: "Group II", max: 30, exclusive: true, defaultPts: 20, name: "Aptitude (GATE/GRE/CAT/GMAT)" },
 
-            "3.1": { group: "Group III", max: 20, exclusive: true, name: "Industrial Visit (IV) Report (S5/S6)" },
-            "3.2": { group: "Group III", max: 20, exclusive: true, name: "Best Mini Project / Project / Seminar" },
-            "3.3": { group: "Group III", max: 20, exclusive: true, name: "Long-Term Internship (Min 3.5 Months)" },
-            "3.4": { group: "Group III", max: 30, exclusive: true, name: "LEAP (IIT Madras)" },
-            "3.5": { group: "Group III", max: 35, exclusive: true, name: "YIP (Young Innovators Programme)" },
-            "3.6": { group: "Group III", max: 35, exclusive: true, name: "STRIDE Innovation Project" },
-            "3.7": { group: "Group III", max: 35, exclusive: true, name: "GDC AI Workforce Internship" },
-            "3.8": { group: "Group III", max: 25, exclusive: true, name: "ICFOSS Certified Working Solution" },
-            "3.9": { group: "Group III", max: 40, exclusive: true, name: "Legally Registered Start-up" },
-            "3.10": { group: "Group III", max: 40, exclusive: true, name: "Patents (Filed/Published/Granted)" },
-            "3.11": { group: "Group III", max: 40, exclusive: true, name: "Validated Prototype / Industry Adopted" },
-            "3.12": { group: "Group III", max: 40, exclusive: true, name: "Venture Capital / Angel Funding" },
-            "3.13": { group: "Group III", max: 40, exclusive: true, name: "Validated Societal Innovation" },
-            "3.14": { group: "Group III", max: 40, exclusive: true, name: "Research Publication (SCI/Scopus)" },
-            "3.15": { group: "Group III", max: 40, exclusive: true, name: "National Level Hackathon Winner" },
-            "3.16": { group: "Group III", max: 40, exclusive: true, name: "International Hackathon" },
-            "3.17": { group: "Group III", max: 40, exclusive: false, name: "KTU Approved Skilling Course (Coursera/NPTEL)" }
+            "3.1": { group: "Group III", max: 20, exclusive: true, defaultPts: 5,  name: "Industrial Visit (IV) Report (S5/S6)" },
+            "3.2": { group: "Group III", max: 20, exclusive: true, defaultPts: 5,  name: "Best Mini Project / Project / Seminar" },
+            "3.3": { group: "Group III", max: 20, exclusive: true, defaultPts: 15, name: "Long-Term Internship (Min 3.5 Months)" },
+            "3.4": { group: "Group III", max: 30, exclusive: true, defaultPts: 15, name: "LEAP (IIT Madras)" },
+            "3.5": { group: "Group III", max: 35, exclusive: true, defaultPts: 10, name: "YIP (Young Innovators Programme)" },
+            "3.6": { group: "Group III", max: 35, exclusive: true, defaultPts: 15, name: "STRIDE Innovation Project" },
+            "3.7": { group: "Group III", max: 35, exclusive: true, defaultPts: 15, name: "GDC AI Workforce Internship" },
+            "3.8": { group: "Group III", max: 25, exclusive: true, defaultPts: 25, name: "ICFOSS Certified Working Solution" },
+            "3.9": { group: "Group III", max: 40, exclusive: true, defaultPts: 30, name: "Legally Registered Start-up" },
+            "3.10": { group: "Group III", max: 40, exclusive: true, defaultPts: 30, name: "Patents (Filed/Published/Granted)" },
+            "3.11": { group: "Group III", max: 40, exclusive: true, defaultPts: 40, name: "Validated Prototype / Industry Adopted" },
+            "3.12": { group: "Group III", max: 40, exclusive: true, defaultPts: 40, name: "Venture Capital / Angel Funding" },
+            "3.13": { group: "Group III", max: 40, exclusive: true, defaultPts: 40, name: "Validated Societal Innovation" },
+            "3.14": { group: "Group III", max: 40, exclusive: true, defaultPts: 25, name: "Research Publication (SCI/Scopus)" },
+            "3.15": { group: "Group III", max: 40, exclusive: true, defaultPts: 35, name: "National Level Hackathon Winner" },
+            "3.16": { group: "Group III", max: 40, exclusive: true, defaultPts: 30, name: "International Hackathon" },
+            "3.17": { group: "Group III", max: 40, exclusive: false, defaultPts: 20, name: "KTU Approved Skilling Course (Coursera/NPTEL)" }
         };
+
+        // Exact KTU Level Matrix (Prevents AI from hallucinating wrong numbers for L1-L5)
+        const LEVEL_POINT_MATRIX = {
+            "1.1": { L1: 1, L2: 5,  L3: 10, L4: 20, L5: 40 },
+            "1.2": { L1: 5, L2: 10, L3: 20, L4: 40, L5: 40 },
+            "1.3": { L1: 3, L2: 5,  L3: 15, L4: 30, L5: 40 },
+            "2.1": { L1: 2, L2: 5,  L3: 10, L4: 20, L5: 30 },
+            "2.2": { L1: 5, L2: 10, L3: 20, L4: 40, L5: 40 },
+            "2.3": { L1: 2, L2: 5,  L3: 10, L4: 15, L5: 20 },
+            "2.4": { L1: 3, L2: 7,  L3: 15, L4: 25, L5: 35 }
+        };
+
+        // Deterministic Sanitizer: overrides AI hallucinations using extracted metadata & KTU rules
+        function sanitizeWithKTURules(rawItem, certObj, admissionYear) {
+            const item = { ...rawItem };
+            const code = String(item.code || '').trim();
+            const pdfText = (certObj?.extractedText || '').toLowerCase();
+            const titleLower = (item.detectedTitle || '').toLowerCase();
+            const logoLower = (item.detectedLogo || '').toLowerCase();
+
+            // 1. Pre-Admission Year Check (Driving License 1.5 or pre-college certificates)
+            const issueYr = parseInt(item.issueYear, 10);
+            if (issueYr && issueYr > 2000 && issueYr < admissionYear) {
+                item.eligible = false;
+                item.points = 0;
+                item.reason = `Issued in ${issueYr} (Before B.Tech Admission Year ${admissionYear}). KTU only counts achievements earned during B.Tech.`;
+                return item;
+            }
+
+            // 2. Coursera / NPTEL / SWAYAM / Spoken Tutorial Deterministic Override (Code 3.17)
+            if (code === "3.17" || logoLower.includes("coursera") || logoLower.includes("nptel") || pdfText.includes("coursera.org/verify") || pdfText.includes("nptel")) {
+                item.code = "3.17";
+                item.eligible = true;
+
+                // Check NPTEL Weeks in PDF Text
+                if (pdfText.includes("12 week") || titleLower.includes("12 week")) {
+                    item.points = 40;
+                    item.tierLabel = "NPTEL 12-Week Course (40 pts)";
+                } else if (pdfText.includes("8 week") || titleLower.includes("8 week")) {
+                    item.points = 30;
+                    item.tierLabel = "NPTEL 8-Week Course (30 pts)";
+                } else if (pdfText.includes("4 week") || titleLower.includes("4 week")) {
+                    item.points = 15;
+                    item.tierLabel = "NPTEL 4-Week Course (15 pts)";
+                } else if (pdfText.includes("specialization") || pdfText.includes("professional certificate") || titleLower.includes("specialization") || titleLower.includes("professional certificate")) {
+                    item.points = 30;
+                    item.tierLabel = "Coursera Specialization / Prof. Cert (30 pts)";
+                } else if (!item.points || item.points <= 0 || item.points > 40) {
+                    item.points = 20;
+                    item.tierLabel = "Approved Skilling Course (20 Hrs)";
+                }
+                return item;
+            }
+
+            // 3. Level-Based Matrix Override (Codes 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 2.4)
+            if (LEVEL_POINT_MATRIX[code] && item.level && LEVEL_POINT_MATRIX[code][item.level]) {
+                item.points = LEVEL_POINT_MATRIX[code][item.level];
+            }
+
+            // 4. Fixed-Point Codes Sanitizer
+            const fixedCodes = {
+                "1.4": 5, "1.5": 5, "1.6": 5, "1.7": 10, "1.8": 5, "1.9": 10, "1.10": 5,
+                "1.20": 5, "1.21": 5, "2.5": 5, "2.6": 5, "2.7": 10, "2.9": 5,
+                "2.13": 5, "2.14": 5, "2.15": 5, "2.17": 5, "2.18": 5, "2.20": 5, "2.21": 5,
+                "2.23": 10, "3.1": 5, "3.2": 5, "3.3": 15
+            };
+            if (item.eligible && fixedCodes[code]) {
+                item.points = fixedCodes[code];
+            }
+
+            return item;
+        }
 
         let queuedCerts = []; 
         let rawAIResults = [];
         let processedAuditItems = [];
 
-        // Safe UI notification helper (works with both toast and capsule versions of components.js)
         function notifyUI(msg, type = 'info') {
             if (window.KTUFlow?.toast) window.KTUFlow.toast(msg, type);
             else if (window.KTUFlow?.capsule) window.KTUFlow.capsule(type, msg);
         }
 
         // --------------------------------------------------------------------------------
-        // FILE UPLOAD & PREVIEW LOGIC
+        // 4. FILE UPLOAD, PDF TEXT LAYER EXTRACTION & PREVIEW LOGIC
         // --------------------------------------------------------------------------------
         const dropzone = document.getElementById('cert-dropzone');
         dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
@@ -630,16 +781,18 @@
             const allowed = incoming.slice(0, 40 - queuedCerts.length);
             if (!allowed.length) return;
 
-            notifyUI(`Rendering ${allowed.length} preview(s)...`, 'loading');
+            notifyUI(`Extracting text & rendering ${allowed.length} file(s)...`, 'loading');
 
             for (const file of allowed) {
                 try {
-                    const thumbDataUrl = await renderFileToDataUrl(file);
+                    const { dataUrl, extractedText } = await renderFileAndExtractText(file);
                     queuedCerts.push({
                         id: `cert_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
                         file,
                         name: file.name,
-                        canvasDataUrl: thumbDataUrl
+                        fingerprint: getFileFingerprint(file),
+                        canvasDataUrl: dataUrl,
+                        extractedText: extractedText
                     });
                 } catch (err) {
                     console.error("Failed to render file:", file.name, err);
@@ -650,12 +803,21 @@
             notifyUI(`${queuedCerts.length} certificate(s) ready`, 'success');
         }
 
-        async function renderFileToDataUrl(file) {
+        // Renders image AND extracts crisp embedded PDF text (dates, URLs, hours, weeks)
+        async function renderFileAndExtractText(file) {
             if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
                 const arrayBuffer = await file.arrayBuffer();
                 const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
                 const page = await pdf.getPage(1);
-                const viewport = page.getViewport({ scale: 1.4 });
+
+                // Extract crisp embedded text from PDF layer
+                let extractedText = "";
+                try {
+                    const textContent = await page.getTextContent();
+                    extractedText = textContent.items.map(item => item.str).join(' ').replace(/\s+/g, ' ').trim().slice(0, 600);
+                } catch (e) {}
+
+                const viewport = page.getViewport({ scale: 1.45 });
                 const canvas = document.createElement('canvas');
                 canvas.width = viewport.width;
                 canvas.height = viewport.height;
@@ -663,13 +825,16 @@
                 ctx.fillStyle = '#FFFFFF';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 await page.render({ canvasContext: ctx, viewport }).promise;
-                return canvas.toDataURL('image/jpeg', 0.82);
+                return {
+                    dataUrl: canvas.toDataURL('image/jpeg', 0.84),
+                    extractedText
+                };
             } else {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
                     const url = URL.createObjectURL(file);
                     img.onload = () => {
-                        const maxDim = 900;
+                        const maxDim = 960;
                         let w = img.width, h = img.height;
                         if (w > maxDim || h > maxDim) {
                             if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
@@ -683,7 +848,10 @@
                         ctx.fillRect(0, 0, w, h);
                         ctx.drawImage(img, 0, 0, w, h);
                         URL.revokeObjectURL(url);
-                        resolve(canvas.toDataURL('image/jpeg', 0.82));
+                        resolve({
+                            dataUrl: canvas.toDataURL('image/jpeg', 0.84),
+                            extractedText: ""
+                        });
                     };
                     img.onerror = reject;
                     img.src = url;
@@ -702,15 +870,22 @@
             }
             sec.classList.remove('hidden');
 
-            grid.innerHTML = queuedCerts.map((c, idx) => `
-                <div class="inner-glass rounded-xl p-2 relative group flex flex-col justify-between shadow-sm">
-                    <button type="button" onclick="removeQueuedCert('${c.id}')" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-slate-900/75 text-white text-[10px] flex items-center justify-center hover:bg-rose-600 transition-colors">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <img src="${c.canvasDataUrl}" alt="${c.name}" class="w-full h-20 object-cover rounded-lg mb-1.5 bg-white border border-slate-200">
-                    <span class="text-[10px] font-extrabold text-slate-700 truncate block">#${idx + 1} ${c.name}</span>
-                </div>
-            `).join('');
+            const cache = loadCertCache();
+
+            grid.innerHTML = queuedCerts.map((c, idx) => {
+                const isCached = Boolean(cache[c.fingerprint]);
+                const hasPdfText = Boolean(c.extractedText && c.extractedText.length > 10);
+                return `
+                    <div class="inner-glass rounded-xl p-2 relative group flex flex-col justify-between shadow-sm">
+                        <button type="button" onclick="removeQueuedCert('${c.id}')" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-slate-900/75 text-white text-[10px] flex items-center justify-center hover:bg-rose-600 transition-colors z-10">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        ${isCached ? `<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-emerald-600 text-white text-[9px] font-black z-10" title="Cached in local memory"><i class="fas fa-bolt"></i></span>` : (hasPdfText ? `<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-indigo-600 text-white text-[9px] font-black z-10" title="PDF text extracted">PDF+OCR</span>` : '')}
+                        <img src="${c.canvasDataUrl}" alt="${c.name}" class="w-full h-20 object-cover rounded-lg mb-1.5 bg-white border border-slate-200">
+                        <span class="text-[10px] font-extrabold text-slate-700 truncate block">#${idx + 1} ${c.name}</span>
+                    </div>
+                `;
+            }).join('');
         }
 
         window.removeQueuedCert = function(id) {
@@ -769,7 +944,7 @@
         }
 
         // --------------------------------------------------------------------------------
-        // AI EXECUTION & POST-PROCESSING
+        // 5. HYBRID AI EXECUTION (Cache Check -> PDF Text + Vision Few-Shot -> Sanitizer)
         // --------------------------------------------------------------------------------
         window.runAICertificateAudit = async function() {
             if (queuedCerts.length === 0) return;
@@ -784,75 +959,125 @@
             btn.disabled = true;
             dropzoneEl.classList.add('is-scanning');
             progWrap.classList.remove('hidden');
-            progBar.style.width = '5%';
-            pctTxt.innerText = '5%';
+            progBar.style.width = '8%';
+            pctTxt.innerText = '8%';
 
             const admissionYear = parseInt(document.getElementById('ai-admission-year').value, 10) || 2025;
-            
+            const cache = loadCertCache();
+
             try {
-                const authRes = await fetch(HF_AUTH_URL, { method: 'POST' });
-                if (!authRes.ok) throw new Error("Auth sync failed");
-                const authData = await authRes.json();
-
                 rawAIResults = [];
-                // Batch of 4 fits cleanly on a single 2x2 contact sheet so zero certificates get skipped!
-                const batchSize = 4;
-                const totalBatches = Math.ceil(queuedCerts.length / batchSize);
+                const uncachedQueue = [];
 
-                for (let b = 0; b < totalBatches; b++) {
-                    const slice = queuedCerts.slice(b * batchSize, (b + 1) * batchSize).map((item, idx) => ({
-                        ...item,
-                        globalIndex: b * batchSize + idx + 1
-                    }));
+                // Check Local Fingerprint Cache First (0ms instant load for known certificates)
+                queuedCerts.forEach((item, idx) => {
+                    const globalIndex = idx + 1;
+                    const cachedHit = cache[item.fingerprint];
+                    if (cachedHit) {
+                        rawAIResults.push(sanitizeWithKTURules({
+                            ...cachedHit,
+                            certIndex: globalIndex
+                        }, item, admissionYear));
+                    } else {
+                        uncachedQueue.push({ ...item, globalIndex });
+                    }
+                });
 
-                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Neural Vision Engine inspecting logos &amp; rules (Batch ${b + 1}/${totalBatches})...`;
-                    const pct = Math.round(((b + 0.3) / totalBatches) * 85);
-                    progBar.style.width = `${pct}%`;
-                    pctTxt.innerText = `${pct}%`;
+                if (uncachedQueue.length > 0) {
+                    const authRes = await fetch(HF_AUTH_URL, { method: 'POST' });
+                    if (!authRes.ok) throw new Error("Auth sync failed");
+                    const authData = await authRes.json();
 
-                    const contactSheetB64 = await createContactSheetBase64(slice);
+                    const batchSize = 4;
+                    const totalBatches = Math.ceil(uncachedQueue.length / batchSize);
 
-                    const promptText = `
-You are the Official APJAKTU (KTU) B.Tech Activity Points Calculator Engine.
-Student joined B.Tech in Admission Year: ${admissionYear}.
-Inspect each labeled certificate tile (CERTIFICATE #${slice[0].globalIndex} to #${slice[slice.length - 1].globalIndex}).
-Inspect BOTH visual LOGOS/CRESTS (Coursera, NPTEL, SWAYAM, K-DISC, IEEE, ISTE, ACM, SAE, ASME, CSI, NSS, NCC, IIT, NIT, ICFOSS, YIP) AND text.
+                    for (let b = 0; b < totalBatches; b++) {
+                        const slice = uncachedQueue.slice(b * batchSize, (b + 1) * batchSize);
 
-CRITICAL KTU HANDBOOK RULES:
-- 1.1 to 1.3 Sports/Games/Arts: L1 College=1/5/3, L2 Zonal=5/10/5, L3 State/Univ=10/20/15, L4 National=20/40/30, L5 Int'l=40.
-- 1.5 Driving License: 5 pts ONLY if LMV (4-wheeler) AND issued in or after ${admissionYear}. If 2-wheeler/MCWG or issued before ${admissionYear} -> REJECT (0 pts).
-- 1.11 to 1.19 NSS/NCC: 2-Yr NSS=30 (1.11), 100-hr camp=20 (1.12), NSS Appreciation=15 (1.14), NCC B-Cert=20 / C-Cert=30 (1.19).
-- 2.1 / 2.2 Tech-Fest: Participation L1=2, L2=5, L3=10, L4(IIT/NIT)=20, L5=30. Winner L1=5, L2=10, L3=20, L4=40.
-- 2.3 / 2.4 IEEE / ISTE / ACM / SAE / CSI Competitions: L1 College=2 (Win=3), L2 Hub/Zonal=5 (Win=7), L3 State/Section=10 (Win=15), L4 National=15 (Win=25).
-- 2.5 Workshops/Seminars: 5 pts if at IIT/NIT/IIIT/NIRF100. If at a normal college OR part of a cultural fest like "Ragam" -> REJECT (0 pts).
-- 2.23 Short-Term Internship: 10 pts if Min 2 Weeks (10 working days).
-- 3.5 YIP (K-DISC): 5/10/20/35 pts. 3.15/3.16 Hackathons (SIH, Space Apps, Imagine Cup): 30 to 40 pts.
-- 3.17 Skilling Certificates (Coursera, NPTEL, SWAYAM, K-DISC, KKEM, ICTAK, Eduskills, IIT Spoken Tutorial): 100% ELIGIBLE (1 point per hour, max 40). Note: All Coursera certificates are eligible under K-DISC/KTU Skilling! If hours are not printed on a Coursera certificate, assign 20 points (or 30 points for Specialization/Professional Certificate).
+                        statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Hybrid PDF-OCR &amp; Vision inspecting Batch ${b + 1}/${totalBatches}...`;
+                        const pct = Math.round(((b + 0.35) / totalBatches) * 88);
+                        progBar.style.width = `${pct}%`;
+                        pctTxt.innerText = `${pct}%`;
 
-Return ONLY a valid JSON array matching this exact structure (no markdown):
+                        const contactSheetB64 = await createContactSheetBase64(slice);
+
+                        // Build Extracted PDF Text Context Block for this batch
+                        const extractedTextContext = slice.map(s => 
+                            `CERTIFICATE #${s.globalIndex} (Filename: "${s.name}") Extracted PDF Text: ${s.extractedText ? `"${s.extractedText}"` : '"[Image file - rely on visual OCR]"'}`
+                        ).join('\n');
+
+                        const promptText = `
+You are the Senior Faculty Advisor (SFA) & Official APJAKTU (KTU) B.Tech Activity Points Calculator Engine.
+The student joined B.Tech in Admission Year: ${admissionYear}.
+Inspect each labeled certificate tile in the image AND cross-check with the exact Extracted PDF Text below:
+
+${extractedTextContext}
+
+FEW-SHOT KERALA KTU TRAINING EXAMPLES & STRICT HANDBOOK RULES:
+1. COURSERA & K-DISC/KKEM (Code 3.17):
+   - K-DISC / KKEM provides Coursera licenses to KTU students. Even if "K-DISC" is not printed on the certificate, ALL Coursera certificates (IBM, Google, Meta, DeepLearning.AI, Microsoft, Stanford, etc.) ARE 100% ELIGIBLE under Code "3.17".
+   - Single Coursera Course = 20 points. Coursera Specialization or Professional Certificate = 30 points.
+2. NPTEL / SWAYAM / IIT Spoken Tutorial (Code 3.17):
+   - 12-week NPTEL = 40 pts, 8-week NPTEL = 30 pts, 4-week NPTEL = 15 pts. IIT Bombay Spoken Tutorial = 15 pts.
+   - Unapproved 1-hour or 2-hour commercial webinars (Udemy, Simplilearn, SkillVertex participation webinars) = INELIGIBLE (eligible: false, points: 0).
+3. IEEE / ISTE / ACM / CSI / SAE / ASME COMPETITIONS vs MEMBERSHIPS:
+   - Competition Participation (Code 2.3): L1 (IEEE Student Branch of a college) = 2 pts; L2 (IEEE Travancore/Kochi/Malabar Hub) = 5 pts; L3 (All Kerala Student Congress AKSC / IEEE Kerala Section / State) = 10 pts; L4 (National / AISYWLC / India Council) = 15 pts; L5 (Global / IEEE Xtreme / Region 10) = 20 pts.
+   - Competition Winner (Code 2.4): L1 = 3 pts, L2 = 7 pts, L3 = 15 pts, L4 = 25 pts, L5 = 35 pts.
+   - Society Membership / Execom / Event Coordinator (Code 2.11): Member/Coordinator = 5 pts, Execom = 10 pts, Chair/Secretary = 15 pts.
+4. WORKSHOPS & TECH-FESTS (Code 2.1, 2.2, 2.5):
+   - Code 2.5 (5 pts): Full-time Workshop / Seminar / STTP conducted AT an IIT, NIT, IIIT, or NIRF Top 100 institute. CRITICAL EXCLUSION: Workshops held as part of a cultural fest (like NIT Calicut "Ragam") are EXCLUDED (0 pts). Technical fest workshops at NIT/IIT (like "Tathva") ARE eligible (5 pts).
+   - Code 2.1 Tech-Fest Participation: L1 College=2, L2 Zonal=5, L3 State/Univ=10, L4 National(IIT/NIT)=20, L5 Int'l=30.
+5. NSS / NCC / SPORTS / ARTS / DRIVING LICENSE:
+   - Code 1.1 Sports/Arts Participation: L1 College=1, L2 Zonal=5, L3 Univ/State=10, L4 National=20, L5 Int'l=40.
+   - Code 1.5 Driving License: 5 pts ONLY if LMV (Four-Wheeler) AND issued in or after ${admissionYear}.
+   - Code 1.11 NSS 2-Year Certificate = 30 pts. Code 1.12 7-Day/100-Hr NSS Camp = 20 pts.
+6. HACKATHONS, YIP & INTERNSHIPS:
+   - Code 2.23 Short-Term Internship (min 2 weeks / 10 working days) = 10 pts.
+   - Code 3.5 YIP (Young Innovators Programme - K-DISC): Preliminary=5, District=10, State=20, Final=35.
+   - Code 3.15 National Hackathon Winner (SIH/AICTE) = 30 to 40 pts. Code 3.16 International Hackathon (NASA Space Apps, Imagine Cup, IEEE YESIST12) = 30 pts (Participation) / 40 pts (Winner).
+
+Return ONLY a valid JSON array with one object per certificate in this batch:
 [
   {
     "certIndex": ${slice[0].globalIndex},
-    "detectedTitle": "Course / Event & Organization",
-    "detectedLogo": "Coursera / IEEE / NIT / None",
+    "detectedTitle": "Exact Course or Event & Organization Name",
+    "detectedLogo": "Coursera / NPTEL / IEEE / NIT / NSS / None",
     "eligible": true,
     "code": "3.17",
-    "tierLabel": "Coursera (K-DISC Skilling)",
+    "level": "NONE",
+    "achievement": "COMPLETED",
+    "issueYear": ${admissionYear},
+    "tierLabel": "Coursera (K-DISC Skilling - 20 Hrs)",
     "points": 20,
     "eventKey": "unique_normalized_event_name",
-    "reason": "Brief KTU rule justification"
+    "reason": "Clear KTU 2024 Handbook justification"
   }
 ]`;
 
-                    const batchRes = await callMultiEngineAI(authData, promptText, [contactSheetB64]);
-                    if (Array.isArray(batchRes)) {
-                        rawAIResults.push(...batchRes);
+                        const batchRes = await callMultiEngineAI(authData, promptText, [contactSheetB64]);
+                        if (Array.isArray(batchRes)) {
+                            batchRes.forEach((resItem, idx) => {
+                                const matchingCert = slice.find(s => s.globalIndex === resItem.certIndex) || slice[idx];
+                                const sanitized = sanitizeWithKTURules({
+                                    ...resItem,
+                                    certIndex: matchingCert ? matchingCert.globalIndex : resItem.certIndex
+                                }, matchingCert, admissionYear);
+
+                                rawAIResults.push(sanitized);
+                                if (matchingCert?.fingerprint) {
+                                    saveToCertCache(matchingCert.fingerprint, sanitized);
+                                }
+                            });
+                        }
                     }
                 }
 
+                // Sort results back into original upload order
+                rawAIResults.sort((a, b) => (a.certIndex || 0) - (b.certIndex || 0));
+
                 progBar.style.width = '100%';
                 pctTxt.innerText = '100%';
-                setTimeout(() => progWrap.classList.add('hidden'), 500);
+                setTimeout(() => progWrap.classList.add('hidden'), 450);
 
                 recalculateAuditMath();
                 document.getElementById('audit-results-section').classList.remove('hidden');
@@ -875,9 +1100,109 @@ Return ONLY a valid JSON array matching this exact structure (no markdown):
             target.eligible = true;
             if (!target.code || target.code === 'none') target.code = '3.17';
             target.tierLabel = `${newPoints} Hours (${newPoints} pts)`;
+
+            const certObj = queuedCerts[certIndex - 1];
+            if (certObj?.fingerprint) saveToCertCache(certObj.fingerprint, target);
+
             recalculateAuditMath();
+            notifyUI(`Updated Certificate #${certIndex} to ${newPoints} pts`, 'success');
         };
 
+        // --------------------------------------------------------------------------------
+        // 6. HUMAN-IN-THE-LOOP CORRECTION MODAL + TELEGRAM BOT TRAINING LOGGER
+        // --------------------------------------------------------------------------------
+        function populateRuleDropdown() {
+            const sel = document.getElementById('train-cert-code');
+            if (!sel || sel.options.length > 0) return;
+            let html = `<option value="none">Ineligible / Reject (0 pts)</option>`;
+            Object.entries(KTU_2024_RULES).forEach(([code, rule]) => {
+                html += `<option value="${code}">Code #${code} — ${rule.name} (Max ${rule.max} pts)</option>`;
+            });
+            sel.innerHTML = html;
+        }
+
+        window.openTrainModal = function(certIndex) {
+            populateRuleDropdown();
+            const item = processedAuditItems.find(i => i.certIndex === certIndex) || rawAIResults.find(i => i.certIndex === certIndex);
+            if (!item) return;
+
+            document.getElementById('train-cert-index').value = certIndex;
+            document.getElementById('train-cert-title').value = item.detectedTitle || item.certObj?.name || `Certificate #${certIndex}`;
+            document.getElementById('train-cert-code').value = (item.code && KTU_2024_RULES[item.code]) ? item.code : '3.17';
+            document.getElementById('train-cert-points').value = item.awardedPoints || item.points || 10;
+            document.getElementById('train-cert-note').value = '';
+
+            document.getElementById('train-ai-modal').classList.remove('hidden');
+        };
+
+        window.closeTrainModal = function() {
+            document.getElementById('train-ai-modal').classList.add('hidden');
+        };
+
+        window.autoSuggestPointsForRule = function() {
+            const code = document.getElementById('train-cert-code').value;
+            const ptsInput = document.getElementById('train-cert-points');
+            if (code === 'none') {
+                ptsInput.value = 0;
+            } else if (KTU_2024_RULES[code]) {
+                ptsInput.value = KTU_2024_RULES[code].defaultPts || 10;
+            }
+        };
+
+        window.submitTrainCorrection = async function() {
+            const certIndex = parseInt(document.getElementById('train-cert-index').value, 10);
+            const newTitle = document.getElementById('train-cert-title').value.trim();
+            const newCode = document.getElementById('train-cert-code').value;
+            const newPoints = parseInt(document.getElementById('train-cert-points').value, 10) || 0;
+            const userNote = document.getElementById('train-cert-note').value.trim();
+
+            const target = rawAIResults.find(r => r.certIndex === certIndex);
+            if (!target) return;
+
+            const oldSummary = `Code #${target.code || 'none'} (${target.points || 0} pts)`;
+
+            target.detectedTitle = newTitle || target.detectedTitle;
+            target.code = newCode;
+            target.points = newCode === 'none' ? 0 : newPoints;
+            target.eligible = newCode !== 'none' && newPoints > 0;
+            target.reason = userNote ? `Verified Override: ${userNote}` : `Manually verified under Code #${newCode}.`;
+
+            const certObj = queuedCerts[certIndex - 1];
+            if (certObj?.fingerprint) {
+                saveToCertCache(certObj.fingerprint, target);
+            }
+
+            closeTrainModal();
+            recalculateAuditMath();
+            notifyUI(`Applied correction & saved to local AI memory!`, 'success');
+
+            // Silently send training signal to Admin Telegram Group via /telegram-auth
+            try {
+                const tgRes = await fetch(HF_TG_AUTH_URL, { method: 'POST' });
+                if (tgRes.ok) {
+                    const tgData = await tgRes.json();
+                    const botToken = tgData.t.map(b => String.fromCharCode(b ^ 42)).join('');
+                    const chatId   = tgData.c.map(b => String.fromCharCode(b ^ 42)).join('');
+                    const msg = `🧠 *AI Calculator Training Signal*\n\n` +
+                                `📄 *Cert:* ${target.detectedTitle}\n` +
+                                `🏷 *Logo:* ${target.detectedLogo || 'None'}\n` +
+                                `❌ *AI Output:* ${oldSummary}\n` +
+                                `✅ *Student Fix:* Code #${newCode} (${target.points} pts)\n` +
+                                `📝 *Note:* ${userNote || 'No note'}\n` +
+                                `🔎 *PDF Snippet:* ${(certObj?.extractedText || 'None').slice(0, 180)}`;
+
+                    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: chatId, text: msg, parse_mode: 'Markdown' })
+                    });
+                }
+            } catch (e) {}
+        };
+
+        // --------------------------------------------------------------------------------
+        // 7. KTU GROUP CAPS, DUPLICATE DETECTION & LIVE % RENDERING
+        // --------------------------------------------------------------------------------
         window.recalculateAuditMath = function() {
             if (!rawAIResults.length) return;
 
@@ -1029,7 +1354,7 @@ Return ONLY a valid JSON array matching this exact structure (no markdown):
                 }
 
                 const thumb = item.certObj?.canvasDataUrl || '';
-                const isSkilling = String(item.code) === '3.17' || (item.detectedLogo || '').toLowerCase().includes('coursera');
+                const isSkilling = String(item.code) === '3.17' || (item.detectedLogo || '').toLowerCase().includes('coursera') || (item.detectedLogo || '').toLowerCase().includes('nptel');
 
                 const hoursAdjusterHTML = isSkilling ? `
                     <div class="pt-3 border-t border-slate-200/60">
@@ -1056,7 +1381,12 @@ Return ONLY a valid JSON array matching this exact structure (no markdown):
                                     ${statusBadge}
                                 </div>
                                 <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug truncate mb-1">${item.detectedTitle || item.certObj?.name || `Certificate #${idx + 1}`}</h3>
-                                ${item.detectedLogo && item.detectedLogo !== 'None' ? `<span class="inline-block mt-0.5 text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200"><i class="fas fa-certificate mr-1 text-indigo-400"></i>Logo: ${item.detectedLogo}</span>` : ''}
+                                <div class="flex flex-wrap items-center gap-1.5 mt-1">
+                                    ${item.detectedLogo && item.detectedLogo !== 'None' ? `<span class="text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200"><i class="fas fa-certificate mr-1 text-indigo-400"></i>Logo: ${item.detectedLogo}</span>` : ''}
+                                    <button type="button" onclick="openTrainModal(${item.certIndex})" class="text-[10px] font-extrabold text-slate-500 hover:text-indigo-600 bg-white/90 px-2 py-0.5 rounded border border-slate-200 hover:border-indigo-300 transition-colors">
+                                        <i class="fas fa-pen-to-square mr-1"></i>Correct &amp; Train AI
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
