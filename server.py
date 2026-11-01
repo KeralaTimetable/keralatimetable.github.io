@@ -1,7 +1,7 @@
 """
 server.py
 ---------
-FastAPI REST API exposing KTU paper search + branded download + live status pinging + secure Telegram & Gemini auth.
+FastAPI REST API exposing KTU paper search + branded download + live status pinging + secure Telegram, Gemini, Groq & OpenRouter auth.
 """
 
 from __future__ import annotations
@@ -34,10 +34,12 @@ LOGO_PATH  = os.getenv("BRAND_LOGO_PATH", "keralattlogo.png")
 LOGO_BYTES = open(LOGO_PATH, "rb").read() if LOGO_PATH and os.path.exists(LOGO_PATH) else None
 ADMIN_KEY  = os.getenv("ADMIN_KEY", "change-me")
 
-# ---- Telegram & Gemini Secrets (Stored in Hugging Face Space Secrets, NEVER in GitHub) ----
-TG_BOT_TOKEN   = os.getenv("TG_BOT_TOKEN")
-TG_CHAT_ID     = os.getenv("TG_CHAT_ID", "-1004463800271")
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+# ---- Telegram & AI Secrets (Stored in Hugging Face Space Secrets, NEVER in GitHub) ----
+TG_BOT_TOKEN       = os.getenv("TG_BOT_TOKEN")
+TG_CHAT_ID         = os.getenv("TG_CHAT_ID", "-1004463800271")
+GEMINI_API_KEY     = os.getenv("GEMINI_API_KEY", "")
+GROQ_API_KEY       = os.getenv("GROQ_API_KEY", "")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
 
 # ---- Hugging Face Vault URL ----
 DATASET_RAW_URL = "https://huggingface.co/datasets/KeralaTimetable/ktu-pyq-archive/resolve/main"
@@ -167,19 +169,29 @@ async def telegram_auth(request: Request):
 @app.post("/gemini-auth")
 async def gemini_auth(request: Request):
     """
-    Returns XOR-masked Gemini API key from Hugging Face Secrets ONLY to keralatimetable.in.
+    Returns XOR-masked Gemini, Groq & OpenRouter API keys from Hugging Face Secrets ONLY to keralatimetable.in.
     Supports a single key or comma-separated multiple keys (key1,key2) for automatic load balancing.
     """
     origin = (request.headers.get("origin") or request.headers.get("referer") or "").lower()
     if "keralatimetable.in" not in origin and "localhost" not in origin and "127.0.0.1" not in origin:
         raise HTTPException(403, "Forbidden origin")
 
-    keys = [k.strip() for k in GEMINI_API_KEY.split(",") if k.strip()]
-    if not keys:
-        raise HTTPException(500, "GEMINI_API_KEY secret not configured in Space")
+    g_keys  = [k.strip() for k in GEMINI_API_KEY.split(",") if k.strip()]
+    gr_keys = [k.strip() for k in GROQ_API_KEY.split(",") if k.strip()]
+    or_keys = [k.strip() for k in OPENROUTER_API_KEY.split(",") if k.strip()]
 
-    chosen_key = random.choice(keys)
-    return {"k": [ord(c) ^ 42 for c in chosen_key]}
+    if not g_keys and not gr_keys and not or_keys:
+        raise HTTPException(500, "No AI API keys configured in Space Secrets")
+
+    c_gem = random.choice(g_keys) if g_keys else ""
+    c_grq = random.choice(gr_keys) if gr_keys else ""
+    c_ort = random.choice(or_keys) if or_keys else ""
+
+    return {
+        "k": [ord(c) ^ 42 for c in c_gem],
+        "g": [ord(c) ^ 42 for c in c_grq],
+        "o": [ord(c) ^ 42 for c in c_ort]
+    }
 
 
 @app.post("/admin/harvest")
