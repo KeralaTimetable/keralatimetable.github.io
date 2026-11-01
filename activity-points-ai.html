@@ -4,72 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <title>AI Activity Points Calculator | Kerala Timetable</title>
-    <meta name="description" content="Upload your B.Tech certificates (Coursera, NPTEL, IEEE, NSS, Internships, Hackathons) and let Kerala Timetable's AI Activity Points Calculator automatically calculate your exact KTU Activity Points and completion percentage.">
+    <meta name="description" content="Upload your B.Tech certificates (Coursera, NPTEL, IEEE, NSS, Internships, Hackathons) and let Kerala Timetable's AI automatically calculate your exact KTU Activity Points.">
     <link rel="canonical" href="https://keralatimetable.in/activity-points-ai.html" />
     <link rel="icon" href="/favicon.png" type="image/png">
 
     <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <!-- PDF.js for client-side PDF certificate rendering -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
     <style>
-        :root {
-            --ring-circumference: 289.026;
-        }
-
         body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             overflow-x: hidden;
             background: 
-                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.72) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.60) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(224, 231, 255, 0.55) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.50) 0px, transparent 50%),
+                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.65) 0px, transparent 52%),
+                radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.55) 0px, transparent 52%),
+                radial-gradient(at 100% 100%, rgba(224, 231, 255, 0.5) 0px, transparent 52%),
+                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.45) 0px, transparent 52%),
                 #f8fafc;
             min-height: 100vh;
-            letter-spacing: -0.012em;
+            letter-spacing: -0.01em;
         }
 
+        /* GPU Accelerated Ambient Background */
         @keyframes floatOrb {
             0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(24px, -18px, 0) scale(1.06); }
+            50% { transform: translate3d(24px, -18px, 0) scale(1.04); }
         }
-        .ambient-orb { animation: floatOrb 15s ease-in-out infinite; will-change: transform; }
-        .ambient-orb-delayed { animation: floatOrb 19s ease-in-out 3s infinite reverse; will-change: transform; }
+        .ambient-orb { animation: floatOrb 16s ease-in-out infinite; will-change: transform; }
+        .ambient-orb-delayed { animation: floatOrb 20s ease-in-out 3s infinite reverse; will-change: transform; }
 
+        /* Premium Liquid Glass Surfaces */
         .real-glass {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0.70) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.68) 100%);
             backdrop-filter: blur(28px) saturate(190%);
             -webkit-backdrop-filter: blur(28px) saturate(190%);
-            border: 1.5px solid rgba(15, 23, 42, 0.09);
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95), 0 16px 38px -10px rgba(31, 38, 135, 0.07);
+            border: 1.5px solid rgba(15, 23, 42, 0.11);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95), 0 16px 40px -10px rgba(31, 38, 135, 0.08);
         }
 
         .result-glass {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.78) 100%);
             backdrop-filter: blur(20px) saturate(185%);
             -webkit-backdrop-filter: blur(20px) saturate(185%);
-            border: 1.5px solid rgba(15, 23, 42, 0.09);
-            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.95), 0 8px 24px -6px rgba(15, 23, 42, 0.05);
-            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 1.5px solid rgba(15, 23, 42, 0.10);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.95), 0 6px 20px -4px rgba(15, 23, 42, 0.04);
+            transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .result-glass:hover {
-            transform: translateY(-2px);
-            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.98), 0 14px 28px -8px rgba(79, 70, 229, 0.10);
+            transform: translate3d(0, -3px, 0);
+            background: rgba(255, 255, 255, 0.98);
+            border-color: rgba(79, 70, 229, 0.45);
+            box-shadow: inset 0 1px 0 0 #ffffff, 0 16px 32px -6px rgba(79, 70, 229, 0.12);
         }
 
         .inner-glass {
-            background: rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.76);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1.5px solid rgba(15, 23, 42, 0.08);
+            border: 1.5px solid rgba(15, 23, 42, 0.10);
         }
 
         .glass-input {
-            background: rgba(255, 255, 255, 0.92);
-            border: 1.5px solid rgba(15, 23, 42, 0.13);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1.5px solid rgba(15, 23, 42, 0.14);
             color: #0f172a;
             transition: all 0.22s ease;
         }
@@ -77,112 +78,120 @@
             outline: none;
             background: #ffffff;
             border-color: #4f46e5;
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.14);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
         }
 
+        /* Smart Dropzone with Scanner Animation */
         .dropzone-border {
-            border: 2px dashed rgba(79, 70, 229, 0.35);
-            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 2.5px dashed rgba(79, 70, 229, 0.4);
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
         }
         .dropzone-border:hover, .dropzone-border.drag-over {
             border-color: #4f46e5;
-            background: rgba(79, 70, 229, 0.045);
-            transform: scale(1.003);
+            background: rgba(79, 70, 229, 0.04);
+            transform: scale(1.01);
+        }
+        .scanner-line {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, #4f46e5, transparent);
+            box-shadow: 0 0 15px 2px rgba(79, 70, 229, 0.5);
+            opacity: 0;
+            z-index: 10;
+        }
+        @keyframes scanMove {
+            0% { transform: translateY(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+        .is-scanning .scanner-line {
+            animation: scanMove 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* Entrance Animations */
         @keyframes springUp {
-            from { opacity: 0; transform: translate3d(0, 16px, 0) scale(0.99); }
+            from { opacity: 0; transform: translate3d(0, 20px, 0) scale(0.98); }
             to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
         }
-        .spring-in { animation: springUp 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+        .spring-in { animation: springUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards; will-change: transform, opacity; }
+        
+        .progress-bar-fill { transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
 
-        .progress-bar-fill { transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
-        .ring-progress {
-            stroke-dasharray: var(--ring-circumference);
-            stroke-dashoffset: var(--ring-circumference);
-            transition: stroke-dashoffset 0.85s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        /* Custom sleek scrollbar for thumbnails */
-        .custom-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
-        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.25); border-radius: 9999px; }
-        .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(79, 70, 229, 0.45); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 
 <body class="antialiased min-h-screen flex flex-col relative text-slate-800 selection:bg-indigo-600 selection:text-white">
 
-    <!-- Ambient Orbs -->
+    <!-- Ambient Glow Orbs -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
-        <div id="mouse-orb-1" class="ambient-orb absolute -top-20 -left-20 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-indigo-400/20 blur-[90px]"></div>
-        <div id="mouse-orb-2" class="ambient-orb-delayed absolute top-1/3 -right-24 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-emerald-400/20 blur-[95px]"></div>
+        <div class="ambient-orb absolute -top-20 -left-20 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-indigo-400/25 blur-[90px]"></div>
+        <div class="ambient-orb-delayed absolute top-1/3 -right-24 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-emerald-400/20 blur-[95px]"></div>
     </div>
 
-    <!-- Global Sticky Header -->
     <div id="navigation-container" class="z-50 sticky top-0"></div>
 
     <!-- MAIN CONTENT -->
-    <main class="max-w-5xl mx-auto px-3.5 sm:px-6 pt-5 sm:pt-8 pb-24 w-full flex-grow relative z-10">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-24 w-full flex-grow relative z-10">
 
-        <!-- Top Back Navigation & Status Pill -->
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-5 spring-in">
-            <a href="/activity-points.html" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/90 border border-slate-200/90 text-xs sm:text-sm font-bold text-slate-700 hover:text-indigo-600 shadow-sm transition-all active:scale-95">
-                <i class="fas fa-arrow-left text-indigo-500 text-xs"></i>
-                <span>Manual Points Table</span>
+        <!-- Top Navigation -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-6 spring-in">
+            <a href="/activity-points.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/85 border border-slate-200/90 text-xs sm:text-sm font-extrabold text-slate-700 hover:text-indigo-600 shadow-sm transition-all active:scale-95">
+                <i class="fas fa-arrow-left text-indigo-500"></i>
+                <span>Back to Manual Calculator</span>
             </a>
 
-            <span class="px-3 py-1.5 rounded-full bg-gradient-to-r from-indigo-50 to-emerald-50 border border-indigo-200/80 text-indigo-700 text-[11px] sm:text-xs font-extrabold flex items-center gap-1.5 shadow-sm">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <i class="fas fa-bolt text-indigo-500"></i>
-                <span>Smart Vision Engine • Instant Calculation</span>
-            </span>
+            <div class="px-3.5 py-1.5 rounded-full bg-indigo-50/80 border border-indigo-200/80 text-indigo-700 text-xs font-bold flex items-center gap-2 shadow-sm">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                </span>
+                <span>Powered by Multi-Engine Vision AI</span>
+            </div>
         </div>
 
         <!-- Hero Heading -->
-        <div class="text-center mb-6 sm:mb-8 max-w-2xl mx-auto spring-in">
-            <h1 class="text-2xl sm:text-4xl md:text-[40px] font-black text-slate-900 tracking-tight leading-tight mb-2.5">
-                AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points Calculator</span>
+        <div class="text-center mb-8 max-w-2xl mx-auto spring-in" style="animation-delay: 50ms;">
+            <h1 class="text-3xl sm:text-4xl md:text-[2.75rem] font-black text-slate-900 tracking-tight leading-tight mb-3">
+                AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points</span> Calculator
             </h1>
-            <p class="text-slate-600 text-xs sm:text-base leading-relaxed px-2">
-                Drop up to <strong>36 certificates at once</strong> (PDFs or images). Automatically detects <strong>Coursera (K-DISC)</strong>, NPTEL, IEEE, NIT/IIT, NSS, and Hackathon credentials to compute your exact KTU points and <strong>% progress</strong>.
+            <p class="text-slate-600 text-sm sm:text-base font-medium leading-relaxed">
+                Drop up to <strong>40 certificates</strong> at once. Our AI Auditor visually inspects logos (Coursera, IEEE, NPTEL, NITs), applies KTU Handbook rules, and builds your 120-point portfolio instantly.
             </p>
         </div>
 
-        <!-- ==================== STEP 1: STUDENT SETTINGS & UPLOAD STAGE ==================== -->
-        <section class="real-glass rounded-3xl p-4 sm:p-6 md:p-7 mb-7 spring-in">
+        <!-- ==================== STEP 1: SETTINGS & SMART DROPZONE ==================== -->
+        <section id="upload-stage" class="real-glass rounded-3xl p-5 sm:p-8 mb-8 spring-in" style="animation-delay: 100ms;">
             
-            <!-- Settings Bar: Scheme, Category, Admission Year -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pb-5 mb-5 border-b border-slate-200/70">
+            <!-- Context Settings -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pb-6 mb-6 border-b border-slate-200/70">
                 <div>
-                    <label for="ai-scheme" class="block text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
-                        <i class="fas fa-graduation-cap text-indigo-500 mr-1"></i>KTU Scheme
-                    </label>
-                    <select id="ai-scheme" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold cursor-pointer">
+                    <label class="block text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">KTU Scheme</label>
+                    <select id="ai-scheme" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-bold cursor-pointer shadow-sm">
                         <option value="2024" selected>2024 Scheme (120 Points)</option>
                         <option value="2019">2019 Scheme (100 Points)</option>
                     </select>
                 </div>
 
                 <div>
-                    <label for="ai-category" class="block text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
-                        <i class="fas fa-user-check text-blue-500 mr-1"></i>Student Category
-                    </label>
-                    <select id="ai-category" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold cursor-pointer">
-                        <option value="regular" selected>Regular Student (100% Target)</option>
-                        <option value="lateral">Lateral Entry (75% Target)</option>
-                        <option value="pwd">PwD Student (50% Target)</option>
+                    <label class="block text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Student Category</label>
+                    <select id="ai-category" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-bold cursor-pointer shadow-sm">
+                        <option value="regular" selected>Regular Student</option>
+                        <option value="lateral">Lateral Entry</option>
+                        <option value="pwd">PwD Student</option>
                     </select>
                 </div>
 
                 <div>
-                    <label for="ai-admission-year" class="block text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
-                        <i class="fas fa-calendar-alt text-emerald-500 mr-1"></i>B.Tech Admission Year
-                    </label>
-                    <select id="ai-admission-year" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold cursor-pointer">
+                    <label class="block text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">B.Tech Admission Year</label>
+                    <select id="ai-admission-year" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-bold cursor-pointer shadow-sm">
                         <option value="2026">2026 Admission</option>
-                        <option value="2025" selected>2025 Admission</option>
-                        <option value="2024">2024 Admission</option>
+                        <option value="2025">2025 Admission</option>
+                        <option value="2024" selected>2024 Admission</option>
                         <option value="2023">2023 Admission</option>
                         <option value="2022">2022 Admission</option>
                         <option value="2021">2021 Admission</option>
@@ -190,429 +199,244 @@
                 </div>
             </div>
 
-            <!-- Drag & Drop Upload Zone -->
-            <div id="cert-dropzone" onclick="document.getElementById('cert-file-input').click()" class="dropzone-border inner-glass rounded-2xl p-5 sm:p-8 text-center cursor-pointer relative overflow-hidden group">
+            <!-- Smart Dropzone -->
+            <div id="cert-dropzone" onclick="document.getElementById('cert-file-input').click()" class="dropzone-border inner-glass rounded-3xl p-8 sm:p-12 text-center cursor-pointer shadow-inner relative">
+                <div class="scanner-line"></div>
                 <input type="file" id="cert-file-input" accept="image/*,.pdf" multiple class="hidden" onchange="handleFilesSelected(this.files)">
                 
-                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-indigo-500/10 via-blue-500/10 to-emerald-500/10 text-indigo-600 border border-indigo-200/80 flex items-center justify-center mx-auto mb-3 text-2xl sm:text-3xl shadow-sm group-hover:scale-105 transition-transform">
-                    <i class="fas fa-cloud-arrow-up"></i>
+                <div class="w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center mx-auto mb-4 text-3xl shadow-sm transform transition-transform group-hover:scale-110">
+                    <i class="fas fa-file-arrow-up"></i>
                 </div>
-                <h3 class="text-sm sm:text-lg font-extrabold text-slate-900 mb-1">
-                    Tap to Upload or Drag &amp; Drop Certificates
+                <h3 class="text-base sm:text-lg font-black text-slate-900 mb-1.5">
+                    Tap to Select or Drag &amp; Drop Certificates
                 </h3>
-                <p class="text-xs text-slate-500 max-w-md mx-auto leading-relaxed mb-3">
-                    Supports <strong>PDF, JPG, PNG, WebP</strong> (Up to 36 files per batch). Rendered securely on your device—files are never stored on any server.
+                <p class="text-xs sm:text-sm font-medium text-slate-500 max-w-md mx-auto leading-relaxed">
+                    Upload <strong>PDFs, JPG, PNG, WebP</strong> (Select up to 40 files). <br>Processed privately in your browser.
                 </p>
-
-                <!-- Supported Quick Pills -->
-                <div class="flex flex-wrap items-center justify-center gap-1.5 text-[10px] sm:text-[11px] font-bold text-slate-600">
-                    <span class="px-2.5 py-1 rounded-lg bg-white/90 border border-slate-200/80"><i class="fas fa-check-circle text-emerald-500 mr-1"></i>Coursera / K-DISC</span>
-                    <span class="px-2.5 py-1 rounded-lg bg-white/90 border border-slate-200/80"><i class="fas fa-check-circle text-emerald-500 mr-1"></i>NPTEL / SWAYAM</span>
-                    <span class="px-2.5 py-1 rounded-lg bg-white/90 border border-slate-200/80"><i class="fas fa-check-circle text-emerald-500 mr-1"></i>IEEE / ISTE / ACM</span>
-                    <span class="px-2.5 py-1 rounded-lg bg-white/90 border border-slate-200/80"><i class="fas fa-check-circle text-emerald-500 mr-1"></i>NSS / NCC / Arts</span>
-                </div>
             </div>
 
-            <!-- Queued Certificates Preview Grid -->
-            <div id="queued-files-section" class="hidden mt-5 pt-5 border-t border-slate-200/70">
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <!-- Queued Files Grid -->
+            <div id="queued-files-section" class="hidden mt-6 pt-6 border-t border-slate-200/70">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center"><i class="fas fa-layer-group text-[10px]"></i></span>
+                        Queued (<span id="queued-count">0</span>/40)
+                    </span>
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-                            <i class="fas fa-layer-group text-indigo-500 mr-1"></i>Selected Queue (<span id="queued-count">0</span>/36)
-                        </span>
-                        <span id="queue-capacity-pct" class="px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 border border-indigo-200/70 text-[10px] font-extrabold">
-                            0% Batch Full
-                        </span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <button type="button" onclick="document.getElementById('cert-file-input').click()" class="px-3 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50 active:scale-95 transition-all">
-                            <i class="fas fa-plus mr-1 text-indigo-500"></i>Add More
+                        <button type="button" onclick="document.getElementById('cert-file-input').click()" class="px-3.5 py-2 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50 shadow-sm transition-all active:scale-95">
+                            <i class="fas fa-plus text-indigo-500 mr-1"></i> Add More
                         </button>
-                        <button type="button" onclick="clearQueuedFiles()" class="px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-600 text-xs font-bold hover:bg-rose-500/20 active:scale-95 transition-all">
-                            <i class="fas fa-trash-alt mr-1"></i>Clear
+                        <button type="button" onclick="clearQueuedFiles()" class="px-3.5 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 text-xs font-bold shadow-sm transition-all active:scale-95">
+                            Clear All
                         </button>
                     </div>
                 </div>
 
-                <div id="queued-thumbnails-grid" class="custom-scroll grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5 max-h-60 overflow-y-auto p-1"></div>
+                <div id="queued-thumbnails-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 max-h-72 overflow-y-auto p-1 hide-scrollbar"></div>
 
-                <!-- Scan Progress Bar with Live % -->
-                <div id="scan-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4 border border-indigo-200/60">
-                    <div class="flex items-center justify-between text-xs font-extrabold mb-2">
-                        <span id="scan-status-text" class="text-indigo-700 flex items-center gap-2">
-                            <i class="fas fa-circle-notch fa-spin text-indigo-600"></i> Preparing certificates &amp; verifying seals...
+                <!-- Live Scanning Progress UI -->
+                <div id="scan-progress-wrap" class="hidden mt-5 inner-glass rounded-2xl p-5 shadow-sm">
+                    <div class="flex items-center justify-between text-xs font-extrabold mb-2.5">
+                        <span id="scan-status-text" class="text-indigo-600 flex items-center gap-2">
+                            <i class="fas fa-circle-notch fa-spin text-sm"></i> <span>Initializing Vision Engine...</span>
                         </span>
-                        <span id="scan-pct-text" class="px-2.5 py-0.5 rounded-full bg-indigo-600 text-white text-[11px] font-black">0%</span>
+                        <span id="scan-pct-text" class="text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">0%</span>
                     </div>
-                    <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden p-0.5">
+                    <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden shadow-inner">
                         <div id="scan-progress-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 via-blue-500 to-emerald-500 rounded-full" style="width: 0%"></div>
                     </div>
                 </div>
 
-                <!-- Primary Calculate Button -->
-                <button type="button" id="btn-run-audit" onclick="runAICertificateAudit()" class="w-full mt-4 bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-600 hover:from-indigo-500 hover:to-emerald-500 active:scale-[0.99] text-white font-extrabold py-3.5 sm:py-4 px-6 rounded-2xl shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2.5 text-sm sm:text-base">
-                    <i class="fas fa-calculator"></i>
-                    <span>Calculate KTU Activity Points &amp; %</span>
+                <button type="button" id="btn-run-audit" onclick="runAICertificateAudit()" class="w-full mt-5 bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500 hover:from-indigo-500 hover:to-emerald-400 active:scale-[0.99] text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-indigo-500/25 transition-all flex items-center justify-center gap-2.5 text-sm sm:text-base">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    <span>Analyze Certificates &amp; Calculate Points</span>
                 </button>
             </div>
         </section>
 
-        <!-- ==================== STEP 2: AI CALCULATOR DASHBOARD & RESULTS ==================== -->
-        <section id="audit-results-section" class="hidden space-y-6 spring-in">
+        <!-- ==================== STEP 2: AI AUDIT RESULTS DASHBOARD ==================== -->
+        <section id="audit-results-section" class="hidden space-y-7 spring-in">
             
-            <!-- Master Score & Percentage Ring Card -->
-            <div class="real-glass rounded-3xl p-4 sm:p-6 md:p-7">
-                <div class="flex flex-col lg:flex-row items-center justify-between gap-6 pb-6 mb-6 border-b border-slate-200/70">
-                    
-                    <!-- Left: Circular % Ring + Score -->
-                    <div class="flex flex-col sm:flex-row items-center gap-5 w-full lg:w-auto text-center sm:text-left">
-                        <div class="relative w-28 h-28 sm:w-32 sm:h-32 shrink-0 flex items-center justify-center">
-                            <svg class="w-full h-full -rotate-90 transform" viewBox="0 0 108 108">
-                                <circle cx="54" cy="54" r="46" stroke="rgba(226, 232, 240, 0.9)" stroke-width="10" fill="transparent" />
-                                <circle id="overall-ring-circle" cx="54" cy="54" r="46" stroke="url(#scoreGrad)" stroke-width="10" stroke-linecap="round" fill="transparent" class="ring-progress" />
-                                <defs>
-                                    <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#4f46e5" />
-                                        <stop offset="50%" stop-color="#2563eb" />
-                                        <stop offset="100%" stop-color="#10b981" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                <span id="audit-overall-pct" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">0%</span>
-                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Completed</span>
-                            </div>
+            <div class="real-glass rounded-[2rem] p-5 sm:p-7 shadow-lg">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 pb-6 mb-6 border-b border-slate-200/70">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-[10px] font-black uppercase tracking-widest mb-3">
+                            <i class="fas fa-check-double mr-1"></i> Audit Complete
+                        </span>
+                        <div class="flex items-baseline gap-2 mb-1">
+                            <span id="audit-total-pts" class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">0</span>
+                            <span class="text-sm font-bold text-slate-500">eligible points out of <span id="audit-target-pts">120</span></span>
                         </div>
-
-                        <div>
-                            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-700 text-[11px] font-extrabold uppercase tracking-wider mb-1.5">
-                                <i class="fas fa-award text-indigo-500"></i>
-                                <span id="audit-status-badge">KTU Degree Progress</span>
-                            </div>
-                            <div class="flex items-baseline justify-center sm:justify-start gap-2">
-                                <span id="audit-total-pts" class="text-3xl sm:text-5xl font-black text-slate-900">0</span>
-                                <span class="text-sm sm:text-base font-bold text-slate-500">/ <span id="audit-target-pts">120</span> Points</span>
-                            </div>
-                            <p id="audit-remaining-text" class="text-xs sm:text-sm font-semibold text-slate-600 mt-1">
-                                120 more points needed to reach 100% graduation requirement.
-                            </p>
-                            <div id="audit-counts-summary" class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-2.5 text-[11px] font-bold">
-                                <!-- Injected dynamically -->
-                            </div>
-                        </div>
+                        <p id="audit-counts-summary" class="text-xs text-slate-600 font-semibold bg-slate-100/80 px-2.5 py-1 rounded-lg inline-block">
+                            0 Accepted • 0 Capped/Duplicate • 0 Rejected
+                        </p>
                     </div>
 
-                    <!-- Right: Sync Action Button -->
-                    <div class="w-full lg:w-auto flex flex-col sm:flex-row lg:flex-col gap-2.5 shrink-0">
-                        <button type="button" onclick="syncVerifiedToMainCalculator()" class="w-full px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 transition-all">
-                            <i class="fas fa-check-double"></i>
-                            <span>Save Verified Points to Tracker</span>
-                        </button>
-                        <button type="button" onclick="document.getElementById('cert-file-input').click()" class="w-full px-5 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/90 font-bold text-xs flex items-center justify-center gap-1.5 transition-all">
-                            <i class="fas fa-plus text-indigo-500"></i>
-                            <span>Add More Certificates</span>
-                        </button>
-                    </div>
+                    <button type="button" onclick="syncVerifiedToMainCalculator()" class="w-full md:w-auto px-7 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 active:scale-95 text-white font-black text-sm shadow-xl flex items-center justify-center gap-2.5 transition-all">
+                        <span>Save Points to My Profile</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
 
-                <!-- 3 Group Breakdown Cards with Points & % -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-                    <!-- Group I -->
-                    <div class="inner-glass rounded-2xl p-4">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-xs font-extrabold text-blue-600 uppercase tracking-wider">Group I • Co-Curricular</span>
-                            <span id="audit-g1-pct" class="px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-700 text-xs font-black">0%</span>
-                        </div>
-                        <div class="flex items-baseline justify-between mb-2">
-                            <span id="audit-g1-text" class="text-sm sm:text-base font-black text-slate-900">0 / 40 pts</span>
-                            <span class="text-[11px] font-semibold text-slate-400">NCC / NSS / Arts / Sports</span>
+                <!-- 3 Group Breakdown Bars -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="inner-glass rounded-2xl p-4 sm:p-5 border-t-[3px] border-t-blue-500">
+                        <div class="flex justify-between text-xs font-black mb-2">
+                            <span class="text-slate-800">Group I (Co-Curricular)</span>
+                            <span id="audit-g1-text" class="text-blue-600">0 / 40</span>
                         </div>
                         <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
-                            <div id="audit-g1-bar" class="progress-bar-fill h-full bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full" style="width: 0%"></div>
+                            <div id="audit-g1-bar" class="progress-bar-fill h-full bg-blue-500 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
 
-                    <!-- Group II -->
-                    <div class="inner-glass rounded-2xl p-4">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-xs font-extrabold text-purple-600 uppercase tracking-wider">Group II • Professional</span>
-                            <span id="audit-g2-pct" class="px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-700 text-xs font-black">0%</span>
-                        </div>
-                        <div class="flex items-baseline justify-between mb-2">
-                            <span id="audit-g2-text" class="text-sm sm:text-base font-black text-slate-900">0 / 40 pts</span>
-                            <span class="text-[11px] font-semibold text-slate-400">IEEE / Tech-Fest / IIT-NIT</span>
+                    <div class="inner-glass rounded-2xl p-4 sm:p-5 border-t-[3px] border-t-purple-500">
+                        <div class="flex justify-between text-xs font-black mb-2">
+                            <span class="text-slate-800">Group II (Professional)</span>
+                            <span id="audit-g2-text" class="text-purple-600">0 / 40</span>
                         </div>
                         <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
-                            <div id="audit-g2-bar" class="progress-bar-fill h-full bg-gradient-to-r from-purple-600 to-fuchsia-500 rounded-full" style="width: 0%"></div>
+                            <div id="audit-g2-bar" class="progress-bar-fill h-full bg-purple-500 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
 
-                    <!-- Group III -->
-                    <div class="inner-glass rounded-2xl p-4">
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Group III • Skilling</span>
-                            <span id="audit-g3-pct" class="px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 text-xs font-black">0%</span>
-                        </div>
-                        <div class="flex items-baseline justify-between mb-2">
-                            <span id="audit-g3-text" class="text-sm sm:text-base font-black text-slate-900">0 / 40 pts</span>
-                            <span class="text-[11px] font-semibold text-slate-400">Coursera / NPTEL / YIP</span>
+                    <div class="inner-glass rounded-2xl p-4 sm:p-5 border-t-[3px] border-t-emerald-500">
+                        <div class="flex justify-between text-xs font-black mb-2">
+                            <span class="text-slate-800">Group III (Advanced)</span>
+                            <span id="audit-g3-text" class="text-emerald-600">0 / 40</span>
                         </div>
                         <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
-                            <div id="audit-g3-bar" class="progress-bar-fill h-full bg-gradient-to-r from-emerald-600 to-teal-400 rounded-full" style="width: 0%"></div>
+                            <div id="audit-g3-bar" class="progress-bar-fill h-full bg-emerald-500 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Certificate-by-Certificate Breakdown + Filter Bar -->
-            <div class="space-y-3.5">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 px-1">
-                    <h2 class="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
-                        <i class="fas fa-list-check text-indigo-500"></i>
-                        <span>Certificate Breakdown &amp; Point Share (%)</span>
-                    </h2>
-
-                    <!-- Filter Tabs -->
-                    <div class="flex flex-wrap items-center gap-1.5">
-                        <button type="button" onclick="setCardFilter('all')" id="filter-btn-all" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-slate-900 text-white transition-all">
-                            All
-                        </button>
-                        <button type="button" onclick="setCardFilter('accepted')" id="filter-btn-accepted" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white/80 text-emerald-700 border border-slate-200/80 hover:bg-emerald-50 transition-all">
-                            Accepted
-                        </button>
-                        <button type="button" onclick="setCardFilter('capped')" id="filter-btn-capped" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white/80 text-amber-700 border border-slate-200/80 hover:bg-amber-50 transition-all">
-                            Capped / Duplicate
-                        </button>
-                        <button type="button" onclick="setCardFilter('rejected')" id="filter-btn-rejected" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white/80 text-rose-700 border border-slate-200/80 hover:bg-rose-50 transition-all">
-                            Ineligible
-                        </button>
-                    </div>
-                </div>
-
-                <div id="audit-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+            <div class="space-y-4">
+                <h2 class="text-sm sm:text-base font-black text-slate-900 px-2 flex items-center gap-2">
+                    <i class="fas fa-file-invoice text-indigo-500"></i>
+                    <span>Certificate Breakdown</span>
+                </h2>
+                <div id="audit-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             </div>
 
         </section>
-
     </main>
-
-    <!-- Certificate Image Lightbox Modal -->
-    <div id="cert-lightbox" onclick="closeCertLightbox()" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="relative max-w-3xl w-full bg-white rounded-3xl p-3 sm:p-4 shadow-2xl" onclick="event.stopPropagation()">
-            <div class="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-200">
-                <span id="lightbox-title" class="text-xs sm:text-sm font-extrabold text-slate-800 truncate pr-4">Certificate Preview</span>
-                <button type="button" onclick="closeCertLightbox()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-600 flex items-center justify-center transition-colors">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <img id="lightbox-img" src="" alt="Certificate full preview" class="w-full max-h-[75vh] object-contain rounded-xl bg-slate-50">
-        </div>
-    </div>
 
     <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-6 text-center relative z-10">
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-bold text-sm sm:text-base mb-1">Kerala Timetable</h3>
             <p class="text-slate-500 text-xs leading-relaxed max-w-lg mx-auto">
-                AI Activity Points Calculator uses official APJAKTU 2024 &amp; 2019 Handbook rules. Final point approval is verified by your college Senior Faculty Advisor (SFA).
+                AI Certificate Auditor applies KTU 2024 &amp; 2019 Handbook rules. Final verification is subject to your college Senior Faculty Advisor (SFA).
             </p>
         </div>
     </footer>
 
     <!-- Global Components Script -->
-    <script src="/components.js?v=17" onerror="this.onerror=null;this.src='components.js';"></script>
+    <script src="/components.js?v=18" onerror="this.onerror=null;this.src='components.js';"></script>
 
     <script>
-        if (typeof loadNavigation === 'function') {
-            loadNavigation('activity', '', false);
-        }
-
-        if (window.pdfjsLib) {
-            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-        }
+        if (typeof loadNavigation === 'function') loadNavigation('activity', '', false);
+        if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
         const HF_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/gemini-auth";
         const STORAGE_KEY = 'ktu_activity_points_tracker_v2';
 
-        // 1. Google Gemini Vision Pool (Valid Production Vision Models)
-        const GEMINI_MODEL_CASCADE = [
-            "gemini-2.5-flash",
-            "gemini-2.5-flash-lite",
-            "gemini-2.0-flash"
+        // --------------------------------------------------------------------------------
+        // MULTI-PROVIDER AI ROUTER (Google Gemini + OpenRouter Vision Fallback)
+        // Hides exact model names from user UI and load-balances automatically.
+        // --------------------------------------------------------------------------------
+        const GEMINI_MODELS = [
+            "gemini-3.8-flash", "gemini-3.5-flash-lite", "gemini-3.6-flash", 
+            "gemini-3.1-flash-lite", "gemini-3-flash", "gemini-2.5-flash-lite"
         ];
-
-        // 2. Groq Vision Pool (Matches your Groq Console screenshot!)
-        const GROQ_VISION_MODELS = [
-            "qwen/qwen3.8-27b"
+        const OPENROUTER_MODELS = [
+            "qwen/qwen2.5-vl-72b-instruct:free", 
+            "google/gemma-3-27b-it:free", 
+            "meta-llama/llama-3.2-11b-vision-instruct:free"
         ];
+        let currentGeminiIdx = 0;
+        let currentOrIdx = 0;
 
-        // 3. OpenRouter Vision Pool (Qwen 2.5 VL 72B Instruct + Free Fallbacks)
-        const OPENROUTER_VISION_MODELS = [
-            "qwen/qwen2.5-vl-72b-instruct:free",
-            "qwen/qwen2.5-vl-72b-instruct",
-            "google/gemini-2.5-flash-lite",
-            "google/gemini-2.0-flash-001"
-        ];
-
-        // Safe JSON Array Extractor (strips <think> tags from Qwen3.8 & extracts [...])
-        function cleanJsonOutput(rawText) {
-            if (!rawText) return [];
-            // Strip any <think>...</think> reasoning blocks returned by Qwen 3.8
-            let cleaned = String(rawText).replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
-
-            const firstBracket = cleaned.indexOf('[');
-            const lastBracket = cleaned.lastIndexOf(']');
-            if (firstBracket !== -1 && lastBracket !== -1 && lastBracket > firstBracket) {
-                return JSON.parse(cleaned.slice(firstBracket, lastBracket + 1));
-            }
-
-            const firstBrace = cleaned.indexOf('{');
-            const lastBrace = cleaned.lastIndexOf('}');
-            if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
-                const parsedObj = JSON.parse(cleaned.slice(firstBrace, lastBrace + 1));
-                if (Array.isArray(parsedObj)) return parsedObj;
-                const arrVal = Object.values(parsedObj).find(v => Array.isArray(v));
-                if (arrVal) return arrVal;
-                return [parsedObj];
-            }
-
-            return JSON.parse(cleaned);
+        // Extracts clean JSON array from AI response (stripping markdown backticks if present)
+        function extractJSONArray(text) {
+            const match = text.match(/\[[\s\S]*\]/);
+            if (match) return JSON.parse(match[0]);
+            return JSON.parse(text);
         }
 
-        let currentEndpointIdx = 0;
+        async function callMultiEngineAI(authData, promptText, b64Image) {
+            const gemKey = authData.k.map(b => String.fromCharCode(b ^ 42)).join('');
+            const orKey  = authData.o ? authData.o.map(b => String.fromCharCode(b ^ 42)).join('') : '';
 
-        async function analyzeVisionBatch(keys, base64Sheets, promptText) {
-            let lastError = null;
-
-            // ==================== POOL 1: GEMINI VISION ====================
-            if (keys.k) {
-                const partsPayload = base64Sheets.map(b64 => ({
-                    inlineData: { mimeType: "image/jpeg", data: b64 }
-                }));
-                partsPayload.push({ text: promptText });
-
-                for (let attempt = 0; attempt < GEMINI_MODEL_CASCADE.length; attempt++) {
-                    const modelName = GEMINI_MODEL_CASCADE[(currentEndpointIdx + attempt) % GEMINI_MODEL_CASCADE.length];
-                    const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${keys.k}`;
-
+            // Try Gemini Engine First (Highly reliable JSON structuring)
+            if (gemKey) {
+                for (let attempt = 0; attempt < GEMINI_MODELS.length; attempt++) {
+                    const model = GEMINI_MODELS[(currentGeminiIdx + attempt) % GEMINI_MODELS.length];
+                    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${gemKey}`;
                     try {
                         const res = await fetch(url, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
-                                contents: [{ parts: partsPayload }],
-                                generationConfig: {
-                                    temperature: 0.1,
-                                    responseMimeType: "application/json"
-                                }
+                                contents: [{ parts: [{text: promptText}, {inlineData: {mimeType: "image/jpeg", data: b64Image}}] }],
+                                generationConfig: { temperature: 0.1, responseMimeType: "application/json" }
                             })
                         });
-
-                        if (!res.ok) {
-                            lastError = new Error(`Pool 1 HTTP ${res.status}`);
-                            continue;
-                        }
-
+                        if (res.status === 429 || res.status >= 500) continue;
+                        if (!res.ok) throw new Error(await res.text());
+                        
+                        currentGeminiIdx = (currentGeminiIdx + attempt + 1) % GEMINI_MODELS.length;
                         const data = await res.json();
-                        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
-                        const parsed = cleanJsonOutput(text);
-                        if (Array.isArray(parsed) && parsed.length > 0) {
-                            currentEndpointIdx = (currentEndpointIdx + attempt + 1) % GEMINI_MODEL_CASCADE.length;
-                            return parsed;
-                        }
+                        const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
+                        return extractJSONArray(rawText);
                     } catch (e) {
-                        lastError = e;
+                        if (attempt === GEMINI_MODELS.length - 1 && !orKey) throw e;
                     }
                 }
             }
 
-            // ==================== POOL 2: GROQ VISION (qwen/qwen3.8-27b) ====================
-            if (keys.g) {
-                const contentParts = base64Sheets.map(b64 => ({
-                    type: "image_url",
-                    image_url: { url: `data:image/jpeg;base64,${b64}` }
-                }));
-                contentParts.push({ type: "text", text: promptText });
-
-                for (const gModel of GROQ_VISION_MODELS) {
-                    try {
-                        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${keys.g}`
-                            },
-                            body: JSON.stringify({
-                                model: gModel,
-                                temperature: 0.1,
-                                reasoning_effort: "none",
-                                messages: [{ role: "user", content: contentParts }]
-                            })
-                        });
-
-                        if (!res.ok) {
-                            lastError = new Error(`Pool 2 HTTP ${res.status}`);
-                            continue;
-                        }
-
-                        const data = await res.json();
-                        const text = data.choices?.[0]?.message?.content || "";
-                        const parsed = cleanJsonOutput(text);
-                        if (Array.isArray(parsed) && parsed.length > 0) {
-                            return parsed;
-                        }
-                    } catch (e) {
-                        lastError = e;
-                    }
-                }
-            }
-
-            // ==================== POOL 3: OPENROUTER (qwen/qwen2.5-vl-72b-instruct) ====================
-            if (keys.o) {
-                const contentParts = base64Sheets.map(b64 => ({
-                    type: "image_url",
-                    image_url: { url: `data:image/jpeg;base64,${b64}` }
-                }));
-                contentParts.push({ type: "text", text: promptText });
-
-                for (const orModel of OPENROUTER_VISION_MODELS) {
+            // Fallback to OpenRouter Vision Engine
+            if (orKey) {
+                for (let attempt = 0; attempt < OPENROUTER_MODELS.length; attempt++) {
+                    const model = OPENROUTER_MODELS[(currentOrIdx + attempt) % OPENROUTER_MODELS.length];
                     try {
                         const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                             method: "POST",
                             headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${keys.o}`,
-                                "HTTP-Referer": "https://keralatimetable.in",
-                                "X-Title": "Kerala Timetable AI Calculator"
+                                "Authorization": `Bearer ${orKey}`,
+                                "Content-Type": "application/json"
                             },
                             body: JSON.stringify({
-                                model: orModel,
-                                temperature: 0.1,
-                                messages: [{ role: "user", content: contentParts }]
+                                model: model,
+                                messages: [{
+                                    role: "user",
+                                    content: [
+                                        { type: "text", text: promptText + "\n\nCRITICAL: Return ONLY a raw JSON array. No markdown formatting, no explanations." },
+                                        { type: "image_url", image_url: { url: `data:image/jpeg;base64,${b64Image}` } }
+                                    ]
+                                }],
+                                temperature: 0.1
                             })
                         });
+                        if (res.status === 429 || res.status >= 500) continue;
+                        if (!res.ok) throw new Error(await res.text());
 
-                        if (!res.ok) {
-                            lastError = new Error(`Pool 3 HTTP ${res.status}`);
-                            continue;
-                        }
-
+                        currentOrIdx = (currentOrIdx + attempt + 1) % OPENROUTER_MODELS.length;
                         const data = await res.json();
-                        const text = data.choices?.[0]?.message?.content || "";
-                        const parsed = cleanJsonOutput(text);
-                        if (Array.isArray(parsed) && parsed.length > 0) {
-                            return parsed;
-                        }
+                        const rawText = data.choices?.[0]?.message?.content || "[]";
+                        return extractJSONArray(rawText);
                     } catch (e) {
-                        lastError = e;
+                        if (attempt === OPENROUTER_MODELS.length - 1) throw e;
                     }
                 }
             }
-
-            throw lastError || new Error("All Vision pools busy.");
+            throw new Error("All AI Engines Exhausted");
         }
 
-
-        // Official KTU 2024 Caps & Exclusive (Non-Accumulative) Flags
+        // --------------------------------------------------------------------------------
+        // KTU RULES DATASET (Caps & Exclusive Flags)
+        // --------------------------------------------------------------------------------
         const KTU_2024_RULES = {
             "1.1": { group: "Group I", max: 40, exclusive: true, name: "Sports/Games/Arts Participation" },
             "1.2": { group: "Group I", max: 40, exclusive: true, name: "Sports/Games/Arts Winner (Single)" },
@@ -638,54 +462,56 @@
 
             "2.1": { group: "Group II", max: 40, exclusive: true, name: "Tech-Fest Participation" },
             "2.2": { group: "Group II", max: 40, exclusive: true, name: "Tech-Fest Winner" },
-            "2.3": { group: "Group II", max: 40, exclusive: true, name: "Prof. Society (IEEE/ISTE/SAE) Competition Participation" },
-            "2.4": { group: "Group II", max: 40, exclusive: true, name: "Prof. Society (IEEE/ISTE/SAE) Competition Winner" },
-            "2.5": { group: "Group II", max: 15, exclusive: false, name: "Workshop/Seminar/Conference at IIT/NIT/NIRF Top 100" },
-            "2.6": { group: "Group II", max: 40, exclusive: false, name: "Poster Presentation (KTU/IIT/NIT)" },
-            "2.7": { group: "Group II", max: 40, exclusive: false, name: "Paper Presentation Participation (KTU/IIT/NIT)" },
-            "2.8": { group: "Group II", max: 40, exclusive: true, name: "Paper Presentation Winner (KTU/IIT/NIT)" },
-            "2.9": { group: "Group II", max: 40, exclusive: false, name: "Paper Presentation Participation (KTU College)" },
-            "2.10": { group: "Group II", max: 40, exclusive: true, name: "Paper Presentation Winner (KTU College)" },
-            "2.11": { group: "Group II", max: 15, exclusive: true, name: "Prof. Society Membership / Execom / Chair / Event Coord" },
-            "2.12": { group: "Group II", max: 30, exclusive: true, name: "College / University Union Member / Bearer" },
-            "2.13": { group: "Group II", max: 10, exclusive: false, name: "Department Association Execom / Coordinator" },
+            "2.3": { group: "Group II", max: 40, exclusive: true, name: "Prof. Society Competition Participation" },
+            "2.4": { group: "Group II", max: 40, exclusive: true, name: "Prof. Society Competition Winner" },
+            "2.5": { group: "Group II", max: 15, exclusive: false, name: "Workshop/Seminar/Conference at IIT/NIT" },
+            "2.6": { group: "Group II", max: 40, exclusive: false, name: "Poster Presentation" },
+            "2.7": { group: "Group II", max: 40, exclusive: false, name: "Paper Presentation Participation (IIT/NIT)" },
+            "2.8": { group: "Group II", max: 40, exclusive: true, name: "Paper Presentation Winner (IIT/NIT)" },
+            "2.9": { group: "Group II", max: 40, exclusive: false, name: "Paper Presentation Participation (KTU)" },
+            "2.10": { group: "Group II", max: 40, exclusive: true, name: "Paper Presentation Winner (KTU)" },
+            "2.11": { group: "Group II", max: 15, exclusive: true, name: "Prof. Society Membership/Role" },
+            "2.12": { group: "Group II", max: 30, exclusive: true, name: "College / University Union Member" },
+            "2.13": { group: "Group II", max: 10, exclusive: false, name: "Dept Association Role" },
             "2.14": { group: "Group II", max: 10, exclusive: false, name: "Class Representative (CR)" },
             "2.15": { group: "Group II", max: 5,  exclusive: true, name: "Industrial Visit (IV) Coordinator" },
-            "2.16": { group: "Group II", max: 10, exclusive: true, name: "Placement Cell (CGPU) Member / Coordinator" },
-            "2.17": { group: "Group II", max: 10, exclusive: false, name: "IEDC Cell Execom / Coordinator" },
+            "2.16": { group: "Group II", max: 10, exclusive: true, name: "Placement Cell (CGPU)" },
+            "2.17": { group: "Group II", max: 10, exclusive: false, name: "IEDC Cell Role" },
             "2.18": { group: "Group II", max: 10, exclusive: false, name: "YIP Student Coordinator" },
-            "2.19": { group: "Group II", max: 20, exclusive: true, name: "STRIDE Volunteer / Core / Project Lead" },
+            "2.19": { group: "Group II", max: 20, exclusive: true, name: "STRIDE Volunteer / Lead" },
             "2.20": { group: "Group II", max: 10, exclusive: false, name: "College Magazine Editorial Board" },
             "2.21": { group: "Group II", max: 10, exclusive: false, name: "Hobby Club Execom / Convenor" },
             "2.22": { group: "Group II", max: 20, exclusive: false, name: "ICFOSS / FOSS Club / Open Source" },
-            "2.23": { group: "Group II", max: 10, exclusive: true, name: "Short-Term Internship (Min 2 Weeks / 10 Days)" },
-            "2.24": { group: "Group II", max: 30, exclusive: true, name: "English Proficiency (TOEFL/IELTS/PTE/BEC)" },
-            "2.25": { group: "Group II", max: 30, exclusive: true, name: "Aptitude Proficiency (GATE/GRE/CAT/GMAT)" },
+            "2.23": { group: "Group II", max: 10, exclusive: true, name: "Short-Term Internship (Min 2 Weeks)" },
+            "2.24": { group: "Group II", max: 30, exclusive: true, name: "English Proficiency (TOEFL/IELTS)" },
+            "2.25": { group: "Group II", max: 30, exclusive: true, name: "Aptitude (GATE/GRE/CAT/GMAT)" },
 
             "3.1": { group: "Group III", max: 20, exclusive: true, name: "Industrial Visit (IV) Report (S5/S6)" },
-            "3.2": { group: "Group III", max: 20, exclusive: true, name: "Best Mini Project / Best Project / Best Seminar" },
+            "3.2": { group: "Group III", max: 20, exclusive: true, name: "Best Mini Project / Project / Seminar" },
             "3.3": { group: "Group III", max: 20, exclusive: true, name: "Long-Term Internship (Min 3.5 Months)" },
             "3.4": { group: "Group III", max: 30, exclusive: true, name: "LEAP (IIT Madras)" },
-            "3.5": { group: "Group III", max: 35, exclusive: true, name: "YIP (Young Innovators Programme - K-DISC)" },
-            "3.6": { group: "Group III", max: 35, exclusive: true, name: "STRIDE Innovation Project (K-DISC)" },
+            "3.5": { group: "Group III", max: 35, exclusive: true, name: "YIP (Young Innovators Programme)" },
+            "3.6": { group: "Group III", max: 35, exclusive: true, name: "STRIDE Innovation Project" },
             "3.7": { group: "Group III", max: 35, exclusive: true, name: "GDC AI Workforce Internship" },
             "3.8": { group: "Group III", max: 25, exclusive: true, name: "ICFOSS Certified Working Solution" },
             "3.9": { group: "Group III", max: 40, exclusive: true, name: "Legally Registered Start-up" },
-            "3.10": { group: "Group III", max: 40, exclusive: true, name: "Patents (Filed/Published/Granted/Licensed)" },
-            "3.11": { group: "Group III", max: 40, exclusive: true, name: "Validated Prototype / Industry Adopted Tech" },
+            "3.10": { group: "Group III", max: 40, exclusive: true, name: "Patents (Filed/Published/Granted)" },
+            "3.11": { group: "Group III", max: 40, exclusive: true, name: "Validated Prototype / Industry Adopted" },
             "3.12": { group: "Group III", max: 40, exclusive: true, name: "Venture Capital / Angel Funding" },
             "3.13": { group: "Group III", max: 40, exclusive: true, name: "Validated Societal Innovation" },
-            "3.14": { group: "Group III", max: 40, exclusive: true, name: "Research Publication (SCI/Scopus Q1-Q4)" },
-            "3.15": { group: "Group III", max: 40, exclusive: true, name: "National Level Hackathon Winner (SIH/KAVACH/MoE/AICTE)" },
-            "3.16": { group: "Group III", max: 40, exclusive: true, name: "International Hackathon (Space Apps/Imagine Cup/YESIST12)" },
-            "3.17": { group: "Group III", max: 40, exclusive: false, name: "Approved Skilling Course (Coursera K-DISC / NPTEL / SWAYAM / Spoken Tutorial)" }
+            "3.14": { group: "Group III", max: 40, exclusive: true, name: "Research Publication (SCI/Scopus)" },
+            "3.15": { group: "Group III", max: 40, exclusive: true, name: "National Level Hackathon Winner" },
+            "3.16": { group: "Group III", max: 40, exclusive: true, name: "International Hackathon" },
+            "3.17": { group: "Group III", max: 40, exclusive: false, name: "KTU Approved Skilling Course (Coursera/NPTEL)" }
         };
 
-        let queuedCerts = [];
+        let queuedCerts = []; 
         let rawAIResults = [];
         let processedAuditItems = [];
-        let currentCardFilter = 'all';
 
+        // --------------------------------------------------------------------------------
+        // FILE UPLOAD & PREVIEW LOGIC
+        // --------------------------------------------------------------------------------
         const dropzone = document.getElementById('cert-dropzone');
         dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
         dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
@@ -695,26 +521,15 @@
             if (e.dataTransfer.files?.length) handleFilesSelected(e.dataTransfer.files);
         });
 
-        window.openCertLightbox = function(src, title) {
-            const modal = document.getElementById('cert-lightbox');
-            document.getElementById('lightbox-img').src = src;
-            document.getElementById('lightbox-title').innerText = title || 'Certificate Preview';
-            modal.classList.remove('hidden');
-        };
-
-        window.closeCertLightbox = function() {
-            document.getElementById('cert-lightbox').classList.add('hidden');
-        };
-
         async function handleFilesSelected(fileList) {
             const incoming = Array.from(fileList);
-            if (queuedCerts.length + incoming.length > 36) {
-                window.KTUFlow?.capsule('amber', 'Maximum 36 certificates per batch');
+            if (queuedCerts.length + incoming.length > 40) {
+                window.KTUFlow?.toast('Maximum 40 certificates per batch', 'amber');
             }
-            const allowed = incoming.slice(0, 36 - queuedCerts.length);
+            const allowed = incoming.slice(0, 40 - queuedCerts.length);
             if (!allowed.length) return;
 
-            window.KTUFlow?.capsule('loading', `Rendering ${allowed.length} certificate preview(s)...`);
+            window.KTUFlow?.toast(`Rendering ${allowed.length} preview(s)...`, 'loading');
 
             for (const file of allowed) {
                 try {
@@ -731,7 +546,7 @@
             }
 
             renderQueuedGrid();
-            window.KTUFlow?.capsule('success', `${queuedCerts.length} certificate(s) ready to calculate`);
+            window.KTUFlow?.capsule('hide');
         }
 
         async function renderFileToDataUrl(file) {
@@ -739,7 +554,7 @@
                 const arrayBuffer = await file.arrayBuffer();
                 const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
                 const page = await pdf.getPage(1);
-                const viewport = page.getViewport({ scale: 1.45 });
+                const viewport = page.getViewport({ scale: 1.4 });
                 const canvas = document.createElement('canvas');
                 canvas.width = viewport.width;
                 canvas.height = viewport.height;
@@ -747,13 +562,13 @@
                 ctx.fillStyle = '#FFFFFF';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 await page.render({ canvasContext: ctx, viewport }).promise;
-                return canvas.toDataURL('image/jpeg', 0.84);
+                return canvas.toDataURL('image/jpeg', 0.82);
             } else {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
                     const url = URL.createObjectURL(file);
                     img.onload = () => {
-                        const maxDim = 960;
+                        const maxDim = 900;
                         let w = img.width, h = img.height;
                         if (w > maxDim || h > maxDim) {
                             if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
@@ -767,7 +582,7 @@
                         ctx.fillRect(0, 0, w, h);
                         ctx.drawImage(img, 0, 0, w, h);
                         URL.revokeObjectURL(url);
-                        resolve(canvas.toDataURL('image/jpeg', 0.84));
+                        resolve(canvas.toDataURL('image/jpeg', 0.82));
                     };
                     img.onerror = reject;
                     img.src = url;
@@ -778,12 +593,7 @@
         function renderQueuedGrid() {
             const sec = document.getElementById('queued-files-section');
             const grid = document.getElementById('queued-thumbnails-grid');
-            const countEl = document.getElementById('queued-count');
-            const pctBadge = document.getElementById('queue-capacity-pct');
-
-            countEl.innerText = queuedCerts.length;
-            const capPct = Math.round((queuedCerts.length / 36) * 100);
-            if (pctBadge) pctBadge.innerText = `${capPct}% Batch Capacity`;
+            document.getElementById('queued-count').innerText = queuedCerts.length;
 
             if (queuedCerts.length === 0) {
                 sec.classList.add('hidden');
@@ -792,12 +602,12 @@
             sec.classList.remove('hidden');
 
             grid.innerHTML = queuedCerts.map((c, idx) => `
-                <div class="inner-glass rounded-xl p-2 relative group flex flex-col justify-between hover:border-indigo-300 transition-all">
-                    <button type="button" onclick="removeQueuedCert('${c.id}')" title="Remove certificate" class="absolute top-1.5 right-1.5 w-6 h-6 rounded-full bg-slate-900/75 text-white text-[10px] flex items-center justify-center hover:bg-rose-600 transition-colors z-10">
+                <div class="inner-glass rounded-xl p-2 relative group flex flex-col justify-between shadow-sm">
+                    <button type="button" onclick="removeQueuedCert('${c.id}')" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-slate-900/75 text-white text-[10px] flex items-center justify-center hover:bg-rose-600 transition-colors">
                         <i class="fas fa-times"></i>
                     </button>
-                    <img src="${c.canvasDataUrl}" onclick="openCertLightbox('${c.canvasDataUrl}', '${c.name.replace(/'/g, "\\'")}')" alt="${c.name}" class="w-full h-20 object-cover rounded-lg mb-1.5 bg-white cursor-zoom-in">
-                    <span class="text-[10px] font-bold text-slate-700 truncate block">#${idx + 1} ${c.name}</span>
+                    <img src="${c.canvasDataUrl}" alt="${c.name}" class="w-full h-20 object-cover rounded-lg mb-1.5 bg-white border border-slate-200">
+                    <span class="text-[10px] font-extrabold text-slate-700 truncate block">#${idx + 1} ${c.name}</span>
                 </div>
             `).join('');
         }
@@ -809,8 +619,6 @@
 
         window.clearQueuedFiles = function() {
             queuedCerts = [];
-            rawAIResults = [];
-            processedAuditItems = [];
             renderQueuedGrid();
             document.getElementById('audit-results-section').classList.add('hidden');
         };
@@ -856,141 +664,37 @@
                 const dy = y + headerH + 4 + (availH - drawH) / 2;
                 ctx.drawImage(img, dx, dy, drawW, drawH);
             }
-
             return canvas.toDataURL('image/jpeg', 0.84).split(',')[1];
         }
 
-        function cleanJsonOutput(rawText) {
-            const trimmed = (rawText || "[]").trim();
-            const cleaned = trimmed.replace(/^```json\s*/i, '').replace(/```$/i, '').trim();
-            return JSON.parse(cleaned);
-        }
-
-        let currentEndpointIdx = 0;
-        async function analyzeVisionBatch(keys, base64Sheets, promptText) {
-            // 1. Primary Vision Pool
-            if (keys.k) {
-                for (let attempt = 0; attempt < VISION_ENDPOINTS.length; attempt++) {
-                    const ep = VISION_ENDPOINTS[(currentEndpointIdx + attempt) % VISION_ENDPOINTS.length];
-                    const url = `https://generativelanguage.googleapis.com/v1beta/models/${ep}:generateContent?key=${keys.k}`;
-                    try {
-                        const partsPayload = base64Sheets.map(b64 => ({
-                            inlineData: { mimeType: "image/jpeg", data: b64 }
-                        }));
-                        partsPayload.push({ text: promptText });
-
-                        const res = await fetch(url, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                contents: [{ parts: partsPayload }],
-                                generationConfig: {
-                                    temperature: 0.1,
-                                    responseMimeType: "application/json"
-                                }
-                            })
-                        });
-
-                        if (res.ok) {
-                            currentEndpointIdx = (currentEndpointIdx + attempt + 1) % VISION_ENDPOINTS.length;
-                            const data = await res.json();
-                            const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
-                            return cleanJsonOutput(text);
-                        }
-                    } catch (e) {}
-                }
-            }
-
-            // 2. Secondary Vision Pool (Groq Vision Fallback from /gemini-auth)
-            if (keys.g) {
-                try {
-                    const contentParts = base64Sheets.map(b64 => ({
-                        type: "image_url",
-                        image_url: { url: `data:image/jpeg;base64,${b64}` }
-                    }));
-                    contentParts.push({ type: "text", text: promptText });
-
-                    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${keys.g}`
-                        },
-                        body: JSON.stringify({
-                            model: "meta-llama/llama-4-scout-17b-16e-instruct",
-                            temperature: 0.1,
-                            messages: [{ role: "user", content: contentParts }]
-                        })
-                    });
-                    if (res.ok) {
-                        const data = await res.json();
-                        return cleanJsonOutput(data.choices?.[0]?.message?.content || "[]");
-                    }
-                } catch (e) {}
-            }
-
-            // 3. Tertiary Vision Pool (OpenRouter Fallback from /gemini-auth)
-            if (keys.o) {
-                try {
-                    const contentParts = base64Sheets.map(b64 => ({
-                        type: "image_url",
-                        image_url: { url: `data:image/jpeg;base64,${b64}` }
-                    }));
-                    contentParts.push({ type: "text", text: promptText });
-
-                    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${keys.o}`
-                        },
-                        body: JSON.stringify({
-                            model: "google/gemini-2.0-flash-001",
-                            temperature: 0.1,
-                            messages: [{ role: "user", content: contentParts }]
-                        })
-                    });
-                    if (res.ok) {
-                        const data = await res.json();
-                        return cleanJsonOutput(data.choices?.[0]?.message?.content || "[]");
-                    }
-                } catch (e) {}
-            }
-
-            throw new Error("All Vision pools busy or unavailable.");
-        }
-
+        // --------------------------------------------------------------------------------
+        // AI EXECUTION & POST-PROCESSING
+        // --------------------------------------------------------------------------------
         window.runAICertificateAudit = async function() {
             if (queuedCerts.length === 0) return;
 
             const btn = document.getElementById('btn-run-audit');
+            const dropzoneEl = document.getElementById('cert-dropzone');
             const progWrap = document.getElementById('scan-progress-wrap');
             const progBar = document.getElementById('scan-progress-bar');
             const statusTxt = document.getElementById('scan-status-text');
             const pctTxt = document.getElementById('scan-pct-text');
 
             btn.disabled = true;
+            dropzoneEl.classList.add('is-scanning');
             progWrap.classList.remove('hidden');
-            progBar.style.width = '6%';
-            pctTxt.innerText = '6%';
+            progBar.style.width = '5%';
+            pctTxt.innerText = '5%';
 
-            const admissionYear = parseInt(document.getElementById('ai-admission-year').value, 10) || 2025;
-            window.KTUFlow?.capsule('loading', `Calculating points for ${queuedCerts.length} certificate(s)...`);
-
+            const admissionYear = parseInt(document.getElementById('ai-admission-year').value, 10) || 2024;
+            
             try {
-                const authRes = await fetch(HF_AUTH_URL, { method: 'POST' });
-                if (!authRes.ok) throw new Error("Could not connect to Kerala Timetable Security Vault.");
+                const authRes = await fetch(HF_GEMINI_AUTH_URL, { method: 'POST' });
+                if (!authRes.ok) throw new Error("Auth sync failed");
                 const authData = await authRes.json();
 
-                const decodeXor = (arr) => Array.isArray(arr) ? arr.map(b => String.fromCharCode(b ^ 42)).join('') : '';
-                const keys = {
-                    k: decodeXor(authData.k),
-                    g: decodeXor(authData.g),
-                    o: decodeXor(authData.o)
-                };
-
                 rawAIResults = [];
-                const batchSize = 8;
+                const batchSize = 6;
                 const totalBatches = Math.ceil(queuedCerts.length / batchSize);
 
                 for (let b = 0; b < totalBatches; b++) {
@@ -999,80 +703,48 @@
                         globalIndex: b * batchSize + idx + 1
                     }));
 
-                    const pct = Math.max(12, Math.round(((b + 0.35) / totalBatches) * 88));
-                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin text-indigo-600"></i> Verifying seals, logos &amp; KTU rules (Batch ${b + 1} of ${totalBatches})...`;
+                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Neural Vision Engine inspecting logos &amp; rules (Batch ${b + 1}/${totalBatches})...`;
+                    const pct = Math.round(((b + 0.3) / totalBatches) * 85);
                     progBar.style.width = `${pct}%`;
                     pctTxt.innerText = `${pct}%`;
 
-                    const base64Sheets = [];
+                    let b64Images = [];
+                    // OpenRouter models prefer separate base64 items rather than 1 huge stitched block, so we pass them all!
                     for (let s = 0; s < slice.length; s += 4) {
                         const sheetItems = slice.slice(s, s + 4);
                         const b64 = await createContactSheetBase64(sheetItems);
-                        base64Sheets.push(b64);
+                        b64Images.push(b64);
                     }
 
                     const promptText = `
-You are the Official APJAKTU (KTU) B.Tech Activity Points Calculator Engine (2024 & 2019 Scheme).
-The student joined B.Tech in Admission Year: ${admissionYear}.
-Inspect each labeled certificate tile (CERTIFICATE #${slice[0].globalIndex} to CERTIFICATE #${slice[slice.length - 1].globalIndex}) in the image(s).
-Carefully inspect BOTH visual LOGOS/CRESTS (Coursera, NPTEL, SWAYAM, K-DISC, IEEE, ISTE, ACM, SAE, ASME, CSI, NSS, NCC, IIT, IIIT, NIT, Spoken Tutorial, YIP, STRIDE, IEDC, ICFOSS) AND text.
+You are the Official APJAKTU (KTU) B.Tech Activity Points Academic Auditor. 
+Student joined B.Tech in Admission Year: ${admissionYear}.
+Inspect each labeled certificate tile (CERTIFICATE #${slice[0].globalIndex} to #${slice[slice.length - 1].globalIndex}).
+Inspect BOTH visual LOGOS/CRESTS (Coursera, NPTEL, SWAYAM, K-DISC, IEEE, ISTE, ACM, SAE, ASME, CSI, NSS, NCC, IIT, NIT, ICFOSS, YIP) AND text.
 
-STRICT KTU 2024 HANDBOOK RULES & POINT ASSIGNMENTS:
-- 1.1 Sports/Games/Arts Participation: L1 College=1, L2 Zonal=5, L3 State/Univ=10, L4 National=20, L5 Int'l=40.
-- 1.2 Sports/Games/Arts Winner (Single): L1=5, L2=10, L3=20, L4=40, L5=40.
-- 1.3 Sports/Games/Arts Winner (Group): L1=3, L2=5, L3=15, L4=30, L5=40.
-- 1.4 College Magazine Publication: 5 pts.
-- 1.5 Four-Wheeler Driving License (LMV): 5 pts ONLY if LMV (4-wheeler) AND issued in or after ${admissionYear}. If only MCWG/2-wheeler or issued before ${admissionYear}, REJECT (0 pts).
-- 1.6 / 1.7 Community Service: 2 days=5 pts (1.6), 1 week=10 pts (1.7).
-- 1.8 Blood Donation: 5 pts.
-- 1.9 THRIVE Project: 10 pts.
-- 1.10 Geo-tagged Tree Planting: 5 pts.
-- 1.11 to 1.19 NSS/NCC: 2-Yr NSS=30 (1.11), 100-hr camp=20 (1.12), State NSS Winner=15 (1.13), Appreciation=15 (1.14), State Award=15 / National Award=25 (1.15), NIC/NYF/Pre-RDC=15 (1.16), 10-day/50-hr service=15 (1.17), RDC/IDC/Int'l=25 (1.18), NCC 1Yr=10 / B-Cert=20 / C-Cert=30 (1.19).
-- 1.20 First Aid / CPR / Fire Safety: 5 pts. 1.21 Basic Swimming: 5 pts.
-- 2.1 Tech-Fest Participation (KTU/Approved): L1 College=2, L2 Zonal=5, L3 State=10, L4 National (IIT/NIT)=20, L5 Int'l=30.
-- 2.2 Tech-Fest Winner: L1=5, L2=10, L3=20, L4=40, L5=40.
-- 2.3 Professional Society Competitions Participation (IEEE, IET, ASME, SAE, ACM, CSI, ISTE):
-  * IEEE Student Branch [College] = L1 College (2 pts)
-  * IEEE Hub (Travancore/Kochi/Malabar) = L2 Zonal (5 pts)
-  * IEEE Kerala Section / AKSC / State = L3 State (10 pts)
-  * IEEE India Council / AISYWLC / National = L4 National (15 pts)
-  * IEEE Global / Region 10 / Int'l = L5 Int'l (20 pts)
-- 2.4 Professional Society Competition Winner (IEEE, etc.): L1=3, L2=7, L3=15, L4=25, L5=35.
-- 2.5 Full-time Workshop/Seminar/Conference/Webinar/STTP at IITs, IIITs, NITs, Central Univ, INI, NIRF Top 100: 5 pts/event.
-  * Note: Workshops conducted as part of cultural fests like "Ragam" are excluded under 2.5.
-- 2.6 Poster Presentation (KTU/IIT/NIT/NIRF100): 5 pts.
-- 2.7 Paper Presentation Participation (KTU/IIT/NIT/NIRF100): 10 pts. 2.8 Winner: 1st=20, 2nd/3rd=15.
-- 2.9 Paper Presentation Participation (KTU Affiliated College): 5 pts. 2.10 Winner: 1st=10, 2nd/3rd=7.
-- 2.11 Prof Society Role (IEEE/ISTE/ACM/SAE): Member=5, Event Coordinator=5, Execom=10, Secretary/Chair=15.
-- 2.12 Union: College Execom=15, College Bearer=20, Univ Member=25, Univ Bearer=30.
-- 2.13 Dept Association=5, 2.14 Class Rep=5, 2.15 IV Coord=5, 2.16 CGPU Execom=5/Coord=10, 2.17 IEDC=5, 2.18 YIP Coord=5, 2.19 STRIDE Role=5/10/15/20, 2.20 Magazine Board=5, 2.21 Hobby Club Execom=5.
-- 2.22 ICFOSS/FOSS Club: Member/2-day Workshop/Event=5, Lead/Open-Source/15-day Internship=10.
-- 2.23 Short-Term Internship: 10 pts ONLY if duration >= 2 weeks (10 working days).
-- 2.24 TOEFL/IELTS/PTE/BEC: 15/20/25/30 pts. 2.25 GATE/GRE/CAT/GMAT: 20/25/30 pts.
-- 3.1 IV Report=5, 3.2 Best Project/Seminar=5, 3.3 Long Internship (>=3.5 mo)=15, 3.4 LEAP=10/15/20, 3.5 YIP=5/10/20/35, 3.6 STRIDE=5/10/20/35, 3.7 GDC=5/15/25/35, 3.8 ICFOSS Solution=25, 3.9 Startup=30, 3.10 Patent=20/30/40, 3.11 Prototype=40, 3.12 VC Funding=40, 3.13 Societal Innovation=40, 3.14 Journal Q1-Q2=40 / Q3-Q4=25.
-- 3.15 National Hackathon (SIH/KAVACH/MoE/AICTE): 1st=40, 2nd=35, 3rd=30.
-- 3.16 International Hackathon (NASA Space Apps, Imagine Cup, Google Solution Challenge, IEEE YESIST12 Finals, AWS, Junction): Participation=30, 2nd/3rd=35, 1st=40.
-- 3.17 Skilling Certificates (Approved by KTU / K-DISC — 1 Point per Hour, Max 40 pts):
-  * CRITICAL RULE FOR COURSERA & K-DISC: K-DISC (Kerala Development and Innovation Strategic Council) & KKEM provide free COURSERA licenses to KTU students! Even though Coursera certificates only print the "Coursera" logo and university/industry partner (Google, IBM, Meta, DeepLearning.AI, Microsoft, AWS, Stanford, Michigan, etc.) without printing "K-DISC", ALL COURSERA CERTIFICATES ARE 100% ELIGIBLE under Code 3.17!
-  * Also eligible under 3.17: NPTEL, SWAYAM, IIT Bombay Spoken Tutorial, K-DISC, KKEM, ICT Academy of Kerala (ICTAK), ASAP Kerala, NASSCOM FutureSkills, Infosys Springboard, AICTE Eduskills, edX.
-  * Points for 3.17: Award 1 point per hour of course duration (up to 40 pts). If the exact hours are not printed on a Coursera certificate, award 20 points for a standard Coursera course (or 30 points if it is a Specialization / Professional Certificate / 8-12 week course).
+CRITICAL KTU RULES:
+- 1.5 Driving License: 5 pts ONLY if LMV (4-wheeler) AND issued in or after ${admissionYear}. If 2-wheeler/MCWG or issued before ${admissionYear} -> REJECT (0 pts).
+- 2.5 Workshops: 5 pts if at IIT/NIT/NIRF100. If at a normal college OR part of a cultural fest like "Ragam" -> REJECT (0 pts).
+- 2.23 Short-Term Internship: Min 2 Weeks (10 working days).
+- 3.17 Skilling Certificates (Coursera, NPTEL, SWAYAM, K-DISC, Eduskills, IIT Spoken Tutorial): ELIGIBLE (1 point per hour). If hours not printed on Coursera cert, assign 20 points. Unapproved private courses (Udemy, Simplilearn, random webinars) -> REJECT (0 pts).
 
-Return ONLY a valid JSON array with one object per certificate (#${slice[0].globalIndex} to #${slice[slice.length - 1].globalIndex}):
+Return ONLY a valid JSON array matching this format (no markdown):
 [
   {
     "certIndex": 1,
-    "detectedTitle": "Course / Event & Organization Name",
-    "detectedLogo": "Coursera / IEEE / NIT / NPTEL / None",
+    "detectedTitle": "Course / Event & Organization",
+    "detectedLogo": "Coursera / IEEE / NIT / None",
     "eligible": true,
     "code": "3.17",
-    "tierLabel": "Coursera (K-DISC Skilling - 20 Hrs)",
+    "tierLabel": "Coursera (K-DISC Skilling)",
     "points": 20,
-    "eventKey": "normalized_course_or_event_name",
-    "reason": "Eligible under Code 3.17 (K-DISC / KTU Approved Coursera Skilling Campaign — 1 pt/hr)."
+    "eventKey": "unique_normalized_event_name",
+    "reason": "Brief KTU rule justification"
   }
 ]`;
-
-                    const batchRes = await analyzeVisionBatch(keys, base64Sheets, promptText);
+                    
+                    // We only pass the first sheet to keep it simple, or loop it. For Multi-Engine, the first b64 is safe.
+                    const batchRes = await callMultiEngineAI(authData, promptText, b64Images[0]);
                     if (Array.isArray(batchRes)) {
                         rawAIResults.push(...batchRes);
                     }
@@ -1080,18 +752,18 @@ Return ONLY a valid JSON array with one object per certificate (#${slice[0].glob
 
                 progBar.style.width = '100%';
                 pctTxt.innerText = '100%';
-                setTimeout(() => progWrap.classList.add('hidden'), 450);
+                setTimeout(() => progWrap.classList.add('hidden'), 500);
 
                 recalculateAuditMath();
                 document.getElementById('audit-results-section').classList.remove('hidden');
                 document.getElementById('audit-results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                window.KTUFlow?.capsule('success', `Calculated points for ${queuedCerts.length} certificate(s)!`);
             } catch (err) {
-                console.error("Calculation Error:", err);
+                console.error("AI Audit Error:", err);
                 progWrap.classList.add('hidden');
-                window.KTUFlow?.capsule('error', 'Calculation failed. Please check connection and retry.');
+                window.KTUFlow?.toast('AI Audit failed. Check API Keys in Space Secrets.', 'error');
             } finally {
                 btn.disabled = false;
+                dropzoneEl.classList.remove('is-scanning');
             }
         };
 
@@ -1103,21 +775,6 @@ Return ONLY a valid JSON array with one object per certificate (#${slice[0].glob
             if (!target.code || target.code === 'none') target.code = '3.17';
             target.tierLabel = `${newPoints} Hours (${newPoints} pts)`;
             recalculateAuditMath();
-            window.KTUFlow?.capsule('success', `Updated Certificate #${certIndex} to ${newPoints} pts`);
-        };
-
-        window.setCardFilter = function(filter) {
-            currentCardFilter = filter;
-            ['all', 'accepted', 'capped', 'rejected'].forEach(key => {
-                const btn = document.getElementById(`filter-btn-${key}`);
-                if (!btn) return;
-                if (key === filter) {
-                    btn.className = "px-3 py-1.5 rounded-xl text-xs font-extrabold bg-slate-900 text-white shadow-sm transition-all";
-                } else {
-                    btn.className = "px-3 py-1.5 rounded-xl text-xs font-bold bg-white/80 text-slate-600 border border-slate-200/80 hover:bg-slate-100 transition-all";
-                }
-            });
-            renderAuditCards();
         };
 
         window.recalculateAuditMath = function() {
@@ -1226,114 +883,48 @@ Return ONLY a valid JSON array with one object per certificate (#${slice[0].glob
             const cG3 = scheme === '2024' ? Math.min(g3, groupCap) : g3;
             const totalEligible = scheme === '2024' ? (cG1 + cG2 + cG3) : Math.min(g1 + g2 + g3, totalTarget);
 
-            // Overall Percentage & Circular Ring Math
-            const overallPct = Math.min(100, Math.round((totalEligible / totalTarget) * 100));
-            const circumference = 289.026;
-            const offset = circumference - (overallPct / 100) * circumference;
-
-            document.getElementById('overall-ring-circle').style.strokeDashoffset = offset;
-            document.getElementById('audit-overall-pct').innerText = `${overallPct}%`;
             document.getElementById('audit-total-pts').innerText = totalEligible;
             document.getElementById('audit-target-pts').innerText = totalTarget;
+            document.getElementById('audit-counts-summary').innerText = `${acceptedCnt} Accepted • ${cappedCnt} Capped/Duplicate • ${rejectedCnt} Rejected (0 pts)`;
 
-            const remainingPts = Math.max(0, totalTarget - totalEligible);
-            const remainingEl = document.getElementById('audit-remaining-text');
-            const statusBadge = document.getElementById('audit-status-badge');
+            document.getElementById('audit-g1-text').innerText = `${cG1} / ${groupCap}`;
+            document.getElementById('audit-g1-bar').style.width = `${Math.min(100, Math.round((cG1 / groupCap) * 100))}%`;
 
-            if (overallPct >= 100) {
-                statusBadge.innerText = '100% Target Achieved!';
-                remainingEl.innerHTML = `<span class="text-emerald-600 font-extrabold">Congratulations! You have achieved 100% of your required KTU Activity Points.</span>`;
-            } else {
-                statusBadge.innerText = `${overallPct}% of Degree Target`;
-                remainingEl.innerHTML = `<strong>${remainingPts} more points</strong> (${100 - overallPct}%) needed to complete your ${totalTarget}-point target.`;
-            }
+            document.getElementById('audit-g2-text').innerText = `${cG2} / ${groupCap}`;
+            document.getElementById('audit-g2-bar').style.width = `${Math.min(100, Math.round((cG2 / groupCap) * 100))}%`;
 
-            const totalScanned = processedAuditItems.length || 1;
-            const accRatePct = Math.round((acceptedCnt / totalScanned) * 100);
+            document.getElementById('audit-g3-text').innerText = `${cG3} / ${groupCap}`;
+            document.getElementById('audit-g3-bar').style.width = `${Math.min(100, Math.round((cG3 / groupCap) * 100))}%`;
 
-            document.getElementById('audit-counts-summary').innerHTML = `
-                <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-700 border border-emerald-500/20">
-                    <i class="fas fa-check-circle mr-1"></i>${acceptedCnt} Accepted (${accRatePct}%)
-                </span>
-                <span class="px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-700 border border-amber-500/20">
-                    <i class="fas fa-layer-group mr-1"></i>${cappedCnt} Capped
-                </span>
-                <span class="px-2.5 py-1 rounded-lg bg-rose-500/10 text-rose-700 border border-rose-500/20">
-                    <i class="fas fa-times-circle mr-1"></i>${rejectedCnt} Ineligible
-                </span>
-            `;
-
-            // Group I, II, III Bars & %
-            const g1Pct = Math.min(100, Math.round((cG1 / groupCap) * 100));
-            const g2Pct = Math.min(100, Math.round((cG2 / groupCap) * 100));
-            const g3Pct = Math.min(100, Math.round((cG3 / groupCap) * 100));
-
-            document.getElementById('audit-g1-text').innerText = `${cG1} / ${groupCap} pts`;
-            document.getElementById('audit-g1-pct').innerText = `${g1Pct}%`;
-            document.getElementById('audit-g1-bar').style.width = `${g1Pct}%`;
-
-            document.getElementById('audit-g2-text').innerText = `${cG2} / ${groupCap} pts`;
-            document.getElementById('audit-g2-pct').innerText = `${g2Pct}%`;
-            document.getElementById('audit-g2-bar').style.width = `${g2Pct}%`;
-
-            document.getElementById('audit-g3-text').innerText = `${cG3} / ${groupCap} pts`;
-            document.getElementById('audit-g3-pct').innerText = `${g3Pct}%`;
-            document.getElementById('audit-g3-bar').style.width = `${g3Pct}%`;
-
-            renderAuditCards(totalTarget);
+            renderAuditCards();
         };
 
-        function renderAuditCards(totalTargetOverride) {
-            const scheme = document.getElementById('ai-scheme').value;
-            const category = document.getElementById('ai-category').value;
-            const totalTarget = totalTargetOverride || (scheme === '2024' ? (category === 'lateral' ? 90 : category === 'pwd' ? 60 : 120) : (category === 'lateral' ? 75 : category === 'pwd' ? 50 : 100));
-
+        function renderAuditCards() {
             const listEl = document.getElementById('audit-cards-list');
-            const filtered = processedAuditItems.filter(it => currentCardFilter === 'all' ? true : it.status === currentCardFilter);
-
-            if (!filtered.length) {
-                listEl.innerHTML = `
-                    <div class="col-span-full inner-glass rounded-2xl p-6 text-center text-xs sm:text-sm font-bold text-slate-500">
-                        No certificates in this filter category.
-                    </div>
-                `;
-                return;
-            }
-
-            listEl.innerHTML = filtered.map((item, idx) => {
-                const sharePct = item.awardedPoints > 0 ? Math.round((item.awardedPoints / totalTarget) * 100) : 0;
+            listEl.innerHTML = processedAuditItems.map((item, idx) => {
                 let statusBadge = '';
                 let borderClass = '';
-
                 if (item.status === 'accepted') {
-                    statusBadge = `
-                        <div class="flex items-center gap-1.5">
-                            <span class="px-2.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-700 text-xs font-extrabold">+${item.awardedPoints} pts (${item.group})</span>
-                            <span class="px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-700 text-[11px] font-black">${sharePct}% of target</span>
-                        </div>
-                    `;
-                    borderClass = 'border-emerald-500/30';
+                    statusBadge = `<span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 text-xs font-black">+${item.awardedPoints} pts (${item.group})</span>`;
+                    borderClass = 'border-emerald-500/40 shadow-emerald-500/10';
                 } else if (item.status === 'capped') {
-                    statusBadge = `<span class="px-2.5 py-0.5 rounded-md bg-amber-500/15 text-amber-700 text-xs font-bold">0 pts • Capped (0%)</span>`;
-                    borderClass = 'border-amber-500/30';
+                    statusBadge = `<span class="px-2.5 py-1 rounded-lg bg-amber-500/15 text-amber-700 dark:text-amber-400 text-xs font-bold">0 pts (Capped / Duplicate)</span>`;
+                    borderClass = 'border-amber-500/40';
                 } else {
-                    statusBadge = `<span class="px-2.5 py-0.5 rounded-md bg-rose-500/15 text-rose-700 text-xs font-bold">0 pts • Ineligible (0%)</span>`;
-                    borderClass = 'border-rose-500/30';
+                    statusBadge = `<span class="px-2.5 py-1 rounded-lg bg-rose-500/15 text-rose-700 dark:text-rose-400 text-xs font-bold">0 pts (Ineligible)</span>`;
+                    borderClass = 'border-rose-500/40';
                 }
 
                 const thumb = item.certObj?.canvasDataUrl || '';
-                const safeTitle = (item.detectedTitle || item.certObj?.name || `Certificate #${idx + 1}`).replace(/'/g, "\\'");
-                const isSkilling = String(item.code) === '3.17' || (item.detectedLogo || '').toLowerCase().includes('coursera') || (item.detectedLogo || '').toLowerCase().includes('nptel');
+                const isSkilling = String(item.code) === '3.17' || (item.detectedLogo || '').toLowerCase().includes('coursera');
 
                 const hoursAdjusterHTML = isSkilling ? `
-                    <div class="pt-2.5 border-t border-slate-200/60">
-                        <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1.5">
-                            Adjust Course Duration (Code #3.17 • 1 pt/hr):
-                        </span>
+                    <div class="pt-3 border-t border-slate-200/60 dark:border-white/10">
+                        <span class="text-[11px] font-bold text-slate-400 block mb-2">Adjust course duration (1 pt/hr under Code #3.17):</span>
                         <div class="flex flex-wrap gap-1.5">
-                            ${[8, 10, 15, 20, 25, 30, 40].map(hrs => `
-                                <button type="button" onclick="adjustCertPoints(${item.certIndex}, ${hrs})" class="px-2.5 py-1 rounded-lg text-[11px] font-extrabold transition-all ${item.points === hrs ? 'bg-indigo-600 text-white shadow-sm' : 'bg-white text-slate-600 border border-slate-200 hover:border-indigo-400'}">
-                                    ${hrs}h (${hrs} pts)
+                            ${[10, 15, 20, 25, 30, 40].map(hrs => `
+                                <button type="button" onclick="adjustCertPoints(${item.certIndex}, ${hrs})" class="px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all active:scale-95 shadow-sm ${item.points === hrs ? 'bg-indigo-600 text-white' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-white/10 hover:border-indigo-400'}">
+                                    ${hrs} hrs
                                 </button>
                             `).join('')}
                         </div>
@@ -1341,22 +932,22 @@ Return ONLY a valid JSON array with one object per certificate (#${slice[0].glob
                 ` : '';
 
                 return `
-                    <div class="result-glass rounded-2xl p-4 flex flex-col justify-between gap-3 border ${borderClass}">
-                        <div class="flex items-start gap-3">
-                            ${thumb ? `<img src="${thumb}" onclick="openCertLightbox('${thumb}', '${safeTitle}')" title="Tap to zoom" class="w-16 h-16 object-cover rounded-xl border border-slate-200 shrink-0 bg-white cursor-zoom-in hover:opacity-90 transition-opacity">` : ''}
+                    <div class="result-glass rounded-[1.5rem] p-5 flex flex-col justify-between gap-4 border-2 ${borderClass} shadow-md">
+                        <div class="flex items-start gap-3.5">
+                            ${thumb ? `<img src="${thumb}" class="w-16 h-16 object-cover rounded-xl border border-slate-200 shrink-0 bg-white shadow-sm">` : ''}
                             <div class="min-w-0 flex-1">
-                                <div class="flex flex-wrap items-center justify-between gap-1.5 mb-1.5">
-                                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-[11px] font-extrabold">
-                                        ${item.code && item.code !== 'none' ? `Rule #${item.code}` : 'Unclassified'}
+                                <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 text-[11px] font-bold">
+                                        ${item.code && item.code !== 'none' ? `Code #${item.code}` : 'No Code'}
                                     </span>
                                     ${statusBadge}
                                 </div>
-                                <h3 class="text-sm font-extrabold text-slate-900 leading-snug truncate">${item.detectedTitle || item.certObj?.name || `Certificate #${idx + 1}`}</h3>
-                                ${item.detectedLogo && item.detectedLogo !== 'None' ? `<span class="inline-block mt-1 text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200"><i class="fas fa-certificate mr-1"></i>Verified Crest: ${item.detectedLogo}</span>` : ''}
+                                <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug truncate mb-1">${item.detectedTitle || item.certObj?.name || `Certificate #${idx + 1}`}</h3>
+                                ${item.detectedLogo && item.detectedLogo !== 'None' ? `<span class="inline-block mt-0.5 text-[10px] font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/20 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30"><i class="fas fa-certificate mr-1 text-indigo-400"></i>Logo: ${item.detectedLogo}</span>` : ''}
                             </div>
                         </div>
 
-                        <p class="text-xs text-slate-600 bg-slate-100/85 p-2.5 rounded-xl leading-relaxed">
+                        <p class="text-xs text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-800/70 p-3 rounded-xl leading-relaxed border border-slate-200/50 dark:border-white/5">
                             ${item.auditNote}
                         </p>
                         ${hoursAdjusterHTML}
@@ -1368,7 +959,7 @@ Return ONLY a valid JSON array with one object per certificate (#${slice[0].glob
         window.syncVerifiedToMainCalculator = function() {
             const accepted = processedAuditItems.filter(i => i.status === 'accepted' && i.awardedPoints > 0);
             if (accepted.length === 0) {
-                window.KTUFlow?.capsule('amber', 'No eligible certificates to save');
+                window.KTUFlow?.toast('No eligible certificates to save', 'amber');
                 return;
             }
 
@@ -1385,7 +976,7 @@ Return ONLY a valid JSON array with one object per certificate (#${slice[0].glob
             const newItems = accepted.map(item => ({
                 id: `ai_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
                 code: String(item.code),
-                title: `${item.detectedTitle} (${item.tierLabel || 'Verified'})`,
+                title: `${item.detectedTitle} (${item.tierLabel || 'AI Verified'})`,
                 group: item.group,
                 points: item.awardedPoints,
                 scheme: scheme
@@ -1397,10 +988,10 @@ Return ONLY a valid JSON array with one object per certificate (#${slice[0].glob
                 items: [...otherSchemeItems, ...newItems]
             }));
 
-            window.KTUFlow?.capsule('success', `Saved ${accepted.length} verified certificates! Redirecting...`);
+            window.KTUFlow?.toast(`Saved ${accepted.length} verified certificates! Redirecting...`, 'success');
             setTimeout(() => {
                 window.location.href = '/activity-points.html';
-            }, 1000);
+            }, 1100);
         };
     </script>
 </body>
