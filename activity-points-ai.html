@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <title>AI Activity Points Calculator | Kerala Timetable</title>
-    <meta name="description" content="Upload your B.Tech certificates (Coursera, NPTEL, IEEE, NSS, Internships, Hackathons) and let Kerala Timetable's AI Activity Points Calculator automatically calculate your exact KTU Activity Points and % progress.">
+    <meta name="description" content="Upload your B.Tech certificates and calculate your KTU Activity Points and percentage progress based on official KTU 2024 & 2019 Handbook rules.">
     <link rel="canonical" href="https://keralatimetable.in/activity-points-ai.html" />
     <link rel="icon" href="/favicon.png" type="image/png">
 
     <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- PDF.js for client-side PDF certificate rendering + text layer extraction -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
     <style>
@@ -20,106 +18,63 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             overflow-x: hidden;
             background: 
-                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.65) 0px, transparent 52%),
-                radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.55) 0px, transparent 52%),
-                radial-gradient(at 100% 100%, rgba(224, 231, 255, 0.5) 0px, transparent 52%),
-                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.45) 0px, transparent 52%),
+                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.55) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.45) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(224, 231, 255, 0.45) 0px, transparent 50%),
                 #f8fafc;
             min-height: 100vh;
             letter-spacing: -0.01em;
         }
 
-        /* GPU Accelerated Ambient Background */
-        @keyframes floatOrb {
-            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(24px, -18px, 0) scale(1.04); }
-        }
-        .ambient-orb { animation: floatOrb 16s ease-in-out infinite; will-change: transform; }
-        .ambient-orb-delayed { animation: floatOrb 20s ease-in-out 3s infinite reverse; will-change: transform; }
-
-        /* Premium Liquid Glass Surfaces */
         .real-glass {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.68) 100%);
-            backdrop-filter: blur(28px) saturate(190%);
-            -webkit-backdrop-filter: blur(28px) saturate(190%);
-            border: 1.5px solid rgba(15, 23, 42, 0.11);
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95), 0 16px 40px -10px rgba(31, 38, 135, 0.08);
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1.5px solid rgba(15, 23, 42, 0.10);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95), 0 12px 32px -8px rgba(15, 23, 42, 0.06);
         }
 
         .result-glass {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.78) 100%);
-            backdrop-filter: blur(20px) saturate(185%);
-            -webkit-backdrop-filter: blur(20px) saturate(185%);
-            border: 1.5px solid rgba(15, 23, 42, 0.10);
-            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.95), 0 6px 20px -4px rgba(15, 23, 42, 0.04);
-            transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border: 1.5px solid rgba(15, 23, 42, 0.09);
+            box-shadow: 0 4px 16px -4px rgba(15, 23, 42, 0.04);
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
         .result-glass:hover {
-            transform: translate3d(0, -3px, 0);
-            background: rgba(255, 255, 255, 0.98);
-            border-color: rgba(79, 70, 229, 0.45);
-            box-shadow: inset 0 1px 0 0 #ffffff, 0 16px 32px -6px rgba(79, 70, 229, 0.12);
+            transform: translateY(-2px);
+            border-color: rgba(79, 70, 229, 0.35);
         }
 
         .inner-glass {
-            background: rgba(255, 255, 255, 0.76);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1.5px solid rgba(15, 23, 42, 0.10);
+            background: rgba(255, 255, 255, 0.72);
+            border: 1.5px solid rgba(15, 23, 42, 0.09);
         }
 
         .glass-input {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1.5px solid rgba(15, 23, 42, 0.14);
             color: #0f172a;
-            transition: all 0.22s ease;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
         .glass-input:focus {
             outline: none;
             background: #ffffff;
             border-color: #4f46e5;
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.14);
         }
 
-        /* Smart Dropzone with Scanner Animation */
         .dropzone-border {
-            border: 2.5px dashed rgba(79, 70, 229, 0.4);
-            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            position: relative;
-            overflow: hidden;
+            border: 2px dashed rgba(79, 70, 229, 0.35);
+            transition: border-color 0.2s ease, background 0.2s ease;
         }
         .dropzone-border:hover, .dropzone-border.drag-over {
             border-color: #4f46e5;
-            background: rgba(79, 70, 229, 0.04);
-            transform: scale(1.01);
-        }
-        .scanner-line {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, transparent, #4f46e5, transparent);
-            box-shadow: 0 0 15px 2px rgba(79, 70, 229, 0.5);
-            opacity: 0;
-            z-index: 10;
-        }
-        @keyframes scanMove {
-            0% { transform: translateY(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(100%); opacity: 0; }
-        }
-        .is-scanning .scanner-line {
-            animation: scanMove 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(79, 70, 229, 0.03);
         }
 
-        /* Entrance Animations */
-        @keyframes springUp {
-            from { opacity: 0; transform: translate3d(0, 20px, 0) scale(0.98); }
-            to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-        }
-        .spring-in { animation: springUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards; will-change: transform, opacity; }
-        
-        .progress-bar-fill { transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
-
+        .progress-bar-fill { transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -127,64 +82,45 @@
 
 <body class="antialiased min-h-screen flex flex-col relative text-slate-800 selection:bg-indigo-600 selection:text-white">
 
-    <!-- Ambient Glow Orbs -->
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
-        <div class="ambient-orb absolute -top-20 -left-20 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-indigo-400/25 blur-[90px]"></div>
-        <div class="ambient-orb-delayed absolute top-1/3 -right-24 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-emerald-400/20 blur-[95px]"></div>
-    </div>
-
     <div id="navigation-container" class="z-50 sticky top-0"></div>
 
     <!-- MAIN CONTENT -->
-    <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-24 w-full flex-grow relative z-10">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-6 sm:pt-9 pb-20 w-full flex-grow relative z-10">
 
-        <!-- Top Navigation -->
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-6 spring-in">
-            <a href="/activity-points.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/85 border border-slate-200/90 text-xs sm:text-sm font-extrabold text-slate-700 hover:text-indigo-600 shadow-sm transition-all active:scale-95">
-                <i class="fas fa-arrow-left text-indigo-500"></i>
+        <!-- Top Back Link -->
+        <div class="flex items-center justify-between gap-3 mb-5">
+            <a href="/activity-points.html" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/85 border border-slate-200 text-xs sm:text-sm font-bold text-slate-700 hover:text-indigo-600 shadow-sm transition-all active:scale-95">
+                <i class="fas fa-arrow-left text-indigo-500 text-xs"></i>
                 <span>Back to Manual Calculator</span>
             </a>
-
-            <div class="flex items-center gap-2">
-                <span id="cached-count-pill" class="hidden px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-extrabold">
-                    <i class="fas fa-bolt mr-1"></i><span id="cached-count-num">0</span> Instant Memory
-                </span>
-                <div class="px-3.5 py-1.5 rounded-full bg-indigo-50/80 border border-indigo-200/80 text-indigo-700 text-xs font-bold flex items-center gap-2 shadow-sm">
-                    <span class="relative flex h-2 w-2">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
-                    </span>
-                    <span>Hybrid PDF-OCR + Vision AI</span>
-                </div>
-            </div>
         </div>
 
-        <!-- Hero Heading -->
-        <div class="text-center mb-8 max-w-2xl mx-auto spring-in" style="animation-delay: 50ms;">
-            <h1 class="text-3xl sm:text-4xl md:text-[2.75rem] font-black text-slate-900 tracking-tight leading-tight mb-3">
-                AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points</span> Calculator
+        <!-- Clean Heading -->
+        <div class="text-center mb-7 max-w-2xl mx-auto">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-2">
+                AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-600">Activity Points</span> Calculator
             </h1>
-            <p class="text-slate-600 text-sm sm:text-base font-medium leading-relaxed">
-                Drop up to <strong>40 certificates</strong> at once. Extracts embedded PDF text, inspects visual logos (Coursera, IEEE, NPTEL, NITs), enforces official KTU Handbook caps, and calculates your exact points &amp; <strong>% progress</strong>.
+            <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
+                Upload your certificates (PDFs or images) to automatically verify eligibility, apply KTU Handbook caps, and calculate your points and percentage progress.
             </p>
         </div>
 
-        <!-- ==================== STEP 1: SETTINGS & SMART DROPZONE ==================== -->
-        <section id="upload-stage" class="real-glass rounded-3xl p-5 sm:p-8 mb-8 spring-in" style="animation-delay: 100ms;">
+        <!-- ==================== STEP 1: SETTINGS & UPLOAD ==================== -->
+        <section class="real-glass rounded-3xl p-4 sm:p-7 mb-7">
             
             <!-- Context Settings -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pb-6 mb-6 border-b border-slate-200/70">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pb-5 mb-5 border-b border-slate-200/70">
                 <div>
-                    <label class="block text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">KTU Scheme</label>
-                    <select id="ai-scheme" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-bold cursor-pointer shadow-sm">
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">KTU Scheme</label>
+                    <select id="ai-scheme" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold cursor-pointer">
                         <option value="2024" selected>2024 Scheme (120 Points)</option>
                         <option value="2019">2019 Scheme (100 Points)</option>
                     </select>
                 </div>
 
                 <div>
-                    <label class="block text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Student Category</label>
-                    <select id="ai-category" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-bold cursor-pointer shadow-sm">
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">Student Category</label>
+                    <select id="ai-category" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold cursor-pointer">
                         <option value="regular" selected>Regular Student (100%)</option>
                         <option value="lateral">Lateral Entry (75%)</option>
                         <option value="pwd">PwD Student (50%)</option>
@@ -192,8 +128,8 @@
                 </div>
 
                 <div>
-                    <label class="block text-[11px] font-extrabold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">B.Tech Admission Year</label>
-                    <select id="ai-admission-year" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-4 py-3 text-sm font-bold cursor-pointer shadow-sm">
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 ml-1">B.Tech Admission Year</label>
+                    <select id="ai-admission-year" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold cursor-pointer">
                         <option value="2026">2026 Admission</option>
                         <option value="2025" selected>2025 Admission</option>
                         <option value="2024">2024 Admission</option>
@@ -204,150 +140,192 @@
                 </div>
             </div>
 
-            <!-- Smart Dropzone -->
-            <div id="cert-dropzone" onclick="document.getElementById('cert-file-input').click()" class="dropzone-border inner-glass rounded-3xl p-8 sm:p-12 text-center cursor-pointer shadow-inner relative">
-                <div class="scanner-line"></div>
+            <!-- Upload Zone -->
+            <div id="cert-dropzone" onclick="document.getElementById('cert-file-input').click()" class="dropzone-border inner-glass rounded-2xl p-6 sm:p-9 text-center cursor-pointer">
                 <input type="file" id="cert-file-input" accept="image/*,.pdf" multiple class="hidden" onchange="handleFilesSelected(this.files)">
                 
-                <div class="w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center mx-auto mb-4 text-3xl shadow-sm transform transition-transform group-hover:scale-110">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center mx-auto mb-3 text-xl">
                     <i class="fas fa-file-arrow-up"></i>
                 </div>
-                <h3 class="text-base sm:text-lg font-black text-slate-900 mb-1.5">
-                    Tap to Select or Drag &amp; Drop Certificates
+                <h3 class="text-sm sm:text-base font-bold text-slate-900 mb-1">
+                    Select or Drop Certificates Here
                 </h3>
-                <p class="text-xs sm:text-sm font-medium text-slate-500 max-w-md mx-auto leading-relaxed">
-                    Upload <strong>PDFs, JPG, PNG, WebP</strong> (Select up to 40 files). <br>PDF text layers &amp; logos are extracted privately in your browser.
+                <p class="text-xs text-slate-500 max-w-md mx-auto">
+                    Supports PDF, JPG, PNG, and WebP (up to 40 files at once).
                 </p>
             </div>
 
-            <!-- Queued Files Grid -->
-            <div id="queued-files-section" class="hidden mt-6 pt-6 border-t border-slate-200/70">
-                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-                    <span class="text-xs font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center"><i class="fas fa-layer-group text-[10px]"></i></span>
-                        Queued (<span id="queued-count">0</span>/40)
+            <!-- Queued Files Grid (Instant Selection!) -->
+            <div id="queued-files-section" class="hidden mt-5 pt-5 border-t border-slate-200/70">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="text-xs font-bold text-slate-700">
+                        Selected Certificates (<span id="queued-count">0</span>/40)
                     </span>
                     <div class="flex items-center gap-2">
-                        <button type="button" onclick="document.getElementById('cert-file-input').click()" class="px-3.5 py-2 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50 shadow-sm transition-all active:scale-95">
+                        <button type="button" onclick="document.getElementById('cert-file-input').click()" class="px-3 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50">
                             <i class="fas fa-plus text-indigo-500 mr-1"></i> Add More
                         </button>
-                        <button type="button" onclick="clearQueuedFiles()" class="px-3.5 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 text-xs font-bold shadow-sm transition-all active:scale-95">
+                        <button type="button" onclick="clearQueuedFiles()" class="px-3 py-1.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold hover:bg-rose-100">
                             Clear All
                         </button>
                     </div>
                 </div>
 
-                <div id="queued-thumbnails-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 max-h-72 overflow-y-auto p-1 hide-scrollbar"></div>
+                <div id="queued-thumbnails-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5 max-h-60 overflow-y-auto p-1 hide-scrollbar"></div>
 
-                <!-- Live Scanning Progress UI -->
-                <div id="scan-progress-wrap" class="hidden mt-5 inner-glass rounded-2xl p-5 shadow-sm">
-                    <div class="flex items-center justify-between text-xs font-extrabold mb-2.5">
+                <!-- Progress Bar -->
+                <div id="scan-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4">
+                    <div class="flex items-center justify-between text-xs font-bold mb-2">
                         <span id="scan-status-text" class="text-indigo-600 flex items-center gap-2">
-                            <i class="fas fa-circle-notch fa-spin text-sm"></i> <span>Initializing Hybrid Vision + OCR Engine...</span>
+                            <i class="fas fa-circle-notch fa-spin"></i> <span>Preparing certificates...</span>
                         </span>
-                        <span id="scan-pct-text" class="text-slate-700 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-md font-black">0%</span>
+                        <span id="scan-pct-text" class="text-slate-700 font-bold">0%</span>
                     </div>
-                    <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden shadow-inner">
-                        <div id="scan-progress-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 via-blue-500 to-emerald-500 rounded-full" style="width: 0%"></div>
+                    <div class="w-full h-2 bg-slate-200/80 rounded-full overflow-hidden">
+                        <div id="scan-progress-bar" class="progress-bar-fill h-full bg-indigo-600 rounded-full" style="width: 0%"></div>
                     </div>
                 </div>
 
-                <button type="button" id="btn-run-audit" onclick="runAICertificateAudit()" class="w-full mt-5 bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500 hover:from-indigo-500 hover:to-emerald-400 active:scale-[0.99] text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-indigo-500/25 transition-all flex items-center justify-center gap-2.5 text-sm sm:text-base">
-                    <i class="fas fa-wand-magic-sparkles"></i>
-                    <span>Analyze Certificates &amp; Calculate Points (%)</span>
+                <button type="button" id="btn-run-audit" onclick="runAICertificateAudit()" class="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 active:scale-[0.99] text-white font-bold py-3.5 px-6 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 text-sm">
+                    <i class="fas fa-calculator"></i>
+                    <span>Calculate Activity Points</span>
                 </button>
             </div>
         </section>
 
-        <!-- ==================== STEP 2: AI CALCULATOR RESULTS DASHBOARD ==================== -->
-        <section id="audit-results-section" class="hidden space-y-7 spring-in">
+        <!-- ==================== STEP 2: RESULTS & % PROGRESS ==================== -->
+        <section id="audit-results-section" class="hidden space-y-6">
             
-            <div class="real-glass rounded-[2rem] p-5 sm:p-7 shadow-lg">
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 pb-6 mb-6 border-b border-slate-200/70">
-                    <div>
-                        <div class="flex flex-wrap items-center gap-2 mb-3">
-                            <span class="inline-block px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-[10px] font-black uppercase tracking-widest">
-                                <i class="fas fa-check-double mr-1"></i> Calculation Complete
-                            </span>
-                            <span id="audit-overall-pct-badge" class="inline-block px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 text-xs font-black">
+            <div class="real-glass rounded-3xl p-5 sm:p-6">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-5 mb-5 border-b border-slate-200/70">
+                    <div class="w-full md:w-auto">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <span class="text-xs font-bold text-slate-500">Total Eligible Points</span>
+                            <span id="audit-overall-pct-badge" class="px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 text-xs font-bold">
                                 0% Completed
                             </span>
                         </div>
-                        <div class="flex items-baseline gap-2.5 mb-1.5">
-                            <span id="audit-total-pts" class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">0</span>
-                            <span class="text-sm font-bold text-slate-500">eligible points out of <span id="audit-target-pts">120</span> (<span id="audit-overall-pct-inline" class="text-indigo-600 font-black">0%</span>)</span>
+                        <div class="flex items-baseline gap-2 mb-2">
+                            <span id="audit-total-pts" class="text-3xl sm:text-4xl font-extrabold text-slate-900">0</span>
+                            <span class="text-sm font-semibold text-slate-500">/ <span id="audit-target-pts">120</span> pts (<span id="audit-overall-pct-inline" class="text-indigo-600 font-bold">0%</span>)</span>
                         </div>
-                        <p id="audit-counts-summary" class="text-xs text-slate-600 font-semibold bg-slate-100/80 px-2.5 py-1 rounded-lg inline-block">
-                            0 Accepted • 0 Capped/Duplicate • 0 Rejected
+                        <div class="w-full md:w-72 h-2.5 bg-slate-200/80 rounded-full overflow-hidden mb-2">
+                            <div id="audit-overall-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <p id="audit-counts-summary" class="text-xs text-slate-500 font-medium">
+                            0 Accepted • 0 Capped/Duplicate • 0 Ineligible
                         </p>
                     </div>
 
-                    <button type="button" onclick="syncVerifiedToMainCalculator()" class="w-full md:w-auto px-7 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 active:scale-95 text-white font-black text-sm shadow-xl flex items-center justify-center gap-2.5 transition-all">
-                        <span>Save Points to My Profile</span>
-                        <i class="fas fa-arrow-right"></i>
+                    <button type="button" onclick="syncVerifiedToMainCalculator()" class="w-full md:w-auto px-6 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all">
+                        <i class="fas fa-check"></i>
+                        <span>Save Points to Calculator</span>
                     </button>
                 </div>
 
                 <!-- 3 Group Breakdown Bars with % -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div class="inner-glass rounded-2xl p-4 sm:p-5 border-t-[3px] border-t-blue-500">
-                        <div class="flex justify-between items-center text-xs font-black mb-2">
-                            <span class="text-slate-800">Group I (Co-Curricular)</span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                    <div class="inner-glass rounded-2xl p-4">
+                        <div class="flex justify-between items-center text-xs font-bold mb-1.5">
+                            <span class="text-slate-800">Group I</span>
                             <span id="audit-g1-text" class="text-blue-600">0 / 40 (0%)</span>
                         </div>
-                        <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
-                            <div id="audit-g1-bar" class="progress-bar-fill h-full bg-blue-500 rounded-full" style="width: 0%"></div>
+                        <div class="w-full h-2 bg-slate-200/80 rounded-full overflow-hidden">
+                            <div id="audit-g1-bar" class="progress-bar-fill h-full bg-blue-600 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
 
-                    <div class="inner-glass rounded-2xl p-4 sm:p-5 border-t-[3px] border-t-purple-500">
-                        <div class="flex justify-between items-center text-xs font-black mb-2">
-                            <span class="text-slate-800">Group II (Professional)</span>
+                    <div class="inner-glass rounded-2xl p-4">
+                        <div class="flex justify-between items-center text-xs font-bold mb-1.5">
+                            <span class="text-slate-800">Group II</span>
                             <span id="audit-g2-text" class="text-purple-600">0 / 40 (0%)</span>
                         </div>
-                        <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
-                            <div id="audit-g2-bar" class="progress-bar-fill h-full bg-purple-500 rounded-full" style="width: 0%"></div>
+                        <div class="w-full h-2 bg-slate-200/80 rounded-full overflow-hidden">
+                            <div id="audit-g2-bar" class="progress-bar-fill h-full bg-purple-600 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
 
-                    <div class="inner-glass rounded-2xl p-4 sm:p-5 border-t-[3px] border-t-emerald-500">
-                        <div class="flex justify-between items-center text-xs font-black mb-2">
-                            <span class="text-slate-800">Group III (Advanced)</span>
+                    <div class="inner-glass rounded-2xl p-4">
+                        <div class="flex justify-between items-center text-xs font-bold mb-1.5">
+                            <span class="text-slate-800">Group III</span>
                             <span id="audit-g3-text" class="text-emerald-600">0 / 40 (0%)</span>
                         </div>
-                        <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
-                            <div id="audit-g3-bar" class="progress-bar-fill h-full bg-emerald-500 rounded-full" style="width: 0%"></div>
+                        <div class="w-full h-2 bg-slate-200/80 rounded-full overflow-hidden">
+                            <div id="audit-g3-bar" class="progress-bar-fill h-full bg-emerald-600 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-2 px-2">
-                    <h2 class="text-sm sm:text-base font-black text-slate-900 flex items-center gap-2">
-                        <i class="fas fa-file-invoice text-indigo-500"></i>
-                        <span>Certificate Breakdown &amp; Point Share (%)</span>
+            <!-- Certificate Breakdown Cards -->
+            <div class="space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2 px-1">
+                    <h2 class="text-sm sm:text-base font-bold text-slate-900">
+                        Certificate Breakdown
                     </h2>
-                    <span class="text-[11px] font-bold text-slate-500">
-                        <i class="fas fa-sliders mr-1 text-indigo-500"></i>Spot a wrong rule? Click <strong>"Correct &amp; Train AI"</strong> on any card
+                    <span class="text-xs text-slate-500">
+                        Wrong rule detected? Click <strong>Edit / Suggest Rule</strong> on any card.
                     </span>
                 </div>
-                <div id="audit-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                <div id="audit-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
             </div>
 
         </section>
+
+        <!-- ==================== ADMIN APPROVAL & LOGS PANEL ==================== -->
+        <section id="admin-panel" class="hidden mt-10 pt-8 border-t border-slate-200/80 space-y-6">
+            <div class="real-glass rounded-3xl p-5 sm:p-6">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <div>
+                        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-shield-halved text-indigo-600"></i> Admin Rule Approval &amp; Scan Logs
+                        </h2>
+                        <p class="text-xs text-slate-500">Approve user rule corrections to train the calculator for all students.</p>
+                    </div>
+                    <div id="admin-auth-controls">
+                        <button type="button" onclick="adminLogin()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold shadow-sm">
+                            <i class="fab fa-google mr-1"></i> Admin Sign In
+                        </button>
+                    </div>
+                </div>
+
+                <div id="admin-dashboard-body" class="hidden space-y-6">
+                    <!-- Pending Corrections Queue -->
+                    <div>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-2.5">
+                            Pending User Rule Corrections (<span id="pending-rules-count">0</span>)
+                        </h3>
+                        <div id="pending-rules-list" class="space-y-2.5 max-h-80 overflow-y-auto pr-1"></div>
+                    </div>
+
+                    <!-- Approved Rules Active in System -->
+                    <div class="pt-4 border-t border-slate-200/70">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2.5">
+                            Approved Custom Rules Active (<span id="approved-rules-count">0</span>)
+                        </h3>
+                        <div id="approved-rules-list" class="flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <!-- Recent Certificate Scan Logs -->
+                    <div class="pt-4 border-t border-slate-200/70">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">
+                            Recent Certificate Scans Logged
+                        </h3>
+                        <div id="scan-logs-list" class="space-y-2 max-h-72 overflow-y-auto text-xs pr-1"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- ==================== TRAIN / CORRECT AI MODAL ==================== -->
-    <div id="train-ai-modal" onclick="closeTrainModal()" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-md flex items-center justify-center p-4">
+    <!-- ==================== EDIT / SUGGEST RULE MODAL ==================== -->
+    <div id="train-ai-modal" onclick="closeTrainModal()" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="real-glass bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-slate-200" onclick="event.stopPropagation()">
             <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200/80">
-                <div>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-indigo-600 block">Human-in-the-Loop Feedback</span>
-                    <h3 class="text-base sm:text-lg font-black text-slate-900">Correct Certificate &amp; Train AI</h3>
-                </div>
-                <button type="button" onclick="closeTrainModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-600 flex items-center justify-center">
-                    <i class="fas fa-times"></i>
+                <h3 class="text-base font-extrabold text-slate-900">Edit Certificate Rule</h3>
+                <button type="button" onclick="closeTrainModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center">
+                    <i class="fas fa-times text-xs"></i>
                 </button>
             </div>
 
@@ -355,34 +333,38 @@
 
             <div class="space-y-3.5 text-xs sm:text-sm">
                 <div>
-                    <label class="block text-[11px] font-extrabold text-slate-500 uppercase mb-1">Certificate Title</label>
-                    <input type="text" id="train-cert-title" class="glass-input w-full rounded-xl px-3.5 py-2.5 font-bold">
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Certificate / Event Name</label>
+                    <input type="text" id="train-cert-title" class="glass-input w-full rounded-xl px-3.5 py-2.5 font-semibold">
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-[11px] font-extrabold text-slate-500 uppercase mb-1">Correct KTU Rule Code</label>
-                        <select id="train-cert-code" onchange="autoSuggestPointsForRule()" class="glass-input w-full rounded-xl px-3 py-2.5 font-bold"></select>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">KTU Rule Code</label>
+                        <select id="train-cert-code" onchange="autoSuggestPointsForRule()" class="glass-input w-full rounded-xl px-3 py-2.5 font-semibold"></select>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-extrabold text-slate-500 uppercase mb-1">Eligible Points</label>
-                        <input type="number" id="train-cert-points" min="0" max="40" class="glass-input w-full rounded-xl px-3.5 py-2.5 font-black text-indigo-600">
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Points</label>
+                        <input type="number" id="train-cert-points" min="0" max="40" class="glass-input w-full rounded-xl px-3.5 py-2.5 font-bold text-indigo-600">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-[11px] font-extrabold text-slate-500 uppercase mb-1">Why should this rule apply? (Helps train our prompt)</label>
-                    <input type="text" id="train-cert-note" placeholder="e.g., IEEE Kerala Section State Event = 10 pts under 2.3" class="glass-input w-full rounded-xl px-3.5 py-2.5 font-medium">
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Keyword / Pattern for Admin Approval</label>
+                    <input type="text" id="train-cert-keyword" placeholder="e.g., Coursera, AKSC, Tathva Workshop, YIP" class="glass-input w-full rounded-xl px-3.5 py-2.5">
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Note for Admin Review</label>
+                    <input type="text" id="train-cert-note" placeholder="Why should this rule apply?" class="glass-input w-full rounded-xl px-3.5 py-2.5">
                 </div>
             </div>
 
-            <div class="flex items-center justify-end gap-2.5 mt-6 pt-4 border-t border-slate-200/80">
-                <button type="button" onclick="closeTrainModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold hover:bg-slate-200">
+            <div class="flex items-center justify-end gap-2 mt-5 pt-4 border-t border-slate-200/80">
+                <button type="button" onclick="closeTrainModal()" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold">
                     Cancel
                 </button>
-                <button type="button" onclick="submitTrainCorrection()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-black shadow-lg shadow-indigo-500/25 flex items-center gap-1.5">
-                    <i class="fas fa-bolt"></i>
-                    <span>Apply Fix &amp; Send Training Signal</span>
+                <button type="button" onclick="submitTrainCorrection()" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-sm">
+                    Apply &amp; Submit for Approval
                 </button>
             </div>
         </div>
@@ -392,73 +374,90 @@
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-bold text-sm sm:text-base mb-1">Kerala Timetable</h3>
             <p class="text-slate-500 text-xs leading-relaxed max-w-lg mx-auto">
-                AI Activity Points Calculator applies KTU 2024 &amp; 2019 Handbook rules. Final verification is subject to your college Senior Faculty Advisor (SFA).
+                Based on the Official APJAKTU 2024 &amp; 2019 Activity Points Handbooks.
             </p>
+            <div class="mt-2 text-xs text-slate-400">
+                <button type="button" onclick="toggleAdminSection()" class="hover:text-slate-600 font-bold">
+                    <i class="fas fa-lock text-[10px] mr-1"></i>Admin Portal
+                </button>
+            </div>
         </div>
     </footer>
 
     <!-- Global Components Script -->
     <script src="/components.js?v=18" onerror="this.onerror=null;this.src='components.js';"></script>
 
-    <script>
+    <!-- Firebase Modular SDK + Calculator Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onValue, remove, query as dbQuery, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
         if (typeof loadNavigation === 'function') loadNavigation('activity', '', false);
         if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
+        // --- FIREBASE SETUP ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyAqJ6wDmjJKCVip3dhgBDi35BzxC0QhIac",
+            authDomain: "keralatimetable-5e155.firebaseapp.com",
+            databaseURL: "https://keralatimetable-5e155-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "keralatimetable-5e155",
+            storageBucket: "keralatimetable-5e155.firebasestorage.app",
+            messagingSenderId: "95059742429",
+            appId: "1:95059742429:web:6ebcae342db9179b509534",
+            measurementId: "G-G2WYE8SQ4S"
+        };
+        const ADMIN_EMAIL = "keralatimetable@gmail.com";
+
+        const fbApp = initializeApp(firebaseConfig);
+        const db = getDatabase(fbApp);
+        const auth = getAuth(fbApp);
+        const provider = new GoogleAuthProvider();
+
         const HF_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/gemini-auth";
-        const HF_GEMINI_AUTH_URL = HF_AUTH_URL;
-        const HF_TG_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/telegram-auth";
         const STORAGE_KEY = 'ktu_activity_points_tracker_v2';
         const CERT_CACHE_KEY = 'ktu_ai_cert_cache_v2';
 
+        // Approved Rules synced live from Firebase (/ktu_ai_approved_rules)
+        let approvedCustomRules = [];
+
+        onValue(ref(db, 'ktu_ai_approved_rules'), (snap) => {
+            const val = snap.val();
+            approvedCustomRules = val ? Object.keys(val).map(id => ({ id, ...val[id] })) : [];
+            renderApprovedRulesAdmin();
+        });
+
         // --------------------------------------------------------------------------------
-        // 1. LOCAL FINGERPRINT CACHE (Instant 0ms Re-Scans & Remembers Corrections)
+        // 1. LOCAL FINGERPRINT CACHE
         // --------------------------------------------------------------------------------
         function loadCertCache() {
-            try {
-                return JSON.parse(localStorage.getItem(CERT_CACHE_KEY) || '{}');
-            } catch (e) { return {}; }
+            try { return JSON.parse(localStorage.getItem(CERT_CACHE_KEY) || '{}'); }
+            catch (e) { return {}; }
         }
         function saveToCertCache(fingerprint, resultObj) {
             try {
                 const cache = loadCertCache();
                 cache[fingerprint] = { ...resultObj, cachedAt: Date.now() };
                 localStorage.setItem(CERT_CACHE_KEY, JSON.stringify(cache));
-                updateCacheBadgeUI();
             } catch (e) {}
         }
         function getFileFingerprint(file) {
             return `${file.name.toLowerCase().trim()}_${file.size}_${file.lastModified || 0}`;
         }
-        function updateCacheBadgeUI() {
-            const count = Object.keys(loadCertCache()).length;
-            const pill = document.getElementById('cached-count-pill');
-            const num = document.getElementById('cached-count-num');
-            if (count > 0 && pill && num) {
-                num.innerText = count;
-                pill.classList.remove('hidden');
-            }
-        }
-        updateCacheBadgeUI();
 
         // --------------------------------------------------------------------------------
-        // 2. 3-PROVIDER AI ROUTER (Google Gemini + Groq Vision + OpenRouter Vision)
+        // 2. MULTI-ENGINE AI ROUTER (No model names shown in UI)
         // --------------------------------------------------------------------------------
         const GEMINI_MODELS = [
             "gemini-2.5-flash",
             "gemini-2.5-flash-lite",
             "gemini-2.0-flash",
             "gemini-3.8-flash",
-            "gemini-3.5-flash-lite",
-            "gemini-3.6-flash",
-            "gemini-3.1-flash-lite",
-            "gemini-3-flash"
+            "gemini-3.5-flash-lite"
         ];
-        const GROQ_MODELS = [
-            "qwen/qwen3.8-27b"
-        ];
+        const GROQ_MODELS = ["qwen/qwen3.8-27b"];
         const OPENROUTER_MODELS = [
             "qwen/qwen2.5-vl-72b-instruct:free",
-            "qwen/qwen2.5-vl-72b-instruct",
             "google/gemma-3-27b-it:free",
             "meta-llama/llama-3.2-11b-vision-instruct:free"
         ];
@@ -469,13 +468,11 @@
         function extractJSONArray(rawText) {
             if (!rawText) return [];
             const cleaned = String(rawText).replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
-
             const firstBracket = cleaned.indexOf('[');
             const lastBracket = cleaned.lastIndexOf(']');
             if (firstBracket !== -1 && lastBracket !== -1 && lastBracket > firstBracket) {
                 return JSON.parse(cleaned.slice(firstBracket, lastBracket + 1));
             }
-
             const firstBrace = cleaned.indexOf('{');
             const lastBrace = cleaned.lastIndexOf('}');
             if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
@@ -485,7 +482,6 @@
                 if (foundArr) return foundArr;
                 return [obj];
             }
-
             return JSON.parse(cleaned);
         }
 
@@ -494,21 +490,16 @@
             const gemKey  = decode(authData.k);
             const groqKey = decode(authData.g);
             const orKey   = decode(authData.o);
-
             const imageList = Array.isArray(b64Images) ? b64Images : [b64Images];
 
-            // Pool 1: Google Gemini
             if (gemKey) {
-                const partsPayload = imageList.map(b64 => ({
-                    inlineData: { mimeType: "image/jpeg", data: b64 }
-                }));
+                const partsPayload = imageList.map(b64 => ({ inlineData: { mimeType: "image/jpeg", data: b64 } }));
                 partsPayload.push({ text: promptText });
 
                 for (let attempt = 0; attempt < GEMINI_MODELS.length; attempt++) {
                     const model = GEMINI_MODELS[(currentGeminiIdx + attempt) % GEMINI_MODELS.length];
-                    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${gemKey}`;
                     try {
-                        const res = await fetch(url, {
+                        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${gemKey}`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
@@ -517,10 +508,8 @@
                             })
                         });
                         if (!res.ok) continue;
-
                         const data = await res.json();
-                        const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
-                        const parsed = extractJSONArray(rawText);
+                        const parsed = extractJSONArray(data.candidates?.[0]?.content?.parts?.[0]?.text || "");
                         if (Array.isArray(parsed) && parsed.length > 0) {
                             currentGeminiIdx = (currentGeminiIdx + attempt + 1) % GEMINI_MODELS.length;
                             return parsed;
@@ -529,25 +518,15 @@
                 }
             }
 
-            // Pool 2: Groq Vision (qwen/qwen3.8-27b)
             if (groqKey) {
-                const contentParts = imageList.map(b64 => ({
-                    type: "image_url",
-                    image_url: { url: `data:image/jpeg;base64,${b64}` }
-                }));
-                contentParts.push({
-                    type: "text",
-                    text: promptText + "\n\nCRITICAL: Return ONLY a raw JSON array. No markdown formatting, no explanations."
-                });
+                const contentParts = imageList.map(b64 => ({ type: "image_url", image_url: { url: `data:image/jpeg;base64,${b64}` } }));
+                contentParts.push({ type: "text", text: promptText + "\n\nReturn ONLY a raw JSON array." });
 
                 for (const gModel of GROQ_MODELS) {
                     try {
                         const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                             method: "POST",
-                            headers: {
-                                "Authorization": `Bearer ${groqKey}`,
-                                "Content-Type": "application/json"
-                            },
+                            headers: { "Authorization": `Bearer ${groqKey}`, "Content-Type": "application/json" },
                             body: JSON.stringify({
                                 model: gModel,
                                 temperature: 0.1,
@@ -556,25 +535,16 @@
                             })
                         });
                         if (!res.ok) continue;
-
                         const data = await res.json();
-                        const rawText = data.choices?.[0]?.message?.content || "";
-                        const parsed = extractJSONArray(rawText);
+                        const parsed = extractJSONArray(data.choices?.[0]?.message?.content || "");
                         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
                     } catch (e) { continue; }
                 }
             }
 
-            // Pool 3: OpenRouter Vision (qwen/qwen2.5-vl-72b-instruct)
             if (orKey) {
-                const contentParts = imageList.map(b64 => ({
-                    type: "image_url",
-                    image_url: { url: `data:image/jpeg;base64,${b64}` }
-                }));
-                contentParts.push({
-                    type: "text",
-                    text: promptText + "\n\nCRITICAL: Return ONLY a raw JSON array. No markdown formatting, no explanations."
-                });
+                const contentParts = imageList.map(b64 => ({ type: "image_url", image_url: { url: `data:image/jpeg;base64,${b64}` } }));
+                contentParts.push({ type: "text", text: promptText + "\n\nReturn ONLY a raw JSON array." });
 
                 for (let attempt = 0; attempt < OPENROUTER_MODELS.length; attempt++) {
                     const model = OPENROUTER_MODELS[(currentOrIdx + attempt) % OPENROUTER_MODELS.length];
@@ -584,20 +554,13 @@
                             headers: {
                                 "Authorization": `Bearer ${orKey}`,
                                 "Content-Type": "application/json",
-                                "HTTP-Referer": "https://keralatimetable.in",
-                                "X-Title": "Kerala Timetable AI Activity Points Calculator"
+                                "HTTP-Referer": "https://keralatimetable.in"
                             },
-                            body: JSON.stringify({
-                                model: model,
-                                messages: [{ role: "user", content: contentParts }],
-                                temperature: 0.1
-                            })
+                            body: JSON.stringify({ model, messages: [{ role: "user", content: contentParts }], temperature: 0.1 })
                         });
                         if (!res.ok) continue;
-
                         const data = await res.json();
-                        const rawText = data.choices?.[0]?.message?.content || "";
-                        const parsed = extractJSONArray(rawText);
+                        const parsed = extractJSONArray(data.choices?.[0]?.message?.content || "");
                         if (Array.isArray(parsed) && parsed.length > 0) {
                             currentOrIdx = (currentOrIdx + attempt + 1) % OPENROUTER_MODELS.length;
                             return parsed;
@@ -606,11 +569,11 @@
                 }
             }
 
-            throw new Error("All AI Vision Engines Exhausted");
+            throw new Error("Calculation service busy");
         }
 
         // --------------------------------------------------------------------------------
-        // 3. KTU HANDBOOK RULES + DETERMINISTIC JS POINT SANITIZER MATRIX
+        // 3. KTU HANDBOOK RULES + ADMIN APPROVED FIREBASE RULES SANITIZER
         // --------------------------------------------------------------------------------
         const KTU_2024_RULES = {
             "1.1": { group: "Group I", max: 40, exclusive: true, defaultPts: 5,  name: "Sports/Games/Arts Participation" },
@@ -680,7 +643,6 @@
             "3.17": { group: "Group III", max: 40, exclusive: false, defaultPts: 20, name: "KTU Approved Skilling Course (Coursera/NPTEL)" }
         };
 
-        // Exact KTU Level Matrix (Prevents AI from hallucinating wrong numbers for L1-L5)
         const LEVEL_POINT_MATRIX = {
             "1.1": { L1: 1, L2: 5,  L3: 10, L4: 20, L5: 40 },
             "1.2": { L1: 5, L2: 10, L3: 20, L4: 40, L5: 40 },
@@ -691,7 +653,6 @@
             "2.4": { L1: 3, L2: 7,  L3: 15, L4: 25, L5: 35 }
         };
 
-        // Deterministic Sanitizer: overrides AI hallucinations using extracted metadata & KTU rules
         function sanitizeWithKTURules(rawItem, certObj, admissionYear) {
             const item = { ...rawItem };
             const code = String(item.code || '').trim();
@@ -699,21 +660,31 @@
             const titleLower = (item.detectedTitle || '').toLowerCase();
             const logoLower = (item.detectedLogo || '').toLowerCase();
 
-            // 1. Pre-Admission Year Check (Driving License 1.5 or pre-college certificates)
+            // 1. Check Admin-Approved Firebase Custom Rules First!
+            for (const custom of approvedCustomRules) {
+                const kw = (custom.keyword || '').toLowerCase().trim();
+                if (kw && (titleLower.includes(kw) || logoLower.includes(kw) || pdfText.includes(kw))) {
+                    item.code = custom.code;
+                    item.points = Number(custom.points) || 0;
+                    item.eligible = custom.code !== 'none' && item.points > 0;
+                    item.reason = custom.note || `Verified by Admin Rule (${custom.keyword})`;
+                    return item;
+                }
+            }
+
+            // 2. Pre-Admission Year Check
             const issueYr = parseInt(item.issueYear, 10);
             if (issueYr && issueYr > 2000 && issueYr < admissionYear) {
                 item.eligible = false;
                 item.points = 0;
-                item.reason = `Issued in ${issueYr} (Before B.Tech Admission Year ${admissionYear}). KTU only counts achievements earned during B.Tech.`;
+                item.reason = `Issued in ${issueYr} (Before B.Tech Admission Year ${admissionYear}).`;
                 return item;
             }
 
-            // 2. Coursera / NPTEL / SWAYAM / Spoken Tutorial Deterministic Override (Code 3.17)
+            // 3. Coursera / NPTEL / SWAYAM (Code 3.17)
             if (code === "3.17" || logoLower.includes("coursera") || logoLower.includes("nptel") || pdfText.includes("coursera.org/verify") || pdfText.includes("nptel")) {
                 item.code = "3.17";
                 item.eligible = true;
-
-                // Check NPTEL Weeks in PDF Text
                 if (pdfText.includes("12 week") || titleLower.includes("12 week")) {
                     item.points = 40;
                     item.tierLabel = "NPTEL 12-Week Course (40 pts)";
@@ -723,9 +694,9 @@
                 } else if (pdfText.includes("4 week") || titleLower.includes("4 week")) {
                     item.points = 15;
                     item.tierLabel = "NPTEL 4-Week Course (15 pts)";
-                } else if (pdfText.includes("specialization") || pdfText.includes("professional certificate") || titleLower.includes("specialization") || titleLower.includes("professional certificate")) {
+                } else if (pdfText.includes("specialization") || pdfText.includes("professional certificate") || titleLower.includes("specialization")) {
                     item.points = 30;
-                    item.tierLabel = "Coursera Specialization / Prof. Cert (30 pts)";
+                    item.tierLabel = "Coursera Specialization (30 pts)";
                 } else if (!item.points || item.points <= 0 || item.points > 40) {
                     item.points = 20;
                     item.tierLabel = "Approved Skilling Course (20 Hrs)";
@@ -733,12 +704,11 @@
                 return item;
             }
 
-            // 3. Level-Based Matrix Override (Codes 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 2.4)
+            // 4. Level Matrix Override
             if (LEVEL_POINT_MATRIX[code] && item.level && LEVEL_POINT_MATRIX[code][item.level]) {
                 item.points = LEVEL_POINT_MATRIX[code][item.level];
             }
 
-            // 4. Fixed-Point Codes Sanitizer
             const fixedCodes = {
                 "1.4": 5, "1.5": 5, "1.6": 5, "1.7": 10, "1.8": 5, "1.9": 10, "1.10": 5,
                 "1.20": 5, "1.21": 5, "2.5": 5, "2.6": 5, "2.7": 10, "2.9": 5,
@@ -762,7 +732,7 @@
         }
 
         // --------------------------------------------------------------------------------
-        // 4. FILE UPLOAD, PDF TEXT LAYER EXTRACTION & PREVIEW LOGIC
+        // 4. INSTANT FILE SELECTION (0ms Lag! Defers heavy rendering until scan time)
         // --------------------------------------------------------------------------------
         const dropzone = document.getElementById('cert-dropzone');
         dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
@@ -773,7 +743,7 @@
             if (e.dataTransfer.files?.length) handleFilesSelected(e.dataTransfer.files);
         });
 
-        async function handleFilesSelected(fileList) {
+        window.handleFilesSelected = function(fileList) {
             const incoming = Array.from(fileList);
             if (queuedCerts.length + incoming.length > 40) {
                 notifyUI('Maximum 40 certificates per batch', 'amber');
@@ -781,43 +751,44 @@
             const allowed = incoming.slice(0, 40 - queuedCerts.length);
             if (!allowed.length) return;
 
-            notifyUI(`Extracting text & rendering ${allowed.length} file(s)...`, 'loading');
-
+            // Add instantly without blocking UI thread!
             for (const file of allowed) {
-                try {
-                    const { dataUrl, extractedText } = await renderFileAndExtractText(file);
-                    queuedCerts.push({
-                        id: `cert_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-                        file,
-                        name: file.name,
-                        fingerprint: getFileFingerprint(file),
-                        canvasDataUrl: dataUrl,
-                        extractedText: extractedText
-                    });
-                } catch (err) {
-                    console.error("Failed to render file:", file.name, err);
-                }
+                const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+                queuedCerts.push({
+                    id: `cert_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+                    file,
+                    name: file.name,
+                    isPdf,
+                    previewUrl: isPdf ? null : URL.createObjectURL(file),
+                    fingerprint: getFileFingerprint(file),
+                    canvasDataUrl: null,
+                    extractedText: ""
+                });
             }
 
             renderQueuedGrid();
-            notifyUI(`${queuedCerts.length} certificate(s) ready`, 'success');
-        }
+            notifyUI(`${queuedCerts.length} certificate(s) added`, 'success');
+        };
 
-        // Renders image AND extracts crisp embedded PDF text (dates, URLs, hours, weeks)
-        async function renderFileAndExtractText(file) {
-            if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+        // Fast Parallel Preparation (Runs during Calculate step with optimized 720px resolution)
+        async function prepareCertItem(certItem) {
+            if (certItem.canvasDataUrl) return certItem;
+            const file = certItem.file;
+
+            if (certItem.isPdf) {
                 const arrayBuffer = await file.arrayBuffer();
                 const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
                 const page = await pdf.getPage(1);
 
-                // Extract crisp embedded text from PDF layer
                 let extractedText = "";
                 try {
                     const textContent = await page.getTextContent();
-                    extractedText = textContent.items.map(item => item.str).join(' ').replace(/\s+/g, ' ').trim().slice(0, 600);
+                    extractedText = textContent.items.map(item => item.str).join(' ').replace(/\s+/g, ' ').trim().slice(0, 550);
                 } catch (e) {}
 
-                const viewport = page.getViewport({ scale: 1.45 });
+                const baseVp = page.getViewport({ scale: 1.0 });
+                const scale = Math.min(1.15, 760 / Math.max(baseVp.width, baseVp.height));
+                const viewport = page.getViewport({ scale });
                 const canvas = document.createElement('canvas');
                 canvas.width = viewport.width;
                 canvas.height = viewport.height;
@@ -825,16 +796,16 @@
                 ctx.fillStyle = '#FFFFFF';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 await page.render({ canvasContext: ctx, viewport }).promise;
-                return {
-                    dataUrl: canvas.toDataURL('image/jpeg', 0.84),
-                    extractedText
-                };
+
+                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.76);
+                certItem.extractedText = extractedText;
+                return certItem;
             } else {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
-                    const url = URL.createObjectURL(file);
+                    const url = certItem.previewUrl || URL.createObjectURL(file);
                     img.onload = () => {
-                        const maxDim = 960;
+                        const maxDim = 760;
                         let w = img.width, h = img.height;
                         if (w > maxDim || h > maxDim) {
                             if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
@@ -847,11 +818,8 @@
                         ctx.fillStyle = '#FFFFFF';
                         ctx.fillRect(0, 0, w, h);
                         ctx.drawImage(img, 0, 0, w, h);
-                        URL.revokeObjectURL(url);
-                        resolve({
-                            dataUrl: canvas.toDataURL('image/jpeg', 0.84),
-                            extractedText: ""
-                        });
+                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.76);
+                        resolve(certItem);
                     };
                     img.onerror = reject;
                     img.src = url;
@@ -870,19 +838,22 @@
             }
             sec.classList.remove('hidden');
 
-            const cache = loadCertCache();
-
             grid.innerHTML = queuedCerts.map((c, idx) => {
-                const isCached = Boolean(cache[c.fingerprint]);
-                const hasPdfText = Boolean(c.extractedText && c.extractedText.length > 10);
+                const thumbSrc = c.canvasDataUrl || c.previewUrl;
+                const previewHTML = thumbSrc
+                    ? `<img src="${thumbSrc}" alt="${c.name}" class="w-full h-16 object-cover rounded-lg mb-1.5 bg-white border border-slate-200">`
+                    : `<div class="w-full h-16 rounded-lg mb-1.5 bg-indigo-50/80 border border-indigo-100 flex flex-col items-center justify-center text-indigo-600">
+                           <i class="fas fa-file-pdf text-lg"></i>
+                           <span class="text-[9px] font-bold uppercase mt-0.5">PDF</span>
+                       </div>`;
+
                 return `
-                    <div class="inner-glass rounded-xl p-2 relative group flex flex-col justify-between shadow-sm">
-                        <button type="button" onclick="removeQueuedCert('${c.id}')" class="absolute top-1 right-1 w-6 h-6 rounded-full bg-slate-900/75 text-white text-[10px] flex items-center justify-center hover:bg-rose-600 transition-colors z-10">
+                    <div class="inner-glass rounded-xl p-2 relative flex flex-col justify-between">
+                        <button type="button" onclick="removeQueuedCert('${c.id}')" class="absolute top-1 right-1 w-5 h-5 rounded-full bg-slate-900/70 text-white text-[10px] flex items-center justify-center hover:bg-rose-600 z-10">
                             <i class="fas fa-times"></i>
                         </button>
-                        ${isCached ? `<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-emerald-600 text-white text-[9px] font-black z-10" title="Cached in local memory"><i class="fas fa-bolt"></i></span>` : (hasPdfText ? `<span class="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-indigo-600 text-white text-[9px] font-black z-10" title="PDF text extracted">PDF+OCR</span>` : '')}
-                        <img src="${c.canvasDataUrl}" alt="${c.name}" class="w-full h-20 object-cover rounded-lg mb-1.5 bg-white border border-slate-200">
-                        <span class="text-[10px] font-extrabold text-slate-700 truncate block">#${idx + 1} ${c.name}</span>
+                        ${previewHTML}
+                        <span class="text-[10px] font-bold text-slate-700 truncate block">#${idx + 1} ${c.name}</span>
                     </div>
                 `;
             }).join('');
@@ -900,7 +871,7 @@
         };
 
         async function createContactSheetBase64(batchItems) {
-            const tileW = 800, tileH = 620, headerH = 38;
+            const tileW = 740, tileH = 560, headerH = 34;
             const cols = batchItems.length === 1 ? 1 : 2;
             const rows = Math.ceil(batchItems.length / 2);
 
@@ -921,8 +892,8 @@
                 ctx.fillStyle = '#1e1b4b';
                 ctx.fillRect(x, y, tileW, headerH);
                 ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 18px Inter, sans-serif';
-                ctx.fillText(`CERTIFICATE #${item.globalIndex} (${item.name.slice(0, 38)})`, x + 14, y + 25);
+                ctx.font = 'bold 16px Inter, sans-serif';
+                ctx.fillText(`CERTIFICATE #${item.globalIndex} (${item.name.slice(0, 36)})`, x + 12, y + 22);
 
                 const img = await new Promise((res) => {
                     const im = new Image();
@@ -931,36 +902,34 @@
                 });
 
                 ctx.fillStyle = '#ffffff';
-                ctx.fillRect(x + 4, y + headerH, tileW - 8, tileH - headerH - 4);
+                ctx.fillRect(x + 3, y + headerH, tileW - 6, tileH - headerH - 3);
 
-                const availW = tileW - 16, availH = tileH - headerH - 12;
+                const availW = tileW - 14, availH = tileH - headerH - 10;
                 const scale = Math.min(availW / img.width, availH / img.height);
                 const drawW = img.width * scale, drawH = img.height * scale;
                 const dx = x + (tileW - drawW) / 2;
-                const dy = y + headerH + 4 + (availH - drawH) / 2;
+                const dy = y + headerH + 3 + (availH - drawH) / 2;
                 ctx.drawImage(img, dx, dy, drawW, drawH);
             }
-            return canvas.toDataURL('image/jpeg', 0.84).split(',')[1];
+            return canvas.toDataURL('image/jpeg', 0.78).split(',')[1];
         }
 
         // --------------------------------------------------------------------------------
-        // 5. HYBRID AI EXECUTION (Cache Check -> PDF Text + Vision Few-Shot -> Sanitizer)
+        // 5. FAST PARALLEL AI CALCULATION + FIREBASE SCAN LOGGING
         // --------------------------------------------------------------------------------
         window.runAICertificateAudit = async function() {
             if (queuedCerts.length === 0) return;
 
             const btn = document.getElementById('btn-run-audit');
-            const dropzoneEl = document.getElementById('cert-dropzone');
             const progWrap = document.getElementById('scan-progress-wrap');
             const progBar = document.getElementById('scan-progress-bar');
             const statusTxt = document.getElementById('scan-status-text');
             const pctTxt = document.getElementById('scan-pct-text');
 
             btn.disabled = true;
-            dropzoneEl.classList.add('is-scanning');
             progWrap.classList.remove('hidden');
-            progBar.style.width = '8%';
-            pctTxt.innerText = '8%';
+            progBar.style.width = '10%';
+            pctTxt.innerText = '10%';
 
             const admissionYear = parseInt(document.getElementById('ai-admission-year').value, 10) || 2025;
             const cache = loadCertCache();
@@ -969,88 +938,85 @@
                 rawAIResults = [];
                 const uncachedQueue = [];
 
-                // Check Local Fingerprint Cache First (0ms instant load for known certificates)
                 queuedCerts.forEach((item, idx) => {
                     const globalIndex = idx + 1;
                     const cachedHit = cache[item.fingerprint];
                     if (cachedHit) {
-                        rawAIResults.push(sanitizeWithKTURules({
-                            ...cachedHit,
-                            certIndex: globalIndex
-                        }, item, admissionYear));
+                        rawAIResults.push(sanitizeWithKTURules({ ...cachedHit, certIndex: globalIndex }, item, admissionYear));
                     } else {
-                        uncachedQueue.push({ ...item, globalIndex });
+                        uncachedQueue.push({ item, globalIndex });
                     }
                 });
 
                 if (uncachedQueue.length > 0) {
+                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Reading ${uncachedQueue.length} certificate(s)...`;
+
+                    // Prepare uncached files in parallel (4 at a time) for maximum speed
+                    for (let i = 0; i < uncachedQueue.length; i += 4) {
+                        const chunk = uncachedQueue.slice(i, i + 4);
+                        await Promise.all(chunk.map(c => prepareCertItem(c.item)));
+                    }
+                    renderQueuedGrid();
+
                     const authRes = await fetch(HF_AUTH_URL, { method: 'POST' });
                     if (!authRes.ok) throw new Error("Auth sync failed");
                     const authData = await authRes.json();
+
+                    const approvedRulesPromptBlock = approvedCustomRules.length > 0
+                        ? `\nADMIN-APPROVED CUSTOM KTU RULES (MUST FOLLOW):\n` + approvedCustomRules.map(r => `- If certificate matches "${r.keyword}": assign Code "${r.code}", eligible: ${r.code !== 'none'}, points: ${r.points} (${r.note || ''})`).join('\n')
+                        : '';
 
                     const batchSize = 4;
                     const totalBatches = Math.ceil(uncachedQueue.length / batchSize);
 
                     for (let b = 0; b < totalBatches; b++) {
-                        const slice = uncachedQueue.slice(b * batchSize, (b + 1) * batchSize);
+                        const slice = uncachedQueue.slice(b * batchSize, (b + 1) * batchSize).map(u => ({
+                            ...u.item,
+                            globalIndex: u.globalIndex
+                        }));
 
-                        statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Hybrid PDF-OCR &amp; Vision inspecting Batch ${b + 1}/${totalBatches}...`;
-                        const pct = Math.round(((b + 0.35) / totalBatches) * 88);
+                        statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Calculating points (Batch ${b + 1} of ${totalBatches})...`;
+                        const pct = Math.round(((b + 0.4) / totalBatches) * 90);
                         progBar.style.width = `${pct}%`;
                         pctTxt.innerText = `${pct}%`;
 
                         const contactSheetB64 = await createContactSheetBase64(slice);
-
-                        // Build Extracted PDF Text Context Block for this batch
                         const extractedTextContext = slice.map(s => 
-                            `CERTIFICATE #${s.globalIndex} (Filename: "${s.name}") Extracted PDF Text: ${s.extractedText ? `"${s.extractedText}"` : '"[Image file - rely on visual OCR]"'}`
+                            `CERTIFICATE #${s.globalIndex} (Filename: "${s.name}") PDF Text: ${s.extractedText ? `"${s.extractedText}"` : '"[Image]"'}`
                         ).join('\n');
 
                         const promptText = `
-You are the Senior Faculty Advisor (SFA) & Official APJAKTU (KTU) B.Tech Activity Points Calculator Engine.
-The student joined B.Tech in Admission Year: ${admissionYear}.
-Inspect each labeled certificate tile in the image AND cross-check with the exact Extracted PDF Text below:
-
+You are the Official APJAKTU (KTU) B.Tech Activity Points Calculator Engine.
+Student Admission Year: ${admissionYear}.
+Inspect each labeled certificate tile AND cross-check with the PDF Text below:
 ${extractedTextContext}
+${approvedRulesPromptBlock}
 
-FEW-SHOT KERALA KTU TRAINING EXAMPLES & STRICT HANDBOOK RULES:
-1. COURSERA & K-DISC/KKEM (Code 3.17):
-   - K-DISC / KKEM provides Coursera licenses to KTU students. Even if "K-DISC" is not printed on the certificate, ALL Coursera certificates (IBM, Google, Meta, DeepLearning.AI, Microsoft, Stanford, etc.) ARE 100% ELIGIBLE under Code "3.17".
-   - Single Coursera Course = 20 points. Coursera Specialization or Professional Certificate = 30 points.
-2. NPTEL / SWAYAM / IIT Spoken Tutorial (Code 3.17):
-   - 12-week NPTEL = 40 pts, 8-week NPTEL = 30 pts, 4-week NPTEL = 15 pts. IIT Bombay Spoken Tutorial = 15 pts.
-   - Unapproved 1-hour or 2-hour commercial webinars (Udemy, Simplilearn, SkillVertex participation webinars) = INELIGIBLE (eligible: false, points: 0).
-3. IEEE / ISTE / ACM / CSI / SAE / ASME COMPETITIONS vs MEMBERSHIPS:
-   - Competition Participation (Code 2.3): L1 (IEEE Student Branch of a college) = 2 pts; L2 (IEEE Travancore/Kochi/Malabar Hub) = 5 pts; L3 (All Kerala Student Congress AKSC / IEEE Kerala Section / State) = 10 pts; L4 (National / AISYWLC / India Council) = 15 pts; L5 (Global / IEEE Xtreme / Region 10) = 20 pts.
-   - Competition Winner (Code 2.4): L1 = 3 pts, L2 = 7 pts, L3 = 15 pts, L4 = 25 pts, L5 = 35 pts.
-   - Society Membership / Execom / Event Coordinator (Code 2.11): Member/Coordinator = 5 pts, Execom = 10 pts, Chair/Secretary = 15 pts.
-4. WORKSHOPS & TECH-FESTS (Code 2.1, 2.2, 2.5):
-   - Code 2.5 (5 pts): Full-time Workshop / Seminar / STTP conducted AT an IIT, NIT, IIIT, or NIRF Top 100 institute. CRITICAL EXCLUSION: Workshops held as part of a cultural fest (like NIT Calicut "Ragam") are EXCLUDED (0 pts). Technical fest workshops at NIT/IIT (like "Tathva") ARE eligible (5 pts).
-   - Code 2.1 Tech-Fest Participation: L1 College=2, L2 Zonal=5, L3 State/Univ=10, L4 National(IIT/NIT)=20, L5 Int'l=30.
-5. NSS / NCC / SPORTS / ARTS / DRIVING LICENSE:
-   - Code 1.1 Sports/Arts Participation: L1 College=1, L2 Zonal=5, L3 Univ/State=10, L4 National=20, L5 Int'l=40.
-   - Code 1.5 Driving License: 5 pts ONLY if LMV (Four-Wheeler) AND issued in or after ${admissionYear}.
-   - Code 1.11 NSS 2-Year Certificate = 30 pts. Code 1.12 7-Day/100-Hr NSS Camp = 20 pts.
-6. HACKATHONS, YIP & INTERNSHIPS:
-   - Code 2.23 Short-Term Internship (min 2 weeks / 10 working days) = 10 pts.
-   - Code 3.5 YIP (Young Innovators Programme - K-DISC): Preliminary=5, District=10, State=20, Final=35.
-   - Code 3.15 National Hackathon Winner (SIH/AICTE) = 30 to 40 pts. Code 3.16 International Hackathon (NASA Space Apps, Imagine Cup, IEEE YESIST12) = 30 pts (Participation) / 40 pts (Winner).
+KTU 2024 HANDBOOK RULES:
+- 3.17 Skilling (Coursera K-DISC, NPTEL, SWAYAM, Spoken Tutorial, ICTAK, ASAP): All Coursera certificates are 100% ELIGIBLE under Code "3.17" (Single Course = 20 pts, Specialization = 30 pts). NPTEL: 4-wk=15, 8-wk=30, 12-wk=40. Unapproved 1-hr webinars = 0 pts (eligible: false).
+- 2.3 / 2.4 IEEE, ISTE, ACM, CSI, SAE, ASME Competitions: Participation (2.3): L1 College Branch=2, L2 Hub=5, L3 State/AKSC=10, L4 National=15, L5 Int'l=20. Winner (2.4): L1=3, L2=7, L3=15, L4=25, L5=35.
+- 2.11 Society Role/Membership: Member/Coord=5, Execom=10, Chair/Secretary=15.
+- 2.5 IIT/NIT/NIRF100 Workshop/Seminar: 5 pts (Excludes cultural fest workshops like Ragam).
+- 2.1 / 2.2 Tech-Fest: Participation (2.1) L1=2, L2=5, L3=10, L4=20, L5=30. Winner (2.2) L1=5, L2=10, L3=20, L4=40.
+- 1.1 / 1.2 / 1.3 Sports & Arts: Participation (1.1) L1=1, L2=5, L3=10, L4=20, L5=40. Winner Single (1.2) L1=5, L2=10, L3=20, L4=40.
+- 1.5 Four-Wheeler Driving License (LMV): 5 pts if issued >= ${admissionYear}.
+- 1.11 NSS 2-Yr = 30 pts. 1.12 NSS 100-Hr Camp = 20 pts. 1.8 Blood Donation = 5 pts.
+- 2.23 Short Internship (>=2 weeks) = 10 pts. 3.1 IV Report = 5 pts. 3.15 National Hackathon Winner = 30-40 pts. 3.16 Int'l Hackathon (NASA Space Apps, Imagine Cup, YESIST12) = 30 pts (Participation) / 40 pts (Winner).
 
-Return ONLY a valid JSON array with one object per certificate in this batch:
+Return ONLY a valid JSON array:
 [
   {
     "certIndex": ${slice[0].globalIndex},
-    "detectedTitle": "Exact Course or Event & Organization Name",
+    "detectedTitle": "Course or Event Name",
     "detectedLogo": "Coursera / NPTEL / IEEE / NIT / NSS / None",
     "eligible": true,
     "code": "3.17",
     "level": "NONE",
-    "achievement": "COMPLETED",
     "issueYear": ${admissionYear},
-    "tierLabel": "Coursera (K-DISC Skilling - 20 Hrs)",
+    "tierLabel": "Approved Skilling Course",
     "points": 20,
-    "eventKey": "unique_normalized_event_name",
-    "reason": "Clear KTU 2024 Handbook justification"
+    "eventKey": "normalized_event_name",
+    "reason": "Brief KTU Handbook reason"
   }
 ]`;
 
@@ -1072,26 +1038,53 @@ Return ONLY a valid JSON array with one object per certificate in this batch:
                     }
                 }
 
-                // Sort results back into original upload order
                 rawAIResults.sort((a, b) => (a.certIndex || 0) - (b.certIndex || 0));
 
                 progBar.style.width = '100%';
                 pctTxt.innerText = '100%';
-                setTimeout(() => progWrap.classList.add('hidden'), 450);
+                setTimeout(() => progWrap.classList.add('hidden'), 350);
 
                 recalculateAuditMath();
+                logScanResultsToFirebase();
+
                 document.getElementById('audit-results-section').classList.remove('hidden');
                 document.getElementById('audit-results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                notifyUI(`Calculated points for ${queuedCerts.length} certificate(s)!`, 'success');
+                notifyUI(`Calculated points for ${queuedCerts.length} certificate(s)`, 'success');
             } catch (err) {
-                console.error("AI Calculation Error:", err);
+                console.error("Calculation Error:", err);
                 progWrap.classList.add('hidden');
                 notifyUI('Calculation failed. Please try again.', 'error');
             } finally {
                 btn.disabled = false;
-                dropzoneEl.classList.remove('is-scanning');
             }
         };
+
+        // Store scan results in Firebase (/ktu_ai_scan_logs)
+        async function logScanResultsToFirebase() {
+            try {
+                const scheme = document.getElementById('ai-scheme').value;
+                const category = document.getElementById('ai-category').value;
+                const admissionYear = document.getElementById('ai-admission-year').value;
+
+                for (const item of processedAuditItems) {
+                    const logRef = push(ref(db, 'ktu_ai_scan_logs'));
+                    await set(logRef, {
+                        title: item.detectedTitle || item.certObj?.name || 'Unknown',
+                        fileName: item.certObj?.name || '',
+                        logo: item.detectedLogo || 'None',
+                        code: String(item.code || 'none'),
+                        points: Number(item.awardedPoints || 0),
+                        rawPoints: Number(item.points || 0),
+                        status: item.status || 'rejected',
+                        reason: item.auditNote || '',
+                        scheme,
+                        category,
+                        admissionYear,
+                        timestamp: new Date().toISOString()
+                    });
+                }
+            } catch (e) {}
+        }
 
         window.adjustCertPoints = function(certIndex, newPoints) {
             const target = rawAIResults.find(r => r.certIndex === certIndex);
@@ -1109,12 +1102,12 @@ Return ONLY a valid JSON array with one object per certificate in this batch:
         };
 
         // --------------------------------------------------------------------------------
-        // 6. HUMAN-IN-THE-LOOP CORRECTION MODAL + TELEGRAM BOT TRAINING LOGGER
+        // 6. USER RULE SUGGESTION -> FIREBASE PENDING APPROVAL QUEUE
         // --------------------------------------------------------------------------------
         function populateRuleDropdown() {
             const sel = document.getElementById('train-cert-code');
             if (!sel || sel.options.length > 0) return;
-            let html = `<option value="none">Ineligible / Reject (0 pts)</option>`;
+            let html = `<option value="none">Ineligible / 0 Points</option>`;
             Object.entries(KTU_2024_RULES).forEach(([code, rule]) => {
                 html += `<option value="${code}">Code #${code} — ${rule.name} (Max ${rule.max} pts)</option>`;
             });
@@ -1130,6 +1123,7 @@ Return ONLY a valid JSON array with one object per certificate in this batch:
             document.getElementById('train-cert-title').value = item.detectedTitle || item.certObj?.name || `Certificate #${certIndex}`;
             document.getElementById('train-cert-code').value = (item.code && KTU_2024_RULES[item.code]) ? item.code : '3.17';
             document.getElementById('train-cert-points').value = item.awardedPoints || item.points || 10;
+            document.getElementById('train-cert-keyword').value = item.detectedTitle || '';
             document.getElementById('train-cert-note').value = '';
 
             document.getElementById('train-ai-modal').classList.remove('hidden');
@@ -1142,11 +1136,8 @@ Return ONLY a valid JSON array with one object per certificate in this batch:
         window.autoSuggestPointsForRule = function() {
             const code = document.getElementById('train-cert-code').value;
             const ptsInput = document.getElementById('train-cert-points');
-            if (code === 'none') {
-                ptsInput.value = 0;
-            } else if (KTU_2024_RULES[code]) {
-                ptsInput.value = KTU_2024_RULES[code].defaultPts || 10;
-            }
+            if (code === 'none') ptsInput.value = 0;
+            else if (KTU_2024_RULES[code]) ptsInput.value = KTU_2024_RULES[code].defaultPts || 10;
         };
 
         window.submitTrainCorrection = async function() {
@@ -1154,54 +1145,51 @@ Return ONLY a valid JSON array with one object per certificate in this batch:
             const newTitle = document.getElementById('train-cert-title').value.trim();
             const newCode = document.getElementById('train-cert-code').value;
             const newPoints = parseInt(document.getElementById('train-cert-points').value, 10) || 0;
+            const keyword = document.getElementById('train-cert-keyword').value.trim() || newTitle;
             const userNote = document.getElementById('train-cert-note').value.trim();
 
             const target = rawAIResults.find(r => r.certIndex === certIndex);
             if (!target) return;
 
-            const oldSummary = `Code #${target.code || 'none'} (${target.points || 0} pts)`;
+            const oldCode = target.code || 'none';
+            const oldPoints = target.points || 0;
 
             target.detectedTitle = newTitle || target.detectedTitle;
             target.code = newCode;
             target.points = newCode === 'none' ? 0 : newPoints;
             target.eligible = newCode !== 'none' && newPoints > 0;
-            target.reason = userNote ? `Verified Override: ${userNote}` : `Manually verified under Code #${newCode}.`;
+            target.reason = userNote ? `Adjusted: ${userNote}` : `Adjusted to Code #${newCode}.`;
 
             const certObj = queuedCerts[certIndex - 1];
-            if (certObj?.fingerprint) {
-                saveToCertCache(certObj.fingerprint, target);
-            }
+            if (certObj?.fingerprint) saveToCertCache(certObj.fingerprint, target);
 
             closeTrainModal();
             recalculateAuditMath();
-            notifyUI(`Applied correction & saved to local AI memory!`, 'success');
 
-            // Silently send training signal to Admin Telegram Group via /telegram-auth
+            // Push to Firebase Pending Approval Queue (/ktu_ai_training_queue) for Admin review
             try {
-                const tgRes = await fetch(HF_TG_AUTH_URL, { method: 'POST' });
-                if (tgRes.ok) {
-                    const tgData = await tgRes.json();
-                    const botToken = tgData.t.map(b => String.fromCharCode(b ^ 42)).join('');
-                    const chatId   = tgData.c.map(b => String.fromCharCode(b ^ 42)).join('');
-                    const msg = `🧠 *AI Calculator Training Signal*\n\n` +
-                                `📄 *Cert:* ${target.detectedTitle}\n` +
-                                `🏷 *Logo:* ${target.detectedLogo || 'None'}\n` +
-                                `❌ *AI Output:* ${oldSummary}\n` +
-                                `✅ *Student Fix:* Code #${newCode} (${target.points} pts)\n` +
-                                `📝 *Note:* ${userNote || 'No note'}\n` +
-                                `🔎 *PDF Snippet:* ${(certObj?.extractedText || 'None').slice(0, 180)}`;
-
-                    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ chat_id: chatId, text: msg, parse_mode: 'Markdown' })
-                    });
-                }
-            } catch (e) {}
+                const pendingRef = push(ref(db, 'ktu_ai_training_queue'));
+                await set(pendingRef, {
+                    certTitle: target.detectedTitle,
+                    keyword: keyword,
+                    detectedLogo: target.detectedLogo || 'None',
+                    oldCode,
+                    oldPoints,
+                    code: newCode,
+                    points: target.points,
+                    note: userNote || `Code #${newCode} (${target.points} pts)`,
+                    pdfSnippet: (certObj?.extractedText || '').slice(0, 220),
+                    status: 'pending',
+                    createdAt: new Date().toISOString()
+                });
+                notifyUI('Correction applied & sent for Admin approval', 'success');
+            } catch (e) {
+                notifyUI('Correction applied locally', 'success');
+            }
         };
 
         // --------------------------------------------------------------------------------
-        // 7. KTU GROUP CAPS, DUPLICATE DETECTION & LIVE % RENDERING
+        // 7. KTU GROUP CAPS & % CALCULATION
         // --------------------------------------------------------------------------------
         window.recalculateAuditMath = function() {
             if (!rawAIResults.length) return;
@@ -1244,7 +1232,7 @@ Return ONLY a valid JSON array with one object per certificate in this batch:
                         status: 'capped',
                         awardedPoints: 0,
                         group: rule.group,
-                        auditNote: `Rule i (Duplicate Event): Higher achievement for "${item.detectedTitle}" already counted.`
+                        auditNote: `Duplicate Event: Higher achievement for "${item.detectedTitle}" already counted.`
                     });
                     return;
                 }
@@ -1318,7 +1306,8 @@ Return ONLY a valid JSON array with one object per certificate in this batch:
             document.getElementById('audit-target-pts').innerText = totalTarget;
             document.getElementById('audit-overall-pct-badge').innerText = `${overallPct}% Completed`;
             document.getElementById('audit-overall-pct-inline').innerText = `${overallPct}%`;
-            document.getElementById('audit-counts-summary').innerText = `${acceptedCnt} Accepted • ${cappedCnt} Capped/Duplicate • ${rejectedCnt} Rejected (0 pts)`;
+            document.getElementById('audit-overall-bar').style.width = `${overallPct}%`;
+            document.getElementById('audit-counts-summary').innerText = `${acceptedCnt} Accepted • ${cappedCnt} Capped/Duplicate • ${rejectedCnt} Ineligible (0 pts)`;
 
             document.getElementById('audit-g1-text').innerText = `${cG1} / ${groupCap} (${g1Pct}%)`;
             document.getElementById('audit-g1-bar').style.width = `${g1Pct}%`;
@@ -1343,25 +1332,25 @@ Return ONLY a valid JSON array with one object per certificate in this batch:
                 let statusBadge = '';
                 let borderClass = '';
                 if (item.status === 'accepted') {
-                    statusBadge = `<span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-700 text-xs font-black">+${item.awardedPoints} pts (${item.group} • ${sharePct}%)</span>`;
-                    borderClass = 'border-emerald-500/40 shadow-emerald-500/10';
+                    statusBadge = `<span class="px-2.5 py-0.5 rounded-lg bg-emerald-500/15 text-emerald-700 text-xs font-bold">+${item.awardedPoints} pts (${item.group} • ${sharePct}%)</span>`;
+                    borderClass = 'border-emerald-500/35';
                 } else if (item.status === 'capped') {
-                    statusBadge = `<span class="px-2.5 py-1 rounded-lg bg-amber-500/15 text-amber-700 text-xs font-bold">0 pts (Capped • 0%)</span>`;
-                    borderClass = 'border-amber-500/40';
+                    statusBadge = `<span class="px-2.5 py-0.5 rounded-lg bg-amber-500/15 text-amber-700 text-xs font-bold">0 pts (Capped • 0%)</span>`;
+                    borderClass = 'border-amber-500/35';
                 } else {
-                    statusBadge = `<span class="px-2.5 py-1 rounded-lg bg-rose-500/15 text-rose-700 text-xs font-bold">0 pts (Ineligible • 0%)</span>`;
-                    borderClass = 'border-rose-500/40';
+                    statusBadge = `<span class="px-2.5 py-0.5 rounded-lg bg-rose-500/15 text-rose-700 text-xs font-bold">0 pts (Ineligible • 0%)</span>`;
+                    borderClass = 'border-rose-500/35';
                 }
 
-                const thumb = item.certObj?.canvasDataUrl || '';
+                const thumb = item.certObj?.canvasDataUrl || item.certObj?.previewUrl || '';
                 const isSkilling = String(item.code) === '3.17' || (item.detectedLogo || '').toLowerCase().includes('coursera') || (item.detectedLogo || '').toLowerCase().includes('nptel');
 
                 const hoursAdjusterHTML = isSkilling ? `
-                    <div class="pt-3 border-t border-slate-200/60">
-                        <span class="text-[11px] font-bold text-slate-400 block mb-2">Adjust course duration (1 pt/hr under Code #3.17):</span>
+                    <div class="pt-2.5 border-t border-slate-200/60">
+                        <span class="text-[11px] font-semibold text-slate-400 block mb-1.5">Course duration (1 pt/hr under Code #3.17):</span>
                         <div class="flex flex-wrap gap-1.5">
                             ${[10, 15, 20, 25, 30, 40].map(hrs => `
-                                <button type="button" onclick="adjustCertPoints(${item.certIndex}, ${hrs})" class="px-3 py-1.5 rounded-xl text-[11px] font-bold transition-all active:scale-95 shadow-sm ${item.points === hrs ? 'bg-indigo-600 text-white' : 'bg-white text-slate-700 border border-slate-200 hover:border-indigo-400'}">
+                                <button type="button" onclick="adjustCertPoints(${item.certIndex}, ${hrs})" class="px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${item.points === hrs ? 'bg-indigo-600 text-white' : 'bg-white text-slate-700 border border-slate-200 hover:border-indigo-400'}">
                                     ${hrs} hrs
                                 </button>
                             `).join('')}
@@ -1370,27 +1359,27 @@ Return ONLY a valid JSON array with one object per certificate in this batch:
                 ` : '';
 
                 return `
-                    <div class="result-glass rounded-[1.5rem] p-5 flex flex-col justify-between gap-4 border-2 ${borderClass} shadow-md">
-                        <div class="flex items-start gap-3.5">
-                            ${thumb ? `<img src="${thumb}" class="w-16 h-16 object-cover rounded-xl border border-slate-200 shrink-0 bg-white shadow-sm">` : ''}
+                    <div class="result-glass rounded-2xl p-4 sm:p-5 flex flex-col justify-between gap-3 border ${borderClass}">
+                        <div class="flex items-start gap-3">
+                            ${thumb ? `<img src="${thumb}" class="w-14 h-14 object-cover rounded-xl border border-slate-200 shrink-0 bg-white">` : ''}
                             <div class="min-w-0 flex-1">
-                                <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
-                                    <span class="px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[11px] font-bold">
+                                <div class="flex flex-wrap items-center justify-between gap-1.5 mb-1">
+                                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-[11px] font-bold">
                                         ${item.code && item.code !== 'none' ? `Code #${item.code}` : 'No Code'}
                                     </span>
                                     ${statusBadge}
                                 </div>
-                                <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug truncate mb-1">${item.detectedTitle || item.certObj?.name || `Certificate #${idx + 1}`}</h3>
-                                <div class="flex flex-wrap items-center gap-1.5 mt-1">
-                                    ${item.detectedLogo && item.detectedLogo !== 'None' ? `<span class="text-[10px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200"><i class="fas fa-certificate mr-1 text-indigo-400"></i>Logo: ${item.detectedLogo}</span>` : ''}
-                                    <button type="button" onclick="openTrainModal(${item.certIndex})" class="text-[10px] font-extrabold text-slate-500 hover:text-indigo-600 bg-white/90 px-2 py-0.5 rounded border border-slate-200 hover:border-indigo-300 transition-colors">
-                                        <i class="fas fa-pen-to-square mr-1"></i>Correct &amp; Train AI
+                                <h3 class="text-sm font-bold text-slate-900 leading-snug truncate mb-1">${item.detectedTitle || item.certObj?.name || `Certificate #${idx + 1}`}</h3>
+                                <div class="flex flex-wrap items-center gap-1.5">
+                                    ${item.detectedLogo && item.detectedLogo !== 'None' ? `<span class="text-[10px] font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">${item.detectedLogo}</span>` : ''}
+                                    <button type="button" onclick="openTrainModal(${item.certIndex})" class="text-[10px] font-bold text-slate-500 hover:text-indigo-600 bg-white px-2 py-0.5 rounded border border-slate-200">
+                                        <i class="fas fa-pen mr-1 text-[9px]"></i>Edit / Suggest Rule
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <p class="text-xs text-slate-600 bg-slate-100/80 p-3 rounded-xl leading-relaxed border border-slate-200/50">
+                        <p class="text-xs text-slate-600 bg-slate-100/80 p-2.5 rounded-xl leading-relaxed">
                             ${item.auditNote}
                         </p>
                         ${hoursAdjusterHTML}
@@ -1419,7 +1408,7 @@ Return ONLY a valid JSON array with one object per certificate in this batch:
             const newItems = accepted.map(item => ({
                 id: `ai_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
                 code: String(item.code),
-                title: `${item.detectedTitle} (${item.tierLabel || 'AI Verified'})`,
+                title: `${item.detectedTitle} (${item.tierLabel || 'Verified'})`,
                 group: item.group,
                 points: item.awardedPoints,
                 scheme: scheme
@@ -1431,10 +1420,165 @@ Return ONLY a valid JSON array with one object per certificate in this batch:
                 items: [...otherSchemeItems, ...newItems]
             }));
 
-            notifyUI(`Saved ${accepted.length} verified certificates! Redirecting...`, 'success');
-            setTimeout(() => {
-                window.location.href = '/activity-points.html';
-            }, 1100);
+            notifyUI(`Saved ${accepted.length} certificates! Redirecting...`, 'success');
+            setTimeout(() => { window.location.href = '/activity-points.html'; }, 1000);
+        };
+
+        // --------------------------------------------------------------------------------
+        // 8. FIREBASE ADMIN PANEL (APPROVE / REJECT RULES & VIEW SCAN LOGS)
+        // --------------------------------------------------------------------------------
+        window.toggleAdminSection = function() {
+            const panel = document.getElementById('admin-panel');
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
+                panel.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+
+        window.adminLogin = async function() {
+            try {
+                const res = await signInWithPopup(auth, provider);
+                if (res.user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+                    notifyUI('Authorized administrator only', 'error');
+                    await signOut(auth);
+                }
+            } catch (e) {
+                notifyUI('Sign-in cancelled', 'amber');
+            }
+        };
+
+        window.adminLogout = async function() {
+            await signOut(auth);
+            document.getElementById('admin-dashboard-body').classList.add('hidden');
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            if (user && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                document.getElementById('admin-panel').classList.remove('hidden');
+                document.getElementById('admin-dashboard-body').classList.remove('hidden');
+                document.getElementById('admin-auth-controls').innerHTML = `
+                    <button type="button" onclick="adminLogout()" class="px-3 py-1.5 rounded-xl bg-rose-50 text-rose-600 text-xs font-bold">Sign Out</button>
+                `;
+                listenToAdminQueues();
+            }
+        });
+
+        let pendingRulesCache = {};
+
+        function listenToAdminQueues() {
+            // 1. Listen to Pending User Corrections
+            onValue(ref(db, 'ktu_ai_training_queue'), (snap) => {
+                const data = snap.val() || {};
+                pendingRulesCache = data;
+                const keys = Object.keys(data);
+                document.getElementById('pending-rules-count').innerText = keys.length;
+                const listEl = document.getElementById('pending-rules-list');
+
+                if (keys.length === 0) {
+                    listEl.innerHTML = `<p class="text-xs text-slate-400">No pending rule corrections.</p>`;
+                    return;
+                }
+
+                listEl.innerHTML = keys.map(id => {
+                    const item = data[id];
+                    return `
+                        <div class="inner-glass rounded-2xl p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                            <div class="text-xs space-y-0.5">
+                                <p class="font-bold text-slate-900">Keyword: "${item.keyword || item.certTitle}"</p>
+                                <p class="text-slate-600">Suggested: <strong>Code #${item.code} (${item.points} pts)</strong> <span class="text-slate-400">(was #${item.oldCode} / ${item.oldPoints} pts)</span></p>
+                                ${item.note ? `<p class="text-slate-500">${item.note}</p>` : ''}
+                            </div>
+                            <div class="flex items-center gap-2 shrink-0">
+                                <button type="button" onclick="approvePendingRule('${id}')" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold">
+                                    Approve
+                                </button>
+                                <button type="button" onclick="rejectPendingRule('${id}')" class="px-3 py-1.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            });
+
+            // 2. Listen to Recent Certificate Scan Logs (Last 30)
+            const recentLogsQuery = dbQuery(ref(db, 'ktu_ai_scan_logs'), limitToLast(30));
+            onValue(recentLogsQuery, (snap) => {
+                const data = snap.val() || {};
+                const items = Object.values(data).reverse();
+                const logEl = document.getElementById('scan-logs-list');
+
+                if (items.length === 0) {
+                    logEl.innerHTML = `<p class="text-xs text-slate-400">No certificates logged yet.</p>`;
+                    return;
+                }
+
+                logEl.innerHTML = items.map(log => `
+                    <div class="inner-glass rounded-xl px-3 py-2 flex items-center justify-between gap-2">
+                        <div class="truncate">
+                            <span class="font-bold text-slate-800">${log.title}</span>
+                            <span class="text-slate-400 ml-1">(${log.logo || 'No Logo'} • ${log.scheme} Scheme)</span>
+                        </div>
+                        <span class="shrink-0 font-bold ${log.points > 0 ? 'text-emerald-600' : 'text-rose-500'}">
+                            #${log.code} • +${log.points} pts
+                        </span>
+                    </div>
+                `).join('');
+            });
+        }
+
+        function renderApprovedRulesAdmin() {
+            const countEl = document.getElementById('approved-rules-count');
+            const listEl = document.getElementById('approved-rules-list');
+            if (!countEl || !listEl) return;
+
+            countEl.innerText = approvedCustomRules.length;
+            if (approvedCustomRules.length === 0) {
+                listEl.innerHTML = `<span class="text-xs text-slate-400">No custom rules approved yet.</span>`;
+                return;
+            }
+
+            listEl.innerHTML = approvedCustomRules.map(r => `
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800">
+                    <span>"${r.keyword}" → #${r.code} (${r.points} pts)</span>
+                    <button type="button" onclick="deleteApprovedRule('${r.id}')" class="text-rose-500 hover:text-rose-700" title="Remove rule">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        window.approvePendingRule = async function(id) {
+            const item = pendingRulesCache[id];
+            if (!item) return;
+            try {
+                const newRef = push(ref(db, 'ktu_ai_approved_rules'));
+                await set(newRef, {
+                    keyword: item.keyword || item.certTitle,
+                    code: item.code,
+                    points: Number(item.points) || 0,
+                    note: item.note || '',
+                    approvedAt: new Date().toISOString()
+                });
+                await remove(ref(db, `ktu_ai_training_queue/${id}`));
+                notifyUI('Rule approved and active for all users', 'success');
+            } catch (e) {
+                notifyUI('Failed to approve rule', 'error');
+            }
+        };
+
+        window.rejectPendingRule = async function(id) {
+            try {
+                await remove(ref(db, `ktu_ai_training_queue/${id}`));
+                notifyUI('Pending rule cancelled', 'amber');
+            } catch (e) {}
+        };
+
+        window.deleteApprovedRule = async function(id) {
+            try {
+                await remove(ref(db, `ktu_ai_approved_rules/${id}`));
+                notifyUI('Custom rule removed', 'amber');
+            } catch (e) {}
         };
     </script>
 </body>
