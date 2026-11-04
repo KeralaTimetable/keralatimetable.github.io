@@ -150,7 +150,7 @@
                 AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points</span> Calculator
             </h1>
             <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
-                Upload your certificates to automatically verify eligibility, inspect logos, apply KTU Handbook caps, and calculate your exact points and progress percentage.
+                Upload your certificates to automatically verify eligibility, inspect logos with KTU Vision Brain AI, apply KTU Handbook caps, and calculate your exact points.
             </p>
         </div>
 
@@ -224,7 +224,7 @@
                 <div id="scan-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4">
                     <div class="flex items-center justify-between text-xs font-bold mb-2">
                         <span id="scan-status-text" class="text-indigo-600 flex items-center gap-2">
-                            <i class="fas fa-circle-notch fa-spin"></i> <span>Inspecting logos, rules &amp; text in parallel...</span>
+                            <i class="fas fa-circle-notch fa-spin"></i> <span>Connecting to KTU Vision Brain on ZeroGPU...</span>
                         </span>
                         <span id="scan-pct-text" class="text-slate-800 font-extrabold">0%</span>
                     </div>
@@ -315,7 +315,7 @@
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-bold text-sm sm:text-base mb-1">Kerala Timetable</h3>
             <p class="text-slate-500 text-xs leading-relaxed max-w-lg mx-auto">
-                Based on the Official APJAKTU 2024 &amp; 2019 Activity Points Handbooks.
+                Powered by KTU Vision Brain (Qwen2-VL) • Based on the Official APJAKTU 2024 &amp; 2019 Activity Points Handbooks.
             </p>
         </div>
     </footer>
@@ -325,13 +325,21 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js";
 
-        // Configure PDF.js worker so PDF rendering never hangs or throws errors
+        // Configure PDF.js worker
         if (window.pdfjsLib) {
             window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
         }
 
         if (typeof loadNavigation === 'function') loadNavigation('activity', '', false);
+
+        // =========================================================================
+        // DEDICATED HUGGING FACE ZEROGPU SPACE: KeralaTimetable/ktu-vision-brain
+        // =========================================================================
+        const HF_SPACE_ID  = "KeralaTimetable/ktu-vision-brain";
+        const HF_SPACE_URL = "https://keralatimetable-ktu-vision-brain.hf.space";
+        const STORAGE_KEY  = 'ktu_activity_points_tracker_v2';
 
         // --- FIREBASE LOGGING ---
         let db = null;
@@ -347,9 +355,6 @@
         } catch (e) {
             console.warn("Firebase init skipped:", e);
         }
-
-        const HF_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/gemini-auth";
-        const STORAGE_KEY = 'ktu_activity_points_tracker_v2';
 
         const KTU_RULES_2024 = {
             "1.1": { group: "Group I", max: 40, name: "Sports/Games/Arts Participation" },
@@ -414,7 +419,7 @@
                 if (pctEl) pctEl.innerText = `${d}%`;
             }
             return {
-                start(initialTarget = 5, crawlLimit = 92) {
+                start(initialTarget = 5, crawlLimit = 94) {
                     currentPct = 1; targetPct = initialTarget; maxCrawl = crawlLimit; render();
                     if (timer) clearInterval(timer);
                     timer = setInterval(() => {
@@ -422,10 +427,10 @@
                             currentPct = Math.min(targetPct, currentPct + Math.max(1, (targetPct - currentPct) * 0.35));
                             render();
                         } else if (currentPct < maxCrawl) {
-                            currentPct += 1;
+                            currentPct += 0.4;
                             render();
                         }
-                    }, 140);
+                    }, 180);
                 },
                 advanceTo(t, c) { if (t > targetPct) targetPct = t; if (c > maxCrawl) maxCrawl = c; },
                 finish() {
@@ -519,7 +524,7 @@
                 ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, canvas.width, canvas.height);
                 await page.render({ canvasContext: ctx, viewport }).promise;
 
-                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.78);
+                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.8);
                 return certItem;
             } else {
                 return new Promise((resolve, reject) => {
@@ -538,7 +543,7 @@
                         ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, w, h);
                         ctx.drawImage(img, 0, 0, w, h);
                         URL.revokeObjectURL(url);
-                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.78);
+                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.8);
                         resolve(certItem);
                     };
                     img.onerror = reject;
@@ -576,7 +581,7 @@
             document.getElementById('audit-results-section').classList.add('hidden');
         };
 
-        // Combine up to 4 certificates into 1 visual contact sheet for the AI
+        // Combine up to 4 certificates into 1 visual contact sheet for Qwen2-VL
         async function createContactSheet(batchItems) {
             const tileW = 600, tileH = 460, headerH = 32;
             const cols = batchItems.length === 1 ? 1 : 2;
@@ -606,361 +611,103 @@
                 const dw = img.width * scale, dh = img.height * scale;
                 ctx.drawImage(img, x + (tileW - dw) / 2, y + headerH + 3 + (availH - dh) / 2, dw, dh);
             }
-            return canvas.toDataURL('image/jpeg', 0.8).split(',')[1];
+            return canvas.toDataURL('image/jpeg', 0.82).split(',')[1];
         }
 
-        // --- ROBUST JSON PARSER ---
-        function parseJSON(raw) {
-            if (!raw) return [];
-            let clean = String(raw)
+        // --- ROBUST RESPONSE PARSER FOR GRADIO ZEROGPU OUTPUT ---
+        function parseVisionBrainResponse(rawOutput) {
+            if (!rawOutput) throw new Error("Empty response from KTU Vision Brain");
+
+            if (Array.isArray(rawOutput)) {
+                if (rawOutput.length > 0 && typeof rawOutput[0] === 'object' && 'certIndex' in rawOutput[0]) {
+                    return rawOutput;
+                }
+                if (typeof rawOutput[0] === 'string') {
+                    return parseVisionBrainResponse(rawOutput[0]);
+                }
+            }
+
+            if (typeof rawOutput === 'object') {
+                if (rawOutput.status === 'error') {
+                    throw new Error(rawOutput.message || "Model returned an error");
+                }
+                if (Array.isArray(rawOutput.results)) return rawOutput.results;
+                if (Array.isArray(rawOutput.data)) return parseVisionBrainResponse(rawOutput.data);
+            }
+
+            const str = String(rawOutput)
                 .replace(/<think>[\s\S]*?<\/think>/gi, '')
                 .replace(/```json/gi, '')
                 .replace(/```/g, '')
                 .trim();
 
-            const b1 = clean.indexOf('[');
-            const b2 = clean.lastIndexOf(']');
-            if (b1 !== -1 && b2 !== -1 && b2 > b1) {
-                const parsed = JSON.parse(clean.slice(b1, b2 + 1));
-                if (Array.isArray(parsed)) return parsed;
+            try {
+                const parsedObj = JSON.parse(str);
+                if (parsedObj.status === 'error') {
+                    throw new Error(parsedObj.message || "Model returned an error");
+                }
+                if (Array.isArray(parsedObj.results)) return parsedObj.results;
+                if (Array.isArray(parsedObj)) return parsedObj;
+            } catch (e) {
+                const b1 = str.indexOf('[');
+                const b2 = str.lastIndexOf(']');
+                if (b1 !== -1 && b2 !== -1 && b2 > b1) {
+                    return JSON.parse(str.slice(b1, b2 + 1));
+                }
+                throw e;
             }
 
-            const o1 = clean.indexOf('{');
-            const o2 = clean.lastIndexOf('}');
-            if (o1 !== -1 && o2 !== -1 && o2 > o1) {
-                const obj = JSON.parse(clean.slice(o1, o2 + 1));
-                if (Array.isArray(obj.results)) return obj.results;
-                if (Array.isArray(obj.certificates)) return obj.certificates;
-                if (Array.isArray(obj.items)) return obj.items;
-                return [obj];
-            }
-
-            return JSON.parse(clean);
+            throw new Error("Could not parse KTU Vision Brain output");
         }
 
-        // --- LOCAL DETERMINISTIC KTU AUDITOR FALLBACK (100% RELIABILITY) ---
-        function runSmartLocalAudit(itemsWithIndex) {
-            return itemsWithIndex.map(item => {
-                const cleanName = item.name.replace(/\.[^/.]+$/, '').replace(/[_-]+/g, ' ').trim();
-                const text = `${cleanName} ${item.extractedText || ''}`.toLowerCase();
+        // --- CALL KERALATIMETABLE/KTU-VISION-BRAIN ON ZEROGPU ---
+        async function requestKTUVisionBrain(payloadObj, statusTxtEl) {
+            const payloadJsonStr = JSON.stringify(payloadObj);
 
-                // Reject obvious non-certificates
-                if (/(screenshot|terminal|console|whatsapp image|selfie|id card|hall ticket|admit card|timetable|invoice|receipt)/i.test(text) && !/(certificate|completion|participation|achievement|coursera|nptel|ieee|workshop|internship)/i.test(text)) {
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || `Document #${item.globalIndex}`,
-                        detectedLogo: "None",
-                        eligible: false,
-                        code: "none",
-                        points: 0,
-                        reason: "Rejected: Appears to be a non-certificate image or screenshot."
-                    };
+            // Method 1: Official @gradio/client WebSocket/SSE connection to KeralaTimetable/ktu-vision-brain
+            try {
+                const app = await Client.connect(HF_SPACE_ID);
+                if (statusTxtEl) {
+                    statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2-VL-2B inspecting logos, seals &amp; text on ZeroGPU...</span>`;
                 }
+                const result = await app.predict("/audit", [payloadJsonStr]);
+                const parsed = parseVisionBrainResponse(result?.data);
+                if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+            } catch (gradioErr) {
+                console.warn("Primary @gradio/client call warning, trying direct Gradio API call:", gradioErr);
+            }
 
-                if (text.includes('coursera')) {
-                    const isSpec = text.includes('specialization');
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "Coursera Course Certificate",
-                        detectedLogo: "Coursera",
-                        eligible: true,
-                        code: "3.17",
-                        points: isSpec ? 30 : 20,
-                        reason: isSpec ? "Approved Coursera Specialization under Code #3.17 (30 pts)." : "Approved Coursera Skilling Course under Code #3.17 (20 pts)."
-                    };
-                }
-
-                if (text.includes('nptel') || text.includes('swayam')) {
-                    let pts = 30;
-                    if (text.includes('12 week') || text.includes('12-week')) pts = 40;
-                    else if (text.includes('4 week') || text.includes('4-week')) pts = 15;
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "NPTEL / SWAYAM Certification",
-                        detectedLogo: "NPTEL / SWAYAM",
-                        eligible: true,
-                        code: "3.17",
-                        points: pts,
-                        reason: `Approved MOOC certification under Code #3.17 (${pts} pts).`
-                    };
-                }
-
-                if (text.includes('space apps') || text.includes('nasa') || text.includes('international hackathon')) {
-                    const isWinner = /(winner|first|second|third|1st|2nd|3rd|champion)/i.test(text);
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "International Hackathon",
-                        detectedLogo: text.includes('nasa') ? "NASA" : "International Hackathon",
-                        eligible: true,
-                        code: "3.16",
-                        points: isWinner ? 40 : 30,
-                        reason: `Verified International Hackathon under Code #3.16 (${isWinner ? 40 : 30} pts).`
-                    };
-                }
-
-                if (text.includes('smart india hackathon') || text.includes('sih') || text.includes('hackathon')) {
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "Hackathon Certificate",
-                        detectedLogo: "Hackathon",
-                        eligible: true,
-                        code: "3.15",
-                        points: 30,
-                        reason: "Verified Hackathon achievement under Code #3.15 (30 pts)."
-                    };
-                }
-
-                if (text.includes('ieee') || text.includes('acm') || text.includes('iste') || text.includes('csi') || text.includes('iedc') || text.includes('tinkerhub') || text.includes('mulearn') || text.includes('gdsc') || text.includes('gdg')) {
-                    if (/(execom|coordinator|ambassador|lead|chair|secretary|volunteer|member)/i.test(text)) {
-                        return {
-                            certIndex: item.globalIndex,
-                            detectedTitle: cleanName || "Professional Society Leadership",
-                            detectedLogo: text.includes('ieee') ? "IEEE" : "Professional Society",
-                            eligible: true,
-                            code: "2.11",
-                            points: 15,
-                            reason: "Verified Professional Society Coordinator / Execom role under Code #2.11."
-                        };
-                    }
-                    const isWin = /(winner|first|second|third|1st|2nd|3rd|prize)/i.test(text);
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "Professional Society Event",
-                        detectedLogo: text.includes('ieee') ? "IEEE" : "Professional Society",
-                        eligible: true,
-                        code: isWin ? "2.4" : "2.3",
-                        points: isWin ? 15 : 10,
-                        reason: `Verified Professional Society ${isWin ? 'Winner (#2.4)' : 'Competition (#2.3)'}.`
-                    };
-                }
-
-                if (text.includes('internship') || text.includes('intern ')) {
-                    const isLong = /(month|8 week|6 week|long term)/i.test(text);
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "Internship Certificate",
-                        detectedLogo: "Industry Internship",
-                        eligible: true,
-                        code: isLong ? "3.3" : "2.23",
-                        points: isLong ? 20 : 10,
-                        reason: `Verified Internship completion under Code #${isLong ? '3.3' : '2.23'}.`
-                    };
-                }
-
-                if (text.includes('nss') || text.includes('national service scheme')) {
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "NSS Certificate",
-                        detectedLogo: "NSS",
-                        eligible: true,
-                        code: "1.11",
-                        points: 30,
-                        reason: "Verified NSS Volunteer Certificate under Code #1.11."
-                    };
-                }
-
-                if (text.includes('ncc') || text.includes('national cadet corps')) {
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "NCC Certificate",
-                        detectedLogo: "NCC",
-                        eligible: true,
-                        code: "1.19",
-                        points: 30,
-                        reason: "Verified NCC Certificate under Code #1.19."
-                    };
-                }
-
-                if (text.includes('blood')) {
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "Blood Donation Certificate",
-                        detectedLogo: "Medical / Blood Bank",
-                        eligible: true,
-                        code: "1.8",
-                        points: 5,
-                        reason: "Verified Blood Donation Certificate under Code #1.8."
-                    };
-                }
-
-                if (text.includes('driving') || text.includes('lmv') || text.includes('licence') || text.includes('license')) {
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "Four-Wheeler Driving License (LMV)",
-                        detectedLogo: "MVD / Govt of India",
-                        eligible: true,
-                        code: "1.5",
-                        points: 5,
-                        reason: "Verified LMV Driving License under Code #1.5."
-                    };
-                }
-
-                if (text.includes('workshop') || text.includes('seminar') || text.includes('bootcamp') || text.includes('iit') || text.includes('nit')) {
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "Workshop / Seminar Certificate",
-                        detectedLogo: "Technical Institute",
-                        eligible: true,
-                        code: "2.5",
-                        points: 10,
-                        reason: "Verified Workshop / Seminar participation under Code #2.5."
-                    };
-                }
-
-                if (text.includes('sports') || text.includes('arts') || text.includes('athletic') || text.includes('games') || text.includes('kalotsavam') || text.includes('zonal')) {
-                    const isWin = /(winner|first|second|third|1st|2nd|3rd|medal)/i.test(text);
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "Sports / Arts Certificate",
-                        detectedLogo: "Sports / Arts Council",
-                        eligible: true,
-                        code: isWin ? "1.2" : "1.1",
-                        points: isWin ? 15 : 8,
-                        reason: `Verified Sports/Arts ${isWin ? 'Winner (#1.2)' : 'Participation (#1.1)'}.`
-                    };
-                }
-
-                if (text.includes('yip') || text.includes('young innovators') || text.includes('k-disc')) {
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "YIP (K-DISC) Certificate",
-                        detectedLogo: "K-DISC / YIP",
-                        eligible: true,
-                        code: "3.5",
-                        points: 20,
-                        reason: "Verified Young Innovators Programme (YIP) under Code #3.5."
-                    };
-                }
-
-                if (text.includes('industrial visit') || text.includes('iv report')) {
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "Industrial Visit Certificate",
-                        detectedLogo: "Industry Partner",
-                        eligible: true,
-                        code: "3.1",
-                        points: 5,
-                        reason: "Verified Industrial Visit under Code #3.1."
-                    };
-                }
-
-                if (text.includes('paper') || text.includes('conference') || text.includes('journal')) {
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "Paper Presentation Certificate",
-                        detectedLogo: "Conference / College",
-                        eligible: true,
-                        code: "2.9",
-                        points: 10,
-                        reason: "Verified Technical Paper Presentation under Code #2.9."
-                    };
-                }
-
-                if (text.includes('udemy') || text.includes('google') || text.includes('microsoft') || text.includes('ibm') || text.includes('aws') || text.includes('cisco') || text.includes('infosys') || text.includes('course')) {
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: cleanName || "Online Skilling Certificate",
-                        detectedLogo: "Approved Skilling Partner",
-                        eligible: true,
-                        code: "3.17",
-                        points: 20,
-                        reason: "Verified Skilling / MOOC Certificate under Code #3.17."
-                    };
-                }
-
-                const isWinner = /(winner|first|second|third|1st|2nd|3rd|prize)/i.test(text);
-                return {
-                    certIndex: item.globalIndex,
-                    detectedTitle: cleanName || `Technical Activity Certificate #${item.globalIndex}`,
-                    detectedLogo: "Verified Institution",
-                    eligible: true,
-                    code: isWinner ? "2.2" : "2.1",
-                    points: 10,
-                    reason: `Verified Technical Fest / Co-Curricular Certificate under Code #${isWinner ? '2.2' : '2.1'}.`
-                };
+            // Method 2: Direct Gradio 4/5 Queue REST Call fallback to https://keralatimetable-ktu-vision-brain.hf.space
+            const postRes = await fetch(`${HF_SPACE_URL}/gradio_api/call/audit`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ data: [payloadJsonStr] })
             });
-        }
 
-        // --- AI ROUTER (GEMINI VISION -> OPENROUTER VISION -> LOCAL FALLBACK) ---
-        async function requestAI(authData, promptText, b64Sheets, itemsWithIndex) {
-            const decode = (arr) => Array.isArray(arr) ? arr.map(b => String.fromCharCode(b ^ 42)).join('') : '';
-            const gemKey = authData ? decode(authData.k) : '';
-            const orKey  = authData ? decode(authData.o) : '';
+            if (!postRes.ok) {
+                throw new Error(`KTU Vision Brain HTTP ${postRes.status}`);
+            }
 
-            // Engine 1: Google Gemini (Multimodal Vision)
-            if (gemKey) {
-                const models = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"];
-                for (const m of models) {
+            const { event_id } = await postRes.json();
+            const streamRes = await fetch(`${HF_SPACE_URL}/gradio_api/call/audit/${event_id}`);
+            const streamText = await streamRes.text();
+
+            const lines = streamText.split('\n');
+            for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                    const dataStr = line.slice(6).trim();
+                    if (!dataStr || dataStr === 'null') continue;
                     try {
-                        const parts = b64Sheets.map(b64 => ({ inlineData: { mimeType: "image/jpeg", data: b64 } }));
-                        parts.push({ text: promptText });
-
-                        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${gemKey}`, {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({
-                                contents: [{ parts }],
-                                generationConfig: { temperature: 0.1, responseMimeType: "application/json" }
-                            })
-                        });
-                        if (!res.ok) continue;
-                        const data = await res.json();
-                        const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-                        const parsed = parseJSON(rawText);
-                        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-                    } catch (e) {
-                        console.warn(`Gemini (${m}) attempt skipped:`, e);
-                        continue;
-                    }
+                        const parsedEvent = JSON.parse(dataStr);
+                        const finalArray = parseVisionBrainResponse(parsedEvent);
+                        if (Array.isArray(finalArray) && finalArray.length > 0) {
+                            return finalArray;
+                        }
+                    } catch (e) {}
                 }
             }
 
-            // Engine 2: OpenRouter Free Vision Models (Gemma 3 / Qwen VL / Llama Vision)
-            if (orKey) {
-                const models = [
-                    "google/gemma-3-27b-it:free",
-                    "qwen/qwen2.5-vl-72b-instruct:free",
-                    "qwen/qwen-2.5-vl-72b-instruct:free",
-                    "meta-llama/llama-3.2-11b-vision-instruct:free",
-                    "google/gemini-2.0-flash-exp:free"
-                ];
-                for (const m of models) {
-                    try {
-                        const contentParts = b64Sheets.map(b64 => ({
-                            type: "image_url",
-                            image_url: { url: `data:image/jpeg;base64,${b64}` }
-                        }));
-                        contentParts.push({ type: "text", text: promptText + "\n\nReturn ONLY a raw JSON array." });
-
-                        const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-                            method: "POST",
-                            headers: {
-                                "Authorization": `Bearer ${orKey}`,
-                                "Content-Type": "application/json",
-                                "HTTP-Referer": "https://keralatimetable.in",
-                                "X-Title": "Kerala Timetable Activity Points Calculator"
-                            },
-                            body: JSON.stringify({
-                                model: m,
-                                messages: [{ role: "user", content: contentParts }],
-                                temperature: 0.1
-                            })
-                        });
-                        if (!res.ok) continue;
-                        const data = await res.json();
-                        const rawText = data.choices?.[0]?.message?.content;
-                        const parsed = parseJSON(rawText);
-                        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-                    } catch (e) {
-                        console.warn(`OpenRouter (${m}) attempt skipped:`, e);
-                        continue;
-                    }
-                }
-            }
-
-            // Engine 3: Guaranteed Local KTU Audit Fallback (Never fails)
-            console.info("Using built-in KTU Certificate Auditor fallback.");
-            return runSmartLocalAudit(itemsWithIndex);
+            throw new Error("ZeroGPU queue did not return valid certificate results.");
         }
 
         // --- EXECUTION ---
@@ -977,7 +724,7 @@
             progWrap.classList.remove('hidden');
 
             const ticker = createLiveProgressController(progBar, pctTxt);
-            ticker.start(10, 94);
+            ticker.start(12, 95);
 
             try {
                 // Ensure all certificates are rendered
@@ -985,21 +732,8 @@
                     if (!cert.canvasDataUrl) await prepareCertItem(cert);
                 }
 
-                // Fetch keys from HF Space (non-blocking if HF Space is asleep)
-                let authData = null;
-                try {
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 7000);
-                    const authRes = await fetch(HF_AUTH_URL, { method: "POST", signal: controller.signal });
-                    clearTimeout(timeoutId);
-                    if (authRes.ok) {
-                        authData = await authRes.json();
-                    }
-                } catch (authErr) {
-                    console.warn("Auth endpoint unreachable, proceeding with fallback auditor:", authErr);
-                }
+                statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Preparing high-resolution contact sheets for Vision Brain...</span>`;
 
-                // Prepare all contact sheets in parallel
                 const itemsWithIndex = queuedCerts.map((c, i) => ({ ...c, globalIndex: i + 1 }));
                 const sheetPromises = [];
                 for (let i = 0; i < itemsWithIndex.length; i += 4) {
@@ -1007,42 +741,20 @@
                 }
                 const b64Sheets = await Promise.all(sheetPromises);
 
-                ticker.advanceTo(45, 92);
-                statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Evaluating certificates and logos...</span>`;
+                ticker.advanceTo(35, 95);
+                statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Connecting to KeralaTimetable/ktu-vision-brain (ZeroGPU)...</span>`;
 
                 const pdfSummary = itemsWithIndex.map(c => 
                     `CERT #${c.globalIndex} (File: ${c.name}) Text: ${c.extractedText || "[Image file]"}`
                 ).join("\n");
 
-                const prompt = `You are the Official APJAKTU (KTU) Activity Points Auditor.
-Inspect the certificates in the image(s) and cross-reference with the text layer:
-${pdfSummary}
+                const payloadObj = {
+                    sheets: b64Sheets,
+                    pdfSummary: pdfSummary,
+                    totalCerts: itemsWithIndex.length
+                };
 
-STRICT AUDIT RULES:
-1. REJECT JUNK (eligible: false, points: 0, code: "none"): Terminal screenshots, command-line logs, signatures, random logos without certificate context, ID cards, selfies.
-2. Coursera (K-DISC campaign) (Code 3.17): All Coursera courses are 100% ELIGIBLE. Course = 20 pts, Specialization = 30 pts.
-3. NPTEL/SWAYAM (Code 3.17): 12-wk=40 pts, 8-wk=30 pts, 4-wk=15 pts.
-4. IEEE Competitions: Code 2.3 (Participation L1=2, L2=5, L3=10, L4=15, L5=20). Code 2.4 (Winner L1=3, L2=7, L3=15, L4=25, L5=35).
-5. Student Leadership: Google Ambassador / IEEE Coordinator = Code 2.11 (5-15 pts).
-6. Tech-Fests (Code 2.1 / 2.2): L1=2-5, L2=5-10, L3=10-20, L4=20-40, L5=30-40.
-7. Driving License (Code 1.5): 5 pts ONLY if Four-Wheeler (LMV).
-8. NSS/NCC: 2-Year NSS = Code 1.11 (30 pts). Blood Donation = Code 1.8 (5 pts).
-9. Hackathons: SIH / National = Code 3.15 (30-40 pts). NASA Space Apps / International = Code 3.16 (30 pts participation, 40 pts winner).
-
-Return ONLY a valid JSON array matching CERT #1 through CERT #${itemsWithIndex.length}:
-[
-  {
-    "certIndex": 1,
-    "detectedTitle": "Course / Event Name",
-    "detectedLogo": "Coursera / IEEE / NASA / Google / None",
-    "eligible": true,
-    "code": "3.17",
-    "points": 20,
-    "reason": "Brief official KTU justification"
-  }
-]`;
-
-                rawAIResults = await requestAI(authData, prompt, b64Sheets, itemsWithIndex);
+                rawAIResults = await requestKTUVisionBrain(payloadObj, statusTxt);
 
                 ticker.finish();
                 setTimeout(() => progWrap.classList.add('hidden'), 350);
@@ -1052,18 +764,12 @@ Return ONLY a valid JSON array matching CERT #1 through CERT #${itemsWithIndex.l
 
                 document.getElementById('audit-results-section').classList.remove('hidden');
                 document.getElementById('audit-results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                notifyUI(`Calculated points for ${queuedCerts.length} certificate(s)!`, 'success');
+                notifyUI(`KTU Vision Brain analyzed ${queuedCerts.length} certificate(s)!`, 'success');
             } catch (err) {
-                console.error("Evaluation Error:", err);
-                // Ultimate safety net: run local audit even if an unexpected exception occurs
-                const itemsWithIndex = queuedCerts.map((c, i) => ({ ...c, globalIndex: i + 1 }));
-                rawAIResults = runSmartLocalAudit(itemsWithIndex);
-                ticker.finish();
-                setTimeout(() => progWrap.classList.add('hidden'), 350);
-                recalculateAuditMath();
-                document.getElementById('audit-results-section').classList.remove('hidden');
-                document.getElementById('audit-results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                notifyUI(`Calculated points for ${queuedCerts.length} certificate(s)!`, 'success');
+                console.error("KTU Vision Brain Error:", err);
+                ticker.stop();
+                progWrap.classList.add('hidden');
+                notifyUI(`Vision Brain error: ${err.message || 'Check Space status and retry.'}`, 'error');
             } finally {
                 btn.disabled = false;
             }
