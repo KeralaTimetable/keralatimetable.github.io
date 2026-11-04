@@ -205,10 +205,11 @@
                 </div>
             </div>
 
+            <!-- Hidden File Input (Placed outside dropzone to avoid click bubbling loops) -->
+            <input type="file" id="cert-file-input" accept="image/*,.pdf,application/pdf" multiple class="hidden">
+
             <!-- Liquid Glass Upload Zone -->
-            <div id="cert-dropzone" onclick="document.getElementById('cert-file-input').click()" class="dropzone-border inner-glass rounded-2xl p-7 sm:p-10 text-center cursor-pointer group">
-                <input type="file" id="cert-file-input" accept="image/*,.pdf" multiple class="hidden" onchange="handleFilesSelected(this.files)">
-                
+            <div id="cert-dropzone" onclick="triggerFileSelect()" class="dropzone-border inner-glass rounded-2xl p-7 sm:p-10 text-center cursor-pointer group">
                 <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center mx-auto mb-3.5 text-2xl shadow-sm group-hover:scale-110 transition-transform duration-300">
                     <i class="fas fa-file-arrow-up"></i>
                 </div>
@@ -240,7 +241,7 @@
                         Uploaded Certificates (<span id="queued-count">0</span>/40)
                     </span>
                     <div class="flex items-center gap-2">
-                        <button type="button" onclick="document.getElementById('cert-file-input').click()" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50 transition-all active:scale-95 shadow-sm">
+                        <button type="button" onclick="triggerFileSelect()" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50 transition-all active:scale-95 shadow-sm">
                             <i class="fas fa-plus text-indigo-500 mr-1"></i> Add More
                         </button>
                         <button type="button" onclick="clearQueuedFiles()" class="px-3.5 py-1.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold hover:bg-rose-100 transition-all active:scale-95">
@@ -499,7 +500,7 @@
 
         const fbApp = initializeApp(firebaseConfig);
         const db = getDatabase(fbApp);
-        const auth = getAuth(app => fbApp)();
+        const auth = getAuth(fbApp); // FIXED: Removed erroneous arrow function & double invocation
         const provider = new GoogleAuthProvider();
 
         const VISION_BRAIN_BASE = "https://keralatimetable-ktu-vision-brain.hf.space";
@@ -533,11 +534,9 @@
                 if (timer) clearInterval(timer);
                 timer = setInterval(() => {
                     if (currentPct < targetPct) {
-                        // Fast catch-up when a step completes
                         currentPct = Math.min(targetPct, currentPct + Math.max(1, (targetPct - currentPct) * 0.35));
                         render();
                     } else if (currentPct < maxCrawlPct) {
-                        // Continuous 1-by-1 crawl (e.g. 36%.. 37%.. 38%..) while waiting for GPU
                         currentPct += 1;
                         render();
                     }
@@ -822,16 +821,35 @@
         // 4. PHOTO & PDF UPLOAD WITH LIVE PROGRESS BAR (1%..2%..36%..37%..100%)
         // --------------------------------------------------------------------------------
         const dropzone = document.getElementById('cert-dropzone');
+        const fileInput = document.getElementById('cert-file-input');
+
+        window.triggerFileSelect = function() {
+            if (fileInput) {
+                fileInput.value = '';
+                fileInput.click();
+            }
+        };
+
+        if (fileInput) {
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files?.length) {
+                    window.handleFilesSelected(e.target.files);
+                }
+            });
+        }
+
         dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
         dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
         dropzone.addEventListener('drop', (e) => {
             e.preventDefault();
             dropzone.classList.remove('drag-over');
-            if (e.dataTransfer.files?.length) handleFilesSelected(e.dataTransfer.files);
+            if (e.dataTransfer.files?.length) window.handleFilesSelected(e.dataTransfer.files);
         });
 
         window.handleFilesSelected = async function(fileList) {
-            const incoming = Array.from(fileList);
+            const incoming = Array.from(fileList || []);
+            if (!incoming.length) return;
+
             if (queuedCerts.length + incoming.length > 40) {
                 notifyUI('Maximum 40 certificates per batch', 'amber');
             }
@@ -876,6 +894,7 @@
 
             uploadTicker.finish();
             setTimeout(() => upWrap.classList.add('hidden'), 450);
+            if (fileInput) fileInput.value = '';
             notifyUI(`${queuedCerts.length} certificate(s) uploaded`, 'success');
         };
 
@@ -1055,7 +1074,6 @@
                         ? `\nAPPROVED CUSTOM KTU RULES:\n` + approvedCustomRules.map(r => `- "${r.keyword}" => Code "${r.code}", eligible: ${r.code !== 'none'}, points: ${r.points}`).join('\n')
                         : '';
 
-                    // Group up to 6 certificates per GPU call so ZeroGPU only queues once!
                     const batchSize = 6;
                     const totalBatches = Math.ceil(uncachedQueue.length / batchSize);
 
