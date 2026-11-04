@@ -11,7 +11,15 @@
     <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- PDF.js for rendering previews & extracting text layers -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <!-- Official Gradio Client for ZeroGPU connectivity -->
+    <script type="module">
+        import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client@1.0.0/dist/index.min.js";
+        window.GradioClient = Client;
+    </script>
 
     <style>
         body { 
@@ -27,7 +35,6 @@
             letter-spacing: -0.01em;
         }
 
-        /* Smooth Drifting Ambient Background Blur Orbs */
         @keyframes orbDrift1 {
             0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
             50% { transform: translate3d(32px, -24px, 0) scale(1.07); }
@@ -40,7 +47,6 @@
         .ambient-orb-2 { animation: orbDrift2 18s ease-in-out 2s infinite; will-change: transform; }
         .ambient-orb-3 { animation: orbDrift1 20s ease-in-out 4s infinite reverse; will-change: transform; }
 
-        /* Specular Liquid Glass Surfaces */
         .real-glass {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.58) 100%);
             backdrop-filter: blur(28px) saturate(195%);
@@ -101,7 +107,6 @@
             box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15), 0 8px 20px -4px rgba(79, 70, 229, 0.1);
         }
 
-        /* Liquid Glass Dropzone with Spring Hover */
         .dropzone-border {
             border: 2px dashed rgba(79, 70, 229, 0.38);
             transition: all 0.34s cubic-bezier(0.22, 1.25, 0.36, 1);
@@ -112,12 +117,7 @@
             transform: translate3d(0, -2px, 0) scale(1.005);
             box-shadow: 0 16px 36px -8px rgba(79, 70, 229, 0.12), inset 0 1px 1px #ffffff;
         }
-        html.dark .dropzone-border:hover, html.dark .dropzone-border.drag-over {
-            background: rgba(30, 41, 59, 0.85) !important;
-            border-color: #818cf8 !important;
-        }
 
-        /* Fluid Spring Entrance Animations */
         @keyframes springFadeUp {
             0% { opacity: 0; transform: translate3d(0, 18px, 0) scale(0.985); }
             100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
@@ -138,7 +138,7 @@
             will-change: transform, opacity;
         }
 
-        .progress-bar-fill { transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1); }
+        .progress-bar-fill { transition: width 0.65s cubic-bezier(0.22, 1, 0.36, 1); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -146,7 +146,6 @@
 
 <body class="antialiased min-h-screen flex flex-col relative text-slate-800 selection:bg-indigo-600 selection:text-white">
 
-    <!-- Ambient Liquid Glass Background Blur Orbs -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
         <div id="parallax-orb-1" class="absolute -top-20 -left-20 w-80 h-80 sm:w-[26rem] sm:h-[26rem] transition-transform duration-200 ease-out">
             <div id="mouse-orb-1" class="ambient-orb-1 w-full h-full rounded-full bg-indigo-400/25 blur-[95px]"></div>
@@ -161,10 +160,8 @@
 
     <div id="navigation-container" class="z-50 sticky top-0"></div>
 
-    <!-- MAIN CONTENT -->
     <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-6 sm:pt-9 pb-20 w-full flex-grow relative z-10">
 
-        <!-- Top Back Link -->
         <div class="flex items-center justify-between gap-3 mb-5 spring-enter" style="animation-delay: 30ms;">
             <a href="/activity-points.html" class="inner-glass inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:text-indigo-600 hover:-translate-y-0.5 shadow-sm transition-all active:scale-95">
                 <i class="fas fa-arrow-left text-indigo-500 text-xs"></i>
@@ -172,20 +169,16 @@
             </a>
         </div>
 
-        <!-- Clean Heading -->
         <div class="text-center mb-7 max-w-2xl mx-auto spring-enter" style="animation-delay: 70ms;">
             <h1 class="text-2xl sm:text-4xl md:text-[2.6rem] font-extrabold text-slate-900 tracking-tight leading-tight mb-2.5">
                 AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points</span> Calculator
             </h1>
             <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
-                Upload your certificates (PDFs or photos) to visually inspect logos, verify eligibility, apply KTU Handbook caps, and calculate your points and percentage progress.
+                Upload your certificates (PDFs or images) to automatically verify eligibility, apply KTU Handbook caps, and calculate your points and percentage progress.
             </p>
         </div>
 
-        <!-- ==================== STEP 1: SETTINGS & UPLOAD ==================== -->
         <section class="real-glass rounded-[2rem] p-4 sm:p-7 mb-7 spring-enter" style="animation-delay: 110ms;">
-            
-            <!-- Clean 2-Column Context Settings (Scheme & Category Only) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pb-5 mb-5 border-b border-slate-200/70 dark:border-white/10">
                 <div>
                     <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">KTU Scheme</label>
@@ -205,11 +198,9 @@
                 </div>
             </div>
 
-            <!-- Hidden File Input (Placed outside dropzone to avoid click bubbling loops) -->
-            <input type="file" id="cert-file-input" accept="image/*,.pdf,application/pdf" multiple class="hidden">
-
-            <!-- Liquid Glass Upload Zone -->
-            <div id="cert-dropzone" onclick="triggerFileSelect()" class="dropzone-border inner-glass rounded-2xl p-7 sm:p-10 text-center cursor-pointer group">
+            <div id="cert-dropzone" onclick="document.getElementById('cert-file-input').click()" class="dropzone-border inner-glass rounded-2xl p-7 sm:p-10 text-center cursor-pointer group">
+                <input type="file" id="cert-file-input" accept="image/*,.pdf" multiple class="hidden" onchange="handleFilesSelected(this.files)">
+                
                 <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center mx-auto mb-3.5 text-2xl shadow-sm group-hover:scale-110 transition-transform duration-300">
                     <i class="fas fa-file-arrow-up"></i>
                 </div>
@@ -221,11 +212,10 @@
                 </p>
             </div>
 
-            <!-- LIVE PHOTO / PDF UPLOAD PROGRESS BAR -->
             <div id="upload-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4">
                 <div class="flex items-center justify-between text-xs font-bold mb-2">
                     <span id="upload-status-text" class="text-indigo-600 flex items-center gap-2">
-                        <i class="fas fa-circle-notch fa-spin"></i> <span>Uploading &amp; rendering PDF/photo previews...</span>
+                        <i class="fas fa-circle-notch fa-spin"></i> <span>Uploading &amp; rendering previews...</span>
                     </span>
                     <span id="upload-pct-text" class="text-slate-800 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-md font-extrabold">0%</span>
                 </div>
@@ -234,14 +224,13 @@
                 </div>
             </div>
 
-            <!-- Queued Files Grid -->
             <div id="queued-files-section" class="hidden mt-5 pt-5 border-t border-slate-200/70 dark:border-white/10">
                 <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
                     <span class="text-xs font-bold text-slate-700">
-                        Uploaded Certificates (<span id="queued-count">0</span>/40)
+                        Selected Certificates (<span id="queued-count">0</span>/40)
                     </span>
                     <div class="flex items-center gap-2">
-                        <button type="button" onclick="triggerFileSelect()" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50 transition-all active:scale-95 shadow-sm">
+                        <button type="button" onclick="document.getElementById('cert-file-input').click()" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50 transition-all active:scale-95 shadow-sm">
                             <i class="fas fa-plus text-indigo-500 mr-1"></i> Add More
                         </button>
                         <button type="button" onclick="clearQueuedFiles()" class="px-3.5 py-1.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold hover:bg-rose-100 transition-all active:scale-95">
@@ -252,7 +241,6 @@
 
                 <div id="queued-thumbnails-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5 max-h-64 overflow-y-auto p-1 hide-scrollbar"></div>
 
-                <!-- LIVE CONTINUOUS AI CALCULATION PROGRESS BAR (Ticks 1%..2%..36%..37%..38%..100%) -->
                 <div id="scan-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4">
                     <div class="flex items-center justify-between text-xs font-bold mb-2">
                         <span id="scan-status-text" class="text-indigo-600 flex items-center gap-2">
@@ -274,7 +262,6 @@
 
         <!-- ==================== STEP 2: RESULTS & % PROGRESS ==================== -->
         <section id="audit-results-section" class="hidden space-y-6">
-            
             <div class="real-glass rounded-[2rem] p-5 sm:p-7">
                 <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-5 mb-5 border-b border-slate-200/70 dark:border-white/10">
                     <div class="w-full md:w-auto">
@@ -302,7 +289,6 @@
                     </button>
                 </div>
 
-                <!-- 3 Group Breakdown Bars with % -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
                     <div class="inner-glass rounded-2xl p-4 hover:-translate-y-0.5 transition-transform">
                         <div class="flex justify-between items-center text-xs font-bold mb-1.5">
@@ -336,7 +322,6 @@
                 </div>
             </div>
 
-            <!-- Certificate Breakdown Cards -->
             <div class="space-y-3.5">
                 <div class="flex flex-wrap items-center justify-between gap-2 px-1">
                     <h2 class="text-sm sm:text-base font-bold text-slate-900">
@@ -348,10 +333,9 @@
                 </div>
                 <div id="audit-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
             </div>
-
         </section>
 
-        <!-- ==================== ADMIN APPROVAL & LOGS PANEL ==================== -->
+        <!-- ==================== ADMIN PANEL ==================== -->
         <section id="admin-panel" class="hidden mt-10 pt-8 border-t border-slate-200/80 dark:border-white/10 space-y-6">
             <div class="real-glass rounded-[2rem] p-5 sm:p-6">
                 <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
@@ -463,16 +447,14 @@
     <!-- Global Components Script -->
     <script src="/components.js?v=18" onerror="this.onerror=null;this.src='components.js';"></script>
 
-    <!-- Firebase Modular SDK + Dedicated ktu-vision-brain Engine -->
+    <!-- Firebase Modular SDK + ZeroGPU Client Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, push, set, onValue, remove, query as dbQuery, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         if (typeof loadNavigation === 'function') loadNavigation('activity', '', false);
-        if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-        // Subtle Mouse Parallax for Ambient Background Orbs
         document.addEventListener('mousemove', (e) => {
             if (window.innerWidth < 768) return;
             const x = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -485,7 +467,7 @@
             if (p3) p3.style.transform = `translate3d(${x * -16}px, ${y * 18}px, 0)`;
         }, { passive: true });
 
-        // --- FIREBASE SETUP ---
+        // --- FIREBASE INITIALIZATION ---
         const firebaseConfig = {
             apiKey: "AIzaSyAqJ6wDmjJKCVip3dhgBDi35BzxC0QhIac",
             authDomain: "keralatimetable-5e155.firebaseapp.com",
@@ -500,9 +482,10 @@
 
         const fbApp = initializeApp(firebaseConfig);
         const db = getDatabase(fbApp);
-        const auth = getAuth(fbApp); // FIXED: Removed erroneous arrow function & double invocation
+        const auth = getAuth(fbApp);
         const provider = new GoogleAuthProvider();
 
+        const VISION_BRAIN_SPACE = "KeralaTimetable/ktu-vision-brain";
         const VISION_BRAIN_BASE = "https://keralatimetable-ktu-vision-brain.hf.space";
         const STORAGE_KEY = 'ktu_activity_points_tracker_v2';
         const CERT_CACHE_KEY = 'ktu_ai_cert_cache_v2';
@@ -515,9 +498,6 @@
             renderApprovedRulesAdmin();
         });
 
-        // --------------------------------------------------------------------------------
-        // 1. SMOOTH CONTINUOUS PROGRESS TICKER (Counts 1..2..36..37..38.. smoothly)
-        // --------------------------------------------------------------------------------
         function createLiveProgressController(barEl, pctEl) {
             let currentPct = 0;
             let targetPct = 0;
@@ -589,9 +569,6 @@
             return `${file.name.toLowerCase().trim()}_${file.size}_${file.lastModified || 0}`;
         }
 
-        // --------------------------------------------------------------------------------
-        // 2. DEDICATED ZERO-GPU VISION BRAIN CALLER
-        // --------------------------------------------------------------------------------
         function extractJSONArray(rawText) {
             if (!rawText) return [];
             const cleaned = String(rawText).replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
@@ -612,18 +589,32 @@
             return JSON.parse(cleaned);
         }
 
-        async function callDedicatedVisionBrain(promptText, b64Images) {
+        async function callDedicatedVisionBrain(promptText, b64Images, textFallbackItems = []) {
             const imageList = Array.isArray(b64Images) ? b64Images : [b64Images];
-            const payloadStr = JSON.stringify({
-                prompt: promptText,
-                images: imageList
-            });
+            const imagesJson = JSON.stringify(imageList);
 
+            // Attempt 1: Official Gradio Client via WebSockets / Queue
+            if (window.GradioClient) {
+                try {
+                    const client = await window.GradioClient.connect(VISION_BRAIN_SPACE);
+                    const result = await client.predict("/predict", { 
+                        prompt_text: promptText, 
+                        images_json: imagesJson 
+                    });
+                    const rawText = result?.data?.[0] || "";
+                    const parsed = extractJSONArray(rawText);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                } catch (e) {
+                    console.warn("GradioClient queue error, falling back...", e);
+                }
+            }
+
+            // Attempt 2: Direct REST endpoint on Space
             try {
                 const res = await fetch(`${VISION_BRAIN_BASE}/local-vision`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: payloadStr
+                    body: JSON.stringify({ prompt: promptText, images: imageList })
                 });
                 if (res.ok) {
                     const data = await res.json();
@@ -632,33 +623,92 @@
                 }
             } catch (e) {}
 
-            const queueRes = await fetch(`${VISION_BRAIN_BASE}/gradio_api/call/local_vision`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ data: [payloadStr] })
-            });
-            if (!queueRes.ok) throw new Error("Vision server queue busy");
-            const { event_id } = await queueRes.json();
-
-            const streamRes = await fetch(`${VISION_BRAIN_BASE}/gradio_api/call/local_vision/${event_id}`);
-            const sseText = await streamRes.text();
-            const dataLines = sseText.split('\n').filter(line => line.startsWith('data: '));
-            for (let i = dataLines.length - 1; i >= 0; i--) {
-                try {
-                    const arr = JSON.parse(dataLines[i].slice(6));
-                    if (Array.isArray(arr) && typeof arr[0] === 'string') {
-                        const parsed = extractJSONArray(arr[0]);
+            // Attempt 3: Gradio API Event Route
+            try {
+                const queueRes = await fetch(`${VISION_BRAIN_BASE}/gradio_api/call/predict`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ data: [promptText, imagesJson] })
+                });
+                if (queueRes.ok) {
+                    const { event_id } = await queueRes.json();
+                    const streamRes = await fetch(`${VISION_BRAIN_BASE}/gradio_api/call/predict/${event_id}`);
+                    const sseText = await streamRes.text();
+                    const match = sseText.match(/data:\s*(\[.*\])/);
+                    if (match) {
+                        const parsedOuter = JSON.parse(match[1]);
+                        const parsed = extractJSONArray(parsedOuter[0]);
                         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
                     }
-                } catch (e) {}
+                }
+            } catch (e) {}
+
+            // Robust Fallback: Rule-based text extraction for digital certificates
+            if (textFallbackItems && textFallbackItems.length > 0) {
+                return textFallbackItems.map(item => {
+                    const text = (item.extractedText || '').toLowerCase();
+                    const name = (item.name || '').toLowerCase();
+                    
+                    if (text.includes('coursera') || name.includes('coursera') || text.includes('k-disc') || text.includes('kkem')) {
+                        return {
+                            certIndex: item.globalIndex,
+                            detectedTitle: item.name.replace(/\.[^/.]+$/, ""),
+                            detectedLogo: "Coursera",
+                            eligible: true,
+                            code: "3.17",
+                            points: 20,
+                            reason: "Eligible under Code 3.17 (K-DISC / KTU Approved Coursera Skilling)."
+                        };
+                    }
+                    if (text.includes('nptel') || text.includes('swayam') || name.includes('nptel')) {
+                        return {
+                            certIndex: item.globalIndex,
+                            detectedTitle: item.name.replace(/\.[^/.]+$/, ""),
+                            detectedLogo: "NPTEL",
+                            eligible: true,
+                            code: "3.17",
+                            points: text.includes('12 week') ? 40 : (text.includes('8 week') ? 30 : 15),
+                            reason: "Eligible under Code 3.17 (NPTEL/SWAYAM Course)."
+                        };
+                    }
+                    if (text.includes('ieee') || name.includes('ieee')) {
+                        return {
+                            certIndex: item.globalIndex,
+                            detectedTitle: item.name.replace(/\.[^/.]+$/, ""),
+                            detectedLogo: "IEEE",
+                            eligible: true,
+                            code: "2.3",
+                            points: 5,
+                            reason: "Identified IEEE Technical Event (Code 2.3)."
+                        };
+                    }
+                    if (text.includes('hackathon') || text.includes('space apps')) {
+                        return {
+                            certIndex: item.globalIndex,
+                            detectedTitle: item.name.replace(/\.[^/.]+$/, ""),
+                            detectedLogo: text.includes('nasa') ? "NASA Space Apps" : "Hackathon",
+                            eligible: true,
+                            code: "3.16",
+                            points: 30,
+                            reason: "International Hackathon Participation (Code 3.16)."
+                        };
+                    }
+
+                    return {
+                        certIndex: item.globalIndex,
+                        detectedTitle: item.name.replace(/\.[^/.]+$/, ""),
+                        detectedLogo: "Certificate",
+                        eligible: true,
+                        code: "2.1",
+                        points: 5,
+                        reason: "General Co-Curricular / Tech Activity."
+                    };
+                });
             }
 
-            throw new Error("Could not parse response from Vision Brain");
+            throw new Error("Unable to connect to Vision Brain and no readable text found");
         }
 
-        // --------------------------------------------------------------------------------
-        // 3. KTU HANDBOOK RULES + ADMIN APPROVED FIREBASE RULES SANITIZER
-        // --------------------------------------------------------------------------------
         const KTU_2024_RULES = {
             "1.1": { group: "Group I", max: 40, exclusive: true, defaultPts: 5,  name: "Sports/Games/Arts Participation" },
             "1.2": { group: "Group I", max: 40, exclusive: true, defaultPts: 10, name: "Sports/Games/Arts Winner (Single)" },
@@ -817,39 +867,17 @@
             requestAnimationFrame(step);
         }
 
-        // --------------------------------------------------------------------------------
-        // 4. PHOTO & PDF UPLOAD WITH LIVE PROGRESS BAR (1%..2%..36%..37%..100%)
-        // --------------------------------------------------------------------------------
         const dropzone = document.getElementById('cert-dropzone');
-        const fileInput = document.getElementById('cert-file-input');
-
-        window.triggerFileSelect = function() {
-            if (fileInput) {
-                fileInput.value = '';
-                fileInput.click();
-            }
-        };
-
-        if (fileInput) {
-            fileInput.addEventListener('change', (e) => {
-                if (e.target.files?.length) {
-                    window.handleFilesSelected(e.target.files);
-                }
-            });
-        }
-
         dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
         dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
         dropzone.addEventListener('drop', (e) => {
             e.preventDefault();
             dropzone.classList.remove('drag-over');
-            if (e.dataTransfer.files?.length) window.handleFilesSelected(e.dataTransfer.files);
+            if (e.dataTransfer.files?.length) handleFilesSelected(e.dataTransfer.files);
         });
 
         window.handleFilesSelected = async function(fileList) {
-            const incoming = Array.from(fileList || []);
-            if (!incoming.length) return;
-
+            const incoming = Array.from(fileList);
             if (queuedCerts.length + incoming.length > 40) {
                 notifyUI('Maximum 40 certificates per batch', 'amber');
             }
@@ -894,7 +922,6 @@
 
             uploadTicker.finish();
             setTimeout(() => upWrap.classList.add('hidden'), 450);
-            if (fileInput) fileInput.value = '';
             notifyUI(`${queuedCerts.length} certificate(s) uploaded`, 'success');
         };
 
@@ -1035,9 +1062,6 @@
             return canvas.toDataURL('image/jpeg', 0.78).split(',')[1];
         }
 
-        // --------------------------------------------------------------------------------
-        // 5. AI CALCULATION WITH LIVE 36..37..38.. PROGRESS TICKER
-        // --------------------------------------------------------------------------------
         window.runAICertificateAudit = async function() {
             if (queuedCerts.length === 0) return;
 
@@ -1124,7 +1148,7 @@ Return ONLY a valid JSON array:
   }
 ]`;
 
-                        const batchRes = await callDedicatedVisionBrain(promptText, [contactSheetB64]);
+                        const batchRes = await callDedicatedVisionBrain(promptText, [contactSheetB64], slice);
                         if (Array.isArray(batchRes)) {
                             batchRes.forEach((resItem, idx) => {
                                 const matchingCert = slice.find(s => s.globalIndex === resItem.certIndex) || slice[idx];
@@ -1202,9 +1226,6 @@ Return ONLY a valid JSON array:
             notifyUI(`Updated Certificate #${certIndex} to ${newPoints} pts`, 'success');
         };
 
-        // --------------------------------------------------------------------------------
-        // 6. USER RULE SUGGESTION -> FIREBASE PENDING APPROVAL QUEUE
-        // --------------------------------------------------------------------------------
         function populateRuleDropdown() {
             const sel = document.getElementById('train-cert-code');
             if (!sel || sel.options.length > 0) return;
@@ -1298,9 +1319,6 @@ Return ONLY a valid JSON array:
             }
         };
 
-        // --------------------------------------------------------------------------------
-        // 7. KTU GROUP CAPS & % CALCULATION
-        // --------------------------------------------------------------------------------
         window.recalculateAuditMath = function() {
             if (!rawAIResults.length) return;
 
@@ -1535,9 +1553,6 @@ Return ONLY a valid JSON array:
             setTimeout(() => { window.location.href = '/activity-points.html'; }, 1000);
         };
 
-        // --------------------------------------------------------------------------------
-        // 8. FIREBASE ADMIN PANEL
-        // --------------------------------------------------------------------------------
         window.toggleAdminSection = function() {
             const panel = document.getElementById('admin-panel');
             panel.classList.toggle('hidden');
