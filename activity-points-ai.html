@@ -327,7 +327,6 @@
         import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js";
 
-        // Configure PDF.js worker
         if (window.pdfjsLib) {
             window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
         }
@@ -335,11 +334,15 @@
         if (typeof loadNavigation === 'function') loadNavigation('activity', '', false);
 
         // =========================================================================
-        // DEDICATED HUGGING FACE ZEROGPU SPACE: KeralaTimetable/ktu-vision-brain
+        // SOLUTION A ENDPOINTS:
+        // 1. Authenticated Server Proxy on ktu-papers-api (/vision-audit)
+        // 2. Direct Authenticated Gradio Client to KeralaTimetable/ktu-vision-brain
         // =========================================================================
-        const HF_SPACE_ID  = "KeralaTimetable/ktu-vision-brain";
-        const HF_SPACE_URL = "https://keralatimetable-ktu-vision-brain.hf.space";
-        const STORAGE_KEY  = 'ktu_activity_points_tracker_v2';
+        const API_BASE_URL       = "https://keralatimetable-ktu-papers-api.hf.space";
+        const VISION_PROXY_URL   = `${API_BASE_URL}/vision-audit`;
+        const AUTH_URL           = `${API_BASE_URL}/gemini-auth`;
+        const HF_VISION_SPACE_ID = "KeralaTimetable/ktu-vision-brain";
+        const STORAGE_KEY        = 'ktu_activity_points_tracker_v2';
 
         // --- FIREBASE LOGGING ---
         let db = null;
@@ -410,7 +413,6 @@
             else if (window.KTUFlow?.capsule) window.KTUFlow.capsule(type, msg);
         }
 
-        // Live progress controller
         function createLiveProgressController(barEl, pctEl) {
             let currentPct = 0, targetPct = 0, maxCrawl = 0, timer = null;
             function render() {
@@ -516,7 +518,7 @@
                 } catch (e) {}
 
                 const baseVp = page.getViewport({ scale: 1.0 });
-                const scale = Math.min(1.5, 960 / Math.max(baseVp.width, baseVp.height));
+                const scale = Math.min(1.5, 900 / Math.max(baseVp.width, baseVp.height));
                 const viewport = page.getViewport({ scale });
                 const canvas = document.createElement('canvas');
                 canvas.width = viewport.width; canvas.height = viewport.height;
@@ -524,14 +526,14 @@
                 ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, canvas.width, canvas.height);
                 await page.render({ canvasContext: ctx, viewport }).promise;
 
-                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.84);
                 return certItem;
             } else {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
                     const url = URL.createObjectURL(file);
                     img.onload = () => {
-                        const maxDim = 960;
+                        const maxDim = 900;
                         let w = img.width, h = img.height;
                         if (w > maxDim || h > maxDim) {
                             if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
@@ -543,7 +545,7 @@
                         ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, w, h);
                         ctx.drawImage(img, 0, 0, w, h);
                         URL.revokeObjectURL(url);
-                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.84);
                         resolve(certItem);
                     };
                     img.onerror = reject;
@@ -581,7 +583,6 @@
             document.getElementById('audit-results-section').classList.add('hidden');
         };
 
-        // Stamp a clear "CERTIFICATE #N" banner at the top of each individual certificate image
         async function createLabeledCertImage(item) {
             const img = await new Promise(res => {
                 const im = new Image();
@@ -605,10 +606,9 @@
             ctx.fillRect(0, headerH, img.width, img.height);
             ctx.drawImage(img, 0, headerH);
 
-            return canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
+            return canvas.toDataURL('image/jpeg', 0.84).split(',')[1];
         }
 
-        // --- ROBUST RESPONSE PARSER FOR GRADIO ZEROGPU OUTPUT ---
         function parseVisionBrainResponse(rawOutput) {
             if (!rawOutput) throw new Error("Empty response from KTU Vision Brain");
 
@@ -623,7 +623,7 @@
 
             if (typeof rawOutput === 'object') {
                 if (rawOutput.status === 'error') {
-                    throw new Error(rawOutput.message || "Model returned an error");
+                    throw new Error(rawOutput.message || "Vision Brain returned an error");
                 }
                 if (Array.isArray(rawOutput.results)) return rawOutput.results;
                 if (Array.isArray(rawOutput.data)) return parseVisionBrainResponse(rawOutput.data);
@@ -635,73 +635,46 @@
                 .replace(/```/g, '')
                 .trim();
 
-            try {
-                const parsedObj = JSON.parse(str);
-                if (parsedObj.status === 'error') {
-                    throw new Error(parsedObj.message || "Model returned an error");
-                }
-                if (Array.isArray(parsedObj.results)) return parsedObj.results;
-                if (Array.isArray(parsedObj)) return parsedObj;
-            } catch (e) {
-                const b1 = str.indexOf('[');
-                const b2 = str.lastIndexOf(']');
-                if (b1 !== -1 && b2 !== -1 && b2 > b1) {
-                    return JSON.parse(str.slice(b1, b2 + 1));
-                }
-                throw e;
+            const parsedObj = JSON.parse(str);
+            if (parsedObj.status === 'error') {
+                throw new Error(parsedObj.message || "Vision Brain returned an error");
             }
+            if (Array.isArray(parsedObj.results)) return parsedObj.results;
+            if (Array.isArray(parsedObj)) return parsedObj;
 
             throw new Error("Could not parse KTU Vision Brain output");
         }
 
-        // --- CALL KERALATIMETABLE/KTU-VISION-BRAIN ON ZEROGPU ---
-        async function requestKTUVisionBrain(payloadObj, statusTxtEl) {
-            const payloadJsonStr = JSON.stringify(payloadObj);
-
-            // Method 1: Official @gradio/client connection to KeralaTimetable/ktu-vision-brain
+        // --- SOLUTION A: AUTHENTICATED RELAY VIA KTU-PAPERS-API + AUTHENTICATED GRADIO CLIENT ---
+        async function requestKTUVisionBrain(payloadObj, hfToken, statusTxtEl) {
+            // 1. Primary: Server-side authenticated relay through ktu-papers-api (/vision-audit)
             try {
-                const app = await Client.connect(HF_SPACE_ID);
                 if (statusTxtEl) {
                     statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2-VL-2B inspecting logos, seals &amp; KTU rules on ZeroGPU...</span>`;
                 }
-                const result = await app.predict("/audit", [payloadJsonStr]);
-                const parsed = parseVisionBrainResponse(result?.data);
-                if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-            } catch (gradioErr) {
-                console.warn("Primary @gradio/client call warning, trying direct Gradio API call:", gradioErr);
-            }
-
-            // Method 2: Direct Gradio Queue REST Call fallback to https://keralatimetable-ktu-vision-brain.hf.space
-            const postRes = await fetch(`${HF_SPACE_URL}/gradio_api/call/audit`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ data: [payloadJsonStr] })
-            });
-
-            if (!postRes.ok) {
-                throw new Error(`KTU Vision Brain HTTP ${postRes.status}`);
-            }
-
-            const { event_id } = await postRes.json();
-            const streamRes = await fetch(`${HF_SPACE_URL}/gradio_api/call/audit/${event_id}`);
-            const streamText = await streamRes.text();
-
-            const lines = streamText.split('\n');
-            for (const line of lines) {
-                if (line.startsWith('data: ')) {
-                    const dataStr = line.slice(6).trim();
-                    if (!dataStr || dataStr === 'null') continue;
-                    try {
-                        const parsedEvent = JSON.parse(dataStr);
-                        const finalArray = parseVisionBrainResponse(parsedEvent);
-                        if (Array.isArray(finalArray) && finalArray.length > 0) {
-                            return finalArray;
-                        }
-                    } catch (e) {}
+                const proxyRes = await fetch(VISION_PROXY_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payloadObj)
+                });
+                if (proxyRes.ok) {
+                    const data = await proxyRes.json();
+                    const parsed = parseVisionBrainResponse(data);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                } else {
+                    const errBody = await proxyRes.text();
+                    console.warn("Proxy /vision-audit returned non-200:", proxyRes.status, errBody);
                 }
+            } catch (proxyErr) {
+                console.warn("Server proxy attempt warning, trying direct authenticated Gradio client:", proxyErr);
             }
 
-            throw new Error("ZeroGPU queue did not return valid certificate results.");
+            // 2. Secondary: Direct @gradio/client authenticated with HF_TOKEN from /gemini-auth
+            const payloadJsonStr = JSON.stringify(payloadObj);
+            const clientOptions = hfToken ? { hf_token: hfToken } : {};
+            const app = await Client.connect(HF_VISION_SPACE_ID, clientOptions);
+            const result = await app.predict("/audit", [payloadJsonStr]);
+            return parseVisionBrainResponse(result?.data);
         }
 
         // --- EXECUTION ---
@@ -721,17 +694,25 @@
             ticker.start(10, 95);
 
             try {
-                // Ensure all certificates are rendered
                 for (const cert of queuedCerts) {
                     if (!cert.canvasDataUrl) await prepareCertItem(cert);
                 }
 
-                statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Preparing high-resolution certificates for KTU Vision Brain...</span>`;
+                // Fetch optional HF_TOKEN from /gemini-auth for backup client authentication
+                let hfToken = "";
+                try {
+                    const authRes = await fetch(AUTH_URL, { method: "POST" });
+                    if (authRes.ok) {
+                        const authData = await authRes.json();
+                        if (Array.isArray(authData.h) && authData.h.length > 0) {
+                            hfToken = authData.h.map(b => String.fromCharCode(b ^ 42)).join('');
+                        }
+                    }
+                } catch (e) {}
 
                 const itemsWithIndex = queuedCerts.map((c, i) => ({ ...c, globalIndex: i + 1 }));
                 const allResults = [];
 
-                // Process in batches of up to 4 crisp individual images per ZeroGPU call for maximum accuracy
                 const batchSize = 4;
                 for (let i = 0; i < itemsWithIndex.length; i += batchSize) {
                     const batch = itemsWithIndex.slice(i, i + batchSize);
@@ -754,9 +735,8 @@
                         totalCerts: batch.length
                     };
 
-                    const batchResults = await requestKTUVisionBrain(payloadObj, statusTxt);
+                    const batchResults = await requestKTUVisionBrain(payloadObj, hfToken, statusTxt);
 
-                    // Ensure certIndex maps back to the global index
                     batchResults.forEach((resItem, idxInBatch) => {
                         const expectedGlobalIdx = batch[idxInBatch]?.globalIndex || resItem.certIndex;
                         allResults.push({
