@@ -2,20 +2,21 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
     
     <title>Terms & Conditions | Kerala Timetable</title>
-    <link rel="canonical" href="https://www.keralatimetable.in/terms.html" />
-
-    <meta name="description" content="Terms of Service, Community Guidelines, and Educational Disclaimers for using the Kerala Timetable platform.">
+    <link rel="canonical" href="https://keralatimetable.in/terms.html" />
+    <meta name="description" content="Terms of Service, Advertising & Refund Terms, Community Guidelines, and Educational Disclaimers for using the Kerala Timetable platform.">
+    <link rel="icon" href="/favicon.png" type="image/png">
     
-    <script src="/tailwind-local.js"></script>
+    <!-- Tailwind CSS with Fallback -->
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; overflow-x: hidden; }
         
         .bg-mesh {
             background-color: #f8fafc;
@@ -23,19 +24,18 @@
 
         /* Authentic Glassmorphism */
         .real-glass {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-top: 1px solid rgba(255, 255, 255, 0.9);
-            border-left: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.1);
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.95);
+            border-left: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.08);
         }
 
         @keyframes float-pulse {
-            0% { transform: scale(1); opacity: 0.5; }
+            0%, 100% { transform: scale(1); opacity: 0.5; }
             50% { transform: scale(1.05); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 0.5; }
         }
         .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
 
@@ -46,112 +46,120 @@
         .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
         
         /* Prosaic styling for legal text */
-        .legal-content h2 { margin-top: 2.5rem; margin-bottom: 1rem; color: #1e293b; font-weight: 800; font-size: 1.25rem; }
+        .legal-content h2 { margin-top: 2.25rem; margin-bottom: 0.85rem; color: #0f172a; font-weight: 800; font-size: 1.25rem; }
         .legal-content p { margin-bottom: 1rem; color: #475569; line-height: 1.75; font-size: 0.95rem; }
         .legal-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.5rem; color: #475569; font-size: 0.95rem; line-height: 1.75; }
-        .legal-content li { margin-bottom: 0.5rem; }
+        .legal-content li { margin-bottom: 0.6rem; }
         .legal-content a { color: #6366f1; text-decoration: underline; text-decoration-color: rgba(99, 102, 241, 0.4); text-underline-offset: 4px; transition: all 0.3s ease; }
         .legal-content a:hover { color: #4f46e5; text-decoration-color: #4f46e5; }
     </style>
 </head>
 
-<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative selection:bg-indigo-600 selection:text-white">
 
-    <div id="navigation-container" class="z-50 relative"></div>
+    <!-- Global Sticky Header -->
+    <div id="navigation-container" class="z-50 sticky top-0"></div>
 
-    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <!-- Ambient Background Blur Orbs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
         <div id="scroll-bg-1" class="absolute -top-4 -left-8 md:top-10 md:-left-10 w-64 h-64 md:w-96 md:h-96 transition-transform duration-100 ease-out">
-            <div id="mouse-orb-1" class="w-full h-full bg-amber-400/60 md:bg-amber-400 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+            <div id="mouse-orb-1" class="w-full h-full bg-amber-400/50 md:bg-amber-400/45 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
         </div>
         <div id="scroll-bg-2" class="absolute top-[40%] -right-8 md:top-80 md:-right-20 w-64 h-64 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
-            <div id="mouse-orb-2" class="w-full h-full bg-indigo-500/50 md:bg-indigo-500 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+            <div id="mouse-orb-2" class="w-full h-full bg-indigo-500/45 md:bg-indigo-500/40 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
         </div>
     </div>
 
-    <main class="flex-grow w-full max-w-4xl mx-auto px-4 py-12 md:py-16 relative z-10">
+    <main class="flex-grow w-full max-w-4xl mx-auto px-4 py-10 md:py-16 relative z-10">
         
         <div class="text-center mb-10">
-            <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-                <i class="fas fa-file-contract"></i> Legal & Compliance
+            <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider mb-5 shadow-sm">
+                <i class="fas fa-file-contract text-indigo-600"></i> Legal &amp; Compliance
             </div>
-            <h1 class="animate-fade-up delay-100 text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
-                Terms & <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-500">Disclaimer</span>
+            <h1 class="animate-fade-up delay-100 text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-3 tracking-tight leading-tight">
+                Terms &amp; <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-500">Disclaimer</span>
             </h1>
-            <p class="animate-fade-up delay-200 text-slate-500 font-medium text-sm">
-                Last Updated: July 19, 2026
+            <p class="animate-fade-up delay-200 text-slate-500 font-medium text-xs sm:text-sm">
+                Last Updated: November 4, 2026
             </p>
         </div>
 
         <div class="animate-fade-up delay-300 real-glass rounded-[2rem] p-6 sm:p-10 md:p-12 mb-10">
             
             <div class="legal-content">
-                <p>Welcome to <strong>Kerala Timetable</strong> (<a href="https://www.keralatimetable.in">www.keralatimetable.in</a>). By accessing or using our website, participating in our WhatsApp communities, registering for our gaming events, or downloading our academic archives, you agree to comply with and be bound by the following Terms & Conditions. Please read them carefully.</p>
+                <p>Welcome to <strong>Kerala Timetable</strong> (<a href="https://keralatimetable.in">https://keralatimetable.in</a>). By accessing or using our website, participating in our WhatsApp communities, booking sponsored advertisements, registering for our gaming events, or downloading our academic archives, you agree to comply with and be bound by the following Terms &amp; Conditions. Please read them carefully.</p>
 
                 <h2>1. Educational Disclaimer (Not Officially Affiliated)</h2>
                 <p>Kerala Timetable is an independent, student-driven repository designed to organize educational resources. <strong>We are absolutely NOT officially affiliated with, endorsed by, monitored by, or connected to APJ Abdul Kalam Technological University (APJAKTU).</strong></p>
                 <ul>
-                    <li>All syllabi, study notes, question archives, notifications, and timetables provided on this platform are strictly for general informational purposes.</li>
+                    <li>All syllabi, study notes, question archives, notifications, SGPA/CGPA calculators, and timetables provided on this platform are strictly for general informational and educational purposes.</li>
                     <li>While we make reasonable efforts to maintain update consistency, we make no representations or warranties of any kind regarding the complete accuracy, official confirmation, or final reliability of these materials.</li>
-                    <li>Kerala Timetable holds zero liability for any academic outcomes, loss of grade points, internal evaluations, exam registration issues, or scheduling conflicts resulting from sudden university syllabus alterations that are not yet synchronized with our local search systems. Users are explicitly directed to verify critical timelines on official KTU portals.</li>
+                    <li>Kerala Timetable holds zero liability for any academic outcomes, loss of grade points, internal evaluations, exam registration issues, or scheduling conflicts resulting from sudden university syllabus or timetable alterations that are not yet synchronized with our systems. Users are explicitly directed to verify critical announcements on official KTU portals (<a href="https://ktu.edu.in" target="_blank" rel="noopener noreferrer">ktu.edu.in</a>).</li>
                 </ul>
 
-                <h2>2. Intellectual Property Rights & Smart Search Tools</h2>
-                <p>Unless explicitly stated, Kerala Timetable owns the proprietary rights for all underlying web layout structures, local scripts, custom styling, and automated search engine functionalities on the site. The educational resources (PDFs, university papers) belong to their respective creators or the university.</p>
+                <h2>2. Intellectual Property Rights &amp; Smart Search Tools</h2>
+                <p>Unless explicitly stated, Kerala Timetable owns the proprietary rights for all underlying web layout structures, local scripts, custom styling, and automated search engine functionalities on the site. The educational resources (PDFs, university question papers, and official syllabi) belong to their respective creators or the university.</p>
                 <ul>
-                    <li>Our script-driven, client-side sitemap search engine is provided to assist students with fast routing. Kerala Timetable does not guarantee that automated keyword evaluation will perfectly locate or accurately identify every target course code or resource variation.</li>
-                    <li>You are strictly prohibited from scraping our source code, systematically duplicating our internal pages, or mimicking the site structure without prior written authorization.</li>
+                    <li>Our script-driven search engine and question paper archive are provided to assist students with fast routing. Kerala Timetable does not guarantee that automated keyword evaluation will locate or accurately identify every target course code or resource variation.</li>
+                    <li>You are strictly prohibited from scraping our source code, abusing our backend APIs, systematically duplicating our internal pages, or mimicking the site structure without prior written authorization.</li>
                 </ul>
 
                 <h2>3. Vortex eFootball Tournament Regulations</h2>
                 <p>By registering for the Vortex eFootball Tournament hosted independently by Kerala Timetable, participants explicitly consent to the following performance and operational terms:</p>
                 <ul>
-                    <li><strong>Nominal Entry Fee:</strong> The ₹5 registration fee goes entirely towards event bracketing management, platform upkeep, and the community prize pool structure. This payment is final and completely non-refundable, except in the event of total cancellation of the season by the administration.</li>
+                    <li><strong>Nominal Entry Fee:</strong> The ₹5 registration fee goes entirely towards event bracketing management, platform upkeep, and the community prize pool structure. This payment is final and non-refundable, except in the event of total cancellation of the season by the administration.</li>
                     <li><strong>Independent Gaming Rulings:</strong> Kerala Timetable operates this tournament strictly as a community gaming showcase. We assume zero liability for structural errors inside Konami's eFootball server architecture, network connection drops, game crashes, or device incompatibilities. Banning or qualification rulings made by our designated administrative panel regarding back-passing, network manipulation, or toxic actions are absolute and binding.</li>
-                    <li><strong>Data Security:</strong> Participant gaming IDs, names, and contact channels collected through secure forms will be used strictly for match synchronization and bracket verification. This registry data is highly protected and will never be shared or distributed to external databases.</li>
+                    <li><strong>Data Security:</strong> Participant gaming IDs, names, and contact channels collected through secure forms will be used strictly for match synchronization and bracket verification. This registry data is protected and will never be shared or distributed to external databases.</li>
                 </ul>
 
-                <h2>4. WhatsApp Community Guidelines & Privacy Protection</h2>
-                <p>To preserve a secure, distraction-free environment for thousands of KTU engineering students, our official WhatsApp channels and groups operate under non-negotiable compliance parameters:</p>
+                <h2>4. WhatsApp Community Guidelines &amp; Privacy Protection</h2>
+                <p>To preserve a secure, distraction-free environment for <strong>6,000+ active KTU engineering students</strong>, our official WhatsApp channels and groups operate under non-negotiable compliance parameters:</p>
                 <ul>
-                    <li><strong>Strictly Academic & Official Focus:</strong> All conversations must align strictly with APJAKTU notifications, module updates, exam schedules, and technical queries. Off-topic spam, forwarding rumors, or personal arguments will yield an immediate ban.</li>
-                    <li><strong>Zero Tolerance for Unsolicited Contact:</strong> Extracting phone numbers from our group memberships to send unsolicited Direct Messages (DMs) without explicit member consent is strictly illegal under our code of conduct. Anyone reported for harassing group members via DMs will be permanently banned, and their contact information may be reported to appropriate communication registries. We prioritize absolute protection for student privacy.</li>
-                    <li><strong>Geographic and Account Rules:</strong> We restrict community membership strictly to localized Indian mobile registries (e.g., country code +91). International virtual lines, VOIP numbers, or cross-border registries (such as +1 codes) are completely banned to maintain community trust and verification filters.</li>
+                    <li><strong>Strictly Academic &amp; Official Focus:</strong> All conversations must align strictly with APJAKTU notifications, module updates, exam schedules, and technical queries. Off-topic spam, forwarding unverified rumors, or personal arguments will yield an immediate ban.</li>
+                    <li><strong>Zero Tolerance for Unsolicited Contact:</strong> Extracting phone numbers from our group memberships to send unsolicited Direct Messages (DMs) without explicit member consent is strictly prohibited under our code of conduct. Anyone reported for harassing group members via DMs will be permanently removed. We prioritize absolute protection for student privacy.</li>
+                    <li><strong>Geographic and Account Rules:</strong> We restrict community membership strictly to localized Indian mobile registries (country code +91). International virtual lines, VOIP numbers, or cross-border registries (such as +1 codes) are banned to maintain community trust and security filters.</li>
                 </ul>
 
-                <h2>5. Disclaimers for Partner Promotions, Internships, & Advertisements</h2>
-                <p>Kerala Timetable periodically partners with verified educational vendors, software development platforms, or student training institutes to serve relevant ad slots or share specific career opportunities within our channels.</p>
+                <h2>5. Sponsored Advertisements, Booking Terms &amp; 24-Hour Refund Policy</h2>
+                <p>Kerala Timetable offers official promotional slots via our <a href="/advertisements.html">Advertise With Us</a> page, enabling brands, educators, startups, and college tech-fests to reach our community of 6,000+ KTU students. By booking an advertisement package, the advertiser agrees to the following terms:</p>
                 <ul>
-                    <li><strong>Notice Board Status:</strong> Kerala Timetable acts strictly as a neutral publisher or distributor for third-party advertisements, internship notices, or premium sponsor materials.</li>
-                    <li><strong>No Legal Endorsement:</strong> We do not verify, manage, guarantee, or assume legal liability for the hiring practices, corporate legitimacy, operational frameworks, or monetary transactions of any advertising partner or external internship provider. </li>
-                    <li><strong>User Due Diligence:</strong> Students are strongly advised to perform independent safety checks before transferring fees, submitting personal resumes, or sharing sensitive personal details with any external advertiser or training vendor found via links on this site.</li>
+                    <li><strong>Payment Processing &amp; Confirmation:</strong> All advertising packages (Single Post Drop, 3-Post Campaign, 5-Post Campaign, Monthly Campaign, and Yearly Sponsorship) must be paid in advance through our official <strong>Razorpay</strong> checkout gateway.</li>
+                    <li><strong>12-Hour Automatic WhatsApp Coordination:</strong> Once payment is completed, our ad management team will <strong>automatically contact the advertiser within 12 hours via WhatsApp message</strong> on the number provided during checkout. Advertisers may also initiate a WhatsApp message immediately using the post-payment buttons on the confirmation screen. <strong>Voice calls are strictly discouraged</strong>; WhatsApp text messages are required so all posters, captions, and links are documented accurately.</li>
+                    <li><strong>Content Moderation &amp; 24-Hour Anti-Scam/Spam Refund Policy:</strong> Every submitted advertisement is reviewed by our administrators prior to publishing. If your company, product, or ad creative fails to meet our community standards—such as involving <strong>scams, spam, pyramid/MLM schemes, illegal betting, misleading academic claims, or fraudulent services</strong>—Kerala Timetable reserves the absolute right to reject the campaign. In such cases where an ad is rejected for policy non-compliance, <strong>the full amount paid will be refunded within 24 hours</strong> via the original payment method.</li>
+                    <li><strong>Scheduling &amp; Delivery:</strong> Preferred posting dates and times submitted during checkout are honored on a best-effort basis subject to community announcement schedules and timely submission of ad creatives by the advertiser.</li>
+                    <li><strong>Notice Board Status &amp; No Legal Endorsement:</strong> Even when an advertisement is approved and published, Kerala Timetable acts strictly as a neutral publisher/notice board. We do not officially endorse, guarantee, or assume legal liability for the external apps, books, courses, events, hiring practices, or monetary transactions of any third-party advertiser. Students are advised to exercise independent due diligence before purchasing products or sharing personal/financial information with any external advertiser.</li>
                 </ul>
 
                 <h2>6. Limitation of Liability</h2>
-                <p>In no event shall Kerala Timetable, its network founders, development coordinators, or site ambassadors be held responsible or legally liable for any consequential, incidental, technical, or punitive damages—including but not limited to hosting dropouts, API processing bottlenecks, broken Google Drive file pathways, or server status lag—resulting from your reliance on our tools.</p>
+                <p>In no event shall Kerala Timetable, its network founders, development coordinators, or campus ambassadors be held responsible or legally liable for any consequential, incidental, technical, or punitive damages—including but not limited to hosting dropouts, API processing bottlenecks, broken Google Drive file pathways, or server status lag—resulting from your reliance on our tools or third-party links.</p>
 
                 <h2>7. Governing Law</h2>
-                <p>These Terms & Conditions shall be governed by, construed, and enforced in accordance with the regulatory legal frameworks of India. Any legal disputes or compliance resolutions arising directly out of platform interactions shall fall strictly under the judicial jurisdiction of courts within the State of Kerala.</p>
+                <p>These Terms &amp; Conditions shall be governed by, construed, and enforced in accordance with the laws of India. Any legal disputes or compliance resolutions arising directly out of platform interactions shall fall strictly under the judicial jurisdiction of courts within the State of Kerala.</p>
 
                 <h2>8. Contact Information</h2>
-                <p>If you need to report community rule violations, require clarity on our disclaimers, or have questions about structural operations, reach out directly at: <strong><a href="mailto:keralatimetable@gmail.com">keralatimetable@gmail.com</a></strong></p>
+                <p>If you need to report community rule violations, inquire about an advertising booking or refund, or require clarity on our disclaimers, reach out directly at: <strong><a href="mailto:keralatimetable@gmail.com">keralatimetable@gmail.com</a></strong></p>
             </div>
 
         </div>
     </main>
 
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center relative z-10">
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-8 text-center relative z-10">
         <div class="max-w-3xl mx-auto px-4">
-            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
-            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
+            <h3 class="text-slate-800 font-bold text-base sm:text-lg mb-2">Kerala Timetable</h3>
+            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent student-focused platform and are not officially affiliated with APJ Abdul Kalam Technological University (KTU).</p>
         </div>
     </footer>
 
-    <script src="/components.js?v=16"></script>
+    <!-- Global Components Script -->
+    <script src="/components.js?v=18" onerror="this.onerror=null;this.src='components.js';"></script>
     <script>
         // Load Header Navigation
-        if(typeof loadNavigation === 'function') loadNavigation('', '/', false);
+        if (typeof loadNavigation === 'function') {
+            loadNavigation('', '/', false);
+        }
 
         // --- 1. BUTTERY SMOOTH VERTICAL SCROLL PARALLAX ---
         let lastScrollY = window.scrollY;
@@ -164,8 +172,8 @@
                     const scrollBg1 = document.getElementById('scroll-bg-1');
                     const scrollBg2 = document.getElementById('scroll-bg-2');
                     
-                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.3}px)`;
-                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                    if (scrollBg1) scrollBg1.style.transform = `translate3d(0, ${lastScrollY * 0.25}px, 0)`;
+                    if (scrollBg2) scrollBg2.style.transform = `translate3d(0, ${lastScrollY * -0.18}px, 0)`;
                     ticking = false;
                 });
                 ticking = true;
@@ -177,26 +185,27 @@
             const mouseOrb1 = document.getElementById('mouse-orb-1');
             const mouseOrb2 = document.getElementById('mouse-orb-2');
             
-            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
-            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+            if (mouseOrb1) mouseOrb1.style.transform = `translate3d(${x * -30}px, ${y * -30}px, 0)`;
+            if (mouseOrb2) mouseOrb2.style.transform = `translate3d(${x * 40}px, ${y * 40}px, 0)`;
         }
 
         document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth < 768) return;
             const x = (e.clientX / window.innerWidth - 0.5) * 2; 
             const y = (e.clientY / window.innerHeight - 0.5) * 2;
             applyParallax(x, y);
-        });
+        }, { passive: true });
 
         document.addEventListener('mouseleave', () => applyParallax(0, 0));
 
         // --- 3. GYROSCOPE TILT PARALLAX (For Mobile) ---
         if (window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', (e) => {
-                if(e.gamma === null || e.beta === null) return;
-                let x = Math.max(-1, Math.min(1, e.gamma / 40));
-                let y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
+                if (e.gamma === null || e.beta === null) return;
+                const x = Math.max(-1, Math.min(1, e.gamma / 40));
+                const y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
                 applyParallax(x, y);
-            }, true);
+            }, { passive: true });
         }
     </script>
 </body>
