@@ -355,7 +355,6 @@
                 </div>
 
                 <div id="admin-dashboard-body" class="hidden space-y-6">
-                    <!-- Pending Corrections Queue -->
                     <div>
                         <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-2.5">
                             Pending User Rule Corrections (<span id="pending-rules-count">0</span>)
@@ -363,7 +362,6 @@
                         <div id="pending-rules-list" class="space-y-2.5 max-h-80 overflow-y-auto pr-1"></div>
                     </div>
 
-                    <!-- Approved Rules Active in System -->
                     <div class="pt-4 border-t border-slate-200/70 dark:border-white/10">
                         <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2.5">
                             Approved Custom Rules Active (<span id="approved-rules-count">0</span>)
@@ -371,7 +369,6 @@
                         <div id="approved-rules-list" class="flex flex-wrap gap-2"></div>
                     </div>
 
-                    <!-- Recent Certificate Scan Logs -->
                     <div class="pt-4 border-t border-slate-200/70 dark:border-white/10">
                         <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">
                             Recent Certificate Scans Logged
@@ -384,7 +381,7 @@
 
     </main>
 
-    <!-- ==================== EDIT / SUGGEST RULE MODAL (With Spring Transition) ==================== -->
+    <!-- ==================== EDIT / SUGGEST RULE MODAL ==================== -->
     <div id="train-ai-modal" onclick="closeTrainModal()" class="fixed inset-0 z-50 hidden bg-slate-950/55 backdrop-blur-md flex items-center justify-center p-4">
         <div id="train-modal-card" class="real-glass bg-white/95 dark:bg-slate-900/95 rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-white/15 transform scale-95 opacity-0 transition-all duration-200" onclick="event.stopPropagation()">
             <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200/80 dark:border-white/10">
@@ -452,7 +449,7 @@
     <!-- Global Components Script -->
     <script src="/components.js?v=18" onerror="this.onerror=null;this.src='components.js';"></script>
 
-    <!-- Firebase Modular SDK + Calculator Logic -->
+    <!-- Firebase Modular SDK + Dedicated ktu-vision-brain Engine -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, push, set, onValue, remove, query as dbQuery, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -492,7 +489,8 @@
         const auth = getAuth(fbApp);
         const provider = new GoogleAuthProvider();
 
-        const HF_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/gemini-auth";
+        // Dedicated ZeroGPU Vision Brain Space URL (No external API keys!)
+        const VISION_BRAIN_BASE = "https://keralatimetable-ktu-vision-brain.hf.space";
         const STORAGE_KEY = 'ktu_activity_points_tracker_v2';
         const CERT_CACHE_KEY = 'ktu_ai_cert_cache_v2';
 
@@ -523,25 +521,8 @@
         }
 
         // --------------------------------------------------------------------------------
-        // 2. MULTI-ENGINE AI ROUTER (No model names shown in UI)
+        // 2. DEDICATED ZERO-GPU VISION BRAIN CALLER (ktu-vision-brain ONLY)
         // --------------------------------------------------------------------------------
-        const GEMINI_MODELS = [
-            "gemini-2.5-flash",
-            "gemini-2.5-flash-lite",
-            "gemini-2.0-flash",
-            "gemini-3.8-flash",
-            "gemini-3.5-flash-lite"
-        ];
-        const GROQ_MODELS = ["qwen/qwen3.8-27b"];
-        const OPENROUTER_MODELS = [
-            "qwen/qwen2.5-vl-72b-instruct:free",
-            "google/gemma-3-27b-it:free",
-            "meta-llama/llama-3.2-11b-vision-instruct:free"
-        ];
-
-        let currentGeminiIdx = 0;
-        let currentOrIdx = 0;
-
         function extractJSONArray(rawText) {
             if (!rawText) return [];
             const cleaned = String(rawText).replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
@@ -562,91 +543,50 @@
             return JSON.parse(cleaned);
         }
 
-        async function callMultiEngineAI(authData, promptText, b64Images) {
-            const decode = (arr) => Array.isArray(arr) ? arr.map(b => String.fromCharCode(b ^ 42)).join('') : '';
-            const gemKey  = decode(authData.k);
-            const groqKey = decode(authData.g);
-            const orKey   = decode(authData.o);
+        async function callDedicatedVisionBrain(promptText, b64Images) {
             const imageList = Array.isArray(b64Images) ? b64Images : [b64Images];
+            const payloadStr = JSON.stringify({
+                prompt: promptText,
+                images: imageList
+            });
 
-            if (gemKey) {
-                const partsPayload = imageList.map(b64 => ({ inlineData: { mimeType: "image/jpeg", data: b64 } }));
-                partsPayload.push({ text: promptText });
-
-                for (let attempt = 0; attempt < GEMINI_MODELS.length; attempt++) {
-                    const model = GEMINI_MODELS[(currentGeminiIdx + attempt) % GEMINI_MODELS.length];
-                    try {
-                        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${gemKey}`, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                contents: [{ parts: partsPayload }],
-                                generationConfig: { temperature: 0.1, responseMimeType: "application/json" }
-                            })
-                        });
-                        if (!res.ok) continue;
-                        const data = await res.json();
-                        const parsed = extractJSONArray(data.candidates?.[0]?.content?.parts?.[0]?.text || "");
-                        if (Array.isArray(parsed) && parsed.length > 0) {
-                            currentGeminiIdx = (currentGeminiIdx + attempt + 1) % GEMINI_MODELS.length;
-                            return parsed;
-                        }
-                    } catch (e) { continue; }
+            // Route 1: Direct /local-vision FastAPI endpoint on ktu-vision-brain
+            try {
+                const res = await fetch(`${VISION_BRAIN_BASE}/local-vision`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: payloadStr
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    const parsed = extractJSONArray(data.result || "");
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
                 }
-            }
+            } catch (e) {}
 
-            if (groqKey) {
-                const contentParts = imageList.map(b64 => ({ type: "image_url", image_url: { url: `data:image/jpeg;base64,${b64}` } }));
-                contentParts.push({ type: "text", text: promptText + "\n\nReturn ONLY a raw JSON array." });
+            // Route 2: Gradio ZeroGPU Queue API (/gradio_api/call/local_vision)
+            const queueRes = await fetch(`${VISION_BRAIN_BASE}/gradio_api/call/local_vision`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ data: [payloadStr] })
+            });
+            if (!queueRes.ok) throw new Error("Vision server queue busy");
+            const { event_id } = await queueRes.json();
 
-                for (const gModel of GROQ_MODELS) {
-                    try {
-                        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                            method: "POST",
-                            headers: { "Authorization": `Bearer ${groqKey}`, "Content-Type": "application/json" },
-                            body: JSON.stringify({
-                                model: gModel,
-                                temperature: 0.1,
-                                reasoning_effort: "none",
-                                messages: [{ role: "user", content: contentParts }]
-                            })
-                        });
-                        if (!res.ok) continue;
-                        const data = await res.json();
-                        const parsed = extractJSONArray(data.choices?.[0]?.message?.content || "");
+            const streamRes = await fetch(`${VISION_BRAIN_BASE}/gradio_api/call/local_vision/${event_id}`);
+            const sseText = await streamRes.text();
+            const dataLines = sseText.split('\n').filter(line => line.startsWith('data: '));
+            for (let i = dataLines.length - 1; i >= 0; i--) {
+                try {
+                    const arr = JSON.parse(dataLines[i].slice(6));
+                    if (Array.isArray(arr) && typeof arr[0] === 'string') {
+                        const parsed = extractJSONArray(arr[0]);
                         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-                    } catch (e) { continue; }
-                }
+                    }
+                } catch (e) {}
             }
 
-            if (orKey) {
-                const contentParts = imageList.map(b64 => ({ type: "image_url", image_url: { url: `data:image/jpeg;base64,${b64}` } }));
-                contentParts.push({ type: "text", text: promptText + "\n\nReturn ONLY a raw JSON array." });
-
-                for (let attempt = 0; attempt < OPENROUTER_MODELS.length; attempt++) {
-                    const model = OPENROUTER_MODELS[(currentOrIdx + attempt) % OPENROUTER_MODELS.length];
-                    try {
-                        const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-                            method: "POST",
-                            headers: {
-                                "Authorization": `Bearer ${orKey}`,
-                                "Content-Type": "application/json",
-                                "HTTP-Referer": "https://keralatimetable.in"
-                            },
-                            body: JSON.stringify({ model, messages: [{ role: "user", content: contentParts }], temperature: 0.1 })
-                        });
-                        if (!res.ok) continue;
-                        const data = await res.json();
-                        const parsed = extractJSONArray(data.choices?.[0]?.message?.content || "");
-                        if (Array.isArray(parsed) && parsed.length > 0) {
-                            currentOrIdx = (currentOrIdx + attempt + 1) % OPENROUTER_MODELS.length;
-                            return parsed;
-                        }
-                    } catch (e) { continue; }
-                }
-            }
-
-            throw new Error("Calculation service busy");
+            throw new Error("Could not parse response from Vision Brain");
         }
 
         // --------------------------------------------------------------------------------
@@ -799,7 +739,6 @@
             else if (window.KTUFlow?.capsule) window.KTUFlow.capsule(type, msg);
         }
 
-        // Smooth Number Count-Up Animation Helper
         function animateNumber(el, targetVal, duration = 450) {
             if (!el) return;
             const startVal = parseInt(el.innerText, 10) || 0;
@@ -815,7 +754,7 @@
         }
 
         // --------------------------------------------------------------------------------
-        // 4. INSTANT FILE SELECTION (0ms Lag! Defers heavy rendering until scan time)
+        // 4. INSTANT FILE SELECTION
         // --------------------------------------------------------------------------------
         const dropzone = document.getElementById('cert-dropzone');
         dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
@@ -997,7 +936,7 @@
         }
 
         // --------------------------------------------------------------------------------
-        // 5. FAST PARALLEL AI CALCULATION + FIREBASE SCAN LOGGING
+        // 5. AI CALCULATION VIA ktu-vision-brain + FIREBASE SCAN LOGGING
         // --------------------------------------------------------------------------------
         window.runAICertificateAudit = async function() {
             if (queuedCerts.length === 0) return;
@@ -1038,15 +977,12 @@
                     }
                     renderQueuedGrid();
 
-                    const authRes = await fetch(HF_AUTH_URL, { method: 'POST' });
-                    if (!authRes.ok) throw new Error("Auth sync failed");
-                    const authData = await authRes.json();
-
                     const approvedRulesPromptBlock = approvedCustomRules.length > 0
-                        ? `\nADMIN-APPROVED CUSTOM KTU RULES (MUST FOLLOW):\n` + approvedCustomRules.map(r => `- If certificate matches "${r.keyword}": assign Code "${r.code}", eligible: ${r.code !== 'none'}, points: ${r.points} (${r.note || ''})`).join('\n')
+                        ? `\nAPPROVED CUSTOM KTU RULES:\n` + approvedCustomRules.map(r => `- "${r.keyword}" => Code "${r.code}", eligible: ${r.code !== 'none'}, points: ${r.points}`).join('\n')
                         : '';
 
-                    const batchSize = 4;
+                    // Send 2 certificates per GPU pass for maximum 2B Vision clarity
+                    const batchSize = 2;
                     const totalBatches = Math.ceil(uncachedQueue.length / batchSize);
 
                     for (let b = 0; b < totalBatches; b++) {
@@ -1055,32 +991,30 @@
                             globalIndex: u.globalIndex
                         }));
 
-                        statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Calculating points (Batch ${b + 1} of ${totalBatches})...`;
+                        statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Analyzing certificates (${b + 1} of ${totalBatches})...`;
                         const pct = Math.round(((b + 0.4) / totalBatches) * 90);
                         progBar.style.width = `${pct}%`;
                         pctTxt.innerText = `${pct}%`;
 
                         const contactSheetB64 = await createContactSheetBase64(slice);
                         const extractedTextContext = slice.map(s => 
-                            `CERTIFICATE #${s.globalIndex} (Filename: "${s.name}") PDF Text: ${s.extractedText ? `"${s.extractedText}"` : '"[Image]"'}`
+                            `CERTIFICATE #${s.globalIndex} (File: "${s.name}") PDF Text: ${s.extractedText ? `"${s.extractedText}"` : '"[Image]"'}`
                         ).join('\n');
 
-                        const promptText = `
-You are the Official APJAKTU (KTU) B.Tech Activity Points Calculator Engine.
-Inspect each labeled certificate tile AND cross-check with the PDF Text below:
+                        const promptText = `You are the APJAKTU (KTU) B.Tech Activity Points Calculator.
+Inspect each certificate in the image and the PDF text below:
 ${extractedTextContext}
 ${approvedRulesPromptBlock}
 
-KTU 2024 HANDBOOK RULES:
-- 3.17 Skilling (Coursera K-DISC, NPTEL, SWAYAM, Spoken Tutorial, ICTAK, ASAP): All Coursera certificates are 100% ELIGIBLE under Code "3.17" (Single Course = 20 pts, Specialization = 30 pts). NPTEL: 4-wk=15, 8-wk=30, 12-wk=40. Unapproved 1-hr webinars = 0 pts (eligible: false).
+KTU 2024 RULES:
+- 3.17 Skilling (Coursera, NPTEL, SWAYAM, Spoken Tutorial, K-DISC, ICTAK, ASAP): ALL Coursera certificates are ELIGIBLE under Code "3.17" (Single Course=20 pts, Specialization=30 pts). NPTEL: 4-wk=15, 8-wk=30, 12-wk=40. Unapproved 1-hr webinars=0 pts (eligible: false).
 - 2.3 / 2.4 IEEE, ISTE, ACM, CSI, SAE, ASME Competitions: Participation (2.3): L1 College Branch=2, L2 Hub=5, L3 State/AKSC=10, L4 National=15, L5 Int'l=20. Winner (2.4): L1=3, L2=7, L3=15, L4=25, L5=35.
 - 2.11 Society Role/Membership: Member/Coord=5, Execom=10, Chair/Secretary=15.
 - 2.5 IIT/NIT/NIRF100 Workshop/Seminar: 5 pts (Excludes cultural fest workshops like Ragam).
 - 2.1 / 2.2 Tech-Fest: Participation (2.1) L1=2, L2=5, L3=10, L4=20, L5=30. Winner (2.2) L1=5, L2=10, L3=20, L4=40.
-- 1.1 / 1.2 / 1.3 Sports & Arts: Participation (1.1) L1=1, L2=5, L3=10, L4=20, L5=40. Winner Single (1.2) L1=5, L2=10, L3=20, L4=40.
-- 1.5 Four-Wheeler Driving License (LMV): 5 pts.
-- 1.11 NSS 2-Yr = 30 pts. 1.12 NSS 100-Hr Camp = 20 pts. 1.8 Blood Donation = 5 pts.
-- 2.23 Short Internship (>=2 weeks) = 10 pts. 3.1 IV Report = 5 pts. 3.15 National Hackathon Winner = 30-40 pts. 3.16 Int'l Hackathon (NASA Space Apps, Imagine Cup, YESIST12) = 30 pts (Participation) / 40 pts (Winner).
+- 1.1 / 1.2 Sports & Arts: Participation (1.1) L1=1, L2=5, L3=10, L4=20, L5=40. Winner (1.2) L1=5, L2=10, L3=20, L4=40.
+- 1.5 Four-Wheeler Driving License (LMV)=5 pts. 1.11 NSS 2-Yr=30 pts. 1.8 Blood Donation=5 pts.
+- 2.23 Short Internship (>=2 weeks)=10 pts. 3.1 IV Report=5 pts. 3.15 National Hackathon Winner=30-40 pts. 3.16 Int'l Hackathon (NASA Space Apps, Imagine Cup, YESIST12)=30 pts (Participation) / 40 pts (Winner).
 
 Return ONLY a valid JSON array:
 [
@@ -1098,7 +1032,7 @@ Return ONLY a valid JSON array:
   }
 ]`;
 
-                        const batchRes = await callMultiEngineAI(authData, promptText, [contactSheetB64]);
+                        const batchRes = await callDedicatedVisionBrain(promptText, [contactSheetB64]);
                         if (Array.isArray(batchRes)) {
                             batchRes.forEach((resItem, idx) => {
                                 const matchingCert = slice.find(s => s.globalIndex === resItem.certIndex) || slice[idx];
@@ -1510,7 +1444,7 @@ Return ONLY a valid JSON array:
         };
 
         // --------------------------------------------------------------------------------
-        // 8. FIREBASE ADMIN PANEL (APPROVE / REJECT RULES & VIEW SCAN LOGS)
+        // 8. FIREBASE ADMIN PANEL
         // --------------------------------------------------------------------------------
         window.toggleAdminSection = function() {
             const panel = document.getElementById('admin-panel');
