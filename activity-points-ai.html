@@ -516,7 +516,7 @@
                 } catch (e) {}
 
                 const baseVp = page.getViewport({ scale: 1.0 });
-                const scale = Math.min(1.2, 740 / Math.max(baseVp.width, baseVp.height));
+                const scale = Math.min(1.5, 960 / Math.max(baseVp.width, baseVp.height));
                 const viewport = page.getViewport({ scale });
                 const canvas = document.createElement('canvas');
                 canvas.width = viewport.width; canvas.height = viewport.height;
@@ -524,14 +524,14 @@
                 ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, canvas.width, canvas.height);
                 await page.render({ canvasContext: ctx, viewport }).promise;
 
-                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.85);
                 return certItem;
             } else {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
                     const url = URL.createObjectURL(file);
                     img.onload = () => {
-                        const maxDim = 740;
+                        const maxDim = 960;
                         let w = img.width, h = img.height;
                         if (w > maxDim || h > maxDim) {
                             if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
@@ -543,7 +543,7 @@
                         ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, w, h);
                         ctx.drawImage(img, 0, 0, w, h);
                         URL.revokeObjectURL(url);
-                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.85);
                         resolve(certItem);
                     };
                     img.onerror = reject;
@@ -581,37 +581,31 @@
             document.getElementById('audit-results-section').classList.add('hidden');
         };
 
-        // Combine up to 4 certificates into 1 visual contact sheet for Qwen2-VL
-        async function createContactSheet(batchItems) {
-            const tileW = 600, tileH = 460, headerH = 32;
-            const cols = batchItems.length === 1 ? 1 : 2;
-            const rows = Math.ceil(batchItems.length / 2);
+        // Stamp a clear "CERTIFICATE #N" banner at the top of each individual certificate image
+        async function createLabeledCertImage(item) {
+            const img = await new Promise(res => {
+                const im = new Image();
+                im.onload = () => res(im);
+                im.src = item.canvasDataUrl;
+            });
 
+            const headerH = 36;
             const canvas = document.createElement('canvas');
-            canvas.width = cols * tileW; canvas.height = rows * tileH;
+            canvas.width = img.width;
+            canvas.height = img.height + headerH;
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#0f172a'; ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            for (let i = 0; i < batchItems.length; i++) {
-                const item = batchItems[i];
-                const col = i % 2, row = Math.floor(i / 2);
-                const x = col * tileW, y = row * tileH;
+            ctx.fillStyle = '#1e1b4b';
+            ctx.fillRect(0, 0, canvas.width, headerH);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 16px Inter, sans-serif';
+            ctx.fillText(`CERTIFICATE #${item.globalIndex} (${item.name.slice(0, 42)})`, 12, 24);
 
-                ctx.fillStyle = '#1e1b4b'; ctx.fillRect(x, y, tileW, headerH);
-                ctx.fillStyle = '#ffffff'; ctx.font = 'bold 14px Inter, sans-serif';
-                ctx.fillText(`CERTIFICATE #${item.globalIndex} (${item.name.slice(0, 30)})`, x + 10, y + 21);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, headerH, img.width, img.height);
+            ctx.drawImage(img, 0, headerH);
 
-                const img = await new Promise(res => {
-                    const im = new Image(); im.onload = () => res(im); im.src = item.canvasDataUrl;
-                });
-                ctx.fillStyle = '#ffffff'; ctx.fillRect(x + 3, y + headerH, tileW - 6, tileH - headerH - 3);
-
-                const availW = tileW - 12, availH = tileH - headerH - 8;
-                const scale = Math.min(availW / img.width, availH / img.height);
-                const dw = img.width * scale, dh = img.height * scale;
-                ctx.drawImage(img, x + (tileW - dw) / 2, y + headerH + 3 + (availH - dh) / 2, dw, dh);
-            }
-            return canvas.toDataURL('image/jpeg', 0.82).split(',')[1];
+            return canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
         }
 
         // --- ROBUST RESPONSE PARSER FOR GRADIO ZEROGPU OUTPUT ---
@@ -664,11 +658,11 @@
         async function requestKTUVisionBrain(payloadObj, statusTxtEl) {
             const payloadJsonStr = JSON.stringify(payloadObj);
 
-            // Method 1: Official @gradio/client WebSocket/SSE connection to KeralaTimetable/ktu-vision-brain
+            // Method 1: Official @gradio/client connection to KeralaTimetable/ktu-vision-brain
             try {
                 const app = await Client.connect(HF_SPACE_ID);
                 if (statusTxtEl) {
-                    statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2-VL-2B inspecting logos, seals &amp; text on ZeroGPU...</span>`;
+                    statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2-VL-2B inspecting logos, seals &amp; KTU rules on ZeroGPU...</span>`;
                 }
                 const result = await app.predict("/audit", [payloadJsonStr]);
                 const parsed = parseVisionBrainResponse(result?.data);
@@ -677,7 +671,7 @@
                 console.warn("Primary @gradio/client call warning, trying direct Gradio API call:", gradioErr);
             }
 
-            // Method 2: Direct Gradio 4/5 Queue REST Call fallback to https://keralatimetable-ktu-vision-brain.hf.space
+            // Method 2: Direct Gradio Queue REST Call fallback to https://keralatimetable-ktu-vision-brain.hf.space
             const postRes = await fetch(`${HF_SPACE_URL}/gradio_api/call/audit`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -724,7 +718,7 @@
             progWrap.classList.remove('hidden');
 
             const ticker = createLiveProgressController(progBar, pctTxt);
-            ticker.start(12, 95);
+            ticker.start(10, 95);
 
             try {
                 // Ensure all certificates are rendered
@@ -732,29 +726,47 @@
                     if (!cert.canvasDataUrl) await prepareCertItem(cert);
                 }
 
-                statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Preparing high-resolution contact sheets for Vision Brain...</span>`;
+                statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Preparing high-resolution certificates for KTU Vision Brain...</span>`;
 
                 const itemsWithIndex = queuedCerts.map((c, i) => ({ ...c, globalIndex: i + 1 }));
-                const sheetPromises = [];
-                for (let i = 0; i < itemsWithIndex.length; i += 4) {
-                    sheetPromises.push(createContactSheet(itemsWithIndex.slice(i, i + 4)));
+                const allResults = [];
+
+                // Process in batches of up to 4 crisp individual images per ZeroGPU call for maximum accuracy
+                const batchSize = 4;
+                for (let i = 0; i < itemsWithIndex.length; i += batchSize) {
+                    const batch = itemsWithIndex.slice(i, i + batchSize);
+                    const batchNum = Math.floor(i / batchSize) + 1;
+                    const totalBatches = Math.ceil(itemsWithIndex.length / batchSize);
+
+                    const pctTarget = Math.min(92, Math.round(((i + batch.length * 0.5) / itemsWithIndex.length) * 90));
+                    ticker.advanceTo(pctTarget, 96);
+
+                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Analyzing batch ${batchNum} of ${totalBatches} on ZeroGPU...</span>`;
+
+                    const b64Images = await Promise.all(batch.map(item => createLabeledCertImage(item)));
+                    const pdfSummary = batch.map(c =>
+                        `CERT #${c.globalIndex} (File: ${c.name}) Text: ${c.extractedText || "[Image file]"}`
+                    ).join("\n");
+
+                    const payloadObj = {
+                        sheets: b64Images,
+                        pdfSummary: pdfSummary,
+                        totalCerts: batch.length
+                    };
+
+                    const batchResults = await requestKTUVisionBrain(payloadObj, statusTxt);
+
+                    // Ensure certIndex maps back to the global index
+                    batchResults.forEach((resItem, idxInBatch) => {
+                        const expectedGlobalIdx = batch[idxInBatch]?.globalIndex || resItem.certIndex;
+                        allResults.push({
+                            ...resItem,
+                            certIndex: expectedGlobalIdx
+                        });
+                    });
                 }
-                const b64Sheets = await Promise.all(sheetPromises);
 
-                ticker.advanceTo(35, 95);
-                statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Connecting to KeralaTimetable/ktu-vision-brain (ZeroGPU)...</span>`;
-
-                const pdfSummary = itemsWithIndex.map(c => 
-                    `CERT #${c.globalIndex} (File: ${c.name}) Text: ${c.extractedText || "[Image file]"}`
-                ).join("\n");
-
-                const payloadObj = {
-                    sheets: b64Sheets,
-                    pdfSummary: pdfSummary,
-                    totalCerts: itemsWithIndex.length
-                };
-
-                rawAIResults = await requestKTUVisionBrain(payloadObj, statusTxt);
+                rawAIResults = allResults;
 
                 ticker.finish();
                 setTimeout(() => progWrap.classList.add('hidden'), 350);
