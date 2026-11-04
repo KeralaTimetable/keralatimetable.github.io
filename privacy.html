@@ -2,20 +2,21 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
     
     <title>Privacy Policy | Kerala Timetable</title>
-    <link rel="canonical" href="https://www.keralatimetable.in/privacy.html" />
-
-    <meta name="description" content="Privacy Policy and terms of data usage for Kerala Timetable. Learn how we protect student data, utilize cookies, and manage third-party services.">
+    <link rel="canonical" href="https://keralatimetable.in/privacy.html" />
+    <meta name="description" content="Privacy Policy, advertising refund policy, and terms of data usage for Kerala Timetable. Learn how we protect student data, utilize cookies, and manage third-party services.">
+    <link rel="icon" href="/favicon.png" type="image/png">
     
-    <script src="/tailwind-local.js"></script>
+    <!-- Tailwind CSS with Fallback -->
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif; overflow-x: hidden; }
         
         .bg-mesh {
             background-color: #f8fafc;
@@ -23,19 +24,18 @@
 
         /* Authentic Glassmorphism */
         .real-glass {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-top: 1px solid rgba(255, 255, 255, 0.9);
-            border-left: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.1);
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.95);
+            border-left: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.08);
         }
 
         @keyframes float-pulse {
-            0% { transform: scale(1); opacity: 0.5; }
+            0%, 100% { transform: scale(1); opacity: 0.5; }
             50% { transform: scale(1.05); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 0.5; }
         }
         .orb-pulse { animation: float-pulse 7s ease-in-out infinite; }
 
@@ -46,114 +46,123 @@
         .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
         
         /* Prosaic styling for legal text */
-        .legal-content h2 { margin-top: 2.5rem; margin-bottom: 1rem; color: #1e293b; font-weight: 800; font-size: 1.25rem; }
+        .legal-content h2 { margin-top: 2.25rem; margin-bottom: 0.85rem; color: #0f172a; font-weight: 800; font-size: 1.25rem; }
         .legal-content p { margin-bottom: 1rem; color: #475569; line-height: 1.75; font-size: 0.95rem; }
         .legal-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.5rem; color: #475569; font-size: 0.95rem; line-height: 1.75; }
-        .legal-content li { margin-bottom: 0.5rem; }
+        .legal-content li { margin-bottom: 0.6rem; }
         .legal-content a { color: #6366f1; text-decoration: underline; text-decoration-color: rgba(99, 102, 241, 0.4); text-underline-offset: 4px; transition: all 0.3s ease; }
         .legal-content a:hover { color: #4f46e5; text-decoration-color: #4f46e5; }
     </style>
 </head>
 
-<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative selection:bg-indigo-600 selection:text-white">
 
-    <div id="navigation-container" class="z-50 relative"></div>
+    <!-- Global Sticky Header -->
+    <div id="navigation-container" class="z-50 sticky top-0"></div>
 
-    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <!-- Ambient Background Blur Orbs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
         <div id="scroll-bg-1" class="absolute -top-4 -left-8 md:top-10 md:-left-10 w-64 h-64 md:w-96 md:h-96 transition-transform duration-100 ease-out">
-            <div id="mouse-orb-1" class="w-full h-full bg-amber-400/60 md:bg-amber-400 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
+            <div id="mouse-orb-1" class="w-full h-full bg-amber-400/50 md:bg-amber-400/45 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[90px] orb-pulse transition-transform duration-100 ease-out"></div>
         </div>
         <div id="scroll-bg-2" class="absolute top-[40%] -right-8 md:top-80 md:-right-20 w-64 h-64 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
-            <div id="mouse-orb-2" class="w-full h-full bg-indigo-500/50 md:bg-indigo-500 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+            <div id="mouse-orb-2" class="w-full h-full bg-indigo-500/45 md:bg-indigo-500/40 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
         </div>
     </div>
 
-    <main class="flex-grow w-full max-w-4xl mx-auto px-4 py-12 md:py-16 relative z-10">
+    <main class="flex-grow w-full max-w-4xl mx-auto px-4 py-10 md:py-16 relative z-10">
         
         <div class="text-center mb-10">
-            <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-                <i class="fas fa-shield-alt"></i> Legal & Compliance
+            <div class="animate-fade-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider mb-5 shadow-sm">
+                <i class="fas fa-shield-alt text-indigo-600"></i> Legal &amp; Compliance
             </div>
-            <h1 class="animate-fade-up delay-100 text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight leading-tight">
+            <h1 class="animate-fade-up delay-100 text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-3 tracking-tight leading-tight">
                 Privacy <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-500">Policy</span>
             </h1>
-            <p class="animate-fade-up delay-200 text-slate-500 font-medium text-sm">
-                Effective Date: July 19, 2026
+            <p class="animate-fade-up delay-200 text-slate-500 font-medium text-xs sm:text-sm">
+                Last Updated &amp; Effective Date: November 4, 2026
             </p>
         </div>
 
         <div class="animate-fade-up delay-300 real-glass rounded-[2rem] p-6 sm:p-10 md:p-12 mb-10">
             
             <div class="legal-content">
-                <p>At <strong>Kerala Timetable</strong> (accessible from <a href="https://www.keralatimetable.in">www.keralatimetable.in</a>), the privacy of our visitors is one of our main priorities. This Privacy Policy document outlines the types of information that is collected, recorded, and utilized by Kerala Timetable and how we protect it.</p>
+                <p>At <strong>Kerala Timetable</strong> (accessible from <a href="https://keralatimetable.in">https://keralatimetable.in</a>), the privacy and safety of our student visitors and advertising partners is one of our main priorities. This Privacy Policy document outlines the types of information that are collected, recorded, and utilized by Kerala Timetable and how we protect it.</p>
 
                 <h2>1. Information We Collect and Third-Party Services</h2>
-                <p>While we do not require students to create user accounts to browse our platform, we utilize reliable third-party infrastructure and specific data fields to power our interactive features:</p>
+                <p>While we do not require students to create user accounts to browse our academic platform, we utilize reliable third-party infrastructure and collect specific information only when you voluntarily interact with our features:</p>
                 <ul>
-                    <li><strong>Academic Downloads & Google Drive:</strong> Our study materials, notes, syllabi, and Previous Year Questions (PYQs) are securely stored and shared via Google Drive. When you click to view or download a resource, you may interact with Google's infrastructure, which is governed by Google’s standard privacy terms. We do not track or collect personal data from your Google Account during this process.</li>
+                    <li><strong>Academic Downloads, Question Papers &amp; Cloud Storage:</strong> Our study materials, notes, syllabi, and Previous Year Questions (PYQs) are securely hosted via Google Drive and our official cloud APIs. When you view or download a resource, you may interact with Google's infrastructure, which is governed by Google’s standard privacy terms. When students voluntarily submit question papers through our upload portal, no personal identity is publicly attached to the document.</li>
+                    <li><strong>Sponsored Advertisements &amp; Razorpay Payment Processing:</strong> When brands, educators, or college event organizers book an advertising slot via our <a href="/advertisements.html">Advertise With Us</a> page, we collect campaign details including your Company/Event Name, Advertisement Category, Preferred Schedule, and WhatsApp Number. All payments are processed securely through <strong>Razorpay</strong> (supporting UPI, Cards, and NetBanking). <strong>Kerala Timetable never stores your credit/debit card numbers, UPI PINs, or bank credentials on our servers.</strong> Campaign booking details are used strictly to verify your payment and coordinate your ad placement via WhatsApp within 12 hours.</li>
                     <li><strong>Campus Ambassador Program:</strong> When you apply for our Campus Ambassador Program, we collect personal information including your Name, WhatsApp Number, and College Name. This data is used strictly for program coordination, internal verification, and outreach, and will never be shared or sold.</li>
-                    <li><strong>Vortex eFootball Tournament:</strong> When you register for the Vortex eFootball Tournament hosted by Kerala Timetable (which involves a nominal ₹5 entry fee), we collect necessary participant data such as gaming IDs, contact information, and payment reference numbers. This data is used strictly for tournament bracketing, verification, and prize distribution. <strong>We absolutely guarantee that this collected data is never shared, sold, or distributed to any third party under any circumstances.</strong> Additionally, we do not store sensitive financial details on our servers; transactions are managed directly by secure UPI/payment gateways.</li>
-                    <li><strong>Polls & Trend Radar:</strong> We use Google Firebase to handle and store response data from our live interactive student polls and exam review trackers. This community feedback data is collected entirely anonymously and is never tied back to an individual user identity.</li>
-                    <li><strong>Browser Push Notifications:</strong> We offer opt-in push notifications via Google Firebase Cloud Messaging to send instant university updates, status history alerts, and timetable changes. Firebase manages secure notification tokens to deliver these alerts. You can opt out or disable notifications at any time directly through your web browser's settings.</li>
-                    <li><strong>Log Files:</strong> Like many standard websites, Kerala Timetable utilizes automated log files. The information inside includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date/time stamps, referring/exit pages, and click counts. These are strictly used for server performance metrics and are not linked to any personally identifiable information.</li>
+                    <li><strong>Vortex eFootball Tournament:</strong> When you register for the Vortex eFootball Tournament hosted by Kerala Timetable, we collect necessary participant data such as gaming IDs, contact information, and payment reference numbers. This data is used strictly for tournament bracketing, verification, and prize distribution. <strong>We guarantee that this collected data is never shared, sold, or distributed to any third party under any circumstances.</strong></li>
+                    <li><strong>Polls &amp; Trend Radar:</strong> We use Google Firebase to handle and store response data from our live interactive student polls and exam review trackers. This community feedback data is collected anonymously and is never tied back to an individual user identity.</li>
+                    <li><strong>Browser Push Notifications:</strong> We offer opt-in push notifications via Google Firebase Cloud Messaging to send instant university updates, status history alerts, and timetable changes. Firebase manages anonymous notification tokens to deliver these alerts. You can opt out or disable notifications at any time directly through your web browser's settings.</li>
+                    <li><strong>Log Files:</strong> Like standard websites, Kerala Timetable utilizes automated log files. The information inside includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date/time stamps, referring/exit pages, and click counts. These are strictly used for server performance metrics and security, and are not linked to personally identifiable information.</li>
                 </ul>
 
-                <h2>2. WhatsApp Community Privacy & Guidelines</h2>
-                <p>Kerala Timetable operates an official WhatsApp community to provide instant university announcements. We take the safety and privacy of our student community incredibly seriously. To maintain a focused and secure environment, the following rules apply:</p>
+                <h2>2. WhatsApp Community Privacy &amp; Guidelines</h2>
+                <p>Kerala Timetable operates an official WhatsApp community serving <strong>6,000+ active KTU students</strong> to provide instant university announcements. To maintain a focused and secure environment, the following rules apply:</p>
                 <ul>
                     <li><strong>🔴 Important Privacy Notice:</strong> Taking phone numbers from our WhatsApp groups to direct message (DM) members without their explicit consent is strictly prohibited. This is a secure, monitored educational community, and anyone found bothering or harassing others will be instantly and permanently removed.</li>
                     <li><strong>Geographic Restrictions:</strong> To ensure community security and relevance, phone numbers registered outside of India (e.g., country codes such as +1) are not permitted. Accounts utilizing international virtual numbers will not be accepted into the community and are subject to immediate removal.</li>
                     <li><strong>Strictly Academic Discussions:</strong> Group discussions must remain exclusively focused on APJAKTU-related academics, exams, and university matters. General members are strictly prohibited from posting off-topic content, spam, or unauthorized advertisements.</li>
-                    <li><strong>Approved Partner Promotions:</strong> While member advertisements are prohibited, community administrators may occasionally share verified, highly relevant student opportunities. Kerala Timetable acts solely as a distributor for these opportunities and holds no legal liability or responsibility for the third-party services advertised (see Section 8 for details).</li>
-                    <li><strong>Reporting Unwanted Contact:</strong> If you receive any unsolicited DMs from a group member, please report the number directly to the site administrators. We will take immediate action and keep your identity completely confidential. Respect everyone's privacy.</li>
+                    <li><strong>Approved Partner Promotions:</strong> While unauthorized member advertisements are prohibited, community administrators may share verified, paid student opportunities booked through our official advertising portal. Kerala Timetable acts solely as a distributor for these opportunities (see Section 8 for details).</li>
+                    <li><strong>Reporting Unwanted Contact:</strong> If you receive any unsolicited DMs from a group member, please report the number directly to the group administrators. We will take immediate action and keep your identity completely confidential.</li>
                 </ul>
 
-                <h2>3. Cookies and Web Beacons</h2>
-                <p>Kerala Timetable uses standard browser "cookies" to optimize user experience. These cookies store information including visitor preferences and the specific pages on the website that the visitor accessed. This data allows us to optimize page load speeds and customize our front-end interfaces based on browser configurations.</p>
+                <h2>3. Cookies and Local Storage</h2>
+                <p>Kerala Timetable uses standard browser cookies and `localStorage` to optimize user experience. These store visitor preferences (such as dark/light theme settings, saved syllabus filters, and dismissed notification banners). This data remains on your device and allows us to optimize page load speeds and customize our front-end interface.</p>
 
                 <h2>4. Google DoubleClick DART Cookie</h2>
-                <p>Google is a third-party advertising vendor on our site. It uses cookies, known as DART cookies, to serve targeted advertisements to our site visitors based upon their visits to www.keralatimetable.in and other sites on the internet. Visitors may choose to decline the use of DART cookies by visiting the Google Ad and Content Network Privacy Policy at the following URL: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">https://policies.google.com/technologies/ads</a></p>
+                <p>Google may act as a third-party advertising vendor on our site. It uses cookies, known as DART cookies, to serve advertisements to our site visitors based upon their visits to keralatimetable.in and other sites on the internet. Visitors may choose to decline the use of DART cookies by visiting the Google Ad and Content Network Privacy Policy at the following URL: <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">https://policies.google.com/technologies/ads</a></p>
 
                 <h2>5. Advertising Partners Privacy Policies</h2>
-                <p>Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons within their respective advertisements and links that appear on Kerala Timetable, which are sent directly to users' browsers. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.</p>
+                <p>Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons within their respective advertisements and links that may appear on Kerala Timetable, which are sent directly to users' browsers. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.</p>
                 <p><em>Note: Kerala Timetable has no access to or control over these cookies that are used by third-party advertisers.</em></p>
 
                 <h2>6. Third-Party Privacy Policies</h2>
-                <p>Kerala Timetable's Privacy Policy does not apply to other advertisers, service providers (like Google Drive), or external university portals. We advise you to consult the respective Privacy Policies of these third-party servers for more detailed information on their practices and instructions on how to opt-out of certain features.</p>
+                <p>Kerala Timetable's Privacy Policy does not apply to other advertisers, payment gateways (such as Razorpay), cloud providers (such as Google Drive), or external university portals. We advise you to consult the respective Privacy Policies of these third-party services for more detailed information on their practices.</p>
 
                 <h2>7. Children's Information</h2>
-                <p>Another part of our priority is adding protection for children while using the internet. Kerala Timetable does not knowingly collect any Personal Identifiable Information from children under the age of 13.</p>
+                <p>Another part of our priority is adding protection for children while using the internet. Kerala Timetable is designed for university engineering students and does not knowingly collect any Personal Identifiable Information from children under the age of 13.</p>
 
-                <h2>8. Limitation of Liability for Events, Internships, and Promotions</h2>
-                <p>To ensure transparency and protect our platform from unforeseen liabilities, please be aware of the following regarding external links and community events:</p>
+                <h2>8. Advertising Moderation, Refund Policy &amp; Limitation of Liability</h2>
+                <p>To ensure transparency and protect both our student community and our advertising partners, please note the following terms:</p>
                 <ul>
-                    <li><strong>Tournament & Event Liabilities:</strong> For internally hosted events like the Vortex eFootball Tournament, Kerala Timetable acts strictly as an organizer and facilitator. We are not legally liable for external game server outages, participant connectivity issues, or disputes outside of our official ruling guidelines. Registration fees are utilized strictly for prize pooling and management and are non-refundable unless the event is directly canceled by the administration.</li>
-                    <li><strong>Internships and Advertisements:</strong> Our website and WhatsApp channels may occasionally feature sponsored advertisements, internship postings, courses, or external third-party links. <strong>Kerala Timetable operates solely as a notice board or publisher for these opportunities.</strong> We do not officially endorse, thoroughly vet, or assume any legal responsibility for the hiring practices, data handling, or operational legitimacy of these third-party organizations. Users must exercise their own due diligence before sharing resumes, personal data, or financial information with any external advertiser or internship provider.</li>
+                    <li><strong>Advertising Moderation &amp; 24-Hour Anti-Scam Refund Policy:</strong> Every advertisement booked through our platform is reviewed before publication. If a company, brand, or submitted creative does not follow our community requirements—including but not limited to <strong>scams, spam, fraudulent schemes, misleading claims, or inappropriate content</strong>—we reserve the right to reject the campaign. In the event of such a rejection, <strong>100% of the paid amount will be refunded to the original payment source within 24 hours</strong>.</li>
+                    <li><strong>Campaign Communication Policy:</strong> Once an ad slot is paid for, our team will contact the advertiser automatically within <strong>12 hours via WhatsApp message</strong>, or the advertiser may message our official WhatsApp numbers directly using their payment receipt. Voice calls are discouraged to ensure all campaign assets and links are documented in writing.</li>
+                    <li><strong>Tournament &amp; Event Liabilities:</strong> For internally hosted events like the Vortex eFootball Tournament, Kerala Timetable acts strictly as an organizer and facilitator. We are not legally liable for external game server outages, participant connectivity issues, or disputes outside of our official ruling guidelines.</li>
+                    <li><strong>Third-Party Internships and Advertisements Disclaimer:</strong> While we screen advertisements for obvious spam or scams, <strong>Kerala Timetable operates solely as a publisher/notice board for third-party opportunities, apps, books, events, and internships.</strong> We do not officially endorse or assume legal liability for the external products, services, hiring practices, or data handling of third-party advertisers. Students must exercise their own due diligence before sharing resumes, personal data, or financial information with any third-party organization.</li>
                 </ul>
 
                 <h2>9. Consent</h2>
-                <p>By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</p>
+                <p>By using our website, participating in our WhatsApp community, or booking an advertisement, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</p>
 
                 <h2>10. Contact Us</h2>
-                <p>If you have additional questions, require more information about our Privacy Policy, or need to report a privacy concern, do not hesitate to contact us at: <strong><a href="mailto:keralatimetable@gmail.com">keralatimetable@gmail.com</a></strong></p>
+                <p>If you have additional questions, require more information about our Privacy Policy, or need to report a privacy or refund concern, please contact us at: <strong><a href="mailto:keralatimetable@gmail.com">keralatimetable@gmail.com</a></strong></p>
             </div>
 
         </div>
     </main>
 
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center relative z-10">
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-8 text-center relative z-10">
         <div class="max-w-3xl mx-auto px-4">
-            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
-            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
+            <h3 class="text-slate-800 font-bold text-base sm:text-lg mb-2">Kerala Timetable</h3>
+            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent student-focused platform and are not officially affiliated with APJ Abdul Kalam Technological University (KTU).</p>
         </div>
     </footer>
 
-    <script src="/components.js?v=15"></script>
+    <!-- Global Components Script -->
+    <script src="/components.js?v=18" onerror="this.onerror=null;this.src='components.js';"></script>
     <script>
         // Load Header Navigation
-        if(typeof loadNavigation === 'function') loadNavigation('', '/', false);
+        if (typeof loadNavigation === 'function') {
+            loadNavigation('', '/', false);
+        }
 
         // --- 1. BUTTERY SMOOTH VERTICAL SCROLL PARALLAX ---
         let lastScrollY = window.scrollY;
@@ -166,8 +175,8 @@
                     const scrollBg1 = document.getElementById('scroll-bg-1');
                     const scrollBg2 = document.getElementById('scroll-bg-2');
                     
-                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.3}px)`;
-                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                    if (scrollBg1) scrollBg1.style.transform = `translate3d(0, ${lastScrollY * 0.25}px, 0)`;
+                    if (scrollBg2) scrollBg2.style.transform = `translate3d(0, ${lastScrollY * -0.18}px, 0)`;
                     ticking = false;
                 });
                 ticking = true;
@@ -179,26 +188,27 @@
             const mouseOrb1 = document.getElementById('mouse-orb-1');
             const mouseOrb2 = document.getElementById('mouse-orb-2');
             
-            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
-            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+            if (mouseOrb1) mouseOrb1.style.transform = `translate3d(${x * -30}px, ${y * -30}px, 0)`;
+            if (mouseOrb2) mouseOrb2.style.transform = `translate3d(${x * 40}px, ${y * 40}px, 0)`;
         }
 
         document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth < 768) return;
             const x = (e.clientX / window.innerWidth - 0.5) * 2; 
             const y = (e.clientY / window.innerHeight - 0.5) * 2;
             applyParallax(x, y);
-        });
+        }, { passive: true });
 
         document.addEventListener('mouseleave', () => applyParallax(0, 0));
 
         // --- 3. GYROSCOPE TILT PARALLAX (For Mobile) ---
         if (window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', (e) => {
-                if(e.gamma === null || e.beta === null) return;
-                let x = Math.max(-1, Math.min(1, e.gamma / 40));
-                let y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
+                if (e.gamma === null || e.beta === null) return;
+                const x = Math.max(-1, Math.min(1, e.gamma / 40));
+                const y = Math.max(-1, Math.min(1, (e.beta - 45) / 40));
                 applyParallax(x, y);
-            }, true);
+            }, { passive: true });
         }
     </script>
 </body>
