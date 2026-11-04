@@ -27,7 +27,6 @@
             letter-spacing: -0.01em;
         }
 
-        /* Smooth Drifting Ambient Background Blur Orbs */
         @keyframes orbDrift1 {
             0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
             50% { transform: translate3d(32px, -24px, 0) scale(1.07); }
@@ -40,7 +39,6 @@
         .ambient-orb-2 { animation: orbDrift2 18s ease-in-out 2s infinite; will-change: transform; }
         .ambient-orb-3 { animation: orbDrift1 20s ease-in-out 4s infinite reverse; will-change: transform; }
 
-        /* Specular Liquid Glass Surfaces */
         .real-glass {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.58) 100%);
             backdrop-filter: blur(28px) saturate(195%);
@@ -82,15 +80,11 @@
             -webkit-backdrop-filter: blur(18px) saturate(180%);
             border: 1.5px solid rgba(15, 23, 42, 0.10);
             box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
-            transition: all 0.28s cubic-bezier(0.22, 1.2, 0.36, 1);
         }
 
         .glass-input {
             background: rgba(255, 255, 255, 0.86);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border: 1.5px solid rgba(15, 23, 42, 0.13);
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 4px 12px rgba(15, 23, 42, 0.03);
             color: #0f172a;
             transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -98,47 +92,29 @@
             outline: none;
             background: #ffffff;
             border-color: #4f46e5;
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15), 0 8px 20px -4px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
         }
 
-        /* Liquid Glass Dropzone with Spring Hover */
         .dropzone-border {
             border: 2px dashed rgba(79, 70, 229, 0.38);
-            transition: all 0.34s cubic-bezier(0.22, 1.25, 0.36, 1);
+            transition: all 0.3s ease;
         }
         .dropzone-border:hover, .dropzone-border.drag-over {
             border-color: #4f46e5;
             background: rgba(255, 255, 255, 0.85);
             transform: translate3d(0, -2px, 0) scale(1.005);
-            box-shadow: 0 16px 36px -8px rgba(79, 70, 229, 0.12), inset 0 1px 1px #ffffff;
-        }
-        html.dark .dropzone-border:hover, html.dark .dropzone-border.drag-over {
-            background: rgba(30, 41, 59, 0.85) !important;
-            border-color: #818cf8 !important;
         }
 
-        /* Fluid Spring Entrance Animations */
         @keyframes springFadeUp {
             0% { opacity: 0; transform: translate3d(0, 18px, 0) scale(0.985); }
             100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
         }
         .spring-enter {
             opacity: 0;
-            animation: springFadeUp 0.52s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            will-change: transform, opacity;
+            animation: springFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
-        @keyframes cardCascadeIn {
-            0% { opacity: 0; transform: translate3d(0, 16px, 0) scale(0.97); }
-            100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
-        }
-        .card-cascade {
-            opacity: 0;
-            animation: cardCascadeIn 0.44s cubic-bezier(0.22, 1.18, 0.36, 1) forwards;
-            will-change: transform, opacity;
-        }
-
-        .progress-bar-fill { transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1); }
+        .progress-bar-fill { transition: width 0.35s ease; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -146,13 +122,12 @@
 
 <body class="antialiased min-h-screen flex flex-col relative text-slate-800 selection:bg-indigo-600 selection:text-white">
 
-    <!-- Ambient Liquid Glass Background Blur Orbs -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
         <div id="parallax-orb-1" class="absolute -top-20 -left-20 w-80 h-80 sm:w-[26rem] sm:h-[26rem] transition-transform duration-200 ease-out">
-            <div id="mouse-orb-1" class="ambient-orb-1 w-full h-full rounded-full bg-indigo-400/25 blur-[95px]"></div>
+            <div class="ambient-orb-1 w-full h-full rounded-full bg-indigo-400/25 blur-[95px]"></div>
         </div>
         <div id="parallax-orb-2" class="absolute top-1/3 -right-24 w-80 h-80 sm:w-[28rem] sm:h-[28rem] transition-transform duration-200 ease-out">
-            <div id="mouse-orb-2" class="ambient-orb-2 w-full h-full rounded-full bg-emerald-400/22 blur-[100px]"></div>
+            <div class="ambient-orb-2 w-full h-full rounded-full bg-emerald-400/22 blur-[100px]"></div>
         </div>
         <div id="parallax-orb-3" class="absolute -bottom-24 left-1/4 w-72 h-72 sm:w-96 sm:h-96 transition-transform duration-200 ease-out">
             <div class="ambient-orb-3 w-full h-full rounded-full bg-sky-400/20 blur-[90px]"></div>
@@ -161,32 +136,27 @@
 
     <div id="navigation-container" class="z-50 sticky top-0"></div>
 
-    <!-- MAIN CONTENT -->
     <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-6 sm:pt-9 pb-20 w-full flex-grow relative z-10">
 
-        <!-- Top Back Link -->
-        <div class="flex items-center justify-between gap-3 mb-5 spring-enter" style="animation-delay: 30ms;">
+        <div class="flex items-center justify-between gap-3 mb-5 spring-enter">
             <a href="/activity-points.html" class="inner-glass inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-700 hover:text-indigo-600 hover:-translate-y-0.5 shadow-sm transition-all active:scale-95">
                 <i class="fas fa-arrow-left text-indigo-500 text-xs"></i>
                 <span>Back to Manual Calculator</span>
             </a>
         </div>
 
-        <!-- Clean Heading -->
-        <div class="text-center mb-7 max-w-2xl mx-auto spring-enter" style="animation-delay: 70ms;">
+        <div class="text-center mb-7 max-w-2xl mx-auto spring-enter">
             <h1 class="text-2xl sm:text-4xl md:text-[2.6rem] font-extrabold text-slate-900 tracking-tight leading-tight mb-2.5">
                 AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points</span> Calculator
             </h1>
             <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
-                Upload your certificates (PDFs or photos) to visually inspect logos, verify eligibility, apply KTU Handbook caps, and calculate your points and percentage progress.
+                Upload your certificates to automatically verify eligibility, inspect logos, apply KTU Handbook caps, and calculate your exact points and progress percentage.
             </p>
         </div>
 
-        <!-- ==================== STEP 1: SETTINGS & UPLOAD ==================== -->
-        <section class="real-glass rounded-[2rem] p-4 sm:p-7 mb-7 spring-enter" style="animation-delay: 110ms;">
-            
-            <!-- Clean 2-Column Context Settings (Scheme & Category Only) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pb-5 mb-5 border-b border-slate-200/70 dark:border-white/10">
+        <!-- ==================== UPLOAD & SETTINGS ==================== -->
+        <section class="real-glass rounded-[2rem] p-4 sm:p-7 mb-7 spring-enter">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pb-5 mb-5 border-b border-slate-200/70">
                 <div>
                     <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">KTU Scheme</label>
                     <select id="ai-scheme" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-bold cursor-pointer">
@@ -205,46 +175,44 @@
                 </div>
             </div>
 
-            <!-- Hidden File Input (Outside dropzone to prevent click bubbling loops) -->
-            <input type="file" id="cert-file-input" accept="image/*,.pdf,application/pdf" multiple class="hidden">
-
-            <!-- Liquid Glass Upload Zone -->
-            <div id="cert-dropzone" onclick="triggerFileSelect()" class="dropzone-border inner-glass rounded-2xl p-7 sm:p-10 text-center cursor-pointer group">
-                <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center mx-auto mb-3.5 text-2xl shadow-sm group-hover:scale-110 transition-transform duration-300">
+            <div id="cert-dropzone" onclick="document.getElementById('cert-file-input').click()" class="dropzone-border inner-glass rounded-2xl p-7 sm:p-10 text-center cursor-pointer group">
+                <input type="file" id="cert-file-input" accept="image/*,.pdf" multiple class="hidden" onchange="handleFilesSelected(this.files)">
+                
+                <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center mx-auto mb-3.5 text-2xl shadow-sm group-hover:scale-110 transition-transform">
                     <i class="fas fa-file-arrow-up"></i>
                 </div>
                 <h3 class="text-sm sm:text-base font-extrabold text-slate-900 mb-1">
                     Select or Drop Certificates Here
                 </h3>
                 <p class="text-xs text-slate-500 max-w-md mx-auto">
-                    Supports PDF, JPG, PNG, and WebP (up to 40 files at once).
+                    Supports PDFs, JPG, PNG, and WebP (up to 30 files at once).
                 </p>
             </div>
 
-            <!-- LIVE PHOTO / PDF UPLOAD PROGRESS BAR -->
+            <!-- Upload Rendering Progress -->
             <div id="upload-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4">
                 <div class="flex items-center justify-between text-xs font-bold mb-2">
                     <span id="upload-status-text" class="text-indigo-600 flex items-center gap-2">
-                        <i class="fas fa-circle-notch fa-spin"></i> <span>Uploading &amp; rendering PDF/photo previews...</span>
+                        <i class="fas fa-circle-notch fa-spin"></i> <span>Uploading &amp; rendering previews...</span>
                     </span>
-                    <span id="upload-pct-text" class="text-slate-800 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-md font-extrabold">0%</span>
+                    <span id="upload-pct-text" class="text-slate-800 font-extrabold">0%</span>
                 </div>
-                <div class="w-full h-2.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
-                    <div id="upload-progress-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 to-blue-500 rounded-full" style="width: 0%"></div>
+                <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
+                    <div id="upload-progress-bar" class="progress-bar-fill h-full bg-indigo-600 rounded-full" style="width: 0%"></div>
                 </div>
             </div>
 
-            <!-- Queued Files Grid -->
-            <div id="queued-files-section" class="hidden mt-5 pt-5 border-t border-slate-200/70 dark:border-white/10">
+            <!-- Queued Thumbnails -->
+            <div id="queued-files-section" class="hidden mt-5 pt-5 border-t border-slate-200/70">
                 <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
                     <span class="text-xs font-bold text-slate-700">
-                        Uploaded Certificates (<span id="queued-count">0</span>/40)
+                        Uploaded Certificates (<span id="queued-count">0</span>/30)
                     </span>
                     <div class="flex items-center gap-2">
-                        <button type="button" onclick="triggerFileSelect()" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50 transition-all active:scale-95 shadow-sm">
+                        <button type="button" onclick="document.getElementById('cert-file-input').click()" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50">
                             <i class="fas fa-plus text-indigo-500 mr-1"></i> Add More
                         </button>
-                        <button type="button" onclick="clearQueuedFiles()" class="px-3.5 py-1.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold hover:bg-rose-100 transition-all active:scale-95">
+                        <button type="button" onclick="clearQueuedFiles()" class="px-3.5 py-1.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold hover:bg-rose-100">
                             Clear All
                         </button>
                     </div>
@@ -252,16 +220,16 @@
 
                 <div id="queued-thumbnails-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5 max-h-64 overflow-y-auto p-1 hide-scrollbar"></div>
 
-                <!-- LIVE CONTINUOUS AI CALCULATION PROGRESS BAR (Ticks 1%..2%..36%..37%..38%..100%) -->
+                <!-- Live Analysis Progress Ticker -->
                 <div id="scan-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4">
                     <div class="flex items-center justify-between text-xs font-bold mb-2">
                         <span id="scan-status-text" class="text-indigo-600 flex items-center gap-2">
-                            <i class="fas fa-circle-notch fa-spin"></i> <span>Inspecting certificate logos &amp; text...</span>
+                            <i class="fas fa-circle-notch fa-spin"></i> <span>Inspecting logos, rules &amp; text in parallel...</span>
                         </span>
-                        <span id="scan-pct-text" class="text-slate-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md font-extrabold">0%</span>
+                        <span id="scan-pct-text" class="text-slate-800 font-extrabold">0%</span>
                     </div>
-                    <div class="w-full h-2.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
-                        <div id="scan-progress-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 via-blue-500 to-emerald-500 rounded-full" style="width: 0%"></div>
+                    <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
+                        <div id="scan-progress-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-full" style="width: 0%"></div>
                     </div>
                 </div>
 
@@ -272,11 +240,10 @@
             </div>
         </section>
 
-        <!-- ==================== STEP 2: RESULTS & % PROGRESS ==================== -->
+        <!-- ==================== RESULTS ==================== -->
         <section id="audit-results-section" class="hidden space-y-6">
-            
             <div class="real-glass rounded-[2rem] p-5 sm:p-7">
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-5 mb-5 border-b border-slate-200/70 dark:border-white/10">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-5 mb-5 border-b border-slate-200/70">
                     <div class="w-full md:w-auto">
                         <div class="flex items-center gap-2 mb-1.5">
                             <span class="text-xs font-bold text-slate-500">Total Eligible Points</span>
@@ -288,8 +255,8 @@
                             <span id="audit-total-pts" class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">0</span>
                             <span class="text-sm font-semibold text-slate-500">/ <span id="audit-target-pts">120</span> pts (<span id="audit-overall-pct-inline" class="text-indigo-600 font-bold">0%</span>)</span>
                         </div>
-                        <div class="w-full md:w-80 h-2.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden mb-2">
-                            <div id="audit-overall-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 via-blue-500 to-emerald-500 rounded-full" style="width: 0%"></div>
+                        <div class="w-full md:w-80 h-2.5 bg-slate-200/80 rounded-full overflow-hidden mb-2">
+                            <div id="audit-overall-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-full" style="width: 0%"></div>
                         </div>
                         <p id="audit-counts-summary" class="text-xs text-slate-500 font-medium">
                             0 Accepted • 0 Capped/Duplicate • 0 Ineligible
@@ -302,592 +269,124 @@
                     </button>
                 </div>
 
-                <!-- 3 Group Breakdown Bars with % -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-                    <div class="inner-glass rounded-2xl p-4 hover:-translate-y-0.5 transition-transform">
+                    <div class="inner-glass rounded-2xl p-4">
                         <div class="flex justify-between items-center text-xs font-bold mb-1.5">
                             <span class="text-slate-800">Group I</span>
                             <span id="audit-g1-text" class="text-blue-600">0 / 40 (0%)</span>
                         </div>
-                        <div class="w-full h-2 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
+                        <div class="w-full h-2 bg-slate-200/80 rounded-full overflow-hidden">
                             <div id="audit-g1-bar" class="progress-bar-fill h-full bg-blue-600 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
 
-                    <div class="inner-glass rounded-2xl p-4 hover:-translate-y-0.5 transition-transform">
+                    <div class="inner-glass rounded-2xl p-4">
                         <div class="flex justify-between items-center text-xs font-bold mb-1.5">
                             <span class="text-slate-800">Group II</span>
                             <span id="audit-g2-text" class="text-purple-600">0 / 40 (0%)</span>
                         </div>
-                        <div class="w-full h-2 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
+                        <div class="w-full h-2 bg-slate-200/80 rounded-full overflow-hidden">
                             <div id="audit-g2-bar" class="progress-bar-fill h-full bg-purple-600 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
 
-                    <div class="inner-glass rounded-2xl p-4 hover:-translate-y-0.5 transition-transform">
+                    <div class="inner-glass rounded-2xl p-4">
                         <div class="flex justify-between items-center text-xs font-bold mb-1.5">
                             <span class="text-slate-800">Group III</span>
                             <span id="audit-g3-text" class="text-emerald-600">0 / 40 (0%)</span>
                         </div>
-                        <div class="w-full h-2 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
+                        <div class="w-full h-2 bg-slate-200/80 rounded-full overflow-hidden">
                             <div id="audit-g3-bar" class="progress-bar-fill h-full bg-emerald-600 rounded-full" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Certificate Breakdown Cards -->
             <div class="space-y-3.5">
                 <div class="flex flex-wrap items-center justify-between gap-2 px-1">
-                    <h2 class="text-sm sm:text-base font-bold text-slate-900">
-                        Certificate Breakdown
-                    </h2>
-                    <span class="text-xs text-slate-500">
-                        Wrong rule detected? Click <strong>Edit / Suggest Rule</strong> on any card.
-                    </span>
+                    <h2 class="text-sm sm:text-base font-bold text-slate-900">Certificate Breakdown</h2>
                 </div>
                 <div id="audit-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
             </div>
-
         </section>
-
-        <!-- ==================== ADMIN APPROVAL & LOGS PANEL ==================== -->
-        <section id="admin-panel" class="hidden mt-10 pt-8 border-t border-slate-200/80 dark:border-white/10 space-y-6">
-            <div class="real-glass rounded-[2rem] p-5 sm:p-6">
-                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-                    <div>
-                        <h2 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
-                            <i class="fas fa-shield-halved text-indigo-600"></i> Admin Rule Approval &amp; Scan Logs
-                        </h2>
-                        <p class="text-xs text-slate-500">Approve user rule corrections to update the calculator for all students.</p>
-                    </div>
-                    <div id="admin-auth-controls">
-                        <button type="button" onclick="adminLogin()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold shadow-sm transition-all active:scale-95">
-                            <i class="fab fa-google mr-1"></i> Admin Sign In
-                        </button>
-                    </div>
-                </div>
-
-                <div id="admin-dashboard-body" class="hidden space-y-6">
-                    <div>
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-2.5">
-                            Pending User Rule Corrections (<span id="pending-rules-count">0</span>)
-                        </h3>
-                        <div id="pending-rules-list" class="space-y-2.5 max-h-80 overflow-y-auto pr-1"></div>
-                    </div>
-
-                    <div class="pt-4 border-t border-slate-200/70 dark:border-white/10">
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2.5">
-                            Approved Custom Rules Active (<span id="approved-rules-count">0</span>)
-                        </h3>
-                        <div id="approved-rules-list" class="flex flex-wrap gap-2"></div>
-                    </div>
-
-                    <div class="pt-4 border-t border-slate-200/70 dark:border-white/10">
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">
-                            Recent Certificate Scans Logged
-                        </h3>
-                        <div id="scan-logs-list" class="space-y-2 max-h-72 overflow-y-auto text-xs pr-1"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
     </main>
-
-    <!-- ==================== EDIT / SUGGEST RULE MODAL ==================== -->
-    <div id="train-ai-modal" onclick="closeTrainModal()" class="fixed inset-0 z-50 hidden bg-slate-950/55 backdrop-blur-md flex items-center justify-center p-4">
-        <div id="train-modal-card" class="real-glass bg-white/95 dark:bg-slate-900/95 rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-white/15 transform scale-95 opacity-0 transition-all duration-200" onclick="event.stopPropagation()">
-            <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200/80 dark:border-white/10">
-                <h3 class="text-base font-extrabold text-slate-900">Edit Certificate Rule</h3>
-                <button type="button" onclick="closeTrainModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center transition-transform active:scale-90">
-                    <i class="fas fa-times text-xs"></i>
-                </button>
-            </div>
-
-            <input type="hidden" id="train-cert-index">
-
-            <div class="space-y-3.5 text-xs sm:text-sm">
-                <div>
-                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Certificate / Event Name</label>
-                    <input type="text" id="train-cert-title" class="glass-input w-full rounded-xl px-3.5 py-2.5 font-semibold">
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">KTU Rule Code</label>
-                        <select id="train-cert-code" onchange="autoSuggestPointsForRule()" class="glass-input w-full rounded-xl px-3 py-2.5 font-semibold"></select>
-                    </div>
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Points</label>
-                        <input type="number" id="train-cert-points" min="0" max="40" class="glass-input w-full rounded-xl px-3.5 py-2.5 font-bold text-indigo-600">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Keyword / Pattern for Admin Approval</label>
-                    <input type="text" id="train-cert-keyword" placeholder="e.g., Coursera, AKSC, Tathva Workshop, YIP" class="glass-input w-full rounded-xl px-3.5 py-2.5">
-                </div>
-
-                <div>
-                    <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Note for Admin Review</label>
-                    <input type="text" id="train-cert-note" placeholder="Why should this rule apply?" class="glass-input w-full rounded-xl px-3.5 py-2.5">
-                </div>
-            </div>
-
-            <div class="flex items-center justify-end gap-2 mt-5 pt-4 border-t border-slate-200/80 dark:border-white/10">
-                <button type="button" onclick="closeTrainModal()" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold transition-all active:scale-95">
-                    Cancel
-                </button>
-                <button type="button" onclick="submitTrainCorrection()" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-md transition-all active:scale-95">
-                    Apply &amp; Submit for Approval
-                </button>
-            </div>
-        </div>
-    </div>
 
     <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-6 text-center relative z-10">
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-bold text-sm sm:text-base mb-1">Kerala Timetable</h3>
             <p class="text-slate-500 text-xs leading-relaxed max-w-lg mx-auto">
-                Based on the Official APJAKTU 2024 &amp; 2019 Activity Points Handbooks.
+                Based on the Official APJAKTU 2024 &amp; 2019 Activity Points Handbooks [5].
             </p>
-            <div class="mt-2 text-xs text-slate-400">
-                <button type="button" onclick="toggleAdminSection()" class="hover:text-slate-600 font-bold">
-                    <i class="fas fa-lock text-[10px] mr-1"></i>Admin Portal
-                </button>
-            </div>
         </div>
     </footer>
 
-    <!-- Global Components Script -->
     <script src="/components.js?v=18" onerror="this.onerror=null;this.src='components.js';"></script>
 
-    <!-- Firebase Modular SDK + Dedicated ktu-vision-brain Engine -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, push, set, onValue, remove, query as dbQuery, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         if (typeof loadNavigation === 'function') loadNavigation('activity', '', false);
-        if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-        // Subtle Mouse Parallax for Ambient Background Orbs
-        document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth < 768) return;
-            const x = (e.clientX / window.innerWidth - 0.5) * 2;
-            const y = (e.clientY / window.innerHeight - 0.5) * 2;
-            const p1 = document.getElementById('parallax-orb-1');
-            const p2 = document.getElementById('parallax-orb-2');
-            const p3 = document.getElementById('parallax-orb-3');
-            if (p1) p1.style.transform = `translate3d(${x * -22}px, ${y * -22}px, 0)`;
-            if (p2) p2.style.transform = `translate3d(${x * 28}px, ${y * 28}px, 0)`;
-            if (p3) p3.style.transform = `translate3d(${x * -16}px, ${y * 18}px, 0)`;
-        }, { passive: true });
-
-        // --- FIREBASE SETUP ---
+        // --- FIREBASE LOGGING ---
         const firebaseConfig = {
             apiKey: "AIzaSyAqJ6wDmjJKCVip3dhgBDi35BzxC0QhIac",
             authDomain: "keralatimetable-5e155.firebaseapp.com",
             databaseURL: "https://keralatimetable-5e155-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "keralatimetable-5e155",
-            storageBucket: "keralatimetable-5e155.firebasestorage.app",
-            messagingSenderId: "95059742429",
-            appId: "1:95059742429:web:6ebcae342db9179b509534",
-            measurementId: "G-G2WYE8SQ4S"
+            projectId: "keralatimetable-5e155"
         };
-        const ADMIN_EMAIL = "keralatimetable@gmail.com";
-
         const fbApp = initializeApp(firebaseConfig);
         const db = getDatabase(fbApp);
-        const auth = getAuth(fbApp);
-        const provider = new GoogleAuthProvider();
 
-        const VISION_BRAIN_BASE = "https://keralatimetable-ktu-vision-brain.hf.space";
+        const HF_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/gemini-auth";
         const STORAGE_KEY = 'ktu_activity_points_tracker_v2';
-        const CERT_CACHE_KEY = 'ktu_ai_cert_cache_v3'; // Bumped to v3 to clear old 5pt fallback cache
 
-        let approvedCustomRules = [];
+        const KTU_RULES_2024 = {
+            "1.1": { group: "Group I", max: 40, name: "Sports/Games/Arts Participation" },
+            "1.2": { group: "Group I", max: 40, name: "Sports/Games/Arts Winner (Single)" },
+            "1.3": { group: "Group I", max: 40, name: "Sports/Games/Arts Winner (Group)" },
+            "1.4": { group: "Group I", max: 20, name: "College Magazine Publication" },
+            "1.5": { group: "Group I", max: 5,  name: "Four-Wheeler Driving License (LMV)" },
+            "1.6": { group: "Group I", max: 10, name: "Community Service (2 Days)" },
+            "1.7": { group: "Group I", max: 10, name: "Community Service (1 Week)" },
+            "1.8": { group: "Group I", max: 10, name: "Blood Donation" },
+            "1.9": { group: "Group I", max: 20, name: "THRIVE Project" },
+            "1.10": { group: "Group I", max: 5, name: "Geo-Tagged Tree Planting" },
+            "1.11": { group: "Group I", max: 40, name: "NSS Volunteer (2 Years)" },
+            "1.12": { group: "Group I", max: 40, name: "University Leadership Camp" },
+            "1.19": { group: "Group I", max: 40, name: "NCC Certificate (1Yr/B/C)" },
+            "1.20": { group: "Group I", max: 10, name: "First Aid / CPR / Fire Safety" },
+            "1.21": { group: "Group I", max: 10, name: "Basic Swimming Proficiency" },
 
-        onValue(ref(db, 'ktu_ai_approved_rules'), (snap) => {
-            const val = snap.val();
-            approvedCustomRules = val ? Object.keys(val).map(id => ({ id, ...val[id] })) : [];
-            renderApprovedRulesAdmin();
-        });
+            "2.1": { group: "Group II", max: 40, name: "Tech-Fest Participation" },
+            "2.2": { group: "Group II", max: 40, name: "Tech-Fest Winner" },
+            "2.3": { group: "Group II", max: 40, name: "Professional Society Competition" },
+            "2.4": { group: "Group II", max: 40, name: "Professional Society Winner" },
+            "2.5": { group: "Group II", max: 15, name: "Workshop/Seminar at IIT/NIT" },
+            "2.6": { group: "Group II", max: 40, name: "Poster Presentation" },
+            "2.7": { group: "Group II", max: 40, name: "Paper Presentation (IIT/NIT)" },
+            "2.8": { group: "Group II", max: 40, name: "Paper Winner (IIT/NIT)" },
+            "2.9": { group: "Group II", max: 40, name: "Paper Presentation (KTU College)" },
+            "2.10": { group: "Group II", max: 40, name: "Paper Winner (KTU College)" },
+            "2.11": { group: "Group II", max: 15, name: "Society Member/Execom/Coordinator" },
+            "2.12": { group: "Group II", max: 30, name: "College/University Union" },
+            "2.14": { group: "Group II", max: 10, name: "Class Representative" },
+            "2.23": { group: "Group II", max: 10, name: "Short-Term Internship (>=2 Wks)" },
+            "2.24": { group: "Group II", max: 30, name: "English Proficiency" },
+            "2.25": { group: "Group II", max: 30, name: "Aptitude (GATE/GRE/CAT)" },
 
-        // --------------------------------------------------------------------------------
-        // 1. SMOOTH CONTINUOUS PROGRESS TICKER (Counts 1..2..36..37..38.. smoothly)
-        // --------------------------------------------------------------------------------
-        function createLiveProgressController(barEl, pctEl) {
-            let currentPct = 0;
-            let targetPct = 0;
-            let maxCrawlPct = 0;
-            let timer = null;
-
-            function render() {
-                const display = Math.min(100, Math.round(currentPct));
-                if (barEl) barEl.style.width = `${display}%`;
-                if (pctEl) pctEl.innerText = `${display}%`;
-            }
-
-            function startTicker() {
-                if (timer) clearInterval(timer);
-                timer = setInterval(() => {
-                    if (currentPct < targetPct) {
-                        currentPct = Math.min(targetPct, currentPct + Math.max(1, (targetPct - currentPct) * 0.35));
-                        render();
-                    } else if (currentPct < maxCrawlPct) {
-                        currentPct += 1;
-                        render();
-                    }
-                }, 160);
-            }
-
-            return {
-                start(initialTarget = 5, crawlLimit = 92) {
-                    currentPct = 1;
-                    targetPct = initialTarget;
-                    maxCrawlPct = crawlLimit;
-                    render();
-                    startTicker();
-                },
-                advanceTo(newTarget, newCrawlLimit) {
-                    if (newTarget > targetPct) targetPct = newTarget;
-                    if (newCrawlLimit && newCrawlLimit > maxCrawlPct) maxCrawlPct = newCrawlLimit;
-                },
-                finish() {
-                    if (timer) clearInterval(timer);
-                    targetPct = 100;
-                    maxCrawlPct = 100;
-                    const finishTimer = setInterval(() => {
-                        if (currentPct < 100) {
-                            currentPct = Math.min(100, currentPct + 4);
-                            render();
-                        } else {
-                            clearInterval(finishTimer);
-                        }
-                    }, 25);
-                },
-                stop() {
-                    if (timer) clearInterval(timer);
-                }
-            };
-        }
-
-        function loadCertCache() {
-            try { return JSON.parse(localStorage.getItem(CERT_CACHE_KEY) || '{}'); }
-            catch (e) { return {}; }
-        }
-        function saveToCertCache(fingerprint, resultObj) {
-            try {
-                const cache = loadCertCache();
-                cache[fingerprint] = { ...resultObj, cachedAt: Date.now() };
-                localStorage.setItem(CERT_CACHE_KEY, JSON.stringify(cache));
-            } catch (e) {}
-        }
-        function getFileFingerprint(file) {
-            return `${file.name.toLowerCase().trim()}_${file.size}_${file.lastModified || 0}`;
-        }
-
-        // --------------------------------------------------------------------------------
-        // 2. DEDICATED ZERO-GPU VISION BRAIN CALLER (WITH STRICT NON-CERTIFICATE REJECTION)
-        // --------------------------------------------------------------------------------
-        function extractJSONArray(rawText) {
-            if (!rawText) return [];
-            const cleaned = String(rawText).replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
-            const firstBracket = cleaned.indexOf('[');
-            const lastBracket = cleaned.lastIndexOf(']');
-            if (firstBracket !== -1 && lastBracket !== -1 && lastBracket > firstBracket) {
-                return JSON.parse(cleaned.slice(firstBracket, lastBracket + 1));
-            }
-            const firstBrace = cleaned.indexOf('{');
-            const lastBrace = cleaned.lastIndexOf('}');
-            if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
-                const obj = JSON.parse(cleaned.slice(firstBrace, lastBrace + 1));
-                if (Array.isArray(obj)) return obj;
-                const foundArr = Object.values(obj).find(v => Array.isArray(v));
-                if (foundArr) return foundArr;
-                return [obj];
-            }
-            return JSON.parse(cleaned);
-        }
-
-        async function callDedicatedVisionBrain(promptText, b64Images, textFallbackItems = []) {
-            const imageList = Array.isArray(b64Images) ? b64Images : [b64Images];
-            const imagesJson = JSON.stringify(imageList);
-
-            // 1. Direct Gradio API Call to ZeroGPU Space (/api/predict)
-            try {
-                const res = await fetch(`${VISION_BRAIN_BASE}/api/predict`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ data: [promptText, imagesJson] })
-                });
-                if (res.ok) {
-                    const data = await res.json();
-                    const rawOutput = data?.data?.[0] || "";
-                    const parsed = extractJSONArray(rawOutput);
-                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-                }
-            } catch (e) {
-                console.warn("Direct /api/predict failed, trying Gradio queue...", e);
-            }
-
-            // 2. Gradio Queue API Call (/gradio_api/call/predict)
-            try {
-                const queueRes = await fetch(`${VISION_BRAIN_BASE}/gradio_api/call/predict`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ data: [promptText, imagesJson] })
-                });
-                if (queueRes.ok) {
-                    const { event_id } = await queueRes.json();
-                    const streamRes = await fetch(`${VISION_BRAIN_BASE}/gradio_api/call/predict/${event_id}`);
-                    const sseText = await streamRes.text();
-                    const dataLines = sseText.split('\n').filter(line => line.startsWith('data: '));
-                    for (let i = dataLines.length - 1; i >= 0; i--) {
-                        try {
-                            const parsedOuter = JSON.parse(dataLines[i].slice(6));
-                            if (Array.isArray(parsedOuter) && typeof parsedOuter[0] === 'string') {
-                                const parsed = extractJSONArray(parsedOuter[0]);
-                                if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-                            }
-                        } catch (innerErr) {}
-                    }
-                }
-            } catch (e) {
-                console.warn("Gradio queue call failed, checking text fallback...", e);
-            }
-
-            // 3. Fallback: ONLY award points if genuine certificate text is confirmed!
-            // Reject random images (signatures, terminal screenshots, standalone logos) with 0 pts
-            if (textFallbackItems && textFallbackItems.length > 0) {
-                return textFallbackItems.map(item => {
-                    const text = (item.extractedText || '').toLowerCase();
-                    const name = (item.name || '').toLowerCase();
-
-                    // Coursera / K-DISC
-                    if (text.includes('coursera') || name.includes('coursera') || text.includes('k-disc') || text.includes('kkem')) {
-                        return {
-                            certIndex: item.globalIndex,
-                            detectedTitle: item.name.replace(/\.[^/.]+$/, ""),
-                            detectedLogo: "Coursera",
-                            eligible: true,
-                            code: "3.17",
-                            points: 20,
-                            reason: "Eligible under Code 3.17 (K-DISC / KTU Approved Coursera Skilling)."
-                        };
-                    }
-                    // NPTEL / SWAYAM
-                    if (text.includes('nptel') || text.includes('swayam') || name.includes('nptel')) {
-                        return {
-                            certIndex: item.globalIndex,
-                            detectedTitle: item.name.replace(/\.[^/.]+$/, ""),
-                            detectedLogo: "NPTEL",
-                            eligible: true,
-                            code: "3.17",
-                            points: text.includes('12 week') ? 40 : (text.includes('8 week') ? 30 : 15),
-                            reason: "Eligible under Code 3.17 (NPTEL/SWAYAM Course)."
-                        };
-                    }
-                    // IEEE Events
-                    if (text.includes('ieee') && (text.includes('certificate') || text.includes('participat') || text.includes('workshop'))) {
-                        return {
-                            certIndex: item.globalIndex,
-                            detectedTitle: item.name.replace(/\.[^/.]+$/, ""),
-                            detectedLogo: "IEEE",
-                            eligible: true,
-                            code: "2.3",
-                            points: 5,
-                            reason: "Verified IEEE Technical Event (Code 2.3)."
-                        };
-                    }
-                    // Blood Donation
-                    if (text.includes('blood') && (text.includes('donat') || text.includes('blood bank'))) {
-                        return {
-                            certIndex: item.globalIndex,
-                            detectedTitle: "Blood Donation Certificate",
-                            detectedLogo: "Blood Bank",
-                            eligible: true,
-                            code: "1.8",
-                            points: 5,
-                            reason: "Blood Donation (Code 1.8)."
-                        };
-                    }
-
-                    // Strict Default: Ineligible (0 Points)
-                    return {
-                        certIndex: item.globalIndex,
-                        detectedTitle: item.name.replace(/\.[^/.]+$/, ""),
-                        detectedLogo: "None",
-                        eligible: false,
-                        code: "none",
-                        points: 0,
-                        reason: "Ineligible: Not an official KTU co-curricular or extra-curricular certificate (terminal screenshots, logos, signatures or unverified images are rejected)."
-                    };
-                });
-            }
-
-            throw new Error("Unable to analyze certificate batch");
-        }
-
-        // --------------------------------------------------------------------------------
-        // 3. KTU HANDBOOK RULES + ADMIN APPROVED FIREBASE RULES SANITIZER
-        // --------------------------------------------------------------------------------
-        const KTU_2024_RULES = {
-            "1.1": { group: "Group I", max: 40, exclusive: true, defaultPts: 5,  name: "Sports/Games/Arts Participation" },
-            "1.2": { group: "Group I", max: 40, exclusive: true, defaultPts: 10, name: "Sports/Games/Arts Winner (Single)" },
-            "1.3": { group: "Group I", max: 40, exclusive: true, defaultPts: 5,  name: "Sports/Games/Arts Winner (Group)" },
-            "1.4": { group: "Group I", max: 20, exclusive: false, defaultPts: 5, name: "College Magazine Publication" },
-            "1.5": { group: "Group I", max: 5,  exclusive: true, defaultPts: 5,  name: "Four-Wheeler Driving License" },
-            "1.6": { group: "Group I", max: 10, exclusive: false, defaultPts: 5, name: "Community Service (2 Days)" },
-            "1.7": { group: "Group I", max: 10, exclusive: true, defaultPts: 10, name: "Community Service (1 Week)" },
-            "1.8": { group: "Group I", max: 10, exclusive: false, defaultPts: 5, name: "Blood Donation" },
-            "1.9": { group: "Group I", max: 20, exclusive: false, defaultPts: 10, name: "THRIVE Project" },
-            "1.10": { group: "Group I", max: 5, exclusive: true, defaultPts: 5,  name: "Geo-Tagged Tree Planting" },
-            "1.11": { group: "Group I", max: 40, exclusive: true, defaultPts: 30, name: "NSS Volunteer (2 Years)" },
-            "1.12": { group: "Group I", max: 40, exclusive: true, defaultPts: 20, name: "University Leadership Camp (100 Hrs)" },
-            "1.13": { group: "Group I", max: 40, exclusive: true, defaultPts: 15, name: "State NSS Winner" },
-            "1.14": { group: "Group I", max: 40, exclusive: true, defaultPts: 15, name: "NSS/NCC Special Appreciation" },
-            "1.15": { group: "Group I", max: 40, exclusive: true, defaultPts: 20, name: "State/National NSS/Youth Award" },
-            "1.16": { group: "Group I", max: 40, exclusive: true, defaultPts: 15, name: "Approved National Camp / NIC / NYF" },
-            "1.17": { group: "Group I", max: 40, exclusive: true, defaultPts: 15, name: "10-Day (50 Hrs) State Volunteer" },
-            "1.18": { group: "Group I", max: 40, exclusive: true, defaultPts: 25, name: "RDC / IDC / Int'l NSS/NCC" },
-            "1.19": { group: "Group I", max: 40, exclusive: true, defaultPts: 20, name: "NCC Certificate (1Yr / B / C)" },
-            "1.20": { group: "Group I", max: 10, exclusive: false, defaultPts: 5, name: "First Aid / CPR / Fire Safety" },
-            "1.21": { group: "Group I", max: 10, exclusive: true, defaultPts: 5,  name: "Basic Swimming Proficiency" },
-
-            "2.1": { group: "Group II", max: 40, exclusive: true, defaultPts: 5,  name: "Tech-Fest Participation" },
-            "2.2": { group: "Group II", max: 40, exclusive: true, defaultPts: 10, name: "Tech-Fest Winner" },
-            "2.3": { group: "Group II", max: 40, exclusive: true, defaultPts: 5,  name: "Prof. Society Competition Participation" },
-            "2.4": { group: "Group II", max: 40, exclusive: true, defaultPts: 10, name: "Prof. Society Competition Winner" },
-            "2.5": { group: "Group II", max: 15, exclusive: false, defaultPts: 5, name: "Workshop/Seminar/Conference at IIT/NIT" },
-            "2.6": { group: "Group II", max: 40, exclusive: false, defaultPts: 5, name: "Poster Presentation" },
-            "2.7": { group: "Group II", max: 40, exclusive: false, defaultPts: 10, name: "Paper Presentation Participation (IIT/NIT)" },
-            "2.8": { group: "Group II", max: 40, exclusive: true, defaultPts: 15, name: "Paper Presentation Winner (IIT/NIT)" },
-            "2.9": { group: "Group II", max: 40, exclusive: false, defaultPts: 5, name: "Paper Presentation Participation (KTU)" },
-            "2.10": { group: "Group II", max: 40, exclusive: true, defaultPts: 10, name: "Paper Presentation Winner (KTU)" },
-            "2.11": { group: "Group II", max: 15, exclusive: true, defaultPts: 5,  name: "Prof. Society Membership/Role" },
-            "2.12": { group: "Group II", max: 30, exclusive: true, defaultPts: 15, name: "College / University Union Member" },
-            "2.13": { group: "Group II", max: 10, exclusive: false, defaultPts: 5, name: "Dept Association Role" },
-            "2.14": { group: "Group II", max: 10, exclusive: false, defaultPts: 5, name: "Class Representative (CR)" },
-            "2.15": { group: "Group II", max: 5,  exclusive: true, defaultPts: 5,  name: "Industrial Visit (IV) Coordinator" },
-            "2.16": { group: "Group II", max: 10, exclusive: true, defaultPts: 5,  name: "Placement Cell (CGPU)" },
-            "2.17": { group: "Group II", max: 10, exclusive: false, defaultPts: 5, name: "IEDC Cell Role" },
-            "2.18": { group: "Group II", max: 10, exclusive: false, defaultPts: 5, name: "YIP Student Coordinator" },
-            "2.19": { group: "Group II", max: 20, exclusive: true, defaultPts: 10, name: "STRIDE Volunteer / Lead" },
-            "2.20": { group: "Group II", max: 10, exclusive: false, defaultPts: 5, name: "College Magazine Editorial Board" },
-            "2.21": { group: "Group II", max: 10, exclusive: false, defaultPts: 5, name: "Hobby Club Execom / Convenor" },
-            "2.22": { group: "Group II", max: 20, exclusive: false, defaultPts: 5, name: "ICFOSS / FOSS Club / Open Source" },
-            "2.23": { group: "Group II", max: 10, exclusive: true, defaultPts: 10, name: "Short-Term Internship (Min 2 Weeks)" },
-            "2.24": { group: "Group II", max: 30, exclusive: true, defaultPts: 20, name: "English Proficiency (TOEFL/IELTS)" },
-            "2.25": { group: "Group II", max: 30, exclusive: true, defaultPts: 20, name: "Aptitude (GATE/GRE/CAT/GMAT)" },
-
-            "3.1": { group: "Group III", max: 20, exclusive: true, defaultPts: 5,  name: "Industrial Visit (IV) Report (S5/S6)" },
-            "3.2": { group: "Group III", max: 20, exclusive: true, defaultPts: 5,  name: "Best Mini Project / Project / Seminar" },
-            "3.3": { group: "Group III", max: 20, exclusive: true, defaultPts: 15, name: "Long-Term Internship (Min 3.5 Months)" },
-            "3.4": { group: "Group III", max: 30, exclusive: true, defaultPts: 15, name: "LEAP (IIT Madras)" },
-            "3.5": { group: "Group III", max: 35, exclusive: true, defaultPts: 10, name: "YIP (Young Innovators Programme)" },
-            "3.6": { group: "Group III", max: 35, exclusive: true, defaultPts: 15, name: "STRIDE Innovation Project" },
-            "3.7": { group: "Group III", max: 35, exclusive: true, defaultPts: 15, name: "GDC AI Workforce Internship" },
-            "3.8": { group: "Group III", max: 25, exclusive: true, defaultPts: 25, name: "ICFOSS Certified Working Solution" },
-            "3.9": { group: "Group III", max: 40, exclusive: true, defaultPts: 30, name: "Legally Registered Start-up" },
-            "3.10": { group: "Group III", max: 40, exclusive: true, defaultPts: 30, name: "Patents (Filed/Published/Granted)" },
-            "3.11": { group: "Group III", max: 40, exclusive: true, defaultPts: 40, name: "Validated Prototype / Industry Adopted" },
-            "3.12": { group: "Group III", max: 40, exclusive: true, defaultPts: 40, name: "Venture Capital / Angel Funding" },
-            "3.13": { group: "Group III", max: 40, exclusive: true, defaultPts: 40, name: "Validated Societal Innovation" },
-            "3.14": { group: "Group III", max: 40, exclusive: true, defaultPts: 25, name: "Research Publication (SCI/Scopus)" },
-            "3.15": { group: "Group III", max: 40, exclusive: true, defaultPts: 35, name: "National Level Hackathon Winner" },
-            "3.16": { group: "Group III", max: 40, exclusive: true, defaultPts: 30, name: "International Hackathon" },
-            "3.17": { group: "Group III", max: 40, exclusive: false, defaultPts: 20, name: "KTU Approved Skilling Course (Coursera/NPTEL)" }
+            "3.1": { group: "Group III", max: 20, name: "Industrial Visit Report" },
+            "3.2": { group: "Group III", max: 20, name: "Best Project / Seminar" },
+            "3.3": { group: "Group III", max: 20, name: "Long-Term Internship" },
+            "3.5": { group: "Group III", max: 35, name: "YIP (K-DISC)" },
+            "3.9": { group: "Group III", max: 40, name: "Registered Startup" },
+            "3.10": { group: "Group III", max: 40, name: "Patent (Filed/Granted)" },
+            "3.15": { group: "Group III", max: 40, name: "National Hackathon Winner" },
+            "3.16": { group: "Group III", max: 40, name: "International Hackathon" },
+            "3.17": { group: "Group III", max: 40, name: "Approved Skilling (Coursera/NPTEL)" }
         };
 
-        const LEVEL_POINT_MATRIX = {
-            "1.1": { L1: 1, L2: 5,  L3: 10, L4: 20, L5: 40 },
-            "1.2": { L1: 5, L2: 10, L3: 20, L4: 40, L5: 40 },
-            "1.3": { L1: 3, L2: 5,  L3: 15, L4: 30, L5: 40 },
-            "2.1": { L1: 2, L2: 5,  L3: 10, L4: 20, L5: 30 },
-            "2.2": { L1: 5, L2: 10, L3: 20, L4: 40, L5: 40 },
-            "2.3": { L1: 2, L2: 5,  L3: 10, L4: 15, L5: 20 },
-            "2.4": { L1: 3, L2: 7,  L3: 15, L4: 25, L5: 35 }
-        };
-
-        function sanitizeWithKTURules(rawItem, certObj) {
-            const item = { ...rawItem };
-            const code = String(item.code || '').trim();
-            const pdfText = (certObj?.extractedText || '').toLowerCase();
-            const titleLower = (item.detectedTitle || '').toLowerCase();
-            const logoLower = (item.detectedLogo || '').toLowerCase();
-            const reasonLower = (item.reason || '').toLowerCase();
-
-            // 1. Check Admin-Approved Custom Rules first
-            for (const custom of approvedCustomRules) {
-                const kw = (custom.keyword || '').toLowerCase().trim();
-                if (kw && (titleLower.includes(kw) || logoLower.includes(kw) || pdfText.includes(kw))) {
-                    item.code = custom.code;
-                    item.points = Number(custom.points) || 0;
-                    item.eligible = custom.code !== 'none' && item.points > 0;
-                    item.reason = custom.note || `Verified by Approved Rule (${custom.keyword})`;
-                    return item;
-                }
-            }
-
-            // 2. Strict Non-Certificate Guardrail (Reject signatures, terminal screenshots, standalone logos)
-            const nonCertPatterns = [
-                'terminal', 'screenshot', 'signature', 'standalone logo', 'not a certificate',
-                'not an official', 'selfie', 'id card', 'ineligible'
-            ];
-            if (!item.eligible || code === 'none' || nonCertPatterns.some(p => titleLower.includes(p) || reasonLower.includes(p))) {
-                item.eligible = false;
-                item.code = 'none';
-                item.points = 0;
-                if (!item.reason) {
-                    item.reason = "Not an official KTU activity certificate.";
-                }
-                return item;
-            }
-
-            // 3. Skilling Courses (Code 3.17)
-            if (code === "3.17" || logoLower.includes("coursera") || logoLower.includes("nptel") || pdfText.includes("coursera.org/verify") || pdfText.includes("nptel")) {
-                item.code = "3.17";
-                item.eligible = true;
-                if (pdfText.includes("12 week") || titleLower.includes("12 week")) {
-                    item.points = 40;
-                    item.tierLabel = "NPTEL 12-Week Course (40 pts)";
-                } else if (pdfText.includes("8 week") || titleLower.includes("8 week")) {
-                    item.points = 30;
-                    item.tierLabel = "NPTEL 8-Week Course (30 pts)";
-                } else if (pdfText.includes("4 week") || titleLower.includes("4 week")) {
-                    item.points = 15;
-                    item.tierLabel = "NPTEL 4-Week Course (15 pts)";
-                } else if (pdfText.includes("specialization") || pdfText.includes("professional certificate") || titleLower.includes("specialization")) {
-                    item.points = 30;
-                    item.tierLabel = "Coursera Specialization (30 pts)";
-                } else if (!item.points || item.points <= 0 || item.points > 40) {
-                    item.points = 20;
-                    item.tierLabel = "Approved Skilling Course (20 Hrs)";
-                }
-                return item;
-            }
-
-            if (LEVEL_POINT_MATRIX[code] && item.level && LEVEL_POINT_MATRIX[code][item.level]) {
-                item.points = LEVEL_POINT_MATRIX[code][item.level];
-            }
-
-            const fixedCodes = {
-                "1.4": 5, "1.5": 5, "1.6": 5, "1.7": 10, "1.8": 5, "1.9": 10, "1.10": 5,
-                "1.20": 5, "1.21": 5, "2.5": 5, "2.6": 5, "2.7": 10, "2.9": 5,
-                "2.13": 5, "2.14": 5, "2.15": 5, "2.17": 5, "2.18": 5, "2.20": 5, "2.21": 5,
-                "2.23": 10, "3.1": 5, "3.2": 5, "3.3": 15
-            };
-            if (item.eligible && fixedCodes[code]) {
-                item.points = fixedCodes[code];
-            }
-
-            return item;
-        }
-
-        let queuedCerts = []; 
+        let queuedCerts = [];
         let rawAIResults = [];
         let processedAuditItems = [];
 
@@ -896,57 +395,56 @@
             else if (window.KTUFlow?.capsule) window.KTUFlow.capsule(type, msg);
         }
 
-        function animateNumber(el, targetVal, duration = 450) {
-            if (!el) return;
-            const startVal = parseInt(el.innerText, 10) || 0;
-            if (startVal === targetVal) { el.innerText = targetVal; return; }
-            const startTime = performance.now();
-            function step(now) {
-                const progress = Math.min((now - startTime) / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                el.innerText = Math.round(startVal + (targetVal - startVal) * eased);
-                if (progress < 1) requestAnimationFrame(step);
+        // Live progress controller
+        function createLiveProgressController(barEl, pctEl) {
+            let currentPct = 0, targetPct = 0, maxCrawl = 0, timer = null;
+            function render() {
+                const d = Math.min(100, Math.round(currentPct));
+                if (barEl) barEl.style.width = `${d}%`;
+                if (pctEl) pctEl.innerText = `${d}%`;
             }
-            requestAnimationFrame(step);
+            return {
+                start(initialTarget = 5, crawlLimit = 92) {
+                    currentPct = 1; targetPct = initialTarget; maxCrawl = crawlLimit; render();
+                    if (timer) clearInterval(timer);
+                    timer = setInterval(() => {
+                        if (currentPct < targetPct) {
+                            currentPct = Math.min(targetPct, currentPct + Math.max(1, (targetPct - currentPct) * 0.35));
+                            render();
+                        } else if (currentPct < maxCrawl) {
+                            currentPct += 1;
+                            render();
+                        }
+                    }, 140);
+                },
+                advanceTo(t, c) { if (t > targetPct) targetPct = t; if (c > maxCrawl) maxCrawl = c; },
+                finish() {
+                    if (timer) clearInterval(timer);
+                    targetPct = 100; maxCrawl = 100;
+                    const ft = setInterval(() => {
+                        if (currentPct < 100) { currentPct = Math.min(100, currentPct + 5); render(); }
+                        else clearInterval(ft);
+                    }, 20);
+                },
+                stop() { if (timer) clearInterval(timer); }
+            };
         }
 
-        // --------------------------------------------------------------------------------
-        // 4. PHOTO & PDF UPLOAD WITH LIVE PROGRESS BAR (1%..2%..36%..37%..100%)
-        // --------------------------------------------------------------------------------
+        // --- UPLOAD HANDLER ---
         const dropzone = document.getElementById('cert-dropzone');
-        const fileInput = document.getElementById('cert-file-input');
-
-        window.triggerFileSelect = function() {
-            if (fileInput) {
-                fileInput.value = '';
-                fileInput.click();
-            }
-        };
-
-        if (fileInput) {
-            fileInput.addEventListener('change', (e) => {
-                if (e.target.files?.length) {
-                    window.handleFilesSelected(e.target.files);
-                }
-            });
-        }
-
         dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
         dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
         dropzone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropzone.classList.remove('drag-over');
-            if (e.dataTransfer.files?.length) window.handleFilesSelected(e.dataTransfer.files);
+            e.preventDefault(); dropzone.classList.remove('drag-over');
+            if (e.dataTransfer.files?.length) handleFilesSelected(e.dataTransfer.files);
         });
 
         window.handleFilesSelected = async function(fileList) {
-            const incoming = Array.from(fileList || []);
-            if (!incoming.length) return;
-
-            if (queuedCerts.length + incoming.length > 40) {
-                notifyUI('Maximum 40 certificates per batch', 'amber');
+            const incoming = Array.from(fileList);
+            if (queuedCerts.length + incoming.length > 30) {
+                notifyUI('Maximum 30 certificates per calculation', 'amber');
             }
-            const allowed = incoming.slice(0, 40 - queuedCerts.length);
+            const allowed = incoming.slice(0, 30 - queuedCerts.length);
             if (!allowed.length) return;
 
             const upWrap = document.getElementById('upload-progress-wrap');
@@ -955,14 +453,13 @@
             const upTxt  = document.getElementById('upload-status-text');
 
             upWrap.classList.remove('hidden');
-            const uploadTicker = createLiveProgressController(upBar, upPct);
-            uploadTicker.start(8, 94);
+            const ticker = createLiveProgressController(upBar, upPct);
+            ticker.start(10, 94);
 
             for (let i = 0; i < allowed.length; i++) {
                 const file = allowed[i];
-                upTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Uploading &amp; rendering file ${i + 1} of ${allowed.length} (${file.name.slice(0, 24)})...</span>`;
-                const targetPct = Math.round(((i + 0.8) / allowed.length) * 95);
-                uploadTicker.advanceTo(targetPct, Math.min(98, targetPct + 12));
+                upTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Reading file ${i + 1} of ${allowed.length}...</span>`;
+                ticker.advanceTo(Math.round(((i + 0.8) / allowed.length) * 95), 98);
 
                 const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
                 const certItem = {
@@ -970,8 +467,6 @@
                     file,
                     name: file.name,
                     isPdf,
-                    previewUrl: null,
-                    fingerprint: getFileFingerprint(file),
                     canvasDataUrl: null,
                     extractedText: ""
                 };
@@ -980,14 +475,13 @@
                     await prepareCertItem(certItem);
                     queuedCerts.push(certItem);
                     renderQueuedGrid();
-                } catch (err) {
-                    console.error("Failed to prepare file:", file.name, err);
+                } catch (e) {
+                    console.error("Prep error:", file.name, e);
                 }
             }
 
-            uploadTicker.finish();
-            setTimeout(() => upWrap.classList.add('hidden'), 450);
-            if (fileInput) fileInput.value = '';
+            ticker.finish();
+            setTimeout(() => upWrap.classList.add('hidden'), 400);
             notifyUI(`${queuedCerts.length} certificate(s) uploaded`, 'success');
         };
 
@@ -1000,46 +494,40 @@
                 const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
                 const page = await pdf.getPage(1);
 
-                let extractedText = "";
                 try {
                     const textContent = await page.getTextContent();
-                    extractedText = textContent.items.map(item => item.str).join(' ').replace(/\s+/g, ' ').trim().slice(0, 550);
+                    certItem.extractedText = textContent.items.map(it => it.str).join(' ').replace(/\s+/g, ' ').trim().slice(0, 600);
                 } catch (e) {}
 
                 const baseVp = page.getViewport({ scale: 1.0 });
-                const scale = Math.min(1.15, 720 / Math.max(baseVp.width, baseVp.height));
+                const scale = Math.min(1.2, 740 / Math.max(baseVp.width, baseVp.height));
                 const viewport = page.getViewport({ scale });
                 const canvas = document.createElement('canvas');
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
+                canvas.width = viewport.width; canvas.height = viewport.height;
                 const ctx = canvas.getContext('2d');
-                ctx.fillStyle = '#FFFFFF';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, canvas.width, canvas.height);
                 await page.render({ canvasContext: ctx, viewport }).promise;
 
-                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.76);
-                certItem.extractedText = extractedText;
+                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.78);
                 return certItem;
             } else {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
                     const url = URL.createObjectURL(file);
                     img.onload = () => {
-                        const maxDim = 720;
+                        const maxDim = 740;
                         let w = img.width, h = img.height;
                         if (w > maxDim || h > maxDim) {
                             if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
                             else { w = Math.round((w * maxDim) / h); h = maxDim; }
                         }
                         const canvas = document.createElement('canvas');
-                        canvas.width = w;
-                        canvas.height = h;
+                        canvas.width = w; canvas.height = h;
                         const ctx = canvas.getContext('2d');
-                        ctx.fillStyle = '#FFFFFF';
-                        ctx.fillRect(0, 0, w, h);
+                        ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, w, h);
                         ctx.drawImage(img, 0, 0, w, h);
                         URL.revokeObjectURL(url);
-                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.76);
+                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.78);
                         resolve(certItem);
                     };
                     img.onerror = reject;
@@ -1052,25 +540,18 @@
             const sec = document.getElementById('queued-files-section');
             const grid = document.getElementById('queued-thumbnails-grid');
             document.getElementById('queued-count').innerText = queuedCerts.length;
-
-            if (queuedCerts.length === 0) {
-                sec.classList.add('hidden');
-                return;
-            }
+            if (queuedCerts.length === 0) { sec.classList.add('hidden'); return; }
             sec.classList.remove('hidden');
 
-            grid.innerHTML = queuedCerts.map((c, idx) => {
-                const thumbSrc = c.canvasDataUrl || c.previewUrl;
-                return `
-                    <div class="inner-glass rounded-xl p-2 relative flex flex-col justify-between hover:-translate-y-0.5 transition-transform">
-                        <button type="button" onclick="removeQueuedCert('${c.id}')" class="absolute top-1 right-1 w-5 h-5 rounded-full bg-slate-900/70 text-white text-[10px] flex items-center justify-center hover:bg-rose-600 z-10 transition-colors">
-                            <i class="fas fa-times"></i>
-                        </button>
-                        <img src="${thumbSrc}" alt="${c.name}" class="w-full h-16 object-cover rounded-lg mb-1.5 bg-white border border-slate-200">
-                        <span class="text-[10px] font-bold text-slate-700 truncate block">#${idx + 1} ${c.name}</span>
-                    </div>
-                `;
-            }).join('');
+            grid.innerHTML = queuedCerts.map((c, idx) => `
+                <div class="inner-glass rounded-xl p-2 relative flex flex-col justify-between hover:-translate-y-0.5 transition-transform">
+                    <button type="button" onclick="removeQueuedCert('${c.id}')" class="absolute top-1 right-1 w-5 h-5 rounded-full bg-slate-900/70 text-white text-[10px] flex items-center justify-center hover:bg-rose-600 transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <img src="${c.canvasDataUrl}" alt="${c.name}" class="w-full h-16 object-cover rounded-lg mb-1.5 bg-white border border-slate-200">
+                    <span class="text-[10px] font-bold text-slate-700 truncate block">#${idx + 1} ${c.name}</span>
+                </div>
+            `).join('');
         }
 
         window.removeQueuedCert = function(id) {
@@ -1084,320 +565,220 @@
             document.getElementById('audit-results-section').classList.add('hidden');
         };
 
-        async function createContactSheetBase64(batchItems) {
+        // Combine up to 4 certificates into 1 visual contact sheet for the AI
+        async function createContactSheet(batchItems) {
             const tileW = 600, tileH = 460, headerH = 32;
             const cols = batchItems.length === 1 ? 1 : 2;
             const rows = Math.ceil(batchItems.length / 2);
 
             const canvas = document.createElement('canvas');
-            canvas.width = cols * tileW;
-            canvas.height = rows * tileH;
+            canvas.width = cols * tileW; canvas.height = rows * tileH;
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#0f172a';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0f172a'; ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             for (let i = 0; i < batchItems.length; i++) {
                 const item = batchItems[i];
-                const col = i % 2;
-                const row = Math.floor(i / 2);
-                const x = col * tileW;
-                const y = row * tileH;
+                const col = i % 2, row = Math.floor(i / 2);
+                const x = col * tileW, y = row * tileH;
 
-                ctx.fillStyle = '#1e1b4b';
-                ctx.fillRect(x, y, tileW, headerH);
-                ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 14px Inter, sans-serif';
-                ctx.fillText(`CERTIFICATE #${item.globalIndex} (${item.name.slice(0, 32)})`, x + 10, y + 21);
+                ctx.fillStyle = '#1e1b4b'; ctx.fillRect(x, y, tileW, headerH);
+                ctx.fillStyle = '#ffffff'; ctx.font = 'bold 14px Inter, sans-serif';
+                ctx.fillText(`CERTIFICATE #${item.globalIndex} (${item.name.slice(0, 30)})`, x + 10, y + 21);
 
-                const img = await new Promise((res) => {
-                    const im = new Image();
-                    im.onload = () => res(im);
-                    im.src = item.canvasDataUrl;
+                const img = await new Promise(res => {
+                    const im = new Image(); im.onload = () => res(im); im.src = item.canvasDataUrl;
                 });
-
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect(x + 3, y + headerH, tileW - 6, tileH - headerH - 3);
+                ctx.fillStyle = '#ffffff'; ctx.fillRect(x + 3, y + headerH, tileW - 6, tileH - headerH - 3);
 
                 const availW = tileW - 12, availH = tileH - headerH - 8;
                 const scale = Math.min(availW / img.width, availH / img.height);
-                const drawW = img.width * scale, drawH = img.height * scale;
-                const dx = x + (tileW - drawW) / 2;
-                const dy = y + headerH + 3 + (availH - drawH) / 2;
-                ctx.drawImage(img, dx, dy, drawW, drawH);
+                const dw = img.width * scale, dh = img.height * scale;
+                ctx.drawImage(img, x + (tileW - dw) / 2, y + headerH + 3 + (availH - dh) / 2, dw, dh);
             }
-            return canvas.toDataURL('image/jpeg', 0.78).split(',')[1];
+            return canvas.toDataURL('image/jpeg', 0.8).split(',')[1];
         }
 
-        // --------------------------------------------------------------------------------
-        // 5. AI CALCULATION WITH LIVE 36..37..38.. PROGRESS TICKER
-        // --------------------------------------------------------------------------------
+        // --- MULTI-ENGINE AI ROUTER (GEMINI -> GROQ -> OPENROUTER) ---
+        function parseJSON(raw) {
+            if (!raw) return [];
+            const clean = String(raw).replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+            const b1 = clean.indexOf('['), b2 = clean.lastIndexOf(']');
+            if (b1 !== -1 && b2 !== -1 && b2 > b1) return JSON.parse(clean.slice(b1, b2 + 1));
+            return JSON.parse(clean);
+        }
+
+        async function requestAI(authData, promptText, b64Sheets) {
+            const decode = (arr) => Array.isArray(arr) ? arr.map(b => String.fromCharCode(b ^ 42)).join('') : '';
+            const gemKey = decode(authData.k);
+            const groqKey = decode(authData.g);
+            const orKey = decode(authData.o);
+
+            // Engine 1: Google Gemini (Multimodal Vision)
+            if (gemKey) {
+                const models = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"];
+                for (const m of models) {
+                    try {
+                        const parts = b64Sheets.map(b64 => ({ inlineData: { mimeType: "image/jpeg", data: b64 } }));
+                        parts.push({ text: promptText });
+
+                        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${gemKey}`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                contents: [{ parts }],
+                                generationConfig: { temperature: 0.1, responseMimeType: "application/json" }
+                            })
+                        });
+                        if (!res.ok) continue;
+                        const data = await res.json();
+                        const parsed = parseJSON(data.candidates?.[0]?.content?.parts?.[0]?.text);
+                        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                    } catch (e) { continue; }
+                }
+            }
+
+            // Engine 2: OpenRouter Free Vision (Qwen-2.5-VL-72B / Gemma-3)
+            if (orKey) {
+                const models = [
+                    "qwen/qwen-2.5-vl-72b-instruct:free",
+                    "google/gemma-3-27b-it:free"
+                ];
+                for (const m of models) {
+                    try {
+                        const contentParts = b64Sheets.map(b64 => ({
+                            type: "image_url",
+                            image_url: { url: `data:image/jpeg;base64,${b64}` }
+                        }));
+                        contentParts.push({ type: "text", text: promptText + "\n\nReturn ONLY a raw JSON array." });
+
+                        const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                            method: "POST",
+                            headers: {
+                                "Authorization": `Bearer ${orKey}`,
+                                "Content-Type": "application/json",
+                                "HTTP-Referer": "https://keralatimetable.in"
+                            },
+                            body: JSON.stringify({ model: m, messages: [{ role: "user", content: contentParts }], temperature: 0.1 })
+                        });
+                        if (!res.ok) continue;
+                        const data = await res.json();
+                        const parsed = parseJSON(data.choices?.[0]?.message?.content);
+                        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                    } catch (e) { continue; }
+                }
+            }
+
+            // Engine 3: Groq (Fast Text Analysis)
+            if (groqKey) {
+                try {
+                    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                        method: "POST",
+                        headers: { "Authorization": `Bearer ${groqKey}`, "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            model: "qwen/qwen3.8-27b",
+                            temperature: 0.1,
+                            messages: [{ role: "user", content: promptText + "\n\nReturn ONLY a raw JSON array." }]
+                        })
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        const parsed = parseJSON(data.choices?.[0]?.message?.content);
+                        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                    }
+                } catch (e) {}
+            }
+
+            throw new Error("All AI providers were busy. Please try again.");
+        }
+
+        // --- SINGLE-REQUEST EXECUTION ---
         window.runAICertificateAudit = async function() {
             if (queuedCerts.length === 0) return;
 
             const btn = document.getElementById('btn-run-audit');
             const progWrap = document.getElementById('scan-progress-wrap');
             const progBar = document.getElementById('scan-progress-bar');
-            const statusTxt = document.getElementById('scan-status-text');
             const pctTxt = document.getElementById('scan-pct-text');
+            const statusTxt = document.getElementById('scan-status-text');
 
             btn.disabled = true;
             progWrap.classList.remove('hidden');
 
-            const scanTicker = createLiveProgressController(progBar, pctTxt);
-            scanTicker.start(6, 94);
-
-            const cache = loadCertCache();
+            const ticker = createLiveProgressController(progBar, pctTxt);
+            ticker.start(10, 94);
 
             try {
-                rawAIResults = [];
-                const uncachedQueue = [];
+                // Fetch keys securely from Space
+                const authRes = await fetch(HF_AUTH_URL, { method: "POST" });
+                if (!authRes.ok) throw new Error("Could not authenticate with server");
+                const authData = await authRes.json();
 
-                queuedCerts.forEach((item, idx) => {
-                    const globalIndex = idx + 1;
-                    const cachedHit = cache[item.fingerprint];
-                    if (cachedHit) {
-                        rawAIResults.push(sanitizeWithKTURules({ ...cachedHit, certIndex: globalIndex }, item));
-                    } else {
-                        uncachedQueue.push({ item, globalIndex });
-                    }
-                });
+                // Prepare all contact sheets in parallel
+                const itemsWithIndex = queuedCerts.map((c, i) => ({ ...c, globalIndex: i + 1 }));
+                const sheetPromises = [];
+                for (let i = 0; i < itemsWithIndex.length; i += 4) {
+                    sheetPromises.push(createContactSheet(itemsWithIndex.slice(i, i + 4)));
+                }
+                const b64Sheets = await Promise.all(sheetPromises);
 
-                if (uncachedQueue.length > 0) {
-                    const approvedRulesPromptBlock = approvedCustomRules.length > 0
-                        ? `\nAPPROVED CUSTOM KTU RULES:\n` + approvedCustomRules.map(r => `- "${r.keyword}" => Code "${r.code}", eligible: ${r.code !== 'none'}, points: ${r.points}`).join('\n')
-                        : '';
+                ticker.advanceTo(45, 92);
+                statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Evaluating certificates and logos...</span>`;
 
-                    const batchSize = 6;
-                    const totalBatches = Math.ceil(uncachedQueue.length / batchSize);
+                const pdfSummary = itemsWithIndex.map(c => 
+                    `CERT #${c.globalIndex} (File: ${c.name}) Text: ${c.extractedText || "[Image file]"}`
+                ).join("\n");
 
-                    for (let b = 0; b < totalBatches; b++) {
-                        const slice = uncachedQueue.slice(b * batchSize, (b + 1) * batchSize).map(u => ({
-                            ...u.item,
-                            globalIndex: u.globalIndex
-                        }));
+                const prompt = `You are the Official APJAKTU (KTU) Activity Points Auditor.
+Inspect the certificates in the image(s) and cross-reference with the text layer:
+${pdfSummary}
 
-                        statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Inspecting logos &amp; calculating points (Batch ${b + 1} of ${totalBatches})...</span>`;
-                        const stepStartPct = Math.round((b / totalBatches) * 85) + 8;
-                        const stepEndCrawl = Math.round(((b + 0.92) / totalBatches) * 92);
-                        scanTicker.advanceTo(stepStartPct, stepEndCrawl);
+STRICT AUDIT RULES:
+1. REJECT JUNK (eligible: false, points: 0, code: "none"): Terminal screenshots, command-line logs, signatures, random logos without certificate context, ID cards, selfies.
+2. Coursera (K-DISC campaign) (Code 3.17): All Coursera courses are 100% ELIGIBLE. Course = 20 pts, Specialization = 30 pts.
+3. NPTEL/SWAYAM (Code 3.17): 12-wk=40 pts, 8-wk=30 pts, 4-wk=15 pts.
+4. IEEE Competitions: Code 2.3 (Participation L1=2, L2=5, L3=10, L4=15, L5=20). Code 2.4 (Winner L1=3, L2=7, L3=15, L4=25, L5=35).
+5. Student Leadership: Google Ambassador / IEEE Coordinator = Code 2.11 (5-15 pts).
+6. Tech-Fests (Code 2.1 / 2.2): L1=2-5, L2=5-10, L3=10-20, L4=20-40, L5=30-40.
+7. Driving License (Code 1.5): 5 pts ONLY if Four-Wheeler (LMV).
+8. NSS/NCC: 2-Year NSS = Code 1.11 (30 pts). Blood Donation = Code 1.8 (5 pts).
+9. Hackathons: SIH / National = Code 3.15 (30-40 pts). NASA Space Apps / International = Code 3.16 (30 pts participation, 40 pts winner).
 
-                        const contactSheetB64 = await createContactSheetBase64(slice);
-                        const extractedTextContext = slice.map(s => 
-                            `CERTIFICATE #${s.globalIndex} (File: "${s.name}") PDF Text: ${s.extractedText ? `"${s.extractedText}"` : '"[Image]"'}`
-                        ).join('\n');
-
-                        const promptText = `You are the strict APJAKTU (KTU) B.Tech Activity Points Auditor.
-Inspect each numbered tile in the image and its PDF text below:
-${extractedTextContext}
-${approvedRulesPromptBlock}
-
-CRITICAL NON-CERTIFICATE REJECTION RULE:
-- If a tile shows a terminal/code screenshot, standalone logo, handwritten signature, selfie, ID card, meme, random photo, or anything that is NOT an official issued certificate/driving license, you MUST reject it with:
-  "eligible": false, "code": "none", "points": 0, "reason": "Not an official KTU activity certificate."
-
-KTU 2024 OFFICIAL RULES (Only for genuine certificates):
-- 3.17 Skilling (Coursera, NPTEL, SWAYAM, Spoken Tutorial, K-DISC, ICTAK, ASAP): ALL Coursera certificates are ELIGIBLE under Code "3.17" (Single Course=20 pts, Specialization=30 pts). NPTEL: 4-wk=15, 8-wk=30, 12-wk=40. Unapproved 1-hr webinars=0 pts (eligible: false).
-- 2.3 / 2.4 IEEE, ISTE, ACM, CSI, SAE, ASME Competitions: Participation (2.3): L1 College Branch=2, L2 Hub=5, L3 State/AKSC=10, L4 National=15, L5 Int'l=20. Winner (2.4): L1=3, L2=7, L3=15, L4=25, L5=35.
-- 2.11 Society Role/Membership: Member/Coord=5, Execom=10, Chair/Secretary=15.
-- 2.5 IIT/NIT/NIRF100 Workshop/Seminar: 5 pts (Excludes cultural fest workshops like Ragam).
-- 2.1 / 2.2 Tech-Fest: Participation (2.1) L1=2, L2=5, L3=10, L4=20, L5=30. Winner (2.2) L1=5, L2=10, L3=20, L4=40.
-- 1.1 / 1.2 Sports & Arts: Participation (1.1) L1=1, L2=5, L3=10, L4=20, L5=40. Winner (1.2) L1=5, L2=10, L3=20, L4=40.
-- 1.5 Four-Wheeler Driving License (LMV)=5 pts. 1.11 NSS 2-Yr=30 pts. 1.8 Blood Donation=5 pts.
-- 2.23 Short Internship (>=2 weeks)=10 pts. 3.1 IV Report=5 pts. 3.15 National Hackathon Winner=30-40 pts. 3.16 Int'l Hackathon (NASA Space Apps, Imagine Cup, YESIST12)=30 pts (Participation) / 40 pts (Winner).
-
-Return ONLY a valid JSON array with one object per tile:
+Return ONLY a valid JSON array matching CERT #1 through CERT #${itemsWithIndex.length}:
 [
   {
-    "certIndex": ${slice[0].globalIndex},
-    "detectedTitle": "Course or Event Name",
-    "detectedLogo": "Coursera / NPTEL / IEEE / NIT / NSS / None",
+    "certIndex": 1,
+    "detectedTitle": "Course / Event Name",
+    "detectedLogo": "Coursera / IEEE / NASA / Google / None",
     "eligible": true,
     "code": "3.17",
-    "level": "NONE",
-    "tierLabel": "Approved Skilling Course",
     "points": 20,
-    "eventKey": "normalized_event_name",
-    "reason": "Brief KTU Handbook reason"
+    "reason": "Brief official KTU justification"
   }
 ]`;
 
-                        const batchRes = await callDedicatedVisionBrain(promptText, [contactSheetB64], slice);
-                        if (Array.isArray(batchRes)) {
-                            batchRes.forEach((resItem, idx) => {
-                                const matchingCert = slice.find(s => s.globalIndex === resItem.certIndex) || slice[idx];
-                                const sanitized = sanitizeWithKTURules({
-                                    ...resItem,
-                                    certIndex: matchingCert ? matchingCert.globalIndex : resItem.certIndex
-                                }, matchingCert);
+                // Single batched request
+                rawAIResults = await requestAI(authData, prompt, b64Sheets);
 
-                                rawAIResults.push(sanitized);
-                                if (matchingCert?.fingerprint) {
-                                    saveToCertCache(matchingCert.fingerprint, sanitized);
-                                }
-                            });
-                        }
-                    }
-                }
-
-                rawAIResults.sort((a, b) => (a.certIndex || 0) - (b.certIndex || 0));
-
-                scanTicker.finish();
-                setTimeout(() => progWrap.classList.add('hidden'), 450);
+                ticker.finish();
+                setTimeout(() => progWrap.classList.add('hidden'), 350);
 
                 recalculateAuditMath();
-                logScanResultsToFirebase();
+                logToFirebase();
 
                 document.getElementById('audit-results-section').classList.remove('hidden');
                 document.getElementById('audit-results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                notifyUI(`Calculated points for ${queuedCerts.length} certificate(s)`, 'success');
+                notifyUI(`Calculated points for ${queuedCerts.length} certificate(s)!`, 'success');
             } catch (err) {
-                console.error("Calculation Error:", err);
-                scanTicker.stop();
+                console.error("AI Evaluation Error:", err);
+                ticker.stop();
                 progWrap.classList.add('hidden');
-                notifyUI('Calculation failed. Please try again.', 'error');
+                notifyUI('Calculation failed. Please check your connection and retry.', 'error');
             } finally {
                 btn.disabled = false;
             }
         };
 
-        async function logScanResultsToFirebase() {
-            try {
-                const scheme = document.getElementById('ai-scheme').value;
-                const category = document.getElementById('ai-category').value;
-
-                for (const item of processedAuditItems) {
-                    const logRef = push(ref(db, 'ktu_ai_scan_logs'));
-                    await set(logRef, {
-                        title: item.detectedTitle || item.certObj?.name || 'Unknown',
-                        fileName: item.certObj?.name || '',
-                        logo: item.detectedLogo || 'None',
-                        code: String(item.code || 'none'),
-                        points: Number(item.awardedPoints || 0),
-                        rawPoints: Number(item.points || 0),
-                        status: item.status || 'rejected',
-                        reason: item.auditNote || '',
-                        scheme,
-                        category,
-                        timestamp: new Date().toISOString()
-                    });
-                }
-            } catch (e) {}
-        }
-
-        window.adjustCertPoints = function(certIndex, newPoints) {
-            const target = rawAIResults.find(r => r.certIndex === certIndex);
-            if (!target) return;
-            target.points = newPoints;
-            target.eligible = true;
-            if (!target.code || target.code === 'none') target.code = '3.17';
-            target.tierLabel = `${newPoints} Hours (${newPoints} pts)`;
-
-            const certObj = queuedCerts[certIndex - 1];
-            if (certObj?.fingerprint) saveToCertCache(certObj.fingerprint, target);
-
-            recalculateAuditMath();
-            notifyUI(`Updated Certificate #${certIndex} to ${newPoints} pts`, 'success');
-        };
-
-        // --------------------------------------------------------------------------------
-        // 6. USER RULE SUGGESTION -> FIREBASE PENDING APPROVAL QUEUE
-        // --------------------------------------------------------------------------------
-        function populateRuleDropdown() {
-            const sel = document.getElementById('train-cert-code');
-            if (!sel || sel.options.length > 0) return;
-            let html = `<option value="none">Ineligible / 0 Points</option>`;
-            Object.entries(KTU_2024_RULES).forEach(([code, rule]) => {
-                html += `<option value="${code}">Code #${code} — ${rule.name} (Max ${rule.max} pts)</option>`;
-            });
-            sel.innerHTML = html;
-        }
-
-        window.openTrainModal = function(certIndex) {
-            populateRuleDropdown();
-            const item = processedAuditItems.find(i => i.certIndex === certIndex) || rawAIResults.find(i => i.certIndex === certIndex);
-            if (!item) return;
-
-            document.getElementById('train-cert-index').value = certIndex;
-            document.getElementById('train-cert-title').value = item.detectedTitle || item.certObj?.name || `Certificate #${certIndex}`;
-            document.getElementById('train-cert-code').value = (item.code && KTU_2024_RULES[item.code]) ? item.code : '3.17';
-            document.getElementById('train-cert-points').value = item.awardedPoints || item.points || 10;
-            document.getElementById('train-cert-keyword').value = item.detectedTitle || '';
-            document.getElementById('train-cert-note').value = '';
-
-            const modal = document.getElementById('train-ai-modal');
-            const card = document.getElementById('train-modal-card');
-            modal.classList.remove('hidden');
-            requestAnimationFrame(() => {
-                card.classList.remove('scale-95', 'opacity-0');
-                card.classList.add('scale-100', 'opacity-100');
-            });
-        };
-
-        window.closeTrainModal = function() {
-            const modal = document.getElementById('train-ai-modal');
-            const card = document.getElementById('train-modal-card');
-            card.classList.remove('scale-100', 'opacity-100');
-            card.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 180);
-        };
-
-        window.autoSuggestPointsForRule = function() {
-            const code = document.getElementById('train-cert-code').value;
-            const ptsInput = document.getElementById('train-cert-points');
-            if (code === 'none') ptsInput.value = 0;
-            else if (KTU_2024_RULES[code]) ptsInput.value = KTU_2024_RULES[code].defaultPts || 10;
-        };
-
-        window.submitTrainCorrection = async function() {
-            const certIndex = parseInt(document.getElementById('train-cert-index').value, 10);
-            const newTitle = document.getElementById('train-cert-title').value.trim();
-            const newCode = document.getElementById('train-cert-code').value;
-            const newPoints = parseInt(document.getElementById('train-cert-points').value, 10) || 0;
-            const keyword = document.getElementById('train-cert-keyword').value.trim() || newTitle;
-            const userNote = document.getElementById('train-cert-note').value.trim();
-
-            const target = rawAIResults.find(r => r.certIndex === certIndex);
-            if (!target) return;
-
-            const oldCode = target.code || 'none';
-            const oldPoints = target.points || 0;
-
-            target.detectedTitle = newTitle || target.detectedTitle;
-            target.code = newCode;
-            target.points = newCode === 'none' ? 0 : newPoints;
-            target.eligible = newCode !== 'none' && newPoints > 0;
-            target.reason = userNote ? `Adjusted: ${userNote}` : `Adjusted to Code #${newCode}.`;
-
-            const certObj = queuedCerts[certIndex - 1];
-            if (certObj?.fingerprint) saveToCertCache(certObj.fingerprint, target);
-
-            closeTrainModal();
-            recalculateAuditMath();
-
-            try {
-                const pendingRef = push(ref(db, 'ktu_ai_training_queue'));
-                await set(pendingRef, {
-                    certTitle: target.detectedTitle,
-                    keyword: keyword,
-                    detectedLogo: target.detectedLogo || 'None',
-                    oldCode,
-                    oldPoints,
-                    code: newCode,
-                    points: target.points,
-                    note: userNote || `Code #${newCode} (${target.points} pts)`,
-                    pdfSnippet: (certObj?.extractedText || '').slice(0, 220),
-                    status: 'pending',
-                    createdAt: new Date().toISOString()
-                });
-                notifyUI('Correction applied & sent for Admin approval', 'success');
-            } catch (e) {
-                notifyUI('Correction applied locally', 'success');
-            }
-        };
-
-        // --------------------------------------------------------------------------------
-        // 7. KTU GROUP CAPS & % CALCULATION
-        // --------------------------------------------------------------------------------
+        // --- MATH, CAPS & RENDERING ---
         window.recalculateAuditMath = function() {
             if (!rawAIResults.length) return;
 
@@ -1411,380 +792,171 @@ Return ONLY a valid JSON array with one object per tile:
                 certObj: queuedCerts[(r.certIndex || (i + 1)) - 1] || queuedCerts[i]
             }));
 
-            const sortedByPts = [...indexed].sort((a, b) => (b.points || 0) - (a.points || 0));
-            const seenEvents = new Set();
-            const codeEarnedMap = {};
-            const codeSeenExclusive = new Set();
-            const auditMap = new Map();
+            const codeEarned = {};
+            const processed = [];
 
-            sortedByPts.forEach(item => {
+            indexed.forEach(item => {
                 const code = String(item.code || '').trim();
-                const rule = KTU_2024_RULES[code];
+                const rule = KTU_RULES_2024[code];
+                const pts = Number(item.points) || 0;
 
-                if (!item.eligible || !rule || (item.points || 0) <= 0) {
-                    auditMap.set(item.certIndex, {
+                if (!item.eligible || !rule || pts <= 0) {
+                    processed.push({
                         ...item,
                         status: 'rejected',
                         awardedPoints: 0,
                         group: rule?.group || 'Ineligible',
-                        auditNote: item.reason || 'Does not qualify under KTU Activity Points Handbook.'
+                        note: item.reason || 'Not an eligible KTU activity.'
                     });
                     return;
                 }
 
-                const evKey = (item.eventKey || '').toLowerCase().trim();
-                if (evKey && evKey !== 'none' && seenEvents.has(evKey)) {
-                    auditMap.set(item.certIndex, {
+                const current = codeEarned[code] || 0;
+                if (current >= rule.max) {
+                    processed.push({
                         ...item,
                         status: 'capped',
                         awardedPoints: 0,
                         group: rule.group,
-                        auditNote: `Duplicate Event: Higher achievement for "${item.detectedTitle}" already counted.`
-                    });
-                    return;
-                }
-                if (evKey) seenEvents.add(evKey);
-
-                if (rule.exclusive && codeSeenExclusive.has(code)) {
-                    auditMap.set(item.certIndex, {
-                        ...item,
-                        status: 'capped',
-                        awardedPoints: 0,
-                        group: rule.group,
-                        auditNote: `Non-Accumulative (#${code}): Higher or equal tier already counted for ${rule.name}.`
+                        note: `Cap reached for #${code} (Max ${rule.max} pts).`
                     });
                     return;
                 }
 
-                const currentForCode = codeEarnedMap[code] || 0;
-                if (currentForCode >= rule.max) {
-                    auditMap.set(item.certIndex, {
-                        ...item,
-                        status: 'capped',
-                        awardedPoints: 0,
-                        group: rule.group,
-                        auditNote: `Max Cap Reached: Code #${code} is limited to ${rule.max} points max.`
-                    });
-                    return;
-                }
+                const award = Math.min(pts, rule.max - current);
+                codeEarned[code] = current + award;
 
-                const ptsToAward = Math.min(item.points, rule.max - currentForCode);
-                codeEarnedMap[code] = currentForCode + ptsToAward;
-                if (rule.exclusive) codeSeenExclusive.add(code);
-
-                auditMap.set(item.certIndex, {
+                processed.push({
                     ...item,
                     status: 'accepted',
-                    awardedPoints: ptsToAward,
+                    awardedPoints: award,
                     group: rule.group,
-                    auditNote: item.reason || `Verified under Code #${code} (${rule.name}).`
+                    note: item.reason || `Verified under Code #${code}.`
                 });
             });
 
-            processedAuditItems = indexed.map(it => auditMap.get(it.certIndex) || it);
+            processedAuditItems = processed;
 
             let g1 = 0, g2 = 0, g3 = 0;
-            let acceptedCnt = 0, cappedCnt = 0, rejectedCnt = 0;
+            let acc = 0, cap = 0, rej = 0;
 
-            processedAuditItems.forEach(it => {
-                if (it.status === 'accepted') {
-                    acceptedCnt++;
-                    if (it.group === 'Group I') g1 += it.awardedPoints;
-                    else if (it.group === 'Group II') g2 += it.awardedPoints;
-                    else if (it.group === 'Group III') g3 += it.awardedPoints;
-                } else if (it.status === 'capped') {
-                    cappedCnt++;
-                } else {
-                    rejectedCnt++;
-                }
+            processed.forEach(p => {
+                if (p.status === 'accepted') {
+                    acc++;
+                    if (p.group === 'Group I') g1 += p.awardedPoints;
+                    else if (p.group === 'Group II') g2 += p.awardedPoints;
+                    else if (p.group === 'Group III') g3 += p.awardedPoints;
+                } else if (p.status === 'capped') cap++;
+                else rej++;
             });
 
             const cG1 = scheme === '2024' ? Math.min(g1, groupCap) : g1;
             const cG2 = scheme === '2024' ? Math.min(g2, groupCap) : g2;
             const cG3 = scheme === '2024' ? Math.min(g3, groupCap) : g3;
-            const totalEligible = scheme === '2024' ? (cG1 + cG2 + cG3) : Math.min(g1 + g2 + g3, totalTarget);
+            const total = scheme === '2024' ? (cG1 + cG2 + cG3) : Math.min(g1 + g2 + g3, totalTarget);
 
-            const overallPct = Math.min(100, Math.round((totalEligible / totalTarget) * 100));
+            const overallPct = Math.min(100, Math.round((total / totalTarget) * 100));
             const g1Pct = Math.min(100, Math.round((cG1 / groupCap) * 100));
             const g2Pct = Math.min(100, Math.round((cG2 / groupCap) * 100));
             const g3Pct = Math.min(100, Math.round((cG3 / groupCap) * 100));
 
-            animateNumber(document.getElementById('audit-total-pts'), totalEligible);
+            document.getElementById('audit-total-pts').innerText = total;
             document.getElementById('audit-target-pts').innerText = totalTarget;
             document.getElementById('audit-overall-pct-badge').innerText = `${overallPct}% Completed`;
             document.getElementById('audit-overall-pct-inline').innerText = `${overallPct}%`;
             document.getElementById('audit-overall-bar').style.width = `${overallPct}%`;
-            document.getElementById('audit-counts-summary').innerText = `${acceptedCnt} Accepted • ${cappedCnt} Capped/Duplicate • ${rejectedCnt} Ineligible (0 pts)`;
+            document.getElementById('audit-counts-summary').innerText = `${acc} Accepted • ${cap} Capped • ${rej} Ineligible`;
 
             document.getElementById('audit-g1-text').innerText = `${cG1} / ${groupCap} (${g1Pct}%)`;
             document.getElementById('audit-g1-bar').style.width = `${g1Pct}%`;
-
             document.getElementById('audit-g2-text').innerText = `${cG2} / ${groupCap} (${g2Pct}%)`;
             document.getElementById('audit-g2-bar').style.width = `${g2Pct}%`;
-
             document.getElementById('audit-g3-text').innerText = `${cG3} / ${groupCap} (${g3Pct}%)`;
             document.getElementById('audit-g3-bar').style.width = `${g3Pct}%`;
 
-            renderAuditCards(totalTarget);
+            renderCards(totalTarget);
         };
 
-        function renderAuditCards(totalTargetOverride) {
-            const scheme = document.getElementById('ai-scheme').value;
-            const category = document.getElementById('ai-category').value;
-            const totalTarget = totalTargetOverride || (scheme === '2024' ? (category === 'lateral' ? 90 : category === 'pwd' ? 60 : 120) : (category === 'lateral' ? 75 : category === 'pwd' ? 50 : 100));
-
+        function renderCards(totalTarget) {
             const listEl = document.getElementById('audit-cards-list');
-            listEl.innerHTML = processedAuditItems.map((item, idx) => {
+            listEl.innerHTML = processedAuditItems.map(item => {
                 const sharePct = item.awardedPoints > 0 ? Math.round((item.awardedPoints / totalTarget) * 100) : 0;
-                const delayMs = Math.min(idx * 40, 360);
-                let statusBadge = '';
-                let borderClass = '';
+                let badge = '', border = '';
+
                 if (item.status === 'accepted') {
-                    statusBadge = `<span class="px-2.5 py-0.5 rounded-lg bg-emerald-500/15 text-emerald-700 text-xs font-bold">+${item.awardedPoints} pts (${item.group} • ${sharePct}%)</span>`;
-                    borderClass = 'border-emerald-500/35';
+                    badge = `<span class="px-2.5 py-0.5 rounded-lg bg-emerald-500/15 text-emerald-700 text-xs font-bold">+${item.awardedPoints} pts (${item.group} • ${sharePct}%)</span>`;
+                    border = 'border-emerald-500/35';
                 } else if (item.status === 'capped') {
-                    statusBadge = `<span class="px-2.5 py-0.5 rounded-lg bg-amber-500/15 text-amber-700 text-xs font-bold">0 pts (Capped • 0%)</span>`;
-                    borderClass = 'border-amber-500/35';
+                    badge = `<span class="px-2.5 py-0.5 rounded-lg bg-amber-500/15 text-amber-700 text-xs font-bold">0 pts (Capped)</span>`;
+                    border = 'border-amber-500/35';
                 } else {
-                    statusBadge = `<span class="px-2.5 py-0.5 rounded-lg bg-rose-500/15 text-rose-700 text-xs font-bold">0 pts (Ineligible • 0%)</span>`;
-                    borderClass = 'border-rose-500/35';
+                    badge = `<span class="px-2.5 py-0.5 rounded-lg bg-rose-500/15 text-rose-700 text-xs font-bold">0 pts (Ineligible)</span>`;
+                    border = 'border-rose-500/35';
                 }
 
-                const thumb = item.certObj?.canvasDataUrl || item.certObj?.previewUrl || '';
-                const isSkilling = String(item.code) === '3.17' || (item.detectedLogo || '').toLowerCase().includes('coursera') || (item.detectedLogo || '').toLowerCase().includes('nptel');
-
-                const hoursAdjusterHTML = isSkilling ? `
-                    <div class="pt-2.5 border-t border-slate-200/60 dark:border-white/10">
-                        <span class="text-[11px] font-semibold text-slate-400 block mb-1.5">Course duration (1 pt/hr under Code #3.17):</span>
-                        <div class="flex flex-wrap gap-1.5">
-                            ${[10, 15, 20, 25, 30, 40].map(hrs => `
-                                <button type="button" onclick="adjustCertPoints(${item.certIndex}, ${hrs})" class="px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all active:scale-95 ${item.points === hrs ? 'bg-indigo-600 text-white shadow-sm' : 'bg-white text-slate-700 border border-slate-200 hover:border-indigo-400'}">
-                                    ${hrs} hrs
-                                </button>
-                            `).join('')}
-                        </div>
-                    </div>
-                ` : '';
+                const thumb = item.certObj?.canvasDataUrl || '';
 
                 return `
-                    <div style="animation-delay: ${delayMs}ms" class="card-cascade result-glass rounded-2xl p-4 sm:p-5 flex flex-col justify-between gap-3 border ${borderClass}">
+                    <div class="result-glass rounded-2xl p-4 sm:p-5 flex flex-col justify-between gap-3 border ${border}">
                         <div class="flex items-start gap-3">
-                            ${thumb ? `<img src="${thumb}" class="w-14 h-14 object-cover rounded-xl border border-slate-200 shrink-0 bg-white shadow-sm">` : ''}
+                            ${thumb ? `<img src="${thumb}" class="w-14 h-14 object-cover rounded-xl border border-slate-200 shrink-0 bg-white">` : ''}
                             <div class="min-w-0 flex-1">
                                 <div class="flex flex-wrap items-center justify-between gap-1.5 mb-1">
                                     <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-[11px] font-bold">
                                         ${item.code && item.code !== 'none' ? `Code #${item.code}` : 'No Code'}
                                     </span>
-                                    ${statusBadge}
+                                    ${badge}
                                 </div>
-                                <h3 class="text-sm font-bold text-slate-900 leading-snug truncate mb-1">${item.detectedTitle || item.certObj?.name || `Certificate #${idx + 1}`}</h3>
-                                <div class="flex flex-wrap items-center gap-1.5">
-                                    ${item.detectedLogo && item.detectedLogo !== 'None' ? `<span class="text-[10px] font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">${item.detectedLogo}</span>` : ''}
-                                    <button type="button" onclick="openTrainModal(${item.certIndex})" class="text-[10px] font-bold text-slate-500 hover:text-indigo-600 bg-white px-2 py-0.5 rounded border border-slate-200 transition-colors active:scale-95">
-                                        <i class="fas fa-pen mr-1 text-[9px]"></i>Edit / Suggest Rule
-                                    </button>
-                                </div>
+                                <h3 class="text-sm font-bold text-slate-900 leading-snug truncate mb-0.5">${item.detectedTitle || item.certObj?.name}</h3>
+                                ${item.detectedLogo && item.detectedLogo !== 'None' ? `<span class="text-[10px] font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200"><i class="fas fa-certificate mr-1 text-indigo-500"></i>Logo: ${item.detectedLogo}</span>` : ''}
                             </div>
                         </div>
-
-                        <p class="text-xs text-slate-600 bg-slate-100/80 dark:bg-slate-800/70 p-2.5 rounded-xl leading-relaxed">
-                            ${item.auditNote}
+                        <p class="text-xs text-slate-600 bg-slate-100/80 p-2.5 rounded-xl leading-relaxed">
+                            ${item.note}
                         </p>
-                        ${hoursAdjusterHTML}
                     </div>
                 `;
             }).join('');
         }
 
+        async function logToFirebase() {
+            try {
+                for (const it of processedAuditItems) {
+                    await set(push(ref(db, 'ktu_ai_scan_logs')), {
+                        title: it.detectedTitle || it.certObj?.name || 'Unknown',
+                        logo: it.detectedLogo || 'None',
+                        code: String(it.code || 'none'),
+                        points: Number(it.awardedPoints || 0),
+                        status: it.status || 'rejected',
+                        timestamp: new Date().toISOString()
+                    });
+                }
+            } catch (e) {}
+        }
+
         window.syncVerifiedToMainCalculator = function() {
             const accepted = processedAuditItems.filter(i => i.status === 'accepted' && i.awardedPoints > 0);
-            if (accepted.length === 0) {
-                notifyUI('No eligible certificates to save', 'amber');
-                return;
-            }
+            if (!accepted.length) { notifyUI('No eligible certificates to save', 'amber'); return; }
 
             const scheme = document.getElementById('ai-scheme').value;
             const category = document.getElementById('ai-category').value;
 
             let existing = [];
-            try {
-                const raw = localStorage.getItem(STORAGE_KEY);
-                if (raw) existing = JSON.parse(raw).items || [];
-            } catch (e) {}
+            try { existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}').items || []; } catch (e) {}
 
-            const otherSchemeItems = existing.filter(i => i.scheme !== scheme);
-            const newItems = accepted.map(item => ({
+            const otherItems = existing.filter(i => i.scheme !== scheme);
+            const newItems = accepted.map(it => ({
                 id: `ai_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-                code: String(item.code),
-                title: `${item.detectedTitle} (${item.tierLabel || 'Verified'})`,
-                group: item.group,
-                points: item.awardedPoints,
-                scheme: scheme
+                code: String(it.code),
+                title: it.detectedTitle,
+                group: it.group,
+                points: it.awardedPoints,
+                scheme
             }));
 
-            localStorage.setItem(STORAGE_KEY, JSON.stringify({
-                scheme,
-                category,
-                items: [...otherSchemeItems, ...newItems]
-            }));
-
-            notifyUI(`Saved ${accepted.length} certificates! Redirecting...`, 'success');
-            setTimeout(() => { window.location.href = '/activity-points.html'; }, 1000);
-        };
-
-        // --------------------------------------------------------------------------------
-        // 8. FIREBASE ADMIN PANEL
-        // --------------------------------------------------------------------------------
-        window.toggleAdminSection = function() {
-            const panel = document.getElementById('admin-panel');
-            panel.classList.toggle('hidden');
-            if (!panel.classList.contains('hidden')) {
-                panel.scrollIntoView({ behavior: 'smooth' });
-            }
-        };
-
-        window.adminLogin = async function() {
-            try {
-                const res = await signInWithPopup(auth, provider);
-                if (res.user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
-                    notifyUI('Authorized administrator only', 'error');
-                    await signOut(auth);
-                }
-            } catch (e) {
-                notifyUI('Sign-in cancelled', 'amber');
-            }
-        };
-
-        window.adminLogout = async function() {
-            await signOut(auth);
-            document.getElementById('admin-dashboard-body').classList.add('hidden');
-        };
-
-        onAuthStateChanged(auth, (user) => {
-            if (user && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
-                document.getElementById('admin-panel').classList.remove('hidden');
-                document.getElementById('admin-dashboard-body').classList.remove('hidden');
-                document.getElementById('admin-auth-controls').innerHTML = `
-                    <button type="button" onclick="adminLogout()" class="px-3 py-1.5 rounded-xl bg-rose-50 text-rose-600 text-xs font-bold">Sign Out</button>
-                `;
-                listenToAdminQueues();
-            }
-        });
-
-        let pendingRulesCache = {};
-
-        function listenToAdminQueues() {
-            onValue(ref(db, 'ktu_ai_training_queue'), (snap) => {
-                const data = snap.val() || {};
-                pendingRulesCache = data;
-                const keys = Object.keys(data);
-                document.getElementById('pending-rules-count').innerText = keys.length;
-                const listEl = document.getElementById('pending-rules-list');
-
-                if (keys.length === 0) {
-                    listEl.innerHTML = `<p class="text-xs text-slate-400">No pending rule corrections.</p>`;
-                    return;
-                }
-
-                listEl.innerHTML = keys.map(id => {
-                    const item = data[id];
-                    return `
-                        <div class="inner-glass rounded-2xl p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                            <div class="text-xs space-y-0.5">
-                                <p class="font-bold text-slate-900">Keyword: "${item.keyword || item.certTitle}"</p>
-                                <p class="text-slate-600">Suggested: <strong>Code #${item.code} (${item.points} pts)</strong> <span class="text-slate-400">(was #${item.oldCode} / ${item.oldPoints} pts)</span></p>
-                                ${item.note ? `<p class="text-slate-500">${item.note}</p>` : ''}
-                            </div>
-                            <div class="flex items-center gap-2 shrink-0">
-                                <button type="button" onclick="approvePendingRule('${id}')" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold transition-all active:scale-95">
-                                    Approve
-                                </button>
-                                <button type="button" onclick="rejectPendingRule('${id}')" class="px-3 py-1.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold transition-all active:scale-95">
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            });
-
-            const recentLogsQuery = dbQuery(ref(db, 'ktu_ai_scan_logs'), limitToLast(30));
-            onValue(recentLogsQuery, (snap) => {
-                const data = snap.val() || {};
-                const items = Object.values(data).reverse();
-                const logEl = document.getElementById('scan-logs-list');
-
-                if (items.length === 0) {
-                    logEl.innerHTML = `<p class="text-xs text-slate-400">No certificates logged yet.</p>`;
-                    return;
-                }
-
-                logEl.innerHTML = items.map(log => `
-                    <div class="inner-glass rounded-xl px-3 py-2 flex items-center justify-between gap-2">
-                        <div class="truncate">
-                            <span class="font-bold text-slate-800">${log.title}</span>
-                            <span class="text-slate-400 ml-1">(${log.logo || 'No Logo'} • ${log.scheme} Scheme)</span>
-                        </div>
-                        <span class="shrink-0 font-bold ${log.points > 0 ? 'text-emerald-600' : 'text-rose-500'}">
-                            #${log.code} • +${log.points} pts
-                        </span>
-                    </div>
-                `).join('');
-            });
-        }
-
-        function renderApprovedRulesAdmin() {
-            const countEl = document.getElementById('approved-rules-count');
-            const listEl = document.getElementById('approved-rules-list');
-            if (!countEl || !listEl) return;
-
-            countEl.innerText = approvedCustomRules.length;
-            if (approvedCustomRules.length === 0) {
-                listEl.innerHTML = `<span class="text-xs text-slate-400">No custom rules approved yet.</span>`;
-                return;
-            }
-
-            listEl.innerHTML = approvedCustomRules.map(r => `
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800">
-                    <span>"${r.keyword}" → #${r.code} (${r.points} pts)</span>
-                    <button type="button" onclick="deleteApprovedRule('${r.id}')" class="text-rose-500 hover:text-rose-700" title="Remove rule">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            `).join('');
-        }
-
-        window.approvePendingRule = async function(id) {
-            const item = pendingRulesCache[id];
-            if (!item) return;
-            try {
-                const newRef = push(ref(db, 'ktu_ai_approved_rules'));
-                await set(newRef, {
-                    keyword: item.keyword || item.certTitle,
-                    code: item.code,
-                    points: Number(item.points) || 0,
-                    note: item.note || '',
-                    approvedAt: new Date().toISOString()
-                });
-                await remove(ref(db, `ktu_ai_training_queue/${id}`));
-                notifyUI('Rule approved and active for all users', 'success');
-            } catch (e) {
-                notifyUI('Failed to approve rule', 'error');
-            }
-        };
-
-        window.rejectPendingRule = async function(id) {
-            try {
-                await remove(ref(db, `ktu_ai_training_queue/${id}`));
-                notifyUI('Pending rule cancelled', 'amber');
-            } catch (e) {}
-        };
-
-        window.deleteApprovedRule = async function(id) {
-            try {
-                await remove(ref(db, `ktu_ai_approved_rules/${id}`));
-                notifyUI('Custom rule removed', 'amber');
-            } catch (e) {}
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ scheme, category, items: [...otherItems, ...newItems] }));
+            notifyUI(`Saved ${accepted.length} verified certificates!`, 'success');
+            setTimeout(() => { window.location.href = '/activity-points.html'; }, 900);
         };
     </script>
 </body>
