@@ -138,7 +138,7 @@
             will-change: transform, opacity;
         }
 
-        .progress-bar-fill { transition: width 0.65s cubic-bezier(0.22, 1, 0.36, 1); }
+        .progress-bar-fill { transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -178,7 +178,7 @@
                 AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points</span> Calculator
             </h1>
             <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
-                Upload your certificates (PDFs or images) to automatically verify eligibility, apply KTU Handbook caps, and calculate your points and percentage progress.
+                Upload your certificates (PDFs or photos) to visually inspect logos, verify eligibility, apply KTU Handbook caps, and calculate your points and percentage progress.
             </p>
         </div>
 
@@ -220,11 +220,24 @@
                 </p>
             </div>
 
-            <!-- Queued Files Grid (Instant 0ms Selection!) -->
+            <!-- LIVE PHOTO / PDF UPLOAD PROGRESS BAR -->
+            <div id="upload-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4">
+                <div class="flex items-center justify-between text-xs font-bold mb-2">
+                    <span id="upload-status-text" class="text-indigo-600 flex items-center gap-2">
+                        <i class="fas fa-circle-notch fa-spin"></i> <span>Uploading &amp; rendering PDF/photo previews...</span>
+                    </span>
+                    <span id="upload-pct-text" class="text-slate-800 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-md font-extrabold">0%</span>
+                </div>
+                <div class="w-full h-2.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
+                    <div id="upload-progress-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 to-blue-500 rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Queued Files Grid -->
             <div id="queued-files-section" class="hidden mt-5 pt-5 border-t border-slate-200/70 dark:border-white/10">
                 <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
                     <span class="text-xs font-bold text-slate-700">
-                        Selected Certificates (<span id="queued-count">0</span>/40)
+                        Uploaded Certificates (<span id="queued-count">0</span>/40)
                     </span>
                     <div class="flex items-center gap-2">
                         <button type="button" onclick="document.getElementById('cert-file-input').click()" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50 transition-all active:scale-95 shadow-sm">
@@ -238,13 +251,13 @@
 
                 <div id="queued-thumbnails-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5 max-h-64 overflow-y-auto p-1 hide-scrollbar"></div>
 
-                <!-- Smooth Progress Bar -->
+                <!-- LIVE CONTINUOUS AI CALCULATION PROGRESS BAR (Ticks 1%..2%..36%..37%..38%..100%) -->
                 <div id="scan-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4">
                     <div class="flex items-center justify-between text-xs font-bold mb-2">
                         <span id="scan-status-text" class="text-indigo-600 flex items-center gap-2">
-                            <i class="fas fa-circle-notch fa-spin"></i> <span>Preparing certificates...</span>
+                            <i class="fas fa-circle-notch fa-spin"></i> <span>Inspecting certificate logos &amp; text...</span>
                         </span>
-                        <span id="scan-pct-text" class="text-slate-700 font-bold">0%</span>
+                        <span id="scan-pct-text" class="text-slate-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md font-extrabold">0%</span>
                     </div>
                     <div class="w-full h-2.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
                         <div id="scan-progress-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 via-blue-500 to-emerald-500 rounded-full" style="width: 0%"></div>
@@ -486,10 +499,9 @@
 
         const fbApp = initializeApp(firebaseConfig);
         const db = getDatabase(fbApp);
-        const auth = getAuth(fbApp);
+        const auth = getAuth(app => fbApp)();
         const provider = new GoogleAuthProvider();
 
-        // Dedicated ZeroGPU Vision Brain Space URL (No external API keys!)
         const VISION_BRAIN_BASE = "https://keralatimetable-ktu-vision-brain.hf.space";
         const STORAGE_KEY = 'ktu_activity_points_tracker_v2';
         const CERT_CACHE_KEY = 'ktu_ai_cert_cache_v2';
@@ -503,8 +515,66 @@
         });
 
         // --------------------------------------------------------------------------------
-        // 1. LOCAL FINGERPRINT CACHE
+        // 1. SMOOTH CONTINUOUS PROGRESS TICKER (Counts 1..2..36..37..38.. smoothly)
         // --------------------------------------------------------------------------------
+        function createLiveProgressController(barEl, pctEl) {
+            let currentPct = 0;
+            let targetPct = 0;
+            let maxCrawlPct = 0;
+            let timer = null;
+
+            function render() {
+                const display = Math.min(100, Math.round(currentPct));
+                if (barEl) barEl.style.width = `${display}%`;
+                if (pctEl) pctEl.innerText = `${display}%`;
+            }
+
+            function startTicker() {
+                if (timer) clearInterval(timer);
+                timer = setInterval(() => {
+                    if (currentPct < targetPct) {
+                        // Fast catch-up when a step completes
+                        currentPct = Math.min(targetPct, currentPct + Math.max(1, (targetPct - currentPct) * 0.35));
+                        render();
+                    } else if (currentPct < maxCrawlPct) {
+                        // Continuous 1-by-1 crawl (e.g. 36%.. 37%.. 38%..) while waiting for GPU
+                        currentPct += 1;
+                        render();
+                    }
+                }, 160);
+            }
+
+            return {
+                start(initialTarget = 5, crawlLimit = 92) {
+                    currentPct = 1;
+                    targetPct = initialTarget;
+                    maxCrawlPct = crawlLimit;
+                    render();
+                    startTicker();
+                },
+                advanceTo(newTarget, newCrawlLimit) {
+                    if (newTarget > targetPct) targetPct = newTarget;
+                    if (newCrawlLimit && newCrawlLimit > maxCrawlPct) maxCrawlPct = newCrawlLimit;
+                },
+                finish() {
+                    if (timer) clearInterval(timer);
+                    targetPct = 100;
+                    maxCrawlPct = 100;
+                    const finishTimer = setInterval(() => {
+                        if (currentPct < 100) {
+                            currentPct = Math.min(100, currentPct + 4);
+                            render();
+                        } else {
+                            clearInterval(finishTimer);
+                        }
+                    }, 25);
+                },
+                stop() {
+                    if (timer) clearInterval(timer);
+                }
+            };
+        }
+
         function loadCertCache() {
             try { return JSON.parse(localStorage.getItem(CERT_CACHE_KEY) || '{}'); }
             catch (e) { return {}; }
@@ -521,7 +591,7 @@
         }
 
         // --------------------------------------------------------------------------------
-        // 2. DEDICATED ZERO-GPU VISION BRAIN CALLER (ktu-vision-brain ONLY)
+        // 2. DEDICATED ZERO-GPU VISION BRAIN CALLER
         // --------------------------------------------------------------------------------
         function extractJSONArray(rawText) {
             if (!rawText) return [];
@@ -550,7 +620,6 @@
                 images: imageList
             });
 
-            // Route 1: Direct /local-vision FastAPI endpoint on ktu-vision-brain
             try {
                 const res = await fetch(`${VISION_BRAIN_BASE}/local-vision`, {
                     method: "POST",
@@ -564,7 +633,6 @@
                 }
             } catch (e) {}
 
-            // Route 2: Gradio ZeroGPU Queue API (/gradio_api/call/local_vision)
             const queueRes = await fetch(`${VISION_BRAIN_BASE}/gradio_api/call/local_vision`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -677,7 +745,6 @@
             const titleLower = (item.detectedTitle || '').toLowerCase();
             const logoLower = (item.detectedLogo || '').toLowerCase();
 
-            // 1. Check Admin-Approved Firebase Custom Rules First!
             for (const custom of approvedCustomRules) {
                 const kw = (custom.keyword || '').toLowerCase().trim();
                 if (kw && (titleLower.includes(kw) || logoLower.includes(kw) || pdfText.includes(kw))) {
@@ -689,7 +756,6 @@
                 }
             }
 
-            // 2. Coursera / NPTEL / SWAYAM (Code 3.17)
             if (code === "3.17" || logoLower.includes("coursera") || logoLower.includes("nptel") || pdfText.includes("coursera.org/verify") || pdfText.includes("nptel")) {
                 item.code = "3.17";
                 item.eligible = true;
@@ -712,7 +778,6 @@
                 return item;
             }
 
-            // 3. Level Matrix Override
             if (LEVEL_POINT_MATRIX[code] && item.level && LEVEL_POINT_MATRIX[code][item.level]) {
                 item.points = LEVEL_POINT_MATRIX[code][item.level];
             }
@@ -754,7 +819,7 @@
         }
 
         // --------------------------------------------------------------------------------
-        // 4. INSTANT FILE SELECTION
+        // 4. PHOTO & PDF UPLOAD WITH LIVE PROGRESS BAR (1%..2%..36%..37%..100%)
         // --------------------------------------------------------------------------------
         const dropzone = document.getElementById('cert-dropzone');
         dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); });
@@ -765,7 +830,7 @@
             if (e.dataTransfer.files?.length) handleFilesSelected(e.dataTransfer.files);
         });
 
-        window.handleFilesSelected = function(fileList) {
+        window.handleFilesSelected = async function(fileList) {
             const incoming = Array.from(fileList);
             if (queuedCerts.length + incoming.length > 40) {
                 notifyUI('Maximum 40 certificates per batch', 'amber');
@@ -773,22 +838,45 @@
             const allowed = incoming.slice(0, 40 - queuedCerts.length);
             if (!allowed.length) return;
 
-            for (const file of allowed) {
+            const upWrap = document.getElementById('upload-progress-wrap');
+            const upBar  = document.getElementById('upload-progress-bar');
+            const upPct  = document.getElementById('upload-pct-text');
+            const upTxt  = document.getElementById('upload-status-text');
+
+            upWrap.classList.remove('hidden');
+            const uploadTicker = createLiveProgressController(upBar, upPct);
+            uploadTicker.start(8, 94);
+
+            for (let i = 0; i < allowed.length; i++) {
+                const file = allowed[i];
+                upTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Uploading &amp; rendering file ${i + 1} of ${allowed.length} (${file.name.slice(0, 24)})...</span>`;
+                const targetPct = Math.round(((i + 0.8) / allowed.length) * 95);
+                uploadTicker.advanceTo(targetPct, Math.min(98, targetPct + 12));
+
                 const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
-                queuedCerts.push({
+                const certItem = {
                     id: `cert_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
                     file,
                     name: file.name,
                     isPdf,
-                    previewUrl: isPdf ? null : URL.createObjectURL(file),
+                    previewUrl: null,
                     fingerprint: getFileFingerprint(file),
                     canvasDataUrl: null,
                     extractedText: ""
-                });
+                };
+
+                try {
+                    await prepareCertItem(certItem);
+                    queuedCerts.push(certItem);
+                    renderQueuedGrid();
+                } catch (err) {
+                    console.error("Failed to prepare file:", file.name, err);
+                }
             }
 
-            renderQueuedGrid();
-            notifyUI(`${queuedCerts.length} certificate(s) added`, 'success');
+            uploadTicker.finish();
+            setTimeout(() => upWrap.classList.add('hidden'), 450);
+            notifyUI(`${queuedCerts.length} certificate(s) uploaded`, 'success');
         };
 
         async function prepareCertItem(certItem) {
@@ -807,7 +895,7 @@
                 } catch (e) {}
 
                 const baseVp = page.getViewport({ scale: 1.0 });
-                const scale = Math.min(1.15, 760 / Math.max(baseVp.width, baseVp.height));
+                const scale = Math.min(1.15, 720 / Math.max(baseVp.width, baseVp.height));
                 const viewport = page.getViewport({ scale });
                 const canvas = document.createElement('canvas');
                 canvas.width = viewport.width;
@@ -823,9 +911,9 @@
             } else {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
-                    const url = certItem.previewUrl || URL.createObjectURL(file);
+                    const url = URL.createObjectURL(file);
                     img.onload = () => {
-                        const maxDim = 760;
+                        const maxDim = 720;
                         let w = img.width, h = img.height;
                         if (w > maxDim || h > maxDim) {
                             if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
@@ -838,6 +926,7 @@
                         ctx.fillStyle = '#FFFFFF';
                         ctx.fillRect(0, 0, w, h);
                         ctx.drawImage(img, 0, 0, w, h);
+                        URL.revokeObjectURL(url);
                         certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.76);
                         resolve(certItem);
                     };
@@ -860,20 +949,12 @@
 
             grid.innerHTML = queuedCerts.map((c, idx) => {
                 const thumbSrc = c.canvasDataUrl || c.previewUrl;
-                const delayMs = Math.min(idx * 25, 250);
-                const previewHTML = thumbSrc
-                    ? `<img src="${thumbSrc}" alt="${c.name}" class="w-full h-16 object-cover rounded-lg mb-1.5 bg-white border border-slate-200">`
-                    : `<div class="w-full h-16 rounded-lg mb-1.5 bg-indigo-50/80 border border-indigo-100 flex flex-col items-center justify-center text-indigo-600">
-                           <i class="fas fa-file-pdf text-lg"></i>
-                           <span class="text-[9px] font-bold uppercase mt-0.5">PDF</span>
-                       </div>`;
-
                 return `
-                    <div style="animation-delay: ${delayMs}ms" class="card-cascade inner-glass rounded-xl p-2 relative flex flex-col justify-between hover:-translate-y-0.5 transition-transform">
+                    <div class="inner-glass rounded-xl p-2 relative flex flex-col justify-between hover:-translate-y-0.5 transition-transform">
                         <button type="button" onclick="removeQueuedCert('${c.id}')" class="absolute top-1 right-1 w-5 h-5 rounded-full bg-slate-900/70 text-white text-[10px] flex items-center justify-center hover:bg-rose-600 z-10 transition-colors">
                             <i class="fas fa-times"></i>
                         </button>
-                        ${previewHTML}
+                        <img src="${thumbSrc}" alt="${c.name}" class="w-full h-16 object-cover rounded-lg mb-1.5 bg-white border border-slate-200">
                         <span class="text-[10px] font-bold text-slate-700 truncate block">#${idx + 1} ${c.name}</span>
                     </div>
                 `;
@@ -892,7 +973,7 @@
         };
 
         async function createContactSheetBase64(batchItems) {
-            const tileW = 740, tileH = 560, headerH = 34;
+            const tileW = 600, tileH = 460, headerH = 32;
             const cols = batchItems.length === 1 ? 1 : 2;
             const rows = Math.ceil(batchItems.length / 2);
 
@@ -913,8 +994,8 @@
                 ctx.fillStyle = '#1e1b4b';
                 ctx.fillRect(x, y, tileW, headerH);
                 ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 16px Inter, sans-serif';
-                ctx.fillText(`CERTIFICATE #${item.globalIndex} (${item.name.slice(0, 36)})`, x + 12, y + 22);
+                ctx.font = 'bold 14px Inter, sans-serif';
+                ctx.fillText(`CERTIFICATE #${item.globalIndex} (${item.name.slice(0, 32)})`, x + 10, y + 21);
 
                 const img = await new Promise((res) => {
                     const im = new Image();
@@ -925,7 +1006,7 @@
                 ctx.fillStyle = '#ffffff';
                 ctx.fillRect(x + 3, y + headerH, tileW - 6, tileH - headerH - 3);
 
-                const availW = tileW - 14, availH = tileH - headerH - 10;
+                const availW = tileW - 12, availH = tileH - headerH - 8;
                 const scale = Math.min(availW / img.width, availH / img.height);
                 const drawW = img.width * scale, drawH = img.height * scale;
                 const dx = x + (tileW - drawW) / 2;
@@ -936,7 +1017,7 @@
         }
 
         // --------------------------------------------------------------------------------
-        // 5. AI CALCULATION VIA ktu-vision-brain + FIREBASE SCAN LOGGING
+        // 5. AI CALCULATION WITH LIVE 36..37..38.. PROGRESS TICKER
         // --------------------------------------------------------------------------------
         window.runAICertificateAudit = async function() {
             if (queuedCerts.length === 0) return;
@@ -949,8 +1030,9 @@
 
             btn.disabled = true;
             progWrap.classList.remove('hidden');
-            progBar.style.width = '10%';
-            pctTxt.innerText = '10%';
+
+            const scanTicker = createLiveProgressController(progBar, pctTxt);
+            scanTicker.start(6, 94);
 
             const cache = loadCertCache();
 
@@ -969,20 +1051,12 @@
                 });
 
                 if (uncachedQueue.length > 0) {
-                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Reading ${uncachedQueue.length} certificate(s)...`;
-
-                    for (let i = 0; i < uncachedQueue.length; i += 4) {
-                        const chunk = uncachedQueue.slice(i, i + 4);
-                        await Promise.all(chunk.map(c => prepareCertItem(c.item)));
-                    }
-                    renderQueuedGrid();
-
                     const approvedRulesPromptBlock = approvedCustomRules.length > 0
                         ? `\nAPPROVED CUSTOM KTU RULES:\n` + approvedCustomRules.map(r => `- "${r.keyword}" => Code "${r.code}", eligible: ${r.code !== 'none'}, points: ${r.points}`).join('\n')
                         : '';
 
-                    // Send 2 certificates per GPU pass for maximum 2B Vision clarity
-                    const batchSize = 2;
+                    // Group up to 6 certificates per GPU call so ZeroGPU only queues once!
+                    const batchSize = 6;
                     const totalBatches = Math.ceil(uncachedQueue.length / batchSize);
 
                     for (let b = 0; b < totalBatches; b++) {
@@ -991,10 +1065,10 @@
                             globalIndex: u.globalIndex
                         }));
 
-                        statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Analyzing certificates (${b + 1} of ${totalBatches})...`;
-                        const pct = Math.round(((b + 0.4) / totalBatches) * 90);
-                        progBar.style.width = `${pct}%`;
-                        pctTxt.innerText = `${pct}%`;
+                        statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Inspecting logos &amp; calculating points (Batch ${b + 1} of ${totalBatches})...</span>`;
+                        const stepStartPct = Math.round((b / totalBatches) * 85) + 8;
+                        const stepEndCrawl = Math.round(((b + 0.92) / totalBatches) * 92);
+                        scanTicker.advanceTo(stepStartPct, stepEndCrawl);
 
                         const contactSheetB64 = await createContactSheetBase64(slice);
                         const extractedTextContext = slice.map(s => 
@@ -1002,7 +1076,7 @@
                         ).join('\n');
 
                         const promptText = `You are the APJAKTU (KTU) B.Tech Activity Points Calculator.
-Inspect each certificate in the image and the PDF text below:
+Inspect each certificate in the image (including logos) and the PDF text below:
 ${extractedTextContext}
 ${approvedRulesPromptBlock}
 
@@ -1052,9 +1126,8 @@ Return ONLY a valid JSON array:
 
                 rawAIResults.sort((a, b) => (a.certIndex || 0) - (b.certIndex || 0));
 
-                progBar.style.width = '100%';
-                pctTxt.innerText = '100%';
-                setTimeout(() => progWrap.classList.add('hidden'), 350);
+                scanTicker.finish();
+                setTimeout(() => progWrap.classList.add('hidden'), 450);
 
                 recalculateAuditMath();
                 logScanResultsToFirebase();
@@ -1064,6 +1137,7 @@ Return ONLY a valid JSON array:
                 notifyUI(`Calculated points for ${queuedCerts.length} certificate(s)`, 'success');
             } catch (err) {
                 console.error("Calculation Error:", err);
+                scanTicker.stop();
                 progWrap.classList.add('hidden');
                 notifyUI('Calculation failed. Please try again.', 'error');
             } finally {
