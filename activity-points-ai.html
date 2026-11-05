@@ -150,7 +150,7 @@
                 AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points</span> Calculator
             </h1>
             <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
-                Upload your certificates to automatically verify eligibility, inspect logos with KTU Vision Brain AI, apply KTU Handbook caps, and calculate your exact points.
+                Upload your certificates to automatically verify eligibility, inspect logos with KTU Vision Brain AI (Qwen2.5-VL-7B), apply KTU Handbook caps, and calculate your exact points.
             </p>
         </div>
 
@@ -224,7 +224,7 @@
                 <div id="scan-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4">
                     <div class="flex items-center justify-between text-xs font-bold mb-2">
                         <span id="scan-status-text" class="text-indigo-600 flex items-center gap-2">
-                            <i class="fas fa-circle-notch fa-spin"></i> <span>Connecting to KTU Vision Brain on ZeroGPU...</span>
+                            <i class="fas fa-circle-notch fa-spin"></i> <span>Connecting to KTU Vision Brain (Qwen2.5-VL-7B) on ZeroGPU...</span>
                         </span>
                         <span id="scan-pct-text" class="text-slate-800 font-extrabold">0%</span>
                     </div>
@@ -315,7 +315,7 @@
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-bold text-sm sm:text-base mb-1">Kerala Timetable</h3>
             <p class="text-slate-500 text-xs leading-relaxed max-w-lg mx-auto">
-                Powered by KTU Vision Brain (Qwen2-VL) • Based on the Official APJAKTU 2024 &amp; 2019 Activity Points Handbooks.
+                Powered by KTU Vision Brain (Qwen2.5-VL-7B) • Based on the Official APJAKTU 2024 &amp; 2019 Activity Points Handbooks.
             </p>
         </div>
     </footer>
@@ -518,7 +518,7 @@
                 } catch (e) {}
 
                 const baseVp = page.getViewport({ scale: 1.0 });
-                const scale = Math.min(1.5, 900 / Math.max(baseVp.width, baseVp.height));
+                const scale = Math.min(1.6, 1150 / Math.max(baseVp.width, baseVp.height));
                 const viewport = page.getViewport({ scale });
                 const canvas = document.createElement('canvas');
                 canvas.width = viewport.width; canvas.height = viewport.height;
@@ -526,14 +526,14 @@
                 ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, canvas.width, canvas.height);
                 await page.render({ canvasContext: ctx, viewport }).promise;
 
-                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.84);
+                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.86);
                 return certItem;
             } else {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
                     const url = URL.createObjectURL(file);
                     img.onload = () => {
-                        const maxDim = 900;
+                        const maxDim = 1150;
                         let w = img.width, h = img.height;
                         if (w > maxDim || h > maxDim) {
                             if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
@@ -545,7 +545,7 @@
                         ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, w, h);
                         ctx.drawImage(img, 0, 0, w, h);
                         URL.revokeObjectURL(url);
-                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.84);
+                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.86);
                         resolve(certItem);
                     };
                     img.onerror = reject;
@@ -606,7 +606,7 @@
             ctx.fillRect(0, headerH, img.width, img.height);
             ctx.drawImage(img, 0, headerH);
 
-            return canvas.toDataURL('image/jpeg', 0.84).split(',')[1];
+            return canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
         }
 
         function parseVisionBrainResponse(rawOutput) {
@@ -650,7 +650,7 @@
             // 1. Primary: Server-side authenticated relay through ktu-papers-api (/vision-audit)
             try {
                 if (statusTxtEl) {
-                    statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2-VL-2B inspecting logos, seals &amp; KTU rules on ZeroGPU...</span>`;
+                    statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2.5-VL-7B inspecting logos, seals &amp; KTU rules on ZeroGPU...</span>`;
                 }
                 const proxyRes = await fetch(VISION_PROXY_URL, {
                     method: "POST",
@@ -722,7 +722,7 @@
                     const pctTarget = Math.min(92, Math.round(((i + batch.length * 0.5) / itemsWithIndex.length) * 90));
                     ticker.advanceTo(pctTarget, 96);
 
-                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Analyzing batch ${batchNum} of ${totalBatches} on ZeroGPU...</span>`;
+                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2.5-VL-7B analyzing batch ${batchNum} of ${totalBatches} on ZeroGPU...</span>`;
 
                     const b64Images = await Promise.all(batch.map(item => createLabeledCertImage(item)));
                     const pdfSummary = batch.map(c =>
@@ -756,7 +756,7 @@
 
                 document.getElementById('audit-results-section').classList.remove('hidden');
                 document.getElementById('audit-results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                notifyUI(`KTU Vision Brain analyzed ${queuedCerts.length} certificate(s)!`, 'success');
+                notifyUI(`Qwen2.5-VL-7B analyzed ${queuedCerts.length} certificate(s)!`, 'success');
             } catch (err) {
                 console.error("KTU Vision Brain Error:", err);
                 ticker.stop();
