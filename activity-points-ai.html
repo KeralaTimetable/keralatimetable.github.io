@@ -11,7 +11,6 @@
     <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
     <style>
         body { 
@@ -35,58 +34,46 @@
             0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
             50% { transform: translate3d(-28px, 22px, 0) scale(1.06); }
         }
-        .ambient-orb-1 { animation: orbDrift1 14s ease-in-out infinite; will-change: transform; }
-        .ambient-orb-2 { animation: orbDrift2 18s ease-in-out 2s infinite; will-change: transform; }
-        .ambient-orb-3 { animation: orbDrift1 20s ease-in-out 4s infinite reverse; will-change: transform; }
+        .ambient-orb-1 { animation: orbDrift1 14s ease-in-out infinite; }
+        .ambient-orb-2 { animation: orbDrift2 18s ease-in-out 2s infinite; }
+        .ambient-orb-3 { animation: orbDrift1 20s ease-in-out 4s infinite reverse; }
 
         .real-glass {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.58) 100%);
-            backdrop-filter: blur(28px) saturate(195%);
-            -webkit-backdrop-filter: blur(28px) saturate(195%);
+            background: rgba(255, 255, 255, 0.92);
             border: 1.5px solid rgba(15, 23, 42, 0.11);
-            box-shadow: 
-                inset 0 1px 1px 0 rgba(255, 255, 255, 0.98),
-                0 18px 42px -10px rgba(31, 38, 135, 0.08);
-            transition: transform 0.34s cubic-bezier(0.22, 1.25, 0.36, 1), box-shadow 0.3s ease;
+            box-shadow: 0 14px 34px -10px rgba(31, 38, 135, 0.08);
+        }
+        @media (min-width: 768px) {
+            .real-glass {
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.58) 100%);
+                backdrop-filter: blur(24px) saturate(180%);
+                -webkit-backdrop-filter: blur(24px) saturate(180%);
+            }
         }
 
         .result-glass {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.72) 100%);
-            backdrop-filter: blur(22px) saturate(190%);
-            -webkit-backdrop-filter: blur(22px) saturate(190%);
+            background: rgba(255, 255, 255, 0.94);
             border: 1.5px solid rgba(15, 23, 42, 0.10);
-            box-shadow: 
-                inset 0 1px 1px 0 rgba(255, 255, 255, 0.96),
-                0 8px 24px -4px rgba(15, 23, 42, 0.05);
-            transition: 
-                transform 0.34s cubic-bezier(0.22, 1.28, 0.36, 1),
-                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.24s ease,
-                background 0.24s ease;
-            will-change: transform;
+            box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.05);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.24s ease;
         }
         .result-glass:hover {
-            transform: translate3d(0, -4px, 0) scale(1.006);
-            background: rgba(255, 255, 255, 0.96);
+            transform: translate3d(0, -3px, 0);
+            background: #ffffff;
             border-color: rgba(79, 70, 229, 0.42);
-            box-shadow: 
-                inset 0 1px 1px 0 #ffffff,
-                0 18px 36px -8px rgba(79, 70, 229, 0.13);
+            box-shadow: 0 18px 36px -8px rgba(79, 70, 229, 0.13);
         }
 
         .inner-glass {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.60) 100%);
-            backdrop-filter: blur(18px) saturate(180%);
-            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            background: rgba(255, 255, 255, 0.88);
             border: 1.5px solid rgba(15, 23, 42, 0.10);
-            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
         }
 
         .glass-input {
-            background: rgba(255, 255, 255, 0.86);
+            background: rgba(255, 255, 255, 0.92);
             border: 1.5px solid rgba(15, 23, 42, 0.13);
             color: #0f172a;
-            transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.2s ease;
         }
         .glass-input:focus {
             outline: none;
@@ -97,21 +84,20 @@
 
         .dropzone-border {
             border: 2px dashed rgba(79, 70, 229, 0.38);
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
         .dropzone-border:hover, .dropzone-border.drag-over {
             border-color: #4f46e5;
-            background: rgba(255, 255, 255, 0.85);
-            transform: translate3d(0, -2px, 0) scale(1.005);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         @keyframes springFadeUp {
-            0% { opacity: 0; transform: translate3d(0, 18px, 0) scale(0.985); }
-            100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+            0% { opacity: 0; transform: translate3d(0, 14px, 0); }
+            100% { opacity: 1; transform: translate3d(0, 0, 0); }
         }
         .spring-enter {
             opacity: 0;
-            animation: springFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation: springFadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         .progress-bar-fill { transition: width 0.35s ease; }
@@ -122,15 +108,16 @@
 
 <body class="antialiased min-h-screen flex flex-col relative text-slate-800 selection:bg-indigo-600 selection:text-white">
 
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
-        <div id="parallax-orb-1" class="absolute -top-20 -left-20 w-80 h-80 sm:w-[26rem] sm:h-[26rem] transition-transform duration-200 ease-out">
-            <div class="ambient-orb-1 w-full h-full rounded-full bg-indigo-400/25 blur-[95px]"></div>
+    <!-- Hidden on mobile (<768px) to prevent Android Chrome GPU Low-Memory Killer when opening File Picker -->
+    <div class="hidden md:block fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+        <div id="parallax-orb-1" class="absolute -top-20 -left-20 w-[26rem] h-[26rem]">
+            <div class="ambient-orb-1 w-full h-full rounded-full bg-indigo-400/20 blur-[85px]"></div>
         </div>
-        <div id="parallax-orb-2" class="absolute top-1/3 -right-24 w-80 h-80 sm:w-[28rem] sm:h-[28rem] transition-transform duration-200 ease-out">
-            <div class="ambient-orb-2 w-full h-full rounded-full bg-emerald-400/22 blur-[100px]"></div>
+        <div id="parallax-orb-2" class="absolute top-1/3 -right-24 w-[28rem] h-[28rem]">
+            <div class="ambient-orb-2 w-full h-full rounded-full bg-emerald-400/20 blur-[90px]"></div>
         </div>
-        <div id="parallax-orb-3" class="absolute -bottom-24 left-1/4 w-72 h-72 sm:w-96 sm:h-96 transition-transform duration-200 ease-out">
-            <div class="ambient-orb-3 w-full h-full rounded-full bg-sky-400/20 blur-[90px]"></div>
+        <div id="parallax-orb-3" class="absolute -bottom-24 left-1/4 w-96 h-96">
+            <div class="ambient-orb-3 w-full h-full rounded-full bg-sky-400/18 blur-[80px]"></div>
         </div>
     </div>
 
@@ -150,7 +137,7 @@
                 AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points</span> Calculator
             </h1>
             <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
-                Upload your official certificates to verify authenticity, inspect recipient names &amp; signatures with KTU Vision Brain AI (Qwen2.5-VL-7B), apply KTU Handbook caps, and calculate your exact points.
+                Upload your official certificates to verify authenticity, inspect recipient names &amp; signatures with KTU Vision Brain AI (Qwen3-VL-8B), apply KTU Handbook caps, and calculate your exact points.
             </p>
         </div>
 
@@ -176,7 +163,7 @@
             </div>
 
             <div id="cert-dropzone" onclick="document.getElementById('cert-file-input').click()" class="dropzone-border inner-glass rounded-2xl p-7 sm:p-10 text-center cursor-pointer group">
-                <input type="file" id="cert-file-input" accept="image/*,.pdf" multiple class="hidden" onchange="handleFilesSelected(this.files); this.value='';">
+                <input type="file" id="cert-file-input" accept="image/*,application/pdf" multiple class="hidden" onchange="handleFilesSelected(this.files); this.value='';">
                 
                 <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center mx-auto mb-3.5 text-2xl shadow-sm group-hover:scale-110 transition-transform">
                     <i class="fas fa-file-arrow-up"></i>
@@ -224,7 +211,7 @@
                 <div id="scan-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4">
                     <div class="flex items-center justify-between text-xs font-bold mb-2">
                         <span id="scan-status-text" class="text-indigo-600 flex items-center gap-2">
-                            <i class="fas fa-circle-notch fa-spin"></i> <span>Connecting to KTU Vision Brain (Qwen2.5-VL-7B)...</span>
+                            <i class="fas fa-circle-notch fa-spin"></i> <span>Connecting to KTU Vision Brain (Qwen3-VL-8B)...</span>
                         </span>
                         <span id="scan-pct-text" class="text-slate-800 font-extrabold">0%</span>
                     </div>
@@ -315,7 +302,7 @@
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-bold text-sm sm:text-base mb-1">Kerala Timetable</h3>
             <p class="text-slate-500 text-xs leading-relaxed max-w-lg mx-auto">
-                Powered by KTU Vision Brain (Qwen2.5-VL-7B Forensic Auditor) • Based on the Official APJAKTU 2024 &amp; 2019 Activity Points Handbooks.
+                Powered by KTU Vision Brain (Qwen3-VL-8B Forensic Auditor) • Based on the Official APJAKTU 2024 &amp; 2019 Activity Points Handbooks.
             </p>
         </div>
     </footer>
@@ -327,23 +314,31 @@
         import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { Client } from "https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js";
 
-        if (window.pdfjsLib) {
-            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-        }
-
         if (typeof loadNavigation === 'function') loadNavigation('activity', '', false);
 
-        // =========================================================================
-        // HIGH-TRAFFIC ZEROGPU ARCHITECTURE:
-        // 1. Direct Browser-to-ZeroGPU first (Every student uses their own IP's 60s ZeroGPU quota!)
-        // 2. Supports multiple duplicated Spaces in VISION_SPACE_POOL for 1,000+ user load balancing
-        // 3. Backup server relay via ktu-papers-api (/vision-audit) if campus Wi-Fi IP is full
-        // =========================================================================
+        // Lazy-load pdf.js ONLY when a user selects a PDF file (prevents Android Chrome Low-Memory kills!)
+        let pdfJsLoadedPromise = null;
+        async function ensurePdfJsLoaded() {
+            if (window.pdfjsLib) return window.pdfjsLib;
+            if (!pdfJsLoadedPromise) {
+                pdfJsLoadedPromise = new Promise((resolve, reject) => {
+                    const s = document.createElement('script');
+                    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+                    s.onload = () => {
+                        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+                        resolve(window.pdfjsLib);
+                    };
+                    s.onerror = reject;
+                    document.head.appendChild(s);
+                });
+            }
+            return pdfJsLoadedPromise;
+        }
+
         const VISION_SPACE_POOL  = [
             "KeralaTimetable/ktu-vision-brain"
-            // Tip: If 1,000+ students rush, click "Duplicate this Space" on HF and add replicas here:
-            // "KeralaTimetable/ktu-vision-brain-2",
-            // "KeralaTimetable/ktu-vision-brain-3"
+            // Duplicate Space on HF and add here for 2x-3x queue concurrency:
+            // "KeralaTimetable/ktu-vision-brain-2"
         ];
         const API_BASE_URL       = "https://keralatimetable-ktu-papers-api.hf.space";
         const VISION_PROXY_URL   = `${API_BASE_URL}/vision-audit`;
@@ -497,6 +492,8 @@
 
                 try {
                     await prepareCertItem(certItem);
+                    // Free raw File reference immediately so Android Chrome RAM stays low!
+                    certItem.file = null;
                     queuedCerts.push(certItem);
                     renderQueuedGrid();
                 } catch (e) {
@@ -514,8 +511,9 @@
             const file = certItem.file;
 
             if (certItem.isPdf) {
+                const pdfjs = await ensurePdfJsLoaded();
                 const arrayBuffer = await file.arrayBuffer();
-                const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
                 const page = await pdf.getPage(1);
 
                 try {
@@ -524,7 +522,7 @@
                 } catch (e) {}
 
                 const baseVp = page.getViewport({ scale: 1.0 });
-                const scale = Math.min(1.6, 1100 / Math.max(baseVp.width, baseVp.height));
+                const scale = Math.min(1.5, 1024 / Math.max(baseVp.width, baseVp.height));
                 const viewport = page.getViewport({ scale });
                 const canvas = document.createElement('canvas');
                 canvas.width = viewport.width; canvas.height = viewport.height;
@@ -532,14 +530,15 @@
                 ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, canvas.width, canvas.height);
                 await page.render({ canvasContext: ctx, viewport }).promise;
 
-                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.86);
+                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.84);
+                try { pdf.destroy(); } catch (e) {}
                 return certItem;
             } else {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
                     const url = URL.createObjectURL(file);
                     img.onload = () => {
-                        const maxDim = 1100;
+                        const maxDim = 1024;
                         let w = img.width, h = img.height;
                         if (w > maxDim || h > maxDim) {
                             if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
@@ -551,10 +550,13 @@
                         ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, w, h);
                         ctx.drawImage(img, 0, 0, w, h);
                         URL.revokeObjectURL(url);
-                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.86);
+                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.84);
                         resolve(certItem);
                     };
-                    img.onerror = reject;
+                    img.onerror = (err) => {
+                        URL.revokeObjectURL(url);
+                        reject(err);
+                    };
                     img.src = url;
                 });
             }
@@ -589,7 +591,6 @@
             document.getElementById('audit-results-section').classList.add('hidden');
         };
 
-        // Stamps ONLY "CERT #N" on the header (NEVER the filename) so filenames cannot spoof points!
         async function createLabeledCertImage(item) {
             const img = await new Promise(res => {
                 const im = new Image();
@@ -613,7 +614,7 @@
             ctx.fillRect(0, headerH, img.width, img.height);
             ctx.drawImage(img, 0, headerH);
 
-            return canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
+            return canvas.toDataURL('image/jpeg', 0.84).split(',')[1];
         }
 
         function parseVisionBrainResponse(rawOutput) {
@@ -652,18 +653,15 @@
             throw new Error("Could not parse KTU Vision Brain output");
         }
 
-        // --- DISTRIBUTED ZEROGPU CALLER (STUDENT IP FIRST -> SPACE POOL -> AUTHENTICATED RELAY) ---
         async function requestKTUVisionBrain(payloadObj, hfToken, statusTxtEl) {
             const payloadJsonStr = JSON.stringify(payloadObj);
-
-            // Shuffle VISION_SPACE_POOL so 1,000 concurrent students spread evenly across Spaces
             const shuffledSpaces = [...VISION_SPACE_POOL].sort(() => Math.random() - 0.5);
 
-            // 1. Primary: Direct from Student's Browser IP (Uses Student's own 60s ZeroGPU quota!)
+            // 1. Primary: Direct Browser-to-ZeroGPU (Uses Student's own IP quota)
             for (const spaceId of shuffledSpaces) {
                 try {
                     if (statusTxtEl) {
-                        statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2.5-VL-7B inspecting recipient name, signatures &amp; KTU rules...</span>`;
+                        statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen3-VL-8B inspecting recipient name, signatures &amp; KTU rules...</span>`;
                     }
                     const app = await Client.connect(spaceId);
                     const result = await app.predict("/audit", [payloadJsonStr]);
@@ -674,7 +672,7 @@
                 }
             }
 
-            // 2. Secondary: Authenticated Gradio Client with HF_TOKEN (if student's campus Wi-Fi IP is full)
+            // 2. Secondary: Authenticated Gradio Client with HF_TOKEN from /gemini-auth
             if (hfToken) {
                 for (const spaceId of shuffledSpaces) {
                     try {
@@ -719,11 +717,6 @@
             ticker.start(10, 95);
 
             try {
-                for (const cert of queuedCerts) {
-                    if (!cert.canvasDataUrl) await prepareCertItem(cert);
-                }
-
-                // Fetch optional HF_TOKEN from /gemini-auth for backup authentication if student IP is full
                 let hfToken = "";
                 try {
                     const authRes = await fetch(AUTH_URL, { method: "POST" });
@@ -738,7 +731,6 @@
                 const itemsWithIndex = queuedCerts.map((c, i) => ({ ...c, globalIndex: i + 1 }));
                 const allResults = [];
 
-                // Batch size of 5 keeps total requests low while staying well inside 25s ZeroGPU window
                 const batchSize = 5;
                 for (let i = 0; i < itemsWithIndex.length; i += batchSize) {
                     const batch = itemsWithIndex.slice(i, i + batchSize);
@@ -748,7 +740,7 @@
                     const pctTarget = Math.min(92, Math.round(((i + batch.length * 0.5) / itemsWithIndex.length) * 90));
                     ticker.advanceTo(pctTarget, 96);
 
-                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2.5-VL-7B forensic audit: batch ${batchNum} of ${totalBatches}...</span>`;
+                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen3-VL-8B forensic audit: batch ${batchNum} of ${totalBatches}...</span>`;
 
                     const b64Images = await Promise.all(batch.map(item => createLabeledCertImage(item)));
                     const pdfSummary = batch.map(c =>
@@ -782,12 +774,12 @@
 
                 document.getElementById('audit-results-section').classList.remove('hidden');
                 document.getElementById('audit-results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                notifyUI(`Forensic audit complete for ${queuedCerts.length} file(s)!`, 'success');
+                notifyUI(`Qwen3-VL-8B audit complete for ${queuedCerts.length} file(s)!`, 'success');
             } catch (err) {
                 console.error("KTU Vision Brain Error:", err);
                 ticker.stop();
                 progWrap.classList.add('hidden');
-                notifyUI(`Vision Brain busy: Please wait 15 seconds and click Verify again.`, 'error');
+                notifyUI(`Vision Brain error: ${err.message || 'Check Space status and retry.'}`, 'error');
             } finally {
                 btn.disabled = false;
             }
