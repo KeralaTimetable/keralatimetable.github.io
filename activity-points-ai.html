@@ -224,7 +224,7 @@
                 <div id="scan-progress-wrap" class="hidden mt-4 inner-glass rounded-2xl p-4">
                     <div class="flex items-center justify-between text-xs font-bold mb-2">
                         <span id="scan-status-text" class="text-indigo-600 flex items-center gap-2">
-                            <i class="fas fa-circle-notch fa-spin"></i> <span>Connecting to KTU Vision Brain (Qwen2.5-VL-7B) on ZeroGPU...</span>
+                            <i class="fas fa-circle-notch fa-spin"></i> <span>Connecting to KTU Vision Brain (Qwen2.5-VL-7B)...</span>
                         </span>
                         <span id="scan-pct-text" class="text-slate-800 font-extrabold">0%</span>
                     </div>
@@ -334,14 +334,20 @@
         if (typeof loadNavigation === 'function') loadNavigation('activity', '', false);
 
         // =========================================================================
-        // ENDPOINTS:
-        // 1. Authenticated Server Proxy on ktu-papers-api (/vision-audit)
-        // 2. Direct Authenticated Gradio Client to KeralaTimetable/ktu-vision-brain
+        // HIGH-TRAFFIC ZEROGPU ARCHITECTURE:
+        // 1. Direct Browser-to-ZeroGPU first (Every student uses their own IP's 60s ZeroGPU quota!)
+        // 2. Supports multiple duplicated Spaces in VISION_SPACE_POOL for 1,000+ user load balancing
+        // 3. Backup server relay via ktu-papers-api (/vision-audit) if campus Wi-Fi IP is full
         // =========================================================================
+        const VISION_SPACE_POOL  = [
+            "KeralaTimetable/ktu-vision-brain"
+            // Tip: If 1,000+ students rush, click "Duplicate this Space" on HF and add replicas here:
+            // "KeralaTimetable/ktu-vision-brain-2",
+            // "KeralaTimetable/ktu-vision-brain-3"
+        ];
         const API_BASE_URL       = "https://keralatimetable-ktu-papers-api.hf.space";
         const VISION_PROXY_URL   = `${API_BASE_URL}/vision-audit`;
         const AUTH_URL           = `${API_BASE_URL}/gemini-auth`;
-        const HF_VISION_SPACE_ID = "KeralaTimetable/ktu-vision-brain";
         const STORAGE_KEY        = 'ktu_activity_points_tracker_v2';
 
         // --- FIREBASE LOGGING ---
@@ -518,7 +524,7 @@
                 } catch (e) {}
 
                 const baseVp = page.getViewport({ scale: 1.0 });
-                const scale = Math.min(1.75, 1200 / Math.max(baseVp.width, baseVp.height));
+                const scale = Math.min(1.6, 1100 / Math.max(baseVp.width, baseVp.height));
                 const viewport = page.getViewport({ scale });
                 const canvas = document.createElement('canvas');
                 canvas.width = viewport.width; canvas.height = viewport.height;
@@ -526,14 +532,14 @@
                 ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, canvas.width, canvas.height);
                 await page.render({ canvasContext: ctx, viewport }).promise;
 
-                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.88);
+                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.86);
                 return certItem;
             } else {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
                     const url = URL.createObjectURL(file);
                     img.onload = () => {
-                        const maxDim = 1200;
+                        const maxDim = 1100;
                         let w = img.width, h = img.height;
                         if (w > maxDim || h > maxDim) {
                             if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
@@ -545,7 +551,7 @@
                         ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, w, h);
                         ctx.drawImage(img, 0, 0, w, h);
                         URL.revokeObjectURL(url);
-                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.88);
+                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.86);
                         resolve(certItem);
                     };
                     img.onerror = reject;
@@ -583,7 +589,7 @@
             document.getElementById('audit-results-section').classList.add('hidden');
         };
 
-        // IMPORTANT: Stamps ONLY "CERT #N" on the header (NEVER the filename) so filenames cannot spoof points!
+        // Stamps ONLY "CERT #N" on the header (NEVER the filename) so filenames cannot spoof points!
         async function createLabeledCertImage(item) {
             const img = await new Promise(res => {
                 const im = new Image();
@@ -607,7 +613,7 @@
             ctx.fillRect(0, headerH, img.width, img.height);
             ctx.drawImage(img, 0, headerH);
 
-            return canvas.toDataURL('image/jpeg', 0.86).split(',')[1];
+            return canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
         }
 
         function parseVisionBrainResponse(rawOutput) {
@@ -646,36 +652,54 @@
             throw new Error("Could not parse KTU Vision Brain output");
         }
 
-        // --- AUTHENTICATED RELAY VIA KTU-PAPERS-API + AUTHENTICATED GRADIO CLIENT ---
+        // --- DISTRIBUTED ZEROGPU CALLER (STUDENT IP FIRST -> SPACE POOL -> AUTHENTICATED RELAY) ---
         async function requestKTUVisionBrain(payloadObj, hfToken, statusTxtEl) {
-            // 1. Primary: Server-side authenticated relay through ktu-papers-api (/vision-audit)
-            try {
-                if (statusTxtEl) {
-                    statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2.5-VL-7B verifying recipient name, signatures &amp; KTU rules...</span>`;
-                }
-                const proxyRes = await fetch(VISION_PROXY_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payloadObj)
-                });
-                if (proxyRes.ok) {
-                    const data = await proxyRes.json();
-                    const parsed = parseVisionBrainResponse(data);
+            const payloadJsonStr = JSON.stringify(payloadObj);
+
+            // Shuffle VISION_SPACE_POOL so 1,000 concurrent students spread evenly across Spaces
+            const shuffledSpaces = [...VISION_SPACE_POOL].sort(() => Math.random() - 0.5);
+
+            // 1. Primary: Direct from Student's Browser IP (Uses Student's own 60s ZeroGPU quota!)
+            for (const spaceId of shuffledSpaces) {
+                try {
+                    if (statusTxtEl) {
+                        statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2.5-VL-7B inspecting recipient name, signatures &amp; KTU rules...</span>`;
+                    }
+                    const app = await Client.connect(spaceId);
+                    const result = await app.predict("/audit", [payloadJsonStr]);
+                    const parsed = parseVisionBrainResponse(result?.data);
                     if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-                } else {
-                    const errBody = await proxyRes.text();
-                    console.warn("Proxy /vision-audit returned non-200:", proxyRes.status, errBody);
+                } catch (directErr) {
+                    console.warn(`Direct ZeroGPU call on ${spaceId} warning:`, directErr);
                 }
-            } catch (proxyErr) {
-                console.warn("Server proxy attempt warning, trying direct authenticated Gradio client:", proxyErr);
             }
 
-            // 2. Secondary: Direct @gradio/client authenticated with HF_TOKEN from /gemini-auth
-            const payloadJsonStr = JSON.stringify(payloadObj);
-            const clientOptions = hfToken ? { hf_token: hfToken } : {};
-            const app = await Client.connect(HF_VISION_SPACE_ID, clientOptions);
-            const result = await app.predict("/audit", [payloadJsonStr]);
-            return parseVisionBrainResponse(result?.data);
+            // 2. Secondary: Authenticated Gradio Client with HF_TOKEN (if student's campus Wi-Fi IP is full)
+            if (hfToken) {
+                for (const spaceId of shuffledSpaces) {
+                    try {
+                        const app = await Client.connect(spaceId, { hf_token: hfToken });
+                        const result = await app.predict("/audit", [payloadJsonStr]);
+                        const parsed = parseVisionBrainResponse(result?.data);
+                        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                    } catch (tokenErr) {
+                        console.warn(`Authenticated ZeroGPU call on ${spaceId} warning:`, tokenErr);
+                    }
+                }
+            }
+
+            // 3. Tertiary: Server-side relay through ktu-papers-api (/vision-audit)
+            const proxyRes = await fetch(VISION_PROXY_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: payloadJsonStr
+            });
+            if (!proxyRes.ok) {
+                const errText = await proxyRes.text();
+                throw new Error(errText || `HTTP ${proxyRes.status}`);
+            }
+            const proxyData = await proxyRes.json();
+            return parseVisionBrainResponse(proxyData);
         }
 
         // --- EXECUTION ---
@@ -699,7 +723,7 @@
                     if (!cert.canvasDataUrl) await prepareCertItem(cert);
                 }
 
-                // Fetch optional HF_TOKEN from /gemini-auth for backup client authentication
+                // Fetch optional HF_TOKEN from /gemini-auth for backup authentication if student IP is full
                 let hfToken = "";
                 try {
                     const authRes = await fetch(AUTH_URL, { method: "POST" });
@@ -714,7 +738,8 @@
                 const itemsWithIndex = queuedCerts.map((c, i) => ({ ...c, globalIndex: i + 1 }));
                 const allResults = [];
 
-                const batchSize = 4;
+                // Batch size of 5 keeps total requests low while staying well inside 25s ZeroGPU window
+                const batchSize = 5;
                 for (let i = 0; i < itemsWithIndex.length; i += batchSize) {
                     const batch = itemsWithIndex.slice(i, i + batchSize);
                     const batchNum = Math.floor(i / batchSize) + 1;
@@ -726,7 +751,6 @@
                     statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2.5-VL-7B forensic audit: batch ${batchNum} of ${totalBatches}...</span>`;
 
                     const b64Images = await Promise.all(batch.map(item => createLabeledCertImage(item)));
-                    // Do NOT send c.name in pdfSummary so filenames can never spoof points
                     const pdfSummary = batch.map(c =>
                         `CERT #${c.globalIndex} (PDF Layer) Text: ${c.extractedText || "[Image file]"}`
                     ).join("\n");
@@ -763,7 +787,7 @@
                 console.error("KTU Vision Brain Error:", err);
                 ticker.stop();
                 progWrap.classList.add('hidden');
-                notifyUI(`Vision Brain error: ${err.message || 'Check Space status and retry.'}`, 'error');
+                notifyUI(`Vision Brain busy: Please wait 15 seconds and click Verify again.`, 'error');
             } finally {
                 btn.disabled = false;
             }
