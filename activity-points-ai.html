@@ -150,7 +150,7 @@
                 AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points</span> Calculator
             </h1>
             <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
-                Upload your certificates to automatically verify eligibility, inspect logos with KTU Vision Brain AI (Qwen2.5-VL-7B), apply KTU Handbook caps, and calculate your exact points.
+                Upload your official certificates to verify authenticity, inspect recipient names &amp; signatures with KTU Vision Brain AI (Qwen2.5-VL-7B), apply KTU Handbook caps, and calculate your exact points.
             </p>
         </div>
 
@@ -182,10 +182,10 @@
                     <i class="fas fa-file-arrow-up"></i>
                 </div>
                 <h3 class="text-sm sm:text-base font-extrabold text-slate-900 mb-1">
-                    Select or Drop Certificates Here
+                    Select or Drop Official Certificates Here
                 </h3>
                 <p class="text-xs text-slate-500 max-w-md mx-auto">
-                    Supports PDFs, JPG, PNG, and WebP (up to 30 files at once).
+                    Supports PDFs, JPG, PNG, and WebP (up to 30 files at once). Standalone logos, posters, and screenshots are automatically rejected.
                 </p>
             </div>
 
@@ -235,7 +235,7 @@
 
                 <button type="button" id="btn-run-audit" onclick="runAICertificateAudit()" class="w-full mt-4 bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500 hover:from-indigo-500 hover:to-emerald-400 active:scale-[0.99] text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 text-sm">
                     <i class="fas fa-calculator"></i>
-                    <span>Calculate Activity Points</span>
+                    <span>Verify Certificates &amp; Calculate Points</span>
                 </button>
             </div>
         </section>
@@ -304,7 +304,7 @@
 
             <div class="space-y-3.5">
                 <div class="flex flex-wrap items-center justify-between gap-2 px-1">
-                    <h2 class="text-sm sm:text-base font-bold text-slate-900">Certificate Breakdown</h2>
+                    <h2 class="text-sm sm:text-base font-bold text-slate-900">Forensic Certificate Breakdown</h2>
                 </div>
                 <div id="audit-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
             </div>
@@ -315,7 +315,7 @@
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-bold text-sm sm:text-base mb-1">Kerala Timetable</h3>
             <p class="text-slate-500 text-xs leading-relaxed max-w-lg mx-auto">
-                Powered by KTU Vision Brain (Qwen2.5-VL-7B) • Based on the Official APJAKTU 2024 &amp; 2019 Activity Points Handbooks.
+                Powered by KTU Vision Brain (Qwen2.5-VL-7B Forensic Auditor) • Based on the Official APJAKTU 2024 &amp; 2019 Activity Points Handbooks.
             </p>
         </div>
     </footer>
@@ -334,7 +334,7 @@
         if (typeof loadNavigation === 'function') loadNavigation('activity', '', false);
 
         // =========================================================================
-        // SOLUTION A ENDPOINTS:
+        // ENDPOINTS:
         // 1. Authenticated Server Proxy on ktu-papers-api (/vision-audit)
         // 2. Direct Authenticated Gradio Client to KeralaTimetable/ktu-vision-brain
         // =========================================================================
@@ -429,10 +429,10 @@
                             currentPct = Math.min(targetPct, currentPct + Math.max(1, (targetPct - currentPct) * 0.35));
                             render();
                         } else if (currentPct < maxCrawl) {
-                            currentPct += 0.4;
+                            currentPct += 0.35;
                             render();
                         }
-                    }, 180);
+                    }, 200);
                 },
                 advanceTo(t, c) { if (t > targetPct) targetPct = t; if (c > maxCrawl) maxCrawl = c; },
                 finish() {
@@ -500,7 +500,7 @@
 
             ticker.finish();
             setTimeout(() => upWrap.classList.add('hidden'), 400);
-            notifyUI(`${queuedCerts.length} certificate(s) uploaded`, 'success');
+            notifyUI(`${queuedCerts.length} file(s) ready for forensic audit`, 'success');
         };
 
         async function prepareCertItem(certItem) {
@@ -514,11 +514,11 @@
 
                 try {
                     const textContent = await page.getTextContent();
-                    certItem.extractedText = textContent.items.map(it => it.str).join(' ').replace(/\s+/g, ' ').trim().slice(0, 800);
+                    certItem.extractedText = textContent.items.map(it => it.str).join(' ').replace(/\s+/g, ' ').trim().slice(0, 900);
                 } catch (e) {}
 
                 const baseVp = page.getViewport({ scale: 1.0 });
-                const scale = Math.min(1.6, 1150 / Math.max(baseVp.width, baseVp.height));
+                const scale = Math.min(1.75, 1200 / Math.max(baseVp.width, baseVp.height));
                 const viewport = page.getViewport({ scale });
                 const canvas = document.createElement('canvas');
                 canvas.width = viewport.width; canvas.height = viewport.height;
@@ -526,14 +526,14 @@
                 ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, canvas.width, canvas.height);
                 await page.render({ canvasContext: ctx, viewport }).promise;
 
-                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.86);
+                certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.88);
                 return certItem;
             } else {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
                     const url = URL.createObjectURL(file);
                     img.onload = () => {
-                        const maxDim = 1150;
+                        const maxDim = 1200;
                         let w = img.width, h = img.height;
                         if (w > maxDim || h > maxDim) {
                             if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
@@ -545,7 +545,7 @@
                         ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, w, h);
                         ctx.drawImage(img, 0, 0, w, h);
                         URL.revokeObjectURL(url);
-                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.86);
+                        certItem.canvasDataUrl = canvas.toDataURL('image/jpeg', 0.88);
                         resolve(certItem);
                     };
                     img.onerror = reject;
@@ -583,6 +583,7 @@
             document.getElementById('audit-results-section').classList.add('hidden');
         };
 
+        // IMPORTANT: Stamps ONLY "CERT #N" on the header (NEVER the filename) so filenames cannot spoof points!
         async function createLabeledCertImage(item) {
             const img = await new Promise(res => {
                 const im = new Image();
@@ -600,13 +601,13 @@
             ctx.fillRect(0, 0, canvas.width, headerH);
             ctx.fillStyle = '#ffffff';
             ctx.font = 'bold 16px Inter, sans-serif';
-            ctx.fillText(`CERTIFICATE #${item.globalIndex} (${item.name.slice(0, 42)})`, 12, 24);
+            ctx.fillText(`CERT #${item.globalIndex}`, 12, 24);
 
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, headerH, img.width, img.height);
             ctx.drawImage(img, 0, headerH);
 
-            return canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
+            return canvas.toDataURL('image/jpeg', 0.86).split(',')[1];
         }
 
         function parseVisionBrainResponse(rawOutput) {
@@ -645,12 +646,12 @@
             throw new Error("Could not parse KTU Vision Brain output");
         }
 
-        // --- SOLUTION A: AUTHENTICATED RELAY VIA KTU-PAPERS-API + AUTHENTICATED GRADIO CLIENT ---
+        // --- AUTHENTICATED RELAY VIA KTU-PAPERS-API + AUTHENTICATED GRADIO CLIENT ---
         async function requestKTUVisionBrain(payloadObj, hfToken, statusTxtEl) {
             // 1. Primary: Server-side authenticated relay through ktu-papers-api (/vision-audit)
             try {
                 if (statusTxtEl) {
-                    statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2.5-VL-7B inspecting logos, seals &amp; KTU rules on ZeroGPU...</span>`;
+                    statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2.5-VL-7B verifying recipient name, signatures &amp; KTU rules...</span>`;
                 }
                 const proxyRes = await fetch(VISION_PROXY_URL, {
                     method: "POST",
@@ -722,11 +723,12 @@
                     const pctTarget = Math.min(92, Math.round(((i + batch.length * 0.5) / itemsWithIndex.length) * 90));
                     ticker.advanceTo(pctTarget, 96);
 
-                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2.5-VL-7B analyzing batch ${batchNum} of ${totalBatches} on ZeroGPU...</span>`;
+                    statusTxt.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen2.5-VL-7B forensic audit: batch ${batchNum} of ${totalBatches}...</span>`;
 
                     const b64Images = await Promise.all(batch.map(item => createLabeledCertImage(item)));
+                    // Do NOT send c.name in pdfSummary so filenames can never spoof points
                     const pdfSummary = batch.map(c =>
-                        `CERT #${c.globalIndex} (File: ${c.name}) Text: ${c.extractedText || "[Image file]"}`
+                        `CERT #${c.globalIndex} (PDF Layer) Text: ${c.extractedText || "[Image file]"}`
                     ).join("\n");
 
                     const payloadObj = {
@@ -756,7 +758,7 @@
 
                 document.getElementById('audit-results-section').classList.remove('hidden');
                 document.getElementById('audit-results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                notifyUI(`Qwen2.5-VL-7B analyzed ${queuedCerts.length} certificate(s)!`, 'success');
+                notifyUI(`Forensic audit complete for ${queuedCerts.length} file(s)!`, 'success');
             } catch (err) {
                 console.error("KTU Vision Brain Error:", err);
                 ticker.stop();
@@ -796,7 +798,7 @@
                         status: 'rejected',
                         awardedPoints: 0,
                         group: rule?.group || 'Ineligible',
-                        note: item.reason || 'Not an eligible KTU activity.'
+                        note: item.reason || 'Not an eligible KTU certificate.'
                     });
                     return;
                 }
@@ -882,7 +884,7 @@
                     badge = `<span class="px-2.5 py-0.5 rounded-lg bg-amber-500/15 text-amber-700 text-xs font-bold">0 pts (Capped)</span>`;
                     border = 'border-amber-500/35';
                 } else {
-                    badge = `<span class="px-2.5 py-0.5 rounded-lg bg-rose-500/15 text-rose-700 text-xs font-bold">0 pts (Ineligible)</span>`;
+                    badge = `<span class="px-2.5 py-0.5 rounded-lg bg-rose-500/15 text-rose-700 text-xs font-bold">0 pts (Rejected)</span>`;
                     border = 'border-rose-500/35';
                 }
 
@@ -895,12 +897,12 @@
                             <div class="min-w-0 flex-1">
                                 <div class="flex flex-wrap items-center justify-between gap-1.5 mb-1">
                                     <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-[11px] font-bold">
-                                        ${item.code && item.code !== 'none' ? `Code #${item.code}` : 'No Code'}
+                                        ${item.code && item.code !== 'none' ? `Code #${item.code}` : 'Rejected'}
                                     </span>
                                     ${badge}
                                 </div>
                                 <h3 class="text-sm font-bold text-slate-900 leading-snug truncate mb-0.5">${item.detectedTitle || item.certObj?.name}</h3>
-                                ${item.detectedLogo && item.detectedLogo !== 'None' ? `<span class="text-[10px] font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200"><i class="fas fa-certificate mr-1 text-indigo-500"></i>Logo: ${item.detectedLogo}</span>` : ''}
+                                ${item.detectedLogo && item.detectedLogo !== 'None' ? `<span class="text-[10px] font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200"><i class="fas fa-certificate mr-1 text-indigo-500"></i>Issuer: ${item.detectedLogo}</span>` : ''}
                             </div>
                         </div>
                         <p class="text-xs text-slate-600 bg-slate-100/80 p-2.5 rounded-xl leading-relaxed">
