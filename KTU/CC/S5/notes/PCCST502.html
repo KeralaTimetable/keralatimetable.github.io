@@ -20,37 +20,83 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .bg-mesh {
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.12) 0px, transparent 50%),
-                              radial-gradient(at 80% 0%, hsla(189,100%,56%,0.12) 0px, transparent 50%),
-                              radial-gradient(at 0% 50%, hsla(228,100%,74%,0.12) 0px, transparent 50%);
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
         }
+
+        /* Light Mode Liquid Mesh Background (Automatically overridden by components.js in Dark Mode) */
+        .bg-mesh {
+            background-color: #f1f5f9;
+            background-image: 
+                radial-gradient(at 15% 15%, hsla(235, 100%, 78%, 0.25) 0px, transparent 50%),
+                radial-gradient(at 85% 10%, hsla(192, 100%, 65%, 0.22) 0px, transparent 50%),
+                radial-gradient(at 50% 55%, hsla(255, 100%, 84%, 0.18) 0px, transparent 55%),
+                radial-gradient(at 10% 90%, hsla(215, 100%, 72%, 0.20) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Main Outer Liquid Glass Shell (Compatible with components.js .glass-panel) */
+        .glass-panel {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.52) 100%);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 
+                0 24px 48px -12px rgba(15, 23, 42, 0.06),
+                inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95);
+        }
+
+        /* Liquid Glass Banners & Cards (Compatible with components.js .real-glass & .hybrid-card) */
+        .real-glass {
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+        }
+
         .module-card { 
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); 
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.85) 0%, rgba(248, 250, 252, 0.65) 100%);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 
+                0 10px 25px -5px rgba(30, 58, 138, 0.04),
+                inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s ease, box-shadow 0.25s ease; 
         }
         .module-card.active:hover { 
-            transform: translateY(-6px); 
-            border-color: #818cf8; 
-            box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.08), 0 8px 10px -6px rgba(79, 70, 229, 0.06); 
+            transform: translateY(-5px); 
+            border-color: #818cf8 !important; 
+            box-shadow: 0 20px 30px -8px rgba(79, 70, 229, 0.14); 
         }
-        
-        /* Authentic Glassmorphism for WhatsApp Banner */
-        .real-glass {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 10px 30px -5px rgba(37, 211, 102, 0.12);
+
+        /* Inner Glass Sub-elements (Pills, Accordions) */
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+        }
+
+        /* Primary Liquid Action Button (Works in both Light & Dark Mode) */
+        .btn-download-primary {
+            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.22) !important;
+            box-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.35), inset 0 1px 1px 0 rgba(255, 255, 255, 0.3) !important;
+        }
+        .btn-download-primary:hover {
+            background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%) !important;
+            box-shadow: 0 12px 24px -4px rgba(79, 70, 229, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4) !important;
         }
 
         /* Smooth Accordion Styling */
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
-        details[open] summary ~ * { animation: sweep .25s ease-in-out; }
+        details[open] summary ~ * { animation: sweep .25s ease-out; }
         @keyframes sweep {
-            0%    { opacity: 0; transform: translateY(-6px); }
+            0%    { opacity: 0; transform: translateY(-4px); }
             100%  { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -82,270 +128,267 @@
     <meta property="og:site_name" content="Kerala Timetable">
     <meta property="og:title" content="KTU PCCST502 S5 Design and Analysis of Algorithms Notes PDF Download">
     <meta property="og:description" content="Download comprehensive KTU S5 Design and Analysis of Algorithms (PCCST502) notes. Direct, wait-free PDF downloads for all 4 modules.">
-    <meta property="og:image" content="https://www.keralatimetable.in/social-preview.png">
+    <meta property="og:url" content="https://keralatimetable.in/KTU/CC/S5/notes/PCCST502.html">
+    <meta property="og:image" content="https://keralatimetable.in/social-preview.png">
     <meta property="og:type" content="website">
 </head>
 
 <body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
+    <!-- Ambient Orbs (Automatically optimized by components.js in 120FPS Dark Mode) -->
+    <div class="ambient-orb fixed top-16 -left-20 w-72 h-72 bg-indigo-400/20 rounded-full blur-3xl pointer-events-none z-0"></div>
+    <div class="ambient-orb fixed bottom-10 -right-20 w-80 h-80 bg-sky-400/15 rounded-full blur-3xl pointer-events-none z-0"></div>
+
     <div id="navigation-container"></div>
 
-    <main class="flex-grow max-w-4xl mx-auto px-4 py-8 md:py-12 w-full">
+    <main class="flex-grow max-w-4xl mx-auto px-3.5 sm:px-6 py-6 sm:py-10 w-full relative z-10">
         
-        <div class="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-6 md:p-10 w-full relative overflow-hidden">
-            <!-- Decorative Background Elements -->
-            <div class="absolute -top-24 -right-24 w-60 h-60 bg-indigo-50 rounded-full blur-3xl opacity-70 pointer-events-none"></div>
-            <div class="absolute -bottom-24 -left-24 w-60 h-60 bg-sky-50 rounded-full blur-3xl opacity-70 pointer-events-none"></div>
+        <!-- Outer Glass Container (.glass-panel is natively styled in Dark Mode by components.js) -->
+        <div class="glass-panel rounded-3xl sm:rounded-[32px] p-5 sm:p-8 md:p-10 w-full relative overflow-hidden">
             
             <div class="relative z-10">
                 
                 <!-- Top Navigation Bar -->
-                <div class="flex items-center justify-between mb-6">
-                    <a href="index.html" class="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-indigo-600 transition-all group">
-                        <div class="w-8 h-8 flex items-center justify-center bg-slate-50 border border-slate-200 group-hover:bg-indigo-50 group-hover:border-indigo-200 rounded-full transition-all">
-                            <i class="fas fa-arrow-left transform group-hover:-translate-x-0.5 transition-transform text-xs"></i>
-                        </div>
+                <div class="flex justify-start mb-5">
+                    <a href="/notes.html" class="inner-glass inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-600 hover:text-indigo-600 px-3.5 py-2 rounded-full transition-all active:scale-95 group">
+                        <i class="fas fa-arrow-left transform group-hover:-translate-x-0.5 transition-transform text-xs text-indigo-500"></i>
                         Browse All Subjects
                     </a>
-                    <span class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-extrabold px-3 py-1 rounded-full">
-                        <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                        All 4 Modules Ready
-                    </span>
                 </div>
 
                 <!-- Hero Header Section -->
-                <div class="text-center mb-8">
-                    <div class="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl mb-4 text-white shadow-md shadow-indigo-200">
+                <div class="text-center mb-7 sm:mb-9">
+                    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-indigo-50 text-indigo-600 rounded-2xl mb-4 shadow-sm border border-indigo-100">
                         <i class="fas fa-project-diagram text-2xl"></i>
                     </div>
-                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-2.5 tracking-tight leading-tight">
                         Design and Analysis of Algorithms
                     </h1>
-                    <p class="text-slate-500 font-medium text-sm md:text-base max-w-2xl mx-auto mb-5">
+                    <p class="text-slate-500 font-medium text-xs sm:text-sm md:text-base max-w-2xl mx-auto mb-4">
                         S5 B.Tech (CS / CD / CM / AM / CB / CN / CU / CG) • Exam-Focused Short Notes, Worked Problems & Formula Sheets
                     </p>
 
                     <!-- Course Quick-Info Pills -->
-                    <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-                        <span class="bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold px-3.5 py-1.5 rounded-xl flex items-center gap-1.5">
+                    <div class="flex flex-wrap items-center justify-center gap-2">
+                        <span class="inner-glass text-slate-700 text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
                             <i class="fas fa-hashtag text-indigo-500"></i> PCCST502
                         </span>
-                        <span class="bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold px-3.5 py-1.5 rounded-xl flex items-center gap-1.5">
+                        <span class="inner-glass text-slate-700 text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
                             <i class="fas fa-award text-amber-500"></i> 4 Credits
                         </span>
-                        <span class="bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold px-3.5 py-1.5 rounded-xl flex items-center gap-1.5">
+                        <span class="inner-glass text-slate-700 text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
                             <i class="fas fa-chart-pie text-emerald-500"></i> CIE: 40 | ESE: 60
                         </span>
-                        <span class="bg-indigo-50 text-indigo-700 border border-indigo-100 text-xs font-bold px-3.5 py-1.5 rounded-xl flex items-center gap-1.5">
+                        <span class="inner-glass text-slate-700 text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
                             <i class="fas fa-check-circle text-indigo-500"></i> 2024 Scheme
                         </span>
                     </div>
                 </div>
 
-                <!-- Glassmorphism WhatsApp Channel Banner -->
-                <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="w-full mx-auto mb-10 real-glass hover:bg-white/90 text-slate-800 py-4 px-5 md:px-6 rounded-2xl transition-all flex items-center justify-between gap-4 group">
-                    <div class="flex items-center gap-4">
-                        <div class="bg-[#25D366] text-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
+                <!-- Liquid Glass WhatsApp Channel Banner (.real-glass is natively styled by components.js) -->
+                <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" rel="noopener" class="w-full mx-auto mb-8 real-glass glass-panel-hover text-slate-800 p-4 sm:px-6 rounded-2xl transition-all flex items-center justify-between gap-3.5 active:scale-[0.99] group">
+                    <div class="flex items-center gap-3.5">
+                        <div class="bg-[#25D366] text-white w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
                             <i class="fab fa-whatsapp text-2xl"></i>
                         </div>
                         <div class="flex flex-col text-left">
-                            <span class="text-sm sm:text-base font-black text-slate-800 group-hover:text-indigo-600 transition-colors">Join our KTU WhatsApp Channel</span>
-                            <span class="text-xs font-semibold text-slate-500">Get solved question papers, formula sheets & instant alerts</span>
+                            <span class="text-sm sm:text-base font-black text-slate-900">Join our KTU WhatsApp Channel</span>
+                            <span class="text-[11px] sm:text-xs font-bold text-slate-500">Get solved question papers, formula sheets & instant alerts</span>
                         </div>
                     </div>
-                    <div class="hidden sm:flex items-center gap-1.5 bg-[#25D366]/10 text-[#1da851] font-extrabold text-xs px-3.5 py-2 rounded-xl group-hover:bg-[#25D366] group-hover:text-white transition-all flex-shrink-0">
-                        Follow <i class="fas fa-external-link-alt text-[10px]"></i>
+                    <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center flex-shrink-0 group-hover:bg-[#25D366] group-hover:text-white transition-colors">
+                        <i class="fas fa-chevron-right text-xs"></i>
                     </div>
                 </a>
 
-                <!-- Modules Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                <!-- Modules Grid (Note: components.js automatically injects the global Ad banner right above this grid) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 mb-8">
                     
                     <!-- MODULE 1 (ACTIVE) -->
-                    <div class="module-card active bg-slate-50/70 hover:bg-white border border-slate-200/80 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="module-card active hybrid-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
                         <div>
-                            <div class="flex items-center justify-between gap-2 mb-4">
-                                <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-100/80 px-3 py-1 rounded-lg border border-indigo-200">
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg border border-indigo-100">
                                     Module 1
                                 </span>
-                                <div class="flex items-center gap-2 text-[11px] font-bold text-slate-400">
+                                <div class="flex items-center gap-2 text-[11px] font-bold text-slate-500 inner-glass px-2.5 py-0.5 rounded-md">
                                     <span><i class="far fa-file-pdf text-rose-500 mr-1"></i>20 Pages</span>
                                     <span>•</span>
-                                    <span><i class="far fa-clock mr-1"></i>11 Hrs</span>
+                                    <span>11 Hrs</span>
                                 </div>
                             </div>
-                            <h3 class="text-lg font-extrabold text-slate-800 mb-2 group-hover:text-indigo-600 transition-colors leading-snug">
+                            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 leading-snug">
                                 Algorithm Analysis, Recurrences & AVL Trees
                             </h3>
                             <p class="text-slate-500 text-xs sm:text-sm leading-relaxed mb-4">
                                 Covers algorithm characteristics, time & space complexity (step count, tabular method), best/worst/average cases, asymptotic notations (O, Ω, Θ, o, ω), solving recurrences, and AVL tree rotations, insertions & deletions.
                             </p>
                             <!-- Key Topic Pills -->
-                            <div class="flex flex-wrap gap-1.5 mb-6">
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">Asymptotic Notations</span>
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">Iteration & Recursion Tree</span>
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">Master's Theorem</span>
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">AVL Rotations (LL, RR, LR, RL)</span>
+                            <div class="flex flex-wrap gap-1.5 mb-5">
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Asymptotic Notations</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Iteration & Recursion Tree</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Master's Theorem</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">AVL Rotations (LL, RR, LR, RL)</span>
                             </div>
                         </div>
-                        <a href="https://drive.google.com/file/d/1kOI8HtTpRcZyTAdb4OsdmUK861iIm0Wk/view?usp=drivesdk" target="_blank" rel="noopener" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm shadow-indigo-100">
+                        <a href="https://drive.google.com/file/d/1kOI8HtTpRcZyTAdb4OsdmUK861iIm0Wk/view?usp=drivesdk" target="_blank" rel="noopener" class="btn-download-primary font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 w-full">
                             <i class="fas fa-file-download"></i> Download Module 1 PDF
                         </a>
                     </div>
 
                     <!-- MODULE 2 (ACTIVE) -->
-                    <div class="module-card active bg-slate-50/70 hover:bg-white border border-slate-200/80 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="module-card active hybrid-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
                         <div>
-                            <div class="flex items-center justify-between gap-2 mb-4">
-                                <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-100/80 px-3 py-1 rounded-lg border border-indigo-200">
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg border border-indigo-100">
                                     Module 2
                                 </span>
-                                <div class="flex items-center gap-2 text-[11px] font-bold text-slate-400">
+                                <div class="flex items-center gap-2 text-[11px] font-bold text-slate-500 inner-glass px-2.5 py-0.5 rounded-md">
                                     <span><i class="far fa-file-pdf text-rose-500 mr-1"></i>18 Pages</span>
                                     <span>•</span>
-                                    <span><i class="far fa-clock mr-1"></i>11 Hrs</span>
+                                    <span>11 Hrs</span>
                                 </div>
                             </div>
-                            <h3 class="text-lg font-extrabold text-slate-800 mb-2 group-hover:text-indigo-600 transition-colors leading-snug">
+                            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 leading-snug">
                                 Disjoint Sets, Graphs & Divide and Conquer
                             </h3>
                             <p class="text-slate-500 text-xs sm:text-sm leading-relaxed mb-4">
                                 Detailed notes on Disjoint set operations (Union by rank & path compression), connected components, graph representations, BFS & DFS edge classifications, Kosaraju's SCC algorithm, topological sorting, Merge Sort, and Strassen's algorithm.
                             </p>
                             <!-- Key Topic Pills -->
-                            <div class="flex flex-wrap gap-1.5 mb-6">
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">Union-Find</span>
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">BFS & DFS Analysis</span>
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">SCC & Topological Sort</span>
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">Merge Sort & Strassen's</span>
+                            <div class="flex flex-wrap gap-1.5 mb-5">
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Union-Find</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">BFS & DFS Analysis</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">SCC & Topological Sort</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Merge Sort & Strassen's</span>
                             </div>
                         </div>
-                        <a href="https://drive.google.com/file/d/16vjHQOtqIFoipiNPKPLlNF84JLR0K8YC/view?usp=drivesdk" target="_blank" rel="noopener" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm shadow-indigo-100">
+                        <a href="https://drive.google.com/file/d/16vjHQOtqIFoipiNPKPLlNF84JLR0K8YC/view?usp=drivesdk" target="_blank" rel="noopener" class="btn-download-primary font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 w-full">
                             <i class="fas fa-file-download"></i> Download Module 2 PDF
                         </a>
                     </div>
 
                     <!-- MODULE 3 (ACTIVE) -->
-                    <div class="module-card active bg-slate-50/70 hover:bg-white border border-slate-200/80 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="module-card active hybrid-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
                         <div>
-                            <div class="flex items-center justify-between gap-2 mb-4">
-                                <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-100/80 px-3 py-1 rounded-lg border border-indigo-200">
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg border border-indigo-100">
                                     Module 3
                                 </span>
-                                <div class="flex items-center gap-2 text-[11px] font-bold text-slate-400">
+                                <div class="flex items-center gap-2 text-[11px] font-bold text-slate-500 inner-glass px-2.5 py-0.5 rounded-md">
                                     <span><i class="far fa-file-pdf text-rose-500 mr-1"></i>18 Pages</span>
                                     <span>•</span>
-                                    <span><i class="far fa-clock mr-1"></i>11 Hrs</span>
+                                    <span>11 Hrs</span>
                                 </div>
                             </div>
-                            <h3 class="text-lg font-extrabold text-slate-800 mb-2 group-hover:text-indigo-600 transition-colors leading-snug">
+                            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 leading-snug">
                                 Greedy Strategy, Dynamic Programming & Backtracking
                             </h3>
                             <p class="text-slate-500 text-xs sm:text-sm leading-relaxed mb-4">
                                 Explores Greedy control abstraction, Fractional Knapsack, Kruskal's & Prim's MST, Dijkstra's shortest path, Dynamic Programming optimality principle, Matrix Chain Multiplication, Floyd-Warshall algorithm, and N-Queens backtracking.
                             </p>
                             <!-- Key Topic Pills -->
-                            <div class="flex flex-wrap gap-1.5 mb-6">
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">Fractional Knapsack</span>
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">Kruskal, Prim & Dijkstra</span>
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">Matrix Chain & Floyd-Warshall</span>
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">N-Queens State Space Tree</span>
+                            <div class="flex flex-wrap gap-1.5 mb-5">
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Fractional Knapsack</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Kruskal, Prim & Dijkstra</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Matrix Chain & Floyd-Warshall</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">N-Queens State Space Tree</span>
                             </div>
                         </div>
-                        <a href="https://drive.google.com/file/d/1ClrkFuGs4tbXN79Yuicc2gQOgIxIJjgt/view?usp=drivesdk" target="_blank" rel="noopener" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm shadow-indigo-100">
+                        <a href="https://drive.google.com/file/d/1ClrkFuGs4tbXN79Yuicc2gQOgIxIJjgt/view?usp=drivesdk" target="_blank" rel="noopener" class="btn-download-primary font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 w-full">
                             <i class="fas fa-file-download"></i> Download Module 3 PDF
                         </a>
                     </div>
 
                     <!-- MODULE 4 (ACTIVE) -->
-                    <div class="module-card active bg-slate-50/70 hover:bg-white border border-slate-200/80 rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="module-card active hybrid-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
                         <div>
-                            <div class="flex items-center justify-between gap-2 mb-4">
-                                <span class="text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-100/80 px-3 py-1 rounded-lg border border-indigo-200">
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg border border-indigo-100">
                                     Module 4
                                 </span>
-                                <div class="flex items-center gap-2 text-[11px] font-bold text-slate-400">
+                                <div class="flex items-center gap-2 text-[11px] font-bold text-slate-500 inner-glass px-2.5 py-0.5 rounded-md">
                                     <span><i class="far fa-file-pdf text-rose-500 mr-1"></i>17 Pages</span>
                                     <span>•</span>
-                                    <span><i class="far fa-clock mr-1"></i>11 Hrs</span>
+                                    <span>11 Hrs</span>
                                 </div>
                             </div>
-                            <h3 class="text-lg font-extrabold text-slate-800 mb-2 group-hover:text-indigo-600 transition-colors leading-snug">
+                            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 leading-snug">
                                 Branch & Bound, Complexity Classes, Approximation & Randomized
                             </h3>
                             <p class="text-slate-500 text-xs sm:text-sm leading-relaxed mb-4">
                                 Covers FIFO, LIFO & LC Branch and Bound, TSP using reduced cost matrices, Tractable vs. Intractable problems, P, NP, NP-Hard & NP-Complete classes, Clique & Vertex Cover proofs, Bin Packing heuristics, and Randomized Quick Sort.
                             </p>
                             <!-- Key Topic Pills -->
-                            <div class="flex flex-wrap gap-1.5 mb-6">
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">TSP Reduced Matrix</span>
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">P, NP, NP-Hard, NP-Complete</span>
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">Clique & Vertex Cover</span>
-                                <span class="text-[11px] font-semibold bg-white text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">Bin Packing & Rand QuickSort</span>
+                            <div class="flex flex-wrap gap-1.5 mb-5">
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">TSP Reduced Matrix</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">P, NP, NP-Hard, NP-Complete</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Clique & Vertex Cover</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Bin Packing & Rand QuickSort</span>
                             </div>
                         </div>
-                        <a href="https://drive.google.com/file/d/1sX5NcypIyfq-O3pImjgcn4bRI14_-qEa/view?usp=drivesdk" target="_blank" rel="noopener" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm shadow-indigo-100">
+                        <a href="https://drive.google.com/file/d/1sX5NcypIyfq-O3pImjgcn4bRI14_-qEa/view?usp=drivesdk" target="_blank" rel="noopener" class="btn-download-primary font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 w-full">
                             <i class="fas fa-file-download"></i> Download Module 4 PDF
                         </a>
                     </div>
 
                 </div>
 
-                <!-- Special Thanks / Contributor Spotlight Card -->
-                <div class="mb-10 bg-gradient-to-r from-indigo-50/90 via-purple-50/70 to-sky-50/90 border border-indigo-100 rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-sm">
-                    <div class="flex flex-col sm:flex-row items-center gap-4">
-                        <div class="w-12 h-12 rounded-2xl bg-white text-indigo-600 flex items-center justify-center shadow-sm border border-indigo-100 flex-shrink-0">
-                            <i class="fas fa-heart text-rose-500 text-xl"></i>
+                <!-- Special Thanks / Contributor Spotlight Card (.real-glass ensures full Dark Mode support) -->
+                <div class="mb-8 real-glass rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                    <div class="flex flex-col sm:flex-row items-center gap-3.5">
+                        <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-500 border border-rose-100 flex items-center justify-center shadow-sm flex-shrink-0">
+                            <i class="fas fa-heart text-lg"></i>
                         </div>
                         <div>
-                            <span class="text-[10px] font-black uppercase tracking-widest text-indigo-600 bg-white px-2.5 py-0.5 rounded-full border border-indigo-100 inline-block mb-1">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-100 inline-block mb-1">
                                 Contributor Spotlight
                             </span>
                             <h3 class="text-base sm:text-lg font-extrabold text-slate-900">
                                 Special Thanks to Amal Dev
                             </h3>
-                            <p class="text-xs sm:text-sm text-slate-600 font-medium">
-                                <i class="fas fa-university text-indigo-500 mr-1"></i> College of Engineering Attingal — for creating and sharing these well-structured, exam-oriented notes.
+                            <p class="text-xs sm:text-sm text-slate-500 font-medium">
+                                <i class="fas fa-university text-indigo-500 mr-1"></i> College of Engineering Attingal (CEAL) — for creating and sharing these well-structured, exam-oriented notes.
                             </p>
                         </div>
                     </div>
-                    <a href="https://api.whatsapp.com/send?text=🚨 *KTU S5 Design and Analysis of Algorithms (PCCST502) Notes* %0ADownload all 4 Modules with worked examples & formula sheets here: https://keralatimetable.in/KTU/CC/S5/notes/PCCST502.html" target="_blank" class="bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-sm font-bold py-3 px-5 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 inline-flex items-center justify-center gap-2 shadow-sm flex-shrink-0 w-full sm:w-auto">
+                    <a href="https://api.whatsapp.com/send?text=🚨 *KTU S5 Design and Analysis of Algorithms (PCCST502) Notes* %0ADownload all 4 Modules with worked examples & formula sheets here: https://keralatimetable.in/KTU/CC/S5/notes/PCCST502.html" target="_blank" rel="noopener" class="bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-sm font-bold py-3.5 px-5 rounded-xl transition-all active:scale-95 inline-flex items-center justify-center gap-2 shadow-md flex-shrink-0 w-full sm:w-auto">
                         <i class="fas fa-share-alt"></i> Share with Classmates
                     </a>
                 </div>
 
-                <!-- Interactive FAQ Accordion Section -->
+                <!-- Interactive FAQ Accordion Section (.inner-glass ensures full Dark Mode support) -->
                 <div class="text-left mb-8">
-                    <h3 class="text-lg font-black text-slate-800 mb-4 flex items-center gap-2">
+                    <h3 class="text-base sm:text-lg font-black text-slate-900 mb-3.5 flex items-center gap-2">
                         <i class="fas fa-question-circle text-indigo-500"></i> Frequently Asked Questions
                     </h3>
-                    <div class="space-y-3">
-                        <details class="group bg-slate-50 border border-slate-200/80 rounded-xl p-4 cursor-pointer" open>
-                            <summary class="flex items-center justify-between font-bold text-slate-800 text-sm">
+                    <div class="space-y-2.5">
+                        <details class="group inner-glass rounded-xl p-4 cursor-pointer" open>
+                            <summary class="flex items-center justify-between font-bold text-slate-800 text-xs sm:text-sm">
                                 <span>Do these notes strictly follow the KTU 2024 Scheme (PCCST502) syllabus?</span>
-                                <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180"></i>
+                                <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180 ml-2"></i>
                             </summary>
-                            <p class="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed">
+                            <p class="text-xs sm:text-sm text-slate-500 mt-2.5 leading-relaxed">
                                 Yes! Every module is organized section-by-section according to the official KTU S5 PCCST502 syllabus. Each PDF also includes a dedicated <strong>Formula Sheet and Likely Exam Questions</strong> table at the end tailored for the 3-mark (Part A) and 9-mark (Part B) KTU question paper pattern.
                             </p>
                         </details>
 
-                        <details class="group bg-slate-50 border border-slate-200/80 rounded-xl p-4 cursor-pointer">
-                            <summary class="flex items-center justify-between font-bold text-slate-800 text-sm">
+                        <details class="group inner-glass rounded-xl p-4 cursor-pointer">
+                            <summary class="flex items-center justify-between font-bold text-slate-800 text-xs sm:text-sm">
                                 <span>Are these direct PDF links without ads or waiting timers?</span>
-                                <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180"></i>
+                                <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180 ml-2"></i>
                             </summary>
-                            <p class="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed">
+                            <p class="text-xs sm:text-sm text-slate-500 mt-2.5 leading-relaxed">
                                 Yes! All four module links open directly in Google Drive so you can view them online or download them for offline study with zero wait time.
                             </p>
                         </details>
 
-                        <details class="group bg-slate-50 border border-slate-200/80 rounded-xl p-4 cursor-pointer">
-                            <summary class="flex items-center justify-between font-bold text-slate-800 text-sm">
+                        <details class="group inner-glass rounded-xl p-4 cursor-pointer">
+                            <summary class="flex items-center justify-between font-bold text-slate-800 text-xs sm:text-sm">
                                 <span>Which B.Tech branches share the PCCST502 course code?</span>
-                                <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180"></i>
+                                <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180 ml-2"></i>
                             </summary>
-                            <p class="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed">
+                            <p class="text-xs sm:text-sm text-slate-500 mt-2.5 leading-relaxed">
                                 Design and Analysis of Algorithms (PCCST502) is common to Semester 5 CS, CD, CM, AM, CB, CN, CU, and CG branches under the KTU 2024 scheme.
                             </p>
                         </details>
@@ -353,16 +396,16 @@
                 </div>
 
                 <!-- SEO Keywords Section -->
-                <div class="pt-6 border-t border-slate-100 text-left">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Related Topics & Searches</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-lg">s5 design and analysis of algorithms pccst502 notes ktu</span>
-                        <span class="bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-lg">ktu s5 daa notes pdf download</span>
-                        <span class="bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-lg">pccst502 ktu 2024 scheme notes</span>
-                        <span class="bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-lg">avl tree rotations and master theorem ktu notes</span>
-                        <span class="bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-lg">kruskal prim dijkstra floyd warshall ktu notes</span>
-                        <span class="bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-lg">clique and vertex cover np completeness proof ktu</span>
-                        <span class="bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-semibold px-3 py-1.5 rounded-lg">amal dev ceal daa notes</span>
+                <div class="pt-6 border-t border-slate-200/60 dark:border-white/10 text-left">
+                    <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Related Topics & Searches</h3>
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">s5 design and analysis of algorithms pccst502 notes ktu</span>
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">ktu s5 daa notes pdf download</span>
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">pccst502 ktu 2024 scheme notes</span>
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">avl tree rotations and master theorem ktu notes</span>
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">kruskal prim dijkstra floyd warshall ktu notes</span>
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">clique and vertex cover np completeness proof ktu</span>
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">amal dev ceal daa notes</span>
                     </div>
                 </div>
             </div>
@@ -370,20 +413,21 @@
 
     </main>
 
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center">
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center relative z-10">
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
-            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
+            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
             <div class="mt-4 space-x-4">
-                <a href="../../../../about.html" class="text-indigo-600 text-xs font-bold hover:underline">About Us</a>
+                <a href="/about.html" class="text-indigo-600 text-xs font-bold hover:underline">About Us</a>
                 <a href="https://keralatimetable.stck.me/profile" target="_blank" class="text-indigo-600 text-xs font-bold hover:underline">Support Us</a>
             </div>
         </div>
     </footer>
 
-    <script src="../../../../components.js?v=9"></script>
+    <!-- Safe absolute path for components -->
+    <script src="/components.js?v=13"></script>
     <script>
-        loadNavigation('', '../../../../', false);
+        loadNavigation('notes', '/', false);
     </script>
 </body>
 </html>
