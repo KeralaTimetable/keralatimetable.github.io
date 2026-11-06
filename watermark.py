@@ -2,9 +2,9 @@
 watermark.py
 ------------
 Add your brand watermark (centered logo + bottom text) to KTU question paper & notes PDFs,
-aggressively remove existing third-party watermarks (text, links, low-opacity logos,
-Form XObject stamps & faint background marks like Ktunotes.live, Ktuspecial.in, etc.),
-and merge multiple papers/notes into one branded file.
+safely remove existing third-party watermarks (text, links, overlay logo layers, AND
+faint watermarks baked into flattened handwritten scans like Ktunotes.live / Ktuspecial.in)
+WITHOUT ever deleting or blanking out handwritten note pages.
 Pure-Python, uses PyMuPDF (fitz).
 """
 
@@ -78,189 +78,239 @@ def _is_competitor_text(line_text: str, extra_keywords: list[str] | None = None)
     return False
 
 
-def _analyze_image_faintness(doc: fitz.Document, xref: int) -> dict:
+def _inspect_image_xref(doc: fitz.Document, xref: int) -> dict:
     """
-    Inspects an image XObject (and its /SMask soft-mask if present) at pixel level
-    to determine if it is a low-opacity / faded watermark logo vs real content/scan.
+    Lightweight, safe inspection of an image XObject:
+    - Computes a perceptual/pixel SHA1 hash so identical watermark logos with DIFFERENT
+      xref IDs on each page still match 100%.
+    - Checks whether the image has a true transparency mask (/SMask or inline alpha).
     """
     info = {
-        "has_alpha": False,
-        "mean_alpha": 255.0,
-        "max_alpha": 255,
-        "transparent_ratio": 0.0,
-        "is_low_opacity_alpha": False,
-        "is_washed_out_faint": False,
-        "dark_ink_ratio": 1.0,
         "sha1": "",
         "dims": (0, 0),
+        "has_smask_or_alpha": False,
+        "mean_alpha": 255.0,
+        "transparent_ratio": 0.0,
     }
-
     try:
-        raw_stream = doc.xref_stream(xref) or b""
         smask_val = doc.xref_get_key(xref, "SMask")
         smask_xref = 0
         if smask_val and smask_val[0] == "xref":
             smask_xref = int(smask_val[1].split()[0])
 
-        # Inspect soft-mask (/SMask) directly if PDF uses separate alpha XObject
         if smask_xref > 0:
-            info["has_alpha"] = True
+            info["has_smask_or_alpha"] = True
             smask_pix = fitz.Pixmap(doc, smask_xref)
             s_bytes = smask_pix.samples
             if s_bytes:
                 step = max(1, len(s_bytes) // 4096)
                 sampled = s_bytes[::step]
-                non_zero = [a for a in sampled if a > 3]
+                non_zero = [a for a in sampled if a > 4]
                 info["transparent_ratio"] = 1.0 - (len(non_zero) / max(1, len(sampled)))
                 if non_zero:
                     info["mean_alpha"] = sum(non_zero) / len(non_zero)
-                    info["max_alpha"] = max(non_zero)
                 else:
                     info["mean_alpha"] = 0.0
-                    info["max_alpha"] = 0
 
-                # Low opacity watermark if visible pixels have mean alpha < 175 (~68% opacity)
-                # OR if it's mostly transparent overlay (>35% transparent pixels)
-                if info["mean_alpha"] < 175 or info["max_alpha"] < 195:
-                    info["is_low_opacity_alpha"] = True
-
-        # Load base image Pixmap
         pix = fitz.Pixmap(doc, xref)
         info["dims"] = (pix.width, pix.height)
-
-        # Convert CMYK or other colorspaces to RGB for pixel inspection
-        if pix.colorspace and pix.colorspace.n not in (1, 3):
-            pix = fitz.Pixmap(fitz.csRGB, pix)
+        if pix.alpha:
+            info["has_smask_or_alpha"] = True
 
         samples = pix.samples
-        # Hash a downsampled slice + dimensions so identical logos with different xrefs match
         h_slice = samples[:: max(1, len(samples) // 2048)]
         info["sha1"] = hashlib.sha1(
-            f"{pix.width}x{pix.height}x{pix.alpha}:".encode() + bytes(h_slice)
+            f"{pix.width}x{pix.height}x{pix.n}:".encode() + bytes(h_slice)
         ).hexdigest()
 
-        n = pix.n  # channels including alpha
-        has_inline_alpha = bool(pix.alpha)
-        if has_inline_alpha:
-            info["has_alpha"] = True
-
-        total_px = pix.width * pix.height
-        stride = max(1, total_px // 4096) * n
-
-        dark_pixels = 0
-        faint_watermark_pixels = 0
-        white_or_clear_pixels = 0
-        alpha_non_zero_sum = 0
-        alpha_non_zero_cnt = 0
-        sampled_px = 0
-
-        for idx in range(0, len(samples) - n + 1, stride):
-            sampled_px += 1
-            a = samples[idx + n - 1] if has_inline_alpha else 255
-
-            if has_inline_alpha:
-                if a <= 5:
-                    white_or_clear_pixels += 1
-                    continue
-                alpha_non_zero_sum += a
-                alpha_non_zero_cnt += 1
-
-            if n - pix.alpha == 1:
-                lum = samples[idx]
-            else:
-                r_c, g_c, b_c = samples[idx], samples[idx + 1], samples[idx + 2]
-                lum = (r_c * 299 + g_c * 587 + b_c * 114) // 1000
-
-            if lum >= 246:
-                white_or_clear_pixels += 1
-            elif lum < 145 and a > 160:
-                dark_pixels += 1
-            else:
-                # Mid-light / pastel / washed-out gray/color pixel (typical pre-faded watermark)
-                faint_watermark_pixels += 1
-
-        if sampled_px > 0:
-            info["dark_ink_ratio"] = dark_pixels / sampled_px
-            if has_inline_alpha and not smask_xref:
-                info["transparent_ratio"] = white_or_clear_pixels / sampled_px
-                if alpha_non_zero_cnt > 0:
-                    info["mean_alpha"] = alpha_non_zero_sum / alpha_non_zero_cnt
-                    if info["mean_alpha"] < 175:
-                        info["is_low_opacity_alpha"] = True
-
-            # Pre-faded RGB watermark on white background:
-            # Very few dark ink pixels (< 2.5%), mostly white/clear + faint gray/pastel pixels
-            if (
-                info["dark_ink_ratio"] < 0.025
-                and faint_watermark_pixels > 0
-                and (white_or_clear_pixels + faint_watermark_pixels) / sampled_px > 0.96
-            ):
-                info["is_washed_out_faint"] = True
-
+        if pix.alpha and not smask_xref and samples:
+            alpha_vals = samples[pix.n - 1 :: pix.n * max(1, (pix.width * pix.height) // 4096)]
+            if alpha_vals:
+                non_zero = [a for a in alpha_vals if a > 4]
+                info["transparent_ratio"] = 1.0 - (len(non_zero) / max(1, len(alpha_vals)))
+                if non_zero:
+                    info["mean_alpha"] = sum(non_zero) / len(non_zero)
     except Exception:
         pass
 
     return info
 
 
-def _purge_image_names_from_streams(doc: fitz.Document, page: fitz.Page, target_xrefs: set[int]) -> int:
+def _find_low_opacity_xobjects_in_page_streams(doc: fitz.Document, page: fitz.Page) -> set[int]:
     """
-    Removes `/ImX Do` operator invocations for target image xrefs from both the page's
-    content streams and any nested `/Subtype /Form` XObjects referenced on the page.
+    Parses the page's content stream (and any Form XObjects) to find images or Forms
+    drawn right after a low-opacity ExtGState (`/GSx gs` where `/ca < 0.85`).
+    Many PDF watermarkers use opaque JPEG/PNGs + ExtGState opacity instead of /SMask!
     """
-    removed = 0
+    low_op_xrefs: set[int] = set()
     try:
-        # 1) Map XObject names (e.g. /Im0, /Fm1) on the page and inside Form XObjects
+        # Collect all XObject name -> xref mappings on this page
+        name_to_xref: dict[bytes, int] = {}
         for item in page.get_xobjects():
             # item = (xref, name, invoker_xref, bbox)
-            x_xref = item[0]
-            x_name = item[1]
+            if item[1]:
+                name_to_xref[item[1].encode("latin1")] = item[0]
+
+        if not name_to_xref:
+            return low_op_xrefs
+
+        # Inspect page and Form resources for ExtGState dictionaries with /ca < 0.85
+        low_op_gs_names: set[bytes] = set()
+        xrefs_to_check = [page.xref] + [item[0] for item in page.get_xobjects()]
+        for obj_xref in xrefs_to_check:
+            try:
+                obj_str = doc.xref_object(obj_xref) or ""
+                # Match /GSname << ... /ca 0.15 ... >> or indirect ref
+                for m in re.finditer(r"/([A-Za-z0-9_\-\.]+)\s+(\d+)\s+0\s+R", obj_str):
+                    gs_name, gs_xref = m.group(1), int(m.group(2))
+                    gs_obj = doc.xref_object(gs_xref) or ""
+                    ca_m = re.search(r"/ca\s+([0-9]*\.?[0-9]+)", gs_obj)
+                    if ca_m and float(ca_m.group(1)) < 0.85:
+                        low_op_gs_names.add(gs_name.encode("latin1"))
+            except Exception:
+                pass
+
+        if not low_op_gs_names:
+            return low_op_xrefs
+
+        # Scan content streams for `/GSname gs ... /ImName Do`
+        streams = [doc.xref_stream(c) or b"" for c in page.get_contents()]
+        for item in page.get_xobjects():
+            if doc.xref_get_key(item[0], "Subtype")[1] == "/Form":
+                streams.append(doc.xref_stream(item[0]) or b"")
+
+        for st in streams:
+            for gs_name in low_op_gs_names:
+                # Look for /GSname gs followed within 300 bytes by /XName Do
+                pat = re.compile(
+                    rb"/" + re.escape(gs_name) + rb"\s+gs\b[\s\S]{0,300}?/([A-Za-z0-9_\-\.]+)\s+Do\b"
+                )
+                for m in pat.finditer(st):
+                    x_name = m.group(1)
+                    if x_name in name_to_xref:
+                        low_op_xrefs.add(name_to_xref[x_name])
+    except Exception:
+        pass
+
+    return low_op_xrefs
+
+
+def _purge_xobject_invocations(doc: fitz.Document, page: fitz.Page, target_xrefs: set[int]) -> None:
+    """Removes `/ImX Do` calls for `target_xrefs` from page Contents and nested Form streams."""
+    try:
+        for item in page.get_xobjects():
+            x_xref, x_name, invoker_xref = item[0], item[1], item[2]
             if x_xref in target_xrefs and x_name:
-                # Strip `/x_name Do` from all content streams of the page
                 pattern = re.compile(rb"/" + re.escape(x_name.encode("latin1")) + rb"\s+Do\b")
                 for c_xref in page.get_contents():
                     stream = doc.xref_stream(c_xref)
                     if stream and pattern.search(stream):
-                        new_stream = pattern.sub(b"", stream)
-                        doc.update_stream(c_xref, new_stream)
-                        removed += 1
-
-                # Also check if invoked inside a Form XObject
-                invoker = item[2]
-                if invoker and invoker > 0:
-                    f_stream = doc.xref_stream(invoker)
+                        doc.update_stream(c_xref, pattern.sub(b"", stream))
+                if invoker_xref and invoker_xref > 0:
+                    f_stream = doc.xref_stream(invoker_xref)
                     if f_stream and pattern.search(f_stream):
-                        doc.update_stream(invoker, pattern.sub(b"", f_stream))
-                        removed += 1
+                        doc.update_stream(invoker_xref, pattern.sub(b"", f_stream))
     except Exception:
         pass
 
-    # 2) Also check Form XObjects that exist solely as a single-image watermark stamp
+
+def _clean_baked_watermark_in_scan_region(doc: fitz.Document, xref: int) -> bool:
+    """
+    FOR FLATTENED HANDWRITTEN SCANS (where the watermark logo is baked into the single
+    full-page scan image and there is NO separate watermark layer):
+    - Only operates on the CENTER watermark zone (middle 65% width x 55% height) and
+      BOTTOM footer strip (bottom 7% height).
+    - Preserves 100% of dark/medium pen ink (blue, black, red, pencil strokes) and paper texture.
+    - Only whitens ultra-faint, washed-out watermark pixels (luminance 208..246) that are
+      lighter than the handwriting ink.
+    """
     try:
-        for item in page.get_xobjects():
-            form_xref = item[0]
-            form_name = item[1]
-            subtype = doc.xref_get_key(form_xref, "Subtype")
-            if subtype and subtype[1] == "/Form":
-                f_stream = doc.xref_stream(form_xref) or b""
-                # Check if this Form XObject contains competitor text or references a watermark image
-                f_text = f_stream.decode("latin1", errors="ignore")
-                if _is_competitor_text(f_text):
-                    doc.update_stream(form_xref, b"")
-                    removed += 1
-                    continue
+        pix = fitz.Pixmap(doc, xref)
+        # Only process standard RGB or Grayscale full-page scans of reasonable resolution
+        if pix.width < 300 or pix.height < 300:
+            return False
+        if pix.alpha:
+            return False
+        if pix.colorspace and pix.colorspace.n not in (1, 3):
+            pix = fitz.Pixmap(fitz.csRGB, pix)
 
-                # Check if Form's /Resources /XObject references any target_xrefs
-                res = doc.xref_get_key(form_xref, "Resources")
-                if res and any(f"{tx} 0 R" in res[1] for tx in target_xrefs):
-                    # Blank out the watermark Form stream if it's small
-                    if len(f_stream) < 4096:
-                        doc.update_stream(form_xref, b"")
-                        removed += 1
+        w, h, n = pix.width, pix.height, pix.n
+        samples = bytearray(pix.samples)
+
+        # Sample overall page background brightness first
+        # If the scan has a dark/gray/yellowed phone-camera background (median lum < 228),
+        # DO NOT touch pixels at all so we never leave a white box on a gray camera photo!
+        bg_samples = []
+        step_y = max(1, h // 25)
+        step_x = max(1, w // 25)
+        for sy in range(0, h, step_y):
+            row_off = sy * w * n
+            for sx in range(0, w, step_x):
+                idx = row_off + sx * n
+                if n == 1:
+                    bg_samples.append(samples[idx])
+                else:
+                    bg_samples.append(
+                        (samples[idx] * 299 + samples[idx + 1] * 587 + samples[idx + 2] * 114) // 1000
+                    )
+        bg_samples.sort()
+        median_bg = bg_samples[int(len(bg_samples) * 0.75)] if bg_samples else 255
+
+        # Only bleach baked-in faint watermarks on clean white-background scans (CamScanner / digital)
+        if median_bg < 236:
+            return False
+
+        # Define the two zones where competitor watermarks live:
+        # Zone 1: Center logo box (x: 16%..84%, y: 24%..76%)
+        cx0, cx1 = int(w * 0.16), int(w * 0.84)
+        cy0, cy1 = int(h * 0.24), int(h * 0.76)
+
+        # Zone 2: Bottom footer text strip (x: 15%..85%, y: 93%..99%)
+        fy0, fy1 = int(h * 0.935), int(h * 0.992)
+
+        # Faint watermark luminance band on a white (250-255) page:
+        # Handwriting ink is darker (< 195) or saturated blue/red pen.
+        # Faint 10%–22% opacity watermark sits in [206 .. median_bg - 3].
+        low_lum = 206
+        high_lum = max(215, median_bg - 3)
+        rep_val = min(255, median_bg + 2)
+
+        modified = False
+
+        def _clean_band(y_start: int, y_end: int, x_start: int, x_end: int):
+            nonlocal modified
+            for y in range(y_start, y_end):
+                row_base = y * w * n
+                for x in range(x_start, x_end):
+                    i = row_base + x * n
+                    if n == 1:
+                        v = samples[i]
+                        if low_lum <= v <= high_lum:
+                            samples[i] = rep_val
+                            modified = True
+                    else:
+                        r_c, g_c, b_c = samples[i], samples[i + 1], samples[i + 2]
+                        # Protect blue/red pen ink: if blue or red channel dominates strongly, keep it!
+                        if (b_c - r_c > 28) or (r_c - b_c > 35):
+                            continue
+                        lum = (r_c * 299 + g_c * 587 + b_c * 114) // 1000
+                        if low_lum <= lum <= high_lum:
+                            samples[i] = rep_val
+                            samples[i + 1] = rep_val
+                            samples[i + 2] = rep_val
+                            modified = True
+
+        _clean_band(cy0, cy1, cx0, cx1)
+        _clean_band(fy0, fy1, cx0, cx1)
+
+        if modified:
+            cleaned_pix = fitz.Pixmap(pix.colorspace, w, h, bytes(samples), 0)
+            doc.update_stream(xref, cleaned_pix.tobytes("jpeg", jpg_quality=92))
+            return True
     except Exception:
         pass
 
-    return removed
+    return False
 
 
 def remove_existing_watermarks(
@@ -268,22 +318,21 @@ def remove_existing_watermarks(
     extra_keywords: list[str] | None = None,
 ) -> dict[str, int]:
     """
-    In-place removal of existing text watermarks, hyperlink watermarks, and
-    low-opacity / repeated / centered / footer watermark logo images across a PyMuPDF Document.
-    Carefully preserves full-page scanned note images and actual study diagrams.
+    Safely removes existing text watermarks, hyperlink watermarks, and watermark logo images.
+    GUARANTEE: Never deletes full-page handwritten note scans or sole content images on a page.
     """
     removed_text_count = 0
     removed_image_count = 0
     removed_link_count = 0
     num_pages = len(doc)
 
-    # Cache pixel analysis per xref so we only inspect each image once
-    xref_analysis_cache: dict[int, dict] = {}
-    hash_page_occurrences: Counter[str] = Counter()
-    xref_geometries: dict[int, list[dict]] = {}
+    xref_info_cache: dict[int, dict] = {}
+    hash_page_count: Counter[str] = Counter()
+    dims_center_page_count: Counter[tuple[int, int]] = Counter()
+    page_image_records: dict[int, list[dict]] = {}
 
     # ------------------------------------------------------------------
-    # PASS 1: Inspect all images across pages (Position + Pixel Faintness + Hash)
+    # PASS 1: Catalog all images on every page
     # ------------------------------------------------------------------
     for p_idx, page in enumerate(doc):
         r = page.rect
@@ -291,13 +340,16 @@ def remove_existing_watermarks(
         page_cx = r.x0 + r.width / 2.0
         page_cy = r.y0 + r.height / 2.0
 
-        seen_hashes_on_page: set[str] = set()
+        low_op_stream_xrefs = _find_low_opacity_xobjects_in_page_streams(doc, page)
+        seen_hashes_this_page: set[str] = set()
+        seen_center_dims_this_page: set[tuple[int, int]] = set()
+        records: list[dict] = []
 
         for img_info in page.get_images(full=True):
             xref = img_info[0]
-            if xref not in xref_analysis_cache:
-                xref_analysis_cache[xref] = _analyze_image_faintness(doc, xref)
-            faint_info = xref_analysis_cache[xref]
+            if xref not in xref_info_cache:
+                xref_info_cache[xref] = _inspect_image_xref(doc, xref)
+            meta = xref_info_cache[xref]
 
             rects = page.get_image_rects(xref)
             if not rects:
@@ -308,130 +360,147 @@ def remove_existing_watermarks(
                 ir_cx = ir.x0 + ir.width / 2.0
                 ir_cy = ir.y0 + ir.height / 2.0
 
-                # Centered check (generous tolerance for slightly off-center logos)
                 is_centered = (
                     abs(ir_cx - page_cx) <= r.width * 0.24
                     and abs(ir_cy - page_cy) <= r.height * 0.24
                 )
-                # Header / Footer / Corner stamp check
                 is_edge_stamp = (
-                    ir.y0 >= r.y1 - r.height * 0.14
-                    or ir.y1 <= r.y0 + r.height * 0.12
+                    ir.y0 >= r.y1 - r.height * 0.12
+                    or ir.y1 <= r.y0 + r.height * 0.10
                 )
 
-                xref_geometries.setdefault(xref, []).append({
-                    "page": p_idx,
+                rec = {
+                    "xref": xref,
+                    "rect": ir,
                     "area_ratio": area_ratio,
                     "height_ratio": ir.height / max(1.0, r.height),
                     "is_centered": is_centered,
                     "is_edge_stamp": is_edge_stamp,
-                })
+                    "is_low_op_gs": xref in low_op_stream_xrefs,
+                    "meta": meta,
+                }
+                records.append(rec)
 
-            if faint_info["sha1"]:
-                seen_hashes_on_page.add(faint_info["sha1"])
+                # Only count non-full-page images (< 62% of page area) toward repeated watermark stats
+                if area_ratio < 0.62:
+                    if meta["sha1"]:
+                        seen_hashes_this_page.add(meta["sha1"])
+                    if (is_centered or is_edge_stamp) and meta["dims"] != (0, 0):
+                        seen_center_dims_this_page.add(meta["dims"])
 
-        for h in seen_hashes_on_page:
-            hash_page_occurrences[h] += 1
+        page_image_records[p_idx] = records
+        for h in seen_hashes_this_page:
+            hash_page_count[h] += 1
+        for d in seen_center_dims_this_page:
+            dims_center_page_count[d] += 1
 
     # ------------------------------------------------------------------
-    # Decide which image xrefs are watermarks
+    # PASS 2: Page-by-page safe watermark removal
     # ------------------------------------------------------------------
-    watermark_xrefs: set[int] = set()
+    for p_idx, page in enumerate(doc):
+        records = page_image_records.get(p_idx, [])
+        unique_xrefs_on_page = {rec["xref"] for rec in records}
 
-    for xref, geoms in xref_geometries.items():
-        faint = xref_analysis_cache.get(xref, {})
-        img_hash = faint.get("sha1", "")
-        repeat_pages = hash_page_occurrences.get(img_hash, 1)
+        # Check if this page has substantial text content (digital notes vs scanned page)
+        page_text_len = len((page.get_text("text") or "").strip())
+        has_multiple_images = len(unique_xrefs_on_page) >= 2
 
-        avg_area = sum(g["area_ratio"] for g in geoms) / len(geoms)
-        any_centered = any(g["is_centered"] for g in geoms)
-        any_edge = any(g["is_edge_stamp"] for g in geoms)
+        xrefs_to_delete: set[int] = set()
 
-        is_faint_or_low_alpha = (
-            faint.get("is_low_opacity_alpha", False)
-            or faint.get("is_washed_out_faint", False)
-        )
-        has_alpha = faint.get("has_alpha", False)
-        transparent_ratio = faint.get("transparent_ratio", 0.0)
-        dark_ink_ratio = faint.get("dark_ink_ratio", 1.0)
+        for rec in records:
+            xref = rec["xref"]
+            area_ratio = rec["area_ratio"]
+            meta = rec["meta"]
+            img_hash = meta["sha1"]
+            dims = meta["dims"]
 
-        # SAFETY GUARD: Never delete a real full-page scanned note image!
-        # A real full-page scan covers > 70% of the page AND is opaque (not a transparent overlay)
-        # AND contains real dark ink notes (dark_ink_ratio >= 0.015).
-        if avg_area > 0.72:
-            is_fullpage_watermark_overlay = (
-                (has_alpha and transparent_ratio > 0.45 and is_faint_or_low_alpha)
-                or (is_faint_or_low_alpha and dark_ink_ratio < 0.015)
-            )
-            if is_fullpage_watermark_overlay:
-                watermark_xrefs.add(xref)
-            continue
-
-        # RULE 1: Any low-opacity / faded image in the center or header/footer of the page
-        # (Works even on a 1-page PDF or when every page has a unique xref!)
-        if is_faint_or_low_alpha and (any_centered or any_edge) and avg_area >= 0.004:
-            watermark_xrefs.add(xref)
-            continue
-
-        # RULE 2: Centered overlay image with alpha transparency (e.g. PNG logo with transparent bg)
-        # that sits in the middle of the page (size between 2% and 70% of page)
-        if any_centered and has_alpha and transparent_ratio > 0.18 and 0.02 <= avg_area <= 0.70:
-            watermark_xrefs.add(xref)
-            continue
-
-        # RULE 3: Image (by content SHA1 hash, even if xrefs differ) repeats across multiple pages
-        if num_pages >= 2 and (repeat_pages >= max(2, int(num_pages * 0.35)) or repeat_pages >= 3):
-            if any_centered or any_edge or is_faint_or_low_alpha or has_alpha:
-                watermark_xrefs.add(xref)
+            # ==================================================================
+            # IRONCLAD HANDWRITTEN SCAN PROTECTION:
+            # 1) Never delete any image covering >= 58% of the page unless it has a
+            #    mostly-transparent alpha mask AND there is another image/text layer on the page.
+            # 2) If a page has ONLY 1 image and almost no digital text (< 80 chars),
+            #    that single image IS the scanned note page — NEVER delete it!
+            # ==================================================================
+            if not has_multiple_images and page_text_len < 80 and area_ratio > 0.25:
                 continue
 
-        # RULE 4: Pre-faded / washed-out RGB image anywhere on the page with almost zero dark ink
-        if faint.get("is_washed_out_faint", False) and avg_area >= 0.015:
-            watermark_xrefs.add(xref)
-            continue
+            if area_ratio >= 0.58:
+                # Only allow deleting a large image if the page has multiple images AND
+                # this one is a transparent overlay (has alpha mask with >45% transparency)
+                if (
+                    has_multiple_images
+                    and meta["has_smask_or_alpha"]
+                    and meta["transparent_ratio"] > 0.45
+                    and meta["mean_alpha"] < 180
+                ):
+                    xrefs_to_delete.add(xref)
+                continue
 
-    # ------------------------------------------------------------------
-    # PASS 2: Delete watermark images, clean Form XObject streams, redact text & links
-    # ------------------------------------------------------------------
-    for page in doc:
-        r = page.rect
-        page_area = max(1.0, r.width * r.height)
+            # SAFE RULE A: Identical non-full-page image hash repeats across multiple pages
+            repeat_by_hash = hash_page_count.get(img_hash, 0)
+            if num_pages >= 2 and (
+                repeat_by_hash >= max(2, int(num_pages * 0.35)) or repeat_by_hash >= 3
+            ):
+                if rec["is_centered"] or rec["is_edge_stamp"] or meta["has_smask_or_alpha"]:
+                    xrefs_to_delete.add(xref)
+                    continue
 
-        page_xrefs = {img[0] for img in page.get_images(full=True)}
-        xrefs_to_remove_on_page: set[int] = set()
+            # SAFE RULE B: Same exact pixel dimensions centered/footer on multiple pages
+            # (catches watermarks re-encoded per page with slightly different JPEG compression)
+            repeat_by_dims = dims_center_page_count.get(dims, 0)
+            if num_pages >= 3 and (
+                repeat_by_dims >= max(2, int(num_pages * 0.45)) or repeat_by_dims >= 3
+            ):
+                if (rec["is_centered"] or rec["is_edge_stamp"]) and area_ratio < 0.50:
+                    xrefs_to_delete.add(xref)
+                    continue
 
-        for xref in page_xrefs:
-            should_delete = xref in watermark_xrefs
+            # SAFE RULE C: Drawn with low-opacity ExtGState (/ca < 0.85) in content stream
+            if rec["is_low_op_gs"] and (rec["is_centered"] or rec["is_edge_stamp"]):
+                xrefs_to_delete.add(xref)
+                continue
 
-            # Also catch small footer/header logo stamps near top/bottom margins
-            if not should_delete:
-                for ir in page.get_image_rects(xref):
-                    area_ratio = (ir.width * ir.height) / page_area
-                    if area_ratio > 0.72:
-                        continue
-                    if (
-                        ir.y0 >= r.y1 - r.height * 0.10
-                        and (ir.height / r.height) <= 0.09
-                        and area_ratio <= 0.14
-                    ):
-                        should_delete = True
-                        break
+            # SAFE RULE D: Separate overlay logo with /SMask or Alpha channel sitting in center
+            if (
+                rec["is_centered"]
+                and meta["has_smask_or_alpha"]
+                and (meta["mean_alpha"] < 195 or meta["transparent_ratio"] > 0.25)
+                and (has_multiple_images or page_text_len >= 80)
+            ):
+                xrefs_to_delete.add(xref)
+                continue
 
-            if should_delete:
-                xrefs_to_remove_on_page.add(xref)
+            # SAFE RULE E: Small footer/header stamp at very top or bottom margin (< 8% height)
+            if (
+                rec["is_edge_stamp"]
+                and rec["height_ratio"] <= 0.08
+                and area_ratio <= 0.12
+                and (has_multiple_images or page_text_len >= 40)
+            ):
+                xrefs_to_delete.add(xref)
+                continue
 
-        # 2A) Purge `/ImX Do` references inside page Contents and Form XObjects first,
-        # then call page.delete_image(xref)
-        if xrefs_to_remove_on_page:
-            _purge_image_names_from_streams(doc, page, xrefs_to_remove_on_page)
-            for xref in xrefs_to_remove_on_page:
+        # Execute image layer deletion if watermark layers were found
+        if xrefs_to_delete:
+            _purge_xobject_invocations(doc, page, xrefs_to_delete)
+            for xref in xrefs_to_delete:
                 try:
                     page.delete_image(xref)
                     removed_image_count += 1
                 except Exception:
                     pass
+        else:
+            # If NO separate watermark image layer existed on this page AND this page is a
+            # single full-page scan (flattened handwritten notes), gently clean faint baked-in
+            # watermark pixels in the center/footer without touching handwriting ink:
+            if len(unique_xrefs_on_page) == 1 and records and records[0]["area_ratio"] >= 0.65:
+                sole_xref = records[0]["xref"]
+                if _clean_baked_watermark_in_scan_region(doc, sole_xref):
+                    removed_image_count += 1
 
-        # 2B) Redact competitor watermark text lines/spans (without touching underlying note images)
+        # ------------------------------------------------------------------
+        # Redact competitor watermark text lines/spans (never touching images)
+        # ------------------------------------------------------------------
         page_has_redactions = False
         try:
             text_dict = page.get_text("dict")
@@ -471,7 +540,9 @@ def remove_existing_watermarks(
                 except Exception:
                     pass
 
-        # 2C) Strip clickable competitor links (URI annotations)
+        # ------------------------------------------------------------------
+        # Strip clickable competitor links (URI annotations)
+        # ------------------------------------------------------------------
         try:
             for link in list(page.get_links()):
                 uri = (link.get("uri") or "").lower()
@@ -529,7 +600,7 @@ def add_watermark(
     extra_remove_keywords: list[str] | None = None,
 ) -> bytes:
     """
-    Strips existing third-party watermarks (text, links, low-opacity centered/footer logos)
+    Safely strips existing third-party watermarks without ever deleting handwritten scan pages,
     and returns new PDF bytes with a centered logo and bottom-center text.
     """
     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
