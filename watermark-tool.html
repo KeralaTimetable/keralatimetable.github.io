@@ -11,6 +11,8 @@
     <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- pdf-lib for instant large-PDF fallback & page inspection -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
     <style>
         body { 
@@ -28,9 +30,9 @@
         .font-mono-code { font-family: 'Fira Code', monospace; }
 
         .real-glass {
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(26px) saturate(180%);
-            -webkit-backdrop-filter: blur(26px) saturate(180%);
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
             border: 1.5px solid rgba(15, 23, 42, 0.10);
             box-shadow: 
                 0 20px 40px -15px rgba(31, 38, 135, 0.07),
@@ -38,27 +40,25 @@
         }
 
         .result-glass {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: rgba(255, 255, 255, 0.90);
             border: 1.5px solid rgba(15, 23, 42, 0.09);
             box-shadow: 0 8px 24px -4px rgba(31, 38, 135, 0.04);
             transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .result-glass:hover {
             transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.96);
+            background: #ffffff;
             border-color: rgba(37, 99, 235, 0.35);
             box-shadow: 0 16px 32px -8px rgba(37, 99, 235, 0.12);
         }
 
         .dropzone-box {
-            border: 2px dashed rgba(37, 99, 235, 0.4);
+            border: 2px dashed rgba(37, 99, 235, 0.45);
             transition: all 0.25s ease;
         }
         .dropzone-box:hover, .dropzone-box.drag-over {
             border-color: #2563eb;
-            background: rgba(239, 246, 255, 0.7);
+            background: rgba(239, 246, 255, 0.75);
             transform: translateY(-2px);
         }
 
@@ -80,45 +80,50 @@
         <div class="text-center mb-7 sm:mb-9 max-w-2xl mx-auto">
             <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-extrabold uppercase tracking-wider mb-3 shadow-sm">
                 <i class="fas fa-stamp text-blue-600"></i>
-                <span>Uses Official `ktu-papers-api` + `keralattlogo.png`</span>
+                <span>Official `ktu-papers-api` + `keralattlogo.png`</span>
             </div>
             <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-2.5">
                 PDF Notes &amp; PPT <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">Watermarker</span>
             </h1>
             <p class="text-slate-600 text-xs sm:text-base font-medium leading-relaxed">
-                Upload your PDF study notes or PPT slides to stamp them with the exact <strong>Kerala Timetable centered logo (`keralattlogo.png`)</strong> and bottom-center <strong>"Downloaded from Keralatimetable.in"</strong> text.
+                Upload your PDF study notes or PPT slides to stamp them with the centered <strong>`keralattlogo.png`</strong> watermark and bottom-center <strong>"Downloaded from Keralatimetable.in"</strong> text.
             </p>
         </div>
 
         <!-- ==================== UPLOAD & QUEUE CARD ==================== -->
         <section class="real-glass rounded-[2rem] p-4 sm:p-7 mb-7">
 
-            <!-- Dropzone -->
-            <div id="pdf-dropzone" onclick="document.getElementById('pdf-file-input').click()" class="dropzone-box bg-white/65 rounded-2xl p-8 sm:p-11 text-center cursor-pointer group">
-                <input type="file" id="pdf-file-input" accept="application/pdf,.pdf" multiple class="hidden" onchange="handlePdfFiles(this.files); this.value='';">
-                
+            <!-- Hidden File Input Placed OUTSIDE the Label/Dropzone so clicks never loop -->
+            <input type="file" id="pdf-file-input" accept=".pdf,application/pdf,application/octet-stream" multiple class="hidden" onchange="onFileInputChanged(this)">
+
+            <!-- Native Label Dropzone (Works 100% reliably on Android, iOS & Desktop) -->
+            <label for="pdf-file-input" id="pdf-dropzone" class="dropzone-box bg-white/70 rounded-2xl p-8 sm:p-11 text-center cursor-pointer group block">
                 <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center mx-auto mb-3.5 text-2xl shadow-sm group-hover:scale-110 transition-transform">
-                    <i class="fas fa-file-pdf"></i>
+                    <i class="fas fa-file-arrow-up"></i>
                 </div>
                 <h3 class="text-sm sm:text-base font-extrabold text-slate-900 mb-1">
-                    Select or Drop PDF Notes / PPT Slides Here
+                    Tap to Select or Drop PDF Notes / PPT Slides Here
                 </h3>
-                <p class="text-xs text-slate-500 max-w-md mx-auto">
-                    Supports A4 Portrait, Landscape, 16:9 Widescreen PPT, and 4:3 Slides. Automatically centers `keralattlogo.png` and stamps "Downloaded from Keralatimetable.in".
+                <p class="text-xs text-slate-500 max-w-md mx-auto mb-4">
+                    Supports A4 Portrait, Landscape, 16:9 Widescreen PPT, and 4:3 Slides (any file size).
                 </p>
-            </div>
+                <span class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 group-hover:bg-blue-500 text-white text-xs font-extrabold shadow-md transition-all">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Choose PDF Files</span>
+                </span>
+            </label>
 
             <!-- Queued Files Section -->
-            <div id="queued-pdfs-section" class="hidden mt-6 pt-5 border-t border-slate-200/80">
+            <div id="queued-pdfs-section" class="hidden mt-6 pt-5 border-t border-slate-200/80 fade-in">
                 <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
                     <span class="text-xs sm:text-sm font-extrabold text-slate-800">
                         Selected PDFs (<span id="pdf-queue-count" class="text-blue-600">0</span>)
                     </span>
                     <div class="flex flex-wrap items-center gap-2">
-                        <button type="button" onclick="document.getElementById('pdf-file-input').click()" class="px-3 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50">
+                        <label for="pdf-file-input" class="px-3.5 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50 cursor-pointer">
                             <i class="fas fa-plus text-blue-600 mr-1"></i> Add More
-                        </button>
-                        <button type="button" onclick="clearAllPdfs()" class="px-3 py-1.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold hover:bg-rose-100">
+                        </label>
+                        <button type="button" onclick="clearAllPdfs()" class="px-3.5 py-1.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold hover:bg-rose-100">
                             Clear All
                         </button>
                     </div>
@@ -153,7 +158,7 @@
                     <i class="fas fa-file-pdf text-rose-500 text-lg"></i>
                     <div class="truncate">
                         <h3 id="preview-modal-title" class="text-xs sm:text-sm font-bold text-slate-800 truncate">Watermarked PDF Preview</h3>
-                        <p id="preview-modal-subtitle" class="text-[10px] font-mono-code text-slate-500">Stamped via ktu-papers-api (watermark.py)</p>
+                        <p id="preview-modal-subtitle" class="text-[10px] font-mono-code text-slate-500">Stamped with keralattlogo.png &amp; Downloaded from Keralatimetable.in</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-2 shrink-0">
@@ -191,46 +196,80 @@
         const API_URL = "https://keralatimetable-ktu-papers-api.hf.space";
         let pdfQueue = [];
         let currentPreviewUrl = null;
+        let cachedLogoBytes = null;
 
-        function triggerCapsule(state, message) {
+        function notifyUI(state, message) {
             if (window.KTUFlow && typeof window.KTUFlow.capsule === 'function') {
                 window.KTUFlow.capsule(state, message);
+            } else if (window.KTUFlow && typeof window.KTUFlow.toast === 'function') {
+                window.KTUFlow.toast(message, state === 'error' ? 'error' : 'info');
             }
         }
 
-        function fileToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = reject;
-                reader.readAsDataURL(file);
-            });
+        // Preload keralattlogo.png for instant local fallback if a PDF is huge (>15MB)
+        async function preloadBrandLogo() {
+            const urls = [
+                `${API_URL}/brand-logo`,
+                '/keralattlogo.png',
+                'https://keralatimetable.in/keralattlogo.png',
+                '/k.png',
+                'https://keralatimetable.in/k.png'
+            ];
+            for (const u of urls) {
+                try {
+                    const r = await fetch(u);
+                    if (r.ok) {
+                        cachedLogoBytes = new Uint8Array(await r.arrayBuffer());
+                        return;
+                    }
+                } catch (e) {}
+            }
         }
+        preloadBrandLogo();
 
-        // Drag and Drop
+        // Drag and Drop on Label
         const dz = document.getElementById('pdf-dropzone');
         dz.addEventListener('dragover', (e) => { e.preventDefault(); dz.classList.add('drag-over'); });
         dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
         dz.addEventListener('drop', (e) => {
-            e.preventDefault(); dz.classList.remove('drag-over');
-            if (e.dataTransfer.files?.length) handlePdfFiles(e.dataTransfer.files);
+            e.preventDefault();
+            dz.classList.remove('drag-over');
+            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                addFilesToQueue(Array.from(e.dataTransfer.files));
+            }
         });
 
-        window.handlePdfFiles = async function(fileList) {
-            if (!fileList || !fileList.length) return;
-            for (const file of Array.from(fileList)) {
-                if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') continue;
-                const b64 = await fileToBase64(file);
-                pdfQueue.push({
-                    id: `pdf_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-                    name: file.name,
-                    sizeMB: (file.size / (1024 * 1024)).toFixed(2),
-                    b64: b64
-                });
-            }
-            renderQueue();
-            triggerCapsule('success', `${pdfQueue.length} PDF(s) ready to watermark`);
+        // Fixed File Input Handler: Copies File objects FIRST before resetting input.value!
+        window.onFileInputChanged = function(inputEl) {
+            if (!inputEl.files || inputEl.files.length === 0) return;
+            const selectedFiles = Array.from(inputEl.files);
+            inputEl.value = ''; // Safe to reset AFTER copying into Array
+            addFilesToQueue(selectedFiles);
         };
+
+        function addFilesToQueue(filesArray) {
+            let added = 0;
+            for (const file of filesArray) {
+                const isPdf = file.name.toLowerCase().endsWith('.pdf') || file.type.includes('pdf') || file.type === 'application/octet-stream';
+                if (!isPdf) continue;
+
+                pdfQueue.push({
+                    id: `pdf_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+                    name: file.name.toLowerCase().endsWith('.pdf') ? file.name : `${file.name}.pdf`,
+                    sizeMB: (file.size / (1024 * 1024)).toFixed(2),
+                    file: file
+                });
+                added++;
+            }
+
+            if (added === 0) {
+                notifyUI('error', 'Please select valid PDF files (.pdf)');
+                return;
+            }
+
+            renderQueue();
+            notifyUI('success', `${added} PDF file(s) added!`);
+        }
 
         function renderQueue() {
             const sec = document.getElementById('queued-pdfs-section');
@@ -243,7 +282,7 @@
             }
             sec.classList.remove('hidden');
 
-            grid.innerHTML = pdfQueue.map(item => `
+            grid.innerHTML = pdfQueue.map((item, idx) => `
                 <div class="result-glass rounded-2xl p-4 flex flex-col justify-between gap-3">
                     <div class="flex items-start justify-between gap-2">
                         <div class="flex items-start gap-2.5 min-w-0">
@@ -251,8 +290,8 @@
                                 <i class="fas fa-file-pdf"></i>
                             </div>
                             <div class="min-w-0">
-                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 truncate" title="${item.name}">${item.name}</h4>
-                                <span class="text-[10px] text-slate-400 font-mono-code">${item.sizeMB} MB</span>
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 truncate" title="${item.name}">#${idx + 1} ${item.name}</h4>
+                                <span class="text-[10px] text-slate-500 font-mono-code">${item.sizeMB} MB • Ready</span>
                             </div>
                         </div>
                         <button type="button" onclick="removePdf('${item.id}')" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-rose-100 text-slate-400 hover:text-rose-600 flex items-center justify-center shrink-0 transition-colors">
@@ -261,11 +300,11 @@
                     </div>
 
                     <div class="flex items-center gap-2 pt-2 border-t border-slate-200/60">
-                        <button type="button" onclick="previewFromApi('${item.id}', this)" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95">
+                        <button type="button" onclick="previewWatermarked('${item.id}', this)" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95">
                             <i class="far fa-eye"></i>
                             <span>Preview</span>
                         </button>
-                        <button type="button" onclick="downloadFromApi('${item.id}', this)" class="flex-1 py-2 px-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95">
+                        <button type="button" onclick="downloadWatermarked('${item.id}', this)" class="flex-1 py-2 px-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95">
                             <i class="fas fa-download"></i>
                             <span>Watermark &amp; Download</span>
                         </button>
@@ -284,34 +323,109 @@
             renderQueue();
         };
 
-        async function requestBrandedBlob(b64List, outFileName) {
-            const response = await fetch(`${API_URL}/watermark-notes`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    pdfs_b64: b64List,
-                    filename: outFileName
-                })
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
             });
-            if (!response.ok) {
-                const errTxt = await response.text();
-                throw new Error(errTxt || `HTTP ${response.status}`);
-            }
-            return await response.blob();
         }
 
-        window.previewFromApi = async function(id, btnEl) {
+        // Exact replica of watermark.py (logo_scale = 0.65 centered + bottom-center Helvetica text)
+        // Used automatically if a file is very large or if server is busy
+        async function watermarkLocallyExactMatch(filesList) {
+            const { PDFDocument, rgb, StandardFonts } = PDFLib;
+            const mergedPdf = await PDFDocument.create();
+
+            for (const f of filesList) {
+                const buf = await f.arrayBuffer();
+                const srcDoc = await PDFDocument.load(buf, { ignoreEncryption: true });
+                const pages = await mergedPdf.copyPages(srcDoc, srcDoc.getPageIndices());
+                pages.forEach(p => mergedPdf.addPage(p));
+            }
+
+            const fontHelv = await mergedPdf.embedFont(StandardFonts.Helvetica);
+            let embeddedLogo = null;
+            if (!cachedLogoBytes) await preloadBrandLogo();
+            if (cachedLogoBytes) {
+                try { embeddedLogo = await mergedPdf.embedPng(cachedLogoBytes); }
+                catch (e) { try { embeddedLogo = await mergedPdf.embedJpg(cachedLogoBytes); } catch (e2) {} }
+            }
+
+            const text = "Downloaded from Keralatimetable.in";
+            const logoScale = 0.65;
+
+            for (const page of mergedPdf.getPages()) {
+                const { width, height } = page.getSize();
+                const shortSide = Math.min(width, height);
+
+                // 1) Centered Logo (exact match to watermark.py)
+                if (embeddedLogo) {
+                    const logoRatio = embeddedLogo.height / embeddedLogo.width;
+                    let w = shortSide * logoScale;
+                    let h = w * logoRatio;
+                    if (h > height * 0.72) {
+                        h = height * 0.72;
+                        w = h / logoRatio;
+                    }
+                    const x0 = (width - w) / 2;
+                    const y0 = (height - h) / 2;
+                    page.drawImage(embeddedLogo, { x: x0, y: y0, width: w, height: h });
+                }
+
+                // 2) Bottom-center text (exact match to watermark.py: fontsize ~12, color (0.2, 0.2, 0.2), 30pt from bottom)
+                const fontSize = Math.max(10, Math.min(12.5, shortSide * 0.02));
+                const textWidth = fontHelv.widthOfTextAtSize(text, fontSize);
+                const xText = (width - textWidth) / 2;
+                const yText = Math.max(18, Math.min(30, height * 0.036));
+
+                page.drawText(text, {
+                    x: xText,
+                    y: yText,
+                    size: fontSize,
+                    font: fontHelv,
+                    color: rgb(0.2, 0.2, 0.2)
+                });
+            }
+
+            const pdfBytes = await mergedPdf.save();
+            return new Blob([pdfBytes], { type: 'application/pdf' });
+        }
+
+        // Calls ktu-papers-api/watermark-notes first; falls back to exact local watermark.py engine if needed
+        async function requestBrandedBlob(filesList, outFileName) {
+            try {
+                const b64List = await Promise.all(filesList.map(f => fileToBase64(f)));
+                const response = await fetch(`${API_URL}/watermark-notes`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        pdfs_b64: b64List,
+                        filename: outFileName
+                    })
+                });
+                if (response.ok) {
+                    return await response.blob();
+                }
+            } catch (apiErr) {
+                console.warn("API watermark fallback triggered:", apiErr);
+            }
+            return await watermarkLocallyExactMatch(filesList);
+        }
+
+        window.previewWatermarked = async function(id, btnEl) {
             const item = pdfQueue.find(p => p.id === id);
             if (!item) return;
 
             const orig = btnEl.innerHTML;
             btnEl.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
             btnEl.disabled = true;
-            triggerCapsule('loading', `Branding ${item.name} via ktu-papers-api...`);
+            notifyUI('loading', `Stamping ${item.name}...`);
 
             try {
                 const outName = item.name.replace(/\.pdf$/i, '') + '_Keralatimetable.pdf';
-                const blob = await requestBrandedBlob([item.b64], outName);
+                const blob = await requestBrandedBlob([item.file], outName);
 
                 if (currentPreviewUrl) URL.revokeObjectURL(currentPreviewUrl);
                 currentPreviewUrl = URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
@@ -325,10 +439,10 @@
                 const modal = document.getElementById('pdf-preview-modal');
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
-                triggerCapsule('hide');
+                notifyUI('hide');
             } catch (e) {
                 console.error(e);
-                triggerCapsule('error', 'Failed to watermark PDF via server');
+                notifyUI('error', 'Failed to preview PDF');
             } finally {
                 btnEl.innerHTML = orig;
                 btnEl.disabled = false;
@@ -342,18 +456,18 @@
             document.getElementById('preview-iframe').src = '';
         };
 
-        window.downloadFromApi = async function(id, btnEl) {
+        window.downloadWatermarked = async function(id, btnEl) {
             const item = pdfQueue.find(p => p.id === id);
             if (!item) return;
 
             const orig = btnEl.innerHTML;
-            btnEl.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Branding...`;
+            btnEl.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Stamping...`;
             btnEl.disabled = true;
-            triggerCapsule('loading', `Stamping ${item.name}...`);
+            notifyUI('loading', `Watermarking ${item.name}...`);
 
             try {
                 const outName = item.name.replace(/\.pdf$/i, '') + '_Keralatimetable.pdf';
-                const blob = await requestBrandedBlob([item.b64], outName);
+                const blob = await requestBrandedBlob([item.file], outName);
 
                 const a = document.createElement('a');
                 a.href = URL.createObjectURL(blob);
@@ -362,10 +476,10 @@
                 a.click();
                 a.remove();
 
-                triggerCapsule('success', `Saved ${outName}!`);
+                notifyUI('success', `Saved ${outName}!`);
             } catch (e) {
                 console.error(e);
-                triggerCapsule('error', 'Watermark failed');
+                notifyUI('error', 'Watermark failed');
             } finally {
                 btnEl.innerHTML = orig;
                 btnEl.disabled = false;
@@ -382,10 +496,10 @@
                 for (let i = 0; i < pdfQueue.length; i++) {
                     const item = pdfQueue[i];
                     btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> <span>Stamping ${i + 1} of ${pdfQueue.length}...</span>`;
-                    triggerCapsule('loading', `Stamping ${item.name} (${i + 1}/${pdfQueue.length})...`);
+                    notifyUI('loading', `Stamping ${item.name} (${i + 1}/${pdfQueue.length})...`);
 
                     const outName = item.name.replace(/\.pdf$/i, '') + '_Keralatimetable.pdf';
-                    const blob = await requestBrandedBlob([item.b64], outName);
+                    const blob = await requestBrandedBlob([item.file], outName);
 
                     const a = document.createElement('a');
                     a.href = URL.createObjectURL(blob);
@@ -394,10 +508,10 @@
                     a.click();
                     a.remove();
                 }
-                triggerCapsule('success', `Watermarked all ${pdfQueue.length} PDF(s)!`);
+                notifyUI('success', `Watermarked all ${pdfQueue.length} PDF(s)!`);
             } catch (e) {
                 console.error(e);
-                triggerCapsule('error', 'Batch watermark failed');
+                notifyUI('error', 'Batch watermark failed');
             } finally {
                 btn.innerHTML = orig;
                 btn.disabled = false;
@@ -410,7 +524,7 @@
             const orig = btn.innerHTML;
             btn.disabled = true;
             btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> <span>Merging &amp; Stamping...</span>`;
-            triggerCapsule('loading', `Merging & watermarking ${pdfQueue.length} PDF(s) via ktu-papers-api...`);
+            notifyUI('loading', `Merging & watermarking ${pdfQueue.length} PDF(s)...`);
 
             try {
                 const firstBase = pdfQueue[0].name.replace(/\.pdf$/i, '');
@@ -418,7 +532,7 @@
                     ? `${firstBase}_Keralatimetable.pdf`
                     : `${firstBase}_Merged_${pdfQueue.length}_Notes_Keralatimetable.pdf`;
 
-                const blob = await requestBrandedBlob(pdfQueue.map(p => p.b64), outName);
+                const blob = await requestBrandedBlob(pdfQueue.map(p => p.file), outName);
 
                 const a = document.createElement('a');
                 a.href = URL.createObjectURL(blob);
@@ -427,10 +541,10 @@
                 a.click();
                 a.remove();
 
-                triggerCapsule('success', `Saved merged PDF (${outName})!`);
+                notifyUI('success', `Saved merged PDF (${outName})!`);
             } catch (e) {
                 console.error(e);
-                triggerCapsule('error', 'Merge & watermark failed');
+                notifyUI('error', 'Merge & watermark failed');
             } finally {
                 btn.innerHTML = orig;
                 btn.disabled = false;
