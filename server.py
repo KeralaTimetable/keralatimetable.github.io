@@ -1,11 +1,12 @@
 """
 server.py
 ---------
-FastAPI REST API exposing KTU paper search + branded download + live status pinging
-+ secure Telegram, Gemini, Groq, OpenRouter & HF ZeroGPU Vision Brain relay.
+FastAPI REST API exposing KTU paper search + branded download + PDF notes watermarker
++ live status pinging + secure Telegram, Gemini, Groq, OpenRouter & HF ZeroGPU Vision Brain relay.
 """
 
 from __future__ import annotations
+import base64
 import io
 import json
 import os
@@ -21,7 +22,7 @@ from pydantic import BaseModel
 import ktu_repo as repo
 import watermark as wm
 
-app = FastAPI(title="KTU Papers API", version="1.3")
+app = FastAPI(title="KTU Papers API", version="1.4")
 
 app.add_middleware(
     CORSMiddleware,
@@ -57,6 +58,11 @@ VISION_BRAIN_URLS_RAW = os.getenv(
 class DownloadReq(BaseModel):
     handles: list[str]
     watermark: bool = True
+
+
+class WatermarkNotesReq(BaseModel):
+    pdfs_b64: list[str]
+    filename: str = "ktu_notes.pdf"
 
 
 @app.get("/search")
@@ -155,6 +161,31 @@ async def download(req: DownloadReq):
     fname = "ktu_papers.pdf"
     return StreamingResponse(io.BytesIO(out), media_type="application/pdf",
                              headers={"Content-Disposition": f'attachment; filename="{fname}"'})
+
+
+@app.post("/watermark-notes")
+async def watermark_notes(req: WatermarkNotesReq):
+    """
+    Accepts uploaded PDF study notes or PPT slides (as base64) and stamps them using
+    keralattlogo.png (LOGO_BYTES) and watermark.py (wm.brand_papers) on ktu-papers-api.
+    """
+    if not req.pdfs_b64:
+        raise HTTPException(400, "No PDF files provided")
+
+    pdfs: list[bytes] = []
+    for b64_str in req.pdfs_b64:
+        if "," in b64_str:
+            b64_str = b64_str.split(",", 1)[1]
+        pdfs.append(base64.b64decode(b64_str))
+
+    out = wm.brand_papers(pdfs, logo_bytes=LOGO_BYTES, text=BRAND_TEXT)
+
+    safe_name = (req.filename or "ktu_notes.pdf").replace('"', '')
+    return StreamingResponse(
+        io.BytesIO(out),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{safe_name}"'}
+    )
 
 
 @app.post("/telegram-auth")
