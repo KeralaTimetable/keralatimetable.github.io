@@ -2,9 +2,10 @@
 watermark.py
 ------------
 Add your brand watermark (centered logo + bottom text) to KTU question paper & notes PDFs,
-and surgically remove existing third-party watermarks (like the centered "KTU ktunotes.live
-2024 SCHEME NOTES" overlay logo + bottom "Downloaded from KTUNOTES.LIVE" text)
-while 100% protecting underlying phone-camera / handwritten notebook scans.
+and surgically remove existing third-party watermarks:
+- Works on Ktunotes.live (transparent overlay logos on camera photos)
+- Works on Ktuspecial.in (opaque/Multiply/repeated logos AND flattened white-scan faint logos)
+- 100% protects handwritten notebook scans from ever being blanked out.
 Pure-Python, uses PyMuPDF (fitz).
 """
 
@@ -39,6 +40,8 @@ DEFAULT_COMPETITOR_KEYWORDS = [
     "studocu.com",
     "scribd.com",
     "scheme notes",
+    "together dream the b.tech",
+    "we can together dream",
 ]
 
 # Regex catching "Downloaded from <site>", "Download from <site>", "Visit www.<site>", etc.
@@ -71,7 +74,7 @@ def _is_competitor_text(line_text: str, extra_keywords: list[str] | None = None)
     if WATERMARK_TEXT_REGEX.search(cleaned):
         return True
 
-    if len(cleaned) <= 140:
+    if len(cleaned) <= 150:
         for kw in DEFAULT_COMPETITOR_KEYWORDS:
             if kw in low:
                 return True
@@ -82,9 +85,11 @@ def _is_competitor_text(line_text: str, extra_keywords: list[str] | None = None)
 def _inspect_image_xref(doc: fitz.Document, xref: int) -> dict:
     """
     Inspects an image XObject:
-    - Computes a pixel SHA1 hash so identical watermark logos with DIFFERENT xref IDs
-      across pages still match 100%.
-    - Detects whether the image has an /SMask (soft mask), inline alpha, or /Mask.
+    - Computes a SHA1 hash of pixel samples so identical watermark logos with DIFFERENT
+      xref IDs on each page still match 100%.
+    - Detects `/SMask`, `/Mask`, or inline alpha transparency.
+    - Measures `dark_ink_ratio` and `is_washed_out_logo` so we can distinguish an opaque
+      pre-faded watermark JPEG (like ktuspecial.in) from a real dark-ink handwriting scan.
     """
     info = {
         "xref": xref,
@@ -93,9 +98,10 @@ def _inspect_image_xref(doc: fitz.Document, xref: int) -> dict:
         "pixel_area": 0,
         "has_transparency": False,
         "smask_xref": 0,
+        "dark_ink_ratio": 0.5,
+        "is_washed_out_logo": False,
     }
     try:
-        # Check PDF dictionary keys for /SMask or /Mask
         smask_val = doc.xref_get_key(xref, "SMask")
         if smask_val and smask_val[0] == "xref":
             info["has_transparency"] = True
@@ -111,26 +117,61 @@ def _inspect_image_xref(doc: fitz.Document, xref: int) -> dict:
         if pix.alpha:
             info["has_transparency"] = True
 
+        if pix.colorspace and pix.colorspace.n not in (1, 3):
+            pix = fitz.Pixmap(fitz.csRGB, pix)
+
         samples = pix.samples
         h_slice = samples[:: max(1, len(samples) // 2048)]
         info["sha1"] = hashlib.sha1(
             f"{pix.width}x{pix.height}x{pix.n}:".encode() + bytes(h_slice)
         ).hexdigest()
+
+        # Sample pixels to check if this is a pre-faded opaque watermark image (like ktuspecial.in)
+        # vs a real handwriting page (which has dark ink strokes < 140 luminance)
+        n = pix.n
+        has_a = bool(pix.alpha)
+        total_px = max(1, pix.width * pix.height)
+        stride = max(1, total_px // 4096) * n
+
+        dark_px = 0
+        faint_px = 0
+        white_px = 0
+        sampled = 0
+
+        for i in range(0, len(samples) - n + 1, stride):
+            sampled += 1
+            if has_a and samples[i + n - 1] <= 10:
+                white_px += 1
+                continue
+            if n - pix.alpha == 1:
+                lum = samples[i]
+            else:
+                lum = (samples[i] * 299 + samples[i + 1] * 587 + samples[i + 2] * 114) // 1000
+
+            if lum < 135:
+                dark_px += 1
+            elif lum >= 246:
+                white_px += 1
+            else:
+                faint_px += 1
+
+        if sampled > 0:
+            info["dark_ink_ratio"] = dark_px / sampled
+            # An opaque pre-faded watermark JPEG on white background has almost NO dark black pixels
+            # (< 0.8% dark pixels) and consists almost entirely of white + faint gray/blue tint
+            if dark_px / sampled < 0.008 and faint_px > 10 and (white_px + faint_px) / sampled > 0.985:
+                info["is_washed_out_logo"] = True
+
     except Exception:
         pass
 
     return info
 
 
-def _nuke_image_xref(doc: fitz.Document, page: fitz.Page, xref: int, smask_xref: int = 0) -> None:
+def _nuke_image_xref(doc: fitz.Document, page: fitz.Page, xref: int) -> None:
     """
-    Completely eradicates a watermark image XObject so it cannot render anywhere:
-    1) Removes `/ImX Do` from page content streams and nested Form XObject streams.
-    2) Calls `page.delete_image(xref)`.
-    3) Replaces the image XObject stream (and its /SMask if any) with a 1x1 100%-transparent
-       pixel as a failsafe in case a deeply nested Form XObject still invokes it.
+    Completely removes a watermark image XObject from the page and any nested Form XObjects.
     """
-    # 1) Strip `/Name Do` from page contents and Form XObjects
     try:
         for item in page.get_xobjects():
             x_xref, x_name, invoker_xref = item[0], item[1], item[2]
@@ -147,7 +188,6 @@ def _nuke_image_xref(doc: fitz.Document, page: fitz.Page, xref: int, smask_xref:
     except Exception:
         pass
 
-    # 2) Standard PyMuPDF delete_image
     try:
         page.delete_image(xref)
     except Exception:
@@ -157,27 +197,22 @@ def _nuke_image_xref(doc: fitz.Document, page: fitz.Page, xref: int, smask_xref:
 def _clean_watermark_form_xobjects(
     doc: fitz.Document,
     page: fitz.Page,
-    protected_bg_xrefs: set[int],
+    protected_page_xrefs: set[int],
     extra_keywords: list[str] | None = None,
 ) -> int:
     """
-    Many watermark tools (including Ktunotes.live / Ktuspecial.in / PyMuPDF / ReportLab / iText)
-    place the centered watermark inside a `/Subtype /Form` XObject overlaid on the page.
-    This inspects all Form XObjects on the page and clears any Form XObject that:
-    - Contains competitor text ("ktunotes", "scheme notes", "ktuspecial", etc.), OR
-    - Uses a low-opacity ExtGState (/ca < 0.85) AND does NOT contain the protected notebook scan image.
+    Cleans `/Subtype /Form` XObjects that act as watermark stamps on the page.
     """
     cleaned = 0
     try:
         for item in page.get_xobjects():
-            form_xref, form_name, invoker_xref = item[0], item[1], item[2]
+            form_xref = item[0]
             subtype = doc.xref_get_key(form_xref, "Subtype")
             if not subtype or subtype[1] != "/Form":
                 continue
 
-            # Never touch a Form XObject if it holds the protected background notebook image!
-            res_str = (doc.xref_get_key(form_xref, "Resources")[1] or "")
-            if any(f"{bg_x} 0 R" in res_str for bg_x in protected_bg_xrefs):
+            res_str = doc.xref_get_key(form_xref, "Resources")[1] or ""
+            if any(f"{bg_x} 0 R" in res_str for bg_x in protected_page_xrefs):
                 continue
 
             f_stream = doc.xref_stream(form_xref) or b""
@@ -185,34 +220,109 @@ def _clean_watermark_form_xobjects(
                 continue
 
             f_text = f_stream.decode("latin1", errors="ignore")
-
-            # Check A: Does the Form stream contain competitor text strings?
-            # Extract PDF literal strings (...) inside the Form stream
             literal_strings = " ".join(re.findall(r"\(([^()]{1,120})\)", f_text))
             if _is_competitor_text(literal_strings, extra_keywords) or _is_competitor_text(f_text, extra_keywords):
                 doc.update_stream(form_xref, b"")
                 cleaned += 1
                 continue
 
-            # Check B: Does this Form XObject use a low-opacity ExtGState (/ca < 0.8) typical of a watermark stamp?
             obj_def = doc.xref_object(form_xref) or ""
-            has_low_op_gs = False
             for m in re.finditer(r"/([A-Za-z0-9_\-\.]+)\s+(\d+)\s+0\s+R", obj_def + " " + res_str):
                 gs_xref = int(m.group(2))
                 gs_obj = doc.xref_object(gs_xref) or ""
-                if "/ExtGState" in gs_obj or "/ca" in gs_obj or "/CA" in gs_obj:
+                if "/ExtGState" in gs_obj or "/ca" in gs_obj or "/CA" in gs_obj or "/BM" in gs_obj:
                     ca_m = re.search(r"/(?:ca|CA)\s+([0-9]*\.?[0-9]+)", gs_obj)
-                    if ca_m and float(ca_m.group(1)) < 0.80:
-                        has_low_op_gs = True
-                        break
-
-            if has_low_op_gs and len(f_stream) < 65536:
-                doc.update_stream(form_xref, b"")
-                cleaned += 1
+                    has_multiply = "/Multiply" in gs_obj or "/Screen" in gs_obj or "/Darken" in gs_obj
+                    if (ca_m and float(ca_m.group(1)) < 0.85) or has_multiply:
+                        if len(f_stream) < 65536:
+                            doc.update_stream(form_xref, b"")
+                            cleaned += 1
+                            break
     except Exception:
         pass
 
     return cleaned
+
+
+def _clean_faint_watermark_on_white_scan(doc: fitz.Document, xref: int) -> bool:
+    """
+    Specifically for FLATTENED white-background scans (like Ktuspecial.in pages where the
+    faint pastel-blue/gray logo was merged into the single page JPEG before PDF creation):
+    - Checks that the scan has a pure white background (70th percentile luminance >= 245).
+      (This automatically skips gray phone-camera photos like ktunotes.live!)
+    - In the center watermark zone (x: 15%..85%, y: 20%..78%), whitens ONLY washed-out
+      faint gray / faint pastel-blue watermark pixels (luminance 198..247) while keeping
+      100% of dark handwriting ink (luminance < 190) crisp and untouched.
+    """
+    try:
+        pix = fitz.Pixmap(doc, xref)
+        if pix.width < 350 or pix.height < 350 or pix.alpha:
+            return False
+        if pix.colorspace and pix.colorspace.n not in (1, 3):
+            pix = fitz.Pixmap(fitz.csRGB, pix)
+
+        w, h, n = pix.width, pix.height, pix.n
+        samples = bytearray(pix.samples)
+
+        # 1) Verify this is a pure-white background scan (like CamScanner / ktuspecial.in)
+        # Gray shadow camera photos (like ktunotes.live) have median_bg ~ 185..225 and will be skipped!
+        bg_lums = []
+        step_y = max(1, h // 24)
+        step_x = max(1, w // 24)
+        for sy in range(0, h, step_y):
+            row_off = sy * w * n
+            for sx in range(0, w, step_x):
+                idx = row_off + sx * n
+                if n == 1:
+                    bg_lums.append(samples[idx])
+                else:
+                    bg_lums.append(
+                        (samples[idx] * 299 + samples[idx + 1] * 587 + samples[idx + 2] * 114) // 1000
+                    )
+        bg_lums.sort()
+        white_bg = bg_lums[int(len(bg_lums) * 0.65)] if bg_lums else 0
+
+        # Strictly require a clean white scan background (>= 244)
+        if white_bg < 244:
+            return False
+
+        # Center logo region where Ktuspecial / Ktunotes logos sit (x: 14%..86%, y: 18%..80%)
+        cx0, cx1 = int(w * 0.14), int(w * 0.86)
+        cy0, cy1 = int(h * 0.18), int(h * 0.80)
+
+        # In ktuspecial.in, handwriting is black/dark-gray (lum < 180)
+        # while the faint graduation-cap / KTU SPECIAL watermark is light gray/blue (lum 196..248).
+        min_wm_lum = 196
+        max_wm_lum = 249
+        modified = False
+
+        for y in range(cy0, cy1):
+            row_base = y * w * n
+            for x in range(cx0, cx1):
+                i = row_base + x * n
+                if n == 1:
+                    lum = samples[i]
+                    if min_wm_lum <= lum <= max_wm_lum:
+                        samples[i] = 255
+                        modified = True
+                else:
+                    r_c, g_c, b_c = samples[i], samples[i + 1], samples[i + 2]
+                    lum = (r_c * 299 + g_c * 587 + b_c * 114) // 1000
+                    if min_wm_lum <= lum <= max_wm_lum:
+                        # Faint gray or faint pastel-blue watermark tint -> turn pure white (255)
+                        samples[i] = 255
+                        samples[i + 1] = 255
+                        samples[i + 2] = 255
+                        modified = True
+
+        if modified:
+            cleaned_pix = fitz.Pixmap(pix.colorspace, w, h, bytes(samples), 0)
+            doc.update_stream(xref, cleaned_pix.tobytes("jpeg", jpg_quality=93))
+            return True
+    except Exception:
+        pass
+
+    return False
 
 
 def remove_existing_watermarks(
@@ -221,8 +331,7 @@ def remove_existing_watermarks(
 ) -> dict[str, int]:
     """
     Removes existing text watermarks, hyperlink watermarks, Form XObject stamps,
-    and overlay logo images (like the centered "KTU ktunotes.live 2024 SCHEME NOTES" logo)
-    while 100% protecting the underlying handwritten notebook scan on every page.
+    repeated/overlay logo images, and flattened white-scan faint watermarks.
     """
     removed_text_count = 0
     removed_image_count = 0
@@ -231,39 +340,30 @@ def remove_existing_watermarks(
 
     xref_meta_cache: dict[int, dict] = {}
     hash_page_count: Counter[str] = Counter()
-    dims_page_count: Counter[tuple[int, int]] = Counter()
     xref_page_count: Counter[int] = Counter()
-
-    # Per-page ordered list of image xrefs and protected background xrefs
     page_img_xrefs: dict[int, list[int]] = {}
-    protected_notebook_xrefs: set[int] = set()
+    page_bbox_by_xref: dict[int, dict[int, list[fitz.Rect]]] = {}
 
     # ------------------------------------------------------------------
-    # PASS 1: Catalog all images on every page & lock the main notebook scan
+    # PASS 1: Inspect every image on every page & count cross-page repeats FIRST
+    # (A real handwritten page NEVER repeats on 2+ pages; a watermark ALWAYS repeats!)
     # ------------------------------------------------------------------
     for p_idx, page in enumerate(doc):
-        r = page.rect
-        page_area = max(1.0, r.width * r.height)
-
-        # Collect all image xrefs on this page (including those inside Form XObjects!)
-        raw_imgs = page.get_images(full=True)
         ordered_xrefs: list[int] = []
-        for im in raw_imgs:
+        for im in page.get_images(full=True):
             x = im[0]
             if x not in ordered_xrefs:
                 ordered_xrefs.append(x)
             if x not in xref_meta_cache:
                 xref_meta_cache[x] = _inspect_image_xref(doc, x)
 
-        # Also get rendered bounding boxes via get_image_info(xrefs=True)
-        # (Works even when get_image_rects() returns [] for images inside Form XObjects!)
-        bbox_by_xref: dict[int, list[fitz.Rect]] = {}
+        bbox_map: dict[int, list[fitz.Rect]] = {}
         try:
             for info_item in page.get_image_info(xrefs=True):
                 ix = info_item.get("xref", 0)
                 ibbox = info_item.get("bbox")
                 if ix and ibbox:
-                    bbox_by_xref.setdefault(ix, []).append(fitz.Rect(ibbox))
+                    bbox_map.setdefault(ix, []).append(fitz.Rect(ibbox))
                     if ix not in ordered_xrefs:
                         ordered_xrefs.append(ix)
                     if ix not in xref_meta_cache:
@@ -272,99 +372,104 @@ def remove_existing_watermarks(
             pass
 
         page_img_xrefs[p_idx] = ordered_xrefs
+        page_bbox_by_xref[p_idx] = bbox_map
 
-        # Identify which image (if any) is the MAIN HANDWRITTEN NOTEBOOK SCAN on this page:
-        # A notebook scan is an OPAQUE image (no /SMask or transparency) that covers the largest
-        # area on the page (>= 45% of page area or highest pixel resolution on a scan page).
-        opaque_candidates: list[tuple[float, int, int]] = []
-        for x in ordered_xrefs:
-            meta = xref_meta_cache[x]
-            if meta["has_transparency"]:
-                continue  # A transparent PNG/SMask image is an overlay, never a camera scan!
-            rects = bbox_by_xref.get(x) or page.get_image_rects(x)
-            max_ratio = max(((ir.width * ir.height) / page_area for ir in rects), default=0.0)
-            opaque_candidates.append((max_ratio, meta["pixel_area"], x))
-
-        if len(ordered_xrefs) == 1 and opaque_candidates:
-            # Sole opaque image on the page -> 100% protected notebook scan
-            protected_notebook_xrefs.add(opaque_candidates[0][2])
-        elif opaque_candidates:
-            # Multiple images on the page: lock the largest opaque image as the notebook scan
-            # if it covers >= 40% of the page (or has > 250,000 pixels)
-            opaque_candidates.sort(reverse=True)
-            best_ratio, best_px, best_xref = opaque_candidates[0]
-            if best_ratio >= 0.40 or best_px >= 250_000:
-                protected_notebook_xrefs.add(best_xref)
-
-        # Count cross-page repetitions for all NON-protected images
         seen_hashes: set[str] = set()
-        seen_dims: set[tuple[int, int]] = set()
         for x in ordered_xrefs:
-            if x in protected_notebook_xrefs:
-                continue
             xref_page_count[x] += 1
-            meta = xref_meta_cache[x]
-            if meta["sha1"]:
-                seen_hashes.add(meta["sha1"])
-            if meta["dims"] != (0, 0):
-                seen_dims.add(meta["dims"])
-
+            h = xref_meta_cache[x]["sha1"]
+            if h:
+                seen_hashes.add(h)
         for h in seen_hashes:
             hash_page_count[h] += 1
-        for d in seen_dims:
-            dims_page_count[d] += 1
+
+    # Any image whose xref OR SHA1 pixel hash appears on >= 2 pages is a REPEATED WATERMARK!
+    repeated_watermark_xrefs: set[int] = set()
+    if num_pages >= 2:
+        for x, meta in xref_meta_cache.items():
+            h = meta["sha1"]
+            if xref_page_count[x] >= 2 or (h and hash_page_count[h] >= 2):
+                repeated_watermark_xrefs.add(x)
 
     # ------------------------------------------------------------------
-    # PASS 2: Delete watermark overlay images, Form XObjects, text & links
+    # PASS 2: Per-page protection of unique handwriting scan & removal of watermarks
     # ------------------------------------------------------------------
     for p_idx, page in enumerate(doc):
+        r = page.rect
+        page_area = max(1.0, r.width * r.height)
         ordered_xrefs = page_img_xrefs.get(p_idx, [])
-        has_protected_scan_on_page = any(x in protected_notebook_xrefs for x in ordered_xrefs)
+        bbox_map = page_bbox_by_xref.get(p_idx, {})
 
+        # Identify the UNIQUE handwritten notebook scan on THIS page:
+        # Must NOT be a repeated cross-page watermark, must NOT have transparency,
+        # and must NOT be a washed-out logo with zero dark ink.
+        protected_on_this_page: set[int] = set()
+
+        if len(ordered_xrefs) == 1:
+            sole_x = ordered_xrefs[0]
+            sole_meta = xref_meta_cache[sole_x]
+            # If the sole image on the page is unique to this page (not repeated on all pages),
+            # protect it as the handwritten scan!
+            if sole_x not in repeated_watermark_xrefs and not sole_meta["is_washed_out_logo"]:
+                protected_on_this_page.add(sole_x)
+        elif len(ordered_xrefs) >= 2:
+            # Page has 2+ images (e.g. 1 unique handwriting scan + 1 watermark logo)
+            scan_candidates: list[tuple[float, float, int, int]] = []
+            for x in ordered_xrefs:
+                if x in repeated_watermark_xrefs:
+                    continue  # Repeated across pages = watermark!
+                meta = xref_meta_cache[x]
+                if meta["has_transparency"] or meta["is_washed_out_logo"]:
+                    continue  # Transparent or washed-out = watermark!
+                rects = bbox_map.get(x) or page.get_image_rects(x)
+                max_ratio = max(((ir.width * ir.height) / page_area for ir in rects), default=0.0)
+                scan_candidates.append((max_ratio, meta["dark_ink_ratio"], meta["pixel_area"], x))
+
+            if scan_candidates:
+                scan_candidates.sort(reverse=True)
+                protected_on_this_page.add(scan_candidates[0][3])
+
+        # Decide which image xrefs on this page are watermarks to delete
         xrefs_to_delete: set[int] = set()
-
         for x in ordered_xrefs:
-            # NEVER touch the protected handwritten notebook scan!
-            if x in protected_notebook_xrefs:
+            if x in protected_on_this_page:
                 continue
 
             meta = xref_meta_cache[x]
-            img_hash = meta["sha1"]
-            dims = meta["dims"]
 
-            # RULE 1: Any image with transparency (/SMask, /Mask, or alpha channel)
-            # In KTU notes PDFs, centered logos like "KTU ktunotes.live 2024 SCHEME NOTES"
-            # have transparency so the handwriting underneath shows through.
-            if meta["has_transparency"]:
+            # 1) Repeated across >= 2 pages (catches ktuspecial.in & ktunotes.live logos 100%)
+            if x in repeated_watermark_xrefs:
                 xrefs_to_delete.add(x)
                 continue
 
-            # RULE 2: Same xref ID, same SHA1 image hash, or same pixel dimensions
-            # repeats across >= 2 pages (and is NOT a protected notebook scan)
-            if num_pages >= 2 and (
-                xref_page_count[x] >= 2
-                or hash_page_count.get(img_hash, 0) >= 2
-                or (dims_page_count.get(dims, 0) >= max(2, int(num_pages * 0.35)))
-            ):
+            # 2) Has transparency (/SMask, /Mask, alpha) or is a washed-out faint logo
+            if meta["has_transparency"] or meta["is_washed_out_logo"]:
                 xrefs_to_delete.add(x)
                 continue
 
-            # RULE 3: This page is a handwritten notebook scan (has a protected full-page photo)
-            # AND there is a 2nd extra image overlaid on the same page!
-            if has_protected_scan_on_page and len(ordered_xrefs) >= 2:
+            # 3) Extra image on a page that already has a protected handwriting scan
+            if protected_on_this_page and len(ordered_xrefs) >= 2:
                 xrefs_to_delete.add(x)
                 continue
 
-        # Execute complete removal of all identified watermark image xrefs on this page
+        # Delete all identified watermark image layers on this page
         for x in xrefs_to_delete:
-            smask_x = xref_meta_cache.get(x, {}).get("smask_xref", 0)
-            _nuke_image_xref(doc, page, x, smask_x)
+            _nuke_image_xref(doc, page, x)
             removed_image_count += 1
 
         # Clean any `/Subtype /Form` watermark XObjects on this page
         removed_image_count += _clean_watermark_form_xobjects(
-            doc, page, protected_notebook_xrefs, extra_keywords
+            doc, page, protected_on_this_page, extra_keywords
         )
+
+        # If this page had ONLY 1 single flattened image (no separate watermark image layer)
+        # AND it's a pure-white background scan (like flattened ktuspecial.in pages),
+        # bleach the faint pastel/gray watermark pixels in the center while keeping dark ink:
+        remaining_xrefs = [x for x in ordered_xrefs if x not in xrefs_to_delete]
+        if len(remaining_xrefs) == 1:
+            sole_remaining = remaining_xrefs[0]
+            if _clean_faint_watermark_on_white_scan(doc, sole_remaining):
+                removed_image_count += 1
 
         # ------------------------------------------------------------------
         # Redact competitor watermark text lines/spans (never touching images)
@@ -398,7 +503,6 @@ def remove_existing_watermarks(
 
         if page_has_redactions:
             try:
-                # CRITICAL: PDF_REDACT_IMAGE_NONE ensures underlying notebook photos are untouched
                 page.apply_redactions(
                     images=fitz.PDF_REDACT_IMAGE_NONE,
                     graphics=fitz.PDF_REDACT_LINE_ART_NONE,
