@@ -137,7 +137,7 @@
                 AI <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">Activity Points</span> Calculator
             </h1>
             <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
-                Upload your official certificates to verify authenticity, inspect recipient names &amp; signatures with KTU Vision Brain AI (Qwen3-VL-8B), apply KTU Handbook caps, and calculate your exact points.
+                Upload your official certificates to verify authenticity with KTU Vision Brain AI (Qwen3-VL-8B), apply the exact 2024 APJAKTU Handbook rules (highest point per rule, zero duplicate points), and calculate your progress.
             </p>
         </div>
 
@@ -155,9 +155,9 @@
                 <div>
                     <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Student Category</label>
                     <select id="ai-category" onchange="recalculateAuditMath()" class="glass-input w-full rounded-xl px-4 py-3 text-xs sm:text-sm font-bold cursor-pointer">
-                        <option value="regular" selected>Regular Student (100%)</option>
-                        <option value="lateral">Lateral Entry (75%)</option>
-                        <option value="pwd">PwD Student (50%)</option>
+                        <option value="regular" selected>Regular Student (120 Pts • 40/Group)</option>
+                        <option value="lateral">Lateral Entry (90 Pts • 30/Group)</option>
+                        <option value="pwd">PwD Student (60 Pts • 20/Group)</option>
                     </select>
                 </div>
             </div>
@@ -246,7 +246,7 @@
                             <div id="audit-overall-bar" class="progress-bar-fill h-full bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-full" style="width: 0%"></div>
                         </div>
                         <p id="audit-counts-summary" class="text-xs text-slate-500 font-medium">
-                            0 Accepted • 0 Capped/Duplicate • 0 Ineligible
+                            0 Accepted • 0 Duplicate/Capped • 0 Ineligible
                         </p>
                     </div>
 
@@ -292,6 +292,7 @@
             <div class="space-y-3.5">
                 <div class="flex flex-wrap items-center justify-between gap-2 px-1">
                     <h2 class="text-sm sm:text-base font-bold text-slate-900">Forensic Certificate Breakdown</h2>
+                    <span class="text-[11px] font-semibold text-slate-500">Highest point per rule code applied • Duplicates excluded</span>
                 </div>
                 <div id="audit-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
             </div>
@@ -302,7 +303,7 @@
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-bold text-sm sm:text-base mb-1">Kerala Timetable</h3>
             <p class="text-slate-500 text-xs leading-relaxed max-w-lg mx-auto">
-                Powered by KTU Vision Brain (Qwen3-VL-8B Forensic Auditor) • Based on the Official APJAKTU 2024 &amp; 2019 Activity Points Handbooks.
+                Powered by KTU Vision Brain (Qwen3-VL-8B Forensic Auditor) • Official APJAKTU 2024 Activity Points Handbook Engine.
             </p>
         </div>
     </footer>
@@ -316,7 +317,7 @@
 
         if (typeof loadNavigation === 'function') loadNavigation('activity', '', false);
 
-        // Lazy-load pdf.js ONLY when a user selects a PDF file (prevents Android Chrome Low-Memory kills!)
+        // Lazy-load pdf.js ONLY when a PDF is selected (prevents Android Chrome Low-Memory kills!)
         let pdfJsLoadedPromise = null;
         async function ensurePdfJsLoaded() {
             if (window.pdfjsLib) return window.pdfjsLib;
@@ -337,7 +338,7 @@
 
         const VISION_SPACE_POOL  = [
             "KeralaTimetable/ktu-vision-brain"
-            // Duplicate Space on HF and add here for 2x-3x queue concurrency:
+            // Add duplicated Spaces here to multiply queue concurrency:
             // "KeralaTimetable/ktu-vision-brain-2"
         ];
         const API_BASE_URL       = "https://keralatimetable-ktu-papers-api.hf.space";
@@ -360,49 +361,79 @@
             console.warn("Firebase init skipped:", e);
         }
 
+        // =========================================================================
+        // COMPLETE OFFICIAL 2024 APJAKTU HANDBOOK TABLE (ALL 59 CODES: 1.1 TO 3.17)
+        // Includes exact maximum caps and shared sub-block caps from the 2024 PDF
+        // =========================================================================
         const KTU_RULES_2024 = {
-            "1.1": { group: "Group I", max: 40, name: "Sports/Games/Arts Participation" },
-            "1.2": { group: "Group I", max: 40, name: "Sports/Games/Arts Winner (Single)" },
-            "1.3": { group: "Group I", max: 40, name: "Sports/Games/Arts Winner (Group)" },
-            "1.4": { group: "Group I", max: 20, name: "College Magazine Publication" },
-            "1.5": { group: "Group I", max: 5,  name: "Four-Wheeler Driving License (LMV)" },
-            "1.6": { group: "Group I", max: 10, name: "Community Service (2 Days)" },
-            "1.7": { group: "Group I", max: 10, name: "Community Service (1 Week)" },
-            "1.8": { group: "Group I", max: 10, name: "Blood Donation" },
-            "1.9": { group: "Group I", max: 20, name: "THRIVE Project" },
-            "1.10": { group: "Group I", max: 5, name: "Geo-Tagged Tree Planting" },
-            "1.11": { group: "Group I", max: 40, name: "NSS Volunteer (2 Years)" },
-            "1.12": { group: "Group I", max: 40, name: "University Leadership Camp" },
-            "1.19": { group: "Group I", max: 40, name: "NCC Certificate (1Yr/B/C)" },
-            "1.20": { group: "Group I", max: 10, name: "First Aid / CPR / Fire Safety" },
-            "1.21": { group: "Group I", max: 10, name: "Basic Swimming Proficiency" },
+            // GROUP I (1.1 to 1.21)
+            "1.1":  { group: "Group I", max: 40, block: "G1_SPORTS_ARTS", blockMax: 40, eventFamily: "FAM_SPORTS_ARTS", name: "Sports/Games/Arts Participation" },
+            "1.2":  { group: "Group I", max: 40, block: "G1_SPORTS_ARTS", blockMax: 40, eventFamily: "FAM_SPORTS_ARTS", name: "Sports/Games/Arts Winner (Single)" },
+            "1.3":  { group: "Group I", max: 40, block: "G1_SPORTS_ARTS", blockMax: 40, eventFamily: "FAM_SPORTS_ARTS", name: "Sports/Games/Arts Winner (Group)" },
+            "1.4":  { group: "Group I", max: 20, block: "1.4",            blockMax: 20, eventFamily: "1.4",             name: "Publication in College Magazine" },
+            "1.5":  { group: "Group I", max: 5,  block: "1.5",            blockMax: 5,  eventFamily: "1.5",             name: "Four-Wheeler Driving License (LMV)" },
+            "1.6":  { group: "Group I", max: 10, block: "G1_COMM_SERV",   blockMax: 10, eventFamily: "FAM_COMM_SERV",   name: "Community Service & Allied (2 Days)" },
+            "1.7":  { group: "Group I", max: 10, block: "G1_COMM_SERV",   blockMax: 10, eventFamily: "FAM_COMM_SERV",   name: "Community Service & Allied (1 Week)" },
+            "1.8":  { group: "Group I", max: 10, block: "1.8",            blockMax: 10, eventFamily: "1.8",             name: "Blood Donation" },
+            "1.9":  { group: "Group I", max: 20, block: "1.9",            blockMax: 20, eventFamily: "1.9",             name: "THRIVE Project (Min 5 Days/Sem)" },
+            "1.10": { group: "Group I", max: 5,  block: "1.10",           blockMax: 5,  eventFamily: "1.10",            name: "Tree Geo-Tagging (University NSS Cell)" },
+            "1.11": { group: "Group I", max: 40, block: "G1_NSS_NCC",     blockMax: 40, eventFamily: "1.11",            name: "NSS Volunteer (2 Years Completed)" },
+            "1.12": { group: "Group I", max: 40, block: "G1_NSS_NCC",     blockMax: 40, eventFamily: "1.12",            name: "University Leadership Camp (100 Hrs)" },
+            "1.13": { group: "Group I", max: 40, block: "G1_NSS_NCC",     blockMax: 40, eventFamily: "1.13",            name: "State NSS Festival / Meet Winner" },
+            "1.14": { group: "Group I", max: 40, block: "G1_NSS_NCC",     blockMax: 40, eventFamily: "1.14",            name: "NSS/NCC Special Service Appreciation" },
+            "1.15": { group: "Group I", max: 40, block: "G1_NSS_NCC",     blockMax: 40, eventFamily: "1.15",            name: "NSS/NCC State or National Award" },
+            "1.16": { group: "Group I", max: 40, block: "G1_NSS_NCC",     blockMax: 40, eventFamily: "1.16",            name: "Approved National Camp (NIC/NYF/Pre-RDC)" },
+            "1.17": { group: "Group I", max: 40, block: "G1_NSS_NCC",     blockMax: 40, eventFamily: "1.17",            name: "10-Day (50 Hrs) Official State Service" },
+            "1.18": { group: "Group I", max: 40, block: "G1_NSS_NCC",     blockMax: 40, eventFamily: "1.18",            name: "RDC / IDC / International NSS-NCC Event" },
+            "1.19": { group: "Group I", max: 40, block: "G1_NSS_NCC",     blockMax: 40, eventFamily: "1.19",            name: "NCC Certificate (1Yr / B / C)" },
+            "1.20": { group: "Group I", max: 10, block: "G1_LIFE_SKILLS", blockMax: 10, eventFamily: "1.20",            name: "First Aid / CPR / BLS / Fire Safety" },
+            "1.21": { group: "Group I", max: 10, block: "G1_LIFE_SKILLS", blockMax: 10, eventFamily: "1.21",            name: "Basic Swimming Proficiency" },
 
-            "2.1": { group: "Group II", max: 40, name: "Tech-Fest Participation" },
-            "2.2": { group: "Group II", max: 40, name: "Tech-Fest Winner" },
-            "2.3": { group: "Group II", max: 40, name: "Professional Society Competition" },
-            "2.4": { group: "Group II", max: 40, name: "Professional Society Winner" },
-            "2.5": { group: "Group II", max: 15, name: "Workshop/Seminar at IIT/NIT" },
-            "2.6": { group: "Group II", max: 40, name: "Poster Presentation" },
-            "2.7": { group: "Group II", max: 40, name: "Paper Presentation (IIT/NIT)" },
-            "2.8": { group: "Group II", max: 40, name: "Paper Winner (IIT/NIT)" },
-            "2.9": { group: "Group II", max: 40, name: "Paper Presentation (KTU College)" },
-            "2.10": { group: "Group II", max: 40, name: "Paper Winner (KTU College)" },
-            "2.11": { group: "Group II", max: 15, name: "Society Member/Execom/Coordinator" },
-            "2.12": { group: "Group II", max: 30, name: "College/University Union" },
-            "2.14": { group: "Group II", max: 10, name: "Class Representative" },
-            "2.23": { group: "Group II", max: 10, name: "Short-Term Internship (>=2 Wks)" },
-            "2.24": { group: "Group II", max: 30, name: "English Proficiency" },
-            "2.25": { group: "Group II", max: 30, name: "Aptitude (GATE/GRE/CAT)" },
+            // GROUP II (2.1 to 2.25)
+            "2.1":  { group: "Group II", max: 40, block: "G2_TECH_COMP",  blockMax: 40, eventFamily: "FAM_TECH_FEST",   name: "Tech-Fest / Hackathon Participation" },
+            "2.2":  { group: "Group II", max: 40, block: "G2_TECH_COMP",  blockMax: 40, eventFamily: "FAM_TECH_FEST",   name: "Tech-Fest Winner" },
+            "2.3":  { group: "Group II", max: 40, block: "G2_TECH_COMP",  blockMax: 40, eventFamily: "FAM_PROF_COMP",   name: "Professional Society Competition Participation" },
+            "2.4":  { group: "Group II", max: 40, block: "G2_TECH_COMP",  blockMax: 40, eventFamily: "FAM_PROF_COMP",   name: "Professional Society Competition Winner" },
+            "2.5":  { group: "Group II", max: 15, block: "2.5",           blockMax: 15, eventFamily: "2.5",             name: "Workshop/Seminar at IIT/NIT/INI/NIRF Top 100" },
+            "2.6":  { group: "Group II", max: 40, block: "G2_PAPERS",     blockMax: 40, eventFamily: "2.6",             name: "Poster Presentation Participation" },
+            "2.7":  { group: "Group II", max: 40, block: "G2_PAPERS",     blockMax: 40, eventFamily: "FAM_PAPER_PREM",  name: "Paper Presentation (KTU/IIT/NIT/NIRF Top 100)" },
+            "2.8":  { group: "Group II", max: 40, block: "G2_PAPERS",     blockMax: 40, eventFamily: "FAM_PAPER_PREM",  name: "Paper Presentation Winner (KTU/IIT/NIT/NIRF)" },
+            "2.9":  { group: "Group II", max: 40, block: "G2_PAPERS",     blockMax: 40, eventFamily: "FAM_PAPER_COLL",  name: "Paper Presentation (KTU Affiliated College)" },
+            "2.10": { group: "Group II", max: 40, block: "G2_PAPERS",     blockMax: 40, eventFamily: "FAM_PAPER_COLL",  name: "Paper Presentation Winner (KTU College)" },
+            "2.11": { group: "Group II", max: 15, block: "2.11",          blockMax: 15, eventFamily: "2.11",            name: "Student Professional Society Role (IEEE/IET/ACM)" },
+            "2.12": { group: "Group II", max: 30, block: "2.12",          blockMax: 30, eventFamily: "2.12",            name: "College / University Union Member or Bearer" },
+            "2.13": { group: "Group II", max: 10, block: "2.13",          blockMax: 10, eventFamily: "2.13",            name: "Department Student Association Role" },
+            "2.14": { group: "Group II", max: 10, block: "2.14",          blockMax: 10, eventFamily: "2.14",            name: "Class Representative (CR)" },
+            "2.15": { group: "Group II", max: 5,  block: "2.15",          blockMax: 5,  eventFamily: "2.15",            name: "Industrial Visit Coordinator (Min 6 Days)" },
+            "2.16": { group: "Group II", max: 10, block: "2.16",          blockMax: 10, eventFamily: "2.16",            name: "Placement Cell (CGPU) Member/Coordinator" },
+            "2.17": { group: "Group II", max: 10, block: "2.17",          blockMax: 10, eventFamily: "2.17",            name: "IEDC Cell Execom / Office Bearer / Coordinator" },
+            "2.18": { group: "Group II", max: 10, block: "2.18",          blockMax: 10, eventFamily: "2.18",            name: "YIP (K-DISC) Student Coordinator" },
+            "2.19": { group: "Group II", max: 20, block: "2.19",          blockMax: 20, eventFamily: "2.19",            name: "STRIDE (K-DISC) Volunteer / Leadership Role" },
+            "2.20": { group: "Group II", max: 10, block: "2.20",          blockMax: 10, eventFamily: "2.20",            name: "College Magazine Editorial Board Member" },
+            "2.21": { group: "Group II", max: 10, block: "2.21",          blockMax: 10, eventFamily: "2.21",            name: "Hobby Club Execom Member / Convenor" },
+            "2.22": { group: "Group II", max: 20, block: "2.22",          blockMax: 20, eventFamily: "2.22",            name: "ICFOSS / FOSS Club Activity & Contributions" },
+            "2.23": { group: "Group II", max: 10, block: "2.23",          blockMax: 10, eventFamily: "2.23",            name: "Short-Term Internship (>= 2 Weeks / 10 Days)" },
+            "2.24": { group: "Group II", max: 30, block: "2.24",          blockMax: 30, eventFamily: "2.24",            name: "English Proficiency (TOEFL/IELTS/PTE/BEC)" },
+            "2.25": { group: "Group II", max: 30, block: "2.25",          blockMax: 30, eventFamily: "2.25",            name: "Aptitude Proficiency (GRE/GATE/CAT/GMAT)" },
 
-            "3.1": { group: "Group III", max: 20, name: "Industrial Visit Report" },
-            "3.2": { group: "Group III", max: 20, name: "Best Project / Seminar" },
-            "3.3": { group: "Group III", max: 20, name: "Long-Term Internship" },
-            "3.5": { group: "Group III", max: 35, name: "YIP (K-DISC)" },
-            "3.9": { group: "Group III", max: 40, name: "Registered Startup" },
-            "3.10": { group: "Group III", max: 40, name: "Patent (Filed/Granted)" },
-            "3.15": { group: "Group III", max: 40, name: "National Hackathon Winner" },
-            "3.16": { group: "Group III", max: 40, name: "International Hackathon" },
-            "3.17": { group: "Group III", max: 40, name: "Approved Skilling (Coursera/NPTEL)" }
+            // GROUP III (3.1 to 3.17)
+            "3.1":  { group: "Group III", max: 20, block: "G3_IND_PROJ",  blockMax: 20, eventFamily: "3.1",             name: "Industrial Visit Report (Min 4 Industries)" },
+            "3.2":  { group: "Group III", max: 20, block: "G3_IND_PROJ",  blockMax: 20, eventFamily: "3.2",             name: "Best Mini Project / Best Project / Best Seminar" },
+            "3.3":  { group: "Group III", max: 20, block: "G3_IND_PROJ",  blockMax: 20, eventFamily: "3.3",             name: "Long-Term Internship (Min 3.5 Months)" },
+            "3.4":  { group: "Group III", max: 30, block: "3.4",          blockMax: 30, eventFamily: "3.4",             name: "LEAP – IIT Madras Incubation Cell" },
+            "3.5":  { group: "Group III", max: 35, block: "3.5",          blockMax: 35, eventFamily: "3.5",             name: "YIP – Young Innovators Programme (K-DISC)" },
+            "3.6":  { group: "Group III", max: 35, block: "3.6",          blockMax: 35, eventFamily: "3.6",             name: "STRIDE Innovation Programme (K-DISC)" },
+            "3.7":  { group: "Group III", max: 35, block: "3.7",          blockMax: 35, eventFamily: "3.7",             name: "GDC AI Workforce Internship (AICTE/NHM)" },
+            "3.8":  { group: "Group III", max: 25, block: "3.8",          blockMax: 25, eventFamily: "3.8",             name: "ICFOSS Certified Working FOSS Solution" },
+            "3.9":  { group: "Group III", max: 40, block: "G3_IPR_INNOV", blockMax: 40, eventFamily: "3.9",             name: "Legally Registered Start-up Company" },
+            "3.10": { group: "Group III", max: 40, block: "G3_IPR_INNOV", blockMax: 40, eventFamily: "3.10",            name: "Patents (Filed / Published / Granted / Licensed)" },
+            "3.11": { group: "Group III", max: 40, block: "G3_IPR_INNOV", blockMax: 40, eventFamily: "3.11",            name: "Validated Prototype / Industry Adopted Tech" },
+            "3.12": { group: "Group III", max: 40, block: "G3_IPR_INNOV", blockMax: 40, eventFamily: "3.12",            name: "Venture Capital / Angel Funding" },
+            "3.13": { group: "Group III", max: 40, block: "G3_IPR_INNOV", blockMax: 40, eventFamily: "3.13",            name: "Validated Societal Innovation" },
+            "3.14": { group: "Group III", max: 40, block: "3.14",         blockMax: 40, eventFamily: "3.14",            name: "Research Publication in SCI/Scopus Journal" },
+            "3.15": { group: "Group III", max: 40, block: "3.15",         blockMax: 40, eventFamily: "3.15",            name: "National Hackathon Winner (SIH/KAVACH/MoE/AICTE)" },
+            "3.16": { group: "Group III", max: 40, block: "3.16",         blockMax: 40, eventFamily: "3.16",            name: "International Hackathon (NASA/Imagine Cup/etc.)" },
+            "3.17": { group: "Group III", max: 40, block: "3.17",         blockMax: 40, eventFamily: "3.17",            name: "University Approved Skilling Course (1 Pt/Hr)" }
         };
 
         let queuedCerts = [];
@@ -492,8 +523,7 @@
 
                 try {
                     await prepareCertItem(certItem);
-                    // Free raw File reference immediately so Android Chrome RAM stays low!
-                    certItem.file = null;
+                    certItem.file = null; // Free raw File memory immediately
                     queuedCerts.push(certItem);
                     renderQueuedGrid();
                 } catch (e) {
@@ -661,7 +691,7 @@
             for (const spaceId of shuffledSpaces) {
                 try {
                     if (statusTxtEl) {
-                        statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen3-VL-8B inspecting recipient name, signatures &amp; KTU rules...</span>`;
+                        statusTxtEl.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> <span>Qwen3-VL-8B inspecting recipient name, signatures &amp; KTU 2024 rules...</span>`;
                     }
                     const app = await Client.connect(spaceId);
                     const result = await app.predict("/audit", [payloadJsonStr]);
@@ -785,7 +815,13 @@
             }
         };
 
-        // --- MATH, CAPS & RENDERING ---
+        // =========================================================================
+        // EXACT 2024 KTU MATH ENGINE:
+        // 1. Takes ONLY the SINGLE HIGHEST POINT certificate per Rule Code / Event Family
+        //    (Guideline i: No combining participation & winner; no duplicate rule points)
+        // 2. Enforces Sub-Block Caps (e.g. NSS/NCC 40, Comm Serv 10, Life Skills 10, etc.)
+        // 3. Enforces Group I, Group II, Group III Caps (40 / 30 / 20 pts)
+        // =========================================================================
         window.recalculateAuditMath = function() {
             if (!rawAIResults.length) return;
 
@@ -796,61 +832,122 @@
 
             const indexed = rawAIResults.map((r, i) => ({
                 ...r,
+                originalOrder: i,
                 certObj: queuedCerts[(r.certIndex || (i + 1)) - 1] || queuedCerts[i]
             }));
 
-            const codeEarned = {};
-            const processed = [];
+            // Find the single highest-scoring certificate for each Rule Code AND Event Family
+            // so duplicate uploads or lower-level certificates in the same rule/family are superseded
+            const bestOrderByCode = {};
+            const bestPtsByCode = {};
+            const bestOrderByFamily = {};
+            const bestPtsByFamily = {};
 
             indexed.forEach(item => {
                 const code = String(item.code || '').replace(/^#/, '').trim();
                 const rule = KTU_RULES_2024[code];
                 const pts = Number(item.points) || 0;
+                if (!item.eligible || !rule || pts <= 0) return;
+
+                if (bestPtsByCode[code] === undefined || pts > bestPtsByCode[code]) {
+                    bestPtsByCode[code] = pts;
+                    bestOrderByCode[code] = item.originalOrder;
+                }
+
+                const fam = rule.eventFamily || code;
+                if (bestPtsByFamily[fam] === undefined || pts > bestPtsByFamily[fam]) {
+                    bestPtsByFamily[fam] = pts;
+                    bestOrderByFamily[fam] = item.originalOrder;
+                }
+            });
+
+            const blockEarned = {};
+            const processedByOrder = new Array(indexed.length);
+
+            // Process eligible items in descending order of points so highest points claim block caps first
+            const sortedForScoring = [...indexed].sort((a, b) => (Number(b.points) || 0) - (Number(a.points) || 0));
+
+            sortedForScoring.forEach(item => {
+                const code = String(item.code || '').replace(/^#/, '').trim();
+                const rule = KTU_RULES_2024[code];
+                const pts = Number(item.points) || 0;
 
                 if (!item.eligible || !rule || pts <= 0) {
-                    processed.push({
+                    processedByOrder[item.originalOrder] = {
                         ...item,
                         code,
                         status: 'rejected',
                         awardedPoints: 0,
                         group: rule?.group || 'Ineligible',
-                        note: item.reason || 'Not an eligible KTU certificate.'
-                    });
+                        note: item.reason || 'Does not meet KTU 2024 Handbook eligibility criteria.'
+                    };
                     return;
                 }
 
-                const current = codeEarned[code] || 0;
-                if (current >= rule.max) {
-                    processed.push({
+                const fam = rule.eventFamily || code;
+
+                // Rule 1: Only the single highest-point certificate per Rule Code is taken (No duplicate rule points)
+                if (bestOrderByCode[code] !== item.originalOrder) {
+                    processedByOrder[item.originalOrder] = {
                         ...item,
                         code,
                         status: 'capped',
                         awardedPoints: 0,
                         group: rule.group,
-                        note: `Cap reached for #${code} (Max ${rule.max} pts).`
-                    });
+                        note: `Superseded (No Duplicate Points): Highest achievement (${bestPtsByCode[code]} pts) for Code #${code} (${rule.name}) is already counted.`
+                    };
                     return;
                 }
 
-                const award = Math.min(pts, rule.max - current);
-                codeEarned[code] = current + award;
+                // Rule 2: Guideline (i) Page 20 — Participation & Winning points cannot be combined; highest achievement is taken
+                if (bestOrderByFamily[fam] !== item.originalOrder) {
+                    processedByOrder[item.originalOrder] = {
+                        ...item,
+                        code,
+                        status: 'capped',
+                        awardedPoints: 0,
+                        group: rule.group,
+                        note: `Superseded per KTU Guideline (i): Participation and winning points cannot be combined—highest achievement (${bestPtsByFamily[fam]} pts) is already counted.`
+                    };
+                    return;
+                }
 
-                processed.push({
+                // Rule 3: Enforce shared Sub-Block Maximum Cap from KTU 2024 Table 2
+                const blkKey = rule.block || code;
+                const blkMax = rule.blockMax || rule.max;
+                const currentBlk = blockEarned[blkKey] || 0;
+
+                if (currentBlk >= blkMax) {
+                    processedByOrder[item.originalOrder] = {
+                        ...item,
+                        code,
+                        status: 'capped',
+                        awardedPoints: 0,
+                        group: rule.group,
+                        note: `Maximum sub-block limit (${blkMax} pts) reached for ${rule.name}.`
+                    };
+                    return;
+                }
+
+                const award = Math.min(pts, rule.max, blkMax - currentBlk);
+                blockEarned[blkKey] = currentBlk + award;
+
+                processedByOrder[item.originalOrder] = {
                     ...item,
                     code,
                     status: 'accepted',
                     awardedPoints: award,
                     group: rule.group,
-                    note: item.reason || `Verified under Code #${code}.`
-                });
+                    note: item.reason || `Verified under Code #${code} (${rule.name}).`
+                };
             });
 
-            processedAuditItems = processed;
+            processedAuditItems = processedByOrder;
 
             let g1 = 0, g2 = 0, g3 = 0;
             let acc = 0, cap = 0, rej = 0;
 
-            processed.forEach(p => {
+            processedAuditItems.forEach(p => {
                 if (p.status === 'accepted') {
                     acc++;
                     if (p.group === 'Group I') g1 += p.awardedPoints;
@@ -875,7 +972,7 @@
             document.getElementById('audit-overall-pct-badge').innerText = `${overallPct}% Completed`;
             document.getElementById('audit-overall-pct-inline').innerText = `${overallPct}%`;
             document.getElementById('audit-overall-bar').style.width = `${overallPct}%`;
-            document.getElementById('audit-counts-summary').innerText = `${acc} Accepted • ${cap} Capped • ${rej} Ineligible`;
+            document.getElementById('audit-counts-summary').innerText = `${acc} Accepted • ${cap} Duplicate/Capped • ${rej} Ineligible`;
 
             document.getElementById('audit-g1-text').innerText = `${cG1} / ${groupCap} (${g1Pct}%)`;
             document.getElementById('audit-g1-bar').style.width = `${g1Pct}%`;
@@ -897,7 +994,7 @@
                     badge = `<span class="px-2.5 py-0.5 rounded-lg bg-emerald-500/15 text-emerald-700 text-xs font-bold">+${item.awardedPoints} pts (${item.group} • ${sharePct}%)</span>`;
                     border = 'border-emerald-500/35';
                 } else if (item.status === 'capped') {
-                    badge = `<span class="px-2.5 py-0.5 rounded-lg bg-amber-500/15 text-amber-700 text-xs font-bold">0 pts (Capped)</span>`;
+                    badge = `<span class="px-2.5 py-0.5 rounded-lg bg-amber-500/15 text-amber-700 text-xs font-bold">0 pts (Duplicate / Capped)</span>`;
                     border = 'border-amber-500/35';
                 } else {
                     badge = `<span class="px-2.5 py-0.5 rounded-lg bg-rose-500/15 text-rose-700 text-xs font-bold">0 pts (Rejected)</span>`;
