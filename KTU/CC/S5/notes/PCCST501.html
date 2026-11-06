@@ -25,84 +25,62 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Vibrant Mesh Background for Liquid Glass Refraction */
-        .bg-liquid-mesh {
+        /* Light Mode Mesh Background (Automatically overridden by components.js in Dark Mode) */
+        .bg-mesh {
             background-color: #f1f5f9;
             background-image: 
-                radial-gradient(at 15% 15%, hsla(217, 100%, 75%, 0.28) 0px, transparent 50%),
-                radial-gradient(at 85% 10%, hsla(192, 100%, 65%, 0.25) 0px, transparent 50%),
-                radial-gradient(at 50% 55%, hsla(245, 100%, 82%, 0.20) 0px, transparent 55%),
-                radial-gradient(at 10% 90%, hsla(199, 100%, 70%, 0.22) 0px, transparent 50%);
+                radial-gradient(at 15% 15%, hsla(217, 100%, 75%, 0.25) 0px, transparent 50%),
+                radial-gradient(at 85% 10%, hsla(192, 100%, 65%, 0.22) 0px, transparent 50%),
+                radial-gradient(at 50% 55%, hsla(245, 100%, 82%, 0.18) 0px, transparent 55%),
+                radial-gradient(at 10% 90%, hsla(199, 100%, 70%, 0.20) 0px, transparent 50%);
             background-attachment: fixed;
         }
 
-        /* Outer Main Liquid Glass Shell */
-        .liquid-shell {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.48) 100%);
-            backdrop-filter: blur(28px) saturate(190%);
-            -webkit-backdrop-filter: blur(28px) saturate(190%);
-            border: 1px solid rgba(255, 255, 255, 0.75);
-            box-shadow: 
-                0 24px 48px -12px rgba(15, 23, 42, 0.07),
-                inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95),
-                inset 0 -1px 1px 0 rgba(255, 255, 255, 0.4);
+        /* Main Outer Liquid Glass Panel (Compatible with components.js .glass-panel) */
+        .glass-panel {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.52) 100%);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
         }
 
-        /* Liquid Glass Module Cards */
-        .liquid-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.42) 100%);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 
-                0 10px 25px -5px rgba(30, 58, 138, 0.05),
-                inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .liquid-card:hover {
-            transform: translateY(-5px);
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.6) 100%);
-            border-color: rgba(147, 197, 253, 0.95);
-            box-shadow: 
-                0 20px 35px -10px rgba(37, 99, 235, 0.12),
-                inset 0 1.5px 2px 0 rgba(255, 255, 255, 1);
-        }
-
-        /* Liquid Pill Tags */
-        .liquid-pill {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
-        }
-
-        /* Liquid Glass WhatsApp Banner */
-        .liquid-whatsapp {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.82) 0%, rgba(240, 253, 244, 0.65) 100%);
+        /* Liquid Glass Module Cards & WhatsApp Banner (Compatible with components.js .real-glass & .hybrid-card) */
+        .real-glass {
+            background: rgba(255, 255, 255, 0.68);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 
-                0 12px 30px -8px rgba(37, 211, 102, 0.15),
-                inset 0 1px 1px 0 rgba(255, 255, 255, 1);
         }
 
-        /* Liquid Primary Button */
-        .btn-liquid-blue {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            box-shadow: 
-                0 8px 20px -4px rgba(37, 99, 235, 0.35),
-                inset 0 1px 1px 0 rgba(255, 255, 255, 0.35);
+        .module-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.85) 0%, rgba(248, 250, 252, 0.65) 100%);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s ease, box-shadow 0.25s ease;
         }
-        .btn-liquid-blue:hover {
-            background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-            box-shadow: 
-                0 12px 24px -4px rgba(37, 99, 235, 0.45),
-                inset 0 1px 1px 0 rgba(255, 255, 255, 0.45);
+        .module-card.active:hover {
+            transform: translateY(-4px);
+            border-color: #60a5fa !important;
+            box-shadow: 0 16px 32px -8px rgba(37, 99, 235, 0.14);
         }
 
-        /* Smooth Accordion Styling */
+        /* Inner Glass Sub-elements (Pills, Accordions) */
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+        }
+
+        /* Primary Liquid Action Button (Works in both Light & Dark Mode without turning grey) */
+        .btn-download-primary {
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.22) !important;
+            box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.35), inset 0 1px 1px 0 rgba(255, 255, 255, 0.3) !important;
+        }
+        .btn-download-primary:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #4338ca 100%) !important;
+            box-shadow: 0 12px 24px -4px rgba(37, 99, 235, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4) !important;
+        }
+
+        /* Smooth Accordion Animation */
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
         details[open] summary ~ * { animation: sweep .25s ease-out; }
@@ -136,267 +114,270 @@
     <meta property="og:type" content="website">
 </head>
 
-<body class="bg-liquid-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
 
-    <!-- Ambient Floating Color Orbs for Liquid Refraction -->
-    <div class="fixed top-16 -left-20 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl pointer-events-none z-0"></div>
-    <div class="fixed top-1/2 -right-24 w-80 h-80 bg-cyan-400/20 rounded-full blur-3xl pointer-events-none z-0"></div>
-    <div class="fixed bottom-10 left-1/4 w-72 h-72 bg-indigo-400/15 rounded-full blur-3xl pointer-events-none z-0"></div>
+    <!-- Ambient Orbs (Automatically optimized by components.js in 120FPS Dark Mode) -->
+    <div class="ambient-orb fixed top-16 -left-20 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl pointer-events-none z-0"></div>
+    <div class="ambient-orb fixed bottom-10 -right-20 w-80 h-80 bg-indigo-400/15 rounded-full blur-3xl pointer-events-none z-0"></div>
 
-    <div id="navigation-container" class="relative z-20"></div>
+    <div id="navigation-container"></div>
 
     <main class="flex-grow max-w-4xl mx-auto px-3.5 sm:px-6 py-6 sm:py-10 w-full relative z-10">
         
-        <div class="liquid-shell rounded-[28px] sm:rounded-[36px] p-5 sm:p-8 md:p-10 w-full relative overflow-hidden">
+        <!-- Outer Glass Container (.glass-panel is natively styled in Dark Mode by components.js) -->
+        <div class="glass-panel rounded-3xl sm:rounded-[32px] p-5 sm:p-8 md:p-10 w-full relative overflow-hidden">
             
-            <!-- Back Button -->
-            <div class="flex justify-start mb-5">
-                <a href="/notes.html" class="liquid-pill inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-600 hover:text-blue-600 px-3.5 py-2 rounded-full transition-all active:scale-95 group">
-                    <i class="fas fa-arrow-left transform group-hover:-translate-x-0.5 transition-transform text-xs text-blue-500"></i>
-                    Browse All Subjects
-                </a>
-            </div>
-
-            <!-- Hero Header -->
-            <div class="text-center mb-7 sm:mb-9">
-                <div class="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-tr from-blue-600 to-cyan-500 rounded-2xl mb-4 text-white shadow-lg shadow-blue-500/25 border border-white/40">
-                    <i class="fas fa-network-wired text-2xl"></i>
-                </div>
-                <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-2.5 tracking-tight leading-tight">
-                    KTU S5 Computer Networks Notes
-                </h1>
-                <p class="text-slate-600 font-medium text-xs sm:text-sm md:text-base max-w-xl mx-auto mb-4">
-                    S5 B.Tech (Common Course) • Exam-Oriented Short Notes, Worked Numericals & Formula Sheets
-                </p>
-
-                <!-- Course Metadata Pills -->
-                <div class="flex flex-wrap items-center justify-center gap-2">
-                    <span class="liquid-pill text-slate-700 text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
-                        <i class="fas fa-hashtag text-blue-600"></i> PCCST501
-                    </span>
-                    <span class="liquid-pill text-slate-700 text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
-                        <i class="fas fa-layer-group text-cyan-600"></i> 2024 Scheme
-                    </span>
-                    <span class="liquid-pill text-slate-700 text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
-                        <i class="fas fa-bolt text-amber-500"></i> Direct PDF Download
-                    </span>
-                </div>
-            </div>
-
-            <!-- Liquid Glass WhatsApp Channel Banner -->
-            <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" rel="noopener" class="w-full mx-auto mb-7 liquid-whatsapp hover:bg-white/90 text-slate-800 p-4 sm:px-6 rounded-2xl transition-all flex items-center justify-between gap-3.5 active:scale-[0.99] group">
-                <div class="flex items-center gap-3.5">
-                    <div class="bg-[#25D366] text-white w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
-                        <i class="fab fa-whatsapp text-2xl"></i>
-                    </div>
-                    <div class="flex flex-col text-left">
-                        <span class="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors">Follow our WhatsApp Channel</span>
-                        <span class="text-[11px] sm:text-xs font-semibold text-slate-500">For solved KTU question papers & instant updates</span>
-                    </div>
-                </div>
-                <div class="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:bg-[#25D366] group-hover:text-white transition-colors">
-                    <i class="fas fa-chevron-right text-xs"></i>
-                </div>
-            </a>
-
-            <!-- Modules Grid (Mobile-Friendly Cards) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 mb-8">
+            <div class="relative z-10">
                 
-                <!-- MODULE 1 -->
-                <div class="liquid-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-blue-700 bg-blue-100/80 px-3 py-1 rounded-lg border border-blue-200/80">
-                                Module 1
-                            </span>
-                            <span class="text-[11px] font-bold text-slate-500 liquid-pill px-2.5 py-0.5 rounded-md">
-                                <i class="far fa-file-pdf text-rose-500 mr-1"></i>32 Pages
-                            </span>
-                        </div>
-                        <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 leading-snug">
-                            Internet Fundamentals & Application Layer
-                        </h3>
-                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
-                            Covers network architectures, LAN/WAN, Circuit vs. Packet switching delays, OSI vs. TCP/IP models, encapsulation, Client-Server & P2P paradigms, sockets, HTTP, FTP, SMTP, POP3, IMAP, DNS, and BitTorrent (Rarest-first, Tit-for-Tat).
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mb-5">
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">OSI & TCP/IP</span>
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">HTTP, FTP & DNS</span>
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">SMTP, POP3, IMAP</span>
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">BitTorrent P2P</span>
-                        </div>
-                    </div>
-                    <!-- Paste Module 1 Google Drive Link in href below -->
-                    <a href="" target="_blank" rel="noopener" class="btn-liquid-blue text-white font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 w-full">
-                        <i class="fas fa-download"></i> Download Module 1 PDF
+                <!-- Top Back Link -->
+                <div class="flex justify-start mb-5">
+                    <a href="/notes.html" class="inner-glass inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-600 hover:text-indigo-600 px-3.5 py-2 rounded-full transition-all active:scale-95 group">
+                        <i class="fas fa-arrow-left transform group-hover:-translate-x-0.5 transition-transform text-xs text-indigo-500"></i>
+                        Browse All Subjects
                     </a>
                 </div>
 
-                <!-- MODULE 2 -->
-                <div class="liquid-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-blue-700 bg-blue-100/80 px-3 py-1 rounded-lg border border-blue-200/80">
-                                Module 2
-                            </span>
-                            <span class="text-[11px] font-bold text-slate-500 liquid-pill px-2.5 py-0.5 rounded-md">
-                                <i class="far fa-file-pdf text-rose-500 mr-1"></i>25 Pages
-                            </span>
-                        </div>
-                        <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 leading-snug">
-                            Network Layer, Routing, IPv6 & QoS
-                        </h3>
-                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
-                            Detailed notes on datagram vs. virtual-circuit switching, router fabrics (Crossbar, Banyan), IPv4 header & fragmentation, Classful & CIDR subnetting, DHCP, NAT, ICMP, Distance Vector (Bellman-Ford), Link State (Dijkstra), RIP, OSPF, BGP, IPv6, QoS (Leaky/Token bucket), and Linux routing.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mb-5">
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">IPv4, CIDR & NAT</span>
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Bellman-Ford & Dijkstra</span>
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">RIP, OSPF & BGP</span>
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">IPv6 & QoS</span>
-                        </div>
+                <!-- Hero Header -->
+                <div class="text-center mb-7 sm:mb-9">
+                    <div class="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-blue-50 text-blue-600 rounded-2xl mb-4 shadow-sm border border-blue-100">
+                        <i class="fas fa-network-wired text-2xl"></i>
                     </div>
-                    <a href="https://drive.google.com/file/d/1ToF4HqKPfVYBKzQa_zTx8loGsYNAdOGX/view?usp=drivesdk" target="_blank" rel="noopener" class="btn-liquid-blue text-white font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 w-full">
-                        <i class="fas fa-download"></i> Download Module 2 PDF
-                    </a>
-                </div>
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-2.5 tracking-tight leading-tight">
+                        KTU S5 Computer Networks Notes
+                    </h1>
+                    <p class="text-slate-500 font-medium text-xs sm:text-sm md:text-base max-w-xl mx-auto mb-4">
+                        S5 B.Tech (Common Course) • Exam-Oriented Short Notes, Worked Numericals & Formula Sheets
+                    </p>
 
-                <!-- MODULE 3 -->
-                <div class="liquid-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-blue-700 bg-blue-100/80 px-3 py-1 rounded-lg border border-blue-200/80">
-                                Module 3
-                            </span>
-                            <span class="text-[11px] font-bold text-slate-500 liquid-pill px-2.5 py-0.5 rounded-md">
-                                <i class="far fa-file-pdf text-rose-500 mr-1"></i>27 Pages
-                            </span>
-                        </div>
-                        <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 leading-snug">
-                            Data-Link Layer, Wireless LANs & Mobile IP
-                        </h3>
-                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
-                            Explores byte/bit stuffing, Hamming distance, CRC & Checksum, Stop-and-Wait, Go-Back-N & Selective Repeat ARQ, HDLC, PPP, ALOHA, CSMA/CD, CSMA/CA, FDMA/TDMA/CDMA, ARP, Ethernet (802.3), switch learning, 802.11 Wi-Fi, Bluetooth, Mobile IP, and PF_PACKET sockets.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mb-5">
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">CRC & Sliding Window ARQ</span>
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">ALOHA, CSMA/CD & CA</span>
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Ethernet & ARP</span>
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">802.11, Bluetooth & Mobile IP</span>
-                        </div>
-                    </div>
-                    <a href="https://drive.google.com/file/d/1phJD1nkxWmeDNO2FqSrDjIhICGaUBR04/view?usp=drivesdk" target="_blank" rel="noopener" class="btn-liquid-blue text-white font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 w-full">
-                        <i class="fas fa-download"></i> Download Module 3 PDF
-                    </a>
-                </div>
-
-                <!-- MODULE 4 -->
-                <div class="liquid-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-blue-700 bg-blue-100/80 px-3 py-1 rounded-lg border border-blue-200/80">
-                                Module 4
-                            </span>
-                            <span class="text-[11px] font-bold text-slate-500 liquid-pill px-2.5 py-0.5 rounded-md">
-                                <i class="far fa-file-pdf text-rose-500 mr-1"></i>17 Pages
-                            </span>
-                        </div>
-                        <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 leading-snug">
-                            SNMP, ASN.1 & The Physical Layer
-                        </h3>
-                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
-                            Covers network management with SNMP (Manager, Agent, SMI, MIB, PDUs), ASN.1 types & BER TLV encoding, analog/digital signals, Nyquist & Shannon capacity limits, line coding (NRZ, Manchester, AMI), 4B/5B, B8ZS/HDB3 scrambling, PCM, ASK/FSK/PSK/QAM, FDM/TDM/WDM, FHSS/DSSS, and media.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 mb-5">
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">SNMP, SMI, MIB & ASN.1</span>
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Nyquist & Shannon Limits</span>
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Line Coding, PCM & QAM</span>
-                            <span class="liquid-pill text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">FDM, TDM, WDM & Media</span>
-                        </div>
-                    </div>
-                    <a href="https://drive.google.com/file/d/1Y3szfxbwX3L7qzxfVnp0n_fvtRoJtrNj/view?usp=drivesdk" target="_blank" rel="noopener" class="btn-liquid-blue text-white font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 w-full">
-                        <i class="fas fa-download"></i> Download Module 4 PDF
-                    </a>
-                </div>
-
-            </div>
-
-            <!-- Special Thanks / Contributor Liquid Glass Card -->
-            <div class="mb-8 liquid-card rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-                <div class="flex flex-col sm:flex-row items-center gap-3.5">
-                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-500 text-white flex items-center justify-center shadow-md shadow-rose-500/20 flex-shrink-0">
-                        <i class="fas fa-heart text-lg"></i>
-                    </div>
-                    <div>
-                        <span class="text-[10px] font-black uppercase tracking-widest text-blue-700 bg-blue-100/80 px-2.5 py-0.5 rounded-full border border-blue-200 inline-block mb-1">
-                            Special Thanks
+                    <!-- Course Quick-Info Badges -->
+                    <div class="flex flex-wrap items-center justify-center gap-2">
+                        <span class="inner-glass text-slate-700 text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+                            <i class="fas fa-hashtag text-blue-500"></i> PCCST501
                         </span>
-                        <h3 class="text-base sm:text-lg font-extrabold text-slate-900">
-                            Notes by Amal Dev
-                        </h3>
-                        <p class="text-xs sm:text-sm text-slate-600 font-medium">
-                            <i class="fas fa-university text-blue-500 mr-1"></i> College of Engineering Attingal (CEAL) — thank you for creating and sharing these detailed study materials.
-                        </p>
+                        <span class="inner-glass text-slate-700 text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+                            <i class="fas fa-layer-group text-indigo-500"></i> 2024 Scheme
+                        </span>
+                        <span class="inner-glass text-slate-700 text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+                            <i class="fas fa-bolt text-amber-500"></i> Direct PDF Download
+                        </span>
                     </div>
                 </div>
-                <a href="https://api.whatsapp.com/send?text=🚨 *KTU S5 Computer Networks Notes (PCCST501)* %0ADownload Modules 1 to 4 PDFs with worked problems & formula sheets here: https://keralatimetable.in/KTU/CC/S5/notes/PCCST501.html" target="_blank" rel="noopener" class="bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-sm font-bold py-3.5 px-5 rounded-xl transition-all active:scale-95 inline-flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20 flex-shrink-0 w-full sm:w-auto">
-                    <i class="fas fa-share-alt"></i> Share Notes
+
+                <!-- Liquid Glass WhatsApp Channel Banner (.real-glass is natively styled by components.js) -->
+                <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" rel="noopener" class="w-full mx-auto mb-8 real-glass glass-panel-hover text-slate-800 p-4 sm:px-6 rounded-2xl transition-all flex items-center justify-between gap-3.5 active:scale-[0.99] group">
+                    <div class="flex items-center gap-3.5">
+                        <div class="bg-[#25D366] text-white w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
+                            <i class="fab fa-whatsapp text-2xl"></i>
+                        </div>
+                        <div class="flex flex-col text-left">
+                            <span class="text-sm sm:text-base font-black text-slate-900">Follow our WhatsApp Channel</span>
+                            <span class="text-[11px] sm:text-xs font-bold text-slate-500">For solved KTU question papers & instant updates</span>
+                        </div>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center flex-shrink-0 group-hover:bg-[#25D366] group-hover:text-white transition-colors">
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </div>
                 </a>
-            </div>
 
-            <!-- Mobile-Friendly Interactive FAQ Accordion -->
-            <div class="text-left mb-8">
-                <h3 class="text-base sm:text-lg font-black text-slate-900 mb-3.5 flex items-center gap-2">
-                    <i class="fas fa-question-circle text-blue-600"></i> Frequently Asked Questions
-                </h3>
-                <div class="space-y-2.5">
-                    <details class="group liquid-pill rounded-xl p-4 cursor-pointer" open>
-                        <summary class="flex items-center justify-between font-bold text-slate-800 text-xs sm:text-sm">
-                            <span>What is included in these PCCST501 Computer Networks PDFs?</span>
-                            <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180 ml-2"></i>
-                        </summary>
-                        <p class="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed">
-                            Each PDF follows the KTU S5 PCCST501 syllabus in order, featuring clear diagrams, comparison tables, step-by-step worked numerical problems (CRC, Checksum, ALOHA, CSMA/CD, Subnetting, Bellman-Ford, Dijkstra, PCM), and a Formula Sheet with likely 3-mark and 9-mark exam questions at the end.
-                        </p>
-                    </details>
+                <!-- Modules Grid (Note: components.js automatically injects the global Ad banner right above this grid) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 mb-8">
+                    
+                    <!-- MODULE 1 -->
+                    <div class="module-card active hybrid-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-lg border border-blue-100">
+                                    Module 1
+                                </span>
+                                <span class="inner-glass text-[11px] font-bold text-slate-500 px-2.5 py-0.5 rounded-md">
+                                    <i class="far fa-file-pdf text-rose-500 mr-1"></i>32 Pages
+                                </span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 leading-snug">
+                                Internet Fundamentals & Application Layer
+                            </h3>
+                            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed mb-4">
+                                Covers network architectures, LAN/WAN, Circuit vs. Packet switching delays, OSI vs. TCP/IP models, encapsulation, Client-Server & P2P paradigms, sockets, HTTP, FTP, SMTP, POP3, IMAP, DNS, and BitTorrent (Rarest-first, Tit-for-Tat).
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 mb-5">
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">OSI & TCP/IP</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">HTTP, FTP & DNS</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">SMTP, POP3, IMAP</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">BitTorrent P2P</span>
+                            </div>
+                        </div>
+                        <!-- Paste Module 1 Google Drive Link in href below -->
+                        <a href="" target="_blank" rel="noopener" class="btn-download-primary font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 w-full">
+                            <i class="fas fa-download"></i> Download Module 1 PDF
+                        </a>
+                    </div>
 
-                    <details class="group liquid-pill rounded-xl p-4 cursor-pointer">
-                        <summary class="flex items-center justify-between font-bold text-slate-800 text-xs sm:text-sm">
-                            <span>Are these direct PDF links?</span>
-                            <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180 ml-2"></i>
-                        </summary>
-                        <p class="text-xs sm:text-sm text-slate-600 mt-2.5 leading-relaxed">
-                            Yes! We provide direct Google Drive links with zero wait time, popup ads, or forced redirects for a seamless study experience on both mobile and desktop.
-                        </p>
-                    </details>
+                    <!-- MODULE 2 -->
+                    <div class="module-card active hybrid-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-lg border border-blue-100">
+                                    Module 2
+                                </span>
+                                <span class="inner-glass text-[11px] font-bold text-slate-500 px-2.5 py-0.5 rounded-md">
+                                    <i class="far fa-file-pdf text-rose-500 mr-1"></i>25 Pages
+                                </span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 leading-snug">
+                                Network Layer, Routing, IPv6 & QoS
+                            </h3>
+                            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed mb-4">
+                                Detailed notes on datagram vs. virtual-circuit switching, router fabrics (Crossbar, Banyan), IPv4 header & fragmentation, Classful & CIDR subnetting, DHCP, NAT, ICMP, Distance Vector (Bellman-Ford), Link State (Dijkstra), RIP, OSPF, BGP, IPv6, QoS (Leaky/Token bucket), and Linux routing.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 mb-5">
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">IPv4, CIDR & NAT</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Bellman-Ford & Dijkstra</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">RIP, OSPF & BGP</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">IPv6 & QoS</span>
+                            </div>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1ToF4HqKPfVYBKzQa_zTx8loGsYNAdOGX/view?usp=drivesdk" target="_blank" rel="noopener" class="btn-download-primary font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 w-full">
+                            <i class="fas fa-download"></i> Download Module 2 PDF
+                        </a>
+                    </div>
+
+                    <!-- MODULE 3 -->
+                    <div class="module-card active hybrid-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-lg border border-blue-100">
+                                    Module 3
+                                </span>
+                                <span class="inner-glass text-[11px] font-bold text-slate-500 px-2.5 py-0.5 rounded-md">
+                                    <i class="far fa-file-pdf text-rose-500 mr-1"></i>27 Pages
+                                </span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 leading-snug">
+                                Data-Link Layer, Wireless LANs & Mobile IP
+                            </h3>
+                            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed mb-4">
+                                Explores byte/bit stuffing, Hamming distance, CRC & Checksum, Stop-and-Wait, Go-Back-N & Selective Repeat ARQ, HDLC, PPP, ALOHA, CSMA/CD, CSMA/CA, FDMA/TDMA/CDMA, ARP, Ethernet (802.3), switch learning, 802.11 Wi-Fi, Bluetooth, Mobile IP, and PF_PACKET sockets.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 mb-5">
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">CRC & Sliding Window ARQ</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">ALOHA, CSMA/CD & CA</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Ethernet & ARP</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">802.11, Bluetooth & Mobile IP</span>
+                            </div>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1phJD1nkxWmeDNO2FqSrDjIhICGaUBR04/view?usp=drivesdk" target="_blank" rel="noopener" class="btn-download-primary font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 w-full">
+                            <i class="fas fa-download"></i> Download Module 3 PDF
+                        </a>
+                    </div>
+
+                    <!-- MODULE 4 -->
+                    <div class="module-card active hybrid-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-lg border border-blue-100">
+                                    Module 4
+                                </span>
+                                <span class="inner-glass text-[11px] font-bold text-slate-500 px-2.5 py-0.5 rounded-md">
+                                    <i class="far fa-file-pdf text-rose-500 mr-1"></i>17 Pages
+                                </span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 leading-snug">
+                                SNMP, ASN.1 & The Physical Layer
+                            </h3>
+                            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed mb-4">
+                                Covers network management with SNMP (Manager, Agent, SMI, MIB, PDUs), ASN.1 types & BER TLV encoding, analog/digital signals, Nyquist & Shannon capacity limits, line coding (NRZ, Manchester, AMI), 4B/5B, B8ZS/HDB3 scrambling, PCM, ASK/FSK/PSK/QAM, FDM/TDM/WDM, FHSS/DSSS, and media.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 mb-5">
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">SNMP, SMI, MIB & ASN.1</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Nyquist & Shannon Limits</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">Line Coding, PCM & QAM</span>
+                                <span class="inner-glass text-[10px] sm:text-[11px] font-semibold text-slate-600 px-2.5 py-1 rounded-lg">FDM, TDM, WDM & Media</span>
+                            </div>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1Y3szfxbwX3L7qzxfVnp0n_fvtRoJtrNj/view?usp=drivesdk" target="_blank" rel="noopener" class="btn-download-primary font-bold text-xs sm:text-sm py-3.5 px-4 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 w-full">
+                            <i class="fas fa-download"></i> Download Module 4 PDF
+                        </a>
+                    </div>
+
                 </div>
-            </div>
 
-            <!-- SEO Keywords Section -->
-            <div class="pt-6 border-t border-white/60 text-left">
-                <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Related Topics & Searches</h3>
-                <div class="flex flex-wrap gap-1.5 sm:gap-2">
-                    <span class="liquid-pill text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">s5 computer networks pccst501 notes ktu</span>
-                    <span class="liquid-pill text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">ktu computer networks s5 notes pdf</span>
-                    <span class="liquid-pill text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">pccst501 notes ktu 2024 scheme</span>
-                    <span class="liquid-pill text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">s5 cn notes ktu</span>
-                    <span class="liquid-pill text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">ipv4 cidr subnetting dijkstra bellman ford ktu</span>
-                    <span class="liquid-pill text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">crc csmacd hdlc ppp mobile ip snmp notes ktu</span>
-                    <span class="liquid-pill text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">amal dev ceal computer networks notes</span>
+                <!-- Special Thanks / Contributor Card (.real-glass ensures full Dark Mode support) -->
+                <div class="mb-8 real-glass rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                    <div class="flex flex-col sm:flex-row items-center gap-3.5">
+                        <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-500 border border-rose-100 flex items-center justify-center shadow-sm flex-shrink-0">
+                            <i class="fas fa-heart text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-100 inline-block mb-1">
+                                Special Thanks
+                            </span>
+                            <h3 class="text-base sm:text-lg font-extrabold text-slate-900">
+                                Notes by Amal Dev
+                            </h3>
+                            <p class="text-xs sm:text-sm text-slate-500 font-medium">
+                                <i class="fas fa-university text-indigo-500 mr-1"></i> College of Engineering Attingal (CEAL) — thank you for creating and sharing these detailed study materials.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="https://api.whatsapp.com/send?text=🚨 *KTU S5 Computer Networks Notes (PCCST501)* %0ADownload Modules 1 to 4 PDFs with worked problems & formula sheets here: https://keralatimetable.in/KTU/CC/S5/notes/PCCST501.html" target="_blank" rel="noopener" class="bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-sm font-bold py-3.5 px-5 rounded-xl transition-all active:scale-95 inline-flex items-center justify-center gap-2 shadow-md flex-shrink-0 w-full sm:w-auto">
+                        <i class="fas fa-share-alt"></i> Share Notes
+                    </a>
                 </div>
-            </div>
 
+                <!-- Mobile-Friendly Interactive FAQ Accordion (.inner-glass ensures full Dark Mode support) -->
+                <div class="text-left mb-8">
+                    <h3 class="text-base sm:text-lg font-black text-slate-900 mb-3.5 flex items-center gap-2">
+                        <i class="fas fa-question-circle text-blue-600"></i> Frequently Asked Questions
+                    </h3>
+                    <div class="space-y-2.5">
+                        <details class="group inner-glass rounded-xl p-4 cursor-pointer" open>
+                            <summary class="flex items-center justify-between font-bold text-slate-800 text-xs sm:text-sm">
+                                <span>What is included in these PCCST501 Computer Networks PDFs?</span>
+                                <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180 ml-2"></i>
+                            </summary>
+                            <p class="text-xs sm:text-sm text-slate-500 mt-2.5 leading-relaxed">
+                                Each PDF follows the KTU S5 PCCST501 syllabus in order, featuring clear diagrams, comparison tables, step-by-step worked numerical problems (CRC, Checksum, ALOHA, CSMA/CD, Subnetting, Bellman-Ford, Dijkstra, PCM), and a Formula Sheet with likely 3-mark and 9-mark exam questions at the end.
+                            </p>
+                        </details>
+
+                        <details class="group inner-glass rounded-xl p-4 cursor-pointer">
+                            <summary class="flex items-center justify-between font-bold text-slate-800 text-xs sm:text-sm">
+                                <span>Are these direct PDF links?</span>
+                                <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform group-open:rotate-180 ml-2"></i>
+                            </summary>
+                            <p class="text-xs sm:text-sm text-slate-500 mt-2.5 leading-relaxed">
+                                Yes! We provide direct Google Drive links with zero wait time, popup ads, or forced redirects for a seamless study experience on both mobile and desktop.
+                            </p>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- SEO Keywords Section -->
+                <div class="pt-6 border-t border-slate-200/60 dark:border-white/10 text-left">
+                    <h3 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Related Topics & Searches</h3>
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">s5 computer networks pccst501 notes ktu</span>
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">ktu computer networks s5 notes pdf</span>
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">pccst501 notes ktu 2024 scheme</span>
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">s5 cn notes ktu</span>
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">ipv4 cidr subnetting dijkstra bellman ford ktu</span>
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">crc csmacd hdlc ppp mobile ip snmp notes ktu</span>
+                        <span class="inner-glass text-slate-500 text-[10px] sm:text-[11px] font-semibold px-3 py-1.5 rounded-lg">amal dev ceal computer networks notes</span>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
     </main>
 
-    <footer class="mt-auto border-t border-white/60 bg-white/40 backdrop-blur-md py-8 text-center relative z-10">
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center relative z-10">
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
             <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
             <div class="mt-4 space-x-4">
-                <a href="/about.html" class="text-blue-600 text-xs font-bold hover:underline">About Us</a>
-                <a href="https://keralatimetable.stck.me/profile" target="_blank" class="text-blue-600 text-xs font-bold hover:underline">Support Us</a>
+                <a href="/about.html" class="text-indigo-600 text-xs font-bold hover:underline">About Us</a>
+                <a href="https://keralatimetable.stck.me/profile" target="_blank" class="text-indigo-600 text-xs font-bold hover:underline">Support Us</a>
             </div>
         </div>
     </footer>
@@ -404,7 +385,7 @@
     <!-- Safe absolute path for components -->
     <script src="/components.js?v=13"></script>
     <script>
-        loadNavigation('', '/', false);
+        loadNavigation('notes', '/', false);
     </script>
 </body>
 </html>
