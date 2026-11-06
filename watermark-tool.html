@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>PDF Notes & PPT Watermark Studio | Kerala Timetable</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="https://keralatimetable.in/favicon.png" type="image/png">
+
+    <!-- Tailwind Local with CDN Fallback -->
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- pdf-lib for high-speed vector & image PDF watermarking -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow-x: hidden;
+            background: 
+                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.65) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(254, 243, 199, 0.5) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(219, 234, 254, 0.6) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.5) 0px, transparent 50%),
+                #f8fafc;
+            min-height: 100vh;
+        }
+
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        .real-glass {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(26px) saturate(180%);
+            -webkit-backdrop-filter: blur(26px) saturate(180%);
+            border: 1.5px solid rgba(15, 23, 42, 0.10);
+            box-shadow: 
+                0 20px 40px -15px rgba(31, 38, 135, 0.07),
+                0 1px 2px rgba(255, 255, 255, 0.9) inset;
+        }
+
+        .result-glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1.5px solid rgba(15, 23, 42, 0.09);
+            box-shadow: 0 8px 24px -4px rgba(31, 38, 135, 0.04);
+            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .result-glass:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.96);
+            border-color: rgba(37, 99, 235, 0.35);
+            box-shadow: 0 16px 32px -8px rgba(37, 99, 235, 0.12);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.88);
+            border: 1.5px solid rgba(203, 213, 225, 0.9);
+            color: #0f172a;
+            transition: all 0.2s ease;
+        }
+        .glass-input:focus {
+            outline: none;
+            background: #ffffff;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+        }
+
+        .dropzone-box {
+            border: 2px dashed rgba(37, 99, 235, 0.4);
+            transition: all 0.25s ease;
+        }
+        .dropzone-box:hover, .dropzone-box.drag-over {
+            border-color: #2563eb;
+            background: rgba(239, 246, 255, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .fade-in { animation: fadeIn 0.25s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen flex flex-col relative text-slate-800 selection:bg-blue-600 selection:text-white">
+
+    <!-- Global Header Container -->
+    <div id="navigation-container" class="z-50 sticky top-0"></div>
+    <div id="coloros-live-capsule"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow w-full max-w-5xl mx-auto px-4 sm:px-6 pt-7 sm:pt-11 pb-20 relative z-10">
+
+        <!-- Hero Header -->
+        <div class="text-center mb-7 sm:mb-9 max-w-2xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-extrabold uppercase tracking-wider mb-3 shadow-sm">
+                <i class="fas fa-stamp text-blue-600"></i>
+                <span>Supports A4 Notes, 16:9 PPT &amp; 4:3 Slides</span>
+            </div>
+            <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-2.5">
+                PDF Notes &amp; PPT <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">Watermark Studio</span>
+            </h1>
+            <p class="text-slate-600 text-xs sm:text-base font-medium leading-relaxed">
+                Automatically stamp your Kerala Timetable logo and clickable <strong>"Downloaded from Keralatimetable.in"</strong> branding onto any PDF notes or PowerPoint slide deck.
+            </p>
+        </div>
+
+        <!-- ==================== WATERMARK SETTINGS & UPLOAD CARD ==================== -->
+        <section class="real-glass rounded-[2rem] p-4 sm:p-7 mb-7">
+
+            <!-- Settings Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pb-6 mb-6 border-b border-slate-200/80">
+                
+                <!-- Brand Text -->
+                <div class="sm:col-span-2">
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                        Footer &amp; Watermark Text
+                    </label>
+                    <input type="text" id="wm-text" value="Downloaded from Keralatimetable.in" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold">
+                </div>
+
+                <!-- Layout Preset -->
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                        Watermark Style
+                    </label>
+                    <select id="wm-style" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold cursor-pointer">
+                        <option value="both" selected>Diagonal + Footer Badge (Default)</option>
+                        <option value="ppt">PPT Slide Mode (Subtle Center + Corner Badge)</option>
+                        <option value="footer">Footer Badge Only</option>
+                        <option value="diagonal">Center Diagonal Only</option>
+                    </select>
+                </div>
+
+                <!-- Footer Position -->
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                        Badge Position
+                    </label>
+                    <select id="wm-pos" class="glass-input w-full rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-bold cursor-pointer">
+                        <option value="bottom-center" selected>Bottom Center</option>
+                        <option value="bottom-right">Bottom Right (PPT Friendly)</option>
+                        <option value="bottom-left">Bottom Left</option>
+                        <option value="top-right">Top Right Header</option>
+                    </select>
+                </div>
+
+                <!-- Diagonal Opacity -->
+                <div>
+                    <div class="flex justify-between items-center mb-1.5 px-1">
+                        <label class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Center Opacity</label>
+                        <span id="opacity-val-label" class="text-xs font-extrabold text-blue-600 font-mono-code">10%</span>
+                    </div>
+                    <input type="range" id="wm-opacity" min="3" max="35" value="10" oninput="document.getElementById('opacity-val-label').innerText = this.value + '%'" class="w-full accent-blue-600 cursor-pointer mt-1">
+                </div>
+
+                <!-- Diagonal Size Scale -->
+                <div>
+                    <div class="flex justify-between items-center mb-1.5 px-1">
+                        <label class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Watermark Scale</label>
+                        <span id="scale-val-label" class="text-xs font-extrabold text-blue-600 font-mono-code">100%</span>
+                    </div>
+                    <input type="range" id="wm-scale" min="60" max="150" value="100" oninput="document.getElementById('scale-val-label').innerText = this.value + '%'" class="w-full accent-blue-600 cursor-pointer mt-1">
+                </div>
+
+                <!-- Brand Logo Selector -->
+                <div class="sm:col-span-2 flex items-center justify-between gap-3 bg-white/80 rounded-xl px-3.5 py-2 border border-slate-200/80">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <img id="logo-preview-img" src="/k.png" onerror="this.onerror=null;this.src='/favicon.png';" alt="Logo" class="w-8 h-8 rounded-lg object-contain bg-slate-100 p-0.5 border border-slate-200 shrink-0">
+                        <div class="truncate">
+                            <span class="text-xs font-bold text-slate-800 block truncate">Brand Logo</span>
+                            <span id="logo-status-txt" class="text-[10px] text-emerald-600 font-semibold block">Auto-loaded site logo</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <label class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold cursor-pointer transition-colors">
+                            <i class="fas fa-upload mr-1 text-blue-600"></i>Custom PNG
+                            <input type="file" id="custom-logo-input" accept="image/png,image/jpeg" class="hidden" onchange="handleCustomLogo(this.files)">
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Dropzone -->
+            <div id="pdf-dropzone" onclick="document.getElementById('pdf-file-input').click()" class="dropzone-box bg-white/60 rounded-2xl p-7 sm:p-10 text-center cursor-pointer group">
+                <input type="file" id="pdf-file-input" accept="application/pdf,.pdf" multiple class="hidden" onchange="handlePdfFiles(this.files); this.value='';">
+                
+                <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 border border-blue-200 flex items-center justify-center mx-auto mb-3.5 text-2xl shadow-sm group-hover:scale-110 transition-transform">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h3 class="text-sm sm:text-base font-extrabold text-slate-900 mb-1">
+                    Select or Drop PDF Notes / PPT Slides Here
+                </h3>
+                <p class="text-xs text-slate-500 max-w-md mx-auto">
+                    Supports A4 Portrait, Landscape, 16:9 Widescreen PPT, 4:3 Slides &amp; Handwritten Notes. 100% processed in your browser with zero quality loss.
+                </p>
+            </div>
+
+            <!-- Queued Files Section -->
+            <div id="queued-pdfs-section" class="hidden mt-6 pt-5 border-t border-slate-200/80">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
+                    <span class="text-xs sm:text-sm font-extrabold text-slate-800">
+                        Uploaded PDFs (<span id="pdf-queue-count" class="text-blue-600">0</span>)
+                    </span>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button type="button" onclick="document.getElementById('pdf-file-input').click()" class="px-3 py-1.5 rounded-xl bg-white text-slate-700 border border-slate-200 text-xs font-bold hover:bg-slate-50">
+                            <i class="fas fa-plus text-blue-600 mr-1"></i> Add More PDFs
+                        </button>
+                        <button type="button" onclick="clearAllPdfs()" class="px-3 py-1.5 rounded-xl bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold hover:bg-rose-100">
+                            Clear All
+                        </button>
+                    </div>
+                </div>
+
+                <!-- File Cards List -->
+                <div id="pdf-files-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5"></div>
+
+                <!-- Action Buttons: Brand All Individually OR Merge & Brand -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button type="button" id="btn-brand-all" onclick="processAllIndividually()" class="w-full py-3.5 px-5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-blue-500/25 transition-all flex items-center justify-center gap-2 active:scale-95">
+                        <i class="fas fa-stamp"></i>
+                        <span>Watermark &amp; Download All PDFs</span>
+                    </button>
+
+                    <button type="button" id="btn-merge-brand" onclick="processMergedBrand()" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 active:scale-95">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Merge All + Watermark into 1 PDF</span>
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- PDF Quick Preview Modal -->
+    <div id="pdf-preview-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-3 sm:p-6">
+        <div class="bg-white rounded-3xl w-full max-w-4xl h-[86vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden fade-in">
+            <div class="px-4 sm:px-6 py-3.5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+                <div class="flex items-center gap-2.5 truncate pr-3">
+                    <i class="fas fa-file-pdf text-rose-500 text-lg"></i>
+                    <div class="truncate">
+                        <h3 id="preview-modal-title" class="text-xs sm:text-sm font-bold text-slate-800 truncate">Watermarked PDF Preview</h3>
+                        <p id="preview-modal-subtitle" class="text-[10px] font-mono-code text-slate-500"></p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <a id="preview-download-link" href="#" download class="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
+                        <i class="fas fa-download"></i>
+                        <span>Download PDF</span>
+                    </a>
+                    <button type="button" onclick="closePreviewModal()" class="w-8 h-8 rounded-xl bg-slate-200/70 hover:bg-rose-100 text-slate-600 hover:text-rose-600 flex items-center justify-center transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-grow bg-slate-100 relative">
+                <iframe id="preview-iframe" class="w-full h-full border-0" title="PDF Preview"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-6 text-center relative z-10">
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="text-slate-800 font-bold text-sm sm:text-base mb-1">Kerala Timetable</h3>
+            <p class="text-slate-500 text-xs leading-relaxed max-w-lg mx-auto">
+                PDF Notes &amp; PPT Branding Utility • Automatic Aspect-Ratio Scaling for A4 &amp; Widescreen Slides.
+            </p>
+        </div>
+    </footer>
+
+    <script src="/components.js?v=18" onerror="this.onerror=null;this.src='components.js';"></script>
+    <script>
+        if (typeof loadNavigation === 'function') {
+            loadNavigation('pyq', '', false);
+        }
+
+        const { PDFDocument, rgb, degrees, StandardFonts, PDFName, PDFString } = PDFLib;
+
+        let pdfQueue = [];
+        let cachedLogoBytes = null;
+        let cachedLogoMime = 'image/png';
+        let currentPreviewUrl = null;
+
+        function notify(msg, type = 'info') {
+            if (window.KTUFlow?.capsule) window.KTUFlow.capsule(type === 'error' ? 'error' : 'success', msg);
+            else if (window.KTUFlow?.toast) window.KTUFlow.toast(msg, type);
+        }
+
+        // Preload default logo from site (/keralattlogo.png, /k.png, or /favicon.png)
+        async function loadDefaultLogo() {
+            const candidates = ['/keralattlogo.png', '/k.png', '/favicon.png', 'https://keralatimetable.in/k.png', 'https://keralatimetable.in/favicon.png'];
+            for (const url of candidates) {
+                try {
+                    const res = await fetch(url);
+                    if (res.ok) {
+                        const buf = await res.arrayBuffer();
+                        cachedLogoBytes = new Uint8Array(buf);
+                        cachedLogoMime = url.endsWith('.jpg') || url.endsWith('.jpeg') ? 'image/jpeg' : 'image/png';
+                        document.getElementById('logo-preview-img').src = url;
+                        document.getElementById('logo-status-txt').innerText = `Loaded (${url.split('/').pop()})`;
+                        return;
+                    }
+                } catch (e) {}
+            }
+            document.getElementById('logo-status-txt').innerText = 'Text-only mode (Upload PNG logo if needed)';
+        }
+        loadDefaultLogo();
+
+        window.handleCustomLogo = async function(files) {
+            if (!files || !files.length) return;
+            const file = files[0];
+            const buf = await file.arrayBuffer();
+            cachedLogoBytes = new Uint8Array(buf);
+            cachedLogoMime = file.type === 'image/jpeg' ? 'image/jpeg' : 'image/png';
+            document.getElementById('logo-preview-img').src = URL.createObjectURL(file);
+            document.getElementById('logo-status-txt').innerText = `Custom: ${file.name.slice(0, 18)}`;
+            notify('Custom brand logo loaded!', 'success');
+        };
+
+        // Drag and Drop
+        const dz = document.getElementById('pdf-dropzone');
+        dz.addEventListener('dragover', (e) => { e.preventDefault(); dz.classList.add('drag-over'); });
+        dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+        dz.addEventListener('drop', (e) => {
+            e.preventDefault(); dz.classList.remove('drag-over');
+            if (e.dataTransfer.files?.length) handlePdfFiles(e.dataTransfer.files);
+        });
+
+        window.handlePdfFiles = async function(fileList) {
+            if (!fileList || !fileList.length) return;
+            for (const file of Array.from(fileList)) {
+                if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') continue;
+                try {
+                    const arrayBuf = await file.arrayBuffer();
+                    const pdfDoc = await PDFDocument.load(arrayBuf, { ignoreEncryption: true });
+                    const pageCount = pdfDoc.getPageCount();
+                    let ratioTag = 'A4 Portrait';
+                    if (pageCount > 0) {
+                        const firstPage = pdfDoc.getPage(0);
+                        const { width, height } = firstPage.getSize();
+                        const rot = (firstPage.getRotation().angle || 0) % 360;
+                        const effW = (rot === 90 || rot === 270) ? height : width;
+                        const effH = (rot === 90 || rot === 270) ? width : height;
+                        const ratio = effW / effH;
+                        if (ratio > 1.55) ratioTag = '16:9 PPT Slide';
+                        else if (ratio > 1.15) ratioTag = '4:3 / Landscape';
+                    }
+
+                    pdfQueue.push({
+                        id: `pdf_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+                        name: file.name,
+                        sizeMB: (file.size / (1024 * 1024)).toFixed(2),
+                        bytes: new Uint8Array(arrayBuf),
+                        pageCount,
+                        ratioTag
+                    });
+                } catch (err) {
+                    console.error("Failed to read PDF:", file.name, err);
+                    notify(`Could not read ${file.name}`, 'error');
+                }
+            }
+            renderQueue();
+        };
+
+        function renderQueue() {
+            const sec = document.getElementById('queued-pdfs-section');
+            const grid = document.getElementById('pdf-files-grid');
+            document.getElementById('pdf-queue-count').innerText = pdfQueue.length;
+
+            if (pdfQueue.length === 0) {
+                sec.classList.add('hidden');
+                return;
+            }
+            sec.classList.remove('hidden');
+
+            grid.innerHTML = pdfQueue.map((item, idx) => `
+                <div class="result-glass rounded-2xl p-4 flex flex-col justify-between gap-3">
+                    <div class="flex items-start justify-between gap-2">
+                        <div class="flex items-start gap-2.5 min-w-0">
+                            <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 truncate" title="${item.name}">${item.name}</h4>
+                                <div class="flex flex-wrap items-center gap-1.5 mt-1">
+                                    <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-bold font-mono-code">${item.pageCount} Pages</span>
+                                    <span class="px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] font-bold">${item.ratioTag}</span>
+                                    <span class="text-[10px] text-slate-400 font-mono-code">${item.sizeMB} MB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" onclick="removePdf('${item.id}')" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-rose-100 text-slate-400 hover:text-rose-600 flex items-center justify-center shrink-0 transition-colors">
+                            <i class="fas fa-times text-xs"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-2 border-t border-slate-200/60">
+                        <button type="button" onclick="previewSingleWatermarked('${item.id}', this)" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95">
+                            <i class="far fa-eye"></i>
+                            <span>Preview</span>
+                        </button>
+                        <button type="button" onclick="downloadSingleWatermarked('${item.id}', this)" class="flex-1 py-2 px-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95">
+                            <i class="fas fa-download"></i>
+                            <span>Watermark &amp; Save</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.removePdf = function(id) {
+            pdfQueue = pdfQueue.filter(p => p.id !== id);
+            renderQueue();
+        };
+
+        window.clearAllPdfs = function() {
+            pdfQueue = [];
+            renderQueue();
+        };
+
+        // Add clickable link annotation to a page in pdf-lib
+        function addClickableLinkAnnotation(pdfDoc, page, rect, url) {
+            try {
+                const context = pdfDoc.context;
+                const linkAnnotation = context.obj({
+                    Type: 'Annot',
+                    Subtype: 'Link',
+                    Rect: [rect.x, rect.y, rect.x + rect.width, rect.y + rect.height],
+                    Border: [0, 0, 0],
+                    A: {
+                        Type: 'Action',
+                        S: 'URI',
+                        URI: PDFString.of(url),
+                    },
+                });
+                const linkRef = context.register(linkAnnotation);
+                let annots = page.node.lookup(PDFName.of('Annots'));
+                if (annots && typeof annots.push === 'function') {
+                    annots.push(linkRef);
+                } else {
+                    page.node.set(PDFName.of('Annots'), context.obj([linkRef]));
+                }
+            } catch (e) {}
+        }
+
+        // =========================================================================
+        // CORE WATERMARK ENGINE (AUTO-ADAPTS TO A4, 16:9 PPT, 4:3, & ROTATED PAGES)
+        // =========================================================================
+        async function stampWatermarkOnDocument(pdfDoc) {
+            const brandText  = document.getElementById('wm-text').value.trim() || 'Downloaded from Keralatimetable.in';
+            const styleMode  = document.getElementById('wm-style').value;
+            const badgePos   = document.getElementById('wm-pos').value;
+            const opacityVal = (parseInt(document.getElementById('wm-opacity').value, 10) || 10) / 100;
+            const scaleVal   = (parseInt(document.getElementById('wm-scale').value, 10) || 100) / 100;
+
+            const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+            let embeddedLogo = null;
+            if (cachedLogoBytes) {
+                try {
+                    embeddedLogo = cachedLogoMime === 'image/jpeg'
+                        ? await pdfDoc.embedJpg(cachedLogoBytes)
+                        : await pdfDoc.embedPng(cachedLogoBytes);
+                } catch (e) {
+                    try { embeddedLogo = await pdfDoc.embedPng(cachedLogoBytes); } catch (e2) {}
+                }
+            }
+
+            const pages = pdfDoc.getPages();
+
+            for (const page of pages) {
+                const crop = page.getCropBox() || page.getMediaBox();
+                const ox = crop.x || 0;
+                const oy = crop.y || 0;
+                const W  = crop.width;
+                const H  = crop.height;
+                const minDim = Math.min(W, H);
+                const maxDim = Math.max(W, H);
+                const isLandscapeOrPPT = W > H * 1.12;
+
+                // -----------------------------------------------------------------
+                // 1. CENTER DIAGONAL WATERMARK (LOGO + BRAND TEXT)
+                // -----------------------------------------------------------------
+                if (styleMode === 'both' || styleMode === 'diagonal' || styleMode === 'ppt') {
+                    const effectiveOpacity = styleMode === 'ppt' ? Math.min(opacityVal, 0.07) : opacityVal;
+                    const diagAngle = isLandscapeOrPPT ? 26 : 38;
+                    const rad = (diagAngle * Math.PI) / 180;
+
+                    // Center Logo Watermark
+                    if (embeddedLogo) {
+                        const logoTargetSize = minDim * (isLandscapeOrPPT ? 0.25 : 0.28) * scaleVal;
+                        const logoDims = embeddedLogo.scale(logoTargetSize / Math.max(embeddedLogo.width, embeddedLogo.height));
+                        page.drawImage(embeddedLogo, {
+                            x: ox + (W - logoDims.width) / 2,
+                            y: oy + (H - logoDims.height) / 2 + (minDim * 0.03),
+                            width: logoDims.width,
+                            height: logoDims.height,
+                            opacity: effectiveOpacity
+                        });
+                    }
+
+                    // Diagonal Text across Center
+                    const diagFontSize = Math.max(14, Math.min(44, minDim * 0.048 * scaleVal));
+                    const diagText = "KERALATIMETABLE.IN";
+                    const textW = fontBold.widthOfTextAtSize(diagText, diagFontSize);
+
+                    const cx = ox + W / 2;
+                    const cy = oy + H / 2 - (minDim * 0.04);
+                    const tx = cx - (textW / 2) * Math.cos(rad);
+                    const ty = cy - (textW / 2) * Math.sin(rad);
+
+                    page.drawText(diagText, {
+                        x: tx,
+                        y: ty,
+                        size: diagFontSize,
+                        font: fontBold,
+                        color: rgb(0.15, 0.28, 0.65),
+                        opacity: effectiveOpacity,
+                        rotate: degrees(diagAngle)
+                    });
+                }
+
+                // -----------------------------------------------------------------
+                // 2. FOOTER / HEADER BADGE ("Downloaded from Keralatimetable.in")
+                // -----------------------------------------------------------------
+                if (styleMode === 'both' || styleMode === 'footer' || styleMode === 'ppt') {
+                    // Scale font size proportionally to page size so PPT slides & A4 both look sharp
+                    const footerFontSize = Math.max(7.5, Math.min(12.5, minDim * 0.0175));
+                    const iconSize = footerFontSize * 1.35;
+                    const gap = embeddedLogo ? footerFontSize * 0.45 : 0;
+                    const textWidth = fontBold.widthOfTextAtSize(brandText, footerFontSize);
+                    const padX = footerFontSize * 0.9;
+                    const padY = footerFontSize * 0.48;
+
+                    const pillW = (embeddedLogo ? iconSize + gap : 0) + textWidth + padX * 2;
+                    const pillH = Math.max(iconSize, footerFontSize) + padY * 2;
+                    const marginX = Math.max(12, W * 0.022);
+                    const marginY = Math.max(10, H * 0.018);
+
+                    let pillX = ox + (W - pillW) / 2;
+                    let pillY = oy + marginY;
+
+                    if (badgePos === 'bottom-right') {
+                        pillX = ox + W - pillW - marginX;
+                        pillY = oy + marginY;
+                    } else if (badgePos === 'bottom-left') {
+                        pillX = ox + marginX;
+                        pillY = oy + marginY;
+                    } else if (badgePos === 'top-right') {
+                        pillX = ox + W - pillW - marginX;
+                        pillY = oy + H - pillH - marginY;
+                    }
+
+                    // Subtle white pill background so text is readable even over dark PPT slides
+                    page.drawRectangle({
+                        x: pillX,
+                        y: pillY,
+                        width: pillW,
+                        height: pillH,
+                        color: rgb(0.98, 0.99, 1),
+                        opacity: 0.92,
+                        borderColor: rgb(0.22, 0.42, 0.88),
+                        borderWidth: 0.8,
+                        borderOpacity: 0.45
+                    });
+
+                    let contentX = pillX + padX;
+                    if (embeddedLogo) {
+                        const iDims = embeddedLogo.scale(iconSize / Math.max(embeddedLogo.width, embeddedLogo.height));
+                        page.drawImage(embeddedLogo, {
+                            x: contentX,
+                            y: pillY + (pillH - iDims.height) / 2,
+                            width: iDims.width,
+                            height: iDims.height,
+                            opacity: 0.95
+                        });
+                        contentX += iDims.width + gap;
+                    }
+
+                    page.drawText(brandText, {
+                        x: contentX,
+                        y: pillY + (pillH - footerFontSize) / 2 + (footerFontSize * 0.12),
+                        size: footerFontSize,
+                        font: fontBold,
+                        color: rgb(0.11, 0.25, 0.68),
+                        opacity: 0.95
+                    });
+
+                    // Make the pill clickable -> https://keralatimetable.in
+                    addClickableLinkAnnotation(pdfDoc, page, {
+                        x: pillX,
+                        y: pillY,
+                        width: pillW,
+                        height: pillH
+                    }, 'https://keralatimetable.in');
+                }
+            }
+
+            return await pdfDoc.save();
+        }
+
+        // Preview Single PDF
+        window.previewSingleWatermarked = async function(id, btnEl) {
+            const item = pdfQueue.find(p => p.id === id);
+            if (!item) return;
+
+            const orig = btnEl.innerHTML;
+            btnEl.innerHTML = `<i class="fas fa-spinner fa-spin"></i>`;
+            btnEl.disabled = true;
+
+            try {
+                const pdfDoc = await PDFDocument.load(item.bytes, { ignoreEncryption: true });
+                const outBytes = await stampWatermarkOnDocument(pdfDoc);
+                const blob = new Blob([outBytes], { type: 'application/pdf' });
+
+                if (currentPreviewUrl) URL.revokeObjectURL(currentPreviewUrl);
+                currentPreviewUrl = URL.createObjectURL(blob);
+
+                const cleanName = item.name.replace(/\.pdf$/i, '') + '_Keralatimetable.pdf';
+                document.getElementById('preview-modal-title').innerText = cleanName;
+                document.getElementById('preview-modal-subtitle').innerText = `${item.pageCount} Pages • ${item.ratioTag}`;
+                const dl = document.getElementById('preview-download-link');
+                dl.href = currentPreviewUrl;
+                dl.download = cleanName;
+
+                document.getElementById('preview-iframe').src = currentPreviewUrl;
+                const modal = document.getElementById('pdf-preview-modal');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } catch (e) {
+                console.error(e);
+                notify('Error generating preview', 'error');
+            } finally {
+                btnEl.innerHTML = orig;
+                btnEl.disabled = false;
+            }
+        };
+
+        window.closePreviewModal = function() {
+            const modal = document.getElementById('pdf-preview-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.getElementById('preview-iframe').src = '';
+        };
+
+        // Download Single Watermarked PDF
+        window.downloadSingleWatermarked = async function(id, btnEl) {
+            const item = pdfQueue.find(p => p.id === id);
+            if (!item) return;
+
+            const orig = btnEl.innerHTML;
+            btnEl.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Stamping...`;
+            btnEl.disabled = true;
+
+            try {
+                const pdfDoc = await PDFDocument.load(item.bytes, { ignoreEncryption: true });
+                const outBytes = await stampWatermarkOnDocument(pdfDoc);
+                const blob = new Blob([outBytes], { type: 'application/pdf' });
+                const cleanName = item.name.replace(/\.pdf$/i, '') + '_Keralatimetable.pdf';
+
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = cleanName;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+
+                notify(`Saved ${cleanName}!`, 'success');
+            } catch (e) {
+                console.error(e);
+                notify('Failed to watermark PDF', 'error');
+            } finally {
+                btnEl.innerHTML = orig;
+                btnEl.disabled = false;
+            }
+        };
+
+        // Watermark & Download All Individually
+        window.processAllIndividually = async function() {
+            if (!pdfQueue.length) return;
+            const btn = document.getElementById('btn-brand-all');
+            const orig = btn.innerHTML;
+            btn.disabled = true;
+
+            try {
+                for (let i = 0; i < pdfQueue.length; i++) {
+                    const item = pdfQueu
