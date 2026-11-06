@@ -15,14 +15,14 @@ import time
 import httpx
 
 from fastapi import FastAPI, HTTPException, Query, Request
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 import ktu_repo as repo
 import watermark as wm
 
-app = FastAPI(title="KTU Papers API", version="1.4")
+app = FastAPI(title="KTU Papers API", version="1.5")
 
 app.add_middleware(
     CORSMiddleware,
@@ -48,7 +48,6 @@ HF_TOKEN           = os.getenv("HF_TOKEN", "")
 # ---- Hugging Face URLs ----
 DATASET_RAW_URL = "https://huggingface.co/datasets/KeralaTimetable/ktu-pyq-archive/resolve/main"
 
-# Supports single or comma-separated Vision Brain Space URLs for load balancing
 VISION_BRAIN_URLS_RAW = os.getenv(
     "VISION_BRAIN_URLS",
     "https://keralatimetable-ktu-vision-brain.hf.space/gradio_api/call/audit"
@@ -63,6 +62,16 @@ class DownloadReq(BaseModel):
 class WatermarkNotesReq(BaseModel):
     pdfs_b64: list[str]
     filename: str = "ktu_notes.pdf"
+    logo_opacity: float | None = None
+    logo_scale: float = 0.65
+
+
+@app.get("/brand-logo")
+def get_brand_logo():
+    """Serves keralattlogo.png so watermark-tool.html can render a live opacity preview."""
+    if not LOGO_BYTES:
+        raise HTTPException(404, "keralattlogo.png not found on server")
+    return Response(content=LOGO_BYTES, media_type="image/png")
 
 
 @app.get("/search")
@@ -167,7 +176,7 @@ async def download(req: DownloadReq):
 async def watermark_notes(req: WatermarkNotesReq):
     """
     Accepts uploaded PDF study notes or PPT slides (as base64) and stamps them using
-    keralattlogo.png (LOGO_BYTES) and watermark.py (wm.brand_papers) on ktu-papers-api.
+    keralattlogo.png (LOGO_BYTES) with adjustable logo_opacity & logo_scale.
     """
     if not req.pdfs_b64:
         raise HTTPException(400, "No PDF files provided")
@@ -178,7 +187,13 @@ async def watermark_notes(req: WatermarkNotesReq):
             b64_str = b64_str.split(",", 1)[1]
         pdfs.append(base64.b64decode(b64_str))
 
-    out = wm.brand_papers(pdfs, logo_bytes=LOGO_BYTES, text=BRAND_TEXT)
+    out = wm.brand_papers(
+        pdfs,
+        logo_bytes=LOGO_BYTES,
+        text=BRAND_TEXT,
+        logo_scale=req.logo_scale,
+        logo_opacity=req.logo_opacity
+    )
 
     safe_name = (req.filename or "ktu_notes.pdf").replace('"', '')
     return StreamingResponse(
@@ -210,7 +225,6 @@ async def telegram_auth(request: Request):
 async def gemini_auth(request: Request):
     """
     Returns XOR-masked Gemini, Groq, OpenRouter & HF API keys from Hugging Face Secrets ONLY to keralatimetable.in.
-    Supports a single key or comma-separated multiple keys (key1,key2) for automatic load balancing.
     """
     origin = (request.headers.get("origin") or request.headers.get("referer") or "").lower()
     if "keralatimetable.in" not in origin and "localhost" not in origin and "127.0.0.1" not in origin:
@@ -241,7 +255,6 @@ async def gemini_auth(request: Request):
 async def vision_audit(request: Request):
     """
     Authenticated Server Relay to KeralaTimetable/ktu-vision-brain (Qwen3-VL-8B on ZeroGPU).
-    Rotates across comma-separated HF_TOKENs and VISION_BRAIN_URLS if multiple are provided.
     """
     payload = await request.json()
     payload_str = json.dumps(payload)
@@ -266,7 +279,6 @@ async def vision_audit(request: Request):
                     headers["X-Forwarded-For"] = client_ip
 
                 try:
-                    # Step 1: Enqueue job on Gradio 5 (/gradio_api/call/audit)
                     init_res = await client.post(
                         api_url,
                         headers=headers,
@@ -281,7 +293,6 @@ async def vision_audit(request: Request):
                         last_error = "Missing event_id from Vision Brain Space"
                         continue
 
-                    # Step 2: Stream SSE result from /gradio_api/call/audit/{event_id}
                     stream_url = f"{api_url}/{event_id}"
                     sse_res = await client.get(stream_url, headers=headers)
                     if sse_res.status_code != 200:
