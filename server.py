@@ -2,7 +2,8 @@
 server.py
 ---------
 FastAPI REST API exposing KTU paper search + branded download + PDF notes watermarker
-+ live status pinging + secure Telegram, Gemini, Groq, OpenRouter & HF ZeroGPU Vision Brain relay.
+(with automatic competitor watermark removal) + live status pinging + secure Telegram,
+Gemini, Groq, OpenRouter & HF ZeroGPU Vision Brain relay.
 """
 
 from __future__ import annotations
@@ -22,7 +23,7 @@ from pydantic import BaseModel
 import ktu_repo as repo
 import watermark as wm
 
-app = FastAPI(title="KTU Papers API", version="1.5")
+app = FastAPI(title="KTU Papers API", version="1.6")
 
 app.add_middleware(
     CORSMiddleware,
@@ -64,6 +65,8 @@ class WatermarkNotesReq(BaseModel):
     filename: str = "ktu_notes.pdf"
     logo_opacity: float | None = None
     logo_scale: float = 0.65
+    clean_existing: bool = True
+    extra_remove_keywords: list[str] | None = None
 
 
 @app.get("/brand-logo")
@@ -175,7 +178,8 @@ async def download(req: DownloadReq):
 @app.post("/watermark-notes")
 async def watermark_notes(req: WatermarkNotesReq):
     """
-    Accepts uploaded PDF study notes or PPT slides (as base64) and stamps them using
+    Accepts uploaded PDF study notes or PPT slides (as base64), strips existing
+    third-party watermarks (like Ktunotes.live / Ktuspecial.in), and stamps them using
     keralattlogo.png (LOGO_BYTES) with adjustable logo_opacity & logo_scale.
     """
     if not req.pdfs_b64:
@@ -192,7 +196,9 @@ async def watermark_notes(req: WatermarkNotesReq):
         logo_bytes=LOGO_BYTES,
         text=BRAND_TEXT,
         logo_scale=req.logo_scale,
-        logo_opacity=req.logo_opacity
+        logo_opacity=req.logo_opacity,
+        clean_existing=req.clean_existing,
+        extra_remove_keywords=req.extra_remove_keywords,
     )
 
     safe_name = (req.filename or "ktu_notes.pdf").replace('"', '')
