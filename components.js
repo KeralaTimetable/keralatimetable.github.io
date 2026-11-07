@@ -438,10 +438,13 @@ window.showToast = function(message, type = 'info') {
     } else {
         document.documentElement.classList.remove('dark');
     }
-    
-    if (!document.getElementById('kt-dark-theme-styles')) {
-        const style = document.createElement('style');
-        style.id = 'kt-dark-theme-styles';
+
+    function mountDarkStyles() {
+        let style = document.getElementById('kt-dark-theme-styles');
+        if (!style) {
+            style = document.createElement('style');
+            style.id = 'kt-dark-theme-styles';
+        }
         style.innerHTML = `
             /* ==================================================================
                0. STICKY FROSTED TOP BAR, MOBILE DRAWER & COLOROS LIVE CAPSULE
@@ -462,7 +465,7 @@ window.showToast = function(message, type = 'info') {
             }
 
             html.dark header.kt-frosted-header {
-                background: rgba(9, 13, 24, 0.78) !important;
+                background: rgba(9, 13, 24, 0.85) !important;
                 backdrop-filter: blur(20px) saturate(180%) !important;
                 -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -569,7 +572,7 @@ window.showToast = function(message, type = 'info') {
             }
 
             /* ==================================================================
-               A. LIGHT MODE ENHANCEMENTS
+               A. LIGHT MODE ENHANCEMENTS (Preserves Liquid Glass 100%)
                ================================================================== */
             html:not(.dark) .branch-card {
                 border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
@@ -586,21 +589,23 @@ window.showToast = function(message, type = 'info') {
             }
 
             /* ==================================================================
-               B. 120FPS DARK MODE ENGINE (Zero Lag + Zero White Boxes)
+               B. 120FPS DARK MODE ENGINE (Zero Lag + True Deep Obsidian Canvas)
                ================================================================== */
-            /* 1. Base Obsidian Canvas */
+            /* 1. Base Obsidian Canvas (High Specificity so inline <style> never overrides it) */
+            html.dark,
             html.dark body,
+            html.dark body.bg-mesh,
             html.dark .bg-mesh {
-                background-color: #070B14 !important;
+                background-color: #060913 !important;
                 background-image: 
-                    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.14) 0px, transparent 50%),
-                    radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.11) 0px, transparent 50%),
-                    radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.10) 0px, transparent 55%) !important;
+                    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 48%),
+                    radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 48%),
+                    radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.09) 0px, transparent 55%) !important;
                 background-attachment: scroll !important;
                 color: #f1f5f9 !important;
             }
 
-            /* 2. GPU Fix: Disable expensive CSS blur filters & mix-blend-mode on background orbs in Dark Mode */
+            /* 2. GPU & Washout Fix: Prevent ambient orbs from brightening the mobile screen in Dark Mode */
             html.dark #mouse-orb-1,
             html.dark #mouse-orb-2,
             html.dark .ambient-orb,
@@ -612,8 +617,8 @@ window.showToast = function(message, type = 'info') {
                 filter: none !important;
                 -webkit-filter: none !important;
                 animation: none !important;
-                background: radial-gradient(circle, rgba(79, 70, 229, 0.14) 0%, rgba(16, 185, 129, 0.05) 45%, transparent 70%) !important;
-                opacity: 0.75 !important;
+                background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, transparent 65%) !important;
+                opacity: 0.25 !important;
             }
 
             /* 3. Protect Gradient Text */
@@ -633,38 +638,53 @@ window.showToast = function(message, type = 'info') {
             /* 5. High-FPS Smoked Aurora Cards */
             html.dark .real-glass,
             html.dark .glass-panel {
-                background: linear-gradient(145deg, rgba(19, 27, 46, 0.94) 0%, rgba(11, 16, 30, 0.96) 100%) !important;
+                background: linear-gradient(145deg, rgba(17, 24, 42, 0.95) 0%, rgba(10, 15, 28, 0.97) 100%) !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
                 border: 1px solid rgba(255, 255, 255, 0.09) !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
-                box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 14px 34px -8px rgba(0, 0, 0, 0.55) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.17) !important;
+                box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 16px 36px -8px rgba(0, 0, 0, 0.65) !important;
             }
 
             html.dark .result-glass,
             html.dark .hybrid-card,
+            html.dark .timetable-card,
             html.dark .notice-card,
             html.dark .branch-card {
-                background: linear-gradient(145deg, rgba(21, 30, 50, 0.92) 0%, rgba(13, 19, 34, 0.95) 100%) !important;
+                background: linear-gradient(145deg, rgba(19, 27, 46, 0.95) 0%, rgba(11, 17, 31, 0.98) 100%) !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
-                border: 1px solid rgba(255, 255, 255, 0.08) !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
-                box-shadow: 0 8px 22px -4px rgba(0, 0, 0, 0.4) !important;
+                border: 1px solid rgba(255, 255, 255, 0.09) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.16) !important;
+                box-shadow: 0 10px 26px -6px rgba(0, 0, 0, 0.55) !important;
             }
             html.dark .result-glass:hover,
             html.dark .hybrid-card:hover,
+            html.dark .timetable-card:hover,
             html.dark .notice-card:hover,
             html.dark .branch-card:hover,
             html.dark .glass-panel-hover:hover {
-                background: linear-gradient(145deg, rgba(30, 41, 66, 0.96) 0%, rgba(17, 25, 44, 0.98) 100%) !important;
-                border-color: rgba(99, 102, 241, 0.45) !important;
-                box-shadow: 0 14px 30px -6px rgba(0, 0, 0, 0.6) !important;
+                background: linear-gradient(145deg, rgba(26, 36, 60, 0.97) 0%, rgba(15, 22, 40, 0.99) 100%) !important;
+                border-color: rgba(99, 102, 241, 0.48) !important;
+                box-shadow: 0 16px 32px -6px rgba(0, 0, 0, 0.7) !important;
+            }
+
+            /* Timetable Card Watermark & Countdown Footer in Dark Mode */
+            html.dark .timetable-card > div.pointer-events-none {
+                color: #ffffff !important;
+                opacity: 0.04 !important;
+            }
+            html.dark .timetable-card div[class*="bg-amber-50"] {
+                background: rgba(245, 158, 11, 0.10) !important;
+                border-top: 1px solid rgba(251, 191, 36, 0.22) !important;
+            }
+            html.dark .timetable-card .countdown-target {
+                color: #fbbf24 !important;
             }
 
             /* 6. Inner Glass, Inputs & Selects */
             html.dark .inner-glass {
-                background: rgba(15, 23, 42, 0.78) !important;
+                background: rgba(13, 19, 35, 0.85) !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
                 border: 1px solid rgba(255, 255, 255, 0.09) !important;
@@ -672,7 +692,7 @@ window.showToast = function(message, type = 'info') {
             html.dark .glass-input,
             html.dark select.custom-select,
             html.dark #filter-panel select {
-                background-color: rgba(9, 14, 26, 0.88) !important;
+                background-color: rgba(9, 14, 26, 0.92) !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
                 border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
@@ -723,7 +743,7 @@ window.showToast = function(message, type = 'info') {
             html.dark button[class*="bg-slate-100"],
             html.dark span[class*="bg-slate-100"],
             html.dark div[class*="bg-slate-100"] {
-                background-color: rgba(30, 41, 59, 0.88) !important;
+                background-color: rgba(24, 34, 53, 0.92) !important;
                 border-color: rgba(255, 255, 255, 0.14) !important;
                 color: #f1f5f9 !important;
             }
@@ -737,51 +757,58 @@ window.showToast = function(message, type = 'info') {
             }
             html.dark span[class*="bg-white/"],
             html.dark div[class*="bg-white/"] {
-                background-color: rgba(15, 23, 42, 0.85) !important;
+                background-color: rgba(15, 23, 42, 0.88) !important;
                 border-color: rgba(255, 255, 255, 0.12) !important;
+                color: #e2e8f0 !important;
             }
 
-            /* 9. Pastel Badges & Icon Boxes */
+            /* 9. High-Contrast Pastel Badges & Icon Boxes in Dark Mode */
             html.dark [class*="bg-indigo-50"],
             html.dark [class*="bg-indigo-100"] {
-                background-color: rgba(79, 70, 229, 0.18) !important;
-                border-color: rgba(99, 102, 241, 0.35) !important;
-                color: #a5b4fc !important;
+                background-color: rgba(79, 70, 229, 0.22) !important;
+                border-color: rgba(99, 102, 241, 0.42) !important;
+                color: #c7d2fe !important;
+            }
+            html.dark #new-timetable-banner > div {
+                background: linear-gradient(135deg, rgba(23, 31, 56, 0.96) 0%, rgba(14, 20, 38, 0.98) 100%) !important;
+                border-color: rgba(99, 102, 241, 0.45) !important;
             }
             html.dark [class*="bg-blue-50"],
             html.dark [class*="bg-blue-100"] {
-                background-color: rgba(37, 99, 235, 0.18) !important;
-                border-color: rgba(59, 130, 246, 0.35) !important;
-                color: #93c5fd !important;
+                background-color: rgba(37, 99, 235, 0.22) !important;
+                border-color: rgba(59, 130, 246, 0.42) !important;
+                color: #bae6fd !important;
             }
             html.dark [class*="bg-emerald-50"],
             html.dark [class*="bg-emerald-100"] {
-                background-color: rgba(16, 185, 129, 0.16) !important;
-                border-color: rgba(52, 211, 153, 0.35) !important;
+                background-color: rgba(16, 185, 129, 0.20) !important;
+                border-color: rgba(52, 211, 153, 0.42) !important;
                 color: #6ee7b7 !important;
             }
             html.dark [class*="bg-amber-50"],
+            html.dark [class*="bg-amber-100"],
             html.dark [class*="bg-orange-100"] {
-                background-color: rgba(245, 158, 11, 0.16) !important;
-                border-color: rgba(251, 191, 36, 0.35) !important;
-                color: #fcd34d !important;
+                background-color: rgba(245, 158, 11, 0.20) !important;
+                border-color: rgba(251, 191, 36, 0.42) !important;
+                color: #fde68a !important;
             }
             html.dark [class*="bg-purple-50"] {
-                background-color: rgba(147, 51, 234, 0.18) !important;
-                border-color: rgba(168, 85, 247, 0.35) !important;
-                color: #d8b4fe !important;
+                background-color: rgba(147, 51, 234, 0.22) !important;
+                border-color: rgba(168, 85, 247, 0.42) !important;
+                color: #e9d5ff !important;
             }
             html.dark [class*="bg-red-50"],
-            html.dark [class*="bg-rose-50"] {
-                background-color: rgba(225, 29, 72, 0.18) !important;
-                border-color: rgba(244, 63, 94, 0.35) !important;
-                color: #fda4af !important;
+            html.dark [class*="bg-rose-50"],
+            html.dark [class*="bg-rose-100"] {
+                background-color: rgba(225, 29, 72, 0.22) !important;
+                border-color: rgba(244, 63, 94, 0.42) !important;
+                color: #fecdd3 !important;
             }
 
             /* 10. Hero Glass Folder Illustration */
             html.dark .glass-folder {
-                background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.65) 100%) !important;
-                border-color: rgba(255, 255, 255, 0.15) !important;
+                background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.75) 100%) !important;
+                border-color: rgba(255, 255, 255, 0.16) !important;
             }
             html.dark .glass-folder div[class*="bg-white"] {
                 background: rgba(15, 23, 42, 0.9) !important;
@@ -790,8 +817,8 @@ window.showToast = function(message, type = 'info') {
 
             /* 11. Hybrid Card Right Arrow Circle */
             html.dark .hybrid-card .bg-white {
-                background-color: rgba(255, 255, 255, 0.06) !important;
-                border-color: rgba(255, 255, 255, 0.1) !important;
+                background-color: rgba(255, 255, 255, 0.07) !important;
+                border-color: rgba(255, 255, 255, 0.12) !important;
                 color: #cbd5e1 !important;
             }
             html.dark .hybrid-card:hover .bg-white {
@@ -802,7 +829,7 @@ window.showToast = function(message, type = 'info') {
 
             /* 12. Footer & Modals */
             html.dark footer {
-                background-color: rgba(7, 11, 20, 0.9) !important;
+                background-color: rgba(6, 9, 19, 0.94) !important;
                 border-top-color: rgba(255, 255, 255, 0.08) !important;
             }
             html.dark #notice-modal-content,
@@ -813,7 +840,7 @@ window.showToast = function(message, type = 'info') {
 
             /* 13. Dark Mode Mobile Drawer & Header Action Buttons */
             html.dark #mobile-menu {
-                background: linear-gradient(165deg, rgba(15, 23, 42, 0.95) 0%, rgba(7, 11, 20, 0.95) 100%) !important;
+                background: linear-gradient(165deg, rgba(15, 23, 42, 0.96) 0%, rgba(7, 11, 20, 0.96) 100%) !important;
                 border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
             }
             html.dark #mobile-menu .drawer-header {
@@ -849,8 +876,11 @@ window.showToast = function(message, type = 'info') {
                 background-color: rgba(255, 255, 255, 0.16) !important;
             }
         `;
+        // Append at the very end of <head> so it always wins CSS cascade over page-level <style> tags
         document.head.appendChild(style);
     }
+
+    mountDarkStyles();
 })();
 
 // ==============================================================================
