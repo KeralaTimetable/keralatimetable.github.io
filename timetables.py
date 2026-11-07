@@ -7,7 +7,7 @@ from playwright.sync_api import sync_playwright
 from google import genai
 from google.genai import types
 
-# --- NEW: FIREBASE IMPORTS ---
+# --- FIREBASE IMPORTS ---
 import firebase_admin
 from firebase_admin import credentials, messaging, db
 
@@ -35,7 +35,6 @@ def send_push_notification(title, body):
         return
         
     try:
-        # Fetch all subscriber tokens from the database
         ref = db.reference('subscribers')
         subscribers = ref.get()
         
@@ -43,12 +42,9 @@ def send_push_notification(title, body):
             print("📭 No subscribers found in database.")
             return
             
-        # Extract just the token strings
         tokens = list(subscribers.keys())
         print(f"📢 Preparing to send push notification to {len(tokens)} devices...")
         
-        # Firebase has a limit of 500 tokens per multicast message.
-        # This chunks the tokens into batches of 500 automatically.
         success_total = 0
         failure_total = 0
         
@@ -98,7 +94,7 @@ def create_seo_slug(title):
     return slug.strip('-')
 
 def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_pages"):
-    """Injects the scraped data into your HTML template and saves the file."""
+    """Injects the scraped data into the Liquid Glass HTML template and saves the file."""
     os.makedirs(html_output_dir, exist_ok=True)
     
     slug = create_seo_slug(short_title)
@@ -108,12 +104,12 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
     # Relative path from the HTML folder to the PDF folder
     pdf_link = f"../downloads_timetable/{pdf_filename}"
     
-    # HTML Template - Updated to append "+ Timetable Download" in Title & Heading
+    # Liquid Glass HTML Template (Light & 120FPS Dark Mode Adaptive)
     html_template = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
@@ -131,13 +127,98 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
     
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        /* Liquid Mesh Canvas (Light Mode Default - Dark Mode overridden by components.js) */
         .bg-mesh {
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
-                              radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
-                              radial-gradient(at 0% 50%, hsla(228,100%,74%,0.15) 0px, transparent 50%);
+            background-color: #f4f7fb;
+            background-image: 
+                radial-gradient(at 12% 15%, rgba(99, 102, 241, 0.16) 0px, transparent 50%),
+                radial-gradient(at 88% 10%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
+                radial-gradient(at 50% 90%, rgba(16, 185, 129, 0.11) 0px, transparent 55%);
+            background-attachment: fixed;
         }
-        .btn-glow { box-shadow: 0 0 20px rgba(79, 70, 229, 0.4); }
+
+        /* Authentic Liquid Glass Surface (Light Mode) */
+        .real-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.64) 100%);
+            backdrop-filter: blur(24px) saturate(190%);
+            -webkit-backdrop-filter: blur(24px) saturate(190%);
+            border: 1.5px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 
+                inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
+                0 20px 50px -12px rgba(15, 23, 42, 0.08);
+        }
+
+        /* Recessed Inner Liquid Glass (Light Mode) */
+        .inner-glass {
+            background: rgba(248, 250, 252, 0.72);
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: inset 0 2px 6px rgba(15, 23, 42, 0.03);
+        }
+
+        /* Interactive Hybrid Cards (Light Mode) */
+        .hybrid-card {
+            background: rgba(255, 255, 255, 0.76);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(226, 232, 240, 0.85);
+            box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.05);
+            transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hybrid-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.45);
+            box-shadow: 0 14px 30px -8px rgba(79, 70, 229, 0.14);
+        }
+
+        /* Ambient Orbs (Automatically disabled in Dark Mode by components.js for 120FPS) */
+        .ambient-orb {
+            filter: blur(60px);
+            -webkit-filter: blur(60px);
+            pointer-events: none;
+        }
+
+        /* Primary CTA Liquid Glow & Shimmer */
+        .btn-glow {
+            box-shadow: 0 14px 30px -6px rgba(79, 70, 229, 0.48), inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
+        }
+        .btn-glow:hover {
+            box-shadow: 0 18px 36px -6px rgba(79, 70, 229, 0.62), inset 0 1px 0 0 rgba(255, 255, 255, 0.45);
+        }
+
+        @keyframes sheenSweep {
+            0% { transform: translateX(-120%) skewX(-18deg); }
+            100% { transform: translateX(220%) skewX(-18deg); }
+        }
+        .sheen-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .sheen-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+            animation: sheenSweep 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            pointer-events: none;
+        }
+
+        /* SVG Circular Countdown Ring */
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.95s linear;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        /* Smooth Accordion Caret */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary .faq-chevron { transform: rotate(180deg); }
     </style>
     
     <script type="application/ld+json">
@@ -155,129 +236,337 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
 
     <link rel="icon" href="/favicon.png" type="image/png">
     <meta property="og:site_name" content="Kerala Timetable">
+    <meta property="og:title" content="[[TITLE]] + Timetable Download | KTU Timetable">
+    <meta property="og:description" content="Download the official [[TITLE]] PDF. Check the latest exam dates, slots, and subjects for the APJAKTU examinations.">
     <meta property="og:image" content="https://www.keralatimetable.in/social-preview.png">
     <meta property="og:type" content="website">
 </head>
 
-<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
 
+    <!-- Ambient Liquid Background Orbs -->
+    <div class="ambient-orb fixed -top-24 -left-24 w-96 h-96 bg-indigo-400/20 rounded-full -z-10"></div>
+    <div class="ambient-orb fixed top-1/3 -right-28 w-80 h-80 bg-sky-400/20 rounded-full -z-10"></div>
+
+    <!-- Sticky Frosted Navigation Container -->
     <div id="navigation-container"></div>
 
-    <main class="flex-grow max-w-3xl mx-auto px-4 py-10 w-full flex flex-col items-center">
+    <main class="flex-grow max-w-3xl mx-auto px-4 sm:px-6 pt-5 pb-14 w-full flex flex-col items-center">
         
-        <div class="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8 md:p-10 text-center w-full relative overflow-hidden">
-            <div class="absolute -top-24 -right-24 w-48 h-48 bg-indigo-50 rounded-full blur-3xl opacity-60"></div>
-            
-            <div class="relative z-10">
-                <div class="inline-flex items-center justify-center p-3 bg-indigo-50 rounded-2xl mb-5 text-indigo-600">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                </div>
-                
-                <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight leading-snug">[[TITLE]] + Timetable Download</h2>
-                <p class="text-slate-500 font-medium mb-8">Official Exam Schedule • <strong>APJAKTU</strong></p>
+        <!-- Top Mobile-Friendly Breadcrumb & Verified Status Bar -->
+        <div class="w-full flex items-center justify-between gap-2 mb-4 sm:mb-6">
+            <a href="/timetable.html" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-xs sm:text-sm font-bold text-slate-700 bg-white/80 hover:bg-white border border-slate-200/80 shadow-sm transition-all active:scale-95">
+                <i class="fas fa-arrow-left text-indigo-600 text-xs"></i>
+                <span>All Timetables</span>
+            </a>
 
-                <div class="text-left bg-slate-50 border border-slate-100 p-5 rounded-2xl mb-8 text-sm text-slate-600 shadow-inner">
-                    <p class="mb-3 leading-relaxed"><strong>Important Update:</strong> The <strong>APJ Abdul Kalam Technological University (APJAKTU)</strong> has officially released this latest exam schedule. Download the secure PDF below to verify your specific exam dates and slot codes.</p>
-                </div>
-
-                <div id="download-section" class="py-4 flex flex-col items-center justify-center gap-4">
-                    <div id="loading-container" class="flex flex-col items-center justify-center space-y-4 w-full">
-                        <div class="w-8 h-8 border-4 border-indigo-100 border-t-indigo-600 rounded-full animate-spin"></div>
-                        <p id="timer-text" class="text-lg font-semibold text-slate-700">Connecting to Server in <span id="countdown" class="text-indigo-600 font-bold w-6 inline-block text-center">15</span>s...</p>
-                    </div>
-                    
-                    <a id="download-btn" href="#" target="_blank" class="hidden w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl transition-all duration-300 transform hover:-translate-y-1 items-center justify-center gap-2">
-                        <svg class="w-5 h-5 inline-block -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                        Download PDF Timetable
-                    </a>
-
-                    <a id="whatsapp-btn" href="https://api.whatsapp.com/send?text=🚨 *[[TITLE]] is Out!* Download the official PDF directly here: https://www.keralatimetable.in/timetable_pages/[[SLUG]].html" target="_blank" class="hidden w-full md:w-auto bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 items-center justify-center gap-2 shadow-sm">
-                        <svg class="w-5 h-5 inline-block -mt-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.125.553 4.179 1.604 5.99L.492 23.508l5.635-1.478A11.968 11.968 0 0012.031 24c6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm3.834 17.202c-.161.455-.938.868-1.332.915-.36.042-.818.121-2.502-.538-2.035-.798-3.344-2.884-3.444-3.018-.1-.134-.823-1.096-.823-2.091 0-.995.518-1.485.698-1.684.18-.198.39-.248.52-.248.13 0 .26.002.378.007.126.005.293-.048.455.34.168.402.571 1.397.621 1.498.05.1.08.218.015.348-.065.13-.098.212-.195.328-.098.116-.207.248-.293.348-.095.108-.195.228-.083.422.112.194.498.825 1.07 1.335.738.658 1.353.86 1.545.955.193.095.305.08.418-.04.113-.12.485-.563.615-.758.13-.195.26-.163.435-.098.175.065 1.107.522 1.297.618.19.095.318.142.365.222.048.08.048.468-.113.923z"/></svg>
-                        Share via WhatsApp
-                    </a>
-
-                    <a id="whatsapp-channel-btn" href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" class="hidden w-full md:w-auto bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:-translate-y-1 items-center justify-center gap-2 shadow-sm">
-                        <i class="fab fa-whatsapp text-xl"></i>
-                        Follow WhatsApp Channel
-                    </a>
-                </div>
-
-                <div class="mt-12 text-left border-t border-slate-100 pt-8">
-                    <h3 class="text-lg font-bold text-slate-800 mb-4">Frequently Asked Questions</h3>
-                    <div class="space-y-3">
-                        <div class="bg-slate-50 p-4 border border-slate-100 rounded-xl">
-                            <h4 class="font-bold text-slate-700 text-sm">When do these exams start?</h4>
-                            <p class="text-xs text-slate-500 mt-1">Please refer to the official PDF download above for the exact start dates and subject codes for this batch.</p>
-                        </div>
-                        <div class="bg-slate-50 p-4 border border-slate-100 rounded-xl">
-                            <h4 class="font-bold text-slate-700 text-sm">Is this the final timetable or tentative?</h4>
-                            <p class="text-xs text-slate-500 mt-1">This document contains the schedule published directly by the APJ Abdul Kalam Technological University (KTU). We mirror the official portal's data.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-8 pt-8 border-t border-slate-100 text-left">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Related Topics & Searches</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="bg-white border border-slate-200 text-slate-500 text-xs px-3 py-1.5 rounded-md">[[TITLE]]</span>
-                        <span class="bg-white border border-slate-200 text-slate-500 text-xs px-3 py-1.5 rounded-md">KTU Timetable 2026 PDF</span>
-                        <span class="bg-white border border-slate-200 text-slate-500 text-xs px-3 py-1.5 rounded-md">APJAKTU Exam Schedule Download</span>
-                    </div>
-                </div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-[11px] sm:text-xs font-extrabold tracking-tight shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Official KTU Mirror</span>
             </div>
         </div>
 
+        <!-- Master Liquid Glass Timetable Card -->
+        <section class="real-glass rounded-[2rem] sm:rounded-[2.25rem] p-5 sm:p-8 md:p-10 w-full relative overflow-hidden">
+            
+            <!-- Subtle Specular Highlight Orb Inside Card -->
+            <div class="ambient-orb absolute -top-28 -right-28 w-56 h-56 bg-indigo-500/15 rounded-full pointer-events-none"></div>
+
+            <div class="relative z-10 flex flex-col items-center text-center">
+                
+                <!-- Floating Glass Document Emblem -->
+                <div class="glass-folder w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-indigo-50/90 border border-indigo-100 flex items-center justify-center text-indigo-600 mb-5 shadow-md relative">
+                    <i class="fas fa-file-pdf text-2xl sm:text-3xl"></i>
+                    <span class=" -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 text-white text-[10px] flex items-center justify-center shadow border-2 border-white dark:border-slate-900">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+
+                <!-- Metadata Badges -->
+                <div class="flex flex-wrap items-center justify-center gap-2 mb-3.5">
+                    <span class="px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/60 text-indigo-700 text-[11px] font-extrabold uppercase tracking-wider">
+                        <i class="fas fa-university mr-1"></i> APJAKTU
+                    </span>
+                    <span class="px-3 py-1 rounded-full bg-blue-50 border border-blue-200/60 text-blue-700 text-[11px] font-extrabold uppercase tracking-wider">
+                        <i class="fas fa-bolt mr-1"></i> Direct PDF
+                    </span>
+                </div>
+
+                <!-- Main SEO Heading -->
+                <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-extrabold text-slate-900 mb-3 tracking-tight leading-snug max-w-2xl">
+                    [[TITLE]] <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500">+ Timetable Download</span>
+                </h1>
+                
+                <p class="text-xs sm:text-sm text-slate-500 font-semibold mb-6">
+                    Verified University Examination Schedule • Instant Cloud Mirror
+                </p>
+
+                <!-- Recessed Inner Glass Notice Box -->
+                <div class="inner-glass w-full rounded-2xl p-4 sm:p-5 mb-6 text-left flex items-start gap-3.5">
+                    <div class="w-9 h-9 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center shrink-0 mt-0.5">
+                        <i class="fas fa-info-circle text-sm"></i>
+                    </div>
+                    <div class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        <strong class="text-slate-900 font-bold">Important Update:</strong> The <strong>APJ Abdul Kalam Technological University (APJAKTU)</strong> has officially published this examination timetable. Verify your subject codes, slot letters, and examination dates in the official PDF below.
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- LIQUID GLASS COUNTDOWN & DOWNLOAD ENGINE                  -->
+                <!-- ========================================================= -->
+                <div id="download-section" class="w-full py-2 flex flex-col items-center justify-center">
+                    
+                    <!-- State 1: Interactive Countdown Ring -->
+                    <div id="loading-container" class="inner-glass w-full rounded-3xl p-6 sm:p-7 flex flex-col items-center justify-center space-y-4 transition-all duration-300">
+                        <div class="relative w-20 h-20 flex items-center justify-center">
+                            <svg class="w-20 h-20" viewBox="0 0 80 80">
+                                <circle class="text-slate-200 dark:text-slate-800" stroke-width="6" stroke="currentColor" fill="transparent" r="34" cx="40" cy="40"/>
+                                <circle id="countdown-ring" class="progress-ring__circle text-indigo-600" stroke-width="6" stroke-dasharray="213.6" stroke-dashoffset="0" stroke-linecap="round" stroke="currentColor" fill="transparent" r="34" cx="40" cy="40"/>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span id="countdown" class="text-xl font-extrabold text-indigo-600 leading-none">15</span>
+                                <span class="text-[9px] font-bold uppercase tracking-widest text-slate-400 mt-0.5">sec</span>
+                            </div>
+                        </div>
+
+                        <div class="text-center space-y-1">
+                            <p id="timer-text" class="text-sm sm:text-base font-extrabold text-slate-800">
+                                Preparing Direct PDF Mirror...
+                            </p>
+                            <p id="timer-subtext" class="text-xs font-medium text-slate-500">
+                                Bypassing KTU portal congestion for instant download
+                            </p>
+                        </div>
+
+                        <!-- Sleek Linear Progress Bar -->
+                        <div class="w-full max-w-xs h-1.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div id="countdown-bar" class="h-full bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-400 rounded-full transition-all duration-1000 ease-linear" style="width: 7%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- State 2: Ready Action Dock (Revealed when timer hits 0) -->
+                    <div id="ready-actions" class="hidden w-full flex-col gap-3 sm:gap-3.5 animate-fadeIn">
+                        
+                        <!-- Primary Download Button -->
+                        <a id="download-btn" href="#" target="_blank" rel="noopener" class="sheen-effect btn-glow w-full bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-600 text-white font-extrabold text-sm sm:text-base py-4 px-6 rounded-2xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-[0.99] flex items-center justify-center gap-3">
+                            <i class="fas fa-cloud-download-alt text-lg"></i>
+                            <span>Download Official PDF Timetable</span>
+                            <span class="px-2 py-0.5 rounded-full bg-white/20 text-[10px] font-black uppercase tracking-wider ml-1">PDF</span>
+                        </a>
+
+                        <!-- Secondary Mobile-Friendly 2-Column Share & Copy Bar -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 w-full">
+                            <a id="whatsapp-btn" href="https://api.whatsapp.com/send?text=🚨 *[[TITLE]] is Out!* Download the official PDF directly here: https://www.keralatimetable.in/timetable_pages/[[SLUG]].html" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs sm:text-sm py-3.5 px-5 rounded-xl transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20">
+                                <i class="fab fa-whatsapp text-base"></i>
+                                <span>Share with Classmates</span>
+                            </a>
+
+                            <button id="copy-link-btn" type="button" class="w-full bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm py-3.5 px-5 rounded-xl border border-slate-200/90 transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 shadow-sm">
+                                <i class="fas fa-link text-indigo-600 text-xs"></i>
+                                <span id="copy-link-text">Copy Direct Link</span>
+                            </button>
+                        </div>
+
+                        <!-- WhatsApp Channel Banner -->
+                        <a id="whatsapp-channel-btn" href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" rel="noopener noreferrer" class="inner-glass w-full p-3.5 rounded-xl hover:border-emerald-400/60 transition-all flex items-center justify-between gap-3 group">
+                            <div class="flex items-center gap-3 text-left">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200/60 text-emerald-600 flex items-center justify-center shrink-0">
+                                    <i class="fab fa-whatsapp text-lg"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs sm:text-sm font-extrabold text-slate-800 leading-tight">Get Instant Exam Alerts on WhatsApp</p>
+                                    <p class="text-[11px] font-medium text-slate-500">Join 10,000+ KTU students on our official channel</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 group-hover:bg-emerald-500 group-hover:text-white text-xs font-extrabold transition-colors shrink-0">
+                                Follow <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+                            </span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- COMPANION STUDY RESOURCES (High-UX Internal Links)        -->
+                <!-- ========================================================= -->
+                <div class="w-full mt-8 pt-7 border-t border-slate-200/70 dark:border-white/10 text-left">
+                    <div class="flex items-center justify-between mb-3.5">
+                        <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-400">
+                            <i class="fas fa-sparkles text-indigo-500 mr-1"></i> Prepare for this Exam
+                        </h2>
+                        <span class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400">Free KTU Resources</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <a href="/notes.html" class="hybrid-card p-4 rounded-2xl flex items-center justify-between gap-3 group">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center shrink-0">
+                                    <i class="fas fa-book-open text-sm"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xs sm:text-sm font-extrabold text-slate-800">KTU Study Notes</h3>
+                                    <p class="text-[11px] font-medium text-slate-500">All modules & schemes PDF</p>
+                                </div>
+                            </div>
+                            <div class="w-7 h-7 rounded-full bg-white border border-slate-200/80 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-indigo-600 transition-all shrink-0">
+                                <i class="fas fa-chevron-right text-[10px]"></i>
+                            </div>
+                        </a>
+
+                        <a href="/pyq.html" class="hybrid-card p-4 rounded-2xl flex items-center justify-between gap-3 group">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100 text-purple-600 flex items-center justify-center shrink-0">
+                                    <i class="fas fa-file-alt text-sm"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xs sm:text-sm font-extrabold text-slate-800">Solved PYQ Papers</h3>
+                                    <p class="text-[11px] font-medium text-slate-500">Previous university questions</p>
+                                </div>
+                            </div>
+                            <div class="w-7 h-7 rounded-full bg-white border border-slate-200/80 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-indigo-600 transition-all shrink-0">
+                                <i class="fas fa-chevron-right text-[10px]"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- INTERACTIVE LIQUID GLASS ACCORDION FAQs                   -->
+                <!-- ========================================================= -->
+                <div class="w-full mt-8 pt-7 border-t border-slate-200/70 dark:border-white/10 text-left">
+                    <h2 class="text-sm sm:text-base font-extrabold text-slate-800 mb-3.5 flex items-center gap-2">
+                        <i class="fas fa-question-circle text-indigo-500"></i>
+                        <span>Frequently Asked Questions</span>
+                    </h2>
+
+                    <div class="space-y-2.5">
+                        <details class="inner-glass rounded-2xl group overflow-hidden" open>
+                            <summary class="p-4 cursor-pointer flex items-center justify-between gap-3 font-bold text-slate-800 text-xs sm:text-sm select-none">
+                                <span>When do the [[TITLE]] exams start?</span>
+                                <i class="fas fa-chevron-down faq-chevron text-slate-400 text-xs transition-transform duration-200"></i>
+                            </summary>
+                            <div class="px-4 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-200/50 dark:border-white/5 pt-3">
+                                Please refer to the official PDF download above for the exact subject-wise start dates, FN/AN session timings, and slot codes for your specific scheme and branch.
+                            </div>
+                        </details>
+
+                        <details class="inner-glass rounded-2xl group overflow-hidden">
+                            <summary class="p-4 cursor-pointer flex items-center justify-between gap-3 font-bold text-slate-800 text-xs sm:text-sm select-none">
+                                <span>Is this the final KTU timetable or tentative?</span>
+                                <i class="fas fa-chevron-down faq-chevron text-slate-400 text-xs transition-transform duration-200"></i>
+                            </summary>
+                            <div class="px-4 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-200/50 dark:border-white/5 pt-3">
+                                This document is mirrored directly from the official APJ Abdul Kalam Technological University (KTU) announcements portal. Any revised notifications will automatically update on our dashboard.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- SEO Tag Pills -->
+                <div class="w-full mt-7 pt-6 border-t border-slate-200/70 dark:border-white/10 text-left">
+                    <h3 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2.5">Related Searches</h3>
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                        <span class="bg-white/80 border border-slate-200/80 text-slate-500 text-[11px] font-semibold px-3 py-1 rounded-full">[[TITLE]]</span>
+                        <span class="bg-white/80 border border-slate-200/80 text-slate-500 text-[11px] font-semibold px-3 py-1 rounded-full">KTU Timetable PDF Download</span>
+                        <span class="bg-white/80 border border-slate-200/80 text-slate-500 text-[11px] font-semibold px-3 py-1 rounded-full">APJAKTU Exam Schedule</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center">
+    <!-- Adaptive Frosted Footer -->
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-8 text-center">
         <div class="max-w-3xl mx-auto px-4">
-            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
-            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast and direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
-            <div class="mt-4 space-x-4">
-                <a href="../about.html" class="text-indigo-600 text-xs font-bold hover:underline">About Us</a>
-                <a href="https://keralatimetable.stck.me/profile" target="_blank" class="text-indigo-600 text-xs font-bold hover:underline">Support Us</a>
+            <h3 class="text-slate-800 font-extrabold text-base sm:text-lg mb-1.5">Kerala Timetable</h3>
+            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto">
+                Providing fast, liquid-smooth access to university resources. We are an independent student platform and not officially affiliated with APJ Abdul Kalam Technological University.
+            </p>
+            <div class="mt-4 flex items-center justify-center gap-5">
+                <a href="/timetable.html" class="text-indigo-600 text-xs font-extrabold hover:underline">Timetables</a>
+                <a href="/notes.html" class="text-indigo-600 text-xs font-extrabold hover:underline">Notes</a>
+                <a href="/about.html" class="text-indigo-600 text-xs font-extrabold hover:underline">About Us</a>
+                <a href="/contact-us.html" class="text-indigo-600 text-xs font-extrabold hover:underline">Contact</a>
             </div>
         </div>
     </footer>
 
+    <!-- Core Flow Engine & 120FPS Dark Mode Script -->
     <script src="../components.js?v=12"></script>
     <script>
-        // Load navigation menu correctly adjusted for the /timetable_pages/ subfolder
-        loadNavigation('', '../', false);
+        // Highlight 'timetable' in the navigation drawer
+        loadNavigation('timetable', '../', false);
     </script>
 
     <script>
-        // --- Countdown & Download Logic ---
+        // --- Liquid Glass Countdown, Ring & Capsule Integration ---
         const pdfLink = "[[PDF_LINK]]";
-        let timeLeft = 15;
+        const totalTime = 15;
+        let timeLeft = totalTime;
         
         const countdownEl = document.getElementById('countdown');
-        const downloadBtn = document.getElementById('download-btn');
-        const whatsappBtn = document.getElementById('whatsapp-btn');
-        const whatsappChannelBtn = document.getElementById('whatsapp-channel-btn');
+        const ringEl = document.getElementById('countdown-ring');
+        const barEl = document.getElementById('countdown-bar');
+        const timerSubtext = document.getElementById('timer-subtext');
         const loadingContainer = document.getElementById('loading-container');
+        const readyActions = document.getElementById('ready-actions');
+        const downloadBtn = document.getElementById('download-btn');
+        const copyLinkBtn = document.getElementById('copy-link-btn');
+        const copyLinkText = document.getElementById('copy-link-text');
+
+        const circumference = 2 * Math.PI * 34; // r=34 -> ~213.6
 
         const timer = setInterval(() => {
             timeLeft--;
-            countdownEl.textContent = timeLeft;
+            if (countdownEl) countdownEl.textContent = timeLeft;
+
+            // Update Circular Ring & Linear Bar
+            const elapsed = totalTime - timeLeft;
+            const offset = circumference - (elapsed / totalTime) * circumference;
+            if (ringEl) ringEl.style.strokeDashoffset = offset;
+            if (barEl) barEl.style.width = `${Math.min(100, Math.round((elapsed / totalTime) * 100))}%`;
+
+            if (timeLeft === 8 && timerSubtext) {
+                timerSubtext.textContent = "Verifying official APJAKTU PDF signature...";
+            } else if (timeLeft === 3 && timerSubtext) {
+                timerSubtext.textContent = "Almost ready! Unlocking direct download...";
+            }
 
             if (timeLeft <= 0) {
                 clearInterval(timer);
                 loadingContainer.classList.add('hidden');
                 
-                // Show Download Button
+                // Configure & Reveal Action Dock
                 downloadBtn.href = pdfLink;
-                downloadBtn.classList.remove('hidden');
-                downloadBtn.classList.add('flex', 'btn-glow'); 
-                
-                // Show WhatsApp Buttons
-                whatsappBtn.classList.remove('hidden');
-                whatsappBtn.classList.add('flex');
+                readyActions.classList.remove('hidden');
+                readyActions.classList.add('flex');
 
-                whatsappChannelBtn.classList.remove('hidden');
-                whatsappChannelBtn.classList.add('flex');
+                // Trigger ColorOS Live Capsule Notification
+                if (typeof window.triggerCapsule === 'function') {
+                    window.triggerCapsule('success', 'Timetable PDF Ready to Download!');
+                }
             }
         }, 1000);
+
+        // Copy Direct Link Button with Capsule Toast Feedback
+        copyLinkBtn?.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                if (copyLinkText) copyLinkText.textContent = 'Link Copied!';
+                if (typeof window.triggerCapsule === 'function') {
+                    window.triggerCapsule('success', 'Page link copied to clipboard');
+                }
+                setTimeout(() => {
+                    if (copyLinkText) copyLinkText.textContent = 'Copy Direct Link';
+                }, 2500);
+            } catch (err) {
+                if (typeof window.triggerCapsule === 'function') {
+                    window.triggerCapsule('amber', 'Could not copy link');
+                }
+            }
+        });
     </script>
 </body>
 </html>"""
@@ -291,7 +580,7 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
 
 
 # -------------------------------------------------------------------
-# AI EXTRACTION FUNCTION (UPDATED TO READ FULL PDF)
+# AI EXTRACTION FUNCTION (READS FULL PDF)
 # -------------------------------------------------------------------
 def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
     """Reads the PDF text and uses Gemini to extract structured dates/tags."""
@@ -301,7 +590,6 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
     try:
         with open(pdf_path, "rb") as f:
             reader = PyPDF2.PdfReader(f)
-            # FIX: Read every single page of the PDF to ensure we catch the final exams
             for i in range(len(reader.pages)):
                 text = reader.pages[i].extract_text()
                 if text:
@@ -310,7 +598,6 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
         print(f"❌ Error reading PDF: {e}")
         return None
 
-    # Prompt updated to remove viewLink requirement for now (we inject it later)
     prompt = f"""
     You are an expert data extractor. Analyze this KTU exam timetable text.
     Original Long Title: {original_title}
@@ -338,7 +625,7 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
                 response_schema=TimetableData,
-                temperature=0.0, # Lowered for maximum mathematical strictness
+                temperature=0.0,
             ),
         )
         ai_data = json.loads(response.text)
@@ -349,7 +636,7 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
         return None
 
 # -------------------------------------------------------------------
-# CONFIG UPDATER FUNCTION (UNTOUCHED)
+# CONFIG UPDATER FUNCTION
 # -------------------------------------------------------------------
 def update_timetable_config(ai_data_dict, config_path="timetable-config.js"):
     """Safely appends the AI's JSON object into window.timetablesData."""
@@ -392,7 +679,8 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
         print("Launching headless Chromium browser...")
         browser = p.chromium.launch(headless=True)
         context = browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            ignore_https_errors=True  # Bypasses KTU's SSL certificate errors
         )
         page = context.new_page()
         
@@ -462,14 +750,12 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
                     ai_extracted_data = extract_dashboard_data_with_ai(save_path, title, relative_pdf_link)
                     
                     if ai_extracted_data:
-                        # Grab the short title AI generated
                         short_title = ai_extracted_data.get('title', title)
                         
                         # 3. Generate HTML using the SHORT TITLE
                         html_filepath, relative_html_link = generate_html_page(short_title, filename, html_dir)
                         print(f" -> HTML Generated: {html_filepath}")
                         
-                        # Update the viewLink now that the HTML page exists
                         ai_extracted_data['viewLink'] = relative_html_link
                         
                         # 4. Update the JavaScript Config
@@ -481,11 +767,9 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
                             body=f"{short_title} is now available on the dashboard."
                         )
                     else:
-                        # Fallback just in case AI fails
                         html_filepath, relative_html_link = generate_html_page(title, filename, html_dir)
                         print(f" -> HTML Generated (Fallback Title): {html_filepath}")
 
-                    
                     downloaded_files.append({
                         "title": title,
                         "date": tb['date'],
