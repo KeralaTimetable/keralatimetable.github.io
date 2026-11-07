@@ -24,34 +24,86 @@
         
         .font-sporty { font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em; }
 
+        /* Liquid Mesh Canvas (Light Mode Default - Dark Mode overridden by components.js) */
         .bg-mesh {
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
-                              radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
-                              radial-gradient(at 0% 50%, hsla(228,100%,74%,0.15) 0px, transparent 50%);
+            background-color: #f4f7fb;
+            background-image: 
+                radial-gradient(at 15% 15%, hsla(228,100%,74%,0.16) 0px, transparent 50%),
+                radial-gradient(at 85% 5%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
+                radial-gradient(at 50% 85%, hsla(158,85%,52%,0.10) 0px, transparent 55%);
+            background-attachment: fixed;
+        }
+
+        /* Authentic Liquid Glass Surfaces (Light Mode) */
+        .real-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0.66) 100%);
+            backdrop-filter: blur(22px) saturate(185%);
+            -webkit-backdrop-filter: blur(22px) saturate(185%);
+            border: 1.5px solid rgba(255, 255, 255, 0.85);
+            box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), 0 16px 40px -10px rgba(15, 23, 42, 0.07);
+        }
+
+        .inner-glass {
+            background: rgba(248, 250, 252, 0.76);
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: inset 0 2px 5px rgba(15, 23, 42, 0.03);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1.5px solid rgba(203, 213, 225, 0.85);
+            transition: all 0.25s ease;
+        }
+        .glass-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.14);
+            outline: none;
+        }
+
+        /* Liquid Glass Timetable Card (Syncs with 120FPS Dark Mode .hybrid-card) */
+        .timetable-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.90) 0%, rgba(255, 255, 255, 0.74) 100%);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border: 1.5px solid rgba(226, 232, 240, 0.95);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.95), 0 10px 28px -8px rgba(15, 23, 42, 0.06);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .timetable-card:hover {
+            transform: translateY(-5px);
+            box-shadow: inset 0 1px 0 0 #ffffff, 0 20px 38px -10px rgba(79, 70, 229, 0.16);
+            border-color: rgba(99, 102, 241, 0.45);
+        }
+
+        /* Ambient Orbs (Auto-optimized in Dark Mode by components.js) */
+        .ambient-orb {
+            filter: blur(64px);
+            -webkit-filter: blur(64px);
+            pointer-events: none;
         }
         
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        .timetable-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .timetable-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -8px rgba(99, 102, 241, 0.15); border-color: #c7d2fe; }
-
         @keyframes fadeUpEntry {
-            0% { opacity: 0; transform: translateY(20px); }
+            0% { opacity: 0; transform: translateY(18px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-fade-up { opacity: 0; animation: fadeUpEntry 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
         @keyframes slideDownIn {
             0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-        .animate-slide-down { animation: slideDownIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-slide-down { animation: slideDownIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-        .delay-100 { animation-delay: 80ms; }
-        .delay-200 { animation-delay: 160ms; }
-        .delay-300 { animation-delay: 240ms; }
+        .delay-100 { animation-delay: 70ms; }
+        .delay-200 { animation-delay: 140ms; }
+        .delay-300 { animation-delay: 210ms; }
     </style>
     <link rel="icon" href="/favicon.png" type="image/png">
     <meta property="og:site_name" content="Kerala Timetable">
@@ -59,109 +111,175 @@
     <meta property="og:type" content="website">
 </head>
 
-<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
+
+    <!-- Ambient Liquid Background Orbs -->
+    <div class="ambient-orb fixed -top-28 -left-28 w-96 h-96 bg-indigo-400/20 rounded-full -z-10"></div>
+    <div class="ambient-orb fixed top-1/3 -right-28 w-80 h-80 bg-sky-400/20 rounded-full -z-10"></div>
 
     <div id="navigation-container" class="min-h-[64px] sm:min-h-[73px] w-full"></div>
 
-    <main class="flex-grow w-full pb-14 sm:pb-20">
+    <main class="flex-grow w-full pb-16 sm:pb-24">
         
         <!-- Header -->
-        <div class="w-full max-w-6xl mx-auto px-3.5 sm:px-4 pt-6 sm:pt-10 pb-5 sm:pb-8 text-center relative z-20">
-            <div class="animate-fade-up inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-slate-800 border border-slate-700 text-white text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-4 sm:mb-6 shadow-sm">
-                <i class="fas fa-radar animate-pulse text-cyan-400"></i> Live Exam Radar
+        <div class="w-full max-w-6xl mx-auto px-3.5 sm:px-4 pt-6 sm:pt-10 pb-5 sm:pb-7 text-center relative z-20">
+            <div class="animate-fade-up inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-slate-900 border border-slate-700/80 text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider mb-4 sm:mb-5 shadow-md">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+                </span>
+                <span>Live Exam Radar</span>
+                <span id="total-active-badge" class="hidden ml-1 px-2 py-0.5 rounded-full bg-white/15 text-[10px] text-cyan-300 font-black">0 Active</span>
             </div>
             
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-2.5 sm:mb-4">
-                KTU Timetable <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Dashboard</span>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-2.5 sm:mb-3.5">
+                KTU Timetable <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500">Dashboard</span>
             </h1>
             
-            <p class="text-slate-500 font-medium text-xs sm:text-base md:text-lg max-w-2xl mx-auto mb-1.5 sm:mb-2 leading-relaxed px-2">
-                Latest Timetables of KTU examinations.
+            <p class="text-slate-500 font-medium text-xs sm:text-base md:text-lg max-w-2xl mx-auto mb-2 sm:mb-3 leading-relaxed px-2">
+                Latest official exam schedules, live countdowns & instant PDF mirrors.
             </p>
             
-            <p id="live-clock" class="text-[11px] sm:text-sm font-bold text-slate-400 tracking-widest uppercase"></p>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full inner-glass text-[10px] sm:text-xs font-bold text-slate-500 tracking-wider uppercase">
+                <i class="far fa-clock text-indigo-500"></i>
+                <span id="live-clock">Syncing system time...</span>
+            </div>
         </div>
 
         <div class="w-full max-w-6xl mx-auto px-3.5 sm:px-4 relative z-20">
             
-            <!-- New Timetable Notice Banner -->
-            <div id="new-timetable-banner" class="hidden mb-4 sm:mb-6 animate-slide-down delay-200">
-                <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-2.5 sm:p-4 flex items-start sm:items-center justify-between gap-2.5 sm:gap-3 shadow-sm">
-                    <div class="flex items-start sm:items-center gap-2 sm:gap-3 w-full overflow-hidden">
-                        <div class="bg-indigo-600 text-white text-[9px] sm:text-[10px] font-black px-1.5 sm:px-2 py-1 sm:py-1.5 rounded uppercase tracking-widest whitespace-nowrap shrink-0 mt-0.5 sm:mt-0 shadow-sm shadow-indigo-500/20">
-                            <i class="fas fa-bolt mr-1 text-indigo-200"></i> NEW
+            <!-- New Timetable Notice Banner (Liquid Glass) -->
+            <div id="new-timetable-banner" class="hidden mb-5 sm:mb-6 animate-slide-down delay-200">
+                <div class="real-glass bg-indigo-50/85 border border-indigo-200/90 rounded-2xl p-3 sm:p-4 flex items-start sm:items-center justify-between gap-2.5 sm:gap-3">
+                    <div class="flex items-start sm:items-center gap-2.5 sm:gap-3.5 w-full overflow-hidden">
+                        <div class="bg-indigo-600 text-white text-[9px] sm:text-[10px] font-black px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg uppercase tracking-widest whitespace-nowrap shrink-0 mt-0.5 sm:mt-0 shadow-sm shadow-indigo-500/30 flex items-center gap-1">
+                            <i class="fas fa-bolt text-amber-300"></i>
+                            <span>JUST OUT</span>
                         </div>
-                        <div id="banner-titles" class="flex flex-col gap-1 text-xs sm:text-sm font-bold text-slate-800 w-full truncate"></div>
+                        <div id="banner-titles" class="flex flex-col sm:flex-row sm:flex-wrap gap-1 sm:gap-x-4 text-xs sm:text-sm font-extrabold text-slate-800 w-full truncate"></div>
                     </div>
-                    <button onclick="dismissNewBanner()" class="text-slate-400 hover:text-indigo-600 p-1 shrink-0 transition-colors">
-                        <i class="fas fa-times text-xs sm:text-sm"></i>
+                    <button onclick="dismissNewBanner()" aria-label="Dismiss banner" class="w-7 h-7 rounded-full bg-white/70 hover:bg-white text-slate-400 hover:text-rose-500 flex items-center justify-center shrink-0 transition-colors shadow-sm">
+                        <i class="fas fa-times text-xs"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Search Specific Timetables / Filter Toggle Section -->
             <div class="flex flex-col items-center mb-6 sm:mb-8 animate-fade-up delay-200 w-full">
-                <button type="button" onclick="toggleFilterDrawer()" id="filter-toggle-btn" class="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-200 hover:shadow-sm rounded-full text-xs sm:text-sm font-bold transition-all group active:scale-95 shadow-sm cursor-pointer">
-                    <i class="fas fa-search text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
-                    <span>Search Specific Timetables / Filter</span>
-                    <i id="filter-chevron" class="fas fa-chevron-down text-[10px] ml-0.5 text-slate-400 group-hover:text-indigo-500 transition-transform duration-300"></i>
-                </button>
+                <div class="flex items-center justify-center gap-2 w-full sm:w-auto">
+                    <button type="button" onclick="toggleFilterDrawer()" id="filter-toggle-btn" class="inline-flex items-center justify-center gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 bg-white border border-slate-200/90 text-slate-700 hover:text-indigo-600 hover:border-indigo-300 rounded-full text-xs sm:text-sm font-extrabold transition-all group active:scale-95 shadow-sm cursor-pointer">
+                        <i class="fas fa-sliders-h text-indigo-500 transition-transform group-hover:rotate-12"></i>
+                        <span>Search & Filter Timetables</span>
+                        <span id="active-filter-Dot" class="hidden w-2 h-2 rounded-full bg-indigo-600"></span>
+                        <i id="filter-chevron" class="fas fa-chevron-down text-[10px] ml-0.5 text-slate-400 group-hover:text-indigo-500 transition-transform duration-300"></i>
+                    </button>
 
-                <!-- Filter Drawer (Smooth Slide Down) -->
-                <div id="filter-drawer" class="w-full max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out pointer-events-none">
-                    <div class="pt-4 sm:pt-5 pb-1 sm:pb-2 w-full flex flex-col items-center">
+                    <button type="button" id="quick-reset-btn" onclick="resetAllFilters()" class="hidden items-center gap-1.5 px-3.5 py-2.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200 text-xs font-extrabold hover:bg-rose-100 transition-all active:scale-95">
+                        <i class="fas fa-undo-alt text-[10px]"></i>
+                        <span>Reset</span>
+                    </button>
+                </div>
+
+                <!-- Filter Drawer (Smooth Slide Down Liquid Glass Panel) -->
+                <div id="filter-drawer" class="w-full max-w-3xl max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out pointer-events-none">
+                    <div class="real-glass rounded-3xl p-4 sm:p-5 mt-3.5 w-full flex flex-col items-center gap-3.5">
+                        
+                        <!-- Instant Live Search Input -->
+                        <div class="relative w-full">
+                            <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs sm:text-sm pointer-events-none"></i>
+                            <input 
+                                type="text" 
+                                id="timetable-search-input" 
+                                placeholder="Search by semester (S3, S5), scheme (2024, 2019), or course..." 
+                                class="glass-input w-full pl-10 pr-9 py-2.5 sm:py-3 rounded-2xl text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400"
+                            />
+                            <button type="button" id="clear-search-btn" onclick="clearSearchInput()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-slate-200/80 hover:bg-slate-300 text-slate-600 items-center justify-center text-[10px] transition-colors">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+
                         <!-- Course Filters (Horizontally Scrollable) -->
-                        <div class="flex overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 mb-2.5 sm:mb-3 w-full justify-start sm:justify-center px-1" id="course-filters">
-                            <button class="course-btn active bg-indigo-600 text-white font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm shadow-sm" data-course="ALL">All</button>
-                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="BTECH">B.Tech</button>
-                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="MTECH">M.Tech</button>
-                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="MCA">MCA</button>
-                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="MBA">MBA</button>
-                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl whitespace-nowrap transition-colors text-xs sm:text-sm" data-course="OTHER">Others</button>
+                        <div class="flex overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 w-full justify-start sm:justify-center px-0.5" id="course-filters">
+                            <button class="course-btn active bg-indigo-600 text-white font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl whitespace-nowrap transition-all text-xs sm:text-sm shadow-sm active:scale-95" data-course="ALL">All Courses</button>
+                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl whitespace-nowrap transition-all text-xs sm:text-sm active:scale-95" data-course="BTECH">B.Tech</button>
+                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl whitespace-nowrap transition-all text-xs sm:text-sm active:scale-95" data-course="MTECH">M.Tech</button>
+                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl whitespace-nowrap transition-all text-xs sm:text-sm active:scale-95" data-course="MCA">MCA</button>
+                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl whitespace-nowrap transition-all text-xs sm:text-sm active:scale-95" data-course="MBA">MBA</button>
+                            <button class="course-btn bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl whitespace-nowrap transition-all text-xs sm:text-sm active:scale-95" data-course="OTHER">Others</button>
                         </div>
 
                         <!-- Semester Filters (Horizontally Scrollable) -->
-                        <div class="flex overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 mb-2 sm:mb-3 pb-2 sm:pb-3 border-b border-slate-200/60 w-full justify-start sm:justify-center px-1" id="semester-filters">
-                            <button class="sem-btn active bg-slate-800 text-white font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="ALL">All Sems</button>
-                            <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="S1/S2">S1 / S2</button>
-                            <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="S3/S4">S3 / S4</button>
-                            <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="S5/S6">S5 / S6</button>
-                            <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1 sm:px-4 sm:py-1.5 rounded-md sm:rounded-lg whitespace-nowrap transition-colors text-[11px] sm:text-xs" data-filter="S7/S8">S7 / S8</button>
+                        <div class="flex overflow-x-auto no-scrollbar gap-1.5 sm:gap-2 pt-1 border-t border-slate-200/60 dark:border-white/10 w-full justify-start sm:justify-center px-0.5" id="semester-filters">
+                            <button class="sem-btn active bg-slate-800 text-white font-bold px-3 py-1.5 sm:px-4 sm:py-1.5 rounded-lg whitespace-nowrap transition-all text-[11px] sm:text-xs active:scale-95" data-filter="ALL">All Sems</button>
+                            <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1.5 sm:px-4 sm:py-1.5 rounded-lg whitespace-nowrap transition-all text-[11px] sm:text-xs active:scale-95" data-filter="S1/S2">S1 / S2</button>
+                            <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1.5 sm:px-4 sm:py-1.5 rounded-lg whitespace-nowrap transition-all text-[11px] sm:text-xs active:scale-95" data-filter="S3/S4">S3 / S4</button>
+                            <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1.5 sm:px-4 sm:py-1.5 rounded-lg whitespace-nowrap transition-all text-[11px] sm:text-xs active:scale-95" data-filter="S5/S6">S5 / S6</button>
+                            <button class="sem-btn bg-white text-slate-500 border border-slate-200 hover:bg-slate-50 font-bold px-3 py-1.5 sm:px-4 sm:py-1.5 rounded-lg whitespace-nowrap transition-all text-[11px] sm:text-xs active:scale-95" data-filter="S7/S8">S7 / S8</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Ongoing Section -->
-            <div id="ongoing-section" class="animate-fade-up delay-300 mb-8 sm:mb-12 hidden">
-                <div class="flex items-center gap-2.5 sm:gap-3 mb-3.5 sm:mb-5 border-b border-rose-200/50 pb-2.5 sm:pb-3">
-                    <span class="relative flex h-3 w-3 sm:h-3.5 sm:w-3.5">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 sm:h-3.5 sm:w-3.5 bg-rose-500 border-2 border-white"></span>
-                    </span>
-                    <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Ongoing Exams</h2>
+            <div id="ongoing-section" class="animate-fade-up delay-300 mb-9 sm:mb-12 hidden">
+                <div class="flex items-center justify-between gap-2.5 sm:gap-3 mb-4 sm:mb-5 border-b border-rose-200/60 dark:border-rose-500/20 pb-2.5 sm:pb-3">
+                    <div class="flex items-center gap-2.5 sm:gap-3">
+                        <span class="relative flex h-3 w-3 sm:h-3.5 sm:w-3.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 sm:h-3.5 sm:w-3.5 bg-rose-500 border-2 border-white"></span>
+                        </span>
+                        <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Ongoing Exams</h2>
+                    </div>
+                    <span id="ongoing-count-pill" class="px-2.5 py-0.5 rounded-full bg-rose-50 border border-rose-200 text-rose-600 text-[11px] font-extrabold">0 Live</span>
                 </div>
-                <div id="ongoing-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5"></div>
+                <div id="ongoing-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"></div>
             </div>
 
             <!-- Upcoming Section -->
             <div id="upcoming-section" class="animate-fade-up delay-300 mb-10 sm:mb-16 hidden">
-                <div class="flex items-center gap-2.5 sm:gap-3 mb-3.5 sm:mb-5 border-b border-amber-200/50 pb-2.5 sm:pb-3">
-                    <i class="fas fa-hourglass-half text-amber-500 text-lg sm:text-xl"></i>
-                    <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Upcoming Exams</h2>
+                <div class="flex items-center justify-between gap-2.5 sm:gap-3 mb-4 sm:mb-5 border-b border-amber-200/60 dark:border-amber-500/20 pb-2.5 sm:pb-3">
+                    <div class="flex items-center gap-2.5 sm:gap-3">
+                        <div class="w-7 h-7 rounded-lg bg-amber-50 border border-amber-200/70 flex items-center justify-center text-amber-500">
+                            <i class="fas fa-hourglass-half text-xs sm:text-sm"></i>
+                        </div>
+                        <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Upcoming Exams</h2>
+                    </div>
+                    <span id="upcoming-count-pill" class="px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-extrabold">0 Scheduled</span>
                 </div>
-                <div id="upcoming-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5"></div>
+                <div id="upcoming-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"></div>
             </div>
 
             <!-- Empty Search Fallback -->
-            <div id="empty-state" class="hidden text-center py-12 sm:py-16 bg-white/60 border border-slate-200 border-dashed rounded-2xl sm:rounded-3xl">
-                <i class="fas fa-folder-open text-3xl sm:text-4xl text-slate-300 mb-2 sm:mb-3"></i>
-                <h3 class="text-base sm:text-lg font-bold text-slate-700">No matching exams</h3>
-                <p class="text-xs sm:text-sm text-slate-500 mt-0.5">There are no ongoing or upcoming exams matching this filter.</p>
+            <div id="empty-state" class="hidden text-center py-12 sm:py-16 real-glass rounded-3xl px-4">
+                <div class="w-14 h-14 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-500 flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-folder-open text-2xl"></i>
+                </div>
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-800">No matching exam timetables</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-md mx-auto">There are no ongoing or upcoming exams matching your current search or filter criteria.</p>
+                <button type="button" onclick="resetAllFilters()" class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-extrabold shadow-md shadow-indigo-500/20 transition-all active:scale-95">
+                    <i class="fas fa-sync-alt text-xs"></i>
+                    <span>Show All Timetables</span>
+                </button>
             </div>
 
         </div>
     </main>
+
+    <!-- Adaptive Frosted Footer -->
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-8 text-center">
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="text-slate-800 font-extrabold text-base sm:text-lg mb-1.5">Kerala Timetable</h3>
+            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto">
+                Providing fast, liquid-smooth access to university resources for 6,000+ KTU students.
+            </p>
+            <div class="mt-4 flex items-center justify-center gap-5">
+                <a href="/notes.html" class="text-indigo-600 text-xs font-extrabold hover:underline">Study Notes</a>
+                <a href="/pyq.html" class="text-indigo-600 text-xs font-extrabold hover:underline">PYQ Papers</a>
+                <a href="/about.html" class="text-indigo-600 text-xs font-extrabold hover:underline">About Us</a>
+                <a href="/contact-us.html" class="text-indigo-600 text-xs font-extrabold hover:underline">Contact</a>
+            </div>
+        </div>
+    </footer>
 
     <!-- Push Notification Opt-in Prompt -->
     <div id="push-notification-banner" class="fixed bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 translate-y-[200%] transition-transform duration-700 ease-out z-[100] w-[92%] sm:w-[95%] max-w-2xl bg-slate-900/95 backdrop-blur-xl text-white p-3.5 sm:p-4 md:p-5 rounded-2xl sm:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.4)] border border-slate-700/50 flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4 md:gap-6">
@@ -193,15 +311,18 @@
             const chevron = document.getElementById('filter-chevron');
             if (!drawer) return;
 
-            const isOpen = drawer.classList.contains('max-h-96');
+            const isOpen = drawer.classList.contains('max-h-[420px]');
             if (isOpen) {
-                drawer.classList.remove('max-h-96', 'opacity-100');
+                drawer.classList.remove('max-h-[420px]', 'opacity-100');
                 drawer.classList.add('max-h-0', 'opacity-0', 'pointer-events-none');
                 if (chevron) chevron.classList.remove('rotate-180');
             } else {
                 drawer.classList.remove('max-h-0', 'opacity-0', 'pointer-events-none');
-                drawer.classList.add('max-h-96', 'opacity-100');
+                drawer.classList.add('max-h-[420px]', 'opacity-100');
                 if (chevron) chevron.classList.add('rotate-180');
+                setTimeout(() => {
+                    document.getElementById('timetable-search-input')?.focus();
+                }, 180);
             }
         }
         window.toggleFilterDrawer = toggleFilterDrawer;
@@ -217,8 +338,8 @@
 
         function getCourseFromTitle(title) {
             const t = (title || '').toUpperCase();
-            if (t.includes('B.TECH')) return 'BTECH';
-            if (t.includes('M.TECH')) return 'MTECH';
+            if (t.includes('B.TECH') || t.includes('BTECH')) return 'BTECH';
+            if (t.includes('M.TECH') || t.includes('MTECH')) return 'MTECH';
             if (t.includes('MCA')) return 'MCA';
             if (t.includes('MBA')) return 'MBA';
             return 'OTHER';
@@ -244,46 +365,65 @@
 
             let statusHTML = '';
             if (statusText === 'LIVE') {
-                statusHTML = `<div class="w-full bg-rose-500 border-t border-rose-600 p-2.5 sm:p-3 text-center text-xs sm:text-[15px] font-sporty text-white tracking-widest shadow-[0_-4px_15px_rgba(244,63,94,0.3)] z-10"><i class="fas fa-circle text-[8px] sm:text-[10px] animate-pulse mr-1.5"></i> Ongoing Now</div>`;
+                statusHTML = `
+                    <div class="w-full bg-gradient-to-r from-rose-600 to-rose-500 border-t border-rose-500 p-2.5 sm:p-3 text-center text-xs sm:text-[14px] font-sporty text-white tracking-widest shadow-[0_-4px_15px_rgba(244,63,94,0.28)] z-10 flex items-center justify-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+                        <span>ONGOING NOW</span>
+                    </div>`;
             } else if (isCountdown) {
-                statusHTML = `<div class="w-full bg-amber-50 border-t border-amber-200 p-2.5 sm:p-3.5 text-center z-10"><div class="text-[9px] sm:text-[10px] font-bold text-amber-700 uppercase tracking-widest mb-0.5 sm:mb-1">Starts In</div><div class="countdown-target font-sporty text-amber-600 text-base sm:text-xl md:text-2xl tracking-wider drop-shadow-sm" data-date="${item.startDate}">00:00:00:00</div></div>`;
+                statusHTML = `
+                    <div class="w-full bg-amber-50/90 border-t border-amber-200/80 p-2.5 sm:p-3.5 text-center z-10">
+                        <div class="text-[9px] sm:text-[10px] font-extrabold text-amber-700 uppercase tracking-widest mb-0.5 flex items-center justify-center gap-1">
+                            <i class="far fa-clock text-[9px]"></i>
+                            <span>Starts In</span>
+                        </div>
+                        <div class="countdown-target font-sporty text-amber-600 text-base sm:text-xl md:text-[22px] tracking-wider drop-shadow-sm" data-date="${item.startDate}">00:00:00:00</div>
+                    </div>`;
             } else if (statusText === 'PAST') {
                 statusHTML = `<div class="w-full bg-slate-100 border-t border-slate-200 p-2.5 sm:p-3 text-center text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest z-10">Exam Completed</div>`;
             }
 
             const catAttr = (item.categoryBadge || item.semester || '').toUpperCase();
             const semAttr = (item.semester || '').toUpperCase();
+            const searchableText = `${item.title || ''} ${item.semester || ''} ${item.scheme || ''} ${item.type || ''}`.toUpperCase();
 
             return `
-                <div class="timetable-card bg-white/90 backdrop-blur-md rounded-2xl border border-slate-200 shadow-sm flex flex-col relative overflow-hidden h-full group" data-category="${catAttr}" data-sem="${semAttr}" data-course="${courseTag}">
+                <div class="timetable-card hybrid-card rounded-2xl sm:rounded-3xl flex flex-col relative overflow-hidden h-full group" data-category="${catAttr}" data-sem="${semAttr}" data-course="${courseTag}" data-search="${searchableText}">
                     
-                    <div class="absolute top-1 right-2 text-5xl sm:text-7xl font-black text-slate-900 opacity-20 pointer-events-none select-none z-0 leading-none">
+                    <div class="absolute top-1.5 right-3 text-5xl sm:text-7xl font-black text-slate-900 opacity-[0.07] dark:opacity-[0.06] pointer-events-none select-none z-0 leading-none">
                         ${item.semester}
                     </div>
 
                     <div class="p-4 sm:p-5 flex-grow relative z-10 flex flex-col">
-                        <div class="flex items-center flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
-                            <span class="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-slate-800 text-white shadow-sm">${courseDisplay}</span>
-                            <span class="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded text-[9px] sm:text-[10px] font-black uppercase tracking-wider border ${styles.bg} ${styles.text} ${styles.border}">${item.semester}</span>
-                            <span class="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded text-[9px] sm:text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200">${item.type}</span>
+                        <div class="flex items-center flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
+                            <span class="px-2.5 py-0.5 sm:py-1 rounded-lg text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-slate-900 text-white shadow-sm">${courseDisplay}</span>
+                            <span class="px-2.5 py-0.5 sm:py-1 rounded-lg text-[9px] sm:text-[10px] font-black uppercase tracking-wider border ${styles.bg} ${styles.text} ${styles.border}">${item.semester}</span>
+                            <span class="px-2.5 py-0.5 sm:py-1 rounded-lg text-[9px] sm:text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-600 border border-slate-200/80">${item.type}</span>
                         </div>
                         
-                        <h3 class="text-base sm:text-lg font-extrabold text-slate-800 leading-snug mb-1.5 sm:mb-2 line-clamp-2 pr-2 sm:pr-4" title="${item.title}">${item.title}</h3>
+                        <a href="${item.viewLink}" class="block group-hover:text-indigo-600 transition-colors">
+                            <h3 class="text-base sm:text-lg font-extrabold text-slate-800 leading-snug mb-1.5 sm:mb-2 line-clamp-2 pr-2 sm:pr-4" title="${item.title}">${item.title}</h3>
+                        </a>
                         
-                        <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold text-slate-400 mb-3 sm:mb-4">
-                            <i class="fas fa-book text-slate-300"></i> ${item.scheme}
+                        <div class="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold text-slate-400 mb-3 sm:mb-4">
+                            <i class="fas fa-layer-group text-indigo-400 text-[10px]"></i>
+                            <span>${item.scheme}</span>
                         </div>
                         
-                        <div class="mt-auto pt-3 sm:pt-4 border-t border-slate-100/60">
-                            <div class="flex items-center text-xs sm:text-sm font-bold text-slate-600 mb-3 sm:mb-4">
-                                <i class="fas fa-calendar-alt text-indigo-400 mr-2 text-xs sm:text-sm"></i> ${dateString}
+                        <div class="mt-auto pt-3 sm:pt-4 border-t border-slate-200/60 dark:border-white/10">
+                            <div class="flex items-center justify-between text-xs sm:text-sm font-extrabold text-slate-600 mb-3 sm:mb-3.5">
+                                <span class="inline-flex items-center">
+                                    <i class="fas fa-calendar-alt text-indigo-500 mr-2 text-xs sm:text-sm"></i>
+                                    ${dateString}
+                                </span>
                             </div>
                             
                             <div class="flex items-center gap-2">
-                                <a href="${item.viewLink}" class="flex-grow bg-slate-800 hover:bg-indigo-600 text-white text-center font-bold py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl transition-colors text-xs sm:text-sm shadow-sm active:scale-95">
-                                    View Details
+                                <a href="${item.viewLink}" class="flex-grow bg-indigo-600 hover:bg-indigo-500 text-white text-center font-extrabold py-2.5 px-3 sm:px-4 rounded-xl transition-all text-xs sm:text-sm shadow-sm shadow-indigo-500/20 active:scale-95 flex items-center justify-center gap-1.5">
+                                    <span>View Timetable</span>
+                                    <i class="fas fa-arrow-right text-[10px] opacity-80"></i>
                                 </a>
-                                <a href="${item.pdfLink}" target="_blank" class="shrink-0 w-9 h-9 sm:w-11 sm:h-11 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 flex items-center justify-center rounded-xl border border-indigo-100 transition-colors text-xs sm:text-sm active:scale-95" title="Download PDF">
+                                <a href="${item.pdfLink}" target="_blank" rel="noopener" class="shrink-0 w-10 h-10 sm:w-11 sm:h-11 bg-indigo-50 hover:bg-indigo-600 text-indigo-600 hover:text-white flex items-center justify-center rounded-xl border border-indigo-200/80 transition-all text-xs sm:text-sm active:scale-95" title="Direct PDF Download">
                                     <i class="fas fa-file-pdf"></i>
                                 </a>
                             </div>
@@ -348,15 +488,37 @@
             ongoingGrid.innerHTML = ongoingItems.map(item => generateCardHTML(item, 'LIVE', false)).join('');
             upcomingGrid.innerHTML = upcomingItems.map(item => generateCardHTML(item, '', true)).join('');
 
+            const totalBadge = document.getElementById('total-active-badge');
+            const totalActive = ongoingItems.length + upcomingItems.length;
+            if (totalBadge && totalActive > 0) {
+                totalBadge.textContent = `${totalActive} Active`;
+                totalBadge.classList.remove('hidden');
+            }
+
             applyCombinedFilters(); 
         }
 
         function applyCombinedFilters() {
             const activeCourseBtn = document.querySelector('.course-btn.active');
             const activeSemBtn = document.querySelector('.sem-btn.active');
+            const searchInput = document.getElementById('timetable-search-input');
+            const clearSearchBtn = document.getElementById('clear-search-btn');
+            const quickResetBtn = document.getElementById('quick-reset-btn');
             
             const activeCourse = activeCourseBtn ? activeCourseBtn.getAttribute('data-course') : 'ALL';
             const activeSem = activeSemBtn ? activeSemBtn.getAttribute('data-filter') : 'ALL';
+            const searchQuery = (searchInput ? searchInput.value : '').trim().toUpperCase();
+
+            if (clearSearchBtn) {
+                clearSearchBtn.classList.toggle('hidden', searchQuery.length === 0);
+                clearSearchBtn.classList.toggle('flex', searchQuery.length > 0);
+            }
+
+            const isFiltered = activeCourse !== 'ALL' || activeSem !== 'ALL' || searchQuery.length > 0;
+            if (quickResetBtn) {
+                quickResetBtn.classList.toggle('hidden', !isFiltered);
+                quickResetBtn.classList.toggle('inline-flex', isFiltered);
+            }
 
             const targetSemesters = activeSem !== 'ALL' ? activeSem.split('/').map(s => s.trim().toUpperCase()) : [];
 
@@ -374,6 +536,7 @@
                     const cardCategoryStr = (card.getAttribute('data-category') || "").toUpperCase();
                     const cardSemStr = (card.getAttribute('data-sem') || "").toUpperCase();
                     const cardCourseStr = (card.getAttribute('data-course') || "").toUpperCase();
+                    const cardSearchStr = (card.getAttribute('data-search') || "").toUpperCase();
 
                     let courseMatch = false;
                     if (activeCourse === 'ALL') {
@@ -391,7 +554,12 @@
                         });
                     }
 
-                    if (courseMatch && semMatch) {
+                    let textMatch = true;
+                    if (searchQuery.length > 0) {
+                        textMatch = cardSearchStr.includes(searchQuery);
+                    }
+
+                    if (courseMatch && semMatch && textMatch) {
                         card.style.display = 'flex'; 
                         visibleCount++;
                     } else {
@@ -406,6 +574,11 @@
 
             const ongoingSection = document.getElementById('ongoing-section');
             const upcomingSection = document.getElementById('upcoming-section');
+            const ongoingCountPill = document.getElementById('ongoing-count-pill');
+            const upcomingCountPill = document.getElementById('upcoming-count-pill');
+
+            if (ongoingCountPill) ongoingCountPill.textContent = `${ongoingCount} Live`;
+            if (upcomingCountPill) upcomingCountPill.textContent = `${upcomingCount} Scheduled`;
 
             if (ongoingSection) {
                 ongoingSection.style.display = ongoingCount > 0 ? 'block' : 'none';
@@ -419,9 +592,53 @@
             }
         }
 
+        function clearSearchInput() {
+            const searchInput = document.getElementById('timetable-search-input');
+            if (searchInput) {
+                searchInput.value = '';
+                applyCombinedFilters();
+                searchInput.focus();
+            }
+        }
+        window.clearSearchInput = clearSearchInput;
+
+        function resetAllFilters() {
+            const courseBtns = document.querySelectorAll('.course-btn');
+            const semBtns = document.querySelectorAll('.sem-btn');
+            const searchInput = document.getElementById('timetable-search-input');
+
+            if (searchInput) searchInput.value = '';
+
+            courseBtns.forEach(b => {
+                const isAll = b.getAttribute('data-course') === 'ALL';
+                b.classList.toggle('bg-indigo-600', isAll);
+                b.classList.toggle('text-white', isAll);
+                b.classList.toggle('shadow-sm', isAll);
+                b.classList.toggle('active', isAll);
+                b.classList.toggle('bg-slate-100', !isAll);
+                b.classList.toggle('text-slate-600', !isAll);
+            });
+
+            semBtns.forEach(b => {
+                const isAll = b.getAttribute('data-filter') === 'ALL';
+                b.classList.toggle('bg-slate-800', isAll);
+                b.classList.toggle('text-white', isAll);
+                b.classList.toggle('active', isAll);
+                b.classList.toggle('bg-white', !isAll);
+                b.classList.toggle('text-slate-500', !isAll);
+            });
+
+            applyCombinedFilters();
+            if (typeof window.triggerCapsule === 'function') {
+                window.triggerCapsule('info', 'Showing all exam timetables');
+            }
+        }
+        window.resetAllFilters = resetAllFilters;
+
         function setupFilters() {
             const courseBtns = document.querySelectorAll('.course-btn');
             const semBtns = document.querySelectorAll('.sem-btn');
+            const searchInput = document.getElementById('timetable-search-input');
 
             courseBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
@@ -447,6 +664,10 @@
                     
                     applyCombinedFilters();
                 });
+            });
+
+            searchInput?.addEventListener('input', () => {
+                applyCombinedFilters();
             });
         }
 
@@ -475,8 +696,8 @@
         function updateLiveClock() {
             const clockEl = document.getElementById('live-clock');
             const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            clockEl.innerHTML = `System Time: ${now.toLocaleDateString('en-IN', options)}`;
+            const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            clockEl.innerHTML = `${now.toLocaleDateString('en-IN', options)}`;
         }
 
         function checkLatestUpdates() {
@@ -497,22 +718,28 @@
                     const publishDate = new Date(dateMatch[1]);
                     const daysSincePublish = (now - publishDate) / (1000 * 60 * 60 * 24);
 
-                    if (daysSincePublish >= 0 && daysSincePublish <= 3) {
+                    if (daysSincePublish >= 0 && daysSincePublish <= 4) {
                         newUpdates.push(item);
                     }
                 }
             }
 
-            if (newUpdates.length === 0) return;
+            // Fallback: Show the 2 most recently added items at the bottom of timetablesData if they are upcoming
+            const displayItems = newUpdates.length > 0 
+                ? newUpdates.slice(0, 2) 
+                : bottomItems.filter(i => new Date(i.startDate) > now).slice(0, 2);
 
-            const displayItems = newUpdates.slice(0, 2);
+            if (displayItems.length === 0) return;
 
             const batchId = displayItems.map(item => item.id).join('_');
             if (localStorage.getItem(`dismissed_new_${batchId}`)) return;
 
             const titlesContainer = document.getElementById('banner-titles');
             titlesContainer.innerHTML = displayItems.map(item => 
-                `<div class="truncate"><i class="fas fa-circle text-[5px] sm:text-[6px] text-indigo-300 align-middle mr-1.5"></i>${item.title}</div>`
+                `<a href="${item.viewLink}" class="truncate hover:text-indigo-600 transition-colors flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0"></span>
+                    <span class="truncate underline decoration-indigo-300 underline-offset-2">${item.title}</span>
+                </a>`
             ).join('');
 
             banner.setAttribute('data-batch-id', batchId);
