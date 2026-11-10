@@ -1,5 +1,23 @@
 [
     {
+        "timestamp": "2026-11-10T02:38:07Z",
+        "overall_status": "Partial Outage",
+        "services": {
+            "KTU Main Website": {
+                "status": "Offline (Network Error)",
+                "ping": "Error"
+            },
+            "KTU Login Portal": {
+                "status": "Online",
+                "ping": 1395
+            },
+            "KTU API Server": {
+                "status": "Online",
+                "ping": 4616
+            }
+        }
+    },
+    {
         "timestamp": "2026-11-09T18:36:07Z",
         "overall_status": "All Systems Operational",
         "services": {
@@ -194,24 +212,6 @@
             "KTU API Server": {
                 "status": "Online",
                 "ping": 1539
-            }
-        }
-    },
-    {
-        "timestamp": "2026-10-25T18:50:10Z",
-        "overall_status": "All Systems Operational",
-        "services": {
-            "KTU Main Website": {
-                "status": "Online",
-                "ping": 5119
-            },
-            "KTU Login Portal": {
-                "status": "Online",
-                "ping": 1507
-            },
-            "KTU API Server": {
-                "status": "Online",
-                "ping": 1724
             }
         }
     }
