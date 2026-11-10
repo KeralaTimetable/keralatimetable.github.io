@@ -1,9 +1,8 @@
 name: KTU Automated Bots (Status, Calendars & Timetables)
 
+
 on:
-  schedule:
-    - cron: '0 */4 * * *' 
-  workflow_dispatch:    
+  workflow_dispatch
 
 jobs:
   update-ktu-data:
