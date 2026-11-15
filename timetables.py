@@ -74,11 +74,12 @@ def send_push_notification(title, body):
 
 
 # -------------------------------------------------------------------
-# AI SETUP & SCHEMA
+# AI SETUP & EXTENDED SCHEMA
 # -------------------------------------------------------------------
 client = genai.Client()
 
 class TimetableData(BaseModel):
+    # Core Dashboard Config Fields
     id: str
     title: str
     semester: str
@@ -89,15 +90,128 @@ class TimetableData(BaseModel):
     endDate: str
     viewLink: str
     pdfLink: str
+    # Rich S3-Template Page Fields
+    courseBadge: str
+    seoTitleTag: str
+    slug: str
+    subtitleInfo: str
+    startDateFormatted: str
+    endDateFormatted: str
+    faqSecondQuestion: str
+    faqSecondAnswer: str
+
 
 # -------------------------------------------------------------------
-# UTILITY FUNCTIONS & LIQUID GLASS HTML GENERATOR
+# KTU TITLE CLEANER & SEO SLUG GENERATOR
 # -------------------------------------------------------------------
-def create_seo_slug(title):
-    """Converts a title into a clean, URL-friendly string (e.g., ktu-btech-s4-exam)"""
-    slug = title.lower()
-    slug = re.sub(r'[^a-z0-9]+', '-', slug)
-    return slug.strip('-')
+def clean_ktu_raw_title(raw_title: str) -> dict:
+    """
+    Cleans messy KTU notification titles into the exact S3 standard format:
+    Examples:
+    - "Detailed Time Table of BBA Honours S5 (R) Exam November 2026 (2024 Scheme)- Notification"
+      -> "BBA Honours S5 (R) Exam November 2026 (2024 Scheme)"
+    - "Detailed Time Table of MBA S3 (R, S) (2020 Scheme) November 2026 Examination - Notification"
+      -> "MBA S3 (R, S) Exam November 2026 (2020 Scheme)"
+    - "B.Tech S3 (R, S) Examinations, November 2026 (2024 Scheme) /Working Professionals (R, S) November 2026 - Notification"
+      -> "B.Tech S3 (R, S) Exam November 2026 (2024 Scheme)"
+    """
+    t = raw_title.strip()
+    has_wp = bool(re.search(r'working\s+professionals|\(wp\)', t, flags=re.I))
+
+    # 1. Strip prefixes like "Detailed Time Table of", "Time Table of"
+    t = re.sub(r'^(?:detailed\s+)?time\s*table\s+of\s+', '', t, flags=re.I)
+
+    # 2. Strip suffixes like "- Notification - reg:", "Notification"
+    t = re.sub(r'[\s\-–:]*notification(?:\s*[\-–:]\s*reg\s*:?)?.*$', '', t, flags=re.I)
+
+    # 3. Strip Working Professionals clauses from the main title (moved to subtitle)
+    t = re.sub(r',?\s*including\s*\(wp\)\s*(?:\([r,\s*s]+\))?', '', t, flags=re.I)
+    t = re.sub(r'\s*/\s*working\s+professionals.*$', '', t, flags=re.I)
+
+    # 4. Normalize "Examinations," or "Examination" -> "Exam"
+    t = re.sub(r'\bexaminations?\b\s*,?', 'Exam', t, flags=re.I)
+
+    # 5. Normalize "(R,S)" spacing -> "(R, S)"
+    t = re.sub(r'\(\s*R\s*,\s*S\s*\)', '(R, S)', t, flags=re.I)
+    t = re.sub(r'\(\s*R\s*\)', '(R)', t, flags=re.I)
+    t = re.sub(r'\(\s*S\s*\)', '(S)', t, flags=re.I)
+
+    # 6. Extract Scheme and place "(YYYY Scheme)" cleanly at the end
+    scheme_match = re.search(r'\((\d{4}\s+Scheme)\)', t, flags=re.I)
+    scheme_str = "2024 Scheme"
+    if scheme_match:
+        scheme_str = scheme_match.group(1).title()
+        t_no_scheme = re.sub(r'\(\d{4}\s+Scheme\)', '', t, flags=re.I).strip()
+        # Ensure "Exam" is positioned before Month Year (e.g. for MBA where "Examination" was at the end)
+        t_no_scheme = re.sub(
+            r'((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{4})\s+Exam\b',
+            r'Exam \1',
+            t_no_scheme,
+            flags=re.I
+        )
+        if not re.search(r'\bExam\b', t_no_scheme, flags=re.I):
+            t_no_scheme = re.sub(
+                r'((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{4})',
+                r'Exam \1',
+                t_no_scheme,
+                flags=re.I
+            )
+        t = f"{t_no_scheme} ({scheme_str})"
+
+    t = re.sub(r'\s+', ' ', t).strip(' ,-')
+
+    # Extract Semester (e.g., S3, S5, S7)
+    sem_match = re.search(r'\b(S[1-8])\b', t, flags=re.I)
+    semester = sem_match.group(1).upper() if sem_match else "Exam"
+
+    # Extract Course Badge (e.g., "B.Tech S3 (R, S)", "BBA Honours S5 (R)")
+    badge_match = re.match(r'^(.+?\bS[1-8]\s*(?:\([R,\sS]+\))?)', t, flags=re.I)
+    course_badge = badge_match.group(1).strip() if badge_match else f"KTU {semester}"
+
+    # Build SEO <title> Tag (e.g. "KTU B.Tech S3 (R,S) Exam Timetable Download November 2026 (2024 Scheme)")
+    seo_title = re.sub(
+        r'\bExam\b\s*(.*)$',
+        r'Exam Timetable Download \1',
+        t,
+        flags=re.I
+    ).replace('(R, S)', '(R,S)')
+    if not seo_title.upper().startswith("KTU "):
+        seo_title = f"KTU {seo_title}"
+
+    # Build Subtitle
+    subtitle = (
+        "Official APJAKTU Notification • Including Working Professionals (R, S)"
+        if has_wp else
+        "Verified University Examination Schedule • Official APJAKTU Notification"
+    )
+
+    return {
+        "clean_title": t,
+        "semester": semester,
+        "course_badge": course_badge,
+        "scheme": scheme_str,
+        "seo_title": seo_title,
+        "subtitle": subtitle
+    }
+
+
+def create_seo_slug(title: str) -> str:
+    """
+    Converts a clean title into the exact S3 style SEO slug:
+    "B.Tech S3 (R, S) Exam November 2026 (2024 Scheme)"
+    -> "btech-s3-regular-supply-november-2026-2024-scheme"
+    """
+    s = title.lower()
+    s = re.sub(r'^ktu\s+', '', s)
+    s = s.replace('b.tech', 'btech').replace('m.tech', 'mtech').replace('b.arch', 'barch').replace('b.des', 'bdes')
+    s = re.sub(r'\(\s*r\s*,\s*s\s*\)', 'regular-supply', s)
+    s = re.sub(r'\(\s*r\s*\)', 'regular', s)
+    s = re.sub(r'\(\s*s\s*\)', 'supply', s)
+    s = re.sub(r'\bexaminations?\b|\bexam\b', '', s)
+    s = re.sub(r'[^a-z0-9]+', '-', s)
+    s = re.sub(r'-+', '-', s).strip('-')
+    return s
+
 
 def sanitize_filename(name):
     """Ensures PDF filenames don't contain invalid OS path characters."""
@@ -107,18 +221,55 @@ def sanitize_filename(name):
         clean += '.pdf'
     return clean
 
-def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_pages"):
-    """Injects the scraped data into the Liquid Glass HTML template and saves the file."""
+
+# -------------------------------------------------------------------
+# LIQUID GLASS HTML GENERATOR (100% EXACT S3 TIMETABLE DESIGN)
+# -------------------------------------------------------------------
+def generate_html_page(raw_title, pdf_filename, ai_data=None, html_output_dir="./timetable_pages"):
+    """Injects the scraped & AI data into the exact S3 Liquid Glass HTML template and saves the file."""
     os.makedirs(html_output_dir, exist_ok=True)
     
-    slug = create_seo_slug(short_title)
+    fallback_info = clean_ktu_raw_title(raw_title)
+    
+    # Use AI-cleaned title or regex-cleaned title (always in S3 format)
+    clean_title = (ai_data.get("title") if ai_data else None) or fallback_info["clean_title"]
+    clean_title = re.sub(r'^KTU\s+', '', clean_title, flags=re.I).strip()
+    
+    slug = create_seo_slug((ai_data.get("slug") if ai_data else None) or clean_title)
+    semester = (ai_data.get("semester") if ai_data else None) or fallback_info["semester"]
+    scheme = (ai_data.get("scheme") if ai_data else None) or fallback_info["scheme"]
+    course_badge = (ai_data.get("courseBadge") if ai_data else None) or fallback_info["course_badge"]
+    seo_title_tag = (ai_data.get("seoTitleTag") if ai_data else None) or fallback_info["seo_title"]
+    subtitle_info = (ai_data.get("subtitleInfo") if ai_data else None) or fallback_info["subtitle"]
+    
+    # FAQ 1 Question & Answer (Matches S3 design)
+    course_sem_label = re.sub(r'\s*\([R,\sS]+\)', '', course_badge).strip()
+    faq_1_q = f"When do the {course_sem_label} ({scheme}) exams start and end?"
+    
+    start_fmt = ai_data.get("startDateFormatted") if ai_data else None
+    end_fmt = ai_data.get("endDateFormatted") if ai_data else None
+    if start_fmt and end_fmt and "refer" not in start_fmt.lower():
+        faq_1_a = (
+            f"The {clean_title} examinations begin on <strong>{start_fmt}</strong> "
+            f"and conclude on <strong>{end_fmt}</strong>. Please check the official PDF download above for your specific subject codes."
+        )
+    else:
+        faq_1_a = (
+            f"Please refer to the official {clean_title} PDF download above for the exact subject-wise start and end dates, "
+            f"FN/AN session timings, and slot codes for your specific branch."
+        )
+
+    # FAQ 2 Question & Answer (Matches S3 design)
+    faq_2_q = (ai_data.get("faqSecondQuestion") if ai_data else None) or "Does this timetable include Working Professionals (WP)?"
+    faq_2_a = (ai_data.get("faqSecondAnswer") if ai_data else None) or (
+        f"Please check the official APJAKTU notification header in the PDF above for {clean_title} "
+        f"to verify whether Working Professionals (WP) or supplementary batches are included under the {scheme}."
+    )
+
     html_filename = f"{slug}.html"
     html_filepath = os.path.join(html_output_dir, html_filename)
-    
-    # Relative path from the HTML folder to the PDF folder
     pdf_link = f"../downloads_timetable/{pdf_filename}"
     
-    # Liquid Glass HTML Template (Light & 120FPS Dark Mode Adaptive)
     html_template = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -128,11 +279,11 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
     
-    <title>[[TITLE]] + Timetable Download | KTU Timetable</title>
+    <title>[[SEO_TITLE_TAG]] | Kerala Timetable</title>
     <link rel="canonical" href="https://keralatimetable.in/timetable_pages/[[SLUG]].html" />
 
-    <meta name="description" content="Download the official [[TITLE]] PDF. Check the latest exam dates, slots, and subjects for the APJAKTU examinations.">
-    <meta name="keywords" content="[[TITLE]], KTU Time Table, KTU Exam Date PDF Download, Kerala Tech University, ktu latest updates, Kerala Timetable">
+    <meta name="description" content="Download the official [[CLEAN_TITLE]] PDF. Check the latest exam dates, slots, and subjects for APJAKTU examinations.">
+    <meta name="keywords" content="[[CLEAN_TITLE]], KTU [[SEMESTER]] [[SCHEME]] Timetable PDF, KTU Time Table, KTU Exam Date PDF Download, Kerala Tech University, Kerala Timetable">
     <meta name="robots" content="index, follow">
     
     <script src="/tailwind-local.js"></script>
@@ -187,14 +338,12 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
             box-shadow: 0 14px 30px -8px rgba(79, 70, 229, 0.14);
         }
 
-        /* Ambient Orbs (Automatically disabled in Dark Mode by components.js for 120FPS) */
         .ambient-orb {
             filter: blur(60px);
             -webkit-filter: blur(60px);
             pointer-events: none;
         }
 
-        /* Primary CTA Liquid Glow & Shimmer */
         .btn-glow {
             box-shadow: 0 14px 30px -6px rgba(79, 70, 229, 0.48), inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
         }
@@ -222,14 +371,12 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
             pointer-events: none;
         }
 
-        /* SVG Circular Countdown Ring */
         .progress-ring__circle {
             transition: stroke-dashoffset 0.95s linear;
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
         }
 
-        /* Smooth Accordion Caret */
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
         details[open] summary .faq-chevron { transform: rotate(180deg); }
@@ -240,7 +387,7 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Kerala Timetable",
-      "url": "https://www.keralatimetable.in/",
+      "url": "https://keralatimetable.in/",
       "description": "Web application for APJAKTU students providing server status, exam timetables, and academic updates.",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "All",
@@ -250,19 +397,17 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
 
     <link rel="icon" href="/favicon.png" type="image/png">
     <meta property="og:site_name" content="Kerala Timetable">
-    <meta property="og:title" content="[[TITLE]] + Timetable Download | KTU Timetable">
-    <meta property="og:description" content="Download the official [[TITLE]] PDF. Check the latest exam dates, slots, and subjects for the APJAKTU examinations.">
+    <meta property="og:title" content="[[CLEAN_TITLE]] + Timetable Download">
+    <meta property="og:description" content="Download the official [[CLEAN_TITLE]] Timetable PDF.">
     <meta property="og:image" content="https://www.keralatimetable.in/social-preview.png">
     <meta property="og:type" content="website">
 </head>
 
 <body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
 
-    <!-- Ambient Liquid Background Orbs -->
     <div class="ambient-orb fixed -top-24 -left-24 w-96 h-96 bg-indigo-400/20 rounded-full -z-10"></div>
     <div class="ambient-orb fixed top-1/3 -right-28 w-80 h-80 bg-sky-400/20 rounded-full -z-10"></div>
 
-    <!-- Sticky Frosted Navigation Container -->
     <div id="navigation-container"></div>
 
     <main class="flex-grow max-w-3xl mx-auto px-4 sm:px-6 pt-5 pb-14 w-full flex flex-col items-center">
@@ -283,7 +428,6 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
         <!-- Master Liquid Glass Timetable Card -->
         <section class="real-glass rounded-[2rem] sm:rounded-[2.25rem] p-5 sm:p-8 md:p-10 w-full relative overflow-hidden">
             
-            <!-- Subtle Specular Highlight Orb Inside Card -->
             <div class="ambient-orb absolute -top-28 -right-28 w-56 h-56 bg-indigo-500/15 rounded-full pointer-events-none"></div>
 
             <div class="relative z-10 flex flex-col items-center text-center">
@@ -299,20 +443,20 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
                 <!-- Metadata Badges -->
                 <div class="flex flex-wrap items-center justify-center gap-2 mb-3.5">
                     <span class="px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200/60 text-indigo-700 text-[11px] font-extrabold uppercase tracking-wider">
-                        <i class="fas fa-university mr-1"></i> APJAKTU
+                        <i class="fas fa-graduation-cap mr-1"></i> [[COURSE_BADGE]]
                     </span>
                     <span class="px-3 py-1 rounded-full bg-blue-50 border border-blue-200/60 text-blue-700 text-[11px] font-extrabold uppercase tracking-wider">
-                        <i class="fas fa-bolt mr-1"></i> Direct PDF
+                        <i class="fas fa-layer-group mr-1"></i> [[SCHEME]]
                     </span>
                 </div>
 
                 <!-- Main SEO Heading -->
                 <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-extrabold text-slate-900 mb-3 tracking-tight leading-snug max-w-2xl">
-                    [[TITLE]] <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500">+ Timetable Download</span>
+                    KTU [[CLEAN_TITLE]] <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-sky-500">Timetable Download</span>
                 </h1>
                 
                 <p class="text-xs sm:text-sm text-slate-500 font-semibold mb-6">
-                    Verified University Examination Schedule • Instant Cloud Mirror
+                    [[SUBTITLE_INFO]]
                 </p>
 
                 <!-- Recessed Inner Glass Notice Box -->
@@ -345,32 +489,29 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
 
                         <div class="text-center space-y-1">
                             <p id="timer-text" class="text-sm sm:text-base font-extrabold text-slate-800">
-                                Preparing Direct PDF Mirror...
+                                Preparing Official [[SEMESTER]] Timetable PDF...
                             </p>
                             <p id="timer-subtext" class="text-xs font-medium text-slate-500">
                                 Bypassing KTU portal congestion for instant download
                             </p>
                         </div>
 
-                        <!-- Sleek Linear Progress Bar -->
                         <div class="w-full max-w-xs h-1.5 bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden">
                             <div id="countdown-bar" class="h-full bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-400 rounded-full transition-all duration-1000 ease-linear" style="width: 7%;"></div>
                         </div>
                     </div>
 
-                    <!-- State 2: Ready Action Dock (Revealed when timer hits 0) -->
+                    <!-- State 2: Ready Action Dock -->
                     <div id="ready-actions" class="hidden w-full flex-col gap-3 sm:gap-3.5 animate-fadeIn">
                         
-                        <!-- Primary Download Button -->
                         <a id="download-btn" href="#" target="_blank" rel="noopener" class="sheen-effect btn-glow w-full bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-600 text-white font-extrabold text-sm sm:text-base py-4 px-6 rounded-2xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-[0.99] flex items-center justify-center gap-3">
                             <i class="fas fa-cloud-download-alt text-lg"></i>
                             <span>Download Official PDF Timetable</span>
                             <span class="px-2 py-0.5 rounded-full bg-white/20 text-[10px] font-black uppercase tracking-wider ml-1">PDF</span>
                         </a>
 
-                        <!-- Secondary Mobile-Friendly 2-Column Share & Copy Bar -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 w-full">
-                            <a id="whatsapp-btn" href="https://api.whatsapp.com/send?text=🚨 *[[TITLE]] is Out!* Download the official PDF directly here: https://www.keralatimetable.in/timetable_pages/[[SLUG]].html" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs sm:text-sm py-3.5 px-5 rounded-xl transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20">
+                            <a id="whatsapp-btn" href="https://api.whatsapp.com/send?text=🚨 *[[CLEAN_TITLE]] Timetable is Out!* Download the official PDF directly here: https://www.keralatimetable.in/timetable_pages/[[SLUG]].html" target="_blank" rel="noopener noreferrer" class="w-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs sm:text-sm py-3.5 px-5 rounded-xl transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20">
                                 <i class="fab fa-whatsapp text-base"></i>
                                 <span>Share with Classmates</span>
                             </a>
@@ -381,7 +522,6 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
                             </button>
                         </div>
 
-                        <!-- WhatsApp Channel Banner -->
                         <a id="whatsapp-channel-btn" href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" rel="noopener noreferrer" class="inner-glass w-full p-3.5 rounded-xl hover:border-emerald-400/60 transition-all flex items-center justify-between gap-3 group">
                             <div class="flex items-center gap-3 text-left">
                                 <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200/60 text-emerald-600 flex items-center justify-center shrink-0">
@@ -389,7 +529,7 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
                                 </div>
                                 <div>
                                     <p class="text-xs sm:text-sm font-extrabold text-slate-800 leading-tight">Get Instant Exam Alerts on WhatsApp</p>
-                                    <p class="text-[11px] font-medium text-slate-500">Join 10,000+ KTU students on our official channel</p>
+                                    <p class="text-[11px] font-medium text-slate-500">Join 6,000+ KTU students on our official channel</p>
                                 </div>
                             </div>
                             <span class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 group-hover:bg-emerald-500 group-hover:text-white text-xs font-extrabold transition-colors shrink-0">
@@ -400,9 +540,7 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
 
                 </div>
 
-                <!-- ========================================================= -->
-                <!-- COMPANION STUDY RESOURCES (High-UX Internal Links)        -->
-                <!-- ========================================================= -->
+                <!-- Companion Study Resources -->
                 <div class="w-full mt-8 pt-7 border-t border-slate-200/70 dark:border-white/10 text-left">
                     <div class="flex items-center justify-between mb-3.5">
                         <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-400">
@@ -433,8 +571,8 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
                                     <i class="fas fa-file-alt text-sm"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-xs sm:text-sm font-extrabold text-slate-800">Solved PYQ Papers</h3>
-                                    <p class="text-[11px] font-medium text-slate-500">Previous university questions</p>
+                                    <h3 class="text-xs sm:text-sm font-extrabold text-slate-800">Previous Year Papers</h3>
+                                    <p class="text-[11px] font-medium text-slate-500">Official university PYQs</p>
                                 </div>
                             </div>
                             <div class="w-7 h-7 rounded-full bg-white border border-slate-200/80 flex items-center justify-center text-slate-400 group-hover:text-white group-hover:bg-indigo-600 transition-all shrink-0">
@@ -444,9 +582,7 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
                     </div>
                 </div>
 
-                <!-- ========================================================= -->
-                <!-- INTERACTIVE LIQUID GLASS ACCORDION FAQs                   -->
-                <!-- ========================================================= -->
+                <!-- Interactive Liquid Glass FAQs -->
                 <div class="w-full mt-8 pt-7 border-t border-slate-200/70 dark:border-white/10 text-left">
                     <h2 class="text-sm sm:text-base font-extrabold text-slate-800 mb-3.5 flex items-center gap-2">
                         <i class="fas fa-question-circle text-indigo-500"></i>
@@ -456,21 +592,21 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
                     <div class="space-y-2.5">
                         <details class="inner-glass rounded-2xl group overflow-hidden" open>
                             <summary class="p-4 cursor-pointer flex items-center justify-between gap-3 font-bold text-slate-800 text-xs sm:text-sm select-none">
-                                <span>When do the [[TITLE]] exams start?</span>
+                                <span>[[FAQ_1_QUESTION]]</span>
                                 <i class="fas fa-chevron-down faq-chevron text-slate-400 text-xs transition-transform duration-200"></i>
                             </summary>
                             <div class="px-4 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-200/50 dark:border-white/5 pt-3">
-                                Please refer to the official PDF download above for the exact subject-wise start dates, FN/AN session timings, and slot codes for your specific scheme and branch.
+                                [[FAQ_1_ANSWER]]
                             </div>
                         </details>
 
                         <details class="inner-glass rounded-2xl group overflow-hidden">
                             <summary class="p-4 cursor-pointer flex items-center justify-between gap-3 font-bold text-slate-800 text-xs sm:text-sm select-none">
-                                <span>Is this the final KTU timetable or tentative?</span>
+                                <span>[[FAQ_2_QUESTION]]</span>
                                 <i class="fas fa-chevron-down faq-chevron text-slate-400 text-xs transition-transform duration-200"></i>
                             </summary>
                             <div class="px-4 pb-4 text-xs text-slate-600 leading-relaxed border-t border-slate-200/50 dark:border-white/5 pt-3">
-                                This document is mirrored directly from the official APJ Abdul Kalam Technological University (KTU) announcements portal. Any revised notifications will automatically update on our dashboard.
+                                [[FAQ_2_ANSWER]]
                             </div>
                         </details>
                     </div>
@@ -480,8 +616,8 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
                 <div class="w-full mt-7 pt-6 border-t border-slate-200/70 dark:border-white/10 text-left">
                     <h3 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-2.5">Related Searches</h3>
                     <div class="flex flex-wrap gap-1.5 sm:gap-2">
-                        <span class="bg-white/80 border border-slate-200/80 text-slate-500 text-[11px] font-semibold px-3 py-1 rounded-full">[[TITLE]]</span>
-                        <span class="bg-white/80 border border-slate-200/80 text-slate-500 text-[11px] font-semibold px-3 py-1 rounded-full">KTU Timetable PDF Download</span>
+                        <span class="bg-white/80 border border-slate-200/80 text-slate-500 text-[11px] font-semibold px-3 py-1 rounded-full">[[CLEAN_TITLE]]</span>
+                        <span class="bg-white/80 border border-slate-200/80 text-slate-500 text-[11px] font-semibold px-3 py-1 rounded-full">KTU [[SCHEME]] [[SEMESTER]] Exam Date</span>
                         <span class="bg-white/80 border border-slate-200/80 text-slate-500 text-[11px] font-semibold px-3 py-1 rounded-full">APJAKTU Exam Schedule</span>
                     </div>
                 </div>
@@ -491,7 +627,6 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
 
     </main>
 
-    <!-- Adaptive Frosted Footer -->
     <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-8 text-center">
         <div class="max-w-3xl mx-auto px-4">
             <h3 class="text-slate-800 font-extrabold text-base sm:text-lg mb-1.5">Kerala Timetable</h3>
@@ -507,15 +642,12 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
         </div>
     </footer>
 
-    <!-- Core Flow Engine & 120FPS Dark Mode Script -->
     <script src="../components.js?v=12"></script>
     <script>
-        // Highlight 'timetable' in the navigation drawer
         loadNavigation('timetable', '../', false);
     </script>
 
     <script>
-        // --- Liquid Glass Countdown, Ring & Capsule Integration ---
         const pdfLink = "[[PDF_LINK]]";
         const totalTime = 15;
         let timeLeft = totalTime;
@@ -530,13 +662,12 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
         const copyLinkBtn = document.getElementById('copy-link-btn');
         const copyLinkText = document.getElementById('copy-link-text');
 
-        const circumference = 2 * Math.PI * 34; // r=34 -> ~213.6
+        const circumference = 2 * Math.PI * 34;
 
         const timer = setInterval(() => {
             timeLeft--;
             if (countdownEl) countdownEl.textContent = timeLeft;
 
-            // Update Circular Ring & Linear Bar
             const elapsed = totalTime - timeLeft;
             const offset = circumference - (elapsed / totalTime) * circumference;
             if (ringEl) ringEl.style.strokeDashoffset = offset;
@@ -552,19 +683,16 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
                 clearInterval(timer);
                 loadingContainer.classList.add('hidden');
                 
-                // Configure & Reveal Action Dock
                 downloadBtn.href = pdfLink;
                 readyActions.classList.remove('hidden');
                 readyActions.classList.add('flex');
 
-                // Trigger ColorOS Live Capsule Notification
                 if (typeof window.triggerCapsule === 'function') {
                     window.triggerCapsule('success', 'Timetable PDF Ready to Download!');
                 }
             }
         }, 1000);
 
-        // Copy Direct Link Button with Capsule Toast Feedback
         copyLinkBtn?.addEventListener('click', async () => {
             try {
                 await navigator.clipboard.writeText(window.location.href);
@@ -585,7 +713,24 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
 </body>
 </html>"""
 
-    final_html = html_template.replace('[[TITLE]]', short_title).replace('[[PDF_LINK]]', pdf_link).replace('[[SLUG]]', slug)
+    replacements = {
+        "[[SEO_TITLE_TAG]]": seo_title_tag,
+        "[[CLEAN_TITLE]]": clean_title,
+        "[[SLUG]]": slug,
+        "[[SEMESTER]]": semester,
+        "[[SCHEME]]": scheme,
+        "[[COURSE_BADGE]]": course_badge,
+        "[[SUBTITLE_INFO]]": subtitle_info,
+        "[[FAQ_1_QUESTION]]": faq_1_q,
+        "[[FAQ_1_ANSWER]]": faq_1_a,
+        "[[FAQ_2_QUESTION]]": faq_2_q,
+        "[[FAQ_2_ANSWER]]": faq_2_a,
+        "[[PDF_LINK]]": pdf_link,
+    }
+
+    final_html = html_template
+    for key, val in replacements.items():
+        final_html = final_html.replace(key, str(val))
     
     with open(html_filepath, 'w', encoding='utf-8') as f:
         f.write(final_html)
@@ -594,10 +739,10 @@ def generate_html_page(short_title, pdf_filename, html_output_dir="./timetable_p
 
 
 # -------------------------------------------------------------------
-# AI EXTRACTION FUNCTION (READS FULL PDF)
+# AI EXTRACTION FUNCTION (READS FULL PDF & FORMATS LIKE S3 PAGE)
 # -------------------------------------------------------------------
 def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
-    """Reads the PDF text and uses Gemini to extract structured dates/tags."""
+    """Reads the PDF text and uses Gemini to extract structured dates, S3-style titles, Order No, and FAQs."""
     print(f"🧠 Asking AI to analyze: {original_title}...")
     
     raw_text = ""
@@ -612,21 +757,43 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
         print(f"❌ Error reading PDF: {e}")
         return None
 
+    pre_cleaned = clean_ktu_raw_title(original_title)
+
     prompt = f"""
-    You are an expert data extractor. Analyze this KTU exam timetable text.
-    Original Long Title: {original_title}
+    You are an expert KTU (APJAKTU) examination data extractor. Analyze this KTU exam timetable text and notification title.
+    Original Raw KTU Title: {original_title}
+    Pre-cleaned Reference Title: {pre_cleaned['clean_title']}
     
     Tasks based on the schema:
-    1. id: Create a short, unique snake_case ID (e.g., "mca_s2_may2026").
-    2. title: Create a short, clean title (e.g., "MCA S2 Regular/Supply May 2026").
-    3. startDate: Scan the ENTIRE document and find the VERY FIRST exam date and time. Format: YYYY-MM-DDTHH:MM:SS
-    4. endDate: Scan the ENTIRE document and find the VERY LAST/LATEST exam date and time. Format: YYYY-MM-DDTHH:MM:SS
-    5. semester: Extract the specific semester (e.g., 'S4', 'S1', 'S1-S5').
-    6. categoryBadge: Extract a category for filtering (e.g., 'S1', 'S3', 'S5', 'S7').
-    7. type: 'Regular', 'Supply', 'Honours', or 'Regular/Supply'.
-    8. scheme: (e.g., '2019 Scheme', '2024 Scheme').
-    9. pdfLink: Return exactly "{pdf_link}".
-    10. viewLink: Return an empty string ("").
+    1. id: Create a short, unique snake_case ID (e.g., "btech_s3_nov2026_2024").
+    2. title: Format the title in the EXACT S3 standard pattern:
+       "[Course] [Semester] ([R, S] or [R]) Exam [Month] [Year] ([YYYY] Scheme)"
+       Examples of EXACT expected output for `title`:
+       - "B.Tech S3 (R, S) Exam November 2026 (2024 Scheme)"
+       - "BBA Honours S3 (R, S) Exam November 2026 (2024 Scheme)"
+       - "BBA Honours S5 (R) Exam November 2026 (2024 Scheme)"
+       - "MBA S3 (R, S) Exam November 2026 (2020 Scheme)"
+       - "BCA Honours S5 (R) Exam November 2026 (2024 Scheme)"
+       - "B.Tech S5 (R) Exam November 2026 (2024 Scheme)"
+       - "B.Tech S7 (R, S) Exam November 2026 (2019 Scheme)"
+       - "MCA Two-Year S3 (R, S) Exam November 2026 (2020 Scheme)"
+       Do NOT include "Detailed Time Table of", "Notification", "KTU", or "/Working Professionals" inside `title`.
+    3. courseBadge: Short course + semester + (R, S)/(R) badge (e.g., "B.Tech S3 (R, S)", "BBA Honours S5 (R)", "MBA S3 (R, S)").
+    4. seoTitleTag: Format like "KTU B.Tech S3 (R,S) Exam Timetable Download November 2026 (2024 Scheme)".
+    5. slug: URL-friendly slug expanding (R, S) to regular-supply and (R) to regular, without the word "exam" (e.g., "btech-s3-regular-supply-november-2026-2024-scheme").
+    6. subtitleInfo: Extract the KTU Order/Notification number from the PDF text if present and whether Working Professionals are included (e.g., "Order No: KTU/SOEX-IV/2122/2024 • Including Working Professionals (R, S)" or "Order No: KTU/SOEX-II/1450/2025 • Official University Schedule").
+    7. startDate: Scan the ENTIRE document and find the VERY FIRST exam date and time. Format: YYYY-MM-DDTHH:MM:SS
+    8. endDate: Scan the ENTIRE document and find the VERY LAST/LATEST exam date and time. Format: YYYY-MM-DDTHH:MM:SS
+    9. startDateFormatted: Human-readable first exam date with day of week and Slot if mentioned (e.g., "Tuesday, November 24, 2026 (Slot A)").
+    10. endDateFormatted: Human-readable last exam date with day of week and Slot if mentioned (e.g., "Tuesday, December 8, 2026 (Slot G)").
+    11. faqSecondQuestion: "Does this timetable include Working Professionals (WP)?" (or a relevant second FAQ question for this specific degree).
+    12. faqSecondAnswer: A clear 1-sentence answer referencing the official Notification No., date, and whether Working Professionals (WP) or regular/supply batches are covered.
+    13. semester: Extract the specific semester (e.g., 'S3', 'S5', 'S7').
+    14. categoryBadge: Extract a category for filtering (e.g., 'S1', 'S3', 'S5', 'S7').
+    15. type: 'Regular', 'Supply', 'Honours', or 'Regular/Supply'.
+    16. scheme: (e.g., '2024 Scheme', '2019 Scheme', '2020 Scheme').
+    17. pdfLink: Return exactly "{pdf_link}".
+    18. viewLink: Return an empty string ("").
     
     Messy PDF Text:
     {raw_text[:40000]} 
@@ -643,7 +810,7 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
             ),
         )
         ai_data = json.loads(response.text)
-        print(f"✅ AI Extraction Successful! Start: {ai_data['startDate']} | End: {ai_data['endDate']}")
+        print(f"✅ AI Extraction Successful! Title: {ai_data['title']} | Start: {ai_data['startDate']} | End: {ai_data['endDate']}")
         return ai_data
     except Exception as e:
         print(f"❌ AI Extraction Failed: {e}")
@@ -654,10 +821,17 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
 # CONFIG UPDATER FUNCTION
 # -------------------------------------------------------------------
 def update_timetable_config(ai_data_dict, config_path="timetable-config.js"):
-    """Safely appends the AI's JSON object into window.timetablesData."""
+    """Safely appends the clean 10-key JSON object into window.timetablesData."""
     if not ai_data_dict:
         return
     
+    # Keep only the exact 10 keys expected by timetable-config.js
+    dashboard_keys = [
+        "id", "title", "semester", "categoryBadge", "type",
+        "scheme", "startDate", "endDate", "viewLink", "pdfLink"
+    ]
+    clean_dashboard_dict = {k: ai_data_dict[k] for k in dashboard_keys if k in ai_data_dict}
+
     try:
         if os.path.exists(config_path):
             with open(config_path, "r", encoding="utf-8") as f:
@@ -665,7 +839,7 @@ def update_timetable_config(ai_data_dict, config_path="timetable-config.js"):
         else:
             content = "window.timetablesData = [\n];"
             
-        clean_json = json.dumps(ai_data_dict, indent=4)
+        clean_json = json.dumps(clean_dashboard_dict, indent=4)
         
         last_bracket_idx = content.rfind(']')
         if last_bracket_idx != -1:
@@ -713,13 +887,11 @@ def download_pdf_from_ktu_api(encrypt_id, save_path):
                 timeout=30
             )
             if res.status_code == 200 and len(res.content) > 500:
-                # Case 1: Raw PDF binary stream
                 if res.content.startswith(b"%PDF"):
                     with open(save_path, "wb") as f:
                         f.write(res.content)
                     return True
 
-                # Case 2: Base64 encoded PDF inside JSON or plain text
                 try:
                     data = res.json()
                     if isinstance(data, dict):
@@ -788,7 +960,6 @@ def fetch_timetables_via_direct_api():
             print(f"⚠️ Direct Timetable API warning ({url}): {e}")
 
     # 2. Fallback: Check KTU Announcements API for "Time Table" PDFs!
-    # (When KTU's /exam/timetable tab is empty, KTU posts timetables in Announcements)
     announcement_urls = [
         "https://api.ktu.edu.in/ktu-web-service/anon/announcemnts",
         "https://ktu.edu.in/ktu-web-service/anon/announcemnts",
@@ -833,13 +1004,13 @@ def fetch_timetables_via_direct_api():
 
 
 def process_downloaded_pdf(save_path, filename, title, date_str, html_dir):
-    """Runs AI extraction, generates the Liquid Glass HTML page, updates config, and sends push notification."""
+    """Runs AI extraction, generates the S3-Template Liquid Glass HTML page, updates config, and sends push notification."""
     relative_pdf_link = f"downloads_timetable/{filename}"
     ai_extracted_data = extract_dashboard_data_with_ai(save_path, title, relative_pdf_link)
     
     if ai_extracted_data:
-        short_title = ai_extracted_data.get('title', title)
-        html_filepath, relative_html_link = generate_html_page(short_title, filename, html_dir)
+        short_title = ai_extracted_data.get('title', clean_ktu_raw_title(title)['clean_title'])
+        html_filepath, relative_html_link = generate_html_page(title, filename, ai_data=ai_extracted_data, html_output_dir=html_dir)
         print(f" -> HTML Generated: {html_filepath}")
         
         ai_extracted_data['viewLink'] = relative_html_link
@@ -850,8 +1021,8 @@ def process_downloaded_pdf(save_path, filename, title, date_str, html_dir):
             body=f"{short_title} is now available on the dashboard."
         )
     else:
-        html_filepath, relative_html_link = generate_html_page(title, filename, html_dir)
-        print(f" -> HTML Generated (Fallback Title): {html_filepath}")
+        html_filepath, relative_html_link = generate_html_page(title, filename, ai_data=None, html_output_dir=html_dir)
+        print(f" -> HTML Generated (Regex Clean Fallback): {html_filepath}")
 
     return {
         "title": title,
@@ -900,7 +1071,6 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
                 print(f" -> Direct API binary fetch couldn't decode PDF, queueing for Playwright browser fallback...")
                 needs_browser_fallback.append(tb)
 
-        # If all new files were downloaded via Direct API, we don't even need to open Chromium!
         if not needs_browser_fallback:
             return downloaded_files
 
