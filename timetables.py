@@ -142,7 +142,7 @@ def clean_ktu_raw_title(raw_title: str) -> dict:
     if scheme_match:
         scheme_str = scheme_match.group(1).title()
         t_no_scheme = re.sub(r'\(\d{4}\s+Scheme\)', '', t, flags=re.I).strip()
-        # Ensure "Exam" is positioned before Month Year (e.g. for MBA where "Examination" was at the end)
+        # Ensure "Exam" is positioned before Month Year
         t_no_scheme = re.sub(
             r'((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{4})\s+Exam\b',
             r'Exam \1',
@@ -825,7 +825,6 @@ def update_timetable_config(ai_data_dict, config_path="timetable-config.js"):
     if not ai_data_dict:
         return
     
-    # Keep only the exact 10 keys expected by timetable-config.js
     dashboard_keys = [
         "id", "title", "semester", "categoryBadge", "type",
         "scheme", "startDate", "endDate", "viewLink", "pdfLink"
@@ -860,22 +859,74 @@ def update_timetable_config(ai_data_dict, config_path="timetable-config.js"):
 
 
 # -------------------------------------------------------------------
-# DIRECT KTU BACKEND API HELPERS (BYPASSES BROKEN FRONTEND & SSL)
+# DIRECT KTU BACKEND API HELPERS
 # -------------------------------------------------------------------
 KTU_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
     "Accept": "application/json, text/plain, */*",
     "Content-Type": "application/json",
-    "Origin": "https://www.ktu.edu.in",
-    "Referer": "https://www.ktu.edu.in/"
+    "Origin": "https://ktu.edu.in",
+    "Referer": "https://ktu.edu.in/exam/timetable"
 }
+
+def parse_ktu_timetable_items(content_list):
+    """Normalizes raw KTU JSON timetable/announcement objects into a clean list."""
+    parsed = []
+    if not isinstance(content_list, list):
+        return parsed
+
+    for idx, item in enumerate(content_list):
+        if not isinstance(item, dict):
+            continue
+        title = (
+            item.get("timeTableTitle")
+            or item.get("title")
+            or item.get("subject")
+            or item.get("notificationTitle")
+            or "KTU Exam Timetable"
+        )
+        date_raw = (
+            item.get("createdDate")
+            or item.get("publishedOn")
+            or item.get("announcementDate")
+            or "2026"
+        )
+        date_str = str(date_raw).split("T")[0].split(" ")[0]
+
+        # Check direct encryptId or nested attachmentList
+        enc_id = item.get("encryptId") or item.get("encryptAttachmentId")
+        f_name = item.get("fileName") or item.get("attachmentName") or f"timetable_{idx}.pdf"
+
+        if enc_id:
+            parsed.append({
+                "index": idx,
+                "id": item.get("id"),
+                "title": title.strip(),
+                "date": date_str,
+                "encryptId": enc_id,
+                "fileName": sanitize_filename(f_name)
+            })
+        elif isinstance(item.get("attachmentList"), list):
+            for att in item["attachmentList"]:
+                att_enc = att.get("encryptId") or att.get("encryptAttachmentId")
+                att_name = att.get("attachmentName") or att.get("fileName") or f"timetable_{idx}.pdf"
+                if att_enc:
+                    parsed.append({
+                        "index": idx,
+                        "id": item.get("id"),
+                        "title": title.strip(),
+                        "date": date_str,
+                        "encryptId": att_enc,
+                        "fileName": sanitize_filename(att_name)
+                    })
+    return parsed
+
 
 def download_pdf_from_ktu_api(encrypt_id, save_path):
     """Downloads a PDF directly from KTU's backend API using its encryptId."""
     endpoints = [
         "https://api.ktu.edu.in/ktu-web-service/anon/getAttachment",
-        "https://ktu.edu.in/ktu-web-service/anon/getAttachment",
-        "https://www.ktu.edu.in/ktu-web-service/anon/getAttachment"
+        "https://ktu.edu.in/ktu-web-service/anon/getAttachment"
     ]
     for url in endpoints:
         try:
@@ -915,92 +966,9 @@ def download_pdf_from_ktu_api(encrypt_id, save_path):
                             return True
                 except Exception:
                     pass
-        except Exception as e:
-            print(f" -> Direct API download warning ({url}): {e}")
+        except Exception:
+            pass
     return False
-
-
-def fetch_timetables_via_direct_api():
-    """Fetches timetable metadata directly from KTU REST APIs (Timetable + Announcements)."""
-    items = []
-    
-    # 1. Try Official Timetable Endpoint
-    timetable_urls = [
-        "https://api.ktu.edu.in/ktu-web-service/anon/timetable",
-        "https://ktu.edu.in/ktu-web-service/anon/timetable",
-        "https://www.ktu.edu.in/ktu-web-service/anon/timetable"
-    ]
-    for url in timetable_urls:
-        try:
-            res = requests.post(
-                url,
-                json={"page": 0, "size": 25, "searchText": ""},
-                headers=KTU_HEADERS,
-                verify=False,
-                timeout=20
-            )
-            if res.status_code == 200:
-                data = res.json()
-                content = data.get("content") if isinstance(data, dict) else None
-                if content:
-                    for idx, item in enumerate(content):
-                        enc_id = item.get("encryptId") or item.get("encryptAttachmentId")
-                        f_name = sanitize_filename(item.get("fileName") or item.get("attachmentName") or f"timetable_{idx}.pdf")
-                        items.append({
-                            "index": idx,
-                            "id": item.get("id"),
-                            "title": item.get("timeTableTitle") or item.get("title") or "KTU Exam Timetable",
-                            "date": (item.get("createdDate") or item.get("publishedOn") or "2026").split("T")[0],
-                            "encryptId": enc_id,
-                            "fileName": f_name
-                        })
-                    print(f"✅ Direct Timetable API captured {len(items)} timetables!")
-                    return items
-        except Exception as e:
-            print(f"⚠️ Direct Timetable API warning ({url}): {e}")
-
-    # 2. Fallback: Check KTU Announcements API for "Time Table" PDFs!
-    announcement_urls = [
-        "https://api.ktu.edu.in/ktu-web-service/anon/announcemnts",
-        "https://ktu.edu.in/ktu-web-service/anon/announcemnts",
-        "https://www.ktu.edu.in/ktu-web-service/anon/announcemnts"
-    ]
-    for url in announcement_urls:
-        try:
-            res = requests.post(
-                url,
-                json={"number": 0, "size": 30, "searchText": "Time Table"},
-                headers=KTU_HEADERS,
-                verify=False,
-                timeout=20
-            )
-            if res.status_code == 200:
-                data = res.json()
-                content = data.get("content") if isinstance(data, dict) else None
-                if content:
-                    for idx, item in enumerate(content):
-                        subject = item.get("subject") or item.get("title") or ""
-                        if any(k in subject.lower() for k in ["time table", "timetable", "exam schedule"]):
-                            attachments = item.get("attachmentList") or []
-                            for att in attachments:
-                                enc_id = att.get("encryptId") or att.get("encryptAttachmentId")
-                                raw_name = att.get("attachmentName") or att.get("fileName") or f"timetable_{idx}.pdf"
-                                if enc_id and raw_name.lower().endswith(".pdf"):
-                                    items.append({
-                                        "index": idx,
-                                        "id": item.get("id"),
-                                        "title": subject.strip(),
-                                        "date": (item.get("announcementDate") or item.get("createdDate") or "2026").split("T")[0],
-                                        "encryptId": enc_id,
-                                        "fileName": sanitize_filename(raw_name)
-                                    })
-                    if items:
-                        print(f"✅ Captured {len(items)} timetable PDFs from KTU Announcements API!")
-                        return items
-        except Exception as e:
-            print(f"⚠️ Announcements API fallback warning ({url}): {e}")
-
-    return items
 
 
 def process_downloaded_pdf(save_path, filename, title, date_str, html_dir):
@@ -1032,7 +1000,7 @@ def process_downloaded_pdf(save_path, filename, title, date_str, html_dir):
 
 
 # -------------------------------------------------------------------
-# MAIN SCRAPER FUNCTION (DIRECT API + PLAYWRIGHT STEALTH FALLBACK)
+# MAIN SCRAPER FUNCTION (WAITS FOR KTU SLOW LOAD + CORS-SAFE LISTENER)
 # -------------------------------------------------------------------
 def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetable_pages"):
     os.makedirs(pdf_dir, exist_ok=True)
@@ -1040,45 +1008,8 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
     
     downloaded_files = []
 
-    # ===============================================================
-    # STEP 1: TRY DIRECT API FETCH FIRST (Fastest & Bypasses Blank UI)
-    # ===============================================================
-    print("Attempting Direct KTU Backend API fetch (Timetables + Announcements)...")
-    api_timetables = fetch_timetables_via_direct_api()
-    needs_browser_fallback = []
-
-    if api_timetables:
-        print(f"\nProcessing {len(api_timetables)} timetables via Direct API:")
-        for tb in api_timetables:
-            title = tb['title']
-            encrypt_id = tb['encryptId']
-            if not encrypt_id:
-                continue
-
-            filename = sanitize_filename(f"{tb['date']}_{tb['fileName']}")
-            save_path = os.path.join(pdf_dir, filename)
-
-            if os.path.exists(save_path):
-                print(f"Skipping (Already Exists): '{title}'")
-                continue
-
-            print(f"\nDownloading NEW file via Direct API: '{title}'")
-            if download_pdf_from_ktu_api(encrypt_id, save_path):
-                print(f" -> PDF Saved via Direct API: {filename}")
-                result = process_downloaded_pdf(save_path, filename, title, tb['date'], html_dir)
-                downloaded_files.append(result)
-            else:
-                print(f" -> Direct API binary fetch couldn't decode PDF, queueing for Playwright browser fallback...")
-                needs_browser_fallback.append(tb)
-
-        if not needs_browser_fallback:
-            return downloaded_files
-
-    # ===============================================================
-    # STEP 2: PLAYWRIGHT STEALTH BROWSER FALLBACK
-    # ===============================================================
     with sync_playwright() as p:
-        print("\nLaunching headless Chromium browser (with SSL Bypass & Stealth)...")
+        print("Launching headless Chromium browser (with SSL Bypass & Stealth)...")
         browser = p.chromium.launch(
             headless=True,
             args=[
@@ -1099,42 +1030,75 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
         context.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
         page = context.new_page()
         
-        timetable_metadata = list(needs_browser_fallback)
+        timetable_metadata = []
+        seen_encrypt_ids = set()
         
         def on_response(response):
-            if "anon/timetable" in response.url and not needs_browser_fallback:
+            # Ignore OPTIONS preflight requests (which have empty bodies and caused the line 1 column 1 error!)
+            if response.request.method == "OPTIONS":
+                return
+            if "timetable" in response.url.lower() and response.status == 200:
+                content_type = response.headers.get("content-type", "")
+                if "json" not in content_type.lower():
+                    return
                 try:
-                    data = response.json()
-                    if isinstance(data, dict) and 'content' in data and data['content']:
-                        for idx, item in enumerate(data['content']):
-                            timetable_metadata.append({
-                                'index': idx,
-                                'id': item.get('id'),
-                                'title': item.get('timeTableTitle') or item.get('title'),
-                                'date': (item.get('createdDate') or '2026').split('T')[0],
-                                'encryptId': item.get('encryptId'),
-                                'fileName': sanitize_filename(item.get('fileName') or f"timetable_{idx}.pdf")
-                            })
-                        print(f"Captured {len(timetable_metadata)} exam timetables from browser API response.")
+                    raw_body = response.text()
+                    if not raw_body or not raw_body.strip():
+                        return
+                    data = json.loads(raw_body)
+                    content_list = data.get("content") if isinstance(data, dict) else (data if isinstance(data, list) else None)
+                    if content_list:
+                        parsed_items = parse_ktu_timetable_items(content_list)
+                        for item in parsed_items:
+                            if item["encryptId"] not in seen_encrypt_ids:
+                                seen_encrypt_ids.add(item["encryptId"])
+                                timetable_metadata.append(item)
+                        print(f"✅ Captured {len(timetable_metadata)} exam timetables from browser API response ({response.url}).")
                 except Exception as e:
-                    print(f"Error parsing browser API response: {e}")
+                    print(f"⚠️ Non-fatal JSON parse note on {response.url}: {e}")
                     
         page.on("response", on_response)
         
-        print("Navigating to KTU Exam Timetable page...")
+        print("Navigating to https://ktu.edu.in/exam/timetable ...")
         try:
-            page.goto("https://www.ktu.edu.in/exam/timetable", wait_until="domcontentloaded", timeout=60000)
+            page.goto("https://ktu.edu.in/exam/timetable", wait_until="networkidle", timeout=60000)
         except Exception as nav_err:
-            print(f"⚠️ Primary URL warning ({nav_err}), trying ktu.edu.in fallback...")
-            try:
-                page.goto("https://ktu.edu.in/exam/timetable", wait_until="domcontentloaded", timeout=60000)
-            except Exception as nav_err2:
-                print(f"❌ Both KTU URLs unreachable in browser: {nav_err2}")
-                browser.close()
-                return downloaded_files
+            print(f"⚠️ networkidle timeout or warning ({nav_err}), continuing to wait for table elements...")
 
-        page.wait_for_timeout(5000)
-        
+        # Wait up to 25 seconds for KTU's slow React table / download buttons to render
+        print("Waiting for KTU timetable download buttons to render on page...")
+        try:
+            page.wait_for_selector("button[value]", timeout=25000)
+            print("✅ Download buttons detected on page!")
+        except Exception:
+            print("⚠️ Timed out waiting for `button[value]` selector, waiting an extra 8 seconds just in case...")
+            page.wait_for_timeout(8000)
+
+        # Backup DOM Scraper: If network listener missed the JSON, extract directly from rendered HTML rows!
+        if not timetable_metadata:
+            print("Checking rendered DOM for timetable rows and download buttons...")
+            buttons = page.locator("button[value]")
+            btn_count = buttons.count()
+            print(f"Found {btn_count} download buttons in DOM.")
+            for i in range(btn_count):
+                btn = buttons.nth(i)
+                enc_id = btn.get_attribute("value")
+                if not enc_id or enc_id in seen_encrypt_ids:
+                    continue
+                # Grab the text of the parent row or card containing the button
+                row_text = btn.locator("xpath=ancestor::tr[1] | ancestor::div[contains(@class, 'card') or contains(@class, 'row')][1]").first.inner_text()
+                clean_row_title = " ".join([line.strip() for line in row_text.splitlines() if len(line.strip()) > 10])
+                title_guess = clean_row_title or f"KTU Exam Timetable {i+1}"
+                seen_encrypt_ids.add(enc_id)
+                timetable_metadata.append({
+                    "index": i,
+                    "id": i,
+                    "title": title_guess,
+                    "date": "2026",
+                    "encryptId": enc_id,
+                    "fileName": sanitize_filename(f"{create_seo_slug(title_guess[:60])}.pdf")
+                })
+
         print(f"\nProcessing {len(timetable_metadata)} timetables in browser:")
         
         for tb in timetable_metadata:
@@ -1151,14 +1115,17 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
                 print(f"Skipping (Already Exists): '{title}'")
                 continue
                 
-            print(f"\nDownloading NEW file via Browser UI: '{title}'")
+            print(f"\nDownloading NEW file: '{title}'")
             
+            # 1. Try clicking the button in the browser UI first
+            downloaded_ok = False
             try:
                 button_selector = f"button[value='{encrypt_id}']"
                 button = page.locator(button_selector)
                 
                 if button.count() > 0:
-                    with page.expect_download(timeout=15000) as download_info:
+                    button.first.scroll_into_view_if_needed()
+                    with page.expect_download(timeout=20000) as download_info:
                         button.first.click()
                     download = download_info.value
                     
@@ -1166,16 +1133,26 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
                     save_path = os.path.join(pdf_dir, filename)
                     
                     download.save_as(save_path)
-                    print(f" -> PDF Saved: {filename}")
-                    
-                    result = process_downloaded_pdf(save_path, filename, title, tb['date'], html_dir)
-                    downloaded_files.append(result)
-                    
-                    page.wait_for_timeout(1500)
+                    print(f" -> PDF Saved via Browser Click: {filename}")
+                    downloaded_ok = True
                 else:
-                    print(f" -> Error: Download button not found on UI for '{title}'.")
+                    print(f" -> Button not visible on current view, trying direct API attachment fetch...")
             except Exception as e:
-                print(f" -> Failed to process download: {e}")
+                print(f" -> Browser click download note ({e}), trying direct API attachment fetch...")
+
+            # 2. Fallback to Direct API attachment download using encryptId
+            if not downloaded_ok:
+                filename = predicted_filename
+                if download_pdf_from_ktu_api(encrypt_id, save_path):
+                    print(f" -> PDF Saved via Direct API: {filename}")
+                    downloaded_ok = True
+                else:
+                    print(f" -> ❌ Failed to download PDF for '{title}'")
+
+            if downloaded_ok:
+                result = process_downloaded_pdf(save_path, filename, title, tb['date'], html_dir)
+                downloaded_files.append(result)
+                page.wait_for_timeout(1500)
                 
         browser.close()
         return downloaded_files
