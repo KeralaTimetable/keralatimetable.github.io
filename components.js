@@ -503,6 +503,106 @@ window.showToast = function(message, type = 'info') {
                 color: #ffffff;
             }
 
+            /* ==================== FLUID MOBILE MENU TEXT & ICON ENTRY ANIMATIONS ==================== */
+            #mobile-menu .drawer-brand-wrap {
+                opacity: 0;
+                transform: translate3d(-12px, 0, 0);
+                transition:
+                    opacity 0.36s cubic-bezier(0.22, 1, 0.36, 1) 0.04s,
+                    transform 0.48s cubic-bezier(0.22, 1.15, 0.36, 1) 0.04s;
+                will-change: transform, opacity;
+            }
+            #mobile-menu.drawer-is-open .drawer-brand-wrap {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+
+            #mobile-menu .drawer-anim-item {
+                opacity: 0;
+                transform: translate3d(-18px, 6px, 0) scale(0.96);
+                transition:
+                    opacity 0.2s ease,
+                    transform 0.24s ease,
+                    background-color 0.2s ease,
+                    color 0.2s ease,
+                    border-color 0.2s ease,
+                    box-shadow 0.2s ease;
+                will-change: transform, opacity;
+            }
+            #mobile-menu.drawer-is-open .drawer-anim-item {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) scale(1);
+                transition:
+                    opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--stagger, 0) * 32ms + 65ms),
+                    transform 0.54s cubic-bezier(0.22, 1.15, 0.36, 1) calc(var(--stagger, 0) * 32ms + 65ms),
+                    background-color 0.2s ease,
+                    color 0.2s ease,
+                    border-color 0.2s ease,
+                    box-shadow 0.2s ease;
+            }
+
+            /* Inner Icon Box & Menu Text Secondary Fluid Wave */
+            #mobile-menu a.drawer-anim-item .drawer-icon-box {
+                transform: scale(0.75) rotate(-8deg);
+                opacity: 0;
+                transition:
+                    transform 0.2s ease,
+                    opacity 0.18s ease,
+                    background-color 0.2s ease,
+                    border-color 0.2s ease,
+                    color 0.2s ease;
+                will-change: transform, opacity;
+            }
+            #mobile-menu.drawer-is-open a.drawer-anim-item .drawer-icon-box {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+                transition:
+                    transform 0.56s cubic-bezier(0.22, 1.35, 0.36, 1) calc(var(--stagger, 0) * 32ms + 85ms),
+                    opacity 0.36s ease calc(var(--stagger, 0) * 32ms + 85ms),
+                    background-color 0.2s ease,
+                    border-color 0.2s ease,
+                    color 0.2s ease;
+            }
+
+            #mobile-menu a.drawer-anim-item .drawer-item-text {
+                display: inline-block;
+                opacity: 0;
+                transform: translate3d(-12px, 0, 0);
+                transition:
+                    transform 0.2s ease,
+                    opacity 0.18s ease;
+                will-change: transform, opacity;
+            }
+            #mobile-menu.drawer-is-open a.drawer-anim-item .drawer-item-text {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+                transition:
+                    transform 0.58s cubic-bezier(0.19, 1, 0.22, 1) calc(var(--stagger, 0) * 32ms + 105ms),
+                    opacity 0.42s cubic-bezier(0.19, 1, 0.22, 1) calc(var(--stagger, 0) * 32ms + 105ms);
+            }
+
+            /* Interactive Fluid Hover/Tap Micro-Physics */
+            #mobile-menu.drawer-is-open a.drawer-anim-item:hover .drawer-item-text,
+            #mobile-menu.drawer-is-open a.drawer-anim-item:active .drawer-item-text {
+                transform: translate3d(4px, 0, 0);
+                transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+            #mobile-menu.drawer-is-open a.drawer-anim-item:hover .drawer-icon-box {
+                transform: scale(1.08);
+                transition: transform 0.24s cubic-bezier(0.22, 1.25, 0.36, 1);
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                #mobile-menu .drawer-brand-wrap,
+                #mobile-menu .drawer-anim-item,
+                #mobile-menu a.drawer-anim-item .drawer-icon-box,
+                #mobile-menu a.drawer-anim-item .drawer-item-text {
+                    transition: none !important;
+                    transform: none !important;
+                    opacity: 1 !important;
+                }
+            }
+
             /* ==================== COLOROS DOT-TO-CAPSULE + NEWS TICKER ==================== */
             #coloros-live-capsule,
             #ktu-live-capsule {
@@ -902,7 +1002,7 @@ window.showToast = function(message, type = 'info') {
 })();
 
 // ==============================================================================
-// 3. RESPONSIVE NAVIGATION LOADER (With Dark-Mode Logo Swap & Contact Us Menu)
+// 3. RESPONSIVE NAVIGATION LOADER (With Dark-Mode Logo Swap & Fluid Menu Cascade)
 // ==============================================================================
 function loadNavigation(activePage, basePath = '', isBlog = false) { 
     const container = document.getElementById('navigation-container');
@@ -937,7 +1037,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
              class="fixed inset-y-0 left-0 w-72 transform -translate-x-full z-[60] flex flex-col will-change-transform">
             
             <div class="drawer-header p-5 flex justify-between items-center">
-                <div class="flex items-center gap-2">
+                <div class="drawer-brand-wrap flex items-center gap-2">
                     <img src="${initialLogoSrc}" alt="Kerala Timetable Logo" class="kt-brand-logo w-6 h-6 object-contain shrink-0" width="24" height="24" />
                     <span class="text-base font-extrabold text-slate-900 tracking-tight leading-none">Kerala <span class="text-indigo-600">Timetable</span></span>
                 </div>
@@ -946,64 +1046,64 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                 </button>
             </div>
             
-            <nav class="flex-grow py-4 px-3.5 flex flex-col gap-1.5 overflow-y-auto">
-                <p class="nav-section-label px-3 pt-1 pb-1 text-[10px] font-extrabold uppercase">Academics</p>
+            <nav class="flex-grow py-4 px-3.5 flex flex-col gap-1.5 overflow-y-auto overflow-x-hidden">
+                <p style="--stagger: 0;" class="drawer-anim-item nav-section-label px-3 pt-1 pb-1 text-[10px] font-extrabold uppercase">Academics</p>
                 
-                <a href="/index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('home')}">
+                <a href="/index.html" style="--stagger: 1;" class="drawer-anim-item flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] active:scale-[0.98] ${navItemClass('home')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-home text-xs"></i></span>
-                    <span>Home</span>
+                    <span class="drawer-item-text">Home</span>
                 </a>
                 
-                <a href="/timetable.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('timetable')}">
+                <a href="/timetable.html" style="--stagger: 2;" class="drawer-anim-item flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] active:scale-[0.98] ${navItemClass('timetable')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-calendar-day text-xs"></i></span>
-                    <span>Timetables</span>
+                    <span class="drawer-item-text">Timetables</span>
                 </a>
                 
-                <a href="/notes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('notes')}">
+                <a href="/notes.html" style="--stagger: 3;" class="drawer-anim-item flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] active:scale-[0.98] ${navItemClass('notes')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-book-open text-xs"></i></span>
-                    <span>Study Notes</span>
+                    <span class="drawer-item-text">Study Notes</span>
                 </a>
 
-                <a href="/pyq.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('pyq')}">
+                <a href="/pyq.html" style="--stagger: 4;" class="drawer-anim-item flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] active:scale-[0.98] ${navItemClass('pyq')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-file-alt text-xs"></i></span>
-                    <span>Previous Papers</span>
+                    <span class="drawer-item-text">Previous Papers</span>
                 </a>
 
-                <a href="/activitypoints.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('activity')}">
+                <a href="/activitypoints.html" style="--stagger: 5;" class="drawer-anim-item flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] active:scale-[0.98] ${navItemClass('activity')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-award text-xs"></i></span>
-                    <span>Activity Points</span>
+                    <span class="drawer-item-text">Activity Points</span>
                 </a>
 
-                <p class="nav-section-label px-3 pt-4 pb-1 text-[10px] font-extrabold uppercase">Community & Updates</p>
+                <p style="--stagger: 6;" class="drawer-anim-item nav-section-label px-3 pt-4 pb-1 text-[10px] font-extrabold uppercase">Community & Updates</p>
 
-                <a href="/doubts.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('qa')}">
+                <a href="/doubts.html" style="--stagger: 7;" class="drawer-anim-item flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] active:scale-[0.98] ${navItemClass('qa')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-comments text-xs"></i></span>
-                    <span>Q&A Hub</span>
+                    <span class="drawer-item-text">Q&A Hub</span>
                 </a>
                 
-                <a href="/updates.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('updates')}">
+                <a href="/updates.html" style="--stagger: 8;" class="drawer-anim-item flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] active:scale-[0.98] ${navItemClass('updates')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-bullhorn text-xs"></i></span>
-                    <span>Latest Updates</span>
+                    <span class="drawer-item-text">Latest Updates</span>
                 </a>
                 
-                <a href="/blog/index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('blog')}">
+                <a href="/blog/index.html" style="--stagger: 9;" class="drawer-anim-item flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] active:scale-[0.98] ${navItemClass('blog')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-feather-alt text-xs"></i></span>
-                    <span>Blog</span>
+                    <span class="drawer-item-text">Blog</span>
                 </a>
 
-                <a href="/status.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('status')}">
+                <a href="/status.html" style="--stagger: 10;" class="drawer-anim-item flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] active:scale-[0.98] ${navItemClass('status')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-server text-xs"></i></span>
-                    <span>Server Status</span>
+                    <span class="drawer-item-text">Server Status</span>
                 </a>
 
-                <a href="/contact-us.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('contact')}">
+                <a href="/contact-us.html" style="--stagger: 11;" class="drawer-anim-item flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] active:scale-[0.98] ${navItemClass('contact')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-envelope text-xs"></i></span>
-                    <span>Contact Us</span>
+                    <span class="drawer-item-text">Contact Us</span>
                 </a>
 
-                <a href="/about.html" class="flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] transition-all active:scale-[0.98] ${navItemClass('about')}">
+                <a href="/about.html" style="--stagger: 12;" class="drawer-anim-item flex items-center gap-3 px-3 py-2.5 rounded-2xl text-[15px] active:scale-[0.98] ${navItemClass('about')}">
                     <span class="drawer-icon-box w-8 h-8 rounded-xl flex items-center justify-center shrink-0"><i class="fas fa-info-circle text-xs"></i></span>
-                    <span>About</span>
+                    <span class="drawer-item-text">About</span>
                 </a>
             </nav>
         </div>
@@ -1107,17 +1207,19 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             menu.style.visibility = 'visible';
             overlay.style.visibility = 'visible';
 
-            menu.style.transition = 'transform 0.32s cubic-bezier(0.22, 1, 0.36, 1)';
+            menu.style.transition = 'transform 0.36s cubic-bezier(0.22, 1, 0.36, 1)';
             overlay.classList.add('transition-opacity', 'duration-300');
 
             void menu.offsetWidth;
 
             menu.classList.remove('-translate-x-full');
+            menu.classList.add('drawer-is-open');
             menu.setAttribute('aria-hidden', 'false');
             overlay.classList.remove('opacity-0', 'pointer-events-none');
             overlay.classList.add('opacity-100', 'pointer-events-auto');
             document.body.style.overflow = 'hidden';
         } else {
+            menu.classList.remove('drawer-is-open');
             menu.classList.add('-translate-x-full');
             menu.setAttribute('aria-hidden', 'true');
             overlay.classList.remove('opacity-100', 'pointer-events-auto');
@@ -1129,7 +1231,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                     menu.style.visibility = 'hidden';
                     overlay.style.visibility = 'hidden';
                 }
-            }, 320);
+            }, 340);
         }
     }
 
