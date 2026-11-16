@@ -429,9 +429,12 @@ window.showToast = function(message, type = 'info') {
 };
 
 // ==============================================================================
-// 1. 120FPS DARK MODE ENGINE & ADAPTIVE GLASSMORPHISM (Zero Lag, Zero White Boxes)
+// 1. TRUE iOS 26 OPTICAL LIQUID GLASS & 120FPS DARK MODE ENGINE
+//    - Generates real 3D Squircle Bevel Normal Maps via <canvas>
+//    - Mounts SVG <feDisplacementMap> + Chromatic Dispersion filters
+//    - Upgrades Floating Docks, Sticky Header, Pills & Cards automatically
 // ==============================================================================
-(function initTheme() {
+(function initLiquidGlassAndTheme() {
     const savedTheme = localStorage.getItem('kt_theme') || 'light';
     if (savedTheme === 'dark') {
         document.documentElement.classList.add('dark');
@@ -439,15 +442,182 @@ window.showToast = function(message, type = 'info') {
         document.documentElement.classList.remove('dark');
     }
 
-    function mountDarkStyles() {
+    // Generate a 3D Curved Squircle Lens Normal Map (Red = X normal, Green = Y normal, 128 = flat center)
+    function createSquircleLensDataURL(width, height, cornerRadius, bevelWidth) {
+        try {
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            const imgData = ctx.createImageData(width, height);
+            const data = imgData.data;
+
+            const halfW = width / 2;
+            const halfH = height / 2;
+            const r = Math.min(cornerRadius, halfW - 2, halfH - 2);
+            const innerW = halfW - r;
+            const innerH = halfH - r;
+
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const dx = x - halfW;
+                    const dy = y - halfH;
+
+                    // Signed Distance Function (SDF) to rounded pill/squircle boundary
+                    const qx = Math.abs(dx) - innerW;
+                    const qy = Math.abs(dy) - innerH;
+                    const outDist = Math.hypot(Math.max(qx, 0), Math.max(qy, 0));
+                    const inDist = Math.min(Math.max(qx, qy), 0);
+                    const sdf = outDist + inDist - r; // negative inside pill, 0 at border
+
+                    let nx = 0;
+                    let ny = 0;
+
+                    if (sdf < 0 && sdf > -bevelWidth) {
+                        // Normalized position inside the curved glass bevel (0 = inner flat, 1 = outer rim)
+                        const t = 1 - (-sdf / bevelWidth);
+                        // Smooth optical lens curvature (sine-squared slope)
+                        const strength = Math.pow(Math.sin(t * Math.PI * 0.5), 1.85);
+
+                        let gradX = 0;
+                        let gradY = 0;
+                        if (qx > 0 && qy > 0) {
+                            const len = Math.hypot(qx, qy) || 1;
+                            gradX = (qx / len) * Math.sign(dx);
+                            gradY = (qy / len) * Math.sign(dy);
+                        } else if (qx > qy) {
+                            gradX = Math.sign(dx);
+                        } else {
+                            gradY = Math.sign(dy);
+                        }
+
+                        // Refract light inward around the curved edge (magnifying lens effect)
+                        nx = -gradX * strength;
+                        ny = -gradY * strength;
+                    }
+
+                    const idx = (y * width + x) * 4;
+                    data[idx]     = Math.max(0, Math.min(255, Math.round(128 + nx * 124))); // R: X displacement
+                    data[idx + 1] = Math.max(0, Math.min(255, Math.round(128 + ny * 124))); // G: Y displacement
+                    data[idx + 2] = 128;
+                    data[idx + 3] = 255;
+                }
+            }
+
+            ctx.putImageData(imgData, 0, 0);
+            return canvas.toDataURL('image/png');
+        } catch (e) {
+            return '';
+        }
+    }
+
+    function mountOpticalSVGFilters() {
+        if (document.getElementById('kt-liquid-glass-svg-defs')) return;
+        if (!document.body) {
+            document.addEventListener('DOMContentLoaded', mountOpticalSVGFilters, { once: true });
+            return;
+        }
+
+        // 1. Wide Pill Lens (For Sticky Navbar, Floating Docks, Search Bar, Live Capsule)
+        const pillMapUrl = createSquircleLensDataURL(320, 76, 38, 22);
+        // 2. Card Squircle Lens (For Hero & Glass Cards)
+        const cardMapUrl = createSquircleLensDataURL(240, 180, 36, 20);
+
+        if (!pillMapUrl) return;
+
+        const svgWrapper = document.createElement('div');
+        svgWrapper.id = 'kt-liquid-glass-svg-defs';
+        svgWrapper.setAttribute('aria-hidden', 'true');
+        svgWrapper.style.cssText = 'position:fixed;width:0;height:0;overflow:hidden;pointer-events:none;z-index:-9999;';
+
+        svgWrapper.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" color-interpolation-filters="sRGB">
+                <defs>
+                    <!-- TIER 1: FLOATING PILL & DOCK OPTICAL LENS (Corner Refraction + Chromatic Dispersion) -->
+                    <filter id="kt-ios-pill-lens" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="softBg" />
+                        <feImage href="${pillMapUrl}" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="pillNormalMap" />
+                        
+                        <!-- Main Optical Edge Bending -->
+                        <feDisplacementMap in="softBg" in2="pillNormalMap" scale="28" xChannelSelector="R" yChannelSelector="G" result="refracted" />
+                        
+                        <!-- Subtle Chromatic Aberration (Red/Blue Prism Fringe at Rim) -->
+                        <feDisplacementMap in="softBg" in2="pillNormalMap" scale="33" xChannelSelector="R" yChannelSelector="G" result="refractedR" />
+                        <feColorMatrix in="refractedR" type="matrix" values="
+                            1 0 0 0 0
+                            0 0 0 0 0
+                            0 0 0 0 0
+                            0 0 0 1 0" result="rChan" />
+                        <feColorMatrix in="refracted" type="matrix" values="
+                            0 0 0 0 0
+                            0 1 0 0 0
+                            0 0 1 0 0
+                            0 0 0 1 0" result="gbChan" />
+                        <feBlend in="rChan" in2="gbChan" mode="screen" result="prismMerged" />
+                        
+                        <!-- Boost Vibrancy like Apple Liquid Glass -->
+                        <feColorMatrix in="prismMerged" type="saturate" values="1.85" />
+                    </filter>
+
+                    <!-- TIER 2: SQUIRCLE CARD LENS -->
+                    <filter id="kt-ios-card-lens" x="-8%" y="-8%" width="116%" height="116%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="11" result="cardBlur" />
+                        <feImage href="${cardMapUrl}" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="cardNormalMap" />
+                        <feDisplacementMap in="cardBlur" in2="cardNormalMap" scale="22" xChannelSelector="R" yChannelSelector="G" result="cardRefracted" />
+                        <feColorMatrix in="cardRefracted" type="saturate" values="1.75" />
+                    </filter>
+                </defs>
+            </svg>
+        `;
+        document.body.prepend(svgWrapper);
+    }
+
+    function initDynamicSpecularLightTracking() {
+        if (window._ktSpecularTrackingStarted) return;
+        window._ktSpecularTrackingStarted = true;
+
+        let rafPending = false;
+        const updateAngle = (clientX, clientY) => {
+            if (rafPending) return;
+            rafPending = true;
+            requestAnimationFrame(() => {
+                const nx = (clientX / window.innerWidth) - 0.5;
+                const ny = (clientY / window.innerHeight) - 0.5;
+                const angle = Math.round(135 + nx * 45 + ny * 30);
+                document.documentElement.style.setProperty('--kt-glint-angle', `${angle}deg`);
+                rafPending = false;
+            });
+        };
+
+        window.addEventListener('pointermove', (e) => {
+            if (window.innerWidth >= 768) updateAngle(e.clientX, e.clientY);
+        }, { passive: true });
+
+        window.addEventListener('scroll', () => {
+            if (rafPending) return;
+            rafPending = true;
+            requestAnimationFrame(() => {
+                const scrollShift = (window.scrollY * 0.12) % 60;
+                const angle = Math.round(125 + scrollShift);
+                document.documentElement.style.setProperty('--kt-glint-angle', `${angle}deg`);
+                rafPending = false;
+            });
+        }, { passive: true });
+    }
+
+    function mountDarkAndLiquidGlassStyles() {
         let style = document.getElementById('kt-dark-theme-styles');
         if (!style) {
             style = document.createElement('style');
             style.id = 'kt-dark-theme-styles';
         }
         style.innerHTML = `
+            :root {
+                --kt-glint-angle: 135deg;
+            }
+
             /* ==================================================================
-               0. STICKY FROSTED TOP BAR, MOBILE DRAWER & COLOROS LIVE CAPSULE
+               0. TRUE iOS 26 LIQUID GLASS ENGINE (OPTICAL REFRACTION + SPECULAR RIM)
                ================================================================== */
             #navigation-container {
                 position: sticky !important;
@@ -456,45 +626,120 @@ window.showToast = function(message, type = 'info') {
                 width: 100%;
             }
 
+            /* TIER 1A: Sticky Top Navigation Bar (Optical Lens + Specular Bevel) */
             header.kt-frosted-header {
-                background: rgba(255, 255, 255, 0.56) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.75) !important;
-                box-shadow: 0 4px 24px -4px rgba(15, 23, 42, 0.05), inset 0 -1px 0 0 rgba(15, 23, 42, 0.06) !important;
+                background: linear-gradient(
+                    180deg,
+                    rgba(255, 255, 255, 0.34) 0%,
+                    rgba(255, 255, 255, 0.18) 100%
+                ) !important;
+                -webkit-backdrop-filter: blur(18px) saturate(220%) contrast(106%) brightness(1.04) !important;
+                backdrop-filter: url(#kt-ios-pill-lens) blur(14px) saturate(210%) brightness(1.03) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.72) !important;
+                box-shadow:
+                    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.95),
+                    inset 0 -1.5px 3px 0 rgba(255, 255, 255, 0.55),
+                    0 10px 30px -6px rgba(15, 23, 42, 0.08) !important;
             }
 
             html.dark header.kt-frosted-header {
-                background: rgba(9, 13, 24, 0.85) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-                box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.5) !important;
+                background: linear-gradient(
+                    180deg,
+                    rgba(15, 23, 42, 0.52) 0%,
+                    rgba(9, 13, 24, 0.38) 100%
+                ) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(200%) !important;
+                backdrop-filter: url(#kt-ios-pill-lens) blur(16px) saturate(190%) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+                box-shadow:
+                    inset 0 1px 1px 0 rgba(255, 255, 255, 0.18),
+                    inset 0 -1px 2px 0 rgba(99, 102, 241, 0.18),
+                    0 12px 32px -6px rgba(0, 0, 0, 0.55) !important;
             }
 
+            /* TIER 1B: Floating Bottom Docks (#floating-merge-dock & #floating-points-dock)
+               Matches the exact OpenBlast bottom bar optical corner-warping! */
+            #floating-merge-dock,
+            #floating-points-dock {
+                background: linear-gradient(
+                    var(--kt-glint-angle, 135deg),
+                    rgba(255, 255, 255, 0.42) 0%,
+                    rgba(255, 255, 255, 0.18) 50%,
+                    rgba(240, 246, 255, 0.34) 100%
+                ) !important;
+                -webkit-backdrop-filter: blur(22px) saturate(240%) contrast(110%) brightness(1.06) !important;
+                backdrop-filter: url(#kt-ios-pill-lens) blur(14px) saturate(230%) contrast(108%) !important;
+                border: 1.5px solid rgba(255, 255, 255, 0.78) !important;
+                box-shadow:
+                    inset 0 2px 3px 0 rgba(255, 255, 255, 0.98),
+                    inset 0 -2px 4px 0 rgba(255, 255, 255, 0.55),
+                    inset 2px 0 4px 0 rgba(255, 255, 255, 0.45),
+                    0 22px 48px -10px rgba(15, 23, 42, 0.22),
+                    0 4px 16px -2px rgba(79, 70, 229, 0.15) !important;
+            }
+
+            html.dark #floating-merge-dock,
+            html.dark #floating-points-dock {
+                background: linear-gradient(
+                    var(--kt-glint-angle, 135deg),
+                    rgba(30, 41, 59, 0.58) 0%,
+                    rgba(15, 23, 42, 0.36) 55%,
+                    rgba(30, 41, 59, 0.52) 100%
+                ) !important;
+                -webkit-backdrop-filter: blur(22px) saturate(210%) !important;
+                backdrop-filter: url(#kt-ios-pill-lens) blur(16px) saturate(200%) !important;
+                border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
+                box-shadow:
+                    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.32),
+                    inset 0 -1.5px 3px 0 rgba(99, 102, 241, 0.24),
+                    0 24px 50px -10px rgba(0, 0, 0, 0.78) !important;
+            }
+
+            /* TIER 1C: Home Smart Search Pill & Segmented Switcher Tracks */
+            html:not(.dark) #search-wrapper > div {
+                background: linear-gradient(
+                    var(--kt-glint-angle, 135deg),
+                    rgba(255, 255, 255, 0.46) 0%,
+                    rgba(255, 255, 255, 0.22) 100%
+                ) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(230%) !important;
+                backdrop-filter: url(#kt-ios-pill-lens) blur(14px) saturate(220%) !important;
+                border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+                box-shadow:
+                    inset 0 2px 3px 0 rgba(255, 255, 255, 0.98),
+                    inset 0 -1.5px 3px 0 rgba(255, 255, 255, 0.55),
+                    0 16px 36px -8px rgba(15, 23, 42, 0.09) !important;
+            }
+
+            /* Mobile Slide-Out Glass Drawer */
             #mobile-menu {
-                background: linear-gradient(165deg, rgba(255, 255, 255, 0.88) 0%, rgba(248, 250, 252, 0.82) 100%) !important;
-                backdrop-filter: blur(24px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-                border-right: 1px solid rgba(255, 255, 255, 0.85) !important;
-                box-shadow: 20px 0 50px rgba(15, 23, 42, 0.18) !important;
+                background: linear-gradient(165deg, rgba(255, 255, 255, 0.62) 0%, rgba(248, 250, 252, 0.48) 100%) !important;
+                backdrop-filter: blur(28px) saturate(220%) contrast(106%) !important;
+                -webkit-backdrop-filter: blur(28px) saturate(220%) contrast(106%) !important;
+                border-right: 1.5px solid rgba(255, 255, 255, 0.88) !important;
+                box-shadow:
+                    inset -1.5px 0 3px 0 rgba(255, 255, 255, 0.85),
+                    24px 0 54px rgba(15, 23, 42, 0.18) !important;
             }
             #mobile-menu .drawer-header {
-                background: rgba(255, 255, 255, 0.55) !important;
-                border-bottom: 1px solid rgba(15, 23, 42, 0.07) !important;
+                background: rgba(255, 255, 255, 0.35) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.65) !important;
             }
             #mobile-menu .nav-section-label { color: #475569 !important; letter-spacing: 0.08em; }
             #mobile-menu a.drawer-link-inactive { color: #0f172a !important; }
-            #mobile-menu a.drawer-link-inactive:hover { background: rgba(255, 255, 255, 0.65) !important; color: #4338ca !important; }
+            #mobile-menu a.drawer-link-inactive:hover { background: rgba(255, 255, 255, 0.55) !important; color: #4338ca !important; }
             #mobile-menu a.drawer-link-active {
-                background: rgba(255, 255, 255, 0.92) !important;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.55)) !important;
                 color: #4338ca !important;
-                border: 1px solid rgba(99, 102, 241, 0.25) !important;
-                box-shadow: 0 4px 14px -2px rgba(79, 70, 229, 0.12) !important;
+                border: 1px solid rgba(255, 255, 255, 0.95) !important;
+                box-shadow:
+                    inset 0 1px 1.5px rgba(255, 255, 255, 1),
+                    0 6px 16px -3px rgba(79, 70, 229, 0.15) !important;
             }
             #mobile-menu .drawer-icon-box {
-                background: rgba(255, 255, 255, 0.82);
-                border: 1px solid rgba(15, 23, 42, 0.08);
+                background: rgba(255, 255, 255, 0.68);
+                border: 1px solid rgba(255, 255, 255, 0.9);
+                box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95);
                 color: #334155;
             }
             #mobile-menu a.drawer-link-active .drawer-icon-box {
@@ -541,7 +786,6 @@ window.showToast = function(message, type = 'info') {
                     box-shadow 0.2s ease;
             }
 
-            /* Inner Icon Box & Menu Text Secondary Fluid Wave */
             #mobile-menu a.drawer-anim-item .drawer-icon-box {
                 transform: scale(0.75) rotate(-8deg);
                 opacity: 0;
@@ -581,7 +825,6 @@ window.showToast = function(message, type = 'info') {
                     opacity 0.42s cubic-bezier(0.19, 1, 0.22, 1) calc(var(--stagger, 0) * 32ms + 105ms);
             }
 
-            /* Interactive Fluid Hover/Tap Micro-Physics */
             #mobile-menu.drawer-is-open a.drawer-anim-item:hover .drawer-item-text,
             #mobile-menu.drawer-is-open a.drawer-anim-item:active .drawer-item-text {
                 transform: translate3d(4px, 0, 0);
@@ -603,7 +846,7 @@ window.showToast = function(message, type = 'info') {
                 }
             }
 
-            /* ==================== COLOROS DOT-TO-CAPSULE + NEWS TICKER ==================== */
+            /* ==================== COLOROS DOT-TO-CAPSULE (SMOKED OPTICAL LENS) ==================== */
             #coloros-live-capsule,
             #ktu-live-capsule {
                 position: fixed;
@@ -617,12 +860,15 @@ window.showToast = function(message, type = 'info') {
                 opacity: 0;
                 pointer-events: none;
                 overflow: hidden;
-                background: rgba(11, 15, 25, 0.95) !important;
-                backdrop-filter: blur(20px) saturate(180%) !important;
-                -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-                border: 1px solid rgba(255, 255, 255, 0.16) !important;
+                background: linear-gradient(135deg, rgba(11, 15, 25, 0.76) 0%, rgba(15, 23, 42, 0.62) 100%) !important;
+                -webkit-backdrop-filter: blur(22px) saturate(210%) !important;
+                backdrop-filter: url(#kt-ios-pill-lens) blur(16px) saturate(200%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.26) !important;
                 color: #ffffff !important;
-                box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.22) !important;
+                box-shadow:
+                    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.35),
+                    inset 0 -1px 2px 0 rgba(99, 102, 241, 0.25),
+                    0 18px 38px -6px rgba(0, 0, 0, 0.55) !important;
                 transition: 
                     width 0.68s cubic-bezier(0.16, 1.12, 0.3, 1),
                     transform 0.46s cubic-bezier(0.22, 1.35, 0.36, 1),
@@ -672,40 +918,112 @@ window.showToast = function(message, type = 'info') {
             }
 
             /* ==================================================================
-               A. LIGHT MODE ENHANCEMENTS (Preserves Liquid Glass 100%)
+               A. LIGHT MODE: TRUE iOS 26 SPECULAR LIQUID GLASS CARDS & CONTAINERS
                ================================================================== */
+            /* 1. Primary Hero & Stage Containers (.real-glass, .glass-panel) */
+            html:not(.dark) .real-glass,
+            html:not(.dark) .glass-panel {
+                background: linear-gradient(
+                    var(--kt-glint-angle, 135deg),
+                    rgba(255, 255, 255, 0.52) 0%,
+                    rgba(255, 255, 255, 0.24) 48%,
+                    rgba(245, 249, 255, 0.42) 100%
+                ) !important;
+                -webkit-backdrop-filter: blur(26px) saturate(220%) contrast(106%) brightness(1.04) !important;
+                backdrop-filter: url(#kt-ios-card-lens) blur(22px) saturate(215%) contrast(105%) !important;
+                border: 1.5px solid rgba(255, 255, 255, 0.82) !important;
+                box-shadow:
+                    inset 0 2px 3px 0 rgba(255, 255, 255, 0.98),
+                    inset 0 -2px 4px 0 rgba(255, 255, 255, 0.52),
+                    inset 1.5px 0 3px 0 rgba(255, 255, 255, 0.45),
+                    0 20px 44px -12px rgba(31, 38, 135, 0.10),
+                    0 2px 8px 0 rgba(15, 23, 42, 0.04) !important;
+            }
+
+            /* 2. Interactive Content Cards (.result-glass, .hybrid-card, .branch-card, .group-select-card) */
+            html:not(.dark) .result-glass,
+            html:not(.dark) .hybrid-card,
             html:not(.dark) .branch-card {
-                border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
-                background: rgba(255, 255, 255, 0.85) !important;
-                box-shadow: 0 4px 18px -2px rgba(31, 38, 135, 0.06) !important;
+                background: linear-gradient(
+                    var(--kt-glint-angle, 135deg),
+                    rgba(255, 255, 255, 0.58) 0%,
+                    rgba(255, 255, 255, 0.30) 52%,
+                    rgba(248, 250, 252, 0.48) 100%
+                ) !important;
+                -webkit-backdrop-filter: blur(20px) saturate(210%) contrast(105%) !important;
+                backdrop-filter: blur(20px) saturate(210%) contrast(105%) !important;
+                border: 1.5px solid rgba(255, 255, 255, 0.86) !important;
+                box-shadow:
+                    inset 0 2px 2.5px 0 rgba(255, 255, 255, 1),
+                    inset 0 -1.5px 3px 0 rgba(255, 255, 255, 0.55),
+                    0 10px 28px -6px rgba(31, 38, 135, 0.08) !important;
+                transition:
+                    transform 0.36s cubic-bezier(0.22, 1.35, 0.36, 1),
+                    box-shadow 0.3s ease,
+                    border-color 0.25s ease,
+                    background 0.25s ease !important;
             }
-            html:not(.dark) .branch-card:hover {
-                border-color: #000000 !important;
-                background: #ffffff !important;
+
+            html:not(.dark) .result-glass:hover,
+            html:not(.dark) .hybrid-card:hover,
+            html:not(.dark) .branch-card:hover,
+            html:not(.dark) .glass-panel-hover:hover {
+                transform: translate3d(0, -4px, 0) scale(1.012) !important;
+                background: linear-gradient(
+                    var(--kt-glint-angle, 135deg),
+                    rgba(255, 255, 255, 0.76) 0%,
+                    rgba(255, 255, 255, 0.42) 50%,
+                    rgba(240, 245, 255, 0.65) 100%
+                ) !important;
+                border-color: rgba(255, 255, 255, 1) !important;
+                box-shadow:
+                    inset 0 2.5px 4px 0 #ffffff,
+                    inset 0 -2px 4px 0 rgba(99, 102, 241, 0.22),
+                    0 18px 38px -8px rgba(79, 70, 229, 0.16) !important;
             }
-            html:not(.dark) .real-glass {
-                border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
-                box-shadow: inset 0 1px 1px #fff, 0 16px 40px rgba(31, 38, 135, 0.07) !important;
+
+            /* Liquid Jelly Squish on Tap */
+            .result-glass:active,
+            .hybrid-card:active,
+            .branch-card:active,
+            .group-select-card:active {
+                transform: scale3d(0.975, 0.985, 1) !important;
+                transition: transform 0.12s cubic-bezier(0.22, 1, 0.36, 1) !important;
+            }
+
+            /* 3. Inner GlassWells (.inner-glass) */
+            html:not(.dark) .inner-glass {
+                background: linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.48) 0%,
+                    rgba(255, 255, 255, 0.26) 100%
+                ) !important;
+                -webkit-backdrop-filter: blur(16px) saturate(195%) !important;
+                backdrop-filter: blur(16px) saturate(195%) !important;
+                border: 1.5px solid rgba(255, 255, 255, 0.80) !important;
+                box-shadow:
+                    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95),
+                    0 6px 18px -4px rgba(15, 23, 42, 0.05) !important;
             }
 
             /* ==================================================================
-               B. 120FPS DARK MODE ENGINE (Zero Lag + True Deep Obsidian Canvas)
+               B. 120FPS DARK MODE ENGINE (Smoked Refractive Glass + Deep Obsidian)
                ================================================================== */
-            /* 1. Base Obsidian Canvas (High Specificity so inline <style> never overrides it) */
+            /* 1. Base Obsidian Canvas */
             html.dark,
             html.dark body,
             html.dark body.bg-mesh,
             html.dark .bg-mesh {
                 background-color: #060913 !important;
                 background-image: 
-                    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.12) 0px, transparent 48%),
-                    radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 48%),
-                    radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.09) 0px, transparent 55%) !important;
+                    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 48%),
+                    radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.10) 0px, transparent 48%),
+                    radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.12) 0px, transparent 55%) !important;
                 background-attachment: scroll !important;
                 color: #f1f5f9 !important;
             }
 
-            /* 2. GPU & Washout Fix: Prevent ambient orbs from brightening the mobile screen in Dark Mode */
+            /* 2. GPU & Washout Fix */
             html.dark #mouse-orb-1,
             html.dark #mouse-orb-2,
             html.dark .ambient-orb,
@@ -717,8 +1035,8 @@ window.showToast = function(message, type = 'info') {
                 filter: none !important;
                 -webkit-filter: none !important;
                 animation: none !important;
-                background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, transparent 65%) !important;
-                opacity: 0.25 !important;
+                background: radial-gradient(circle, rgba(79, 70, 229, 0.12) 0%, transparent 65%) !important;
+                opacity: 0.35 !important;
             }
 
             /* 3. Protect Gradient Text */
@@ -735,15 +1053,23 @@ window.showToast = function(message, type = 'info') {
             html.dark .text-slate-500:not(.text-transparent) { color: #94a3b8 !important; }
             html.dark .text-slate-400:not(.text-transparent) { color: #94a3b8 !important; }
 
-            /* 5. High-FPS Smoked Aurora Cards */
+            /* 5. High-FPS Smoked Aurora Liquid Cards */
             html.dark .real-glass,
             html.dark .glass-panel {
-                background: linear-gradient(145deg, rgba(17, 24, 42, 0.95) 0%, rgba(10, 15, 28, 0.97) 100%) !important;
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-                border: 1px solid rgba(255, 255, 255, 0.09) !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.17) !important;
-                box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 16px 36px -8px rgba(0, 0, 0, 0.65) !important;
+                background: linear-gradient(
+                    var(--kt-glint-angle, 145deg),
+                    rgba(22, 31, 54, 0.78) 0%,
+                    rgba(11, 16, 30, 0.86) 55%,
+                    rgba(18, 26, 46, 0.82) 100%
+                ) !important;
+                backdrop-filter: blur(18px) saturate(180%) !important;
+                -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.12) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.24) !important;
+                box-shadow:
+                    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.14),
+                    inset 0 -1px 2px 0 rgba(99, 102, 241, 0.15),
+                    0 16px 36px -8px rgba(0, 0, 0, 0.65) !important;
             }
 
             html.dark .result-glass,
@@ -751,12 +1077,16 @@ window.showToast = function(message, type = 'info') {
             html.dark .timetable-card,
             html.dark .notice-card,
             html.dark .branch-card {
-                background: linear-gradient(145deg, rgba(19, 27, 46, 0.95) 0%, rgba(11, 17, 31, 0.98) 100%) !important;
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-                border: 1px solid rgba(255, 255, 255, 0.09) !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.16) !important;
-                box-shadow: 0 10px 26px -6px rgba(0, 0, 0, 0.55) !important;
+                background: linear-gradient(
+                    var(--kt-glint-angle, 145deg),
+                    rgba(23, 33, 56, 0.82) 0%,
+                    rgba(12, 18, 34, 0.90) 100%
+                ) !important;
+                border: 1px solid rgba(255, 255, 255, 0.11) !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.22) !important;
+                box-shadow:
+                    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.12),
+                    0 10px 26px -6px rgba(0, 0, 0, 0.55) !important;
             }
             html.dark .result-glass:hover,
             html.dark .hybrid-card:hover,
@@ -764,9 +1094,15 @@ window.showToast = function(message, type = 'info') {
             html.dark .notice-card:hover,
             html.dark .branch-card:hover,
             html.dark .glass-panel-hover:hover {
-                background: linear-gradient(145deg, rgba(26, 36, 60, 0.97) 0%, rgba(15, 22, 40, 0.99) 100%) !important;
-                border-color: rgba(99, 102, 241, 0.48) !important;
-                box-shadow: 0 16px 32px -6px rgba(0, 0, 0, 0.7) !important;
+                background: linear-gradient(
+                    var(--kt-glint-angle, 145deg),
+                    rgba(30, 42, 70, 0.90) 0%,
+                    rgba(16, 24, 44, 0.94) 100%
+                ) !important;
+                border-color: rgba(129, 140, 248, 0.52) !important;
+                box-shadow:
+                    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.22),
+                    0 16px 32px -6px rgba(0, 0, 0, 0.72) !important;
             }
 
             /* Timetable Card Watermark & Countdown Footer in Dark Mode */
@@ -784,18 +1120,15 @@ window.showToast = function(message, type = 'info') {
 
             /* 6. Inner Glass, Inputs & Selects */
             html.dark .inner-glass {
-                background: rgba(13, 19, 35, 0.85) !important;
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-                border: 1px solid rgba(255, 255, 255, 0.09) !important;
+                background: rgba(13, 19, 35, 0.78) !important;
+                border: 1px solid rgba(255, 255, 255, 0.11) !important;
+                box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.08) !important;
             }
             html.dark .glass-input,
             html.dark select.custom-select,
             html.dark #filter-panel select {
-                background-color: rgba(9, 14, 26, 0.92) !important;
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-                border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+                background-color: rgba(9, 14, 26, 0.88) !important;
+                border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
                 color: #f8fafc !important;
             }
             html.dark .glass-input:focus {
@@ -815,14 +1148,14 @@ window.showToast = function(message, type = 'info') {
 
             /* 7. Segmented Tab Switcher Tracks */
             html.dark div[class*="bg-slate-200"] {
-                background-color: rgba(8, 12, 22, 0.9) !important;
-                border-color: rgba(255, 255, 255, 0.09) !important;
+                background-color: rgba(8, 12, 22, 0.85) !important;
+                border-color: rgba(255, 255, 255, 0.11) !important;
             }
             html.dark div[class*="bg-slate-200"] > button.bg-white {
-                background: linear-gradient(135deg, rgba(37, 99, 235, 0.28), rgba(79, 70, 229, 0.28)) !important;
+                background: linear-gradient(135deg, rgba(37, 99, 235, 0.34), rgba(79, 70, 229, 0.34)) !important;
                 color: #93c5fd !important;
-                border: 1px solid rgba(96, 165, 250, 0.4) !important;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+                border: 1px solid rgba(96, 165, 250, 0.45) !important;
+                box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.35) !important;
             }
             html.dark div[class*="bg-slate-200"] > button:not(.bg-white) {
                 color: #94a3b8 !important;
@@ -843,8 +1176,8 @@ window.showToast = function(message, type = 'info') {
             html.dark button[class*="bg-slate-100"],
             html.dark span[class*="bg-slate-100"],
             html.dark div[class*="bg-slate-100"] {
-                background-color: rgba(24, 34, 53, 0.92) !important;
-                border-color: rgba(255, 255, 255, 0.14) !important;
+                background-color: rgba(24, 34, 53, 0.88) !important;
+                border-color: rgba(255, 255, 255, 0.16) !important;
                 color: #f1f5f9 !important;
             }
             html.dark a[class*="bg-white"]:hover,
@@ -857,8 +1190,8 @@ window.showToast = function(message, type = 'info') {
             }
             html.dark span[class*="bg-white/"],
             html.dark div[class*="bg-white/"] {
-                background-color: rgba(15, 23, 42, 0.88) !important;
-                border-color: rgba(255, 255, 255, 0.12) !important;
+                background-color: rgba(15, 23, 42, 0.82) !important;
+                border-color: rgba(255, 255, 255, 0.14) !important;
                 color: #e2e8f0 !important;
             }
 
@@ -929,7 +1262,7 @@ window.showToast = function(message, type = 'info') {
 
             /* 12. Footer & Modals */
             html.dark footer {
-                background-color: rgba(6, 9, 19, 0.94) !important;
+                background-color: rgba(6, 9, 19, 0.90) !important;
                 border-top-color: rgba(255, 255, 255, 0.08) !important;
             }
             html.dark #notice-modal-content,
@@ -940,24 +1273,26 @@ window.showToast = function(message, type = 'info') {
 
             /* 13. Dark Mode Mobile Drawer & Header Action Buttons */
             html.dark #mobile-menu {
-                background: linear-gradient(165deg, rgba(15, 23, 42, 0.96) 0%, rgba(7, 11, 20, 0.96) 100%) !important;
-                border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+                background: linear-gradient(165deg, rgba(15, 23, 42, 0.84) 0%, rgba(7, 11, 20, 0.88) 100%) !important;
+                backdrop-filter: blur(28px) saturate(200%) !important;
+                -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+                border-right: 1px solid rgba(255, 255, 255, 0.16) !important;
             }
             html.dark #mobile-menu .drawer-header {
-                background: rgba(7, 11, 20, 0.65) !important;
+                background: rgba(7, 11, 20, 0.55) !important;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
             }
             html.dark #mobile-menu .nav-section-label { color: #94a3b8 !important; }
             html.dark #mobile-menu a.drawer-link-inactive { color: #f1f5f9 !important; text-shadow: none; }
             html.dark #mobile-menu a.drawer-link-inactive:hover { background: rgba(255, 255, 255, 0.08) !important; color: #ffffff !important; }
             html.dark #mobile-menu a.drawer-link-active {
-                background: rgba(79, 70, 229, 0.25) !important;
+                background: rgba(79, 70, 229, 0.28) !important;
                 color: #a5b4fc !important;
-                border: 1px solid rgba(99, 102, 241, 0.4) !important;
+                border: 1px solid rgba(99, 102, 241, 0.45) !important;
             }
             html.dark #mobile-menu .drawer-icon-box {
                 background: rgba(255, 255, 255, 0.08);
-                border-color: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.12);
                 color: #cbd5e1;
             }
             html.dark #mobile-menu a.drawer-link-active .drawer-icon-box {
@@ -976,11 +1311,12 @@ window.showToast = function(message, type = 'info') {
                 background-color: rgba(255, 255, 255, 0.16) !important;
             }
         `;
-        // Append at the very end of <head> so it always wins CSS cascade over page-level <style> tags
         document.head.appendChild(style);
     }
 
-    mountDarkStyles();
+    mountDarkAndLiquidGlassStyles();
+    mountOpticalSVGFilters();
+    initDynamicSpecularLightTracking();
 })();
 
 // ==============================================================================
@@ -1018,7 +1354,6 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     const LIGHT_LOGO_SRC = '/k.png';
     const DARK_LOGO_SRC  = '/assets/k-logo-darktheme.png';
 
-    // Preload dark logo so theme switching has 0ms delay
     const preloadDarkLogo = new Image();
     preloadDarkLogo.src = DARK_LOGO_SRC;
 
@@ -1170,7 +1505,6 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                 : '<i class="fas fa-moon text-[14px] text-slate-600"></i>';
         });
 
-        // Swap K Logo between Light Mode (/k.png) and Dark Mode (/assets/k-logo-darktheme.png)
         const targetLogo = isDark ? DARK_LOGO_SRC : LIGHT_LOGO_SRC;
         document.querySelectorAll('.kt-brand-logo').forEach(img => {
             if (img.getAttribute('src') !== targetLogo) {
@@ -1321,11 +1655,11 @@ function initWhatsAppPopup() {
         const popupHTML = `
             <div id="ktu-wa-popup" class="fixed bottom-5 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-[100] w-[calc(100%-2rem)] max-w-[430px] p-5 sm:p-6 rounded-[2rem] text-white shadow-2xl transition-all duration-500 ease-out transform translate-y-12 opacity-0 overflow-hidden will-change-transform"
                  style="
-                    background: rgba(18, 24, 38, 0.92);
-                    backdrop-filter: blur(20px) saturate(180%);
-                    -webkit-backdrop-filter: blur(20px) saturate(180%);
-                    border: 1px solid rgba(255, 255, 255, 0.14);
-                    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.22), 0 24px 48px -12px rgba(0, 0, 0, 0.65);
+                    background: linear-gradient(135deg, rgba(18, 24, 38, 0.72) 0%, rgba(12, 17, 30, 0.62) 100%);
+                    -webkit-backdrop-filter: blur(22px) saturate(210%);
+                    backdrop-filter: url(#kt-ios-card-lens) blur(18px) saturate(210%);
+                    border: 1.5px solid rgba(255, 255, 255, 0.24);
+                    box-shadow: inset 0 2px 3px 0 rgba(255, 255, 255, 0.32), inset 0 -1.5px 3px 0 rgba(52, 211, 153, 0.22), 0 24px 48px -12px rgba(0, 0, 0, 0.68);
                  ">
                 <div class="relative z-10 flex flex-col gap-3.5 sm:gap-4">
                     <div class="flex items-start justify-between gap-3">
@@ -1350,7 +1684,7 @@ function initWhatsAppPopup() {
                     </p>
 
                     <div class="grid grid-cols-2 gap-3 pt-1">
-                        <button id="ktu-wa-later-btn" class="w-full py-3 px-4 rounded-full bg-white/10 hover:bg-white/15 text-slate-200 font-bold text-xs sm:text-sm transition-all border border-white/5 active:scale-95 text-center">
+                        <button id="ktu-wa-later-btn" class="w-full py-3 px-4 rounded-full bg-white/10 hover:bg-white/15 text-slate-200 font-bold text-xs sm:text-sm transition-all border border-white/15 active:scale-95 text-center">
                             Maybe Later
                         </button>
                         <a id="ktu-wa-follow-btn" href="${CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs sm:text-sm transition-all shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2 active:scale-95 text-center">
