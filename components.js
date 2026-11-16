@@ -429,11 +429,243 @@ window.showToast = function(message, type = 'info') {
 };
 
 // ==============================================================================
-// 1. 120FPS TRUE iOS 26 OPTICAL LIQUID GLASS & DARK MODE ENGINE
-//    - Single-Pass GPU SVG Displacement Lens (Zero Double-Blur, Zero Scroll Repaint)
-//    - Full-Screen Mobile Drawer Fix (No transform on #navigation-container!)
+// 1. OPENBLAST EXACT LIQUID GLASS ENGINE (Gy + $y + tb ResizeObserver Port)
+//    - Exact Circular Cross-Section Profile: g = 1 - Math.sqrt(1 - h*h)
+//    - Exact 3-Channel RGB Chromatic Dispersion: [1.0, 0.93, 0.86]
+//    - Exact 1:1 Pixel-Matched userSpaceOnUse SVG Filter per Pill/Dock
+//    - Exact ::before (blur(5px) saturate(1.8) brightness(1.04)) & ::after Rim
 // ==============================================================================
-(function initLiquidGlassAndTheme() {
+window.KTULiquidGlass = (function() {
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+    let svgRoot = null;
+    const filterCache = new Map();
+    const observedElements = new WeakMap();
+    let filterCounter = 0;
+
+    // Chromium check (Matches OpenBlast Wy() + fallback for Android Chrome where userAgentData may vary)
+    function isChromiumEngine() {
+        if (navigator.userAgentData?.brands?.some(b => b.brand === 'Chromium' || b.brand === 'Google Chrome' || b.brand === 'Microsoft Edge')) {
+            return true;
+        }
+        const ua = navigator.userAgent || '';
+        return /Chrome|CriOS|Edg|OPR|Brave/i.test(ua) && !/Firefox|FxiOS/i.test(ua);
+    }
+
+    // OpenBlast's exact Gy(width, height, radius, bevel) Circular Lens Normal Map Generator
+    function generateNormalMapBytes(e, t, n, r) {
+        const i = new Uint8ClampedArray(e * t * 4);
+        const a = e / 2;
+        const o = t / 2;
+        const s = Math.max(0, Math.min(n, a, o));
+        const c = Math.max(1, Math.min(r, a, o));
+
+        for (let y = 0; y < t; y++) {
+            for (let x = 0; x < e; x++) {
+                const rDx = x + 0.5 - a;
+                const lDy = y + 0.5 - o;
+                const u = Math.abs(rDx) - (a - s);
+                const d = Math.abs(lDy) - (o - s);
+                let f, p = 0, m = 0;
+
+                if (u > 0 && d > 0) {
+                    const dist = Math.hypot(u, d);
+                    f = s - dist;
+                    p = (u / dist) * Math.sign(rDx);
+                    m = (d / dist) * Math.sign(lDy);
+                } else if (u > d) {
+                    f = s - u;
+                    p = Math.sign(rDx);
+                } else {
+                    f = s - d;
+                    m = Math.sign(lDy);
+                }
+
+                const h = Math.min(1, Math.max(0, 1 - f / c));
+                // Exact circular meniscus equation from OpenBlast:
+                const g = 1 - Math.sqrt(1 - h * h);
+                const idx = (y * e + x) * 4;
+                i[idx]     = Math.round(128 - p * g * 127);
+                i[idx + 1] = Math.round(128 - m * g * 127);
+                i[idx + 2] = 128;
+                i[idx + 3] = 255;
+            }
+        }
+        return i;
+    }
+
+    function ensureSvgRoot() {
+        if (svgRoot?.isConnected) return svgRoot;
+        svgRoot = document.createElementNS(SVG_NS, 'svg');
+        svgRoot.setAttribute('width', '0');
+        svgRoot.setAttribute('height', '0');
+        svgRoot.setAttribute('aria-hidden', 'true');
+        svgRoot.style.position = 'absolute';
+        svgRoot.style.pointerEvents = 'none';
+        svgRoot.style.zIndex = '-9999';
+        document.body.append(svgRoot);
+        return svgRoot;
+    }
+
+    function createNormalMapDataURL(w, h, r, bevel) {
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return '';
+        ctx.putImageData(new ImageData(generateNormalMapBytes(w, h, r, bevel), w, h), 0, 0);
+        return canvas.toDataURL();
+    }
+
+    function createSvgNode(tag, attrs) {
+        const el = document.createElementNS(SVG_NS, tag);
+        for (const [k, v] of Object.entries(attrs)) {
+            el.setAttribute(k, String(v));
+        }
+        return el;
+    }
+
+    // OpenBlast's exact $y(width, height, radius, bevel, depth) 3-Channel RGB Chromatic Filter
+    function acquireLiquidFilter(w, h, radius, bevel, depth) {
+        const key = `${w}x${h}r${radius}b${bevel}d${depth}`;
+        const existing = filterCache.get(key);
+        if (existing) {
+            existing.users++;
+            return key;
+        }
+
+        const id = `ot-liquid-${filterCounter++}`;
+        const box = { x: 0, y: 0, width: w, height: h };
+        const filterNode = createSvgNode('filter', {
+            id,
+            ...box,
+            filterUnits: 'userSpaceOnUse',
+            primitiveUnits: 'userSpaceOnUse',
+            'color-interpolation-filters': 'sRGB'
+        });
+
+        const feImg = createSvgNode('feImage', {
+            ...box,
+            result: 'map',
+            preserveAspectRatio: 'none'
+        });
+        feImg.setAttribute('href', createNormalMapDataURL(w, h, radius, bevel));
+        filterNode.append(feImg);
+
+        const channels = [
+            ['r', 1.00, '1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0'],
+            ['g', 0.93, '0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0'],
+            ['b', 0.86, '0 0 0 0 0  0 0 1 0 0  0 0 0 0 0  0 0 0 1 0']
+        ];
+
+        for (const [ch, ratio, matrix] of channels) {
+            filterNode.append(
+                createSvgNode('feDisplacementMap', {
+                    in: 'SourceGraphic',
+                    in2: 'map',
+                    scale: depth * 2 * ratio,
+                    xChannelSelector: 'R',
+                    yChannelSelector: 'G',
+                    result: `${ch}-bent`
+                }),
+                createSvgNode('feColorMatrix', {
+                    in: `${ch}-bent`,
+                    type: 'matrix',
+                    values: matrix,
+                    result: ch
+                })
+            );
+        }
+
+        filterNode.append(
+            createSvgNode('feBlend', { in: 'r', in2: 'g', mode: 'screen', result: 'rg' }),
+            createSvgNode('feBlend', { in: 'rg', in2: 'b', mode: 'screen' })
+        );
+
+        ensureSvgRoot().append(filterNode);
+        filterCache.set(key, { id, node: filterNode, users: 1 });
+        return key;
+    }
+
+    function releaseLiquidFilter(key) {
+        const entry = filterCache.get(key);
+        if (!entry) return;
+        if (--entry.users <= 0) {
+            entry.node.remove();
+            filterCache.delete(key);
+        }
+    }
+
+    // OpenBlast's exact tb(bevel, depth) ResizeObserver attachment
+    function attachLiquidPill(el, bevel = 22, depth = 22) {
+        if (!el || observedElements.has(el)) return;
+        el.classList.add('glass-pill');
+
+        if (!isChromiumEngine()) return;
+
+        let activeKey = null;
+        const updateLens = () => {
+            const w = Math.round(el.offsetWidth);
+            const h = Math.round(el.offsetHeight);
+            if (!w || !h || w > 1400 || h > 260) return;
+
+            const rawRadius = Number.parseFloat(getComputedStyle(el).borderTopLeftRadius) || 28;
+            const r = Math.round(Math.min(rawRadius, w / 2, h / 2));
+            const nextKey = acquireLiquidFilter(w, h, r, bevel, depth);
+            if (activeKey) releaseLiquidFilter(activeKey);
+            activeKey = nextKey;
+
+            const filterEntry = filterCache.get(nextKey);
+            if (filterEntry) {
+                el.style.setProperty('--liquid-filter', `url(#${filterEntry.id})`);
+                el.dataset.liquid = '';
+            }
+        };
+
+        updateLens();
+        const ro = new ResizeObserver(updateLens);
+        ro.observe(el);
+        observedElements.set(el, { ro, getKey: () => activeKey });
+    }
+
+    // Automatically upgrade Kerala Timetable's Floating Docks, Search Bar, Tab Tracks & Pills
+    function scanAndAttachAllPills() {
+        if (!document.body) return;
+
+        // 1. Primary Floating Docks & Player-like Bars (bevel = 22, depth = 22 — exact OpenBlast mobile dock!)
+        const dockSelectors = [
+            '#floating-merge-dock',
+            '#floating-points-dock',
+            '#search-wrapper > div',
+            '#ktu-wa-popup'
+        ];
+        dockSelectors.forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => attachLiquidPill(el, 22, 22));
+        });
+
+        // 2. Sticky Header Bar (bevel = 18, depth = 18)
+        document.querySelectorAll('header.kt-frosted-header').forEach(el => attachLiquidPill(el, 18, 18));
+
+        // 3. Segmented Tab Switchers & Pill Controls (bevel = 16, depth = 16)
+        const pillSelectors = [
+            '#search-card > div.grid.grid-cols-2',
+            '#scheme-filters',
+            '#group-detail-view > div.inner-glass.sticky'
+        ];
+        pillSelectors.forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => attachLiquidPill(el, 16, 16));
+        });
+    }
+
+    return {
+        attachLiquidPill,
+        scanAndAttachAllPills
+    };
+})();
+
+// ==============================================================================
+// 2. OPENBLAST LIQUID GLASS CSS + 120FPS DARK MODE ENGINE
+// ==============================================================================
+(function initTheme() {
     const savedTheme = localStorage.getItem('kt_theme') || 'light';
     if (savedTheme === 'dark') {
         document.documentElement.classList.add('dark');
@@ -441,114 +673,118 @@ window.showToast = function(message, type = 'info') {
         document.documentElement.classList.remove('dark');
     }
 
-    function createSquircleLensDataURL(width, height, cornerRadius, bevelWidth) {
-        try {
-            const canvas = document.createElement('canvas');
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            const imgData = ctx.createImageData(width, height);
-            const data = imgData.data;
-
-            const halfW = width / 2;
-            const halfH = height / 2;
-            const r = Math.min(cornerRadius, halfW - 2, halfH - 2);
-            const innerW = halfW - r;
-            const innerH = halfH - r;
-
-            for (let y = 0; y < height; y++) {
-                for (let x = 0; x < width; x++) {
-                    const dx = x - halfW;
-                    const dy = y - halfH;
-
-                    const qx = Math.abs(dx) - innerW;
-                    const qy = Math.abs(dy) - innerH;
-                    const outDist = Math.hypot(Math.max(qx, 0), Math.max(qy, 0));
-                    const inDist = Math.min(Math.max(qx, qy), 0);
-                    const sdf = outDist + inDist - r;
-
-                    let nx = 0;
-                    let ny = 0;
-
-                    if (sdf < 0 && sdf > -bevelWidth) {
-                        const t = 1 - (-sdf / bevelWidth);
-                        const strength = Math.pow(Math.sin(t * Math.PI * 0.5), 1.85);
-
-                        let gradX = 0;
-                        let gradY = 0;
-                        if (qx > 0 && qy > 0) {
-                            const len = Math.hypot(qx, qy) || 1;
-                            gradX = (qx / len) * Math.sign(dx);
-                            gradY = (qy / len) * Math.sign(dy);
-                        } else if (qx > qy) {
-                            gradX = Math.sign(dx);
-                        } else {
-                            gradY = Math.sign(dy);
-                        }
-
-                        nx = -gradX * strength;
-                        ny = -gradY * strength;
-                    }
-
-                    const idx = (y * width + x) * 4;
-                    data[idx]     = Math.max(0, Math.min(255, Math.round(128 + nx * 124)));
-                    data[idx + 1] = Math.max(0, Math.min(255, Math.round(128 + ny * 124)));
-                    data[idx + 2] = 128;
-                    data[idx + 3] = 255;
-                }
-            }
-
-            ctx.putImageData(imgData, 0, 0);
-            return canvas.toDataURL('image/png');
-        } catch (e) {
-            return '';
-        }
-    }
-
-    function mountOpticalSVGFilters() {
-        if (document.getElementById('kt-liquid-glass-svg-defs')) return;
-        if (!document.body) {
-            document.addEventListener('DOMContentLoaded', mountOpticalSVGFilters, { once: true });
-            return;
-        }
-
-        const pillMapUrl = createSquircleLensDataURL(220, 56, 28, 16);
-        if (!pillMapUrl) return;
-
-        const svgWrapper = document.createElement('div');
-        svgWrapper.id = 'kt-liquid-glass-svg-defs';
-        svgWrapper.setAttribute('aria-hidden', 'true');
-        svgWrapper.style.cssText = 'position:fixed;width:0;height:0;overflow:hidden;pointer-events:none;z-index:-9999;';
-
-        svgWrapper.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" color-interpolation-filters="sRGB">
-                <defs>
-                    <filter id="kt-ios-pill-lens" x="-4%" y="-8%" width="108%" height="116%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
-                        <feImage href="${pillMapUrl}" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="pillNormalMap" />
-                        <feDisplacementMap in="SourceGraphic" in2="pillNormalMap" scale="24" xChannelSelector="R" yChannelSelector="G" />
-                    </filter>
-                </defs>
-            </svg>
-        `;
-        document.body.prepend(svgWrapper);
-    }
-
-    function mountDarkAndLiquidGlassStyles() {
+    function mountDarkStyles() {
         let style = document.getElementById('kt-dark-theme-styles');
         if (!style) {
             style = document.createElement('style');
             style.id = 'kt-dark-theme-styles';
         }
         style.innerHTML = `
+            /* ==================================================================
+               0. OPENBLAST EXACT .glass-pill[data-liquid] ARCHITECTURE
+               ================================================================== */
             :root {
-                --kt-glint-angle: 135deg;
+                --glassMaterialBackground: #fffaf6bf;
+                --glassMaterialShadowColor: rgba(15, 23, 42, 0.12);
+                --glassMaterialInnerStroke: #fff;
+                --glassMaterialInnerStrokeAlpha: 0.5;
+            }
+            html.dark {
+                --glassMaterialBackground: #26262899;
+                --glassMaterialShadowColor: rgba(0, 0, 0, 0.55);
+                --glassMaterialInnerStroke: #fff;
+                --glassMaterialInnerStrokeAlpha: 0.24;
+            }
+
+            .glass-pill {
+                isolation: isolate;
+                position: relative;
+            }
+            /* Preserve fixed/sticky positioning on docks & headers */
+            #floating-merge-dock.glass-pill,
+            #floating-points-dock.glass-pill,
+            #ktu-wa-popup.glass-pill {
+                position: fixed !important;
+            }
+            header.kt-frosted-header.glass-pill,
+            #group-detail-view > div.inner-glass.sticky.glass-pill {
+                position: sticky !important;
+            }
+
+            .glass-pill::before,
+            .glass-pill::after {
+                content: "";
+                border-radius: inherit;
+                pointer-events: none;
+                position: absolute;
+                inset: 0;
+            }
+
+            /* Fallback when [data-liquid] is not active (e.g., iOS Safari) */
+            .glass-pill::before {
+                z-index: -1;
+                background-color: var(--glassMaterialBackground);
+                -webkit-backdrop-filter: saturate(1.9) blur(24px);
+                backdrop-filter: saturate(1.9) blur(24px);
+                box-shadow: 0 14px 44px var(--glassMaterialShadowColor);
+                background-image: linear-gradient(#ffffff1a, #0000 55%);
+            }
+            .glass-pill::after {
+                z-index: 2;
+                box-shadow:
+                    inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                    inset -1.5px -1.5px 0 -0.5px #fff9,
+                    inset 0 0 0 0.5px #00000014,
+                    inset 0 0 14px #fff3;
+            }
+            html.dark .glass-pill::after {
+                box-shadow:
+                    inset 1.5px 1.5px 0 -0.5px #fff9,
+                    inset -1.5px -1.5px 0 -0.5px #ffffff4d,
+                    inset 0 0 14px #ffffff12;
+            }
+
+            /* OPENBLAST EXACT LIQUID FILTER RULE:
+               Low blur(5px) + 3-Channel Chromatic SVG Displacement + 52% translucent fill */
+            .glass-pill[data-liquid] {
+                background: transparent !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                border-color: transparent !important;
+            }
+            .glass-pill[data-liquid]::before {
+                z-index: -1;
+                -webkit-backdrop-filter: var(--liquid-filter) blur(5px) saturate(1.8) brightness(1.04) !important;
+                backdrop-filter: var(--liquid-filter) blur(5px) saturate(1.8) brightness(1.04) !important;
+                background-color: color-mix(in srgb, var(--glassMaterialBackground) 52%, transparent) !important;
+                background-image: linear-gradient(#ffffff1a, #0000 45%) !important;
+                box-shadow: 0 14px 44px var(--glassMaterialShadowColor) !important;
+            }
+            .glass-pill[data-liquid]::after {
+                content: "";
+                border-radius: inherit;
+                pointer-events: none;
+                opacity: 1;
+                position: absolute;
+                inset: 0;
+                z-index: 2;
+                box-shadow:
+                    inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                    inset -1.5px -1.5px 0 -0.5px #fff9,
+                    inset 0 0 0 0.5px #00000014,
+                    inset 0 0 14px #fff3 !important;
+            }
+            html.dark .glass-pill[data-liquid]::after {
+                box-shadow:
+                    inset 1.5px 1.5px 0 -0.5px #fff9,
+                    inset -1.5px -1.5px 0 -0.5px #ffffff4d,
+                    inset 0 0 14px #ffffff12 !important;
             }
 
             /* ==================================================================
-               0. TRUE iOS 26 LIQUID GLASS ENGINE (120FPS COMPOSITED PIPELINE)
+               1. STICKY HEADER, FULL-SCREEN MOBILE DRAWER & COLOROS CAPSULE
                ================================================================== */
-            /* IMPORTANT: Never put transform or will-change on #navigation-container
-               so fixed elements remain anchored to the full viewport! */
+            /* Never apply transform or will-change on #navigation-container */
             #navigation-container {
                 position: sticky !important;
                 top: 0 !important;
@@ -556,97 +792,14 @@ window.showToast = function(message, type = 'info') {
                 width: 100%;
             }
 
-            /* TIER 1A: Sticky Top Navigation Bar (1-Pass Optical Lens + Hardware Blur) */
             header.kt-frosted-header {
-                background: linear-gradient(
-                    180deg,
-                    rgba(255, 255, 255, 0.34) 0%,
-                    rgba(255, 255, 255, 0.18) 100%
-                ) !important;
-                -webkit-backdrop-filter: blur(16px) saturate(220%) contrast(106%) brightness(1.04) !important;
-                backdrop-filter: url(#kt-ios-pill-lens) blur(12px) saturate(210%) brightness(1.03) !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.72) !important;
-                box-shadow:
-                    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.95),
-                    inset 0 -1.5px 3px 0 rgba(255, 255, 255, 0.55),
-                    0 10px 30px -6px rgba(15, 23, 42, 0.08) !important;
-                transform: translateZ(0);
-                backface-visibility: hidden;
-                -webkit-backface-visibility: hidden;
+                border-bottom: 0.5px solid rgba(15, 23, 42, 0.08) !important;
             }
-
             html.dark header.kt-frosted-header {
-                background: linear-gradient(
-                    180deg,
-                    rgba(15, 23, 42, 0.52) 0%,
-                    rgba(9, 13, 24, 0.38) 100%
-                ) !important;
-                -webkit-backdrop-filter: blur(18px) saturate(200%) !important;
-                backdrop-filter: url(#kt-ios-pill-lens) blur(14px) saturate(190%) !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
-                box-shadow:
-                    inset 0 1px 1px 0 rgba(255, 255, 255, 0.18),
-                    inset 0 -1px 2px 0 rgba(99, 102, 241, 0.18),
-                    0 12px 32px -6px rgba(0, 0, 0, 0.55) !important;
+                border-bottom: 0.5px solid rgba(255, 255, 255, 0.12) !important;
             }
 
-            /* TIER 1B: Floating Bottom Docks (#floating-merge-dock & #floating-points-dock) */
-            #floating-merge-dock,
-            #floating-points-dock {
-                background: linear-gradient(
-                    135deg,
-                    rgba(255, 255, 255, 0.42) 0%,
-                    rgba(255, 255, 255, 0.18) 50%,
-                    rgba(240, 246, 255, 0.34) 100%
-                ) !important;
-                -webkit-backdrop-filter: blur(18px) saturate(240%) contrast(110%) brightness(1.06) !important;
-                backdrop-filter: url(#kt-ios-pill-lens) blur(12px) saturate(230%) contrast(108%) !important;
-                border: 1.5px solid rgba(255, 255, 255, 0.78) !important;
-                box-shadow:
-                    inset 0 2px 3px 0 rgba(255, 255, 255, 0.98),
-                    inset 0 -2px 4px 0 rgba(255, 255, 255, 0.55),
-                    inset 2px 0 4px 0 rgba(255, 255, 255, 0.45),
-                    0 22px 48px -10px rgba(15, 23, 42, 0.22),
-                    0 4px 16px -2px rgba(79, 70, 229, 0.15) !important;
-                backface-visibility: hidden;
-                -webkit-backface-visibility: hidden;
-            }
-
-            html.dark #floating-merge-dock,
-            html.dark #floating-points-dock {
-                background: linear-gradient(
-                    135deg,
-                    rgba(30, 41, 59, 0.58) 0%,
-                    rgba(15, 23, 42, 0.36) 55%,
-                    rgba(30, 41, 59, 0.52) 100%
-                ) !important;
-                -webkit-backdrop-filter: blur(18px) saturate(210%) !important;
-                backdrop-filter: url(#kt-ios-pill-lens) blur(14px) saturate(200%) !important;
-                border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
-                box-shadow:
-                    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.32),
-                    inset 0 -1.5px 3px 0 rgba(99, 102, 241, 0.24),
-                    0 24px 50px -10px rgba(0, 0, 0, 0.78) !important;
-            }
-
-            /* TIER 1C: Home Smart Search Pill */
-            html:not(.dark) #search-wrapper > div {
-                background: linear-gradient(
-                    135deg,
-                    rgba(255, 255, 255, 0.46) 0%,
-                    rgba(255, 255, 255, 0.22) 100%
-                ) !important;
-                -webkit-backdrop-filter: blur(18px) saturate(230%) !important;
-                backdrop-filter: url(#kt-ios-pill-lens) blur(12px) saturate(220%) !important;
-                border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
-                box-shadow:
-                    inset 0 2px 3px 0 rgba(255, 255, 255, 0.98),
-                    inset 0 -1.5px 3px 0 rgba(255, 255, 255, 0.55),
-                    0 16px 36px -8px rgba(15, 23, 42, 0.09) !important;
-                transform: translateZ(0);
-            }
-
-            /* ==================== FULL-SCREEN MOBILE SLIDE-OUT GLASS DRAWER ==================== */
+            /* Full-Screen Mobile Drawer (Mounted on document.body) */
             #mobile-menu {
                 position: fixed !important;
                 top: 0 !important;
@@ -655,13 +808,13 @@ window.showToast = function(message, type = 'info') {
                 height: 100vh !important;
                 height: 100dvh !important;
                 max-height: 100dvh !important;
-                background: linear-gradient(165deg, rgba(255, 255, 255, 0.76) 0%, rgba(248, 250, 252, 0.64) 100%) !important;
-                backdrop-filter: blur(24px) saturate(220%) contrast(106%) !important;
-                -webkit-backdrop-filter: blur(24px) saturate(220%) contrast(106%) !important;
-                border-right: 1.5px solid rgba(255, 255, 255, 0.88) !important;
+                background: color-mix(in srgb, var(--glassMaterialBackground) 78%, transparent) !important;
+                backdrop-filter: saturate(190%) blur(32px) !important;
+                -webkit-backdrop-filter: saturate(190%) blur(32px) !important;
+                border-right: 1px solid rgba(255, 255, 255, 0.85) !important;
                 box-shadow:
-                    inset -1.5px 0 3px 0 rgba(255, 255, 255, 0.85),
-                    24px 0 54px rgba(15, 23, 42, 0.22) !important;
+                    inset -1.5px 0 0 -0.5px #fffffff2,
+                    20px 0 50px rgba(15, 23, 42, 0.18) !important;
             }
             #menu-overlay {
                 position: fixed !important;
@@ -671,24 +824,21 @@ window.showToast = function(message, type = 'info') {
                 height: 100dvh !important;
             }
             #mobile-menu .drawer-header {
-                background: rgba(255, 255, 255, 0.42) !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.68) !important;
+                background: rgba(255, 255, 255, 0.45) !important;
+                border-bottom: 1px solid rgba(15, 23, 42, 0.07) !important;
             }
             #mobile-menu .nav-section-label { color: #475569 !important; letter-spacing: 0.08em; }
             #mobile-menu a.drawer-link-inactive { color: #0f172a !important; }
-            #mobile-menu a.drawer-link-inactive:hover { background: rgba(255, 255, 255, 0.55) !important; color: #4338ca !important; }
+            #mobile-menu a.drawer-link-inactive:hover { background: rgba(255, 255, 255, 0.65) !important; color: #4338ca !important; }
             #mobile-menu a.drawer-link-active {
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.62)) !important;
+                background: rgba(255, 255, 255, 0.92) !important;
                 color: #4338ca !important;
-                border: 1px solid rgba(255, 255, 255, 0.95) !important;
-                box-shadow:
-                    inset 0 1px 1.5px rgba(255, 255, 255, 1),
-                    0 6px 16px -3px rgba(79, 70, 229, 0.15) !important;
+                border: 1px solid rgba(99, 102, 241, 0.25) !important;
+                box-shadow: 0 4px 14px -2px rgba(79, 70, 229, 0.12) !important;
             }
             #mobile-menu .drawer-icon-box {
-                background: rgba(255, 255, 255, 0.72);
-                border: 1px solid rgba(255, 255, 255, 0.92);
-                box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95);
+                background: rgba(255, 255, 255, 0.82);
+                border: 1px solid rgba(15, 23, 42, 0.08);
                 color: #334155;
             }
             #mobile-menu a.drawer-link-active .drawer-icon-box {
@@ -795,7 +945,7 @@ window.showToast = function(message, type = 'info') {
                 }
             }
 
-            /* ==================== COLOROS DOT-TO-CAPSULE (SMOKED OPTICAL LENS) ==================== */
+            /* ==================== COLOROS DOT-TO-CAPSULE + NEWS TICKER ==================== */
             #coloros-live-capsule,
             #ktu-live-capsule {
                 position: fixed;
@@ -809,21 +959,20 @@ window.showToast = function(message, type = 'info') {
                 opacity: 0;
                 pointer-events: none;
                 overflow: hidden;
-                background: linear-gradient(135deg, rgba(11, 15, 25, 0.76) 0%, rgba(15, 23, 42, 0.62) 100%) !important;
-                -webkit-backdrop-filter: blur(18px) saturate(210%) !important;
-                backdrop-filter: url(#kt-ios-pill-lens) blur(14px) saturate(200%) !important;
-                border: 1px solid rgba(255, 255, 255, 0.26) !important;
+                background: rgba(18, 18, 22, 0.78) !important;
+                backdrop-filter: blur(16px) saturate(190%) !important;
+                -webkit-backdrop-filter: blur(16px) saturate(190%) !important;
+                border: 1px solid rgba(255, 255, 255, 0.18) !important;
                 color: #ffffff !important;
                 box-shadow:
-                    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.35),
-                    inset 0 -1px 2px 0 rgba(99, 102, 241, 0.25),
-                    0 18px 38px -6px rgba(0, 0, 0, 0.55) !important;
+                    inset 1.5px 1.5px 0 -0.5px #fff9,
+                    inset -1.5px -1.5px 0 -0.5px #ffffff4d,
+                    0 16px 36px -8px rgba(0, 0, 0, 0.5) !important;
                 transition: 
                     width 0.68s cubic-bezier(0.16, 1.12, 0.3, 1),
                     transform 0.46s cubic-bezier(0.22, 1.35, 0.36, 1),
                     opacity 0.32s ease;
                 will-change: width, transform, opacity;
-                backface-visibility: hidden;
             }
             #coloros-live-capsule.capsule-dot,
             #ktu-live-capsule.capsule-dot {
@@ -868,47 +1017,41 @@ window.showToast = function(message, type = 'info') {
             }
 
             /* ==================================================================
-               A. LIGHT MODE: TRUE iOS 26 SPECULAR LIQUID GLASS CARDS (120FPS GPU)
+               A. LIGHT MODE: OPENBLAST SPECULAR RIM ON CARDS (.real-glass, .result-glass, etc.)
                ================================================================== */
             html:not(.dark) .real-glass,
             html:not(.dark) .glass-panel {
-                background: linear-gradient(
-                    135deg,
-                    rgba(255, 255, 255, 0.52) 0%,
-                    rgba(255, 255, 255, 0.24) 48%,
-                    rgba(245, 249, 255, 0.42) 100%
-                ) !important;
-                -webkit-backdrop-filter: blur(22px) saturate(220%) contrast(106%) brightness(1.04) !important;
-                backdrop-filter: blur(22px) saturate(220%) contrast(106%) brightness(1.04) !important;
-                border: 1.5px solid rgba(255, 255, 255, 0.82) !important;
+                background-color: color-mix(in srgb, var(--glassMaterialBackground) 68%, transparent) !important;
+                background-image: linear-gradient(#ffffff24, #0000 50%) !important;
+                -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
+                backdrop-filter: saturate(190%) blur(28px) !important;
+                border: none !important;
                 box-shadow:
-                    inset 0 2px 3px 0 rgba(255, 255, 255, 0.98),
-                    inset 0 -2px 4px 0 rgba(255, 255, 255, 0.52),
-                    inset 1.5px 0 3px 0 rgba(255, 255, 255, 0.45),
-                    0 20px 44px -12px rgba(31, 38, 135, 0.10),
-                    0 2px 8px 0 rgba(15, 23, 42, 0.04) !important;
+                    inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                    inset -1.5px -1.5px 0 -0.5px #fff9,
+                    inset 0 0 0 0.5px #00000014,
+                    inset 0 0 14px #fff3,
+                    0 14px 44px var(--glassMaterialShadowColor) !important;
             }
 
             html:not(.dark) .result-glass,
             html:not(.dark) .hybrid-card,
             html:not(.dark) .branch-card {
-                background: linear-gradient(
-                    135deg,
-                    rgba(255, 255, 255, 0.58) 0%,
-                    rgba(255, 255, 255, 0.30) 52%,
-                    rgba(248, 250, 252, 0.48) 100%
-                ) !important;
-                -webkit-backdrop-filter: blur(16px) saturate(210%) contrast(105%) !important;
-                backdrop-filter: blur(16px) saturate(210%) contrast(105%) !important;
-                border: 1.5px solid rgba(255, 255, 255, 0.86) !important;
+                background-color: color-mix(in srgb, var(--glassMaterialBackground) 74%, transparent) !important;
+                background-image: linear-gradient(#ffffff29, #0000 55%) !important;
+                -webkit-backdrop-filter: saturate(190%) blur(20px) !important;
+                backdrop-filter: saturate(190%) blur(20px) !important;
+                border: none !important;
                 box-shadow:
-                    inset 0 2px 2.5px 0 rgba(255, 255, 255, 1),
-                    inset 0 -1.5px 3px 0 rgba(255, 255, 255, 0.55),
-                    0 10px 28px -6px rgba(31, 38, 135, 0.08) !important;
+                    inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                    inset -1.5px -1.5px 0 -0.5px #fff9,
+                    inset 0 0 0 0.5px #00000014,
+                    inset 0 0 14px #fff3,
+                    0 10px 28px -6px rgba(15, 23, 42, 0.08) !important;
                 transition:
-                    transform 0.34s cubic-bezier(0.22, 1.35, 0.36, 1),
+                    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1),
                     box-shadow 0.28s ease,
-                    border-color 0.24s ease !important;
+                    background-color 0.22s ease !important;
             }
 
             html:not(.dark) .result-glass:hover,
@@ -916,43 +1059,35 @@ window.showToast = function(message, type = 'info') {
             html:not(.dark) .branch-card:hover,
             html:not(.dark) .glass-panel-hover:hover {
                 transform: translate3d(0, -4px, 0) scale(1.012) !important;
-                background: linear-gradient(
-                    135deg,
-                    rgba(255, 255, 255, 0.76) 0%,
-                    rgba(255, 255, 255, 0.42) 50%,
-                    rgba(240, 245, 255, 0.65) 100%
-                ) !important;
-                border-color: rgba(255, 255, 255, 1) !important;
+                background-color: rgba(255, 255, 255, 0.86) !important;
                 box-shadow:
-                    inset 0 2.5px 4px 0 #ffffff,
-                    inset 0 -2px 4px 0 rgba(99, 102, 241, 0.22),
-                    0 18px 38px -8px rgba(79, 70, 229, 0.16) !important;
+                    inset 1.5px 1.5px 0 -0.5px #ffffff,
+                    inset -1.5px -1.5px 0 -0.5px #fff,
+                    inset 0 0 0 1px rgba(79, 70, 229, 0.35),
+                    0 18px 36px -8px rgba(79, 70, 229, 0.14) !important;
             }
 
+            /* OpenBlast ot-press tactile scale physics */
             .result-glass:active,
             .hybrid-card:active,
             .branch-card:active,
             .group-select-card:active {
-                transform: scale3d(0.975, 0.985, 1) !important;
-                transition: transform 0.12s cubic-bezier(0.22, 1, 0.36, 1) !important;
+                transform: scale(0.96) !important;
+                transition-duration: 80ms !important;
             }
 
             html:not(.dark) .inner-glass {
-                background: linear-gradient(
-                    145deg,
-                    rgba(255, 255, 255, 0.48) 0%,
-                    rgba(255, 255, 255, 0.26) 100%
-                ) !important;
-                -webkit-backdrop-filter: blur(14px) saturate(195%) !important;
-                backdrop-filter: blur(14px) saturate(195%) !important;
-                border: 1.5px solid rgba(255, 255, 255, 0.80) !important;
+                background-color: color-mix(in srgb, var(--glassMaterialBackground) 62%, transparent) !important;
+                border: none !important;
                 box-shadow:
-                    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95),
-                    0 6px 18px -4px rgba(15, 23, 42, 0.05) !important;
+                    inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                    inset -1.5px -1.5px 0 -0.5px #fff9,
+                    inset 0 0 0 0.5px #00000014,
+                    inset 0 0 14px #fff3 !important;
             }
 
             /* ==================================================================
-               B. 120FPS DARK MODE ENGINE (Smoked Refractive Glass + Deep Obsidian)
+               B. 120FPS DARK MODE ENGINE (OpenBlast Dark Specular Rim + Zero Lag)
                ================================================================== */
             html.dark,
             html.dark body,
@@ -960,9 +1095,9 @@ window.showToast = function(message, type = 'info') {
             html.dark .bg-mesh {
                 background-color: #060913 !important;
                 background-image: 
-                    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 48%),
-                    radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.10) 0px, transparent 48%),
-                    radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.12) 0px, transparent 55%) !important;
+                    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.14) 0px, transparent 48%),
+                    radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.09) 0px, transparent 48%),
+                    radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.10) 0px, transparent 55%) !important;
                 background-attachment: scroll !important;
                 color: #f1f5f9 !important;
             }
@@ -978,8 +1113,8 @@ window.showToast = function(message, type = 'info') {
                 filter: none !important;
                 -webkit-filter: none !important;
                 animation: none !important;
-                background: radial-gradient(circle, rgba(79, 70, 229, 0.12) 0%, transparent 65%) !important;
-                opacity: 0.35 !important;
+                background: radial-gradient(circle, rgba(79, 70, 229, 0.10) 0%, transparent 65%) !important;
+                opacity: 0.3 !important;
             }
 
             html.dark .text-transparent {
@@ -996,20 +1131,15 @@ window.showToast = function(message, type = 'info') {
 
             html.dark .real-glass,
             html.dark .glass-panel {
-                background: linear-gradient(
-                    145deg,
-                    rgba(22, 31, 54, 0.84) 0%,
-                    rgba(11, 16, 30, 0.90) 55%,
-                    rgba(18, 26, 46, 0.86) 100%
-                ) !important;
+                background: linear-gradient(145deg, rgba(22, 28, 46, 0.88) 0%, rgba(12, 16, 28, 0.92) 100%) !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
-                border: 1px solid rgba(255, 255, 255, 0.12) !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.24) !important;
+                border: none !important;
                 box-shadow:
-                    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.14),
-                    inset 0 -1px 2px 0 rgba(99, 102, 241, 0.15),
-                    0 16px 36px -8px rgba(0, 0, 0, 0.65) !important;
+                    inset 1.5px 1.5px 0 -0.5px #ffffff40,
+                    inset -1.5px -1.5px 0 -0.5px #ffffff1f,
+                    inset 0 0 14px #ffffff0a,
+                    0 16px 40px -8px rgba(0, 0, 0, 0.65) !important;
             }
 
             html.dark .result-glass,
@@ -1017,17 +1147,14 @@ window.showToast = function(message, type = 'info') {
             html.dark .timetable-card,
             html.dark .notice-card,
             html.dark .branch-card {
-                background: linear-gradient(
-                    145deg,
-                    rgba(23, 33, 56, 0.86) 0%,
-                    rgba(12, 18, 34, 0.92) 100%
-                ) !important;
+                background: linear-gradient(145deg, rgba(24, 32, 52, 0.88) 0%, rgba(13, 19, 34, 0.94) 100%) !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
-                border: 1px solid rgba(255, 255, 255, 0.11) !important;
-                border-top: 1px solid rgba(255, 255, 255, 0.22) !important;
+                border: none !important;
                 box-shadow:
-                    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.12),
+                    inset 1.5px 1.5px 0 -0.5px #ffffff38,
+                    inset -1.5px -1.5px 0 -0.5px #ffffff1a,
+                    inset 0 0 14px #ffffff08,
                     0 10px 26px -6px rgba(0, 0, 0, 0.55) !important;
             }
             html.dark .result-glass:hover,
@@ -1036,14 +1163,10 @@ window.showToast = function(message, type = 'info') {
             html.dark .notice-card:hover,
             html.dark .branch-card:hover,
             html.dark .glass-panel-hover:hover {
-                background: linear-gradient(
-                    145deg,
-                    rgba(30, 42, 70, 0.92) 0%,
-                    rgba(16, 24, 44, 0.96) 100%
-                ) !important;
-                border-color: rgba(129, 140, 248, 0.52) !important;
+                background: linear-gradient(145deg, rgba(30, 40, 66, 0.94) 0%, rgba(17, 25, 44, 0.98) 100%) !important;
                 box-shadow:
-                    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.22),
+                    inset 1.5px 1.5px 0 -0.5px #ffffff66,
+                    inset -1.5px -1.5px 0 -0.5px #6366f166,
                     0 16px 32px -6px rgba(0, 0, 0, 0.72) !important;
             }
 
@@ -1060,16 +1183,18 @@ window.showToast = function(message, type = 'info') {
             }
 
             html.dark .inner-glass {
-                background: rgba(13, 19, 35, 0.82) !important;
+                background: rgba(15, 22, 38, 0.82) !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
-                border: 1px solid rgba(255, 255, 255, 0.11) !important;
-                box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.08) !important;
+                border: none !important;
+                box-shadow:
+                    inset 1.5px 1.5px 0 -0.5px #ffffff2e,
+                    inset -1.5px -1.5px 0 -0.5px #ffffff14 !important;
             }
             html.dark .glass-input,
             html.dark select.custom-select,
             html.dark #filter-panel select {
-                background-color: rgba(9, 14, 26, 0.90) !important;
+                background-color: rgba(9, 14, 26, 0.92) !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
                 border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
@@ -1211,8 +1336,8 @@ window.showToast = function(message, type = 'info') {
 
             html.dark #mobile-menu {
                 background: linear-gradient(165deg, rgba(15, 23, 42, 0.88) 0%, rgba(7, 11, 20, 0.92) 100%) !important;
-                backdrop-filter: blur(24px) saturate(200%) !important;
-                -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+                backdrop-filter: blur(28px) saturate(200%) !important;
+                -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
                 border-right: 1px solid rgba(255, 255, 255, 0.16) !important;
             }
             html.dark #mobile-menu .drawer-header {
@@ -1251,12 +1376,11 @@ window.showToast = function(message, type = 'info') {
         document.head.appendChild(style);
     }
 
-    mountDarkAndLiquidGlassStyles();
-    mountOpticalSVGFilters();
+    mountDarkStyles();
 })();
 
 // ==============================================================================
-// 2. GOOGLE ANALYTICS 4 (GA4) LIVE TRACKING
+// 3. GOOGLE ANALYTICS 4 (GA4) LIVE TRACKING
 // ==============================================================================
 (function() {
     if (window._ga4Initialized) return;
@@ -1274,7 +1398,7 @@ window.showToast = function(message, type = 'info') {
 })();
 
 // ==============================================================================
-// 3. RESPONSIVE NAVIGATION LOADER (Mounts Mobile Drawer Directly to document.body)
+// 4. RESPONSIVE NAVIGATION LOADER (Mounts Full-Screen Drawer to document.body)
 // ==============================================================================
 function loadNavigation(activePage, basePath = '', isBlog = false) { 
     const container = document.getElementById('navigation-container');
@@ -1386,11 +1510,10 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
         <div id="menu-overlay" style="visibility: hidden;" class="fixed inset-0 bg-slate-900/35 backdrop-blur-[2px] z-[75] opacity-0 pointer-events-none will-change-[opacity]"></div>
     `;
 
-    // Mount mobile drawer & overlay directly to document.body so they ALWAYS span 100% of the screen height
     document.body.insertAdjacentHTML('beforeend', drawerAndOverlayHTML);
 
     const headerHTML = `
-        <header class="kt-frosted-header w-full z-40 transition-all duration-300">
+        <header class="kt-frosted-header glass-pill w-full z-40 transition-all duration-300">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
                 <div class="flex items-center gap-3">
                     <button id="open-menu-btn" aria-label="Open menu" class="p-2 -ml-2 text-slate-600 hover:text-indigo-600 hover:bg-white/60 dark:hover:bg-white/10 rounded-lg transition-colors focus:outline-none lg:hidden">
@@ -1439,6 +1562,11 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
     `;
 
     container.innerHTML = headerHTML;
+
+    // Attach OpenBlast 1:1 Liquid Glass Lens to Header & Page Docks
+    if (window.KTULiquidGlass) {
+        window.KTULiquidGlass.scanAndAttachAllPills();
+    }
     
     const themeBtns = document.querySelectorAll('.theme-toggle-btn');
     
@@ -1537,7 +1665,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 }
 
 // ==============================================================================
-// 4. GLOBAL AD INJECTOR STRICTLY FOR NOTE PAGES
+// 5. GLOBAL AD INJECTOR STRICTLY FOR NOTE PAGES
 // ==============================================================================
 function injectGlobalAd() {
     if (document.getElementById('global-note-ad')) return;
@@ -1581,7 +1709,7 @@ function injectGlobalAd() {
 }
 
 // ==============================================================================
-// 5. AUTHENTIC LIQUID GLASS WHATSAPP CHANNEL PROMPT
+// 6. AUTHENTIC LIQUID GLASS WHATSAPP CHANNEL PROMPT
 // ==============================================================================
 function initWhatsAppPopup() {
     const STORAGE_KEY = 'ktu_wa_popup_cooldown_until';
@@ -1600,12 +1728,11 @@ function initWhatsAppPopup() {
         const popupHTML = `
             <div id="ktu-wa-popup" class="fixed bottom-5 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-[100] w-[calc(100%-2rem)] max-w-[430px] p-5 sm:p-6 rounded-[2rem] text-white shadow-2xl transition-all duration-500 ease-out transform translate-y-12 opacity-0 overflow-hidden will-change-transform"
                  style="
-                    background: linear-gradient(135deg, rgba(18, 24, 38, 0.72) 0%, rgba(12, 17, 30, 0.62) 100%);
-                    -webkit-backdrop-filter: blur(18px) saturate(210%);
-                    backdrop-filter: url(#kt-ios-pill-lens) blur(14px) saturate(210%);
-                    border: 1.5px solid rgba(255, 255, 255, 0.24);
-                    box-shadow: inset 0 2px 3px 0 rgba(255, 255, 255, 0.32), inset 0 -1.5px 3px 0 rgba(52, 211, 153, 0.22), 0 24px 48px -12px rgba(0, 0, 0, 0.68);
-                    backface-visibility: hidden;
+                    background: rgba(18, 24, 38, 0.86);
+                    backdrop-filter: blur(20px) saturate(180%);
+                    -webkit-backdrop-filter: blur(20px) saturate(180%);
+                    border: 1px solid rgba(255, 255, 255, 0.16);
+                    box-shadow: inset 1.5px 1.5px 0 -0.5px #fff9, inset -1.5px -1.5px 0 -0.5px #ffffff4d, 0 24px 48px -12px rgba(0, 0, 0, 0.65);
                  ">
                 <div class="relative z-10 flex flex-col gap-3.5 sm:gap-4">
                     <div class="flex items-start justify-between gap-3">
@@ -1630,7 +1757,7 @@ function initWhatsAppPopup() {
                     </p>
 
                     <div class="grid grid-cols-2 gap-3 pt-1">
-                        <button id="ktu-wa-later-btn" class="w-full py-3 px-4 rounded-full bg-white/10 hover:bg-white/15 text-slate-200 font-bold text-xs sm:text-sm transition-all border border-white/15 active:scale-95 text-center">
+                        <button id="ktu-wa-later-btn" class="w-full py-3 px-4 rounded-full bg-white/10 hover:bg-white/15 text-slate-200 font-bold text-xs sm:text-sm transition-all border border-white/10 active:scale-95 text-center">
                             Maybe Later
                         </button>
                         <a id="ktu-wa-follow-btn" href="${CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs sm:text-sm transition-all shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2 active:scale-95 text-center">
@@ -1670,11 +1797,14 @@ function initWhatsAppPopup() {
 }
 
 // ==============================================================================
-// 6. SAFE AUTO-INIT
+// 7. SAFE AUTO-INIT
 // ==============================================================================
 function runInitializers() {
     if (window.KTUFlow && typeof window.KTUFlow.ensureCapsuleMounted === 'function') {
         window.KTUFlow.ensureCapsuleMounted();
+    }
+    if (window.KTULiquidGlass && typeof window.KTULiquidGlass.scanAndAttachAllPills === 'function') {
+        window.KTULiquidGlass.scanAndAttachAllPills();
     }
     if (window.KTUFlow && typeof window.KTUFlow.initNoticeWatcher === 'function') {
         window.KTUFlow.initNoticeWatcher();
