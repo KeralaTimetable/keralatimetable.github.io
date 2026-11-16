@@ -431,7 +431,7 @@ window.showToast = function(message, type = 'info') {
 // ==============================================================================
 // 1. 120FPS TRUE iOS 26 OPTICAL LIQUID GLASS & DARK MODE ENGINE
 //    - Single-Pass GPU SVG Displacement Lens (Zero Double-Blur, Zero Scroll Repaint)
-//    - Dedicated Compositor Layers for Sticky Header & Floating Docks
+//    - Full-Screen Mobile Drawer Fix (No transform on #navigation-container!)
 // ==============================================================================
 (function initLiquidGlassAndTheme() {
     const savedTheme = localStorage.getItem('kt_theme') || 'light';
@@ -441,7 +441,6 @@ window.showToast = function(message, type = 'info') {
         document.documentElement.classList.remove('dark');
     }
 
-    // Generate lightweight 3D Squircle Bevel Normal Map (Red = X, Green = Y, 128 = flat center)
     function createSquircleLensDataURL(width, height, cornerRadius, bevelWidth) {
         try {
             const canvas = document.createElement('canvas');
@@ -513,7 +512,6 @@ window.showToast = function(message, type = 'info') {
             return;
         }
 
-        // Compact 220x56 texture keeps GPU texture-cache bandwidth minimal for 120fps scrolling
         const pillMapUrl = createSquircleLensDataURL(220, 56, 28, 16);
         if (!pillMapUrl) return;
 
@@ -522,9 +520,6 @@ window.showToast = function(message, type = 'info') {
         svgWrapper.setAttribute('aria-hidden', 'true');
         svgWrapper.style.cssText = 'position:fixed;width:0;height:0;overflow:hidden;pointer-events:none;z-index:-9999;';
 
-        // Single-Pass GPU Displacement Filter:
-        // Lets native CSS backdrop-filter handle blur() & saturate() in hardware,
-        // while SVG performs ONLY the 1-pass optical corner-bending displacement!
         svgWrapper.innerHTML = `
             <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" color-interpolation-filters="sRGB">
                 <defs>
@@ -552,13 +547,13 @@ window.showToast = function(message, type = 'info') {
             /* ==================================================================
                0. TRUE iOS 26 LIQUID GLASS ENGINE (120FPS COMPOSITED PIPELINE)
                ================================================================== */
+            /* IMPORTANT: Never put transform or will-change on #navigation-container
+               so fixed elements remain anchored to the full viewport! */
             #navigation-container {
                 position: sticky !important;
                 top: 0 !important;
                 z-index: 50 !important;
                 width: 100%;
-                transform: translateZ(0);
-                will-change: transform;
             }
 
             /* TIER 1A: Sticky Top Navigation Bar (1-Pass Optical Lens + Hardware Blur) */
@@ -595,8 +590,7 @@ window.showToast = function(message, type = 'info') {
                     0 12px 32px -6px rgba(0, 0, 0, 0.55) !important;
             }
 
-            /* TIER 1B: Floating Bottom Docks (#floating-merge-dock & #floating-points-dock)
-               Matches the exact OpenBlast bottom bar optical corner-warping at 120fps! */
+            /* TIER 1B: Floating Bottom Docks (#floating-merge-dock & #floating-points-dock) */
             #floating-merge-dock,
             #floating-points-dock {
                 background: linear-gradient(
@@ -652,25 +646,39 @@ window.showToast = function(message, type = 'info') {
                 transform: translateZ(0);
             }
 
-            /* Mobile Slide-Out Glass Drawer */
+            /* ==================== FULL-SCREEN MOBILE SLIDE-OUT GLASS DRAWER ==================== */
             #mobile-menu {
-                background: linear-gradient(165deg, rgba(255, 255, 255, 0.62) 0%, rgba(248, 250, 252, 0.48) 100%) !important;
+                position: fixed !important;
+                top: 0 !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                height: 100vh !important;
+                height: 100dvh !important;
+                max-height: 100dvh !important;
+                background: linear-gradient(165deg, rgba(255, 255, 255, 0.76) 0%, rgba(248, 250, 252, 0.64) 100%) !important;
                 backdrop-filter: blur(24px) saturate(220%) contrast(106%) !important;
                 -webkit-backdrop-filter: blur(24px) saturate(220%) contrast(106%) !important;
                 border-right: 1.5px solid rgba(255, 255, 255, 0.88) !important;
                 box-shadow:
                     inset -1.5px 0 3px 0 rgba(255, 255, 255, 0.85),
-                    24px 0 54px rgba(15, 23, 42, 0.18) !important;
+                    24px 0 54px rgba(15, 23, 42, 0.22) !important;
+            }
+            #menu-overlay {
+                position: fixed !important;
+                inset: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                height: 100dvh !important;
             }
             #mobile-menu .drawer-header {
-                background: rgba(255, 255, 255, 0.35) !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.65) !important;
+                background: rgba(255, 255, 255, 0.42) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.68) !important;
             }
             #mobile-menu .nav-section-label { color: #475569 !important; letter-spacing: 0.08em; }
             #mobile-menu a.drawer-link-inactive { color: #0f172a !important; }
             #mobile-menu a.drawer-link-inactive:hover { background: rgba(255, 255, 255, 0.55) !important; color: #4338ca !important; }
             #mobile-menu a.drawer-link-active {
-                background: linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.55)) !important;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.62)) !important;
                 color: #4338ca !important;
                 border: 1px solid rgba(255, 255, 255, 0.95) !important;
                 box-shadow:
@@ -678,8 +686,8 @@ window.showToast = function(message, type = 'info') {
                     0 6px 16px -3px rgba(79, 70, 229, 0.15) !important;
             }
             #mobile-menu .drawer-icon-box {
-                background: rgba(255, 255, 255, 0.68);
-                border: 1px solid rgba(255, 255, 255, 0.9);
+                background: rgba(255, 255, 255, 0.72);
+                border: 1px solid rgba(255, 255, 255, 0.92);
                 box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95);
                 color: #334155;
             }
@@ -862,7 +870,6 @@ window.showToast = function(message, type = 'info') {
             /* ==================================================================
                A. LIGHT MODE: TRUE iOS 26 SPECULAR LIQUID GLASS CARDS (120FPS GPU)
                ================================================================== */
-            /* 1. Primary Hero & Stage Containers (.real-glass, .glass-panel) */
             html:not(.dark) .real-glass,
             html:not(.dark) .glass-panel {
                 background: linear-gradient(
@@ -882,7 +889,6 @@ window.showToast = function(message, type = 'info') {
                     0 2px 8px 0 rgba(15, 23, 42, 0.04) !important;
             }
 
-            /* 2. Interactive Content Cards (.result-glass, .hybrid-card, .branch-card) */
             html:not(.dark) .result-glass,
             html:not(.dark) .hybrid-card,
             html:not(.dark) .branch-card {
@@ -923,7 +929,6 @@ window.showToast = function(message, type = 'info') {
                     0 18px 38px -8px rgba(79, 70, 229, 0.16) !important;
             }
 
-            /* Liquid Jelly Squish on Tap */
             .result-glass:active,
             .hybrid-card:active,
             .branch-card:active,
@@ -932,7 +937,6 @@ window.showToast = function(message, type = 'info') {
                 transition: transform 0.12s cubic-bezier(0.22, 1, 0.36, 1) !important;
             }
 
-            /* 3. Inner GlassWells (.inner-glass) */
             html:not(.dark) .inner-glass {
                 background: linear-gradient(
                     145deg,
@@ -950,7 +954,6 @@ window.showToast = function(message, type = 'info') {
             /* ==================================================================
                B. 120FPS DARK MODE ENGINE (Smoked Refractive Glass + Deep Obsidian)
                ================================================================== */
-            /* 1. Base Obsidian Canvas */
             html.dark,
             html.dark body,
             html.dark body.bg-mesh,
@@ -964,7 +967,6 @@ window.showToast = function(message, type = 'info') {
                 color: #f1f5f9 !important;
             }
 
-            /* 2. GPU & Washout Fix */
             html.dark #mouse-orb-1,
             html.dark #mouse-orb-2,
             html.dark .ambient-orb,
@@ -980,13 +982,11 @@ window.showToast = function(message, type = 'info') {
                 opacity: 0.35 !important;
             }
 
-            /* 3. Protect Gradient Text */
             html.dark .text-transparent {
                 color: transparent !important;
                 -webkit-text-fill-color: transparent !important;
             }
 
-            /* 4. Text Hierarchy */
             html.dark .text-slate-900:not(.text-transparent) { color: #ffffff !important; }
             html.dark .text-slate-800:not(.text-transparent) { color: #f1f5f9 !important; }
             html.dark .text-slate-700:not(.text-transparent) { color: #e2e8f0 !important; }
@@ -994,7 +994,6 @@ window.showToast = function(message, type = 'info') {
             html.dark .text-slate-500:not(.text-transparent) { color: #94a3b8 !important; }
             html.dark .text-slate-400:not(.text-transparent) { color: #94a3b8 !important; }
 
-            /* 5. High-FPS Smoked Aurora Liquid Cards */
             html.dark .real-glass,
             html.dark .glass-panel {
                 background: linear-gradient(
@@ -1048,7 +1047,6 @@ window.showToast = function(message, type = 'info') {
                     0 16px 32px -6px rgba(0, 0, 0, 0.72) !important;
             }
 
-            /* Timetable Card Watermark & Countdown Footer in Dark Mode */
             html.dark .timetable-card > div.pointer-events-none {
                 color: #ffffff !important;
                 opacity: 0.04 !important;
@@ -1061,7 +1059,6 @@ window.showToast = function(message, type = 'info') {
                 color: #fbbf24 !important;
             }
 
-            /* 6. Inner Glass, Inputs & Selects */
             html.dark .inner-glass {
                 background: rgba(13, 19, 35, 0.82) !important;
                 backdrop-filter: none !important;
@@ -1093,7 +1090,6 @@ window.showToast = function(message, type = 'info') {
                 color: #f8fafc !important;
             }
 
-            /* 7. Segmented Tab Switcher Tracks */
             html.dark div[class*="bg-slate-200"] {
                 background-color: rgba(8, 12, 22, 0.85) !important;
                 border-color: rgba(255, 255, 255, 0.11) !important;
@@ -1112,7 +1108,6 @@ window.showToast = function(message, type = 'info') {
                 background-color: rgba(255, 255, 255, 0.06) !important;
             }
 
-            /* 8. Standalone White / Translucent-White Buttons & Pills */
             html.dark a[class*="bg-white"],
             html.dark button[class*="bg-white"],
             html.dark .result-glass button.bg-white,
@@ -1142,7 +1137,6 @@ window.showToast = function(message, type = 'info') {
                 color: #e2e8f0 !important;
             }
 
-            /* 9. High-Contrast Pastel Badges & Icon Boxes in Dark Mode */
             html.dark [class*="bg-indigo-50"],
             html.dark [class*="bg-indigo-100"] {
                 background-color: rgba(79, 70, 229, 0.22) !important;
@@ -1185,7 +1179,6 @@ window.showToast = function(message, type = 'info') {
                 color: #fecdd3 !important;
             }
 
-            /* 10. Hero Glass Folder Illustration */
             html.dark .glass-folder {
                 background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.75) 100%) !important;
                 border-color: rgba(255, 255, 255, 0.16) !important;
@@ -1195,7 +1188,6 @@ window.showToast = function(message, type = 'info') {
                 border-color: rgba(255, 255, 255, 0.15) !important;
             }
 
-            /* 11. Hybrid Card Right Arrow Circle */
             html.dark .hybrid-card .bg-white {
                 background-color: rgba(255, 255, 255, 0.07) !important;
                 border-color: rgba(255, 255, 255, 0.12) !important;
@@ -1207,7 +1199,6 @@ window.showToast = function(message, type = 'info') {
                 color: #ffffff !important;
             }
 
-            /* 12. Footer & Modals */
             html.dark footer {
                 background-color: rgba(6, 9, 19, 0.90) !important;
                 border-top-color: rgba(255, 255, 255, 0.08) !important;
@@ -1218,9 +1209,8 @@ window.showToast = function(message, type = 'info') {
                 border: 1px solid rgba(255, 255, 255, 0.15) !important;
             }
 
-            /* 13. Dark Mode Mobile Drawer & Header Action Buttons */
             html.dark #mobile-menu {
-                background: linear-gradient(165deg, rgba(15, 23, 42, 0.84) 0%, rgba(7, 11, 20, 0.88) 100%) !important;
+                background: linear-gradient(165deg, rgba(15, 23, 42, 0.88) 0%, rgba(7, 11, 20, 0.92) 100%) !important;
                 backdrop-filter: blur(24px) saturate(200%) !important;
                 -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
                 border-right: 1px solid rgba(255, 255, 255, 0.16) !important;
@@ -1284,7 +1274,7 @@ window.showToast = function(message, type = 'info') {
 })();
 
 // ==============================================================================
-// 3. RESPONSIVE NAVIGATION LOADER (With Dark-Mode Logo Swap & Fluid Menu Cascade)
+// 3. RESPONSIVE NAVIGATION LOADER (Mounts Mobile Drawer Directly to document.body)
 // ==============================================================================
 function loadNavigation(activePage, basePath = '', isBlog = false) { 
     const container = document.getElementById('navigation-container');
@@ -1313,11 +1303,15 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
         ? 'drawer-link-active font-extrabold'
         : 'drawer-link-inactive font-bold border border-transparent';
 
-    const navHTML = `
+    // Remove any existing drawer/overlay before mounting fresh ones directly onto document.body
+    document.getElementById('mobile-menu')?.remove();
+    document.getElementById('menu-overlay')?.remove();
+
+    const drawerAndOverlayHTML = `
         <div id="mobile-menu" aria-hidden="true" style="visibility: hidden;" 
-             class="fixed inset-y-0 left-0 w-72 transform -translate-x-full z-[60] flex flex-col will-change-transform">
+             class="fixed inset-y-0 left-0 w-72 transform -translate-x-full z-[80] flex flex-col will-change-transform">
             
-            <div class="drawer-header p-5 flex justify-between items-center">
+            <div class="drawer-header p-5 flex justify-between items-center shrink-0">
                 <div class="drawer-brand-wrap flex items-center gap-2">
                     <img src="${initialLogoSrc}" alt="Kerala Timetable Logo" class="kt-brand-logo w-6 h-6 object-contain shrink-0" width="24" height="24" />
                     <span class="text-base font-extrabold text-slate-900 tracking-tight leading-none">Kerala <span class="text-indigo-600">Timetable</span></span>
@@ -1389,8 +1383,13 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             </nav>
         </div>
 
-        <div id="menu-overlay" style="visibility: hidden;" class="fixed inset-0 bg-slate-900/35 backdrop-blur-[2px] z-50 opacity-0 pointer-events-none will-change-[opacity]"></div>
+        <div id="menu-overlay" style="visibility: hidden;" class="fixed inset-0 bg-slate-900/35 backdrop-blur-[2px] z-[75] opacity-0 pointer-events-none will-change-[opacity]"></div>
+    `;
 
+    // Mount mobile drawer & overlay directly to document.body so they ALWAYS span 100% of the screen height
+    document.body.insertAdjacentHTML('beforeend', drawerAndOverlayHTML);
+
+    const headerHTML = `
         <header class="kt-frosted-header w-full z-40 transition-all duration-300">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
                 <div class="flex items-center gap-3">
@@ -1439,7 +1438,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
         </header>
     `;
 
-    container.innerHTML = navHTML;
+    container.innerHTML = headerHTML;
     
     const themeBtns = document.querySelectorAll('.theme-toggle-btn');
     
