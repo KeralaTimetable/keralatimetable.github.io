@@ -1,8 +1,7 @@
 name: KTU Automated Bots (Status, Calendars & Timetables)
 
-
 on:
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   update-ktu-data:
@@ -15,13 +14,17 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
+          cache: 'pip'
 
-      - name: Install Dependencies
+      - name: Install Dependencies & Browsers (Playwright + Camoufox)
         run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb libgtk-3-0 libdbus-glib-1-2 libxt6 libpci3 libasound2t64 || sudo apt-get install -y xvfb libgtk-3-0 libdbus-glib-1-2 libxt6 libpci3 libasound2
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 playwright PyPDF2 google-genai pydantic firebase-admin
-          python -m playwright install chromium
+          pip install requests beautifulsoup4 playwright PyPDF2 google-genai pydantic firebase-admin "camoufox[geoip]"
+          python -m playwright install --with-deps chromium
+          python -m camoufox fetch
 
       - name: Run KTU Server Ping
         run: python ping-server.py
@@ -33,7 +36,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
-        run: python timetables.py
+        run: xvfb-run -a python timetables.py
 
       - name: Run Global Sitemap Generator
         run: python generate_sitemap.py
