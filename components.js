@@ -430,10 +430,10 @@ window.showToast = function(message, type = 'info') {
 
 // ==============================================================================
 // 1. OPENBLAST EXACT LIQUID GLASS ENGINE (Gy + $y + tb ResizeObserver Port)
+//    - Fixed Android Chrome Yellow/Green Bug (Uses pure color-neutral displacement
+//      so white/blue backgrounds NEVER turn yellow!)
 //    - Exact Circular Cross-Section Profile: g = 1 - Math.sqrt(1 - h*h)
-//    - Exact 3-Channel RGB Chromatic Dispersion: [1.0, 0.93, 0.86]
 //    - Exact 1:1 Pixel-Matched userSpaceOnUse SVG Filter per Pill/Dock
-//    - Exact ::before (blur(5px) saturate(1.8) brightness(1.04)) & ::after Rim
 // ==============================================================================
 window.KTULiquidGlass = (function() {
     const SVG_NS = 'http://www.w3.org/2000/svg';
@@ -442,7 +442,6 @@ window.KTULiquidGlass = (function() {
     const observedElements = new WeakMap();
     let filterCounter = 0;
 
-    // Chromium check (Matches OpenBlast Wy() + fallback for Android Chrome where userAgentData may vary)
     function isChromiumEngine() {
         if (navigator.userAgentData?.brands?.some(b => b.brand === 'Chromium' || b.brand === 'Google Chrome' || b.brand === 'Microsoft Edge')) {
             return true;
@@ -524,7 +523,7 @@ window.KTULiquidGlass = (function() {
         return el;
     }
 
-    // OpenBlast's exact $y(width, height, radius, bevel, depth) 3-Channel RGB Chromatic Filter
+    // Color-True Optical Lens Filter (Fixes Android Chrome's yellow/green feBlend bug!)
     function acquireLiquidFilter(w, h, radius, bevel, depth) {
         const key = `${w}x${h}r${radius}b${bevel}d${depth}`;
         const existing = filterCache.get(key);
@@ -551,34 +550,15 @@ window.KTULiquidGlass = (function() {
         feImg.setAttribute('href', createNormalMapDataURL(w, h, radius, bevel));
         filterNode.append(feImg);
 
-        const channels = [
-            ['r', 1.00, '1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0'],
-            ['g', 0.93, '0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0'],
-            ['b', 0.86, '0 0 0 0 0  0 0 1 0 0  0 0 0 0 0  0 0 0 1 0']
-        ];
-
-        for (const [ch, ratio, matrix] of channels) {
-            filterNode.append(
-                createSvgNode('feDisplacementMap', {
-                    in: 'SourceGraphic',
-                    in2: 'map',
-                    scale: depth * 2 * ratio,
-                    xChannelSelector: 'R',
-                    yChannelSelector: 'G',
-                    result: `${ch}-bent`
-                }),
-                createSvgNode('feColorMatrix', {
-                    in: `${ch}-bent`,
-                    type: 'matrix',
-                    values: matrix,
-                    result: ch
-                })
-            );
-        }
-
+        // Pure optical circular meniscus displacement (100% color-accurate on Android & Desktop GPU, zero yellow tint!)
         filterNode.append(
-            createSvgNode('feBlend', { in: 'r', in2: 'g', mode: 'screen', result: 'rg' }),
-            createSvgNode('feBlend', { in: 'rg', in2: 'b', mode: 'screen' })
+            createSvgNode('feDisplacementMap', {
+                in: 'SourceGraphic',
+                in2: 'map',
+                scale: depth * 2,
+                xChannelSelector: 'R',
+                yChannelSelector: 'G'
+            })
         );
 
         ensureSvgRoot().append(filterNode);
@@ -595,7 +575,6 @@ window.KTULiquidGlass = (function() {
         }
     }
 
-    // OpenBlast's exact tb(bevel, depth) ResizeObserver attachment
     function attachLiquidPill(el, bevel = 22, depth = 22) {
         if (!el || observedElements.has(el)) return;
         el.classList.add('glass-pill');
@@ -608,7 +587,7 @@ window.KTULiquidGlass = (function() {
             const h = Math.round(el.offsetHeight);
             if (!w || !h || w > 1400 || h > 260) return;
 
-            const rawRadius = Number.parseFloat(getComputedStyle(el).borderTopLeftRadius) || 28;
+            const rawRadius = Number.parseFloat(getComputedStyle(el).borderTopLeftRadius) || 22;
             const r = Math.round(Math.min(rawRadius, w / 2, h / 2));
             const nextKey = acquireLiquidFilter(w, h, r, bevel, depth);
             if (activeKey) releaseLiquidFilter(activeKey);
@@ -627,11 +606,10 @@ window.KTULiquidGlass = (function() {
         observedElements.set(el, { ro, getKey: () => activeKey });
     }
 
-    // Automatically upgrade Kerala Timetable's Floating Docks, Search Bar, Tab Tracks & Pills
     function scanAndAttachAllPills() {
         if (!document.body) return;
 
-        // 1. Primary Floating Docks & Player-like Bars (bevel = 22, depth = 22 — exact OpenBlast mobile dock!)
+        // 1. Primary Floating Docks & Search Pill (bevel = 22, depth = 22)
         const dockSelectors = [
             '#floating-merge-dock',
             '#floating-points-dock',
@@ -642,17 +620,17 @@ window.KTULiquidGlass = (function() {
             document.querySelectorAll(sel).forEach(el => attachLiquidPill(el, 22, 22));
         });
 
-        // 2. Sticky Header Bar (bevel = 18, depth = 18)
-        document.querySelectorAll('header.kt-frosted-header').forEach(el => attachLiquidPill(el, 18, 18));
+        // 2. Sticky Top Header (Slightly rounded rectangular bar: bevel = 20, depth = 22)
+        document.querySelectorAll('header.kt-frosted-header').forEach(el => attachLiquidPill(el, 20, 22));
 
-        // 3. Segmented Tab Switchers & Pill Controls (bevel = 16, depth = 16)
+        // 3. Segmented Tab Switchers & Pill Controls (bevel = 16, depth = 18)
         const pillSelectors = [
             '#search-card > div.grid.grid-cols-2',
             '#scheme-filters',
             '#group-detail-view > div.inner-glass.sticky'
         ];
         pillSelectors.forEach(sel => {
-            document.querySelectorAll(sel).forEach(el => attachLiquidPill(el, 16, 16));
+            document.querySelectorAll(sel).forEach(el => attachLiquidPill(el, 16, 18));
         });
     }
 
@@ -682,15 +660,16 @@ window.KTULiquidGlass = (function() {
         style.innerHTML = `
             /* ==================================================================
                0. OPENBLAST EXACT .glass-pill[data-liquid] ARCHITECTURE
+                  (Crystal-clear neutral white #f8fafc99 — zero yellow tint!)
                ================================================================== */
             :root {
-                --glassMaterialBackground: #fffaf6bf;
-                --glassMaterialShadowColor: rgba(15, 23, 42, 0.12);
+                --glassMaterialBackground: rgba(248, 250, 252, 0.62);
+                --glassMaterialShadowColor: rgba(15, 23, 42, 0.10);
                 --glassMaterialInnerStroke: #fff;
                 --glassMaterialInnerStrokeAlpha: 0.5;
             }
             html.dark {
-                --glassMaterialBackground: #26262899;
+                --glassMaterialBackground: rgba(24, 30, 46, 0.68);
                 --glassMaterialShadowColor: rgba(0, 0, 0, 0.55);
                 --glassMaterialInnerStroke: #fff;
                 --glassMaterialInnerStrokeAlpha: 0.24;
@@ -706,7 +685,6 @@ window.KTULiquidGlass = (function() {
             #ktu-wa-popup.glass-pill {
                 position: fixed !important;
             }
-            header.kt-frosted-header.glass-pill,
             #group-detail-view > div.inner-glass.sticky.glass-pill {
                 position: sticky !important;
             }
@@ -724,10 +702,10 @@ window.KTULiquidGlass = (function() {
             .glass-pill::before {
                 z-index: -1;
                 background-color: var(--glassMaterialBackground);
-                -webkit-backdrop-filter: saturate(1.9) blur(24px);
-                backdrop-filter: saturate(1.9) blur(24px);
-                box-shadow: 0 14px 44px var(--glassMaterialShadowColor);
-                background-image: linear-gradient(#ffffff1a, #0000 55%);
+                -webkit-backdrop-filter: saturate(1.85) blur(22px);
+                backdrop-filter: saturate(1.85) blur(22px);
+                box-shadow: 0 12px 36px var(--glassMaterialShadowColor);
+                background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0) 55%);
             }
             .glass-pill::after {
                 z-index: 2;
@@ -745,7 +723,7 @@ window.KTULiquidGlass = (function() {
             }
 
             /* OPENBLAST EXACT LIQUID FILTER RULE:
-               Low blur(5px) + 3-Channel Chromatic SVG Displacement + 52% translucent fill */
+               Low blur(5px) + Circular Meniscus SVG Displacement + Crystal Clear Fill */
             .glass-pill[data-liquid] {
                 background: transparent !important;
                 backdrop-filter: none !important;
@@ -756,9 +734,13 @@ window.KTULiquidGlass = (function() {
                 z-index: -1;
                 -webkit-backdrop-filter: var(--liquid-filter) blur(5px) saturate(1.8) brightness(1.04) !important;
                 backdrop-filter: var(--liquid-filter) blur(5px) saturate(1.8) brightness(1.04) !important;
-                background-color: color-mix(in srgb, var(--glassMaterialBackground) 52%, transparent) !important;
-                background-image: linear-gradient(#ffffff1a, #0000 45%) !important;
-                box-shadow: 0 14px 44px var(--glassMaterialShadowColor) !important;
+                background-color: rgba(255, 255, 255, 0.36) !important;
+                background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 48%) !important;
+                box-shadow: 0 12px 36px var(--glassMaterialShadowColor) !important;
+            }
+            html.dark .glass-pill[data-liquid]::before {
+                background-color: rgba(15, 23, 42, 0.48) !important;
+                background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 48%) !important;
             }
             .glass-pill[data-liquid]::after {
                 content: "";
@@ -782,7 +764,8 @@ window.KTULiquidGlass = (function() {
             }
 
             /* ==================================================================
-               1. STICKY HEADER, FULL-SCREEN MOBILE DRAWER & COLOROS CAPSULE
+               1. SLIGHTLY ROUNDED RECTANGULAR LIQUID GLASS TOP HEADER
+                  (Floating rounded rectangle so all 4 corners refract!)
                ================================================================== */
             /* Never apply transform or will-change on #navigation-container */
             #navigation-container {
@@ -790,13 +773,26 @@ window.KTULiquidGlass = (function() {
                 top: 0 !important;
                 z-index: 50 !important;
                 width: 100%;
+                padding: 8px 10px 0 10px !important;
+                background: transparent !important;
+            }
+            @media (min-width: 640px) {
+                #navigation-container {
+                    padding: 10px 16px 0 16px !important;
+                }
             }
 
             header.kt-frosted-header {
-                border-bottom: 0.5px solid rgba(15, 23, 42, 0.08) !important;
+                max-width: 72rem !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                border-radius: 20px !important;
+                border: none !important;
             }
-            html.dark header.kt-frosted-header {
-                border-bottom: 0.5px solid rgba(255, 255, 255, 0.12) !important;
+            @media (min-width: 640px) {
+                header.kt-frosted-header {
+                    border-radius: 24px !important;
+                }
             }
 
             /* Full-Screen Mobile Drawer (Mounted on document.body) */
@@ -808,7 +804,7 @@ window.KTULiquidGlass = (function() {
                 height: 100vh !important;
                 height: 100dvh !important;
                 max-height: 100dvh !important;
-                background: color-mix(in srgb, var(--glassMaterialBackground) 78%, transparent) !important;
+                background: rgba(255, 255, 255, 0.78) !important;
                 backdrop-filter: saturate(190%) blur(32px) !important;
                 -webkit-backdrop-filter: saturate(190%) blur(32px) !important;
                 border-right: 1px solid rgba(255, 255, 255, 0.85) !important;
@@ -959,7 +955,7 @@ window.KTULiquidGlass = (function() {
                 opacity: 0;
                 pointer-events: none;
                 overflow: hidden;
-                background: rgba(18, 18, 22, 0.78) !important;
+                background: rgba(18, 18, 22, 0.85) !important;
                 backdrop-filter: blur(16px) saturate(190%) !important;
                 -webkit-backdrop-filter: blur(16px) saturate(190%) !important;
                 border: 1px solid rgba(255, 255, 255, 0.18) !important;
@@ -1021,10 +1017,10 @@ window.KTULiquidGlass = (function() {
                ================================================================== */
             html:not(.dark) .real-glass,
             html:not(.dark) .glass-panel {
-                background-color: color-mix(in srgb, var(--glassMaterialBackground) 68%, transparent) !important;
-                background-image: linear-gradient(#ffffff24, #0000 50%) !important;
-                -webkit-backdrop-filter: saturate(190%) blur(28px) !important;
-                backdrop-filter: saturate(190%) blur(28px) !important;
+                background-color: rgba(255, 255, 255, 0.56) !important;
+                background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 50%) !important;
+                -webkit-backdrop-filter: saturate(190%) blur(26px) !important;
+                backdrop-filter: saturate(190%) blur(26px) !important;
                 border: none !important;
                 box-shadow:
                     inset 1.5px 1.5px 0 -0.5px #fffffff2,
@@ -1037,10 +1033,10 @@ window.KTULiquidGlass = (function() {
             html:not(.dark) .result-glass,
             html:not(.dark) .hybrid-card,
             html:not(.dark) .branch-card {
-                background-color: color-mix(in srgb, var(--glassMaterialBackground) 74%, transparent) !important;
-                background-image: linear-gradient(#ffffff29, #0000 55%) !important;
-                -webkit-backdrop-filter: saturate(190%) blur(20px) !important;
-                backdrop-filter: saturate(190%) blur(20px) !important;
+                background-color: rgba(255, 255, 255, 0.64) !important;
+                background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 55%) !important;
+                -webkit-backdrop-filter: saturate(190%) blur(18px) !important;
+                backdrop-filter: saturate(190%) blur(18px) !important;
                 border: none !important;
                 box-shadow:
                     inset 1.5px 1.5px 0 -0.5px #fffffff2,
@@ -1077,7 +1073,7 @@ window.KTULiquidGlass = (function() {
             }
 
             html:not(.dark) .inner-glass {
-                background-color: color-mix(in srgb, var(--glassMaterialBackground) 62%, transparent) !important;
+                background-color: rgba(255, 255, 255, 0.52) !important;
                 border: none !important;
                 box-shadow:
                     inset 1.5px 1.5px 0 -0.5px #fffffff2,
@@ -1514,7 +1510,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 
     const headerHTML = `
         <header class="kt-frosted-header glass-pill w-full z-40 transition-all duration-300">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
                 <div class="flex items-center gap-3">
                     <button id="open-menu-btn" aria-label="Open menu" class="p-2 -ml-2 text-slate-600 hover:text-indigo-600 hover:bg-white/60 dark:hover:bg-white/10 rounded-lg transition-colors focus:outline-none lg:hidden">
                         <i class="fas fa-bars text-xl"></i>
