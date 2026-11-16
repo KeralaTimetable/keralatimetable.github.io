@@ -430,8 +430,6 @@ window.showToast = function(message, type = 'info') {
 
 // ==============================================================================
 // 1. OPENBLAST EXACT LIQUID GLASS ENGINE (Gy + $y + tb ResizeObserver Port)
-//    - Fixed Android Chrome Yellow/Green Bug (Uses pure color-neutral displacement
-//      so white/blue backgrounds NEVER turn yellow!)
 //    - Exact Circular Cross-Section Profile: g = 1 - Math.sqrt(1 - h*h)
 //    - Exact 1:1 Pixel-Matched userSpaceOnUse SVG Filter per Pill/Dock
 // ==============================================================================
@@ -523,7 +521,6 @@ window.KTULiquidGlass = (function() {
         return el;
     }
 
-    // Color-True Optical Lens Filter (Fixes Android Chrome's yellow/green feBlend bug!)
     function acquireLiquidFilter(w, h, radius, bevel, depth) {
         const key = `${w}x${h}r${radius}b${bevel}d${depth}`;
         const existing = filterCache.get(key);
@@ -550,7 +547,6 @@ window.KTULiquidGlass = (function() {
         feImg.setAttribute('href', createNormalMapDataURL(w, h, radius, bevel));
         filterNode.append(feImg);
 
-        // Pure optical circular meniscus displacement (100% color-accurate on Android & Desktop GPU, zero yellow tint!)
         filterNode.append(
             createSvgNode('feDisplacementMap', {
                 in: 'SourceGraphic',
@@ -587,7 +583,7 @@ window.KTULiquidGlass = (function() {
             const h = Math.round(el.offsetHeight);
             if (!w || !h || w > 1400 || h > 260) return;
 
-            const rawRadius = Number.parseFloat(getComputedStyle(el).borderTopLeftRadius) || 22;
+            const rawRadius = Number.parseFloat(getComputedStyle(el).borderTopLeftRadius) || 20;
             const r = Math.round(Math.min(rawRadius, w / 2, h / 2));
             const nextKey = acquireLiquidFilter(w, h, r, bevel, depth);
             if (activeKey) releaseLiquidFilter(activeKey);
@@ -620,8 +616,8 @@ window.KTULiquidGlass = (function() {
             document.querySelectorAll(sel).forEach(el => attachLiquidPill(el, 22, 22));
         });
 
-        // 2. Sticky Top Header (Slightly rounded rectangular bar: bevel = 20, depth = 22)
-        document.querySelectorAll('header.kt-frosted-header').forEach(el => attachLiquidPill(el, 20, 22));
+        // 2. Sticky Top Header (Slightly rounded rectangular bar: bevel = 18, depth = 20)
+        document.querySelectorAll('header.kt-frosted-header').forEach(el => attachLiquidPill(el, 18, 20));
 
         // 3. Segmented Tab Switchers & Pill Controls (bevel = 16, depth = 18)
         const pillSelectors = [
@@ -660,7 +656,6 @@ window.KTULiquidGlass = (function() {
         style.innerHTML = `
             /* ==================================================================
                0. OPENBLAST EXACT .glass-pill[data-liquid] ARCHITECTURE
-                  (Crystal-clear neutral white #f8fafc99 — zero yellow tint!)
                ================================================================== */
             :root {
                 --glassMaterialBackground: rgba(248, 250, 252, 0.62);
@@ -764,8 +759,7 @@ window.KTULiquidGlass = (function() {
             }
 
             /* ==================================================================
-               1. SLIGHTLY ROUNDED RECTANGULAR LIQUID GLASS TOP HEADER
-                  (Floating rounded rectangle so all 4 corners refract!)
+               1. SLEEK SINGLE-LINE ROUNDED RECTANGULAR LIQUID GLASS TOP HEADER
                ================================================================== */
             /* Never apply transform or will-change on #navigation-container */
             #navigation-container {
@@ -773,12 +767,12 @@ window.KTULiquidGlass = (function() {
                 top: 0 !important;
                 z-index: 50 !important;
                 width: 100%;
-                padding: 8px 10px 0 10px !important;
+                padding: 6px 8px 0 8px !important;
                 background: transparent !important;
             }
             @media (min-width: 640px) {
                 #navigation-container {
-                    padding: 10px 16px 0 16px !important;
+                    padding: 8px 16px 0 16px !important;
                 }
             }
 
@@ -786,12 +780,12 @@ window.KTULiquidGlass = (function() {
                 max-width: 72rem !important;
                 margin-left: auto !important;
                 margin-right: auto !important;
-                border-radius: 20px !important;
+                border-radius: 18px !important;
                 border: none !important;
             }
             @media (min-width: 640px) {
                 header.kt-frosted-header {
-                    border-radius: 24px !important;
+                    border-radius: 22px !important;
                 }
             }
 
@@ -1434,7 +1428,7 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
             <div class="drawer-header p-5 flex justify-between items-center shrink-0">
                 <div class="drawer-brand-wrap flex items-center gap-2">
                     <img src="${initialLogoSrc}" alt="Kerala Timetable Logo" class="kt-brand-logo w-6 h-6 object-contain shrink-0" width="24" height="24" />
-                    <span class="text-base font-extrabold text-slate-900 tracking-tight leading-none">Kerala <span class="text-indigo-600">Timetable</span></span>
+                    <span class="text-base font-extrabold text-slate-900 tracking-tight leading-none whitespace-nowrap">Kerala <span class="text-indigo-600">Timetable</span></span>
                 </div>
                 <button id="close-menu-btn" aria-label="Close menu" class="w-8 h-8 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-rose-500 transition-all rounded-full bg-white/70 dark:bg-white/10 shadow-sm active:scale-95 focus:outline-none">
                     <i class="fas fa-times text-base"></i>
@@ -1510,18 +1504,18 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
 
     const headerHTML = `
         <header class="kt-frosted-header glass-pill w-full z-40 transition-all duration-300">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <button id="open-menu-btn" aria-label="Open menu" class="p-2 -ml-2 text-slate-600 hover:text-indigo-600 hover:bg-white/60 dark:hover:bg-white/10 rounded-lg transition-colors focus:outline-none lg:hidden">
-                        <i class="fas fa-bars text-xl"></i>
+            <div class="max-w-6xl mx-auto px-3.5 sm:px-6 py-2.5 sm:py-3.5 flex justify-between items-center gap-2">
+                <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <button id="open-menu-btn" aria-label="Open menu" class="p-1.5 -ml-1 text-slate-600 hover:text-indigo-600 hover:bg-white/60 dark:hover:bg-white/10 rounded-lg transition-colors focus:outline-none lg:hidden shrink-0">
+                        <i class="fas fa-bars text-lg sm:text-xl"></i>
                     </button>
-                    <a href="/index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                    <a href="/index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity min-w-0">
                         <img src="${initialLogoSrc}" alt="Kerala Timetable Logo" class="kt-brand-logo w-6 h-6 sm:w-7 sm:h-7 object-contain shrink-0" width="28" height="28" />
-                        <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-none">Kerala <span class="text-indigo-600">Timetable</span>${logoExtension}</h1>
+                        <h1 class="text-[18px] sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-none whitespace-nowrap truncate">Kerala <span class="text-indigo-600">Timetable</span>${logoExtension}</h1>
                     </a>
                 </div>
 
-                <div class="hidden lg:flex gap-2 items-center">
+                <div class="hidden lg:flex gap-2 items-center shrink-0">
                     <a href="/notes.html" class="text-sm px-4 py-2 rounded-full flex items-center gap-2 transition-all active:scale-95 ${activePage === 'notes' ? 'font-bold text-indigo-700 bg-indigo-50/85 border border-indigo-100 shadow-sm' : 'font-bold text-slate-600 hover:text-indigo-600 hover:bg-white/60 dark:hover:bg-white/10'}">
                         <i class="fas fa-book-open text-[10px]"></i> Study Notes
                     </a>
@@ -1545,12 +1539,12 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
                     </button>
                 </div>
                 
-                <div class="lg:hidden flex items-center gap-2">
-                    <button class="theme-toggle-btn w-10 h-10 flex items-center justify-center bg-slate-100/85 text-slate-600 rounded-full border border-slate-200 shadow-sm transition-all active:scale-95 focus:outline-none" aria-label="Toggle Theme">
-                        <i class="fas fa-moon text-[14px]"></i>
+                <div class="lg:hidden flex items-center gap-1.5 shrink-0">
+                    <button class="theme-toggle-btn w-9 h-9 flex items-center justify-center bg-slate-100/85 text-slate-600 rounded-full border border-slate-200 shadow-sm transition-all active:scale-95 focus:outline-none" aria-label="Toggle Theme">
+                        <i class="fas fa-moon text-[13px]"></i>
                     </button>
-                    <a href="/updates.html" aria-label="Notifications" class="w-10 h-10 flex items-center justify-center bg-slate-100/85 text-indigo-600 rounded-full border border-slate-200 shadow-sm transition-all active:scale-95">
-                       <i class="fas fa-bell text-[14px]"></i>
+                    <a href="/updates.html" aria-label="Notifications" class="w-9 h-9 flex items-center justify-center bg-slate-100/85 text-indigo-600 rounded-full border border-slate-200 shadow-sm transition-all active:scale-95">
+                       <i class="fas fa-bell text-[13px]"></i>
                     </a>
                 </div>
             </div>
@@ -1570,8 +1564,8 @@ function loadNavigation(activePage, basePath = '', isBlog = false) {
         const isDark = document.documentElement.classList.contains('dark');
         themeBtns.forEach(btn => {
             btn.innerHTML = isDark 
-                ? '<i class="fas fa-sun text-[14px] text-amber-400"></i>' 
-                : '<i class="fas fa-moon text-[14px] text-slate-600"></i>';
+                ? '<i class="fas fa-sun text-[13px] text-amber-400"></i>' 
+                : '<i class="fas fa-moon text-[13px] text-slate-600"></i>';
         });
 
         const targetLogo = isDark ? DARK_LOGO_SRC : LIGHT_LOGO_SRC;
