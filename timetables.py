@@ -1,9 +1,11 @@
 import os
 import json
 import re
+import ssl
 import base64
 import time
 import requests
+from requests.adapters import HTTPAdapter
 import urllib3
 import PyPDF2
 from pydantic import BaseModel
@@ -24,6 +26,36 @@ from firebase_admin import credentials, messaging, db
 
 # Disable SSL warnings when bypassing KTU's misconfigured SSL certificate
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
+# -------------------------------------------------------------------
+# CUSTOM TLS ADAPTER FOR KTU (Fixes "peer closed connection" resets)
+# -------------------------------------------------------------------
+class KTUTLSAdapter(HTTPAdapter):
+    """Configures OpenSSL SECLEVEL=1 and legacy renegotiation so KTU's server doesn't drop connections."""
+    def init_poolmanager(self, *args, **kwargs):
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        try:
+            ctx.set_ciphers("DEFAULT:@SECLEVEL=1")
+        except Exception:
+            pass
+        if hasattr(ssl, "OP_LEGACY_SERVER_CONNECT"):
+            ctx.options |= ssl.OP_LEGACY_SERVER_CONNECT
+        kwargs["ssl_context"] = ctx
+        return super().init_poolmanager(*args, **kwargs)
+
+
+def get_ktu_http_session() -> requests.Session:
+    session = requests.Session()
+    adapter = KTUTLSAdapter()
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+    return session
+
+
+KTU_SESSION = get_ktu_http_session()
 
 # -------------------------------------------------------------------
 # FIREBASE SETUP
@@ -118,16 +150,7 @@ class TimetableData(BaseModel):
 # KTU TITLE CLEANER & SEO SLUG GENERATOR
 # -------------------------------------------------------------------
 def clean_ktu_raw_title(raw_title: str) -> dict:
-    """
-    Cleans messy KTU notification titles into the exact S3 standard format:
-    Examples:
-    - "Detailed Time Table of BBA Honours S5 (R) Exam November 2026 (2024 Scheme)- Notification"
-      -> "BBA Honours S5 (R) Exam November 2026 (2024 Scheme)"
-    - "Detailed Time Table of MBA S3 (R, S) (2020 Scheme) November 2026 Examination - Notification"
-      -> "MBA S3 (R, S) Exam November 2026 (2020 Scheme)"
-    - "B.Tech S3 (R, S) Examinations, November 2026 (2024 Scheme) /Working Professionals (R, S) November 2026 - Notification"
-      -> "B.Tech S3 (R, S) Exam November 2026 (2024 Scheme)"
-    """
+    """Cleans messy KTU notification titles into the exact S3 standard format."""
     t = raw_title.strip()
     has_wp = bool(re.search(r'working\s+professionals|\(wp\)', t, flags=re.I))
 
@@ -209,11 +232,7 @@ def clean_ktu_raw_title(raw_title: str) -> dict:
 
 
 def create_seo_slug(title: str) -> str:
-    """
-    Converts a clean title into the exact S3 style SEO slug:
-    "B.Tech S3 (R, S) Exam November 2026 (2024 Scheme)"
-    -> "btech-s3-regular-supply-november-2026-2024-scheme"
-    """
+    """Converts a clean title into the exact S3 style SEO slug."""
     s = title.lower()
     s = re.sub(r'^ktu\s+', '', s)
     s = s.replace('b.tech', 'btech').replace('m.tech', 'mtech').replace('b.arch', 'barch').replace('b.des', 'bdes')
@@ -236,10 +255,7 @@ def sanitize_filename(name):
 
 
 def build_unique_pdf_filename(title: str, raw_att_name: str, encrypt_id: str) -> str:
-    """
-    Prevents collision when KTU names every attachment 'Notification'.
-    Builds a clean, unique filename like 'bca-honours-s5-regular-november-2026-2024-scheme.pdf'.
-    """
+    """Builds a clean, unique filename so 'Notification.pdf' attachments never collide."""
     cleaned_title = clean_ktu_raw_title(title)["clean_title"]
     slug_base = create_seo_slug(cleaned_title)
     if not raw_att_name or raw_att_name.strip().lower() in ("notification", "notification.pdf", "timetable", "time table", "attachment"):
@@ -806,20 +822,11 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
     1. id: Create a short, unique snake_case ID (e.g., "btech_s3_nov2026_2024").
     2. title: Format the title in the EXACT S3 standard pattern:
        "[Course] [Semester] ([R, S] or [R]) Exam [Month] [Year] ([YYYY] Scheme)"
-       Examples of EXACT expected output for `title`:
-       - "B.Tech S3 (R, S) Exam November 2026 (2024 Scheme)"
-       - "BBA Honours S3 (R, S) Exam November 2026 (2024 Scheme)"
-       - "BBA Honours S5 (R) Exam November 2026 (2024 Scheme)"
-       - "MBA S3 (R, S) Exam November 2026 (2020 Scheme)"
-       - "BCA Honours S5 (R) Exam November 2026 (2024 Scheme)"
-       - "B.Tech S5 (R) Exam November 2026 (2024 Scheme)"
-       - "B.Tech S7 (R, S) Exam November 2026 (2019 Scheme)"
-       - "MCA Two-Year S3 (R, S) Exam November 2026 (2020 Scheme)"
        Do NOT include "Detailed Time Table of", "Notification", "KTU", or "/Working Professionals" inside `title`.
     3. courseBadge: Short course + semester + (R, S)/(R) badge (e.g., "B.Tech S3 (R, S)", "BBA Honours S5 (R)", "MBA S3 (R, S)").
     4. seoTitleTag: Format like "KTU B.Tech S3 (R,S) Exam Timetable Download November 2026 (2024 Scheme)".
     5. slug: URL-friendly slug expanding (R, S) to regular-supply and (R) to regular, without the word "exam" (e.g., "btech-s3-regular-supply-november-2026-2024-scheme").
-    6. subtitleInfo: Extract the KTU Order/Notification number from the PDF text if present and whether Working Professionals are included (e.g., "Order No: KTU/SOEX-IV/2122/2024 • Including Working Professionals (R, S)" or "Order No: KTU/SOEX-II/1450/2025 • Official University Schedule").
+    6. subtitleInfo: Extract the KTU Order/Notification number from the PDF text if present and whether Working Professionals are included.
     7. startDate: Scan the ENTIRE document and find the VERY FIRST exam date and time. Format: YYYY-MM-DDTHH:MM:SS
     8. endDate: Scan the ENTIRE document and find the VERY LAST/LATEST exam date and time. Format: YYYY-MM-DDTHH:MM:SS
     9. startDateFormatted: Human-readable first exam date with day of week and Slot if mentioned (e.g., "Tuesday, November 24, 2026 (Slot A)").
@@ -861,7 +868,7 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
 # CONFIG UPDATER FUNCTION
 # -------------------------------------------------------------------
 def update_timetable_config(ai_data_dict, config_path="timetable-config.js"):
-    """Safely appends the clean 10-key JSON object into window.timetablesData."""
+    """Safely appends the clean 10-key JSON object into window.timetablesData without duplicating IDs."""
     if not ai_data_dict:
         return
 
@@ -877,6 +884,10 @@ def update_timetable_config(ai_data_dict, config_path="timetable-config.js"):
                 content = f.read()
         else:
             content = "window.timetablesData = [\n];"
+
+        if f'"{clean_dashboard_dict.get("id")}"' in content or f'"{clean_dashboard_dict.get("pdfLink")}"' in content:
+            print(f"ℹ️ Entry '{clean_dashboard_dict.get('id')}' already in {config_path}, skipping duplicate config entry.")
+            return
 
         clean_json = json.dumps(clean_dashboard_dict, indent=4)
 
@@ -899,7 +910,7 @@ def update_timetable_config(ai_data_dict, config_path="timetable-config.js"):
 
 
 # -------------------------------------------------------------------
-# KTU PORTAL API & COORDINATE-BASED TURNSTILE SOLVER
+# KTU PORTAL API & NON-SPAMMING TURNSTILE SOLVER
 # -------------------------------------------------------------------
 KTU_TIMETABLE_API_URL = "https://api.ktu.edu.in/ktu-web-portal-api/anon/timetable"
 KTU_ANNOUNCEMENTS_API_URL = "https://api.ktu.edu.in/ktu-web-portal-api/anon/announcemnts"
@@ -915,71 +926,26 @@ KTU_MIRROR_API_BASE = os.environ.get(
 KTU_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
     "Accept": "application/json, text/plain, */*",
-    "Accept-Language": "en-US,en;q=0.5",
+    "Accept-Language": "en-US,en;q=0.9",
     "Content-Type": "application/json",
-    "Sec-GPC": "1",
-    "Sec-Fetch-Dest": "empty",
-    "Sec-Fetch-Mode": "cors",
-    "Sec-Fetch-Site": "same-site",
     "Origin": "https://ktu.edu.in",
     "Referer": "https://ktu.edu.in/"
 }
 
 
-def handle_turnstile_challenge(page) -> bool:
-    """
-    Clicks Cloudflare Turnstile verification checkbox using bounding-box coordinates
-    (bypasses Closed Shadow DOM restrictions on challenges.cloudflare.com iframes).
-    """
-    clicked = False
-    try:
-        # 1. Check all iframes matching Cloudflare / Turnstile
-        iframe_locators = page.locator("iframe[src*='cloudflare'], iframe[src*='turnstile'], iframe[title*='Cloudflare'], iframe[title*='Widget']")
-        count = iframe_locators.count()
-        for i in range(count):
-            box = iframe_locators.nth(i).bounding_box()
-            if box and box["width"] > 30 and box["height"] > 20:
-                click_x = box["x"] + 28
-                click_y = box["y"] + (box["height"] / 2)
-                page.mouse.move(click_x - 10, click_y - 5)
-                page.wait_for_timeout(150)
-                page.mouse.click(click_x, click_y)
-                clicked = True
-                page.wait_for_timeout(2500)
-                break
-
-        # 2. Also check page frames directly in case iframe src is dynamically injected
-        if not clicked:
-            for frame in page.frames:
-                frame_url = (frame.url or "").lower()
-                if "challenges.cloudflare.com" in frame_url or "turnstile" in frame_url:
-                    try:
-                        frame_el = frame.frame_element()
-                        box = frame_el.bounding_box()
-                        if box:
-                            click_x = box["x"] + 28
-                            click_y = box["y"] + (box["height"] / 2)
-                            page.mouse.click(click_x, click_y)
-                            clicked = True
-                            page.wait_for_timeout(2500)
-                            break
-                    except Exception:
-                        pass
-    except Exception:
-        pass
-    return clicked
-
-
 def get_page_turnstile_token(page) -> str:
-    """Reads any active Cloudflare Turnstile token from the page DOM or window.turnstile."""
+    """Reads any active Cloudflare Turnstile token from the page DOM, inputs, or window.turnstile."""
     try:
         token = page.evaluate(
             """() => {
                 try {
-                    const el = document.querySelector('input[name="cf-turnstile-response"]');
-                    if (el && el.value) return el.value;
+                    const inputs = document.querySelectorAll('input[name="cf-turnstile-response"], input[name*="turnstile"], textarea[name="cf-turnstile-response"]');
+                    for (const el of inputs) {
+                        if (el && el.value && el.value.length > 20) return el.value;
+                    }
                     if (window.turnstile && typeof window.turnstile.getResponse === 'function') {
-                        return window.turnstile.getResponse() || "";
+                        const r = window.turnstile.getResponse();
+                        if (r && r.length > 20) return r;
                     }
                 } catch (e) {}
                 return "";
@@ -988,6 +954,87 @@ def get_page_turnstile_token(page) -> str:
         return token or ""
     except Exception:
         return ""
+
+
+def click_turnstile_checkbox_once(page) -> bool:
+    """
+    Finds the Cloudflare Turnstile iframe and clicks the checkbox coordinates ONCE.
+    Does not spam-click so the verification spinner can finish without resetting.
+    """
+    try:
+        iframe_locators = page.locator(
+            "iframe[src*='cloudflare'], iframe[src*='turnstile'], iframe[title*='Cloudflare'], iframe[title*='Widget']"
+        )
+        count = iframe_locators.count()
+        for i in range(count):
+            el = iframe_locators.nth(i)
+            if not el.is_visible():
+                continue
+            box = el.bounding_box()
+            if box and box["width"] > 30 and box["height"] > 20:
+                click_x = box["x"] + 28
+                click_y = box["y"] + (box["height"] / 2)
+                page.mouse.move(click_x - 15, click_y - 8, steps=6)
+                page.wait_for_timeout(180)
+                page.mouse.click(click_x, click_y)
+                return True
+
+        for frame in page.frames:
+            frame_url = (frame.url or "").lower()
+            if "challenges.cloudflare.com" in frame_url or "turnstile" in frame_url:
+                try:
+                    frame_el = frame.frame_element()
+                    box = frame_el.bounding_box()
+                    if box and box["width"] > 30 and box["height"] > 20:
+                        click_x = box["x"] + 28
+                        click_y = box["y"] + (box["height"] / 2)
+                        page.mouse.move(click_x - 12, click_y - 6, steps=5)
+                        page.wait_for_timeout(180)
+                        page.mouse.click(click_x, click_y)
+                        return True
+                except Exception:
+                    pass
+    except Exception:
+        pass
+    return False
+
+
+def wait_for_turnstile_or_data(page, captured_state: dict, timetable_metadata: list, max_wait_sec: int = 28) -> str:
+    """
+    Waits for Turnstile to auto-solve or clicks it at most ONCE every 14 seconds.
+    Returns the captured Turnstile token if found.
+    """
+    last_click_time = 0.0
+    click_attempts = 0
+    start_ts = time.time()
+
+    while (time.time() - start_ts) < max_wait_sec:
+        page.wait_for_timeout(1500)
+
+        # 1. Check if token already captured via network or DOM
+        tok = get_page_turnstile_token(page) or captured_state.get("x_token") or ""
+        if tok:
+            captured_state["x_token"] = tok
+            return tok
+
+        # 2. Check if data or download buttons already rendered
+        if timetable_metadata:
+            return captured_state.get("x_token") or ""
+        try:
+            if page.locator("button[value], a.btn-outline-primary, button.btn-outline-primary").count() > 0:
+                return captured_state.get("x_token") or ""
+        except Exception:
+            pass
+
+        # 3. Click Turnstile ONLY if at least 14s have elapsed since last click (max 2 clicks total)
+        now = time.time()
+        if click_attempts < 2 and (now - last_click_time) >= 14.0 and (now - start_ts) >= 4.0:
+            if click_turnstile_checkbox_once(page):
+                click_attempts += 1
+                last_click_time = now
+                print(f"🛡️ [Click {click_attempts}/2] Clicked Cloudflare Turnstile checkbox — waiting up to 14s for verification...")
+
+    return get_page_turnstile_token(page) or captured_state.get("x_token") or ""
 
 
 def parse_ktu_timetable_items(content_list, filter_timetables_only=False):
@@ -1066,12 +1113,78 @@ def parse_ktu_timetable_items(content_list, filter_timetables_only=False):
     return parsed
 
 
+def fetch_ktu_list_via_browser(page, x_token: str) -> list:
+    """
+    Directly executes fetch() inside the browser context to query KTU's timetable & announcements APIs
+    in case Angular did not auto-fire the request after Turnstile completed.
+    """
+    endpoints = [
+        (KTU_TIMETABLE_API_URL, False),
+        (KTU_ANNOUNCEMENTS_API_URL, True),
+    ]
+    collected = []
+
+    for api_url, is_ann in endpoints:
+        try:
+            payload_body = {"size": 20, "page": 0, "searchText": ""}
+            if x_token:
+                payload_body["token"] = x_token
+
+            res = page.evaluate(
+                """async ({ url, payload, xToken }) => {
+                    try {
+                        const headers = {
+                            "Accept": "application/json, text/plain, */*",
+                            "Content-Type": "application/json"
+                        };
+                        if (xToken) {
+                            headers["x-token"] = xToken;
+                            headers["X-Token"] = xToken;
+                        }
+                        const r = await fetch(url, {
+                            method: "POST",
+                            headers,
+                            body: JSON.stringify(payload)
+                        });
+                        if (!r.ok) return { ok: false, status: r.status };
+                        const text = await r.text();
+                        return { ok: true, text };
+                    } catch (e) {
+                        return { ok: false, error: String(e) };
+                    }
+                }""",
+                {"url": api_url, "payload": payload_body, "xToken": x_token or ""}
+            )
+            if isinstance(res, dict) and res.get("ok") and res.get("text"):
+                data = json.loads(res["text"])
+                content_list = (
+                    data.get("content")
+                    if isinstance(data, dict) and isinstance(data.get("content"), list)
+                    else (data.get("data") if isinstance(data, dict) and isinstance(data.get("data"), list) else (data if isinstance(data, list) else None))
+                )
+                if content_list:
+                    items = parse_ktu_timetable_items(content_list, filter_timetables_only=is_ann)
+                    if items:
+                        print(f"✅ In-Browser API Fetch succeeded ({api_url}): {len(items)} timetable(s) found.")
+                        collected.extend(items)
+                        break
+        except Exception:
+            pass
+
+    return collected
+
+
 def save_raw_or_base64_pdf(raw_bytes_or_text, save_path) -> bool:
     """Decodes raw PDF bytes or JSON/base64 attachment responses from KTU's getAttachment endpoint."""
     if isinstance(raw_bytes_or_text, bytes):
         if raw_bytes_or_text.startswith(b"%PDF"):
             with open(save_path, "wb") as f:
                 f.write(raw_bytes_or_text)
+            return True
+        idx = raw_bytes_or_text.find(b"%PDF-")
+        if 0 < idx < 128:
+            with open(save_path, "wb") as f:
+                f.write(raw_bytes_or_text[idx:])
             return True
         try:
             raw_bytes_or_text = raw_bytes_or_text.decode("utf-8", errors="ignore")
@@ -1091,25 +1204,27 @@ def save_raw_or_base64_pdf(raw_bytes_or_text, save_path) -> bool:
                     or data.get("attachment")
                     or data.get("content")
                     or data.get("fileData")
+                    or data.get("byteData")
+                    or data.get("response")
                 )
-                if b64_str:
+                if isinstance(b64_str, str) and b64_str:
                     pdf_bytes = base64.b64decode(b64_str)
-                    if pdf_bytes.startswith(b"%PDF"):
+                    if b"%PDF" in pdf_bytes[:64]:
                         with open(save_path, "wb") as f:
-                            f.write(pdf_bytes)
+                            f.write(pdf_bytes[pdf_bytes.find(b"%PDF"):])
                         return True
             elif isinstance(data, str):
                 pdf_bytes = base64.b64decode(data)
-                if pdf_bytes.startswith(b"%PDF"):
+                if b"%PDF" in pdf_bytes[:64]:
                     with open(save_path, "wb") as f:
-                        f.write(pdf_bytes)
+                        f.write(pdf_bytes[pdf_bytes.find(b"%PDF"):])
                     return True
         except Exception:
             try:
                 pdf_bytes = base64.b64decode(text.strip('"'))
-                if pdf_bytes.startswith(b"%PDF"):
+                if b"%PDF" in pdf_bytes[:64]:
                     with open(save_path, "wb") as f:
-                        f.write(pdf_bytes)
+                        f.write(pdf_bytes[pdf_bytes.find(b"%PDF"):])
                     return True
             except Exception:
                 pass
@@ -1118,113 +1233,135 @@ def save_raw_or_base64_pdf(raw_bytes_or_text, save_path) -> bool:
 
 def download_pdf_via_browser_fetch(page, encrypt_id: str, x_token: str, save_path: str) -> bool:
     """
-    Executes fetch() inside the live Camoufox/Playwright page context on ktu.edu.in.
-    Tries both form-urlencoded and JSON bodies across KTU's getAttachment endpoints.
+    Executes fetch() inside the live Camoufox/Playwright browser context on ktu.edu.in.
+    Tries JSON body, token-enriched JSON body, and form-urlencoded body.
     """
-    handle_turnstile_challenge(page)
     fresh_token = get_page_turnstile_token(page) or x_token or ""
 
+    payload_variants = [
+        {"contentType": "application/json", "body": json.dumps({"encryptId": encrypt_id})},
+        {"contentType": "application/json", "body": json.dumps({"encryptId": encrypt_id, "token": fresh_token})},
+        {"contentType": "application/x-www-form-urlencoded", "body": f"encryptId={requests.utils.quote(encrypt_id, safe='')}"},
+    ]
+
     for api_url in KTU_ATTACHMENT_API_URLS:
-        try:
-            result = page.evaluate(
-                """async ({ url, encryptId, xToken }) => {
-                    try {
-                        const headers = {
-                            "Accept": "application/json, text/plain, */*",
-                            "Content-Type": "application/json"
-                        };
-                        if (xToken) {
-                            headers["x-token"] = xToken;
-                            headers["X-Token"] = xToken;
+        for variant in payload_variants:
+            try:
+                result = page.evaluate(
+                    """async ({ url, contentType, bodyStr, xToken }) => {
+                        try {
+                            const headers = {
+                                "Accept": "application/json, text/plain, application/pdf, */*",
+                                "Content-Type": contentType
+                            };
+                            if (xToken) {
+                                headers["x-token"] = xToken;
+                                headers["X-Token"] = xToken;
+                            }
+                            const res = await fetch(url, {
+                                method: "POST",
+                                headers,
+                                body: bodyStr,
+                                credentials: "include"
+                            });
+                            if (!res.ok) {
+                                return { ok: false, status: res.status };
+                            }
+                            const buf = await res.arrayBuffer();
+                            const bytes = new Uint8Array(buf);
+                            if (bytes.length < 200) {
+                                return { ok: false, status: res.status, len: bytes.length };
+                            }
+                            let binary = "";
+                            const chunkSize = 0x8000;
+                            for (let i = 0; i < bytes.length; i += chunkSize) {
+                                binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+                            }
+                            return { ok: true, status: res.status, b64: btoa(binary) };
+                        } catch (e) {
+                            return { ok: false, error: String(e) };
                         }
-                        const res = await fetch(url, {
-                            method: "POST",
-                            headers,
-                            body: JSON.stringify({ encryptId })
-                        });
-                        if (!res.ok) {
-                            return { ok: false, status: res.status };
-                        }
-                        const buf = await res.arrayBuffer();
-                        const bytes = new Uint8Array(buf);
-                        let binary = "";
-                        const chunkSize = 0x8000;
-                        for (let i = 0; i < bytes.length; i += chunkSize) {
-                            binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
-                        }
-                        return { ok: true, status: res.status, b64: btoa(binary) };
-                    } catch (e) {
-                        return { ok: false, error: String(e) };
+                    }""",
+                    {
+                        "url": api_url,
+                        "contentType": variant["contentType"],
+                        "bodyStr": variant["body"],
+                        "xToken": fresh_token
                     }
-                }""",
-                {
-                    "url": api_url,
-                    "encryptId": encrypt_id,
-                    "xToken": fresh_token
-                }
-            )
-            if isinstance(result, dict) and result.get("ok") and result.get("b64"):
-                raw_bytes = base64.b64decode(result["b64"])
-                if save_raw_or_base64_pdf(raw_bytes, save_path):
-                    return True
-        except Exception:
-            pass
+                )
+                if isinstance(result, dict) and result.get("ok") and result.get("b64"):
+                    raw_bytes = base64.b64decode(result["b64"])
+                    if save_raw_or_base64_pdf(raw_bytes, save_path):
+                        return True
+            except Exception:
+                pass
     return False
 
 
-def download_pdf_from_ktu_api(encrypt_id: str, save_path: str, x_token: str = None) -> bool:
+def download_pdf_from_ktu_api(encrypt_id: str, save_path: str, x_token: str = None, cookies: list = None) -> bool:
     """
-    Downloads a PDF from:
-    1. KTU's official `ktu-web-portal-api/anon/getAttachment` endpoint
-    2. Community Camoufox pre-cached mirror endpoint (`/download/{encrypt_id}`)
+    Downloads a PDF using:
+    1. KTU's official `getAttachment` endpoint over a custom SECLEVEL=1 TLS session + browser cookies
+    2. Community Camoufox pre-cached mirror endpoint (`/download/{encrypt_id}`) with retry
     """
     headers = dict(KTU_HEADERS)
     if x_token:
         headers["x-token"] = x_token
         headers["X-Token"] = x_token
 
-    for url in KTU_ATTACHMENT_API_URLS:
-        try:
-            res = requests.post(
-                url,
-                json={"encryptId": encrypt_id},
-                headers=headers,
-                verify=False,
-                timeout=30
-            )
-            if res.status_code == 200 and len(res.content) > 500:
-                if save_raw_or_base64_pdf(res.content, save_path):
-                    return True
-        except Exception:
-            pass
+    if cookies:
+        for c in cookies:
+            if c.get("name") and c.get("value"):
+                KTU_SESSION.cookies.set(c["name"], c["value"])
 
-    # Fallback: Pre-cached Camoufox Mirror API download endpoint
-    for encoded_id in (requests.utils.quote(encrypt_id, safe=''), encrypt_id):
-        try:
-            mirror_download_url = f"{KTU_MIRROR_API_BASE.rstrip('/')}/download/{encoded_id}"
-            res = requests.get(mirror_download_url, timeout=45)
-            if res.status_code == 200 and len(res.content) > 500:
-                if save_raw_or_base64_pdf(res.content, save_path):
-                    return True
-            else:
-                print(f" -> Mirror /download/{encoded_id} status: {res.status_code} ({res.text[:80]})")
-                break
-        except Exception as e:
-            print(f" -> Mirror download error: {e}")
+    # 1. Direct KTU API with custom TLS adapter
+    for url in KTU_ATTACHMENT_API_URLS:
+        for payload in ({"encryptId": encrypt_id}, {"encryptId": encrypt_id, "token": x_token or ""}):
+            try:
+                res = KTU_SESSION.post(
+                    url,
+                    json=payload,
+                    headers=headers,
+                    verify=False,
+                    timeout=30
+                )
+                if res.status_code == 200 and len(res.content) > 500:
+                    if save_raw_or_base64_pdf(res.content, save_path):
+                        return True
+            except Exception:
+                pass
+
+    # 2. Fallback: Camoufox Mirror API download endpoint (try raw and URL-encoded with backoff)
+    candidate_ids = []
+    for cid in (encrypt_id, requests.utils.quote(encrypt_id, safe="")):
+        if cid not in candidate_ids:
+            candidate_ids.append(cid)
+
+    for attempt in range(2):
+        for cid in candidate_ids:
+            try:
+                mirror_download_url = f"{KTU_MIRROR_API_BASE.rstrip('/')}/download/{cid}"
+                res = KTU_SESSION.get(mirror_download_url, timeout=60)
+                if res.status_code == 200 and len(res.content) > 500:
+                    if save_raw_or_base64_pdf(res.content, save_path):
+                        return True
+                elif attempt == 1:
+                    print(f" -> Mirror /download/{cid} status: {res.status_code} ({res.text[:90]})")
+            except Exception as e:
+                if attempt == 1:
+                    print(f" -> Mirror download error: {e}")
+        time.sleep(3)
 
     return False
 
 
 def fetch_timetables_from_mirror_api() -> list:
-    """
-    Fallback fetcher using the Camoufox-backed KTU Announcements API
-    (https://ktu-announcements-api-wxk8.onrender.com/announcements)
-    """
+    """Fallback fetcher using the Camoufox-backed KTU Announcements API."""
     endpoint = f"{KTU_MIRROR_API_BASE.rstrip('/')}/announcements"
     print(f"🌐 Querying Camoufox Pre-Cached Mirror API ({endpoint}) [up to 75s for Render cold start]...")
     for attempt in range(2):
         try:
-            res = requests.get(endpoint, timeout=75)
+            res = KTU_SESSION.get(endpoint, timeout=75)
             if res.status_code == 200:
                 payload = res.json()
                 data_list = payload.get("data") if isinstance(payload, dict) else (payload if isinstance(payload, list) else [])
@@ -1289,9 +1426,7 @@ def process_downloaded_pdf(save_path, filename, title, date_str, html_dir):
 # UNIFIED PAGE SCRAPER & IN-BROWSER DOWNLOADER
 # -------------------------------------------------------------------
 def _scrape_and_download_with_page(page, pdf_dir, html_dir):
-    """
-    Keeps the browser session ALIVE during both metadata discovery AND PDF downloading.
-    """
+    """Keeps the browser session ALIVE during both metadata discovery AND PDF downloading."""
     timetable_metadata = []
     seen_encrypt_ids = set()
     captured_state = {"x_token": None, "last_attachment_body": None}
@@ -1363,25 +1498,20 @@ def _scrape_and_download_with_page(page, pdf_dir, html_dir):
         except Exception as nav_err:
             print(f"⚠️ Navigation warning ({nav_err}), continuing...")
 
-        # Poll up to 30 seconds: click Turnstile bounding box & wait for API response or DOM buttons
-        for attempt in range(10):
-            page.wait_for_timeout(3000)
-            if handle_turnstile_challenge(page):
-                print(f"🛡️ [Attempt {attempt+1}] Clicked Cloudflare Turnstile checkbox via mouse coordinates...")
-            tok = get_page_turnstile_token(page)
-            if tok and not captured_state.get("x_token"):
-                captured_state["x_token"] = tok
-                print("🔑 Turnstile token detected in DOM!")
-            if timetable_metadata:
-                break
-            try:
-                if page.locator("button[value], a.btn-outline-primary, button.btn-outline-primary").count() > 0:
-                    print("✅ Download buttons detected in DOM!")
-                    break
-            except Exception:
-                pass
+        # Wait cleanly for Turnstile without spam-clicking
+        tok = wait_for_turnstile_or_data(page, captured_state, timetable_metadata, max_wait_sec=28)
+        if tok:
+            print(f"🔑 Turnstile token active (len={len(tok)})!")
 
-    # If direct browser scraping was blocked by Turnstile, fallback to Mirror API while browser is still open
+        # If Angular didn't fire the XHR automatically, fetch directly inside the browser context
+        if not timetable_metadata:
+            browser_items = fetch_ktu_list_via_browser(page, captured_state.get("x_token"))
+            for item in browser_items:
+                if item["encryptId"] not in seen_encrypt_ids:
+                    seen_encrypt_ids.add(item["encryptId"])
+                    timetable_metadata.append(item)
+
+    # Fallback to Pre-Cached Mirror API for metadata list while keeping browser open for PDF fetch
     if not timetable_metadata:
         print("⚠️ Direct KTU portal returned empty list. Switching to Pre-Cached Camoufox Mirror API...")
         mirror_items = fetch_timetables_from_mirror_api()
@@ -1392,10 +1522,14 @@ def _scrape_and_download_with_page(page, pdf_dir, html_dir):
 
     print(f"\n📋 Processing {len(timetable_metadata)} timetable(s):")
 
+    try:
+        browser_cookies = page.context.cookies()
+    except Exception:
+        browser_cookies = []
+
     for tb in timetable_metadata:
         title = tb['title']
         encrypt_id = tb['encryptId']
-        btn_text = tb.get('buttonText', '')
 
         if not encrypt_id:
             continue
@@ -1411,47 +1545,50 @@ def _scrape_and_download_with_page(page, pdf_dir, html_dir):
         downloaded_ok = False
         filename = predicted_filename
 
-        # Method A: Click the button in the live browser (matches by value=encryptId OR by card title)
-        try:
-            button = page.locator(f"button[value='{encrypt_id}']")
-            if button.count() == 0:
-                # Find the card containing this timetable's title and click its download button
-                card = page.locator("div.card, tr, li").filter(has_text=title[:35])
-                if card.count() > 0:
-                    button = card.first.locator("button, a.btn")
-            if button.count() > 0:
-                captured_state["last_attachment_body"] = None
-                handle_turnstile_challenge(page)
-                button.first.scroll_into_view_if_needed()
-                try:
-                    with page.expect_download(timeout=15000) as download_info:
-                        button.first.click()
-                    download = download_info.value
-                    dl_suggested = download.suggested_filename
-                    if dl_suggested and dl_suggested.lower() not in ("notification.pdf", "notification"):
-                        filename = sanitize_filename(f"{tb['date']}_{dl_suggested}")
-                        save_path = os.path.join(pdf_dir, filename)
-                    download.save_as(save_path)
-                    print(f" -> PDF Saved via Browser Download: {filename}")
-                    downloaded_ok = True
-                except Exception:
-                    page.wait_for_timeout(3000)
-                    if captured_state.get("last_attachment_body"):
-                        if save_raw_or_base64_pdf(captured_state["last_attachment_body"], save_path):
-                            print(f" -> PDF Saved via Intercepted /getAttachment XHR Response: {filename}")
-                            downloaded_ok = True
-        except Exception as click_err:
-            print(f" -> Browser click note: {click_err}")
+        # Method A: In-browser fetch() using the live page's Turnstile token & TLS session
+        if download_pdf_via_browser_fetch(page, encrypt_id, captured_state.get("x_token"), save_path):
+            print(f" -> PDF Saved via In-Browser Fetch: {filename}")
+            downloaded_ok = True
 
-        # Method B: In-browser fetch() using the live page's Turnstile token & TLS session
+        # Method B: Click the button in the live browser (if rendered on page)
         if not downloaded_ok:
-            if download_pdf_via_browser_fetch(page, encrypt_id, captured_state.get("x_token"), save_path):
-                print(f" -> PDF Saved via In-Browser Fetch: {filename}")
-                downloaded_ok = True
+            try:
+                button = page.locator(f"button[value='{encrypt_id}']")
+                if button.count() == 0:
+                    card = page.locator("div.card, tr, li").filter(has_text=title[:35])
+                    if card.count() > 0:
+                        button = card.first.locator("button, a.btn")
+                if button.count() > 0:
+                    captured_state["last_attachment_body"] = None
+                    button.first.scroll_into_view_if_needed()
+                    try:
+                        with page.expect_download(timeout=15000) as download_info:
+                            button.first.click()
+                        download = download_info.value
+                        dl_suggested = download.suggested_filename
+                        if dl_suggested and dl_suggested.lower() not in ("notification.pdf", "notification"):
+                            filename = sanitize_filename(f"{tb['date']}_{dl_suggested}")
+                            save_path = os.path.join(pdf_dir, filename)
+                        download.save_as(save_path)
+                        print(f" -> PDF Saved via Browser Download: {filename}")
+                        downloaded_ok = True
+                    except Exception:
+                        page.wait_for_timeout(3000)
+                        if captured_state.get("last_attachment_body"):
+                            if save_raw_or_base64_pdf(captured_state["last_attachment_body"], save_path):
+                                print(f" -> PDF Saved via Intercepted /getAttachment XHR Response: {filename}")
+                                downloaded_ok = True
+            except Exception as click_err:
+                print(f" -> Browser click note: {click_err}")
 
-        # Method C: Direct API + Mirror `/download/{encrypt_id}`
+        # Method C: Direct KTU TLS Session (SECLEVEL=1) + Mirror `/download/{encrypt_id}`
         if not downloaded_ok:
-            if download_pdf_from_ktu_api(encrypt_id, save_path, x_token=captured_state.get("x_token")):
+            if download_pdf_from_ktu_api(
+                encrypt_id,
+                save_path,
+                x_token=captured_state.get("x_token"),
+                cookies=browser_cookies
+            ):
                 print(f" -> PDF Saved via Direct/Mirror API: {filename}")
                 downloaded_ok = True
             else:
@@ -1473,8 +1610,6 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
     # TIER 1: CAMOUFOX ANTI-DETECT BROWSER (Headed inside Xvfb for Turnstile)
     # -------------------------------------------------------------------
     if HAS_CAMOUFOX:
-        # When running under `xvfb-run -a`, `headless=False` runs a real headed browser
-        # inside the Xvfb virtual display, which passes Cloudflare Turnstile checks!
         has_display = bool(os.environ.get("DISPLAY"))
         camoufox_headless_mode = False if has_display else "virtual"
         print(f"🦊 Launching Camoufox Anti-Detect Browser (headless={camoufox_headless_mode}, DISPLAY={os.environ.get('DISPLAY')})...")
@@ -1496,7 +1631,7 @@ def scrape_exam_timetables(pdf_dir="./downloads_timetable", html_dir="./timetabl
     # -------------------------------------------------------------------
     # TIER 2: PLAYWRIGHT STEALTH + MIRROR API FALLBACK
     # -------------------------------------------------------------------
-    print("🌐 Launching Playwright Browser (with Coordinate Turnstile Handler & Mirror Fallback)...")
+    print("🌐 Launching Playwright Browser (with Non-Spam Turnstile Handler & Mirror Fallback)...")
     with sync_playwright() as p:
         has_display = bool(os.environ.get("DISPLAY"))
         browser = p.chromium.launch(
