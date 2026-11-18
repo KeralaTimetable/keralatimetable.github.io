@@ -18,14 +18,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --ot-ease-sheet: cubic-bezier(0.3, 0.1, 0.2, 1);
+            --ot-ease-emph: cubic-bezier(0.2, 0, 0, 1);
+            --ot-ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+            --glassMaterialBackground: rgba(248, 250, 252, 0.62);
+            --glassMaterialShadowColor: rgba(15, 23, 42, 0.10);
+        }
+
+        html.dark {
+            --glassMaterialBackground: rgba(24, 30, 46, 0.68);
+            --glassMaterialShadowColor: rgba(0, 0, 0, 0.60);
+        }
+
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: #f1f5fb;
             background-image: 
-                radial-gradient(at 0% 0%, hsla(253, 100%, 93%, 0.85) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(189, 100%, 90%, 0.8) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, hsla(208, 100%, 94%, 0.85) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, hsla(283, 100%, 94%, 0.8) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, hsla(253, 100%, 93%, 0.88) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(189, 100%, 90%, 0.82) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(208, 100%, 94%, 0.88) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(283, 100%, 94%, 0.82) 0px, transparent 50%);
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -40,68 +53,145 @@
         .ambient-orb-1 { animation: orbDrift 15s ease-in-out infinite; will-change: transform; }
         .ambient-orb-2 { animation: orbDrift 19s ease-in-out 2s infinite reverse; will-change: transform; }
 
-        /* --- SPECULAR LIQUID GLASS PANELS --- */
+        /* ==========================================================================
+           OPENBLAST TRUE iOS 26 LIQUID GLASS PILL ENGINE (.glass-pill[data-liquid])
+           ========================================================================== */
+        .glass-pill {
+            isolation: isolate;
+            position: relative;
+        }
+        .glass-pill::before,
+        .glass-pill::after {
+            content: "";
+            border-radius: inherit;
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+        }
+        .glass-pill::before {
+            z-index: -1;
+            background-color: var(--glassMaterialBackground);
+            -webkit-backdrop-filter: saturate(1.9) blur(26px);
+            backdrop-filter: saturate(1.9) blur(26px);
+            box-shadow: 0 14px 44px var(--glassMaterialShadowColor);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 255, 255, 0) 55%);
+        }
+        .glass-pill[data-liquid] {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-color: transparent !important;
+            box-shadow: none !important;
+        }
+        .glass-pill[data-liquid]::before {
+            z-index: -1;
+            -webkit-backdrop-filter: var(--liquid-filter) blur(5px) saturate(1.85) brightness(1.04) !important;
+            backdrop-filter: var(--liquid-filter) blur(5px) saturate(1.85) brightness(1.04) !important;
+            background-color: color-mix(in srgb, var(--glassMaterialBackground) 52%, transparent) !important;
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 48%) !important;
+            box-shadow: 0 14px 40px -6px var(--glassMaterialShadowColor) !important;
+        }
+        html.dark .glass-pill[data-liquid]::before {
+            background-color: rgba(15, 23, 42, 0.48) !important;
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 48%) !important;
+        }
+        .glass-pill::after,
+        .glass-pill[data-liquid]::after {
+            z-index: 2;
+            opacity: 1;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3 !important;
+        }
+        html.dark .glass-pill::after,
+        html.dark .glass-pill[data-liquid]::after {
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fff9,
+                inset -1.5px -1.5px 0 -0.5px #ffffff4d,
+                inset 0 0 14px #ffffff12 !important;
+        }
+
+        /* --- SPECULAR LIQUID GLASS PANELS (OpenBlast 4-Layer Rim) --- */
         .glass-panel {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.76) 0%, rgba(255, 255, 255, 0.58) 100%);
-            backdrop-filter: blur(24px) saturate(190%);
-            -webkit-backdrop-filter: blur(24px) saturate(190%);
-            border: 1.5px solid rgba(15, 23, 42, 0.14);
+            background-color: rgba(255, 255, 255, 0.58);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 52%);
+            backdrop-filter: blur(26px) saturate(190%);
+            -webkit-backdrop-filter: blur(26px) saturate(190%);
+            border: none;
             box-shadow: 
-                inset 0 1px 1px 0 rgba(255, 255, 255, 0.98),
-                0 12px 32px -8px rgba(15, 23, 42, 0.07);
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3,
+                0 14px 40px -10px rgba(15, 23, 42, 0.08);
             transition: 
-                transform 0.32s cubic-bezier(0.22, 1.25, 0.36, 1),
+                transform 0.36s var(--ot-ease-settle),
                 box-shadow 0.3s ease,
-                border-color 0.25s ease,
-                background 0.25s ease;
+                background-color 0.25s ease;
         }
         
         .glass-panel-hover:hover {
-            background: rgba(255, 255, 255, 0.94);
-            transform: translate3d(0, -3px, 0);
-            border-color: rgba(79, 70, 229, 0.45);
+            background-color: rgba(255, 255, 255, 0.86);
+            transform: translate3d(0, -4px, 0) scale(1.01);
             box-shadow: 
-                inset 0 1px 1px 0 #ffffff,
-                0 18px 38px -8px rgba(79, 70, 229, 0.12);
+                inset 1.5px 1.5px 0 -0.5px #ffffff,
+                inset -1.5px -1.5px 0 -0.5px #ffffff,
+                inset 0 0 0 1px rgba(79, 70, 229, 0.38),
+                0 20px 40px -10px rgba(79, 70, 229, 0.15);
+        }
+        .glass-panel-hover:active {
+            transform: scale(0.97);
+            transition-duration: 80ms;
         }
 
-        /* GPU-Friendly Hero Artwork Folder (No nested backdrop-filter lag during slide!) */
+        /* GPU-Friendly Hero Artwork Folder */
         .glass-folder {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.52) 100%);
-            border: 1.5px solid rgba(15, 23, 42, 0.14);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.44) 100%);
+            border: none;
             box-shadow: 
-                inset 0 1px 2px 0 rgba(255, 255, 255, 0.95),
-                0 16px 36px -8px rgba(15, 23, 42, 0.10);
+                inset 1.5px 1.5px 0 -0.5px #ffffff,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                0 18px 38px -8px rgba(15, 23, 42, 0.12);
             transform: rotate(6deg) translateZ(0);
-            transition: transform 0.5s cubic-bezier(0.22, 1.2, 0.36, 1);
+            transition: transform 0.5s var(--ot-ease-settle);
         }
         html.dark .glass-folder {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.65) 100%);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 16px 36px rgba(0, 0, 0, 0.5);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fff9,
+                inset -1.5px -1.5px 0 -0.5px #ffffff33,
+                0 18px 38px rgba(0, 0, 0, 0.55);
         }
         .glass-folder-inner {
-            background: linear-gradient(160deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.82) 100%);
-            border: 1.5px solid rgba(15, 23, 42, 0.14);
-            box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.12);
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 250, 252, 0.78) 100%);
+            border: none;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #ffffff,
+                inset 0 0 0 0.5px rgba(15, 23, 42, 0.10),
+                0 12px 24px -6px rgba(15, 23, 42, 0.12);
         }
         html.dark .glass-folder-inner {
             background: linear-gradient(160deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.88) 100%);
-            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px rgba(255, 255, 255, 0.25),
+                0 12px 24px -6px rgba(0, 0, 0, 0.5);
         }
 
-        /* Expandable Search Filter Panel with Spring Easing */
+        /* Expandable Search Filter Panel with OpenBlast Spring Easing */
         .expand-panel {
             max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transform: translate3d(0, -8px, 0) scale(0.98);
+            transform: translate3d(0, -10px, 0) scale(0.97);
             transform-origin: top center;
             pointer-events: none;
             transition: 
-                max-height 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                max-height 0.4s var(--ot-ease-emph),
                 opacity 0.24s ease,
-                transform 0.32s cubic-bezier(0.22, 1.2, 0.36, 1);
+                transform 0.36s var(--ot-ease-settle);
         }
         .expand-panel.active {
             max-height: 440px; 
@@ -113,37 +203,42 @@
 
         /* --- LIQUID GLASS HYBRID CARDS --- */
         .hybrid-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.62) 100%);
-            backdrop-filter: blur(18px) saturate(180%);
-            -webkit-backdrop-filter: blur(18px) saturate(180%);
-            border: 1.5px solid rgba(15, 23, 42, 0.14);
-            border-radius: 1.15rem;
-            padding: 0.9rem;
+            background-color: rgba(255, 255, 255, 0.64);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0) 55%);
+            backdrop-filter: blur(18px) saturate(190%);
+            -webkit-backdrop-filter: blur(18px) saturate(190%);
+            border: none;
+            border-radius: 1.25rem;
+            padding: 0.95rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            transition: 
-                transform 0.32s cubic-bezier(0.22, 1.28, 0.36, 1),
-                background 0.22s ease,
-                border-color 0.22s ease,
-                box-shadow 0.28s ease;
             text-decoration: none;
             box-shadow: 
-                inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
-                0 6px 18px -4px rgba(15, 23, 42, 0.05);
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3,
+                0 8px 22px -6px rgba(15, 23, 42, 0.06);
+            transition: 
+                transform 0.34s var(--ot-ease-settle),
+                background-color 0.22s ease,
+                box-shadow 0.28s ease;
             will-change: transform;
         }
         .hybrid-card:hover {
-            transform: translate3d(0, -3px, 0) scale(1.008);
-            background: rgba(255, 255, 255, 0.96);
-            border-color: rgba(15, 23, 42, 0.65);
+            transform: translate3d(0, -4px, 0) scale(1.012);
+            background-color: rgba(255, 255, 255, 0.88);
             box-shadow: 
-                inset 0 1px 1px 0 #ffffff,
-                0 14px 28px -6px rgba(15, 23, 42, 0.10);
+                inset 1.5px 1.5px 0 -0.5px #ffffff,
+                inset -1.5px -1.5px 0 -0.5px #ffffff,
+                inset 0 0 0 1px rgba(79, 70, 229, 0.38),
+                0 16px 32px -8px rgba(79, 70, 229, 0.14);
         }
         .hybrid-card:active {
-            transform: translate3d(0, -1px, 0) scale(0.985);
+            transform: scale(0.96);
+            transition-duration: 80ms;
         }
         
         @media (min-width: 768px) {
@@ -156,6 +251,15 @@
             }
         }
 
+        /* OpenBlast Tactile Press Physics (.ot-press) */
+        .ot-press {
+            transition: transform 0.16s var(--ot-ease-settle), filter 0.15s ease;
+        }
+        .ot-press:not(:disabled):active {
+            transition-duration: 80ms;
+            transform: scale(0.93);
+        }
+
         /* --- 120FPS HARDWARE-ACCELERATED HERO CAROUSEL SLIDES --- */
         .hero-slide {
             position: absolute;
@@ -163,10 +267,10 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transform: translate3d(36px, 0, 0) scale(0.985);
+            transform: translate3d(36px, 0, 0) scale(0.98);
             transition: 
-                transform 0.56s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.56s var(--ot-ease-emph),
+                opacity 0.42s var(--ot-ease-emph),
                 visibility 0.56s;
             will-change: transform, opacity;
             backface-visibility: hidden;
@@ -183,28 +287,28 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transform: translate3d(-36px, 0, 0) scale(0.985);
+            transform: translate3d(-36px, 0, 0) scale(0.98);
             z-index: 10;
         }
         .hero-slide.slide-exit-right {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transform: translate3d(36px, 0, 0) scale(0.985);
+            transform: translate3d(36px, 0, 0) scale(0.98);
             z-index: 10;
         }
         @media (min-width: 768px) {
             .hero-slide { inset: 2rem; }
         }
 
-        /* Smooth Vertical Spring Entrance (Replaces heavy 60px horizontal layout thrashing) */
-        @keyframes springFadeUp {
-            0% { opacity: 0; transform: translate3d(0, 14px, 0) scale(0.99); }
+        /* OpenBlast Staggered Spring Entrance */
+        @keyframes otRiseIn {
+            0% { opacity: 0; transform: translate3d(0, 12px, 0) scale(0.99); }
             100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
         }
         .spring-enter {
             opacity: 0;
-            animation: springFadeUp 0.52s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation: otRiseIn 0.5s var(--ot-ease-emph) forwards;
             will-change: transform, opacity;
         }
 
@@ -250,7 +354,7 @@
     </div>
 
     <!-- Global Sticky Frosted Header -->
-    <div id="navigation-container" class="min-h-[73px] w-full z-50 sticky top-0"></div>
+    <div id="navigation-container" class="w-full z-50 sticky top-0"></div>
 
     <!-- Pre-mounted ColorOS Obsidian Dot-to-Sides Live Capsule -->
     <div id="coloros-live-capsule">
@@ -282,11 +386,11 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 pb-6 md:pb-0">
-                        <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-400 text-white font-bold text-sm shadow-lg shadow-indigo-500/25 hover:scale-[1.03] active:scale-95 transition-transform flex items-center justify-center gap-2">
+                        <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" rel="noopener noreferrer" class="ot-press w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-500 to-emerald-400 text-white font-bold text-sm shadow-lg shadow-indigo-500/25 hover:scale-[1.03] transition-transform flex items-center justify-center gap-2">
                             <i class="fab fa-whatsapp text-lg"></i> Join WhatsApp Community
                         </a>
                         
-                        <a href="#quick-access" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-white/85 dark:bg-white/10 border-[1.5px] border-slate-900/25 dark:border-white/15 hover:bg-white hover:border-black text-slate-800 font-bold text-sm shadow-sm active:scale-95 transition-all flex items-center justify-center gap-2">
+                        <a href="#quick-access" class="ot-press w-full sm:w-auto px-6 py-2.5 rounded-full bg-white/85 dark:bg-white/10 border border-white/80 dark:border-white/15 hover:bg-white text-slate-800 font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2">
                             Explore <i class="fas fa-chevron-right text-xs"></i>
                         </a>
                     </div>
@@ -326,7 +430,7 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 pb-6 md:pb-0">
-                        <a href="pyq.html" class="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-red-500 to-rose-600 text-white font-bold text-sm shadow-lg shadow-red-500/25 hover:scale-[1.03] active:scale-95 transition-transform flex items-center justify-center gap-2">
+                        <a href="pyq.html" class="ot-press w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-red-500 to-rose-600 text-white font-bold text-sm shadow-lg shadow-red-500/25 hover:scale-[1.03] transition-transform flex items-center justify-center gap-2">
                             <i class="fas fa-search text-base"></i> Find Question Papers
                         </a>
                     </div>
@@ -363,7 +467,7 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 pb-6 md:pb-0">
-                        <a href="notes.html" class="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-white font-bold text-sm shadow-lg shadow-amber-500/25 hover:scale-[1.03] active:scale-95 transition-transform flex items-center justify-center gap-2">
+                        <a href="notes.html" class="ot-press w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-amber-500 to-yellow-500 text-white font-bold text-sm shadow-lg shadow-amber-500/25 hover:scale-[1.03] transition-transform flex items-center justify-center gap-2">
                             <i class="fas fa-book-open text-base"></i> Browse Notes
                         </a>
                     </div>
@@ -400,7 +504,7 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 pb-6 md:pb-0">
-                        <a href="updates.html" class="w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-sm shadow-lg shadow-emerald-500/25 hover:scale-[1.03] active:scale-95 transition-transform flex items-center justify-center gap-2">
+                        <a href="updates.html" class="ot-press w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-sm shadow-lg shadow-emerald-500/25 hover:scale-[1.03] transition-transform flex items-center justify-center gap-2">
                             <i class="fas fa-bullhorn text-base"></i> View Updates
                         </a>
                     </div>
@@ -421,34 +525,34 @@
             </div>
 
             <!-- Carousel Pill Indicators -->
-            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 md:left-8 md:translate-x-0 flex items-center gap-2 z-30">
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 md:left-8 md:translate-x-0 flex items-center gap-2 z-30 bg-white/45 dark:bg-slate-900/45 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm">
                 <button aria-label="Slide 1" class="carousel-dot w-7 h-1.5 rounded-full bg-indigo-600 transition-all duration-300" data-index="0"></button>
                 <button aria-label="Slide 2" class="carousel-dot w-2 h-1.5 rounded-full bg-slate-400/60 hover:bg-slate-500 transition-all duration-300" data-index="1"></button>
                 <button aria-label="Slide 3" class="carousel-dot w-2 h-1.5 rounded-full bg-slate-400/60 hover:bg-slate-500 transition-all duration-300" data-index="2"></button>
                 <button aria-label="Slide 4" class="carousel-dot w-2 h-1.5 rounded-full bg-slate-400/60 hover:bg-slate-500 transition-all duration-300" data-index="3"></button>
             </div>
 
-            <!-- Carousel Arrows -->
-            <button id="btn-prev" aria-label="Previous slide" class="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 dark:bg-slate-900/70 hover:bg-white rounded-full items-center justify-center text-slate-700 hover:text-indigo-600 border-[1.5px] border-slate-900/20 shadow-sm active:scale-90 transition-all z-30">
-                <i class="fas fa-chevron-left text-xs"></i>
+            <!-- Carousel Arrows (True OpenBlast Liquid Glass Buttons) -->
+            <button id="btn-prev" aria-label="Previous slide" class="ot-press glass-pill hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full items-center justify-center text-slate-700 hover:text-indigo-600 z-30">
+                <i class="fas fa-chevron-left text-xs relative z-10"></i>
             </button>
-            <button id="btn-next" aria-label="Next slide" class="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 dark:bg-slate-900/70 hover:bg-white rounded-full items-center justify-center text-slate-700 hover:text-indigo-600 border-[1.5px] border-slate-900/20 shadow-sm active:scale-90 transition-all z-30">
-                <i class="fas fa-chevron-right text-xs"></i>
+            <button id="btn-next" aria-label="Next slide" class="ot-press glass-pill hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full items-center justify-center text-slate-700 hover:text-indigo-600 z-30">
+                <i class="fas fa-chevron-right text-xs relative z-10"></i>
             </button>
         </div>
 
-        <!-- SMART SEARCH BAR (Direct Course Search + Expandable Branch/Semester Drawer) -->
+        <!-- SMART SEARCH BAR (True OpenBlast Optical Liquid Glass Pill!) -->
         <div id="search-wrapper" class="w-full relative z-40 mt-1 md:mt-2 spring-enter" style="animation-delay: 90ms;">
-            <div class="bg-white/80 backdrop-blur-2xl border-[1.5px] border-slate-900/20 focus-within:border-indigo-600 rounded-2xl md:rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.95),0_12px_32px_rgba(15,23,42,0.06)] relative transition-all">
+            <div id="smart-search-pill" class="glass-pill rounded-2xl md:rounded-full relative transition-all">
                 
-                <form id="quick-search-form" class="flex items-center w-full p-1 md:p-1.5">
-                    <button type="submit" aria-label="Search" class="w-11 h-11 md:w-12 md:h-12 flex-shrink-0 text-slate-500 hover:text-indigo-600 transition-colors rounded-full focus:outline-none flex items-center justify-center">
+                <form id="quick-search-form" class="relative z-10 flex items-center w-full p-1 md:p-1.5">
+                    <button type="submit" aria-label="Search" class="ot-press w-11 h-11 md:w-12 md:h-12 flex-shrink-0 text-slate-500 hover:text-indigo-600 transition-colors rounded-full focus:outline-none flex items-center justify-center">
                         <i class="fas fa-search text-base md:text-lg"></i>
                     </button>
                     
                     <input type="search" id="quick-search-input" placeholder="Search course code or subject (e.g. GAMAT101, CST201)..." class="w-full bg-transparent border-none focus:outline-none text-slate-800 font-bold placeholder-slate-400 text-xs sm:text-sm md:text-base px-2 h-11 md:h-12" autocomplete="off">
                     
-                    <button type="button" id="chevron-trigger" aria-label="Toggle branch filter" class="px-3.5 h-10 md:h-11 flex-shrink-0 flex items-center justify-center gap-1.5 text-slate-600 cursor-pointer bg-slate-100/80 dark:bg-white/10 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl md:rounded-full transition-all mr-1 text-xs font-bold border border-slate-200/80 dark:border-white/10">
+                    <button type="button" id="chevron-trigger" aria-label="Toggle branch filter" class="ot-press px-3.5 h-10 md:h-11 flex-shrink-0 flex items-center justify-center gap-1.5 text-slate-700 cursor-pointer bg-white/75 dark:bg-white/10 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl md:rounded-full transition-all mr-1 text-xs font-bold shadow-sm">
                         <span class="hidden sm:inline">Filter</span>
                         <i id="chevron-icon" class="fas fa-chevron-down text-[11px] transition-transform duration-300"></i>
                     </button>
@@ -456,7 +560,7 @@
 
                 <!-- Expandable Quick Filter & Live Autocomplete Drawer -->
                 <div id="filter-panel" class="expand-panel absolute top-full left-0 right-0 mt-2.5 z-50">
-                    <div class="glass-panel bg-white/95 rounded-[1.75rem] p-4 sm:p-5 shadow-2xl border-[1.5px] border-slate-900/20">
+                    <div class="glass-panel bg-white/90 dark:bg-slate-900/95 rounded-[1.75rem] p-4 sm:p-5 shadow-2xl">
                         
                         <!-- Live Subject Matches (Revealed when typing) -->
                         <div id="home-autocomplete-list" class="hidden mb-4 pb-3 border-b border-slate-200/70 dark:border-white/10 divide-y divide-slate-100 dark:divide-white/5 max-h-48 overflow-y-auto"></div>
@@ -466,7 +570,7 @@
                         </p>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                             <div>
-                                <select id="select-branch" class="w-full bg-white dark:bg-slate-900 border-[1.5px] border-slate-900/15 dark:border-white/15 text-slate-800 font-bold rounded-xl p-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm cursor-pointer">
+                                <select id="select-branch" class="w-full bg-white/90 dark:bg-slate-900 border border-slate-200 dark:border-white/15 text-slate-800 font-bold rounded-xl p-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm cursor-pointer">
                                     <option value="" disabled selected>Select Branch</option>
                                     <option value="CSE">Computer Science (CSE)</option>
                                     <option value="ECE">Electronics & Comm (ECE)</option>
@@ -476,7 +580,7 @@
                                 </select>
                             </div>
                             <div>
-                                <select id="select-sem" class="w-full bg-white dark:bg-slate-900 border-[1.5px] border-slate-900/15 dark:border-white/15 text-slate-800 font-bold rounded-xl p-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm cursor-pointer">
+                                <select id="select-sem" class="w-full bg-white/90 dark:bg-slate-900 border border-slate-200 dark:border-white/15 text-slate-800 font-bold rounded-xl p-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm cursor-pointer">
                                     <option value="" disabled selected>Select Semester</option>
                                     <option value="S1">Semester 1 (S1)</option>
                                     <option value="S2">Semester 2 (S2)</option>
@@ -486,7 +590,7 @@
                                     <option value="S6">Semester 6 (S6)</option>
                                 </select>
                             </div>
-                            <button type="button" id="btn-find" class="w-full bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-extrabold py-3 px-5 rounded-xl transition-all shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2 text-xs sm:text-sm">
+                            <button type="button" id="btn-find" class="ot-press w-full bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-3 px-5 rounded-xl transition-all shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2 text-xs sm:text-sm">
                                 <span>Open Notes Hub</span>
                                 <i class="fas fa-arrow-right text-xs"></i>
                             </button>
@@ -495,7 +599,6 @@
                 </div>
             </div>
         </div>
-
         <!-- QUICK ACCESS HYBRID GRID -->
         <div id="quick-access" class="w-full mt-2 spring-enter" style="animation-delay: 140ms;">
             <div class="flex items-center justify-between mb-3 px-2">
@@ -515,7 +618,7 @@
                             <p class="hidden md:block text-xs text-slate-500 font-medium">Check semester & exam schedules</p>
                         </div>
                     </div>
-                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/20 shrink-0">
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/15 shrink-0">
                         <i class="fas fa-chevron-right text-[10px]"></i>
                     </div>
                 </a>
@@ -531,7 +634,7 @@
                             <p class="hidden md:block text-xs text-slate-500 font-medium">Free notes by KTU students</p>
                         </div>
                     </div>
-                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/20 shrink-0">
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/15 shrink-0">
                         <i class="fas fa-chevron-right text-[10px]"></i>
                     </div>
                 </a>
@@ -547,7 +650,7 @@
                             <p class="hidden md:block text-xs text-slate-500 font-medium">All PYQs in one place</p>
                         </div>
                     </div>
-                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/20 shrink-0">
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/15 shrink-0">
                         <i class="fas fa-chevron-right text-[10px]"></i>
                     </div>
                 </a>
@@ -563,7 +666,7 @@
                             <p class="hidden md:block text-xs text-slate-500 font-medium">Latest announcements & news</p>
                         </div>
                     </div>
-                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/20 shrink-0">
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/15 shrink-0">
                         <i class="fas fa-chevron-right text-[10px]"></i>
                     </div>
                 </a>
@@ -583,7 +686,7 @@
                             <p class="hidden md:block text-xs text-slate-500 font-medium">Platform uptime & latency</p>
                         </div>
                     </div>
-                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/20 shrink-0">
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/15 shrink-0">
                         <i class="fas fa-chevron-right text-[10px]"></i>
                     </div>
                 </a>
@@ -599,7 +702,7 @@
                             <p class="hidden md:block text-xs text-slate-500 font-medium">Tips, guides & student stories</p>
                         </div>
                     </div>
-                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/20 shrink-0">
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/15 shrink-0">
                         <i class="fas fa-chevron-right text-[10px]"></i>
                     </div>
                 </a>
@@ -619,7 +722,7 @@
                             <p class="hidden md:block text-xs text-slate-500 font-medium">Student polls & difficulty ratings</p>
                         </div>
                     </div>
-                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/20 shrink-0">
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/15 shrink-0">
                         <i class="fas fa-chevron-right text-[10px]"></i>
                     </div>
                 </a>
@@ -635,7 +738,7 @@
                             <p class="hidden md:block text-xs text-slate-500 font-medium">Official KTU schedules</p>
                         </div>
                     </div>
-                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/20 shrink-0">
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/15 shrink-0">
                         <i class="fas fa-chevron-right text-[10px]"></i>
                     </div>
                 </a>
@@ -655,7 +758,7 @@
                             <p class="hidden md:block text-xs text-slate-500 font-medium">Ask & clear KTU doubts</p>
                         </div>
                     </div>
-                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/20 shrink-0">
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/15 shrink-0">
                         <i class="fas fa-chevron-right text-[10px]"></i>
                     </div>
                 </a>
@@ -671,7 +774,7 @@
                             <p class="hidden md:block text-xs text-slate-500 font-medium">Join 5K+ active students</p>
                         </div>
                     </div>
-                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/20 shrink-0">
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/15 shrink-0">
                         <i class="fas fa-chevron-right text-[10px]"></i>
                     </div>
                 </a>
@@ -687,7 +790,7 @@
                             <p class="hidden md:block text-xs text-slate-500 font-medium">Found a bug? Let us know</p>
                         </div>
                     </div>
-                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/20 shrink-0">
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors border border-slate-900/15 shrink-0">
                         <i class="fas fa-chevron-right text-[10px]"></i>
                     </div>
                 </a>
@@ -737,11 +840,11 @@
             </div>
         </div>
 
-        <!-- STATS PILL -->
+        <!-- STATS PILL (True OpenBlast Liquid Glass Pill!) -->
         <div class="w-full mt-4 mb-4 spring-enter" style="animation-delay: 250ms;">
-            <div class="glass-panel rounded-[2rem] md:rounded-full p-6 md:px-10 flex flex-wrap md:flex-nowrap items-center justify-between gap-6">
+            <div id="home-stats-pill" class="glass-pill rounded-[2rem] md:rounded-full p-6 md:px-10 flex flex-wrap md:flex-nowrap items-center justify-between gap-6">
                 
-                <div class="flex items-center gap-3 w-[45%] md:w-auto">
+                <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
                     <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 flex items-center justify-center text-lg shrink-0 border border-indigo-200 dark:border-indigo-500/30">
                         <i class="fas fa-users"></i>
                     </div>
@@ -751,9 +854,9 @@
                     </div>
                 </div>
 
-                <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0"></div>
+                <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0 relative z-10"></div>
 
-                <div class="flex items-center gap-3 w-[45%] md:w-auto">
+                <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
                     <div class="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 flex items-center justify-center text-lg shrink-0 border border-emerald-200 dark:border-emerald-500/30">
                         <i class="fas fa-file-alt"></i>
                     </div>
@@ -763,9 +866,9 @@
                     </div>
                 </div>
 
-                <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0"></div>
+                <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0 relative z-10"></div>
 
-                <div class="flex items-center gap-3 w-[45%] md:w-auto">
+                <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
                     <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-300 flex items-center justify-center text-lg shrink-0 border border-blue-200 dark:border-blue-500/30">
                         <i class="fas fa-download"></i>
                     </div>
@@ -775,9 +878,9 @@
                     </div>
                 </div>
 
-                <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0"></div>
+                <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0 relative z-10"></div>
 
-                <div class="flex items-center gap-3 w-[45%] md:w-auto">
+                <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
                     <div class="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-500/20 text-orange-600 dark:text-orange-300 flex items-center justify-center text-lg shrink-0 border border-orange-200 dark:border-orange-500/30">
                         <i class="fas fa-star"></i>
                     </div>
@@ -792,23 +895,180 @@
 
     </main>
 
-    <!-- MINIMAL FOOTER -->
+    <!-- MINIMAL FOOTER (True OpenBlast Liquid Glass Pill!) -->
     <footer class="w-full max-w-6xl mx-auto px-4 pb-8 relative z-10 spring-enter" style="animation-delay: 290ms;">
-        <div class="glass-panel rounded-full px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p class="text-xs md:text-sm font-medium text-slate-700">
+        <div id="home-footer-pill" class="glass-pill rounded-full px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="relative z-10 text-xs md:text-sm font-medium text-slate-700">
                 Made with <i class="fas fa-heart text-rose-500 mx-1"></i> for KTU Students
             </p>
-            <a href="about.html" class="text-xs md:text-sm font-bold text-indigo-600 hover:text-indigo-800 transition-colors flex items-center gap-1">
+            <a href="about.html" class="ot-press relative z-10 text-xs md:text-sm font-bold text-indigo-600 hover:text-indigo-800 transition-colors flex items-center gap-1">
                 About Kerala Timetable <i class="fas fa-chevron-right text-[10px]"></i>
             </a>
         </div>
     </footer>
 
-    <script src="/components.js?v=16" onerror="this.onerror=null;this.src='components.js';"></script>
+    <!-- Global Site Components (Cache-Busted v=25) -->
+    <script src="/components.js?v=25" onerror="this.onerror=null;this.src='components.js';"></script>
     <script>
         if (typeof loadNavigation === 'function') loadNavigation('home', '', false);
 
+        // =====================================================================
+        // EMBEDDED OPENBLAST LIQUID GLASS ENGINE FOR INDEX.HTML
+        // (Attaches 1:1 Circular Meniscus Lens to Smart Search Pill, Arrows,
+        // Header, Stats Pill, & Footer Pill)
+        // =====================================================================
+        window.HomeLiquidGlass = (function() {
+            const SVG_NS = 'http://www.w3.org/2000/svg';
+            let svgRoot = null;
+            const filterCache = new Map();
+            let counter = 0;
+
+            function isChromium() {
+                if (navigator.userAgentData?.brands?.some(b => /Chromium|Chrome|Edge/i.test(b.brand))) return true;
+                return /Chrome|CriOS|Edg|OPR|Brave/i.test(navigator.userAgent) && !/Firefox|FxiOS/i.test(navigator.userAgent);
+            }
+
+            // OpenBlast Gy(w, h, r, bevel) Circular Meniscus Normal Map
+            function generateLensBytes(w, h, radius, bevel) {
+                const bytes = new Uint8ClampedArray(w * h * 4);
+                const halfW = w / 2, halfH = h / 2;
+                const r = Math.max(0, Math.min(radius, halfW, halfH));
+                const b = Math.max(1, Math.min(bevel, halfW, halfH));
+
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        const dx = x + 0.5 - halfW;
+                        const dy = y + 0.5 - halfH;
+                        const qx = Math.abs(dx) - (halfW - r);
+                        const qy = Math.abs(dy) - (halfH - r);
+
+                        let distFromEdge, nx = 0, ny = 0;
+                        if (qx > 0 && qy > 0) {
+                            const d = Math.hypot(qx, qy);
+                            distFromEdge = r - d;
+                            nx = (qx / d) * Math.sign(dx);
+                            ny = (qy / d) * Math.sign(dy);
+                        } else if (qx > qy) {
+                            distFromEdge = r - qx;
+                            nx = Math.sign(dx);
+                        } else {
+                            distFromEdge = r - qy;
+                            ny = Math.sign(dy);
+                        }
+
+                        const norm = Math.min(1, Math.max(0, 1 - distFromEdge / b));
+                        const g = 1 - Math.sqrt(1 - norm * norm);
+                        const idx = (y * w + x) * 4;
+                        bytes[idx]     = Math.round(128 - nx * g * 127);
+                        bytes[idx + 1] = Math.round(128 - ny * g * 127);
+                        bytes[idx + 2] = 128;
+                        bytes[idx + 3] = 255;
+                    }
+                }
+                return bytes;
+            }
+
+            function createLensDataURL(w, h, r, bevel) {
+                const canvas = document.createElement('canvas');
+                canvas.width = w; canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return '';
+                ctx.putImageData(new ImageData(generateLensBytes(w, h, r, bevel), w, h), 0, 0);
+                return canvas.toDataURL();
+            }
+
+            function getSvgRoot() {
+                if (svgRoot?.isConnected) return svgRoot;
+                svgRoot = document.createElementNS(SVG_NS, 'svg');
+                svgRoot.setAttribute('width', '0');
+                svgRoot.setAttribute('height', '0');
+                svgRoot.setAttribute('aria-hidden', 'true');
+                svgRoot.style.cssText = 'position:absolute;pointer-events:none;width:0;height:0;z-index:-9999;';
+                document.body.append(svgRoot);
+                return svgRoot;
+            }
+
+            function elNS(tag, attrs) {
+                const node = document.createElementNS(SVG_NS, tag);
+                for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, String(v));
+                return node;
+            }
+
+            function acquireFilter(w, h, r, bevel, depth) {
+                const key = `${w}x${h}r${r}b${bevel}d${depth}`;
+                const existing = filterCache.get(key);
+                if (existing) { existing.users++; return existing; }
+
+                const id = `home-liquid-${counter++}`;
+                const box = { x: 0, y: 0, width: w, height: h };
+                const filter = elNS('filter', {
+                    id, ...box,
+                    filterUnits: 'userSpaceOnUse',
+                    primitiveUnits: 'userSpaceOnUse',
+                    'color-interpolation-filters': 'sRGB'
+                });
+                const feImg = elNS('feImage', { ...box, result: 'map', preserveAspectRatio: 'none' });
+                feImg.setAttribute('href', createLensDataURL(w, h, r, bevel));
+                filter.append(
+                    feImg,
+                    elNS('feDisplacementMap', {
+                        in: 'SourceGraphic',
+                        in2: 'map',
+                        scale: depth * 2,
+                        xChannelSelector: 'R',
+                        yChannelSelector: 'G'
+                    })
+                );
+                getSvgRoot().append(filter);
+                const entry = { key, id, node: filter, users: 1 };
+                filterCache.set(key, entry);
+                return entry;
+            }
+
+            function attach(el, bevel = 22, depth = 22) {
+                if (!el || el._homeLiquidAttached) return;
+                el._homeLiquidAttached = true;
+                el.classList.add('glass-pill');
+                if (!isChromium()) return;
+
+                let currentEntry = null;
+                const update = () => {
+                    const w = Math.round(el.offsetWidth);
+                    const h = Math.round(el.offsetHeight);
+                    if (!w || !h || w > 1400 || h > 260) return;
+
+                    const rawR = Number.parseFloat(getComputedStyle(el).borderTopLeftRadius) || 24;
+                    const r = Math.round(Math.min(rawR, w / 2, h / 2));
+                    const nextEntry = acquireFilter(w, h, r, bevel, depth);
+                    if (currentEntry && currentEntry.key !== nextEntry.key) {
+                        if (--currentEntry.users <= 0) {
+                            currentEntry.node.remove();
+                            filterCache.delete(currentEntry.key);
+                        }
+                    }
+                    currentEntry = nextEntry;
+                    el.style.setProperty('--liquid-filter', `url(#${nextEntry.id})`);
+                    el.dataset.liquid = '';
+                };
+
+                update();
+                const ro = new ResizeObserver(update);
+                ro.observe(el);
+            }
+
+            return { attach };
+        })();
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Attach OpenBlast 1:1 Liquid Glass Lens to Home Pills & Floating Arrows
+            const topHeader = document.querySelector('header.kt-frosted-header');
+            if (topHeader) window.HomeLiquidGlass.attach(topHeader, 18, 20);
+            window.HomeLiquidGlass.attach(document.getElementById('smart-search-pill'), 22, 22);
+            window.HomeLiquidGlass.attach(document.getElementById('btn-prev'), 14, 16);
+            window.HomeLiquidGlass.attach(document.getElementById('btn-next'), 14, 16);
+            window.HomeLiquidGlass.attach(document.getElementById('home-stats-pill'), 22, 22);
+            window.HomeLiquidGlass.attach(document.getElementById('home-footer-pill'), 20, 20);
+
             // --- 120FPS GPU CAROUSEL WITH TOUCH SWIPE & HOVER PAUSE ---
             const carouselEl = document.getElementById('hero-carousel');
             const slides = document.querySelectorAll('.hero-slide');
