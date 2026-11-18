@@ -63,4 +63,17 @@ window.timetablesData = [
     "viewLink": "timetable_pages/bca-honours-s3-regular-supply-november-2026-2024-scheme.html",
     "pdfLink": "downloads_timetable/2026-11-16_bca-honours-s3-regular-supply-november-2026-2024-scheme.pdf"
 }
+,
+{
+    "id": "bdes_s7_nov2026_2019",
+    "title": "B.Des S7 (R, S) Exam November 2026 (2019 Scheme)",
+    "semester": "S7",
+    "categoryBadge": "S7",
+    "type": "Regular/Supply",
+    "scheme": "2019 Scheme",
+    "startDate": "2026-11-23T09:30:00",
+    "endDate": "2026-11-23T12:30:00",
+    "viewLink": "timetable_pages/bdes-s7-regular-supply-november-2026-2019-scheme.html",
+    "pdfLink": "downloads_timetable/2026-11-17_bdes-s7-regular-supply-november-2026-2019-scheme.pdf"
+}
 ];
