@@ -39,4 +39,30 @@ window.timetablesData = [
         "viewLink": "timetable_pages/btech-s7-regular-supply-november-2026-2019-scheme.html",
         "pdfLink": "https://drive.google.com/file/d/17QtmmZS0OI4Hg9h4z3zWXXHSKDw5fsZe/view?usp=drivesdk"
     },
+,
+{
+    "id": "apjaktu_detailed_time_table_of_bdes_s7_regula",
+    "title": "APJAKTU - Detailed Time Table of B.Des S7 (R, S) Exam November 2026 (2019 Scheme)",
+    "semester": "S7",
+    "categoryBadge": "S7",
+    "type": "Regular/Supply",
+    "scheme": "2019 Scheme",
+    "startDate": "2026-11-17T09:30:00",
+    "endDate": "2026-11-17T12:30:00",
+    "viewLink": "timetable_pages/apjaktu-detailed-time-table-of-bdes-s7-regular-supply-november-2026-2019-scheme.html",
+    "pdfLink": "downloads_timetable/2026-11-17_apjaktu-detailed-time-table-of-bdes-s7-regular-supply-november-2026-2019-scheme.pdf"
+}
+,
+{
+    "id": "bca_honours_s3_regular_supply_november_2026_2",
+    "title": "BCA Honours S3 (R, S) Exam November 2026 (2024 Scheme)",
+    "semester": "S3",
+    "categoryBadge": "S3",
+    "type": "Regular/Supply",
+    "scheme": "2024 Scheme",
+    "startDate": "2026-11-16T09:30:00",
+    "endDate": "2026-11-16T12:30:00",
+    "viewLink": "timetable_pages/bca-honours-s3-regular-supply-november-2026-2024-scheme.html",
+    "pdfLink": "downloads_timetable/2026-11-16_bca-honours-s3-regular-supply-november-2026-2024-scheme.pdf"
+}
 ];
