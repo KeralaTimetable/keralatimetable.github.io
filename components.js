@@ -182,6 +182,9 @@ window.KTUFlow = (function() {
             if (waPopup) {
                 waPopup.style.bottom = isActive ? '5.5rem' : '1.25rem';
             }
+            if (isActive && window.KTULiquidGlass && typeof window.KTULiquidGlass.refreshDocks === 'function') {
+                window.KTULiquidGlass.refreshDocks();
+            }
         },
 
         capsule(state = 'idle', message = '', actionUrl = null) {
@@ -438,6 +441,7 @@ window.KTULiquidGlass = (function() {
     let svgRoot = null;
     const filterCache = new Map();
     const observedElements = new WeakMap();
+    const dockUpdaters = new Set();
     let filterCounter = 0;
 
     function isChromiumEngine() {
@@ -583,10 +587,10 @@ window.KTULiquidGlass = (function() {
             const h = Math.round(el.offsetHeight);
             if (!w || !h || w > 1400 || h > 260) return;
 
-            const rawRadius = Number.parseFloat(getComputedStyle(el).borderTopLeftRadius) || 20;
+            const rawRadius = Number.parseFloat(getComputedStyle(el).borderTopLeftRadius) || 22;
             const r = Math.round(Math.min(rawRadius, w / 2, h / 2));
             const nextKey = acquireLiquidFilter(w, h, r, bevel, depth);
-            if (activeKey) releaseLiquidFilter(activeKey);
+            if (activeKey && activeKey !== nextKey) releaseLiquidFilter(activeKey);
             activeKey = nextKey;
 
             const filterEntry = filterCache.get(nextKey);
@@ -599,13 +603,34 @@ window.KTULiquidGlass = (function() {
         updateLens();
         const ro = new ResizeObserver(updateLens);
         ro.observe(el);
+
+        // For bottom popup docks that start hidden (opacity: 0, scale(0.92)),
+        // watch class changes (.dock-active) so Chromium re-binds the backdrop-filter texture!
+        if (el.id === 'floating-merge-dock' || el.id === 'floating-points-dock') {
+            dockUpdaters.add(updateLens);
+            const mo = new MutationObserver(() => {
+                if (el.classList.contains('dock-active')) {
+                    requestAnimationFrame(updateLens);
+                    setTimeout(updateLens, 120);
+                }
+            });
+            mo.observe(el, { attributes: true, attributeFilter: ['class'] });
+        }
+
         observedElements.set(el, { ro, getKey: () => activeKey });
+    }
+
+    function refreshDocks() {
+        dockUpdaters.forEach(fn => {
+            requestAnimationFrame(fn);
+            setTimeout(fn, 120);
+        });
     }
 
     function scanAndAttachAllPills() {
         if (!document.body) return;
 
-        // 1. Primary Floating Docks & Search Pill (bevel = 22, depth = 22)
+        // 1. Primary Floating Docks & Search Pill (bevel = 18, depth = 20 — exact match with Top Header!)
         const dockSelectors = [
             '#floating-merge-dock',
             '#floating-points-dock',
@@ -613,7 +638,7 @@ window.KTULiquidGlass = (function() {
             '#ktu-wa-popup'
         ];
         dockSelectors.forEach(sel => {
-            document.querySelectorAll(sel).forEach(el => attachLiquidPill(el, 22, 22));
+            document.querySelectorAll(sel).forEach(el => attachLiquidPill(el, 18, 20));
         });
 
         // 2. Sticky Top Header (Slightly rounded rectangular bar: bevel = 18, depth = 20)
@@ -632,7 +657,8 @@ window.KTULiquidGlass = (function() {
 
     return {
         attachLiquidPill,
-        scanAndAttachAllPills
+        scanAndAttachAllPills,
+        refreshDocks
     };
 })();
 
@@ -717,8 +743,7 @@ window.KTULiquidGlass = (function() {
                     inset 0 0 14px #ffffff12;
             }
 
-            /* OPENBLAST EXACT LIQUID FILTER RULE:
-               Low blur(5px) + Circular Meniscus SVG Displacement + Crystal Clear Fill */
+            /* OPENBLAST EXACT LIQUID FILTER RULE (Used by Top Bar — Untouched 100%!) */
             .glass-pill[data-liquid] {
                 background: transparent !important;
                 backdrop-filter: none !important;
@@ -756,6 +781,51 @@ window.KTULiquidGlass = (function() {
                     inset 1.5px 1.5px 0 -0.5px #fff9,
                     inset -1.5px -1.5px 0 -0.5px #ffffff4d,
                     inset 0 0 14px #ffffff12 !important;
+            }
+
+            /* ==================================================================
+               FIX FOR BOTTOM POPUP DOCKS (#floating-merge-dock & #floating-points-dock):
+               Chromium drops ::before backdrop-filter on elements that transition
+               from opacity:0 + offscreen translate3d() with will-change:transform,opacity.
+               Applying the exact Top Bar backdrop-filter & specular rim DIRECTLY onto the
+               dock element guarantees 100% identical blur + refraction physics!
+               ================================================================== */
+            #floating-merge-dock,
+            #floating-points-dock,
+            #floating-merge-dock.glass-pill[data-liquid],
+            #floating-points-dock.glass-pill[data-liquid] {
+                will-change: auto !important;
+                isolation: auto !important;
+                border-radius: 22px !important;
+                border: none !important;
+                background-color: rgba(255, 255, 255, 0.36) !important;
+                background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 48%) !important;
+                -webkit-backdrop-filter: var(--liquid-filter, ) blur(5px) saturate(1.8) brightness(1.04) !important;
+                backdrop-filter: var(--liquid-filter, ) blur(5px) saturate(1.8) brightness(1.04) !important;
+                box-shadow:
+                    inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                    inset -1.5px -1.5px 0 -0.5px #fff9,
+                    inset 0 0 0 0.5px #00000014,
+                    inset 0 0 14px #fff3,
+                    0 14px 40px rgba(15, 23, 42, 0.16) !important;
+            }
+            #floating-merge-dock::before,
+            #floating-points-dock::before,
+            #floating-merge-dock.glass-pill[data-liquid]::before,
+            #floating-points-dock.glass-pill[data-liquid]::before {
+                display: none !important;
+            }
+            html.dark #floating-merge-dock,
+            html.dark #floating-points-dock,
+            html.dark #floating-merge-dock.glass-pill[data-liquid],
+            html.dark #floating-points-dock.glass-pill[data-liquid] {
+                background-color: rgba(15, 23, 42, 0.48) !important;
+                background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 48%) !important;
+                box-shadow:
+                    inset 1.5px 1.5px 0 -0.5px #fff9,
+                    inset -1.5px -1.5px 0 -0.5px #ffffff4d,
+                    inset 0 0 14px #ffffff12,
+                    0 20px 44px rgba(0, 0, 0, 0.65) !important;
             }
 
             /* ==================================================================
