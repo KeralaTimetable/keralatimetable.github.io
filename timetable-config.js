@@ -50,8 +50,7 @@ window.timetablesData = [
     "endDate": "2026-11-17T12:30:00",
     "viewLink": "timetable_pages/apjaktu-detailed-time-table-of-bdes-s7-regular-supply-november-2026-2019-scheme.html",
     "pdfLink": "downloads_timetable/2026-11-17_apjaktu-detailed-time-table-of-bdes-s7-regular-supply-november-2026-2019-scheme.pdf"
-}
-,
+},
 {
     "id": "bca_honours_s3_regular_supply_november_2026_2",
     "title": "BCA Honours S3 (R, S) Exam November 2026 (2024 Scheme)",
