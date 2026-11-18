@@ -130,78 +130,230 @@
     </script>
 
     <!-- Tailwind CSS & Icons -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --ot-ease-emph: cubic-bezier(0.2, 0, 0, 1);
+            --ot-ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+            --glassMaterialBackground: rgba(248, 250, 252, 0.62);
+            --glassMaterialShadowColor: rgba(15, 23, 42, 0.12);
+        }
+
+        html.dark {
+            --glassMaterialBackground: rgba(30, 36, 52, 0.68);
+            --glassMaterialShadowColor: rgba(0, 0, 0, 0.65);
+        }
+
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             overflow-x: hidden;
             background: 
-                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.65) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(254, 243, 199, 0.5) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(219, 234, 254, 0.6) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.5) 0px, transparent 50%),
+                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.72) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(254, 243, 199, 0.55) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(219, 234, 254, 0.68) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.58) 0px, transparent 50%),
                 #f8fafc;
             min-height: 100vh;
         }
 
         .font-mono-code { font-family: 'Fira Code', monospace; }
 
-        /* Deluxe Glassmorphism */
-        .real-glass {
-            background: rgba(255, 255, 255, 0.62);
-            backdrop-filter: blur(28px) saturate(180%);
-            -webkit-backdrop-filter: blur(28px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.75);
-            border-top: 1px solid rgba(255, 255, 255, 0.95);
-            border-left: 1px solid rgba(255, 255, 255, 0.95);
-            box-shadow: 
-                0 20px 40px -15px rgba(31, 38, 135, 0.07),
-                0 1px 2px rgba(255, 255, 255, 0.85) inset;
-            transform-style: preserve-3d;
-            transition: transform 0.18s ease-out, box-shadow 0.2s ease;
+        /* ==========================================================================
+           OPENBLAST TRUE iOS 26 LIQUID GLASS PILL ENGINE (.glass-pill[data-liquid])
+           IMPORTANT: Parent MUST have backdrop-filter: none so ::before can refract
+           the scrolling page content directly behind it!
+           ========================================================================== */
+        .glass-pill {
+            isolation: isolate;
+            position: relative;
+        }
+        .glass-pill::before,
+        .glass-pill::after {
+            content: "";
+            border-radius: inherit;
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+        }
+        /* Fallback for Safari / Non-Chromium */
+        .glass-pill::before {
+            z-index: -1;
+            background-color: var(--glassMaterialBackground);
+            -webkit-backdrop-filter: saturate(1.9) blur(26px);
+            backdrop-filter: saturate(1.9) blur(26px);
+            box-shadow: 0 14px 44px var(--glassMaterialShadowColor);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 55%);
+        }
+        /* Active Optical Refraction State (1:1 OpenBlast CSS) */
+        .glass-pill[data-liquid] {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-color: transparent !important;
+            box-shadow: none !important;
+        }
+        .glass-pill[data-liquid]::before {
+            z-index: -1;
+            -webkit-backdrop-filter: var(--liquid-filter) blur(5px) saturate(1.85) brightness(1.04) !important;
+            backdrop-filter: var(--liquid-filter) blur(5px) saturate(1.85) brightness(1.04) !important;
+            background-color: color-mix(in srgb, var(--glassMaterialBackground) 50%, transparent) !important;
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 48%) !important;
+            box-shadow: 0 18px 46px -8px var(--glassMaterialShadowColor) !important;
+        }
+        html.dark .glass-pill[data-liquid]::before {
+            background-color: rgba(15, 23, 42, 0.46) !important;
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 48%) !important;
+        }
+        /* 4-Layer Specular Meniscus Rim (::after) */
+        .glass-pill::after,
+        .glass-pill[data-liquid]::after {
+            z-index: 2;
+            opacity: 1;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3 !important;
+        }
+        html.dark .glass-pill::after,
+        html.dark .glass-pill[data-liquid]::after {
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fff9,
+                inset -1.5px -1.5px 0 -0.5px #ffffff4d,
+                inset 0 0 14px #ffffff12 !important;
+        }
+
+        /* ==========================================================================
+           iOS SLIDING SEGMENTED CONTROL PILL (.ios-segmented-track + .ios-sliding-pill)
+           Matches OpenBlast's .ot-dock-pill spring physics!
+           ========================================================================== */
+        .ios-segmented-track {
+            position: relative;
+            isolation: isolate;
+            background: rgba(118, 118, 128, 0.12);
+            border-radius: 9999px;
+            padding: 4px;
+            box-shadow:
+                inset 0 1px 2px rgba(15, 23, 42, 0.08),
+                inset 0 0 0 0.5px rgba(15, 23, 42, 0.06);
+        }
+        html.dark .ios-segmented-track {
+            background: rgba(118, 118, 128, 0.24);
+            box-shadow:
+                inset 0 1px 2px rgba(0, 0, 0, 0.4),
+                inset 0 0 0 0.5px rgba(255, 255, 255, 0.08);
+        }
+
+        /* The physical sliding glass thumb inside the 2-tab track */
+        .ios-sliding-pill {
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            left: 4px;
+            width: calc(50% - 4px);
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #ffffff,
+                inset -1px -1px 0 -0.5px rgba(255, 255, 255, 0.8),
+                0 3px 10px -1px rgba(15, 23, 42, 0.12),
+                0 1px 3px 0 rgba(15, 23, 42, 0.06);
+            transform: translate3d(calc(var(--tab-idx, 0) * 100%), 0, 0) scale(1);
+            transition:
+                transform 0.38s cubic-bezier(0.22, 1.18, 0.36, 1),
+                background-color 0.25s ease,
+                box-shadow 0.25s ease;
+            pointer-events: none;
+            z-index: 0;
             will-change: transform;
+        }
+        .ios-segmented-track:active .ios-sliding-pill {
+            transform: translate3d(calc(var(--tab-idx, 0) * 100%), 0, 0) scale(0.96);
+        }
+        html.dark .ios-sliding-pill {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.38), rgba(79, 70, 229, 0.38));
+            box-shadow:
+                inset 1.2px 1.2px 0 -0.5px rgba(255, 255, 255, 0.45),
+                inset -1px -1px 0 -0.5px rgba(147, 197, 253, 0.25),
+                0 4px 14px rgba(0, 0, 0, 0.45);
+        }
+
+        /* Specular Glass Containers & Cards */
+        .real-glass {
+            background: rgba(255, 255, 255, 0.56);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 52%);
+            backdrop-filter: blur(26px) saturate(190%);
+            -webkit-backdrop-filter: blur(26px) saturate(190%);
+            border: none;
+            box-shadow: 
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3,
+                0 20px 44px -15px rgba(31, 38, 135, 0.09);
+            transform-style: preserve-3d;
+            transition: transform 0.22s var(--ot-ease-settle), box-shadow 0.22s ease;
         }
 
         .result-glass {
-            background: rgba(255, 255, 255, 0.78);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.88);
-            border-top: 1px solid rgba(255, 255, 255, 0.98);
+            background: rgba(255, 255, 255, 0.66);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 55%);
+            backdrop-filter: blur(18px) saturate(190%);
+            -webkit-backdrop-filter: blur(18px) saturate(190%);
+            border: none;
             box-shadow: 
-                0 8px 24px -4px rgba(31, 38, 135, 0.04),
-                inset 0 1px 2px rgba(255, 255, 255, 0.9);
-            transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3,
+                0 8px 24px -4px rgba(31, 38, 135, 0.05);
+            transition: transform 0.32s var(--ot-ease-settle), box-shadow 0.28s ease, background-color 0.22s ease;
         }
 
         .result-glass:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.94);
-            border-color: rgba(37, 99, 235, 0.35); 
-            box-shadow: 0 16px 32px -8px rgba(37, 99, 235, 0.14), inset 0 1px 2px rgba(255, 255, 255, 1);
+            transform: translateY(-4px) scale(1.01);
+            background-color: rgba(255, 255, 255, 0.88);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #ffffff,
+                inset -1.5px -1.5px 0 -0.5px #ffffff,
+                inset 0 0 0 1px rgba(37, 99, 235, 0.38),
+                0 16px 32px -8px rgba(37, 99, 235, 0.14);
+        }
+
+        .result-glass:active {
+            transform: scale(0.97);
+            transition-duration: 80ms;
         }
 
         .result-glass.selected-card {
-            background: rgba(239, 246, 255, 0.94) !important;
-            border-color: rgba(37, 99, 235, 0.7) !important;
-            box-shadow: 0 14px 30px -6px rgba(37, 99, 235, 0.2), inset 0 0 0 1px rgba(37, 99, 235, 0.25) !important;
+            background: rgba(239, 246, 255, 0.88) !important;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #ffffff,
+                inset 0 0 0 1.5px rgba(37, 99, 235, 0.65),
+                0 14px 30px -6px rgba(37, 99, 235, 0.22) !important;
             transform: translateY(-2px);
         }
 
         html.dark .result-glass.selected-card {
             background: rgba(30, 58, 138, 0.38) !important;
-            border-color: rgba(96, 165, 250, 0.65) !important;
-            box-shadow: 0 14px 32px -6px rgba(37, 99, 235, 0.35), inset 0 0 0 1px rgba(96, 165, 250, 0.25) !important;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px rgba(255, 255, 255, 0.35),
+                inset 0 0 0 1.5px rgba(96, 165, 250, 0.65),
+                0 14px 32px -6px rgba(37, 99, 235, 0.35) !important;
         }
 
         .glass-input {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1.5px solid rgba(203, 213, 225, 0.85);
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(15, 23, 42, 0.10);
             color: #0f172a; 
-            box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.03);
+            box-shadow:
+                inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+                inset 0 2px 4px rgba(15, 23, 42, 0.03);
             transition: all 0.22s ease;
         }
         
@@ -226,40 +378,36 @@
 
         /* Autocomplete Dropdown */
         .autocomplete-glass {
-            background: rgba(255, 255, 255, 0.96);
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(24px) saturate(190%);
             -webkit-backdrop-filter: blur(24px) saturate(190%);
-            border: 1px solid rgba(203, 213, 225, 0.85);
-            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.15);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #ffffff,
+                inset 0 0 0 0.5px rgba(15, 23, 42, 0.12),
+                0 20px 40px -10px rgba(15, 23, 42, 0.16);
         }
         html.dark .autocomplete-glass {
-            background: rgba(15, 23, 42, 0.95);
-            border-color: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.65);
+            background: rgba(15, 23, 42, 0.92);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px rgba(255, 255, 255, 0.22),
+                0 20px 40px -10px rgba(0, 0, 0, 0.7);
         }
 
-        /* ==================== BOTTOM FLOATING MERGE DOCK ==================== */
+        /* ==================== BOTTOM FLOATING MERGE DOCK (TRUE OPENBLAST LIQUID PILL) ==================== */
         #floating-merge-dock {
-            position: fixed;
-            bottom: 1.25rem;
+            position: fixed !important;
+            bottom: max(1rem, env(safe-area-inset-bottom));
             left: 50%;
             z-index: 55;
-            width: calc(100% - 1.75rem);
+            width: calc(100% - 1.5rem);
             max-width: 30rem;
+            border-radius: 9999px;
             transform: translate3d(-50%, 140%, 0) scale(0.92);
             opacity: 0;
             pointer-events: none;
-            background: rgba(255, 255, 255, 0.86);
-            backdrop-filter: blur(28px) saturate(200%);
-            -webkit-backdrop-filter: blur(28px) saturate(200%);
-            border: 1px solid rgba(255, 255, 255, 0.95);
-            box-shadow: 
-                0 22px 48px -12px rgba(15, 23, 42, 0.22),
-                0 4px 16px -2px rgba(37, 99, 235, 0.14),
-                inset 0 1px 0 0 rgba(255, 255, 255, 1);
             transition: 
-                transform 0.46s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+                transform 0.46s cubic-bezier(0.22, 1.18, 0.36, 1),
+                opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
             will-change: transform, opacity;
         }
         #floating-merge-dock.dock-active {
@@ -267,12 +415,14 @@
             opacity: 1;
             pointer-events: auto;
         }
-        html.dark #floating-merge-dock {
-            background: rgba(15, 23, 42, 0.88);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 
-                0 24px 50px -12px rgba(0, 0, 0, 0.75),
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
+
+        /* Tactile Press Physics (OpenBlast .ot-press) */
+        .ot-press {
+            transition: transform 0.16s var(--ot-ease-settle);
+        }
+        .ot-press:not(:disabled):active {
+            transition-duration: 80ms;
+            transform: scale(0.92);
         }
 
         /* Ambient Orbs */
@@ -303,8 +453,14 @@
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        .fade-in { animation: fadeIn 0.25s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        /* Smooth View Swap Animation */
+        .ot-swap-in {
+            animation: otSwapIn 0.28s var(--ot-ease-emph) both;
+        }
+        @keyframes otSwapIn {
+            0% { opacity: 0; transform: translate3d(0, 6px, 0) scale(0.99); }
+            100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+        }
     </style>
 </head>
 
@@ -333,9 +489,9 @@
     </div>
 
     <!-- MAIN BODY -->
-    <main class="flex-grow w-full max-w-5xl mx-auto px-3.5 sm:px-6 pt-7 sm:pt-11 md:pt-14 pb-24 relative z-10 flex flex-col items-center">
+    <main class="flex-grow w-full max-w-5xl mx-auto px-3.5 sm:px-6 pt-5 sm:pt-9 md:pt-12 pb-28 relative z-10 flex flex-col items-center">
         
-<div class="text-center mb-6 sm:mb-8 max-w-3xl mx-auto">
+        <div class="text-center mb-6 sm:mb-8 max-w-3xl mx-auto">
             <h1 id="hero-h1" class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-3">
                 KTU PYQ Finder — <span class="font-extrabold">B.Tech Previous Year Question Papers,</span> <br class="hidden sm:inline">
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">Download PDF Instantly!</span>
@@ -347,24 +503,27 @@
             </p>
         </div>
 
-        <!-- 3D Perspective Search Box with Tabs -->
+        <!-- 3D Perspective Search Box with iOS Sliding Pill Tabs -->
         <div id="parallax-container" class="w-full max-w-2xl relative perspective-1000 mb-6 sm:mb-7 z-30">
             <div id="search-card" class="real-glass rounded-[1.8rem] sm:rounded-[2.2rem] p-4 sm:p-6 md:p-8 w-full flex flex-col relative transition-all duration-300">
                 
-                <!-- Tab Switcher (Single-Line Non-Wrapping on Mobile) -->
-                <div class="grid grid-cols-2 gap-1.5 mb-5 bg-slate-200/55 p-1.5 rounded-2xl w-full max-w-sm mx-auto border border-slate-200/60 shadow-inner">
-                    <button id="tab-search" type="button" onclick="toggleTab('search')" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white text-blue-600 shadow-sm border border-slate-200 whitespace-nowrap flex items-center justify-center gap-1.5">
+                <!-- iOS Sliding Segmented Control (Search Code <-> Browse Semester) -->
+                <div id="mode-segmented-track" class="ios-segmented-track grid grid-cols-2 mb-5 w-full max-w-sm mx-auto select-none" style="--tab-idx: 0;">
+                    <!-- Physical Sliding Glass Pill Thumb -->
+                    <span class="ios-sliding-pill" aria-hidden="true"></span>
+
+                    <button id="tab-search" type="button" onclick="toggleTab('search')" class="relative z-10 px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold transition-colors duration-200 text-blue-600 dark:text-blue-300 whitespace-nowrap flex items-center justify-center gap-1.5">
                         <i class="fas fa-search text-[11px]"></i>
                         <span>Search Code</span>
                     </button>
-                    <button id="tab-browse" type="button" onclick="toggleTab('browse')" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-500 hover:text-slate-800 hover:bg-white/40 border border-transparent whitespace-nowrap flex items-center justify-center gap-1.5">
+                    <button id="tab-browse" type="button" onclick="toggleTab('browse')" class="relative z-10 px-3 py-2 rounded-full text-xs sm:text-sm font-bold transition-colors duration-200 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white whitespace-nowrap flex items-center justify-center gap-1.5">
                         <i class="fas fa-layer-group text-[11px]"></i>
                         <span>Browse Semester</span>
                     </button>
                 </div>
                 
                 <!-- View 1: Search by Code or Subject Name with Live Autocomplete -->
-                <div id="view-search" class="fade-in w-full flex flex-col gap-2.5 relative">
+                <div id="view-search" class="ot-swap-in w-full flex flex-col gap-2.5 relative">
                     <div class="flex items-center justify-between px-1">
                         <label for="searchInput" class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">
                             Enter KTU Course Code or Subject Name
@@ -384,7 +543,7 @@
                             <i class="fas fa-times text-xs"></i>
                         </button>
 
-                        <button type="submit" aria-label="Search Question Papers" class="absolute right-2 sm:right-2.5 h-10 sm:h-11 px-4 sm:px-5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl flex items-center justify-center gap-1.5 font-bold text-xs sm:text-sm transition-all shadow-[0_4px_14px_rgba(37,99,235,0.3)] active:scale-95">
+                        <button type="submit" aria-label="Search Question Papers" class="ot-press absolute right-2 sm:right-2.5 h-10 sm:h-11 px-4 sm:px-5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl flex items-center justify-center gap-1.5 font-bold text-xs sm:text-sm transition-all shadow-[0_4px_14px_rgba(37,99,235,0.3)]">
                             <span class="hidden sm:inline">Search</span>
                             <i class="fas fa-arrow-right text-xs sm:text-sm"></i>
                         </button>
@@ -395,7 +554,7 @@
                 </div>
 
                 <!-- View 2: Browse Cascading Dropdowns (with localStorage persistence) -->
-                <div id="view-browse" class="hidden fade-in w-full flex-col gap-3">
+                <div id="view-browse" class="hidden ot-swap-in w-full flex-col gap-3">
                     <div class="flex items-center justify-between px-1 mb-0.5">
                         <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">
                             <i class="fas fa-bookmark text-blue-500 mr-1"></i> Auto-saves your branch &amp; semester
@@ -438,7 +597,7 @@
                     </div>
 
                     <!-- Action Button -->
-                    <button type="button" onclick="executeBrowseSearch()" class="w-full mt-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl py-3.5 text-xs sm:text-sm font-bold transition-all shadow-[0_4px_14px_rgba(37,99,235,0.3)] active:scale-95 flex items-center justify-center gap-2">
+                    <button type="button" onclick="executeBrowseSearch()" class="ot-press w-full mt-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl py-3.5 text-xs sm:text-sm font-bold transition-all shadow-[0_4px_14px_rgba(37,99,235,0.3)] flex items-center justify-center gap-2">
                         <span>Find Question Papers</span>
                         <i class="fas fa-file-pdf"></i>
                     </button>
@@ -463,32 +622,32 @@
             <!-- Trending Courses (Crawlable Internal Anchor Links + Instant JS Handler) -->
             <p class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest mb-2.5">Popular KTU PYQ Searches</p>
             <div class="flex flex-wrap justify-center gap-2 sm:gap-2.5">
-                <a href="#results-area" onclick="quickSearch('GAMAT101'); return false;" title="KTU GAMAT101 Mathematics for Information Science-1 Previous Year Question Papers PDF" class="px-3.5 py-1.5 sm:px-4 sm:py-2 real-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm active:scale-95">
+                <a href="#results-area" onclick="quickSearch('GAMAT101'); return false;" title="KTU GAMAT101 Mathematics for Information Science-1 Previous Year Question Papers PDF" class="ot-press px-3.5 py-1.5 sm:px-4 sm:py-2 result-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:text-blue-600 transition-all">
                     <i class="fas fa-fire text-amber-500 mr-1"></i>GAMAT101
                 </a>
-                <a href="#results-area" onclick="quickSearch('UCEST105'); return false;" title="KTU UCEST105 Algorithmic Thinking with Python Previous Year Question Papers PDF" class="px-3.5 py-1.5 sm:px-4 sm:py-2 real-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm active:scale-95">
+                <a href="#results-area" onclick="quickSearch('UCEST105'); return false;" title="KTU UCEST105 Algorithmic Thinking with Python Previous Year Question Papers PDF" class="ot-press px-3.5 py-1.5 sm:px-4 sm:py-2 result-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:text-blue-600 transition-all">
                     UCEST105
                 </a>
-                <a href="#results-area" onclick="quickSearch('GXEST203'); return false;" title="KTU GXEST203 Foundations of Computing Previous Year Question Papers PDF" class="px-3.5 py-1.5 sm:px-4 sm:py-2 real-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm active:scale-95">
+                <a href="#results-area" onclick="quickSearch('GXEST203'); return false;" title="KTU GXEST203 Foundations of Computing Previous Year Question Papers PDF" class="ot-press px-3.5 py-1.5 sm:px-4 sm:py-2 result-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:text-blue-600 transition-all">
                     GXEST203
                 </a>
-                <a href="#results-area" onclick="quickSearch('MAT101'); return false;" title="KTU MAT101 Linear Algebra and Calculus Previous Year Question Papers PDF" class="px-3.5 py-1.5 sm:px-4 sm:py-2 real-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm active:scale-95">
+                <a href="#results-area" onclick="quickSearch('MAT101'); return false;" title="KTU MAT101 Linear Algebra and Calculus Previous Year Question Papers PDF" class="ot-press px-3.5 py-1.5 sm:px-4 sm:py-2 result-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:text-blue-600 transition-all">
                     MAT101
                 </a>
-                <a href="#results-area" onclick="quickSearch('EST110'); return false;" title="KTU EST110 Engineering Graphics Previous Year Question Papers PDF" class="px-3.5 py-1.5 sm:px-4 sm:py-2 real-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm active:scale-95">
+                <a href="#results-area" onclick="quickSearch('EST110'); return false;" title="KTU EST110 Engineering Graphics Previous Year Question Papers PDF" class="ot-press px-3.5 py-1.5 sm:px-4 sm:py-2 result-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:text-blue-600 transition-all">
                     EST110
                 </a>
-                <a href="#results-area" onclick="quickSearch('CST201'); return false;" title="KTU CST201 Data Structures Previous Year Question Papers PDF" class="px-3.5 py-1.5 sm:px-4 sm:py-2 real-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm active:scale-95">
+                <a href="#results-area" onclick="quickSearch('CST201'); return false;" title="KTU CST201 Data Structures Previous Year Question Papers PDF" class="ot-press px-3.5 py-1.5 sm:px-4 sm:py-2 result-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:text-blue-600 transition-all">
                     CST201
                 </a>
-                <a href="#results-area" onclick="quickSearch('MET204'); return false;" title="KTU MET204 Manufacturing Process Previous Year Question Papers PDF" class="px-3.5 py-1.5 sm:px-4 sm:py-2 real-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm active:scale-95">
+                <a href="#results-area" onclick="quickSearch('MET204'); return false;" title="KTU MET204 Manufacturing Process Previous Year Question Papers PDF" class="ot-press px-3.5 py-1.5 sm:px-4 sm:py-2 result-glass rounded-xl text-xs sm:text-sm font-bold font-mono-code text-slate-700 hover:text-blue-600 transition-all">
                     MET204
                 </a>
             </div>
         </div>
 
         <!-- WhatsApp Community Banner -->
-        <a href="https://chat.whatsapp.com/CD0wDNFlMDbKFQW1TWDg3l" target="_blank" rel="noopener noreferrer" class="w-full max-w-sm mx-auto mb-8 sm:mb-10 real-glass hover:bg-white/85 text-slate-800 py-2.5 px-4 sm:py-3 sm:px-5 rounded-2xl transition-all flex items-center justify-center gap-3.5 shadow-sm border border-[#25D366]/40 hover:border-[#25D366]/70 group z-20 relative active:scale-95">
+        <a href="https://chat.whatsapp.com/CD0wDNFlMDbKFQW1TWDg3l" target="_blank" rel="noopener noreferrer" class="ot-press w-full max-w-sm mx-auto mb-8 sm:mb-10 result-glass text-slate-800 py-2.5 px-4 sm:py-3 sm:px-5 rounded-2xl transition-all flex items-center justify-center gap-3.5 group z-20 relative">
             <div class="bg-[#25D366] text-white w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 shrink-0">
                 <i class="fab fa-whatsapp text-lg sm:text-xl"></i>
             </div>
@@ -521,12 +680,12 @@
 
                     <!-- Right Quick Actions -->
                     <div class="flex items-center gap-2">
-                        <button type="button" id="btn-select-all" onclick="toggleSelectAllPapers()" class="px-3 py-1.5 rounded-xl bg-white/90 hover:bg-white text-slate-700 border border-slate-200/90 text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all active:scale-95">
+                        <button type="button" id="btn-select-all" onclick="toggleSelectAllPapers()" class="ot-press px-3 py-1.5 rounded-xl bg-white/90 hover:bg-white text-slate-700 border border-slate-200/90 text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
                             <i class="far fa-check-square text-blue-600"></i>
                             <span id="select-all-label">Select All</span>
                         </button>
 
-                        <button type="button" onclick="shareSearchLink()" class="px-3 py-1.5 rounded-xl bg-white/90 hover:bg-white text-slate-700 border border-slate-200/90 text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all active:scale-95" title="Copy direct link to these question papers">
+                        <button type="button" onclick="shareSearchLink()" class="ot-press px-3 py-1.5 rounded-xl bg-white/90 hover:bg-white text-slate-700 border border-slate-200/90 text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all" title="Copy direct link to these question papers">
                             <i class="fas fa-share-alt text-blue-600"></i>
                             <span>Share</span>
                         </button>
@@ -535,11 +694,11 @@
 
                 <!-- Bottom Row: Scheme Filter Pills + Subtle Merge Hint -->
                 <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-2.5">
-                    <div id="scheme-filters" class="w-full md:w-auto overflow-x-auto hide-scrollbar flex gap-1.5 bg-slate-200/60 p-1.5 rounded-xl border border-slate-200/80">
-                        <button type="button" onclick="setSchemeFilter('All')" id="btn-filter-all" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 whitespace-nowrap transition-all">All Schemes</button>
-                        <button type="button" onclick="setSchemeFilter('2024')" id="btn-filter-2024" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-white/60 whitespace-nowrap transition-all">2024 Scheme</button>
-                        <button type="button" onclick="setSchemeFilter('2019')" id="btn-filter-2019" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-white/60 whitespace-nowrap transition-all">2019 Scheme</button>
-                        <button type="button" onclick="setSchemeFilter('2015')" id="btn-filter-2015" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-white/60 whitespace-nowrap transition-all">2015 Scheme</button>
+                    <div id="scheme-filters" class="ios-segmented-track w-full md:w-auto overflow-x-auto hide-scrollbar flex gap-1 p-1 rounded-full">
+                        <button type="button" onclick="setSchemeFilter('All')" id="btn-filter-all" class="ot-press px-3.5 py-1.5 rounded-full text-xs font-bold bg-white text-blue-600 shadow-sm whitespace-nowrap transition-all">All Schemes</button>
+                        <button type="button" onclick="setSchemeFilter('2024')" id="btn-filter-2024" class="ot-press px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-600 hover:text-slate-800 whitespace-nowrap transition-all">2024 Scheme</button>
+                        <button type="button" onclick="setSchemeFilter('2019')" id="btn-filter-2019" class="ot-press px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-600 hover:text-slate-800 whitespace-nowrap transition-all">2019 Scheme</button>
+                        <button type="button" onclick="setSchemeFilter('2015')" id="btn-filter-2015" class="ot-press px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-600 hover:text-slate-800 whitespace-nowrap transition-all">2015 Scheme</button>
                     </div>
 
                     <p class="text-[11px] font-semibold text-slate-500 flex items-center gap-1.5">
@@ -552,7 +711,6 @@
             <!-- Results Grid -->
             <div id="results-grid" class="w-full grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4"></div>
         </div>
-
         <!-- ==================== SEO SILO ARCHIVE & KEYWORD DIRECTORY ==================== -->
         <section id="seo-archive-directory" aria-label="KTU B.Tech Question Paper Archive" class="w-full max-w-4xl mx-auto mt-2 mb-10 z-20">
             <div class="real-glass rounded-[1.8rem] p-5 sm:p-7 md:p-8">
@@ -783,10 +941,10 @@
 
     </main>
 
-    <!-- ==================== FLOATING BOTTOM MERGE DOCK (Appears when >= 1 paper ticked) ==================== -->
-    <div id="floating-merge-dock" class="rounded-[1.75rem] p-2.5 sm:p-3 flex items-center justify-between gap-2.5">
-        <div class="flex items-center gap-2.5 pl-1.5">
-            <span id="dock-count-badge" class="w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-black flex items-center justify-center shadow-sm shrink-0">
+    <!-- ==================== FLOATING BOTTOM MERGE DOCK (True OpenBlast Liquid Glass Pill!) ==================== -->
+    <div id="floating-merge-dock" class="glass-pill p-2.5 sm:p-3 flex items-center justify-between gap-2.5">
+        <div class="relative z-10 flex items-center gap-2.5 pl-1.5">
+            <span id="dock-count-badge" class="w-8 h-8 rounded-full bg-blue-600 text-white text-xs font-black flex items-center justify-center shadow-md shrink-0">
                 1
             </span>
             <div class="flex flex-col text-left">
@@ -799,7 +957,7 @@
             </div>
         </div>
 
-        <button type="button" id="btn-floating-merge" onclick="downloadMergedPapers(this)" class="px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 shadow-[0_8px_20px_-4px_rgba(37,99,235,0.45)] transition-all active:scale-95 shrink-0">
+        <button type="button" id="btn-floating-merge" onclick="downloadMergedPapers(this)" class="ot-press relative z-10 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 shadow-[0_8px_20px_-4px_rgba(37,99,235,0.45)] shrink-0">
             <i class="fas fa-layer-group text-xs"></i>
             <span id="floating-merge-label">Merge &amp; Download</span>
         </button>
@@ -807,7 +965,7 @@
 
     <!-- PDF Quick Preview Modal -->
     <div id="pdf-preview-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-3 sm:p-6">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-4xl h-[85vh] flex flex-col shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden fade-in">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-4xl h-[85vh] flex flex-col shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden ot-swap-in">
             <div class="px-4 sm:px-6 py-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-900">
                 <div class="flex items-center gap-2.5 truncate pr-3">
                     <i class="fas fa-file-pdf text-rose-500 text-lg"></i>
@@ -817,7 +975,7 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2 shrink-0">
-                    <a id="preview-download-link" href="#pdf-preview-modal" download class="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
+                    <a id="preview-download-link" href="#pdf-preview-modal" download class="ot-press px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
                         <i class="fas fa-download"></i>
                         <span>Save PDF</span>
                     </a>
@@ -842,21 +1000,161 @@
         </div>
     </footer>
 
+    <!-- Global Site Components (Cache-Busted v=25) -->
+    <script src="/components.js?v=25" onerror="this.onerror=null;this.src='https://keralatimetable.in/components.js?v=25';"></script>
+
     <!-- Scripts -->
     <script>
-        // Dynamically load /components.js when hosted on keralatimetable.in
-        (function loadSiteComponents() {
-            try {
-                if (window.location.hostname.includes('keralatimetable.in') || window.location.protocol === 'http:' || window.location.protocol === 'https:') {
-                    const s = document.createElement('script');
-                    s.src = 'https://keralatimetable.in/components.js?v=17';
-                    s.async = true;
-                    s.onload = () => {
-                        if (typeof loadNavigation === 'function') loadNavigation('pyq', '', false);
-                    };
-                    document.head.appendChild(s);
+        if (typeof loadNavigation === 'function') {
+            loadNavigation('pyq', '', false);
+        }
+
+        // =====================================================================
+        // EMBEDDED OPENBLAST LIQUID GLASS ENGINE (Guarantees 1:1 Refraction on
+        // #floating-merge-dock & Header even if components.js is cached!)
+        // =====================================================================
+        window.PYQLiquidGlass = (function() {
+            const SVG_NS = 'http://www.w3.org/2000/svg';
+            let svgRoot = null;
+            const filterCache = new Map();
+            let counter = 0;
+
+            function isChromium() {
+                if (navigator.userAgentData?.brands?.some(b => /Chromium|Chrome|Edge/i.test(b.brand))) return true;
+                return /Chrome|CriOS|Edg|OPR|Brave/i.test(navigator.userAgent) && !/Firefox|FxiOS/i.test(navigator.userAgent);
+            }
+
+            // OpenBlast Gy(w, h, r, bevel) Circular Meniscus Normal Map
+            function generateLensBytes(w, h, radius, bevel) {
+                const bytes = new Uint8ClampedArray(w * h * 4);
+                const halfW = w / 2, halfH = h / 2;
+                const r = Math.max(0, Math.min(radius, halfW, halfH));
+                const b = Math.max(1, Math.min(bevel, halfW, halfH));
+
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        const dx = x + 0.5 - halfW;
+                        const dy = y + 0.5 - halfH;
+                        const qx = Math.abs(dx) - (halfW - r);
+                        const qy = Math.abs(dy) - (halfH - r);
+
+                        let distFromEdge, nx = 0, ny = 0;
+                        if (qx > 0 && qy > 0) {
+                            const d = Math.hypot(qx, qy);
+                            distFromEdge = r - d;
+                            nx = (qx / d) * Math.sign(dx);
+                            ny = (qy / d) * Math.sign(dy);
+                        } else if (qx > qy) {
+                            distFromEdge = r - qx;
+                            nx = Math.sign(dx);
+                        } else {
+                            distFromEdge = r - qy;
+                            ny = Math.sign(dy);
+                        }
+
+                        const norm = Math.min(1, Math.max(0, 1 - distFromEdge / b));
+                        const g = 1 - Math.sqrt(1 - norm * norm);
+                        const idx = (y * w + x) * 4;
+                        bytes[idx]     = Math.round(128 - nx * g * 127);
+                        bytes[idx + 1] = Math.round(128 - ny * g * 127);
+                        bytes[idx + 2] = 128;
+                        bytes[idx + 3] = 255;
+                    }
                 }
-            } catch (e) {}
+                return bytes;
+            }
+
+            function createLensDataURL(w, h, r, bevel) {
+                const canvas = document.createElement('canvas');
+                canvas.width = w; canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return '';
+                ctx.putImageData(new ImageData(generateLensBytes(w, h, r, bevel), w, h), 0, 0);
+                return canvas.toDataURL();
+            }
+
+            function getSvgRoot() {
+                if (svgRoot?.isConnected) return svgRoot;
+                svgRoot = document.createElementNS(SVG_NS, 'svg');
+                svgRoot.setAttribute('width', '0');
+                svgRoot.setAttribute('height', '0');
+                svgRoot.setAttribute('aria-hidden', 'true');
+                svgRoot.style.cssText = 'position:absolute;pointer-events:none;width:0;height:0;z-index:-9999;';
+                document.body.append(svgRoot);
+                return svgRoot;
+            }
+
+            function elNS(tag, attrs) {
+                const node = document.createElementNS(SVG_NS, tag);
+                for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, String(v));
+                return node;
+            }
+
+            function acquireFilter(w, h, r, bevel, depth) {
+                const key = `${w}x${h}r${r}b${bevel}d${depth}`;
+                const existing = filterCache.get(key);
+                if (existing) { existing.users++; return existing; }
+
+                const id = `pyq-liquid-${counter++}`;
+                const box = { x: 0, y: 0, width: w, height: h };
+                const filter = elNS('filter', {
+                    id, ...box,
+                    filterUnits: 'userSpaceOnUse',
+                    primitiveUnits: 'userSpaceOnUse',
+                    'color-interpolation-filters': 'sRGB'
+                });
+                const feImg = elNS('feImage', { ...box, result: 'map', preserveAspectRatio: 'none' });
+                feImg.setAttribute('href', createLensDataURL(w, h, r, bevel));
+                filter.append(
+                    feImg,
+                    elNS('feDisplacementMap', {
+                        in: 'SourceGraphic',
+                        in2: 'map',
+                        scale: depth * 2,
+                        xChannelSelector: 'R',
+                        yChannelSelector: 'G'
+                    })
+                );
+                getSvgRoot().append(filter);
+                const entry = { key, id, node: filter, users: 1 };
+                filterCache.set(key, entry);
+                return entry;
+            }
+
+            function attach(el, bevel = 22, depth = 22) {
+                if (!el || el._pyqLiquidAttached) return;
+                el._pyqLiquidAttached = true;
+                el.classList.add('glass-pill');
+                if (!isChromium()) return;
+
+                let currentEntry = null;
+                const update = () => {
+                    // Use offsetWidth/offsetHeight so CSS scale() transforms don't skew the lens dimensions!
+                    const w = Math.round(el.offsetWidth);
+                    const h = Math.round(el.offsetHeight);
+                    if (!w || !h) return;
+
+                    const rawR = Number.parseFloat(getComputedStyle(el).borderTopLeftRadius) || 28;
+                    const r = Math.round(Math.min(rawR, w / 2, h / 2));
+                    const nextEntry = acquireFilter(w, h, r, bevel, depth);
+                    if (currentEntry && currentEntry.key !== nextEntry.key) {
+                        if (--currentEntry.users <= 0) {
+                            currentEntry.node.remove();
+                            filterCache.delete(currentEntry.key);
+                        }
+                    }
+                    currentEntry = nextEntry;
+                    el.style.setProperty('--liquid-filter', `url(#${nextEntry.id})`);
+                    el.dataset.liquid = '';
+                };
+
+                update();
+                const ro = new ResizeObserver(update);
+                ro.observe(el);
+                el._pyqLiquidRefresh = update;
+            }
+
+            return { attach };
         })();
 
         // Safe LocalStorage Wrappers
@@ -881,7 +1179,7 @@
             } catch (e) {}
         }
 
-        // Unified Capsule & Toast Helpers (Uses KTUFlow when available, with built-in UI fallback)
+        // Unified Capsule & Toast Helpers
         let toastTimer = null;
         function triggerCapsule(state, message, actionUrl = null) {
             if (window.KTUFlow && typeof window.KTUFlow.capsule === 'function') {
@@ -921,7 +1219,7 @@
             }, 2800);
         }
 
-        // Built-in Verified KTU Catalog Fallback (Used instantly while/if external JSON loads)
+        // Built-in Verified KTU Catalog Fallback
         const FALLBACK_CATALOG = {
             branches: {
                 CSE: "Computer Science and Engineering",
@@ -1277,7 +1575,7 @@
 
             wrap.classList.remove('hidden');
             container.innerHTML = list.map(code => `
-                <button type="button" onclick="quickSearch('${code.replace(/'/g, "\\'")}')" class="px-3 py-1 real-glass rounded-lg text-xs font-bold font-mono-code text-blue-700 bg-blue-50/60 hover:bg-blue-100 border border-blue-200/80 transition-all active:scale-95 flex items-center gap-1.5">
+                <button type="button" onclick="quickSearch('${code.replace(/'/g, "\\'")}')" class="ot-press px-3 py-1 result-glass rounded-lg text-xs font-bold font-mono-code text-blue-700 hover:text-blue-600 transition-all flex items-center gap-1.5">
                     <i class="fas fa-history text-[10px] text-blue-400"></i> ${code}
                 </button>
             `).join('');
@@ -1368,30 +1666,33 @@
             }
         });
 
-        // --- Tab Switching Logic ---
+        // --- iOS Sliding Tab Switching Logic (Search Code <-> Browse Semester) ---
         let currentActiveTab = 'search';
         async function toggleTab(tabId) {
             currentActiveTab = tabId;
+            const trackEl = document.getElementById('mode-segmented-track');
             const searchView = document.getElementById('view-search');
             const browseView = document.getElementById('view-browse');
             const btnSearch = document.getElementById('tab-search');
             const btnBrowse = document.getElementById('tab-browse');
 
-            const activeClass = "px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white text-blue-600 shadow-sm border border-slate-200 whitespace-nowrap flex items-center justify-center gap-1.5";
-            const inactiveClass = "px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-500 hover:text-slate-800 hover:bg-white/40 border border-transparent whitespace-nowrap flex items-center justify-center gap-1.5";
+            const activeTextClass = "relative z-10 px-3 py-2 rounded-full text-xs sm:text-sm font-extrabold transition-colors duration-200 text-blue-600 dark:text-blue-300 whitespace-nowrap flex items-center justify-center gap-1.5";
+            const inactiveTextClass = "relative z-10 px-3 py-2 rounded-full text-xs sm:text-sm font-bold transition-colors duration-200 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white whitespace-nowrap flex items-center justify-center gap-1.5";
 
             if (tabId === 'search') {
+                if (trackEl) trackEl.style.setProperty('--tab-idx', '0');
                 searchView.classList.remove('hidden');
                 browseView.classList.add('hidden');
                 browseView.classList.remove('flex');
-                btnSearch.className = activeClass;
-                btnBrowse.className = inactiveClass;
+                btnSearch.className = activeTextClass;
+                btnBrowse.className = inactiveTextClass;
             } else {
+                if (trackEl) trackEl.style.setProperty('--tab-idx', '1');
                 searchView.classList.add('hidden');
                 browseView.classList.remove('hidden');
                 browseView.classList.add('flex');
-                btnBrowse.className = activeClass;
-                btnSearch.className = inactiveClass;
+                btnBrowse.className = activeTextClass;
+                btnSearch.className = inactiveTextClass;
 
                 const glassCard = document.getElementById('search-card');
                 if (glassCard) glassCard.style.transform = 'none';
@@ -1465,9 +1766,9 @@
                 const el = document.getElementById(btnInfo.id);
                 if (!el) return;
                 if (activeSchemeFilter === btnInfo.val) {
-                    el.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-600 shadow-sm border border-slate-200 whitespace-nowrap transition-all";
+                    el.className = "ot-press px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-white text-blue-600 shadow-sm whitespace-nowrap transition-all";
                 } else {
-                    el.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-800 hover:bg-white/60 whitespace-nowrap transition-all";
+                    el.className = "ot-press px-3.5 py-1.5 rounded-full text-xs font-bold text-slate-600 hover:text-slate-800 whitespace-nowrap transition-all";
                 }
             });
         }
@@ -1598,8 +1899,15 @@
             if (count > 0) {
                 badge.innerText = count;
                 titleText.innerText = count === 1 ? '1 Paper Selected' : `${count} Papers Selected`;
-                btnLabel.innerText = count === 1 ? 'Download Selected PDF' : `Merge & Download (${count})`;
+                btnLabel.innerText = count === 1 ? 'Download PDF' : `Merge & Download (${count})`;
                 dock.classList.add('dock-active');
+
+                // Ensure OpenBlast 1:1 Liquid Glass Lens is attached & refreshed on the dock
+                window.PYQLiquidGlass?.attach(dock, 22, 22);
+                if (typeof dock._pyqLiquidRefresh === 'function') {
+                    requestAnimationFrame(() => dock._pyqLiquidRefresh());
+                }
+
                 if (window.KTUFlow && typeof window.KTUFlow.setBottomDockActive === 'function') {
                     window.KTUFlow.setBottomDockActive(true);
                 }
@@ -1664,11 +1972,11 @@
                         </div>
 
                         <div class="flex items-center gap-2">
-                            <button type="button" onclick="previewPaper('${paper.handle}', '${safeCode}', '${safeSession}', '${safeTitle}', this)" class="px-3.5 py-2.5 sm:py-3 rounded-xl bg-slate-100/90 hover:bg-slate-200/80 text-slate-700 border border-slate-200/90 text-xs font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95" title="Quick Preview PDF">
+                            <button type="button" onclick="previewPaper('${paper.handle}', '${safeCode}', '${safeSession}', '${safeTitle}', this)" class="ot-press px-3.5 py-2.5 sm:py-3 rounded-xl bg-slate-100/90 hover:bg-slate-200/80 text-slate-700 border border-slate-200/90 text-xs font-bold transition-all flex items-center justify-center gap-1.5" title="Quick Preview PDF">
                                 <i class="far fa-eye"></i>
                                 <span class="hidden sm:inline">Preview</span>
                             </button>
-                            <button type="button" onclick="downloadPaper('${paper.handle}', '${safeCode}', '${safeSession}', this)" class="flex-1 bg-white hover:bg-blue-600 text-slate-700 hover:text-white border border-slate-200 hover:border-blue-600 text-xs font-bold py-2.5 sm:py-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm active:scale-[0.98]">
+                            <button type="button" onclick="downloadPaper('${paper.handle}', '${safeCode}', '${safeSession}', this)" class="ot-press flex-1 bg-white hover:bg-blue-600 text-slate-700 hover:text-white border border-slate-200 hover:border-blue-600 text-xs font-bold py-2.5 sm:py-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm">
                                 <i class="fas fa-file-pdf transition-transform"></i><span>Download PDF</span>
                             </button>
                         </div>
@@ -1901,8 +2209,14 @@
             if (glassCard) glassCard.style.transform = 'none';
         });
 
-        // --- On Load: Render Recent Chips, Preload Catalog, Check Deep-Link URL (?q=...) ---
+        // --- On Load: Attach Liquid Glass to Dock & Header, Render Chips, Check Deep-Link (?q=...) ---
         window.addEventListener('DOMContentLoaded', async () => {
+            // Attach OpenBlast 1:1 Liquid Glass Lens to Bottom Merge Dock & Header
+            const mergeDock = document.getElementById('floating-merge-dock');
+            if (mergeDock) window.PYQLiquidGlass?.attach(mergeDock, 22, 22);
+            const topHeader = document.querySelector('header.kt-frosted-header');
+            if (topHeader) window.PYQLiquidGlass?.attach(topHeader, 18, 20);
+
             renderRecentSearches();
             await fetchCatalogData();
 
