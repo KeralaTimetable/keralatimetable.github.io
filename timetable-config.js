@@ -39,10 +39,9 @@ window.timetablesData = [
         "viewLink": "timetable_pages/btech-s7-regular-supply-november-2026-2019-scheme.html",
         "pdfLink": "https://drive.google.com/file/d/17QtmmZS0OI4Hg9h4z3zWXXHSKDw5fsZe/view?usp=drivesdk"
     },
-,
 {
     "id": "apjaktu_detailed_time_table_of_bdes_s7_regula",
-    "title": "APJAKTU - Detailed Time Table of B.Des S7 (R, S) Exam November 2026 (2019 Scheme)",
+    "title": "B.Des S7 (R, S) Exam November 2026 (2019 Scheme)",
     "semester": "S7",
     "categoryBadge": "S7",
     "type": "Regular/Supply",
