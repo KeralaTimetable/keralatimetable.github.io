@@ -76,7 +76,7 @@ else:
 
 
 def send_push_notification(title, body):
-    """Fetches tokens from Firebase and broadcasts the push notification."""
+    """Fetches tokens from Firebase, broadcasts via FCM v1 send_each, and prunes dead tokens."""
     if not firebase_creds_json:
         print("⏭️ Skipping Push: No Firebase credentials found.")
         return
@@ -94,24 +94,33 @@ def send_push_notification(title, body):
 
         success_total = 0
         failure_total = 0
+        stale_tokens = []
 
         for i in range(0, len(tokens), 500):
             batch_tokens = tokens[i:i + 500]
-            message = messaging.MulticastMessage(
-                notification=messaging.Notification(
-                    title=title,
-                    body=body
-                ),
-                tokens=batch_tokens
-            )
-            if hasattr(messaging, "send_each_for_multicast"):
-                response = messaging.send_each_for_multicast(message)
-            else:
-                response = messaging.send_multicast(message)
+            messages = [
+                messaging.Message(
+                    notification=messaging.Notification(title=title, body=body),
+                    token=tok
+                )
+                for tok in batch_tokens
+            ]
+            response = messaging.send_each(messages)
             success_total += response.success_count
             failure_total += response.failure_count
 
+            for tok, send_res in zip(batch_tokens, response.responses):
+                if not send_res.success and send_res.exception:
+                    err_str = str(send_res.exception).upper()
+                    if "UNREGISTERED" in err_str or "NOT_FOUND" in err_str or "INVALID" in err_str:
+                        stale_tokens.append(tok)
+
         print(f"🚀 Push Sent! Success: {success_total} | Failed: {failure_total}")
+
+        if stale_tokens:
+            for dead_tok in stale_tokens:
+                ref.child(dead_tok).delete()
+            print(f"🧹 Cleaned up {len(stale_tokens)} expired/unregistered subscriber token(s).")
 
     except Exception as e:
         print(f"❌ Error sending push notification: {e}")
@@ -154,8 +163,9 @@ def clean_ktu_raw_title(raw_title: str) -> dict:
     t = raw_title.strip()
     has_wp = bool(re.search(r'working\s+professionals|\(wp\)', t, flags=re.I))
 
-    # 1. Strip prefixes like "Detailed Time Table of", "Time Table of"
-    t = re.sub(r'^(?:detailed\s+)?time\s*table\s+of\s+', '', t, flags=re.I)
+    # 1. Strip prefixes like "APJAKTU - ", "KTU - ", "Detailed Time Table of", "Time Table of"
+    t = re.sub(r'^(?:apjaktu|ktu)\s*[\-–:]+\s*', '', t, flags=re.I)
+    t = re.sub(r'^(?:detailed\s+)?time\s*table\s+(?:of|for)\s+', '', t, flags=re.I)
 
     # 2. Strip suffixes like "- Notification - reg:", "Notification"
     t = re.sub(r'[\s\-–:]*notification(?:\s*[\-–:]\s*reg\s*:?)?.*$', '', t, flags=re.I)
@@ -844,7 +854,7 @@ def extract_dashboard_data_with_ai(pdf_path, original_title, pdf_link):
     {raw_text[:40000]} 
     """
 
-    for model_name in ("gemini-2.5-flash", "gemini-2.0-flash"):
+    for model_name in ("gemini-3.8-flash", "gemini-3.5-flash-lite", "gemini-3.5-flash"):
         try:
             response = client.models.generate_content(
                 model=model_name,
