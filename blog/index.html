@@ -1,178 +1,513 @@
-    <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7313827303298932" crossorigin="anonymous"></script>
     
     <title>KTU Guides & Blog | Kerala Timetable</title>
     <meta name="description" content="Explore our library of guides, rules, and result checkers for APJAKTU engineering students and Kerala board exams.">
+    <link rel="canonical" href="https://keralatimetable.in/blog/" />
     
-    <script src="/tailwind-local.js"></script>
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .bg-mesh {
-            background-color: #f8fafc;
-            background-image: radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
-                              radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%);
+        :root {
+            --ot-ease-emph: cubic-bezier(0.2, 0, 0, 1);
+            --ot-ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+            --glassMaterialBackground: rgba(248, 250, 252, 0.62);
+            --glassMaterialShadowColor: rgba(15, 23, 42, 0.09);
         }
-        /* Smooth accordion transition */
-        .faq-content { transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; max-height: 0; overflow: hidden; }
-        .faq-item.active .faq-content { max-height: 500px; padding-bottom: 1.25rem; }
+        html.dark {
+            --glassMaterialBackground: rgba(24, 30, 46, 0.68);
+            --glassMaterialShadowColor: rgba(0, 0, 0, 0.55);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.65) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(219, 234, 254, 0.55) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(243, 232, 255, 0.50) 0px, transparent 50%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================================================
+           OPENBLAST LIQUID GLASS PILL (.glass-pill[data-liquid])
+           ========================================================================== */
+        .glass-pill {
+            isolation: isolate;
+            position: relative;
+        }
+        .glass-pill::before,
+        .glass-pill::after {
+            content: "";
+            border-radius: inherit;
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+        }
+        .glass-pill::before {
+            z-index: -1;
+            background-color: var(--glassMaterialBackground);
+            -webkit-backdrop-filter: saturate(1.85) blur(22px);
+            backdrop-filter: saturate(1.85) blur(22px);
+            box-shadow: 0 10px 30px var(--glassMaterialShadowColor);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 255, 255, 0) 55%);
+        }
+        .glass-pill[data-liquid] {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-color: transparent !important;
+            box-shadow: none !important;
+        }
+        .glass-pill[data-liquid]::before {
+            z-index: -1;
+            -webkit-backdrop-filter: var(--liquid-filter) blur(5px) saturate(1.8) brightness(1.04) !important;
+            backdrop-filter: var(--liquid-filter) blur(5px) saturate(1.8) brightness(1.04) !important;
+            background-color: rgba(255, 255, 255, 0.42) !important;
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 48%) !important;
+            box-shadow: 0 12px 34px -6px var(--glassMaterialShadowColor) !important;
+        }
+        html.dark .glass-pill[data-liquid]::before {
+            background-color: rgba(15, 23, 42, 0.50) !important;
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 48%) !important;
+        }
+        .glass-pill::after,
+        .glass-pill[data-liquid]::after {
+            z-index: 2;
+            opacity: 1;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3 !important;
+        }
+        html.dark .glass-pill::after,
+        html.dark .glass-pill[data-liquid]::after {
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fff9,
+                inset -1.5px -1.5px 0 -0.5px #ffffff4d,
+                inset 0 0 14px #ffffff12 !important;
+        }
+
+        /* Clean Liquid Glass Cards */
+        .real-glass {
+            background-color: rgba(255, 255, 255, 0.62);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0) 50%);
+            -webkit-backdrop-filter: saturate(190%) blur(22px);
+            backdrop-filter: saturate(190%) blur(22px);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                0 12px 32px -8px rgba(15, 23, 42, 0.07);
+        }
+
+        .result-glass {
+            background-color: rgba(255, 255, 255, 0.72);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0) 55%);
+            -webkit-backdrop-filter: saturate(185%) blur(16px);
+            backdrop-filter: saturate(185%) blur(16px);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                0 6px 20px -4px rgba(15, 23, 42, 0.05);
+            transition: transform 0.28s var(--ot-ease-settle), box-shadow 0.24s ease, background-color 0.2s ease;
+        }
+        .result-glass:hover {
+            transform: translateY(-3px);
+            background-color: rgba(255, 255, 255, 0.92);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #ffffff,
+                inset 0 0 0 1px rgba(79, 70, 229, 0.30),
+                0 14px 30px -8px rgba(79, 70, 229, 0.12);
+        }
+        .result-glass:active {
+            transform: scale(0.98);
+            transition-duration: 80ms;
+        }
+
+        /* iOS Sliding Segmented Filter Control */
+        .ios-segmented-track {
+            position: relative;
+            isolation: isolate;
+            background: rgba(118, 118, 128, 0.12);
+            border-radius: 9999px;
+            padding: 4px;
+            box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.07);
+        }
+        html.dark .ios-segmented-track {
+            background: rgba(118, 118, 128, 0.24);
+        }
+        .ios-sliding-pill {
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            left: 4px;
+            width: calc(33.3333% - 2.66px);
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 2px 8px -1px rgba(15, 23, 42, 0.12), inset 1px 1px 0 #ffffff;
+            transform: translate3d(calc(var(--seg-idx, 0) * 100%), 0, 0);
+            transition: transform 0.34s var(--ot-ease-settle);
+            pointer-events: none;
+            z-index: 0;
+        }
+        html.dark .ios-sliding-pill {
+            background: rgba(79, 70, 229, 0.42);
+            box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.35), 0 3px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Clean Smooth FAQ Accordion */
+        .faq-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.28s var(--ot-ease-settle);
+        }
+        .faq-item.active .faq-content {
+            grid-template-rows: 1fr;
+        }
+        .faq-inner { overflow: hidden; }
         .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+        .ot-press { transition: transform 0.16s var(--ot-ease-settle); }
+        .ot-press:active { transition-duration: 80ms; transform: scale(0.95); }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translate3d(0, 10px, 0); }
+            to { opacity: 1; transform: translate3d(0, 0, 0); }
+        }
+        .fade-in-up { animation: fadeSlideUp 0.38s var(--ot-ease-emph) both; }
     </style>
+
     <link rel="icon" href="/favicon.png" type="image/png">
     <meta property="og:site_name" content="Kerala Timetable">
+    <meta property="og:title" content="KTU Guides & Blog | Kerala Timetable">
+    <meta property="og:description" content="Explore our library of guides, rules, and result checkers for APJAKTU engineering students.">
     <meta property="og:image" content="https://www.keralatimetable.in/social-preview.png">
     <meta property="og:type" content="website">
 </head>
 
-<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+<body class="text-slate-800 antialiased flex flex-col min-h-screen relative selection:bg-indigo-600 selection:text-white">
 
-    <div id="navigation-container"></div>
+    <!-- Global Sticky Liquid Glass Navigation -->
+    <div id="navigation-container" class="w-full z-50 sticky top-0"></div>
 
-    <main class="flex-grow max-w-5xl mx-auto px-4 py-10 w-full">
+    <!-- Main Container (Mobile-First Spacing) -->
+    <main class="flex-grow max-w-5xl mx-auto px-4 sm:px-6 pt-5 sm:pt-9 pb-16 w-full relative z-10">
         
-        <div class="text-center mb-16 relative z-10">
-            <h1 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">Student <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Guides & Articles</span></h1>
-            <p class="text-lg text-slate-500 font-medium max-w-2xl mx-auto">Everything you need to navigate KTU academic rules, calculate your grades, and find your results fast.</p>
-        </div>
+        <!-- Compact, Clean Header -->
+        <header class="text-center mb-6 sm:mb-9 max-w-2xl mx-auto fade-in-up">
+            <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-2.5 tracking-tight leading-tight">
+                Student <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Guides &amp; Articles</span>
+            </h1>
+            <p class="text-xs sm:text-base text-slate-600 font-medium leading-relaxed">
+                Clear, up-to-date guides on KTU academic rules, grade calculation, attendance, and exam prep.
+            </p>
+        </header>
 
-        <div class="mb-16">
-            <h2 class="text-2xl font-black text-slate-800 mb-6 flex items-center gap-2">
-                <i class="fas fa-bolt text-amber-500"></i> Latest Published
-            </h2>
+        <!-- Liquid Glass Search & iOS Sliding Filter Bar -->
+        <section class="max-w-2xl mx-auto mb-8 sm:mb-10 space-y-3 fade-in-up" style="animation-delay: 50ms;">
+            <!-- Liquid Glass Search Pill -->
+            <div id="blog-search-pill" class="glass-pill rounded-full flex items-center px-3.5 py-1.5">
+                <i class="fas fa-search text-slate-400 text-sm pl-1.5 pr-2.5 relative z-10"></i>
+                <input type="search" id="blog-search-input" oninput="applyBlogFilter()" placeholder="Search guides (e.g. pass mark, honors, SGPA, attendance)..." class="relative z-10 w-full bg-transparent border-none focus:outline-none text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 py-2">
+                <button type="button" id="blog-clear-btn" onclick="clearBlogSearch()" aria-label="Clear search" class="hidden relative z-10 w-7 h-7 rounded-full text-slate-400 hover:text-slate-700 items-center justify-center text-xs">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- iOS Sliding Category Switcher -->
+            <div id="blog-filter-track" class="ios-segmented-track grid grid-cols-3 w-full max-w-sm mx-auto select-none" style="--seg-idx: 0;">
+                <span class="ios-sliding-pill" aria-hidden="true"></span>
+                <button type="button" id="seg-all" onclick="setBlogCategory('all')" class="relative z-10 py-2 px-2 rounded-full text-xs font-extrabold text-indigo-600 dark:text-indigo-200 transition-colors">
+                    All Guides
+                </button>
+                <button type="button" id="seg-rules" onclick="setBlogCategory('Rules')" class="relative z-10 py-2 px-2 rounded-full text-xs font-bold text-slate-500 hover:text-slate-800 dark:text-slate-400 transition-colors">
+                    KTU Rules
+                </button>
+                <button type="button" id="seg-guides" onclick="setBlogCategory('Guides')" class="relative z-10 py-2 px-2 rounded-full text-xs font-bold text-slate-500 hover:text-slate-800 dark:text-slate-400 transition-colors">
+                    Tips &amp; More
+                </button>
+            </div>
+        </section>
+
+        <!-- LATEST PUBLISHED GRID -->
+        <section class="mb-10 sm:mb-14 fade-in-up" style="animation-delay: 90ms;">
+            <div class="flex items-center justify-between gap-2 mb-4 px-1">
+                <h2 id="latest-section-heading" class="text-base sm:text-xl font-extrabold text-slate-900 flex items-center gap-2">
+                    <i class="fas fa-bolt text-amber-500 text-sm sm:text-base"></i>
+                    <span>Latest Published</span>
+                </h2>
+                <span id="post-count-badge" class="text-[11px] font-bold text-slate-500 bg-white/75 dark:bg-white/10 px-2.5 py-1 rounded-full shadow-sm">
+                    Loading...
+                </span>
+            </div>
             
-            <div id="latest-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="col-span-full text-center py-10">
-                    <i class="fas fa-circle-notch fa-spin text-indigo-500 text-3xl mb-3"></i>
-                    <p class="text-slate-500 font-medium">Loading guides...</p>
+            <div id="latest-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-5">
+                <div class="col-span-full text-center py-10 real-glass rounded-3xl">
+                    <i class="fas fa-circle-notch fa-spin text-indigo-500 text-2xl mb-2.5"></i>
+                    <p class="text-xs sm:text-sm text-slate-500 font-semibold">Loading guides...</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="mb-16 bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm">
-            <h2 class="text-2xl font-black text-slate-800 mb-2 flex items-center gap-2">
-                <i class="fas fa-gavel text-indigo-600"></i> KTU Rules & Regulations
-            </h2>
-            <p class="text-sm text-slate-500 mb-8 border-b border-slate-100 pb-4">Essential reading for B.Tech students regarding attendance, honors, and grading.</p>
+        <!-- KTU RULES & REGULATIONS SECTION -->
+        <section id="rules-section-wrap" class="mb-10 sm:mb-14 real-glass rounded-[1.75rem] sm:rounded-3xl p-4 sm:p-7 fade-in-up" style="animation-delay: 130ms;">
+            <div class="pb-3.5 mb-4 sm:mb-5 border-b border-slate-200/70 dark:border-white/10">
+                <h2 class="text-base sm:text-xl font-extrabold text-slate-900 flex items-center gap-2">
+                    <i class="fas fa-gavel text-indigo-600 dark:text-indigo-400 text-sm sm:text-base"></i>
+                    <span>KTU Rules &amp; Regulations</span>
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">
+                    Essential reading for B.Tech students on attendance, honors, and grading.
+                </p>
+            </div>
             
-            <div id="rules-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                </div>
-        </div>
+            <div id="rules-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-5"></div>
+        </section>
 
-        <div class="max-w-3xl mx-auto border-t border-slate-200 pt-12">
-            <h2 class="text-2xl font-black text-slate-800 mb-8 flex items-center gap-2">
-                <i class="fas fa-question-circle text-indigo-500"></i> Frequently Asked Questions
+        <!-- FREQUENTLY ASKED QUESTIONS -->
+        <section class="max-w-3xl mx-auto pt-4 sm:pt-6 fade-in-up" style="animation-delay: 160ms;">
+            <h2 class="text-base sm:text-xl font-extrabold text-slate-900 mb-4 px-1 flex items-center gap-2">
+                <i class="fas fa-question-circle text-indigo-500 text-sm sm:text-base"></i>
+                <span>Frequently Asked Questions</span>
             </h2>
             
-            <div class="space-y-4">
-                <div class="faq-item bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-indigo-300 transition-colors cursor-pointer" onclick="this.classList.toggle('active')">
-                    <div class="p-5 flex justify-between items-center">
-                        <h3 class="font-bold text-slate-800">What is the pass mark in KTU?</h3>
-                        <i class="fas fa-chevron-down text-slate-400 faq-icon transition-transform duration-300"></i>
+            <div class="space-y-3">
+                <div class="faq-item result-glass rounded-2xl cursor-pointer select-none" onclick="this.classList.toggle('active')">
+                    <div class="p-4 sm:p-5 flex justify-between items-center gap-3">
+                        <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug">What is the pass mark in KTU?</h3>
+                        <i class="fas fa-chevron-down text-slate-400 text-xs faq-icon transition-transform duration-300 shrink-0"></i>
                     </div>
-                    <div class="faq-content px-5 text-sm text-slate-600 leading-relaxed">
-                        To pass a subject in KTU, you need to score a minimum of <strong>40% in your End Semester Examination (ESE)</strong>, AND your combined internal + external marks must be <strong>at least 50%</strong>. If you fail either condition, you receive an 'F' grade.
+                    <div class="faq-content">
+                        <div class="faq-inner px-4 sm:px-5 pb-4 sm:pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            To pass a subject in KTU, you need to score a minimum of <strong>40% in your End Semester Examination (ESE)</strong>, AND your combined internal + external marks must be <strong>at least 50%</strong>. If you fail either condition, you receive an 'F' grade.
+                        </div>
                     </div>
                 </div>
 
-                <div class="faq-item bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-indigo-300 transition-colors cursor-pointer" onclick="this.classList.toggle('active')">
-                    <div class="p-5 flex justify-between items-center">
-                        <h3 class="font-bold text-slate-800">How many times can I claim medical leave (60% attendance)?</h3>
-                        <i class="fas fa-chevron-down text-slate-400 faq-icon transition-transform duration-300"></i>
+                <div class="faq-item result-glass rounded-2xl cursor-pointer select-none" onclick="this.classList.toggle('active')">
+                    <div class="p-4 sm:p-5 flex justify-between items-center gap-3">
+                        <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug">How many times can I claim medical leave (60% attendance)?</h3>
+                        <i class="fas fa-chevron-down text-slate-400 text-xs faq-icon transition-transform duration-300 shrink-0"></i>
                     </div>
-                    <div class="faq-content px-5 text-sm text-slate-600 leading-relaxed">
-                        According to the official APJAKTU regulations, the Principal can condone attendance shortage down to 60% on medical grounds, but this is only allowed for a maximum of <strong>two semesters</strong> during your entire 4-year B.Tech program.
+                    <div class="faq-content">
+                        <div class="faq-inner px-4 sm:px-5 pb-4 sm:pb-5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            According to the official APJAKTU regulations, the Principal can condone attendance shortage down to 60% on medical grounds, but this is only allowed for a maximum of <strong>two semesters</strong> during your entire 4-year B.Tech program.
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
     </main>
 
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-8 text-center">
-        <div class="max-w-3xl mx-auto px-4">
-            <h3 class="text-slate-800 font-bold text-lg mb-2">Kerala Timetable</h3>
-            <p class="text-slate-500 text-sm leading-relaxed max-w-lg mx-auto">Providing fast and direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
-            <div class="mt-4 space-x-4">
-                <a href="../about.html" class="text-indigo-600 text-xs font-bold hover:underline">About Us</a>
-                <a href="https://keralatimetable.stck.me/profile" target="_blank" class="text-indigo-600 text-xs font-bold hover:underline">Support Us</a>
+    <!-- CLEAN LIQUID GLASS FOOTER -->
+    <footer class="mt-auto max-w-5xl mx-auto w-full px-4 sm:px-6 pb-7 relative z-10">
+        <div id="blog-footer-pill" class="glass-pill rounded-3xl sm:rounded-full px-5 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div class="relative z-10">
+                <h3 class="text-slate-900 font-extrabold text-sm">Kerala Timetable</h3>
+                <p class="text-slate-500 text-xs mt-0.5">Independent platform — not officially affiliated with APJAKTU.</p>
+            </div>
+            <div class="relative z-10 flex items-center gap-4">
+                <a href="../about.html" class="text-indigo-600 dark:text-indigo-400 text-xs font-bold hover:underline">About Us</a>
+                <a href="https://keralatimetable.stck.me/profile" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 text-xs font-bold hover:underline">Support Us</a>
             </div>
         </div>
     </footer>
 
-    <script src="../components.js"></script>
+    <!-- Global Components (Cache-Busted v=26) -->
+    <script src="../components.js?v=26" onerror="this.onerror=null;this.src='/components.js?v=26';"></script>
     <script>
-        // 1. Load the Navigation (Pass '../' for folder, and 'true' for Blog logo)
-        loadNavigation('none', '../', true);
+        // 1. Load Navigation (Active: 'blog', Folder: '../', Blog suffix: true)
+        if (typeof loadNavigation === 'function') {
+            loadNavigation('blog', '../', true);
+        }
 
-        // 2. Fetch and Render the Blog Posts
+        // 2. Attach OpenBlast Liquid Glass Lens to Search Pill & Footer Pill
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.KTULiquidGlass && typeof window.KTULiquidGlass.attachLiquidPill === 'function') {
+                window.KTULiquidGlass.attachLiquidPill(document.getElementById('blog-search-pill'), 18, 18);
+                window.KTULiquidGlass.attachLiquidPill(document.getElementById('blog-footer-pill'), 18, 18);
+            }
+        });
+
+        // 3. Safe Color Mapping (Works reliably even with purged/local Tailwind builds)
+        const COLOR_MAP = {
+            indigo:  'bg-indigo-50 text-indigo-600 border-indigo-200/70',
+            blue:    'bg-blue-50 text-blue-600 border-blue-200/70',
+            emerald: 'bg-emerald-50 text-emerald-700 border-emerald-200/70',
+            green:   'bg-emerald-50 text-emerald-700 border-emerald-200/70',
+            amber:   'bg-amber-50 text-amber-700 border-amber-200/70',
+            orange:  'bg-amber-50 text-amber-700 border-amber-200/70',
+            rose:    'bg-rose-50 text-rose-600 border-rose-200/70',
+            red:     'bg-rose-50 text-rose-600 border-rose-200/70',
+            purple:  'bg-purple-50 text-purple-600 border-purple-200/70',
+            violet:  'bg-purple-50 text-purple-600 border-purple-200/70',
+            teal:    'bg-emerald-50 text-emerald-700 border-emerald-200/70',
+            sky:     'bg-blue-50 text-blue-600 border-blue-200/70'
+        };
+
+        let cachedPosts = [];
+        let activeCategory = 'all';
+
+        function setBlogCategory(cat) {
+            activeCategory = cat;
+            const track = document.getElementById('blog-filter-track');
+            const btns = [
+                { id: 'seg-all', key: 'all', idx: 0 },
+                { id: 'seg-rules', key: 'Rules', idx: 1 },
+                { id: 'seg-guides', key: 'Guides', idx: 2 }
+            ];
+
+            btns.forEach(b => {
+                const el = document.getElementById(b.id);
+                if (!el) return;
+                if (b.key === cat) {
+                    if (track) track.style.setProperty('--seg-idx', String(b.idx));
+                    el.className = "relative z-10 py-2 px-2 rounded-full text-xs font-extrabold text-indigo-600 dark:text-indigo-200 transition-colors";
+                } else {
+                    el.className = "relative z-10 py-2 px-2 rounded-full text-xs font-bold text-slate-500 hover:text-slate-800 dark:text-slate-400 transition-colors";
+                }
+            });
+
+            applyBlogFilter();
+        }
+
+        function clearBlogSearch() {
+            const input = document.getElementById('blog-search-input');
+            if (input) input.value = '';
+            applyBlogFilter();
+            input?.focus();
+        }
+
+        function applyBlogFilter() {
+            const input = document.getElementById('blog-search-input');
+            const clearBtn = document.getElementById('blog-clear-btn');
+            const query = (input?.value || '').trim().toLowerCase();
+
+            if (clearBtn) {
+                clearBtn.classList.toggle('hidden', !query);
+                clearBtn.classList.toggle('flex', !!query);
+            }
+
+            const filtered = cachedPosts.filter(post => {
+                const matchesCat = activeCategory === 'all'
+                    ? true
+                    : activeCategory === 'Rules'
+                        ? (post.category || '').toLowerCase() === 'rules'
+                        : (post.category || '').toLowerCase() !== 'rules';
+
+                if (!matchesCat) return false;
+                if (!query) return true;
+
+                return (post.title || '').toLowerCase().includes(query) ||
+                       (post.excerpt || '').toLowerCase().includes(query) ||
+                       (post.category || '').toLowerCase().includes(query) ||
+                       (post.tag || '').toLowerCase().includes(query);
+            });
+
+            const headingSpan = document.querySelector('#latest-section-heading span');
+            if (headingSpan) {
+                headingSpan.innerText = query
+                    ? `Results for "${input.value.trim()}"`
+                    : activeCategory === 'Rules'
+                        ? 'KTU Rules & Regulations'
+                        : activeCategory === 'Guides'
+                            ? 'Tips, Results & Guides'
+                            : 'Latest Published';
+            }
+
+            const countBadge = document.getElementById('post-count-badge');
+            if (countBadge) {
+                countBadge.innerText = `${filtered.length} ${filtered.length === 1 ? 'guide' : 'guides'}`;
+            }
+
+            renderGrid(filtered, 'latest-grid');
+
+            // Hide duplicate Rules section when user is actively searching or filtering only Rules
+            const rulesSection = document.getElementById('rules-section-wrap');
+            if (rulesSection) {
+                const hideRules = !!query || activeCategory === 'Rules';
+                rulesSection.classList.toggle('hidden', hideRules);
+            }
+        }
+
         async function fetchPosts() {
             try {
                 const response = await fetch('blog-posts.json');
-                const allPosts = await response.json();
-                
-                // Render ALL posts to the Top Grid
-                renderGrid(allPosts, 'latest-grid');
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                cachedPosts = await response.json();
 
-                // Filter out ONLY the Rules posts, and render them to the Bottom Grid
-                const rulesPosts = allPosts.filter(post => post.category === 'Rules');
+                applyBlogFilter();
+
+                const rulesPosts = cachedPosts.filter(post => (post.category || '').toLowerCase() === 'rules');
                 renderGrid(rulesPosts, 'rules-grid');
-
             } catch (error) {
                 console.error("Error loading blog posts:", error);
+                document.getElementById('post-count-badge').innerText = 'Error';
                 document.getElementById('latest-grid').innerHTML = `
-                    <div class="col-span-full text-center py-10 text-red-500 font-medium bg-red-50 rounded-2xl border border-red-100">
+                    <div class="col-span-full text-center py-8 px-4 text-rose-600 font-semibold bg-rose-50/90 rounded-2xl border border-rose-200 text-xs sm:text-sm">
                         Failed to load guides. Please refresh the page.
                     </div>`;
             }
         }
 
-        // Helper function to draw the cards into a specific grid
         function renderGrid(posts, gridElementId) {
             const grid = document.getElementById(gridElementId);
-            grid.innerHTML = ''; // Clear loading text
+            if (!grid) return;
 
-            posts.forEach(post => {
-                const bgClass = `bg-${post.color}-50`;
-                const textClass = `text-${post.color}-600`;
+            if (!posts || posts.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-8 px-4 real-glass rounded-2xl">
+                        <i class="fas fa-search text-slate-300 text-2xl mb-2"></i>
+                        <p class="text-sm font-bold text-slate-700">No matching guides found.</p>
+                        <p class="text-xs text-slate-500 mt-1">Try a different keyword or switch back to "All Guides".</p>
+                    </div>`;
+                return;
+            }
 
-                const cardHTML = `
-                    <a href="${post.url}" class="group flex flex-col bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:border-indigo-300 transition-all duration-300 transform hover:-translate-y-1">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-2">
-                                <span class="${bgClass} ${textClass} border border-${post.color}-100 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wide">
-                                    ${post.category}
-                                </span>
-                                <span class="bg-slate-100 text-slate-500 px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider">
-                                    ${post.tag}
-                                </span>
+            grid.innerHTML = posts.map(post => {
+                const colorKey = (post.color || 'indigo').toLowerCase();
+                const badgeStyle = COLOR_MAP[colorKey] || COLOR_MAP.indigo;
+
+                return `
+                    <a href="${post.url}" class="group result-glass rounded-2xl sm:rounded-3xl p-4 sm:p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                <div class="flex items-center gap-1.5 flex-wrap">
+                                    <span class="${badgeStyle} border px-2.5 py-0.5 rounded-lg text-[10px] sm:text-xs font-extrabold uppercase tracking-wide">
+                                        ${post.category || 'Guide'}
+                                    </span>
+                                    ${post.tag ? `<span class="bg-slate-100/90 dark:bg-white/10 text-slate-500 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider">${post.tag}</span>` : ''}
+                                </div>
+                                ${post.date ? `<span class="text-slate-400 text-[11px] font-semibold flex items-center gap-1"><i class="far fa-calendar-alt text-[10px]"></i> ${post.date}</span>` : ''}
                             </div>
-                            <span class="text-slate-400 text-xs font-bold flex items-center gap-1 hidden sm:flex">
-                                <i class="far fa-calendar-alt"></i> ${post.date}
-                            </span>
+                            <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors leading-snug">
+                                ${post.title}
+                            </h3>
+                            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3">
+                                ${post.excerpt || ''}
+                            </p>
                         </div>
-                        <h3 class="text-xl font-extrabold text-slate-800 mb-3 group-hover:text-indigo-600 transition-colors leading-snug">
-                            ${post.title}
-                        </h3>
-                        <p class="text-slate-500 text-sm leading-relaxed mb-6 flex-grow">
-                            ${post.excerpt}
-                        </p>
-                        <div class="text-indigo-600 text-sm font-bold flex items-center gap-2 mt-auto group-hover:translate-x-2 transition-transform">
-                            Read Guide <i class="fas fa-arrow-right"></i>
+                        <div class="text-indigo-600 dark:text-indigo-400 text-xs sm:text-sm font-extrabold flex items-center gap-1.5 pt-2 border-t border-slate-200/50 dark:border-white/10 group-hover:gap-2.5 transition-all">
+                            <span>Read Guide</span>
+                            <i class="fas fa-arrow-right text-[11px]"></i>
                         </div>
                     </a>
                 `;
-                grid.innerHTML += cardHTML;
-            });
+            }).join('');
         }
 
-        // Start the engine
         fetchPosts();
     </script>
 </body>
