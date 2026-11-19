@@ -15,74 +15,300 @@
     <meta name="keywords" content="ktu notes 2024 scheme, ktu btech notes, ktu study materials, ktu cse notes, ktu ce notes, ktu mechanical notes, apjaktu notes pdf">
     <meta name="robots" content="index, follow">
     
-    <script src="/tailwind-local.js"></script>
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-        
-        /* Base Background */
-        .bg-mesh {
-            background-color: #f1f5f9;
+        :root {
+            --ot-ease-emph: cubic-bezier(0.2, 0, 0, 1);
+            --ot-ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+            --glassMaterialBackground: rgba(248, 250, 252, 0.62);
+            --glassMaterialShadowColor: rgba(15, 23, 42, 0.10);
         }
 
-        /* -------------------------------------------
-           AUTHENTIC GLASSMORPHISM
-        ------------------------------------------- */
+        html.dark {
+            --glassMaterialBackground: rgba(24, 30, 46, 0.68);
+            --glassMaterialShadowColor: rgba(0, 0, 0, 0.60);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            background-color: #f1f5fb;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(199, 210, 254, 0.72) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(233, 213, 255, 0.62) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(186, 230, 253, 0.65) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(209, 250, 229, 0.52) 0px, transparent 50%);
+            min-height: 100vh;
+        }
+
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        /* Ambient Orbs */
+        @keyframes orbDrift {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(24px, -18px, 0) scale(1.06); }
+        }
+        .ambient-orb-1 { animation: orbDrift 15s ease-in-out infinite; will-change: transform; }
+        .ambient-orb-2 { animation: orbDrift 19s ease-in-out 2s infinite reverse; will-change: transform; }
+
+        /* ==========================================================================
+           OPENBLAST TRUE iOS 26 LIQUID GLASS PILL ENGINE (.glass-pill[data-liquid])
+           ========================================================================== */
+        .glass-pill {
+            isolation: isolate;
+            position: relative;
+        }
+        .glass-pill::before,
+        .glass-pill::after {
+            content: "";
+            border-radius: inherit;
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+        }
+        .glass-pill::before {
+            z-index: -1;
+            background-color: var(--glassMaterialBackground);
+            -webkit-backdrop-filter: saturate(1.9) blur(26px);
+            backdrop-filter: saturate(1.9) blur(26px);
+            box-shadow: 0 14px 44px var(--glassMaterialShadowColor);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 255, 255, 0) 55%);
+        }
+        .glass-pill[data-liquid] {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-color: transparent !important;
+            box-shadow: none !important;
+        }
+        .glass-pill[data-liquid]::before {
+            z-index: -1;
+            -webkit-backdrop-filter: var(--liquid-filter) blur(5px) saturate(1.85) brightness(1.04) !important;
+            backdrop-filter: var(--liquid-filter) blur(5px) saturate(1.85) brightness(1.04) !important;
+            background-color: rgba(255, 255, 255, 0.36) !important;
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0) 48%) !important;
+            box-shadow: 0 14px 40px -6px var(--glassMaterialShadowColor) !important;
+        }
+        html.dark .glass-pill[data-liquid]::before {
+            background-color: rgba(15, 23, 42, 0.48) !important;
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 48%) !important;
+        }
+        .glass-pill::after,
+        .glass-pill[data-liquid]::after {
+            z-index: 2;
+            opacity: 1;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3 !important;
+        }
+        html.dark .glass-pill::after,
+        html.dark .glass-pill[data-liquid]::after {
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fff9,
+                inset -1.5px -1.5px 0 -0.5px #ffffff4d,
+                inset 0 0 14px #ffffff12 !important;
+        }
+
+        /* ==========================================================================
+           iOS SLIDING SEGMENTED CONTROL (Branch Mode Switcher)
+           ========================================================================== */
+        .ios-segmented-track {
+            position: relative;
+            isolation: isolate;
+            background: rgba(118, 118, 128, 0.12);
+            border-radius: 9999px;
+            padding: 4px;
+            box-shadow:
+                inset 0 1px 2px rgba(15, 23, 42, 0.08),
+                inset 0 0 0 0.5px rgba(15, 23, 42, 0.06);
+        }
+        html.dark .ios-segmented-track {
+            background: rgba(118, 118, 128, 0.24);
+            box-shadow:
+                inset 0 1px 2px rgba(0, 0, 0, 0.45),
+                inset 0 0 0 0.5px rgba(255, 255, 255, 0.08);
+        }
+        .ios-sliding-pill {
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            left: 4px;
+            width: calc(50% - 4px);
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #ffffff,
+                0 3px 10px -1px rgba(15, 23, 42, 0.12),
+                0 1px 3px 0 rgba(15, 23, 42, 0.06);
+            transform: translate3d(calc(var(--seg-idx, 0) * 100%), 0, 0);
+            transition: transform 0.38s cubic-bezier(0.22, 1.18, 0.36, 1);
+            pointer-events: none;
+            z-index: 0;
+            will-change: transform;
+        }
+        html.dark .ios-sliding-pill {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.42), rgba(147, 51, 234, 0.42));
+            box-shadow:
+                inset 1.2px 1.2px 0 -0.5px rgba(255, 255, 255, 0.45),
+                0 4px 14px rgba(0, 0, 0, 0.45);
+        }
+
+        /* Specular Glass Containers */
         .real-glass {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.45);
-            border-top: 1px solid rgba(255, 255, 255, 0.9);
-            border-left: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.12);
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
+            background-color: rgba(255, 255, 255, 0.58);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 52%);
+            backdrop-filter: blur(26px) saturate(190%);
+            -webkit-backdrop-filter: blur(26px) saturate(190%);
+            border: none;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3,
+                0 18px 42px -12px rgba(31, 38, 135, 0.09);
+            transition: transform 0.25s var(--ot-ease-settle), box-shadow 0.25s ease;
         }
 
-        /* Inner glass for inputs */
         .inner-glass {
-            background: rgba(255, 255, 255, 0.55);
-            border: 1px solid rgba(255, 255, 255, 0.75);
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.65);
+            border: none;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014;
+            transition: all 0.22s ease;
         }
 
-        /* Custom Select Input Styling (Font-size 16px avoids iOS Safari auto-zoom) */
+        /* Custom Select Styling (16px prevents iOS Safari zoom) */
         select.custom-select {
             appearance: none;
+            -webkit-appearance: none;
             font-size: 16px;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23475569%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 1rem center;
-            background-size: 0.65rem auto;
+            background-size: 1rem auto;
         }
 
-        /* Continuous Orb Animation */
-        @keyframes float-pulse {
-            0% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 0.6; }
-        }
-        .orb-pulse { animation: float-pulse 6s ease-in-out infinite; }
-        
-        /* Premium Branch Cards */
+        /* Premium Branch Cards (OpenBlast Specular Rim + Hover Lift) */
         .branch-card {
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.85);
+            background-color: rgba(255, 255, 255, 0.66);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 55%);
+            backdrop-filter: blur(18px) saturate(190%);
+            -webkit-backdrop-filter: blur(18px) saturate(190%);
+            border: none;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3,
+                0 10px 26px -6px rgba(15, 23, 42, 0.06);
+            transition:
+                transform 0.34s var(--ot-ease-settle),
+                box-shadow 0.28s ease,
+                background-color 0.22s ease;
             touch-action: manipulation;
         }
-        .branch-card:hover {
-            transform: translateY(-5px);
-            background: #ffffff;
-            box-shadow: 0 16px 32px -8px rgba(79, 70, 229, 0.15);
+        .branch-card:not(.branch-locked):hover {
+            transform: translate3d(0, -4px, 0) scale(1.012);
+            background-color: rgba(255, 255, 255, 0.88);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #ffffff,
+                inset -1.5px -1.5px 0 -0.5px #ffffff,
+                inset 0 0 0 1px rgba(79, 70, 229, 0.38),
+                0 18px 36px -8px rgba(79, 70, 229, 0.15);
         }
-        .branch-card:active {
-            transform: scale(0.985);
+        .branch-card:not(.branch-locked):active {
+            transform: scale(0.96);
+            transition-duration: 80ms;
+        }
+
+        /* Semester Quick-Jump Chip */
+        .sem-chip {
+            background: rgba(255, 255, 255, 0.72);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #ffffff,
+                inset 0 0 0 0.5px rgba(15, 23, 42, 0.10),
+                0 4px 12px -2px rgba(15, 23, 42, 0.05);
+            transition: transform 0.18s var(--ot-ease-settle), background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .sem-chip:hover:not(:disabled) {
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px -4px rgba(79, 70, 229, 0.18), inset 0 0 0 1px rgba(79, 70, 229, 0.35);
+        }
+        .sem-chip.sem-active {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed) !important;
+            color: #ffffff !important;
+            box-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+        }
+        html.dark .sem-chip {
+            background: rgba(24, 34, 54, 0.85);
+            color: #e2e8f0;
+            box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.16), 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+        html.dark .sem-chip:hover:not(:disabled) {
+            background: rgba(36, 48, 76, 0.95);
+        }
+
+        /* Floating Bottom Quick-Access Dock (Exact Top-Bar Liquid Glass Physics!) */
+        #floating-notes-dock {
+            position: fixed !important;
+            bottom: max(1rem, env(safe-area-inset-bottom));
+            left: 50%;
+            z-index: 55;
+            width: calc(100% - 1.5rem);
+            max-width: 28rem;
+            border-radius: 22px;
+            transform: translate3d(-50%, 140%, 0) scale(0.94);
+            opacity: 0;
+            pointer-events: none;
+            background-color: rgba(255, 255, 255, 0.36);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 48%);
+            -webkit-backdrop-filter: var(--liquid-filter, ) blur(5px) saturate(1.8) brightness(1.04);
+            backdrop-filter: var(--liquid-filter, ) blur(5px) saturate(1.8) brightness(1.04);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3,
+                0 14px 40px rgba(15, 23, 42, 0.16);
+            transition:
+                transform 0.46s cubic-bezier(0.22, 1.18, 0.36, 1),
+                opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        #floating-notes-dock.dock-active {
+            transform: translate3d(-50%, 0, 0) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        html.dark #floating-notes-dock {
+            background-color: rgba(15, 23, 42, 0.50);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 48%);
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fff9,
+                inset -1.5px -1.5px 0 -0.5px #ffffff4d,
+                inset 0 0 14px #ffffff12,
+                0 20px 44px rgba(0, 0, 0, 0.65);
+        }
+
+        /* OpenBlast Tactile Press & Entrance Animations */
+        .ot-press { transition: transform 0.16s var(--ot-ease-settle); }
+        .ot-press:not(:disabled):active { transition-duration: 80ms; transform: scale(0.93); }
+
+        @keyframes otRiseIn {
+            0% { opacity: 0; transform: translate3d(0, 14px, 0) scale(0.99); }
+            100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+        }
+        .spring-enter {
+            opacity: 0;
+            animation: otRiseIn 0.5s var(--ot-ease-emph) forwards;
+            will-change: transform, opacity;
         }
     </style>
     
@@ -103,303 +329,652 @@
     
     <meta property="og:site_name" content="Kerala Timetable">
     <meta property="og:image" content="https://keralatimetable.in/social-preview.png">
-    
-    <!-- Complete OG Tags -->
     <meta property="og:title" content="KTU B.Tech Notes 2024 Scheme | All Branches PDF Download">
     <meta property="og:description" content="Download KTU B.Tech Notes for all branches under the 2024 Scheme. Get comprehensive, wait-free PDF study materials.">
     <meta property="og:url" content="https://keralatimetable.in/notes.html">
     <meta property="og:type" content="website">
 </head>
 
-<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative">
+<body class="text-slate-800 antialiased flex flex-col min-h-screen relative selection:bg-indigo-600 selection:text-white">
 
-    <div id="navigation-container"></div>
+    <!-- Global Sticky Liquid Glass Navigation -->
+    <div id="navigation-container" class="w-full z-50 sticky top-0"></div>
 
-    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div id="scroll-bg-1" class="absolute top-12 -left-28 md:-left-10 w-64 h-64 md:w-96 md:h-96 transition-transform duration-100 ease-out">
-            <div id="mouse-orb-1" class="w-full h-full bg-indigo-400/50 md:bg-indigo-400 rounded-full mix-blend-multiply filter blur-[60px] md:blur-[80px] orb-pulse transition-transform duration-100 ease-out"></div>
+    <!-- Pre-mounted ColorOS Live Capsule -->
+    <div id="coloros-live-capsule"></div>
+
+    <!-- Ambient Refraction Orbs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+        <div id="scroll-bg-1" class="absolute top-12 -left-24 md:-left-10 w-72 h-72 md:w-96 md:h-96 transition-transform duration-100 ease-out">
+            <div id="mouse-orb-1" class="ambient-orb-1 w-full h-full bg-indigo-400/35 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[90px]"></div>
         </div>
-        <div id="scroll-bg-2" class="absolute top-48 -right-28 md:-right-20 w-72 h-72 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
-            <div id="mouse-orb-2" class="w-full h-full bg-purple-400/50 md:bg-purple-400 rounded-full mix-blend-multiply filter blur-[70px] md:blur-[100px] orb-pulse transition-transform duration-100 ease-out" style="animation-delay: 2s;"></div>
+        <div id="scroll-bg-2" class="absolute top-48 -right-24 md:-right-16 w-80 h-80 md:w-[30rem] md:h-[30rem] transition-transform duration-100 ease-out">
+            <div id="mouse-orb-2" class="ambient-orb-2 w-full h-full bg-purple-400/35 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[105px]"></div>
         </div>
     </div>
 
-    <main class="flex-grow w-full max-w-6xl mx-auto px-3.5 sm:px-6 py-6 sm:py-10 md:py-12 relative z-10">
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow w-full max-w-6xl mx-auto px-3.5 sm:px-6 pt-5 sm:pt-9 md:pt-12 pb-28 relative z-10">
         
-        <div class="text-center mb-6 sm:mb-10 max-w-3xl mx-auto">
-            <div class="inline-flex items-center justify-center p-2.5 sm:p-3 bg-white/80 backdrop-blur-md rounded-2xl mb-3 sm:mb-4 text-indigo-600 shadow-[0_4px_16px_rgba(79,70,229,0.12)] border border-white">
-                <i class="fas fa-book-open text-lg sm:text-2xl"></i>
+        <!-- Hero Section -->
+        <div class="text-center mb-7 sm:mb-10 max-w-3xl mx-auto spring-enter" style="animation-delay: 30ms;">
+            <div id="notes-hero-badge" class="glass-pill inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 text-indigo-700 dark:text-indigo-300 text-xs font-extrabold tracking-wide">
+                <span class="relative z-10 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>Wait-Free PDFs • 2024 Scheme Updated</span>
+                </span>
             </div>
-            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-2.5 sm:mb-3.5 tracking-tight leading-tight">
-                KTU Notes <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">2024 Scheme</span>
+
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-3 tracking-tight leading-[1.08]">
+                KTU Notes <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600">2024 Scheme</span>
             </h1>
 
             <p class="text-slate-600 font-medium max-w-2xl mx-auto text-xs sm:text-sm md:text-base leading-relaxed px-1">
-                The ultimate academic hub. Find your exact syllabus, study notes, and materials organized by branch and semester.
+                Syllabus-aligned, module-wise B.Tech study notes organized by branch and semester. Pick your stream below or jump straight to your semester.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-10 mb-8 sm:mb-14 perspective-1000">
+        <!-- MAIN 12-COL STAGE: QUICK FINDER + BRANCH DIRECTORY -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-7 lg:gap-9 mb-10 sm:mb-14">
             
-            <div class="lg:col-span-5 relative" style="perspective: 1000px;">
-                <div id="glass-card" class="real-glass rounded-2xl sm:rounded-[2rem] p-4 sm:p-7 md:p-8 w-full sticky top-20 sm:top-24 z-20">
-                    <div style="transform: translateZ(20px);">
-                        <div class="flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6">
-                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-indigo-600 shadow-sm border border-white text-xs sm:text-base shrink-0">
-                                <i class="fas fa-search"></i>
+            <!-- LEFT: LIQUID GLASS QUICK FINDER CARD -->
+            <div class="lg:col-span-5 spring-enter" style="animation-delay: 80ms;">
+                <div id="glass-card" class="real-glass rounded-[2rem] p-5 sm:p-6 md:p-7 w-full lg:sticky lg:top-24 z-20">
+                    
+                    <div class="flex items-center justify-between gap-3 mb-5">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center shadow-md shadow-indigo-500/25 shrink-0">
+                                <i class="fas fa-compass text-base"></i>
                             </div>
-                            <h2 class="text-lg sm:text-2xl font-black text-slate-800 tracking-tight">Quick Finder</h2>
+                            <div>
+                                <h2 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight leading-none">Quick Finder</h2>
+                                <p class="text-[11px] font-semibold text-slate-500 mt-1">Instant jump to module PDFs</p>
+                            </div>
                         </div>
+                        <span class="px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 text-[10px] font-extrabold font-mono-code">2024</span>
+                    </div>
 
-                        <div class="space-y-3.5 sm:space-y-5">
-                            <div>
-                                <label class="block text-[10px] sm:text-xs font-black text-slate-600 uppercase tracking-wider mb-1 sm:mb-2 ml-1">Branch</label>
-                                <select id="quickBranch" class="custom-select inner-glass w-full text-slate-800 font-semibold rounded-xl sm:rounded-2xl px-3.5 sm:px-5 py-3 sm:py-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer hover:bg-white/70">
-                                    <option value="" disabled selected>Select Branch</option>
-                                    <option value="CSE">Computer Science (CSE)</option>
-                                    <option value="AD">AI & Data Science (AD)</option>
-                                    <option value="CE" disabled>Civil (Coming Soon)</option>
-                                    <option value="ME" disabled>Mechanical (Coming Soon)</option>
-                                    <option value="EEE" disabled>Electrical (Coming Soon)</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block text-[10px] sm:text-xs font-black text-slate-600 uppercase tracking-wider mb-1 sm:mb-2 ml-1">Semester</label>
-                                <select id="quickSem" class="custom-select inner-glass w-full text-slate-800 font-semibold rounded-xl sm:rounded-2xl px-3.5 sm:px-5 py-3 sm:py-3.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all cursor-pointer hover:bg-white/70">
-                                    <option value="" disabled selected>Select Semester</option>
-                                    <option value="S1">Semester 1</option>
-                                    <option value="S2">Semester 2</option>
-                                    <option value="S3">Semester 3</option>
-                                    <option value="S4">Semester 4</option>
-                                    <option value="S5">Semester 5</option>
-                                    <option value="S6">Semester 6</option>
-                                    <option value="S7">Semester 7</option>
-                                    <option value="S8">Semester 8</option>
-                                </select>
-                            </div>
-
-                            <button onclick="handleQuickSearch()" class="w-full mt-4 sm:mt-6 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 sm:py-3.5 px-5 sm:px-6 rounded-xl sm:rounded-2xl shadow-[0_6px_16px_rgba(79,70,229,0.25)] transform transition active:scale-[0.98] flex items-center justify-center gap-2 text-xs sm:text-base">
-                                <span>Access Notes</span> <i class="fas fa-arrow-right text-xs"></i>
+                    <!-- iOS Sliding Branch Pill Selector (CSE <-> AI & DS) -->
+                    <div class="mb-4">
+                        <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-2 ml-1">1. Choose Available Branch</label>
+                        <div id="branch-segmented-track" class="ios-segmented-track grid grid-cols-2 w-full select-none" style="--seg-idx: 0;">
+                            <span class="ios-sliding-pill" aria-hidden="true"></span>
+                            <button type="button" id="seg-btn-cse" onclick="selectBranchSegment('CSE')" class="relative z-10 py-2.5 px-3 rounded-full text-xs sm:text-sm font-extrabold text-indigo-600 dark:text-indigo-200 transition-colors flex items-center justify-center gap-1.5 whitespace-nowrap">
+                                <i class="fas fa-laptop-code text-xs"></i>
+                                <span>CSE (S1–S8)</span>
+                            </button>
+                            <button type="button" id="seg-btn-ad" onclick="selectBranchSegment('AD')" class="relative z-10 py-2.5 px-3 rounded-full text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-800 dark:text-slate-400 transition-colors flex items-center justify-center gap-1.5 whitespace-nowrap">
+                                <i class="fas fa-brain text-xs"></i>
+                                <span>AI &amp; DS (S5)</span>
                             </button>
                         </div>
                     </div>
+
+                    <!-- Hidden native select synced for accessibility & all branches -->
+                    <div class="mb-4">
+                        <label for="quickBranch" class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">Or Pick From All Branches</label>
+                        <select id="quickBranch" onchange="syncFromDropdowns()" class="custom-select inner-glass w-full text-slate-800 font-bold rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+                            <option value="CSE" selected>Computer Science (CSE)</option>
+                            <option value="AD">AI &amp; Data Science (AD)</option>
+                            <option value="CE" disabled>Civil Engineering (Coming Soon)</option>
+                            <option value="ME" disabled>Mechanical Engineering (Coming Soon)</option>
+                            <option value="EEE" disabled>Electrical &amp; Electronics (Coming Soon)</option>
+                            <option value="ECE" disabled>Electronics &amp; Comm (Coming Soon)</option>
+                        </select>
+                    </div>
+
+                    <!-- 1-Tap Semester Grid (S1 to S8) -->
+                    <div class="mb-5">
+                        <div class="flex items-center justify-between mb-2 px-1">
+                            <label class="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">2. Tap Semester</label>
+                            <span id="sem-availability-hint" class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">All S1–S8 Ready</span>
+                        </div>
+                        <div id="semester-chip-grid" class="grid grid-cols-4 gap-2">
+                            <!-- Populated dynamically by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Primary Action CTA -->
+                    <button type="button" id="btn-access-notes" onclick="handleQuickSearch()" class="ot-press w-full bg-gradient-to-r from-indigo-600 via-blue-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold py-3.5 px-5 rounded-2xl shadow-[0_10px_24px_-6px_rgba(79,70,229,0.45)] flex items-center justify-center gap-2 text-sm">
+                        <span id="btn-access-label">Open CSE Notes</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </button>
                 </div>
             </div>
 
-            <div class="lg:col-span-7 z-10">
-                <div class="flex items-center gap-2.5 mb-3 sm:mb-5 px-1">
-                    <h2 class="text-sm sm:text-base md:text-lg font-black text-slate-800">Browse by Branch</h2>
-                    <div class="h-px bg-slate-300 flex-grow ml-2 opacity-50"></div>
+            <!-- RIGHT: BROWSE BY BRANCH DIRECTORY -->
+            <div class="lg:col-span-7 z-10 spring-enter" style="animation-delay: 130ms;">
+                <div class="flex items-center justify-between gap-2.5 mb-3.5 px-1">
+                    <h2 class="text-xs sm:text-sm font-extrabold text-slate-600 uppercase tracking-widest flex items-center gap-2">
+                        <i class="fas fa-layer-group text-indigo-500"></i> Browse by Department
+                    </h2>
+                    <span class="text-[11px] font-bold text-slate-400">2 Live • 4 Upcoming</span>
                 </div>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     
-                    <!-- CSE Card -->
-                    <a href="/KTU/CSE/notes.html" class="branch-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 relative group overflow-hidden">
-                        <div class="absolute top-0 right-0 w-28 h-28 sm:w-32 sm:h-32 bg-indigo-100 rounded-full blur-xl -mr-8 -mt-8 transition-transform duration-500 group-hover:scale-150"></div>
-                        <div class="relative z-10 flex items-center justify-between">
-                            <div class="flex items-center gap-3 sm:gap-4">
-                                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 shrink-0 rounded-xl sm:rounded-2xl bg-white/80 text-indigo-600 flex items-center justify-center text-lg sm:text-2xl shadow-sm border border-white transition-transform group-hover:scale-110 group-hover:rotate-3 duration-300">
+                    <!-- CSE Card (Live) -->
+                    <a href="/KTU/CSE/notes.html" class="branch-card rounded-3xl p-4 sm:p-5 relative group overflow-hidden block">
+                        <div class="absolute top-0 right-0 w-28 h-28 bg-indigo-400/20 rounded-full blur-2xl -mr-8 -mt-8 transition-transform duration-500 group-hover:scale-150 pointer-events-none"></div>
+                        <div class="relative z-10 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-600 text-white flex items-center justify-center text-xl sm:text-2xl shadow-md shadow-indigo-500/25 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3">
                                     <i class="fas fa-laptop-code"></i>
                                 </div>
-                                <div>
-                                    <h3 class="text-sm sm:text-base md:text-lg font-black text-slate-900 group-hover:text-indigo-600 transition-colors leading-tight">Computer Science</h3>
-                                    <p class="text-slate-500 font-medium text-[11px] sm:text-xs mt-0.5">CSE • S1 to S8</p>
+                                <div class="min-w-0">
+                                    <div class="flex items-center gap-1.5 mb-0.5">
+                                        <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 text-[9px] font-black uppercase tracking-wider">Live</span>
+                                        <span class="text-[10px] font-mono-code font-bold text-slate-400">CSE</span>
+                                    </div>
+                                    <h3 class="text-sm sm:text-base font-black text-slate-900 group-hover:text-indigo-600 transition-colors leading-tight truncate">Computer Science</h3>
+                                    <p class="text-slate-500 font-semibold text-[11px] mt-0.5">Semesters S1 to S8 PDFs</p>
                                 </div>
                             </div>
+                            <span class="w-8 h-8 rounded-full bg-white/80 dark:bg-white/10 text-slate-500 group-hover:bg-indigo-600 group-hover:text-white flex items-center justify-center transition-colors shrink-0 shadow-sm">
+                                <i class="fas fa-chevron-right text-[10px]"></i>
+                            </span>
                         </div>
                     </a>
 
-                    <!-- AD Card -->
-                    <a href="/KTU/AI-DS/notes.html" class="branch-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 relative group overflow-hidden">
-                        <div class="absolute top-0 right-0 w-28 h-28 sm:w-32 sm:h-32 bg-emerald-100 rounded-full blur-xl -mr-8 -mt-8 transition-transform duration-500 group-hover:scale-150"></div>
-                        <div class="relative z-10 flex items-center justify-between">
-                            <div class="flex items-center gap-3 sm:gap-4">
-                                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 shrink-0 rounded-xl sm:rounded-2xl bg-white/80 text-emerald-600 flex items-center justify-center text-lg sm:text-2xl shadow-sm border border-white transition-transform group-hover:scale-110 group-hover:-rotate-3 duration-300">
+                    <!-- AD Card (Live) -->
+                    <a href="/KTU/AI-DS/notes.html" class="branch-card rounded-3xl p-4 sm:p-5 relative group overflow-hidden block">
+                        <div class="absolute top-0 right-0 w-28 h-28 bg-emerald-400/20 rounded-full blur-2xl -mr-8 -mt-8 transition-transform duration-500 group-hover:scale-150 pointer-events-none"></div>
+                        <div class="relative z-10 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center text-xl sm:text-2xl shadow-md shadow-emerald-500/25 transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-3">
                                     <i class="fas fa-brain"></i>
                                 </div>
-                                <div>
-                                    <h3 class="text-sm sm:text-base md:text-lg font-black text-slate-900 group-hover:text-emerald-600 transition-colors leading-tight">AI & Data Science</h3>
-                                    <p class="text-slate-500 font-medium text-[11px] sm:text-xs mt-0.5">AD • S5 Available</p>
+                                <div class="min-w-0">
+                                    <div class="flex items-center gap-1.5 mb-0.5">
+                                        <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 text-[9px] font-black uppercase tracking-wider">Live</span>
+                                        <span class="text-[10px] font-mono-code font-bold text-slate-400">AD</span>
+                                    </div>
+                                    <h3 class="text-sm sm:text-base font-black text-slate-900 group-hover:text-emerald-600 transition-colors leading-tight truncate">AI &amp; Data Science</h3>
+                                    <p class="text-slate-500 font-semibold text-[11px] mt-0.5">S5 Core Modules Ready</p>
                                 </div>
                             </div>
+                            <span class="w-8 h-8 rounded-full bg-white/80 dark:bg-white/10 text-slate-500 group-hover:bg-emerald-600 group-hover:text-white flex items-center justify-center transition-colors shrink-0 shadow-sm">
+                                <i class="fas fa-chevron-right text-[10px]"></i>
+                            </span>
                         </div>
                     </a>
 
-                    <!-- CE Card -->
-                    <div class="branch-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 relative overflow-hidden opacity-80 cursor-not-allowed">
-                        <div class="relative z-10 flex items-center gap-3 sm:gap-4">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:rounded-2xl bg-white/80 text-slate-400 flex items-center justify-center text-base sm:text-xl shadow-sm border border-white">
-                                <i class="fas fa-building"></i>
+                    <!-- CE Card (Upcoming) -->
+                    <button type="button" onclick="notifyComingSoon('Civil Engineering (CE)')" class="branch-card branch-locked rounded-3xl p-4 sm:p-5 relative overflow-hidden opacity-75 hover:opacity-95 text-left w-full">
+                        <div class="relative z-10 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-2xl bg-slate-200/70 dark:bg-white/10 text-slate-500 dark:text-slate-400 flex items-center justify-center text-lg">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <h3 class="text-sm sm:text-base font-extrabold text-slate-700 leading-tight truncate">Civil Engg.</h3>
+                                    <p class="text-slate-400 text-[10px] mt-0.5 uppercase font-bold tracking-wider">Coming Soon</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="text-sm sm:text-base md:text-lg font-bold text-slate-700 leading-tight">Civil Engg.</h3>
-                                <p class="text-slate-400 text-[10px] sm:text-xs mt-0.5 uppercase font-bold tracking-wider">Coming Soon</p>
-                            </div>
+                            <i class="fas fa-clock text-slate-300 dark:text-slate-600 text-xs shrink-0"></i>
                         </div>
-                    </div>
+                    </button>
 
-                    <!-- ME Card -->
-                    <div class="branch-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 relative overflow-hidden opacity-80 cursor-not-allowed">
-                        <div class="relative z-10 flex items-center gap-3 sm:gap-4">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:rounded-2xl bg-white/80 text-slate-400 flex items-center justify-center text-base sm:text-xl shadow-sm border border-white">
-                                <i class="fas fa-cogs"></i>
+                    <!-- ME Card (Upcoming) -->
+                    <button type="button" onclick="notifyComingSoon('Mechanical Engineering (ME)')" class="branch-card branch-locked rounded-3xl p-4 sm:p-5 relative overflow-hidden opacity-75 hover:opacity-95 text-left w-full">
+                        <div class="relative z-10 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-2xl bg-slate-200/70 dark:bg-white/10 text-slate-500 dark:text-slate-400 flex items-center justify-center text-lg">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <h3 class="text-sm sm:text-base font-extrabold text-slate-700 leading-tight truncate">Mechanical</h3>
+                                    <p class="text-slate-400 text-[10px] mt-0.5 uppercase font-bold tracking-wider">Coming Soon</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="text-sm sm:text-base md:text-lg font-bold text-slate-700 leading-tight">Mechanical</h3>
-                                <p class="text-slate-400 text-[10px] sm:text-xs mt-0.5 uppercase font-bold tracking-wider">Coming Soon</p>
-                            </div>
+                            <i class="fas fa-clock text-slate-300 dark:text-slate-600 text-xs shrink-0"></i>
                         </div>
-                    </div>
+                    </button>
 
-                    <!-- EEE Card -->
-                    <div class="branch-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 relative overflow-hidden opacity-80 cursor-not-allowed">
-                        <div class="relative z-10 flex items-center gap-3 sm:gap-4">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:rounded-2xl bg-white/80 text-slate-400 flex items-center justify-center text-base sm:text-xl shadow-sm border border-white">
-                                <i class="fas fa-bolt"></i>
+                    <!-- EEE Card (Upcoming) -->
+                    <button type="button" onclick="notifyComingSoon('Electrical & Electronics (EEE)')" class="branch-card branch-locked rounded-3xl p-4 sm:p-5 relative overflow-hidden opacity-75 hover:opacity-95 text-left w-full">
+                        <div class="relative z-10 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-2xl bg-slate-200/70 dark:bg-white/10 text-slate-500 dark:text-slate-400 flex items-center justify-center text-lg">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <h3 class="text-sm sm:text-base font-extrabold text-slate-700 leading-tight truncate">Electrical (EEE)</h3>
+                                    <p class="text-slate-400 text-[10px] mt-0.5 uppercase font-bold tracking-wider">Coming Soon</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="text-sm sm:text-base md:text-lg font-bold text-slate-700 leading-tight">Electrical (EEE)</h3>
-                                <p class="text-slate-400 text-[10px] sm:text-xs mt-0.5 uppercase font-bold tracking-wider">Coming Soon</p>
-                            </div>
+                            <i class="fas fa-clock text-slate-300 dark:text-slate-600 text-xs shrink-0"></i>
                         </div>
-                    </div>
+                    </button>
 
-                    <!-- ECE Card -->
-                    <div class="branch-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 relative overflow-hidden opacity-80 cursor-not-allowed">
-                        <div class="relative z-10 flex items-center gap-3 sm:gap-4">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-xl sm:rounded-2xl bg-white/80 text-slate-400 flex items-center justify-center text-base sm:text-xl shadow-sm border border-white">
-                                <i class="fas fa-microchip"></i>
+                    <!-- ECE Card (Upcoming) -->
+                    <button type="button" onclick="notifyComingSoon('Electronics & Communication (ECE)')" class="branch-card branch-locked rounded-3xl p-4 sm:p-5 relative overflow-hidden opacity-75 hover:opacity-95 text-left w-full">
+                        <div class="relative z-10 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-2xl bg-slate-200/70 dark:bg-white/10 text-slate-500 dark:text-slate-400 flex items-center justify-center text-lg">
+                                    <i class="fas fa-microchip"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <h3 class="text-sm sm:text-base font-extrabold text-slate-700 leading-tight truncate">Electronics (ECE)</h3>
+                                    <p class="text-slate-400 text-[10px] mt-0.5 uppercase font-bold tracking-wider">Coming Soon</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="text-sm sm:text-base md:text-lg font-bold text-slate-700 leading-tight">Electronics (ECE)</h3>
-                                <p class="text-slate-400 text-[10px] sm:text-xs mt-0.5 uppercase font-bold tracking-wider">Coming Soon</p>
-                            </div>
+                            <i class="fas fa-clock text-slate-300 dark:text-slate-600 text-xs shrink-0"></i>
                         </div>
-                    </div>
+                    </button>
 
+                </div>
+
+                <!-- Featured High-Yield Notes Shelf -->
+                <div class="mt-6">
+                    <h2 class="text-xs font-extrabold text-slate-500 uppercase tracking-widest mb-3 px-1 flex items-center gap-2">
+                        <i class="fas fa-bolt text-amber-500"></i> Most Downloaded Study Hubs
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <a href="/KTU/CSE/S1/notes/index.html" class="branch-card rounded-2xl p-4 flex items-center gap-3.5 group">
+                            <div class="w-10 h-10 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                <i class="fas fa-folder-open text-base"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 truncate">S1 CSE Complete Hub</h3>
+                                <p class="text-[11px] text-slate-500 truncate">GAMAT101, UCEST105 &amp; more</p>
+                            </div>
+                        </a>
+
+                        <a href="/notes-ucest206.html" class="branch-card rounded-2xl p-4 flex items-center gap-3.5 group">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                                <i class="fas fa-star text-base"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 truncate">UCEST206 IPR Notes</h3>
+                                <p class="text-[11px] text-slate-500 truncate">Viral 9-page S2 exam guide</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="mt-6 pt-6 sm:mt-8 sm:pt-8 border-t border-slate-200/60 z-10 relative">
-            <h3 class="text-[10px] sm:text-[11px] font-black text-slate-400 uppercase tracking-widest mb-3 sm:mb-4 flex items-center gap-2">
-                <i class="fas fa-fire text-orange-400"></i> Trending Searches
+        <!-- CLICKABLE TRENDING SEARCHES -->
+        <section class="mt-4 pt-6 border-t border-slate-200/60 dark:border-white/10 z-10 relative spring-enter" style="animation-delay: 190ms;">
+            <h3 class="text-[10px] sm:text-xs font-extrabold text-slate-500 uppercase tracking-widest mb-3.5 flex items-center gap-2 px-1">
+                <i class="fas fa-fire text-orange-500"></i> Trending Notes &amp; PYQ Searches
             </h3>
-            <div class="flex flex-wrap gap-1.5 sm:gap-2.5">
-                <span class="bg-white/80 backdrop-blur-sm border border-white hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-600 text-[10px] sm:text-[11px] font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl cursor-pointer shadow-sm">ktu notes 2024 scheme</span>
-                <span class="bg-white/80 backdrop-blur-sm border border-white hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-600 text-[10px] sm:text-[11px] font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl cursor-pointer shadow-sm">ktu cse s3 notes pdf</span>
-                <span class="bg-white/80 backdrop-blur-sm border border-white hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-600 text-[10px] sm:text-[11px] font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl cursor-pointer shadow-sm">btech first year study materials ktu</span>
-                <span class="bg-white/80 backdrop-blur-sm border border-white hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-600 text-[10px] sm:text-[11px] font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl cursor-pointer shadow-sm">data structures ktu 2024</span>
-                <span class="bg-white/80 backdrop-blur-sm border border-white hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-600 text-[10px] sm:text-[11px] font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl cursor-pointer shadow-sm">ktu civil notes pdf download</span>
-                <span class="bg-white/80 backdrop-blur-sm border border-white hover:border-indigo-300 hover:text-indigo-700 transition-colors text-slate-600 text-[10px] sm:text-[11px] font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl cursor-pointer shadow-sm">kerala timetable notes</span>
+            <div class="flex flex-wrap gap-2">
+                <a href="/KTU/CSE/notes.html" class="ot-press branch-card text-slate-700 hover:text-indigo-600 text-[11px] sm:text-xs font-bold px-3.5 py-2 rounded-full">ktu notes 2024 scheme</a>
+                <a href="/KTU/CSE/S3/notes/index.html" class="ot-press branch-card text-slate-700 hover:text-indigo-600 text-[11px] sm:text-xs font-bold px-3.5 py-2 rounded-full">ktu cse s3 notes pdf</a>
+                <a href="/KTU/CSE/S1/notes/index.html" class="ot-press branch-card text-slate-700 hover:text-indigo-600 text-[11px] sm:text-xs font-bold px-3.5 py-2 rounded-full">btech first year study materials ktu</a>
+                <a href="/pyq.html?q=CST201" class="ot-press branch-card text-slate-700 hover:text-indigo-600 text-[11px] sm:text-xs font-bold px-3.5 py-2 rounded-full">data structures ktu 2024</a>
+                <a href="/pyq.html" class="ot-press branch-card text-slate-700 hover:text-indigo-600 text-[11px] sm:text-xs font-bold px-3.5 py-2 rounded-full">ktu previous year papers pdf</a>
+                <a href="/KTU/AI-DS/S5/notes/index.html" class="ot-press branch-card text-slate-700 hover:text-indigo-600 text-[11px] sm:text-xs font-bold px-3.5 py-2 rounded-full">ktu ai &amp; ds s5 notes</a>
             </div>
-        </div>
+        </section>
 
     </main>
 
-    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 py-6 sm:py-8 text-center relative z-10">
-        <div class="max-w-3xl mx-auto px-4">
-            <h3 class="text-slate-800 font-bold text-base sm:text-lg mb-1.5">Kerala Timetable</h3>
-            <p class="text-slate-500 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto">Providing fast, direct access to university resources. We are an independent platform and not officially affiliated with APJ Abdul Kalam Technological University.</p>
+    <!-- FLOATING BOTTOM QUICK-OPEN DOCK (Exact Top Bar Liquid Glass Physics!) -->
+    <div id="floating-notes-dock" class="p-2.5 sm:p-3 flex items-center justify-between gap-2.5">
+        <div class="flex items-center gap-2.5 pl-1 min-w-0">
+            <span id="dock-branch-badge" class="px-2.5 h-8 rounded-full bg-indigo-600 text-white text-xs font-black font-mono-code flex items-center justify-center shadow-sm shrink-0">
+                CSE
+            </span>
+            <div class="flex flex-col text-left min-w-0">
+                <span id="dock-notes-title" class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight truncate">CSE Semester 1 Notes</span>
+                <span class="text-[10px] font-bold text-slate-500">2024 Scheme • Wait-Free PDFs</span>
+            </div>
+        </div>
+
+        <button type="button" onclick="handleQuickSearch()" class="ot-press px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs sm:text-sm font-extrabold flex items-center justify-center gap-1.5 shadow-lg shadow-indigo-500/30 shrink-0">
+            <span>Open</span>
+            <i class="fas fa-arrow-right text-[10px]"></i>
+        </button>
+    </div>
+
+    <!-- MINIMAL LIQUID GLASS FOOTER -->
+    <footer class="w-full max-w-6xl mx-auto px-4 pb-8 relative z-10 spring-enter" style="animation-delay: 230ms;">
+        <div id="notes-footer-pill" class="glass-pill rounded-3xl sm:rounded-full px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div class="relative z-10">
+                <h3 class="text-slate-900 font-extrabold text-sm">Kerala Timetable</h3>
+                <p class="text-slate-500 text-xs">Independent student resource hub — not officially affiliated with APJAKTU.</p>
+            </div>
+            <a href="/pyq.html" class="ot-press relative z-10 px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 text-xs font-extrabold flex items-center gap-1.5 shrink-0">
+                <span>Need PYQs?</span>
+                <i class="fas fa-arrow-right text-[10px]"></i>
+            </a>
         </div>
     </footer>
 
-    <script src="/components.js?v=13"></script>
+    <!-- Global Site Components (Cache-Busted v=26) -->
+    <script src="/components.js?v=26" onerror="this.onerror=null;this.src='components.js';"></script>
     <script>
-        // Load Header Navigation
-        if(typeof loadNavigation === 'function') loadNavigation('notes', '/', false);
+        if (typeof loadNavigation === 'function') loadNavigation('notes', '/', false);
 
-        // --- 1. BUTTERY SMOOTH VERTICAL SCROLL PARALLAX (Mobile Optimized) ---
+        // =====================================================================
+        // EMBEDDED OPENBLAST LIQUID GLASS ENGINE FOR NOTES.HTML
+        // =====================================================================
+        window.NotesLiquidGlass = (function() {
+            const SVG_NS = 'http://www.w3.org/2000/svg';
+            let svgRoot = null;
+            const filterCache = new Map();
+            let counter = 0;
+
+            function isChromium() {
+                if (navigator.userAgentData?.brands?.some(b => /Chromium|Chrome|Edge/i.test(b.brand))) return true;
+                return /Chrome|CriOS|Edg|OPR|Brave/i.test(navigator.userAgent) && !/Firefox|FxiOS/i.test(navigator.userAgent);
+            }
+
+            function generateLensBytes(w, h, radius, bevel) {
+                const bytes = new Uint8ClampedArray(w * h * 4);
+                const halfW = w / 2, halfH = h / 2;
+                const r = Math.max(0, Math.min(radius, halfW, halfH));
+                const b = Math.max(1, Math.min(bevel, halfW, halfH));
+
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        const dx = x + 0.5 - halfW;
+                        const dy = y + 0.5 - halfH;
+                        const qx = Math.abs(dx) - (halfW - r);
+                        const qy = Math.abs(dy) - (halfH - r);
+
+                        let distFromEdge, nx = 0, ny = 0;
+                        if (qx > 0 && qy > 0) {
+                            const d = Math.hypot(qx, qy);
+                            distFromEdge = r - d;
+                            nx = (qx / d) * Math.sign(dx);
+                            ny = (qy / d) * Math.sign(dy);
+                        } else if (qx > qy) {
+                            distFromEdge = r - qx;
+                            nx = Math.sign(dx);
+                        } else {
+                            distFromEdge = r - qy;
+                            ny = Math.sign(dy);
+                        }
+
+                        const norm = Math.min(1, Math.max(0, 1 - distFromEdge / b));
+                        const g = 1 - Math.sqrt(1 - norm * norm);
+                        const idx = (y * w + x) * 4;
+                        bytes[idx]     = Math.round(128 - nx * g * 127);
+                        bytes[idx + 1] = Math.round(128 - ny * g * 127);
+                        bytes[idx + 2] = 128;
+                        bytes[idx + 3] = 255;
+                    }
+                }
+                return bytes;
+            }
+
+            function createLensDataURL(w, h, r, bevel) {
+                const canvas = document.createElement('canvas');
+                canvas.width = w; canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return '';
+                ctx.putImageData(new ImageData(generateLensBytes(w, h, r, bevel), w, h), 0, 0);
+                return canvas.toDataURL();
+            }
+
+            function getSvgRoot() {
+                if (svgRoot?.isConnected) return svgRoot;
+                svgRoot = document.createElementNS(SVG_NS, 'svg');
+                svgRoot.setAttribute('width', '0');
+                svgRoot.setAttribute('height', '0');
+                svgRoot.setAttribute('aria-hidden', 'true');
+                svgRoot.style.cssText = 'position:absolute;pointer-events:none;width:0;height:0;z-index:-9999;';
+                document.body.append(svgRoot);
+                return svgRoot;
+            }
+
+            function elNS(tag, attrs) {
+                const node = document.createElementNS(SVG_NS, tag);
+                for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, String(v));
+                return node;
+            }
+
+            function acquireFilter(w, h, r, bevel, depth) {
+                const key = `${w}x${h}r${r}b${bevel}d${depth}`;
+                const existing = filterCache.get(key);
+                if (existing) { existing.users++; return existing; }
+
+                const id = `notes-liquid-${counter++}`;
+                const box = { x: 0, y: 0, width: w, height: h };
+                const filter = elNS('filter', {
+                    id, ...box,
+                    filterUnits: 'userSpaceOnUse',
+                    primitiveUnits: 'userSpaceOnUse',
+                    'color-interpolation-filters': 'sRGB'
+                });
+                const feImg = elNS('feImage', { ...box, result: 'map', preserveAspectRatio: 'none' });
+                feImg.setAttribute('href', createLensDataURL(w, h, r, bevel));
+                filter.append(
+                    feImg,
+                    elNS('feDisplacementMap', {
+                        in: 'SourceGraphic',
+                        in2: 'map',
+                        scale: depth * 2,
+                        xChannelSelector: 'R',
+                        yChannelSelector: 'G'
+                    })
+                );
+                getSvgRoot().append(filter);
+                const entry = { key, id, node: filter, users: 1 };
+                filterCache.set(key, entry);
+                return entry;
+            }
+
+            function attach(el, bevel = 18, depth = 20, directMode = false) {
+                if (!el || el._notesLiquidAttached) return;
+                el._notesLiquidAttached = true;
+                if (!directMode) el.classList.add('glass-pill');
+                if (!isChromium()) return;
+
+                let currentEntry = null;
+                const update = () => {
+                    const w = Math.round(el.offsetWidth);
+                    const h = Math.round(el.offsetHeight);
+                    if (!w || !h || w > 1400 || h > 260) return;
+
+                    const rawR = Number.parseFloat(getComputedStyle(el).borderTopLeftRadius) || 22;
+                    const r = Math.round(Math.min(rawR, w / 2, h / 2));
+                    const nextEntry = acquireFilter(w, h, r, bevel, depth);
+                    if (currentEntry && currentEntry.key !== nextEntry.key) {
+                        if (--currentEntry.users <= 0) {
+                            currentEntry.node.remove();
+                            filterCache.delete(currentEntry.key);
+                        }
+                    }
+                    currentEntry = nextEntry;
+                    el.style.setProperty('--liquid-filter', `url(#${nextEntry.id})`);
+                    if (!directMode) el.dataset.liquid = '';
+                };
+
+                update();
+                const ro = new ResizeObserver(update);
+                ro.observe(el);
+                el._notesLiquidRefresh = update;
+            }
+
+            return { attach };
+        })();
+
+        // =====================================================================
+        // INTERACTIVE QUICK FINDER & SEMESTER CHIP CONTROLLER
+        // =====================================================================
+        const ALL_SEMS = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'];
+        let selectedBranch = 'CSE';
+        let selectedSem = '';
+
+        function notifyUser(msg, type = 'amber') {
+            if (window.KTUFlow && typeof window.KTUFlow.toast === 'function') {
+                window.KTUFlow.toast(msg, type);
+            } else {
+                alert(msg);
+            }
+        }
+
+        function notifyComingSoon(branchName) {
+            notifyUser(`${branchName} notes are coming soon!`, 'amber');
+        }
+
+        function selectBranchSegment(branch) {
+            selectedBranch = branch;
+            const track = document.getElementById('branch-segmented-track');
+            const btnCse = document.getElementById('seg-btn-cse');
+            const btnAd = document.getElementById('seg-btn-ad');
+            const selectEl = document.getElementById('quickBranch');
+
+            if (selectEl) selectEl.value = branch;
+
+            const activeCls = "relative z-10 py-2.5 px-3 rounded-full text-xs sm:text-sm font-extrabold text-indigo-600 dark:text-indigo-200 transition-colors flex items-center justify-center gap-1.5 whitespace-nowrap";
+            const inactiveCls = "relative z-10 py-2.5 px-3 rounded-full text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-800 dark:text-slate-400 transition-colors flex items-center justify-center gap-1.5 whitespace-nowrap";
+
+            if (branch === 'CSE') {
+                if (track) track.style.setProperty('--seg-idx', '0');
+                btnCse.className = activeCls;
+                btnAd.className = inactiveCls;
+                document.getElementById('sem-availability-hint').innerText = 'All S1–S8 Ready';
+            } else {
+                if (track) track.style.setProperty('--seg-idx', '1');
+                btnAd.className = activeCls;
+                btnCse.className = inactiveCls;
+                document.getElementById('sem-availability-hint').innerText = 'S5 Ready Now';
+                if (selectedSem && selectedSem !== 'S5') selectedSem = 'S5';
+            }
+
+            renderSemesterChips();
+            updateActionUI();
+        }
+
+        function syncFromDropdowns() {
+            const val = document.getElementById('quickBranch').value;
+            if (val === 'CSE' || val === 'AD') {
+                selectBranchSegment(val);
+            }
+        }
+
+        function selectSemesterChip(sem) {
+            if (selectedBranch === 'AD' && sem !== 'S5') {
+                notifyUser('Only S5 notes are currently available for AI & Data Science!', 'amber');
+                return;
+            }
+            selectedSem = (selectedSem === sem) ? '' : sem;
+            renderSemesterChips();
+            updateActionUI();
+        }
+
+        function renderSemesterChips() {
+            const grid = document.getElementById('semester-chip-grid');
+            if (!grid) return;
+
+            grid.innerHTML = ALL_SEMS.map(sem => {
+                const isAvailable = (selectedBranch === 'CSE') || (selectedBranch === 'AD' && sem === 'S5');
+                const isActive = selectedSem === sem;
+                const lockedCls = isAvailable
+                    ? 'cursor-pointer text-slate-700'
+                    : 'opacity-40 cursor-not-allowed text-slate-400';
+
+                return `
+                    <button type="button"
+                            onclick="selectSemesterChip('${sem}')"
+                            class="ot-press sem-chip ${isActive ? 'sem-active' : ''} ${lockedCls} rounded-xl py-2.5 text-xs sm:text-sm font-extrabold font-mono-code flex items-center justify-center">
+                        ${sem}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function updateActionUI() {
+            const btnLabel = document.getElementById('btn-access-label');
+            const dock = document.getElementById('floating-notes-dock');
+            const dockBadge = document.getElementById('dock-branch-badge');
+            const dockTitle = document.getElementById('dock-notes-title');
+
+            const branchName = selectedBranch === 'AD' ? 'AI & DS' : 'CSE';
+
+            if (selectedSem) {
+                btnLabel.innerText = `Open ${branchName} ${selectedSem} Notes`;
+                if (dockBadge) dockBadge.innerText = `${selectedBranch} ${selectedSem}`;
+                if (dockTitle) dockTitle.innerText = `${branchName} Semester ${selectedSem.slice(1)} Notes`;
+                if (dock) {
+                    dock.classList.add('dock-active');
+                    if (typeof dock._notesLiquidRefresh === 'function') {
+                        requestAnimationFrame(() => dock._notesLiquidRefresh());
+                    }
+                }
+                window.KTUFlow?.setBottomDockActive?.(true);
+            } else {
+                btnLabel.innerText = `Open ${branchName} Notes Hub`;
+                if (dock) dock.classList.remove('dock-active');
+                window.KTUFlow?.setBottomDockActive?.(false);
+            }
+        }
+
+        function handleQuickSearch() {
+            if (!selectedBranch) {
+                notifyUser('Please select a Branch first.', 'amber');
+                return;
+            }
+
+            if (window.KTUFlow && typeof window.KTUFlow.setProfile === 'function') {
+                window.KTUFlow.setProfile({ branch: selectedBranch, sem: selectedSem || '' });
+            }
+
+            if (selectedBranch === 'CSE') {
+                const targetUrl = selectedSem
+                    ? `/KTU/CSE/${selectedSem}/notes/index.html`
+                    : `/KTU/CSE/notes.html`;
+                window.KTUFlow?.capsule?.('loading', `Opening CSE ${selectedSem || 'Notes'}...`);
+                window.location.href = targetUrl;
+            } else if (selectedBranch === 'AD') {
+                if (!selectedSem) {
+                    window.KTUFlow?.capsule?.('loading', 'Opening AI & DS Notes...');
+                    window.location.href = `/KTU/AI-DS/notes.html`;
+                } else if (selectedSem === 'S5') {
+                    window.KTUFlow?.capsule?.('loading', 'Opening AI & DS S5 Notes...');
+                    window.location.href = `/KTU/AI-DS/S5/notes/index.html`;
+                } else {
+                    notifyUser('Only S5 notes are currently available for AI & Data Science!', 'amber');
+                }
+            } else {
+                notifyComingSoon(selectedBranch);
+            }
+        }
+
+        // --- Smooth Parallax Engine ---
         let lastScrollY = window.scrollY;
         let ticking = false;
-
         window.addEventListener('scroll', () => {
             lastScrollY = window.scrollY;
             if (!ticking) {
                 window.requestAnimationFrame(() => {
-                    const scrollBg1 = document.getElementById('scroll-bg-1');
-                    const scrollBg2 = document.getElementById('scroll-bg-2');
-                    
-                    if(scrollBg1) scrollBg1.style.transform = `translateY(${lastScrollY * 0.3}px)`;
-                    if(scrollBg2) scrollBg2.style.transform = `translateY(${lastScrollY * -0.2}px)`;
+                    const bg1 = document.getElementById('scroll-bg-1');
+                    const bg2 = document.getElementById('scroll-bg-2');
+                    if (bg1) bg1.style.transform = `translate3d(0, ${lastScrollY * 0.25}px, 0)`;
+                    if (bg2) bg2.style.transform = `translate3d(0, ${lastScrollY * -0.18}px, 0)`;
                     ticking = false;
                 });
                 ticking = true;
             }
         }, { passive: true });
 
-        // --- 2. 3D MOUSE PARALLAX (For PC) ---
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 2; // Range -1 to 1
-            const y = (e.clientY / window.innerHeight - 0.5) * 2;
-            applyParallax(x, y);
-        });
+        // --- On Load: Hydrate Saved Branch/Sem & Mount Liquid Glass Lenses ---
+        window.addEventListener('DOMContentLoaded', () => {
+            window.NotesLiquidGlass.attach(document.getElementById('notes-hero-badge'), 16, 18, false);
+            window.NotesLiquidGlass.attach(document.getElementById('notes-footer-pill'), 18, 20, false);
+            window.NotesLiquidGlass.attach(document.getElementById('floating-notes-dock'), 18, 20, true);
 
-        // Reset 3D Tilt when mouse leaves window
-        document.addEventListener('mouseleave', () => {
-            applyParallax(0, 0);
-        });
-
-        // --- 3. GYROSCOPE TILT PARALLAX (For Mobile) ---
-        if (window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', (e) => {
-                if(e.gamma === null || e.beta === null) return;
-                
-                // e.gamma is left/right tilt (-90 to 90)
-                // e.beta is front/back tilt (-180 to 180). Assume ~45 degrees is neutral holding position.
-                let x = e.gamma / 40; 
-                let y = (e.beta - 45) / 40; 
-
-                // Cap the values between -1 and 1 so it doesn't tilt too far
-                x = Math.max(-1, Math.min(1, x));
-                y = Math.max(-1, Math.min(1, y));
-
-                applyParallax(x, y);
-            }, true);
-        }
-
-        // --- SHARED PARALLAX FUNCTION ---
-        function applyParallax(x, y) {
-            const mouseOrb1 = document.getElementById('mouse-orb-1');
-            const mouseOrb2 = document.getElementById('mouse-orb-2');
-            
-            // Move orbs opposite to tilt/mouse
-            if(mouseOrb1) mouseOrb1.style.transform = `translate(${x * -30}px, ${y * -30}px)`;
-            if(mouseOrb2) mouseOrb2.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
-
-            // 3D Tilt the Glass Card
-            const glassCard = document.getElementById('glass-card');
-            if(glassCard) {
-                // Adjust degrees here for stronger/weaker tilt
-                glassCard.style.transform = `perspective(1000px) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
-            }
-        }
-
-        // --- Quick Search Functionality ---
-        function handleQuickSearch() {
-            const branch = document.getElementById('quickBranch').value;
-            const sem = document.getElementById('quickSem').value;
-            
-            if (!branch || !sem) {
-                alert("Please select both a Branch and a Semester.");
-                return;
-            }
-
-            if (branch === 'CSE') {
-                window.location.href = `/KTU/CSE/${sem}/notes/index.html`;
-            } else if (branch === 'AD') {
-                if (sem === 'S5') {
-                    // FIXED: Pointing Quick Search to the safe /KTU/AI-DS/ path
-                    window.location.href = `/KTU/AI-DS/${sem}/notes/index.html`;
-                } else {
-                    alert("Only S5 notes are currently available for AI & Data Science!");
+            // Restore saved branch/sem from KTUFlow memory if valid
+            if (window.KTUFlow && typeof window.KTUFlow.getProfile === 'function') {
+                const prof = window.KTUFlow.getProfile();
+                if (prof.branch === 'CSE' || prof.branch === 'AD') {
+                    selectedBranch = prof.branch;
                 }
-            } else {
-                alert("Notes for " + branch + " are coming soon!");
+                if (prof.sem && ALL_SEMS.includes(prof.sem)) {
+                    if (selectedBranch === 'CSE' || prof.sem === 'S5') {
+                        selectedSem = prof.sem;
+                    }
+                }
             }
-        }
+
+            selectBranchSegment(selectedBranch);
+        });
     </script>
 </body>
 </html>
