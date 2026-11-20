@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
+
+    <title id="dynamic-page-title">KTU Exam Review Hub | Live B.Tech Exam Polls - Kerala Timetable</title>
+    <meta id="dynamic-meta-desc" name="description" content="Vote anonymously on today's KTU B.Tech exam papers and see live student difficulty ratings (Easy, Average, Hard, Supply Confirm) across all branches. Polls open right after exams end.">
+    <meta name="keywords" content="ktu exam review, ktu exam poll, ktu paper difficulty review, ktu s3 exam review, ktu s5 exam review, kerala timetable poll, apjaktu exam feedback">
+    <meta name="robots" content="index, follow">
+
+    <link id="dynamic-canonical" rel="canonical" href="https://keralatimetable.in/poll/" />
+    <link rel="icon" href="/favicon.png" type="image/png">
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Kerala Timetable">
+    <meta property="og:type" content="website">
+    <meta id="dynamic-og-title" property="og:title" content="KTU Exam Review Hub | Live Exam Polls">
+    <meta id="dynamic-og-desc" property="og:description" content="How was today's KTU exam? Cast your 100% anonymous vote and view live branch-wise student difficulty ratings.">
+    <meta id="dynamic-og-url" property="og:url" content="https://keralatimetable.in/poll/">
+    <meta property="og:image" content="https://www.keralatimetable.in/social-preview.png">
+
+    <!-- Tailwind & Fonts -->
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --apple-spring: cubic-bezier(0.22, 1, 0.36, 1);
+            --glassMaterialBackground: rgba(248, 250, 252, 0.62);
+            --glassMaterialShadowColor: rgba(15, 23, 42, 0.12);
+        }
+
+        html.dark {
+            --glassMaterialBackground: rgba(30, 36, 52, 0.68);
+            --glassMaterialShadowColor: rgba(0, 0, 0, 0.65);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .font-sporty {
+            font-family: 'Orbitron', monospace, sans-serif;
+            letter-spacing: 0.06em;
+            font-variant-numeric: tabular-nums;
+        }
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        /* Apple HIG Liquid Glass Mesh Background */
+        .bg-mesh {
+            background-color: #eef2f9;
+            background-image:
+                radial-gradient(at 8% 12%, rgba(99, 102, 241, 0.20) 0px, transparent 48%),
+                radial-gradient(at 92% 8%, rgba(244, 63, 94, 0.14) 0px, transparent 48%),
+                radial-gradient(at 50% 45%, rgba(14, 165, 233, 0.12) 0px, transparent 55%),
+                radial-gradient(at 80% 90%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+                radial-gradient(at 15% 88%, rgba(251, 146, 60, 0.11) 0px, transparent 48%);
+            background-attachment: fixed;
+        }
+
+        /* Primary Liquid Glass Surface */
+        .real-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.50) 100%);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: none;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3,
+                0 20px 44px -12px rgba(15, 23, 42, 0.08);
+        }
+
+        /* Recessed Fluid Well */
+        .inner-glass {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.62) 0%, rgba(248, 250, 252, 0.78) 100%);
+            border: none;
+            box-shadow:
+                inset 1.2px 1.2px 0 -0.5px #fffffff2,
+                inset -1.2px -1.2px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000010;
+        }
+
+        /* Floating Exam Series Card (Matches timetable.html Liquid Glass) */
+        .timetable-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.58) 55%, rgba(255, 255, 255, 0.74) 100%);
+            backdrop-filter: blur(26px) saturate(200%);
+            -webkit-backdrop-filter: blur(26px) saturate(200%);
+            border: 1.5px solid rgba(255, 255, 255, 0.92);
+            box-shadow:
+                inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 1),
+                inset 0 -1px 1px 0 rgba(255, 255, 255, 0.55),
+                0 18px 40px -12px rgba(15, 23, 42, 0.08);
+            transition: transform 0.36s var(--apple-spring), box-shadow 0.36s var(--apple-spring), border-color 0.25s ease;
+        }
+        html:not(.dark) .timetable-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(125deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.06) 38%, transparent 60%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .timetable-card:hover {
+            transform: translateY(-5px) scale(1.008);
+            border-color: rgba(129, 140, 248, 0.65);
+            box-shadow:
+                inset 0 1.5px 2px 0 rgba(255, 255, 255, 1),
+                0 26px 50px -12px rgba(79, 70, 229, 0.16);
+        }
+
+        /* High-Gloss Liquid CTA Button */
+        .liquid-cta-btn {
+            background: linear-gradient(180deg, #6366f1 0%, #4f46e5 100%);
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.38),
+                0 10px 20px -6px rgba(79, 70, 229, 0.45);
+            transition: all 0.26s var(--apple-spring);
+        }
+        .liquid-cta-btn:hover {
+            background: linear-gradient(180deg, #818cf8 0%, #4f46e5 100%);
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
+                0 14px 26px -6px rgba(79, 70, 229, 0.6);
+        }
+
+        /* Vote Option Tactile Glass Tile */
+        .vote-option-btn {
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1.5px solid rgba(15, 23, 42, 0.08);
+            box-shadow:
+                inset 1.2px 1.2px 0 rgba(255, 255, 255, 0.95),
+                0 6px 16px -6px rgba(15, 23, 42, 0.08);
+            transition: transform 0.22s var(--apple-spring), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.22s ease;
+        }
+        .vote-option-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+        }
+        .vote-option-btn:active {
+            transform: scale(0.92);
+            transition-duration: 80ms;
+        }
+        html.dark .vote-option-btn {
+            background: rgba(24, 34, 56, 0.88) !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+            box-shadow:
+                inset 1.2px 1.2px 0 -0.5px rgba(255, 255, 255, 0.22),
+                0 8px 20px -6px rgba(0, 0, 0, 0.5) !important;
+        }
+        html.dark .vote-option-btn:hover {
+            background: rgba(34, 48, 78, 0.96) !important;
+        }
+
+        /* Tapped Vote Pop Spring */
+        @keyframes votePopBounce {
+            0% { transform: scale(1); }
+            30% { transform: scale(0.88); }
+            65% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        .vote-popped {
+            animation: votePopBounce 0.42s cubic-bezier(0.22, 1.35, 0.36, 1) forwards !important;
+        }
+
+        /* ==========================================================================
+           FACEBOOK-REACTION-STYLE EMOJI BURST PARTICLE ENGINE (120FPS GPU)
+           ========================================================================== */
+        .emoji-burst-particle {
+            position: fixed;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            z-index: 9999;
+            user-select: none;
+            line-height: 1;
+            will-change: transform, opacity;
+            animation: emojiRadialBurst var(--dur, 880ms) cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0ms) forwards;
+            filter: drop-shadow(0 6px 10px rgba(15, 23, 42, 0.18));
+        }
+
+        @keyframes emojiRadialBurst {
+            0% {
+                opacity: 0;
+                transform: translate3d(var(--x0), var(--y0), 0) scale(0.25) rotate(0deg);
+            }
+            18% {
+                opacity: 1;
+                transform: translate3d(calc(var(--x0) + var(--dx) * 0.42), calc(var(--y0) + var(--dy) * 0.42), 0) scale(var(--peak, 1.2)) rotate(calc(var(--rot) * 0.5));
+            }
+            75% {
+                opacity: 0.95;
+                transform: translate3d(calc(var(--x0) + var(--dx) * 0.94), calc(var(--y0) + var(--dy) * 0.94 + 8px), 0) scale(var(--endScale, 0.9)) rotate(var(--rot));
+            }
+            100% {
+                opacity: 0;
+                transform: translate3d(calc(var(--x0) + var(--dx)), calc(var(--y0) + var(--dy) + 22px), 0) scale(0.45) rotate(calc(var(--rot) * 1.25));
+            }
+        }
+
+        .emoji-burst-ring {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            border-radius: 9999px;
+            border-width: 3px;
+            border-style: solid;
+            transform: translate(-50%, -50%) scale(0.25);
+            opacity: 0.9;
+            will-change: transform, opacity;
+            animation: burstRingExpand 0.58s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes burstRingExpand {
+            0% { transform: translate(-50%, -50%) scale(0.25); opacity: 0.85; }
+            100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+        }
+
+        /* Smooth View & Bar Animations */
+        @keyframes viewEnterForward {
+            0% { opacity: 0; transform: translate3d(20px, 8px, 0) scale(0.99); }
+            100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+        }
+        @keyframes viewEnterBack {
+            0% { opacity: 0; transform: translate3d(-20px, 8px, 0) scale(0.99); }
+            100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+        }
+        @keyframes fadeUpSoft {
+            0% { opacity: 0; transform: translate3d(0, 12px, 0) scale(0.99); }
+            100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+        }
+        .view-enter-forward { animation: viewEnterForward 0.36s var(--apple-spring) both; }
+        .view-enter-back { animation: viewEnterBack 0.36s var(--apple-spring) both; }
+        .ot-swap-in { animation: fadeUpSoft 0.34s var(--apple-spring) both; }
+
+        .ot-press { transition: transform 0.16s var(--apple-spring); }
+        .ot-press:not(:disabled):active { transform: scale(0.94); transition-duration: 80ms; }
+
+        .branch-pill-active {
+            background: linear-gradient(135deg, #4f46e5, #2563eb) !important;
+            color: #ffffff !important;
+            border-color: transparent !important;
+            box-shadow: 0 6px 16px -4px rgba(79, 70, 229, 0.45) !important;
+        }
+
+        .ambient-orb { filter: blur(72px); -webkit-filter: blur(72px); pointer-events: none; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .emoji-burst-particle, .emoji-burst-ring, .view-enter-forward, .view-enter-back, .ot-swap-in {
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-mesh text-slate-800 antialiased flex flex-col min-h-screen relative overflow-x-hidden selection:bg-indigo-600 selection:text-white">
+
+    <!-- Ambient Orbs (Auto-disabled in Dark Mode by components.js for 120FPS) -->
+    <div class="ambient-orb fixed -top-28 -left-24 w-[26rem] h-[26rem] bg-indigo-400/25 rounded-full -z-10"></div>
+    <div class="ambient-orb fixed top-1/4 -right-28 w-[24rem] h-[24rem] bg-rose-400/20 rounded-full -z-10"></div>
+    <div class="ambient-orb fixed bottom-10 left-1/3 w-[22rem] h-[22rem] bg-sky-300/18 rounded-full -z-10"></div>
+
+    <!-- Global Sticky Liquid Glass Navigation -->
+    <div id="navigation-container" class="min-h-[64px] sm:min-h-[73px] w-full"></div>
+
+    <!-- ColorOS Live Capsule -->
+    <div id="coloros-live-capsule"></div>
+
+    <!-- Fallback Toast -->
+    <div id="fallback-toast" class="fixed top-4 right-4 z-50 hidden px-4 py-2.5 rounded-2xl real-glass text-xs font-bold text-slate-800 shadow-lg items-center gap-2">
+        <i id="fallback-toast-icon" class="fas fa-info-circle text-indigo-600"></i>
+        <span id="fallback-toast-msg"></span>
+    </div>
+
+    <main class="flex-grow w-full max-w-5xl mx-auto px-3.5 sm:px-6 pt-6 sm:pt-10 pb-20 relative z-20">
+
+        <!-- HERO HEADER (Home View) -->
+        <div id="hub-hero" class="text-center mb-7 sm:mb-10 max-w-2xl mx-auto ot-swap-in">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 backdrop-blur-xl border border-white/20 text-white text-[11px] font-extrabold uppercase tracking-wider mb-4 shadow-md">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                </span>
+                <span>Live Exam Reviews</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-3">
+                Exam <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-500">Review Hub</span>
+            </h1>
+
+            <p class="text-slate-600 font-medium text-xs sm:text-base max-w-xl mx-auto leading-relaxed">
+                Vote 100% anonymously right after your KTU exam ends. Polls auto-lock 24 hours later with the final student verdict.
+            </p>
+        </div>
+
+        <!-- BACK / BREADCRUMB BAR (Visible inside Exam Series or Single Subject Link) -->
+        <div id="view-breadcrumb" class="hidden max-w-3xl mx-auto mb-5 real-glass rounded-2xl px-3 py-2 flex items-center justify-between gap-2 ot-swap-in">
+            <button type="button" onclick="goHome()" class="ot-press px-3 py-1.5 rounded-xl bg-white/90 hover:bg-white text-slate-700 border border-slate-200/80 text-xs font-extrabold flex items-center gap-1.5 shadow-sm shrink-0">
+                <i class="fas fa-arrow-left text-[10px] text-indigo-600"></i>
+                <span id="crumb-back-label">All Exams</span>
+            </button>
+
+            <span id="crumb-current" class="text-xs font-extrabold text-slate-700 truncate px-2">Exam Review</span>
+
+            <button type="button" onclick="shareCurrentPage()" class="ot-press px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200/80 text-xs font-extrabold flex items-center gap-1.5 shrink-0 transition-colors" title="Copy share link">
+                <i class="fas fa-share-alt text-[10px]"></i>
+                <span class="hidden sm:inline">Share</span>
+            </button>
+        </div>
+
+        <!-- ==================================================================
+             VIEW 1: MAIN HUB HOME (Live & Upcoming Exam Series Cards)
+             ================================================================== -->
+        <div id="view-home" class="w-full">
+
+            <!-- Loading State -->
+            <div id="home-loading" class="text-center py-14">
+                <i class="fas fa-circle-notch fa-spin text-3xl text-indigo-500 mb-3"></i>
+                <p class="text-xs sm:text-sm text-slate-500 font-bold">Syncing live exam polls...</p>
+            </div>
+
+            <!-- LIVE / ACTIVE EXAM SERIES SECTION -->
+            <section id="live-exams-section" class="hidden mb-10 sm:mb-12">
+                <div class="flex items-center justify-between gap-3 mb-4 sm:mb-5 pb-3 border-b border-slate-200/70 dark:border-white/10">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-2xl bg-rose-50 border border-rose-200/80 flex items-center justify-center shadow-sm">
+                            <span class="relative flex h-3 w-3">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-rose-500"></span>
+                            </span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg sm:text-2xl font-black text-slate-900 tracking-tight leading-none">Live &amp; Ongoing Reviews</h2>
+                            <p class="text-[11px] sm:text-xs font-semibold text-slate-500 mt-1">Tap your exam series to vote on your branch paper</p>
+                        </div>
+                    </div>
+                    <span id="live-exams-count" class="px-3 py-1 rounded-full bg-rose-50 border border-rose-200/80 text-rose-600 text-xs font-extrabold shadow-sm shrink-0">0 Live</span>
+                </div>
+                <div id="live-exams-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"></div>
+            </section>
+
+            <!-- UPCOMING EXAM SERIES SECTION -->
+            <section id="upcoming-exams-section" class="hidden mb-10 sm:mb-12">
+                <div class="flex items-center justify-between gap-3 mb-4 sm:mb-5 pb-3 border-b border-slate-200/70 dark:border-white/10">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-2xl bg-amber-50 border border-amber-200/80 flex items-center justify-center text-amber-500 shadow-sm">
+                            <i class="fas fa-hourglass-half text-sm"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-lg sm:text-2xl font-black text-slate-900 tracking-tight leading-none">Upcoming Exam Reviews</h2>
+                            <p class="text-[11px] sm:text-xs font-semibold text-slate-500 mt-1">Polls unlock automatically right when each exam finishes</p>
+                        </div>
+                    </div>
+                    <span id="upcoming-exams-count" class="px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-extrabold shadow-sm shrink-0">0 Scheduled</span>
+                </div>
+                <div id="upcoming-exams-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"></div>
+            </section>
+
+            <!-- PAST / COMPLETED VERDICTS SECTION -->
+            <section id="past-exams-section" class="hidden mb-8">
+                <div class="flex items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-200/70 dark:border-white/10">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-2xl bg-slate-100 border border-slate-200/80 flex items-center justify-center text-slate-500 shadow-sm">
+                            <i class="fas fa-poll-h text-sm"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight leading-none">Recent Verdicts</h2>
+                            <p class="text-[11px] sm:text-xs font-semibold text-slate-500 mt-1">Locked polls with final student difficulty ratings</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="past-exams-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"></div>
+            </section>
+
+            <!-- Empty Home State -->
+            <div id="home-empty-state" class="hidden text-center py-14 real-glass rounded-[2rem] max-w-xl mx-auto px-4">
+                <i class="fas fa-folder-open text-3xl text-slate-300 mb-3"></i>
+                <h3 class="text-base sm:text-lg font-extrabold text-slate-700">No Active Exam Reviews</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">Check back right after your next KTU examination ends.</p>
+            </div>
+        </div>
+
+        <!-- ==================================================================
+             VIEW 2: INSIDE AN EXAM SERIES (All Branch Subjects Top-to-Bottom)
+             ================================================================== -->
+        <div id="view-exam" class="hidden max-w-3xl mx-auto w-full">
+            <div class="real-glass rounded-[1.8rem] p-5 sm:p-6 mb-6">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                    <div class="flex flex-wrap items-center gap-1.5">
+                        <span id="exam-sem-badge" class="px-2.5 py-1 rounded-xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-wider">S3</span>
+                        <span id="exam-scheme-badge" class="px-2.5 py-1 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-700 text-[10px] font-extrabold uppercase tracking-wider">2024 Scheme</span>
+                    </div>
+                    <span id="exam-live-pill" class="px-2.5 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-600 text-[10px] font-extrabold uppercase tracking-wider">Poll Live</span>
+                </div>
+
+                <h2 id="exam-detail-title" class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-snug mb-1">
+                    B.Tech S3 (R,S) 2024 Scheme Exam Review
+                </h2>
+                <p id="exam-detail-subtitle" class="text-xs sm:text-sm font-medium text-slate-500 mb-4">
+                    Tap your branch filter or scroll down to vote on your paper.
+                </p>
+
+                <!-- Auto-Generated Branch Filter Pills -->
+                <div id="exam-branch-filters" class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar pt-3 border-t border-slate-200/70 dark:border-white/10"></div>
+            </div>
+
+            <!-- Subject Poll Cards Stack (Live -> Upcoming -> Closed) -->
+            <div id="exam-subjects-list" class="space-y-5"></div>
+        </div>
+
+        <!-- ==================================================================
+             VIEW 3: SINGLE SUBJECT SPOTLIGHT (?s=<subjectId> for WhatsApp Shares!)
+             ================================================================== -->
+        <div id="view-single" class="hidden max-w-2xl mx-auto w-full">
+            <div class="text-center mb-4">
+                <span id="single-exam-context" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full inner-glass text-[11px] font-extrabold text-indigo-600">
+                    B.Tech S3 (R,S) 2024 Scheme • Exam Day 2
+                </span>
+            </div>
+
+            <!-- Only the Targeted Subject Poll Card Renders Here -->
+            <div id="single-subject-slot" class="mb-5"></div>
+
+            <!-- WhatsApp Channel Follow Strip -->
+            <a href="https://whatsapp.com/channel/0029Vb7zhxw5vKABedfmht0D" target="_blank" rel="noopener noreferrer"
+               class="ot-press w-full real-glass rounded-2xl py-3.5 px-5 flex items-center justify-center gap-2.5 text-xs sm:text-sm font-extrabold text-slate-800 hover:text-emerald-600 transition-all mb-4">
+                <i class="fab fa-whatsapp text-xl text-[#25D366]"></i>
+                <span>Follow WhatsApp Channel for Live KTU Results &amp; Polls</span>
+            </a>
+
+            <div class="text-center">
+                <button type="button" id="single-view-all-btn" class="ot-press inline-flex items-center gap-2 px-5 py-2.5 rounded-full inner-glass text-xs font-extrabold text-indigo-600 hover:text-indigo-700 transition-colors">
+                    <span>View All Polls in This Exam</span>
+                    <i class="fas fa-arrow-right text-[10px]"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SYSTEM ERROR -->
+        <div id="system-error-state" class="hidden max-w-xl mx-auto text-center py-10 px-5 real-glass rounded-3xl">
+            <i class="fas fa-exclamation-triangle text-3xl text-rose-500 mb-3"></i>
+            <h3 class="text-base font-black text-slate-800 mb-1">Could not sync exam polls</h3>
+            <p id="system-error-msg" class="text-xs text-slate-500"></p>
+        </div>
+
+    </main>
+
+    <!-- Frosted Footer -->
+    <footer class="mt-auto border-t border-white/60 bg-white/50 backdrop-blur-2xl py-6 text-center relative z-10">
+        <div class="max-w-3xl mx-auto px-4">
+            <p class="text-slate-500 text-xs font-medium">
+                <strong class="text-slate-800">Kerala Timetable</strong> • Anonymous KTU Student Exam Review Hub. Not officially affiliated with APJAKTU.
+            </p>
+        </div>
+    </footer>
+    <!-- Global Site Components & Poll Config -->
+    <script src="/components.js?v=25" onerror="this.onerror=null;this.src='https://keralatimetable.in/components.js?v=25';"></script>
+    <script src="./poll-config.js?v=1"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+        import { getDatabase, ref, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+
+        // Mount Global Navigation
+        if (typeof loadNavigation === 'function') {
+            loadNavigation('poll', '', false);
+        }
+
+        // =====================================================================
+        // 1. FIREBASE INIT & CONSTANTS
+        // =====================================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
+            authDomain: "kerala-timetable-db.firebaseapp.com",
+            databaseURL: "https://kerala-timetable-db-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "kerala-timetable-db",
+            storageBucket: "kerala-timetable-db.firebasestorage.app",
+            messagingSenderId: "527439836518",
+            appId: "1:527439836518:web:af7725a5bf07d6a4f584a7"
+        };
+
+        const VOTE_META = {
+            easy:    { label: 'Easy',           emoji: '😊', hex: '#10b981', hoverCls: 'hover:border-emerald-500 hover:bg-emerald-50/80', textCls: 'text-emerald-600', bgCls: 'bg-emerald-50', borderCls: 'border-emerald-200' },
+            average: { label: 'Average',        emoji: '😐', hex: '#4f46e5', hoverCls: 'hover:border-indigo-500 hover:bg-indigo-50/80',  textCls: 'text-indigo-600',  bgCls: 'bg-indigo-50',  borderCls: 'border-indigo-200'  },
+            hard:    { label: 'Hard',           emoji: '😓', hex: '#f97316', hoverCls: 'hover:border-orange-500 hover:bg-orange-50/80',  textCls: 'text-orange-600',  bgCls: 'bg-orange-50',  borderCls: 'border-orange-200'  },
+            supply:  { label: 'Supply Confirm', emoji: '💀', hex: '#e11d48', hoverCls: 'hover:border-rose-500 hover:bg-rose-50/80',       textCls: 'text-rose-600',    bgCls: 'bg-rose-50',    borderCls: 'border-rose-200'    }
+        };
+
+        let db = null;
+        let examList = [];
+        let activeUnsubscribes = [];
+        let currentRoute = { view: 'home', examId: null, subjectId: null, branchFilter: 'ALL' };
+        let countdownRefreshPending = false;
+
+        // =====================================================================
+        // 2. HELPERS (Escape, Capsule, Clipboard, Semester Colors)
+        // =====================================================================
+        function escapeHtml(str) {
+            return String(str ?? '')
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
+        let toastTimer = null;
+        function triggerCapsule(state, message) {
+            if (window.KTUFlow && typeof window.KTUFlow.capsule === 'function') {
+                window.KTUFlow.capsule(state, message);
+                return;
+            }
+            const t = document.getElementById('fallback-toast');
+            const m = document.getElementById('fallback-toast-msg');
+            const i = document.getElementById('fallback-toast-icon');
+            if (!t || !m) return;
+            m.textContent = message;
+            if (i) i.className = state === 'error' ? 'fas fa-exclamation-circle text-rose-500' : 'fas fa-check-circle text-indigo-600';
+            t.classList.remove('hidden'); t.classList.add('flex');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => { t.classList.add('hidden'); t.classList.remove('flex'); }, 2500);
+        }
+
+        function copyShareLink(url, title, toastMsg) {
+            if (navigator.share) {
+                navigator.share({ title, text: `${title} — Vote anonymously on Kerala Timetable:`, url }).catch(() => {});
+                return;
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => triggerCapsule('success', toastMsg)).catch(() => fallbackCopy(url, toastMsg));
+            } else {
+                fallbackCopy(url, toastMsg);
+            }
+        }
+
+        function fallbackCopy(text, msg) {
+            try {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.cssText = 'position:fixed;opacity:0;';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                ta.remove();
+                triggerCapsule('success', msg);
+            } catch {}
+        }
+
+        function getSemColors(sem) {
+            const s = (sem || '').toUpperCase();
+            if (s.includes('S1') || s.includes('S2')) return 'bg-indigo-50 text-indigo-700 border-indigo-200';
+            if (s.includes('S3') || s.includes('S4')) return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+            if (s.includes('S5') || s.includes('S6')) return 'bg-amber-50 text-amber-700 border-amber-200';
+            return 'bg-rose-50 text-rose-700 border-rose-200';
+        }
+
+        function clearActiveListeners() {
+            activeUnsubscribes.forEach(unsub => { try { unsub(); } catch {} });
+            activeUnsubscribes = [];
+        }
+
+        function getVotedChoice(subjectId) {
+            try { return localStorage.getItem('voted_' + subjectId); } catch { return null; }
+        }
+
+        function saveVotedChoice(subjectId, category) {
+            try { localStorage.setItem('voted_' + subjectId, category); } catch {}
+        }
+
+        // =====================================================================
+        // 3. FACEBOOK-REACTION-STYLE EMOJI BURST PARTICLE PHYSICS
+        // =====================================================================
+        function triggerEmojiBurst(anchorEl, emoji, colorHex) {
+            if (!anchorEl) return;
+            const rect = anchorEl.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+
+            // 1. Expanding Color Shockwave Ring
+            const ring = document.createElement('div');
+            ring.className = 'emoji-burst-ring';
+            const ringSize = Math.max(rect.width, rect.height) * 0.72;
+            ring.style.width = `${ringSize}px`;
+            ring.style.height = `${ringSize}px`;
+            ring.style.left = `${cx}px`;
+            ring.style.top = `${cy}px`;
+            ring.style.borderColor = colorHex;
+            document.body.appendChild(ring);
+            setTimeout(() => ring.remove(), 620);
+
+            // 2. 18 Radial Fountain Emoji Particles Bursting Around Button
+            const count = 18;
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('span');
+                p.className = 'emoji-burst-particle';
+                p.textContent = emoji;
+
+                // Evenly distributed 360° angles with jitter + slight upward bias
+                const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.42;
+                const dist = 62 + Math.random() * 98;
+                const dx = Math.cos(angle) * dist;
+                const dy = Math.sin(angle) * dist - 26; // slight upward celebration lift
+                const size = 18 + Math.round(Math.random() * 16);
+                const rot = Math.round((Math.random() - 0.5) * 76);
+                const dur = 760 + Math.round(Math.random() * 280);
+                const delay = Math.round(Math.random() * 85);
+                const peak = (1.05 + Math.random() * 0.35).toFixed(2);
+
+                p.style.fontSize = `${size}px`;
+                p.style.setProperty('--x0', `${cx - size / 2}px`);
+                p.style.setProperty('--y0', `${cy - size / 2}px`);
+                p.style.setProperty('--dx', `${dx.toFixed(1)}px`);
+                p.style.setProperty('--dy', `${dy.toFixed(1)}px`);
+                p.style.setProperty('--rot', `${rot}deg`);
+                p.style.setProperty('--dur', `${dur}ms`);
+                p.style.setProperty('--delay', `${delay}ms`);
+                p.style.setProperty('--peak', peak);
+
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), dur + delay + 80);
+            }
+        }
+
+        // =====================================================================
+        // 4. EXAM SERIES & SUBJECT TIMING ANALYSIS
+        // =====================================================================
+        function getSubjectTiming(subj, nowMs) {
+            const openMs = new Date(subj.opensAt).getTime();
+            const closeMs = new Date(subj.closesAt).getTime();
+            if (nowMs < openMs) return { state: 'UPCOMING', openMs, closeMs };
+            if (nowMs <= closeMs) return { state: 'LIVE', openMs, closeMs };
+            return { state: 'CLOSED', openMs, closeMs };
+        }
+
+        function analyzeExamSeries(exam, nowMs) {
+            const subjects = exam.subjects || [];
+            const live = [];
+            const upcoming = [];
+            const closed = [];
+
+            subjects.forEach(s => {
+                const t = getSubjectTiming(s, nowMs);
+                if (t.state === 'LIVE') live.push({ ...s, ...t });
+                else if (t.state === 'UPCOMING') upcoming.push({ ...s, ...t });
+                else closed.push({ ...s, ...t });
+            });
+
+            upcoming.sort((a, b) => a.openMs - b.openMs);
+            closed.sort((a, b) => b.closeMs - a.closeMs);
+
+            if (live.length > 0) {
+                const activeDay = Math.max(...live.map(s => s.day || 1));
+                const latestClose = Math.max(...live.map(s => s.closeMs));
+                return {
+                    status: 'LIVE',
+                    rank: 1,
+                    activeDay,
+                    liveCount: live.length,
+                    totalCount: subjects.length,
+                    nextTargetIso: new Date(latestClose).toISOString(),
+                    live, upcoming, closed
+                };
+            }
+
+            if (closed.length > 0 && upcoming.length > 0) {
+                const nextSubj = upcoming[0];
+                return {
+                    status: 'BETWEEN_DAYS',
+                    rank: 2,
+                    nextDay: nextSubj.day || 2,
+                    nextTargetIso: nextSubj.opensAt,
+                    liveCount: 0,
+                    totalCount: subjects.length,
+                    live, upcoming, closed
+                };
+            }
+
+            if (upcoming.length > 0) {
+                const firstSubj = upcoming[0];
+                return {
+                    status: 'UPCOMING',
+                    rank: 3,
+                    nextDay: firstSubj.day || 1,
+                    nextTargetIso: firstSubj.opensAt,
+                    liveCount: 0,
+                    totalCount: subjects.length,
+                    live, upcoming, closed
+                };
+            }
+
+            return {
+                status: 'CLOSED',
+                rank: 4,
+                liveCount: 0,
+                totalCount: subjects.length,
+                live, upcoming, closed
+            };
+        }
+
+        function findSubjectGlobally(subjectId) {
+            for (const exam of examList) {
+                const subj = (exam.subjects || []).find(s => s.id === subjectId);
+                if (subj) return { exam, subj };
+            }
+            return null;
+        }
+
+        // =====================================================================
+        // 5. VIEW 1: HOME DASHBOARD (Live, Between-Days, Upcoming, Past)
+        // =====================================================================
+        function buildExamSeriesCardHTML(exam, info) {
+            const semColors = getSemColors(exam.semester);
+            const dayTag = info.status === 'LIVE'
+                ? `<span class="px-2.5 py-1 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 text-[10px] font-black uppercase tracking-wider">Exam Day ${info.activeDay}</span>`
+                : info.status === 'BETWEEN_DAYS'
+                    ? `<span class="px-2.5 py-1 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-700 text-[10px] font-black uppercase tracking-wider">Next: Day ${info.nextDay}</span>`
+                    : '';
+
+            let footerStripHTML = '';
+            if (info.status === 'LIVE') {
+                footerStripHTML = `
+                    <div class="w-full bg-gradient-to-r from-rose-600 via-rose-500 to-orange-500 border-t border-rose-400/50 py-3 px-4 text-center text-xs sm:text-[13px] font-sporty text-white tracking-widest shadow-[0_-4px_18px_rgba(244,63,94,0.3)] relative z-10 flex items-center justify-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+                        <span>DAY ${info.activeDay} • POLL IS LIVE</span>
+                    </div>`;
+            } else if (info.status === 'BETWEEN_DAYS') {
+                footerStripHTML = `
+                    <div class="w-full bg-amber-50/90 border-t border-amber-200/75 px-4 py-3 text-center relative z-10">
+                        <div class="text-[9px] sm:text-[10px] font-extrabold text-amber-700 uppercase tracking-widest mb-0.5 flex items-center justify-center gap-1.5">
+                            <i class="far fa-clock text-[9px]"></i>
+                            <span>Next Poll (Exam Day ${info.nextDay})</span>
+                        </div>
+                        <div class="countdown-target font-sporty text-amber-600 text-base sm:text-lg tracking-wider font-black" data-target-iso="${escapeHtml(info.nextTargetIso)}">--:--:--</div>
+                    </div>`;
+            } else if (info.status === 'UPCOMING') {
+                footerStripHTML = `
+                    <div class="w-full bg-amber-50/90 border-t border-amber-200/75 px-4 py-3 text-center relative z-10">
+                        <div class="text-[9px] sm:text-[10px] font-extrabold text-amber-700 uppercase tracking-widest mb-0.5 flex items-center justify-center gap-1.5">
+                            <i class="far fa-clock text-[9px]"></i>
+                            <span>Starting In</span>
+                        </div>
+                        <div class="countdown-target font-sporty text-amber-600 text-base sm:text-lg tracking-wider font-black" data-target-iso="${escapeHtml(info.nextTargetIso)}">--:--:--</div>
+                    </div>`;
+            } else {
+                footerStripHTML = `
+                    <div class="w-full bg-slate-100/85 border-t border-slate-200 py-3 px-4 text-center text-[10px] sm:text-xs font-extrabold text-slate-500 uppercase tracking-widest relative z-10">
+                        All Polls Locked • View Final Verdicts
+                    </div>`;
+            }
+
+            const subjectSummary = info.status === 'LIVE'
+                ? `${info.liveCount} ${info.liveCount === 1 ? 'Subject' : 'Subjects'} Live Now`
+                : `${info.totalCount} ${info.totalCount === 1 ? 'Subject' : 'Subjects'} Scheduled`;
+
+            const ctaText = info.status === 'LIVE' ? 'Vote Now' : info.status === 'CLOSED' ? 'View Verdicts' : 'Open Exam Polls';
+
+            return `
+                <article onclick="openExamSeries('${escapeHtml(exam.id)}')" class="timetable-card rounded-[2rem] flex flex-col relative overflow-hidden h-full cursor-pointer group ot-swap-in">
+                    <!-- Subtle Glass Watermark -->
+                    <div class="absolute top-2 right-4 text-6xl sm:text-7xl font-black text-slate-900 opacity-[0.05] pointer-events-none select-none z-0 leading-none tracking-tighter">
+                        ${escapeHtml(exam.semester)}
+                    </div>
+
+                    <div class="p-5 sm:p-6 flex-grow relative z-10 flex flex-col">
+                        <div class="flex items-center flex-wrap gap-1.5 mb-3.5">
+                            <span class="px-2.5 py-1 rounded-xl text-[10px] font-black uppercase tracking-wider bg-slate-900 text-white shadow-sm">${escapeHtml(exam.course || 'B.Tech')}</span>
+                            <span class="px-2.5 py-1 rounded-xl text-[10px] font-black uppercase tracking-wider border ${semColors}">${escapeHtml(exam.semester)}</span>
+                            ${dayTag}
+                        </div>
+
+                        <h3 class="text-lg sm:text-xl font-black text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug mb-3 pr-2">
+                            ${escapeHtml(exam.title)}
+                        </h3>
+
+                        <div class="flex flex-wrap items-center gap-2 mb-5">
+                            <span class="inner-glass inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold text-slate-600">
+                                <i class="fas fa-layer-group text-indigo-500 text-[10px]"></i>
+                                <span>${escapeHtml(exam.scheme || 'KTU')}</span>
+                            </span>
+                            <span class="inner-glass inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold text-slate-700">
+                                <i class="fas fa-poll text-rose-500 text-[10px]"></i>
+                                <span>${escapeHtml(subjectSummary)}</span>
+                            </span>
+                        </div>
+
+                        <div class="mt-auto pt-3 border-t border-slate-200/60 dark:border-white/10">
+                            <div class="liquid-cta-btn w-full text-white text-center font-extrabold py-3 px-4 rounded-2xl text-xs sm:text-sm flex items-center justify-center gap-2">
+                                <span>${ctaText}</span>
+                                <i class="fas fa-arrow-right text-[10px] opacity-90 transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${footerStripHTML}
+                </article>
+            `;
+        }
+
+        function renderHomeView(direction = 'back') {
+            clearActiveListeners();
+            currentRoute = { view: 'home', examId: null, subjectId: null, branchFilter: 'ALL' };
+
+            document.getElementById('hub-hero')?.classList.remove('hidden');
+            document.getElementById('view-breadcrumb')?.classList.add('hidden');
+            document.getElementById('view-exam')?.classList.add('hidden');
+            document.getElementById('view-single')?.classList.add('hidden');
+            document.getElementById('home-loading')?.classList.add('hidden');
+
+            const homeEl = document.getElementById('view-home');
+            homeEl.classList.remove('hidden', 'view-enter-forward', 'view-enter-back');
+            void homeEl.offsetWidth;
+            homeEl.classList.add(direction === 'back' ? 'view-enter-back' : 'view-enter-forward');
+
+            const nowMs = Date.now();
+            const analyzed = examList.map(exam => ({ exam, info: analyzeExamSeries(exam, nowMs) }));
+
+            const liveOrActive = analyzed.filter(x => x.info.status === 'LIVE' || x.info.status === 'BETWEEN_DAYS')
+                .sort((a, b) => a.info.rank - b.info.rank);
+            const upcoming = analyzed.filter(x => x.info.status === 'UPCOMING')
+                .sort((a, b) => new Date(a.info.nextTargetIso) - new Date(b.info.nextTargetIso));
+            const past = analyzed.filter(x => x.info.status === 'CLOSED');
+
+            // Render Live & Ongoing
+            const liveSec = document.getElementById('live-exams-section');
+            const liveGrid = document.getElementById('live-exams-grid');
+            const liveCnt = document.getElementById('live-exams-count');
+            if (liveOrActive.length) {
+                liveSec.classList.remove('hidden');
+                const liveNowCount = liveOrActive.filter(x => x.info.status === 'LIVE').length;
+                liveCnt.textContent = liveNowCount > 0 ? `${liveNowCount} Live Now` : `${liveOrActive.length} Active`;
+                liveGrid.innerHTML = liveOrActive.map(x => buildExamSeriesCardHTML(x.exam, x.info)).join('');
+            } else {
+                liveSec.classList.add('hidden');
+            }
+
+            // Render Upcoming
+            const upSec = document.getElementById('upcoming-exams-section');
+            const upGrid = document.getElementById('upcoming-exams-grid');
+            const upCnt = document.getElementById('upcoming-exams-count');
+            if (upcoming.length) {
+                upSec.classList.remove('hidden');
+                upCnt.textContent = `${upcoming.length} Scheduled`;
+                upGrid.innerHTML = upcoming.map(x => buildExamSeriesCardHTML(x.exam, x.info)).join('');
+            } else {
+                upSec.classList.add('hidden');
+            }
+
+            // Render Past
+            const pastSec = document.getElementById('past-exams-section');
+            const pastGrid = document.getElementById('past-exams-grid');
+            if (past.length) {
+                pastSec.classList.remove('hidden');
+                pastGrid.innerHTML = past.map(x => buildExamSeriesCardHTML(x.exam, x.info)).join('');
+            } else {
+                pastSec.classList.add('hidden');
+            }
+
+            document.getElementById('home-empty-state').classList.toggle('hidden', analyzed.length > 0);
+
+            document.title = 'KTU Exam Review Hub | Live B.Tech Exam Polls - Kerala Timetable';
+            tickAllCountdowns();
+        }
+
+        // =====================================================================
+        // 6. SUBJECT POLL CARD BUILDER (Used in Exam Series + Single Spotlight)
+        // =====================================================================
+        function buildSubjectPollCardHTML(subj, exam, nowMs, isSpotlight = false) {
+            const timing = getSubjectTiming(subj, nowMs);
+            const votedChoice = getVotedChoice(subj.id);
+
+            let statusPill = '';
+            if (timing.state === 'LIVE') {
+                statusPill = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-600 text-[10px] font-black uppercase tracking-wider shrink-0"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span>Live</span>`;
+            } else if (timing.state === 'UPCOMING') {
+                statusPill = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-[10px] font-black uppercase tracking-wider shrink-0"><i class="far fa-clock text-[9px]"></i>Upcoming</span>`;
+            } else {
+                statusPill = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-500 text-[10px] font-black uppercase tracking-wider shrink-0"><i class="fas fa-lock text-[9px]"></i>Locked</span>`;
+            }
+
+            const tagsHTML = (subj.tags || []).map((t, idx) => {
+                const cls = idx === 0
+                    ? 'bg-indigo-50 border-indigo-200 text-indigo-700'
+                    : 'bg-slate-100 border-slate-200 text-slate-600';
+                return `<span class="px-2 py-0.5 rounded-md border ${cls} text-[10px] font-extrabold uppercase tracking-wider">${escapeHtml(t)}</span>`;
+            }).join('');
+
+            const codeBadge = subj.code
+                ? `<span class="px-2 py-0.5 rounded-md bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-extrabold font-mono-code">${escapeHtml(subj.code)}</span>`
+                : '';
+
+            let bodyHTML = '';
+            if (timing.state === 'UPCOMING') {
+                bodyHTML = `
+                    <div class="inner-glass rounded-2xl p-5 text-center">
+                        <i class="fas fa-hourglass-half text-2xl text-indigo-400 mb-2"></i>
+                        <h4 class="text-xs font-black text-slate-800 uppercase tracking-widest">Poll Opens After Exam Ends</h4>
+                        <div class="countdown-target font-sporty text-indigo-600 text-base sm:text-lg font-black mt-2" data-target-iso="${escapeHtml(subj.opensAt)}">--:--:--</div>
+                    </div>
+                `;
+            } else if (timing.state === 'LIVE' && !votedChoice) {
+                bodyHTML = `
+                    <div id="vote-box-${escapeHtml(subj.id)}" class="inner-glass rounded-2xl p-4 sm:p-5">
+                        <div class="flex items-center justify-between gap-2 mb-3.5">
+                            <span class="text-xs font-black text-slate-700 uppercase tracking-wider">How was the paper?</span>
+                            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200/80 text-indigo-600 text-[10px] font-bold">
+                                <i class="fas fa-user-secret text-[9px]"></i> Anonymous
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                            ${Object.entries(VOTE_META).map(([key, m]) => `
+                                <button type="button"
+                                        data-vote-group="${escapeHtml(subj.id)}"
+                                        onclick="submitVote('${escapeHtml(subj.id)}', '${key}', this)"
+                                        class="vote-option-btn ${m.hoverCls} rounded-2xl p-3.5 sm:p-4 flex flex-col items-center justify-center gap-1.5 group focus:outline-none cursor-pointer">
+                                    <span class="text-3xl sm:text-4xl transition-transform duration-200 group-hover:scale-115 leading-none">${m.emoji}</span>
+                                    <span class="font-extrabold text-[11px] sm:text-xs text-slate-700 text-center leading-tight">${m.label}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+
+                        <div class="mt-3.5 flex items-center justify-center gap-1.5 text-[11px] font-bold text-slate-400">
+                            <i class="far fa-clock text-[10px]"></i>
+                            <span>Auto-locks in</span>
+                            <span class="countdown-target font-sporty text-slate-600" data-target-iso="${escapeHtml(subj.closesAt)}">--:--:--</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Live results placeholder (hydrated by real-time Firebase listener)
+                bodyHTML = `
+                    <div id="results-box-${escapeHtml(subj.id)}" class="inner-glass rounded-2xl p-4 sm:p-5 ot-swap-in">
+                        <div class="flex items-center justify-between gap-2 pb-2.5 mb-3.5 border-b border-slate-200/70 dark:border-white/10">
+                            <span class="text-xs font-black text-slate-800 uppercase tracking-wider">Live Distribution</span>
+                            <span id="votes-count-${escapeHtml(subj.id)}" class="text-[11px] font-sporty font-extrabold text-indigo-600 bg-white/90 px-2.5 py-0.5 rounded-lg border border-slate-200/70 shadow-sm">...</span>
+                        </div>
+                        <div id="charts-${escapeHtml(subj.id)}" class="space-y-3">
+                            <div class="text-center text-xs font-bold text-slate-400 py-3"><i class="fas fa-circle-notch fa-spin mr-1.5"></i>Loading live votes...</div>
+                        </div>
+                        ${timing.state === 'LIVE' ? `
+                            <div class="mt-3.5 pt-2.5 border-t border-slate-200/60 dark:border-white/10 flex items-center justify-center gap-1.5 text-[11px] font-bold text-slate-400">
+                                <i class="far fa-clock text-[10px]"></i>
+                                <span>Auto-locks in</span>
+                                <span class="countdown-target font-sporty text-slate-600" data-target-iso="${escapeHtml(subj.closesAt)}">--:--:--</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            return `
+                <article id="poll-card-${escapeHtml(subj.id)}" class="real-glass rounded-[1.8rem] p-5 sm:p-6 ot-swap-in">
+                    <div class="flex items-start justify-between gap-3 mb-4">
+                        <div class="min-w-0">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2">
+                                ${codeBadge}
+                                ${tagsHTML}
+                            </div>
+                            <h3 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight leading-snug">
+                                ${escapeHtml(subj.subjectName)}
+                            </h3>
+                        </div>
+
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            ${statusPill}
+                            <button type="button"
+                                    onclick="shareSubjectPoll('${escapeHtml(subj.id)}', '${escapeHtml(subj.subjectName).replace(/'/g, "\\'")}', '${escapeHtml(exam.semester)}')"
+                                    class="ot-press w-8 h-8 rounded-xl bg-white/85 hover:bg-indigo-600 text-slate-500 hover:text-white border border-slate-200/80 flex items-center justify-center transition-all shadow-sm"
+                                    title="Copy unique WhatsApp share link for this subject">
+                                <i class="fas fa-share-alt text-[11px]"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="poll-body-${escapeHtml(subj.id)}">
+                        ${bodyHTML}
+                    </div>
+                </article>
+            `;
+        }
+
+        function attachLiveResultsListener(subjectId, isClosed) {
+            if (!db) return;
+            const pollRef = ref(db, 'polls/' + subjectId);
+            const unsub = onValue(pollRef, (snapshot) => {
+                const chartsEl = document.getElementById('charts-' + subjectId);
+                const countEl = document.getElementById('votes-count-' + subjectId);
+                if (!chartsEl || !countEl) return;
+
+                const data = snapshot.val() || { easy: 0, average: 0, hard: 0, supply: 0 };
+                const total = (data.easy || 0) + (data.average || 0) + (data.hard || 0) + (data.supply || 0);
+                const myChoice = getVotedChoice(subjectId);
+
+                countEl.textContent = `${total} ${total === 1 ? 'Vote' : 'Votes'}`;
+
+                if (total === 0) {
+                    chartsEl.innerHTML = `<p class="text-xs font-bold text-slate-500 text-center py-3">No votes cast yet.</p>`;
+                    return;
+                }
+
+                let barsHTML = '';
+                let maxVotes = -1;
+                let verdictKey = null;
+                let isTie = false;
+
+                Object.entries(VOTE_META).forEach(([key, m]) => {
+                    const val = data[key] || 0;
+                    const pct = Math.round((val / total) * 100);
+                    if (val > maxVotes) { maxVotes = val; verdictKey = key; isTie = false; }
+                    else if (val === maxVotes && val > 0) { isTie = true; }
+
+                    const isMine = myChoice === key;
+                    barsHTML += `
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-bold mb-1">
+                                <span class="flex items-center gap-1.5" style="color:${m.hex}">
+                                    <span>${m.emoji} ${m.label}</span>
+                                    ${isMine ? `<span class="px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700 text-[9px] font-black uppercase">You</span>` : ''}
+                                </span>
+                                <span class="text-slate-600 font-sporty text-[11px]">${pct}%</span>
+                            </div>
+                            <div class="w-full bg-slate-200/80 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                                <div class="h-2.5 rounded-full transition-all duration-700 ease-out" style="width: ${pct}%; background-color: ${m.hex}"></div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // Final Verdict Banner when poll is locked
+                if (isClosed && total > 0) {
+                    if (isTie || !verdictKey) {
+                        barsHTML += `
+                            <div class="mt-4 pt-3 border-t border-slate-200/70 dark:border-white/10">
+                                <div class="bg-slate-100 border border-slate-200 rounded-xl p-3 flex items-center justify-between">
+                                    <span class="text-[10px] font-extrabold text-slate-500 uppercase tracking-widest">Final Verdict</span>
+                                    <span class="text-xs sm:text-sm font-black text-slate-700">Mixed Reactions 🤷‍♂️</span>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        const vm = VOTE_META[verdictKey];
+                        barsHTML += `
+                            <div class="mt-4 pt-3 border-t border-slate-200/70 dark:border-white/10">
+                                <div class="${vm.bgCls} border ${vm.borderCls} rounded-xl p-3 flex items-center justify-between">
+                                    <span class="text-[10px] font-extrabold ${vm.textCls} uppercase tracking-widest">Final Verdict</span>
+                                    <span class="text-xs sm:text-sm font-black ${vm.textCls}">${vm.label} ${vm.emoji}</span>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+
+                chartsEl.innerHTML = barsHTML;
+            });
+
+            activeUnsubscribes.push(unsub);
+        }
+
+        // =====================================================================
+        // 7. VOTING ACTION WITH EMOJI BURST + FIREBASE TRANSACTION
+        // =====================================================================
+        window.submitVote = function(subjectId, category, btnEl) {
+            const meta = VOTE_META[category];
+            if (!meta || !db) return;
+
+            // 1. Lock all buttons on this card & bounce tapped button
+            document.querySelectorAll(`[data-vote-group="${subjectId}"]`).forEach(b => b.disabled = true);
+            btnEl?.classList.add('vote-popped');
+
+            // 2. Launch Facebook-Reaction-Style Emoji Explosion around tapped button!
+            triggerEmojiBurst(btnEl, meta.emoji, meta.hex);
+
+            // 3. Commit to Firebase in parallel with the celebration beat
+            saveVotedChoice(subjectId, category);
+            const voteRef = ref(db, 'polls/' + subjectId + '/' + category);
+            const txPromise = runTransaction(voteRef, (cur) => (cur || 0) + 1);
+            const burstDelay = new Promise(resolve => setTimeout(resolve, 560));
+
+            Promise.all([txPromise, burstDelay]).then(() => {
+                const found = findSubjectGlobally(subjectId);
+                const subj = found?.subj;
+                const bodyEl = document.getElementById('poll-body-' + subjectId);
+                if (bodyEl && subj) {
+                    bodyEl.innerHTML = `
+                        <div id="results-box-${escapeHtml(subjectId)}" class="inner-glass rounded-2xl p-4 sm:p-5 ot-swap-in">
+                            <div class="flex items-center justify-between gap-2 pb-2.5 mb-3.5 border-b border-slate-200/70 dark:border-white/10">
+                                <span class="text-xs font-black text-slate-800 uppercase tracking-wider">Live Distribution</span>
+                                <span id="votes-count-${escapeHtml(subjectId)}" class="text-[11px] font-sporty font-extrabold text-indigo-600 bg-white/90 px-2.5 py-0.5 rounded-lg border border-slate-200/70 shadow-sm">...</span>
+                            </div>
+                            <div id="charts-${escapeHtml(subjectId)}" class="space-y-3"></div>
+                            <div class="mt-3.5 pt-2.5 border-t border-slate-200/60 dark:border-white/10 flex items-center justify-center gap-1.5 text-[11px] font-bold text-slate-400">
+                                <i class="far fa-clock text-[10px]"></i>
+                                <span>Auto-locks in</span>
+                                <span class="countdown-target font-sporty text-slate-600" data-target-iso="${escapeHtml(subj.closesAt)}">--:--:--</span>
+                            </div>
+                        </div>
+                    `;
+                    attachLiveResultsListener(subjectId, false);
+                    tickAllCountdowns();
+                }
+                triggerCapsule('success', `Vote recorded! ${meta.emoji}`);
+            }).catch(err => {
+                console.error('Firebase vote error:', err);
+                try { localStorage.removeItem('voted_' + subjectId); } catch {}
+                document.querySelectorAll(`[data-vote-group="${subjectId}"]`).forEach(b => b.disabled = false);
+                triggerCapsule('error', 'Could not save vote. Try again.');
+            });
+        };
+
+        // =====================================================================
+        // 8. VIEW 2: INSIDE AN EXAM SERIES
+        // =====================================================================
+        function renderExamSeriesView(examId, branchFilter = 'ALL', direction = 'forward') {
+            clearActiveListeners();
+            const exam = examList.find(e => e.id === examId);
+            if (!exam) { renderHomeView('back'); return; }
+
+            currentRoute = { view: 'exam', examId: exam.id, subjectId: null, branchFilter };
+            const nowMs = Date.now();
+            const info = analyzeExamSeries(exam, nowMs);
+
+            document.getElementById('hub-hero')?.classList.add('hidden');
+            document.getElementById('view-home')?.classList.add('hidden');
+            document.getElementById('view-single')?.classList.add('hidden');
+
+            const crumbBar = document.getElementById('view-breadcrumb');
+            crumbBar.classList.remove('hidden');
+            document.getElementById('crumb-back-label').textContent = 'All Exams';
+            document.getElementById('crumb-current').textContent = `${exam.semester} • ${exam.scheme}`;
+
+            document.getElementById('exam-sem-badge').textContent = exam.semester;
+            document.getElementById('exam-scheme-badge').textContent = exam.scheme;
+            document.getElementById('exam-detail-title').textContent = exam.title;
+
+            const pillEl = document.getElementById('exam-live-pill');
+            if (info.status === 'LIVE') {
+                pillEl.className = 'px-2.5 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-600 text-[10px] font-black uppercase tracking-wider';
+                pillEl.textContent = `Day ${info.activeDay} • Poll Live`;
+            } else if (info.status === 'BETWEEN_DAYS') {
+                pillEl.className = 'px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-[10px] font-black uppercase tracking-wider';
+                pillEl.textContent = `Next: Day ${info.nextDay}`;
+            } else if (info.status === 'UPCOMING') {
+                pillEl.className = 'px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-[10px] font-black uppercase tracking-wider';
+                pillEl.textContent = 'Upcoming';
+            } else {
+                pillEl.className = 'px-2.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-500 text-[10px] font-black uppercase tracking-wider';
+                pillEl.textContent = 'Closed';
+            }
+
+            // Branch Filter Pills (auto-extracted from subjects)
+            const branches = ['ALL', ...new Set((exam.subjects || []).map(s => s.branch).filter(Boolean))];
+            const branchBar = document.getElementById('exam-branch-filters');
+            branchBar.innerHTML = branches.map(br => {
+                const active = br === branchFilter;
+                return `
+                    <button type="button" onclick="setBranchFilter('${escapeHtml(br)}')"
+                            class="ot-press ${active ? 'branch-pill-active' : 'bg-white/85 text-slate-600 border-slate-200/80 hover:text-indigo-600'} px-3 py-1 rounded-full text-[11px] font-extrabold border whitespace-nowrap transition-all">
+                        ${br === 'ALL' ? 'All Branches' : escapeHtml(br)}
+                    </button>
+                `;
+            }).join('');
+
+            // Sort subjects: Live first -> Upcoming -> Closed
+            const rankMap = { LIVE: 1, UPCOMING: 2, CLOSED: 3 };
+            const subjects = (exam.subjects || [])
+                .filter(s => branchFilter === 'ALL' || s.branch === branchFilter)
+                .map(s => ({ subj: s, timing: getSubjectTiming(s, nowMs) }))
+                .sort((a, b) => {
+                    const r = rankMap[a.timing.state] - rankMap[b.timing.state];
+                    return r !== 0 ? r : (b.subj.day || 1) - (a.subj.day || 1);
+                });
+
+            const listEl = document.getElementById('exam-subjects-list');
+            listEl.innerHTML = subjects.map(({ subj }) => buildSubjectPollCardHTML(subj, exam, nowMs, false)).join('');
+
+            // Attach Firebase listeners to already-voted or closed subjects
+            subjects.forEach(({ subj, timing }) => {
+                if (timing.state === 'CLOSED' || (timing.state === 'LIVE' && getVotedChoice(subj.id))) {
+                    attachLiveResultsListener(subj.id, timing.state === 'CLOSED');
+                }
+            });
+
+            const viewEl = document.getElementById('view-exam');
+            viewEl.classList.remove('hidden', 'view-enter-forward', 'view-enter-back');
+            void viewEl.offsetWidth;
+            viewEl.classList.add(direction === 'back' ? 'view-enter-back' : 'view-enter-forward');
+
+            document.title = `${exam.title} | Kerala Timetable`;
+            tickAllCountdowns();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // =====================================================================
+        // 9. VIEW 3: SINGLE SUBJECT SPOTLIGHT (?s=<subjectId>)
+        // =====================================================================
+        function renderSingleSubjectView(subjectId) {
+            clearActiveListeners();
+            const found = findSubjectGlobally(subjectId);
+            if (!found) {
+                triggerCapsule('error', 'Poll not found');
+                renderHomeView('back');
+                return;
+            }
+
+            const { exam, subj } = found;
+            currentRoute = { view: 'single', examId: exam.id, subjectId: subj.id, branchFilter: 'ALL' };
+            const nowMs = Date.now();
+            const timing = getSubjectTiming(subj, nowMs);
+
+            document.getElementById('hub-hero')?.classList.add('hidden');
+            document.getElementById('view-home')?.classList.add('hidden');
+            document.getElementById('view-exam')?.classList.add('hidden');
+
+            const crumbBar = document.getElementById('view-breadcrumb');
+            crumbBar.classList.remove('hidden');
+            document.getElementById('crumb-back-label').textContent = 'All Exams';
+            document.getElementById('crumb-current').textContent = subj.subjectName;
+
+            document.getElementById('single-exam-context').textContent = `${exam.title}${subj.day ? ` • Exam Day ${subj.day}` : ''}`;
+            document.getElementById('single-subject-slot').innerHTML = buildSubjectPollCardHTML(subj, exam, nowMs, true);
+
+            const viewAllBtn = document.getElementById('single-view-all-btn');
+            viewAllBtn.onclick = () => window.openExamSeries(exam.id);
+
+            if (timing.state === 'CLOSED' || (timing.state === 'LIVE' && getVotedChoice(subj.id))) {
+                attachLiveResultsListener(subj.id, timing.state === 'CLOSED');
+            }
+
+            const viewEl = document.getElementById('view-single');
+            viewEl.classList.remove('hidden', 'view-enter-forward', 'view-enter-back');
+            void viewEl.offsetWidth;
+            viewEl.classList.add('view-enter-forward');
+
+            document.title = `${subj.subjectName} (${exam.semester}) Exam Review | Kerala Timetable`;
+            tickAllCountdowns();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // =====================================================================
+        // 10. URL ROUTER & NAVIGATION ACTIONS
+        // =====================================================================
+        function pushRouteUrl(paramsObj) {
+            const params = new URLSearchParams(paramsObj);
+            const qs = params.toString();
+            const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+            try { window.history.pushState({}, '', url); } catch {}
+        }
+
+        window.goHome = function() {
+            pushRouteUrl({});
+            renderHomeView('back');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        window.openExamSeries = function(examId) {
+            pushRouteUrl({ exam: examId });
+            renderExamSeriesView(examId, 'ALL', 'forward');
+        };
+
+        window.openSingleSubject = function(subjectId) {
+            pushRouteUrl({ s: subjectId });
+            renderSingleSubjectView(subjectId);
+        };
+
+        window.setBranchFilter = function(branch) {
+            if (currentRoute.view === 'exam' && currentRoute.examId) {
+                renderExamSeriesView(currentRoute.examId, branch, 'forward');
+            }
+        };
+
+        window.shareSubjectPoll = function(subjectId, subjectName, semester) {
+            const url = `${window.location.origin}${window.location.pathname}?s=${encodeURIComponent(subjectId)}`;
+            copyShareLink(url, `${subjectName} ${semester} Exam Review`, 'Subject poll link copied!');
+        };
+
+        window.shareCurrentPage = function() {
+            copyShareLink(window.location.href, document.title, 'Poll link copied!');
+        };
+
+        function resolveRouteFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const singleId = params.get('s') || params.get('poll');
+            const examId = params.get('exam');
+
+            if (singleId) {
+                renderSingleSubjectView(singleId.trim());
+            } else if (examId) {
+                renderExamSeriesView(examId.trim(), 'ALL', 'forward');
+            } else {
+                renderHomeView('forward');
+            }
+        }
+
+        window.addEventListener('popstate', resolveRouteFromUrl);
+
+        // =====================================================================
+        // 11. SINGLE GLOBAL 1-SECOND COUNTDOWN ENGINE
+        // =====================================================================
+        function tickAllCountdowns() {
+            const nodes = document.querySelectorAll('.countdown-target[data-target-iso]');
+            if (!nodes.length) return;
+            const nowMs = Date.now();
+            let needsStateFlip = false;
+
+            nodes.forEach(el => {
+                const targetMs = new Date(el.getAttribute('data-target-iso')).getTime();
+                const dist = targetMs - nowMs;
+
+                if (dist <= 0) {
+                    el.textContent = 'UPDATING...';
+                    needsStateFlip = true;
+                    return;
+                }
+
+                const d = Math.floor(dist / 86400000);
+                const h = Math.floor((dist % 86400000) / 3600000);
+                const m = Math.floor((dist % 3600000) / 60000);
+                const s = Math.floor((dist % 60000) / 1000);
+
+                el.textContent = d > 0
+                    ? `${d}d : ${String(h).padStart(2, '0')}h : ${String(m).padStart(2, '0')}m : ${String(s).padStart(2, '0')}s`
+                    : `${String(h).padStart(2, '0')}h : ${String(m).padStart(2, '0')}m : ${String(s).padStart(2, '0')}s`;
+            });
+
+            if (needsStateFlip && !countdownRefreshPending) {
+                countdownRefreshPending = true;
+                setTimeout(() => {
+                    countdownRefreshPending = false;
+                    resolveRouteFromUrl();
+                }, 1200);
+            }
+        }
+
+        // =====================================================================
+        // 12. BOOT
+        // =====================================================================
+        try {
+            const app = initializeApp(firebaseConfig);
+            db = getDatabase(app);
+
+            examList = Array.isArray(window.KTU_POLL_EXAMS) ? window.KTU_POLL_EXAMS : [];
+            if (!examList.length) {
+                throw new Error('poll-config.js did not load any exam polls.');
+            }
+
+            resolveRouteFromUrl();
+            setInterval(tickAllCountdowns, 1000);
+        } catch (err) {
+            console.error(err);
+            document.getElementById('home-loading')?.classList.add('hidden');
+            const errBox = document.getElementById('system-error-state');
+            const errMsg = document.getElementById('system-error-msg');
+            if (errMsg) errMsg.textContent = err.message;
+            errBox?.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
