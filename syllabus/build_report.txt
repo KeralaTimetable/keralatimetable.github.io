@@ -1,0 +1,113 @@
+KTU 2024 FIRST YEAR SYLLABUS BUILD REPORT
+=======================================================
+
+SOURCE: group-a.pdf (Group A) — 132 pages
+  - GAMAT101   | p.  3-  7 (5p) | S1    | Mathematics For Information Science – 1
+  - GAPHT121   | p.  8- 14 (7p) | S1,S2 | Physics For Information Science
+  - GXCYT122   | p. 15- 22 (8p) | S1,S2 | Chemistry For Information Science And Electrical Science
+  - GMEST103   | p. 23- 26 (4p) | S1    | Engineering Graphics And Computer Aided Drawing
+  - GXEST104   | p. 27- 32 (6p) | S1    | Introduction To Electrical And Electronics Engineering
+  - UCEST105   | p. 33- 41 (9p) | S1    | Algorithmic Thinking With Python
+  - GXESL106   | p. 42- 47 (6p) | S1    | Basic Electrical And Electronics Engineering Workshop
+  - UCHWT127   | p. 48- 58 (11p) | S1,S2 | Health And Wellness
+  - UCHUT128   | p. 59- 66 (8p) | S1,S2 | Life Skills And Professional Communication
+  - GAMAT201   | p. 68- 71 (4p) | S2    | Mathematics For Information Science – 2
+  - GAPHT121   | p. 72- 78 (7p) | S1,S2 | Physics For Information Science
+  - GXCYT122   | p. 79- 85 (7p) | S1,S2 | Chemistry For Information Science And Electrical Science
+  - GXEST203   | p. 86- 88 (3p) | S2    | Foundations Of Computing: From Hardware Essentials To Web Design
+  - GXEST204   | p. 89- 92 (4p) | S2    | Programming In C
+  - UCEST206   | p. 93- 98 (6p) | S2    | Engineering Entrepreneurship And IPR
+  - UCHWT127   | p. 99-108 (10p) | S1,S2 | Health And Wellness
+  - UCHUT128   | p.109-117 (9p) | S1,S2 | Life Skills And Professional Communication
+  - GXESL208   | p.118-123 (6p) | S2    | IT Workshop
+  - PCCST205   | p.125-128 (4p) | S2    | Discrete Mathematics
+  - PCITT205   | p.129-132 (4p) | S2    | Discrete Mathematical Structures
+
+SOURCE: group-b.pdf (Group B) — 182 pages
+  - GYMAT101   | p.  3-  7 (5p) | S1    | Mathematics For Electrical Science And Physical Science - 1
+  - GBPHT121   | p.  8- 14 (7p) | S1,S2 | Physics For Electrical Science
+  - GXCYT122   | p. 15- 22 (8p) | S1,S2 | Chemistry For Information Science & Electrical Science
+  - GMEST103   | p. 23- 26 (4p) | S1    | Engineering Graphics And Computer Aided Drawing
+  - GXEST104   | p. 27- 32 (6p) | S1    | Introduction To Electrical And Electronics Engineering
+  - UCEST105   | p. 33- 41 (9p) | S1    | Algorithmic Thinking With Python
+  - GXESL106   | p. 42- 47 (6p) | S1,S2 | Basic Electrical And Electronics Engineering Workshop
+  - UCPWT127   | p. 48- 59 (12p) | S1,S2 | Health And Wellness
+  - UCHUT128   | p. 60- 67 (8p) | S1,S2 | Life Skills And Professional Communication
+  - GYMAT201   | p. 69- 73 (5p) | S2    | Mathematics For Electrical Science And Physical Science - 2
+  - GBPHT121   | p. 74- 80 (7p) | S1,S2 | Physics For Electrical Science
+  - GXCYT122   | p. 81- 88 (8p) | S1,S2 | Chemistry For Information Science And Electrical Science
+  - GXEST203   | p. 89- 92 (4p) | S2    | Foundations Of Computing: From Hardware Essentials To Web Design
+  - GBEST213   | p. 93- 96 (4p) | S2    | Engineering Mechanics
+  - GXEST204   | p. 97-100 (4p) | S2    | Programming In C
+  - UCEST206   | p.101-106 (6p) | S2    | Engineering Entrepreneurship And IPR
+  - UCPWT127   | p.107-118 (12p) | S1,S2 | Health And Wellness
+  - UCHUT128   | p.119-126 (8p) | S1,S2 | Life Skills And Professional Communication
+  - GXESL208   | p.127-132 (6p) | S2    | IT Workshop
+  - PCECT205   | p.134-137 (4p) | S2    | Network Theory
+  - PCEET205   | p.138-143 (6p) | S2    | Measurements And Instrumentation
+  - PCBMT205   | p.144-147 (4p) | S2    | Anatomy And Physiology For Biomedical Engineering
+  - PCEBT205   | p.148-151 (4p) | S2    | Basic Anatomy & Physiology For Biomedical Engineers
+  - PCBRT205   | p.152-156 (5p) | S2    | Anatomy And Physiology For Biomedical Engineering
+  - PCEIT205   | p.157-161 (5p) | S2    | Logic Circuit Design
+  - PCICT205   | p.162-166 (5p) | S2    | Basic Of Instrumentation Engineering
+  - PCCPT205   | p.167-170 (4p) | S2    | Sensors And Actuators
+  - PCERT205   | p.171-174 (4p) | S2    | Digital Electronics
+  - PCRAT205   | p.175-178 (4p) | S2    | Sensors And Actuators For Robotics
+  - PCRUT205   | p.179-182 (4p) | S2    | Sensor Technology For Robotics
+
+SOURCE: group-c.pdf (Group C) — 208 pages
+  - GYMAT101   | p.  3-  7 (5p) | S1    | Mathematics For Electrical Science And Physical Science - 1
+  - GZPHT121   | p.  8- 16 (9p) | S1,S2 | Physics For Physical Science And Life Science
+  - GCCYT122   | p. 17- 25 (9p) | S1,S2 | Chemistry For Physical Science
+  - GCEST103   | p. 26- 29 (4p) | S1    | Engineering Mechanics
+  - GCEST104   | p. 30- 36 (7p) | S1    | Introduction To Mechanical Engineering & Civil Engineering
+  - UCEST105   | p. 37- 45 (9p) | S1    | Algorithmic Thinking With Python
+  - GCESL106   | p. 46- 53 (8p) | S1    | Engineering Workshop
+  - UCPWT127   | p. 54- 64 (11p) | S1,S2 | Health And Wellness
+  - UCHUT128   | p. 65- 72 (8p) | S1,S2 | Life Skills And Professional Communication
+  - GYMAT201   | p. 74- 78 (5p) | S2    | Mathematics For Electrical Science And Physical Science – 2
+  - GZPHT121   | p. 79- 86 (8p) | S1,S2 | Physics For Physical Science And Life Science
+  - GCCYT122   | p. 87- 94 (8p) | S1,S2 | Chemistry For Physical Science
+  - GCEST203   | p. 95- 98 (4p) | S2    | Engineering Graphics And Computer Aided Drawing
+  - GZEST204   | p. 99-104 (6p) | S2    | Basic Electrical & Electronics Engineering
+  - UCEST206   | p.105-110 (6p) | S2    | Engineering Entrepreneurship And IPR
+  - UCPWT127   | p.111-121 (11p) | S1,S2 | Health And Wellness
+  - UCHUT128   | p.122-132 (11p) | S1,S2 | Life Skills And Professional Communication
+  - GZESL208   | p.133-138 (6p) | S2    | Basic Electrical And Electronics Engineering Workshop
+  - PCCEL208   | p.139-144 (6p) | S2    | Civil Engineering Drafting Lab
+  - PCCET205   | p.146-151 (6p) | S2    | Mechanics Of Solids
+  - PCCHT205   | p.152-156 (5p) | S2    | Process Calculations
+  - PCMET205   | p.157-160 (4p) | S2    | Material Science And Engineering
+  - PCAUT205   | p.161-165 (5p) | S2    | Automobile Power Plant
+  - PCMRT205   | p.166-171 (6p) | S2    | Transducers & Measurements
+  - PCPET205   | p.172-176 (5p) | S2    | Fundamentals Of Manufacturing Systems And Processes
+  - PCAOT205   | p.177-181 (5p) | S2    | Fundamentals Of Aeronautics And Aircraft Instruments
+  - PCAGT205   | p.182-187 (6p) | S2    | Crop Production & Protection Technologies
+  - PCIET205   | p.188-193 (6p) | S2    | Materials And Manufacturing Engineering
+  - PCNST205   | p.194-198 (5p) | S2    | Basic Ship Theory
+  - PCPOT205   | p.199-203 (5p) | S2    | Polymers & Polymerisation Principles
+  - PCSFT205   | p.204-208 (5p) | S2    | Principles Of Safety Management
+
+SOURCE: group-d.pdf (Group D) — 149 pages
+  - GDMAT101   | p.  3-  6 (4p) | S1    | Mathematics For Life Science -1
+  - GZPHT121   | p.  7- 13 (7p) | S1,S2 | Physics For Physical Science And Life Science
+  - GDCYT122   | p. 14- 21 (8p) | S1,S2 | Chemistry For Life Science
+  - GMEST103   | p. 22- 25 (4p) | S1    | Engineering Graphics And Computer Aided Drawing
+  - GDBBT104   | p. 26- 29 (4p) | S1    | Basic Concepts Of Biotechnology And Biochemical Engineering
+  - GDFTT104   | p. 30- 33 (4p) | S1    | Introduction To Food Technology
+  - UCEST105   | p. 34- 42 (9p) | S1    | Algorithmic Thinking With Python
+  - GDBBL106   | p. 43- 47 (5p) | S1    | Fundamentals In Biotechnology Lab
+  - GDFTL106   | p. 48- 52 (5p) | S1    | Foundations Of Food Technology Lab
+  - UCPWT127   | p. 53- 63 (11p) | S1,S2 | Health And Wellness
+  - UCHUT128   | p. 64- 71 (8p) | S1,S2 | Life Skills And Professional Communication
+  - GDMAT201   | p. 73- 77 (5p) | S2    | Mathematics For Life Science - 2
+  - GZPHT121   | p. 78- 85 (8p) | S1,S2 | Physics For Physical Science And Life Science
+  - GDCYT122   | p. 86- 93 (8p) | S1,S2 | Chemistry For Life Science
+  - GDEST203   | p. 94- 99 (6p) | S2    | Basic Mechanical And Civil Engineering
+  - GZEST204   | p.100-105 (6p) | S2    | Basic Electrical & Electronics Engineering
+  - UCEST206   | p.106-112 (7p) | S2    | Engineering Entrepreneurship And IPR
+  - UCPWT127   | p.113-124 (12p) | S1,S2 | Health And Wellness
+  - UCHUT128   | p.125-131 (7p) | S1,S2 | Life Skills And Professional Communication
+  - GZESL208   | p.132-137 (6p) | S2    | Basic Electrical And Electronics Engineering Workshop
+  - GDCYT122   | p.139-143 (5p) | S2    | Bioprocess Calculations
+  - PCFTT205   | p.144-149 (6p) | S2    | Food Chemistry

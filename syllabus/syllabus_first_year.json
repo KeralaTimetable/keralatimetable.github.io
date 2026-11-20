@@ -1,0 +1,2584 @@
+{
+  "scheme": "2024",
+  "level": "First Year (S1 & S2)",
+  "groups": [
+    {
+      "id": "Group A",
+      "label": "Group A",
+      "branches": "CSE, IT, AI & DS, Cyber Security, CSBS & Allied Branches"
+    },
+    {
+      "id": "Group B",
+      "label": "Group B",
+      "branches": "ECE, EEE, EIE, Applied Electronics, Robotics & Allied Branches"
+    },
+    {
+      "id": "Group C",
+      "label": "Group C",
+      "branches": "CE, ME, Automobile, Industrial, Chemical, Metallurgy & Allied Branches"
+    },
+    {
+      "id": "Group D",
+      "label": "Group D",
+      "branches": "Biotech, Food Tech, Polymer, Naval Arch, Agriculture & Allied Branches"
+    }
+  ],
+  "total_courses": 62,
+  "courses": [
+    {
+      "code": "GAMAT101",
+      "title": "Mathematics For Information Science – 1",
+      "common_note": "Group A",
+      "groups": [
+        "Group A"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "3",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/GAMAT101.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Limits of Function Values Continuity at a point ContinuousFunctions\n, , ,\nRates of Change: Derivative at a Point , Derivative as a Function , Second -\nand Higher-Order Derivatives Instantaneous Rates of Change Chain\n, ,\nRule ImplicitDifferentiation TangentsandNormalLines Linearization\n, , , ,\nConcavity:TheSecondDerivativeTestforConcavity\n.\n[ Relevant topics ..."
+        },
+        {
+          "no": 2,
+          "summary": "FunctionsofSeveralVariables:DomainsandRanges Levelcurvesoftwo\n,\nvariables Limitsforfunctionsoftwovariables Continuityforfunctionsof\n, ,\ntwo variables Partial derivatives of a functions of\n,\nmore than two variables , Partial derivatives and continuity , Second - Order\npartial derivatives The mixed derivative theorem TheChain Rule:\n, ,\nFunctionsoftwo variables..."
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/111106146",
+        "https://nptel.ac.in/courses/111107108"
+      ]
+    },
+    {
+      "code": "GAPHT121",
+      "title": "Physics For Information Science",
+      "common_note": "Common To Group A",
+      "groups": [
+        "Group A"
+      ],
+      "semesters": [
+        "S1",
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:2:0",
+      "exam_hours": "",
+      "course_type": "Theory + Lab",
+      "pages": 7,
+      "pdf_url": "/syllabus/pdfs/GAPHT121.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Electricalconductivity\nClassical free electron theory Electrical conductivity in metals Fermi\n, ,\nDirac distribution Variation of Fermi function with temperature Fermi\n, ,\nEnergy Energy bands Classification of materials into conductor\n, , ,\nsemiconductorandinsulator\n.\nSuperconductivity Transition temperature Critical field Meissner effect\n, , , ,\nType I and ..."
+        },
+        {
+          "no": 2,
+          "summary": "QuantumMechanics\nIntroduction Concept of uncertainty and conjugate observables\n,\n(qualitative) Uncertainty principle (statement only) Application of\n, ,\nuncertainty principle- Absence of electron inside nucleus Natural line\n-\nbroadening Wave function properties physical interpretation\n, – - ,\nFormulation of time dependent and time independent Schrodinger\nequ..."
+        },
+        {
+          "no": 3,
+          "summary": "SemiconductorPhysics\nIntrinsicsemiconductor Derivation of density of electrons in conduction\n,\nbandanddensityofholesinvalenceband Intrinsiccarrierconcentration\n, ,\nVariation of Intrinsic carrier concentration with temperature Extrinsic\n,\nsemiconductor(qualitative)\nFormation of p-n junction Fermi level in semiconductors-intrinsic and\n,\nextrinsic , Energy band..."
+        },
+        {
+          "no": 4,
+          "summary": "SemiconductorDevices\nSemiconductor devices- Rectifiers- Full wave and Half wave Zener diode-\n.\nVI characteristics Tunnel diode-VI characteristics Semiconductor Laser\n, ,\n(Constructionandworking) Applications\n,\nPhotonic devices (Qualitative treatment only) Photo detectors (Junction\n-\nand PIN photodiodes) Solar cells- IV Characteristics Efficiency Stringing\n, ..."
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/115103108",
+        "https://nptel.ac.in/courses/115101107",
+        "https://nptel.ac.in/courses/115102023",
+        "https://nptel.ac.in/courses/108106181",
+        "https://nptel.ac.in/courses/108108112"
+      ]
+    },
+    {
+      "code": "GBPHT121",
+      "title": "Physics For Electrical Science",
+      "common_note": "Common to Group B",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S1",
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:2:0",
+      "exam_hours": "",
+      "course_type": "Theory + Lab",
+      "pages": 7,
+      "pdf_url": "/syllabus/pdfs/GBPHT121.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "SemiconductorPhysics\nIntrinsic semiconductor Derivation of density of electrons in conduction\n,\nbandanddensityofholesinvalenceband Intrinsiccarrierconcentration\n, ,\nVariation of Intrinsic carrier concentration with temperature Extrinsic\n,\nsemiconductor(qualitative)\nFormation of p-n junction Fermi level in semiconductors-intrinsic and\n,\nextrinsic , Energy ban..."
+        },
+        {
+          "no": 2,
+          "summary": "SemiconductorDevices\nSemiconductor devices - Rectifiers- Full wave and Half wave , Zener\ndiode V -I characteristics Zener breakdown and Avalanche breakdown\n- - ,\nTunnel diode V -I characteristics Applications of Zener and Tunnel\n- ,\ndiodes\n.\nPhotonic devices (qualitative) Photo detectors (Junction and PIN\n-\nphotodiodes) Applications Solar cells- V -I Charact..."
+        },
+        {
+          "no": 3,
+          "summary": "Superconductivity&Dielectrics\nSuper conductivity Transition temperature Critical field Meissner\n, , ,\neffect Type I and Type II Super conductors Applications of\n, ,\nsuperconductors\n.\nDielectric constant Polarization Permittivity- relative permittivity\n, , ,\nRelation between polarization and dielectric constant Types of\n,\nPolarization Internal fields in liqui..."
+        },
+        {
+          "no": 4,
+          "summary": "Laser&FiberOptics\nOptical processes - Absorption , Spontaneous emission and stimulated\nemission Properties of laser Principle of laser conditions for sustained\n, , -\nlasing Population inversion Pumping Metastable states Basic\n– , , ,\ncomponents of laser Active medium- Optical resonant cavity\n- ,\nConstruction and working of Ruby laser Semiconductor Laser\n,\n(Q..."
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/108106181",
+        "https://nptel.ac.in/courses/108108112",
+        "https://nptel.ac.in/courses/115103108",
+        "https://nptel.ac.in/courses/115102124"
+      ]
+    },
+    {
+      "code": "GCCYT122",
+      "title": "Chemistry For Physical Science",
+      "common_note": "Group C",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S1",
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:2:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 9,
+      "pdf_url": "/syllabus/pdfs/GCCYT122.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "EngineeringMaterials\nFuels: Calorific value HCV and LCV Experimental determination\n– –\nof calorific value of solid fuels Analysis of coal Proximate analysis-\n. –\nOctane & Cetane Number Biofuels- Biodiesel -Green Hydrogen\n. .\nLubricants: Classification Solid Semisolid and Liquid lubricants\n- , .\nProperties of lubricants Viscosity Index Flash point Fire point ..."
+        },
+        {
+          "no": 2,
+          "summary": "ElectrochemistryandCorrosionScience\nElectrochemical Cell Electrode potential Nernst equation for single\n- -\nelectrode and cell (Numerical problems) Reference electrodes SHE\n- –\n& Calomel electrode –Construction and Working Electrochemical\n-\nseries Applications Glass Electrode & pH Measurement\n- – -\nConductivity- Measurement using Digital conductivity meter L..."
+        },
+        {
+          "no": 3,
+          "summary": "InstrumentalMethodsofAnalysis\nMolecular Spectroscopy: Types of spectra- Molecular energy levels -\nBeer Lambert’s law Numerical problems Electronic Spectroscopy\n– - –\nPrinciple Types of electronic transitions –Role of Conjugation in\n,\nabsorption maxima Instrumentation-Applications Vibrational\n- –\nspectroscopy Principle- Number of vibrational modes Vibrational..."
+        },
+        {
+          "no": 4,
+          "summary": "EnvironmentalChemistry\nWater characteristics Hardness Types of hardness- Temporary\n- -\nand Permanent Disadvantages of hard water -Degree of hardness\n-\n(Numericals) Water softening methods-Ion exchange process-\nPrinciple procedure and advantages Reverse osmosis principle\n, . – ,\nprocess and advantages . – Water disinfection methods – chlorination-\nBreak point..."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/104/106/104106137/",
+        "https://archive.nptel.ac.in/courses/113/105/113105102/",
+        "https://archive.nptel.ac.in/courses/113/104/113104082/",
+        "https://www.youtube.com/watch?v=BeSxFLvk1h0",
+        "https://archive.nptel.ac.in/courses/113/104/113104102/",
+        "https://archive.nptel.ac.in/courses/104/105/104105124/",
+        "https://archive.nptel.ac.in/courses/105/104/105104157/"
+      ]
+    },
+    {
+      "code": "GCESL106",
+      "title": "Engineering Workshop",
+      "common_note": "",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "1",
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0 0 2 0\n- - -",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Lab",
+      "pages": 8,
+      "pdf_url": "/syllabus/pdfs/GCESL106.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "General: Introduction to workshop practice Safety precautions Shop floor\n, ,\nethics and Basic First Aid knowledge Study of mechanical and measurement\n, .\ntools components and their applications: (a) Tools: screw drivers spanners\n, , ,\nAllen keys cutting pliers etc and accessories (b) bearings seals O -rings\n, . , , ,\ncirclips keys etc(c)Vernier Calipers Heig..."
+        },
+        {
+          "no": 2,
+          "summary": "Carpentry:Understandingcarpentrytoolsandknowledgeofatleastonemodel\n1 T –Lap joint 2 Cross lap joint 3 Dovetail joint 4 Mortise joints\n. . . ."
+        },
+        {
+          "no": 3,
+          "summary": "Foundry:Understandingoffoundrytoolsandknowledgeofatleastonemodel\n1 BenchMoulding 2 FloorMoulding3 Coremaking 4 Patternmaking\n. . . ."
+        },
+        {
+          "no": 4,
+          "summary": "Sheet Metal: Understanding sheet metal working tools and knowledge of at\nleast onemodel\n1 Cylindricalshape2 Conicalshape3 Prismaticshapedjobfromsheetmetal\n. . ."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/105/106/105106206/",
+        "https://archive.nptel.ac.in/courses/105/106/105106201/",
+        "https://archive.nptel.ac.in/courses/105/104/105104101/",
+        "https://archive.nptel.ac.in/courses/117/106/117106108/"
+      ]
+    },
+    {
+      "code": "GCEST103",
+      "title": "Engineering Mechanics",
+      "common_note": "",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "3",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3 0 0 0\n- - -",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/GCEST103.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to statics: introduction to branches of mechanics\n,\nconcept of rigid body scalars and vectors vector operations forces\n, ,\ninspace Supportreactionsofbeams(point loadandUDLonly)\n.\nForce systems: rectangular components in 2D and 3D moment and\n,\ncouple resultants Equilibrium: system isolation and the free-body\n,\ndiagram equilibriumconditions2Dand3D..."
+        },
+        {
+          "no": 2,
+          "summary": "Friction: -laws of friction analysis of blocks and ladder\n–\nCentroid of composite areas- – moment of inertia- parallel axis and\nperpendicular axis theorems Polar moment of inertia radius of\n. ,\ngyration mass moment of inertia-ring and disc\n,"
+        },
+        {
+          "no": 3,
+          "summary": "Dynamics rectilinear translation equations of motion in\n– -\nkinematics and kinetics – D’Alembert’s principle . –motion on\nhorizontalandinclinedsurfaces motionofconnectedbodies\n,"
+        },
+        {
+          "no": 4,
+          "summary": "Curvilinear translation equations of kinematics projectile\n-\nmotion(solutionstartingfrom differential equations)\nRotation – kinematics of rotation- equation of motion for a rigid\nbody rotating about a fixed axis –rotation under a constant moment"
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/112106286"
+      ]
+    },
+    {
+      "code": "GCEST104",
+      "title": "Introduction To Mechanical Engineering & Civil Engineering",
+      "common_note": "",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "4 0 0 0\n- - -",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 7,
+      "pdf_url": "/syllabus/pdfs/GCEST104.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "General introduction to Mechanical Engineering:\nThermodynamic cycles -Carnot Cycle -Derivation of efficiency\n(problems on efficiency) Otto Diesel cycles (no derivation of\n,\nefficiency and problems)\n.\nIC Engines: CI & SI Engines working of 2 -Stroke & 4 -Stroke\n,\nengines Listing the parts of IC Engines Concept of CRDI MPFI\n. . ,\nandhybridengines\n.\nRefrigerati..."
+        },
+        {
+          "no": 2,
+          "summary": "Classification of pumps Description about working with sketches\n,\nof: Reciprocating pump Centrifugal pump Classification of\n, .\nHydraulicTurbines\n.\nDifferent type of gears and its applications (spur helical bevel\n, , ,\nworm and worm wheel) List types of clutches and their use\n, ,\nBearingsandtheir classification(Journal bearingandballbearing)\nManufacturing Pr..."
+        },
+        {
+          "no": 3,
+          "summary": "General Introduction to Civil Engineering: Relevance of Civil\nEngineering in the overall infrastructural development of the\ncountry\n.\nBrief introduction to major disciplines of Civil Engineering like\nStructural Engineering Geo-technical Engineering Transportation\n, ,\nEngineering Water Resources Engineering and Environmental\n,\nEngineering\n.\nIntroduction to bu..."
+        },
+        {
+          "no": 4,
+          "summary": "Conventional construction materials: Brick stone sand\n, , ,\ncement and timber- Classifications Qualities Tests and Uses of\n, ,\nconstruction materials Cement concrete: Constituent materials\n. ,\npropertiesandtypes\n."
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/112/105/112105123/",
+        "https://nptel.ac.in/courses/112/106/112106133/",
+        "https://nptel.ac.in/courses/112/105/112105129/",
+        "https://nptel.ac.in/courses/112/105/112105171/",
+        "https://nptel.ac.in/courses/112/105/112105268/",
+        "https://archive.nptel.ac.in/courses/112/107/112107145",
+        "https://archive.nptel.ac.in/courses/105/106/105106201/",
+        "https://archive.nptel.ac.in/courses/105/106/105106206/"
+      ]
+    },
+    {
+      "code": "GDBBL106",
+      "title": "Fundamentals In Biotechnology Lab",
+      "common_note": "",
+      "groups": [
+        "Group D"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "1",
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:2:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Lab",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/GDBBL106.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "IntroductiontoBiosafetyinLaboratories"
+        },
+        {
+          "no": 2,
+          "summary": "Basic concepts of preparing solutions (normality molarity molality)\n, ,"
+        },
+        {
+          "no": 3,
+          "summary": "Principlesofsteriletechniqueandcellpropagation\n."
+        },
+        {
+          "no": 4,
+          "summary": "PreparationofbuffersanddeterminationofpH"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "GDBBT104",
+      "title": "Basic Concepts Of Biotechnology And Biochemical Engineering",
+      "common_note": "Common to Biotechnology",
+      "groups": [
+        "Group D"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3 1 0 0\n- - -",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/GDBBT104.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Exploring Biological concepts Different types of Cells -Animal\n–\ncells Plant cells and bacterial cells Structure of cells Cycles of\n, , . ,\nlife- Mitosis & Meiosis\n.\nStructure and function of Biomolecules carbohydrates (mono-, di\n- -,\nand polysaccharides) lipids proteins (amino acids peptides) and\n, , , ,\nnucleic acids(DNA & RNA)\n.\nCell growth and Product sy..."
+        },
+        {
+          "no": 2,
+          "summary": "Enzymes and Bioenergetics Enzymes: Classification Catalysis\n, ,\nSteady-state kinetics Enzyme Inhibition Regulatory Enzymes Co-\n, , ,\nEnzymes Vitamins Application of Enzymes- Applications of\n,\nenzymes inindustrial pharmaceutical and analytical sectors Enzyme\n, , ,\nimmobilization\n."
+        },
+        {
+          "no": 3,
+          "summary": "Bioprocess- Basic concepts of Different Upstream and\nDownstream processes; Intracellular and extracellular products-\nGrowth -associated and non-growth associated products\n- .\nModes of bioreactor operation batch bioreactor Disadvantages\n- ,\nof batch bioreactor Continuous bioreactor advantages of continuous\n, ,\nbioreactor Fed batch bioreactor Applications\n, - ..."
+        },
+        {
+          "no": 4,
+          "summary": "Bioreactors - Basic functions of a bioreactor , parts of a fermenter ,\nand their functions role of aeration and mixing in oxygen transfer\n. ,\nmechanism of mixing impellers- types and Flow patterns\n, , .\nIntroduction to process instrumentation and control: Common\nmethodologies of measurements Measuring Instruments:\n,\nThermocouples Venturi meters U -tube manom..."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/102/108/102108086/",
+        "https://archive.nptel.ac.in/courses/102/102/102102033/",
+        "https://archive.nptel.ac.in/courses/102/106/102106086/",
+        "https://onlinecourses.nptel.ac.in/noc20_bt21/preview"
+      ]
+    },
+    {
+      "code": "GDCYT122",
+      "title": "Chemistry For Life Science",
+      "common_note": "Common to D Group",
+      "groups": [
+        "Group D"
+      ],
+      "semesters": [
+        "S1",
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:2:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 8,
+      "pdf_url": "/syllabus/pdfs/GDCYT122.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Fundamentals of Molecular\nSpectroscopy"
+        },
+        {
+          "no": 2,
+          "summary": "Principlesof\nPhysicalChemistry"
+        },
+        {
+          "no": 3,
+          "summary": "Instrumental Methods of\nAnalysis"
+        },
+        {
+          "no": 4,
+          "summary": "PolymerChemistry:\nAn Introduction"
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/104/106/104106137/",
+        "https://archive.nptel.ac.in/courses/113/105/113105102/",
+        "https://archive.nptel.ac.in/courses/113/104/113104082/",
+        "https://www.youtube.com/watch?v=BeSxFLvk1h0",
+        "https://archive.nptel.ac.in/courses/113/104/113104102/",
+        "https://archive.nptel.ac.in/courses/104/105/104105124/",
+        "https://archive.nptel.ac.in/courses/105/104/105104157/"
+      ]
+    },
+    {
+      "code": "GDFTL106",
+      "title": "Foundations Of Food Technology Lab",
+      "common_note": "",
+      "groups": [
+        "Group D"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "1",
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:2:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Lab",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/GDFTL106.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "EstimationofMoistureContentbyHotAirOvenmethod\n."
+        },
+        {
+          "no": 2,
+          "summary": "Testforthepresenceofcarbohydratesinthegivenfoodsample\n."
+        },
+        {
+          "no": 3,
+          "summary": "Testforthepresenceofproteininagivenfoodsample\n."
+        },
+        {
+          "no": 4,
+          "summary": "EstimationofPhysical parametersofwater\n."
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/103107088"
+      ]
+    },
+    {
+      "code": "GDFTT104",
+      "title": "Introduction To Food Technology",
+      "common_note": "",
+      "groups": [
+        "Group D"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3 1 0 0\n- - -",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/GDFTT104.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Food & Nutrients: Introduction to food and nutrients Definition of\n,\nfood , functions of food , food groups , Nutrients in food –\nCarbohydrates proteins lipids vitamins and minerals their\n, , , ,\nclassification functions and sources Role\n, .\nofwaterasanutrientanditsdietarysources\n."
+        },
+        {
+          "no": 2,
+          "summary": "Engineering Properties of Foods: Shape and size criteria for\n–\ndescribing shape and size Volume and methods of measurement of\nvolume Density Types Method of measurement of apparent\n, , ,\ndensity material density particle density bulk density true density-\n, , , ,\nLaws offriction effect of loadand properties of contactingbodies\n, .\nEffect of sliding velocity ..."
+        },
+        {
+          "no": 3,
+          "summary": "Fluid Mechanics : definition of fluid - properties of fluids – density ,\nspecific gravity compressibility surface tension and viscosity\n, , –\nabsolute and kinematic viscosity variation of properties with\ntemperature and pressure – rheology of fluids- Newtonian and non-\nNewtonian fluids –fluid static Pascal’s law hydrostatic equilibrium\n–\nin gravity and centr..."
+        },
+        {
+          "no": 4,
+          "summary": "Basics of Process Calculations- –units and dimensions-basic and\nderived quantities-conversion of units conversion of empirical\n–\nequations moisture content wet basis & dry basis mole concept\n– - , –\nmethod of expressing composition –mole fraction weight fraction\n– –\nvolume fraction– concentration of liquid solutions molarity\n– ,\nmolality normality ppm Order ..."
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/103107088",
+        "https://archive.nptel.ac.in/courses/126/105/126105011/",
+        "https://onlinecourses.nptel.ac.in/noc22_ch02/preview"
+      ]
+    },
+    {
+      "code": "GDMAT101",
+      "title": "Mathematics For Life Science -1",
+      "common_note": "",
+      "groups": [
+        "Group D"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "3",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/GDMAT101.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Systems of linear equations . Gauss Elimination , Rank of a matrix - Row\nechelon form Solutions of Linear systems: Existence Uniqueness-\n, ,\nFundamental theorem for linear systems - homogeneous and non-\nhomogeneous (theorem without proof) The matrix Eigen value problem\n, .\nDeterminingEigenvaluesandEigenvectors\n.\n(Text1:Relevanttopicsfromsections73 74 75 81)\n..."
+        },
+        {
+          "no": 2,
+          "summary": "Introduction to calculus differentiation from first principles\n- ,\nDifferentiation of common functions Differentiation of a product\n, ,\nDifferentiation of a quotient Function of function (Chain Rule)\n, ,\nIntroduction to Parametric equations Differentiation in parameters\n, ,\nIntroduction to partial derivatives first order partial derivatives second\n, ,\norderp..."
+        },
+        {
+          "no": 4,
+          "summary": "HigherEngineering\nMathematics"
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/111/107/111107164/",
+        "https://archive.nptel.ac.in/courses/111/104/111104125/",
+        "https://archive.nptel.ac.in/courses/111/106/111106100/"
+      ]
+    },
+    {
+      "code": "GMEST103",
+      "title": "Engineering Graphics And Computer Aided Drawing",
+      "common_note": "Common to A, B & D",
+      "groups": [
+        "Group A",
+        "Group B",
+        "Group D"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "3",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "2:0:2:0",
+      "exam_hours": "",
+      "course_type": "Theory & Lab",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/GMEST103.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: Relevance of technical drawing in engineering fieldTypes of\n.\nlines Dimensioning BIS code of practice for technical drawing (No\n, , .\nquestionsfortheendsemesterexamination)\nProjectionofpointsindifferentquadrants Projectionofstraightlinesinclined\n,\ntooneplaneandinclinedto both planes Trace ofaline Inclination of lines\n. .\nwith reference planes T..."
+        },
+        {
+          "no": 2,
+          "summary": "Projection of Simple solids such as Triangular Rectangle Square\n, , ,\nPentagonalandHexagonalPrisms Pyramids ConeandCylinderonly\n, , .\nProjection of solids in simple position including profile view\n."
+        },
+        {
+          "no": 3,
+          "summary": "Sections of Solids: Sections of Prisms Pyramids Cone and Cylinder only\n, , ,\nwith axis in vertical position and cut by different section planes Trueshape\n.\nofthesections (Excludetrueshapegivenproblems)\n.\nDevelopment of Surfaces: Development of surfaces of the solids and\nsolidscutbydifferentsectionplanes (Excludeproblemswiththroughholes)\n."
+        },
+        {
+          "no": 4,
+          "summary": "Isometric Projection: Isometric scale- Isometric View and Projections of\nPrisms Pyramids Cone Cylinder Sphere Hemisphere and their\n, , , , ,\ncombinations\n.\nComputerAidedDrawing(CAD): Introduction Roleof CADin designand\n,\ndevelopment of new products Advantages of CAD Creating two-\n, .\ndimensional drawing with dimensions using suitablesoftware (CAD only\n. ,\nin..."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/112/102/112102304/"
+      ]
+    },
+    {
+      "code": "GXCYT122",
+      "title": "Chemistry For Information Science And Electrical Science",
+      "common_note": "Common to Group A & B",
+      "groups": [
+        "Group A",
+        "Group B"
+      ],
+      "semesters": [
+        "S1",
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:2:0",
+      "exam_hours": "",
+      "course_type": "Theory + Lab",
+      "pages": 8,
+      "pdf_url": "/syllabus/pdfs/GXCYT122.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "ElectrochemistryandCorrosionScience(9Hours)\nElectrochemical Cell Electrode potential Nernst equation for single\n- -\nelectrode and cell (Numerical problems) Reference electrodes SHE &\n- –\nCalomel electrode –Construction and Working Electrochemical series\n- -\nApplications Glass Electrode & pH Measurement -Conductivity-\n–\nMeasurement using Digital conductivity ..."
+        },
+        {
+          "no": 2,
+          "summary": "MaterialsforElectronicApplications(9Hrs)\nNanomaterials - Classification based on Dimension & Materials- Synthesis\nSol gel & Chemical Reduction Applications of nanomaterials\n– -\nCarbon Nanotubes Fullerenes Graphene & Carbon Quantum Dots\n– , , –\nstructure properties&application\n, .\nPolymers Fire Retardant Polymers- Halogenated & Non-halogenated\n-\npolymers (Exa..."
+        },
+        {
+          "no": 3,
+          "summary": "MolecularSpectroscopyandAnalyticalTechniques(9Hours)\nSpectroscopy-Types of spectra- Molecular energy levels - Beer Lambert’s\nlaw Numerical problems Electronic Spectroscopy Principle Types of\n– - – ,\nelectronic transitions –Role of conjugation in absorption maxima-\nInstrumentation-Applications Vibrational spectroscopy Principle-\n– –\nNumber of vibrational mode..."
+        },
+        {
+          "no": 4,
+          "summary": "EnvironmentalChemistry(9Hrs)\nWater characteristics Hardness Types of hardness- Temporary and\n- -\nPermanent Disadvantages of hard water -Degree of hardness (Numericals)\n-\nWater softening methods-Ion exchange process- Principle procedure and\n,\nadvantages . Reverse osmosis – principle , process and advantages . – Water"
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/104/106/104106137/",
+        "https://archive.nptel.ac.in/courses/113/105/113105102/",
+        "https://archive.nptel.ac.in/courses/113/104/113104082/",
+        "https://www.youtube.com/watch?v=BeSxFLvk1h0",
+        "https://archive.nptel.ac.in/courses/113/104/113104102/",
+        "https://archive.nptel.ac.in/courses/104/105/104105124/",
+        "https://archive.nptel.ac.in/courses/105/104/105104157/"
+      ]
+    },
+    {
+      "code": "GXESL106",
+      "title": "Basic Electrical And Electronics Engineering Workshop",
+      "common_note": "Common to All Groups except for Civil Engineering Branch",
+      "groups": [
+        "Group A",
+        "Group B"
+      ],
+      "semesters": [
+        "S1",
+        "S2"
+      ],
+      "credits": "1",
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:2:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/GXESL106.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "a)DemonstratetheprecautionarystepsadoptedincaseofElectricalshocks\n.\nb) Identify different types of cables wires switches fuses fuse carriers MCB ELCB and\n, , , , , ,\nMCCB familiarizetheratings\n, ."
+        },
+        {
+          "no": 2,
+          "summary": "Wiring of a simple light circuit for light/ fan point (PVC conduit wiring) and a 6A plug\nsocketwithindividualcontrol\n."
+        },
+        {
+          "no": 3,
+          "summary": "Wiring of light/fan circuit using two-way switches (Staircase wiring)\n."
+        },
+        {
+          "no": 4,
+          "summary": "Wiringoffluorescentlampandapowerplug(16A)socketwithacontrolswitch\n."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "GXEST104",
+      "title": "Introduction To Electrical And Electronics Engineering",
+      "common_note": "Common to Group A & B",
+      "groups": [
+        "Group A",
+        "Group B"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "4:0:0:0",
+      "exam_hours": "",
+      "course_type": "Group Core-Theory",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/GXEST104.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "ElementaryconceptsofDCelectriccircuits:\nCurrent and Voltage Division Rule Relative potential\n-\nCapacitors & Inductors: V -I relations and Energy stored Ohms\n.\nLaw and Kirchhoff's laws numerical problems\n- .\nStar-delta conversion (resistive networks only derivation not required)\n- -\nnumericalproblems\n.\nAnalysis of DC Electric circuits: Mesh current method mat..."
+        },
+        {
+          "no": 2,
+          "summary": "ElectromagneticInduction:\nFaraday's laws Lenz's law- statically induced and dynamically induced emf\n,\nSelf -inductance and mutual inductance coefficient of coupling (numerical\n– ,\nproblemsnotneeded)\nAlternatingCurrentfundamentals:\nGeneration of alternating voltages Representation of sinusoidal\n-\nwaveforms: frequency , period , average value , RMS value and f..."
+        },
+        {
+          "no": 3,
+          "summary": "IntroductiontoElectronicdevices:\nPassiveandactivecomponentsinelectronics\nWorking of PN junction diode V -I characteristics of PN Junction diode\n,"
+        },
+        {
+          "no": 4,
+          "summary": "ModernElectronicsanditsapplications:\nGeneral block diagram of a Communication system Block diagramof\n,\nFiberopticCommunicationsystem\nConceptof AMand FM(Noderivationrequired) Block diagramofAM\n,\nand FM super-heterodyne receiver\nBasic concepts of Wired and Wireless communication Blockdiagramof\n,\nGSM\nComparisonof3G 4G 5Gand6GcommunicationtechnologiesBlock\n, ,\nd..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "GYMAT101",
+      "title": "Mathematics For Electrical Science And Physical Science - 1",
+      "common_note": "Common to Groups B & C",
+      "groups": [
+        "Group B",
+        "Group C"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "3",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/GYMAT101.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Linear systems of equations: Gauss elimination Row echelon form\n, ,\nLinear Independence: rank of a matrix Solutions of linear systems:\n,\nExistence Uniqueness (without proof) The matrix Eigen Value Problem\n, , ,\nDeterminingEigenvaluesandEigenvector Diagonalizationofmatrices\n, .\n(Text1:Relevanttopicsfromsections73 74 75 81 84)\n. , . , . , . , ."
+        },
+        {
+          "no": 2,
+          "summary": "Homogeneous linear ODEs of second order Superposition principle\n, ,\nGeneral solution Homogeneous linear ODEs of second order with\n,\nconstant coefficients (Method to find general solution solution of linear\n,\nInitial Value Problem) Non homogenous ODEs (with constant\n.\ncoefficients) General solution Particular solution by the method of\n- ,\nundeterminedcoeffici..."
+        },
+        {
+          "no": 3,
+          "summary": "Laplace Transform Inverse Laplace Transform Linearity property First\n, , ,\nshifting theorem Transform of derivatives Solution of Initial value\n, ,\nproblems by Laplace transform (Second order linear ODE with constant\ncoefficients with initial conditions at t=0 only) Unit step function\n, ,\nSecond shifting theorem Dirac delta function and its transform (Initial..."
+        },
+        {
+          "no": 4,
+          "summary": "Taylor series representation (without proof assuming the possibility of\n,\npower series expansion in appropriate domains) Maclaurin series\n,\nrepresentation Fourier series Euler formulas Convergence of Fourier\n, , ,\nseries (Dirichlet’s conditions) Fourier series of 2π periodic functions\n, ,\nFourier series of 2l periodic functions Half range sine series expansi..."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/111/107/111107164/",
+        "https://archive.nptel.ac.in/courses/111/104/111104031/",
+        "https://archive.nptel.ac.in/courses/111/106/111106139/",
+        "https://archive.nptel.ac.in/courses/111/101/111101164/"
+      ]
+    },
+    {
+      "code": "GZPHT121",
+      "title": "Physics For Physical Science And Life Science",
+      "common_note": "Groups C & D",
+      "groups": [
+        "Group C",
+        "Group D"
+      ],
+      "semesters": [
+        "S1",
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:2:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory + Lab",
+      "pages": 9,
+      "pdf_url": "/syllabus/pdfs/GZPHT121.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Laser&FibreOptics\nOptical processes – Absorption-Spontaneous emission and stimulated\nemission Principle of laser conditions for sustained lasing Population\n, - –\ninversion- Pumping- Metastable states Basic components of laser\n, -\nActive medium Optical resonant cavity Construction and working of\n- ,\nRuby laser and CO2 laser Construction and working Semiconduc..."
+        },
+        {
+          "no": 2,
+          "summary": "InterferenceandDiffraction\nIntroduction Principle of super position Constructive and destructive\n, ,\ninterference Optical path Phase difference and path difference Cosine\n, , ,\nlaw- reflected system- Condition for constructive and destructive\ninterference Colours in thin films Newton’s Rings-Determination of\n, ,\nrefractive index of transparent liquids and wa..."
+        },
+        {
+          "no": 3,
+          "summary": "QuantumMechanics\nIntroduction Concept of uncertainty and conjugate observables\n,\n(qualitative) Uncertainty principle (statement only) Application of\n, ,\nuncertainty principle- Absence of electron inside nucleus Natural line\n-\nbroadening Wave function properties physical interpretation\n, – - ,\nFormulation of time dependent and time independent Schrodinger\nequ..."
+        },
+        {
+          "no": 4,
+          "summary": "Waves&Acoustics\nWaves- transverse and longitudinal waves Concept of frequency\n, ,\nwavelength and time period (no derivation) Transverse vibrations in a\n,\nstretched string- derivation of velocity and frequency laws of transverse\n-\nvibration\n.\nAcoustics- Reverberation and echo Reverberation time and its\n,\nsignificance - Sabine’s Formula , Factors affecting aco..."
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/115102124",
+        "https://nptel.ac.in/courses/104104085",
+        "https://nptel.ac.in/courses/115105537",
+        "https://nptel.ac.in/courses/115102023",
+        "https://nptel.ac.in/courses/115101107",
+        "https://nptel.ac.in/courses/112104212",
+        "https://nptel.ac.in/courses/124105004"
+      ]
+    },
+    {
+      "code": "UCEST105",
+      "title": "Algorithmic Thinking With Python",
+      "common_note": "Common to All Branches",
+      "groups": [
+        "Group A",
+        "Group B",
+        "Group C",
+        "Group D"
+      ],
+      "semesters": [
+        "S1"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:2:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 9,
+      "pdf_url": "/syllabus/pdfs/UCEST105.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "PROBLEM -SOLVING STRATEGIES:- Problem-solving strategies defined\n,\nImportance of understanding multiple problem-solving strategies Trial and\n,\nError Heuristics Means- Ends Analysis and Backtracking (Working\n, , ,\nbackward)\n.\nTHE PROBLEM -SOLVING PROCESS:- Computer as a model of\ncomputation Understanding the problem Formulating a model Developing\n, , ,\nan alg..."
+        },
+        {
+          "no": 2,
+          "summary": "ALGORITHM AND PSEUDOCODE REPRESENTATION:- Meaning and\nDefinition of Pseudocode Reasons for using pseudocode The main\n, ,\nconstructs of pseudocode - Sequencing , selection (if -else structure , case\nstructure) and repetition (for while repeat until loops) Sample problems*\n, , - ,\nFLOWCHARTS** :- Symbols used in creating a Flowchart - start and end ,\narithmeti..."
+        },
+        {
+          "no": 3,
+          "summary": "SELECTION AND ITERATION USING PYTHON:- if -else elif for loop\n, , ,\nrange whileloop\n, .\nSequence data types in Python list tuple set strings dictionary Creating\n- , , , , ,\nandusingArraysinPython(usingNumpylibrary)\n.\nDECOMPOSITION AND MODULARISATION* :- Problem decomposition\nas a strategy for solving complex problems Modularisation Motivation for\n, ,\nmodular..."
+        },
+        {
+          "no": 4,
+          "summary": "Psychology(Sec Problem\n..\nSolving)\n."
+        }
+      ],
+      "video_links": [
+        "https://opentextbc.ca/h5ppsychology/chapter/problem-solving/",
+        "https://onlinecourses.nptel.ac.in/noc21_cs32/preview"
+      ]
+    },
+    {
+      "code": "UCHUT128",
+      "title": "Life Skills And Professional Communication",
+      "common_note": "Common to all Branches",
+      "groups": [
+        "Group A",
+        "Group B",
+        "Group C",
+        "Group D"
+      ],
+      "semesters": [
+        "S1",
+        "S2"
+      ],
+      "credits": "1",
+      "cie": "100",
+      "ese": "0",
+      "ltpr": "2:0:1:0",
+      "exam_hours": "",
+      "course_type": "Activity-based",
+      "pages": 11,
+      "pdf_url": "/syllabus/pdfs/UCHUT128.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "LifeSkills&Personality\nDevelopment"
+        },
+        {
+          "no": 2,
+          "summary": "EmotionalIntelligence:Whyit\ncanmattermorethanIQ"
+        },
+        {
+          "no": 3,
+          "summary": "Prepare a presentation on instances of\nempathy they have observed in their\nownlifeorinother’slife"
+        },
+        {
+          "no": 4,
+          "summary": "DeepWork:Rulesforfocused\nsuccessinadistractedworld"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "UCHWT127",
+      "title": "Health And Wellness",
+      "common_note": "Common to all Groups",
+      "groups": [
+        "Group A"
+      ],
+      "semesters": [
+        "S1",
+        "S2"
+      ],
+      "credits": "1",
+      "cie": "50",
+      "ese": "0",
+      "ltpr": "1:0:1:0",
+      "exam_hours": "",
+      "course_type": "Theory and Practical",
+      "pages": 11,
+      "pdf_url": "/syllabus/pdfs/UCHWT127.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Human Body Systems related to Physical activity and its functions:\nRespiratory System Cardiovascular System\n- .\nMusculoskeletalSystemandtheMajorMusclegroupsof theHumanBody\n.\nQuantifying Physical Activity Energy Expenditure and Metabolicequivalent\noftask(MET)\nExercise Continuum: Light -intensity physical activity Moderate intensity\n, -\nphysical activity Vigor..."
+        },
+        {
+          "no": 2,
+          "summary": "Concept of Health and Wellness: Health and wellness differentiation\n,\nFactors affecting health and wellness Mental health and Factors\n.\naffectingmentalhealth\n.\nSports and Socialization: Sports and character building Leadership\n-\nthroughPhysicalActivityand Sports\nDiet and nutrition: Exploring Micro and Macronutrients: Concept of\nBalanceddiet\nCarbohydrate&theG..."
+        },
+        {
+          "no": 3,
+          "summary": "Lifestyle management strategies to prevent / manage common\nhypokinetic diseases and disorders Obesity Cardiovascular diseases\n- -\n(e .g ., coronary artery disease , hypertension) - Diabetes - Osteoporosis\n- Musculoskeletal disorders (e .g ., osteoarthritis , Low back pain ,\nKyphosis lordosis flatfoot Knockknee)\n, , ,\nMeaning , Aims and objectives of yoga - C..."
+        },
+        {
+          "no": 4,
+          "summary": "Firstaid and principlesofFirstAid:Primarysurvey:ABC (Airway\n,\nBreathing Circulation) QualitiesofaGoodFirstAider\n, .\nFirst aid measures for: - Cuts and scrapes - Bruises - Sprains -\nStrains Fractures Burns Nosebleeds\n- - - .\nFirst Aid Procedures: Cardiopulmonary Resuscitation (CPR)\n-\nHeimlich Maneuver - Applying a sling\nSports injuries: Classification (Soft T..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "UCPWT127",
+      "title": "Health And Wellness",
+      "common_note": "Common to all Groups",
+      "groups": [
+        "Group B",
+        "Group C",
+        "Group D"
+      ],
+      "semesters": [
+        "S1",
+        "S2"
+      ],
+      "credits": "1",
+      "cie": "50",
+      "ese": "0",
+      "ltpr": "1:0:1:0",
+      "exam_hours": "",
+      "course_type": "Course Objectives",
+      "pages": 12,
+      "pdf_url": "/syllabus/pdfs/UCPWT127.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Human Body Systems related to Physical activity and its functions:\nRespiratory System Cardiovascular System\n- .\nMusculoskeletalSystemandtheMajorMusclegroupsoftheHumanBody\n.\nQuantifying Physical Activity Energy Expenditure and Metabolic\nequivalentoftask(MET)\nExercise Continuum: Light -intensity physical activity Moderate\n, -\nintensity physical activity Vigoro..."
+        },
+        {
+          "no": 2,
+          "summary": "Concept of Health and Wellness: Health and wellness differentiation\n,\nFactors affecting health and wellness Mental health and Factors affecting\n.\nmentalhealth\n.\nSports and Socialization: Sports and character building Leadership through\n-\nPhysicalActivityandSports\nDiet and nutrition: Exploring Micro and Macronutrients: Concept of\nBalanceddiet\nCarbohydrate&the..."
+        },
+        {
+          "no": 3,
+          "summary": "Lifestyle management strategies to prevent / manage common hypokinetic\ndiseases and disorders - Obesity - cardiovascular diseases (e .g ., coronary\nartery disease hypertension) Diabetes Osteoporosis Musculoskeletal\n, - - -\ndisorders (eg osteoarthritis Low back pain Kyphosis lordosis flat foot\n. ., , , , , ,\nKnock knee) Meaning , Aims and objectives of yoga -..."
+        },
+        {
+          "no": 4,
+          "summary": "First aid and principles of First Aid: Primary survey: ABC (Airway\n,\nBreathing Circulation) QualitiesofaGoodFirstAider\n, .\nFirst aid measures for: - Cuts and scrapes - Bruises - Sprains - Strains\nFractures Burns Nosebleeds\n- - - .\nFirst Aid Procedures: Cardiopulmonary Resuscitation (CPR)\n-\nHeimlich Maneuver - Applying a sling\nSports injuries: Classification ..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "GAMAT201",
+      "title": "Mathematics For Information Science – 2",
+      "common_note": "Group A",
+      "groups": [
+        "Group A"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "3",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/GAMAT201.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Linearsystemsofequations SolutionbyGausselimination Rowechelon\n, ,\nform and rank of a matrix , Fundamental theorem for linear systems -\nhomogeneous and non-homogeneous (without proof) Eigen values and\n,\nEigenvectorsofmatrices Diagonalizationofmatrices\n, .\n[Text1:Relevanttopicsfromsections73 74 75 81 84]\n. , . , . , . , ."
+        },
+        {
+          "no": 2,
+          "summary": "Vector Spaces , Examples of vector space – Rn and M mxn only , Subspaces ,\nExamples as subspaces of Rn and M mxn , Linear combinations of vectors in\na vector space Spanning sets Linear dependence and independence\n, , ,\nBasis for a vector space The dimension of vector space Coordinate\n, ,\nrepresentation in Rn Change of basis in Rn : Transition Matrix (without..."
+        },
+        {
+          "no": 3,
+          "summary": "Vectorlengthandunitvector Dotproductandanglebetweentwovectors\n, ,\nThe Cauchy- Schwarz Inequality Inner product Examples as Rn and\n, ,\nM Properties of inner products Definitions of length distance and\n2x2, , ,\nangle Orthogonal projections in inner product spaces Orthogonal and\n, ,\northonormal sets Orthogonal and orthonormal basis Gram-Schmidt\n, ,\northonormali..."
+        },
+        {
+          "no": 4,
+          "summary": "Linear Transformations Properties of linear transformations Linear\n, ,\nTransformation given by a matrix Rotation in R2 Projection in R3\n, , ,\nKernel of a Linear Transformation and its basis Range of a Linear\n,\nTransformation and its basis Rank and Nullity of a Linear\n,\nTransformation Sum of Rank and Nullity (without proof) Matrices for\n, ,\nLinearTransformati..."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/111/107/111107164/"
+      ]
+    },
+    {
+      "code": "GBEST213",
+      "title": "Engineering Mechanics",
+      "common_note": "Common to EEE, CP, BR, RA & RU",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "3",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/GBEST213.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to statics: Introduction to branches of mechanics concept of\n,\nrigid body scalars and vectors vector operations forces in space Support\n, , .\nreactions of beams (point load and UDL on Simply supported and cantilever\nbeams)\nForce systems: Rectangular components in 2D and 3D moment and\n,\ncouple resultants Equilibrium: system isolation and the free..."
+        },
+        {
+          "no": 2,
+          "summary": "Friction: -Laws of friction analysis of blocks and ladder Centroid of\n–\ncomposite areas- – moment of inertia- parallel axis and\nperpendicular axis theorems Polar moment of inertia radius of\n. ,\ngyration mass moment of inertia-ring and disc\n,"
+        },
+        {
+          "no": 3,
+          "summary": "Dynamics Rectilinear translation equations of motion in\n– -\nkinematics and kinetics – D’Alembert’s principle . – motion on horizontal and\ninclined surfaces motion of connected bodies\n, .\nCombinedmotionoftranslationandrotation\n."
+        },
+        {
+          "no": 4,
+          "summary": "Mechanical vibration Free and forced vibration degree of\n- ,\nfreedom . Simple harmonic motion - spring mass model ,period ,\nstiffness frequency simple numerical problems of single degree of\n, ,\nfreedom"
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/112106286"
+      ]
+    },
+    {
+      "code": "GCEST203",
+      "title": "Engineering Graphics And Computer Aided Drawing",
+      "common_note": "",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "3",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "2 0 2 0\n- - -",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory & Lab",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/GCEST203.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: Relevance of technical drawing in engineering field\n.\nTypes oflines Dimensioning BIS code of practice for technical\n, ,\ndrawing (Noquestionsfor theendsemesterexamination)\n.\nProjection of points in different quadrants Projection of straight\n,\nlines inclined to one plane and inclined to both planes Traces of a\n.\nline Inclinationof lines with refe..."
+        },
+        {
+          "no": 2,
+          "summary": "Projection of Simple solids such as Triangular Rectangle Square\n, , ,\nPentagonal and Hexagonal Prisms Pyramids Cone Cylinder and\n, ,\ntetrahedron Projection of solids in simple position including profile\n.\nview Projection of solids with axis inclined to one of the reference\n.\nplanesandwithaxisinclinedtobothreferenceplanes\n."
+        },
+        {
+          "no": 3,
+          "summary": "Sections of Solids: Sections of tetrahedron Prisms Pyramids Cone\n, , , ,\nCylinder with axis in vertical position and cut by different section\nplanes True shape of the sections (Exclude true shape given\n. .\nproblems)\nDevelopment of Surfaces: Developmentof surfaces of thesolids and\nsolids cut by different section planes (Exclude problems with\n.\nthroughholes)"
+        },
+        {
+          "no": 4,
+          "summary": "Isometric Projection: Isometric scale- Isometric View and\nProjections of Prisms Pyramids Cone Cylinder Frustum of\n, , , ,\nPyramid Frustum of Cone Sphere Hemisphere and their\n, , ,\ncombinations\n.\nComputer Aided Drawing (CAD): Introduction Role of CAD in\n,\ndesign and development of new products Advantages of CAD\n, .\nCreating two-dimensional drawing with dimens..."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/112/102/112102304/"
+      ]
+    },
+    {
+      "code": "GDEST203",
+      "title": "Basic Mechanical And Civil Engineering",
+      "common_note": "",
+      "groups": [
+        "Group D"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "3",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3 0 0 0\n- - -",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/GDEST203.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "General Introduction to Mechanical Engineering\nThermodynamic cycles -Carnot Cycle -Derivation of efficiency\n(problems on efficiency) Otto Diesel cycles (no derivation of\n,\nefficiencyand problems)\n.\nIC Engines: CI & SI Engines working of 2 -Stroke & 4 -Stroke\n,\nengines Listing the parts of IC Engines Concept of CRDI MPFI\n. . , ,\nandhybridengines\n.\nRefrigerati..."
+        },
+        {
+          "no": 2,
+          "summary": "Classification of pumps Description about working with sketches of\n,\nReciprocating pump Centrifugal pump Classification of Hydraulic\n, .\nTurbines\n.\nDifferent types of gears and their applications (spur helical bevel\n, , ,\nworm and worm wheel) List types of clutches and their use\n, , ,\nBearingsandtheirclassification(Journal bearingandball bearing)\nManufacturi..."
+        },
+        {
+          "no": 3,
+          "summary": "Relevance of Civil Engineering in the overall infrastructural\ndevelopmentofthe country\n.\nA brief introduction to major disciplines of Civil Engineering like\nTransportation Engineering Structural Engineering Geo-technical\n, ,\nEngineering Water Resources Engineering and Environmental\n, ,\nEngineering Introduction to buildings: Types of buildings according\n.\nto ..."
+        },
+        {
+          "no": 4,
+          "summary": "Engineering\nMaterials(Material\nScience)"
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/112/105/112105123/",
+        "https://nptel.ac.in/courses/112/106/112106133/",
+        "https://nptel.ac.in/courses/112/105/112105129/",
+        "https://nptel.ac.in/courses/112/105/112105171/",
+        "https://nptel.ac.in/courses/112/105/112105268/",
+        "https://archive.nptel.ac.in/courses/112/107/112107145",
+        "https://archive.nptel.ac.in/courses/105/106/105106201/",
+        "https://archive.nptel.ac.in/courses/129/106/129106002/"
+      ]
+    },
+    {
+      "code": "GDMAT201",
+      "title": "Mathematics For Life Science - 2",
+      "common_note": "",
+      "groups": [
+        "Group D"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "3",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min\n. .",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/GDMAT201.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Complex numbers and their geometric representation- addition\n,\nsubtraction multiplication division conjugate Polar form of complex\n, , , .\nnumbers Derivative Analytic function Cauchy Riemann equation\n, - , ,\nExponential function Trigonometric and hyperbolic functions Euler’s\n, -\nformula\n.\n(Text1:RelevanttopicsfromSections131132133134135136)\n. , . , . , . , ...."
+        },
+        {
+          "no": 2,
+          "summary": "Power series - Concept behaviour of convergence of Power series- Radius\nof convergence . Taylor and Maclaurin series - Binomial series-Series\nrepresentation of exponential trigonometric logarithmic functions\n- - .\nFourierseries Eulerformulas ConvergenceofFourierseries(Dirichlet’s\n, ,"
+        },
+        {
+          "no": 3,
+          "summary": "Homogeneous linear ODEs of second order with constant coefficients\n(Method to find general solution solution of linear Initial Value\n,\nProblem) Non homogenous ODEs (with constant coefficients) General\n. -\nsolution Particular solution by the method of undetermined coefficients\n,\n(Particular solutions for the functions 𝑘𝑒ఊ௫ 𝑘𝑥௡ 𝑘𝑐𝑜𝑠𝜔𝑥 𝑘𝑠𝑖𝑛𝜔𝑥\n, , , ,\n𝑘𝑒ఈ௫𝑐𝑜𝑠𝜔𝑥 ..."
+        },
+        {
+          "no": 4,
+          "summary": "Laplace Transform Inverse Laplace Transform Linearity property First\n, , ,\nshifting theorem Transform of derivatives Solution of Initial value\n, ,\nproblems by Laplace transform (Second order linear ODE with constant\ncoefficientswithinitialconditionsatt=0only)\n.\n(Text1: RelevanttopicsfromSections6162)\n. , ."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/111/103/111103070/",
+        "https://onlinecourses.nptel.ac.in/noc23_ma64/preview",
+        "https://archive.nptel.ac.in/courses/111/104/111104031/",
+        "https://archive.nptel.ac.in/courses/111/106/111106139/"
+      ]
+    },
+    {
+      "code": "GXESL208",
+      "title": "IT Workshop",
+      "common_note": "Common to Group A&B",
+      "groups": [
+        "Group A",
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "1",
+      "cie": "50",
+      "ese": "",
+      "ltpr": "0:0:2:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/GXESL208.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Practice Computer Hardware Familiarization CPU Box Motherboard CPU & Chip-set\n– , , ,\nInterfacecards Card slots Hard disk Cables SMPS NIC Various ports etc Computer\n, , , , , , , .\nPeripherals I/O Devices Storage devices Interface cards Buses Firmware\n- . , – –"
+        },
+        {
+          "no": 2,
+          "summary": "FamiliarizationofBootprocess"
+        },
+        {
+          "no": 3,
+          "summary": "Familiarizinginstallationof LinuxandWindowsoperatingsystems"
+        },
+        {
+          "no": 4,
+          "summary": "Familiarizing basic Unix/Linux commands - ls , mkdir , cp , mv , grep , rmdir , chmod , useradd ,\npasswd history dmesg cpuinfo uname du time write fdisk\n, , , , , , , ,"
+        }
+      ],
+      "video_links": [
+        "https://overthewire.org/wargames/bandit/",
+        "https://www.w3schools.com/"
+      ]
+    },
+    {
+      "code": "GXEST203",
+      "title": "Foundations Of Computing: From Hardware Essentials To Web Design",
+      "common_note": "Common to Group A & B",
+      "groups": [
+        "Group A",
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "3",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/GXEST203.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Computer Hardware CPU Memory Memory hierarchy: registers cache\n– , - , ,\nRAM , virtual memory , Motherboard - Computer Peripherals - I/O devices ,\nStorage devices- HDDs SSDs optical drives I/O communication and device\n, , ,\nmanagement , Interface cards – Buses – Firmware - Boot process"
+        },
+        {
+          "no": 2,
+          "summary": "Binary representation of data and numbers Integer Representation Data\n, ,\nstorage units bits bytes kilobytes etc ASCII and Unicode CPU\n- , , , ., ,\nArchitecture and Instruction Set: Basic CPU architecture ALU registers\n- , ,\ncontrol unit Instruction format and assembly language (basics only) Fetch\n, -\nexecutecycleandinstructionexecution\n."
+        },
+        {
+          "no": 3,
+          "summary": "Computer System Software Operating Systems Basic commands in Linux /\n- ,\nWindows Shell scripting (bash) Computer Communications LAN MAN\n, . – , ,\nWAN Client/Server networks Peer-to-Peer networks Topologies Basics of\n, , , .\nIPaddresses DHCP NAT Network Security (Desktop & Perimeter) DNS\n, , , , ,\nVPN Routers Client -Server Internet WWW Web servers\n, , , , , ..."
+        },
+        {
+          "no": 4,
+          "summary": "Web Design (Basics of HTML CSS and JavaScript) Understanding the\n, , –\nweb content delivery Understanding HTML and XHTML Connections\n, ,\nUnderstandingCascadingStyleSheets UnderstandingJavaScript\n,"
+        }
+      ],
+      "video_links": [
+        "https://www.nand2tetris.org/",
+        "https://onlinecourses.swayam2.ac.in/nou20_cs05/preview"
+      ]
+    },
+    {
+      "code": "GXEST204",
+      "title": "Programming In C",
+      "common_note": "Common to Group A & B",
+      "groups": [
+        "Group A",
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:2:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/GXEST204.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "C Fundamentals Character Set Constants Identifiers Keywords Basic\n- , , , ,\nData types Variables Operators and its precedence Bit -wise operators\n, , , ,\nExpressions; Statements - Input and Output statements; Structure of a C\nprogram;Simpleprograms\n.\nControl Statements if if -else nested if switch while do-while for break\n- , , , , , , ,\n&continue nestedloop..."
+        },
+        {
+          "no": 2,
+          "summary": "Arrays - Single dimensional arrays , Defining an array , Array initialization ,\nAccessing array elements; Enumerated data type; Type Definition; Two-\ndimensional arrays – Defining a two-dimensional array; Programs for matrix\nprocessing;Programsforsequentialsearch;Bubblesort;\nStrings - D eclaring a string variable , Reading and displaying strings ,\nS tring re..."
+        },
+        {
+          "no": 3,
+          "summary": "Functions Function definition Function call Function prototype\n- , , ,\nParameter passing; Recursion; Passing array to function; Macros - Defining\nandcallingmacros;CommandlineArguments\n.\nStructures - Defining a Structure variable , Accessing members , Array of\nstructures Passingstructuretofunction;Union\n, .\nStorage Class Storage Classes associated with variab..."
+        },
+        {
+          "no": 4,
+          "summary": "Pointers - Declaration , Operations on pointers , Passing pointer to a function ,\nAccessing arrayelementsusingpointers Processingstringsusingpointers\n, ,\nPointertopointer Arrayofpointers Pointertofunction Pointertostructure\n, , , ,\nDynamicMemoryAllocation\n.\nFiles- Different types of files in C Opening & Closing a file Writing to and\n, ,\nReadingfroma file Pro..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "GYMAT201",
+      "title": "Mathematics For Electrical Science And Physical Science - 2",
+      "common_note": "Common to Group B & C",
+      "groups": [
+        "Group B",
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "3",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/GYMAT201.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Limits and continuity Partial derivatives Partial derivatives of functions\n, ,\nwithtwovariables Partialderivativesviewedas rateof changeandslopes\n, ,\nPartialderivativesof functions withmorethantwo variables Higher order\n,\npartial derivatives Local Linear approximations Chain rule Implicit\n, , ,\ndifferentiation Maxima and minima of functions of two variables\n..."
+        },
+        {
+          "no": 2,
+          "summary": "Double integrals Reversing the order of integration in double integrals\n, ,\nchange of coordinates in double integrals (Cartesian to polar) Evaluating\n,\nareas using Double integrals Finding volumes using double integration\n, ,\nTriple integrals Volume calculated as triple integral Triple integral in\n, ,\nCartesian andcylindricalcoordinates\n.\n(Text1:Relevanttopi..."
+        },
+        {
+          "no": 3,
+          "summary": "Vector valued function of single variable derivative of vector valued\n-\nfunction Concept of scalar and vector fields Gradient and its properties\n, , ,\nDirectional derivative Divergent and curl Line integrals of vector fields\n, , ,\nWork done as line integral Conservative vector field independence of\n, ,\npath Potentialfunction(resultswithoutproof)\n, .\n(Text1:R..."
+        },
+        {
+          "no": 4,
+          "summary": "Green’s theorem (for simply connected domains without proof) and\n,\napplications to evaluating line integrals finding areas using Greens\n,\ntheorem Surface integrals over surfaces of the form z = g(x y) Flux\n, , ,\nintegrals over surfaces of the form z = g(x y) Divergence theorem\n, ,\n(without proof) Using Divergence theorem to find flux Stokes theorem\n, ,\n(with..."
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/111107108"
+      ]
+    },
+    {
+      "code": "GZESL208",
+      "title": "Basic Electrical And Electronics Engineering Workshop",
+      "common_note": "Common to Group C & D except for Civil Engineering Branch",
+      "groups": [
+        "Group C",
+        "Group D"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "1",
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:2:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Lab",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/GZESL208.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "a)DemonstratetheprecautionarystepsadoptedincaseofElectricalshocks\n.\nb)Identify different types of cables wires switches fuses fuse carriers MCB\n, , , , , ,\nELCBandMCCB familiarisetheratings\n, ."
+        },
+        {
+          "no": 2,
+          "summary": "Wiring of a simple light circuit for light/ fan point (PVC conduit wiring) and a\n6A plugsocketwithindividualcontrol\n."
+        },
+        {
+          "no": 3,
+          "summary": "Wiring of light/fan circuit using two-way switches (Staircase wiring)\n."
+        },
+        {
+          "no": 4,
+          "summary": "Wiringoffluorescentlampandapowerplug(16A)socketwithacontrolswitch\n."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "GZEST204",
+      "title": "Basic Electrical & Electronics Engineering",
+      "common_note": "Common to Group C & D",
+      "groups": [
+        "Group C",
+        "Group D"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "4:0:0:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/GZEST204.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Generation of alternating voltages: Faradays laws of\n-\nElectromagnetic induction Generation of Alternating Voltage\n, ,\nElementary Generator Representation of ac voltage and currents\n, ,\nsinusoidal waveforms: frequency period average RMS values and\n, ,\nform factor of waveform; (Simplenumerical problems)\nDC Circuits: Resistance in Series and Parallel Ohms Law ..."
+        },
+        {
+          "no": 2,
+          "summary": "Generation of electrical energy: Conventional Sources: Hydro\n,\nthermal nuclearplants(Blockdiagramdescription)\n,\nIntroduction to non-conventional energy sources: solar wind\n, ,\nsmallhydroplants PVsystemfordomesticapplication\n, .\nTransformers Principle of operation step-up and step-down\n. ,\ntransformers\nAC power supply scheme: Single phase and three phase syst..."
+        },
+        {
+          "no": 3,
+          "summary": "IntroductiontoSemiconductordevices:\nElectronic components- Passive and active components Resistors\n- ,\nCapacitors and Inductors (constructional features not required):\ntypes specifications Standardvalues colourcoding\n, . , .\nPN Junction diode: Principle of operation V -I characteristics\n- , .\nBipolarJunction Transistors: PNP and NPN structures Principle of\n,..."
+        },
+        {
+          "no": 4,
+          "summary": "ElectronicInstrumentation:\nQuality of measurements -accuracy precision sensitivity and\n, ,\nresolution , Working principle and applications of Sensors – pressure\n– strain gauge , Bourden gauge , temperature – RTD , thermocouple ,\nproximity – capacitive sensor , ultrasonic sensor and accelerometer .\nInternet of things (IoT): Introduction architecture of IoT\n, ..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "PCAGT205",
+      "title": "Crop Production & Protection Technologies",
+      "common_note": "AGRICULTURE ENGINEERING",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/PCAGT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to agriculture -Importance of agricultural science for\ncrop production - Branches of agricultural science-National and\ninternational agricultural research Institutes - Basic elements of crop\nproduction - Agricultural seasons in India and Kerala .\nClassification of crops based on the intensity of cultivation uses life\n, ,\nspan growth habit and cl..."
+        },
+        {
+          "no": 2,
+          "summary": "Crop rotation cropping systems cropping scheme relay cropping\n, , , ,\nmixed croppingandintercropping\n.\nSoil -water-plant relationship crop coefficients water requirement of\n, ,\ncrops and critical stages for irrigation; Weeds and their management\nincrops;\nTime and method of sowing of major field crops seed rate for\n,\nimportant crops; Methods and time of appli..."
+        },
+        {
+          "no": 3,
+          "summary": "Definition of soil Different functions of soil in our eco system\n.\nnamely as medium of plant growth Regulator of water supply\n, ,\nRecycle of raw materials Modifier of atmosphere Habitat for\n, ,\norganisms Engineering medium etc Soil profiles and horizons: O\n, . ,\nA B and C Soil as an interface ofsolids water and air and their\n, . ,\npercentagecomposition\n.\nFor..."
+        },
+        {
+          "no": 4,
+          "summary": "Organic and inorganic fertilizers- its Importance- soil reactions\n.\nGypsum requirement for reclamation of sodic soils and neutralizing\nRSC;Liquidfertilizersandtheirsolubilityandcompatibility\n.\nMajor pests and diseases of field crops and horticultural crops and\ntheir management Integrated methods of managing water nutrients\n. ,\nandplant protection\n.\nCrop prod..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "PCAOT205",
+      "title": "Fundamentals Of Aeronautics And Aircraft Instruments",
+      "common_note": "AERONAUTICAL ENGINEERING",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/PCAOT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Atmospheric properties: Physical properties and structure of\natmosphere- temperature pressure and altitude relations\n, .\nBasic concepts of Aeronautics: Laws of motion applied to\naeronautics Aerodynamic forces Nomenclature and Classification\n. ,\nof airfoil mean aerodynamic chord Centre of pressure and\n, ,\naerodynamic center Types of drag reduction techniques ..."
+        },
+        {
+          "no": 2,
+          "summary": "Aircraft Classification and Components: Aircraft classifications\n.\nAirplane configurations based on wing landing gear engines\n, ,\nattachments Components of Wing Fuselage-Fuselage Construction\n. ,\nTruss Monocoque Semi -Monocoque Control surfaces and\n, , .\nmaneuvers\n."
+        },
+        {
+          "no": 3,
+          "summary": "Basic Instruments: Pitot static system Pitot static instruments:\n,\nAltimeter Vertical speed indicator Airspeed indicator Mach meter\n, , . ,\nGyroscope heading indicator Turn coordinator Engine\n, , ,\ninstruments: Temperature gauges Pressure gauges Tachometer:\n, ,\nMechanical and Electrical Modern control systems-Fly by wire\n.\nsystemsandAutopilotsystems\n."
+        },
+        {
+          "no": 4,
+          "summary": "Cockpit Display systems: Head Up Display Head Down Display\n, ,\nHelmetMount Display Multifunctional Keyboard Multifunctional\n, ,\nDisplay DirectVoiceInput HandsonThrottleandStick\n, , .\nNavigation systems: Distance Measuring Equipment Very High\n,\nOmnidirectional Range Automatic Direction Finder Instrument\n, ,\nLanding System Microwave Landing Systems Inertial Na..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "PCAUT205",
+      "title": "Automobile Power Plant",
+      "common_note": "AUTOMOBILE ENGINEERING",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2Hrs 30Min\n. .",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/PCAUT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "ENGINES:\nBasic engine nomenclature Classification & Applications of IC\n,\nEngines Constructional details of engine components: Cylinders\n. –\ntypes Cylinder liners Engine block Cylinder head Gasket Piston\n, , , , , ,\nPiston rings Piston pins Connecting rod Crank shaft Flywheel\n, , , , ,\nCam shaft Valve and valve mechanism systems OHV OHC\n, - , ,\nDOHC Valve Tim..."
+        },
+        {
+          "no": 2,
+          "summary": "FUELSUPPLYSYSTEM:\nAir fuel mixture requirements and types Octane & Cetane Rating\n, .\nTypesoffuel feed systems fuel tank fuel pumps and fuel filters air\n, , ,\nfilter types Carburetion simple carburetor Fuel injection system\n. , , -\nGDi MPFi\n, .\nFuel supply system in diesel engines: components of diesel fuel\nsystem feed pump injection pump injection nozzles an..."
+        },
+        {
+          "no": 3,
+          "summary": "IGNITION&EMISSIONSYSTEM:\nIgnition system in IC engines: Ignition System Overview Battery\nignition system magneto ignition system distributor less ignition\n, , –\nCDI & Coil onplugtypeof ignitionsystem\nPollutants in IC Engines NOx CO unburned hydrocarbons smoke\n. , , ,\nandparticulate Nonexhaustemissionsandcontrol\n.\nmethods , Exhaust gas treatment . - Catalytic..."
+        },
+        {
+          "no": 4,
+          "summary": "COOLING&LUBRICATIONSYSTEM\nNeed for cooling types- air cooling system and liquid cooling\n,\nsystems- components- radiator water pump and cooling fan\n, .\nProperties of coolants and additives Requirements of lubrication\n.\nsystems Types of Lubrication system SAE Ratings Multi grade\n. .\nlubricants Pre-lubrication systems Supercharging and\n, .\nTurbocharginginICEngi..."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/112/103/112103262/#",
+        "https://archive.nptel.ac.in/courses/107/106/107106088"
+      ]
+    },
+    {
+      "code": "PCBMT205",
+      "title": "Anatomy And Physiology For Biomedical Engineering",
+      "common_note": "BIOMEDICAL ENGINEERING",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "4:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/PCBMT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Anatomy & Physiology: Definitions structural & functional\n,\norganization of human body – cells , tissues , organs & systems , Cell: Basic\nstructure organelles&theirfunctions\n, .\nCell membrane – structure , transport across cell membranes – passive\ntransport (passive diffusion and facilitated diffusion) active transport\n–\nprimary – Na+ -K+ pum..."
+        },
+        {
+          "no": 2,
+          "summary": "Nervous System: General organization Neurons structure & types Central\n, – ,\nnervous system – Brain - structure and functions of each parts , Spinal cord -\nstructure – spinal and cranial nerves , spinal reflex , Brain Stem – basic\nstructure & functions Peripheral nervous system: Efferent & afferent\n.\ndivision Autonomic nervous system: Sympathetic & Parasympa..."
+        },
+        {
+          "no": 3,
+          "summary": "Blood the composition of blood (blood proteins and blood cells & their\n-\nfunction) bloodgroups Bloodclotting Lymphaticsystemanditsfunctions\n, . . .\nCardiovascular system major blood vessels Heart structure of heart and its\n- , -\nelectrical activity (ECG Heart rate normal & abnormal) Heart sounds &\n, – ,\nmurmurs Strokevolume&cardiacoutput bloodpressure\n, , .\n..."
+        },
+        {
+          "no": 4,
+          "summary": "Muscular System Types of muscles Skeletal muscle levels of\n- , -\norganization structure mechanismofmusclecontraction&relaxation\n, , .\nUrinary System - Structure and function of organs , kidneys , nephron –\nstructure and types Basic renal processes involved in urine formation\n, ,\nmicturition(definitiononly)\nDigestive system Anatomy and Functions of Components..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "PCBRT205",
+      "title": "Anatomy And Physiology For Biomedical Engineering",
+      "common_note": "BIOMEDICAL AND ROBOTIC ENGINEERING",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/PCBRT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Importance of Anatomy& Physiology for Biomedical Engineering\n.\nIntroduction to Anatomy & Physiology: Definitions structural & functional\n,\norganization of human body – cells , tissues , organs & systems , Cell: Basic\nstructure organelles&theirfunctions\n, .\nCell membrane – structure , transport across cell membranes – passive\ntransport (passive diffusion and ..."
+        },
+        {
+          "no": 2,
+          "summary": "Nervous System: General organization Neurons structure & types Central\n, – ,\nnervous system – Brain - structure and functions of each parts , Spinal cord -\nstructure – spinal and cranial nerves , spinal reflex , Brain Stem – basic\nstructure & functions Peripheral nervous system: Efferent & afferent\n.\ndivision Autonomic nervous system: Sympathetic & Parasympa..."
+        },
+        {
+          "no": 3,
+          "summary": "Blood the composition of blood (blood proteins and blood cells & their\n-\nfunction) blood groups Blood clotting Lymphatic system and its functions\n, . . .\nCardiovascular system major blood vessels Heart structure of heart and its\n- , -\nelectrical activity (ECG Heart rate normal & abnormal) Heart sounds &\n, – ,\nmurmurs Strokevolume&cardiacoutput bloodpressure\n..."
+        },
+        {
+          "no": 4,
+          "summary": "Muscular System Types of muscles Skeletal muscle-levels of organization\n- , ,\nstructure mechanismofmusclecontraction&relaxation\n, .\nUrinary System-Structure and function of organs , kidneys , nephron –\nstructure and types Basic renal processes involved in urine formation\n, ,\nmicturition(definitiononly)\nDigestive system Anatomy and Functions of Components of ..."
+        }
+      ],
+      "video_links": [
+        "https://www.skillmd.com/course/anatomy-nptel-video-lessons/",
+        "https://www.youtube.com/watch?v=ydZkJzl4IVk",
+        "https://nptel.ac.in/courses/109104029",
+        "http://www.digimat.in/nptel/courses/video/103103133/L01.html",
+        "https://www.youtube.com/watch?v=aIS5aBKsIwk",
+        "https://www.youtube.com/watch?v=QjihqB2rHX8,http://acl.digimat.in/nptel/courses/video/102104"
+      ]
+    },
+    {
+      "code": "PCCEL208",
+      "title": "Civil Engineering Drafting Lab",
+      "common_note": "Common to CE and CV",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "1",
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:2:0",
+      "exam_hours": "2Hrs 30Min\n. .",
+      "course_type": "Practical",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/PCCEL208.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Civil Engineering Drawing Concept of Scale Plan Section and\n, , ,\nElevation Drawingtoolsand accessories Manualand ComputerAided Drafting\n. ,\nDraw the view of simple objects (books shelves benches etc) adopting appropriate\n, , , .\nscales"
+        },
+        {
+          "no": 2,
+          "summary": "Draw sectional details and elevation of paneled doors\n."
+        },
+        {
+          "no": 3,
+          "summary": "Draw sectional details and elevation of wooden glazed window\n."
+        },
+        {
+          "no": 4,
+          "summary": "Draw elevation section and detailing of connection between members for steel roof\n,\ntruss"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "PCCET205",
+      "title": "Mechanics Of Solids",
+      "common_note": "CIVIL ENGINEERING",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3 1 0 0\n- - -",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/PCCET205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Concept of stress and strain types stress strain relation\n– , – -\nHooke’s law Young’s modulus of elasticity Stress-strain diagram\n, .\nof mild steel Factor of safety working stress Axially loaded bars\n. , .\nwith uniform and uniformly varying cross section–stress strain and\n,\ndeformation Temperature effects temperature stress in composite\n. ,\nbars\n.\nShear stre..."
+        },
+        {
+          "no": 2,
+          "summary": "Beams – different types . Types of loading on beams . Concept of\nbending moment and shear force Relationship between intensity of\n.\nload shear forceand bending moment Shear force and bending\n, .\nmoment diagrams of cantilever beams simply supported beams and\n,\noverhanging beams fordifferenttypeofloads Pointof contraflexure\n. ."
+        },
+        {
+          "no": 3,
+          "summary": "Theory of simple bending assumptionsandlimitations Calculation\n, .\nof normal stress in beams moment of resistance Shear stress in\n, .\nbeams . Beams of uniform strength . Strain energy due to bending –\ncalculationof strainenergyinbeams\n.\nDerivation of differential equation for calculating the deflection of\nbeams Macaulay’s method\n– ."
+        },
+        {
+          "no": 4,
+          "summary": "Stresses on inclined planes for uniaxial and biaxial stress fields\n.\nPrincipalstresses and principal planes maximumshear stress in2D\n,\nproblems Mohr’scircleof stressfor 2Dproblems\n. .\nShort coluMin – direct and bending stress . Kern of a section .\nSlender coluMin Euler’s buckling load slenderness ratio\n– , ,\nlimitationof Euler’sformula Rankine’sformula\n. .\nT..."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/105/104/105104160/"
+      ]
+    },
+    {
+      "code": "PCCHT205",
+      "title": "Process Calculations",
+      "common_note": "CHEMICAL ENGINEERING",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3 1 0 0\n- - -",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/PCCHT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Basic Concepts: Introduction to Chemical Engineering Chemical\n,\nprocess Industry UnitOperationsandUnit Processes\n, .\nUnits and Dimensions Conversion of units Conversion of\n, ,\nequations- problems\n.\nComposition of solids liquids and solutions weight percent mole\n, - ,\npercent molarity normality molality ppm\n, , , ,\nGaseous mixtures Composition of gaseous mixt..."
+        },
+        {
+          "no": 2,
+          "summary": "Material Balance for unit operations- Introduction key component\n,\nMaterialbalanceforunitoperationslikemixing distillation drying\n, , ,\nevaporation absorption crystallization extraction leaching\n, , , , ."
+        },
+        {
+          "no": 3,
+          "summary": "Material Balance for unit processes - Definition of terms -\nlimiting reactant excess reactant percentage yield conversion\n, , , ,\nselectivity\nOrsat analysis Material Balance for combustion Recycle bypass and\n, , ,\npurgeoperations\n.\nProblem solving in Material balance using EXCEL/ Matlab/\nSCILAB/ PYTHON etc only for self -study/microproject/assignment\n.- ."
+        },
+        {
+          "no": 4,
+          "summary": "Energy Balance: Heat capacity of solids liquids and gaseous\n,\nmixtures Kopp’s Rule Latent Heats-Heat of fusion heat of\n, , ,\nvaporization Estimation of Heat of Vaporization Kistyakowsky\n, -\nEquation Trouton’srule Watsonequation\n, , .\nHeat effects accompanying chemical reactions Standard heats of\n-\nreaction standard heat of combustion and standard heat of\n, ,..."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/103/105/103105209/"
+      ]
+    },
+    {
+      "code": "PCCPT205",
+      "title": "Sensors And Actuators",
+      "common_note": "CYBER PHYSICAL",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/PCCPT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Sensors Transducers and Actuators: Basics of Energy transformation:\n,\nTransducers Sensors and Actuators Principles Classification Parameters\n, , , , ,\nandCharacteristics EnvironmentalParameters(EP) Characterization\n, , .\nMechanical and Electromechanical Sensors: Introduction\n,\nResistive Potentiometer Strain Gauge Resistance Strain Gauge\n, , ,\nSemiconductorSt..."
+        },
+        {
+          "no": 2,
+          "summary": "Inductive Sensors- Sensitivity and Linearity of the Sensor Types-\n,\nCapacitiveSensors ElectrostaticTransducer Force/StressSensorsusing\n, ,"
+        },
+        {
+          "no": 3,
+          "summary": "Gas sensors: Optical gas sensor Metal oxide semiconductor gas sensor\n, ,\nField effect transistor gas sensor Piezoelectric gas sensor Polymer gas\n, ,\nsensor Nano-structured based gas sensors\n,\nDesign and fabrication process of Microsensors: Force Sensors Pressure\n,\nSensors Straingaugesandpracticalapplications\n,"
+        },
+        {
+          "no": 4,
+          "summary": "Working principles of Actuators Piezoelectric and Piezoresistive\n.\nactuators micropumpsandmicroactuatorswithpracticalapplications\n,\nPneumatic and Hydraulic Actuation Systems- Actuation systems\n,\nPneumatic and hydraulic systems Directional Control valves Pressure\n, ,\ncontrolvalves Cylinders Servo and proportional control valves Process\n, , ,\ncontrol valves\n,\n..."
+        }
+      ],
+      "video_links": [
+        "https://onlinecourses.nptel.ac.in/noc21_ee32/preview"
+      ]
+    },
+    {
+      "code": "PCCST205",
+      "title": "Discrete Mathematics",
+      "common_note": "Common to all Computer Science and its allied branches",
+      "groups": [
+        "Group A"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/PCCST205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Sets Functions andRelations\n, ,\nSetsandSubsets VennDiagrams SetOperations Set Identities Generalized\n, , , ,\nUnions and Intersections The Principle of Inclusion-Exclusion (Basic and\n,\nGeneralizedversions) andapplications\n, .\nFunctiondefinition Injections SurjectionsandBijections InverseFunctions\n, , , ,\nand Compositions of Functions Cardinality of Sets Canto..."
+        },
+        {
+          "no": 2,
+          "summary": "Mathematicallogicandproofs\nPropositional Logic Applications of Propositional Logic Propositional\n, ,\nEquivalences Predicates and Quantifiers Nested Quantifiers Rules of\n, , ,\nInference\nIntroduction to Proofs Methods of Proving Theorems Direct proof Indirect\n, - ,\nproof (Proof by Contraposition) Proof by Contradiction Proof bycounter\n, ,\nexamples ThePigeonhol..."
+        },
+        {
+          "no": 3,
+          "summary": "InductionandRecurrences\nMathematicalInduction WeakandStronginduction\n,\nRecursive (Inductive) definitions and recurrence relations Modeling with\n,\nRecurrence Relations Solving Linear Recurrence Relations (homogeneous\n,\nandnonhomogeneous) GeneratingFunctions UsingGeneratingFunctionsto\n, ,\nSolveRecurrenceRelations\n."
+        },
+        {
+          "no": 4,
+          "summary": "Grouptheory\nGroups - Definition , Examples , and Elementary Properties , Abelian group ,\nPermutation group Subgroup Homomorphisms Isomorphisms and Cyclic\n, , , ,\nGroups CosetsandLagrange'sTheorem\n,"
+        }
+      ],
+      "video_links": [
+        "https://nptelvideos.com/lecture.php?id=6033",
+        "https://nptelvideos.com/lecture.php?id=6024",
+        "https://nptelvideos.com/lecture.php?id=6051",
+        "https://nptelvideos.com/lecture.php?id=6058"
+      ]
+    },
+    {
+      "code": "PCEBT205",
+      "title": "Basic Anatomy & Physiology For Biomedical Engineers",
+      "common_note": "ELECTRONICS AND BIOMEDICAL ENGINEERING",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/PCEBT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Anatomy & Physiology: Definition & relationship of\nstructural&functionalorganizationofhumanbody\n.\nHomeostasis: Body fluids ICF & ECF fluid compartments in human body\n, ,\nHomeostatic control System- negative & positive feedback and feed\n–\nforwardmechanisms\n.\nCell: Structure membrane & Transport mechanisms RMP Action\n, . -\npotentials ionic basi..."
+        },
+        {
+          "no": 2,
+          "summary": "Nervous System: General organization - Central nervous system , Cerebrum\n– Cerebral cortex –– motor , sensory , language & association areas –\nmajor functions Basal ganglia Thalamus &\n. ,\nHypothalamus functions Cerebellum Brain Stem basic structure&\n– . , –\nfunctions Spinal cord spinal reflex Neurons structure & types\n. - . – ,\nMechanisms of Nerve impulses S..."
+        },
+        {
+          "no": 3,
+          "summary": "Blood: The composition of blood (blood proteins and blood cells & their\nfunction) hematocrit bloodgroups bloodclotting Major arteries&veins\n, , , .\nLymphanditsfunction\n.\nCardiovascular system: Major blood vessels Circulatory Systems-\n,\nSystemiccirculationandpulmonarycirculation\nHeart structure of heart and its electrical activity Auto rhythmic cells\n- ,\ncard..."
+        },
+        {
+          "no": 4,
+          "summary": "Skeletal system: functions of skeletal system Bone classification &\n, –\ncomposition- structure of long bone – compact and spongy bone . Types of\njointsandfunction Typesofcartilageandfunction\n. .\nMuscular System: Organization Types of muscles skeletal cardiac and\n, - ,\nsmoothmuscles mechanismofmusclecontraction&relaxation\n, .\nUrinary System: Structure and fun..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "PCECT205",
+      "title": "Network Theory",
+      "common_note": "COMMON TO EC, EA, AE, EV BRANCHES",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/PCECT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Networkfundamentalsandanalysismethods:\nConcept of networks and circuits Circuit variables Ideal and practical\n, ,\nsources Independent and dependent sources Source transformation\n, , ,\nKirchhoff’s laws Mesh analysis Node analysis Super-mesh analysis and\n. , ,\nsuper-node analysis applied to both DC and AC networks containing\nindependentanddependentsources\n."
+        },
+        {
+          "no": 2,
+          "summary": "Network theorems and applications: Superposition theorem Reciprocity\n,\ntheorem Thevenin’s theorem Norton’s theorem Millman’s theorem and\n, , ,\nMaximum power transfer theorem for the analysis of DC and AC networks\nhavingindependentanddependentsources\n."
+        },
+        {
+          "no": 3,
+          "summary": "Laplacetransformsandtransientanalysis: Laplacetransformsofstandard\nsignals and common functions Laplace transform theorems (proof not\n,\nrequired) Inverse Laplace transforms Solution of differential equations\n, , .\nTransformation of basic signals and circuits to s – domain with and without\ninitial conditions Transient analysis of RL RC andRLC networks with DC..."
+        },
+        {
+          "no": 4,
+          "summary": "Network functions and two-port parameters: Network functions for\nsingle-port and two-port networks Properties of driving point and transfer\n,\nfunctions Significance of poles and zeros of network functions Pole-zero\n, ,\nplot Impedance Admittance Hybrid and Transmission parameters of two-\n. , ,\nport networks Reciprocity and symmetry conditions (derivation not\n..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "PCEET205",
+      "title": "Measurements And Instrumentation",
+      "common_note": "ELECTRICAL AND ELECTRONICS ENGINEERING",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "PC -Theory",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/PCEET205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Functional Elements of Measurements Systems- Block Schematic and brief\noperationofbuildingblocks\nStandards of Measurements- Static characteristics (accuracy precision linearity\n, , ,\nresolution) Needforcalibration Typesoferrors\n, ,\nInstruments- Classification; Operating Forces and Torques: deflecting\n,\ncontrolling and damping torques- Gravity and spring cont..."
+        },
+        {
+          "no": 2,
+          "summary": "Magnetic Measurement Flux Meter Determination of BH Curve\n- , -\nHysteresis Loop (Method of Reversal) Measurement of Resistance\n. ,"
+        },
+        {
+          "no": 3,
+          "summary": "MeasurementofPowerandEnergy:MeasurementofPowerusingDynamometer\ntype wattmeter Three phase Power Measurement using Two Wattmeter Method\n,\n(Include Phasor Diagrams and Expressions Include simple problems of two\n,\nwattmetermethod)\nMeasurement of Energy Using Induction type Energy Meter Two Element\n,\nEnergyMeter\nInstrument Transformers-CT and PT Principle of Ope..."
+        },
+        {
+          "no": 4,
+          "summary": "Block Schematic of electronic instrumentation system – role of sensors and\ntransducers\nClassification of Temperature transducers- Principle of operation of\nThermistorsandRTD\nClassification of flow transducers- Principle of operation of\nElectromagneticandultrasonictypes\nStrain gauge: Basic working principle types and applications; Measurement of\n,\nangularspee..."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/108/105/108105153/",
+        "https://archive.nptel.ac.in/courses/108/108/108108147/",
+        "https://archive.nptel.ac.in/courses/106/105/106105166/"
+      ]
+    },
+    {
+      "code": "PCEIT205",
+      "title": "Logic Circuit Design",
+      "common_note": "ELECTRONICS AND INSTRUMENTATION",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/PCEIT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Digital systems Binary and hexadecimal number systems Methods of base\n- ,\nconversions Binary and hexadecimal arithmetic Representation of signed\n, ,\nnumbers(1’s complement 2’s complement9’s complement 10’s\n, , ,\ncomplement forms) Fixed and floating point numbers decimal codes\n. , –\nBCD Graycodes Excess3code ASCIIcode\n, , , .\nBoolean Algebra Basic definitions..."
+        },
+        {
+          "no": 2,
+          "summary": "Combinational Logic Systems – Half and full adders , 4 bit ripple carry\nadder Subtractors BCD Adder Magnitude Comparators Decoders and\n, , , ,\nEncoders MultiplexersandDemultiplexer\n, .\nBasicIntroductiontoProgrammablelogicdevices(PLD)andFPGA Verilog\n.\nHDL Basic language elements identifiers and operators Verilog\n– , .\nimplementationoflogicgatesandcombinationa..."
+        },
+        {
+          "no": 3,
+          "summary": "Latches and Flipflops SR Latch SR Flipflop JK D and T flipflops Master\n– , , , ,\nslave JK FF Excitation table and characteristic equation conversion of\n, ,\nflipflops\n.\nRegisters Shift registers-SIPO SISO PISO PIPO Bidirectional Verilog\n- , , , , .\nmodelingofflipflops"
+        },
+        {
+          "no": 4,
+          "summary": "Counters- Ripple counter Mod 10 Counter Ring counter and Johnsons-\n, ,\nDesign of Asynchronous and Synchronous counters Mod N counter\n, ,\nsequencegenerator\n.\nVerilog modelling of asynchronous and synchronous counters Verilog\n.\nimplementationofsequencegenerator\n.\nElectrical characteristics of TTL and CMOS logic families logic levels and\n–\nnoise margins fan-out..."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/117/106/117106086/",
+        "https://archive.nptel.ac.in/courses/106/105/106105185/"
+      ]
+    },
+    {
+      "code": "PCERT205",
+      "title": "Digital Electronics",
+      "common_note": "ELECTRONICS AND COMPUTER ENGINEERING",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/PCERT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Number Systems: Introduction to number systems (decimal binary octal\n, , ,\nhexadecimal) and their bases conversion methods between decimal binary\n- , ,\noctal and hexadecimal number systems Arithmetic Binary Addition\n. - ,\nBinary Multiplication and Binary Division Addition of BCD Octal and\n. ,\nHexadecimal numbers Representing Negative Numbers Signed Numbers\n...."
+        },
+        {
+          "no": 2,
+          "summary": "Introduction to Boolean Algebra Postulates (Idempotence Commutativity\n- , ,\nAssociativity Distributive Property etc .) and Basic Theorems (like De-\n, ,\nMorgan’s Theorem) Minimization of Boolean expressions Canonical and\n, -\nStandard Forms , Karnaugh map Minimization (up to four variables) , Don't -\nCare Conditions Digital Logic Gates Implementation of Boolea..."
+        },
+        {
+          "no": 3,
+          "summary": "Combinational and Arithmetic Circuits Combinatorial Logic Systems\n-\nData Encoders and Decoders Data Selection and Distribution (Mux &\n,\nDemux) Code Converters Comparators Arithmetic Circuits Half and Full\n, , . -\nAdder Half&FullSubtractor BinaryParallelAdder BCDAdder\n, , , ."
+        },
+        {
+          "no": 4,
+          "summary": "Sequential Logic Circuits: Sequential Circuits Fundamentals Flip-flops\n, -\nSR JK TandD Conversionof Flipflops Excitationtable andcharacteristic\n, , , ,\nequation Asynchronous (Binary and BCD counters) and Synchronous\n.\ncounter design (Binary up down and up-down counter BCD counter)\n, , ,\ntiming sequences and state diagrams , Mod N counter . Shift registers - ..."
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/117106086"
+      ]
+    },
+    {
+      "code": "PCFTT205",
+      "title": "Food Chemistry",
+      "common_note": "",
+      "groups": [
+        "Group D"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/PCFTT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Food chemistry: Importance of food Scope of food\n,\nchemistry Different food groups: their classification and\n.\nimportance Water Structure of water molecule properties of\n. - ,\nwater water activity and its importance determination of water\n, ,\nqualityforfoodprocessing\n.\nVitamins- Definition Classification general sources functions and\n, , ,\ndi..."
+        },
+        {
+          "no": 2,
+          "summary": "Chemistry of carbohydrates –Definition classification Structure of\n, ,\nmajor mono-, di - and polysaccharides . Properties and reactions of\ncarbohydrates Browning reactions- Caramelization Maillard\n. ,\nreaction Dextrose Equivalent Sugar alcohols properties\n, . – .\nGlycemic Index definition and significance\n– .\nStarch properties thickening & gelatinization mod..."
+        },
+        {
+          "no": 3,
+          "summary": "Proteins- Definition Classification -according to composition\n, ,\nstructure and functions Role of proteins in food and dietary\n, .\nrequirements\nAmino acids-Definition classification Physical and chemical\n, ,\nproperties of proteins Important protein sources– Milk Meat Fish\n, , , ,\nEgg and Cereal proteins Texturized proteins\n–\nFood Enzymes- Food sources functi..."
+        },
+        {
+          "no": 4,
+          "summary": "Lipids- Definition structure classification & nomenclature\n, , .\nProperties of fats&oils:crystalformation polymorphism melting\n, ,\npoints plasticity and isomerisation Modification of fats:\n, .\nhydrogenation- cis and trans isomers inter-esterification\n, .\nRancidity and its types; Shortening power of fats tenderization\n, ,\nemulsification Food sources of lipids..."
+        }
+      ],
+      "video_links": [
+        "https://onlinecourses.swayam2.ac.in/cec20_ag10/preview"
+      ]
+    },
+    {
+      "code": "PCICT205",
+      "title": "Basic Of Instrumentation Engineering",
+      "common_note": "INSTRUMENTATION AND CONTROL ENGINEERING",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/PCICT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "INTRODUCTION TO INSTRUMENTATION & CONTROL\nENGINEERING Definition-scope and importance- application of\n-\ninstrumentation in different fields like petrochemical Biomedical\n, ,\npharmaceuticalandfoodprocessing\n.\nFUNCTIONAL ELEMENTS OF MEASUREMENT SYSTEM:\nIntroduction to instrument systems Typical applications of instrument\n-\nsystems Basic description of the func..."
+        },
+        {
+          "no": 2,
+          "summary": "FUNCTIONAL ELEMENTS OF CONTROL SYSTEM: Need of\nControl\nsystems – Role of error detectors – Block diagram for a control system with\nexamples\n.\nMEASUREMENT SYSTEM PERFORMANCE: Static characteristics of\ninstruments Accuracy and precision static sensitivity linearity hysteresis\n. , , , ,\nthreshold dead time dead zone resolution or discrimination static error\n, ,..."
+        },
+        {
+          "no": 3,
+          "summary": "CALIBRATION OF MEASURING SENSORS AND\nINSTRUMENTS:\nStandards and calibration Necessity of calibration- Careful instrument\n–\ndesign Principles of calibration-Control of calibration\n,\nenvironment Calibration chain and traceability-Calibration records\n- -\nIntelligentinstruments\n.\nTYPES OF INPUTS: Input output configuration of measuring instruments\nand measuremen..."
+        },
+        {
+          "no": 4,
+          "summary": "MEASUREMENT NOISE: Noise signal to noise ratio sources of noise\n, , ,\nJohnson noise power spectrum density Sources of measurement noise-\n, .\nInductive Coupling-Capacitive (electrostatic) coupling Noise due\n-\nto multiple earths-Noise in the form of voltage\n.\nERRORS DURING THE MEASUREMENT PROCESS: Errors in\nmeasurements true value Limiting errors (Guarantee er..."
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/108102191"
+      ]
+    },
+    {
+      "code": "PCIET205",
+      "title": "Materials And Manufacturing Engineering",
+      "common_note": "INDUSTRIAL ENGINEERING",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2Hrs 30Min\n. .",
+      "course_type": "Theory",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/PCIET205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Materials and Types of Materials: Metals polymers ceramics\n, , ,\ncomposites advanced materials biomaterials nanomaterials smart\n, , , ,\nmaterials energymaterials sustainableandgreenmaterials\n, , .\nCrystal Structure: Crystal lattices and the unit cell Simple cubic BCC\n. , ,\nFCC HCP crystal structures Atomic packing factor Crystallographic\n, . .\npointsdirectio..."
+        },
+        {
+          "no": 2,
+          "summary": "Phase Diagram: Basic concepts: Solubility limit solvent solute solid\n, , ,\nsolutions Hume Rothery’s rule phase and phase equilibrium Gibb’s phase\n, , ,\nrule Alloys needforalloying TypesofPhasediagrams Invariantreactions\n. , . , ,\nIron-iron carbide equilibrium diagram TTT diagram CCT diagram\n, , ,\nFormationofpearlite bainite andmartensite\n, , .\nHeat Treatment..."
+        },
+        {
+          "no": 3,
+          "summary": "Rolling: Principles of rolling types of rolling mills Various rolling\n, ,\nprocesses and applications: hot rolling cold rolling ring rolling thread\n, , ,\nrolling tuberolling shaperolling skewrolling defectsinrolling\n, , , , .\nForging: Classification of forging various forging operations: cogging\n, ,\ncoining heading piercing hubbing swaging forgingdefects\n, , ..."
+        },
+        {
+          "no": 4,
+          "summary": "Casting: cores shell mold casting plaster mold casting ceramic mold\n, , ,\ncasting investment casting permanent mold casting pressure casting die\n, , , ,\ncasting centrifugalcasting castingdefects\n, , .\nWelding: weldability solidification of weld metal heat affected zone gas\n, , ,\nwelding arc welding (including GTAW MIG TIG plasma arc welding\n, , , , ,\nsubmerg..."
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/113/104/113104068/",
+        "https://nptel.ac.in/courses/113/106/113106034/",
+        "https://nptel.ac.in/courses/113/104/113104005/",
+        "https://archive.nptel.ac.in/courses/112/106/112106293/",
+        "https://onlinecourses.nptel.ac.in/noc22_mm25/preview",
+        "https://nptel.ac.in/courses/113/106/113106032/",
+        "https://nptel.ac.in/courses/113/104/113104006/",
+        "https://onlinecourses.nptel.ac.in/noc24_me74/preview"
+      ]
+    },
+    {
+      "code": "PCITT205",
+      "title": "Discrete Mathematical Structures",
+      "common_note": "INFORMATION TECHNOLOGY",
+      "groups": [
+        "Group A"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/PCITT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Logic: Propositional Logic Truth tables\n, ,\nConditional propositions and Logical Equivalence The laws of\n,\nLogic ThePrincipleofDuality Resolutionproofs\n, , .\nPredicates and Quantifiers: Universal quantifier and Existential\nquantifier Negation of Quantifiers The Rule of Universal\n, ,\nSpecification The Rule of Universal Generalizations The\n, .\n..."
+        },
+        {
+          "no": 2,
+          "summary": "Fundamental Principles of Counting: The Rules of Sum and\nProduct Permutations Combinations The Binomial Theorem\n, , ,\n(without proof) Combinations with Repetition Pigeon Hole\n, ,\nPrinciple Principle of Inclusion and Exclusion (without proof)\n, ,\nDerangements\n."
+        },
+        {
+          "no": 3,
+          "summary": "Relations FunctionsandAlgebraicStructures:Sets Relations Functions\n, , , ,\nEquivalenceRelations Posets and Lattices HasseDiagrams Complimented\n, , ,\nand Distributive lattices Structured sets for binary operations Semigroups\n, , ,\nMonoids Groups Rings Fields\n, , , ."
+        },
+        {
+          "no": 4,
+          "summary": "Generating Function: Definitions and Examples CalculationTechniques\n, ,\nExponential GeneratingFunction\n.\nRecurrence Relations: First -order linear recurrence relations with constant\ncoefficients homogeneous non-homogeneous Solution Second -order linear\n– , .\nrecurrence relations with constant coefficients homogeneous non-\n, ,\nhomogeneousSolution\n."
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/106106094",
+        "https://nptel.ac.in/courses/106103205"
+      ]
+    },
+    {
+      "code": "PCMET205",
+      "title": "Material Science And Engineering",
+      "common_note": "MECHANICAL ENGINEERING",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/PCMET205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to material science: Classification of engineering\nmaterials Structure of solids- Metallic Ionic and covalent bonding\n, , .\nProperties based on atomic bonding . Crystallography: - SC , BCC ,\nFCC HCP structures APF theoretical density simple problems\n, , - –\nMiller Indices: crystal plane and direction Modes of plastic\n- -\ndeformation:- Slip and t..."
+        },
+        {
+          "no": 2,
+          "summary": "Crystal imperfections Point defects Line defects Surface defects\n– - , , ,\nVolume defects . edge and screw dislocations – Burgers vector –\ninteractionbetweendislocations\n.\nPolishing and etching Metallographic characterisations of metallic\n,"
+        },
+        {
+          "no": 3,
+          "summary": "Mechanical properties: Tensile properties Hardness and hardness\n,\nmeasurement Impact properties Fatigue Creep DBBTT Super\n, , , , ,\nplasticity\n.\nTypes of steels- low medium and high carbon steels stainless steels\n, , ,\nalloy steels and their applications Properties and applications of\n.\ncomposites super-alloys intermetallic- Stoichiometric and Non\n, ,\nstoich..."
+        },
+        {
+          "no": 4,
+          "summary": "Phase diagrams: need of alloying classification of alloys Hume\n- - -\nRothery`s rule – equilibrium diagram of common types of binary\nsystems: isomorphous (Cu- Ni) eutectic (Pb Sn) lever rule and\n- ,\nGibb`sphaserule\n.\nDetailed discussion on Iron- Carbon equilibrium diagram with\nmicrostructure and properties -Heat treatment: TTT CCT diagram\n- , ,\napplications T..."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/113/105/113105103/"
+      ]
+    },
+    {
+      "code": "PCMRT205",
+      "title": "Transducers & Measurements",
+      "common_note": "MECHATRONICS ENGINEERING",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 6,
+      "pdf_url": "/syllabus/pdfs/PCMRT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introductiontotransducersandsensors\nDefinition of sensors and transducers –Mechanical devices as\nPrimary Detectors-Pressure Sensitive Primary Devices- Temperature\nDetectors- Hydro pneumatic Devices Electric Transducers\n. .\nAdvantages of Electrical Transducers Classification of Electrical\n.\nTransducers- Primary and Secondary Transducers Active and\n,\nPassive T..."
+        },
+        {
+          "no": 2,
+          "summary": "Resistive Transducers- Potentiometers Strain gauges-gauge factor-\n,\nResistance Thermometers Thermistors Capacitance transducers\n, . -\npiezo electric transducers Inductive transducers: LVDT\n–\ncharacteristics-photoelectric sensors – Hall Effect transducers -\nmeasuring circuits-calibration- Optical transducers Ionization\n.\ntransducers DigitalTransducer ShaftEnc..."
+        },
+        {
+          "no": 3,
+          "summary": "MeasurementsandMeasurementSystems\nMeasurements- Significance of Measurements- Methods of\nMeasurement: Direct &Indirect Methods-Instruments-Mechanical\n,\nElectrical and Electronic instruments- Classification of Instruments-\nAnalog and Digital Modes of Operation-Functions of Instruments and\nMeasurement Systems- Applications of Measurement Systems-\nElements of a..."
+        },
+        {
+          "no": 4,
+          "summary": "DC bridges: introduction sources and detectors-General Equation-\n,\nTypes of bridges: Wheatstone Kelvin bridge-\n,\nAC bridges: introduction sources and detectors-General equation\n, .\nMaxwell’s inductance and Maxwell’s inductance -capacitance\nbridge\n.\nCathode ray oscilloscopes: principles construction and limitations-\n,\nDigital storage oscilloscopes: principles..."
+        }
+      ],
+      "video_links": [
+        "https://www.youtube.com/watch?v=1uPTyjxZzyo",
+        "https://onlinecourses.nptel.ac.in/noc23_ee105/preview",
+        "https://nptel.ac.in/courses/112107242",
+        "https://onlinecourses.nptel.ac.in/noc23_ee112/preview",
+        "https://www.youtube.com/watch?v=0FVzYLEdSA8"
+      ]
+    },
+    {
+      "code": "PCNST205",
+      "title": "Basic Ship Theory",
+      "common_note": "NAVAL AND SHIPPING ENGINEERING",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3 1 0 0\n- - -",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/PCNST205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Types of ships terms and definitions Archimedes principle laws of\n, , ,\nfloatation weightandbuoyancy\n, .\nTheship’sform maindimensions linesplan coefficientsandtheirmeaning\n, , , ,\nFairingprocessandtableofoffsets Linesplandevelopmentanddrawing\n,"
+        },
+        {
+          "no": 2,
+          "summary": "Integration rules: Trapezoidal rule Simpson’s rules Tchebycheff’s rule\n- , , ,\nareas volumesandmoments Bonjeancalculationsandcurves sectionalarea\n, , ,\ncurves Hydrostaticcalculationsandcurves\n. ."
+        },
+        {
+          "no": 3,
+          "summary": "Potential energy and equilibrium , Stability of ships – stable and unstable\nconditions Stability terms Equal volume Inclinations shift of COB due to\n, , . . .\ninclinations C .O .B curve metacentre pro-metacentre and metacentric\n, , ,\nradius metacentric height metacentric curve surface of flotation curve of\n, , , ,\nflotation rightingmomentandrightinglever\n,"
+        },
+        {
+          "no": 4,
+          "summary": "Frames framing systems primary and secondary members shipbuilding\n, , ,\nmaterials Bottom structure shell structure decks bulkheads\n, , , , ,\nsuperstructures bulkheads foreandaftstructures\n, , .\nMain and auxiliary machinery types of propulsion machinery types of\n, ,\nauxiliarymachinery"
+        }
+      ],
+      "video_links": [
+        "https://nptel.ac.in/courses/114105003",
+        "https://nptel.ac.in/courses/114105031"
+      ]
+    },
+    {
+      "code": "PCPET205",
+      "title": "Fundamentals Of Manufacturing Systems And Processes",
+      "common_note": "PRODUCTION ENGINEERING",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3 1 0 0\n- - -",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/PCPET205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Manufacturing Systems Classification of\n,\nManufacturing Systems; Discreet Manufacturing Repetitive\n,\nManufacturing Job Shop Manufacturing Batch Manufacturing\n, , ,\nContinues manufacturing Additive Manufacturing\n, .\nManufacturing Strategies; Lean Manufacturing Mass\n,\nCustomization Green Manufacturing Total Quality Management\n, , ,\nAgile Manufa..."
+        },
+        {
+          "no": 2,
+          "summary": "Glass and Ceramic Manufacturing; Relevant Properties of glass and\nceramics Processing Steps; Mixing melting forming cooling and\n, , , ,\nfinishing equipment’s used for processing: rotary kiln tumbler ball\n, , ,\nmilling hydraulicpresses&jiggers\n, .\nPlastic Manufacturing; Relevant Properties of Plastics Processing\n,\nMethods;Plastic Extrusion Injection Moulding ..."
+        },
+        {
+          "no": 3,
+          "summary": "Metal industries –Ferrous Metals and Alloys- -raw materials for iron\nmaking blast furnace and electric furnace operation shaping and\n, ,\nfinishing applicationofironandsteel\n, .\nNon-Ferrous Metals examples of nonferrous metals- extraction of\n,\nore smelting &refining shapingandfinishing alloying application of\n, , , ,\nnonferrousmetals (Shouldcoverbasicsconcept..."
+        },
+        {
+          "no": 4,
+          "summary": "Wood based integrated Pulp and paper mill – Wood chips production ,\nBatch digester Pulp washing filters bleaching drying and\n, , ,\ncalendaring\n.\nCement manufacturing process- flow diagram raw mill circuit\n, ,\ncementbeneficiation Manufacturing method and equipment used in\n,\nPortlandcement manufacture\nPetroleum refining process- flow diagram illustrating refin..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "PCPOT205",
+      "title": "Polymers & Polymerisation Principles",
+      "common_note": "POLYMER ENGINEERING",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2Hrs 30Min\n. .",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/PCPOT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Monomers and Polymers: Definitions of monomer repeat unit oligomer\n, , ,\npolymer degree of polymerization representation of polymer functionality\n, , , ,\nbi -functional systems poly-functional systems advantages and\n, ,\ndisadvantages of polymers classification of polymers structure of\n, .\nmonomer repeat unit and polymer of the following- polyethylene\n, ,\npol..."
+        },
+        {
+          "no": 2,
+          "summary": "Molecular weight: High molecular weight of polymers concept of\n,\naveraging different averages in polymer molecular weight number average\n, , ,\nweight average viscosity average z-average MWD polydispersity index\n, , , , ,\nprinciples of osmotic pressure method and viscometry Experimental\n,\nmethods to determine weight average and z-average molecular weight\n."
+        },
+        {
+          "no": 3,
+          "summary": "Types of Polymerisation : Linear step polymerisation Carothers equation\n, ,\nnon linear step polymerization Addition polymerization- Free radical\n,\npolymerisarion ,Cationic polymerization anionic polymerization Co-\n, ,\nordinationpolymerization Copolymerisation differenttypesofcopolymers\n, , ,\nalternating random block and graft copolymer copolymerization drift..."
+        },
+        {
+          "no": 4,
+          "summary": "Polymerisation techniques: Bulk polymerisation Solution polymerisation\n, ,\nSuspension polymerization Emulsion polymerisation Interfacial\n, ,\npolymerisation\n."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/content/mp4/105/106/105106205/MP4/mod01lec03.mp4",
+        "https://archive.nptel.ac.in/content/mp4/105/106/105106205/MP4/mod01lec05.mp4",
+        "https://archive.nptel.ac.in/content/mp4/105/106/105106205/MP4/mod09lec66.mp4",
+        "https://archive.nptel.ac.in/content/mp4/105/106/105106205/MP4/mod01lec06.mp4"
+      ]
+    },
+    {
+      "code": "PCRAT205",
+      "title": "Sensors And Actuators For Robotics",
+      "common_note": "ROBOTICS AND ARTIFICIAL ENGINEERING",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/PCRAT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Robotics and Automation: laws of robot brief history of\n- ,\nrobotics roboticsystemcomponents safetymeasuresinrobotics\n, ,\nTypes of robots: Manipulator Legged robot wheeled robot aerial robots\n, , , ,\nIndustrial robots humanoids Cobots Autonomous robots and Swarm\n, , ,\nrobots RoboticsApplications\n, ."
+        },
+        {
+          "no": 2,
+          "summary": "Transducers and sensors: - Static and Dynamic Characteristics , Classification\nofsensors RoboticSensors\n,\nProximity sensor- Eddy current proximity sensor Inductive Proximity\n,\nsensor CapacitiveProximitysensor\n, ,\nForce Sensor Piezoelectric Sensor Tactile sensor- Touch Sensor/Contact\n, ,\nSensor TemperatureSensors:Thermistors Thermocouples\n. ,"
+        },
+        {
+          "no": 3,
+          "summary": "Motion sensor: Encoder sensors LVDT Accelerometer gyroscope-working\n, , ,\nprinciple only PIR sensor Range Sensors: RF beacons Ultrasonic Ranging\n, , , ,\nReflectivebeacons\nOptical sensors: Photoconductive cell photovoltaic Photo resistive\n, , ,\nPhotodiodes Phototransistors LaserRangeSensor(LIDAR)\n, ,\nSpecial sensors: Acoustic Sensors vision and imaging sensor..."
+        },
+        {
+          "no": 4,
+          "summary": "Definition Types characteristics and selection of Actuators; linear; rotary;\n, ,\ncylindrical Logical and Continuous Actuators Pneumatic actuator and\n, ,\nElectro-Pneumatic actuator;\nMechanical actuation systems: Hydraulic actuator Control valves;\n-\napplications Electrical actuating systems: Electric motors as actuators\n.\nOverviewofelectricmotors\n.\nSolid -stat..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "PCRUT205",
+      "title": "Sensor Technology For Robotics",
+      "common_note": "ROBOTICS AND AUTOMATION",
+      "groups": [
+        "Group B"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 4,
+      "pdf_url": "/syllabus/pdfs/PCRUT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Robotics and Automation: -laws of robot brief history of\n,\nrobotics roboticsystemcomponents safetymeasuresinrobotics\n, ,\nTypesofrobots:Manipulator Leggedrobot wheeledrobot aerialrobots\n, , , ,\nIndustrialrobots humanoids Cobots AutonomousrobotsandSwarmrobots\n, , , ,\nRoboticsApplications\n."
+        },
+        {
+          "no": 2,
+          "summary": "Transducers and sensors: -Static and Dynamic Characteristics Classification\n,\nofsensors RoboticSensors\n,\nProximity sensor- Eddy current proximity sensor Inductive Proximity sensor\n, ,\nCapacitiveProximitysensor\n,\nForce Sensor Piezoelectric Sensor Tactile sensor- Touch Sensor/Contact\n, ,\nSensor\n."
+        },
+        {
+          "no": 3,
+          "summary": "TemperatureSensors:Thermistors Thermocouples\n,\nMotion sensor: Encoder sensors LVDT Accelerometer gyroscope-working\n, , ,\nprincipleonly PIRsensor RangeSensors:RFbeacons UltrasonicRanging\n, , , ,\nReflectivebeacons"
+        },
+        {
+          "no": 4,
+          "summary": "Optical sensors: Photo conductive cell photo voltaic Photo resistive\n, , ,\nPhotodiodes Phototransistors LaserRangeSensor(LIDAR)\n, , ,\nSpecialsensors:AcousticSensors visionandimagingsensors microand\n, ,\nnanosensors\n."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "PCSFT205",
+      "title": "Principles Of Safety Management",
+      "common_note": "SAFETY & FIRE ENGINEERING",
+      "groups": [
+        "Group C"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2Hrs 30Min\n. .",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/PCSFT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction-Safety -Goals of safety engineering Need for safety Safety and\n. .\nproductivity Definitions: Accident Injury Hazard Risk Unsafe act Unsafe\n. , , , , ,\nCondition Near miss Dangerous Occurrence Reportable accidents Loss\n, , , ,\nPrevention History of Safety Engineering Industrialization and Accidents\n. . ,\nEvolution of modern safety concepts Theori..."
+        },
+        {
+          "no": 2,
+          "summary": "Accident prevention Methods- Engineering Education and Enforcement\n, -\nSafety Education & Training -Importance Various training methods\n, ,\nEffectivenessof training Behaviour orientedtraining Need andReasons for\n, .\nAccident Prevention 5E of Accident Prevention Effective Communication-\n- .\npurpose , barrier to effective communication . Safety problems - empl..."
+        },
+        {
+          "no": 3,
+          "summary": "Personal protection in the work environment Types of PPEs Personal\n, ,\nprotective equipment respiratory and non-respiratory equipment Standards\n.\nrelated to PPEs Monitoring Safety Performance: Frequency rate severity\n. ,\nrate , incidence rate , activity rate , safety “t” score , and safety activity rate –\nproblems Cost of accidents Computation of Costs- Util..."
+        },
+        {
+          "no": 4,
+          "summary": "Code of Practice on Safety Audit -IS 14489 -Goals Objectives and\n,\nResponsibilities Audit Methodology Executing the Audit Job safety\n, , ,\nanalysis (JSA) Safety surveys Non conformity reporting (NCR) Safety\n, , .\nInventory Technique The practice of safety management -the significance of\n.\nrisk acceptability Risk Management -Introduction to ISO 31000 Accident..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "code": "UCEST206",
+      "title": "Engineering Entrepreneurship And IPR",
+      "common_note": "Common to all Branches",
+      "groups": [
+        "Group A",
+        "Group B",
+        "Group C",
+        "Group D"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "3",
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "pages": 7,
+      "pdf_url": "/syllabus/pdfs/UCEST206.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "IntroductiontoIdeation Innovation&Entrepreneurship\n,\n● WhatisIdeation?\n● UnderstandingInnovation\n● FrameworksforInnovation\n● TheEntrepreneurialMindset\n● StartingaBusiness typesformationstatutorycompliances\n, .\n● ResourcesforAspiringEntrepreneurs\nIntroductiontoIntellectualPropertyRights(IPR)\n● TypesofIPR:Patents trademarks copyrights tradesecrets\n, , ,\nStrate..."
+        },
+        {
+          "no": 2,
+          "summary": "Problemandsolutioncanvaspreparation\n● Orientationandcanvasintroduction\n● Customerneedsassessment\n● Marketsegmentation\n● Valueproposition\n● Competitiveanalysis\n● Marketentrystrategy\n● Marketvalidation\n● Regulatoryandlegalconsiderations\nCustomerprofiling\n● Reviewofmarketresearch\n● Customersegmentation\n● Customerprofiling\n● Personadevelopment\n● Validationandfee..."
+        },
+        {
+          "no": 3,
+          "summary": "Businessplanpreparation\n● Businessplanframework\n● Marketanalysis\n● Product/servicedescription\n● Marketingandsalesstrategy\n● Operationsplan\n● Financialprojections\n● Riskmanagement\nPrototypedevelopmentplanpreparation\n● Prototyperequirementsanalysis\n● Technicalspecifications\n● Developmentapproach\n● Developmenttimeline\n● Resourceallocation\n● Testingandqualityass..."
+        },
+        {
+          "no": 4,
+          "summary": "Prototypedevelopment\nStakeholderengagement\nstrategies\n● Investors\n● Partners\n● Customers\n● Advisors&Mentors"
+        }
+      ],
+      "video_links": []
+    }
+  ]
+}
