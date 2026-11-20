@@ -330,7 +330,6 @@
 
         <!-- HERO HEADER (With Low-Opacity Floating Reaction Emojis in Background) -->
         <div id="hub-hero" class="relative text-center mb-7 sm:mb-10 py-3 sm:py-5 max-w-2xl mx-auto ot-swap-in">
-            <!-- Soft Floating Background Reaction Emojis -->
             <div aria-hidden="true" class="absolute inset-0 -mx-2 sm:-mx-10 overflow-visible pointer-events-none select-none z-0">
                 <span class="hero-float-emoji drift-a text-3xl sm:text-5xl top-1 left-2 sm:left-4" style="animation-delay: 0s;">😊</span>
                 <span class="hero-float-emoji drift-b text-3xl sm:text-5xl top-0 right-3 sm:right-6" style="animation-delay: 1.1s;">💀</span>
@@ -470,7 +469,7 @@
                 <div id="exam-branch-filters" class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar pt-3 border-t border-slate-200/70 dark:border-white/10"></div>
             </div>
 
-            <!-- Subject Poll Cards Stack (Live -> Upcoming -> Closed) -->
+            <!-- Subject Poll Cards Stack (Live -> Upcoming Soonest -> Closed) -->
             <div id="exam-subjects-list" class="space-y-5"></div>
         </div>
 
@@ -521,7 +520,7 @@
     </footer>
     <!-- Global Site Components & Poll Config -->
     <script src="/components.js?v=25" onerror="this.onerror=null;this.src='https://keralatimetable.in/components.js?v=25';"></script>
-    <script src="./poll-config.js?v=1"></script>
+    <script src="./poll-config.js?v=2"></script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
@@ -533,7 +532,7 @@
         }
 
         // =====================================================================
-        // 1. FIREBASE INIT & CONSTANTS
+        // 1. FIREBASE INIT, REACTION META & BRANCH PRIORITY
         // =====================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyCQQdEQPqHebt9QCDzWIvZdRUk0g-2dCLs",
@@ -552,6 +551,25 @@
             supply:  { label: 'Supply Confirm', emoji: '💀', hex: '#e11d48', hoverCls: 'hover:border-rose-500 hover:bg-rose-50/80',       textCls: 'text-rose-600',    bgCls: 'bg-rose-50',    borderCls: 'border-rose-200'    }
         };
 
+        // Branch priority tie-breaker (CSE & CE top priority within same exam time)
+        const BRANCH_PRIORITY = {
+            'CSE': 1,
+            'GROUP A': 1,
+            'CE': 2,
+            'ECE': 3,
+            'ME': 4,
+            'EEE': 5,
+            'IT': 6,
+            'GROUP B & C': 7,
+            'GROUP D': 8,
+            'COMMON': 9
+        };
+
+        function getBranchPriority(branch) {
+            const key = (branch || '').trim().toUpperCase();
+            return BRANCH_PRIORITY[key] ?? 99;
+        }
+
         let db = null;
         let examList = [];
         let activeUnsubscribes = [];
@@ -559,7 +577,7 @@
         let countdownRefreshPending = false;
 
         // =====================================================================
-        // 2. HELPERS (Escape, Capsule, Clipboard)
+        // 2. HELPERS (Escape, Capsule, Clipboard, Haptics)
         // =====================================================================
         function escapeHtml(str) {
             return String(str ?? '')
@@ -622,6 +640,21 @@
             try { localStorage.setItem('voted_' + subjectId, category); } catch {}
         }
 
+        function triggerVoteHaptics(category) {
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            if (typeof navigator === 'undefined' || typeof navigator.vibrate !== 'function') return;
+
+            const patterns = {
+                easy:    [18, 40, 26],           // light cheerful double-pop
+                average: [22],                   // clean single tap
+                hard:    [32, 38, 24],           // firm double pulse
+                supply:  [42, 45, 28, 45, 55]    // dramatic skull triple-thud
+            };
+            try {
+                navigator.vibrate(patterns[category] || [20]);
+            } catch {}
+        }
+
         // =====================================================================
         // 3. FACEBOOK-REACTION-STYLE EMOJI BURST PARTICLE PHYSICS
         // =====================================================================
@@ -631,7 +664,6 @@
             const cx = rect.left + rect.width / 2;
             const cy = rect.top + rect.height / 2;
 
-            // 1. Expanding Color Shockwave Ring
             const ring = document.createElement('div');
             ring.className = 'emoji-burst-ring';
             const ringSize = Math.max(rect.width, rect.height) * 0.72;
@@ -643,7 +675,6 @@
             document.body.appendChild(ring);
             setTimeout(() => ring.remove(), 620);
 
-            // 2. 18 Radial Fountain Emoji Particles Bursting Around Button
             const count = 18;
             for (let i = 0; i < count; i++) {
                 const p = document.createElement('span');
@@ -817,16 +848,13 @@
 
             return `
                 <article onclick="openExamSeries('${escapeHtml(exam.id)}')" class="poll-series-card rounded-[1.9rem] flex flex-col relative overflow-hidden h-full cursor-pointer group ot-swap-in">
-                    <!-- Top Accent Bar -->
                     <div class="h-1 w-full bg-gradient-to-r ${topAccentCls}"></div>
 
-                    <!-- Subtle Tilted Reaction Emoji Watermark -->
                     <div aria-hidden="true" class="absolute top-3 right-4 text-3xl sm:text-4xl opacity-[0.10] pointer-events-none select-none z-0 flex gap-1 -rotate-6">
                         <span>😊</span><span>😓</span><span>💀</span>
                     </div>
 
                     <div class="p-5 sm:p-6 flex-grow relative z-10 flex flex-col">
-                        <!-- Header Row: Semester Squircle + Tags -->
                         <div class="flex items-start gap-3.5 mb-3.5">
                             <div class="w-12 h-12 rounded-2xl ${semSquircleCls} flex flex-col items-center justify-center shrink-0">
                                 <span class="text-base font-black leading-none">${escapeHtml(exam.semester)}</span>
@@ -844,7 +872,6 @@
                             </div>
                         </div>
 
-                        <!-- Embedded Reaction Preview Strip -->
                         <div class="inner-glass rounded-2xl px-3.5 py-2.5 flex items-center justify-between gap-2 mb-4">
                             <div class="flex items-center -space-x-1 text-base sm:text-lg select-none" aria-hidden="true">
                                 <span class="inline-block transform -rotate-6">😊</span>
@@ -855,7 +882,6 @@
                             <span class="text-[11px] font-extrabold text-slate-600 truncate">${escapeHtml(subjectSummary)}</span>
                         </div>
 
-                        <!-- Action CTA -->
                         <div class="mt-auto">
                             <div class="${ctaBtnCls} w-full text-white text-center font-extrabold py-2.5 sm:py-3 px-4 rounded-2xl text-xs sm:text-sm flex items-center justify-center gap-2">
                                 <span>${ctaText}</span>
@@ -887,10 +913,18 @@
             const nowMs = Date.now();
             const analyzed = examList.map(exam => ({ exam, info: analyzeExamSeries(exam, nowMs) }));
 
-            const liveOrActive = analyzed.filter(x => x.info.status === 'LIVE' || x.info.status === 'BETWEEN_DAYS')
-                .sort((a, b) => a.info.rank - b.info.rank);
-            const upcoming = analyzed.filter(x => x.info.status === 'UPCOMING')
+            // Running (LIVE) first -> Between Days (least time to next poll) -> Upcoming (least time to start) -> Closed
+            const liveOrActive = analyzed
+                .filter(x => x.info.status === 'LIVE' || x.info.status === 'BETWEEN_DAYS')
+                .sort((a, b) => {
+                    if (a.info.rank !== b.info.rank) return a.info.rank - b.info.rank;
+                    return new Date(a.info.nextTargetIso) - new Date(b.info.nextTargetIso);
+                });
+
+            const upcoming = analyzed
+                .filter(x => x.info.status === 'UPCOMING')
                 .sort((a, b) => new Date(a.info.nextTargetIso) - new Date(b.info.nextTargetIso));
+
             const past = analyzed.filter(x => x.info.status === 'CLOSED');
 
             const liveSec = document.getElementById('live-exams-section');
@@ -926,7 +960,6 @@
             }
 
             document.getElementById('home-empty-state').classList.toggle('hidden', analyzed.length > 0);
-
             document.title = 'KTU Exam Review Hub | Live B.Tech Exam Polls - Kerala Timetable';
             tickAllCountdowns();
         }
@@ -1125,7 +1158,7 @@
         }
 
         // =====================================================================
-        // 7. VOTING ACTION WITH EMOJI BURST + FIREBASE TRANSACTION
+        // 7. VOTING ACTION WITH HAPTICS + EMOJI BURST + FIREBASE TRANSACTION
         // =====================================================================
         window.submitVote = function(subjectId, category, btnEl) {
             const meta = VOTE_META[category];
@@ -1133,6 +1166,9 @@
 
             document.querySelectorAll(`[data-vote-group="${subjectId}"]`).forEach(b => b.disabled = true);
             btnEl?.classList.add('vote-popped');
+
+            // Synchronized tactile haptic vibration + radial emoji burst
+            triggerVoteHaptics(category);
             triggerEmojiBurst(btnEl, meta.emoji, meta.hex);
 
             saveVotedChoice(subjectId, category);
@@ -1172,7 +1208,7 @@
         };
 
         // =====================================================================
-        // 8. VIEW 2: INSIDE AN EXAM SERIES
+        // 8. VIEW 2: INSIDE AN EXAM SERIES (Priority Sort: Live -> Soonest Upcoming -> Closed, CSE & CE First)
         // =====================================================================
         function renderExamSeriesView(examId, branchFilter = 'ALL', direction = 'forward') {
             clearActiveListeners();
@@ -1211,7 +1247,14 @@
                 pillEl.textContent = 'Closed';
             }
 
-            const branches = ['ALL', ...new Set((exam.subjects || []).map(s => s.branch).filter(Boolean))];
+            // Sort Branch Filter Pills: CSE, CE, ECE, ME, EEE, IT first, then alphabetical
+            const uniqueBranches = [...new Set((exam.subjects || []).map(s => s.branch).filter(Boolean))]
+                .sort((a, b) => {
+                    const pDiff = getBranchPriority(a) - getBranchPriority(b);
+                    return pDiff !== 0 ? pDiff : a.localeCompare(b);
+                });
+            const branches = ['ALL', ...uniqueBranches];
+
             const branchBar = document.getElementById('exam-branch-filters');
             branchBar.innerHTML = branches.map(br => {
                 const active = br === branchFilter;
@@ -1223,13 +1266,33 @@
                 `;
             }).join('');
 
+            // MASTER SORT PRIORITY:
+            // 1. State: LIVE (Running) -> UPCOMING -> CLOSED
+            // 2. Time:  LIVE = soonest closing; UPCOMING = least time until opens (Day 1 -> Day 6); CLOSED = newest closed first
+            // 3. Branch tie-breaker (same time/day): CSE -> CE -> ECE -> ME -> EEE -> IT -> alphabetical
             const rankMap = { LIVE: 1, UPCOMING: 2, CLOSED: 3 };
             const subjects = (exam.subjects || [])
                 .filter(s => branchFilter === 'ALL' || s.branch === branchFilter)
                 .map(s => ({ subj: s, timing: getSubjectTiming(s, nowMs) }))
                 .sort((a, b) => {
-                    const r = rankMap[a.timing.state] - rankMap[b.timing.state];
-                    return r !== 0 ? r : (b.subj.day || 1) - (a.subj.day || 1);
+                    const stateDiff = rankMap[a.timing.state] - rankMap[b.timing.state];
+                    if (stateDiff !== 0) return stateDiff;
+
+                    if (a.timing.state === 'LIVE') {
+                        const closeDiff = a.timing.closeMs - b.timing.closeMs;
+                        if (closeDiff !== 0) return closeDiff;
+                    } else if (a.timing.state === 'UPCOMING') {
+                        const openDiff = a.timing.openMs - b.timing.openMs;
+                        if (openDiff !== 0) return openDiff;
+                    } else {
+                        const closedDiff = b.timing.closeMs - a.timing.closeMs;
+                        if (closedDiff !== 0) return closedDiff;
+                    }
+
+                    const brDiff = getBranchPriority(a.subj.branch) - getBranchPriority(b.subj.branch);
+                    if (brDiff !== 0) return brDiff;
+
+                    return (a.subj.code || a.subj.subjectName || '').localeCompare(b.subj.code || b.subj.subjectName || '');
                 });
 
             const listEl = document.getElementById('exam-subjects-list');
