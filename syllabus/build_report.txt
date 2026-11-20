@@ -2,7 +2,7 @@ KTU 2024 FIRST YEAR SYLLABUS BUILD REPORT
 =======================================================
 
 SOURCE: group-a.pdf (Group A) — 132 pages
-  - GAMAT101   | p.  3-  7 (5p) | S1    | Mathematics For Information Science – 1
+  - GAMAT101   | p.  3-  7 (5p) | S1    | Mathematics For Information Science - 1
   - GAPHT121   | p.  8- 14 (7p) | S1,S2 | Physics For Information Science
   - GXCYT122   | p. 15- 22 (8p) | S1,S2 | Chemistry For Information Science And Electrical Science
   - GMEST103   | p. 23- 26 (4p) | S1    | Engineering Graphics And Computer Aided Drawing
@@ -11,7 +11,7 @@ SOURCE: group-a.pdf (Group A) — 132 pages
   - GXESL106   | p. 42- 47 (6p) | S1    | Basic Electrical And Electronics Engineering Workshop
   - UCHWT127   | p. 48- 58 (11p) | S1,S2 | Health And Wellness
   - UCHUT128   | p. 59- 66 (8p) | S1,S2 | Life Skills And Professional Communication
-  - GAMAT201   | p. 68- 71 (4p) | S2    | Mathematics For Information Science – 2
+  - GAMAT201   | p. 68- 71 (4p) | S2    | Mathematics For Information Science - 2
   - GAPHT121   | p. 72- 78 (7p) | S1,S2 | Physics For Information Science
   - GXCYT122   | p. 79- 85 (7p) | S1,S2 | Chemistry For Information Science And Electrical Science
   - GXEST203   | p. 86- 88 (3p) | S2    | Foundations Of Computing: From Hardware Essentials To Web Design
@@ -30,7 +30,7 @@ SOURCE: group-b.pdf (Group B) — 182 pages
   - GMEST103   | p. 23- 26 (4p) | S1    | Engineering Graphics And Computer Aided Drawing
   - GXEST104   | p. 27- 32 (6p) | S1    | Introduction To Electrical And Electronics Engineering
   - UCEST105   | p. 33- 41 (9p) | S1    | Algorithmic Thinking With Python
-  - GXESL106   | p. 42- 47 (6p) | S1,S2 | Basic Electrical And Electronics Engineering Workshop
+  - GXESL106   | p. 42- 47 (6p) | S1    | Basic Electrical And Electronics Engineering Workshop
   - UCPWT127   | p. 48- 59 (12p) | S1,S2 | Health And Wellness
   - UCHUT128   | p. 60- 67 (8p) | S1,S2 | Life Skills And Professional Communication
   - GYMAT201   | p. 69- 73 (5p) | S2    | Mathematics For Electrical Science And Physical Science - 2
@@ -65,7 +65,7 @@ SOURCE: group-c.pdf (Group C) — 208 pages
   - GCESL106   | p. 46- 53 (8p) | S1    | Engineering Workshop
   - UCPWT127   | p. 54- 64 (11p) | S1,S2 | Health And Wellness
   - UCHUT128   | p. 65- 72 (8p) | S1,S2 | Life Skills And Professional Communication
-  - GYMAT201   | p. 74- 78 (5p) | S2    | Mathematics For Electrical Science And Physical Science – 2
+  - GYMAT201   | p. 74- 78 (5p) | S2    | Mathematics For Electrical Science And Physical Science - 2
   - GZPHT121   | p. 79- 86 (8p) | S1,S2 | Physics For Physical Science And Life Science
   - GCCYT122   | p. 87- 94 (8p) | S1,S2 | Chemistry For Physical Science
   - GCEST203   | p. 95- 98 (4p) | S2    | Engineering Graphics And Computer Aided Drawing
@@ -89,7 +89,7 @@ SOURCE: group-c.pdf (Group C) — 208 pages
   - PCSFT205   | p.204-208 (5p) | S2    | Principles Of Safety Management
 
 SOURCE: group-d.pdf (Group D) — 149 pages
-  - GDMAT101   | p.  3-  6 (4p) | S1    | Mathematics For Life Science -1
+  - GDMAT101   | p.  3-  6 (4p) | S1    | Mathematics For Life Science - 1
   - GZPHT121   | p.  7- 13 (7p) | S1,S2 | Physics For Physical Science And Life Science
   - GDCYT122   | p. 14- 21 (8p) | S1,S2 | Chemistry For Life Science
   - GMEST103   | p. 22- 25 (4p) | S1    | Engineering Graphics And Computer Aided Drawing
@@ -109,5 +109,5 @@ SOURCE: group-d.pdf (Group D) — 149 pages
   - UCPWT127   | p.113-124 (12p) | S1,S2 | Health And Wellness
   - UCHUT128   | p.125-131 (7p) | S1,S2 | Life Skills And Professional Communication
   - GZESL208   | p.132-137 (6p) | S2    | Basic Electrical And Electronics Engineering Workshop
-  - GDCYT122   | p.139-143 (5p) | S2    | Bioprocess Calculations
+  - PCBBT205   | p.139-143 (5p) | S2    | Bioprocess Calculations
   - PCFTT205   | p.144-149 (6p) | S2    | Food Chemistry

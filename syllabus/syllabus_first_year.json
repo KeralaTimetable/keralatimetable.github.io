@@ -10,24 +10,24 @@
     {
       "id": "Group B",
       "label": "Group B",
-      "branches": "ECE, EEE, EIE, Applied Electronics, Robotics & Allied Branches"
+      "branches": "ECE, EEE, EIE, Applied Electronics, Robotics, Biomedical & Allied Branches"
     },
     {
       "id": "Group C",
       "label": "Group C",
-      "branches": "CE, ME, Automobile, Industrial, Chemical, Metallurgy & Allied Branches"
+      "branches": "CE, ME, Chemical, Automobile, Mechatronics, Industrial, Aeronautics, Agriculture, Naval Arch, Polymer, Safety & Allied Branches"
     },
     {
       "id": "Group D",
       "label": "Group D",
-      "branches": "Biotech, Food Tech, Polymer, Naval Arch, Agriculture & Allied Branches"
+      "branches": "Biotechnology, Biochemical Engineering & Food Technology"
     }
   ],
-  "total_courses": 62,
+  "total_courses": 63,
   "courses": [
     {
       "code": "GAMAT101",
-      "title": "Mathematics For Information Science – 1",
+      "title": "Mathematics For Information Science - 1",
       "common_note": "Group A",
       "groups": [
         "Group A"
@@ -36,8 +36,8 @@
         "S1"
       ],
       "credits": "3",
-      "cie": "40",
-      "ese": "60",
+      "cie": "",
+      "ese": "",
       "ltpr": "3:0:0:0",
       "exam_hours": "",
       "course_type": "Theory",
@@ -70,11 +70,11 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
-      "ese": "60",
+      "cie": "",
+      "ese": "",
       "ltpr": "3:0:2:0",
       "exam_hours": "",
-      "course_type": "Theory + Lab",
+      "course_type": "Theory",
       "pages": 7,
       "pdf_url": "/syllabus/pdfs/GAPHT121.pdf",
       "modules": [
@@ -115,11 +115,11 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:0:2:0",
       "exam_hours": "",
-      "course_type": "Theory + Lab",
+      "course_type": "Theory",
       "pages": 7,
       "pdf_url": "/syllabus/pdfs/GBPHT121.pdf",
       "modules": [
@@ -207,29 +207,12 @@
       "credits": "1",
       "cie": "50",
       "ese": "50",
-      "ltpr": "0 0 2 0\n- - -",
+      "ltpr": "0 0 2 0:::",
       "exam_hours": "2 Hrs 30 Min\n. .",
       "course_type": "Lab",
       "pages": 8,
       "pdf_url": "/syllabus/pdfs/GCESL106.pdf",
-      "modules": [
-        {
-          "no": 1,
-          "summary": "General: Introduction to workshop practice Safety precautions Shop floor\n, ,\nethics and Basic First Aid knowledge Study of mechanical and measurement\n, .\ntools components and their applications: (a) Tools: screw drivers spanners\n, , ,\nAllen keys cutting pliers etc and accessories (b) bearings seals O -rings\n, . , , ,\ncirclips keys etc(c)Vernier Calipers Heig..."
-        },
-        {
-          "no": 2,
-          "summary": "Carpentry:Understandingcarpentrytoolsandknowledgeofatleastonemodel\n1 T –Lap joint 2 Cross lap joint 3 Dovetail joint 4 Mortise joints\n. . . ."
-        },
-        {
-          "no": 3,
-          "summary": "Foundry:Understandingoffoundrytoolsandknowledgeofatleastonemodel\n1 BenchMoulding 2 FloorMoulding3 Coremaking 4 Patternmaking\n. . . ."
-        },
-        {
-          "no": 4,
-          "summary": "Sheet Metal: Understanding sheet metal working tools and knowledge of at\nleast onemodel\n1 Cylindricalshape2 Conicalshape3 Prismaticshapedjobfromsheetmetal\n. . ."
-        }
-      ],
+      "modules": [],
       "video_links": [
         "https://archive.nptel.ac.in/courses/105/106/105106206/",
         "https://archive.nptel.ac.in/courses/105/106/105106201/",
@@ -250,7 +233,7 @@
       "credits": "3",
       "cie": "40",
       "ese": "60",
-      "ltpr": "3 0 0 0\n- - -",
+      "ltpr": "3 0 0 0:::",
       "exam_hours": "2 Hrs 30 Min\n. .",
       "course_type": "Theory",
       "pages": 4,
@@ -290,7 +273,7 @@
       "credits": "4",
       "cie": "40",
       "ese": "60",
-      "ltpr": "4 0 0 0\n- - -",
+      "ltpr": "4 0 0 0:::",
       "exam_hours": "2 Hrs 30 Min\n. .",
       "course_type": "Theory",
       "pages": 7,
@@ -342,24 +325,7 @@
       "course_type": "Lab",
       "pages": 5,
       "pdf_url": "/syllabus/pdfs/GDBBL106.pdf",
-      "modules": [
-        {
-          "no": 1,
-          "summary": "IntroductiontoBiosafetyinLaboratories"
-        },
-        {
-          "no": 2,
-          "summary": "Basic concepts of preparing solutions (normality molarity molality)\n, ,"
-        },
-        {
-          "no": 3,
-          "summary": "Principlesofsteriletechniqueandcellpropagation\n."
-        },
-        {
-          "no": 4,
-          "summary": "PreparationofbuffersanddeterminationofpH"
-        }
-      ],
+      "modules": [],
       "video_links": []
     },
     {
@@ -375,7 +341,7 @@
       "credits": "4",
       "cie": "40",
       "ese": "60",
-      "ltpr": "3 1 0 0\n- - -",
+      "ltpr": "3 1 0 0:::",
       "exam_hours": "2 Hrs 30 Min\n. .",
       "course_type": "Theory",
       "pages": 4,
@@ -427,19 +393,15 @@
       "modules": [
         {
           "no": 1,
-          "summary": "Fundamentals of Molecular\nSpectroscopy"
+          "summary": "Stereochemistry&MaterialsforBiologicalApplications\nStereochemistry: Stereo Isomerism-Configurational Isomerism-\nGeometrical & Optical isomers-Wedge & Fischer projections E -Z\n-\nNomenclature- R&S Configuration\nNanomaterials: Classification based on materials- Synthesis – Sol\ngel & Chemical reduction Bio-applications of nanomaterials\n– –\nCarbon Nanotubes Fulle..."
         },
         {
           "no": 2,
-          "summary": "Principlesof\nPhysicalChemistry"
+          "summary": "Electrochemistry and Corrosion Science\nElectrochemical Cell: Electrode potential Nernst equation for\n-\nsingle electrode and cell (Numerical problems) Reference\n-\nelectrodes SHE & Calomel electrode –Construction and Working\n–\nElectrochemical series Applications Glass Electrode & pH\n- - –\nMeasurement -Conductivity- Measurement using Digital\nconductivity meter ..."
         },
         {
           "no": 3,
-          "summary": "Instrumental Methods of\nAnalysis"
-        },
-        {
-          "no": 4,
-          "summary": "PolymerChemistry:\nAn Introduction"
+          "summary": "Instrumental Methods of Analysis\nSpectroscopy: Types of spectra - Molecular energy levels - Beer\nLambert’s law Numerical problems Electronic Spectroscopy\n– - –\nPrinciple Types of electronic transitions Role of conjugation in\n, –\nabsorption maxima- Instrumentation-Applications Vibrational\n–\nspectroscopy Principle- Number of vibrational modes Vibrational\n– -\nm..."
         }
       ],
       "video_links": [
@@ -470,24 +432,7 @@
       "course_type": "Lab",
       "pages": 5,
       "pdf_url": "/syllabus/pdfs/GDFTL106.pdf",
-      "modules": [
-        {
-          "no": 1,
-          "summary": "EstimationofMoistureContentbyHotAirOvenmethod\n."
-        },
-        {
-          "no": 2,
-          "summary": "Testforthepresenceofcarbohydratesinthegivenfoodsample\n."
-        },
-        {
-          "no": 3,
-          "summary": "Testforthepresenceofproteininagivenfoodsample\n."
-        },
-        {
-          "no": 4,
-          "summary": "EstimationofPhysical parametersofwater\n."
-        }
-      ],
+      "modules": [],
       "video_links": [
         "https://nptel.ac.in/courses/103107088"
       ]
@@ -505,7 +450,7 @@
       "credits": "4",
       "cie": "40",
       "ese": "60",
-      "ltpr": "3 1 0 0\n- - -",
+      "ltpr": "3 1 0 0:::",
       "exam_hours": "2 Hrs 30 Min\n. .",
       "course_type": "Theory",
       "pages": 4,
@@ -536,7 +481,7 @@
     },
     {
       "code": "GDMAT101",
-      "title": "Mathematics For Life Science -1",
+      "title": "Mathematics For Life Science - 1",
       "common_note": "",
       "groups": [
         "Group D"
@@ -560,10 +505,6 @@
         {
           "no": 2,
           "summary": "Introduction to calculus differentiation from first principles\n- ,\nDifferentiation of common functions Differentiation of a product\n, ,\nDifferentiation of a quotient Function of function (Chain Rule)\n, ,\nIntroduction to Parametric equations Differentiation in parameters\n, ,\nIntroduction to partial derivatives first order partial derivatives second\n, ,\norderp..."
-        },
-        {
-          "no": 4,
-          "summary": "HigherEngineering\nMathematics"
         }
       ],
       "video_links": [
@@ -585,11 +526,11 @@
         "S1"
       ],
       "credits": "3",
-      "cie": "40",
-      "ese": "60",
+      "cie": "",
+      "ese": "",
       "ltpr": "2:0:2:0",
       "exam_hours": "",
-      "course_type": "Theory & Lab",
+      "course_type": "Theory",
       "pages": 4,
       "pdf_url": "/syllabus/pdfs/GMEST103.pdf",
       "modules": [
@@ -627,11 +568,11 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
-      "ese": "60",
+      "cie": "",
+      "ese": "",
       "ltpr": "3:0:2:0",
       "exam_hours": "",
-      "course_type": "Theory + Lab",
+      "course_type": "Theory",
       "pages": 8,
       "pdf_url": "/syllabus/pdfs/GXCYT122.pdf",
       "modules": [
@@ -671,35 +612,17 @@
         "Group B"
       ],
       "semesters": [
-        "S1",
-        "S2"
+        "S1"
       ],
       "credits": "1",
-      "cie": "50",
+      "cie": "",
       "ese": "50",
       "ltpr": "0:0:2:0",
       "exam_hours": "",
-      "course_type": "Lab",
+      "course_type": "Theory",
       "pages": 6,
       "pdf_url": "/syllabus/pdfs/GXESL106.pdf",
-      "modules": [
-        {
-          "no": 1,
-          "summary": "a)DemonstratetheprecautionarystepsadoptedincaseofElectricalshocks\n.\nb) Identify different types of cables wires switches fuses fuse carriers MCB ELCB and\n, , , , , ,\nMCCB familiarizetheratings\n, ."
-        },
-        {
-          "no": 2,
-          "summary": "Wiring of a simple light circuit for light/ fan point (PVC conduit wiring) and a 6A plug\nsocketwithindividualcontrol\n."
-        },
-        {
-          "no": 3,
-          "summary": "Wiring of light/fan circuit using two-way switches (Staircase wiring)\n."
-        },
-        {
-          "no": 4,
-          "summary": "Wiringoffluorescentlampandapowerplug(16A)socketwithacontrolswitch\n."
-        }
-      ],
+      "modules": [],
       "video_links": []
     },
     {
@@ -714,11 +637,11 @@
         "S1"
       ],
       "credits": "4",
-      "cie": "40",
-      "ese": "60",
+      "cie": "",
+      "ese": "",
       "ltpr": "4:0:0:0",
       "exam_hours": "",
-      "course_type": "Group Core-Theory",
+      "course_type": "Theory",
       "pages": 6,
       "pdf_url": "/syllabus/pdfs/GXEST104.pdf",
       "modules": [
@@ -753,7 +676,7 @@
         "S1"
       ],
       "credits": "3",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:0:0:0",
       "exam_hours": "",
@@ -847,8 +770,8 @@
         "S1"
       ],
       "credits": "4",
-      "cie": "40",
-      "ese": "60",
+      "cie": "",
+      "ese": "",
       "ltpr": "3:0:2:0",
       "exam_hours": "",
       "course_type": "Theory",
@@ -866,10 +789,6 @@
         {
           "no": 3,
           "summary": "SELECTION AND ITERATION USING PYTHON:- if -else elif for loop\n, , ,\nrange whileloop\n, .\nSequence data types in Python list tuple set strings dictionary Creating\n- , , , , ,\nandusingArraysinPython(usingNumpylibrary)\n.\nDECOMPOSITION AND MODULARISATION* :- Problem decomposition\nas a strategy for solving complex problems Modularisation Motivation for\n, ,\nmodular..."
-        },
-        {
-          "no": 4,
-          "summary": "Psychology(Sec Problem\n..\nSolving)\n."
         }
       ],
       "video_links": [
@@ -892,31 +811,14 @@
         "S2"
       ],
       "credits": "1",
-      "cie": "100",
-      "ese": "0",
+      "cie": "",
+      "ese": "",
       "ltpr": "2:0:1:0",
       "exam_hours": "",
-      "course_type": "Activity-based",
+      "course_type": "Theory",
       "pages": 11,
       "pdf_url": "/syllabus/pdfs/UCHUT128.pdf",
-      "modules": [
-        {
-          "no": 1,
-          "summary": "LifeSkills&Personality\nDevelopment"
-        },
-        {
-          "no": 2,
-          "summary": "EmotionalIntelligence:Whyit\ncanmattermorethanIQ"
-        },
-        {
-          "no": 3,
-          "summary": "Prepare a presentation on instances of\nempathy they have observed in their\nownlifeorinother’slife"
-        },
-        {
-          "no": 4,
-          "summary": "DeepWork:Rulesforfocused\nsuccessinadistractedworld"
-        }
-      ],
+      "modules": [],
       "video_links": []
     },
     {
@@ -931,11 +833,11 @@
         "S2"
       ],
       "credits": "1",
-      "cie": "50",
-      "ese": "0",
+      "cie": "",
+      "ese": "",
       "ltpr": "1:0:1:0",
       "exam_hours": "",
-      "course_type": "Theory and Practical",
+      "course_type": "Theory",
       "pages": 11,
       "pdf_url": "/syllabus/pdfs/UCHWT127.pdf",
       "modules": [
@@ -972,11 +874,11 @@
         "S2"
       ],
       "credits": "1",
-      "cie": "50",
+      "cie": "",
       "ese": "0",
       "ltpr": "1:0:1:0",
       "exam_hours": "",
-      "course_type": "Course Objectives",
+      "course_type": "Activity / Theory",
       "pages": 12,
       "pdf_url": "/syllabus/pdfs/UCPWT127.pdf",
       "modules": [
@@ -990,18 +892,18 @@
         },
         {
           "no": 3,
-          "summary": "Lifestyle management strategies to prevent / manage common hypokinetic\ndiseases and disorders - Obesity - cardiovascular diseases (e .g ., coronary\nartery disease hypertension) Diabetes Osteoporosis Musculoskeletal\n, - - -\ndisorders (eg osteoarthritis Low back pain Kyphosis lordosis flat foot\n. ., , , , , ,\nKnock knee) Meaning , Aims and objectives of yoga -..."
+          "summary": "Lifestyle management strategies to prevent / manage common hypokinetic\ndiseases and disorders - Obesity - Cardiovascular diseases (e .g ., coronary\nartery disease hypertension) Diabetes Osteoporosis Musculoskeletal\n, - - -\ndisorders (eg osteoarthritis Low back pain Kyphosis lordosis flat foot\n. ., , , , , ,\nKnockknee)\nMeaning , Aims and objectives of yoga - ..."
         },
         {
           "no": 4,
-          "summary": "First aid and principles of First Aid: Primary survey: ABC (Airway\n,\nBreathing Circulation) QualitiesofaGoodFirstAider\n, .\nFirst aid measures for: - Cuts and scrapes - Bruises - Sprains - Strains\nFractures Burns Nosebleeds\n- - - .\nFirst Aid Procedures: Cardiopulmonary Resuscitation (CPR)\n-\nHeimlich Maneuver - Applying a sling\nSports injuries: Classification ..."
+          "summary": "First aid and principles of First Aid: Primary survey: ABC (Airway\n,\nBreathing Circulation) QualitiesofaGoodFirstAider\n, .\nFirst aid measures for: - Cuts and scrapes - Bruises - Sprains - Strains -\nFractures Burns Nosebleeds\n- - .\nFirst Aid Procedures: Cardiopulmonary Resuscitation (CPR)\n-\nHeimlich Maneuver - Applying a sling\nSports injuries: Classification ..."
         }
       ],
       "video_links": []
     },
     {
       "code": "GAMAT201",
-      "title": "Mathematics For Information Science – 2",
+      "title": "Mathematics For Information Science - 2",
       "common_note": "Group A",
       "groups": [
         "Group A"
@@ -1010,8 +912,8 @@
         "S2"
       ],
       "credits": "3",
-      "cie": "40",
-      "ese": "60",
+      "cie": "",
+      "ese": "",
       "ltpr": "3:0:0:0",
       "exam_hours": "",
       "course_type": "Theory",
@@ -1050,7 +952,7 @@
         "S2"
       ],
       "credits": "3",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:0:0:0",
       "exam_hours": "",
@@ -1092,9 +994,9 @@
       "credits": "3",
       "cie": "40",
       "ese": "60",
-      "ltpr": "2 0 2 0\n- - -",
+      "ltpr": "2 0 2 0:::",
       "exam_hours": "2 Hrs 30 Min\n. .",
-      "course_type": "Theory & Lab",
+      "course_type": "Theory",
       "pages": 4,
       "pdf_url": "/syllabus/pdfs/GCEST203.pdf",
       "modules": [
@@ -1132,7 +1034,7 @@
       "credits": "3",
       "cie": "40",
       "ese": "60",
-      "ltpr": "3 0 0 0\n- - -",
+      "ltpr": "3 0 0 0:::",
       "exam_hours": "2 Hrs 30 Min\n. .",
       "course_type": "Theory",
       "pages": 6,
@@ -1149,10 +1051,6 @@
         {
           "no": 3,
           "summary": "Relevance of Civil Engineering in the overall infrastructural\ndevelopmentofthe country\n.\nA brief introduction to major disciplines of Civil Engineering like\nTransportation Engineering Structural Engineering Geo-technical\n, ,\nEngineering Water Resources Engineering and Environmental\n, ,\nEngineering Introduction to buildings: Types of buildings according\n.\nto ..."
-        },
-        {
-          "no": 4,
-          "summary": "Engineering\nMaterials(Material\nScience)"
         }
       ],
       "video_links": [
@@ -1221,31 +1119,14 @@
         "S2"
       ],
       "credits": "1",
-      "cie": "50",
+      "cie": "",
       "ese": "",
       "ltpr": "0:0:2:0",
       "exam_hours": "",
-      "course_type": "Lab",
+      "course_type": "Theory",
       "pages": 6,
       "pdf_url": "/syllabus/pdfs/GXESL208.pdf",
-      "modules": [
-        {
-          "no": 1,
-          "summary": "Practice Computer Hardware Familiarization CPU Box Motherboard CPU & Chip-set\n– , , ,\nInterfacecards Card slots Hard disk Cables SMPS NIC Various ports etc Computer\n, , , , , , , .\nPeripherals I/O Devices Storage devices Interface cards Buses Firmware\n- . , – –"
-        },
-        {
-          "no": 2,
-          "summary": "FamiliarizationofBootprocess"
-        },
-        {
-          "no": 3,
-          "summary": "Familiarizinginstallationof LinuxandWindowsoperatingsystems"
-        },
-        {
-          "no": 4,
-          "summary": "Familiarizing basic Unix/Linux commands - ls , mkdir , cp , mv , grep , rmdir , chmod , useradd ,\npasswd history dmesg cpuinfo uname du time write fdisk\n, , , , , , , ,"
-        }
-      ],
+      "modules": [],
       "video_links": [
         "https://overthewire.org/wargames/bandit/",
         "https://www.w3schools.com/"
@@ -1263,8 +1144,8 @@
         "S2"
       ],
       "credits": "3",
-      "cie": "40",
-      "ese": "60",
+      "cie": "",
+      "ese": "",
       "ltpr": "3:0:0:0",
       "exam_hours": "",
       "course_type": "Theory",
@@ -1305,8 +1186,8 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
-      "ese": "60",
+      "cie": "",
+      "ese": "",
       "ltpr": "3:0:2:0",
       "exam_hours": "",
       "course_type": "Theory",
@@ -1344,7 +1225,7 @@
         "S2"
       ],
       "credits": "3",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:0:0:0",
       "exam_hours": "",
@@ -1395,19 +1276,19 @@
       "modules": [
         {
           "no": 1,
-          "summary": "a)DemonstratetheprecautionarystepsadoptedincaseofElectricalshocks\n.\nb)Identify different types of cables wires switches fuses fuse carriers MCB\n, , , , , ,\nELCBandMCCB familiarisetheratings\n, ."
+          "summary": "Familiarization/Identification of electronic components with specification\n(Functionality type size colour coding package symbol and cost of -Active Passive\n, , , , , , ,\nElectrical Electronic Electro-mechanical Wires Cables Connectors Fuses Switches\n, , , , , , , ,\nRelays Crystals Displays Fasteners Heatsinketc)\n, , , , ."
         },
         {
           "no": 2,
-          "summary": "Wiring of a simple light circuit for light/ fan point (PVC conduit wiring) and a\n6A plugsocketwithindividualcontrol\n."
+          "summary": "Drawing of electronic circuit diagrams using BIS/IEEE symbols and Interpret data\nsheetsofdiscretecomponentsandIC’s"
         },
         {
           "no": 3,
-          "summary": "Wiring of light/fan circuit using two-way switches (Staircase wiring)\n."
+          "summary": "Familiarization/Application of testing instruments and commonly used tools\n. -\nMultimeter Functiongenerator Powersupply CRO DSO\n, , , , .\nSoldering iron Desoldering pump Pliers Cutters Wire strippers Screw drivers\n, , , , , ,\nTweezers Crimping tool Hot air soldering and de- soldering station\n, ,"
         },
         {
           "no": 4,
-          "summary": "Wiringoffluorescentlampandapowerplug(16A)socketwithacontrolswitch\n."
+          "summary": "Testing of electronic components using multimeter Resistor Capacitor Diode\n- , , ,\nTransistorandJFET\n."
         }
       ],
       "video_links": []
@@ -1569,6 +1450,47 @@
       ]
     },
     {
+      "code": "PCBBT205",
+      "title": "Bioprocess Calculations",
+      "common_note": "",
+      "groups": [
+        "Group D"
+      ],
+      "semesters": [
+        "S2"
+      ],
+      "credits": "4",
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2 Hrs 30 Min\n. .",
+      "course_type": "Theory",
+      "pages": 5,
+      "pdf_url": "/syllabus/pdfs/PCBBT205.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "UnitsandConversions:SystemofUnitsandConversion\n.\nChemical composition: Methods of expressing compositions of\nmixtures and solutions- mole percent mass percent volume percent\n, , ,\nmolarity molality normality ppm density and specific gravity and\n, , , , ,\nspecific gravityscales\n.\nGas Laws: Ideal gas and Real Gas laws Ideal gas mixtures gas\n, ,\nconstant Compos..."
+        },
+        {
+          "no": 2,
+          "summary": "Fundamentals of material balances and energy balances: Definition\nof unit operations andunit processes\n.\nLaw of conservation of mass , types of material balance problems –\ntotal and component balances steady and unsteady state processes\n, ,\nbatchandcontinuousprocesses\n.\nConcept of tie element the basis for calculations independent\n, ,\nmaterial balanceequatio..."
+        },
+        {
+          "no": 3,
+          "summary": "Material balances without chemical reactions: Material balances for\nunit operations like evaporation crystallization leaching extraction\n, , ,\nanddistillation\n.\nQualitative and quantitative study of bypass recycle and purging\n,\noperations Case study on filtration operations in downstream\nprocessing\n(A treatment using numerical examples on all the above topic..."
+        },
+        {
+          "no": 4,
+          "summary": "Material balances with chemical reactions: Definition of terms like\nlimiting reactant excess reactant percentage yield and selectivity\n, , ,\nextent ofreaction\nCombustion of solid liquid and gaseous fuels (Biological reactions\n, ,\nCarbonandSulphur compounds only) Orsat analysis\n. .\nHeatofreactionandapplicationofHess’slaw\n."
+        }
+      ],
+      "video_links": [
+        "https://archive.nptel.ac.in/courses/102/106/102106069/",
+        "https://archive.nptel.ac.in/courses/103/103/103103165/"
+      ]
+    },
+    {
       "code": "PCBMT205",
       "title": "Anatomy And Physiology For Biomedical Engineering",
       "common_note": "BIOMEDICAL ENGINEERING",
@@ -1579,7 +1501,7 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "4:0:0:0",
       "exam_hours": "",
@@ -1617,7 +1539,7 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:1:0:0",
       "exam_hours": "",
@@ -1669,24 +1591,7 @@
       "course_type": "Practical",
       "pages": 6,
       "pdf_url": "/syllabus/pdfs/PCCEL208.pdf",
-      "modules": [
-        {
-          "no": 1,
-          "summary": "Introduction to Civil Engineering Drawing Concept of Scale Plan Section and\n, , ,\nElevation Drawingtoolsand accessories Manualand ComputerAided Drafting\n. ,\nDraw the view of simple objects (books shelves benches etc) adopting appropriate\n, , , .\nscales"
-        },
-        {
-          "no": 2,
-          "summary": "Draw sectional details and elevation of paneled doors\n."
-        },
-        {
-          "no": 3,
-          "summary": "Draw sectional details and elevation of wooden glazed window\n."
-        },
-        {
-          "no": 4,
-          "summary": "Draw elevation section and detailing of connection between members for steel roof\n,\ntruss"
-        }
-      ],
+      "modules": [],
       "video_links": []
     },
     {
@@ -1702,7 +1607,7 @@
       "credits": "4",
       "cie": "40",
       "ese": "60",
-      "ltpr": "3 1 0 0\n- - -",
+      "ltpr": "3 1 0 0:::",
       "exam_hours": "2 Hrs 30 Min\n. .",
       "course_type": "Theory",
       "pages": 6,
@@ -1742,7 +1647,7 @@
       "credits": "4",
       "cie": "40",
       "ese": "60",
-      "ltpr": "3 1 0 0\n- - -",
+      "ltpr": "3 1 0 0:::",
       "exam_hours": "2 Hrs 30 Min\n. .",
       "course_type": "Theory",
       "pages": 5,
@@ -1780,8 +1685,8 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
-      "ese": "60",
+      "cie": "",
+      "ese": "",
       "ltpr": "3:1:0:0",
       "exam_hours": "",
       "course_type": "Theory",
@@ -1820,8 +1725,8 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
-      "ese": "60",
+      "cie": "",
+      "ese": "",
       "ltpr": "3:1:0:0",
       "exam_hours": "",
       "course_type": "Theory",
@@ -1863,7 +1768,7 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:1:0:0",
       "exam_hours": "",
@@ -1901,7 +1806,7 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:1:0:0",
       "exam_hours": "",
@@ -1939,11 +1844,11 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:1:0:0",
       "exam_hours": "",
-      "course_type": "PC -Theory",
+      "course_type": "Theory",
       "pages": 6,
       "pdf_url": "/syllabus/pdfs/PCEET205.pdf",
       "modules": [
@@ -1981,7 +1886,7 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:1:0:0",
       "exam_hours": "",
@@ -2022,7 +1927,7 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:1:0:0",
       "exam_hours": "",
@@ -2102,7 +2007,7 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:1:0:0",
       "exam_hours": "",
@@ -2142,7 +2047,7 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:1:0:0",
       "exam_hours": "2Hrs 30Min\n. .",
@@ -2314,9 +2219,9 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
-      "ltpr": "3 1 0 0\n- - -",
+      "ltpr": "3 1 0 0:::",
       "exam_hours": "",
       "course_type": "Theory",
       "pages": 5,
@@ -2357,7 +2262,7 @@
       "credits": "4",
       "cie": "40",
       "ese": "60",
-      "ltpr": "3 1 0 0\n- - -",
+      "ltpr": "3 1 0 0:::",
       "exam_hours": "2 Hrs 30 Min\n. .",
       "course_type": "Theory",
       "pages": 5,
@@ -2393,7 +2298,7 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:1:0:0",
       "exam_hours": "2Hrs 30Min\n. .",
@@ -2436,7 +2341,7 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:1:0:0",
       "exam_hours": "",
@@ -2474,7 +2379,7 @@
         "S2"
       ],
       "credits": "4",
-      "cie": "40",
+      "cie": "",
       "ese": "60",
       "ltpr": "3:1:0:0",
       "exam_hours": "",
@@ -2553,8 +2458,8 @@
         "S2"
       ],
       "credits": "3",
-      "cie": "60",
-      "ese": "40",
+      "cie": "",
+      "ese": "",
       "ltpr": "3:0:0:0",
       "exam_hours": "",
       "course_type": "Theory",
