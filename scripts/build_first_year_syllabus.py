@@ -7,7 +7,6 @@ and outputs a rich syllabus_first_year.json with metadata, modules & NPTEL links
 """
 
 import json
-import os
 import re
 from pathlib import Path
 import fitz  # PyMuPDF
@@ -27,17 +26,17 @@ GROUP_META = {
     "B": {
         "id": "Group B",
         "label": "Group B",
-        "branches": "ECE, EEE, EIE, Applied Electronics, Robotics & Allied Branches"
+        "branches": "ECE, EEE, EIE, Applied Electronics, Robotics, Biomedical & Allied Branches"
     },
     "C": {
         "id": "Group C",
         "label": "Group C",
-        "branches": "CE, ME, Automobile, Industrial, Chemical, Metallurgy & Allied Branches"
+        "branches": "CE, ME, Chemical, Automobile, Mechatronics, Industrial, Aeronautics, Agriculture, Naval Arch, Polymer, Safety & Allied Branches"
     },
     "D": {
         "id": "Group D",
         "label": "Group D",
-        "branches": "Biotech, Food Tech, Polymer, Naval Arch, Agriculture & Allied Branches"
+        "branches": "Biotechnology, Biochemical Engineering & Food Technology"
     }
 }
 
@@ -53,7 +52,6 @@ def clean_space(text: str) -> str:
 def get_sorted_lines(page: fitz.Page):
     """Return text lines sorted strictly top-to-bottom (fixes out-of-order PDF streams like GXESL106)."""
     blocks = page.get_text("blocks")
-    # Sort by vertical position (y0 rounded to 4pt buckets), then horizontal (x0)
     blocks.sort(key=lambda b: (round(b[1] / 4), b[0]))
     lines = []
     for b in blocks:
@@ -71,7 +69,6 @@ def is_divider_or_cover_page(page: fitz.Page, page_idx: int) -> bool:
     if page_idx == 0:
         return True
     raw = clean_space(page.get_text("text"))
-    # Strip standard KTU running header/footer
     stripped = re.sub(r"B\.?\s*Tech\s*2024\s*[–-]\s*S1/S2", "", raw, flags=re.I)
     stripped = re.sub(r"APJ\s+Abdul\s+Kalam\s+Technological\s+University\s*\d*", "", stripped, flags=re.I)
     stripped = clean_space(stripped)
@@ -88,7 +85,6 @@ def is_divider_or_cover_page(page: fitz.Page, page_idx: int) -> bool:
         for pat in divider_patterns:
             if re.search(pat, stripped, flags=re.I):
                 return True
-        # Extremely sparse blank/separator page with no table markers
         if len(stripped) < 35 and not re.search(r"(Module|Experiment|CO\d|Text Books|Reference)", stripped, re.I):
             return True
     return False
@@ -100,26 +96,55 @@ def detect_course_start(page: fitz.Page):
     Otherwise returns None.
     """
     full_text = page.get_text("text")
-    # Strict KTU 2024 syllabus table signature
     has_course_code_lbl = bool(re.search(r"Course\s+Code", full_text, re.I))
     has_cie = bool(re.search(r"CIE\s+Marks", full_text, re.I))
     has_credits = bool(re.search(r"\bCredits\b", full_text, re.I))
     if not (has_course_code_lbl and (has_cie or has_credits)):
         return None
 
-    # Find Course Code inside the top 45% of the page (where the header metadata table sits)
     rect = page.rect
     top_clip = fitz.Rect(0, 0, rect.width, rect.height * 0.48)
     top_text = page.get_text("text", clip=top_clip)
 
-    # Prefer code immediately following "Course Code"
-    code_match = re.search(r"Course\s+Code\s*[:\-]?\s*([A-Z]{4,5}\d{3})\b", top_text, re.I)
-    if not code_match:
-        code_match = COURSE_CODE_RE.search(top_text)
-    if not code_match:
-        return None
+    # Extract Metadata Table Fields first (handles spaces in codes like "PCBBT 205")
+    code = cie = ese = credits = ltpr = exam_hours = course_type = ""
+    try:
+        tables = page.find_tables(clip=top_clip)
+        if tables and tables.tables:
+            for row in tables.tables[0].extract():
+                cells = [clean_space(c or "") for c in row]
+                for i in range(len(cells) - 1):
+                    k = cells[i].lower()
+                    v = cells[i + 1]
+                    if not v:
+                        continue
+                    if "course code" in k and not code:
+                        m_code = re.search(r"([A-Z]{4,5}\s*\d{3})\b", v, re.I)
+                        if m_code:
+                            code = re.sub(r"\s+", "", m_code.group(1)).upper()
+                    elif "cie marks" in k and not cie:
+                        cie = v
+                    elif "ese marks" in k and not ese:
+                        ese = v
+                    elif k == "credits" and not credits:
+                        credits = v
+                    elif "teaching hours" in k and not ltpr:
+                        ltpr = v
+                    elif "exam hours" in k and not exam_hours:
+                        exam_hours = v
+                    elif "course type" in k and not course_type:
+                        course_type = v
+    except Exception:
+        pass
 
-    code = code_match.group(1).upper()
+    # Regex fallback for Course Code (allows optional space before digits)
+    if not code:
+        code_match = re.search(r"Course\s+Code\s*[:\-]?\s*([A-Z]{4,5}\s*\d{3})\b", top_text, re.I)
+        if not code_match:
+            code_match = COURSE_CODE_RE.search(top_text)
+        if not code_match:
+            return None
+        code = re.sub(r"\s+", "", code_match.group(1)).upper()
 
     # Extract spatial lines above the "Course Code" row to reliably get Semester, Title, and Common Note
     sorted_lines = get_sorted_lines(page)
@@ -154,91 +179,72 @@ def detect_course_start(page: fitz.Page):
             title_parts.append(ln)
 
     raw_title = clean_space(" ".join(title_parts))
-    # Fix occasional missing spaces from KTU PDFs (e.g., ESSENTIALSTO -> ESSENTIALS TO)
     raw_title = re.sub(r"ESSENTIALSTO", "ESSENTIALS TO", raw_title, flags=re.I)
+    raw_title = re.sub(r"\s*[-–]\s*([12])$", r" - \1", raw_title)
     title = raw_title.title() if raw_title.isupper() else raw_title
-    # Restore acronyms in Title Case
     for acr in ["IPR", "IT", "CAD", "AI", "ML", "IoT", "CSE", "ECE", "EEE", "ME", "CE", "C", "C++", "PCB", "VLSI"]:
         title = re.sub(rf"\b{re.escape(acr)}\b", acr, title, flags=re.I)
     if not title:
         title = code
 
-    # Determine semester tags (S1, S2, or both)
-    semesters = []
-    sem_src = sem_label.upper()
-    if re.search(r"S?1\s*/\s*S?2", sem_src):
-        semesters = ["S1", "S2"]
-    elif re.search(r"\bS?1\b", sem_src):
-        semesters = ["S1"]
-    elif re.search(r"\bS?2\b", sem_src):
-        semesters = ["S2"]
+    # Use KTU 2024 course code numbering first (12x = S1/S2, 1xx = S1, 2xx = S2)
+    num_m = re.search(r"(\d{3})$", code)
+    if num_m:
+        digits = num_m.group(1)
+        if digits.startswith("12"):
+            semesters = ["S1", "S2"]
+        elif digits.startswith("1"):
+            semesters = ["S1"]
+        elif digits.startswith("2"):
+            semesters = ["S2"]
+        else:
+            semesters = ["S1"]
     else:
-        # Fallback from course code digit (e.g. GAMAT101 -> S1, GAMAT201 -> S2, GAPHT121 -> S1/S2)
-        num_m = re.search(r"(\d{3})$", code)
-        if num_m:
-            digits = num_m.group(1)
-            if digits.startswith("12"):
-                semesters = ["S1", "S2"]
-            elif digits.startswith("1"):
-                semesters = ["S1"]
-            elif digits.startswith("2"):
-                semesters = ["S2"]
+        sem_src = sem_label.upper()
+        if re.search(r"S?1\s*/\s*S?2", sem_src):
+            semesters = ["S1", "S2"]
+        elif re.search(r"\bS?2\b", sem_src):
+            semesters = ["S2"]
+        else:
+            semesters = ["S1"]
 
-    # Extract Metadata Table Fields cleanly using PyMuPDF table finder (with regex fallback)
-    cie = ese = credits = ltpr = exam_hours = course_type = ""
-    try:
-        tables = page.find_tables(clip=top_clip)
-        if tables and tables.tables:
-            for row in tables.tables[0].extract():
-                cells = [clean_space(c or "") for c in row]
-                for i in range(len(cells) - 1):
-                    k = cells[i].lower()
-                    v = cells[i + 1]
-                    if not v:
-                        continue
-                    if "cie marks" in k and not cie:
-                        cie = v
-                    elif "ese marks" in k and not ese:
-                        ese = v
-                    elif k == "credits" and not credits:
-                        credits = v
-                    elif "teaching hours" in k and not ltpr:
-                        ltpr = v
-                    elif "exam hours" in k and not exam_hours:
-                        exam_hours = v
-                    elif "course type" in k and not course_type:
-                        course_type = v
-    except Exception:
-        pass
-
-    # Regex fallbacks if table extraction missed anything
+    # Regex fallbacks if table extraction missed anything (single-line safe)
     if not cie:
-        m = re.search(r"CIE\s+Marks\s+(\d+)", top_text, re.I)
-        if m: cie = m.group(1)
+        m = re.search(r"CIE\s+Marks[ \t]+(\d+)", top_text, re.I)
+        if m:
+            cie = m.group(1)
     if not ese:
-        m = re.search(r"ESE\s+Marks(?:\s*\([^)]*\))?\s+(\d+)", top_text, re.I)
-        if m: ese = m.group(1)
+        m = re.search(r"ESE\s+Marks(?:\s*\([^)]*\))?[ \t]+(\d+)", top_text, re.I)
+        if m:
+            ese = m.group(1)
     if not credits:
-        m = re.search(r"Credits\s+(\d+)", top_text, re.I)
-        if m: credits = m.group(1)
+        m = re.search(r"Credits[ \t]+(\d+)", top_text, re.I)
+        if m:
+            credits = m.group(1)
     if not ltpr:
         m = re.search(r"\b(\d\s*[:\-]\s*\d\s*[:\-]\s*\d\s*[:\-]\s*\d)\b", top_text)
-        if m: ltpr = re.sub(r"\s+", "", m.group(1)).replace("-", ":")
+        if m:
+            ltpr = m.group(1)
+    if ltpr:
+        ltpr = re.sub(r"\s*[:\-]\s*", ":", ltpr)
     if not course_type:
-        m = re.search(r"Course\s+Type\s+([A-Za-z0-9 &+\-/]+)", top_text, re.I)
-        if m: course_type = clean_space(m.group(1))
+        m = re.search(r"Course\s+Type[ \t]+([A-Za-z0-9 &+\-/]+)", top_text, re.I)
+        if m and not re.search(r"Course\s+Objectives?", m.group(1), re.I):
+            course_type = clean_space(m.group(1))
+    if not course_type:
+        course_type = "Activity / Theory" if ese == "0" else "Theory"
 
     return {
         "code": code,
         "title": title,
         "common_note": common_note,
-        "semesters": semesters or ["S1"],
+        "semesters": semesters,
         "credits": credits,
         "cie": cie,
         "ese": ese,
         "ltpr": ltpr,
         "exam_hours": exam_hours,
-        "course_type": course_type or "Theory",
+        "course_type": course_type,
     }
 
 
@@ -260,22 +266,25 @@ def extract_modules_and_links(doc: fitz.Document, start_p: int, end_p: int):
                     seen_links.add(url)
                     video_links.append(url)
 
-        # Extract Modules from syllabus tables
+        # Extract Modules from KTU 3-column syllabus tables (Module No | Syllabus Description | Contact Hours)
         try:
             tables = page.find_tables()
             for tbl in tables.tables:
                 rows = tbl.extract()
+                if not rows:
+                    continue
+                header_str = " ".join(clean_space(x or "") for x in rows[0])
+                if re.search(r"(Sl\.?\s*No|Expt\.?\s*No|Experiment|Benchmark\s*Score|Title of the Book|Activity)", header_str, re.I):
+                    continue
                 for r in rows:
-                    if not r or len(r) < 2:
+                    if not r or len(r) != 3:
                         continue
                     c0 = clean_space(r[0] or "")
                     c1 = clean_space(r[1] or "")
                     if c0 in ("1", "2", "3", "4") and len(c1) > 25 and not c1.startswith("http"):
-                        # Avoid capturing Reference Books / Experiment List tables as Modules
-                        if not re.search(r"(Sl\.?\s*No|Expt\.?\s*No|Benchmark\s*Score|Title of the Book)", " ".join(clean_space(x or "") for x in rows[0]), re.I):
-                            mod_num = int(c0)
-                            if mod_num not in modules:
-                                modules[mod_num] = c1[:360] + ("..." if len(c1) > 360 else "")
+                        mod_num = int(c0)
+                        if mod_num not in modules:
+                            modules[mod_num] = c1[:360] + ("..." if len(c1) > 360 else "")
         except Exception:
             pass
 
@@ -294,11 +303,15 @@ def detect_group_from_filename(path: Path) -> str:
 
 
 def process_all_pdfs():
-    OUT_PDF_DIR.mkdir(parents=True, exist_ok=True)
     pdf_files = sorted(RAW_DIR.glob("*.pdf"))
     if not pdf_files:
         print(f"[ERROR] No PDFs found in {RAW_DIR.resolve()}")
         return
+
+    # Clean old split PDFs automatically so no stale files remain
+    OUT_PDF_DIR.mkdir(parents=True, exist_ok=True)
+    for old_pdf in OUT_PDF_DIR.glob("*.pdf"):
+        old_pdf.unlink()
 
     master_courses = {}  # keyed by course_code
     report_lines = ["KTU 2024 FIRST YEAR SYLLABUS BUILD REPORT", "=" * 55, ""]
@@ -336,7 +349,6 @@ def process_all_pdfs():
             next_start = starts[idx + 1][0] if idx + 1 < len(starts) else total_pages
             end_p = next_start - 1
 
-            # Strip trailing section divider pages (e.g. Page 67 "SEMESTER 2 GROUP A" or Page 124 "PROGRAMME CORE 1")
             while end_p > start_p and end_p in dividers:
                 end_p -= 1
 
@@ -345,7 +357,6 @@ def process_all_pdfs():
             pdf_out_path = OUT_PDF_DIR / f"{code}.pdf"
             rel_pdf_url = f"/syllabus/pdfs/{code}.pdf"
 
-            # Save split PDF if not already saved (or if this occurrence has more pages / cleaner layout)
             should_write = (code not in master_courses) or (page_count > master_courses[code]["pages"])
             if should_write:
                 sub_doc = fitz.open()
@@ -355,7 +366,6 @@ def process_all_pdfs():
 
             modules, video_links = extract_modules_and_links(doc, start_p, end_p)
 
-            # Merge semesters & groups cleanly for common subjects
             sems_found = set(meta["semesters"])
             if meta["section_sem"] in ("S1", "S2") and len(sems_found) == 0:
                 sems_found.add(meta["section_sem"])
