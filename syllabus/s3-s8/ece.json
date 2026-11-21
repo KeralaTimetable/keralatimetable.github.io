@@ -1,0 +1,3426 @@
+{
+  "scheme": "2024",
+  "level": "S3–S8",
+  "branch": {
+    "code": "ECE",
+    "slug": "ece",
+    "name": "Electronics and Communication Engineering",
+    "short_name": "ECE",
+    "group": "Group B"
+  },
+  "total_courses": 75,
+  "semester_counts": {
+    "S3": 9,
+    "S4": 14,
+    "S5": 13,
+    "S6": 14,
+    "S7": 17,
+    "S8": 10
+  },
+  "category_counts": {
+    "Core": 10,
+    "PBL Core": 4,
+    "Math & Science": 3,
+    "Common / Humanities": 2,
+    "Lab": 7,
+    "Program Elective": 41,
+    "Open Elective": 8
+  },
+  "courses": [
+    {
+      "id": "PCECT302",
+      "code": "PCECT302",
+      "title": "Solid State Devices",
+      "category": "Core",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "PhysicsofElectrical Science(GBPHT121)",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT302.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "ReviewofSemiconductorphysics:Equilibriumandsteadystateconditions , Concept of effective mass and Fermi level Density of states & Effective , density of states Equilibrium concentration of electrons and holes Excess , . carriers in semiconductors: Generation and recombination mechanisms of excess carriers quasi -Fermi levels Carrier transport in semiconductors: , . Drift conduct..."
+        },
+        {
+          "no": 2,
+          "summary": "PN junctions: Contact potential Electrical Field Potential and Charge , , distributionatthejunction BiasingandEnergybanddiagrams Idealdiode , , equation Bipolar junction transistor: Transistor action Base width . , modulation Current components in a BJT Derivation of current , , components ."
+        },
+        {
+          "no": 3,
+          "summary": "Metal Semiconductor contacts: Electron affinity and work function , OhmicandRectifyingContacts currentvoltagecharacteristics IdealMOS , . capacitor: band diagrams at equilibrium accumulation depletion and , , inversion surfacepotential CVcharacteristics effectsofrealsurfaces , , , , threshold voltage body effect MOSFET Drain current equation of , . - enhancement type MOSFET (de..."
+        },
+        {
+          "no": 4,
+          "summary": "MOSFET scaling: Need for scaling constant voltage scaling and constant , field scaling Sub threshold conduction in MOS Short channel effects in . - . MOSFETs: Channel length modulation Drain Induced Barrier Lowering , , Velocity Saturation Threshold Voltage Variations and Hot Carrier Effects , . MESFETandFinFET:Structure operationandadvantages , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCECT303",
+      "code": "PCECT303",
+      "title": "Analog Circuits",
+      "category": "Core",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "BEE/ (GYEST104)",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT303.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Wave Shaping Circuits: RC differentiating and integrating circuits Analysis , of First order RC low pass and high pass filter for step input -rise time band , width DiodeClippingandclampingcircuits . . BJT/MOSFET Biasing: Need for biasing DCloadline operating point BJT , , , biasing (CE configuration) fixed bias & voltage divider bias (Design & – analysis) MOSFETbiasing . ,"
+        },
+        {
+          "no": 2,
+          "summary": "BJT Amplifiers: Design of RC coupled CE amplifier Small signal analysis of - CE amplifier using hybrid - π model (low and mid frequency`) . The high - frequency hybrid -π model of BJT Miller effect High frequency response , , f of single stage CE amplifier short circuit current gain cut -off frequency β , , & unity gain bandwidth f T . MOSFETAmplifiers:DesignofCSamplifier Small..."
+        },
+        {
+          "no": 3,
+          "summary": "Feedback amplifiers: The general feedback structure Effect of negative , feedback on gain bandwidth noise reduction and distortion The four basic , , . feedback topologies Analysis of discrete BJT circuits in voltage-series and , voltage-shunt feedback topologies voltage gain input and output impedance - , . Oscillators: Classification criterion for oscillation Wien bridge osci..."
+        },
+        {
+          "no": 4,
+          "summary": "Poweramplifiers:Classification TransformercoupledclassApoweramplifier , , push pull class B and class AB power amplifiers complementary- symmetry , classBandClassAB power amplifiers , class C and D power amplifier - efficiency and distortion (no analysisrequired) Linear Voltage Regulators: Types of voltage regulators- series and shunt - workinganddesign load&lineregulation shor..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PBECT304",
+      "code": "PBECT304",
+      "title": "Logic Circuit Design",
+      "category": "PBL Core",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:1",
+      "exam_hours": "",
+      "course_type": "PBL",
+      "prerequisites": "GYEST104 IntroductiontoElectrical& ElectronicsEngineering",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBECT304.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to digital circuits: Review of number systems representation- conversions Arithmetic of Binary number systems Signed and unsigned , , numbers BCD , . Boolean algebra: Theorems , sum of product and product of sum - simplification canonical forms- min term and max term Simplification of , , Boolean expressions - Karnaugh map (upto 4 variables) , Implementation of Boo..."
+        },
+        {
+          "no": 2,
+          "summary": "Combinational logic circuits- Half adder and Full adders Subtractors BCD , , adder Ripple carry and carry look ahead adders Decoders Encoders Code , , , , converters Comparators Parity generator Multiplexers De-multiplexers , , , , , ImplementationofBooleanalgebrausingMUX . Introduction to Verilog HDL Basic language elements Basic implementation – , oflogicgatesandcombinational..."
+        },
+        {
+          "no": 3,
+          "summary": "Sequential Circuits: SR Latch Flip flops SR JK Master-Slave JK D and , - , , , T Flip flops Conversion of Flip flops Excitation table and characteristic . , equation Shift registers-SIPO SISO PISO PIPO and Universal shift . , , , registers Ring and Johnsons counters Design of Asynchronous Synchronous . . , andModNcounters ."
+        },
+        {
+          "no": 4,
+          "summary": "Finite state machines Mealy and Moore models State graphs State - , , assignment Statetable Statereduction , , . Logic Families: -Electrical characteristics of logic gates (Noise margin Fan- , in Fan-out Propagation delay Transition time Power -delay product) -TTL , , , , , ECL CMOS , . CircuitdescriptionandworkingofTTLandCMOSinverter CMOSNAND , andCMOSNORgates ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "GNEST305",
+      "code": "GNEST305",
+      "title": "Introduction to Artificial Intelligence and Data Science",
+      "category": "Math & Science",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/GNEST305.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to AI and Machine Learning: Basics of Machine Learning - types of Machine Learning systems-challenges in ML Supervised learning - model example- regression models- Classification model example- Logistic regression-unsupervised model example- K -means clustering Artificial . Neural Network Perceptron- Universal Approximation Theorem (statement - only) Multi -Layer P..."
+        },
+        {
+          "no": 2,
+          "summary": "MathematicalFoundationsofAIandDatascience:Roleoflinearalgebra in Data representation and analysis Matrix decomposition- Singular Value – Decomposition (SVD) Spectral decomposition- Dimensionality reduction - technique-Principal Component Analysis (PCA) (Text -1) ."
+        },
+        {
+          "no": 3,
+          "summary": "Applied Probability and Statistics for AI and Data Science: Basics of probability-random variables and statistical measures - rules in probability- Bayes theorem and its applications- statistical estimation-Maximum Likelihood Estimator (MLE) statistical summaries- Correlation analysis- - linear correlation (direct problems only) regression analysis- linear regression - (usingle..."
+        },
+        {
+          "no": 4,
+          "summary": "Basics of Data Science: Benefits of data science-use of statistics and Machine Learning in Data Science- data science process - applications of Machine Learning in Data Science- modelling process- demonstration of ML applications in data science- Big Data and Data Science (For visualization . the software tools like Tableau PowerBI R or Python can be used For , , . Machine Lear..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "GYMAT301",
+      "code": "GYMAT301",
+      "title": "Mathematics for Electrical Science and Physical Science - 3",
+      "category": "Math & Science",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "Basicknowledgein complexnumbers .",
+      "common_note": "Common to B & C Groups",
+      "shared_branches": [
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/GYMAT301.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "FourierIntegral FromFourierseriestoFourierIntegral FourierCosineand , , Sineintegrals FourierCosineandSineTransform Linearity Transformsof , , , Derivatives Fourier Transform and its inverse Linearity Transforms of , , , Derivative . (Text1:Relevanttopicsfromsections117 118 119) . , . , ."
+        },
+        {
+          "no": 2,
+          "summary": "Complex Function Limit Continuity Derivative Analytic functions , , , , , Cauchy-Riemann Equations (without proof) Laplace’s Equations Harmonic , , functions Finding harmonic conjugate Conformal mapping Mappings of , , , w=𝑧ଶ 𝑤=𝑒௭ w=ଵ 𝑤=𝑠𝑖𝑛𝑧 , , ௭, . (Text1:Relevanttopicsfromsections133 134 171 172 174) . , . , . , . , ."
+        },
+        {
+          "no": 3,
+          "summary": "ComplexIntegration:Lineintegralsinthecomplexplane(Definition&Basic properties) First evaluation method Second evaluation method Cauchy’s , , , integraltheorem(withoutproof)onsimplyconnecteddomain Independence , of path Cauchy integral theorem on multiply connected domain (without , proof) CauchyIntegralformula(withoutproof) , . (Text1:Relevanttopicsfromsections141 142 143) . , ..."
+        },
+        {
+          "no": 4,
+          "summary": "Taylor series and Maclaurin series Laurent series (without proof) , , Singularities and Zeros Isolated Singularity Poles Essential Singularities – , , , Removable singularities Zeros of Analytic functions Poles and Zeros , – , Formulas for Residues Residue theorem (without proof) Residue , , Integration- Integral of Rational Functions of cosθ and sinθ . (Text1:Relevanttopicsfro..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "UCHUT346",
+      "code": "UCHUT346",
+      "title": "Economics for Engineers",
+      "category": "Common / Humanities",
+      "semesters": [
+        "S3",
+        "S4"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "2:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "Common to All Branches",
+      "shared_branches": [
+        "CSE",
+        "AIML",
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/UCHUT346.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Basic Economics Concepts Basic economic problems Production - – Possibility Curve Utility Law of diminishing marginal utility Law of – – – Demand Law of supply Elasticity measurement of elasticity and its - – - applications Equilibrium- Changes in demand and supply and its effects – Production function Law of variable proportion Economies of Scale - – – Internal and External Ec..."
+        },
+        {
+          "no": 2,
+          "summary": "Cost concepts Social cost private cost Explicit and implicit cost Sunk – , – – cost - Opportunity cost - short run cost curves - Revenue concepts Firms and their objectives Types of firms Markets Perfect Competition – – - Monopoly Monopolistic Competition Oligopoly (features and – - - equilibriumofafirm)"
+        },
+        {
+          "no": 3,
+          "summary": "Monetary System Money Functions Central Banking –Inflation – – - - Causes and Effects Measures to Control Inflation Monetary and Fiscal – - policies Deflation – Taxation Direct and Indirect taxes (merits and demerits) GST – - National income Concepts Circular Flow Methods of Estimation and – - – Difficulties Stock Market Functions- Problems faced by the Indian stock - – market ..."
+        },
+        {
+          "no": 4,
+          "summary": "Value Analysis and value Engineering Cost Value Exchange Value Use - , , Value , Esteem Value - Aims , Advantages and Application areas of Value Engineering - Value Engineering Procedure - Break -even Analysis - Cost - Benefit Analysis Capital Budgeting Process planning - -"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "UCHUT347",
+      "code": "UCHUT347",
+      "title": "Engineering Ethics and Sustainable Development",
+      "category": "Common / Humanities",
+      "semesters": [
+        "S3",
+        "S4"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "2:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CSE",
+        "AIML",
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/UCHUT347.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Fundamentals of ethics - Personal vs . professional ethics , Civic Virtue , Respect for others Profession and Professionalism Ingenuity diligence , , , and responsibility Integrity in design development and research domains , , , , Plagiarism , a balanced outlook on law - challenges - case studies , Technology and digital revolution-Data information and knowledge , , , Cybertru..."
+        },
+        {
+          "no": 2,
+          "summary": "Introduction to Environmental Ethics: Definition importance and , historical development of environmental ethics key philosophical theories , (anthropocentrism biocentrism ecocentrism) Sustainable Engineering , , . Principles: Definition and scope triple bottom line (economic social and , , environmental sustainability) life cycle analysis and sustainability metrics , . Ecosyst..."
+        },
+        {
+          "no": 3,
+          "summary": "Hydrology and WaterManagement: Basics of hydrologyand watercycle , Waterscarcityandpollutionissues Sustainablewatermanagementpractices , , Environmental flow disruptions and disasters Zero Waste Concepts and , . Practices: Definition of zero waste and its principles Strategies for waste , reduction reuse reduceand recycling Case studiesof successful zero waste , , , initiatives..."
+        },
+        {
+          "no": 4,
+          "summary": "RenewableEnergyandSustainableTechnologies: Overviewofrenewable energy sources (solar wind hydro biomass) Sustainable technologies in , , , , energy production and consumption Challenges and opportunities in , renewable energy adoption Climate Change and Engineering Solutions: . Basics of climate change science Impact of climate change on natural and , humansystems Kerala/Indiaa..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCECL307",
+      "code": "PCECL307",
+      "title": "Analog Circuits Lab",
+      "category": "Lab",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL307.pdf",
+      "modules": [],
+      "experiments_count": 12,
+      "experiments": [
+        {
+          "no": "10",
+          "title": "Transistor series voltage regulator – Design for a specific output voltage with & without short circuitprotection(plotload&lineregulationcharacteristics) ."
+        },
+        {
+          "no": "1",
+          "title": "RC Integrating and Differentiating Circuits (Transient analysis with different inputs and – frequencyresponse)"
+        },
+        {
+          "no": "2",
+          "title": "DiodeClippingandClampingCircuits(Transientandtransfercharacteristics)"
+        },
+        {
+          "no": "3",
+          "title": "CE amplifier – Design for a specific voltage gain and plot frequency response characteristics"
+        },
+        {
+          "no": "4",
+          "title": "CS MOSFET amplifier - Design for a specific voltage gain and plot frequency response characteristics"
+        },
+        {
+          "no": "5",
+          "title": "Cascaded amplifier (CE – CE) - Design for a specific voltage gain and plot frequency responsecharacteristics"
+        },
+        {
+          "no": "6",
+          "title": "Cascode amplifier - Design for a specific voltage gain and plot frequency response characteristics"
+        },
+        {
+          "no": "7",
+          "title": "Feedback amplifiers (current series & voltage series) - Design for a specific voltage gain and plotfrequencyresponsecharacteristics"
+        },
+        {
+          "no": "8",
+          "title": "RC oscillators – RC phase shift or wien bridge oscillator"
+        },
+        {
+          "no": "9",
+          "title": "Power amplifiers (Transformer less) Class B & Class AB –"
+        },
+        {
+          "no": "10",
+          "title": "Transistor series voltage regulator – Design for a specific output voltage with & without short circuitprotection(plotload&lineregulationcharacteristics) ."
+        },
+        {
+          "no": "10",
+          "title": "Transistor series voltage regulator – Design for a specific output voltage with & without short"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCECL308",
+      "code": "PCECL308",
+      "title": "Logic Circuit Design Laboratory",
+      "category": "Lab",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL308.pdf",
+      "modules": [],
+      "experiments_count": 8,
+      "experiments": [
+        {
+          "no": "2",
+          "title": "Experiment2:AddersinVerilog (a)Developmentofverilogmodulesforhalfadderinanyofthe3modelingstyles (b)Developmentofverilogmodulesforfulladderinstructuralmodelingusinghalfadder ."
+        },
+        {
+          "no": "3",
+          "title": "Experiment3:MuxandDemuxinVerilog (a)Developmentofverilogmodulesfora4x1MUX . (b)Developmentofverilogmodulesfora1x4DEMUX ."
+        },
+        {
+          "no": "4",
+          "title": "Experiment4:Flipflopsandcounters (a)DevelopmentofverilogmodulesforSR JKandDflipflops , . (b)Developmentofverilogmodulesforabinarydecade/Johnson/Ringcounters"
+        },
+        {
+          "no": "5",
+          "title": "Experiment5 MultiplexerandLogicImplementationinFPGA . (a)Makeagateleveldesignofan8:1multiplexer writetoFPGAandtestitsfunctionality , . (b)Usetheabovemoduletorealizeanylogicfunction"
+        },
+        {
+          "no": "6",
+          "title": "Experiment 6 Flip-Flops and their Conversion in FPGA . (a) Make gate level designs of J -K J -K master-slave T and D flip-flops implement and test them , , , ontheFPGAboard . (b) Implement and test the conversions such a..."
+        },
+        {
+          "no": "7",
+          "title": "Experiment7:AsynchronousandSynchronousCountersinFPGA (a) Make a design of a 4 -bit up down ripple counter using T -flip-flops in the previous experiment , implementandtestthemontheFPGAboard . (b) Make a design of a 4 -bi..."
+        },
+        {
+          "no": "8",
+          "title": "Experiment8:UniversalShiftRegisterinFPGA (a) Make a design of a 4 -bit universal shift register using D -flip-flops in the previous experiment , implementandtestthemontheFPGAboard . (b)ImplementringandJohnsoncounterswith..."
+        },
+        {
+          "no": "9",
+          "title": "Experiment9 BCDtoSevenSegmentDecoderinFPGA . (a)Makeagateleveldesignofasevensegmentdecoder writetoFPGAandtestitsfunctionality , . (b)Testitwithswitchesandsevensegmentdisplay Useouputportsforconnectiontothedisplay . ."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCECT402",
+      "code": "PCECT402",
+      "title": "Signals and Systems",
+      "category": "Core",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "MathematicsforElectrical andPhysicalSciences (GYMAT101 , GYMAT201)",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT402.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introductiontosignalsandsystems: Continuous time and discrete time signals Elementary signals - , Classificationofsignals Basicsignaloperations , . Continuous time and discrete time systems Representation and – Classification (memory causal stable linear time-invariant invertible) , , , , , Convolutionintegralandconvolutionsumoperations . Continuous time and discrete time LTI s..."
+        },
+        {
+          "no": 2,
+          "summary": "Frequencydomainrepresentationofcontinuoustimesignals: Continuous time Fourier series Exponential Fourier series - representationofperiodicsignals . Continuous time Fourier transform Convergence and Gibbs - phenomenon Continuous time Fourier transform of standard signals , , PropertiesofContinuoustimeFouriertransform InverseTransform , . Bilateral Laplace Transform Concept of RO..."
+        },
+        {
+          "no": 3,
+          "summary": "Sampling of continuous time signals to discrete signals and frequencydomainrepresentationofdiscretetimesignals: Conversionofcontinuoustimesignalto discretetimesignal Sampling , theoremforlowpasssignals Nyquistcriteria Aliasing , , . DiscretetimeFourierseriesfordiscreteperiodicsignals . Discrete time Fourier transform (DTFT) -Convergence condition DTFT , ofstandardsignals Proper..."
+        },
+        {
+          "no": 4,
+          "summary": "AnalysisofLTIsystemsusingTransforms Concept of transfer function-Frequency response Magnitude response , andphaseresponse . Analysis of Continuous time LTI systems using Laplace and Fourier transforms . Analysis of discrete time LTI systems using DTFT and Z transforms , StabilityandcausalityusingZtransform ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCECT403",
+      "code": "PCECT403",
+      "title": "Linear Integrated Circuits",
+      "category": "Core",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "AnalogCircuits (PCECT303)",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT403.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "DifferentialAmplifiers:DifferentialamplifierconfigurationsusingBJT , DC Analysis transfer characteristics; AC analysis differential and - - common mode gains CMRR input and output resistance voltage gain , , , , constantcurrentbias constantcurrentsource , . Concept of current mirror: two-transistor current mirror Wilson and , Widlarcurrentmirrors . Operational amplifiers (Op Am..."
+        },
+        {
+          "no": 2,
+          "summary": "Op Amp with negative feedback: General concept of Voltage Series , Voltage Shunt Current Series and Current Shunt negative feedback Op , , Amp circuits with Voltage Series and Voltage Shunt feedback Virtual , groundconcept . Analysis of inverting and non-inverting amplifier for closed loop gain , InputResistanceandOutputResistance . Op Amp applications: Summer Voltage Follower ..."
+        },
+        {
+          "no": 3,
+          "summary": "Oscillators and Multivibrators: Phase Shift and Wien-bridge Oscillators , Triangular and Sawtooth waveform generators Astable and Monostable , multivibrators . Active filters: Comparison with passive filters First and Second order , Low pass High pass Band pass and Band Reject active filters State , , , Variablefilters . Voltage Regulators: Fixed and Adjustable voltage regulato..."
+        },
+        {
+          "no": 4,
+          "summary": "Timer and VCO: Timer IC 555 Functional diagram Astable and - , monostable operations Basic concepts of Voltage Controlled Oscillator , andapplicationofVCOICLM566 . Phase Locked Loop: Basic building block Operation Closed loop , , analysis Lockandcapturerange ApplicationsofPLL PLLIC565 , , , . DataConverters:DigitaltoAnalogconverters Specifications Weighted , , resistor type and..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PBECT404",
+      "code": "PBECT404",
+      "title": "Microcontrollers",
+      "category": "PBL Core",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:1",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "PBL",
+      "prerequisites": "PBECT304 -Logic CircuitDesign",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBECT404.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Microcontroller Architecture General internal architecture Address – , bus Databus controlbus , , . The Microcontroller 8051: Features of 8051 microcontroller Block , diagram of 8051 - program status word (PSW) , accumulator , program counter Memory organization RAM & ROM register banks and stack . – , , SpecialFunctionRegisters(SFRs) I/Oportorganization Interrupts , , ."
+        },
+        {
+          "no": 2,
+          "summary": "Instruction Set of 8051 & Addressing modes: Classification of instruction set - Data transfer group , arithmetic group , logical group , branchinggroup . Addressing modes Types Accessing the data from internal and external - . memory ."
+        },
+        {
+          "no": 3,
+          "summary": "Programming 8051 Using Assembly Language: Introduction to 8051 assembly language programming Data types& directives Concept of . , subroutine Softwaredelayprogramming . . Programming 8051 Using Embedded C Language: Introduction to embedded C advantages – ."
+        },
+        {
+          "no": 4,
+          "summary": "Timer / Counter in 8051: Timer registers Timer0 Timer1 - , . Configuration of timer registers Timer mode programming Counter . . mode ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "GBMAT401",
+      "code": "GBMAT401",
+      "title": "Mathematics for Electrical Science - 4",
+      "category": "Math & Science",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "Basiccalculus",
+      "common_note": "",
+      "shared_branches": [
+        "ECE",
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/GBMAT401.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Random variables Discrete random variables and their probability , distributions Cumulativedistributionfunction Expectation Meanand , , , variance Binomial distribution Poisson distribution Poisson , , , distribution as a limit of the binomial distribution Joint pmf of two , discrete random variables Marginal pmf Independent random , , variables Expectedvalueofafunctionoftwodis..."
+        },
+        {
+          "no": 2,
+          "summary": "Continuous random variables and their probability distributions , Cumulative distribution function Expectation Mean and variance , , , Uniform Normal and Exponential distributions Joint pdf of two , , Continuous random variables Marginal pdf Independent random , , variables Expectationvalueofafunctionoftwocontinuousvariables , . [Text1:Relevanttopicsfromsections31 41 42 43 44 5..."
+        },
+        {
+          "no": 3,
+          "summary": "Confidence Intervals Confidence Level Confidence Intervals and , , One-side confidence intervals for a Population Mean for large and small samples (normal distribution and t -distribution) Hypotheses and , TestProcedures TypeIandTypeIIerror zTestsforHypothesesabout , , a Population Mean (for large sample) t Test for Hypotheses about a , Population Mean (for small sample) Tests ..."
+        },
+        {
+          "no": 4,
+          "summary": "Random process concept classification of process Methods of , , Description of Random process Special classes Average Values of , , Random Process Stationarity- SSS WSS Autocorrelation functions , , , and its properties Ergodicity Mean-Ergodic Process Mean-Ergodic , , , Theorem CorrelationErgodicProcess DistributionErgodicProcess , , . [Text2:RelevanttopicsfromChapter6]"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCECL407",
+      "code": "PCECL407",
+      "title": "Linear Integrated Circuits Lab",
+      "category": "Lab",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Lab",
+      "prerequisites": "PCECT303",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL407.pdf",
+      "modules": [],
+      "experiments_count": 2,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "Simulationofanythreecircuitsfromexperiments3 5 6 7 8 9 10and11of , , , , , , sectionI"
+        },
+        {
+          "no": "2",
+          "title": "Simulationofexperiments3or4fromsectionII"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCECL408",
+      "code": "PCECL408",
+      "title": "Microcontroller Lab",
+      "category": "Lab",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Lab",
+      "prerequisites": "PCECL307 -Logic CircuitDesignand SimulationLab",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL408.pdf",
+      "modules": [],
+      "experiments_count": 5,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "PWMgenerationforDCmotorcontrol ."
+        },
+        {
+          "no": "2",
+          "title": "Object/VisitorCounter ."
+        },
+        {
+          "no": "3",
+          "title": "UARTinterfacetoBluetooth ."
+        },
+        {
+          "no": "4",
+          "title": "SPI/I2Cinterfacetodisplay ."
+        },
+        {
+          "no": "5",
+          "title": "Real -time clock ."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PEECT411",
+      "code": "PEECT411",
+      "title": "Instrumentation",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT411.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introductiontomeasuringinstruments GeneralizedConfigurationsandFunctionalelementsofInstrumentation systems Need for Measurement Systems Classification of Types of , , Measuringinstruments StaticandDynamiccharacteristicsofmeasuring . instruments ."
+        },
+        {
+          "no": 2,
+          "summary": "SensorsandTransducers ClassificationandselectioncriteriaofTransducers Principles of operation construction theory advantages and , , , disadvantages applicationsof , Resistive Transducers: Potentiometers strain gauges (metallic and , , semi -conductor type) Resistance Thermometer Thermistors , , . Inductive Transducers: LVDT (Linear variable differential transformer) . Capaciti..."
+        },
+        {
+          "no": 3,
+          "summary": "ElectronicMeasuringInstruments Digital storage oscilloscope Working principle and applications of , waveformanalyser digitalfrequencymeter harmonicdistortionmeter , , , harmonic analyser spectrum analyser and logic state analyser IEEE , - 488GeneralPurposeInterfaceBus(GPIB)Instrumentswithapplication . EMI , GroundingandShielding"
+        },
+        {
+          "no": 4,
+          "summary": "PLCProgramming Basic PLC Programming: Programming ON/OFF Inputs Creating , Ladder diagrams Register Basics PLC Timers and Counters PLC , , , Arithmetic functions Number comparison functions Data handling , , Functions:Skipfunctionandapplications;mastercontrolrelayfunction and applications; jump with non-return and return; data table register , andothermovefunctions PLCfunctions..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT412",
+      "code": "PEECT412",
+      "title": "Power Electronics",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "AnalogCircuits (PCECT303)",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT412.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: ScopeandapplicationsofPower Electronics Properties , ofidealswitch . Structureandstaticcharacteristics:Powerdiodes PowerBJT Power , , MOSFET & IGBT – comparison . Basic principles of wide band gap devices SiC & GaN – . Safe Operating Area: Power BJT Power MOSFET & IGBT Drive , . Circuits: Power BJT and Power MOSFET (any two example circuits – noanalysis) ."
+        },
+        {
+          "no": 2,
+          "summary": "SCR:Structure twotransistoranalogy staticcharacteristics , , . Rectifiers: Three phase diode bridge rectifiers Single phase half , - controlled rectifier with R load Single phase fully controlled bridge – rectifier (continuous conduction) output voltage equation Principle of – . three phase half wave controlled rectifier– (average output voltage equation for continuous load cur..."
+        },
+        {
+          "no": 3,
+          "summary": "DC DC Switch Mode Converters: Buck Boost and Buck -boost DC – , - DC converters Waveforms and expression of DC -DC converters for . output voltage voltageandcurrent rippleunder continuous conduction , mode . Isolatedconverters:Flyback Forward PushPull HalfbridgeandFull , , , bridge converters Waveforms and governing equations – ."
+        },
+        {
+          "no": 4,
+          "summary": "DC -AC Switch Mode Inverters: Inverter topologies Driven , Inverters: Push -Pull Half bridge and Full bridge configurations Single , , phase PWM inverters (Single pulse width and sinusoidal pulse width modulation) – rms output voltage equation and output voltage waveforms ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT413",
+      "code": "PEECT413",
+      "title": "Machine Learning",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT413.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Review: supervised unsupervised machine learning techniques , , dimensionality reduction techniques-PCA SVD , Instance-Based vs Model -Based Learning Machine Learning models , , Hyper parameters regularization Training Batch and Online Learning , , - , Challenges of Machine Learning: Data Issues-Quality Relevancy Over , , fitting under fitting Bias variance Performance metrics:..."
+        },
+        {
+          "no": 2,
+          "summary": "Regression: linear regression logistic regression error functions in , regression MSE L1 L2 Crossentropymultivariateregression , , , , . Classification: Naive Bayes classifier Support Vector machines , , Decision trees -random forests Ensemble methods: boosting bagging , , ."
+        },
+        {
+          "no": 3,
+          "summary": "Unsupervised learning: Clustering-K -means High Hierarchical , , clustering criterion functions for clustering proximity measures , , , Euclidean Manhattan MinkowskiDistances CosineSimilarity , , , . Reinforcement Learning: Agent based learning Q -learning , , IntroductiontoHMMmodels"
+        },
+        {
+          "no": 4,
+          "summary": "Introduction to Artificial Neural Networks: Biological Neuron , Perceptron Training limitations XORproblem Multilayerperceptron , , , , , Gradient based learning stochastic gradient descent Activation , , Functions-Sigmoid ReLU tanh Back propagation- Chain rule , , . , Regularization- L1 L2 , ,"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT414",
+      "code": "PEECT414",
+      "title": "Object Oriented Programming",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PROGRAMMING INC",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT414.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: Approaches to Software Design Functional Oriented Design Object - , OrientedDesign CaseStudyofAutomatedFireAlarmSystem , . Introduction to Java - Java Buzzwords , Java program structure , Java compiler Bytecode Java Virtual Machine (JVM) Comments Lexical , , , , Issues ."
+        },
+        {
+          "no": 2,
+          "summary": "CoreJavaFundamentals: Primitive Data types Integers Floating Point Types Characters - , , , Boolean Literals Variables Type Conversion and Casting Arrays . , , , , Strings- String Handling functions . Operators Arithmetic Operators Bitwise Operators Relational - , , Operators Boolean Logical Operators Assignment Operator , , , Conditional(Ternary)Operator OperatorPrecedence , ...."
+        },
+        {
+          "no": 3,
+          "summary": "MorefeaturesofJava: Packages Defining Package CLASSPATH Importing Packages - , , . Exception Handling Checked Exceptions Unchecked Exceptions try - , , BlockandcatchClause MultiplecatchClauses NestedtryStatements , , , throw throwsandfinally , . Input/output I/O Basics Reading Console Input Writing Console - , , Output PrintWriterClass WorkingwithFiles , , ."
+        },
+        {
+          "no": 4,
+          "summary": "AdvancedfeaturesofJava: Swings fundamentals Swing Key Features Model View Controller - , (MVC) SwingControls ComponentsandContainers SwingPackages , , , , EventHandlinginSwings SwingLayoutManagers ExploringSwings , , –JFrame JLabel The Swing Buttons JtextField , , , .. Java DataBase Connectivity (JDBC) JDBC overview Creating and - , Executing Queries create table delete insert ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT415",
+      "code": "PEECT415",
+      "title": "Digital Systems and VLSI Design",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PBECT304Logic CircuitDesign",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 8,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT415.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Clocked Synchronous Networks Analysis of Clocked Synchronous , SequentialNetworks(CSSN) Mealymachine Mooremachine Modellingof , , , CSSN State assignment andreduction Designof CSSN ASM Chartandits , , , realization ."
+        },
+        {
+          "no": 2,
+          "summary": "Asynchronous Sequential Circuits Analysis of Asynchronous Sequential , Circuits (ASC) Flow table reduction Races in ASC State assignment , , , problemandthetransitiontable DesignofAsynchronousSequentialCircuits , , DesignofALU ."
+        },
+        {
+          "no": 3,
+          "summary": "Hazards static and dynamic hazards in combinational networks Essential – , Hazards Design of Hazard free circuits Data synchronizers Mixed , , , operating mode asynchronous circuits Practical issues- clock skew and , jitter Synchronous and asynchronous inputs Flip-Flops and Simple Flip- , , FlopApplications switchdebouncer , . Faults Fault table method path sensitization method..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT416",
+      "code": "PEECT416",
+      "title": "Digital System Design",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PBECT304:Logic CircuitDesign",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT416.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Clocked Synchronous Networks Analysis of Clocked Synchronous , SequentialNetworks(CSSN) ModelingofCSSN Stateassignmentand , , reduction DesignofCSSN , ."
+        },
+        {
+          "no": 2,
+          "summary": "ASMChartanditsrealization . Asynchronous Sequential Circuits Analysis of Asynchronous , Sequential Circuits (ASC) Flow table reduction Races in ASC State , , , assignmentproblemandthetransitiontable ."
+        },
+        {
+          "no": 3,
+          "summary": "Hazards static and dynamic hazards in combinational networks – , EssentialHazards DesignofHazardfreecircuits Datasynchronizers , , , Mixed operating mode asynchronous circuits Practical issues- clock , skewandjitter Synchronousandasynchronousinputs , . Faults: Fault table method path sensitization method Boolean – – differencemethod ."
+        },
+        {
+          "no": 4,
+          "summary": "VLSI Design flow: Design entry: Schematic Data types and objects , , different modelling styles in VHDL Dataflow Behavioural and - , Structural Modelling VHDL constructs and codes for combinational . andsequentialcircuits ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCECT501",
+      "code": "PCECT501",
+      "title": "Electromagnetics",
+      "category": "Core",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "PhysicsforElectrical sciences (GBPHT121)",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT501.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Review of coordinate system-Rectangular cylindrical and spherical , coordinate systems Review of vector calculus- curl divergence gradient . , . Review of Coulomb’s law Gauss’s law and Ampere’s current law , . Derivation of capacitance and inductance of two wire transmission line and coaxial cable Magnetic scalar and vector potential Poisson and Laplace . . equations Determinat..."
+        },
+        {
+          "no": 2,
+          "summary": "Maxwell’s equation from fundamental laws Boundary condition of electric . field and magnetic field from Maxwell’s equations Solution to wave . equation Propagation of plane EM wave in perfect dielectric lossy medium , , goodconductor skindepth Polarizationofwaves , . ."
+        },
+        {
+          "no": 3,
+          "summary": "Reflection and refraction of plane electromagnetic waves at boundaries for normal&obliqueincidence(parallelandperpendicularpolarization) Snell’s , law of refraction Brewster angle Power density of EM wave Poynting , . , vectortheorem ."
+        },
+        {
+          "no": 4,
+          "summary": "Transmissionlineascircuitelements(LandC) Transmissionlineequations . and characteristic impedance Reflection coefficient and VSWR Derivation . . of input impedance of transmission line Calculation of line impedance and . VSWR using smith chart The hollow rectangular waveguide –TE and TM . wave-dominant mode group velocity and phase velocity –derivation and , simpleproblemsonly ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCECT502",
+      "code": "PCECT502",
+      "title": "Analog and Digital Communication",
+      "category": "Core",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "PCECT402Signalsand Systems GBMAT401Probability , RandomProcessand NumericalMethods",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT502.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Blockdiagramofacommunicationsystem Needformodulation Amplitude . . modulation Equation and spectrum of AM signal DSB -SC SSB -pilot , , , carrierandVestigialsidebandsystems . Anglemodulation: Narrowand wideband FM andtheirspectra relationship , between FM and PM Carson’s rule pre-emphasis and de-emphasis filtering , , . ComparisonofAMandFM BlockdiagramofFMreceiver , . Superhete..."
+        },
+        {
+          "no": 2,
+          "summary": "SamplingandQuantization SQNRforuniformquantization Companding , , Pulse code modulation Transmitter and receiver DPCM transmitter and , . receiver Deltamodulation Slopeoverload Linecodes . , , ."
+        },
+        {
+          "no": 3,
+          "summary": "Baseband data transmission of digital data through AWGN channel , Mathematical model of ISI Nyquist criterion for zero ISI Signal modelling , , forISI Raisedcosinespectrum EqualizationZeroforcingEqualiser , , , . Geometric representation of Signals-Gram-Schmitt procedure Signal space , . VectormodelofAWGNchannel . Matchedfilterandcorrelationreceivers MAPreceiver Maximumlikeliho..."
+        },
+        {
+          "no": 4,
+          "summary": "Digital band pass modulation schemes-BPSK system and signal constellation BPSK transmitter and receiver QPSK system and Signal . . constellations BER analysis of BPSK and QPSK in erfc Plots of BER Vs . . SNR QPSK transmitter and receiver Quadrature amplitude modulation and . . signalconstellation ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCECT503",
+      "code": "PCECT503",
+      "title": "Control Systems",
+      "category": "Core",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "GBMAT301 Mathematicsfor Electrical Science -3",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT503.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: Basic Components of Control Systems Open-Loop and , Closed -Loop Control Systems with examples . Mathematical modelling of control systems: Electrical Systems and Mechanicaltranslationalsystems . Transfer Function: Block diagram reduction techniques Signal flow , graph Mason’sgainformula , ."
+        },
+        {
+          "no": 2,
+          "summary": "Time Domain Analysis of Control Systems: Standard Test signals Time , response of first order systems (unit impulse step and ramp inputs) and , second order systems (step input only) Time response of undamped under . , damped critically damped second order system to unit step signal Time , , domain specifications for asecond order underdamped system Steady state , errorandstati..."
+        },
+        {
+          "no": 3,
+          "summary": "Stability of linear control systems: Concept of BIBO stability absolute , stability RouthHurwitzCriterion , . RootLocusTechniques:Introduction propertiesanditsconstruction , . Frequencydomainanalysis:Frequencydomainspecifications Relative stability: gain margin and phase margin Stability analysis using . BodeplotandNyquiststabilitycriterion . P PI&PIDcontrollers:Introduction , ..."
+        },
+        {
+          "no": 4,
+          "summary": "StateVariableAnalysisofLinearSystems: State variables state equations state variable representation of electrical , , systems Transfer function from State equation Solutions of the state . , equations state transition matrix Controllability and observability , , - Kalman’sTest ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PBECT504",
+      "code": "PBECT504",
+      "title": "Digital Signal Processing",
+      "category": "PBL Core",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:1",
+      "exam_hours": "",
+      "course_type": "PBL",
+      "prerequisites": "Signals&Systems PCECT402",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBECT504.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Review of sampling Z -Transform and DTFT , The Discrete Fourier Transform: DFT as a linear transformation (Matrix Relation) IDFT PropertiesofDFTandexamples(proofnotnecessary) , , . Circularconvolution linearconvolution usingcircularconvolution Filtering , , oflongdatasequences overlapsaveandoverlapaddmethods , . FrequencyAnalysisofSignalsusingtheDFT(conceptonlyrequired)"
+        },
+        {
+          "no": 2,
+          "summary": "Design of FIR Filters Symmetric and Anti -symmetric FIR Filters Design - , of linear phase FIR filters using Window methods (rectangular Hamming , , and Hanning) Design of IIR Digital Filters from Analog Filters . (Butterworth) IIR Filter Design by Impulse Invariance and Bilinear , , Transformation FrequencyTransformationsintheAnalogDomain , ."
+        },
+        {
+          "no": 3,
+          "summary": "Structures for the realization of Discrete-Time Systems Block diagram and - signalflowgraphrepresentationsoffilters . FIRFilterStructures:Linearstructures DirectForm , . IIR Filter Structures: Direct Form Transposed Form Cascade Form and , , ParallelForm . Multi -rate Digital Signal Processing: Decimation and Interpolation (Time domain and Frequency Domain Interpretation ) Anti..."
+        },
+        {
+          "no": 4,
+          "summary": "Efficient Computation of DFT: Fast Fourier Transform and computational advantage over DFT Radix-2 Decimation in Time FFT Algorithm , . Computer architecture for signal processing: Harvard Architecture , pipelining MAC Introduction to TMS320C67xx digital signal processor , , , FunctionalBlockDiagram . Finite word length effects in DSP systems: Introduction fixed -point and , flo..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCECL507",
+      "code": "PCECL507",
+      "title": "Course Name: Digital Signal Processing Lab",
+      "category": "Lab",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "prerequisites": "Signalsand Systems DSP ,",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL507.pdf",
+      "modules": [],
+      "experiments_count": 14,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "Generationandplottingofdiscretetimesignals:Impulse step sinusoids damped , , , sinusoids complex exponentials(realandimaginaryparts) randomsignals , ,"
+        },
+        {
+          "no": "2",
+          "title": "Convolutionofsignalsusingnumpyconvolve()or scipysignalconvolve()or Matlab . . ."
+        },
+        {
+          "no": "3",
+          "title": "Matrixrepresentationofconvolution"
+        },
+        {
+          "no": "4",
+          "title": "Impulseandstepresponses ofsystems describedbydifferenceequationsusing scipysignalconvolve()andscipysignallfilter() Commentonthedifferences . . . . ."
+        },
+        {
+          "no": "5",
+          "title": "Filteringofa noisysinewavewitha movingaveragefilter usingscipysignallfilter()or . . Matlab Trydifferentfilter lengthsandcommentonyourresults ."
+        },
+        {
+          "no": "6",
+          "title": "Filteringofa longsequenceusingblockconvolution"
+        },
+        {
+          "no": "7",
+          "title": "DTFTofsignalsandfrequencyresponseofsystemsusingscipysignalfreqz()or Matlab . ."
+        },
+        {
+          "no": "8",
+          "title": "DFTofasequenceusingscipyfftfft() or Matlab . ."
+        },
+        {
+          "no": "9",
+          "title": "MatrixrepresentationofDFT"
+        },
+        {
+          "no": "10",
+          "title": "RelationbetweenDTFTandDFTusingscipysignalfreqz()andscipyfftfft()or Matlab . . . ."
+        },
+        {
+          "no": "11",
+          "title": "VerificationofpropertiesofDFT"
+        },
+        {
+          "no": "12",
+          "title": "VerificationofParseval’srelationfor aspecifiedsignal"
+        },
+        {
+          "no": "13",
+          "title": "FIRfilter designusingwindowmethod"
+        },
+        {
+          "no": "14",
+          "title": "IIRfilter designusingimpulseinvariantandbilinear transformation"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCECL508",
+      "code": "PCECL508",
+      "title": "Communication Lab I",
+      "category": "Lab",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Lab",
+      "prerequisites": "Analogcircuits Signals , andsystems Digital , SignalProcessing",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 8,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL508.pdf",
+      "modules": [],
+      "experiments_count": 2,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "AnyonefromthefollowingAnalogmodulationschemes ● AMmodulationanddetectionusingTransistorsorICS ● FMmodulationanddetection"
+        },
+        {
+          "no": "2",
+          "title": "HardwareExperiment:AnyonefromthefollowingDigitalmodulation&Waveform codingSchemes ● GenerationandDetectionofPCMsignals ● GenerationandDetectionofDeltamodulatedsignals ● GenerationandDetectionofBPSK ● GenerationandDetecti..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PEECT521",
+      "code": "PEECT521",
+      "title": "Biomedical Engineering",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT521.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to bio-medical engineering , Sources of bio-electric potential: Resting and action potential propagation of , action potentials Various bioelectric potentials (ECG EEG EMG ERG . , , , , EOG EGGconceptonly) , . Electrodetheory:Nernstequation Electrodeskininterface , Bio-potential electrodes: Microelectrodes skin surface electrodes needle , , electrodes Bio-potential..."
+        },
+        {
+          "no": 2,
+          "summary": "Heart and cardiovascular system: electro conduction system of the heart , ECG lead configurations Einthoven triangle Electrocardiography ECG , , , machine block diagram ECG recording system - , . The human nervous system: Neurons action potentialof brain brain waves , , , placementofelectrodes EEGrecording evokedpotential , , , Electrical activity of muscles: EMG signal acquisi..."
+        },
+        {
+          "no": 3,
+          "summary": "Instruments for clinical laboratory: Oxymeters blood cell counter flame , , photometer Spectrophotometer , Therapeutic Equipments: Principles block schematic diagram working and , , applications of pacemakers cardiac defibrillators heart –lung machine , , , dialyzers surgicaldiathermyequipment ventilators , , Biomedical Telemetry system: Components of biotelemetry system , appl..."
+        },
+        {
+          "no": 4,
+          "summary": "Medical Imaging systems (Basic Principle only): X -ray imaging - X -ray machine applications of X -rays in medicine , . ComputedTomograpy:Principle imagereconstruction scanningsystemand , , applications Ultrasonic imaging systems: Basic pulse echo system Different types of , Ultrasonics systems: A -Scan B -Scan M -Scan applications real -time , , , , , ultrasonicimagingsystemsa..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT522",
+      "code": "PEECT522",
+      "title": "Data Structures",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT522.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Basic Concepts of Data Structures: Algorithms Performance Analysis , , SpaceComplexity TimeComplexity AsymptoticNotations , , Arrays: Linear Search and Binary Search Stacks Queues-Circular Queues , , , PriorityQueues DoubleEndedQueues EvaluationofExpressions , ,"
+        },
+        {
+          "no": 2,
+          "summary": "Linked List: Self -Referential Structures Dynamic Memory Allocation , , Singly Linked List - Operations on Linked List . Doubly Linked List , Circular Linked List Stacks and Queues using Linked List Polynomial , , representationusingLinkedList"
+        },
+        {
+          "no": 3,
+          "summary": "Trees and Graphs: Trees Binary Trees-Tree Operations Binary Tree , , Representation TreeTraversals BinarySearch , , Trees- Binary Search Tree Operations Graphs Representation of Graphs Depth First Search and Breadth First , , SearchonGraphs ApplicationsofGraphs ,"
+        },
+        {
+          "no": 4,
+          "summary": "Sorting and Hashing: Sorting Techniques Selection Sort Insertion Sort – , , QuickSort MergeSortandHeapSort , Hashing- Hashing Techniques Collision Resolution Overflow handling , , , Hashing functions – Mid square , Division , Folding , Digit Analysis"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT523",
+      "code": "PEECT523",
+      "title": "Sensors and Actuators",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT523.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Sensors and actuators: Block diagram of a closed loop control System Sensors and Transducers Sensors Classification Sensor , , , Characteristics Transfer Function Calibration Span (Full Scale Input) - , , , Full -Scale Output Accuracy Precision Hysteresis Nonlinearity Saturation , , , , , , Repeatability DeadBand Sensitivity Resolution , , , ."
+        },
+        {
+          "no": 2,
+          "summary": "Position and Displacement Sensors Potentiometric Sensors Capacitive - , Sensors LVDT HallEffectSensors , , Pressure Sensors -Mercury Pressure Sensor Bellows Membranes and Thin , , , plates PiezoresistiveSensors CapacitiveSensors , , . Force Strain and Tactile Sensors Strain Gauges Tactile Sensors Switch , , - , - Sensors Piezoelectric Sensors Piezoresistive Sensors Capacitive T..."
+        },
+        {
+          "no": 3,
+          "summary": "Flow Sensors Ultrasonic Flow Sensors Electromagnetic Flow Sensors - , . Temperature Sensors Resistance Temperature Detectors Thermistors - , , Thermocouple ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT524",
+      "code": "PEECT524",
+      "title": "ARM Architecture and Programming",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "ProgramminginC",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT524.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Embedded C: Fixed -width integer data types in C99 boolean type mixing , , types manipulatingbitsinmemoryandIOports accessingmemorymapped , , IO using pointers structures packed structures bit fields casting address of , , , , anobject unions , . [1]Ch 4 . Review of computer organization: Memory CPU IO Introduction to Arm , , , cortex M architecture: Internal organization-gener..."
+        },
+        {
+          "no": 2,
+          "summary": "Arm assembly language programming: Loading constants into registers , loading memory data into registers storing data from registers to memory , , converting C assignment statements to assembly memory address , calculations Memoryaddressingexamples:translatingCpointerexpressions , to assembly translating C subscript expressions to assembly translating , , structure references t..."
+        },
+        {
+          "no": 3,
+          "summary": "Control structures in assembly language: instruction sequencing conditional , branch instructions translating if -then and if -then-else statements to , assembly compound conditionals implementing loops speeding up array , , , access Implementing functions: function call and return register usage , , , parameterpassing returnvalues temporaryvariables preservingregisters , , , [..."
+        },
+        {
+          "no": 4,
+          "summary": "IO programming in assembly: Interrupts and exceptions thread and handler , modes entering the exception handler returning from exception handler , , , latency reduction techniques priorities and nested exceptions , , synchronization transfer rate and latency buffers and queues double , , , buffering polledwaitingloops interruptdrivenIO DMA , , , [1]Ch 8 . . System initializatio..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT525",
+      "code": "PEECT525",
+      "title": "ARM Architecture, Programming and Interfacing",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT525.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Embedded C: Fixed -width integer data types in C99 boolean type mixing , , types manipulatingbitsinmemoryandIOports accessingmemorymapped , , IO using pointers structures packed structures bit fields casting address of , , , , anobject unions , . [1]Ch 4 . Review of computer organization: Memory CPU IO Introduction to Arm , , , cortex M architecture: Internal organization-gener..."
+        },
+        {
+          "no": 2,
+          "summary": "Arm assembly language programming: Loading constants into registers , loading memory data into registers storing data from registers to memory , , converting C assignment statements to assembly memory address , calculations Memoryaddressingexamples:translatingCpointerexpressions , to assembly translating C subscript expressions to assembly translating , , structure references t..."
+        },
+        {
+          "no": 3,
+          "summary": "Control structures in assembly language: instruction sequencing conditional , branch instructions translating if -then and if -then-else statements to , assembly compound conditionals implementing loops speeding up array , , , access Implementing functions: function call and return register usage , , , parameterpassing returnvalues temporaryvariables preservingregisters , , , [..."
+        },
+        {
+          "no": 4,
+          "summary": "IO programming in assembly: Interrupts and exceptions thread and handler , modes entering the exception handler returning from exception handler , , , latency reduction techniques priorities and nested exceptions , , synchronization transfer rate and latency buffers and queues double , , , buffering polledwaitingloops interruptdrivenIO DMA , , , [1]Ch 8 . . System initializatio..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT526",
+      "code": "PEECT526",
+      "title": "High Speed Digital Design",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "BASIC ELECTRONICS",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT526.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "High Speed Digital Design: Fundamentals: Frequency and time Time and , distance Lumped versus distributed systems four kinds of reactance- , , ordinary capacitance and inductance mutual capacitance and inductance , , Relationofmutualcapacitanceandmutualinductancetocrosstalk ."
+        },
+        {
+          "no": 2,
+          "summary": "High Speed properties of Logic gates: Power Quiescent vs active , dissipation Active power driving a capacitive load Active power due to , , overlappingbiascurrents Inputpower Speed Packaging(Powerdissipation , , , analysisofonlyCMOSlogicgatesarerequired) Measurement Techniques: Rise time and bandwidth of oscilloscope probes self inductance of probe ground loop spurious signal ..."
+        },
+        {
+          "no": 3,
+          "summary": "Transmission Lines: Problems of point to point wiring signal distortion , , EMI cross talk Infinite Uniform transmission line; ideal distortion less , . lossless transmission line RC transmission line Skin effect Proximity , , , effect Dielectric loss Effects of source and load impedance Termination: , . . End terminator Source terminators middle terminators AC biasing for end ..."
+        },
+        {
+          "no": 4,
+          "summary": "Power system: Stable voltage reference Uniform voltage distribution , , distributionproblems choosingabypasscapacitor , . Clock Distribution: Timing margin Clock skew Using low impedance , , drivers using low impedance distribution lines delay adjustments , , , Differentialdistribution Clocksignaldutycycle Decouplingclockreceivers , , fromtheclockbus ClockOscillators Cannedcloc..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT527",
+      "code": "PEECT527",
+      "title": "Estimation and Detection",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT527.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "StatisticalEstimationTheoryI Fundamentals of estimation theory the mathematical estimation problem , , Minimum variance unbiased estimation basics of Cramer-Rao Lower , Bound linearmodels bestlinearunbiasedestimation applicationexamples , , , ."
+        },
+        {
+          "no": 2,
+          "summary": "StatisticalEstimationTheoryII Maximum likelihood estimation least squares Bayesian philosophy , , , minimummeansquareerrorestimation applicationexamples , ."
+        },
+        {
+          "no": 3,
+          "summary": "StatisticalDetectionTheoryI Fundamentals of detection theory the mathematical detection problem , , Hypothesis testing classical approach Neyman-Pearson theorem likelihood , , , ratio test receiver operating characteristics Bayesian approach minimum , , , probabilityoferror Bayesrisk multiplehypothesistesting , , ."
+        },
+        {
+          "no": 4,
+          "summary": "StatisticalDetectionTheoryII Detection of deterministic signals matched filters detection of random , , signals estimator-correlator linear model application examples , , , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCECT601",
+      "code": "PCECT601",
+      "title": "Advanced Communication Theory",
+      "category": "Core",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "ADC (PCECT502)",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT601.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Entropy: Entropy Properties of Entropy Joint and Conditional , , Entropy MutualInformation PropertiesofMutualInformation , , Discrete memoryless sources Source code Average length of source , , code Bounds on average length uniquely decodable and prefix-free , , sourcecodes Kraft Inequality(withproof) . Shannon’s source coding theorem (both achievability and converse) , Huffman..."
+        },
+        {
+          "no": 2,
+          "summary": "Channel Capacity of AWGN Channel: Differential entropy , Differential Entropy of Gaussian random variable Shannon-Hartley , theorem(withproof) Shannonlimit , Block codes: Error detecting and correcting capability Linear block . codes Generator and parity-check matrix (Systematic form only) . . . Encodingcircuit Maximumlikelihooddecodingoflinearblockcodes , . Boundeddistancedeco..."
+        },
+        {
+          "no": 3,
+          "summary": "Introduction to Wireless Communication: Introduction Evolution - , , Paging Wireless LAN Bluetooth Zig-Bee and Personal Area . , , networks Broadband Wireless Access-WiMax Technology Wireless . . Spectrumallocation Standards , . Cellular System Design Fundamentals: Frequency Reuse channel , assignment strategies Handoff strategies Interference and system , , capacity trunking a..."
+        },
+        {
+          "no": 4,
+          "summary": "Path loss and shadowing: Free space path loss Two-Ray model , , Shadowing Statistical Multipath Channel Models: Time-varying channel impulse response (Analysis not required) Narrowband fading Wideband , , fading models Delay spread and Coherence bandwidth Doppler , , spread and Coherence time Flat fading versus frequency selective , fading Slowfadingversusfastfading , Multi -ca..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCECT602",
+      "code": "PCECT602",
+      "title": "Microwaves & Antennas Pcect602",
+      "category": "Core",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "Electromagnetics (PCECT501)",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT602.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Microwaves: Electromagnetic spectrum Frequency Bands Features of , , microwaves advantages & disadvantages Applications Atmospheric , , , propagationeffects . Cavity Resonator: TE and TM modes in waveguides (Review only) - Rectangular Cavity Resonator- Resonance frequency Q factor Excitation , , and Tuning Re-entrant cavity , . MicrowaveHybridCircuits:EplaneTee HplaneTee Hybrid..."
+        },
+        {
+          "no": 2,
+          "summary": "Microwavetubes:Types StructureandPrinciplesofoperationof , Two Cavity Klystron- Velocity Modulation Bunching , Reflex Klystron- Velocity Modulation Power output and efficiency , Traveling Wave Tube Amplifier- Slow wave structures Helix TWT , amplificationprocess . Magnetron Oscillator- Cylindrical magnetron Cyclotron angular , frequency , Microwave measurements: Measurement of ..."
+        },
+        {
+          "no": 3,
+          "summary": "Antennas: Definition Radiation mechanism Polarisation Types , , , , Applications Basic antenna parameters: Radiation Pattern Radiation Power Density , , Radiation Intensity Radiation resistance Beamwidth Directivity Antenna , , , , Efficiency Gain Beam Efficiency Bandwidth Input Impedance Antenna , , , , , Radiation Efficiency Effective aperture area Effective height Antenna , ..."
+        },
+        {
+          "no": 4,
+          "summary": "Antennaarrays:Fieldoftwoisotropicpointsources Principleofpattern , multiplication Array factor Linear arrays of ‘n’ isotropic point sources , , with equal amplitude Grating lobes Design of Broadside and End fire , , arrays Phasedarrayprinciple Adaptiveantennaarrayprinciple , , . Broad band antennas: Log periodic antenna array – Principle and design equations Helicalantenna:Desi..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PBECT604",
+      "code": "PBECT604",
+      "title": "VLSI Circuit Design",
+      "category": "PBL Core",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:1",
+      "exam_hours": "",
+      "course_type": "PBL",
+      "prerequisites": "PCECT302SolidStateDevices , PCECT303AnalogCircuits , PBECT304LogicCircuitDesign",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBECT604.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "VLSIDesignMethodologies: Introduction Moore’slaw ASICdesign Full , , , custom ASICs Standard cell based ASICs Gate array based ASICs SoCs , , , , FPGA devices ASIC and FPGA Design flows Top-Down and Bottom-Up , , designmethodologies LogicalandPhysicaldesign , ."
+        },
+        {
+          "no": 2,
+          "summary": "Fabrication techniques: Material Preparation Purification and Crystal growth (CZ process) Wafer preparation Epitaxy molecular beam , , - epitaxy Thermal Oxidation- Dry and Wet oxidation Diffusion and ion , , implantation techniques Lithography- Photo lithographic sequence , , Electron Beam Lithography Etching Chemical Vapor Deposition and , , PhysicalVaporDeposition . MOSFET Fa..."
+        },
+        {
+          "no": 3,
+          "summary": "Static CMOS Logic Design: MOSFET Logic Design NMOS Inverter - (Static analysis only) basic logic gates CMOS logic Static and transient , , , analysis of CMOS inverter Static and dynamic powerdissipation (detailed , analysis not required) Propagation delays Realization of logic functions , . withstaticCMOSlogic . Layout Design and Design rules: Stick Diagram and Design rules-mic..."
+        },
+        {
+          "no": 4,
+          "summary": "Pass transistors and Transmission gate logic: Basic concepts Realisation , oflogicgatesusingpasstransistorsandcomplementarypasstransistors . Dynamic logic Design: Pre charge Logic evaluation Issues in dynamic , , logic Domino Logic NP domino logic Realisation of logic gates circuits , , , usingdynamiclogic(NANDandNOR) . Sequential Logic and Memory design: Behaviour of bistable ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCECL607",
+      "code": "PCECL607",
+      "title": "Communication Lab Ii",
+      "category": "Lab",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL607.pdf",
+      "modules": [],
+      "experiments_count": 19,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "ReflexKlystronModeCharacteristics ."
+        },
+        {
+          "no": "2",
+          "title": "GUNNdiodecharacteristics ."
+        },
+        {
+          "no": "3",
+          "title": "VSWRandFrequencymeasurement ."
+        },
+        {
+          "no": "4",
+          "title": "VerifytherelationbetweenGuidewavelength freespacewavelengthandcutoffwave , lengthforrectangularwaveguide ."
+        },
+        {
+          "no": "5",
+          "title": "Unknownloadimpedancemeasurementusingsmithchartandverificationusing transmissionlineequation ."
+        },
+        {
+          "no": "6",
+          "title": "MeasurementofMagicTeecharacteristics ."
+        },
+        {
+          "no": "7",
+          "title": "DirectionalCouplerCharacteristics ."
+        },
+        {
+          "no": "1",
+          "title": "SettingupofFiberopticDigitallink ."
+        },
+        {
+          "no": "2",
+          "title": "MeasurementofNumericalApertureofanOptical fiber"
+        },
+        {
+          "no": "3",
+          "title": "StudyoflossesinOpticalfiber"
+        },
+        {
+          "no": "4",
+          "title": "Voltage vs Current (V -I) characteristics of Laser Diode . ."
+        },
+        {
+          "no": "5",
+          "title": "Voltage vs Current (V -I) characteristics of LED . ."
+        },
+        {
+          "no": "6",
+          "title": "CharacteristicsofPhotodiode"
+        },
+        {
+          "no": "1",
+          "title": "Familiarizationofanyantennasimulationsoftware"
+        },
+        {
+          "no": "2",
+          "title": "SimulationofDipoleAntenna"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PEECT631",
+      "code": "PEECT631",
+      "title": "Computer Networks",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT631.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Computer Networks Components of computer networks . Transmissionmodesincomputercommunication . Switching: circuit switching and packet switching Performance analysis of . packet switched network: Throughput analysis Delay and loss in packet , - switchednetworks Typesofdelay Packetloss , , . IntroductiontoQueueingmodelsincomputernetworks Littlestheorem . . Networ..."
+        },
+        {
+          "no": 2,
+          "summary": "Application Layer: Communication between processes Web application: , HTTP Message format Email application: SMTP Message format MIME , , , , , POP3 DomainNameSystem(DNS) , . Transport Layer connectionless and connection-oriented protocols UDP . - Protocols for reliable data transfer: ARQ protocols stop-and -wait protocol , , alternating-bit protocol Go-back N Selective Repeat ..."
+        },
+        {
+          "no": 3,
+          "summary": "Network Layer: Datagram versus virtual -circuit network service Router , architecture RoutingandForwarding StaticroutingandDynamicrouting , , . AddressResolutionprotocols(ARP RARP) , Subnetting ClasslessRouting(CIDR) ICMP , , . IPv4: Datagram format Fragmentation and reassembly addressing address , , , assignment manual and DHCP IPv6 Datagram format Transitioning from – . - , I..."
+        },
+        {
+          "no": 4,
+          "summary": "Link Layer Services of link layer Error detection and correction , – checksum CRC , . Multiple access protocols – Channel partitioning , random access . ALOHA – pure and slotted efficiency CSMA CSMA/CA CSMA/CD Link layer , , , , . addressing: MAC address Ethernet Wireless Networks IEEE 80211 , . . wirelessLAN . PhysicalLayer:Guidedandunguidedtransmissionmedia (Co-axial cable UT..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT632",
+      "code": "PEECT632",
+      "title": "Digital Image Processing",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT632.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Digital Image Fundamentals: Image representation Types of images , , Elements of DIP system Basic relationship between pixels Distance , , Measures Simple image formation model Brightness contrast hue , . , , , saturation Mach band effect Colour image fundamentals-RGB CMY HIS , . , , models 2Dsamplingandquantization , ."
+        },
+        {
+          "no": 2,
+          "summary": "2D Image transforms: DFT Properties Walsh transform Hadamard , , , transform Haar transform DCT KL transform and Singular Value , , , Decomposition . Image Compression: Image compression model Lossy lossless , , compression Concept of transform coding JPEG Image compression , , standard ."
+        },
+        {
+          "no": 3,
+          "summary": "Image Enhancement: Spatial domain methods: Basic Gray Level Transformations Histogram Processing Enhancement Using , , Arithmetic/Logic Operations Basics of Spatial Filtering Smoothing spatial , , Filters SharpeningspatialFilters , . Frequency domain methods: low pass filtering high pass filtering , , homomorphicfiltering ."
+        },
+        {
+          "no": 4,
+          "summary": "Image Restoration: Degradation model Inverse filtering- removal of blur , caused by uniform linear motion Minimum Mean Square Error (Wiener) , Filtering . Image segmentation: Region based approach clustering Segmentation , , basedonthresholding edgebasedsegmentation HoughTransform , , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT633",
+      "code": "PEECT633",
+      "title": "Secure Communication",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT633.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction and Classic Encryption Techniques:-OSI security architecture , Security attacks Passive attacks Active attacks Security services- – , , Authentication Access Control Data Confidentiality Data integrity , , , , Nonrepudiation Availability service Model for network security , . . Symmetric cipher model Cryptography Substitution techniques- Hill , , Cipher Transpositi..."
+        },
+        {
+          "no": 2,
+          "summary": "Block Ciphers: Data Encryption Standard Block Cipher Principles - , – Stream Ciphers and Block Ciphers Feistel Cipher Feistel Decryption , , algorithm TheDataencryptionstandard DESDecryption TheAESCipher , , , , substitute bytes transformation Shift row transformation Mix Column , , transformation ."
+        },
+        {
+          "no": 3,
+          "summary": "Public Key Cryptography: -RSA and Key Management Principles of public , key cryptosystems-Public key cryptosystems Application for Public key , cryptosystem requirements Fermat’s theorem Euler’s Totient Function , , ,"
+        },
+        {
+          "no": 4,
+          "summary": "Euler’s theorem RSA algorithm Key management Distribution of public , , , keys Publicly available directory Public key authority public key , , , certificates Distributionofsecretkeysusingpublickeycryptography , . Message Authentication and Hash Function: Authentication requirements - , Authentication functions- Message Encryption Public Key Encryption , , MessageAuthentication..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT634",
+      "code": "PEECT634",
+      "title": "Nanoelectronics",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT634.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Nano electronics-Review of MOSFETs- Band diagram- operation-threshold voltage- current -MOSFET parameters . Challenges going to sub -100 nm MOSFETs- Technological and physical limitsofNanoelectronicsystems characteristiclengths , Scaling and short channel effects-Channel length Oxide layer thickness , , tunneling power density non-uniform dopant concentration th..."
+        },
+        {
+          "no": 2,
+          "summary": "NovelMOSDevicesandPerformanceOptimization Silicon-on-insulator devices--FD SOI PD SOI ,"
+        },
+        {
+          "no": 3,
+          "summary": "Multiple gate MOSFETs--Double gate MOSFETs FinFETs Nanowires- , , Multi gate MOSFET physics-natural length and short channel effects . Multi Gate MOSFET performance optimization: Fins Fin Width Fin , , Height and Fin Pitch Fin Surface Crystal Orientation Fins on Bulk Silicon , , , Nano-wires Gate Stack Gate Patterning Threshold Voltage and Gate Work . , , function requirements ..."
+        },
+        {
+          "no": 4,
+          "summary": "ApplicationsofQuantummechanicsandQuantumdevices Tunneling and applications of quantum mechanics- solution of Schrodinger equation: Free space Potential well tunneling through a , , potential barrier Potential energy profiles for material interfaces . , Applicationsoftunneling . Hetero junctions -Modulation-doped hetero junctions- SiGe strained hetero structures- MODFET Resonant..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT635",
+      "code": "PEECT635",
+      "title": "Image Processing Applications",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PBECT504Digital SignalProcessing",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT635.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Digital Image Fundamentals: Image representation Types of images , , Elements of DIP system Basic relationship between pixels Distance , , Measures Simple image formation model Brightness contrast hue , . , , , saturation Mach band effect Colour image fundamentals-RGB CMY HIS , . , , models 2Dsamplingandquantization , ."
+        },
+        {
+          "no": 2,
+          "summary": "2D Image transforms: DFT Properties Walsh transform Hadamard , , , transform Haar transform DCT KL transform and Singular Value , , , Decomposition . Image Compression: Image compression model Lossy lossless , , compression Concept of transform coding JPEG Image compression , , standard ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT636",
+      "code": "PEECT636",
+      "title": "Optical Communication",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PHYSICS",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT636.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Optical fiber Communications: Structure of Optical fiber materials , , Generalblockdiagramofopticalcommunicationsystem Advantages , . Optical fiber waveguides: Principle of light guidance Numerical Aperture , , Vnumber StepandGradedindexfibers SingleandMultimodefibers , , . Transmission Characteristics: Attenuation Absorption losses Linear and , , Non linear scattering losses b..."
+        },
+        {
+          "no": 2,
+          "summary": "Optical fibers and Cables Fabrication Techniques- Double crucible – method Outside Vapour phase oxidation Modified Chemical Vapour , , Deposition Optical Fiber Cables- Single and Multi fiber cables . . OpticalFiberConnections:splices connectors&couplers , . Optical Fiber Measurements:- Attenuation and dispersion measurements , MZ interferometer Optical Time Domain Reflectometer..."
+        },
+        {
+          "no": 3,
+          "summary": "Optical sources: LEDs and LDs general structures characteristics , , , modulatorsusingLEDsandLDs couplingwithfibres . , Optical detectors: Quantum efficiency and Responsivity Structure and , workingofPINandAPD Optical Receivers: Direct detection- noise in detectors SNR BER - , , analysis Coherentdetectionprinciples . Optical Amplifiers: EDFA Principle structure and working Rama..."
+        },
+        {
+          "no": 4,
+          "summary": "MultiplexingStrategies:OTDM SCM OFDM WDMandOpticalCDMA: , , , concepts components couplers splitters Add/ Drop multiplexers Fiber , - , , , gratingfilters tunablefilters , . Optical networks General description of SONET/SDH – Free space optics: Principle of LiFi technology Visible Light . Communication Other applications of optical fibers: Entertainment Sensors Types & , – prin..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT637",
+      "code": "PEECT637",
+      "title": "Optimization Techniques",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT637.pdf",
+      "modules": [
+        {
+          "no": 4,
+          "summary": "Modern methods of Optimization– Metaheuristic techniques: Genetic Algorithms Simulated Annealing Particle Swarm optimization –Ant – – colony optimization– : Use of Matlab/Scilab to solve optimization problem"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEECT611",
+      "code": "OEECT611",
+      "title": "Entertainment Electronics",
+      "category": "Open Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT611.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Review of Analog Television: Scanning Horizontal and Vertical , Synchronization Color information Transmissionmethods NTSC and PAL , , . standards Digital media streaming: Packetized elementary stream of audio- . video data MPEG data stream MPEG -2 transport stream packet Accessing , , , a program scrambled programs program synchronization PSI Additional , , . , (Network inform..."
+        },
+        {
+          "no": 2,
+          "summary": "Digital Video Broadcasting (DVB): Satellite TV broadcasting DVB -S – Parameters DVB -S Modulator DVB -S set -top box DVB -S2 Cable TV , , , . broadcasting DVB -C Standard DVB -C Modulator DVB C set -top box – , , - . Terrestrial TV broadcasting DVB -T Standard DVB -T Modulator DVB -T – , , Carriers and System Parameters DVB -T receiver Broadcasting for , . Handheld devices DVB ..."
+        },
+        {
+          "no": 3,
+          "summary": "High Definition Video and Audio: Pixel resolution Comparison with ,"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEECT612",
+      "code": "OEECT612",
+      "title": "Computer Networks",
+      "category": "Open Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT612.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "IntroductiontoComputerNetworksComponentsofcomputernetworks . Transmission modes serial and parallel transmission asynchronous - , , synchronous simplex halfduplex fullduplexcommunication , , , . Switching:circuitswitchingandpacketswitching . Networks: Network criteria physical structures network models categories , , , ofnetworks InterconnectionofNetworks , . Delay and loss in ..."
+        },
+        {
+          "no": 2,
+          "summary": "TCP/IPprotocolsuite:Introduction Application Layer: Communication between processes Web application: , HTTP Messageformat Emailapplication:SMTP Messageformat MIME , , , , , POP3 DomainNameSystem(DNS) , . Transport Layer connectionless and connection-oriented protocols UDP . - Protocolsforreliabledatatransfer:ARQ protocols stop-and -wait protocol alternating-bit protocol Go-back..."
+        },
+        {
+          "no": 3,
+          "summary": "Network Layer: Datagram versus virtual -circuit network service Router , architecture RoutingandForwarding StaticroutingandDynamicrouting , , . AddressResolutionprotocols(ARP RARP) , Subnetting ClasslessRouting(CIDR) ICMP , , . IPv4: Datagram format Fragmentation and reassembly addressing address , , , assignment manual and DHCP IPv6 Datagram format Transitioning from – . - , I..."
+        },
+        {
+          "no": 4,
+          "summary": "Link Layer Services of link layer Error detection and correction , – checksum CRC , . Multiple access protocols – Channel partitioning , random access . ALOHA – pure and slotted efficiency CSMA CSMA/CA CSMA/CD Link layer , , , , . addressing: MAC address Ethernet Wireless Networks IEEE 80211 , . . wirelessLAN . PhysicalLayer:Guidedandunguidedtransmissionmedia (Co-axial cable UT..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEECT613",
+      "code": "OEECT613",
+      "title": "Biomedical Engineering",
+      "category": "Open Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT613.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to bio-medical engineering , Sources of bio-electric potential: Resting and action potential propagation , ofactionpotentials Variousbioelectricpotentials(ECG EEG EMG ERG . , , , , EOG EGGconceptonly) , . Electrodetheory:Nernstequation Electrodeskininterface , Bio-potential electrodes: Microelectrodes skin surface electrodes needle , , electrodes Bio-potential ampl..."
+        },
+        {
+          "no": 2,
+          "summary": "Heart and cardiovascular system: electro conduction system of the heart , ECG lead configurations Einthoven triangle Electrocardiography ECG , , , machine block diagram ECG recording system - , .. The human nervous system: Neurons action potential of brain brain , , waves placementofelectrodes EEGrecording evokedpotential , , , , Electrical activity of muscles: EMG signal acqui..."
+        },
+        {
+          "no": 3,
+          "summary": "Instruments for clinical laboratory: Oxymeters blood cell counter flame , , photometer Spectrophotometer , TherapeuticEquipments:Principles blockschematicdiagram workingand , , applications of pacemakers cardiac defibrillators heart –lung machine , , , dialyzers surgicaldiathermyequipment ventilators , , Biomedical Telemetry system: Components of biotelemetry system , applicati..."
+        },
+        {
+          "no": 4,
+          "summary": "Medical Imaging systems (Basic Principle only): X -ray imaging - X -ray machine applications of X -rays in medicine , . Computed Tomograpy: Principle image reconstruction scanning system , , andapplications Ultrasonic imaging systems: Basic pulse echo system Different types of , Ultrasonics systems: A -Scan B -Scan M -Scan applications real -time , , , , , ultrasonicimagingsyst..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCECT751",
+      "code": "PCECT751",
+      "title": "Satellite and Radar Communication",
+      "category": "Core",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT751.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Satellite orbit and orbital equations Kepler‟s laws of planetary motion , , locating satellite in the orbit locatingsatellitewith respect to earth Look , , angle calculation coverage angle and slant range orbital perturbations , , , satellite launching orbital effects in communication subsystem , performance . Satellite subsystems Attitude and orbit control system Telemetry tra..."
+        },
+        {
+          "no": 2,
+          "summary": "Satellite link design- Basic link analysis Interference analysis terrestrial , , interference Intermodulation interference inter-symbol interference and , , rain induced attenuation uplink power control system availability , , , systemdesignforlinkwithoutfrequencyreuseandsystem designforlink withfrequencyreuse ."
+        },
+        {
+          "no": 3,
+          "summary": "Basics of Radar: Introduction Range Radar Waveforms Simple form of , , , Radar Equation Radar Block Diagramand Operation RadarFrequencies , , andApplications PredictionofRangePerformance MinimumDetectable , , Signal ReceiverNoise ModifiedRadarRangeEquation , ,"
+        },
+        {
+          "no": 4,
+          "summary": "CW and Frequency Modulated Radar: Doppler Effect CW Radar Block , – Diagram ApplicationsofCWradar , . FM -CW Radar: FM -CW Radar Range and Doppler Measurement Block , , Diagram and Characteristics (Approaching/ Receding Targets) FM -CW , altimeter MultipleFrequencyCWRadar , . MTI and Pulse Doppler Radar: Introduction Principle MTI versus Pulse , . DopplerRadar TrackingRadar:var..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT741",
+      "code": "PEECT741",
+      "title": "Advanced Mobile Communication",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT741.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Evolutionfrom1Gto5G Analogvoicesystemsin1G;digitalradiosystems . in 2G voice and messaging services TDMA based GSM CDMA 25G , , , , . (GPRS) 2 .75G (EDGE); IMT2000: 3G UMTS W -CDMA HSPA HSPA+ , , , , , 3G services and data rates; IMT Advanced: 4G LTE VoLTE OFDM , , , , MIMO LTE Advanced Pro (3GPP Release 13+); IMT2020: 5G , , enhancements in comparison to IMT Advanced Evolution..."
+        },
+        {
+          "no": 2,
+          "summary": "Basics of 5G 5G potential and applications; Usage scenarios: enhanced . mobile broadband (eMBB) ultra reliable low latency communications , (URLLC) massive machine type communications (MMTC) D2D , , communications V2X communications; Spectrum for 5G spectrum , , access/sharing; millimeter Wave communication channels and , signals/waveformsin5G carrieraggregation smallcells dual..."
+        },
+        {
+          "no": 3,
+          "summary": "5G Network New Radio (NR) Standalone and non-standalone mode; non- . , orthogonal multiple access (NOMA); massive MIMO beam formation , , FAPI: PHY API Specification flexible frame structure Service Data , , Adaptation Protocol (SDAP); centralized RAN open RAN; multi -access , edge computing (MEC); software defined networking (SDN) network , function virtualization (NFV); netwo..."
+        },
+        {
+          "no": 4,
+          "summary": "Current state and Challenges ahead 5G penetration in developed countries; . deployment challenges in low-middle income countries stronger backhaul , requirements dynamic spectrum access and usage of unlicensed spectrum , , contrasting radio resource requirements; large cell usage: LMLC; possible solutions for connectivity in rural areas (BharatNet TVWS Long-range , , WiFi FSO);..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT742",
+      "code": "PEECT742",
+      "title": "Deep Learning",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT742.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "ReviewofANN:Perceptrons Convolutional Neural Networks: Convolution operation CNN Architecture , kernels padding- Convolutional layers-, Pooling Layers fully connected , , layers . Feature and weight visualization t -SNE ,"
+        },
+        {
+          "no": 2,
+          "summary": "Loss functions-Mean Squared Error Cross Entropy , Activationfunctions SigmoidRelu Softmax , , Training CNNs:-Initialization Back -propagation Optimization algorithms:-SGD Momentum Adagrad RMS Prop Adam , , , , , Hyper parameter optimization-Learning rate Regularizationmethods: L1 L2 regularizaton dropout DataAugmentation , , , Earlystopping batch normalization IntroductiontoTra..."
+        },
+        {
+          "no": 3,
+          "summary": "Sequence models Recurrent Neural Networks (RNN): cell structure and , architecture Training RNN back propagation through time Vanishing , , . andexplodinggradients . Long Short -Term Memory (LSTM) architecture and training , . GatedRecurrentUnits(GRU) architecttureandtraining , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT743",
+      "code": "PEECT743",
+      "title": "Robotics and Automation",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT743.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "FundamentalsofRobotics AutomationandRobotics: Definitionandhistoryofrobotics . Differencesbetweenautomationandrobotics . Applicationsofroboticsinindustryandservicesectors . RobotAnatomy: Basiccomponents:Links joints andendeffectors , , . Structuralconfigurations:Cartesian cylindrical spherical SCARA , , , , articulated . DegreesofFreedom(DOF)andtheirsignificance . Configuration..."
+        },
+        {
+          "no": 2,
+          "summary": "ControlSystemsforRobots BasicControlSystemModels: Open-loop and closed -loop control . Blockdiagramsandtransferfunctions . RobotMotions: Types of motions: Slew motion joint -interpolated motion and straight , , - linemotion . Pathplanningandtrajectorygeneration . Controllers: On/offcontrol . Proportional(P)control . Integral(I)control . Proportionalplusintegral(PI)control . Pro..."
+        },
+        {
+          "no": 3,
+          "summary": "ActuationandFeedbackMechanisms Sensors: Typesofsensors:Positionandvelocitysensors . Workingprinciplesofencodersandresolvers . Potentiometersandtachometers . Actuators: Electricactuators:DCmotors steppermotors andservomotors , , . Hydraulicactuators . Pneumaticactuators . PowerTransmissionDevices: Gears belts chains , , . Leadscrewsandballscrews . EndEffectors: Typesofgrippers:M..."
+        },
+        {
+          "no": 4,
+          "summary": "IndustrialApplicationsandWorkCellDesign MaterialHandling: Generalconsiderationsformaterialhandlingwithrobots Materialtransfer , applications . PickandPlaceOperations: Techniquesandapplications Integrationwithproductionlines , . PalletizingandRelatedOperations: Methodsandcasestudies . ManufacturingProcesses: Diecasting plasticmolding forging , , . Machiningoperations stampingpre..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT744",
+      "code": "PEECT744",
+      "title": "Coding Theory",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCECT601Advanced CommunicationTheory",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT744.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Algebra-Overview of Groups Rings Finite Fields -Binary , , fieldarithmetic Primitiveelements(3hrs) , Irreducible and Primitive Polynomials Conjugate elements and Minimal , Polynomials- Field extension-Construction of Finite Fields from Polynomial rings(3hrs) Vector spaces – Subspace and Dual spaces-matrices(3hrs)"
+        },
+        {
+          "no": 2,
+          "summary": "Error Control Coding – Relevance of error control codes in Communication System concepts of Code rate Hamming Distance Minimum Distance , , , , Errordetectingandcorrectingcapability (3hrs) . Review on LBC -Generator matrix Parity Check Matrix Maximum , . Likelihood Decoding-syndrome decoding (3hrs) Simple bounds on block codes - Singleton bound , Hamming Bound , Gilbert - Varsh..."
+        },
+        {
+          "no": 3,
+          "summary": "Basic concepts of cyclic codes Polynomial and matrix description – . Interrelationbetweenpolynomialandmatrixviewpoint(2hrs) Encoding: Non-systematic and systematic encoding syndrome decoding- , completedecodingofcycliccodes(4hrs) Hamming Codes-properties-Examples (1 hr) BCH codes Reed -Solomon Codes (Properties and encoding only) (2hrs) ,"
+        },
+        {
+          "no": 4,
+          "summary": "Review on Convolution Codes- Systematic Encoders Decoding of , Convolution Codes –Viterbi algorithm Turbo Codes Encoding parallel , , concatenatedcodes (3hrs) . Low Density Parity Codes Construction Tanner Graphs Message passing , , , decoding Example of message passing decoding over binary erasure . channels Message passing of LLR and decoding over AWGN channels . . (3hrs) Pol..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT745",
+      "code": "PEECT745",
+      "title": "Deep Learning Techniques",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT745.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "ReviewofANN:Perceptrons Convolutional Neural Networks: Convolution operation CNN Architecture , kernels padding- Convolutional layers-, Pooling Layers fully connected , , layers . Feature and weight visualization t -SNE ,"
+        },
+        {
+          "no": 2,
+          "summary": "Loss functions-Mean Squared Error Cross Entropy , Activationfunctions SigmoidRelu Softmax , , Training CNNs:-Initialization Back -propagation Optimization algorithms:-SGD Momentum Adagrad RMS Prop Adam , , , , , Hyper parameter optimization-Learning rate Regularizationmethods: L1 L2 regularizaton dropout DataAugmentation , , , Earlystopping batch normalization IntroductiontoTra..."
+        },
+        {
+          "no": 3,
+          "summary": "Sequence models Recurrent Neural Networks (RNN): cell structure and , architecture Training RNN back propagation through time Vanishing , , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT746",
+      "code": "PEECT746",
+      "title": "Advanced Digital Signal Processing",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "DigitalSignal Processing",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT746.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Multi -rate system and filter banks : Basic multi -rate operations: up sampling and down sampling time domain , and frequency domain analysis Need for anti aliasing and anti imaging , filters Nobleidentities . . Type 1 and Type 2 polyphase decomposition Efficient structures for , decimation and interpolation filters Uniform filter banks and its . implementation using polyphase ..."
+        },
+        {
+          "no": 2,
+          "summary": "Wavelettransform: Time Frequency Trade off in signal analysis Heisenberg's uncertainty , principle . Short Time Fourier transform-Filter Bank representation Continuous . Wavelet Transform- Admissibility condition Time-frequency diagrams for . theSTFTandthewavelettransform Discrete Wavelet Transform- Haar Scaling and Wavelet Functions Haar , analysis of signals concept of nested..."
+        },
+        {
+          "no": 3,
+          "summary": "Power spectrum estimation- Rational power spectra representation , Relationships Between the Filter Parameters and the Autocorrelation Sequence Parametric method of power spectrum estimation-Yule Walker , equations Non parametric method of power spectrum estimation- , Periodogram Averagingperiodogram , ."
+        },
+        {
+          "no": 4,
+          "summary": "Linear prediction filters- Forward and backward predictors lattice filter , structure relationshipbetweenlinearfiltercoefficientsandreflection , coefficients Normal equations for optimum filter design Adaptive filters- , . Weinerfilterdesign Adaptivefiltersforadaptivechannelequalization , , adaptivenoisecancellationandLinearPredictiveCodingofSpeechSignals , Steepestdescentalgor..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT747",
+      "code": "PEECT747",
+      "title": "Cryptography",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT747.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to cryptology: Stream and block ciphers- secret and public keycryptography . Introduction to Complexity of Algorithm- P NP NP -Complete classes , , . Numbertheory:Primes divisibility lineardiaphantineequations , , , congruences systemoflinearcongruences Wilsontheorem Fermat‘slittle , , , theorem Euler'stheorem Multiplicativefunctions Primitiveroots , . , , Quadrati..."
+        },
+        {
+          "no": 2,
+          "summary": "Reviewofalgebraicstructures:groups rings finitefields polynomial , , , ringsoverfinitefield . SymmetricCiphers:Affinecipher Hillcipher Encipheringmatrices Data , , . Encryptionstandard(DES) AdvancedEncryptionstandard(AES) , ."
+        },
+        {
+          "no": 3,
+          "summary": "Public key cryptography: One-way functions RSA Discrete Log Diffie- , , , HelmanKeyExchangesystem Digitalsignaturestandards KnapsackCrypto , . system Zero-knowledge protocols , . Ellipticcurvesandellipticcurvecryptosystems"
+        },
+        {
+          "no": 4,
+          "summary": "Cryptanalysis: Primality testing- pseudo primes- the rho method . Cryptanalysismethods:linear differential higherorderdifferential , , , quadratic Factoring Algorithms- Trial Division Dixon's Algorithm . , , QuadraticSieve ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT752",
+      "code": "PEECT752",
+      "title": "Internet of Things",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT752.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to IoT technology: Definitions of IoT Characteristics of IoT , devices – power , computational constraints , IoT Architectural view – Middleware based architecture Service oriented architecture M2M , , Communication and IoT Typical application areas of IoT technology (case , studies of at least four domains) Energy management and Smart grid IoT - , for Home Cities ..."
+        },
+        {
+          "no": 2,
+          "summary": "Components of IoT technology: Identification/Addressing Electronic - Product Codes RFID ubiquitous code IPv4 IPv6 Sensors and Actuators* , , , , . . IoT Hardware** IoT Software overview of Operating systems Firmware , – , , Middleware ApplicationsoftwareusedinIoT ConnectivityforIoTdevices , . characteristics – ."
+        },
+        {
+          "no": 3,
+          "summary": "Communication technologies for IoT : Zigbee - key features , architecture , limitations Bluetooth technology bluetooth stack piconet scatternet , - , , , limitations Bluetooth Low Energy (key features architecture limitations) , , , , Wifi (IEEE 802 .11) technology key features limitations Cellular – , , technology GSM 3G 4GLTE (overview) features limitations LoRa – , , , , , t..."
+        },
+        {
+          "no": 4,
+          "summary": "IoT Data Management : Storage technologies for IoT hardware – Volatile , Non-volatile Embedded (MTP/OTP) external flash (NAND/NOR) DRAM , , , , eflash UFS eMMC (overview of technologies) Cloud and IoT Cloud , , . , computing – architecture , advantages of cloud computing , Software as a Service (SaaS) Platform as a Service (PaaS) Infrastructure as a Service , , (IaaS) Case stud..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT753",
+      "code": "PEECT753",
+      "title": "Real Time Operating System",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT753.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Real -Time Systems Overview of Real -Time Systems: Definition and types of real -time systems , Hard vs soft real -time systems Basic Concepts: Real -time tasks and their . . characteristics Task scheduling Timing constraints and requirements , , . RTOS Architectures: Monolithic kernels vs microkernels RTOS . . examples: commercial vs Open RTOS and their compari..."
+        },
+        {
+          "no": 2,
+          "summary": "Real -Time Scheduling and Synchronization Real -Time Scheduling Algorithms: Fixed -priority scheduling (Rate- Monotonic Deadline-Monotonic) Dynamic priority scheduling (Earliest , , Deadline First) Priority based preemption Round Robin Task , , , Synchronization: Mutual exclusion Priority inversion and inheritance , Inter-Task Communication: Semaphores Mutexes Event flags , , I..."
+        },
+        {
+          "no": 3,
+          "summary": "Real -Time System Design and Analysis System Design Principles: Modular design , Time-triggered vs . event - triggered systems Worst -Case Execution Time (WCET) Analysis: , Techniques for WCET estimation Timing analysis Reliability and Fault , , Tolerance:Redundancy Errordetectionandrecovery , . Designing a Real -Time System: Case study: Designing a real -time control system WC..."
+        },
+        {
+          "no": 4,
+          "summary": "Real -Time Operating System Services and Applications Real -Time Operating System Services: Memory management I/O , management Real -Time Middleware: Middleware services for real -time . systems Case Studies and Applications: Automotive systems Aerospace , , anddefense Medicaldevices , Memory Management in RTOS: Implementing dynamic memory allocation Real -Time Middleware Imple..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT754",
+      "code": "PEECT754",
+      "title": "Mixed Signal Circuits",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT754.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "CMOSAmplifiers MOSsmallsignalmodel: CMOS Amplifiers: Common source amplifier with resistive and active loads Common source amplifier with source degeneration Common gate , , and Common drain amplifier (only voltage gain and input and output impedancesofthecircuits) . CascodeAmplifier:Cascodedamplifierwithcascadeloads Foldedcascode Amplifier ."
+        },
+        {
+          "no": 2,
+          "summary": "CMOS Differential Amplifiers MOS Current Mirror: Basic circuit PMOS and NMOS current mirrors , Simple and Cascode current mirror circuits . CMOSDifferentialAmplifier:DifferentialAmplifierwithresistive current , source and current mirror loads MOS telescopic cascode amplifier (only , voltagegainandinputandoutputimpedanceofthecircuits)"
+        },
+        {
+          "no": 3,
+          "summary": "CMOSOperationalAmplifier TwoStageOperationalAmplifiers FrequencycompensationofOPAMPS Millercompensation . Band gap References- Supply Independent Biasing , Temperature independent references –band gap reference"
+        },
+        {
+          "no": 4,
+          "summary": "DataConverters:DACspecifications ADCspecifications , DAC Architecture Resistor String R -2R Ladder Networks Current - , , Steering ChargeScaling cyclicand , , Pipelinetypes . ADC Architecture- Flash type The Successive approximation type and , oversamplingADCs ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT755",
+      "code": "PEECT755",
+      "title": "Mixed Signal Circuit Design",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "SolidStateDevices , NetworkTheory",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT755.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "CMOSAmplifiers MOSsmallsignalmodel: CMOS Amplifiers: Common source amplifier with resistive and active loads Common source amplifier with source degeneration , , Common gate and Common drain amplifier (only voltage gain and inputandoutputimpedancesofthecircuits) . Cascode Amplifier: Cascoded amplifier with cascade loads Folded cascodeAmplifier ."
+        },
+        {
+          "no": 2,
+          "summary": "CMOS Differential Amplifiers MOS Current Mirror: Basic circuit PMOS and NMOS current , mirrors Simple and Cascode current mirror circuits . CMOS Differential Amplifier: Differential Amplifier with resistive , current source and current mirror loads MOS telescopic cascode , amplifier (only voltage gain and input and output impedance of the circuits)"
+        },
+        {
+          "no": 3,
+          "summary": "CMOSOperationalAmplifierTwoStageOperationalAmplifiers FrequencycompensationofOPAMPSMillercompensation . Band gap References- Supply Independent Biasing , Temperature independent references –band gap reference"
+        },
+        {
+          "no": 4,
+          "summary": "DataConverters:DACspecifications ADCspecifications , DAC Architecture Resistor String R -2R Ladder Networks Current - , , Steering Charge Scaling cyclic and Pipeline types , , . ADC Architecture- Flash type The Successive approximation type and , oversamplingADCs ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT756",
+      "code": "PEECT756",
+      "title": "Speech and Audio Processing",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT756.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Speech Production: Acoustic theory of speech production- -Source/Filter - model Pitch Formant Spectrogram-- Discrete model for speech - , , production Articulatory Phonetics -Acoustic Phonetics- Basic speech units , andtheirclassification ."
+        },
+        {
+          "no": 2,
+          "summary": "Short -Time Speech Analysis Windowing STFT spectra of windows- Wide , , , and narrow band spectrogram -Time domain parameters (Short time energy , short time zero crossing Rate ACF) Frequency domain parameters-Filter , . bank analysis STFT Analysis Prosody of speech MFCC -computation LPC . . . , Model PitchandFormantEstimation , ."
+        },
+        {
+          "no": 3,
+          "summary": "Speech Enhancement: Spectral subtraction and Filtering Harmonic , filtering parametric resynthesis Speaker Recognition: Speaker verification , . and speaker identification- log-likelihood Machine learning models in . SpeakerRecognition Languageidentification:implicitandexplicitmodels . ."
+        },
+        {
+          "no": 4,
+          "summary": "Signal Processing models of audio perception: Basic anatomy of hearing System: Basilar membrane behaviour Sound perception: Auditory Filter . Banks Critical Band Structure Absolute Threshold of Hearing Masking- , , , SimultaneousMasking TemporalMasking Modelsofspeechperception , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT757",
+      "code": "PEECT757",
+      "title": "Microwave Devices & Circuits",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "Microwave& Antennas (Coursecode)",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT757.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Limitation of conventional solid state devices at Microwave Microwave . generationandamplification . Structure Operation Power output and efficiency of IMPATT and , , TRAPATTdiodes Bipolar transistors biasing FET biasing MESFET Structure – , – , – , Operation . Microwave amplifiers and oscillators Amplifiers Gain and stability – – , Single stage transistor amplifier design Osci..."
+        },
+        {
+          "no": 2,
+          "summary": "Microwave Network Analysis Equivalent voltages and currents – , Impedance and Admittance matrices Scattering matrix The transmission , , matrix . Signal flow graphs Impedance matching and tuning Matching with . – lumped elements Single stub tuning Double stub tuning Quarter wave , , . transformer Theoryofsmallreflections , ."
+        },
+        {
+          "no": 3,
+          "summary": "Microwave filters Periodic structures Analysis of infinite periodic – – structuresandterminatedperiodicstructures"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEECT721",
+      "code": "OEECT721",
+      "title": "Optical Communication",
+      "category": "Open Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "PHYSICS",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT721.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Optical fiber Communications: Structure of Optical fiber materials , , Generalblockdiagramofopticalcommunicationsystem Advantages , . Optical fiber waveguides: Principle of light guidance Numerical Aperture , , Vnumber StepandGradedindexfibers SingleandMultimodefibers , , . Transmission Characteristics: Attenuation Absorption losses Linear and , , Non linear scattering losses b..."
+        },
+        {
+          "no": 2,
+          "summary": "Optical fibers and Cables Fabrication Techniques- Double crucible – method Outside Vapour phase oxidation Modified Chemical Vapour , , Deposition Optical Fiber Cables- Single and Multi fiber cables . . OpticalFiberConnections:splices connectors&couplers , . Optical Fiber Measurements:- Attenuation and dispersion measurements , MZ interferometer Optical Time Domain Reflectometer..."
+        },
+        {
+          "no": 3,
+          "summary": "Optical sources: LEDs and LDs general structures characteristics , , , modulatorsusingLEDsandLDs couplingwithfibres . , Optical detectors: Quantum efficiency and Responsivity Structure and , workingofPINandAPD Optical Receivers: Direct detection- noise in detectors SNR BER - , , analysis Coherentdetectionprinciples . Optical Amplifiers: EDFA Principle structure and working Rama..."
+        },
+        {
+          "no": 4,
+          "summary": "MultiplexingStrategies:OTDM SCM OFDM WDMandOpticalCDMA: , , , concepts components couplers splitters Add/ Drop multiplexers Fiber , - , , , gratingfilters tunablefilters , . Optical networks General description of SONET/SDH – Free space optics: Principle of LiFi technology Visible Light . Communication Other applications of optical fibers: Entertainment Sensors Types & , – prin..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEECT722",
+      "code": "OEECT722",
+      "title": "Digital Image Processing",
+      "category": "Open Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT722.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Digital Image Fundamentals: Image representation Types of images , , Elements of DIP system Basic relationship between pixels Distance , , Measures Simple image formation model Brightness contrast hue , . , , , saturation Mach band effect Colour image fundamentals-RGB CMY HIS , . , , models 2Dsamplingandquantization , ."
+        },
+        {
+          "no": 2,
+          "summary": "2D Image transforms: DFT Properties Walsh transform Hadamard , , , transform Haar transform DCT KL transform and Singular Value , , , Decomposition . Image Compression: Image compression model Lossy lossless , , compression Concept of transform coding JPEG Image compression , , standard ."
+        },
+        {
+          "no": 3,
+          "summary": "Image Enhancement: Spatial domain methods: Basic Gray Level Transformations Histogram Processing Enhancement Using , , Arithmetic/Logic Operations Basics of Spatial Filtering Smoothing spatial , , Filters SharpeningspatialFilters , . Frequency domain methods: low pass filtering high pass filtering , , homomorphicfiltering ."
+        },
+        {
+          "no": 4,
+          "summary": "Image Restoration: Degradation model Inverse filtering- removal of blur , caused by uniform linear motion Minimum Mean Square Error (Wiener) , Filtering . Image segmentation: Region based approach clustering Segmentation , , basedonthresholding edgebasedsegmentation HoughTransform , , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEECT723",
+      "code": "OEECT723",
+      "title": "Optimization Techniques",
+      "category": "Open Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT723.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Engineering application of Optimization – Statement of an Optimization problem–Classification Review of basic calculus concepts –Stationary , points; Functions of single and two variables; Convexity and concavity of functions –Definition of Global and Local optima Optimality criteria – , Linear programming methods for optimum design Standard form of linear – programming (LP) pr..."
+        },
+        {
+          "no": 2,
+          "summary": "Optimization algorithms for solving unconstrained nonlinear optimization problems Search based techniques: Direct search: Fibonacci and golden – section search Hookes and Jeeves Gradient based method: Newton’s , , method"
+        },
+        {
+          "no": 3,
+          "summary": "Optimization algorithms for solving constrained optimization problems– direct methods penalty function methods barrier method -Optimization of – , functionofmultiplevariablessubjecttoequalityconstraints;Lagrangian function– Inequality constrained techniques-KKT conditions-constrained steepestdescentmethod"
+        },
+        {
+          "no": 4,
+          "summary": "Modern methods of Optimization– Metaheuristic techniques: Genetic Algorithms Simulated Annealing Particle Swarm optimization –Ant – – colony optimization– : Use of Matlab/Scilab to solve optimization problem"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT861",
+      "code": "PEECT861",
+      "title": "Wireless Sensor Networks",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT861.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction application and challenges of wireless sensor networks , , (WSN) . Wireless LANS and PANS: Introduction Fundamentals of WLANs IEEE , , 80211standard HIPERLANstandard Bluetooth . , , , Wireless WANs and MANs : Cellular architecture 2G/3G/4G/5G Cellular , Networks WLL IEEE 80215 Standard: Physical layer Data link layer , , . , , MACprotocols WirelessInternet"
+        },
+        {
+          "no": 2,
+          "summary": "Network architecture: Sensor network scenarios Optimization goals and , figuresofmerit DesignprinciplesofWSNs ServiceinterfacesofWSNs , , . Communication Protocols: Physical layer: Wireless channel and communication fundamentals Physical layer and transceiver design , considerationsinWSNs ."
+        },
+        {
+          "no": 3,
+          "summary": "Mobile ad hoc networks and wireless sensor networks Field buses and , wireless sensor networks Enabling technologies for wireless sensor , networks . Mobile IP TCP in wireless domain TCP -BUS and Ad Hoc TCP Split TCP , , , , WAP optimisingWeboverwireless , ."
+        },
+        {
+          "no": 4,
+          "summary": "WSN architecture: Single node architecture: Hardware components Energy , consumptionof sensor nodes Lowpowerwireless sensornetworks Routing , , protocols-LEACH PEGASIS and RPL Operating systems and execution , , environments CaseStudy:TinyOSandnesC50Otherexamples , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT862",
+      "code": "PEECT862",
+      "title": "RF Engineering",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "Microwaves &Antennas",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT862.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "RF circuit introduction Importance of radio frequency design RF - , behaviourofresistorsinductorsandcapacitors Planar Transmission Lines Micro strip lines and Strip lines – – ConstructionalFeatures Impedance Matching Networks-Design of Matching Circuits using Lumped Elements Single Stub tuning Quarter-Wave Transformers Multi -Section , , , Transformer Binomial Transformer –"
+        },
+        {
+          "no": 2,
+          "summary": "RF Filter Design- Filter Design using insertion loss technique –Active RF components- Bipolar Junction Transistor Construction-Functionality- – PowerFrequencyLimitationsofHighFrequencytransistors . GaAs devices Familiarization of RF Field Effect Transistors and High - Electron Mobility Transistors–Constructional details RF circuit measurements and characterization- Using Vector..."
+        },
+        {
+          "no": 3,
+          "summary": "Amplifier design using S -parameters Characteristics of Amplifier Power - Relations Stability Considerations Stability Circles Tests for , – , UnconditionalStability High frequency amplifier design Single stage amplifier Design Design – – formaximumgain Lownoiseamplifierdesign ,"
+        },
+        {
+          "no": 4,
+          "summary": "Basic oscillator model -Feedback oscillator design—Negative Resistance Oscillator- Dielectric Resonator Oscillator YIG Tuned Oscillator - Mixer Basic characteristics Single-Ended Mixer Design Single-balanced - – , and double-balanced mixers"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT863",
+      "code": "PEECT863",
+      "title": "Renewable Energy Systems",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT863.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Renewable Energy (RE)Sources: World energy scenario , Over view of conventional energy sources their limitation need of , , renewable energy potential & development of renewable energy sources , , Renewable energy in India An overview of types of renewable energy , systems - Wind power , Hydropower (micro and mini) , Solar energy , Biomass Bio-fuel Geothermal He..."
+        },
+        {
+          "no": 2,
+          "summary": "Solar Energy: Introduction to photovoltaic (PV) systems Principle of PV - conversion; Commercial solar cell Thin film PV device fabrication , - LPCVD APCVD PECVD; Tandem Solar cell fabrication; Solar power , , extraction using PV -Cells I -V Characteristics PV -Inverters without D .C to , , . D .C converters stand alone and grid collected PV systems Grid interfacing- . , , with..."
+        },
+        {
+          "no": 3,
+          "summary": "Wind Energy: Sources and potentials of Wind Intensity Topography , , , General Classification of Wind Turbines-Rotor Turbines Multiple-Blade , Turbines DragTurbines LiftingTurbines SystemToroidalRotorAmplifier , , , Platform (TARP) –Wind amplified rotor platform (WARP) Generators and , speed control used in wind power energy: Fixed speed with capacitor bank , Rotor resistance c..."
+        },
+        {
+          "no": 4,
+          "summary": "Electronic conversion systems application to renewable energy generation systems: Basic schemes and functional advantages Power control and , management systems for grid integration island detection systems , , synchronizingwiththegrid;Issuesinintegrationofconverterbasedsources; Network voltage management; Power quality management and Frequency management; Influence of PV/WECS ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT864",
+      "code": "PEECT864",
+      "title": "Cyber Security",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT864.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: Security basics Aspects of network security – – Attacks Different types Hackers Crackers Common intrusion – – – – techniques –Trojan Horse Virus Worm Security threats Sources , , . - of security threats- Motives Target Assets and vulnerabilities - – Consequences of threats- E -mail threats Web -threats Intruders and - - Hackers Insider threats Cybercrimes , , ."
+        },
+        {
+          "no": 2,
+          "summary": "Security services and mechanisms OS Security Protection , – Mechanisms –Authentication & Access control Discretionary and – Mandatory access control Firewall Need for firewall Characteristics Types of firewall - , , , Firewall Basing , Intrusion Detection System- Types Goals of IDS IDS strengths and , , Limitations ."
+        },
+        {
+          "no": 3,
+          "summary": "Cryptography: Basic Encryption & Decryption Transposition & – substitution ciphers Caesar substitution Polyalphabetic – – substitutions Crypt analysis Symmetric key algorithms Feistel – – – Networks Confusion Diffusion DES Algorithm Strength of – – – – DES Comparison & important features of modern symmetric key – algorithms Public key cryptosystems The RSA Algorithm – – – Diffi..."
+        },
+        {
+          "no": 4,
+          "summary": "Introduction to Cyber Crime and law: Cyber Crimes Types of , Cybercrime Hacking Attack vectors Cyberspace and Criminal , , , Behaviour Clarification of Terms Traditional Problems Associated , , withComputerCrime IntroductiontoIncidentResponse , , Digital Forensics Computer Language Network Language Realms , , , of the Cyber world A Brief History of the Internet Recognizing and ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT865",
+      "code": "PEECT865",
+      "title": "Antenna Theory and Design",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "ELECTROMAGNETICS",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT865.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Antenna theory: Radiation mechanism from an antenna Current , Distribution on a Thin Wire Antenna Friis Transmission Equation and , RadarRangeEquation . Retardedpotentialconcept Infinitesimaldipole smalldipole Smallcircular , , , loopantenna . Biconical antenna Triangular sheet and Bow-tie antenna , TravelingWaveandBroadbandAntennas FractalAntennas , Array antennas; Binomial ar..."
+        },
+        {
+          "no": 2,
+          "summary": "Microstrip antennas: Radiation mechanism Rectangular Patch and Circular , Patch Quality Factor Bandwidth and Efficiency Input Impedance , , , , , Coupling Circular Polarisation Substrates for microstrip antennas Feeding , , , methods Transmissionlinemodel , Broad banding of microstrip antenna using stacked elements compact , circularlypolarisedantennas Designofmicrostripline(us..."
+        },
+        {
+          "no": 3,
+          "summary": "Reconfigurable antennas-types- principles of frequency polarisation and , patternreconfigurableantennas Metamaterial based antennas- Fundamentals of metamaterials metasurface , , SRR Smart Antennas: Introduction Smart -Antenna Analogy Smart Antennas’ , Benefits and drawbacks Antenna Beamforming Mobile Ad hoc Networks , , (MANETs)"
+        },
+        {
+          "no": 4,
+          "summary": "RadioWavePropagation Ground wave propagation Plane earth reflection Space wave and surface , , wave Duct propagation Spherical earth propagation Tropospheric waves , , , , Tropospheric scatter Ionospheric propagation Effects of earth’s magnetic , , field Criticalfrequency MaximumusableFrequency Virtualheight , , , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT866",
+      "code": "PEECT866",
+      "title": "Low Power VLSI",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT866.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "PhysicsofPowerdissipationinMOSFETdevices Needforlowpowercircuitdesign MISStructure , Deepsubmicrontransistordesignissues:Shortchanneleffects Channel Length Modulation Surface scattering Punch through Velocity , , , saturation Impact ionization Hot electron effects Body Effect Narrow , , , , width effect V roll -off Drain Induced Barrier Lowering Gate Induced , th , , drain leak..."
+        },
+        {
+          "no": 2,
+          "summary": "Sources of power dissipation in digital ICs – DynamicPowerDissipation: ShortCircuitPower:ShortCircuitCurrentofInverter Shortcircuitcurrent , dependency on input rise and fall time Variation of shortcircuit current , withloadcapacitance . Switching power dissipation: Switching Power of CMOS Inverter , Switchingactivityanditseffects . GlitchingPower:Glitchesanditseffectonpowerdis..."
+        },
+        {
+          "no": 3,
+          "summary": "Low-Power Design Approaches- SupplyVoltageScalingforLowPower: EffectofSupplyvoltageonDelayandPower EffectofSupplyvoltageonStaticandDynamicPower Multi VDD Dynamic VDD Dynamic Voltage and Frequency Scaling , , (DVFS)Approaches . ArchitecturalLevelApproaches:PipeliningandParallelProcessing LeakagepowerreductionTechniques: EffectofthresholdvoltageonLeakagePower Transistorstacking M..."
+        },
+        {
+          "no": 4,
+          "summary": "Circuit Design Styles for Low Power- Non clockedcircuitdesignstyle: Fully Complementary logic NMOSand . Pseudo –NMOS logic Differential Cascode Voltage Switch logic(DCVS) , Clocked design style: Basic concept Dynamic Logic Domino logic , , , DifferentialCurrentSwitchLogic . Adiabatic switching Adiabatic charging Adiabatic amplification – , , Adiabaticlogicgates Pulsedpowersuppl..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT867",
+      "code": "PEECT867",
+      "title": "Block Chain",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT867.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Blockchain Definition architecture elements of blockchain benefits and – , , , limitations , types of blockchain . Consensus – definition , types , consensus in blockchain . Decentralization Decentralization using blockchain Methods of – , decentralization Routes to decentralization Blockchain and full ecosystem , , decentralization ."
+        },
+        {
+          "no": 2,
+          "summary": "Consensus Algorithms Crash fault -tolerance (CFT) algorithms Paxos , – , Raft Byzantine fault tolerance (BFT) algorithms Practical Byzantine Fault . - – Tolerance (PBFT) Proof of work (PoW) Proof of stake (PoS) Types of , , , PoS . Bitcoin Definition Cryptographic keys Private keys public keys – , – , , addresses Transactions Lifecycle coinbase transactions transaction . – , , ..."
+        },
+        {
+          "no": 3,
+          "summary": "Smart Contracts Definition Smart contract templates Oracles Types of – , , , oracles Deploying smart contracts Decentralization terminology , . – Decentralizedapplications DecentralizedAutonomousOrganizations , . Use cases of Blockchain technology – Government , Health care , Finance , Supplychainmanagement . Blockchain and allied technologies Blockchain and Cloud Computing – ,..."
+        },
+        {
+          "no": 4,
+          "summary": "Ethereum The Ethereum network Components of the Ethereum ecosystem – . – Keys and addresses , Accounts , Transactions and messages . The Ethereum VirtualMachine Blocksandblockchain , . The Solidity language – The layout of a Solidity source code , Structure of a smart contract variables data types control structures events inheritance , , , , , , libraries functions errorhandli..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEECT868",
+      "code": "PEECT868",
+      "title": "Antenna Theory and Wave Propagation",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "ELECTROMAGNETICS",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT868.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Antenna theory: Radiation mechanism from an antenna Current , Distribution on a Thin Wire Antenna Friis Transmission Equation and , RadarRangeEquation . Infinitesimaldipole smalldipole Smallcircularloopantenna , , . Biconical antenna Triangular sheet and Bow-tie antenna , TravelingWaveandBroadbandAntennas FractalAntennas ,"
+        },
+        {
+          "no": 2,
+          "summary": "Microstrip antennas: Radiation mechanism Rectangular Patch and , Circular Patch Quality Factor Bandwidth and Efficiency Input , , , , Impedance Coupling Circular Polarisation Substrates for microstrip , , , antennas AntennaMeasurements MeasurementofAntennaRange Radiation Patterns Gain and Directivity , , , RadiationEfficiency Impedance CurrentPolarization , ,"
+        },
+        {
+          "no": 3,
+          "summary": "Reconfigurable antennas-types- principles of frequency polarisation and , patternreconfigurableantennas Metamaterial based antennas- Fundamentals of metamaterials , metasurface SRR , Smart Antennas: Introduction Smart -Antenna Analogy Smart Antennas’ , Benefits and drawbacks Antenna Beamforming Mobile Ad hoc Networks , , (MANETs)"
+        },
+        {
+          "no": 4,
+          "summary": "RadioWavePropagation Ground wave propagation Plane earth reflection Space wave and surface , , wave Spherical earth propagation Tropospheric waves Ionospheric , , , propagation Effects of earth’s magneticfield Critical frequency Maximum , , , usableFrequency Virtualheight , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEECT831",
+      "code": "OEECT831",
+      "title": "Internet of Things",
+      "category": "Open Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT831.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to IoT technology: Definitions of IoT Characteristics of IoT , devices – power , computational constraints , IoT Architectural view – Middleware based architecture Service oriented architecture M2M , , Communication and IoT Typical application areas of IoT technology (case , studies of at least four domains) Energy management and Smart grid IoT - , for Home Cities ..."
+        },
+        {
+          "no": 2,
+          "summary": "Components of IoT technology: Identification/Addressing Electronic - Product Codes RFID ubiquitous code IPv4 IPv6 Sensors and Actuators* , , , , . . IoT Hardware** IoT Software overview of Operating systems Firmware , – , , Middleware ApplicationsoftwareusedinIoT ConnectivityforIoTdevices , . characteristics – ."
+        },
+        {
+          "no": 3,
+          "summary": "Communication technologies for IoT : Zigbee - key features , architecture , limitations Bluetooth technology bluetooth stack piconet scatternet , - , , , limitations Bluetooth Low Energy (key features architecture limitations) , , , , Wifi (IEEE 802 .11) technology key features limitations Cellular – , , technology GSM 3G 4GLTE (overview) features limitations LoRa – , , , , , t..."
+        },
+        {
+          "no": 4,
+          "summary": "IoT Data Management : Storage technologies for IoT hardware – Volatile , Non-volatile Embedded (MTP/OTP) external flash (NAND/NOR) DRAM , , , , eflash UFS eMMC (overview of technologies) Cloud and IoT Cloud , , . , computing – architecture , advantages of cloud computing , Software as a Service (SaaS) Platform as a Service (PaaS) Infrastructure as a Service , , (IaaS) Case stud..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEECT832",
+      "code": "OEECT832",
+      "title": "Satellite and Radar Communication",
+      "category": "Open Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT832.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Satellite orbit and orbital equations Kepler‟s laws of planetary motion , , locating satellite in the orbit locating satellite with respect to earth Look , , angle calculation coverage angle and slant range orbital perturbations , , , satellitelaunching orbitaleffectsincommunicationsubsystemperformance , . Satellite subsystems Attitude and orbit control system Telemetry trackin..."
+        },
+        {
+          "no": 2,
+          "summary": "Satellite link design- Basic link analysis Interference analysis terrestrial , , interference Intermodulation interference inter-symbol interference and rain , , inducedattenuation uplinkpowercontrol systemavailability systemdesign , , , for link without frequency reuse and system design for link with frequency reuse ."
+        },
+        {
+          "no": 3,
+          "summary": "Basics of Radar: Introduction Range Radar Waveforms Simple form of , , , Radar Equation Radar Block Diagram and Operation Radar Frequencies , , and Applications Prediction of Range Performance Minimum Detectable , , Signal ReceiverNoise ModifiedRadarRangeEquation , ,"
+        },
+        {
+          "no": 4,
+          "summary": "CW and Frequency Modulated Radar: Doppler Effect CW Radar Block , – Diagram ApplicationsofCWradar , . FM -CW Radar: FM -CW Radar Range and Doppler Measurement Block , , Diagram and Characteristics (Approaching/ Receding Targets) FM -CW , altimeter MultipleFrequencyCWRadar , . MTI and Pulse Doppler Radar: Introduction Principle MTI versus Pulse Doppler , . Radar TrackingRadar:va..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    }
+  ]
+}

@@ -1,0 +1,4125 @@
+{
+  "scheme": "2024",
+  "level": "S3–S8",
+  "branch": {
+    "code": "CE",
+    "slug": "ce",
+    "name": "Civil Engineering",
+    "short_name": "CE",
+    "group": "Group C"
+  },
+  "total_courses": 86,
+  "semester_counts": {
+    "S3": 9,
+    "S4": 16,
+    "S5": 14,
+    "S6": 18,
+    "S7": 19,
+    "S8": 12
+  },
+  "category_counts": {
+    "Core": 9,
+    "PBL Core": 4,
+    "Math & Science": 3,
+    "Common / Humanities": 2,
+    "Lab": 8,
+    "Program Elective": 44,
+    "Open Elective": 16
+  },
+  "courses": [
+    {
+      "id": "PCCET302",
+      "code": "PCCET302",
+      "title": "Fluid Mechanics",
+      "category": "Core",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "GCEST103/ Equivalent",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET302.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Fluidproperties Newton’slawofviscosity typesoffluids(descriptiononly) , , FluidStatics: Fluid pressure Pascal’s Law Hydrostatic law Measurement of , , , fluid pressure using manometers -Simple manometer (Piezo meter and U tube manometers)andDifferentialmanometers(Utubedifferentialmanometerand inverted U tube differential manometer) (include numerical problems) , Mechanicalgauge..."
+        },
+        {
+          "no": 2,
+          "summary": "Determinationoftotalpressureandcentreofpressureonsurfaces(include numericalproblems):Verticalplanesurface Horizontalplanesurface inclined , , planesurface curvedsurfaces , , Buoyancy and Floatation: Basic concepts centre of buoyancy meta-centre , , and meta-centric height of floating bodies determination of meta -centric , height using analytical and experimental method (includ..."
+        },
+        {
+          "no": 3,
+          "summary": "Fluid Kinematics: Methods of describing fluid motion Lagrangian and , Eulerianmethods . types of fluid flow continuity equation in one two and three dimensions , , (include derivation and numerical problems) -4 Determination of velocity and acceleration at a point in fluid flow (include numerical problems) Description of streamline pathline and streakline , , , velocitypotentia..."
+        },
+        {
+          "no": 4,
+          "summary": "FlowthroughOrifices:hydrauliccoefficientsandexperimentaldetermination ofhydrauliccoefficients (associated numerical problems) Discharge through large orifices- rectangular orifice(dischargingfreely fully submergedand partially submerged) time of , , emptying of a rectangular tank through an orifice at its bottom (include numericalproblems) . Pipe flow- Computation of major loss..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCCET303",
+      "code": "PCCET303",
+      "title": "Structural Analysis - I",
+      "category": "Core",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "PCCEL205/Equivalent",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET303.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Statically determinate trusses: Analysis using method of joints and methodofsections . Cables and Suspension bridges: Forces in loaded (concentrated and uniformly distributed) cables - length of cables – supports at same and different levels maximum tension in the suspension cable and backstays – , pressureontowers . Simple suspension bridges with three hinged stiffening girder..."
+        },
+        {
+          "no": 2,
+          "summary": "DeformationResponseofStaticallyDeterminateBeams: Conjugate beam method Real beam and conjugate beam boundary – , conditions; Applications to determinate deformations of cantilever and simply supported beams (prismatic and beams of varying cross section subjectedtoconcentratedanduniformlydistributedloads . EnergyPrinciplesandEnergyTheorems: Castigliano’s theorem I Principle of v..."
+        },
+        {
+          "no": 3,
+          "summary": "IndeterminateStructures: Introductiontoforcemethodofanalysis Staticindeterminacy . Analysisofstaticallyindeterminatestructures Castigliano’s theorem II Minimum strain energy method for analysing , staticallyindeterminatestructures(Illustrationonly) Method of consistent deformations: Analysis of beams frames and , trusses (simple problems with one redundant illustration only for..."
+        },
+        {
+          "no": 4,
+          "summary": "Three Hinged Arches: Action of an arch - Eddy’s theorem – Three hinged , parabolic and circular arches (with supports at same level) - determination of horizontal thrust bending moment normal thrust and , , radialshear . MovingLoadsandinfluencelines Introduction to moving loads concept of influence lines influence lines - - forreaction shearforceandbendingmomentinsimplysupporte..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PBCET304",
+      "code": "PBCET304",
+      "title": "Surveying & Geomatics",
+      "category": "PBL Core",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:1",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "PBL",
+      "prerequisites": "GCEST104",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCET304.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Surveying : Principles Linear angular andgraphical , , methods Survey stations Survey lines- ranging Bearing of survey lines , , , , Local attraction Declination Methods of orientation (by compass and , , bybacksighting) . Levelling : Principles of levelling- Dumpy level booking and reducing , levels Methods- simple differential reciprocal levelling profile , , ..."
+        },
+        {
+          "no": 2,
+          "summary": "Contouring:Characteristics methods uses , , . Areas and Volumes: computation of area by offsets to base line by , dividing area into number of triangles; volume of level section by prismoidalandtrapezoidalformulae . Massdiagram:Construction Characteristicsanduses , Triangulation: Triangulation figures Triangulation stations Inter , , visibilityofstations SatelliteStationsandred..."
+        },
+        {
+          "no": 3,
+          "summary": "Theory of Errors : Types theory of least squares Weighting of , , observations Most probable value Computation of indirectly observed , , quantities method of normal equations - . Total Station : Concept of EDM principles and working advantages , , and applications Global Positioning Systems-Components and , principles satellite ranging-calculating position signal structure , ,..."
+        },
+        {
+          "no": 4,
+          "summary": "Remote Sensing : Definition- Electromagnetic spectrum-Energy interactions with atmosphere and earth surface features-spectral reflectance of vegetation soil and water- Classification of sensors- , Active and Passive Resolution-spatial spectral radiometric and , , Temporal resolution Multi spectral scanning-Along track and across , trackscanning Geographical Information System :..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "GNEST305",
+      "code": "GNEST305",
+      "title": "Introduction to Artificial Intelligence and Data Science",
+      "category": "Math & Science",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/GNEST305.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to AI and Machine Learning: Basics of Machine Learning - types of Machine Learning systems-challenges in ML Supervised learning - model example- regression models- Classification model example- Logistic regression-unsupervised model example- K -means clustering Artificial . Neural Network Perceptron- Universal Approximation Theorem (statement - only) Multi -Layer P..."
+        },
+        {
+          "no": 2,
+          "summary": "MathematicalFoundationsofAIandDatascience:Roleoflinearalgebra in Data representation and analysis Matrix decomposition- Singular Value – Decomposition (SVD) Spectral decomposition- Dimensionality reduction - technique-Principal Component Analysis (PCA) (Text -1) ."
+        },
+        {
+          "no": 3,
+          "summary": "Applied Probability and Statistics for AI and Data Science: Basics of probability-random variables and statistical measures - rules in probability- Bayes theorem and its applications- statistical estimation-Maximum Likelihood Estimator (MLE) statistical summaries- Correlation analysis- - linear correlation (direct problems only) regression analysis- linear regression - (usingle..."
+        },
+        {
+          "no": 4,
+          "summary": "Basics of Data Science: Benefits of data science-use of statistics and Machine Learning in Data Science- data science process - applications of Machine Learning in Data Science- modelling process- demonstration of ML applications in data science- Big Data and Data Science (For visualization . the software tools like Tableau PowerBI R or Python can be used For , , . Machine Lear..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "GYMAT301",
+      "code": "GYMAT301",
+      "title": "Mathematics for Electrical Science and Physical Science - 3",
+      "category": "Math & Science",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "Basicknowledgein complexnumbers .",
+      "common_note": "Common to B & C Groups",
+      "shared_branches": [
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/GYMAT301.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "FourierIntegral FromFourierseriestoFourierIntegral FourierCosineand , , Sineintegrals FourierCosineandSineTransform Linearity Transformsof , , , Derivatives Fourier Transform and its inverse Linearity Transforms of , , , Derivative . (Text1:Relevanttopicsfromsections117 118 119) . , . , ."
+        },
+        {
+          "no": 2,
+          "summary": "Complex Function Limit Continuity Derivative Analytic functions , , , , , Cauchy-Riemann Equations (without proof) Laplace’s Equations Harmonic , , functions Finding harmonic conjugate Conformal mapping Mappings of , , , w=𝑧ଶ 𝑤=𝑒௭ w=ଵ 𝑤=𝑠𝑖𝑛𝑧 , , ௭, . (Text1:Relevanttopicsfromsections133 134 171 172 174) . , . , . , . , ."
+        },
+        {
+          "no": 3,
+          "summary": "ComplexIntegration:Lineintegralsinthecomplexplane(Definition&Basic properties) First evaluation method Second evaluation method Cauchy’s , , , integraltheorem(withoutproof)onsimplyconnecteddomain Independence , of path Cauchy integral theorem on multiply connected domain (without , proof) CauchyIntegralformula(withoutproof) , . (Text1:Relevanttopicsfromsections141 142 143) . , ..."
+        },
+        {
+          "no": 4,
+          "summary": "Taylor series and Maclaurin series Laurent series (without proof) , , Singularities and Zeros Isolated Singularity Poles Essential Singularities – , , , Removable singularities Zeros of Analytic functions Poles and Zeros , – , Formulas for Residues Residue theorem (without proof) Residue , , Integration- Integral of Rational Functions of cosθ and sinθ . (Text1:Relevanttopicsfro..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "UCHUT346",
+      "code": "UCHUT346",
+      "title": "Economics for Engineers",
+      "category": "Common / Humanities",
+      "semesters": [
+        "S3",
+        "S4"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "2:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "Common to All Branches",
+      "shared_branches": [
+        "CSE",
+        "AIML",
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/UCHUT346.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Basic Economics Concepts Basic economic problems Production - – Possibility Curve Utility Law of diminishing marginal utility Law of – – – Demand Law of supply Elasticity measurement of elasticity and its - – - applications Equilibrium- Changes in demand and supply and its effects – Production function Law of variable proportion Economies of Scale - – – Internal and External Ec..."
+        },
+        {
+          "no": 2,
+          "summary": "Cost concepts Social cost private cost Explicit and implicit cost Sunk – , – – cost - Opportunity cost - short run cost curves - Revenue concepts Firms and their objectives Types of firms Markets Perfect Competition – – - Monopoly Monopolistic Competition Oligopoly (features and – - - equilibriumofafirm)"
+        },
+        {
+          "no": 3,
+          "summary": "Monetary System Money Functions Central Banking –Inflation – – - - Causes and Effects Measures to Control Inflation Monetary and Fiscal – - policies Deflation – Taxation Direct and Indirect taxes (merits and demerits) GST – - National income Concepts Circular Flow Methods of Estimation and – - – Difficulties Stock Market Functions- Problems faced by the Indian stock - – market ..."
+        },
+        {
+          "no": 4,
+          "summary": "Value Analysis and value Engineering Cost Value Exchange Value Use - , , Value , Esteem Value - Aims , Advantages and Application areas of Value Engineering - Value Engineering Procedure - Break -even Analysis - Cost - Benefit Analysis Capital Budgeting Process planning - -"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "UCHUT347",
+      "code": "UCHUT347",
+      "title": "Engineering Ethics and Sustainable Development",
+      "category": "Common / Humanities",
+      "semesters": [
+        "S3",
+        "S4"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "2:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CSE",
+        "AIML",
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/UCHUT347.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Fundamentals of ethics - Personal vs . professional ethics , Civic Virtue , Respect for others Profession and Professionalism Ingenuity diligence , , , and responsibility Integrity in design development and research domains , , , , Plagiarism , a balanced outlook on law - challenges - case studies , Technology and digital revolution-Data information and knowledge , , , Cybertru..."
+        },
+        {
+          "no": 2,
+          "summary": "Introduction to Environmental Ethics: Definition importance and , historical development of environmental ethics key philosophical theories , (anthropocentrism biocentrism ecocentrism) Sustainable Engineering , , . Principles: Definition and scope triple bottom line (economic social and , , environmental sustainability) life cycle analysis and sustainability metrics , . Ecosyst..."
+        },
+        {
+          "no": 3,
+          "summary": "Hydrology and WaterManagement: Basics of hydrologyand watercycle , Waterscarcityandpollutionissues Sustainablewatermanagementpractices , , Environmental flow disruptions and disasters Zero Waste Concepts and , . Practices: Definition of zero waste and its principles Strategies for waste , reduction reuse reduceand recycling Case studiesof successful zero waste , , , initiatives..."
+        },
+        {
+          "no": 4,
+          "summary": "RenewableEnergyandSustainableTechnologies: Overviewofrenewable energy sources (solar wind hydro biomass) Sustainable technologies in , , , , energy production and consumption Challenges and opportunities in , renewable energy adoption Climate Change and Engineering Solutions: . Basics of climate change science Impact of climate change on natural and , humansystems Kerala/Indiaa..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCCEL307",
+      "code": "PCCEL307",
+      "title": "Survey Lab",
+      "category": "Lab",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Lab",
+      "prerequisites": "GCESL106/Equivalent",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL307.pdf",
+      "modules": [],
+      "experiments_count": 16,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "Conventionalsurveying a Chain/tapesurveying . b Compasssurveying ."
+        },
+        {
+          "no": "2",
+          "title": "Levelling Differentiallevelling"
+        },
+        {
+          "no": "3",
+          "title": "Flylevelling"
+        },
+        {
+          "no": "4",
+          "title": "ProfileLevellingandCrosssectioning"
+        },
+        {
+          "no": "5",
+          "title": "Distancebetweeninaccessiblepoints(horizontalangle)"
+        },
+        {
+          "no": "6",
+          "title": "Leveldifferencebetweenpoints(verticalangle)"
+        },
+        {
+          "no": "7",
+          "title": "Tangentialtacheometry(verticalangle)"
+        },
+        {
+          "no": "8",
+          "title": "Traversing Balancing the traverse using Bowditch’s rule Transit rule and graphical - , method"
+        },
+        {
+          "no": "9",
+          "title": "Totalstationsurvey Heightsanddistances"
+        },
+        {
+          "no": "10",
+          "title": "Areacomputation Contouring"
+        },
+        {
+          "no": "11",
+          "title": "Setting out of curve- simple curve"
+        },
+        {
+          "no": "12",
+          "title": "Setting out of curve - Compound curve using angular methods only"
+        },
+        {
+          "no": "13",
+          "title": "Studyofinstruments a Automaticlevel . b Digitallevel . c HandledGPS ."
+        },
+        {
+          "no": "14",
+          "title": "LidarSurveying"
+        },
+        {
+          "no": "15",
+          "title": "GNSSSurveying"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCCEL308",
+      "code": "PCCEL308",
+      "title": "Fluid Mechanics Lab",
+      "category": "Lab",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Lab",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL308.pdf",
+      "modules": [],
+      "experiments_count": 17,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "Studyoftaps valves pipefittings gauges Pitottubes watermetersandcurrentmeters , , , , ,"
+        },
+        {
+          "no": "2",
+          "title": "CalibrationofPressuregauges"
+        },
+        {
+          "no": "3",
+          "title": "Determinationofmetacentricheightandradiusofgyrationoffloatingbodies ."
+        },
+        {
+          "no": "4",
+          "title": "VerificationofBernoulli’stheorem"
+        },
+        {
+          "no": "5",
+          "title": "Hydrauliccoefficientsoforificesandmouthpiecesunderconstantheadmethodandtime ofemptyingmethod ."
+        },
+        {
+          "no": "6",
+          "title": "CalibrationofVenturimeter"
+        },
+        {
+          "no": "7",
+          "title": "CalibrationofOrificemeter"
+        },
+        {
+          "no": "8",
+          "title": "Calibrationofwatermeter .."
+        },
+        {
+          "no": "9",
+          "title": "Calibrationofrectangularnotch"
+        },
+        {
+          "no": "10",
+          "title": "Calibrationoftriangularnotch"
+        },
+        {
+          "no": "11",
+          "title": "Determinationofcoefficientofdischarge(TimeofEmptyingthroughorifice)"
+        },
+        {
+          "no": "12",
+          "title": "PlottingSpecificEnergyCurvesinOpenChannelflow"
+        },
+        {
+          "no": "13",
+          "title": "StudyofParametersofHydraulicJumpinOpenchannelFlow"
+        },
+        {
+          "no": "14",
+          "title": "Determination of friction co-efficient in pipes"
+        },
+        {
+          "no": "15",
+          "title": "Determination of loss co-efficient for pipe fittings"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCCET402",
+      "code": "PCCET402",
+      "title": "Soil Mechanics",
+      "category": "Core",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "PCCET205or equivalent",
+      "common_note": "Common to Civil Engineering Branches",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET402.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Nature of soil and functional relationships : Introduction to geotechnical engineering– Soil types Major soil deposits of India 3 phase system – - – Basicsoilproperties:Voidratio porosity degreeofsaturation aircontent , , , , water content specific gravity unit weight Relationship between basic soil , , - properties Relative Density- Numerical problems , . Determination of Wate..."
+        },
+        {
+          "no": 2,
+          "summary": "Index properties: Sieve analysis Hydrometer analysis-strokes law , , calibrationofhydrometer correctionstohydrometerreadings gradationof , , soil combined sieve and hydrometer analysis limitations [no derivation , , , requiredforpercentagefineranddiameter] . Consistency Atterberg Limits and indices Plasticity charts activity of – – – soil -laboratory tests for Liquid Limit (Cas..."
+        },
+        {
+          "no": 3,
+          "summary": "Principle of effective stress Total neutral and effective stress Pressure - , – diagrams in layered soil with water table saturated by capillary action , , subjected to surcharge load Numerical problems- Quick sand condition – – Criticalhydraulicgradient Stress distribution : Introduction - Boussinesq’s equations for vertical pressure due to point loads and line loads – Assumpt..."
+        },
+        {
+          "no": 4,
+          "summary": "Consolidation Definition Concepts of Coefficient of compressibility and - – volume compressibility - e-log p curve - Compression index , Recompression index and Pre-consolidation Pressure - Normally consolidated , over consolidated and under consolidated soils - Terzaghi’s theory of one- dimensional consolidation with its assumptions (no derivation required) - average degree of..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCCET403",
+      "code": "PCCET403",
+      "title": "Structural Analysis - Ii",
+      "category": "Core",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "PCCET303/ Equivalent",
+      "common_note": "Common for Civil Engineering Branches",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET403.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Conceptofdisplacementapproachtostructuralanalysis: Introduction to displacement methods of analysis Kinematic . indeterminacy SlopeDeflectionMethod: Introduction signconvention developmentofslopedeflectionequation; , , Analysisofcontinuousbeamsincludingsettlementofsupports;Analysis of orthogonal rigid plane frames including sway frames with kinematic indeterminacyupto2 MomentDi..."
+        },
+        {
+          "no": 2,
+          "summary": "Approximate Methods of Analysis of Multi -storeyed Frames: Analysis for vertical loads-substitute frames-loading condition for maximum hogging and sagging moments in beams and maximum bendingmomentincolumns . Analysis for lateral loads portal method cantilever method – , . Plastic Theory: Introduction plastic hinge concepts plastic modulus – – – shape factor redistribution of m..."
+        },
+        {
+          "no": 3,
+          "summary": "Matrixanalysisofstructures: Flexibilitymethod: Definition of flexibility influence coefficients Concepts of physical - approach . Flexibility matrices for truss and frame elements-load transformation matrix- development of total flexibility matrix of the structure-analysis of simple structures (determinate & indeterminate) -plane truss and plane frame-nodal loadsandelementloads"
+        },
+        {
+          "no": 4,
+          "summary": "Stiffnessmethod: Definition of stiffness influence coefficients Concepts of physical - approach . Development of stiffness matrices by physical approach -stiffness matrices for truss and frame elements-displacement transformation matrix-analysis of simple indeterminate structures-plane truss and plane frame-nodal loads and element loads . Introduction to direct stiffness method..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PBCET404",
+      "code": "PBCET404",
+      "title": "Design of Concrete Structures",
+      "category": "PBL Core",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:1",
+      "exam_hours": "",
+      "course_type": "PBL",
+      "prerequisites": "(PCCEL208and PCCET303)or equivalent",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCET404.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Properties of Concrete and Steel Philosophies of Design by Limit State , Method IntroductionofIS456:2000designprovisions , Limit State of Collapse in Flexure Singly Reinforced Rectangular Beams - ComputationofParametersofGoverningEquations Determination of Neutral Axis Depth and Computation of Moment of Resistance- Numerical Problems Limit State of Collapse in Shear Numerical P..."
+        },
+        {
+          "no": 2,
+          "summary": "Doubly Reinforced Beams Theory and Problems Flanged Beams Theory - - andISCodeprovisionsonly One-way slabs Basic Principles Theory and design Numerical Problems - , - Design of Two-way Slabs Numerical Problems -"
+        },
+        {
+          "no": 3,
+          "summary": "Limit State of Serviceability Introduction to IS code provisions only - Compression members Definitions Classifications Guidelines and - , , Assumptions modes of failure - . AnalysisofShortAxiallyLoadedCompressionMembersunderAxialLoad with Uniaxial Bending & Biaxial bending Numerical Problems - DesignofShortColumnsunderAxialLoadwithUniaxialBending&Biaxial bending Numerical Prob..."
+        },
+        {
+          "no": 4,
+          "summary": "Foundations - Shallow foundations- isolated foundations – Design of square and rectangular foundation Numerical Problems ( Only axially loaded .- conditionisexpected) Modellinganddesignofasimpleframedstructureinanystructuralanalysis anddesignsoftware (Example:Adoublestoriedstructurewiththreerooms . inGFandFF)"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "GCMAT401",
+      "code": "GCMAT401",
+      "title": "Mathematics for Physical Science - 4",
+      "category": "Math & Science",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "Basiccalculus .",
+      "common_note": "C Group",
+      "shared_branches": [
+        "ME",
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/GCMAT401.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Random variables Discrete random variables and their probability , distributions Cumulative distribution function Expectation Mean and , , , variance Binomial distribution Poisson distribution Poisson distribution as , , , a limit of the binomial distribution Joint pmf of two discrete random , variables Marginal pmf Independent random variables Expectedvalueofa , , , functionof..."
+        },
+        {
+          "no": 2,
+          "summary": "Continuous random variables and their probability distributions Cumulative , distributionfunction Expectation Meanand variance Uniform Normaland , , , , Exponential distributions Joint pdf of two Continuous random variables , , Marginalpdf Independentrandomvariables Expectationvalueofafunction , , oftwocontinuousvariables . [Text1:Relevanttopicsfromsections31 41 42 43 44 51 52]..."
+        },
+        {
+          "no": 3,
+          "summary": "Confidence Intervals Confidence Level Confidence Intervals and One-side , , confidence intervals for a Population Mean for large and small samples (normal distribution and t -distribution) Hypotheses and Test Procedures , , Type I and Type II error z Tests for Hypotheses about a Population Mean , (forlargesample) tTestforHypothesesaboutaPopulationMean(forsmall , sample) Tests c..."
+        },
+        {
+          "no": 4,
+          "summary": "Newton-Raphson Method Gauss Elimination Method Gauss Jordan , , - Method Numerical solution of ordinary differential equations-Euler’s , method Modified Euler’s method Runge Kutta method of 2nd Order , , - , Numerical solution of Laplace equation –Jacobi’s Method Curve Fitting by , Method of Least Squares Straight lines Parabola - , . (Text2:Relevanttopicsfromsections25 42 75 8..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCCEL407",
+      "code": "PCCEL407",
+      "title": "Materials Testing Lab (Group C)",
+      "category": "Lab",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "prerequisites": "PCCET205/ Equivalent",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL407.pdf",
+      "modules": [],
+      "experiments_count": 17,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "Test on stress-strain characteristics of mild steel and Tor Steel by conducting uniaxial tension testonrodspecimens"
+        },
+        {
+          "no": "2",
+          "title": "Sheartestonmildsteelrod(CompressionTestingMachineandShearShackle)"
+        },
+        {
+          "no": "3",
+          "title": "FlexuralbehaviourofsteelbyconductingabendingtestonRolledsteelsections(Icross section)"
+        },
+        {
+          "no": "4",
+          "title": "Torsionalbehaviourandestimationofmodulusofrigidityofsteelbyconductingtorsion teston rodspecimens"
+        },
+        {
+          "no": "5",
+          "title": "Estimationofmodulusofrigidityofsteelandbrass/coppermaterialsutilizingthe principles of torsional vibrations Torsion Pendulum – ."
+        },
+        {
+          "no": "6",
+          "title": "Estimationoftoughnessofsteelspecimensbyconducting(a)Izod&(b)Charpyimpact tests ."
+        },
+        {
+          "no": "7",
+          "title": "Estimationofhardnesspropertiesofengineeringmaterialssuchasbrass aluminium , , copper steeletcbyperformingBrinellhardnesstest , ."
+        },
+        {
+          "no": "8",
+          "title": "EstimationofHardnesspropertiesofengineeringmaterialssuchasbrass aluminium , , copper steeletcbyperforming(a)Rockwellhardnesstest(b)Vicker’shardnesstest , ."
+        },
+        {
+          "no": "9",
+          "title": "Estimationofmodulusofrigidityofsteelbyperformingtensionandcompressiontests onspring specimens ."
+        },
+        {
+          "no": "10",
+          "title": "Flexuralbehaviouroftimbermaterialbyperformingbendingtestsonbeamspecimens ."
+        },
+        {
+          "no": "11",
+          "title": "Estimationofcompressivestrengthoftimberspecimen ."
+        },
+        {
+          "no": "12",
+          "title": "ExperimentonverificationofMaxwell’sreciprocaltheorem"
+        },
+        {
+          "no": "13",
+          "title": "DemonstrationofFatigueTest"
+        },
+        {
+          "no": "14",
+          "title": "Study/demonstrationofStrainGaugesandloadcells"
+        },
+        {
+          "no": "15",
+          "title": "Bend&RebendtestonMSRods"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCCEL408",
+      "code": "PCCEL408",
+      "title": "Civil Engineering Modelling Lab",
+      "category": "Lab",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "prerequisites": "PCCEL208/ Equivalent",
+      "common_note": "Common to C Group",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL408.pdf",
+      "modules": [],
+      "experiments_count": 10,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "Reviewofdraftingsoftware: Planasinglestoreyedresidentialbuildingwithflatroofforgivenrequirementsanddraw thesiteplan plan sectionandelevation , , ."
+        },
+        {
+          "no": "2",
+          "title": "Planadoublestoreyedresidentialbuildingwithslopedroofforasetofgivenrequirements for a given plot and draw the site plan plan section and elevation Prepare a file with , , . hardcopiesofdrawingsreadytosubmitforapprovalfrom..."
+        },
+        {
+          "no": "5",
+          "title": "Planandprepareplumbingandsanitarydrawingsofabuilding ."
+        },
+        {
+          "no": "6",
+          "title": "Planandprepareelectricaldrawingsofabuilding ."
+        },
+        {
+          "no": "7",
+          "title": "IntroductiontoBIMSoftware: Drawplan section&elevationofasinglestoriedresidential , building(Expt1or2)"
+        },
+        {
+          "no": "8",
+          "title": "IntroductiontoProjectPlanningSoftware:Scheduletheconstructionsequenceofasingle storiedresidentialbuilding"
+        },
+        {
+          "no": "9",
+          "title": "Preparationofacontourmapofasitefromtheprovidedtotalstationsurveydata"
+        },
+        {
+          "no": "10",
+          "title": "Earthworkestimationfromtheprovidedtotalstationsurveydata"
+        },
+        {
+          "no": "11",
+          "title": "SimulationofasmallwatersupplypipenetworkusingEPANET"
+        },
+        {
+          "no": "12",
+          "title": "LandusedatapreparationusingGIS"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PECET411",
+      "code": "PECET411",
+      "title": "Advanced Solid Mechanics",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "(PCCET205)or equivalent",
+      "common_note": "Common to Civil Engineering branches",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET411.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Elementary concept of elasticity stresses in three dimensions Principal , , Stresses Stress Invariants Mohr's Circle for 3 -D state of stress Octahedral , , , Stresses State of pure shear plane stress Differential equations of , , . equilibrium planestressproblemsandplanestrainproblemscomparison , ."
+        },
+        {
+          "no": 2,
+          "summary": "Analysis of strain State of strain at a point Strain Invariant Principal , , , Strains Plane state of strain Strain measurements Compatibility , , . conditions . EnergyMethods: Workdonebyforcesandelasticstrainenergystored . Reciprocalrelations Theoremofvirtualwork , ."
+        },
+        {
+          "no": 3,
+          "summary": "Bending of beams: Asymmetrical bending Shear centre Bending of , , curved beams Stress distribution in beam with rectangular circular and , , trapezoidal cross- section Deflection of thick curved bars , . Axisymmetricproblems:Thickwalledcylindersubjectedtointernaland externalpressures Compoundcylinders Shrinkfit , , ,"
+        },
+        {
+          "no": 4,
+          "summary": "Introduction to Mechanics of Composite Materials: Lamina and Laminates MicromechanicsofFRPComposites , . Introduction to Fracture Mechanics: Basic modes of fracture Fracture , toughnessevaluation ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET412",
+      "code": "PECET412",
+      "title": "Concrete Technology",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET412.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Cement chemical composition Bogue’s compounds hydration hydrated - , , , structure , various types of cement , testing of cement as per Indian standard – standardconsistency settingtimes fineness specificgravity , , , . Aggregates - Utility in concrete , fine and coarse aggregates , effect of geometry &amp; texture strength mechanical properties moisture content , , , , water a..."
+        },
+        {
+          "no": 2,
+          "summary": "Properties of fresh concrete- factors affecting workability slump test , compactingfactortestVeeBeeconsistometertest flowtest , , . Properties of hardened concrete modulus of elasticity compressive – , strength splittensilestrength flexuralstrength effectofwatercementratioon , , . propertiesofconcrete . Maturity of concrete (concept only) . Creep - factors affecting creep - eff..."
+        },
+        {
+          "no": 3,
+          "summary": "Mix proportioning- Mix design ,nominal mix design mix concept of mix , , design variables of proportioning general considerations , - . Various methods of mix design - design of concrete mix as per IS 10262 - 2019Statisticalqualitycontrolofconcrete meanstrength standarddeviation , , , coefficientofvariation samplingandtesting acceptancecriteria , , . Special concrete lightweigh..."
+        },
+        {
+          "no": 4,
+          "summary": "Durability of concrete factors affecting durability permeability cracking , , , , reinforcement corrosion carbonation chloride penetration sulphate attack , , , , acidattack fireresistance frostdamage alkalisilicareaction , , , . 3D concrete printing underwater concrete mass concrete; slip form , , construction SprayedConcrete , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET413",
+      "code": "PECET413",
+      "title": "Mechanics of Fluid Flow",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCCET302",
+      "common_note": "Common for Civil Engineering Branches",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET413.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Basic Concepts and Fundamentals: Fluid statics Cartesian Tensors Fluid , , Kinematics and Description of fluid motion –Types of motion of fluid , elements Vorticity and circulation– Concept of rotational and irrotational , flows Equationofmotionofforcedandfreevortexflow Streamfunctionand . . its relation with velocity field `1 Relation between stream function and . – velocity p..."
+        },
+        {
+          "no": 2,
+          "summary": "Pipe Flow: Viscous flow: Reynolds experiment to classify laminar and turbulent flows significance ofReynoldsnumber criticalReynoldsnumber , , , shear stress and velocity distribution in a pipe Hagen Poiseuille equation , . Turbulent flow: Chezy’s equation Moody’s chart siphon transmission of , , , power through pipes efficiency of transmission Water hammer real life , , , probl..."
+        },
+        {
+          "no": 3,
+          "summary": "ConceptofBoundary Layer : Growthofboundarylayerover aflat plateand definition of boundary layer thickness displacement thickness momentum , , thickness and energy thickness laminar and turbulent boundary layers , , laminar sub layer velocity profile Von- Karman momentum integral , , equationsfortheboundarylayers calculationofdrag separationofboundary , , andmethodsofcontrol ."
+        },
+        {
+          "no": 4,
+          "summary": "Dimensional Analysis and Hydraulic similitude: Dimensional analysis , Buckingham’s theorem important dimensional numbers and their , significance geometric Kinematic and dynamic similarity model studies , , , . Froude Reynold Weber Cauchy and Mach laws- Applications and , , , limitationsofmodeltesting simpleproblemsonly , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET414",
+      "code": "PECET414",
+      "title": "Cartography and GIS",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PBCET304",
+      "common_note": "Common to Civil Engineering Branches",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET414.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Maps and Scale: Map - types of maps - interpreting maps - map scale: plain linear statement diagonal and comparative representative fraction Map , , , . Projections: General principles of map projections – classification – cylindrical conical and zenithally projections coordinate systems UTM , , – - – choiceofprojections ."
+        },
+        {
+          "no": 2,
+          "summary": "Map Layout and Map Production: Data acquisition –Spatial and Non-Spatial Data -Mechanics of map construction -Map design and layout - map reproduction methods: tradition and modern Cartographic Publication - Modern Cartography: Theories Geodata Infrastructures Geovisualization - - – Visual Data Analytics Location based services Multimedia Cartography - - - Georelief Mobile Cart..."
+        },
+        {
+          "no": 3,
+          "summary": "Introduction: Nature of GIS Real world and representations: Modelling – , Maps Databases and Spatial Databases Geographic phenomena: fields , - , objects and boundaries Data types: nominal ordinal interval and ratio - , , - Attributedata . Data Representation: Tessellations and vector approaches Topology and - spatial relationships Scale and resolution Representations of geogra..."
+        },
+        {
+          "no": 4,
+          "summary": "Data Management: GIS software Spatial Data Infrastructure Spatial data - - handling Database management systems GIS and spatial databases Data - – - Input: Spatial data input –Data quality Data preparation Point data - – transformation"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET415",
+      "code": "PECET415",
+      "title": "Architectural Engineering",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PBCET304 PCCEL218 , (orequivalent)",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET415.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Definition of architecture –Historical development of architecture . Principles of architectural composition Unity/ harmony character– balance – – proportion scale –rhythm Accentuation and contrast – – –– . Organising principles in architecture Symmetry hierarchy axis linear – – – – – concentric radial and asymmetric grouping primary and secondary , – – masses . Form and Space ..."
+        },
+        {
+          "no": 2,
+          "summary": "Acoustics fundamentals: Intensity of sound Watts/m2 Bel Decibel scales- , - - - dBA -Phon Addition of sound levels . . Acoustical Defects- Echoes Reverberation Foci and Dead Spots Loudness , , , , Noise Acoustics applications: Recommended sound levels for interiors Air and , - structure born noises-Measures of noise control Source-path and receiving - end TLvalueandcomputationo..."
+        },
+        {
+          "no": 3,
+          "summary": "Thermal comfort: Factors affecting thermal comfort effective Temperature - Thermal comfort indices-ET -CET Charts- Bioclimatic chart Psychrometry - andPsycrometricchart . Earth -Sun relationship: Sun’s apparent movement with respect to the earth . Solarangles Computation of solar radiation on different surfaces-solar path diagram- shadow-throw concept and design of shading devi..."
+        },
+        {
+          "no": 4,
+          "summary": "Architecture Design aspect: basic anthropometrics- human functions and their implications for space requirements- movement and circulation diagrams- special interpretations- various activities and their relationship with spaces Perspective views of form: 2 -point perspective and 3 -point perspective Climateresponsivearchitecture Traditional Architecture of Kerala- Scope of Vast..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET416",
+      "code": "PECET416",
+      "title": "Engineering Geology",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET416.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "RelevanceofGeologyinCivilEngineering BranchesofGeology , . Surface Processes of the earth -Weathering -Types of weathering Products , ofweathering Geologicalprocessesbyrivers GeologicalworkbySeawaves . . and currents and coastal protection measures Landslides-types causes and . , controllingmeasures . Internal Processes of the earth Earthquakes- Causes and effects Seismic - , w..."
+        },
+        {
+          "no": 2,
+          "summary": "Mineralogy-Physical properties of minerals physical properties and , chemicalcompositionofmineralslikequartz orthoclase plagioclase biotite , , , , muscovite hornblende augite hypersthene calcite gypsum , , , , , . Petrology- Igneous rocks Chemical and mineralogical classification - , structures & textures Sedimentary rocks-types based on mode of formation . and structures Meta..."
+        },
+        {
+          "no": 3,
+          "summary": "Hydrogeology- Origin & Occurrence of groundwater vertical distribution of , groundwater Aquifers and types of aquifers Porosity and . . Permeability/hydraulicconductivity Darcy'sLaw Electricalresistivitysurvey , . for groundwater exploration Seawater intrusion in Coastal area Ghyben- . , Herzberg relation Problems created by groundwater to civil engineering . structures Methods..."
+        },
+        {
+          "no": 4,
+          "summary": "Structural Geology– Attitude of rocks Dip and Strike Terminology brief – . , classificationandengineeringsignificanceoffolds faultsandjoints , . Engineering Geology -Significance of geological Investigations for civil engineeringprojects Geologicalpartofsiteinvestigationfortheconstruction . ofdams&reservoirs tunnelsandhighways , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET417",
+      "code": "PECET417",
+      "title": "Numerical Methods for Engineers",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "Programme Elective for Civil Engineering Branches",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET417.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to numerical methods Errors in numerical computation System - of linear algebraic equations –Ill -conditioned systems Symmetric and – Banded systems Elimination methods –Gauss Elimination (review) Gauss . , Seidel iteration Factorization method -Choleski’s method System of non- , . linear equations Newton-Raphson method – . Eigen value problems largest and smallest..."
+        },
+        {
+          "no": 2,
+          "summary": "Approximation Lagrangian and Hermite interpolation Spline interpolation - , - QuadraticandCubicsplines(exampleofequalintervals) Datasmoothingby . least squares criterion- non-polynomial models like exponential model and powerequation Multiplelinearregression , . Numerical integration - Newton–Cotes open quadrature formulae , Trapezoidalrule Simpson’srules(Review) , ."
+        },
+        {
+          "no": 3,
+          "summary": "Solution of first -order ordinary differential equations stability of solution - , UseofTaylorseries Euler’smethod ModifiedEuler’smethod Fourthorder , , , Runge-Kutta method Higher order equations of initial value type by Runge- . Kuttamethod . Ordinary differential equations of the boundary value type Finite difference – solution ."
+        },
+        {
+          "no": 4,
+          "summary": "Partial differential equations in two-dimension types Laplace Equation - , andPoisson’sequation . Parabolic equations Explicit finite difference method Bender-Schmidt – – method Crank -Nicholson implicit method Elliptic equations Finite . . - differencemethod . Weighted residual methods for initial value problems and boundary value problems – Collocation method , Method of leas..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET418",
+      "code": "PECET418",
+      "title": "Environmental Law and Policy",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "Common for Civil Engineering Branches",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET418.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "BasicConceptsinEnvironmentalLaw: Anintroductiontothelegalsystem; Constitution Acts Rules Regulations; Indian Judiciary Doctrine of , , , , precedents judicial review Writ petitions PIL –liberalization of the rule of , , , locus standi Judicialactivism Introduction to environmental laws in India; , . Constitutional provisions Stockholm conference; Bhopal gas tragedy; Rio , confe..."
+        },
+        {
+          "no": 3,
+          "summary": "Air WaterandMarineLaws:NationalWaterPolicyandsomestatepolicies , Laws relating to prevention of pollution access and management of water , andinstitutionalmechanism:WaterAct 1974;WaterCessAct 1977 EPA , , , , 1986 PollutionControlBoardsGroundwaterandlawJudicialremediesand . proceduresMarinelawsofIndia;Coastalzoneregulations Legalframework . onAirpollution:AirAct1981;EPA 1986 , ..."
+        },
+        {
+          "no": 4,
+          "summary": "HazardousSubstancesandActivitiesLegalframework:EPAandrulesmade thereunder;PLIAct 199Principlesofstrictandabsoluteliability; , International Environmental law : An introduction to International law; sourcesofinternationallaw;lawoftreaties;signature ratificationEvolution , of international environmental law: Customary principles; Common but differentiatedresponsibility Polluterpa..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCCET501",
+      "code": "PCCET501",
+      "title": "Hydrology and Water Resources Engineering",
+      "category": "Core",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET501.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Hydrologic cycle-precipitation-mechanism types forms and measurement , , usingraingauges Optimumnumberofraingauges representationofrainfall , , data-mass curve and hyetograph computation of mean precipitation over a , catchment , Design rainfall - probable maximum rainfall; IDF curves (conceptual idea only) Infiltration-measurement by double ring infiltrometer . , , Horton’s mo..."
+        },
+        {
+          "no": 2,
+          "summary": "Runoff -components of runoff Hydrograph analysis-Hydrograph from - isolated storm-Base flow , separation . Unit hydrograph – uses , assumptions and limitations of unit hydrograph theory Computation of storm/flood . hydrograph of different duration by method of superposition and by development of S Hydrograph; Floods-methods of design flood estimation – – Empirical methods; SPF ..."
+        },
+        {
+          "no": 3,
+          "summary": "Irrigation– Necessity Benefits and ill effects Types: flow and lift irrigation , . perennial and inundation irrigation Soil -water –plant relationships - . . Irrigation efficiencies Computation o crop water requirement: depth and , frequency of Irrigation Duty and delta duty-factors affecting and method . , of improving duty Computation of crop water requirement by using the , ..."
+        },
+        {
+          "no": 4,
+          "summary": "Vertical distribution of ground water- classification of saturated formation (review) Aquifer properties Darcy’s law Well hydraulics-Steady radial , , flow into a fully penetrating well in Confined and Unconfined aquifers; Types of wells Types of tube wells; well losses; Yield of open wells- , pumping test and recuperation test Pollution of ground water- sources . , distributio..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCCET502",
+      "code": "PCCET502",
+      "title": "Transportation Engineering",
+      "category": "Core",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET502.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: Classification of roads- based on material function Typical , . cross sections of roads in urban and rural area Requirements and factors , controllingalignmentofroads . Geometric design of highways: Design controls and criteria Design of , highwaycrosssectionelements . Design of horizontal alignment Stopping sight distance Overtaking sight - , distance superelevat..."
+        },
+        {
+          "no": 2,
+          "summary": "Highway materials: Desirable properties and testing of road aggregates , bituminousmaterialsandsubgradesoil Introduction to Pavements and Pavement Design: Flexible and rigid pavements Functions of individual layers Factors influencing pavement , , design Flexible pavements: Design of flexible pavements by CBR method and IRC 37: 2018* worked out problems - Rigid pavements: Types..."
+        },
+        {
+          "no": 3,
+          "summary": "Traffic engineering: Road user vehicle characteristics Macroscopic , , (Volume Density and speed) and Microscopic (time and space headway) , characteristics of traffic stream- Fundamental diagrams of traffic flow- Greenshield’s model (derivation not required) Capacity and Level of , Service(Conceptonly) . Traffic Surveys: Data collection and Analysis Volume speed O&D - , , , pa..."
+        },
+        {
+          "no": 4,
+          "summary": "Introduction to Airport Engineering: Components of airport selection , ofsiteforairport Runwayorientation basicrunwaylengthandcorrections . , required Designoftaxiways , . Harbours: classification features requirements Break waters necessity , , . - andfunctions classification , . Docks Functions and types dry docks wet docks – - , Tunnel Engineering: Tunnel sections tunnel sur..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCCET503",
+      "code": "PCCET503",
+      "title": "Environmental Engineering",
+      "category": "Core",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "PCCET302",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET503.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to environmental engineering- Population forecast water - demand estimation-types of demand demand fluctuation - Systemsofsewerage:separateandcombined Layout plan of a conventional water treatment plant - site selection-Intakes- Screening-types of screens -aeration -aerator types Theory and principles of sedimentation-Stoke’s Law-Types of settling - Designofplainse..."
+        },
+        {
+          "no": 2,
+          "summary": "Filtration of water-theory of filtration-types of filters - design of a slow sandandrapidsandfilter . Disinfection of water various methods advantages and limitations - - . Lay out of water distribution network -types-methods of distribution . Network analysis –Hardy cross and equivalent pipe methods ."
+        },
+        {
+          "no": 3,
+          "summary": "Layout plan of a conventional waste water treatment plant - site selection- conceptofprimary secondaryandtertiarytreatment equalizationofflow , , . Secondary treatment methods-basic concepts of biological unit processes- aerobic and anaerobic- attached and suspended growth processes (Conceptsonly) Trickling filter (Concept only) types- construction & operation-design of - trick..."
+        },
+        {
+          "no": 4,
+          "summary": "UpflowAnaerobicSludgeBlanket(UASB)reactor(Conceptonly) . Natural waste water treatment systems-Oxidation Ponds and Lagoons- WetlandsandRootzonesystems(Conceptsonly) . Low-cost sanitation systems- Design of a septic tank and soak -pit . Sludge treatment (concepts only) -thickening- digestion- dewatering- drying- composting ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PBCET504",
+      "code": "PBCET504",
+      "title": "Foundation Engineering",
+      "category": "PBL Core",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:1",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "PBL",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCET504.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Earth pressure - At rest , active and passive earth pressures - Rankine’s theory – Earth pressure and point of application for cohesionless and cohesive soils - Influence of surcharge and water table on earth pressure - Numerical problems - Earth pressure with layered backfill - Numerical problems - Coulomb’s theory[conceptonly] Stability of finite slopes Toe failure base failu..."
+        },
+        {
+          "no": 2,
+          "summary": "General Considerations: Functions of foundations definition of shallow and - deepfoundation Site investigation and soil exploration: objectives planning reconnaissance - - Guidelines for choosing spacing and depth of borings [I .S guidelines only] - . . Standard Penetration Test Procedure and correlations Corrections for SPT – - value Numerical Problems Boring log Soil profile ..."
+        },
+        {
+          "no": 3,
+          "summary": "Settlement analysis: Introduction- causes of settlement – estimation immediate settlement(IS Code)Numericalproblems . . Design of Isolated Footing-Combined footings- Rectangular and Trapezoidal combined footings Numerical problems - Raft foundations: Types Design Principles of raft foundation- Bearing – capacityequationsforraftonsand(Teng’sequationbasedonSPTvalue)and for raft o..."
+        },
+        {
+          "no": 4,
+          "summary": "Pile foundations: Uses and classification of piles Selection of type and length - of piles Bearing capacity of single pile in clay and sand [I .S Static formulae] - . Numerical problems Dynamic formulae (Modified Hiley formulae only) - - – Numerical Problems I .S Pile load test [conventional] Negative skin friction - . - - Group action - Group efficiency - Capacity of Pile grou..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCCEL507",
+      "code": "PCCEL507",
+      "title": "Geotechnical Engineering Lab",
+      "category": "Lab",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "prerequisites": "PCCET402",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL507.pdf",
+      "modules": [],
+      "experiments_count": 15,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "SieveAnalysis"
+        },
+        {
+          "no": "2",
+          "title": "Determination of Specific Gravity-Pycnometer & Specific Gravity bottle"
+        },
+        {
+          "no": "3",
+          "title": "Determination of Water Content -Oven Drying Method"
+        },
+        {
+          "no": "4",
+          "title": "Swelling Test -Free Swell"
+        },
+        {
+          "no": "5",
+          "title": "Hydrometeranalysis"
+        },
+        {
+          "no": "6",
+          "title": "Atterberg Limits Liquid Limit Plastic Limit Shrinkage Limit - , ,"
+        },
+        {
+          "no": "7",
+          "title": "Field Density Test (i) Core Cutter (ii) Sand Replacement Method – ,"
+        },
+        {
+          "no": "8",
+          "title": "LightCompactionTest(StandardProctorTest)"
+        },
+        {
+          "no": "9",
+          "title": "DirectShearTest"
+        },
+        {
+          "no": "10",
+          "title": "UnconfinedCompressionTest"
+        },
+        {
+          "no": "11",
+          "title": "ConsolidationTest"
+        },
+        {
+          "no": "12",
+          "title": "Permeability Test Constant Head Permeability Variable Head Permeability - ,"
+        },
+        {
+          "no": "13",
+          "title": "TriaxialShearstrengthTest"
+        },
+        {
+          "no": "14",
+          "title": "FlexiblewallPermeabilityTest"
+        },
+        {
+          "no": "15",
+          "title": "DeterminationofRelativeDensityofCohesionlesssoil"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCCEL508",
+      "code": "PCCEL508",
+      "title": "Concrete Lab (Mt-2)",
+      "category": "Lab",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Lab",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL508.pdf",
+      "modules": [],
+      "experiments_count": 15,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "TestonCement:Fineness normalconsistency initial&finalsettingtime , , ."
+        },
+        {
+          "no": "2",
+          "title": "TestonCement:Specificgravityandcompressivestrength"
+        },
+        {
+          "no": "3",
+          "title": "Studyonsoundnessofcement ."
+        },
+        {
+          "no": "4",
+          "title": "TestonCoarseandFineAggregate:Sieveanalysis ."
+        },
+        {
+          "no": "5",
+          "title": "TestonCoarseandFineAggregate:Waterabsorption bulkdensity voidratio porosity , , , andspecificgravity ."
+        },
+        {
+          "no": "6",
+          "title": "Testonbulkingofsand ."
+        },
+        {
+          "no": "7",
+          "title": "Testoncoarseaggregatecrushingvalue"
+        },
+        {
+          "no": "8",
+          "title": "Testsonfreshconcrete:Measurementofworkabilityofconcretebyslumpconetestand compactingfactortest ."
+        },
+        {
+          "no": "9",
+          "title": "Study on workability of concrete by Vee-Bee test and flow test ."
+        },
+        {
+          "no": "10",
+          "title": "ConcretemixdesignbyIScodemethodandcastingofcubes cylinderswithdesigned , concretemixes ."
+        },
+        {
+          "no": "11",
+          "title": "Testsonhardenedpropertiesofconcrete:Compressive splitandflexuralstrength , ."
+        },
+        {
+          "no": "12",
+          "title": "Testsonhardenedpropertiesofconcrete:Modulusofelasticityofconcrete"
+        },
+        {
+          "no": "13",
+          "title": "Testsonbrick floorandrooftilesasperIScodeprovision , ."
+        },
+        {
+          "no": "14",
+          "title": "Study on Non-destructive tests on hardened concrete (Rebound hammer ultrasonic pulse , velocityandRebarlocator) ."
+        },
+        {
+          "no": "15",
+          "title": "Studyonconcretecorecutter concretepenetrometerandcrackdetectionmicroscope , ."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PECET521",
+      "code": "PECET521",
+      "title": "Advanced Structural Analysis",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PCCET303/ PCCET403",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET521.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Two hinged Arches: Analysis of two hinged arches Support reactions - normalthrustandradialshearatanysectionofaparabolicarchduetosimple casesofloading influencelineforhorizontalthrust bendingmoment normal , , , thrust andradialshear , . Matrix Analysis of Structures: Reviewing the definition of flexibility and stiffnessinfluencecoefficients andconceptsofphysicalapproach ,"
+        },
+        {
+          "no": 2,
+          "summary": "Direct stiffness method: Introduction to direct stiffness method -Rotation of axes in two dimensions stiffness matrix of elements in global co- ordinates , from element co-ordinates- assembly of load vector and stiffness matrix , solution of two span continuous beam-single bay single storey portal frame ."
+        },
+        {
+          "no": 3,
+          "summary": "Structural dynamics: Introduction degrees of freedom equation of - - motion D’Alembert’s principle-damping- free response of damped and , undamped systems- logarithmic decrement single degree of freedom -- systems subjected to harmonic load - transient and steady state responses , simpleportalframeproblems ."
+        },
+        {
+          "no": 4,
+          "summary": "Finite Element Methods: Boundary value problems; Introduction to approximatenumericalsolutionsforsolvingdifferentialequations . Formulation techniques: Element equations using weighted residual approach the axial element example - ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET522",
+      "code": "PECET522",
+      "title": "Modern Construction Technology",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET522.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Sustainable Construction Materials: Wood bamboo straw bales earthen , , , materials recycled aggregates recycled plastic products sustainable , , , concretes biocomposites , Smart & Intelligent materials: Types Neoprene Bridge pads thermocol - , , - Smart and Intelligent Materials Special features: Shape Memory Alloys , - (SMAs) Magneto strictivematerials Piezoelectricmaterials..."
+        },
+        {
+          "no": 2,
+          "summary": "Equipment for Earth Work: Fundamentals of earth work operations earth - moving operations types of earth work equipment tractors motor graders - - , , scrapers , front end waders – excavating and earth moving equipment - dozer , excavators rippers loaders trucks and hauling equipment compacting , , - , equipment finishingequipment , . Erection Equipment: Cranes Derrick Cranes M..."
+        },
+        {
+          "no": 3,
+          "summary": "Construction techniques: Construction joints movement and expansion - joints –Vacuum Dewatering of Concrete Flooring Techniques of – construction for continuous concreting operation in Tall buildings Slip Form – techniques—Erection techniques of Tall structures large Span Structures , - Bridge Construction - Construction sequence and methods - Bow string bridges cable stayed br..."
+        },
+        {
+          "no": 4,
+          "summary": "Cost -effective construction: Rapid wall construction soil -cement block , masonry voided slab filler slab rat -trap bond cavity wall ferrocement and , , , , , ferroconcreteconstructions . Prefabricated construction: Advantages and disadvantages prefabricated , components . Pre-Engineered Buildings: Introduction Advantages Pre-Engineered – - Buildings Vs Conventional Steel Buil..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET523",
+      "code": "PECET523",
+      "title": "Open Channel Hydraulics",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET523.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Open channel flow Uniform flow Conveyance and section factor , - , Hydraulic exponents Computation of discharge through compound channels; Design of channels for uniform flow-Non erodible channel - Minimum permissible velocity-best hydraulic section Erodible channels . which scour but do not silt - Tractive force approach , stable hydraulic section Velocity distribution in open..."
+        },
+        {
+          "no": 2,
+          "summary": "Specific energy- specific energy diagram and discharge diagram Critical , flow and its computation -Hydraulic exponents Application of Specific . energy for channel transitions- hump and reduction in channel width"
+        },
+        {
+          "no": 3,
+          "summary": "Gradually varied flow- Dynamic equation of gradually varied flow- different forms; Computation of length of water surface profiles direct - stepmethod Bresse’smethod;Standardstepmethod , . Rapidly varied flow-Hydraulic jump sloping and exponential channels - , types based on tail water conditions Uses of hydraulic jumps for energy . dissipation below spillways- jump height curv..."
+        },
+        {
+          "no": 4,
+          "summary": "Unsteady flow through open channels – Surges- positive surges (problems) andconceptofnegativesurges;Spatiallyvariedflow dynamicequationof , spatiallyvariedflow Analysisofspatiallyvariedflowprofile , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET524",
+      "code": "PECET524",
+      "title": "Disaster Management",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET524.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Hazardsanddisasters:Introductiontokeyconceptsandterminology:hazard , disastersandtypesofclassifications vulnerability exposure risk crisis , , , , , emergency capacity resilience Carbonfootprint Effectofsubsystemsof , , , . earth . Extent and nature of natural hazards implications of climate change: Earth , quakes Volcanoes Floods Coastal disasters- Storm surges Tsunamis , , . ..."
+        },
+        {
+          "no": 2,
+          "summary": "Landslides Causesandprediction , , Soil and soil degradation erosion and Desertification Forest fires their , , , mitigationmethods ."
+        },
+        {
+          "no": 3,
+          "summary": "Impactsandassessment:RiskManagementandAssessmentandDisaster Managementcycle . SWOT Analysis- basic concepts uses limitations and , , advantages Disaster management plan and reports participation of . , communityindisastermanagement ."
+        },
+        {
+          "no": 4,
+          "summary": "Hazardanddisastermanagementplansforfloods stormsurges landslides , , , earthquakes forest fires: pre-disaster phase actual disaster phase post , , , - disasterphase"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET525",
+      "code": "PECET525",
+      "title": "Design of Prestressed Concrete",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PBCET404",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET525.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction and Analysis of Members: Concept of Prestressing Types of - Pre-stressing Advantages Limitations –Prestressing systems Anchoring - - - devices Materials Mechanical Properties of high strength concrete - - - high strength steel - Stress-Strain curve for High strength concrete Losses in Prestress: Loss of Pre stress due to Elastic shortening Friction , , Anchorage sl..."
+        },
+        {
+          "no": 2,
+          "summary": "Design of Sections for Flexure: Analysis of members at ultimate strength Preliminary Design Final Design for Type 1members - - . Deflection due to gravity loads Deflection due to prestressing force-Total - deflection Limits of deflection Limits of span-to-effective depth ratio - -"
+        },
+        {
+          "no": 3,
+          "summary": "Design of Sections for Flexure: Analysis of members at ultimate strength Preliminary Design Final Design for Type 1 members - - . Design for Shear: Analysis for shear Components of shear resistance - Modes of Failure Limit State of - - collapse for shear Design of transverse reinforcement - ."
+        },
+        {
+          "no": 4,
+          "summary": "Different anchorage system and designofend blockby latest IScodes . ConceptualdesignanddetailingofPrestresseddeck Prestressed beam cast in situ slab composite Sections- Analysis –"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET526",
+      "code": "PECET526",
+      "title": "Applied Hydrology and Climatology",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET526.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction weather and climate; hydrometeorology- variables affecting - precipitation- humidity vapor pressure saturation vapor pressure– , , temperaturerelation(simpleproblems) perceptiblewater formsandtypesof , , precipitation; cloud - types; Monsoon- characteristics of Indian summer monsoon rainfall - climate oscillations and Indian monsoon rainfall , Evapotranspiration me..."
+        },
+        {
+          "no": 2,
+          "summary": "Causes and effects of climate change modeling of hydrologic impact of , climate change on water resources-typical framework general circulation , models and regional climate models; Downscaling-concept and types , Catchment characteristics classification of streams stream pattern and , - streamorder;"
+        },
+        {
+          "no": 3,
+          "summary": "Statistical methods in hydro-climatology: principal component analysis and itsuseinclimatechangestudies methodsforchangepointanalysis methods , , for trend analysis-statistical and graphical methods stationary and non- , stationary series- determination of non-stationarity of hydro-climatic series (noproblems)"
+        },
+        {
+          "no": 4,
+          "summary": "Design flood and their Estimation Different methods; Flood frequency - studies -Gumbel’s method; Flood Routing-Hydrologic and Hydraulic routing , Flood routing through reservoirs concept only Flood routing through – . channels Muskingum method determination of Muskingum parameters - , . Flood control methods Flood forecasting and warning (Brief descriptions - only)"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET527",
+      "code": "PECET527",
+      "title": "Town Planning",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET527.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Definition of town planning Evolution of towns Objective of town , , planning Economic Justification for town planning Principles of town , , planning Necessityoftownplanning Origin Growthandpatternsoftown , , , development distributionoflanduse siteforidealtown , , . Migration trends and impacts on urban and rural development Problems of , urban growth -beginning of town plann..."
+        },
+        {
+          "no": 2,
+          "summary": "Surveys: Definition Necessity collection of data Types of surveys , , , , methodsadoptedtocollectdata Drawings reports , , . Zoning: Definition Use of land Objects of zoning Principles of zoning , , , , Aspects Advantages & Importance zoning Transition zone Economy of , , , zoning Zoningpowers Mapsforzoning , ,"
+        },
+        {
+          "no": 3,
+          "summary": "Housing: Classification of residential buildings- Agencies for housing- Housing finance agencies- problems of housing in India Slums:Causes characteristicsandeffectsofslums Slumclearance , , . Industries: Classification of industry Concentration of industry , , requirementsoftheindustry Industrialtownships , . Public Buildings: Location classification principle of design town c..."
+        },
+        {
+          "no": 4,
+          "summary": "Town Planning Legislations: Laws relating to land acquisition; urban land ceiling UDPFIguidelines disastermitigationmanagement;Environmental , , andPollutionControlActs . Re-planning of existing towns: Objects of re-planning defects of existing , town data required for re- planning Urban Renewal projects De- , , , centralization and Re-centralized Garden city concept overview ,..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET528",
+      "code": "PECET528",
+      "title": "Optimization Techniques and Operational Research for Civil Engineers",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET528.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Linear Programming: Introduction and formulation of models; Convexity; simplex method; Two phase method; Degeneracy , non - existent and unbounded solutions; Duality in LPP Dual simplex method Sensitivity . . . , analysis;Revisedsimplexmethod;transportationandassignmentproblems"
+        },
+        {
+          "no": 2,
+          "summary": "Non-Linear Programming: Classical optimisation methods; Equality and inequality constraints; Lagrange multipliers; & KuhnTucker conditions; Quadraticforms;Quadraticprogramming ."
+        },
+        {
+          "no": 3,
+          "summary": "Search Methods: One dimensional optimisation; Fibonacci search; multi - dimensional search methods; Univariate search; gradient methods; steepest descent/ascent methods; Conjugate Gradient method; Penalty function approach ."
+        },
+        {
+          "no": 4,
+          "summary": "DynamicProgramming:Principleofoptimality;Recursiverelations;solution of LPProblem; simple examples Integer Linear Programming: travelling . . . salesmanproblem"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCCET601",
+      "code": "PCCET601",
+      "title": "Quantity Surveying and Valuation",
+      "category": "Core",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "PCCEL218",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET601.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction- Quantity Surveying- Basic principles Role/responsibility of , Quantity surveyor at various stages of construction Estimate-Details required , Type of estimate purposes Contingencies Work -charge establishment Tools , . , , andPlant centagecharge Daywork Primecost Provisionalsum&provisional , , , , Quantity Overheadcharges Costindex Contractdocuments(Briefdescripti..."
+        },
+        {
+          "no": 2,
+          "summary": "Introduction to the use of CPWD schedule of rates as per latest DSR and Analysis of rate as per latest DAR Specifications-General specification of all itemsofaresidentialbuilding Detailedspecifications(CPWDspecifications)of . major item of work like Earth work excavation in foundation masonry , , Reinforced cement concrete finishing of building work Analysis of rates for , Eart..."
+        },
+        {
+          "no": 3,
+          "summary": "Detailed Estimate- Preparation of detailed measurement using Centre line method & Short wall long wall (separate wall) method for RCC single-storied building (Flat roof) including stair cabin- Residential/office/school building . BOQ preparation of a single-storied RCC building work . Materialquantitycalculationoftheitemsofwork(Rubble Brickwork Concrete , , work Plastering)inde..."
+        },
+        {
+          "no": 4,
+          "summary": "Valuation – purpose , factor affecting , introduction to terms-Value , Cost , Price , kinds of values Income- Gross income net income outgoings annuity sinking , , , , fund Year’s purchase Depreciation obsolescence -Free hold and leasehold , , , properties Methods of calculating depreciation straight line method constant . – – percentagemethod sinkingfundmethodandquantitysurvey..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCCET602",
+      "code": "PCCET602",
+      "title": "Design of Steel Structures",
+      "category": "Core",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "PCCET501",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET602.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to steel and steel structures properties of steel structural steel , , sections Introductiontodesignloadsandloadcombinations limitstatedesign . , concepts . Type of Fasteners- Bolts and welds Types of simple bolted and welded . connections-Relative advantages and disadvantages-Modes of failure of bolted connection-Design of bearing type connection and friction conn..."
+        },
+        {
+          "no": 2,
+          "summary": "Welds-specifications and effective area of welds-Fillet and butt connections- Axially loaded connections for plate and angle truss members- Design of bracketconnections . Tension Members Types of sections -Modes of failure-Slenderness ratio- Net - area- Concepts of Shear Lag- Design of tension Members-Connections in tension members Use of lug angles -"
+        },
+        {
+          "no": 3,
+          "summary": "Types of compression members and sections–Behaviour and types of failures- Effective Length -Slenderness ratio–Column formula and column curves- Design of solid and built -up columns - Design of Built up laced and battened type Types of beam sections- Flexural strength and lateral stability of beams- Design"
+        },
+        {
+          "no": 4,
+          "summary": "oflaterallysupportedandlaterallyunsupportedbeams . Design of roof trusses-types-Design loads and load combination- Assessment of wind loads- Design of I section purlin"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PBCET604",
+      "code": "PBCET604",
+      "title": "Construction Project Management",
+      "category": "PBL Core",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:1",
+      "exam_hours": "",
+      "course_type": "PBL",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCET604.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Construction projects , life cycle of a project – phases in a project . Tendering: typesoftenders stagesintendering , . Process of development of plans and schedules work break -down structure – , estimatingdurations . Types of Schedules Construction schedule Material schedule labour – , , schedule equipmentschedule financialschedule , , . Techniques of planning Bar charts Mile..."
+        },
+        {
+          "no": 2,
+          "summary": "Handling resources on projects resource constraints and conflicts resource , , allocationandresourcelevelling Conceptonly . Time-Cost trade-off on construction projects – Classification of costs , compressionofnetworks costoptimizationthroughthecrashingofanetwork , ."
+        },
+        {
+          "no": 3,
+          "summary": "Updating project schedules Project control Schedule/time/progress control . , , periodic progress reports Concept of Time-cost monitoring and control using . S -curve , Earned value analysis – measures of performance ."
+        },
+        {
+          "no": 4,
+          "summary": "Introduction to BIM Technology: Define BIM and BIM model describe , workflow in using BIM in the building lifecycle Model -Based cost , estimating Perform Simulations Apply BIM to reduce error and change , , ordersinprojects EvaluateandcommunicateideasrelatedtotheuseofBIM , inthebuildinglifecycle BIMBenefits:CaseStudies OrganizationalMaturity , , andDimensions ConstructionManag..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCCEL607",
+      "code": "PCCEL607",
+      "title": "Transportation Engineering Lab",
+      "category": "Lab",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Lab",
+      "prerequisites": "PECET637",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL607.pdf",
+      "modules": [],
+      "experiments_count": 14,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "CaliforniaBearingRatioTest"
+        },
+        {
+          "no": "2",
+          "title": "SpecificGravityandWaterAbsorptionTest"
+        },
+        {
+          "no": "3",
+          "title": "AggregateImpactTest"
+        },
+        {
+          "no": "4",
+          "title": "LosAngelesAbrasionTest"
+        },
+        {
+          "no": "5",
+          "title": "AggregateCrushingValueTest"
+        },
+        {
+          "no": "6",
+          "title": "ShapeTest:Angularitynumber"
+        },
+        {
+          "no": "7",
+          "title": "Combinedflakinessandelongationindex"
+        },
+        {
+          "no": "8",
+          "title": "Strippingvalueofroadaggregates ."
+        },
+        {
+          "no": "9",
+          "title": "Determinationofgradeofbitumenbasedonviscosity"
+        },
+        {
+          "no": "10",
+          "title": "Softeningpoint"
+        },
+        {
+          "no": "11",
+          "title": "Ductilityofbitumen(DemonstrationusingAgedbitumen)"
+        },
+        {
+          "no": "12",
+          "title": "Flashandfirepointofbitumen"
+        },
+        {
+          "no": "13",
+          "title": "DesignofbituminousmixbyMarshallmethodofmixdesign"
+        },
+        {
+          "no": "14",
+          "title": "UseofMERLINapparatustodetermineroadroughness"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCCEL609",
+      "code": "PCCEL609",
+      "title": "Environmental Engineering Lab",
+      "category": "Lab",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Lab",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL609.pdf",
+      "modules": [],
+      "experiments_count": 16,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "DeterminationofpHandTurbidity"
+        },
+        {
+          "no": "2",
+          "title": "DeterminationofConductivityandTotaldissolvedsolids"
+        },
+        {
+          "no": "3",
+          "title": "DeterminationofAlkalinity&Acidity"
+        },
+        {
+          "no": "4",
+          "title": "DeterminationofChlorides"
+        },
+        {
+          "no": "5",
+          "title": "DeterminationandEstimationoftotalsolids organicsolidsandinorganicsolids ,"
+        },
+        {
+          "no": "6",
+          "title": "Determinationofiron"
+        },
+        {
+          "no": "7",
+          "title": "DeterminationofDissolvedOxygen"
+        },
+        {
+          "no": "8",
+          "title": "DeterminationofNitrogen"
+        },
+        {
+          "no": "9",
+          "title": "DeterminationoftotalPhosphorous"
+        },
+        {
+          "no": "10",
+          "title": "DeterminationofBOD . ."
+        },
+        {
+          "no": "11",
+          "title": "DeterminationofCOD . ."
+        },
+        {
+          "no": "12",
+          "title": "DeterminationofOptimumcoagulantdose"
+        },
+        {
+          "no": "13",
+          "title": "DeterminationofChlorinedemand"
+        },
+        {
+          "no": "14",
+          "title": "DeterminationofSulphate"
+        },
+        {
+          "no": "15",
+          "title": "DeterminationofHardness"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PECET631",
+      "code": "PECET631",
+      "title": "Advanced Design of Concrete Structures",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PBCET404 PCCET602 ,",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET631.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Design of continuous beams– Redistribution of moments- Detailing Reinforced concrete portal frames: Introduction Analysis and design of rectangular portal - frames for vertical loading Approximate methods for structural Analysis and designforverticalloads Patternloading lateralloads , ,"
+        },
+        {
+          "no": 2,
+          "summary": "Retaining Structures- Introduction- Functions and types of retaining walls- Structural analysis and design of RCC cantilever type of retaining wall for various types of backfill conditions Counterfort retaining wall design . - principles of components and detailing (design not required) Introduction to StrutandTieMethod;DesignofDeepbeams CorbelsandPilecap ,"
+        },
+        {
+          "no": 3,
+          "summary": "Introduction to design of water tanks-design philosophy and requirements- joints- IS code recommendations- Design of rectangular circular water tanks using IS code coefficients (IS 3370 2009) Yield line method of analysis of - . slabs Characteristic features of yield lines– analysis by virtual work method – – Yieldlineanalysisbyequilibriummethod . Flat slabs Introduction–compon..."
+        },
+        {
+          "no": 4,
+          "summary": "Review of the codes –IS 811(1987) IS 801(1975) SP 6 -5(1980) Light gauge , , sections – Types of cross sections – Local buckling and post buckling – Design of compression and Tension members Design of flexural member Types of – - connectionsandtheirdesign"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET632",
+      "code": "PECET632",
+      "title": "Irrigation and Drainage Engineering",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET632.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Surface Irrigation methods: Classification Border irrigation: design – parameters evaluation and ideal wetting pattern Furrow irrigation: design , – parameters types of furrows evaluation ideal wetting pattern Basin , , , – irrigation: types of basins ideal wetting pattern shapes and size Efficiency , , – ofsurfaceirrigationmethods . Crop Water Requirements : Infiltration and m..."
+        },
+        {
+          "no": 2,
+          "summary": "Irrigation System Performance Indicators: Systems classification – Rehabilitation and modernization Performance indicators Improving – – system performance –constraints . Land Drainage systems: necessity-types-surfaces and subsurface drainage-design considerations . SoilWater Zone: Description Flow through soil water zone-Physical , properties of soil -hydraulic conductivity-sa..."
+        },
+        {
+          "no": 3,
+          "summary": "Drainage studies-continuity equation , Laplace equation relaxation method of solution-Typical boundary conditions , likeimperviouslayer planeofsymmetry freewatersurface water atrest or , , , slowly moving water seepage surface- Dupit Forchheimer Theory steady low , above an impervious horizontal boundary-Dupits equation-water table subject torecharge . Flow into open drains-ste..."
+        },
+        {
+          "no": 4,
+          "summary": "Layout of open drainage systems: types-Field drains design considerations , of ditch drains- Mole drains design considerations suitability- Sub -surface , , drainage systems- Pipe drainage systems design for uniform and non-uniform flow conditions-transport and dewatering situations Patterns of drainage . system- Drainage criteria formulation for off season drainage crop season..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET633",
+      "code": "PECET633",
+      "title": "Ground Improvement Techniques",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PBCET504",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET633.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction Need for engineered ground improvement classification of , ground modification techniques; suitability feasibility and desirability of , groundimprovementtechnique;objectivesofimprovingsoil Emergingtrends . in ground improvement -Different materials used for ground improvement and itsproperty Drainage and dewatering: well point system shallow & deep well system - ,..."
+        },
+        {
+          "no": 2,
+          "summary": "Compaction-Introduction compaction mechanics Field procedure surface , , , compaction DynamicCompaction selectionoffieldcompactionprocedures , , , compactionqualitycontrol . Drainage Methods- Introduction Seepage filter requirements ground water , , , and seepage control methods of dewatering systems Design of dewatering , , system including pipe line effects of dewatering Drai..."
+        },
+        {
+          "no": 3,
+          "summary": "Chemical Modification- Definition cement stabilization sandwich , , technique , admixtures . Hydration – effect of cement stabilization on permeability Swelling and shrinkage and strength and deformation , characteristics Criteria for cement stabilization Stabilization using Fly ash . . . Lime stabilization – suitability , process , criteria for lime stabilization . Bitumen tar..."
+        },
+        {
+          "no": 4,
+          "summary": "GroutingAndInjection: Introduction Effect of grouting Chemicals and materials used Types of , . . grouting Groutingprocedure Applicationsofgrouting . , . Reinforced earth: mechanism- types of reinforcing elements- - reinforcement -soil interaction applications- reinforced soil structures with – vertical faces Geosynthetics types of geosynthetics functions of – – geosynthetics p..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET634",
+      "code": "PECET634",
+      "title": "Repair and Rehabilitation of Structures",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PBCET404",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET634.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction Maintenance importance of maintenance routine and – , , preventive maintenance rehabilitation repair retrofit and strengthening , , , , needforrehabilitationofstructures . Cracks in R .C . buildings - Various cracks in R .C . structures , causes and effects . Damages to masonry structures - Various damages to masonry structures andcauses . Damage diagnosis and asse..."
+        },
+        {
+          "no": 2,
+          "summary": "Non-Destructive Testing of structures: Rebound hammer Ultra sonic , pulsevelocity . Semi destructive testing of structures: Probe test Pull out test Chloride , , penetration test Carbonation Carbonation depth testing Corrosion activity , , , measurement Coretest , . Strength and Durability of Concrete structures - Quality assurance for concrete Strength Durability and Thermal p..."
+        },
+        {
+          "no": 3,
+          "summary": "Repair materials -Various repair materials Criteria for material selection , , Methodology of Selection Health and safety precautions for handling and . applicationsofrepairmaterials . Special mortars and concretes- Polymer concrete Sulphur infiltrated , concrete Fibre reinforced concrete High strength concrete High , , , performance concrete Vacuum concrete Self -compacting co..."
+        },
+        {
+          "no": 4,
+          "summary": "Crack repair Various methods of crack repair Grouting Routing and - , , sealing Stitching Dry packing Autogenous healing Overlays Repair to , , , , , activecracks Repairtodormantcracks , . Corrosion of embedded steel in concrete Corrosion of embedded steel in – concrete Mechanism Stages of corrosion damage Repair of various , , . corrosiondamagesofstructuralelementsbyCathodicpr..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET635",
+      "code": "PECET635",
+      "title": "Advanced Foundation Engineering",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PCCET402 PBCET504",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET635.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Bearing capacity of shallow foundations-Review of technology-IS code formulaforsafebearingcapacityofshallowfoundation Numericalproblems . . Footings subjected to moments-effective width concept -Numerical problems . Allowable bearing pressure from N Value-Teng’s equations for safe bearing capacity of strip square and circular footings Safe bearing pressure for a , , permissible..."
+        },
+        {
+          "no": 2,
+          "summary": "Deep foundations- Geotechnical Design of Piles from SPT and CPT -values- number and spacing-Numerical Problems-Settlement of pile groups in clay- equivalent raft concept -Numerical problem . Settlement of pile groups in sand - Skempton’s method -Meyerhof’s Method -Numerical problem Uplift capacity . of single piles and group of piles in clay -Numerical problems ."
+        },
+        {
+          "no": 3,
+          "summary": "Under reamed piles-ultimate load carrying capacity in sand and clay-design considerations as per IS IS formula-single and double bulb -Numerical . problems Drilled piers (straight shafted and belled) in clay- Design . Considerations- Load Transfer Mechanism Vertical Bearing Capacity and . uplift capacity of belled pier - Numerical problems Types of Sheet Pile Walls-Cantilever S..."
+        },
+        {
+          "no": 4,
+          "summary": "Behavior of vertical piles under lateral loading Failure mechanisms of short – pilesincohesiveandgranularsoilsforrestrainedandunrestrainedconditions , givenby(Broms) Failuremechanismsoflongpilesinsandandclaybothfree . headed and fixed headed given by Broms-Empirical Methods to Determine Lateral Strength of Piles-IS 2911 and Brom’s method IS2911 method -concept . and assumptions..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET636",
+      "code": "PECET636",
+      "title": "Solid and Hazardous Waste Management",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET636.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction Wastes-Sources and characteristics Categories of wastes- Municipal - , Industrial Bio-medical Universal Construction and demolition Radioactive , , , , , ewastes Agriculturalwaste Functionalelementsofsolidwastemanagement , ."
+        },
+        {
+          "no": 2,
+          "summary": "FunctionalElements Characteristics of solid waste Proximate and ultimate analysis Generation , , and factors Storage of solid waste- factors to be considered Collection , systems Routing Needfortransferoperation , , . Processing techniques- Mechanical volume and size reduction chemical , volume reduction component separation Resource conservation and , recovery ."
+        },
+        {
+          "no": 3,
+          "summary": "DisposalOfSolidWaste Biochemical methods Sanitary landfills composting anaerobic digesters – , , Sanitary landfills- parts and their functions design considerations methods of , , landfilling advantages and disadvantages Composting- Stages in aerobic , composting types of composting-Indore and Bangalore process , Anaerobic digesters – Stages in anaerobic digestion , Parts of a ..."
+        },
+        {
+          "no": 4,
+          "summary": "HazardousWaste Hazardous waste –Definition and Identification Classification Handling and , , Storage Collection Transportation Treatment and remedial actions , , , StabilizationandSolidification Thermalmethods SecureLandfill , ,"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET637",
+      "code": "PECET637",
+      "title": "Traffic Engineering and Management",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PCCET502",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET637.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Fundamental parameters- speed density volume travel time headway , , , , , spacing time-space diagram time mean speed space mean speed and their , , , relation Fundamental diagrams of traffic flow Single Regime models . . - Greenshields model Greenberg logarithmic model Multi -Regime models , . – Two and three regime linear models Need and scope of traffic regulations- . Motor ..."
+        },
+        {
+          "no": 2,
+          "summary": "Scope of traffic management measures – restrictions to turning movements – one-way streets – tidal flow operations-Closing side streets –Exclusive bus lanes . Intersections: At -grade intersections- basic forms- conflict points -visibility triangle- design principles- Channelization Grade separated intersection: . Grade separated intersections without interchange and with inter..."
+        },
+        {
+          "no": 3,
+          "summary": "Capacity and Level of service (LOS): Concept Base capacity Adjusted - , capacity LOSdefinition FactorsAffectingCapacityandLOS Homogeneous , , , and heterogeneous traffic conditions- vehicle types Concept of PCU - . Capacity and LOS analysis –Single lane Intermediate lane and two lane , interurban roads- Base capacity and adjustment factors- Indo HCM (2017) Approach Capacity and..."
+        },
+        {
+          "no": 4,
+          "summary": "Traffic Signals Warrants- pre-timed and traffic actuated Design of signal - . timing at isolated intersections- Phase design- optimum cycle time (Webster’s approach) green splitting-pedestrian phase -phase diagrams timing diagram , , . Traffic Safety: Road Safety Situation in India Causes of road accidents , – influence of road vehicle driver and environmental factors Pedestria..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET611",
+      "code": "OECET611",
+      "title": "Introduction to Construction Engineering",
+      "category": "Open Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET611.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "ConstructionMaterials Mortar – Types – properties – uses . Timber products – properties & uses of plywood , fibre board , particle board . Cement - Manufacturing , chemical composition , Tests on cement – specific gravity standardconsistency initialandfinalsettingtime fineness soundness , , , , , compressivestrength ISspecifications , Aggregates types Gradation importance of gr..."
+        },
+        {
+          "no": 2,
+          "summary": "ConcreteTechnology Process of manufacturing concrete batching mixing transportation placing – , , , , compacting finishing curing , , Propertiesoffreshconcrete:Workability factorsaffectingworkability teston , , workability(slumptest) segregationandbleeding(briefdiscussion) , Properties of hardened concrete: Strength factors affecting strength tests for , , strengthofconcreteinc..."
+        },
+        {
+          "no": 3,
+          "summary": "BuildingConstruction Preliminaryconsiderationsforshallowanddeepfoundations Masonry – Types of stone masonry Lintels and arches types and construction details – . Tall Buildings Framed building steel and concrete frame structural systems – – – –erection of steel work –concrete framed construction– formwork construction – andexpansion joints . Introduction to prefabricated constr..."
+        },
+        {
+          "no": 4,
+          "summary": "ConstructionTechnology Cost -effective construction rapid wall construction soil -cement block – , masonry voidedslabtechnology fillerslabtechnology , , Basic concept of prestressing fundamental understanding of pre-tensioned and – post -tensioned construction Construction3Dprinting(briefdiscussiononly) Building failures – General reasons – classification – Causes of failures i..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET612",
+      "code": "OECET612",
+      "title": "Environmental Laws and Policy",
+      "category": "Open Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET612.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "BasicConceptsinEnvironmentalLaw An introduction to the legal system; Constitution Acts Rules Regulations; , , , Indian Judiciary Doctrine of precedents judicial review Writ petitions PIL , , , , – liberalization of the rule of locus standi Judicial activism Introduction to , . environmental laws in India; Constitutional provisions Stockholm , conference; Bhopal gas tragedy; Rio..."
+        },
+        {
+          "no": 2,
+          "summary": "Forest WildlifeandBiodiversityrelatedlaws , Evolution and Jurisprudence of Forest and Wildlife laws; Colonial forest policies; Forest policies after independence 2 Statutory framework on Forests Wildlife and Biodiversity: IFA 1927; WLPA 1972; FCA 1980; , , , ,"
+        },
+        {
+          "no": 3,
+          "summary": "Air WaterandMarineLaws , NationalWaterPolicyandsomestatepoliciesLawsrelatingtopreventionof pollution access and management of water and institutional mechanism: , WaterAct 1974;WaterCessAct 1977 EPA 1986 PollutionControlBoards , , , , . GroundwaterandlawJudicialremediesandproceduresMarinelawsofIndia; Coastal zone regulations Legal framework on Air pollution: Air Act1981; . , EP..."
+        },
+        {
+          "no": 4,
+          "summary": "HazardousSubstancesandActivitiesLegalframework EPAandrulesmadethereunder;PLIAct 199Principlesofstrictandabsolute , liability; InternationalEnvironmentallaw An introduction to international law; sources of international law; law of treaties; signature ratification Evolution of international environmental law: , Customary principles; Common but differentiated responsibility Pollu..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET613",
+      "code": "OECET613",
+      "title": "Disaster Management",
+      "category": "Open Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET613.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Hazardsanddisasters:Introductiontokeyconceptsandterminology:hazard , disastersandtypesofclassifications vulnerability exposure risk crisis , , , , , emergency capacity resilience Carbonfootprint Effectofsubsystemsof , , , . earth . Extent and nature of natural hazards implications of climate change: Earth , quakes Volcanoes Floods Coastal disasters- Storm surges Tsunamis , , . ..."
+        },
+        {
+          "no": 2,
+          "summary": "Landslides Causes and prediction Soil and soil degradation erosion and , , , Desertification Forestfires theirmitigationmethods , , ."
+        },
+        {
+          "no": 3,
+          "summary": "Impactsandassessment:RiskManagementandAssessmentandDisaster Managementcycle . SWOT Analysis- basic concepts uses limitations and advantages Disaster , , . management plan and reports participation of community in disaster , management ."
+        },
+        {
+          "no": 4,
+          "summary": "Hazardanddisastermanagementplansforfloods stormsurges landslides , , , earthquakes forest fires: pre-disaster phase actual disaster phase post , , , - disasterphase"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET614",
+      "code": "OECET614",
+      "title": "Environmental Impact Assessment",
+      "category": "Open Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET614.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction Pollution and pollutants general aspects scale of impact -Global local - , , pollutants History of EIA Global and Indian scenario Need for EIA EIA 2006 key - , , features GeneraloverviewofDraftEIA2020 , EIA procedure in India Public participation Significance & steps , – Environmentmanagementplan RoleofanEnvironmentalEngineer"
+        },
+        {
+          "no": 2,
+          "summary": "Impact analysis- Adhoc checklists matrix methods overlay analysis , , , , FaultTreeAnalysismethod&EventTreeAnalysismethod EIAcasestudies WaterPollution Point and Non-point Source of Pollution Major Pollutants of Water Physical , , , chemicalandbiologicalcharacteristicsofwater Waterbornediseases Water , , Quality standards (IS 10500 -2012)"
+        },
+        {
+          "no": 3,
+          "summary": "SolidWaste ClassificationandsourcesofSolidWaste CharacteristicsofSolidWaste , , E -waste & Radioactive wastes Types management/disposal , - , Hazardous waste -waste identification process and characteristics SolidWasteManagementRules2016 Land/SoilPollution Effectsofurbanizationonlanddegradation ImpactofModernAgricultureon , Soil pesticidepollution EffectonEnvironment , ,"
+        },
+        {
+          "no": 4,
+          "summary": "AirPollution ClassificationofPollutionandPollutants PrimaryandSecondaryPollutants , , CriteriaPollutantsandtheirimpactsonenvironment humanhealth National , , AmbientAirQualityStandardsbyCPCB NoisePollution Sources of Noise Effects of Noise measurement ofnoise Equivalent sound , , , pressure level Control measures –Noise pollution (Regulation and control) , Rule2000"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET615",
+      "code": "OECET615",
+      "title": "Structural Geology",
+      "category": "Open Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET615.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Structural Geology; Forces causing deformation in Earth’s lithosphere; Concept of rock deformation: Stress and Strain in rocks; Strain ellipsesofdifferenttypesandtheirgeologicalsignificance;Rheologyofrocks; Conceptofdipandstrike;Outcroppatterns ."
+        },
+        {
+          "no": 2,
+          "summary": "Foliation and lineation- Description and origin of foliations axial plane , cleavageanditstectonicsignificance;Descriptionandoriginoflineationand relationship with the major structures; Neotectonics-Introduction; Neo tectonicactivityinKerala ."
+        },
+        {
+          "no": 3,
+          "summary": "Folds- Fold morphology; Geometric and genetic classification of folds; Introductiontothemechanicsoffolding:Buckling Bending Flexuralslipand , , flowfolding;Importanceofstructuresinmineral oilandgasdeposits ,"
+        },
+        {
+          "no": 4,
+          "summary": "Fractures and faults: Geometric and genetic classification of fractures and faults; Effects of faulting on the outcrops; Geologic/geomorphic criteria for recognition of faults and fault plane solutions; Lineaments- Introduction; MajorlineamentsinKeralaanditspossibleimplications ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET616",
+      "code": "OECET616",
+      "title": "Applied Earth Systems",
+      "category": "Open Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET616.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Fundamentalconceptsofequilibrium Geomorphicagentsandprocesses Basic . . concept of Earth as a system and its component sub systems Climate Change . vis-a-vis the interrelationships of the subsystems- Green House Effect and Globalwarming basicideasabouttheircausesandeffects , ."
+        },
+        {
+          "no": 2,
+          "summary": "Weathering- relevance influence of and on earth systems types and controlling , , factors Soil formation and controls soil profile soil erosion and conservation . - , , methods Fluvial processes-hydrological cycle fluvial erosion transportation . , , and deposition fluvial landforms Stages of stream development; Drainage , . patterns ."
+        },
+        {
+          "no": 3,
+          "summary": "Wagner’s ideas of continental drift Plate Tectonics- seafloor spreading Plate , . boundaries and their features mechanisms of plate movements Basics of , oceanography: coastal upwelling and downwelling Outlines of ocean floor . topography basicoutlinesoforiginandcirculationofdeepseasurfacecurrents , (AtlanticandPacificOceans)"
+        },
+        {
+          "no": 4,
+          "summary": "Basicsofatmosphereandatmosphericprocesses:Structureandcompositionof the atmosphere Heat budget factors affecting solar radiation Fundamental . , . concepts of precipitation global wind patterns General weather systems of , . India Monsoon system cyclone and jet stream , - ,"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET741",
+      "code": "PECET741",
+      "title": "Structural Dynamics",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCCET403",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET741.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction Classification of dynamic loads essential characteristics of – – a dynamic problem – methods of discretization– single degree of freedom systems – basic components of a dynamic system . Formulation of equation of motion Newton’s 2nd law and D’ Alembert’s – principle; influence of gravitational forces generalized SDOF systems – . Solution of the equation of motion u..."
+        },
+        {
+          "no": 2,
+          "summary": "Response to harmonic loading steady state and transient states steady sate – amplitude Dynamic magnification factor force transmissibility and , , vibrationisolation . Response to periodic loading Fourier series representation of periodic – loadsintimedomain ResponseofSDOFsystems . . Response to impulse loading half -sine rectangular and triangular – , pulses;"
+        },
+        {
+          "no": 3,
+          "summary": "Response to general loading Duhamel Integral damped and – , undampedsystems . Multi degree of freedom systems – Lumped mass systems , shear building frame Equationofmotion , . Freevibrationanalysis:Naturalfrequenciesandmodeshapes orthogonality , ofnormalmodes ."
+        },
+        {
+          "no": 4,
+          "summary": "Approximate methods: Rayleigh’s method Dunkarley’s method , Stodola’smethod . Distributed mass (continuous) systems – differential equation of motion Axial vibration of rods Flexural vibration of beams natural – . , frequencies and mode shapes of simply supported beam Evaluation of . frequencies and mode shapes of cantilever beam and fixed beam (formulationonly) ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET742",
+      "code": "PECET742",
+      "title": "Formwork Engineering",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET742.pdf",
+      "modules": [],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET743",
+      "code": "PECET743",
+      "title": "Environmental Geotechnology",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCCET402",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET743.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Scope of geoenvironmental engineering multiphase behaviour of soil - – importance of soil physics soil chemistry hydrogeology biological process- , , , Geochemical Attenuation-Quantification of attenuation capacities-Laboratory evaluation sequential batch -contact testing and Column percolation testing , . Soil -water-contaminant interaction and concepts of double layer –Change..."
+        },
+        {
+          "no": 2,
+          "summary": "Contaminant transport in soil -Transport process- Advection Diffusion , , Dispersion and sorption-Fick’s equation Characteristics of Municipal solid waste Physical Chemical and geotechnical , , characteristics-Identification of Hazardous and Non-Hazardous waste waste .- dump and its impact on environment -Regulatory requirement -Solid waste management rules (brief introduction ..."
+        },
+        {
+          "no": 3,
+          "summary": "Landfill Types-Landfill layout and capacity Planning of landfills-Liner and , Cover system its components and its functions-natural clay liner- compacted , clay liner selection of soil for barrier layer- Methods to find permeability of clay barrier layer -Primary and secondary leachate collection and removal systems - Gas Management Gas extraction systems-passive and active sys..."
+        },
+        {
+          "no": 4,
+          "summary": "Application of geosynthetics in landfills-Geotextile geomembrane geosynthetic , , clay liners Geocomposites methodology of construction testing and design , . , aspects Contaminated site- Soil exploration at contaminated site (brief introduction) -risk assessment of contaminated site remediation methods for soil and groundwater - –selection and planning of remediation methods–i..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET744",
+      "code": "PECET744",
+      "title": "Airport Planning and Design",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:3:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCCET502",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET744.pdf",
+      "modules": [
+        {
+          "no": 4,
+          "summary": "Visual Aids: Objectives Runway Marking Taxiway Marking Shoulder , , , marking Apron marking Airport Lighting: Beacon Obstruction lighting , . , , Approach lighting Runway lighting Taxiway Lighting Airfield Signage , . , system: Runway and taxiway signages Signing standards Air traffic , . control: Air traffic control -objectives rules control system control , , , network -visua..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET745",
+      "code": "PECET745",
+      "title": "Pavement Design and Construction",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PCCET502and PCCEL607",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET745.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Pavement: Functions and characteristics- types of pavement: flexible pavement rigid pavement comparison Different layers of flexible and rigid , , - pavement functionsandcharacteristicsoflayers , . Pavement materials: Properties of aggregates bitumen and subgrade soil , . Requirements and tests on aggregates bitumen and subgrade soil (CBR , value) Types of bitumen and uses bitu..."
+        },
+        {
+          "no": 2,
+          "summary": "Bituminous pavement types: Penetration layer system and premixed system- Types and specification of materials used Special types of . bituminouslayers(stonemasticasphaltandmasticasphalt) . Mixdesign:physicalandvolumetricpropertiesofbituminousmix Marshall , methodofmixdesign Superpavemixdesign , ."
+        },
+        {
+          "no": 3,
+          "summary": "Construction of Flexible Pavement Construction steps equipment used - , and quality control checks of subgrade granular sub base (GSB)WBM , , , WMM Bituminous Macadam and Bituminous Concrete layers of flexible , pavement . Construction of Cement concrete pavement: material characterization , preparation of subgrade and base presetting reinforcement in joints and , PCCslabconstr..."
+        },
+        {
+          "no": 4,
+          "summary": "Introduction to Pavement Evaluation- Structural and functional requirements of pavements Functional evaluation of pavements- pavement . conditionsurvey pavementdistressratingindices , , Structural evaluation of flexible pavements by Benkelman Beam Deflection technique ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET746",
+      "code": "PECET746",
+      "title": "Highway Materials and Design",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:3:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCCET502",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET746.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Pavements and materials: Desirable properties and testing of materials: Introduction to highway pavements-Flexible and rigid pavements- component parts Functions and significance of layers Pavement Materials - . Desirable properties principle and procedure of tests for assessment of – , subgradesoil roadaggregatesandbitumen , ."
+        },
+        {
+          "no": 2,
+          "summary": "Bituminous mixes requirements and design: Materials for durable pavements- Artificial aggregates types of binders -emulsions cut backs and , , , modified binders-grading characteristics and uses Aging of bitumen and , . aging tests Requirements of bituminous mixes Specifications for . , bituminous pavement layers Grading of aggregates design of bituminous . , mixesusingMarshall..."
+        },
+        {
+          "no": 3,
+          "summary": "Design of flexible pavements: Introduction to analysis and design of flexible pavements: Factors affecting design and performance of pavements , ESWL of multiple wheels Repeated loads and EWL factors stresses and , ,"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET747",
+      "code": "PECET747",
+      "title": "River Engineering",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCCET501",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET747.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction river morphology- classification of rivers systems of stream – - classification Behaviour of rivers channel geometry effects of long . , , contraction . Super critical flow Stream profiles and bed material bank erosion , , degradation aggradation , . River basin management plans inter basin river water transfers and river , waterdisputes ."
+        },
+        {
+          "no": 2,
+          "summary": "River training works classification of river training works-objectives – - methods – planning – design parameters-embankment as river training works- design of guide banks- artificial cut off pitched island river – – diversions examples of river training works - ."
+        },
+        {
+          "no": 3,
+          "summary": "Properties of the sediment settling velocity incipient motion critical , - tractive force empirical equations- scour criteria Shield’s analysis –White’s , , analysis Regimes of flow and resistance; Bed form mechanics design of stable channels Garret’s method Bed load transport and its estimation – ."
+        },
+        {
+          "no": 4,
+          "summary": "Suspended load transport Diffusion in turbulent flow differential equation , , forsuspensionofsediment estimationofsuspendedload Sedimentsamplers , , bed load samplers suspended load samplers – – ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET751",
+      "code": "PECET751",
+      "title": "Ground Water Engineering",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCCET501 PCCET402 ,",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET751.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Vertical distribution of groundwater- Types of geologic formations aquifer , and their types Properties of aquifer related to storage and transmissivity of , water Darcy’slaw(Review) , Steady unidirectional flow- steady flow in a homogenous aquifer- aquifer with recharge- flow into infiltration galleries (Problems from unidirectional . flow) Evaluation of aquifer parameters by ..."
+        },
+        {
+          "no": 2,
+          "summary": "Modelling of ground water flow- governing equations of ground water flow and boundary conditions (basic ideas only) solution of partial differential , equation of ground water flow for 1D steady ground water flow in homogenous aquifers (confined and unconfined) using finite difference method(uniformmeshintervalonly) Partial differential equation governing unsteady groundwater f..."
+        },
+        {
+          "no": 3,
+          "summary": "Well hydraulics -Well flow near aquifer boundaries- Image well system . Method of images- Practical cases (Problemsfrommethodofimages) . Method of constructing shallow wells- Method of constructing shallow wells -cable tool method rotary method and reverse rotary method -well , completion-design of gravel packed well -well development -different methods wellrehabilitation , ."
+        },
+        {
+          "no": 4,
+          "summary": "Surface investigation of groundwater- different methods-electrical resistivity method seismic refraction method determination of aquifer thickness of , - horizontalaquifers(Problemsfromresistivitymethod seismicrefraction) , Groundwater Contamination Quality of Ground Water- Graphical , Representations ReducingGroundwaterContamination . . Sea water intrusion- Ghyben-Herzberg equ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET752",
+      "code": "PECET752",
+      "title": "Sustainable Construction Practices",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET752.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to sustainable practices: Building life cycle resource use , inthebuiltenvironment majorenvironmentalissues threedimensionsof , , sustainability environment economy and social aspects construction , , , ecologyandprinciplesofgreenengineering . Indoor Environmental Quality: Day lighting air ventilation exhaust , , systems low VOC paints materials & adhesives buildin..."
+        },
+        {
+          "no": 2,
+          "summary": "Energy Efficiency: Environmental impact of building constructions , Conceptsofembodiedenergy operationalenergyandlifecycleenergy , . Methods to reduce operational energy: Energy efficient building envelopes Solar Heat Gain Coefficient U -Values for facade materials , , , efficientlightingtechnologies energyefficientandBEEratedappliancesfor , heating and air-conditioning systems..."
+        },
+        {
+          "no": 3,
+          "summary": "Water conservation and efficiency: Rainwater harvesting methods for roof & non-roof reducing landscape water demand by proper irrigation , systems water efficient plumbing systems water metering waste water , , , treatment recycleandreusesystems , . Waste Management: Handling of construction & demolition waste materials separation of household waste handling e-waste on-site and..."
+        },
+        {
+          "no": 4,
+          "summary": "Introduction to Green Buildings: Definition of green buildings definition , of sustainability typical features of green buildings benefits of green , , buildings towards sustainable development Green building rating systems . – GRIHA IGBC and LEED overview of the criteria as per these rating , , systems Casestudies , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET753",
+      "code": "PECET753",
+      "title": "Advanced Geotechnical Investigation",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "Geotechnical Engineering -1 (PCCET402)",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET753.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Planningan InvestigationProgramme Geotechnical Investigation Necessity Scope and Objectives – , Planning of a sub -surface exploration program -Factors to be considered Reconnaissance preliminaryanddetailedinvestigation , . ISguidelinesfordecidingthenumber size spacinganddepthofboreholes . , , Explorationtechniques Methods of exploration- open pits trenches shafts boreholes Met..."
+        },
+        {
+          "no": 2,
+          "summary": "SoundingMethods Standard Penetration Test procedure Factors influencing the SPT results and - , precautions to obtain reliable results– corrections to be applied to observed N values– correlations of N value with various engineering and index properties of soils-Field study from sites-Field visit and analysis of data Static cone penetration test -procedure-merits/drawbacks Corr..."
+        },
+        {
+          "no": 3,
+          "summary": "FieldTests Geophysical methods -Seismic refraction method - procedure , use , limitations . Electrical resistivity method -Electrical profiling and electrical sounding- procedure uses limitations , , Field tests – Pressure meter Test procedure , uses -limitations , correlations . Pile load tests- Procedure- analysis of results of data"
+        },
+        {
+          "no": 4,
+          "summary": "Sampling, Report & Geosynthetics Soil Sampling- disturbed and undisturbed soil samples- representative and non- representative samples chunk and tube samples Area ratio clearance outside , , , clearance-recovery ratio Handling and transportation of sample Types of , , samplers-Thin walled sampler Piston sampler-Split spoon sampler Methods for , . collectionofsandsamplesfrombene..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET754",
+      "code": "PECET754",
+      "title": "Railway, Port and Harbor Engineering",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCCET502",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET754.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Role of Railways in the development of a Nation- Development of railways in India-Track Alignment Basic requirements- Factors in selection of - suitable alignment -Surveys for track alignment - Permanent way and Railway track components- Functions of various components- Rails , Sleepers , Ballast , - Rails - types of rails , rail sections- defects in rails , creep of rails theo..."
+        },
+        {
+          "no": 2,
+          "summary": "Geometric design of track: gradients grade compensation speed of trains , , on curves super elevation cant deficiency negative super elevation curves , , , , , types (brief description) necessity of providing transition curve length of , , transition curve , widening on curves . Points and crossings-Necessity – Turnout components- Crossings- Components- Design features of turno..."
+        },
+        {
+          "no": 3,
+          "summary": "Water Transportation: Advantages and disadvantages Harbours- . Classification requirements and characteristics of good harbour and , , principles of harbour planning site selection- Layout of harbour-Shape of , harbour harbour depth Ship characteristics Effects of natural phenomena , , . on marine structures- Tides Wind Water waves Littoral drift Marine , , . Structure- General..."
+        },
+        {
+          "no": 4,
+          "summary": "Navigational Aids- Necessity Types of navigation aids Requirement of , , signals Fixed and floating navigation aid Docking and Repair Facilities- , - wet dock classification-different types-design considerations- operation of , lock gates and passage- Dry dock - Graving dry dock - design aspects- floating dry dock design aspects- Port Facilities- Port building facilities - , Tr..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET755",
+      "code": "PECET755",
+      "title": "Design of Hydraulic Structures",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET755.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Diversion head works- layout and functions of components Weir and , barrage- Causes of failure of weirs on permeable soils - Bligh’s theory and Khosla’s theory Designofvertical dropweir Designofimperviousfloor of . . hydraulicstructuresbyKhosla’stheory Cross drainage works-Types selection of suitable type Type of aqueducts , , . Regulation Works Canal falls-necessity classifica..."
+        },
+        {
+          "no": 2,
+          "summary": "Hydraulic design and Drawing of the following hydraulic structures: 1 . Tank sluice 2 Canal Fall (Trapezoidal Notch type) 3 Syphon Aqueduct . . (TypeIII)4 SyphonWellDrop5 CanalRegulator(UsingKhosla’sTheory . ."
+        },
+        {
+          "no": 3,
+          "summary": "Dams-Types Gravity dam selection of site- forces acting stability , – - analysis and modes of failure Principal and shear stresses Problems – - Elementary profile –limiting height of gravity dams high and low dams- Practicalprofiles Functionsofvariouscomponentsshafts keys waterstops , , , , and different types of galleries Grouting Instrumentation in dams (Concept , . only)"
+        },
+        {
+          "no": 4,
+          "summary": "Earth dams-types causes of failure and design criteria Arch dams- thin , , cylinder theory; Spillways-types-Ogee spillway profile; Energy dissipation- stilling basins-Indian standard Type I and Type II (description only) Arch dams-types methods for design (list only) -Thin cylinder theory ,"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET756",
+      "code": "PECET756",
+      "title": "Air and Noise Pollution Control Engineering",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:3:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET756.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Airpollutants Sources classification CombustionProcessesandpollutant , , , emission EffectsonHealth vegetation materialsandatmosphere Reactions , , , , ofpollutantsintheatmosphereandtheireffects Smoke smogandozone , , layerdisturbance Greenhouseeffect , ."
+        },
+        {
+          "no": 2,
+          "summary": "Airsamplingandpollutionmeasurementmethods principlesandinstruments , , ambient air quality and emission standards Air pollution indices Air Act , , , legislationandregulations"
+        },
+        {
+          "no": 3,
+          "summary": "Controlprinciples Removalofgaseouspollutantsbyadsorption absorption , , , reactionandothermethods Particulateemissioncontrol settlingchambers . , , cycloneseparation Wetcollectors fabricfilters electrostaticprecipitatorsand , , , otherremovalmethodslikeabsorption adsorption precipitationetc , , . Biologicalairpollutioncontroltechnologies Indoorairquality ,"
+        },
+        {
+          "no": 4,
+          "summary": "Noise pollution: Basicsof acoustics and specificationof sound; sound power , sound intensity and sound pressure levels; plane point and line sources , , multiple sources; outdoor and indoor noise propagation; psychoacoustics and noise criteria effects of noise on health annoyance rating schemes; special , ,"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET757",
+      "code": "PECET757",
+      "title": "Finite Element Method",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCCET403",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET757.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "General Introduction –introduction to boundary value problems – approximate numerical solutions for solving differential equations least – square method – collocation method – Galerkin method – introduction to finite element method advantages and disadvantages - ."
+        },
+        {
+          "no": 2,
+          "summary": "Brief review of matrix methods Direct stiffness method truss and beam – – element Coordinate transformation –global assembly –Estimation of – element forces Interpolation and shape functions- polynomial . approximations for 1D and 2D elements using Lagrange polynomials – CST LSTandbilinearrectangularelements ,"
+        },
+        {
+          "no": 3,
+          "summary": "Formulation techniques Variational approach and weighted residual – approach formulation of element equations for 1D bar element 1D beam – , element and CST element Isoparametric sub -parametric and super- . , parametricelements"
+        },
+        {
+          "no": 4,
+          "summary": "Development of stiffness matrix for bar element and beam element - Introduction to higher order elements introduction to axisymmetric – elements Numerical Integration Gauss quadrature Discussion of – – . modelling and analysis using recent commercial finite element software packages"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET721",
+      "code": "OECET721",
+      "title": "Intelligent Transportation Systems",
+      "category": "Open Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET721.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "IntroductiontoIntelligentTransportationSystems: Basics of ITS: History of ITS Urbanisation and motorisation Transport , , system characteristics and problems ITS components importance need . - , , , challenges ITSinitiativesinIndia . Understanding ITS: Functionalities required for user service ITS , architecture ITStechnologybuildingblocks(introductiononly) ,"
+        },
+        {
+          "no": 2,
+          "summary": "Traffic management and ITS: Traffic management – objectives , measures , applicationofITSfortrafficmanagement ITSuserservicesandapplications:(introductiononly) ATIS advanced traveller information system- Introduction Functional areas , , components AVCS -advanced vehicle control system APTS advanced . , - public transportation system CVOS -commercial vehicle operation system , ..."
+        },
+        {
+          "no": 3,
+          "summary": "Transport Demand management and ITS: Introduction Applicationof ITS , for TDM Promotion of Public transport Road pricing parking - , , management High occupancy lanes Bicycle rentals carpooling integrated , , , , fare trafficruleenforcement Incentiveschemes , , . Use of GPS and GIS in ITS: Introduction to GPS and GIS Automatic , vehicle location and identification real time pas..."
+        },
+        {
+          "no": 4,
+          "summary": "AutomatedHighwaysystems: AHS: Introduction Concepts and technologies of AHS Connected vehicle , , system Vehicleautomation Benefits goals challengeswithAHS , , , , . Sensing Technologies: In vehicle- categories examples Issues In road , , , - intrusive non-intrusive application uses , , , . Smart Roads: concepts and technologies smart street lights smart , , intersection Selfdr..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET722",
+      "code": "OECET722",
+      "title": "Environmental Health and Safety",
+      "category": "Open Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET722.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Occupational Health And Toxicology: Safety at work – Socio – Economic reasons . Introduction to health and safety at various industries occupational related diseases-Musculoskeletal disorders . , hearing impairment carcinogens silicosis asbestosis pneumoconiosis , , , , – Toxic materials and substances used in work exposure limits , , toxicological investigation..."
+        },
+        {
+          "no": 2,
+          "summary": "Chemical hazards- Dust fumes vapour fog gases; Methods of Control , , , , . Biological hazards- Classification of Biohazardous agents– bacterial agents , viral agents fungal parasitic agents infectious diseases control of , , , , biological agents at workplaces Noise noise exposure regulation and . , control Radiation Hazards Types and effects of radiation on human body . , , d..."
+        },
+        {
+          "no": 3,
+          "summary": "Safety in Construction industry Scaffolding and Working platform - , Welding and Cutting Excavation Work Concreting control measures to , , , reduce the risk Electrical Hazards Protection against voltage fluctuations . , , Effectsofshockonhumanbody ."
+        },
+        {
+          "no": 4,
+          "summary": "Safe working environment - The basic purpose and benefits of safety inspection First -aid appliances shelters rest rooms and lunch rooms use of , , , , personal protective equipment Role of an individual in conservation of , natural resources Methodsforcontrolling water pollution roleofindividual , , inpreventionofpollution ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET723",
+      "code": "OECET723",
+      "title": "Watershed Conservation and Mangement",
+      "category": "Open Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:3:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET723.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Watershed Management: Definition and importance of watersheds - Watershed functions and processes -Watershed management objectives and principles- Integrated and multidisciplinary approach for watershedmanagement . Hydrological Cycle and Watershed Characteristics: Components of the hydrological cycle Watershed characteristics (size shape slope drainage - , , , p..."
+        },
+        {
+          "no": 2,
+          "summary": "Soil and Water Conservation Techniques: Soil erosion- types causes and , , effects Soil conservation methods (contour plowing terracing strip , , , cropping) Waterconservationtechniques(rainwaterharvesting checkdams , , , rechargepits) Role of Vegetation in Watershed Management: Importance of vegetation in soil and water conservation Types of vegetation and their roles in - wat..."
+        },
+        {
+          "no": 3,
+          "summary": "Watershed Management Planning and Implementation: Steps in watershed management planning Community involvement in watershed - management Case studies of successful watershed management projects - Environmental and Socio-Economic Considerations: Environmental impact assessment of watershed projects Social and economic benefits of - watershed management Policy and legal framework..."
+        },
+        {
+          "no": 4,
+          "summary": "Watershed Modeling and Geographic Information Systems (GIS): Introduction to watershed modelling- Use of GIS in watershed management - Applicationsofremotesensinginwatershedanalysis Delineation and Prioritization-Concept of Topographic or Contour Map , Boundary Delineation GIS for Delineation Accuracy in Delineation , , , ConceptofPriority Factors Basics&Methods Purpose&Benefit..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET724",
+      "code": "OECET724",
+      "title": "Forensic Engineering",
+      "category": "Open Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET724.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Forensic Engineering Forensic Engineering Definition - – , Investigation Pyramid Eyewitness Information Role in Legal system , , , Scientific Method Applying scientific method in forensic engineering – – engineer as expert witness – scientific methods and legal system , Qualification of forensic engineer Technical knowledge oral and written – – communication oth..."
+        },
+        {
+          "no": 2,
+          "summary": "Forensic Engineering Workflow and Investigation Methods Forensic - Engineering Workflow-Team &planning-preliminary onsite investigation . Sampling-selection of sample-collection- packing-sealing of samples Source , and type of evidence Paper documentation- digital documentation- - electronic data Physical Evidence-Collection of photograph -cataloguing . - Recognizing the Eviden..."
+        },
+        {
+          "no": 3,
+          "summary": "Physical Product Failure & Analytical Methods Introduction to typical - Forensic Engineering Tool box-NDT , Crack detection and human eye - Hardness testing- and Destructive testing Methods with case studies Indirect , stress strain Analysis-Brittle lacquer technique Contact Radiography- , Metallography-EDAX method Forensic Optical Microscopy-Examination- , Magnification-USB Mi..."
+        },
+        {
+          "no": 4,
+          "summary": "Engineer in the Court room & Criminal Cases - Role of an Engineering Expert -Report -pre trial meetings-Alternative dispute resolution-Single joint expert Engineer in the court room Criminal Cases-Introduction-Counterfeit . , coins-fraudulent road accidents-Fraudulent Insurance claims Cyber Crimes , and Cases- SIM Swapping -ATM Cloning-Microsoft Internal Spam- Intellectualprope..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET725",
+      "code": "OECET725",
+      "title": "Finance for Engineering",
+      "category": "Open Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET725.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Book keeping and Accounting Accounting Process –– – Purpose of accounting Classification of accounting Generally Accepted – – Accounting Principles Conventions and Concepts Double entry system – – of accounting Preparation of Journal Ledger and Trial Balance – , . (Illustrativeproblem) Introduction to financial statements Preparation of Profit & Loss Account – a..."
+        },
+        {
+          "no": 2,
+          "summary": "Rate of Return method Minimum attractive rate of return (MARR) – , Internal Rate of Return (IRR) Economic Decision Making using – Incremental Rate of Return (IRoR) Analysis of public projects Benefit cost – analysis applications – . Breakeven analysis Fixed and variable cost Total cost Breakeven point – – – and breakeven chart Interpretation limitations – , ."
+        },
+        {
+          "no": 3,
+          "summary": "Working capital Operating cycle Working capital management Sources – – – of finance long term and short term financing - . Financing of PPP projects Sources of project finance Providers of finance – – Financial structure Financial indicators Special nature of infrastructure – – – financingneed ."
+        },
+        {
+          "no": 4,
+          "summary": "Construction Economics – Definition and scope . Time value of money – Simple and Compound interest – Time value equivalence –Cash flow diagrams Interest calculations Compound – – interest factors Interest tables – . Evaluating alternatives by equivalence Present worth comparison Future – – worth comparison Annual cost and worth comparison – ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET861",
+      "code": "PECET861",
+      "title": "Water and Air Quality Management",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET861.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Water quality: impurities (pollutants and contaminants) in water their , significance and estimation techniques; water borne diseases; standards of potable water Impact of water pollutants on environment; self -purification of . wasteinstreams;zonesofpurification;eutrophication;disposalstandards"
+        },
+        {
+          "no": 2,
+          "summary": "Water treatment:Aeration and types of aerators; purpose and mechanism of flocculation; coagulants used in water treatment; factors influencing coagulation; estimation of coagulant dose; types of flash mixers and flocculators; sedimentation; analysis of discrete and flocculent settling; sedimentation tanks; Filtration: types and design of filters Disinfection: , chemical and non..."
+        },
+        {
+          "no": 3,
+          "summary": "Waterresourcesandquality managementinIndia:Water availability; water stress index; status and trend of surface and groundwater; issues and policy interventions; pollutionofrivers lakesand ground water;GAPandNational , RiverActionProgramme;roleofnationalandinternationalagenciesinwater healthandsanitation ."
+        },
+        {
+          "no": 4,
+          "summary": "AirPollution:Types Sources Effectsonhumanhealth vegetation materials , , , , , global environmental issuesAir sampling and pollution measurement . methods principles and instruments ambient air quality and emission , , standards Air pollution indices Air Act legislation and regulations Control , , , principles Removalofgaseouspollutantsbyadsorption absorption reaction , , , and..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET862",
+      "code": "PECET862",
+      "title": "Valuation of Real Properties",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PCCET601",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET862.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Role of valuer-Classification-Valuers’ Functions & Responsibilities Purpose- . doctrine of estate-different form of value-factors affecting aspects , , characteristics Supply and demand forces factors affecting demand and . , supply-Cost Price & Value Type of interest (right) in land -Free hold -Lease , hold Forms of lease Mortgage Income Outgoings-Type sinking fund Year’s , , ..."
+        },
+        {
+          "no": 2,
+          "summary": "Investment -Type-characteristics of ideal investment Appraisal technique – Netpresentvalue(NPV)bydiscountedcashflowmethod(DCF) Internalrate , of return (IRR) -Numerical Example Life of various types of buildings . - Depreciation- Obsolescence-Functional & Economical -difference between depreciation and obsolescence Method of estimating cost depreciation- Numericalexamples"
+        },
+        {
+          "no": 3,
+          "summary": "Building FSI – Plot coverage – Types of structure Method of Valuation for open land - Comparative method , Abstractive method , Belting method - Numericalexamples Method of valuation of land with buildings- Rental method direct comparison , of the capital , Valuation based on profit - Numerical examples Valuation of apartment -FSI – Super built -up area , Undivided share of lan..."
+        },
+        {
+          "no": 4,
+          "summary": "Environment & Valuation- Environmental factors affecting valuation Professional ethics- Model Code of Conduct as notified by MCA under the Companies (Registered valuers and valuation) Rules 2017 Ethical - considerationsundertermsofengagements SalientfeaturesofRealestate(regulation&development)Act2016 Transfer , ofpropertyAct Landacquisition IndianeasementAct , , , Estate Duty A..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET863",
+      "code": "PECET863",
+      "title": "Contracts Management",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PCCET601",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET863.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to contract management -Definition & importance Type of , contracts(Lumpsum itemrate EPC BOTetc ) , , , .. , Agreementandcontract Indian Contract Act 1872 Layout and Salient Features Performance and – - Non-performance of Contract Breach of Contract Consequences and - - Remedies Liquidated Damages Extension of Time - ,"
+        },
+        {
+          "no": 2,
+          "summary": "Contract Documentation-Form of Agreement & Hierarchy of Terms and Conditions- Typical structure of contract Preamble Scope and - , Specifications- Preliminaries and General Insurance policies Bonds and - , Guarantees Terms of Payment Price adjustment Assignments and , - - Subcontracting Tendering and Bidding process-Prequalification Invitation of tender Bid , , preparation and ..."
+        },
+        {
+          "no": 3,
+          "summary": "Standard Forms of Contracts FIDIC form of Contract - . Performance Bond Programme of Work Submissions and approvals - – - Progress Review Meetings Certification and Interim Payments Quality and - - Safety - Variation clauses and changes to the scope of work - Claims - Delay and disruption Force majeure and Exceptional events Suspension & - - Termination - Taking over and Substa..."
+        },
+        {
+          "no": 4,
+          "summary": "Conflicts , Disputes , and their causes - Conflict avoidance and tiered dispute resolution clauses Alternative Dispute Resolution Methods & Litigation - - Best practices in dispute resolution and management General Provisions - - ArbitrationAgreement CompositionofArbitralTribunal ,"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET864",
+      "code": "PECET864",
+      "title": "Advanced Design of Steel Structures",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCCET602",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET864.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Types of bolts−Bearing and High strength bolts−Prying Force−Beam to Column connections−Design of seat angle−Unstiffened −Design of seat angle−Stiffened web angle & end plate connections Beam and column bolted , splices−Design of framed beam connection−continuous beam to beam connection"
+        },
+        {
+          "no": 2,
+          "summary": "Structure and properties of weld metal Beam to-column connections− . Stiffened beam seat connection−Web angle and end plate connections− - Tubular Connections−Parameters of an in-plane joint - Welds in tubular joints−curvedweldlengthatintersectionoftubes"
+        },
+        {
+          "no": 3,
+          "summary": "Design of plate girders subjected to uniformly distributed loads design of – stiffeners Designof gantrygirders−Introduction−Loading consideration−Selection of gantry girder−Position of moving load for maximum effects profile of , gantry girder limitation on vertical deflection−Design of gantry girders , ."
+        },
+        {
+          "no": 4,
+          "summary": "DesignofLightGaugeStructures:Designoflightgaugesteelstructures: Introduction−Types of cross sections−Materials-Local and post buckling of thin elements−Stiffened and multiple stiffened compression elements−Tension members− Beams and deflection of beams−Combined stressesandconnections"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET865",
+      "code": "PECET865",
+      "title": "Design of Earthquake Resistant Structures",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PCCET303/ Equivalent",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET865.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction Classification of dynamic loads essential characteristics of – – a dynamic problem – methods of discretization– single degree of freedom systems – basic components of a dynamic system . Formulation of equation of motion Newton’s 2nd law and D’ Alembert’s – principlegeneralizedSDOFsystems . Solution of the equation of motion undamped free vibration damped free – – v..."
+        },
+        {
+          "no": 2,
+          "summary": "Base excited SDOF system formulation of equation of motion Response - – ofSDOFbaseexcitedsystems; Response spectrum: Concept of pseudo acceleration velocity Response , . spectra Four-way logarithmic plot DVA spectrum (concept only) , – . Multi degree of freedom systems 2 DOF systems- Equation of motion- – Normal modes of vibrations and natural frequencies MDOF systems: shear , ..."
+        },
+        {
+          "no": 3,
+          "summary": "Elements of Earthquake Engineering: Plate tectonics faults Earthquake – , magnitude and intensity Focus and Epicentre Energy release and seismic , , waves Characteristics of Earthquake Measurement of ground motion- . , Seismographs Seismiczonemapping , . StructuralSystemsforSeismicResistance:Lateralloadresistingsystemsin RCandsteelstructures . Building Irregularities: in elevat..."
+        },
+        {
+          "no": 4,
+          "summary": "Responsespectrum method(RSM): concept (Numerical problems in RSM , notexpectedinexams) Ductility considerations in earthquake resistant design of buildings: Ductility of R .C structures- significance Factors influencing ductility . . Ductile detailing provisions as per IS -13920 (2016) - for beams , columns , beam-column joints and shear walls . Evaluation of Earthquake pronene..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET866",
+      "code": "PECET866",
+      "title": "Urban Transportation Planning",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET866.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Need for transportation planning- Characteristics of urban travel , Transportation issues and challenges Detrimental effects of traffic on , environment Urban Structure- types and properties -centripetal grid linear . , , , directional Movement and Accessibility Hierarchy of transportation , – facilities Demand analysis intransportationplanning Modelling basedon . , consumerbeh..."
+        },
+        {
+          "no": 2,
+          "summary": "Transportation planning process -Systems approach , Elements/stages of transportation planning process - Goal , objectives and constraints Trip-based and Activity-based approaches for , transportation planning . Data collection – Definition of study area , zoning- selection of cordon Sampling techniques and sample size , , Sources of data and types of surveys for planning Trip ..."
+        },
+        {
+          "no": 3,
+          "summary": "Trip Distribution- Growth factor methods Synthetic methods- Gravity , models opportunity model Modal Split Factors influencing modal split , . - , Types of mode split models trip end trip interchange logit model – , , . Traffic assignment Purpose Elements of transportation networks- Nodes and - , linksMethodsfortrafficassignment ,"
+        },
+        {
+          "no": 4,
+          "summary": "Transportation and land use - Role of urban activity analysis in transportationplanning Transportationimpactsonactivitysystem Landuse , , transportationinteraction . Land use models- Selection of land use model Lowry model -Structure , , features Model equation system Sustainable transportation- features , . , facilities Transit oriented development Non transport solutions to t..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PECET867",
+      "code": "PECET867",
+      "title": "Rural Water Supply and Onsite Sanitation Systems",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PCCET503",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET867.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "IntroductiontoRuralWaterSupplyandSanitation Overview of Global Water and Sanitation Challenges Global water crisis: , statisticsandtrends Importanceofwaterandsanitationinruraldevelopment , , Sustainable Development Goals (SDGs) related to water and sanitation . Principles of Rural Water Supply Basic water supply concepts: sources , , availability and quality Water demand estima..."
+        },
+        {
+          "no": 2,
+          "summary": "DesignandImplementationofRuralWaterSupplySystems WaterSourceDevelopment Identifyingandprotectingwatersources:surface , water groundwater and rainwater Water source contamination and , , , protection strategies Water Treatment and Distribution Water treatment . , methods: filtration disinfection and safe storage Distribution systems: , , , pipelines storagetanks andstandpipes Op..."
+        },
+        {
+          "no": 3,
+          "summary": "Introduction to On-Site Sanitation Concepts of on-site sanitation: Importance of sanitation for public health and environment Design and construction of basic on-site sanitation systems: pit . latrines septic tanks and composting toilets Advanced sanitation , , . technologies: biogas digesters eco-san toilets Selecting appropriate sanitation , . systems based on local condition..."
+        },
+        {
+          "no": 4,
+          "summary": "Planning and Management of Rural Water Supply and Sanitation Projects Planning water supply and sanitation projects: needs for assessment and feasibility studies Funding and financing options for rural water and . sanitation projects Stakeholder engagement and community participation . . National and international policies on water and sanitation Regulatory . frameworksandstand..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET831",
+      "code": "OECET831",
+      "title": "Waste Management",
+      "category": "Open Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET831.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "INTRODUCTIONTO SOLIDWASTE MANAGEMENT: Classification of solid wastes (source and type based) solid waste management (SWM) , , elements of SWM ESSWM (environmentally sound solid waste , management) and EST (environmentally sound technologies) factors , affecting SWM Indian scenario progress in MSW (municipal solid waste) , , management in India Indian and global scenario of e-wa..."
+        },
+        {
+          "no": 2,
+          "summary": "WASTE GENERATION ASPECTS: Waste stream assessment (WSA) , waste generation and composition waste characteristics (physical and , chemical) health and environmental effects (public health and , environmental) COLLECTION STORAGE TRANSPORT AND DISPOSAL OF , , WASTES:WasteCollection StorageandTransport:Collectioncomponents , , storage-containers/collection vehicles collection opera..."
+        },
+        {
+          "no": 3,
+          "summary": "WASTE DISPOSAL: key issues in waste disposal disposal options and , selection criteria sanitary landfill landfill gas emission leachate formation , , , , environmentaleffectsoflandfill landfilloperationissues acasestudy , , . HAZARDOUS WASTE MANAGEMENT AND TREATMENT: Identification and classification of hazardous waste hazardous waste , treatment pollution prevention and waste ..."
+        },
+        {
+          "no": 4,
+          "summary": "WASTE PROCESSING TECHNIQUES & SOURCE REDUCTION , PRODUCT RECOVERY & RECYCLING: Purpose of processing , mechanical volume and size reduction component separation drying and , , dewatering Source Reduction Product Recovery and Recycling: basics . , , purpose implementation monitoring and evaluation of source reduction , , significance of recycling planning of a recycling programm..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET832",
+      "code": "OECET832",
+      "title": "Rainwater Harvesting",
+      "category": "Open Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET832.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction:Hydrologiccycle AdvantagesofRainwater Factorsaffecting , , run off from catchment Important points relating to water storage and , recharging Rainwater harvesting Components of rain water harvesting , , , Catchment area harvesting structures soil moisture conservation check , , , dams artificialrecharge farmponds percolationtanks , , , ."
+        },
+        {
+          "no": 2,
+          "summary": "Water harvesting: Principles importance and issues Water harvesting , , techniques – classification based on source , storage and use . Rain water harvestingmethods storingrainwaterfordirectuse Recharginggroundwater , , aquifers from rooftop runoff Recharging ground water aquifers with runoff , from ground areas Modular Rain Water Harvesting System- Coarse mesh/leaf , screen Gu..."
+        },
+        {
+          "no": 3,
+          "summary": "Recharging subsurface Aquifers: Methods of recharging subsurface aquifers- through recharge pit - recharge through abandoned hand pump - recharge through abandoned dug well/ open well - through recharge trench - recharge through shafts recharge trench with bore -"
+        },
+        {
+          "no": 4,
+          "summary": "Artificial Recharge Concept of artificial recharge of groundwater recharge - , methods basin stream channel ditch and furrow flooding and recharge – - - , , wellmethods rechargemoundsandinducedrecharge , . Concepts of Watershed need for watershed development in India Planning - , of watershed management Drainage ,watershed management for rainwater – - harvesting ,"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET833",
+      "code": "OECET833",
+      "title": "Public Transportation Systems",
+      "category": "Open Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET833.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Basic Operating Elements of Public Transit public transport travel , characteristics Transit travel characteristics: factors spatial distribution , , , temporal variations Passenger volume analysis and service capacity , determination Introduction to transit service planning Operational planning , , process Service and evaluation standards Datarequirements andcollection , , , F..."
+        },
+        {
+          "no": 2,
+          "summary": "Transit Line Capacity: Elements and Computation Systems approach to , transit line capacity Capacities of different modes Level Service measures , , , SpeedofTransitService Passengerdemand:factorsandelasticity Stopsand , . stoppingregimes: Definitions andrelationships Practicaland optimalvalues , of stop spacing Comparison of all -stop skip-stop zonal and express/local , , , op..."
+        },
+        {
+          "no": 3,
+          "summary": "Transit Lines and Networks: Planning objectives principles and , considerations Geometry of transit lines Types of transit lines and their , , characteristics Transfers in transit networks Analysis of metro network , , geometricforms TransitSystemStatistics Routechoiceandassignment , ,"
+        },
+        {
+          "no": 4,
+          "summary": "Introduction to Network design and service design Performance and , EconomicMeasures:Revenues costsandoperatingratio TransitFares:Fare , , structure and Collection Costing and cost allocation methods Modern , , Approaches in Transit planning: Information System for Passengers , ApplicationofITS ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET834",
+      "code": "OECET834",
+      "title": "Fundamentals of Building Planning",
+      "category": "Open Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET834.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Definition of architecture –Historical development of architecture . Principles of architectural composition Unity/ harmony character– balance – – proportion scale –rhythm Accentuation and contrast – – –– . Organising principles in architecture Symmetry hierarchy axis linear – – – – – concentric radial and asymmetric grouping primary and secondary , – – masses . Form and Space ..."
+        },
+        {
+          "no": 2,
+          "summary": "Acoustics fundamentals: Intensity of sound Watts/m2 Bel Decibel scales- , - - - dBA -Phon Addition of sound levels . . Acoustical Defects- Echoes Reverberation Foci and Dead Spots Loudness , , , , Noise Sound absorption-materials and fixings . Natural lighting: Visualtask requirements Units of Light Light Vision and , , , Buildings Standards of Lighting and Visual comfort -The ..."
+        },
+        {
+          "no": 3,
+          "summary": "Thermal comfort: Factors affecting thermal comfort effective Temperature - Thermal comfort indices-ET -CET Charts- Bioclimatic chart Psychrometry - andPsycrometricchart . Earth -Sun relationship: Sun’s apparent movement with respect to the earth . Solarangles Thermaldesignofbuildings:Thermophysicalpropertiesofbuildingmaterials and thermal control -. Functionalprotection: Causes..."
+        },
+        {
+          "no": 4,
+          "summary": "Architecture Design aspect: basic anthropometrics- human functions and their implications for space requirements- movement and circulation diagrams- special interpretations- various activities and their relationship with spaces Energy efficiency in buildings Energy assessment in buildings Green – – buildingratingguidelines"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OECET835",
+      "code": "OECET835",
+      "title": "Hydrogeology",
+      "category": "Open Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "PECET416",
+      "common_note": "",
+      "shared_branches": [
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET835.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Groundwater- origin and occurrence Hydrological cycle Geologic structures . . favouring groundwater occurrence and movement Vertical distribution of . groundwater Water table Groundwater reservoirs aquifer aquiclude . . – , , aquifuge and aquitard Types of aquifers– unconfined confined leaky and . , , bounded aquifers artesian aquifers; springs and their types Hydrological – . ..."
+        },
+        {
+          "no": 2,
+          "summary": "Groundwater exploration- Remote sensing and GIS applications Geophysical . methods of groundwater exploration: Principles of electrical resistivity method Wenner and Schlumberger methods Subsurface investigations- test - . drilling resistivity logging SP logging radiation logging- brief description , , , . Groundwater movement Water table and Piezometric level (surface) – – The..."
+        },
+        {
+          "no": 3,
+          "summary": "Well design criteria Water wells– types of wells Methods for drilling deep . . wells Quality of groundwater-domestic irrigation and industrial & . , construction purpose . Chemical characteristics of groundwater – Graphical representationofwaterqualitydata:Interpretationofhydrochemicalanalysis data: Hill -Piper Trilinear diagram Durov’s diagram and U S Salinity , . . diagram So..."
+        },
+        {
+          "no": 4,
+          "summary": "Saline water intrusion in coastal and other aquifers and its prevention . Ghyben-Herzberg relationship– methods and need for artificial recharge to aquifers Groundwater management Groundwater development safe yield . . – andoptimalminingpolicy Relationbetweengeomorphologyofaterrainand . its hydrogeological condition Problems created by groundwater in the . constructionphaseofme..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    }
+  ]
+}

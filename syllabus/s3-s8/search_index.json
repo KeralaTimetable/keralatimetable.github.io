@@ -1,0 +1,6134 @@
+{
+  "scheme": "2024",
+  "total_unique_courses": 431,
+  "courses": [
+    {
+      "id": "GAEST305",
+      "code": "GAEST305",
+      "title": "Digital Electronics and Logic Design",
+      "category": "Math & Science",
+      "credits": "4",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/GAEST305.pdf"
+    },
+    {
+      "id": "GAMAT301",
+      "code": "GAMAT301",
+      "title": "Mathematics for Computer and Information Science - 3",
+      "category": "Math & Science",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/GAMAT301.pdf"
+    },
+    {
+      "id": "GNEST305",
+      "code": "GNEST305",
+      "title": "Introduction to Artificial Intelligence and Data Science",
+      "category": "Math & Science",
+      "credits": "4",
+      "branches": [
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/GNEST305.pdf"
+    },
+    {
+      "id": "GYMAT301",
+      "code": "GYMAT301",
+      "title": "Mathematics for Electrical Science and Physical Science - 3",
+      "category": "Math & Science",
+      "credits": "3",
+      "branches": [
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/GYMAT301.pdf"
+    },
+    {
+      "id": "PBCET304",
+      "code": "PBCET304",
+      "title": "Surveying & Geomatics",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCET304.pdf"
+    },
+    {
+      "id": "PBCMT304",
+      "code": "PBCMT304",
+      "title": "Concepts in Machine Learning",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCMT304.pdf"
+    },
+    {
+      "id": "PBCST304",
+      "code": "PBCST304",
+      "title": "Object Oriented Programming",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCST304.pdf"
+    },
+    {
+      "id": "PBECT304",
+      "code": "PBECT304",
+      "title": "Logic Circuit Design",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBECT304.pdf"
+    },
+    {
+      "id": "PBEET304",
+      "code": "PBEET304",
+      "title": "Analog Electronics",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBEET304.pdf"
+    },
+    {
+      "id": "PBMET304",
+      "code": "PBMET304",
+      "title": "Manufacturing Processes",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBMET304.pdf"
+    },
+    {
+      "id": "PCCEL307",
+      "code": "PCCEL307",
+      "title": "Survey Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL307.pdf"
+    },
+    {
+      "id": "PCCEL308",
+      "code": "PCCEL308",
+      "title": "Fluid Mechanics Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL308.pdf"
+    },
+    {
+      "id": "PCCET302",
+      "code": "PCCET302",
+      "title": "Fluid Mechanics",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET302.pdf"
+    },
+    {
+      "id": "PCCET303",
+      "code": "PCCET303",
+      "title": "Structural Analysis - I",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET303.pdf"
+    },
+    {
+      "id": "PCCSL307",
+      "code": "PCCSL307",
+      "title": "Data Structures Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCSL307.pdf"
+    },
+    {
+      "id": "PCCSL308",
+      "code": "PCCSL308",
+      "title": "Digital Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCSL308.pdf"
+    },
+    {
+      "id": "PCCST302",
+      "code": "PCCST302",
+      "title": "Theory of Computation",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCST302.pdf"
+    },
+    {
+      "id": "PCCST303",
+      "code": "PCCST303",
+      "title": "Data Structures and Algorithms",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCST303.pdf"
+    },
+    {
+      "id": "PCECL307",
+      "code": "PCECL307",
+      "title": "Analog Circuits Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL307.pdf"
+    },
+    {
+      "id": "PCECL308",
+      "code": "PCECL308",
+      "title": "Logic Circuit Design Laboratory",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL308.pdf"
+    },
+    {
+      "id": "PCECT302",
+      "code": "PCECT302",
+      "title": "Solid State Devices",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT302.pdf"
+    },
+    {
+      "id": "PCECT303",
+      "code": "PCECT303",
+      "title": "Analog Circuits",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT303.pdf"
+    },
+    {
+      "id": "PCEEL307",
+      "code": "PCEEL307",
+      "title": "Circuits and Measurements Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL307.pdf"
+    },
+    {
+      "id": "PCEEL308",
+      "code": "PCEEL308",
+      "title": "Analog Electronics Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL308.pdf"
+    },
+    {
+      "id": "PCEET302",
+      "code": "PCEET302",
+      "title": "Circuits & Networks",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET302.pdf"
+    },
+    {
+      "id": "PCEET303",
+      "code": "PCEET303",
+      "title": "DC Machines & Transformers",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET303.pdf"
+    },
+    {
+      "id": "PCMEL307",
+      "code": "PCMEL307",
+      "title": "Computer Aided Machine Drawing & Modelling",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMEL307.pdf"
+    },
+    {
+      "id": "PCMEL308",
+      "code": "PCMEL308",
+      "title": "Materials Testing Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMEL308.pdf"
+    },
+    {
+      "id": "PCMET302",
+      "code": "PCMET302",
+      "title": "Mechanics of Solids",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMET302.pdf"
+    },
+    {
+      "id": "PCMET303",
+      "code": "PCMET303",
+      "title": "Fluid Mechanics and Machinery",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S3"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMET303.pdf"
+    },
+    {
+      "id": "UCHUT346",
+      "code": "UCHUT346",
+      "title": "Economics for Engineers",
+      "category": "Common / Humanities",
+      "credits": "2",
+      "branches": [
+        "CSE",
+        "AIML",
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "semesters": [
+        "S3",
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/UCHUT346.pdf"
+    },
+    {
+      "id": "UCHUT347",
+      "code": "UCHUT347",
+      "title": "Engineering Ethics and Sustainable Development",
+      "category": "Common / Humanities",
+      "credits": "2",
+      "branches": [
+        "CSE",
+        "AIML",
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "semesters": [
+        "S3",
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/UCHUT347.pdf"
+    },
+    {
+      "id": "GAMAT401",
+      "code": "GAMAT401",
+      "title": "Mathematics for Computer and Information Science - 4",
+      "category": "Math & Science",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/GAMAT401.pdf"
+    },
+    {
+      "id": "GBMAT401",
+      "code": "GBMAT401",
+      "title": "Mathematics for Electrical Science - 4",
+      "category": "Math & Science",
+      "credits": "3",
+      "branches": [
+        "ECE",
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/GBMAT401.pdf"
+    },
+    {
+      "id": "GCMAT401",
+      "code": "GCMAT401",
+      "title": "Mathematics for Physical Science - 4",
+      "category": "Math & Science",
+      "credits": "3",
+      "branches": [
+        "ME",
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/GCMAT401.pdf"
+    },
+    {
+      "id": "PBCET404",
+      "code": "PBCET404",
+      "title": "Design of Concrete Structures",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCET404.pdf"
+    },
+    {
+      "id": "PBCMT404",
+      "code": "PBCMT404",
+      "title": "Database Systems",
+      "category": "PBL Core",
+      "credits": "3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCMT404.pdf"
+    },
+    {
+      "id": "PBCST404",
+      "code": "PBCST404",
+      "title": "Computer Organization and Architecture",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCST404.pdf"
+    },
+    {
+      "id": "PBECT404",
+      "code": "PBECT404",
+      "title": "Microcontrollers",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBECT404.pdf"
+    },
+    {
+      "id": "PBEET404",
+      "code": "PBEET404",
+      "title": "Digital Electronics",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBEET404.pdf"
+    },
+    {
+      "id": "PBMET404",
+      "code": "PBMET404",
+      "title": "Mechanics of Machinery",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBMET404.pdf"
+    },
+    {
+      "id": "PCCEL407",
+      "code": "PCCEL407",
+      "title": "Materials Testing Lab (Group C)",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL407.pdf"
+    },
+    {
+      "id": "PCCEL408",
+      "code": "PCCEL408",
+      "title": "Civil Engineering Modelling Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL408.pdf"
+    },
+    {
+      "id": "PCCET402",
+      "code": "PCCET402",
+      "title": "Soil Mechanics",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET402.pdf"
+    },
+    {
+      "id": "PCCET403",
+      "code": "PCCET403",
+      "title": "Structural Analysis - Ii",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET403.pdf"
+    },
+    {
+      "id": "PCCML408",
+      "code": "PCCML408",
+      "title": "Artificial Intelligence Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCML408.pdf"
+    },
+    {
+      "id": "PCCMT402",
+      "code": "PCCMT402",
+      "title": "Fundamentals of Artificial Intelligence",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCMT402.pdf"
+    },
+    {
+      "id": "PCCSL407",
+      "code": "PCCSL407",
+      "title": "Operating Systems Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCSL407.pdf"
+    },
+    {
+      "id": "PCCSL408",
+      "code": "PCCSL408",
+      "title": "DBMS Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCSL408.pdf"
+    },
+    {
+      "id": "PCCST402",
+      "code": "PCCST402",
+      "title": "Database Management Systems",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCST402.pdf"
+    },
+    {
+      "id": "PCCST403",
+      "code": "PCCST403",
+      "title": "Operating Systems",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCST403.pdf"
+    },
+    {
+      "id": "PCECL407",
+      "code": "PCECL407",
+      "title": "Linear Integrated Circuits Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL407.pdf"
+    },
+    {
+      "id": "PCECL408",
+      "code": "PCECL408",
+      "title": "Microcontroller Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL408.pdf"
+    },
+    {
+      "id": "PCECT402",
+      "code": "PCECT402",
+      "title": "Signals and Systems",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT402.pdf"
+    },
+    {
+      "id": "PCECT403",
+      "code": "PCECT403",
+      "title": "Linear Integrated Circuits",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT403.pdf"
+    },
+    {
+      "id": "PCEEL407",
+      "code": "PCEEL407",
+      "title": "DC Machines & Transformers Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL407.pdf"
+    },
+    {
+      "id": "PCEEL408",
+      "code": "PCEEL408",
+      "title": "Branch Name (Branch Code) COURSE NAME: POWER ELECTRONICS and DRIVES LAB",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL408.pdf"
+    },
+    {
+      "id": "PCEET402",
+      "code": "PCEET402",
+      "title": "Synchronous & Induction Machines",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET402.pdf"
+    },
+    {
+      "id": "PCEET403",
+      "code": "PCEET403",
+      "title": "SEMSEMESTER-4 COURSE NAME: Power Electronics and Drives",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET403.pdf"
+    },
+    {
+      "id": "PCMEL407",
+      "code": "PCMEL407",
+      "title": "Fluid Mechanics and Hydraulic Machines Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMEL407.pdf"
+    },
+    {
+      "id": "PCMEL408",
+      "code": "PCMEL408",
+      "title": "Manufacturing Technology Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMEL408.pdf"
+    },
+    {
+      "id": "PCMET402",
+      "code": "PCMET402",
+      "title": "Machine Tools and Metrology",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMET402.pdf"
+    },
+    {
+      "id": "PCMET403",
+      "code": "PCMET403",
+      "title": "Engineering Thermodynamics",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMET403.pdf"
+    },
+    {
+      "id": "PECET411",
+      "code": "PECET411",
+      "title": "Advanced Solid Mechanics",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET411.pdf"
+    },
+    {
+      "id": "PECET412",
+      "code": "PECET412",
+      "title": "Concrete Technology",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET412.pdf"
+    },
+    {
+      "id": "PECET413",
+      "code": "PECET413",
+      "title": "Mechanics of Fluid Flow",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET413.pdf"
+    },
+    {
+      "id": "PECET414",
+      "code": "PECET414",
+      "title": "Cartography and GIS",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET414.pdf"
+    },
+    {
+      "id": "PECET415",
+      "code": "PECET415",
+      "title": "Architectural Engineering",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET415.pdf"
+    },
+    {
+      "id": "PECET416",
+      "code": "PECET416",
+      "title": "Engineering Geology",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET416.pdf"
+    },
+    {
+      "id": "PECET417",
+      "code": "PECET417",
+      "title": "Numerical Methods for Engineers",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET417.pdf"
+    },
+    {
+      "id": "PECET418",
+      "code": "PECET418",
+      "title": "Environmental Law and Policy",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET418.pdf"
+    },
+    {
+      "id": "PECMT415",
+      "code": "PECMT415",
+      "title": "Computer Organization",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT415.pdf"
+    },
+    {
+      "id": "PECST411",
+      "code": "PECST411",
+      "title": "Software Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST411.pdf"
+    },
+    {
+      "id": "PECST412",
+      "code": "PECST412",
+      "title": "Pattern Recognition",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST412.pdf"
+    },
+    {
+      "id": "PECST413",
+      "code": "PECST413",
+      "title": "Functional Programming",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST413.pdf"
+    },
+    {
+      "id": "PECST414",
+      "code": "PECST414",
+      "title": "Coding Theory",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST414.pdf"
+    },
+    {
+      "id": "PECST415",
+      "code": "PECST415",
+      "title": "PECST415",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST415.pdf"
+    },
+    {
+      "id": "PECST416",
+      "code": "PECST416",
+      "title": "Signals and Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST416.pdf"
+    },
+    {
+      "id": "PECST417",
+      "code": "PECST417",
+      "title": "Soft Computing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST417.pdf"
+    },
+    {
+      "id": "PECST418",
+      "code": "PECST418",
+      "title": "Computational Geometry",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST418.pdf"
+    },
+    {
+      "id": "PECST419",
+      "code": "PECST419",
+      "title": "Cyber Ethics, Privacy and Legal Issues",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST419.pdf"
+    },
+    {
+      "id": "PECST495",
+      "code": "PECST495",
+      "title": "Advanced Data Structures",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST495.pdf"
+    },
+    {
+      "id": "PEECT411",
+      "code": "PEECT411",
+      "title": "Instrumentation",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT411.pdf"
+    },
+    {
+      "id": "PEECT412",
+      "code": "PEECT412",
+      "title": "Power Electronics",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT412.pdf"
+    },
+    {
+      "id": "PEECT413",
+      "code": "PEECT413",
+      "title": "Machine Learning",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT413.pdf"
+    },
+    {
+      "id": "PEECT414",
+      "code": "PEECT414",
+      "title": "Object Oriented Programming",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT414.pdf"
+    },
+    {
+      "id": "PEECT415",
+      "code": "PEECT415",
+      "title": "Digital Systems and VLSI Design",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT415.pdf"
+    },
+    {
+      "id": "PEECT416",
+      "code": "PEECT416",
+      "title": "Digital System Design",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT416.pdf"
+    },
+    {
+      "id": "PEEET411",
+      "code": "PEEET411",
+      "title": "Electronic Instrumentation",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET411.pdf"
+    },
+    {
+      "id": "PEEET412",
+      "code": "PEEET412",
+      "title": "Renewable Energy Sources",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET412.pdf"
+    },
+    {
+      "id": "PEEET413",
+      "code": "PEEET413",
+      "title": "Mathematics for Machine Learning",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET413.pdf"
+    },
+    {
+      "id": "PEEET414",
+      "code": "PEEET414",
+      "title": "Theory of Computation",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET414.pdf"
+    },
+    {
+      "id": "PEEET416",
+      "code": "PEEET416",
+      "title": "Computer Organization",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET416.pdf"
+    },
+    {
+      "id": "PEEET417",
+      "code": "PEEET417",
+      "title": "Solid State Devices",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET417.pdf"
+    },
+    {
+      "id": "PEEET418",
+      "code": "PEEET418",
+      "title": "Illumination Technology",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET418.pdf"
+    },
+    {
+      "id": "PEEET419",
+      "code": "PEEET419",
+      "title": "Object Oriented Programming",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET419.pdf"
+    },
+    {
+      "id": "PEMET411",
+      "code": "PEMET411",
+      "title": "Turbo Machinery",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET411.pdf"
+    },
+    {
+      "id": "PEMET412",
+      "code": "PEMET412",
+      "title": "Nuclear Energy",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET412.pdf"
+    },
+    {
+      "id": "PEMET413",
+      "code": "PEMET413",
+      "title": "Composite Materials",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET413.pdf"
+    },
+    {
+      "id": "PEMET414",
+      "code": "PEMET414",
+      "title": "Components of Intelligent Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET414.pdf"
+    },
+    {
+      "id": "PEMET415",
+      "code": "PEMET415",
+      "title": "Advanced Mechanics of Solids",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET415.pdf"
+    },
+    {
+      "id": "PEMET416",
+      "code": "PEMET416",
+      "title": "Advanced Metal Joining Techniques",
+      "category": "Program Elective",
+      "credits": "4/3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET416.pdf"
+    },
+    {
+      "id": "PEMET417",
+      "code": "PEMET417",
+      "title": "Technology Management",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET417.pdf"
+    },
+    {
+      "id": "PEMET418",
+      "code": "PEMET418",
+      "title": "Supply Chain and Logistics Management",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S4"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET418.pdf"
+    },
+    {
+      "id": "PBCET504",
+      "code": "PBCET504",
+      "title": "Foundation Engineering",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCET504.pdf"
+    },
+    {
+      "id": "PBCMT504",
+      "code": "PBCMT504",
+      "title": "Introduction to Computer Vision",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCMT504.pdf"
+    },
+    {
+      "id": "PBCST504",
+      "code": "PBCST504",
+      "title": "Microcontrollers",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCST504.pdf"
+    },
+    {
+      "id": "PBECT504",
+      "code": "PBECT504",
+      "title": "Digital Signal Processing",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBECT504.pdf"
+    },
+    {
+      "id": "PBEET504",
+      "code": "PBEET504",
+      "title": "Electrical and Electronics Engineering (EE) MICROPROCESSORS and EMBEDDED SYSTEMS",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBEET504.pdf"
+    },
+    {
+      "id": "PBMET504",
+      "code": "PBMET504",
+      "title": "Management for Engineers",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBMET504.pdf"
+    },
+    {
+      "id": "PCCEL507",
+      "code": "PCCEL507",
+      "title": "Geotechnical Engineering Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL507.pdf"
+    },
+    {
+      "id": "PCCEL508",
+      "code": "PCCEL508",
+      "title": "Concrete Lab (Mt-2)",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL508.pdf"
+    },
+    {
+      "id": "PCCET501",
+      "code": "PCCET501",
+      "title": "Hydrology and Water Resources Engineering",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET501.pdf"
+    },
+    {
+      "id": "PCCET502",
+      "code": "PCCET502",
+      "title": "Transportation Engineering",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET502.pdf"
+    },
+    {
+      "id": "PCCET503",
+      "code": "PCCET503",
+      "title": "Environmental Engineering",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET503.pdf"
+    },
+    {
+      "id": "PCCML508",
+      "code": "PCCML508",
+      "title": "Deep Learning Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCML508.pdf"
+    },
+    {
+      "id": "PCCMT503",
+      "code": "PCCMT503",
+      "title": "Deep Learning Concepts",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCMT503.pdf"
+    },
+    {
+      "id": "PCCSL507",
+      "code": "PCCSL507",
+      "title": "Networks Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCSL507.pdf"
+    },
+    {
+      "id": "PCCSL508",
+      "code": "PCCSL508",
+      "title": "Machine Learning Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCSL508.pdf"
+    },
+    {
+      "id": "PCCST501",
+      "code": "PCCST501",
+      "title": "Computer Networks",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCST501.pdf"
+    },
+    {
+      "id": "PCCST502",
+      "code": "PCCST502",
+      "title": "Design and Analysis of Algorithms",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCST502.pdf"
+    },
+    {
+      "id": "PCCST503",
+      "code": "PCCST503",
+      "title": "Machine Learning",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCST503.pdf"
+    },
+    {
+      "id": "PCECL507",
+      "code": "PCECL507",
+      "title": "Course Name: Digital Signal Processing Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL507.pdf"
+    },
+    {
+      "id": "PCECL508",
+      "code": "PCECL508",
+      "title": "Communication Lab I",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL508.pdf"
+    },
+    {
+      "id": "PCECT501",
+      "code": "PCECT501",
+      "title": "Electromagnetics",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT501.pdf"
+    },
+    {
+      "id": "PCECT502",
+      "code": "PCECT502",
+      "title": "Analog and Digital Communication",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT502.pdf"
+    },
+    {
+      "id": "PCECT503",
+      "code": "PCECT503",
+      "title": "Control Systems",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT503.pdf"
+    },
+    {
+      "id": "PCEEL507",
+      "code": "PCEEL507",
+      "title": "AC Machines Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL507.pdf"
+    },
+    {
+      "id": "PCEEL508",
+      "code": "PCEEL508",
+      "title": "Engineering (EE) Electrical and Electronics MICROPROC CESSOR and EMBEDDED SYSTEMS LAB",
+      "category": "Lab",
+      "credits": "",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL508.pdf"
+    },
+    {
+      "id": "PCEET501",
+      "code": "PCEET501",
+      "title": "Power Generation, Transmission and Protection",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET501.pdf"
+    },
+    {
+      "id": "PCEET502",
+      "code": "PCEET502",
+      "title": "Electromagnetic Theory",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET502.pdf"
+    },
+    {
+      "id": "PCEET503",
+      "code": "PCEET503",
+      "title": "Signals and Systems",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET503.pdf"
+    },
+    {
+      "id": "PCMEL507",
+      "code": "PCMEL507",
+      "title": "Thermal Engineering Lab - 1",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMEL507.pdf"
+    },
+    {
+      "id": "PCMEL508",
+      "code": "PCMEL508",
+      "title": "Mechanical Engineering Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMEL508.pdf"
+    },
+    {
+      "id": "PCMET501",
+      "code": "PCMET501",
+      "title": "Dynamics of Machinery",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMET501.pdf"
+    },
+    {
+      "id": "PCMET502",
+      "code": "PCMET502",
+      "title": "Advanced Manufacturing Engineering",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMET502.pdf"
+    },
+    {
+      "id": "PCMET503",
+      "code": "PCMET503",
+      "title": "Heat and Mass Transfer",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMET503.pdf"
+    },
+    {
+      "id": "PECET521",
+      "code": "PECET521",
+      "title": "Advanced Structural Analysis",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET521.pdf"
+    },
+    {
+      "id": "PECET522",
+      "code": "PECET522",
+      "title": "Modern Construction Technology",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET522.pdf"
+    },
+    {
+      "id": "PECET523",
+      "code": "PECET523",
+      "title": "Open Channel Hydraulics",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET523.pdf"
+    },
+    {
+      "id": "PECET524",
+      "code": "PECET524",
+      "title": "Disaster Management",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET524.pdf"
+    },
+    {
+      "id": "PECET525",
+      "code": "PECET525",
+      "title": "Design of Prestressed Concrete",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET525.pdf"
+    },
+    {
+      "id": "PECET526",
+      "code": "PECET526",
+      "title": "Applied Hydrology and Climatology",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET526.pdf"
+    },
+    {
+      "id": "PECET527",
+      "code": "PECET527",
+      "title": "Town Planning",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET527.pdf"
+    },
+    {
+      "id": "PECET528",
+      "code": "PECET528",
+      "title": "Optimization Techniques and Operational Research for Civil Engineers",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET528.pdf"
+    },
+    {
+      "id": "PECMT522",
+      "code": "PECMT522",
+      "title": "Expert Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT522.pdf"
+    },
+    {
+      "id": "PECMT523",
+      "code": "PECMT523",
+      "title": "Fuzzy Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT523.pdf"
+    },
+    {
+      "id": "PECMT527",
+      "code": "PECMT527",
+      "title": "Introduction to Compiler Design",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT527.pdf"
+    },
+    {
+      "id": "PECMT528",
+      "code": "PECMT528",
+      "title": "Concepts in Social Network Analysis",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT528.pdf"
+    },
+    {
+      "id": "PECMT535",
+      "code": "PECMT535",
+      "title": "Object Oriented Programming Concepts",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT535.pdf"
+    },
+    {
+      "id": "PECST521",
+      "code": "PECST521",
+      "title": "Software Project Management",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST521.pdf"
+    },
+    {
+      "id": "PECST522",
+      "code": "PECST522",
+      "title": "Artificial Intelligence",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST522.pdf"
+    },
+    {
+      "id": "PECST523",
+      "code": "PECST523",
+      "title": "Data Analytics",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST523.pdf"
+    },
+    {
+      "id": "PECST524",
+      "code": "PECST524",
+      "title": "Data Compression",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST524.pdf"
+    },
+    {
+      "id": "PECST525",
+      "code": "PECST525",
+      "title": "Data Mining",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST525.pdf"
+    },
+    {
+      "id": "PECST526",
+      "code": "PECST526",
+      "title": "Digital Signal Processing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST526.pdf"
+    },
+    {
+      "id": "PECST527",
+      "code": "PECST527",
+      "title": "Computer Graphics & Multimedia",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST527.pdf"
+    },
+    {
+      "id": "PECST528",
+      "code": "PECST528",
+      "title": "Advanced Computer Architecture",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST528.pdf"
+    },
+    {
+      "id": "PECST595",
+      "code": "PECST595",
+      "title": "Advanced Graph Algorithms",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST595.pdf"
+    },
+    {
+      "id": "PEECT521",
+      "code": "PEECT521",
+      "title": "Biomedical Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT521.pdf"
+    },
+    {
+      "id": "PEECT522",
+      "code": "PEECT522",
+      "title": "Data Structures",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT522.pdf"
+    },
+    {
+      "id": "PEECT523",
+      "code": "PEECT523",
+      "title": "Sensors and Actuators",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT523.pdf"
+    },
+    {
+      "id": "PEECT524",
+      "code": "PEECT524",
+      "title": "ARM Architecture and Programming",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT524.pdf"
+    },
+    {
+      "id": "PEECT525",
+      "code": "PEECT525",
+      "title": "ARM Architecture, Programming and Interfacing",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT525.pdf"
+    },
+    {
+      "id": "PEECT526",
+      "code": "PEECT526",
+      "title": "High Speed Digital Design",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT526.pdf"
+    },
+    {
+      "id": "PEECT527",
+      "code": "PEECT527",
+      "title": "Estimation and Detection",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT527.pdf"
+    },
+    {
+      "id": "PEEET521",
+      "code": "PEEET521",
+      "title": "Energy Storage Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET521.pdf"
+    },
+    {
+      "id": "PEEET522",
+      "code": "PEEET522",
+      "title": "ELECTRIC VEHICLES PEEET522 CIE Marks",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET522.pdf"
+    },
+    {
+      "id": "PEEET523",
+      "code": "PEEET523",
+      "title": "Digital System Design",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET523.pdf"
+    },
+    {
+      "id": "PEEET524",
+      "code": "PEEET524",
+      "title": "Software Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET524.pdf"
+    },
+    {
+      "id": "PEEET526",
+      "code": "PEEET526",
+      "title": "Data Structures",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET526.pdf"
+    },
+    {
+      "id": "PEEET527",
+      "code": "PEEET527",
+      "title": "Introduction to Machine Learning",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET527.pdf"
+    },
+    {
+      "id": "PEEET528",
+      "code": "PEEET528",
+      "title": "Computer Network Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET528.pdf"
+    },
+    {
+      "id": "PEMET521",
+      "code": "PEMET521",
+      "title": "Computational Fluid Dynamics",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET521.pdf"
+    },
+    {
+      "id": "PEMET522",
+      "code": "PEMET522",
+      "title": "Design for Manufacture and Assembly",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET522.pdf"
+    },
+    {
+      "id": "PEMET523",
+      "code": "PEMET523",
+      "title": "Computer Aided Design and Analysis",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET523.pdf"
+    },
+    {
+      "id": "PEMET524",
+      "code": "PEMET524",
+      "title": "Additive Manufacturing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET524.pdf"
+    },
+    {
+      "id": "PEMET525",
+      "code": "PEMET525",
+      "title": "Instrumentation and Control Systems",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET525.pdf"
+    },
+    {
+      "id": "PEMET526",
+      "code": "PEMET526",
+      "title": "Energy Economics and Policy",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET526.pdf"
+    },
+    {
+      "id": "PEMET527",
+      "code": "PEMET527",
+      "title": "Human Resources Management",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET527.pdf"
+    },
+    {
+      "id": "PEMET528",
+      "code": "PEMET528",
+      "title": "Operations Research",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S5"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET528.pdf"
+    },
+    {
+      "id": "OECET611",
+      "code": "OECET611",
+      "title": "Introduction to Construction Engineering",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET611.pdf"
+    },
+    {
+      "id": "OECET612",
+      "code": "OECET612",
+      "title": "Environmental Laws and Policy",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET612.pdf"
+    },
+    {
+      "id": "OECET613",
+      "code": "OECET613",
+      "title": "Disaster Management",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET613.pdf"
+    },
+    {
+      "id": "OECET614",
+      "code": "OECET614",
+      "title": "Environmental Impact Assessment",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET614.pdf"
+    },
+    {
+      "id": "OECET615",
+      "code": "OECET615",
+      "title": "Structural Geology",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET615.pdf"
+    },
+    {
+      "id": "OECET616",
+      "code": "OECET616",
+      "title": "Applied Earth Systems",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET616.pdf"
+    },
+    {
+      "id": "OECMT615",
+      "code": "OECMT615",
+      "title": "Artificial Intelligence",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECMT615.pdf"
+    },
+    {
+      "id": "OECST611",
+      "code": "OECST611",
+      "title": "Data Structures",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST611.pdf"
+    },
+    {
+      "id": "OECST612",
+      "code": "OECST612",
+      "title": "Data Communication",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST612.pdf"
+    },
+    {
+      "id": "OECST613",
+      "code": "OECST613",
+      "title": "Foundations of Cryptography",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST613.pdf"
+    },
+    {
+      "id": "OECST614",
+      "code": "OECST614",
+      "title": "Machine Learning for Engineers",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST614.pdf"
+    },
+    {
+      "id": "OECST615",
+      "code": "OECST615",
+      "title": "Object Oriented Programming",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST615.pdf"
+    },
+    {
+      "id": "OEECT611",
+      "code": "OEECT611",
+      "title": "Entertainment Electronics",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT611.pdf"
+    },
+    {
+      "id": "OEECT612",
+      "code": "OEECT612",
+      "title": "Computer Networks",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT612.pdf"
+    },
+    {
+      "id": "OEECT613",
+      "code": "OEECT613",
+      "title": "Biomedical Engineering",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT613.pdf"
+    },
+    {
+      "id": "OEEET611",
+      "code": "OEEET611",
+      "title": "Introduction to Control Systems",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET611.pdf"
+    },
+    {
+      "id": "OEEET612",
+      "code": "OEEET612",
+      "title": "Energy Management",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET612.pdf"
+    },
+    {
+      "id": "OEEET613",
+      "code": "OEEET613",
+      "title": "Renewable Energy Systems",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET613.pdf"
+    },
+    {
+      "id": "OEMET611",
+      "code": "OEMET611",
+      "title": "Introduction to Business Analytics",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET611.pdf"
+    },
+    {
+      "id": "OEMET612",
+      "code": "OEMET612",
+      "title": "Quantitative Techniques for Engineers",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET612.pdf"
+    },
+    {
+      "id": "OEMET613",
+      "code": "OEMET613",
+      "title": "Automotive Technology",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET613.pdf"
+    },
+    {
+      "id": "OEMET614",
+      "code": "OEMET614",
+      "title": "Renewable Energy Engineering",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET614.pdf"
+    },
+    {
+      "id": "OEMET615",
+      "code": "OEMET615",
+      "title": "Quality Engineering and Management",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET615.pdf"
+    },
+    {
+      "id": "OEMET616",
+      "code": "OEMET616",
+      "title": "Additive Manufacturing",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET616.pdf"
+    },
+    {
+      "id": "OEMET617",
+      "code": "OEMET617",
+      "title": "Solar Energy Conservation Systems",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET617.pdf"
+    },
+    {
+      "id": "PBCET604",
+      "code": "PBCET604",
+      "title": "Construction Project Management",
+      "category": "PBL Core",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCET604.pdf"
+    },
+    {
+      "id": "PBCMT604",
+      "code": "PBCMT604",
+      "title": "Concepts in Data Analytics",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCMT604.pdf"
+    },
+    {
+      "id": "PBCST604",
+      "code": "PBCST604",
+      "title": "Fundamentals of Cyber Security",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBCST604.pdf"
+    },
+    {
+      "id": "PBECT604",
+      "code": "PBECT604",
+      "title": "VLSI Circuit Design",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBECT604.pdf"
+    },
+    {
+      "id": "PBEET604",
+      "code": "PBEET604",
+      "title": "Branch Name (Branch Code) COURSE NAME: POWER SYSTEM ANALYSIS",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBEET604.pdf"
+    },
+    {
+      "id": "PBMET604",
+      "code": "PBMET604",
+      "title": "Thermal Engineering",
+      "category": "PBL Core",
+      "credits": "4",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBMET604.pdf"
+    },
+    {
+      "id": "PCCEL607",
+      "code": "PCCEL607",
+      "title": "Transportation Engineering Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL607.pdf"
+    },
+    {
+      "id": "PCCEL609",
+      "code": "PCCEL609",
+      "title": "Environmental Engineering Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCEL609.pdf"
+    },
+    {
+      "id": "PCCET601",
+      "code": "PCCET601",
+      "title": "Quantity Surveying and Valuation",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET601.pdf"
+    },
+    {
+      "id": "PCCET602",
+      "code": "PCCET602",
+      "title": "Design of Steel Structures",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCET602.pdf"
+    },
+    {
+      "id": "PCCML607",
+      "code": "PCCML607",
+      "title": "Natural Language Processing Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCML607.pdf"
+    },
+    {
+      "id": "PCCMT601",
+      "code": "PCCMT601",
+      "title": "Introduction to Natural Language Processing",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCMT601.pdf"
+    },
+    {
+      "id": "PCCMT602",
+      "code": "PCCMT602",
+      "title": "Generative AI",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCMT602.pdf"
+    },
+    {
+      "id": "PCCSL607",
+      "code": "PCCSL607",
+      "title": "Systems Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCSL607.pdf"
+    },
+    {
+      "id": "PCCST601",
+      "code": "PCCST601",
+      "title": "Compiler Design",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCST601.pdf"
+    },
+    {
+      "id": "PCCST602",
+      "code": "PCCST602",
+      "title": "Advanced Computing Systems",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCCST602.pdf"
+    },
+    {
+      "id": "PCECL607",
+      "code": "PCECL607",
+      "title": "Communication Lab Ii",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECL607.pdf"
+    },
+    {
+      "id": "PCECT601",
+      "code": "PCECT601",
+      "title": "Advanced Communication Theory",
+      "category": "Core",
+      "credits": "4",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT601.pdf"
+    },
+    {
+      "id": "PCECT602",
+      "code": "PCECT602",
+      "title": "Microwaves & Antennas Pcect602",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT602.pdf"
+    },
+    {
+      "id": "PCEEL607",
+      "code": "PCEEL607",
+      "title": "Control System Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL607.pdf"
+    },
+    {
+      "id": "PCEEL609",
+      "code": "PCEEL609",
+      "title": "Power System Lab",
+      "category": "Lab",
+      "credits": "1",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL609.pdf"
+    },
+    {
+      "id": "PCEET601",
+      "code": "PCEET601",
+      "title": "Control Systems",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET601.pdf"
+    },
+    {
+      "id": "PCEET602",
+      "code": "PCEET602",
+      "title": "Electrical System Design and Estimation",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET602.pdf"
+    },
+    {
+      "id": "PCMEL607",
+      "code": "PCMEL607",
+      "title": "Computer Aided Design and Analysis Lab",
+      "category": "Lab",
+      "credits": "2",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMEL607.pdf"
+    },
+    {
+      "id": "PCMEL609",
+      "code": "PCMEL609",
+      "title": "Thermal Engineering Lab - 2",
+      "category": "Lab",
+      "credits": "1",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMEL609.pdf"
+    },
+    {
+      "id": "PCMET601",
+      "code": "PCMET601",
+      "title": "Industrial and Systems Engineering",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMET601.pdf"
+    },
+    {
+      "id": "PCMET602",
+      "code": "PCMET602",
+      "title": "Machine Design",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCMET602.pdf"
+    },
+    {
+      "id": "PECET631",
+      "code": "PECET631",
+      "title": "Advanced Design of Concrete Structures",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET631.pdf"
+    },
+    {
+      "id": "PECET632",
+      "code": "PECET632",
+      "title": "Irrigation and Drainage Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET632.pdf"
+    },
+    {
+      "id": "PECET633",
+      "code": "PECET633",
+      "title": "Ground Improvement Techniques",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET633.pdf"
+    },
+    {
+      "id": "PECET634",
+      "code": "PECET634",
+      "title": "Repair and Rehabilitation of Structures",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET634.pdf"
+    },
+    {
+      "id": "PECET635",
+      "code": "PECET635",
+      "title": "Advanced Foundation Engineering",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET635.pdf"
+    },
+    {
+      "id": "PECET636",
+      "code": "PECET636",
+      "title": "Solid and Hazardous Waste Management",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET636.pdf"
+    },
+    {
+      "id": "PECET637",
+      "code": "PECET637",
+      "title": "Traffic Engineering and Management",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET637.pdf"
+    },
+    {
+      "id": "PECMT632",
+      "code": "PECMT632",
+      "title": "Topics in Computing Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT632.pdf"
+    },
+    {
+      "id": "PECMT695",
+      "code": "PECMT695",
+      "title": "Data Handling and Visualization",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT695.pdf"
+    },
+    {
+      "id": "PECMT745",
+      "code": "PECMT745",
+      "title": "Reinforcement Learning",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S6",
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT745.pdf"
+    },
+    {
+      "id": "PECST631",
+      "code": "PECST631",
+      "title": "Software Testing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST631.pdf"
+    },
+    {
+      "id": "PECST632",
+      "code": "PECST632",
+      "title": "Deep Learning",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST632.pdf"
+    },
+    {
+      "id": "PECST633",
+      "code": "PECST633",
+      "title": "Wireless & Mobile Computing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST633.pdf"
+    },
+    {
+      "id": "PECST634",
+      "code": "PECST634",
+      "title": "Advanced Database Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST634.pdf"
+    },
+    {
+      "id": "PECST635",
+      "code": "PECST635",
+      "title": "Cloud Computing",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST635.pdf"
+    },
+    {
+      "id": "PECST636",
+      "code": "PECST636",
+      "title": "Digital Image Processing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST636.pdf"
+    },
+    {
+      "id": "PECST637",
+      "code": "PECST637",
+      "title": "Fundamentals of Cryptography",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST637.pdf"
+    },
+    {
+      "id": "PECST638",
+      "code": "PECST638",
+      "title": "Quantum Computing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST638.pdf"
+    },
+    {
+      "id": "PECST639",
+      "code": "PECST639",
+      "title": "Randomized Algorithms",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST639.pdf"
+    },
+    {
+      "id": "PECST695",
+      "code": "PECST695",
+      "title": "Mobile Application Development",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST695.pdf"
+    },
+    {
+      "id": "PEECT631",
+      "code": "PEECT631",
+      "title": "Computer Networks",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT631.pdf"
+    },
+    {
+      "id": "PEECT632",
+      "code": "PEECT632",
+      "title": "Digital Image Processing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT632.pdf"
+    },
+    {
+      "id": "PEECT633",
+      "code": "PEECT633",
+      "title": "Secure Communication",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT633.pdf"
+    },
+    {
+      "id": "PEECT634",
+      "code": "PEECT634",
+      "title": "Nanoelectronics",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT634.pdf"
+    },
+    {
+      "id": "PEECT635",
+      "code": "PEECT635",
+      "title": "Image Processing Applications",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT635.pdf"
+    },
+    {
+      "id": "PEECT636",
+      "code": "PEECT636",
+      "title": "Optical Communication",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT636.pdf"
+    },
+    {
+      "id": "PEECT637",
+      "code": "PEECT637",
+      "title": "Optimization Techniques",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT637.pdf"
+    },
+    {
+      "id": "PEEET631",
+      "code": "PEEET631",
+      "title": "Digital Protection of Power Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET631.pdf"
+    },
+    {
+      "id": "PEEET632",
+      "code": "PEEET632",
+      "title": "Operating Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET632.pdf"
+    },
+    {
+      "id": "PEEET633",
+      "code": "PEEET633",
+      "title": "High Voltage Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET633.pdf"
+    },
+    {
+      "id": "PEEET634",
+      "code": "PEEET634",
+      "title": "Internet of Things",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET634.pdf"
+    },
+    {
+      "id": "PEEET636",
+      "code": "PEEET636",
+      "title": "Digital Signal Processing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET636.pdf"
+    },
+    {
+      "id": "PEEET637",
+      "code": "PEEET637",
+      "title": "Cloud Computing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET637.pdf"
+    },
+    {
+      "id": "PEEET638",
+      "code": "PEEET638",
+      "title": "Optimization Techniques",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET638.pdf"
+    },
+    {
+      "id": "PEMET631",
+      "code": "PEMET631",
+      "title": "Power Plant Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET631.pdf"
+    },
+    {
+      "id": "PEMET632",
+      "code": "PEMET632",
+      "title": "Compressible Fluid Flow",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET632.pdf"
+    },
+    {
+      "id": "PEMET633",
+      "code": "PEMET633",
+      "title": "Industrial Tribology",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET633.pdf"
+    },
+    {
+      "id": "PEMET634",
+      "code": "PEMET634",
+      "title": "Finite Element Methods",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET634.pdf"
+    },
+    {
+      "id": "PEMET635",
+      "code": "PEMET635",
+      "title": "Advanced Materials",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET635.pdf"
+    },
+    {
+      "id": "PEMET636",
+      "code": "PEMET636",
+      "title": "Non-Destructive Testing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET636.pdf"
+    },
+    {
+      "id": "PEMET637",
+      "code": "PEMET637",
+      "title": "Industrial Safety Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET637.pdf"
+    },
+    {
+      "id": "PEMET638",
+      "code": "PEMET638",
+      "title": "Marketing Management",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S6"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET638.pdf"
+    },
+    {
+      "id": "OECET721",
+      "code": "OECET721",
+      "title": "Intelligent Transportation Systems",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET721.pdf"
+    },
+    {
+      "id": "OECET722",
+      "code": "OECET722",
+      "title": "Environmental Health and Safety",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET722.pdf"
+    },
+    {
+      "id": "OECET723",
+      "code": "OECET723",
+      "title": "Watershed Conservation and Mangement",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET723.pdf"
+    },
+    {
+      "id": "OECET724",
+      "code": "OECET724",
+      "title": "Forensic Engineering",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET724.pdf"
+    },
+    {
+      "id": "OECET725",
+      "code": "OECET725",
+      "title": "Finance for Engineering",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET725.pdf"
+    },
+    {
+      "id": "OECST721",
+      "code": "OECST721",
+      "title": "Cyber Security",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST721.pdf"
+    },
+    {
+      "id": "OECST722",
+      "code": "OECST722",
+      "title": "Cloud Computing",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST722.pdf"
+    },
+    {
+      "id": "OECST723",
+      "code": "OECST723",
+      "title": "Software Engineering",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST723.pdf"
+    },
+    {
+      "id": "OECST724",
+      "code": "OECST724",
+      "title": "Computer Networks",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST724.pdf"
+    },
+    {
+      "id": "OECST725",
+      "code": "OECST725",
+      "title": "Mobile Application Development",
+      "category": "Open Elective",
+      "credits": "0",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST725.pdf"
+    },
+    {
+      "id": "OEECT721",
+      "code": "OEECT721",
+      "title": "Optical Communication",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT721.pdf"
+    },
+    {
+      "id": "OEECT722",
+      "code": "OEECT722",
+      "title": "Digital Image Processing",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT722.pdf"
+    },
+    {
+      "id": "OEECT723",
+      "code": "OEECT723",
+      "title": "Optimization Techniques",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT723.pdf"
+    },
+    {
+      "id": "OEEET721",
+      "code": "OEEET721",
+      "title": "Design of Solar Pv Systems Oeeet721",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET721.pdf"
+    },
+    {
+      "id": "OEEET722",
+      "code": "OEEET722",
+      "title": "Hybrid and Electric Vehicles",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET722.pdf"
+    },
+    {
+      "id": "OEEET723",
+      "code": "OEEET723",
+      "title": "Introduction to Energy Storage Systems",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET723.pdf"
+    },
+    {
+      "id": "OEMET721",
+      "code": "OEMET721",
+      "title": "Engineering Materials",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET721.pdf"
+    },
+    {
+      "id": "OEMET722",
+      "code": "OEMET722",
+      "title": "Robotics",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET722.pdf"
+    },
+    {
+      "id": "OEMET723",
+      "code": "OEMET723",
+      "title": "Finite Element Methods",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET723.pdf"
+    },
+    {
+      "id": "OEMET724",
+      "code": "OEMET724",
+      "title": "Non-Destructive Testing",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET724.pdf"
+    },
+    {
+      "id": "OEMET725",
+      "code": "OEMET725",
+      "title": "Engineering Instruments and Measurements",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET725.pdf"
+    },
+    {
+      "id": "OEMET726",
+      "code": "OEMET726",
+      "title": "Computational Heat Transfer",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET726.pdf"
+    },
+    {
+      "id": "OEMET727",
+      "code": "OEMET727",
+      "title": "Power Plant Engineering",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET727.pdf"
+    },
+    {
+      "id": "PCECT751",
+      "code": "PCECT751",
+      "title": "Satellite and Radar Communication",
+      "category": "Core",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCECT751.pdf"
+    },
+    {
+      "id": "PECET741",
+      "code": "PECET741",
+      "title": "Structural Dynamics",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET741.pdf"
+    },
+    {
+      "id": "PECET742",
+      "code": "PECET742",
+      "title": "Formwork Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET742.pdf"
+    },
+    {
+      "id": "PECET743",
+      "code": "PECET743",
+      "title": "Environmental Geotechnology",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET743.pdf"
+    },
+    {
+      "id": "PECET744",
+      "code": "PECET744",
+      "title": "Airport Planning and Design",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET744.pdf"
+    },
+    {
+      "id": "PECET745",
+      "code": "PECET745",
+      "title": "Pavement Design and Construction",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET745.pdf"
+    },
+    {
+      "id": "PECET746",
+      "code": "PECET746",
+      "title": "Highway Materials and Design",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET746.pdf"
+    },
+    {
+      "id": "PECET747",
+      "code": "PECET747",
+      "title": "River Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET747.pdf"
+    },
+    {
+      "id": "PECET751",
+      "code": "PECET751",
+      "title": "Ground Water Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET751.pdf"
+    },
+    {
+      "id": "PECET752",
+      "code": "PECET752",
+      "title": "Sustainable Construction Practices",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET752.pdf"
+    },
+    {
+      "id": "PECET753",
+      "code": "PECET753",
+      "title": "Advanced Geotechnical Investigation",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET753.pdf"
+    },
+    {
+      "id": "PECET754",
+      "code": "PECET754",
+      "title": "Railway, Port and Harbor Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET754.pdf"
+    },
+    {
+      "id": "PECET755",
+      "code": "PECET755",
+      "title": "Design of Hydraulic Structures",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET755.pdf"
+    },
+    {
+      "id": "PECET756",
+      "code": "PECET756",
+      "title": "Air and Noise Pollution Control Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET756.pdf"
+    },
+    {
+      "id": "PECET757",
+      "code": "PECET757",
+      "title": "Finite Element Method",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET757.pdf"
+    },
+    {
+      "id": "PECMT753",
+      "code": "PECMT753",
+      "title": "Computational Linguistics",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT753.pdf"
+    },
+    {
+      "id": "PECST741",
+      "code": "PECST741",
+      "title": "Formal Methods in Software Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST741.pdf"
+    },
+    {
+      "id": "PECST742",
+      "code": "PECST742",
+      "title": "Web Programming",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST742.pdf"
+    },
+    {
+      "id": "PECST743",
+      "code": "PECST743",
+      "title": "Bioinformatics",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST743.pdf"
+    },
+    {
+      "id": "PECST744",
+      "code": "PECST744",
+      "title": "Information Security",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST744.pdf"
+    },
+    {
+      "id": "PECST745",
+      "code": "PECST745",
+      "title": "Computer Vision",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST745.pdf"
+    },
+    {
+      "id": "PECST746",
+      "code": "PECST746",
+      "title": "Embedded Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST746.pdf"
+    },
+    {
+      "id": "PECST747",
+      "code": "PECST747",
+      "title": "Blockchain and Cryptocurrencies",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST747.pdf"
+    },
+    {
+      "id": "PECST748",
+      "code": "PECST748",
+      "title": "Real Time Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST748.pdf"
+    },
+    {
+      "id": "PECST749",
+      "code": "PECST749",
+      "title": "Approximation Algorithms",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST749.pdf"
+    },
+    {
+      "id": "PECST751",
+      "code": "PECST751",
+      "title": "Advanced Computer Networks",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST751.pdf"
+    },
+    {
+      "id": "PECST752",
+      "code": "PECST752",
+      "title": "Responsible Artificial Intelligence",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST752.pdf"
+    },
+    {
+      "id": "PECST753",
+      "code": "PECST753",
+      "title": "Fuzzy Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST753.pdf"
+    },
+    {
+      "id": "PECST754",
+      "code": "PECST754",
+      "title": "Digital Forensics",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST754.pdf"
+    },
+    {
+      "id": "PECST755",
+      "code": "PECST755",
+      "title": "Internet of Things",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST755.pdf"
+    },
+    {
+      "id": "PECST756",
+      "code": "PECST756",
+      "title": "Game Theory and Mechanism Design",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST756.pdf"
+    },
+    {
+      "id": "PECST757",
+      "code": "PECST757",
+      "title": "High Performance Computing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST757.pdf"
+    },
+    {
+      "id": "PECST758",
+      "code": "PECST758",
+      "title": "Programming Languages",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST758.pdf"
+    },
+    {
+      "id": "PECST759",
+      "code": "PECST759",
+      "title": "Parallel Algorithms",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST759.pdf"
+    },
+    {
+      "id": "PECST785",
+      "code": "PECST785",
+      "title": "Algorithms for Data Science",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST785.pdf"
+    },
+    {
+      "id": "PECST795",
+      "code": "PECST795",
+      "title": "Topics in Theoretical Computer Science",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST795.pdf"
+    },
+    {
+      "id": "PEECT741",
+      "code": "PEECT741",
+      "title": "Advanced Mobile Communication",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT741.pdf"
+    },
+    {
+      "id": "PEECT742",
+      "code": "PEECT742",
+      "title": "Deep Learning",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT742.pdf"
+    },
+    {
+      "id": "PEECT743",
+      "code": "PEECT743",
+      "title": "Robotics and Automation",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT743.pdf"
+    },
+    {
+      "id": "PEECT744",
+      "code": "PEECT744",
+      "title": "Coding Theory",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT744.pdf"
+    },
+    {
+      "id": "PEECT745",
+      "code": "PEECT745",
+      "title": "Deep Learning Techniques",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT745.pdf"
+    },
+    {
+      "id": "PEECT746",
+      "code": "PEECT746",
+      "title": "Advanced Digital Signal Processing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT746.pdf"
+    },
+    {
+      "id": "PEECT747",
+      "code": "PEECT747",
+      "title": "Cryptography",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT747.pdf"
+    },
+    {
+      "id": "PEECT752",
+      "code": "PEECT752",
+      "title": "Internet of Things",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT752.pdf"
+    },
+    {
+      "id": "PEECT753",
+      "code": "PEECT753",
+      "title": "Real Time Operating System",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT753.pdf"
+    },
+    {
+      "id": "PEECT754",
+      "code": "PEECT754",
+      "title": "Mixed Signal Circuits",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT754.pdf"
+    },
+    {
+      "id": "PEECT755",
+      "code": "PEECT755",
+      "title": "Mixed Signal Circuit Design",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT755.pdf"
+    },
+    {
+      "id": "PEECT756",
+      "code": "PEECT756",
+      "title": "Speech and Audio Processing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT756.pdf"
+    },
+    {
+      "id": "PEECT757",
+      "code": "PEECT757",
+      "title": "Microwave Devices & Circuits",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT757.pdf"
+    },
+    {
+      "id": "PEEET741",
+      "code": "PEEET741",
+      "title": "Power System Operation and Control",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET741.pdf"
+    },
+    {
+      "id": "PEEET742",
+      "code": "PEEET742",
+      "title": "Energy Management and Auditing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET742.pdf"
+    },
+    {
+      "id": "PEEET743",
+      "code": "PEEET743",
+      "title": "Special Electrical Machines",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET743.pdf"
+    },
+    {
+      "id": "PEEET744",
+      "code": "PEEET744",
+      "title": "Discrete Time Control Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET744.pdf"
+    },
+    {
+      "id": "PEEET746",
+      "code": "PEEET746",
+      "title": "Digital Image Processing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET746.pdf"
+    },
+    {
+      "id": "PEEET751",
+      "code": "PEEET751",
+      "title": "Power Quality",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET751.pdf"
+    },
+    {
+      "id": "PEEET752",
+      "code": "PEEET752",
+      "title": "Nonlinear Control Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET752.pdf"
+    },
+    {
+      "id": "PEEET753",
+      "code": "PEEET753",
+      "title": "Deep Learning",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET753.pdf"
+    },
+    {
+      "id": "PEEET754",
+      "code": "PEEET754",
+      "title": "Computer Vision",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET754.pdf"
+    },
+    {
+      "id": "PEMET741",
+      "code": "PEMET741",
+      "title": "Gas Turbine and Jet Propulsion",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET741.pdf"
+    },
+    {
+      "id": "PEMET742",
+      "code": "PEMET742",
+      "title": "Automobile Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET742.pdf"
+    },
+    {
+      "id": "PEMET743",
+      "code": "PEMET743",
+      "title": "Design of Machine Elements",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET743.pdf"
+    },
+    {
+      "id": "PEMET744",
+      "code": "PEMET744",
+      "title": "Failure Analysis and Design",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET744.pdf"
+    },
+    {
+      "id": "PEMET745",
+      "code": "PEMET745",
+      "title": "Mechatronics",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET745.pdf"
+    },
+    {
+      "id": "PEMET746",
+      "code": "PEMET746",
+      "title": "Lean Manufacturing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET746.pdf"
+    },
+    {
+      "id": "PEMET747",
+      "code": "PEMET747",
+      "title": "Reliability Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET747.pdf"
+    },
+    {
+      "id": "PEMET748",
+      "code": "PEMET748",
+      "title": "Robotics",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET748.pdf"
+    },
+    {
+      "id": "PEMET751",
+      "code": "PEMET751",
+      "title": "Refrigeration and Airconditioning",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET751.pdf"
+    },
+    {
+      "id": "PEMET752",
+      "code": "PEMET752",
+      "title": "Acoustics and Noise Control",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET752.pdf"
+    },
+    {
+      "id": "PEMET753",
+      "code": "PEMET753",
+      "title": "Aerospace Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET753.pdf"
+    },
+    {
+      "id": "PEMET754",
+      "code": "PEMET754",
+      "title": "Renewable Energy Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET754.pdf"
+    },
+    {
+      "id": "PEMET755",
+      "code": "PEMET755",
+      "title": "Optimization Techniques",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET755.pdf"
+    },
+    {
+      "id": "PEMET756",
+      "code": "PEMET756",
+      "title": "Mobile Robotics",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET756.pdf"
+    },
+    {
+      "id": "PEMET757",
+      "code": "PEMET757",
+      "title": "Flexible Manufacturing Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET757.pdf"
+    },
+    {
+      "id": "PEMET758",
+      "code": "PEMET758",
+      "title": "Quality Engineering and Management",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET758.pdf"
+    },
+    {
+      "id": "OECET831",
+      "code": "OECET831",
+      "title": "Waste Management",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET831.pdf"
+    },
+    {
+      "id": "OECET832",
+      "code": "OECET832",
+      "title": "Rainwater Harvesting",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET832.pdf"
+    },
+    {
+      "id": "OECET833",
+      "code": "OECET833",
+      "title": "Public Transportation Systems",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET833.pdf"
+    },
+    {
+      "id": "OECET834",
+      "code": "OECET834",
+      "title": "Fundamentals of Building Planning",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET834.pdf"
+    },
+    {
+      "id": "OECET835",
+      "code": "OECET835",
+      "title": "Hydrogeology",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECET835.pdf"
+    },
+    {
+      "id": "OECST831",
+      "code": "OECST831",
+      "title": "Introduction to Algorithm",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST831.pdf"
+    },
+    {
+      "id": "OECST832",
+      "code": "OECST832",
+      "title": "Web Programming",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST832.pdf"
+    },
+    {
+      "id": "OECST833",
+      "code": "OECST833",
+      "title": "Software Testing",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST833.pdf"
+    },
+    {
+      "id": "OECST834",
+      "code": "OECST834",
+      "title": "Internet of Things",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST834.pdf"
+    },
+    {
+      "id": "OECST835",
+      "code": "OECST835",
+      "title": "Computer Graphics",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OECST835.pdf"
+    },
+    {
+      "id": "OEECT831",
+      "code": "OEECT831",
+      "title": "Internet of Things",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT831.pdf"
+    },
+    {
+      "id": "OEECT832",
+      "code": "OEECT832",
+      "title": "Satellite and Radar Communication",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEECT832.pdf"
+    },
+    {
+      "id": "OEEET831",
+      "code": "OEEET831",
+      "title": "Introduction to Robotics",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET831.pdf"
+    },
+    {
+      "id": "OEEET832",
+      "code": "OEEET832",
+      "title": "PLC and Automation",
+      "category": "Open Elective",
+      "credits": "4",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET832.pdf"
+    },
+    {
+      "id": "OEEET833",
+      "code": "OEEET833",
+      "title": "Mechatronic Systems and Control",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET833.pdf"
+    },
+    {
+      "id": "OEMET831",
+      "code": "OEMET831",
+      "title": "Industrial Hydraulics and Automation",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET831.pdf"
+    },
+    {
+      "id": "OEMET832",
+      "code": "OEMET832",
+      "title": "3D Printing and Tooling",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET832.pdf"
+    },
+    {
+      "id": "OEMET833",
+      "code": "OEMET833",
+      "title": "Numerical Techniques Engineering",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET833.pdf"
+    },
+    {
+      "id": "OEMET834",
+      "code": "OEMET834",
+      "title": "Business Organization and Development",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET834.pdf"
+    },
+    {
+      "id": "OEMET835",
+      "code": "OEMET835",
+      "title": "World Class Manufacturing",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET835.pdf"
+    },
+    {
+      "id": "OEMET836",
+      "code": "OEMET836",
+      "title": "Micro Electro Mechanical Systems",
+      "category": "Open Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEMET836.pdf"
+    },
+    {
+      "id": "PECET861",
+      "code": "PECET861",
+      "title": "Water and Air Quality Management",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET861.pdf"
+    },
+    {
+      "id": "PECET862",
+      "code": "PECET862",
+      "title": "Valuation of Real Properties",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET862.pdf"
+    },
+    {
+      "id": "PECET863",
+      "code": "PECET863",
+      "title": "Contracts Management",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET863.pdf"
+    },
+    {
+      "id": "PECET864",
+      "code": "PECET864",
+      "title": "Advanced Design of Steel Structures",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET864.pdf"
+    },
+    {
+      "id": "PECET865",
+      "code": "PECET865",
+      "title": "Design of Earthquake Resistant Structures",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET865.pdf"
+    },
+    {
+      "id": "PECET866",
+      "code": "PECET866",
+      "title": "Urban Transportation Planning",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET866.pdf"
+    },
+    {
+      "id": "PECET867",
+      "code": "PECET867",
+      "title": "Rural Water Supply and Onsite Sanitation Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECET867.pdf"
+    },
+    {
+      "id": "PECMT862",
+      "code": "PECMT862",
+      "title": "Large Language Models",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT862.pdf"
+    },
+    {
+      "id": "PECST861",
+      "code": "PECST861",
+      "title": "Software Architectures",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST861.pdf"
+    },
+    {
+      "id": "PECST862",
+      "code": "PECST862",
+      "title": "Natural Language Processing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST862.pdf"
+    },
+    {
+      "id": "PECST863",
+      "code": "PECST863",
+      "title": "Topics in Security",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST863.pdf"
+    },
+    {
+      "id": "PECST864",
+      "code": "PECST864",
+      "title": "Computational Complexity",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST864.pdf"
+    },
+    {
+      "id": "PECST865",
+      "code": "PECST865",
+      "title": "Next Generation Interaction Design",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST865.pdf"
+    },
+    {
+      "id": "PECST866",
+      "code": "PECST866",
+      "title": "Speech and Audio Processing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST866.pdf"
+    },
+    {
+      "id": "PECST867",
+      "code": "PECST867",
+      "title": "Storage Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST867.pdf"
+    },
+    {
+      "id": "PECST868",
+      "code": "PECST868",
+      "title": "Prompt Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST868.pdf"
+    },
+    {
+      "id": "PECST869",
+      "code": "PECST869",
+      "title": "Computational Number Theory",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "CSE",
+        "AIML"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECST869.pdf"
+    },
+    {
+      "id": "PEECT861",
+      "code": "PEECT861",
+      "title": "Wireless Sensor Networks",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT861.pdf"
+    },
+    {
+      "id": "PEECT862",
+      "code": "PEECT862",
+      "title": "RF Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT862.pdf"
+    },
+    {
+      "id": "PEECT863",
+      "code": "PEECT863",
+      "title": "Renewable Energy Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT863.pdf"
+    },
+    {
+      "id": "PEECT864",
+      "code": "PEECT864",
+      "title": "Cyber Security",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT864.pdf"
+    },
+    {
+      "id": "PEECT865",
+      "code": "PEECT865",
+      "title": "Antenna Theory and Design",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT865.pdf"
+    },
+    {
+      "id": "PEECT866",
+      "code": "PEECT866",
+      "title": "Low Power VLSI",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT866.pdf"
+    },
+    {
+      "id": "PEECT867",
+      "code": "PEECT867",
+      "title": "Block Chain",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT867.pdf"
+    },
+    {
+      "id": "PEECT868",
+      "code": "PEECT868",
+      "title": "Antenna Theory and Wave Propagation",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ECE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEECT868.pdf"
+    },
+    {
+      "id": "PEEET861",
+      "code": "PEEET861",
+      "title": "Smart Grid Technologies",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET861.pdf"
+    },
+    {
+      "id": "PEEET862",
+      "code": "PEEET862",
+      "title": "HVDC and FACTS",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET862.pdf"
+    },
+    {
+      "id": "PEEET863",
+      "code": "PEEET863",
+      "title": "Mechatronic Systems",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET863.pdf"
+    },
+    {
+      "id": "PEEET864",
+      "code": "PEEET864",
+      "title": "Electronic Communication",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "EEE"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET864.pdf"
+    },
+    {
+      "id": "PEMET837",
+      "code": "PEMET837",
+      "title": "Product Design and Innovation",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET837.pdf"
+    },
+    {
+      "id": "PEMET861",
+      "code": "PEMET861",
+      "title": "Cryogenic Engineering",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET861.pdf"
+    },
+    {
+      "id": "PEMET862",
+      "code": "PEMET862",
+      "title": "Pressure Vessel and Piping Design",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET862.pdf"
+    },
+    {
+      "id": "PEMET863",
+      "code": "PEMET863",
+      "title": "Hybrid and Electric Vehicles",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET863.pdf"
+    },
+    {
+      "id": "PEMET864",
+      "code": "PEMET864",
+      "title": "Micro and Nano Manufacturing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET864.pdf"
+    },
+    {
+      "id": "PEMET865",
+      "code": "PEMET865",
+      "title": "Aircraft Design",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET865.pdf"
+    },
+    {
+      "id": "PEMET866",
+      "code": "PEMET866",
+      "title": "Advanced Numerical Control in Manufacturing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET866.pdf"
+    },
+    {
+      "id": "PEMET867",
+      "code": "PEMET867",
+      "title": "Metal Additive Manufacturing",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET867.pdf"
+    },
+    {
+      "id": "PEMET868",
+      "code": "PEMET868",
+      "title": "Nanotechnology",
+      "category": "Program Elective",
+      "credits": "3",
+      "branches": [
+        "ME"
+      ],
+      "semesters": [
+        "S8"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET868.pdf"
+    }
+  ]
+}

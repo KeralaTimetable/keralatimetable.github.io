@@ -1,0 +1,604 @@
+KTU 2024 S3–S8 SYLLABUS BUILD REPORT
+=================================================================
+
+SOURCE: CSE.pdf -> CSE (Computer Science and Engineering) — 444 pages
+  - GAMAT301   | p.  2-  5 ( 4p) | S3    | Math & Science     | cr:3   | Mathematics for Computer and Information Science - 3
+  - PCCST302   | p.  6- 10 ( 5p) | S3    | Core               | cr:4   | Theory of Computation
+  - PCCST303   | p. 11- 14 ( 4p) | S3    | Core               | cr:4   | Data Structures and Algorithms
+  - PBCST304   | p. 15- 22 ( 8p) | S3    | PBL Core           | cr:4   | Object Oriented Programming
+  - GAEST305   | p. 23- 27 ( 5p) | S3    | Math & Science     | cr:4   | Digital Electronics and Logic Design
+  - UCHUT346   | p. 28- 31 ( 4p) | S3    | Common / Humanities | cr:2   | Economics for Engineers
+  - UCHUT347   | p. 32- 38 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
+  - PCCSL307   | p. 39- 44 ( 6p) | S3    | Lab                | cr:2   | Data Structures Lab
+  - PCCSL308   | p. 45- 50 ( 6p) | S3    | Lab                | cr:2   | Digital Lab
+  - GAMAT401   | p. 52- 55 ( 4p) | S4    | Math & Science     | cr:3   | Mathematics for Computer and Information Science - 4
+  - PCCST402   | p. 56- 59 ( 4p) | S4    | Core               | cr:4   | Database Management Systems
+  - PCCST403   | p. 60- 63 ( 4p) | S4    | Core               | cr:4   | Operating Systems
+  - PBCST404   | p. 64- 68 ( 5p) | S4    | PBL Core           | cr:4   | Computer Organization and Architecture
+  - PECST411   | p. 69- 72 ( 4p) | S4    | Program Elective   | cr:3   | Software Engineering
+  - PECST412   | p. 73- 76 ( 4p) | S4    | Program Elective   | cr:3   | Pattern Recognition
+  - PECST413   | p. 77- 79 ( 3p) | S4    | Program Elective   | cr:3   | Functional Programming
+  - PECST414   | p. 80- 82 ( 3p) | S4    | Program Elective   | cr:3   | Coding Theory
+  - PECST416   | p. 83- 86 ( 4p) | S4    | Program Elective   | cr:3   | Signals and Systems
+  - PECST417   | p. 87- 90 ( 4p) | S4    | Program Elective   | cr:3   | Soft Computing
+  - PECST418   | p. 91- 95 ( 5p) | S4    | Program Elective   | cr:3   | Computational Geometry
+  - PECST419   | p. 96- 99 ( 4p) | S4    | Program Elective   | cr:3   | Cyber Ethics, Privacy and Legal Issues
+  - PECST415   | p.100-104 ( 5p) | S4    | Program Elective   | cr:5/3 | PECST415
+  - PECST495   | p.105-108 ( 4p) | S4    | Program Elective   | cr:5/3 | Advanced Data Structures
+  - UCHUT346   | p.109-112 ( 4p) | S4    | Common / Humanities | cr:2   | Economics for Engineers
+  - UCHUT347   | p.113-119 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
+  - PCCSL407   | p.120-126 ( 7p) | S4    | Lab                | cr:2   | Operating Systems Lab
+  - PCCSL408   | p.127-131 ( 5p) | S4    | Lab                | cr:2   | DBMS Lab
+  - PCCST501   | p.133-136 ( 4p) | S5    | Core               | cr:4   | Computer Networks
+  - PCCST502   | p.137-141 ( 5p) | S5    | Core               | cr:4   | Design and Analysis of Algorithms
+  - PCCST503   | p.142-145 ( 4p) | S5    | Core               | cr:3   | Machine Learning
+  - PBCST504   | p.146-152 ( 7p) | S5    | PBL Core           | cr:4   | Microcontrollers
+  - PECST521   | p.153-156 ( 4p) | S5    | Program Elective   | cr:3   | Software Project Management
+  - PECST522   | p.157-160 ( 4p) | S5    | Program Elective   | cr:3   | Artificial Intelligence
+  - PECST523   | p.161-164 ( 4p) | S5    | Program Elective   | cr:3   | Data Analytics
+  - PECST524   | p.165-168 ( 4p) | S5    | Program Elective   | cr:3   | Data Compression
+  - PECST526   | p.169-173 ( 5p) | S5    | Program Elective   | cr:3   | Digital Signal Processing
+  - PECST527   | p.174-177 ( 4p) | S5    | Program Elective   | cr:3   | Computer Graphics & Multimedia
+  - PECST528   | p.178-181 ( 4p) | S5    | Program Elective   | cr:3   | Advanced Computer Architecture
+  - PECST525   | p.182-185 ( 4p) | S5    | Program Elective   | cr:5/3 | Data Mining
+  - PECST595   | p.186-192 ( 7p) | S5    | Program Elective   | cr:5/3 | Advanced Graph Algorithms
+  - PCCSL507   | p.193-202 (10p) | S5    | Lab                | cr:2   | Networks Lab
+  - PCCSL508   | p.203-211 ( 9p) | S5    | Lab                | cr:2   | Machine Learning Lab
+  - PCCST601   | p.213-216 ( 4p) | S6    | Core               | cr:4   | Compiler Design
+  - PCCST602   | p.217-220 ( 4p) | S6    | Core               | cr:3   | Advanced Computing Systems
+  - PECST631   | p.221-225 ( 5p) | S6    | Program Elective   | cr:3   | Software Testing
+  - PECST632   | p.226-229 ( 4p) | S6    | Program Elective   | cr:3   | Deep Learning
+  - PECST633   | p.230-233 ( 4p) | S6    | Program Elective   | cr:3   | Wireless & Mobile Computing
+  - PECST634   | p.234-238 ( 5p) | S6    | Program Elective   | cr:3   | Advanced Database Systems
+  - PECST636   | p.239-242 ( 4p) | S6    | Program Elective   | cr:3   | Digital Image Processing
+  - PECST637   | p.243-246 ( 4p) | S6    | Program Elective   | cr:3   | Fundamentals of Cryptography
+  - PECST638   | p.247-250 ( 4p) | S6    | Program Elective   | cr:3   | Quantum Computing
+  - PECST639   | p.251-254 ( 4p) | S6    | Program Elective   | cr:3   | Randomized Algorithms
+  - PECST635   | p.255-258 ( 4p) | S6    | Program Elective   | cr:5/3 | Cloud Computing
+  - PECST695   | p.259-266 ( 8p) | S6    | Program Elective   | cr:5/3 | Mobile Application Development
+  - PBCST604   | p.267-273 ( 7p) | S6    | PBL Core           | cr:4   | Fundamentals of Cyber Security
+  - OECST611   | p.274-276 ( 3p) | S6    | Open Elective      | cr:3   | Data Structures
+  - OECST612   | p.277-280 ( 4p) | S6    | Open Elective      | cr:3   | Data Communication
+  - OECST613   | p.281-283 ( 3p) | S6    | Open Elective      | cr:3   | Foundations of Cryptography
+  - OECST614   | p.284-288 ( 5p) | S6    | Open Elective      | cr:3   | Machine Learning for Engineers
+  - OECST615   | p.289-293 ( 5p) | S6    | Open Elective      | cr:3   | Object Oriented Programming
+  - PCCSL607   | p.294-299 ( 6p) | S6    | Lab                | cr:2   | Systems Lab
+  - PECST741   | p.301-303 ( 3p) | S7    | Program Elective   | cr:3   | Formal Methods in Software Engineering
+  - PECST742   | p.304-307 ( 4p) | S7    | Program Elective   | cr:3   | Web Programming
+  - PECST743   | p.308-311 ( 4p) | S7    | Program Elective   | cr:3   | Bioinformatics
+  - PECST744   | p.312-314 ( 3p) | S7    | Program Elective   | cr:3   | Information Security
+  - PECST746   | p.315-318 ( 4p) | S7    | Program Elective   | cr:3   | Embedded Systems
+  - PECST747   | p.319-322 ( 4p) | S7    | Program Elective   | cr:3   | Blockchain and Cryptocurrencies
+  - PECST748   | p.323-325 ( 3p) | S7    | Program Elective   | cr:3   | Real Time Systems
+  - PECST749   | p.326-329 ( 4p) | S7    | Program Elective   | cr:3   | Approximation Algorithms
+  - PECST745   | p.330-333 ( 4p) | S7    | Program Elective   | cr:5/3 | Computer Vision
+  - PECST795   | p.334-338 ( 5p) | S7    | Program Elective   | cr:5/3 | Topics in Theoretical Computer Science
+  - PECST751   | p.339-342 ( 4p) | S7    | Program Elective   | cr:3   | Advanced Computer Networks
+  - PECST752   | p.343-346 ( 4p) | S7    | Program Elective   | cr:3   | Responsible Artificial Intelligence
+  - PECST753   | p.347-350 ( 4p) | S7    | Program Elective   | cr:3   | Fuzzy Systems
+  - PECST754   | p.351-354 ( 4p) | S7    | Program Elective   | cr:3   | Digital Forensics
+  - PECST756   | p.355-357 ( 3p) | S7    | Program Elective   | cr:3   | Game Theory and Mechanism Design
+  - PECST757   | p.358-360 ( 3p) | S7    | Program Elective   | cr:3   | High Performance Computing
+  - PECST758   | p.361-364 ( 4p) | S7    | Program Elective   | cr:3   | Programming Languages
+  - PECST759   | p.365-368 ( 4p) | S7    | Program Elective   | cr:3   | Parallel Algorithms
+  - PECST755   | p.369-372 ( 4p) | S7    | Program Elective   | cr:5/3 | Internet of Things
+  - PECST785   | p.373-377 ( 5p) | S7    | Program Elective   | cr:5/3 | Algorithms for Data Science
+  - OECST721   | p.378-380 ( 3p) | S7    | Open Elective      | cr:3   | Cyber Security
+  - OECST722   | p.381-383 ( 3p) | S7    | Open Elective      | cr:3   | Cloud Computing
+  - OECST723   | p.384-388 ( 5p) | S7    | Open Elective      | cr:3   | Software Engineering
+  - OECST724   | p.389-391 ( 3p) | S7    | Open Elective      | cr:3   | Computer Networks
+  - OECST725   | p.392-395 ( 4p) | S7    | Open Elective      | cr:0   | Mobile Application Development
+  - PECST861   | p.397-399 ( 3p) | S8    | Program Elective   | cr:3   | Software Architectures
+  - PECST862   | p.400-403 ( 4p) | S8    | Program Elective   | cr:3   | Natural Language Processing
+  - PECST863   | p.404-406 ( 3p) | S8    | Program Elective   | cr:3   | Topics in Security
+  - PECST864   | p.407-410 ( 4p) | S8    | Program Elective   | cr:3   | Computational Complexity
+  - PECST866   | p.411-413 ( 3p) | S8    | Program Elective   | cr:3   | Speech and Audio Processing
+  - PECST867   | p.414-416 ( 3p) | S8    | Program Elective   | cr:3   | Storage Systems
+  - PECST868   | p.417-420 ( 4p) | S8    | Program Elective   | cr:3   | Prompt Engineering
+  - PECST869   | p.421-423 ( 3p) | S8    | Program Elective   | cr:3   | Computational Number Theory
+  - PECST865   | p.424-427 ( 4p) | S8    | Program Elective   | cr:5/3 | Next Generation Interaction Design
+  - OECST831   | p.428-430 ( 3p) | S8    | Open Elective      | cr:3   | Introduction to Algorithm
+  - OECST832   | p.431-434 ( 4p) | S8    | Open Elective      | cr:3   | Web Programming
+  - OECST833   | p.435-438 ( 4p) | S8    | Open Elective      | cr:3   | Software Testing
+  - OECST834   | p.439-441 ( 3p) | S8    | Open Elective      | cr:3   | Internet of Things
+  - OECST835   | p.442-444 ( 3p) | S8    | Open Elective      | cr:3   | Computer Graphics
+
+SOURCE: AIML.pdf -> AIML (Computer Science and Engineering (AI & ML)) — 441 pages
+  - GAMAT301   | p.  2-  5 ( 4p) | S3    | Math & Science     | cr:3   | Mathematics for Computer and Information Science - 3
+  - PCCST302   | p.  6- 10 ( 5p) | S3    | Core               | cr:4   | Theory of Computation
+  - PCCST303   | p. 11- 14 ( 4p) | S3    | Core               | cr:4   | Data Structures and Algorithms
+  - PBCMT304   | p. 15- 21 ( 7p) | S3    | PBL Core           | cr:4   | Concepts in Machine Learning
+  - GAEST305   | p. 22- 25 ( 4p) | S3    | Math & Science     | cr:4   | Digital Electronics and Logic Design
+  - UCHUT346   | p. 26- 32 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Economics for Engineers
+  - UCHUT347   | p. 33- 39 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
+  - PCCSL307   | p. 40- 44 ( 5p) | S3    | Lab                | cr:2   | Data Structures Lab
+  - PCCSL308   | p. 45- 50 ( 6p) | S3    | Lab                | cr:2   | Digital Lab
+  - GAMAT401   | p. 52- 55 ( 4p) | S4    | Math & Science     | cr:3   | COURSE NAME: Mathematics for Computer and Information Science - 4
+  - PCCMT402   | p. 56- 59 ( 4p) | S4    | Core               | cr:4   | Fundamentals of Artificial Intelligence
+  - PCCST403   | p. 60- 63 ( 4p) | S4    | Core               | cr:4   | Operating Systems
+  - PBCMT404   | p. 64- 69 ( 6p) | S4    | PBL Core           | cr:3   | Database Systems
+  - PECST411   | p. 70- 73 ( 4p) | S4    | Program Elective   | cr:3   | Software Engineering
+  - PECST412   | p. 74- 77 ( 4p) | S4    | Program Elective   | cr:3   | Pattern Recognition
+  - PECST413   | p. 78- 80 ( 3p) | S4    | Program Elective   | cr:3   | Functional Programming
+  - PECST414   | p. 81- 83 ( 3p) | S4    | Program Elective   | cr:3   | Coding Theory
+  - PECST416   | p. 84- 87 ( 4p) | S4    | Program Elective   | cr:3   | Signals and Systems
+  - PECST417   | p. 88- 91 ( 4p) | S4    | Program Elective   | cr:3   | Soft Computing
+  - PECST418   | p. 92- 95 ( 4p) | S4    | Program Elective   | cr:3   | Computational Geometry
+  - PECST419   | p. 96- 99 ( 4p) | S4    | Program Elective   | cr:3   | Cyber Ethics, Privacy and Legal Issues
+  - PECMT415   | p.100-103 ( 4p) | S4    | Program Elective   | cr:5/3 | Computer Organization
+  - PECST495   | p.104-107 ( 4p) | S4    | Program Elective   | cr:5/3 | Advanced Data Structures
+  - UCHUT346   | p.108-114 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Economics for Engineers
+  - UCHUT347   | p.115-121 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
+  - PCCSL407   | p.122-128 ( 7p) | S4    | Lab                | cr:2   | Operating Systems Lab
+  - PCCML408   | p.129-133 ( 5p) | S4    | Lab                | cr:2   | Artificial Intelligence Lab
+  - PCCST501   | p.135-138 ( 4p) | S5    | Core               | cr:4   | Computer Networks
+  - PCCST502   | p.139-143 ( 5p) | S5    | Core               | cr:4   | Design and Analysis of Algorithms
+  - PCCMT503   | p.144-147 ( 4p) | S5    | Core               | cr:4   | Deep Learning Concepts
+  - PBCMT504   | p.148-154 ( 7p) | S5    | PBL Core           | cr:4   | Introduction to Computer Vision
+  - PECST521   | p.155-158 ( 4p) | S5    | Program Elective   | cr:3   | Software Project Management
+  - PECMT522   | p.159-162 ( 4p) | S5    | Program Elective   | cr:3   | Expert Systems
+  - PECMT523   | p.163-166 ( 4p) | S5    | Program Elective   | cr:3   | Fuzzy Systems
+  - PECST524   | p.167-170 ( 4p) | S5    | Program Elective   | cr:3   | Data Compression
+  - PECST526   | p.171-175 ( 5p) | S5    | Program Elective   | cr:3   | Digital Signal Processing
+  - PECMT527   | p.176-179 ( 4p) | S5    | Program Elective   | cr:3   | Introduction to Compiler Design
+  - PECMT528   | p.180-183 ( 4p) | S5    | Program Elective   | cr:3   | Concepts in Social Network Analysis
+  - PECST525   | p.184-188 ( 5p) | S5    | Program Elective   | cr:5/3 | Data Mining
+  - PECMT535   | p.189-195 ( 7p) | S5    | Program Elective   | cr:5/3 | Object Oriented Programming Concepts
+  - PCCSL507   | p.196-205 (10p) | S5    | Lab                | cr:2   | Networks Lab
+  - PCCML508   | p.206-210 ( 5p) | S5    | Lab                | cr:2   | Deep Learning Lab
+  - PCCMT601   | p.212-215 ( 4p) | S6    | Core               | cr:4   | Introduction to Natural Language Processing
+  - PCCMT602   | p.216-220 ( 5p) | S6    | Core               | cr:3   | Generative AI
+  - PECST631   | p.221-225 ( 5p) | S6    | Program Elective   | cr:3   | Software Testing
+  - PECMT632   | p.226-229 ( 4p) | S6    | Program Elective   | cr:3   | Topics in Computing Systems
+  - PECST633   | p.230-233 ( 4p) | S6    | Program Elective   | cr:3   | Wireless & Mobile Computing
+  - PECST634   | p.234-238 ( 5p) | S6    | Program Elective   | cr:3   | Advanced Database Systems
+  - PECST636   | p.239-242 ( 4p) | S6    | Program Elective   | cr:3   | Digital Image Processing
+  - PECST637   | p.243-246 ( 4p) | S6    | Program Elective   | cr:3   | Fundamentals of Cryptography
+  - PECST638   | p.247-250 ( 4p) | S6    | Program Elective   | cr:3   | Quantum Computing
+  - PECST639   | p.251-254 ( 4p) | S6    | Program Elective   | cr:3   | Randomized Algorithms
+  - PECST635   | p.255-259 ( 5p) | S6    | Program Elective   | cr:5/3 | Cloud Computing
+  - PECMT695   | p.260-263 ( 4p) | S6    | Program Elective   | cr:5/3 | Data Handling and Visualization
+  - PBCMT604   | p.264-270 ( 7p) | S6    | PBL Core           | cr:4   | Concepts in Data Analytics
+  - OECST611   | p.271-274 ( 4p) | S6    | Open Elective      | cr:3   | Data Structures
+  - OECST612   | p.275-278 ( 4p) | S6    | Open Elective      | cr:3   | Data Communication
+  - OECST613   | p.279-281 ( 3p) | S6    | Open Elective      | cr:3   | Foundations of Cryptography
+  - OECST614   | p.282-286 ( 5p) | S6    | Open Elective      | cr:3   | Machine Learning for Engineers
+  - OECMT615   | p.287-290 ( 4p) | S6    | Open Elective      | cr:3   | Artificial Intelligence
+  - PCCML607   | p.291-295 ( 5p) | S6    | Lab                | cr:2   | Natural Language Processing Lab
+  - PECST741   | p.297-299 ( 3p) | S7    | Program Elective   | cr:3   | Formal Methods in Software Engineering
+  - PECST742   | p.300-303 ( 4p) | S7    | Program Elective   | cr:3   | Web Programming
+  - PECST743   | p.304-307 ( 4p) | S7    | Program Elective   | cr:3   | Bioinformatics
+  - PECST744   | p.308-310 ( 3p) | S7    | Program Elective   | cr:3   | Information Security
+  - PECST746   | p.311-314 ( 4p) | S7    | Program Elective   | cr:3   | Embedded Systems
+  - PECST747   | p.315-318 ( 4p) | S7    | Program Elective   | cr:3   | Blockchain and Cryptocurrencies
+  - PECST748   | p.319-321 ( 3p) | S7    | Program Elective   | cr:3   | Real Time Systems
+  - PECST749   | p.322-325 ( 4p) | S7    | Program Elective   | cr:3   | Approximation Algorithms
+  - PECMT745   | p.326-329 ( 4p) | S6,S7 | Program Elective   | cr:5/3 | Reinforcement Learning
+  - PECST795   | p.330-334 ( 5p) | S7    | Program Elective   | cr:5/3 | Topics in Theoretical Computer Science
+  - PECST751   | p.335-338 ( 4p) | S7    | Program Elective   | cr:3   | Advanced Computer Networks
+  - PECST752   | p.339-342 ( 4p) | S7    | Program Elective   | cr:3   | Responsible Artificial Intelligence
+  - PECMT753   | p.343-346 ( 4p) | S7    | Program Elective   | cr:3   | Computational Linguistics
+  - PECST754   | p.347-350 ( 4p) | S7    | Program Elective   | cr:3   | Digital Forensics
+  - PECST756   | p.351-353 ( 3p) | S7    | Program Elective   | cr:3   | Game Theory and Mechanism Design
+  - PECST757   | p.354-357 ( 4p) | S7    | Program Elective   | cr:3   | High Performance Computing
+  - PECST758   | p.358-361 ( 4p) | S7    | Program Elective   | cr:3   | Programming Languages
+  - PECST759   | p.362-365 ( 4p) | S7    | Program Elective   | cr:3   | Parallel Algorithms
+  - PECST755   | p.366-369 ( 4p) | S7    | Program Elective   | cr:5/3 | Internet of Things
+  - PECST785   | p.370-374 ( 5p) | S7    | Program Elective   | cr:5/3 | Algorithms for Data Science
+  - OECST721   | p.375-377 ( 3p) | S7    | Open Elective      | cr:3   | Cyber Security
+  - OECST722   | p.378-380 ( 3p) | S7    | Open Elective      | cr:3   | Cloud Computing
+  - OECST723   | p.381-385 ( 5p) | S7    | Open Elective      | cr:3   | Software Engineering
+  - OECST724   | p.386-388 ( 3p) | S7    | Open Elective      | cr:3   | Computer Networks
+  - OECST725   | p.389-392 ( 4p) | S7    | Open Elective      | cr:3   | Mobile Application Development
+  - PECST861   | p.394-396 ( 3p) | S8    | Program Elective   | cr:3   | Software Architectures
+  - PECMT862   | p.397-400 ( 4p) | S8    | Program Elective   | cr:3   | Large Language Models
+  - PECST863   | p.401-403 ( 3p) | S8    | Program Elective   | cr:3   | Topics in Security
+  - PECST864   | p.404-407 ( 4p) | S8    | Program Elective   | cr:3   | Computational Complexity
+  - PECST866   | p.408-410 ( 3p) | S8    | Program Elective   | cr:3   | Speech and Audio Processing
+  - PECST867   | p.411-413 ( 3p) | S8    | Program Elective   | cr:3   | Storage Systems
+  - PECST868   | p.414-417 ( 4p) | S8    | Program Elective   | cr:3   | Prompt Engineering
+  - PECST869   | p.418-420 ( 3p) | S8    | Program Elective   | cr:3   | Computational Number Theory
+  - PECST865   | p.421-424 ( 4p) | S8    | Program Elective   | cr:5/3 | Next Generation Interaction Design
+  - OECST831   | p.425-427 ( 3p) | S8    | Open Elective      | cr:3   | Introduction to Algorithm
+  - OECST832   | p.428-431 ( 4p) | S8    | Open Elective      | cr:3   | Web Programming
+  - OECST833   | p.432-435 ( 4p) | S8    | Open Elective      | cr:3   | Software Testing
+  - OECST834   | p.436-438 ( 3p) | S8    | Open Elective      | cr:3   | Internet of Things
+  - OECST835   | p.439-441 ( 3p) | S8    | Open Elective      | cr:3   | Computer Graphics
+
+SOURCE: ECE.pdf -> ECE (Electronics and Communication Engineering) — 367 pages
+  - GYMAT301   | p.  2-  5 ( 4p) | S3    | Math & Science     | cr:3   | Mathematics for Electrical Science and Physical Science - 3
+  - PCECT302   | p.  6-  9 ( 4p) | S3    | Core               | cr:4   | Solid State Devices
+  - PCECT303   | p. 10- 13 ( 4p) | S3    | Core               | cr:4   | Analog Circuits
+  - PBECT304   | p. 14- 19 ( 6p) | S3    | PBL Core           | cr:4   | Logic Circuit Design
+  - GNEST305   | p. 20- 24 ( 5p) | S3    | Math & Science     | cr:4   | Introduction to Artificial Intelligence and Data Science
+  - UCHUT346   | p. 25- 31 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Economics for Engineers
+  - UCHUT347   | p. 32- 36 ( 5p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
+  - PCECL307   | p. 37- 41 ( 5p) | S3    | Lab                | cr:2   | Analog Circuits Lab
+  - PCECL308   | p. 42- 47 ( 6p) | S3    | Lab                | cr:2   | Logic Circuit Design Laboratory
+  - GBMAT401   | p. 49- 52 ( 4p) | S4    | Math & Science     | cr:3   | Mathematics for Electrical Science - 4
+  - PCECT402   | p. 53- 56 ( 4p) | S4    | Core               | cr:4   | Signals and Systems
+  - PCECT403   | p. 57- 60 ( 4p) | S4    | Core               | cr:4   | Linear Integrated Circuits
+  - PBECT404   | p. 61- 65 ( 5p) | S4    | PBL Core           | cr:4   | Microcontrollers
+  - PEECT411   | p. 66- 69 ( 4p) | S4    | Program Elective   | cr:3   | Instrumentation
+  - PEECT412   | p. 70- 73 ( 4p) | S4    | Program Elective   | cr:3   | Power Electronics
+  - PEECT413   | p. 74- 77 ( 4p) | S4    | Program Elective   | cr:3   | Machine Learning
+  - PEECT414   | p. 78- 81 ( 4p) | S4    | Program Elective   | cr:3   | Object Oriented Programming
+  - PEECT416   | p. 82- 85 ( 4p) | S4    | Program Elective   | cr:3   | Digital System Design
+  - PEECT415   | p. 86- 93 ( 8p) | S4    | Program Elective   | cr:5/3 | Digital Systems and VLSI Design
+  - UCHUT346   | p. 94-100 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Economics for Engineers
+  - UCHUT347   | p.101-106 ( 6p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
+  - PCECL407   | p.107-111 ( 5p) | S4    | Lab                | cr:2   | Linear Integrated Circuits Lab
+  - PCECL408   | p.112-117 ( 6p) | S4    | Lab                | cr:2   | Microcontroller Lab
+  - PCECT501   | p.119-122 ( 4p) | S5    | Core               | cr:4   | Electromagnetics
+  - PCECT502   | p.123-126 ( 4p) | S5    | Core               | cr:4   | Analog and Digital Communication
+  - PCECT503   | p.127-130 ( 4p) | S5    | Core               | cr:3   | Control Systems
+  - PBECT504   | p.131-136 ( 6p) | S5    | PBL Core           | cr:4   | Digital Signal Processing
+  - PEECT521   | p.137-141 ( 5p) | S5    | Program Elective   | cr:3   | Biomedical Engineering
+  - PEECT522   | p.142-145 ( 4p) | S5    | Program Elective   | cr:3   | Data Structures
+  - PEECT523   | p.146-149 ( 4p) | S5    | Program Elective   | cr:3   | Sensors and Actuators
+  - PEECT524   | p.150-153 ( 4p) | S5    | Program Elective   | cr:3   | ARM Architecture and Programming
+  - PEECT526   | p.154-157 ( 4p) | S5    | Program Elective   | cr:3   | High Speed Digital Design
+  - PEECT527   | p.158-160 ( 3p) | S5    | Program Elective   | cr:3   | Estimation and Detection
+  - PEECT525   | p.161-165 ( 5p) | S5    | Program Elective   | cr:5/3 | ARM Architecture, Programming and Interfacing
+  - PCECL507   | p.166-170 ( 5p) | S5    | Lab                | cr:2   | Course Name: Digital Signal Processing Lab
+  - PCECL508   | p.171-178 ( 8p) | S5    | Lab                | cr:2   | Communication Lab I
+  - PCECT601   | p.180-185 ( 6p) | S6    | Core               | cr:4   | Advanced Communication Theory
+  - PCECT602   | p.186-190 ( 5p) | S6    | Core               | cr:3   | Microwaves & Antennas Pcect602
+  - PEECT631   | p.191-195 ( 5p) | S6    | Program Elective   | cr:3   | Computer Networks
+  - PEECT632   | p.196-199 ( 4p) | S6    | Program Elective   | cr:3   | Digital Image Processing
+  - PEECT633   | p.200-203 ( 4p) | S6    | Program Elective   | cr:3   | Secure Communication
+  - PEECT634   | p.204-208 ( 5p) | S6    | Program Elective   | cr:3   | Nanoelectronics
+  - PEECT636   | p.209-213 ( 5p) | S6    | Program Elective   | cr:3   | Optical Communication
+  - PEECT637   | p.214-217 ( 4p) | S6    | Program Elective   | cr:3   | Optimization Techniques
+  - PEECT635   | p.218-222 ( 5p) | S6    | Program Elective   | cr:5/3 | Image Processing Applications
+  - PBECT604   | p.223-229 ( 7p) | S6    | PBL Core           | cr:4   | VLSI Circuit Design
+  - OEECT611   | p.230-233 ( 4p) | S6    | Open Elective      | cr:3   | Entertainment Electronics
+  - OEECT612   | p.234-237 ( 4p) | S6    | Open Elective      | cr:3   | Computer Networks
+  - OEECT613   | p.238-242 ( 5p) | S6    | Open Elective      | cr:3   | Biomedical Engineering
+  - PCECL607   | p.243-248 ( 6p) | S6    | Lab                | cr:2   | Communication Lab Ii
+  - PEECT741   | p.250-253 ( 4p) | S7    | Program Elective   | cr:3   | Advanced Mobile Communication
+  - PEECT742   | p.254-257 ( 4p) | S7    | Program Elective   | cr:3   | Deep Learning
+  - PEECT743   | p.258-262 ( 5p) | S7    | Program Elective   | cr:3   | Robotics and Automation
+  - PEECT744   | p.263-266 ( 4p) | S7    | Program Elective   | cr:3   | Coding Theory
+  - PEECT746   | p.267-270 ( 4p) | S7    | Program Elective   | cr:3   | Advanced Digital Signal Processing
+  - PEECT747   | p.271-274 ( 4p) | S7    | Program Elective   | cr:3   | Cryptography
+  - PEECT745   | p.275-281 ( 7p) | S7    | Program Elective   | cr:5/3 | Deep Learning Techniques
+  - PCECT751   | p.282-285 ( 4p) | S7    | Core               | cr:3   | Satellite and Radar Communication
+  - PEECT752   | p.286-289 ( 4p) | S7    | Program Elective   | cr:3   | Internet of Things
+  - PEECT753   | p.290-294 ( 5p) | S7    | Program Elective   | cr:3   | Real Time Operating System
+  - PEECT754   | p.295-298 ( 4p) | S7    | Program Elective   | cr:3   | Mixed Signal Circuits
+  - PEECT756   | p.299-301 ( 3p) | S7    | Program Elective   | cr:3   | Speech and Audio Processing
+  - PEECT757   | p.302-305 ( 4p) | S7    | Program Elective   | cr:3   | Microwave Devices & Circuits
+  - PEECT755   | p.306-311 ( 6p) | S7    | Program Elective   | cr:5/3 | Mixed Signal Circuit Design
+  - OEECT721   | p.312-315 ( 4p) | S7    | Open Elective      | cr:3   | Optical Communication
+  - OEECT722   | p.316-319 ( 4p) | S7    | Open Elective      | cr:3   | Digital Image Processing
+  - OEECT723   | p.320-323 ( 4p) | S7    | Open Elective      | cr:3   | Optimization Techniques
+  - PEECT861   | p.325-328 ( 4p) | S8    | Program Elective   | cr:3   | Wireless Sensor Networks
+  - PEECT862   | p.329-332 ( 4p) | S8    | Program Elective   | cr:3   | RF Engineering
+  - PEECT863   | p.333-336 ( 4p) | S8    | Program Elective   | cr:3   | Renewable Energy Systems
+  - PEECT864   | p.337-341 ( 5p) | S8    | Program Elective   | cr:3   | Cyber Security
+  - PEECT866   | p.342-346 ( 5p) | S8    | Program Elective   | cr:3   | Low Power VLSI
+  - PEECT867   | p.347-350 ( 4p) | S8    | Program Elective   | cr:3   | Block Chain
+  - PEECT868   | p.351-354 ( 4p) | S8    | Program Elective   | cr:3   | Antenna Theory and Wave Propagation
+  - PEECT865   | p.355-358 ( 4p) | S8    | Program Elective   | cr:5/3 | Antenna Theory and Design
+  - OEECT831   | p.359-363 ( 5p) | S8    | Open Elective      | cr:3   | Internet of Things
+  - OEECT832   | p.364-367 ( 4p) | S8    | Open Elective      | cr:3   | Satellite and Radar Communication
+
+SOURCE: EEE.pdf -> EEE (Electrical and Electronics Engineering) — 341 pages
+  - GYMAT301   | p.  2-  5 ( 4p) | S3    | Math & Science     | cr:3   | Mathematics for Electrical Science and Physical Science - 3
+  - PCEET302   | p.  6-  8 ( 3p) | S3    | Core               | cr:4   | Circuits & Networks
+  - PCEET303   | p.  9- 12 ( 4p) | S3    | Core               | cr:4   | DC Machines & Transformers
+  - PBEET304   | p. 13- 19 ( 7p) | S3    | PBL Core           | cr:4   | Analog Electronics
+  - GNEST305   | p. 20- 24 ( 5p) | S3    | Math & Science     | cr:4   | Introduction to Artificial Intelligence and Data Science
+  - UCHUT346   | p. 25- 31 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Economics for Engineers
+  - UCHUT347   | p. 32- 37 ( 6p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
+  - PCEEL307   | p. 38- 42 ( 5p) | S3    | Lab                | cr:2   | Circuits and Measurements Lab
+  - PCEEL308   | p. 43- 47 ( 5p) | S3    | Lab                | cr:2   | Analog Electronics Lab
+  - GBMAT401   | p. 49- 53 ( 5p) | S4    | Math & Science     | cr:3   | Mathematics for Electrical Science - 4
+  - PCEET402   | p. 54- 58 ( 5p) | S4    | Core               | cr:4   | Synchronous & Induction Machines
+  - PCEET403   | p. 59- 63 ( 5p) | S4    | Core               | cr:4   | SEMSEMESTER-4 COURSE NAME: Power Electronics and Drives
+  - PBEET404   | p. 64- 71 ( 8p) | S4    | PBL Core           | cr:4   | Digital Electronics
+  - PEEET411   | p. 72- 77 ( 6p) | S4    | Program Elective   | cr:3   | Electronic Instrumentation
+  - PEEET412   | p. 78- 81 ( 4p) | S4    | Program Elective   | cr:3   | Renewable Energy Sources
+  - PEEET413   | p. 82- 86 ( 5p) | S4    | Program Elective   | cr:3   | Mathematics for Machine Learning
+  - PEEET414   | p. 87- 90 ( 4p) | S4    | Program Elective   | cr:3   | Theory of Computation
+  - PEEET416   | p. 91- 95 ( 5p) | S4    | Program Elective   | cr:3   | Computer Organization
+  - PEEET417   | p. 96- 99 ( 4p) | S4    | Program Elective   | cr:3   | Solid State Devices
+  - PEEET418   | p.100-105 ( 6p) | S4    | Program Elective   | cr:3   | Illumination Technology
+  - PEEET419   | p.106-110 ( 5p) | S4    | Program Elective   | cr:3   | Object Oriented Programming
+  - UCHUT346   | p.111-117 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Economics for Engineers
+  - UCHUT347   | p.118-123 ( 6p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
+  - PCEEL407   | p.124-130 ( 7p) | S4    | Lab                | cr:2   | DC Machines & Transformers Lab
+  - PCEEL408   | p.131-137 ( 7p) | S4    | Lab                | cr:2   | Branch Name (Branch Code) COURSE NAME: POWER ELECTRONICS and DRIVES LAB
+  - PCEET501   | p.140-144 ( 5p) | S5    | Core               | cr:4   | Power Generation, Transmission and Protection
+  - PCEET502   | p.145-149 ( 5p) | S5    | Core               | cr:4   | Electromagnetic Theory
+  - PCEET503   | p.150-153 ( 4p) | S5    | Core               | cr:3   | Signals and Systems
+  - PBEET504   | p.154-160 ( 7p) | S5    | PBL Core           | cr:4   | Electrical and Electronics Engineering (EE) MICROPROCESSORS and EMBEDDED SYSTEMS
+  - PEEET521   | p.161-164 ( 4p) | S5    | Program Elective   | cr:3   | Energy Storage Systems
+  - PEEET522   | p.165-169 ( 5p) | S5    | Program Elective   | cr:3   | ELECTRIC VEHICLES PEEET522 CIE Marks
+  - PEEET523   | p.170-173 ( 4p) | S5    | Program Elective   | cr:3   | Digital System Design
+  - PEEET524   | p.174-178 ( 5p) | S5    | Program Elective   | cr:3   | Software Engineering
+  - PEEET526   | p.179-183 ( 5p) | S5    | Program Elective   | cr:3   | Data Structures
+  - PEEET527   | p.184-187 ( 4p) | S5    | Program Elective   | cr:3   | Introduction to Machine Learning
+  - PEEET528   | p.188-191 ( 4p) | S5    | Program Elective   | cr:3   | Computer Network Systems
+  - PCEEL507   | p.192-198 ( 7p) | S5    | Lab                | cr:2   | AC Machines Lab
+  - PCEEL508   | p.199-204 ( 6p) | S5    | Lab                | cr:    | Engineering (EE) Electrical and Electronics MICROPROC CESSOR and EMBEDDED SYSTEMS LAB
+  - PCEET601   | p.207-210 ( 4p) | S6    | Core               | cr:3   | Control Systems
+  - PCEET602   | p.211-214 ( 4p) | S6    | Core               | cr:3   | Electrical System Design and Estimation
+  - PEEET631   | p.215-218 ( 4p) | S6    | Program Elective   | cr:3   | Digital Protection of Power Systems
+  - PEEET632   | p.219-222 ( 4p) | S6    | Program Elective   | cr:3   | Operating Systems
+  - PEEET633   | p.223-226 ( 4p) | S6    | Program Elective   | cr:3   | High Voltage Engineering
+  - PEEET634   | p.227-230 ( 4p) | S6    | Program Elective   | cr:3   | Internet of Things
+  - PEEET636   | p.231-234 ( 4p) | S6    | Program Elective   | cr:3   | Digital Signal Processing
+  - PEEET637   | p.235-238 ( 4p) | S6    | Program Elective   | cr:3   | Cloud Computing
+  - PEEET638   | p.239-242 ( 4p) | S6    | Program Elective   | cr:3   | Optimization Techniques
+  - PBEET604   | p.243-244 ( 2p) | S6    | PBL Core           | cr:4   | Branch Name (Branch Code) COURSE NAME: POWER SYSTEM ANALYSIS
+  - OEEET611   | p.246-249 ( 4p) | S6    | Open Elective      | cr:3   | Introduction to Control Systems
+  - OEEET612   | p.250-253 ( 4p) | S6    | Open Elective      | cr:3   | Energy Management
+  - OEEET613   | p.254-257 ( 4p) | S6    | Open Elective      | cr:3   | Renewable Energy Systems
+  - PCEEL607   | p.258-265 ( 8p) | S6    | Lab                | cr:2   | Control System Lab
+  - PCEEL609   | p.266-270 ( 5p) | S6    | Lab                | cr:1   | Power System Lab
+  - PEEET741   | p.272-274 ( 3p) | S7    | Program Elective   | cr:3   | Power System Operation and Control
+  - PEEET742   | p.275-277 ( 3p) | S7    | Program Elective   | cr:3   | Energy Management and Auditing
+  - PEEET743   | p.278-280 ( 3p) | S7    | Program Elective   | cr:3   | Special Electrical Machines
+  - PEEET744   | p.281-284 ( 4p) | S7    | Program Elective   | cr:3   | Discrete Time Control Systems
+  - PEEET746   | p.285-288 ( 4p) | S7    | Program Elective   | cr:3   | Digital Image Processing
+  - PEEET751   | p.289-291 ( 3p) | S7    | Program Elective   | cr:3   | Power Quality
+  - PEEET752   | p.292-295 ( 4p) | S7    | Program Elective   | cr:3   | Nonlinear Control Systems
+  - PEEET753   | p.296-299 ( 4p) | S7    | Program Elective   | cr:3   | Deep Learning
+  - PEEET754   | p.300-303 ( 4p) | S7    | Program Elective   | cr:3   | Computer Vision
+  - OEEET721   | p.304-306 ( 3p) | S7    | Open Elective      | cr:3   | Design of Solar Pv Systems Oeeet721
+  - OEEET722   | p.307-310 ( 4p) | S7    | Open Elective      | cr:3   | Hybrid and Electric Vehicles
+  - OEEET723   | p.311-314 ( 4p) | S7    | Open Elective      | cr:3   | Introduction to Energy Storage Systems
+  - PEEET861   | p.316-319 ( 4p) | S8    | Program Elective   | cr:3   | Smart Grid Technologies
+  - PEEET862   | p.320-322 ( 3p) | S8    | Program Elective   | cr:3   | HVDC and FACTS
+  - PEEET863   | p.323-326 ( 4p) | S8    | Program Elective   | cr:3   | Mechatronic Systems
+  - PEEET864   | p.327-329 ( 3p) | S8    | Program Elective   | cr:3   | Electronic Communication
+  - OEEET831   | p.330-333 ( 4p) | S8    | Open Elective      | cr:3   | Introduction to Robotics
+  - OEEET832   | p.334-337 ( 4p) | S8    | Open Elective      | cr:4   | PLC and Automation
+  - OEEET833   | p.338-341 ( 4p) | S8    | Open Elective      | cr:3   | Mechatronic Systems and Control
+
+SOURCE: ME.pdf -> ME (Mechanical Engineering) — 447 pages
+  - GYMAT301   | p.  2-  5 ( 4p) | S3    | Math & Science     | cr:3   | Mathematics for Electrical Science and Physical Science - 3
+  - PCMET302   | p.  6-  9 ( 4p) | S3    | Core               | cr:4   | Mechanics of Solids
+  - PCMET303   | p. 10- 13 ( 4p) | S3    | Core               | cr:4   | Fluid Mechanics and Machinery
+  - PBMET304   | p. 14- 19 ( 6p) | S3    | PBL Core           | cr:4   | Manufacturing Processes
+  - GNEST305   | p. 20- 24 ( 5p) | S3    | Math & Science     | cr:4   | Introduction to Artificial Intelligence and Data Science
+  - UCHUT346   | p. 25- 28 ( 4p) | S3    | Common / Humanities | cr:2   | Economics for Engineers
+  - UCHUT347   | p. 29- 33 ( 5p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
+  - PCMEL307   | p. 34- 38 ( 5p) | S3    | Lab                | cr:2   | Computer Aided Machine Drawing & Modelling
+  - PCMEL308   | p. 39- 43 ( 5p) | S3    | Lab                | cr:2   | Materials Testing Lab
+  - GCMAT401   | p. 45- 48 ( 4p) | S4    | Math & Science     | cr:3   | Mathematics for Physical Science - 4
+  - PCMET402   | p. 49- 52 ( 4p) | S4    | Core               | cr:4   | Machine Tools and Metrology
+  - PCMET403   | p. 53- 56 ( 4p) | S4    | Core               | cr:4   | Engineering Thermodynamics
+  - PBMET404   | p. 57- 62 ( 6p) | S4    | PBL Core           | cr:4   | Mechanics of Machinery
+  - PEMET411   | p. 63- 66 ( 4p) | S4    | Program Elective   | cr:3   | Turbo Machinery
+  - PEMET412   | p. 67- 70 ( 4p) | S4    | Program Elective   | cr:3   | Nuclear Energy
+  - PEMET413   | p. 71- 74 ( 4p) | S4    | Program Elective   | cr:3   | Composite Materials
+  - PEMET414   | p. 75- 78 ( 4p) | S4    | Program Elective   | cr:3   | Components of Intelligent Systems
+  - PEMET416   | p. 79- 82 ( 4p) | S4    | Program Elective   | cr:4/3 | Advanced Metal Joining Techniques
+  - PEMET417   | p. 83- 87 ( 5p) | S4    | Program Elective   | cr:3   | Technology Management
+  - PEMET418   | p. 88- 91 ( 4p) | S4    | Program Elective   | cr:3   | Supply Chain and Logistics Management
+  - PEMET415   | p. 92- 95 ( 4p) | S4    | Program Elective   | cr:5/3 | Advanced Mechanics of Solids
+  - UCHUT346   | p. 96- 99 ( 4p) | S4    | Common / Humanities | cr:2   | Economics for Engineers
+  - UCHUT347   | p.100-105 ( 6p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
+  - PCMEL407   | p.106-110 ( 5p) | S4    | Lab                | cr:2   | Fluid Mechanics and Hydraulic Machines Lab
+  - PCMEL408   | p.111-115 ( 5p) | S4    | Lab                | cr:2   | Manufacturing Technology Lab
+  - PCMET501   | p.117-120 ( 4p) | S5    | Core               | cr:4   | Dynamics of Machinery
+  - PCMET502   | p.121-125 ( 5p) | S5    | Core               | cr:4   | Advanced Manufacturing Engineering
+  - PCMET503   | p.126-131 ( 6p) | S5    | Core               | cr:3   | Heat and Mass Transfer
+  - PBMET504   | p.132-137 ( 6p) | S5    | PBL Core           | cr:4   | Management for Engineers
+  - PEMET521   | p.138-141 ( 4p) | S5    | Program Elective   | cr:3   | Computational Fluid Dynamics
+  - PEMET522   | p.142-145 ( 4p) | S5    | Program Elective   | cr:3   | Design for Manufacture and Assembly
+  - PEMET523   | p.146-149 ( 4p) | S5    | Program Elective   | cr:3   | Computer Aided Design and Analysis
+  - PEMET524   | p.150-153 ( 4p) | S5    | Program Elective   | cr:3   | Additive Manufacturing
+  - PEMET526   | p.154-158 ( 5p) | S5    | Program Elective   | cr:3   | Energy Economics and Policy
+  - PEMET527   | p.159-163 ( 5p) | S5    | Program Elective   | cr:3   | Human Resources Management
+  - PEMET528   | p.164-167 ( 4p) | S5    | Program Elective   | cr:3   | Operations Research
+  - PEMET525   | p.168-172 ( 5p) | S5    | Program Elective   | cr:5/3 | Instrumentation and Control Systems
+  - PCMEL507   | p.173-178 ( 6p) | S5    | Lab                | cr:2   | Thermal Engineering Lab - 1
+  - PCMEL508   | p.179-185 ( 7p) | S5    | Lab                | cr:2   | Mechanical Engineering Lab
+  - PCMET601   | p.187-191 ( 5p) | S6    | Core               | cr:3   | Industrial and Systems Engineering
+  - PCMET602   | p.192-196 ( 5p) | S6    | Core               | cr:3   | Machine Design
+  - PEMET631   | p.197-201 ( 5p) | S6    | Program Elective   | cr:3   | Power Plant Engineering
+  - PEMET632   | p.202-205 ( 4p) | S6    | Program Elective   | cr:3   | Compressible Fluid Flow
+  - PEMET633   | p.206-210 ( 5p) | S6    | Program Elective   | cr:3   | Industrial Tribology
+  - PEMET634   | p.211-215 ( 5p) | S6    | Program Elective   | cr:3   | Finite Element Methods
+  - PEMET636   | p.216-220 ( 5p) | S6    | Program Elective   | cr:3   | Non-Destructive Testing
+  - PEMET637   | p.221-225 ( 5p) | S6    | Program Elective   | cr:3   | Industrial Safety Engineering
+  - PEMET638   | p.226-230 ( 5p) | S6    | Program Elective   | cr:3   | Marketing Management
+  - PEMET635   | p.231-234 ( 4p) | S6    | Program Elective   | cr:5/3 | Advanced Materials
+  - PBMET604   | p.235-240 ( 6p) | S6    | PBL Core           | cr:4   | Thermal Engineering
+  - OEMET611   | p.241-245 ( 5p) | S6    | Open Elective      | cr:3   | Introduction to Business Analytics
+  - OEMET612   | p.246-249 ( 4p) | S6    | Open Elective      | cr:3   | Quantitative Techniques for Engineers
+  - OEMET613   | p.250-255 ( 6p) | S6    | Open Elective      | cr:3   | Automotive Technology
+  - OEMET614   | p.256-260 ( 5p) | S6    | Open Elective      | cr:3   | Renewable Energy Engineering
+  - OEMET615   | p.261-265 ( 5p) | S6    | Open Elective      | cr:3   | Quality Engineering and Management
+  - OEMET616   | p.266-269 ( 4p) | S6    | Open Elective      | cr:3   | Additive Manufacturing
+  - OEMET617   | p.270-274 ( 5p) | S6    | Open Elective      | cr:3   | Solar Energy Conservation Systems
+  - PCMEL607   | p.275-284 (10p) | S6    | Lab                | cr:2   | Computer Aided Design and Analysis Lab
+  - PCMEL609   | p.285-289 ( 5p) | S6    | Lab                | cr:1   | Thermal Engineering Lab - 2
+  - PEMET741   | p.291-294 ( 4p) | S7    | Program Elective   | cr:3   | Gas Turbine and Jet Propulsion
+  - PEMET742   | p.295-299 ( 5p) | S7    | Program Elective   | cr:3   | Automobile Engineering
+  - PEMET743   | p.300-303 ( 4p) | S7    | Program Elective   | cr:3   | Design of Machine Elements
+  - PEMET744   | p.304-307 ( 4p) | S7    | Program Elective   | cr:3   | Failure Analysis and Design
+  - PEMET746   | p.308-311 ( 4p) | S7    | Program Elective   | cr:3   | Lean Manufacturing
+  - PEMET747   | p.312-315 ( 4p) | S7    | Program Elective   | cr:3   | Reliability Engineering
+  - PEMET748   | p.316-319 ( 4p) | S7    | Program Elective   | cr:3   | Robotics
+  - PEMET745   | p.320-323 ( 4p) | S7    | Program Elective   | cr:5/3 | Mechatronics
+  - PEMET751   | p.324-328 ( 5p) | S7    | Program Elective   | cr:3   | Refrigeration and Airconditioning
+  - PEMET752   | p.329-332 ( 4p) | S7    | Program Elective   | cr:3   | Acoustics and Noise Control
+  - PEMET753   | p.333-336 ( 4p) | S7    | Program Elective   | cr:3   | Aerospace Engineering
+  - PEMET754   | p.337-340 ( 4p) | S7    | Program Elective   | cr:3   | Renewable Energy Engineering
+  - PEMET756   | p.341-344 ( 4p) | S7    | Program Elective   | cr:3   | Mobile Robotics
+  - PEMET757   | p.345-347 ( 3p) | S7    | Program Elective   | cr:3   | Flexible Manufacturing Systems
+  - PEMET758   | p.348-351 ( 4p) | S7    | Program Elective   | cr:3   | Quality Engineering and Management
+  - PEMET755   | p.352-355 ( 4p) | S7    | Program Elective   | cr:5/3 | Optimization Techniques
+  - OEMET721   | p.356-359 ( 4p) | S7    | Open Elective      | cr:3   | Engineering Materials
+  - OEMET722   | p.360-364 ( 5p) | S7    | Open Elective      | cr:3   | Robotics
+  - OEMET723   | p.365-368 ( 4p) | S7    | Open Elective      | cr:3   | Finite Element Methods
+  - OEMET724   | p.369-372 ( 4p) | S7    | Open Elective      | cr:3   | Non-Destructive Testing
+  - OEMET725   | p.373-376 ( 4p) | S7    | Open Elective      | cr:3   | Engineering Instruments and Measurements
+  - OEMET726   | p.377-379 ( 3p) | S7    | Open Elective      | cr:3   | Computational Heat Transfer
+  - OEMET727   | p.380-383 ( 4p) | S7    | Open Elective      | cr:3   | Power Plant Engineering
+  - PEMET861   | p.385-389 ( 5p) | S8    | Program Elective   | cr:3   | Cryogenic Engineering
+  - PEMET862   | p.390-393 ( 4p) | S8    | Program Elective   | cr:3   | Pressure Vessel and Piping Design
+  - PEMET863   | p.394-398 ( 5p) | S8    | Program Elective   | cr:3   | Hybrid and Electric Vehicles
+  - PEMET864   | p.399-404 ( 6p) | S8    | Program Elective   | cr:3   | Micro and Nano Manufacturing
+  - PEMET866   | p.405-408 ( 4p) | S8    | Program Elective   | cr:3   | Advanced Numerical Control in Manufacturing
+  - PEMET867   | p.409-412 ( 4p) | S8    | Program Elective   | cr:3   | Metal Additive Manufacturing
+  - PEMET868   | p.413-416 ( 4p) | S8    | Program Elective   | cr:3   | Nanotechnology
+  - PEMET865   | p.417-420 ( 4p) | S8    | Program Elective   | cr:5/3 | Aircraft Design
+  - OEMET831   | p.421-424 ( 4p) | S8    | Open Elective      | cr:3   | Industrial Hydraulics and Automation
+  - OEMET832   | p.425-429 ( 5p) | S8    | Open Elective      | cr:3   | 3D Printing and Tooling
+  - OEMET833   | p.430-433 ( 4p) | S8    | Open Elective      | cr:3   | Numerical Techniques Engineering
+  - OEMET834   | p.434-437 ( 4p) | S8    | Open Elective      | cr:3   | Business Organization and Development
+  - OEMET835   | p.438-440 ( 3p) | S8    | Open Elective      | cr:3   | World Class Manufacturing
+  - OEMET836   | p.441-443 ( 3p) | S8    | Open Elective      | cr:3   | Micro Electro Mechanical Systems
+  - PEMET837   | p.444-447 ( 4p) | S8    | Program Elective   | cr:3   | Product Design and Innovation
+
+SOURCE: CE.pdf -> CE (Civil Engineering) — 407 pages
+  - GYMAT301   | p.  2-  5 ( 4p) | S3    | Math & Science     | cr:3   | Mathematics for Electrical Science and Physical Science - 3
+  - PCCET302   | p.  6- 10 ( 5p) | S3    | Core               | cr:4   | Fluid Mechanics
+  - PCCET303   | p. 11- 14 ( 4p) | S3    | Core               | cr:4   | Structural Analysis - I
+  - PBCET304   | p. 15- 21 ( 7p) | S3    | PBL Core           | cr:4   | Surveying & Geomatics
+  - GNEST305   | p. 22- 26 ( 5p) | S3    | Math & Science     | cr:4   | Introduction to Artificial Intelligence and Data Science
+  - UCHUT346   | p. 27- 33 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Economics for Engineers
+  - UCHUT347   | p. 34- 40 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
+  - PCCEL307   | p. 41- 45 ( 5p) | S3    | Lab                | cr:2   | Survey Lab
+  - PCCEL308   | p. 46- 50 ( 5p) | S3    | Lab                | cr:2   | Fluid Mechanics Lab
+  - GCMAT401   | p. 52- 55 ( 4p) | S4    | Math & Science     | cr:3   | Mathematics for Physical Science - 4
+  - PCCET402   | p. 56- 60 ( 5p) | S4    | Core               | cr:4   | Soil Mechanics
+  - PCCET403   | p. 61- 64 ( 4p) | S4    | Core               | cr:4   | Structural Analysis - Ii
+  - PBCET404   | p. 65- 70 ( 6p) | S4    | PBL Core           | cr:4   | Design of Concrete Structures
+  - PECET411   | p. 71- 74 ( 4p) | S4    | Program Elective   | cr:3   | Advanced Solid Mechanics
+  - PECET412   | p. 75- 78 ( 4p) | S4    | Program Elective   | cr:3   | Concrete Technology
+  - PECET413   | p. 79- 82 ( 4p) | S4    | Program Elective   | cr:3   | Mechanics of Fluid Flow
+  - PECET414   | p. 83- 87 ( 5p) | S4    | Program Elective   | cr:3   | Cartography and GIS
+  - PECET416   | p. 88- 91 ( 4p) | S4    | Program Elective   | cr:3   | Engineering Geology
+  - PECET417   | p. 92- 95 ( 4p) | S4    | Program Elective   | cr:3   | Numerical Methods for Engineers
+  - PECET418   | p. 96- 99 ( 4p) | S4    | Program Elective   | cr:3   | Environmental Law and Policy
+  - PECET415   | p.100-105 ( 6p) | S4    | Program Elective   | cr:5/3 | Architectural Engineering
+  - UCHUT346   | p.106-112 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Economics for Engineers
+  - UCHUT347   | p.113-119 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
+  - PCCEL407   | p.120-125 ( 6p) | S4    | Lab                | cr:2   | Materials Testing Lab (Group C)
+  - PCCEL408   | p.126-130 ( 5p) | S4    | Lab                | cr:2   | Civil Engineering Modelling Lab
+  - PCCET501   | p.132-135 ( 4p) | S5    | Core               | cr:4   | Hydrology and Water Resources Engineering
+  - PCCET502   | p.136-140 ( 5p) | S5    | Core               | cr:4   | Transportation Engineering
+  - PCCET503   | p.141-144 ( 4p) | S5    | Core               | cr:3   | Environmental Engineering
+  - PBCET504   | p.145-150 ( 6p) | S5    | PBL Core           | cr:4   | Foundation Engineering
+  - PECET521   | p.151-154 ( 4p) | S5    | Program Elective   | cr:3   | Advanced Structural Analysis
+  - PECET522   | p.155-158 ( 4p) | S5    | Program Elective   | cr:3   | Modern Construction Technology
+  - PECET523   | p.159-161 ( 3p) | S5    | Program Elective   | cr:3   | Open Channel Hydraulics
+  - PECET524   | p.162-165 ( 4p) | S5    | Program Elective   | cr:3   | Disaster Management
+  - PECET526   | p.166-169 ( 4p) | S5    | Program Elective   | cr:3   | Applied Hydrology and Climatology
+  - PECET527   | p.170-172 ( 3p) | S5    | Program Elective   | cr:3   | Town Planning
+  - PECET528   | p.173-175 ( 3p) | S5    | Program Elective   | cr:3   | Optimization Techniques and Operational Research for Civil Engineers
+  - PECET525   | p.176-179 ( 4p) | S5    | Program Elective   | cr:5/3 | Design of Prestressed Concrete
+  - PCCEL507   | p.180-184 ( 5p) | S5    | Lab                | cr:2   | Geotechnical Engineering Lab
+  - PCCEL508   | p.185-189 ( 5p) | S5    | Lab                | cr:2   | Concrete Lab (Mt-2)
+  - PCCET601   | p.191-195 ( 5p) | S6    | Core               | cr:3   | Quantity Surveying and Valuation
+  - PCCET602   | p.196-199 ( 4p) | S6    | Core               | cr:3   | Design of Steel Structures
+  - PECET631   | p.200-203 ( 4p) | S6    | Program Elective   | cr:3   | Advanced Design of Concrete Structures
+  - PECET632   | p.204-208 ( 5p) | S6    | Program Elective   | cr:3   | Irrigation and Drainage Engineering
+  - PECET633   | p.209-212 ( 4p) | S6    | Program Elective   | cr:3   | Ground Improvement Techniques
+  - PECET634   | p.213-217 ( 5p) | S6    | Program Elective   | cr:3   | Repair and Rehabilitation of Structures
+  - PECET636   | p.218-221 ( 4p) | S6    | Program Elective   | cr:3   | Solid and Hazardous Waste Management
+  - PECET637   | p.222-225 ( 4p) | S6    | Program Elective   | cr:3   | Traffic Engineering and Management
+  - PECET635   | p.226-230 ( 5p) | S6    | Program Elective   | cr:5/3 | Advanced Foundation Engineering
+  - PBCET604   | p.231-237 ( 7p) | S6    | PBL Core           | cr:3   | Construction Project Management
+  - OECET611   | p.238-241 ( 4p) | S6    | Open Elective      | cr:3   | Introduction to Construction Engineering
+  - OECET612   | p.242-245 ( 4p) | S6    | Open Elective      | cr:3   | Environmental Laws and Policy
+  - OECET613   | p.246-250 ( 5p) | S6    | Open Elective      | cr:3   | Disaster Management
+  - OECET614   | p.251-254 ( 4p) | S6    | Open Elective      | cr:3   | Environmental Impact Assessment
+  - OECET615   | p.255-257 ( 3p) | S6    | Open Elective      | cr:3   | Structural Geology
+  - OECET616   | p.258-261 ( 4p) | S6    | Open Elective      | cr:3   | Applied Earth Systems
+  - PCCEL607   | p.262-267 ( 6p) | S6    | Lab                | cr:2   | Transportation Engineering Lab
+  - PCCEL609   | p.268-272 ( 5p) | S6    | Lab                | cr:2   | Environmental Engineering Lab
+  - PECET741   | p.274-277 ( 4p) | S7    | Program Elective   | cr:3   | Structural Dynamics
+  - PECET742   | p.278-281 ( 4p) | S7    | Program Elective   | cr:3   | Formwork Engineering
+  - PECET743   | p.282-285 ( 4p) | S7    | Program Elective   | cr:3   | Environmental Geotechnology
+  - PECET744   | p.286-289 ( 4p) | S7    | Program Elective   | cr:3   | Airport Planning and Design
+  - PECET746   | p.290-293 ( 4p) | S7    | Program Elective   | cr:3   | Highway Materials and Design
+  - PECET747   | p.294-297 ( 4p) | S7    | Program Elective   | cr:3   | River Engineering
+  - PECET745   | p.298-302 ( 5p) | S7    | Program Elective   | cr:5/3 | Pavement Design and Construction
+  - PECET751   | p.303-306 ( 4p) | S7    | Program Elective   | cr:3   | Ground Water Engineering
+  - PECET752   | p.307-310 ( 4p) | S7    | Program Elective   | cr:3   | Sustainable Construction Practices
+  - PECET753   | p.311-315 ( 5p) | S7    | Program Elective   | cr:3   | Advanced Geotechnical Investigation
+  - PECET754   | p.316-320 ( 5p) | S7    | Program Elective   | cr:3   | Railway, Port and Harbor Engineering
+  - PECET756   | p.321-324 ( 4p) | S7    | Program Elective   | cr:3   | Air and Noise Pollution Control Engineering
+  - PECET757   | p.325-328 ( 4p) | S7    | Program Elective   | cr:3   | Finite Element Method
+  - PECET755   | p.329-332 ( 4p) | S7    | Program Elective   | cr:5/3 | Design of Hydraulic Structures
+  - OECET721   | p.333-336 ( 4p) | S7    | Open Elective      | cr:3   | Intelligent Transportation Systems
+  - OECET722   | p.337-340 ( 4p) | S7    | Open Elective      | cr:3   | Environmental Health and Safety
+  - OECET723   | p.341-344 ( 4p) | S7    | Open Elective      | cr:3   | Watershed Conservation and Mangement
+  - OECET724   | p.345-348 ( 4p) | S7    | Open Elective      | cr:3   | Forensic Engineering
+  - OECET725   | p.349-352 ( 4p) | S7    | Open Elective      | cr:3   | Finance for Engineering
+  - PECET861   | p.354-357 ( 4p) | S8    | Program Elective   | cr:3   | Water and Air Quality Management
+  - PECET862   | p.358-361 ( 4p) | S8    | Program Elective   | cr:3   | Valuation of Real Properties
+  - PECET863   | p.362-365 ( 4p) | S8    | Program Elective   | cr:3   | Contracts Management
+  - PECET864   | p.366-369 ( 4p) | S8    | Program Elective   | cr:3   | Advanced Design of Steel Structures
+  - PECET866   | p.370-374 ( 5p) | S8    | Program Elective   | cr:3   | Urban Transportation Planning
+  - PECET867   | p.375-378 ( 4p) | S8    | Program Elective   | cr:3   | Rural Water Supply and Onsite Sanitation Systems
+  - PECET865   | p.379-383 ( 5p) | S8    | Program Elective   | cr:5/3 | Design of Earthquake Resistant Structures
+  - OECET831   | p.384-389 ( 6p) | S8    | Open Elective      | cr:3   | Waste Management
+  - OECET832   | p.390-393 ( 4p) | S8    | Open Elective      | cr:3   | Rainwater Harvesting
+  - OECET833   | p.394-397 ( 4p) | S8    | Open Elective      | cr:3   | Public Transportation Systems
+  - OECET834   | p.398-403 ( 6p) | S8    | Open Elective      | cr:3   | Fundamentals of Building Planning
+  - OECET835   | p.404-407 ( 4p) | S8    | Open Elective      | cr:3   | Hydrogeology
+
+=================================================================
+SUMMARY: 6 branches | 431 unique deduplicated PDFs
+QA WARNINGS (52):
+  [MODULES] CSE GAEST305 (p.23): Extracted 2/4 modules (Digital Electronics and Logic Design)
+  [MODULES] CSE PBCST404 (p.64): Extracted 3/4 modules (Computer Organization and Architecture)
+  [MODULES] CSE PECST416 (p.83): Extracted 0/4 modules (Signals and Systems)
+  [MODULES] CSE PECST415 (p.100): Extracted 2/4 modules (PECST415)
+  [MODULES] CSE PECST695 (p.259): Extracted 3/4 modules (Mobile Application Development)
+  [MODULES] CSE PECST743 (p.308): Extracted 3/4 modules (Bioinformatics)
+  [MODULES] CSE PECST747 (p.319): Extracted 3/4 modules (Blockchain and Cryptocurrencies)
+  [MODULES] CSE PECST751 (p.339): Extracted 3/4 modules (Advanced Computer Networks)
+  [MODULES] CSE PECST753 (p.347): Extracted 2/4 modules (Fuzzy Systems)
+  [OVERRIDE] CSE p.355: Official KTU PDF printed PECST753; mapped to PECST756 (Game Theory and Mechanism Design)
+  [MODULES] CSE PECST758 (p.361): Extracted 3/4 modules (Programming Languages)
+  [MODULES] CSE PECST755 (p.369): Extracted 3/4 modules (Internet of Things)
+  [MODULES] CSE OECST721 (p.378): Extracted 3/4 modules (Cyber Security)
+  [CREDITS] CSE OECST725 (p.392): Suspicious credits='0' (Mobile Application Development)
+  [MODULES] CSE PECST866 (p.411): Extracted 3/4 modules (Speech and Audio Processing)
+  [MODULES] AIML GAEST305 (p.22): Extracted 2/4 modules (Digital Electronics and Logic Design)
+  [MODULES] AIML PECST416 (p.84): Extracted 0/4 modules (Signals and Systems)
+  [MODULES] AIML PECMT415 (p.100): Extracted 3/4 modules (Computer Organization)
+  [MODULES] AIML PCCMT602 (p.216): Extracted 2/4 modules (Generative AI)
+  [MODULES] AIML PECST758 (p.358): Extracted 3/4 modules (Programming Languages)
+  [MODULES] AIML OECST721 (p.375): Extracted 3/4 modules (Cyber Security)
+  [MODULES] AIML PECST866 (p.408): Extracted 3/4 modules (Speech and Audio Processing)
+  [MODULES] ECE PEECT415 (p.86): Extracted 3/4 modules (Digital Systems and VLSI Design)
+  [MODULES] ECE PEECT523 (p.146): Extracted 3/4 modules (Sensors and Actuators)
+  [MODULES] ECE PEECT637 (p.214): Extracted 1/4 modules (Optimization Techniques)
+  [MODULES] ECE PEECT635 (p.218): Extracted 2/4 modules (Image Processing Applications)
+  [MODULES] ECE OEECT611 (p.230): Extracted 3/4 modules (Entertainment Electronics)
+  [MODULES] ECE PEECT742 (p.254): Extracted 3/4 modules (Deep Learning)
+  [MODULES] ECE PEECT745 (p.275): Extracted 3/4 modules (Deep Learning Techniques)
+  [MODULES] ECE PEECT757 (p.302): Extracted 3/4 modules (Microwave Devices & Circuits)
+  [MODULES] EEE PCEET302 (p.6): Extracted 3/4 modules (Circuits & Networks)
+  [MODULES] EEE GNEST305 (p.20): Extracted 3/4 modules (Introduction to Artificial Intelligence and Data Science)
+  [MODULES] EEE PCEET403 (p.59): Extracted 0/4 modules (SEMSEMESTER-4 COURSE NAME: Power Electronics and Drives)
+  [MODULES] EEE PBEET404 (p.64): Extracted 2/4 modules (Digital Electronics)
+  [MODULES] EEE PEEET411 (p.72): Extracted 3/4 modules (Electronic Instrumentation)
+  [MODULES] EEE PBEET504 (p.154): Extracted 0/4 modules (Electrical and Electronics Engineering (EE) MICROPROCESSORS and EMBEDDED SYSTEMS)
+  [MODULES] EEE PEEET521 (p.161): Extracted 2/4 modules (Energy Storage Systems)
+  [MODULES] EEE PEEET526 (p.179): Extracted 2/4 modules (Data Structures)
+  [CREDITS] EEE PCEEL508 (p.199): Suspicious credits='' (Engineering (EE) Electrical and Electronics MICROPROC CESSOR and EMBEDDED SYSTEMS LAB)
+  [MODULES] EEE PEEET632 (p.219): Extracted 3/4 modules (Operating Systems)
+  [MODULES] EEE PBEET604 (p.243): Extracted 0/4 modules (Branch Name (Branch Code) COURSE NAME: POWER SYSTEM ANALYSIS)
+  [MODULES] EEE OEEET721 (p.304): Extracted 3/4 modules (Design of Solar Pv Systems Oeeet721)
+  [MODULES] ME GYMAT301 (p.2): Extracted 3/4 modules (Mathematics for Electrical Science and Physical Science - 3)
+  [CIE/ESE] ME PBMET304 (p.14): PBL course has CIE=40/ESE=60 in top table (Manufacturing Processes)
+  [MODULES] ME OEMET617 (p.270): Extracted 3/4 modules (Solar Energy Conservation Systems)
+  [MODULES] ME PEMET756 (p.341): Extracted 3/4 modules (Mobile Robotics)
+  [MODULES] ME PEMET757 (p.345): Extracted 3/4 modules (Flexible Manufacturing Systems)
+  [MODULES] ME PEMET758 (p.348): Extracted 3/4 modules (Quality Engineering and Management)
+  [MODULES] CE PECET418 (p.96): Extracted 3/4 modules (Environmental Law and Policy)
+  [MODULES] CE PECET742 (p.278): Extracted 0/4 modules (Formwork Engineering)
+  [MODULES] CE PECET744 (p.286): Extracted 1/4 modules (Airport Planning and Design)
+  [MODULES] CE PECET746 (p.290): Extracted 3/4 modules (Highway Materials and Design)

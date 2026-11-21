@@ -1,0 +1,110 @@
+{
+  "scheme": "2024",
+  "level": "S3–S8",
+  "total_branches": 6,
+  "total_unique_courses": 431,
+  "branches": [
+    {
+      "code": "CSE",
+      "slug": "cse",
+      "name": "Computer Science and Engineering",
+      "short_name": "CSE",
+      "group": "Group A",
+      "total_courses": 98,
+      "semester_counts": {
+        "S3": 9,
+        "S4": 18,
+        "S5": 15,
+        "S6": 19,
+        "S7": 25,
+        "S8": 14
+      },
+      "json_url": "/syllabus/s3-s8/cse.json"
+    },
+    {
+      "code": "AIML",
+      "slug": "aiml",
+      "name": "Computer Science and Engineering (AI & ML)",
+      "short_name": "CSE (AI & ML)",
+      "group": "Group A",
+      "total_courses": 98,
+      "semester_counts": {
+        "S3": 9,
+        "S4": 18,
+        "S5": 15,
+        "S6": 20,
+        "S7": 25,
+        "S8": 14
+      },
+      "json_url": "/syllabus/s3-s8/aiml.json"
+    },
+    {
+      "code": "ECE",
+      "slug": "ece",
+      "name": "Electronics and Communication Engineering",
+      "short_name": "ECE",
+      "group": "Group B",
+      "total_courses": 75,
+      "semester_counts": {
+        "S3": 9,
+        "S4": 14,
+        "S5": 13,
+        "S6": 14,
+        "S7": 17,
+        "S8": 10
+      },
+      "json_url": "/syllabus/s3-s8/ece.json"
+    },
+    {
+      "code": "EEE",
+      "slug": "eee",
+      "name": "Electrical and Electronics Engineering",
+      "short_name": "EEE",
+      "group": "Group B",
+      "total_courses": 70,
+      "semester_counts": {
+        "S3": 9,
+        "S4": 16,
+        "S5": 13,
+        "S6": 15,
+        "S7": 12,
+        "S8": 7
+      },
+      "json_url": "/syllabus/s3-s8/eee.json"
+    },
+    {
+      "code": "ME",
+      "slug": "me",
+      "name": "Mechanical Engineering",
+      "short_name": "ME",
+      "group": "Group C",
+      "total_courses": 95,
+      "semester_counts": {
+        "S3": 9,
+        "S4": 16,
+        "S5": 14,
+        "S6": 20,
+        "S7": 23,
+        "S8": 15
+      },
+      "json_url": "/syllabus/s3-s8/me.json"
+    },
+    {
+      "code": "CE",
+      "slug": "ce",
+      "name": "Civil Engineering",
+      "short_name": "CE",
+      "group": "Group C",
+      "total_courses": 86,
+      "semester_counts": {
+        "S3": 9,
+        "S4": 16,
+        "S5": 14,
+        "S6": 18,
+        "S7": 19,
+        "S8": 12
+      },
+      "json_url": "/syllabus/s3-s8/ce.json"
+    }
+  ]
+}

@@ -1,0 +1,3261 @@
+{
+  "scheme": "2024",
+  "level": "S3–S8",
+  "branch": {
+    "code": "EEE",
+    "slug": "eee",
+    "name": "Electrical and Electronics Engineering",
+    "short_name": "EEE",
+    "group": "Group B"
+  },
+  "total_courses": 70,
+  "semester_counts": {
+    "S3": 9,
+    "S4": 16,
+    "S5": 13,
+    "S6": 15,
+    "S7": 12,
+    "S8": 7
+  },
+  "category_counts": {
+    "Core": 9,
+    "PBL Core": 4,
+    "Math & Science": 3,
+    "Common / Humanities": 2,
+    "Lab": 8,
+    "Program Elective": 35,
+    "Open Elective": 9
+  },
+  "courses": [
+    {
+      "id": "PCEET302",
+      "code": "PCEET302",
+      "title": "Circuits & Networks",
+      "category": "Core",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "Introductionto ElectricalEngineering",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET302.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Mesh analysis and nodal analysis ( Review only) - super mesh and super node - Superposition principle - source transformation – analysis with DC andAC(sinusoidal)excitation Thevenin’s theorem - Norton’s theorem - Maximum power transfer theorem analysis with DC and AC (sinusoidal) excitation with - independentanddependentsources . Reciprocity Theorem application to the analysis ..."
+        },
+        {
+          "no": 2,
+          "summary": "Resonance - series resonance– resonant frequency – variations of impedance and current with frequency bandwidth quality factor– – – parallel resonance (series RL in parallel with C –calculation of resonant frequency) . Power in 3 -phase circuits – complex power - active , reactive and apparent power in balanced load – steadystate analysis of 3 -wire unbalanced delta connected c..."
+        },
+        {
+          "no": 3,
+          "summary": "Laplacetransforms(Reviewonly) Transient response of simple series and parallel RL and RC circuits with"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCEET303",
+      "code": "PCEET303",
+      "title": "DC Machines & Transformers",
+      "category": "Core",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET303.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Constructional details of dc machines - armature winding - lap and wave – simplex progressive only winding diagrams of simplex lap wound , – , , double layer 12 -slot 4 -pole dc armature with 12 commutator segments , , , – winding diagram of simplex wave wound double layer 16 -slot 6 -pole dc , , , , armature with 12 commutator segments (winding diagram not for evaluation) DC g..."
+        },
+        {
+          "no": 2,
+          "summary": "DC motor back emf torque equation numerical problems – – – Classification of DC motors steady-state equations numerical problems – – Characteristics of DC motors numerical problems – Starting of DC motors 3 -point starter – Braking regenerative braking dynamic braking and plugging (concepts – , only) Speed control of DC shunt and series motors field control and armature – contr..."
+        },
+        {
+          "no": 3,
+          "summary": "Single phase transformers constructional details principle of operation – - - EMF equation ideal and practical transformer numerical problems - – Operation on no load and on load - phasor diagram at different load conditions equivalent circuit voltage regulation numerical problems - - – Losses and efficiency condition for maximum efficiency numerical - – problems Testing of tra..."
+        },
+        {
+          "no": 4,
+          "summary": "Autotransformer – saving of copper – numerical problems 3 phase transformer construction different connections of 3 -phase - – - transformers Υ -Υ Δ -Δ Υ -Δ Δ -Υ numerical problems - , , , – Difference between power transformer and distribution transformer – all - day efficiency numerical problems – Scott connection for 3 -phase to 2 -phase conversion Vector groupings Yy0 Dd0 Y..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PBEET304",
+      "code": "PBEET304",
+      "title": "Analog Electronics",
+      "category": "PBL Core",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:1",
+      "exam_hours": "",
+      "course_type": "PBL",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBEET304.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Review of Bipolar Junction Transistor- Introduction to DC Biasing Base – Bias Voltage Divider Bias – Common Emitter Amplifier AC concepts ––Role of coupling capacitors – and emitter bypass capacitor- Common Emitter AC equivalent circuit - Amplifier Gain Calculation of amplifier gains and impedances using h - parameterequivalentcircuit . EmitterFollowerAmplifier Power Amplifiers..."
+        },
+        {
+          "no": 2,
+          "summary": "Introduction to JFET JFET biasing circuits Common Source – – Amplifier Introduction to MOSFET -MOSFET construction -D -MOSFET E , - MOSFET -Complementary MOSFET Amplifier Frequency Response Basic concepts BJT amplifier – – Frequency response – FET amplifier Frequency Response Feedback and Oscillator circuits Feedback concepts Feedback – – connection types Practical Feedback cir..."
+        },
+        {
+          "no": 3,
+          "summary": "Introduction to Operational Amplifiers (Op-Amps) Operation – Overview Differential amplifiers and Op-Amp Specifications -Gain – , CMRRandslewrate Op- Amp Circuits Inverting Amplifiers Non inverting Amplifiers – – – Summing and Difference Amplifiers Instrumentation Amplifiers – Differentiator and Integrator circuits-practical circuits Comparators:Zerocrossingandvoltageleveldetec..."
+        },
+        {
+          "no": 4,
+          "summary": "Active Filters – Butterworth , Chebyshev and Bessel Filters , Low pass filter – high pass filter -band pass and notch filters- Butterworth Wave form generation using Op-Amps: Square triangular and ramp , generatorcircuits using Op-Amp- Effect of slew rate on waveform generation . Timer555 IC: Internal diagram of 555 IC Astable and Monostable multi – - vibratorsusing555IC"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "GNEST305",
+      "code": "GNEST305",
+      "title": "Introduction to Artificial Intelligence and Data Science",
+      "category": "Math & Science",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/GNEST305.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to AI and Machine Learning: Basics of Machine Learning - types of Machine Learning systems-challenges in ML Supervised learning - model example- regression models- Classification model example- Logistic regression-unsupervised model example- K -means clustering Artificial . Neural Network Perceptron- Universal Approximation Theorem (statement - only) Multi -Layer P..."
+        },
+        {
+          "no": 2,
+          "summary": "MathematicalFoundationsofAIandDatascience:Roleoflinearalgebra in Data representation and analysis Matrix decomposition- Singular Value – Decomposition (SVD) Spectral decomposition- Dimensionality reduction - technique-Principal Component Analysis (PCA) (Text -1) ."
+        },
+        {
+          "no": 3,
+          "summary": "Applied Probability and Statistics for AI and Data Science: Basics of probability-random variables and statistical measures - rules in probability- Bayes theorem and its applications- statistical estimation-Maximum Likelihood Estimator (MLE) statistical summaries- Correlation analysis- - linear correlation (direct problems only) regression analysis- linear regression - (usingle..."
+        },
+        {
+          "no": 4,
+          "summary": "Basics of Data Science: Benefits of data science-use of statistics and Machine Learning in Data Science- data science process - applications of Machine Learning in Data Science- modelling process- demonstration of ML applications in data science- Big Data and Data Science (For visualization . the software tools like Tableau PowerBI R or Python can be used For , , . Machine Lear..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "GYMAT301",
+      "code": "GYMAT301",
+      "title": "Mathematics for Electrical Science and Physical Science - 3",
+      "category": "Math & Science",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "Basicknowledgein complexnumbers .",
+      "common_note": "Common to B & C Groups",
+      "shared_branches": [
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/GYMAT301.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "FourierIntegral FromFourierseriestoFourierIntegral FourierCosineand , , Sineintegrals FourierCosineandSineTransform Linearity Transformsof , , , Derivatives Fourier Transform and its inverse Linearity Transforms of , , , Derivative . (Text1:Relevanttopicsfromsections117 118 119) . , . , ."
+        },
+        {
+          "no": 2,
+          "summary": "Complex Function Limit Continuity Derivative Analytic functions , , , , , Cauchy-Riemann Equations (without proof) Laplace’s Equations Harmonic , , functions Finding harmonic conjugate Conformal mapping Mappings of , , , w=𝑧ଶ 𝑤=𝑒௭ w=ଵ 𝑤=𝑠𝑖𝑛𝑧 , , ௭, . (Text1:Relevanttopicsfromsections133 134 171 172 174) . , . , . , . , ."
+        },
+        {
+          "no": 3,
+          "summary": "ComplexIntegration:Lineintegralsinthecomplexplane(Definition&Basic properties) First evaluation method Second evaluation method Cauchy’s , , , integraltheorem(withoutproof)onsimplyconnecteddomain Independence , of path Cauchy integral theorem on multiply connected domain (without , proof) CauchyIntegralformula(withoutproof) , . (Text1:Relevanttopicsfromsections141 142 143) . , ..."
+        },
+        {
+          "no": 4,
+          "summary": "Taylor series and Maclaurin series Laurent series (without proof) , , Singularities and Zeros Isolated Singularity Poles Essential Singularities – , , , Removable singularities Zeros of Analytic functions Poles and Zeros , – , Formulas for Residues Residue theorem (without proof) Residue , , Integration- Integral of Rational Functions of cosθ and sinθ . (Text1:Relevanttopicsfro..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "UCHUT346",
+      "code": "UCHUT346",
+      "title": "Economics for Engineers",
+      "category": "Common / Humanities",
+      "semesters": [
+        "S3",
+        "S4"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "2:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "Common to All Branches",
+      "shared_branches": [
+        "CSE",
+        "AIML",
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/UCHUT346.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Basic Economics Concepts Basic economic problems Production - – Possibility Curve Utility Law of diminishing marginal utility Law of – – – Demand Law of supply Elasticity measurement of elasticity and its - – - applications Equilibrium- Changes in demand and supply and its effects – Production function Law of variable proportion Economies of Scale - – – Internal and External Ec..."
+        },
+        {
+          "no": 2,
+          "summary": "Cost concepts Social cost private cost Explicit and implicit cost Sunk – , – – cost - Opportunity cost - short run cost curves - Revenue concepts Firms and their objectives Types of firms Markets Perfect Competition – – - Monopoly Monopolistic Competition Oligopoly (features and – - - equilibriumofafirm)"
+        },
+        {
+          "no": 3,
+          "summary": "Monetary System Money Functions Central Banking –Inflation – – - - Causes and Effects Measures to Control Inflation Monetary and Fiscal – - policies Deflation – Taxation Direct and Indirect taxes (merits and demerits) GST – - National income Concepts Circular Flow Methods of Estimation and – - – Difficulties Stock Market Functions- Problems faced by the Indian stock - – market ..."
+        },
+        {
+          "no": 4,
+          "summary": "Value Analysis and value Engineering Cost Value Exchange Value Use - , , Value , Esteem Value - Aims , Advantages and Application areas of Value Engineering - Value Engineering Procedure - Break -even Analysis - Cost - Benefit Analysis Capital Budgeting Process planning - -"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "UCHUT347",
+      "code": "UCHUT347",
+      "title": "Engineering Ethics and Sustainable Development",
+      "category": "Common / Humanities",
+      "semesters": [
+        "S3",
+        "S4"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "2:0:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "CSE",
+        "AIML",
+        "ECE",
+        "EEE",
+        "ME",
+        "CE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/UCHUT347.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Fundamentals of ethics - Personal vs . professional ethics , Civic Virtue , Respect for others Profession and Professionalism Ingenuity diligence , , , and responsibility Integrity in design development and research domains , , , , Plagiarism , a balanced outlook on law - challenges - case studies , Technology and digital revolution-Data information and knowledge , , , Cybertru..."
+        },
+        {
+          "no": 2,
+          "summary": "Introduction to Environmental Ethics: Definition importance and , historical development of environmental ethics key philosophical theories , (anthropocentrism biocentrism ecocentrism) Sustainable Engineering , , . Principles: Definition and scope triple bottom line (economic social and , , environmental sustainability) life cycle analysis and sustainability metrics , . Ecosyst..."
+        },
+        {
+          "no": 3,
+          "summary": "Hydrology and WaterManagement: Basics of hydrologyand watercycle , Waterscarcityandpollutionissues Sustainablewatermanagementpractices , , Environmental flow disruptions and disasters Zero Waste Concepts and , . Practices: Definition of zero waste and its principles Strategies for waste , reduction reuse reduceand recycling Case studiesof successful zero waste , , , initiatives..."
+        },
+        {
+          "no": 4,
+          "summary": "RenewableEnergyandSustainableTechnologies: Overviewofrenewable energy sources (solar wind hydro biomass) Sustainable technologies in , , , , energy production and consumption Challenges and opportunities in , renewable energy adoption Climate Change and Engineering Solutions: . Basics of climate change science Impact of climate change on natural and , humansystems Kerala/Indiaa..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCEEL307",
+      "code": "PCEEL307",
+      "title": "Circuits and Measurements Lab",
+      "category": "Lab",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:0:3",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL307.pdf",
+      "modules": [],
+      "experiments_count": 22,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "VerificationofSuperpositiontheorem * ."
+        },
+        {
+          "no": "2",
+          "title": "Verificationof (a)Thevenin’stheoremandMaximumPowerTransfertheorem* . (b)CalculationofNorton’sequivalentcircuit(calculationonly) ."
+        },
+        {
+          "no": "3",
+          "title": "Determinationofimpedance admittanceandpowerfactorinRLCseries/parallelcircuit , andtostudytheeffectofreactivecomponentsonpowerfactor ."
+        },
+        {
+          "no": "4",
+          "title": "Measurementoftwoportnetworkparameters ."
+        },
+        {
+          "no": "5",
+          "title": "StepresponseofRLCcircuit(suggestedtouseDSO) ."
+        },
+        {
+          "no": "6",
+          "title": "3 -phase power measurement using one-wattmeter and two-wattmeter methods and , determinationofreactive/apparentpowerdrawn* ."
+        },
+        {
+          "no": "7",
+          "title": "ResistancemeasurementusingWheatstone’sbridgeandextensionofrangeofvoltmeters ."
+        },
+        {
+          "no": "8",
+          "title": "ResistancemeasurementusingWheatstone’sbridgeandextensionofrangeofvoltmeters ."
+        },
+        {
+          "no": "9",
+          "title": "Extensionofinstrumentrangeusinginstrumenttransformers(CTandPT) ."
+        },
+        {
+          "no": "10",
+          "title": "Calibration of 1 -phase Energy meter at various power factors and phantom loading (minimum3conditions)* ."
+        },
+        {
+          "no": "11",
+          "title": "Calibration of 3 -phase Energy meter using standard wattmeter"
+        },
+        {
+          "no": "12",
+          "title": "Determination of B -H curve μ-H curve and μ-B curve of a magnetic specimen , ."
+        },
+        {
+          "no": "13",
+          "title": "Measurement of self inductance Mutual inductance and Coupling coefficient of a 1 -phase , transformer ."
+        },
+        {
+          "no": "14",
+          "title": "MeasurementofCapacitance/Inductance/frequencyusingACbridges ."
+        },
+        {
+          "no": "15",
+          "title": "DeterminationofcharacteristicsofThermalsensors:Thermistor Thermocoupleand , RTD* ."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCEEL308",
+      "code": "PCEEL308",
+      "title": "Analog Electronics Lab",
+      "category": "Lab",
+      "semesters": [
+        "S3"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL308.pdf",
+      "modules": [],
+      "experiments_count": 18,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "Clippingandclampingcircuitsusingdiodes ."
+        },
+        {
+          "no": "2",
+          "title": "Basic RC circuits- High pass and Low pass filters"
+        },
+        {
+          "no": "3",
+          "title": "RC coupled amplifier using BJT in CE configuration-Measurement of gain BW and , plottingoffrequencyresponse ."
+        },
+        {
+          "no": "4",
+          "title": "EmitterFollowerAmplifier"
+        },
+        {
+          "no": "5",
+          "title": "JFET amplifier-Measurement of gain BW and plotting of frequency response , ."
+        },
+        {
+          "no": "6",
+          "title": "MOSFETamplifier"
+        },
+        {
+          "no": "7",
+          "title": "Design and testing of voltage regulators Zener and series –"
+        },
+        {
+          "no": "8",
+          "title": "Design and set up of inverting and non-inverting amplifier ."
+        },
+        {
+          "no": "9",
+          "title": "Op-amps circuits Scale changer adder integrator and differentiator – , , , ."
+        },
+        {
+          "no": "10",
+          "title": "Precision rectifier using Op-amp ."
+        },
+        {
+          "no": "11",
+          "title": "Op- Amp Oscillators RC Phase shift and Wien Bridge Oscillator –"
+        },
+        {
+          "no": "12",
+          "title": "Op Amp Oscillator - LC Oscillators- Colpitts or Hartley Oscillator"
+        },
+        {
+          "no": "13",
+          "title": "Waveform generation– Square triangular and saw tooth waveform generation using , OPAMPs ."
+        },
+        {
+          "no": "14",
+          "title": "Basic comparator and Schmitt trigger circuits using Op-amp (Use comparator ICs such asLM311) ."
+        },
+        {
+          "no": "15",
+          "title": "Active Filters (High Pass and Low pass-one each)"
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCEET402",
+      "code": "PCEET402",
+      "title": "Synchronous & Induction Machines",
+      "category": "Core",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "PCEET303",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET402.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Principle of Operation of 3 -phase alternators classification – - constructional features types of armature windings winding diagram - – of a 3 -phase 12 slot 2 -pole single layer full -pitched armature winding , , , (winding diagram not for evaluation) – coil -span factor and distribution factor (sinusoidal flux distribution only) EMF equation numerical - – problems Cylindrica..."
+        },
+        {
+          "no": 2,
+          "summary": "Power flow equations in cylindrical -rotor type synchronous generator – numericalproblems Parallel operation - synchronous generator on infinite bus-bar – conditions methods of synchronisation effect of change of mechanical input – – – effect of change of excitation - V -curves and inverted V curves – numericalproblems Salient -pole synchronous generator two reaction theory pha..."
+        },
+        {
+          "no": 3,
+          "summary": "3 -phase Induction motor principle of operation classification – - - constructional features torque equation torque-slip characteristics – - – relation between starting torque maximum torque and full -load torque , - numericalproblems Phasor diagram equivalent circuit - Power flow diagram losses and efficiency numerical problems - – No-load and blocked -rotor tests circle diagr..."
+        },
+        {
+          "no": 4,
+          "summary": "Braking of Induction motors plugging dynamic braking regenerative – , , braking(conceptsonly) Speed control stator voltage control V/f control rotor resistance – , , control Induction generator line excited and self -excited induction generators – (principle of operation only) torque-slip characteristics for braking – , motoring and regeneration Single-phase induction motors do..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCEET403",
+      "code": "PCEET403",
+      "title": "SEMSEMESTER-4 COURSE NAME: Power Electronics and Drives",
+      "category": "Core",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "",
+      "course_type": "Theory",
+      "prerequisites": "PCEET303 PCEET304 ,",
+      "common_note": "B Group",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET403.pdf",
+      "modules": [],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PBEET404",
+      "code": "PBEET404",
+      "title": "Digital Electronics",
+      "category": "PBL Core",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:1",
+      "exam_hours": "",
+      "course_type": "PBL",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 8,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBEET404.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Number Systems and Codes binary octal and hexadecimal – , – conversions ASCII code Excess 3 code Gray code BCD code Signed – , – , , numbers 1’s complement and 2’s complement addition and subtraction – – Basic logic gates universal gates TTL CMOS Internal diagram of – – – – TTL NAND gate and CMOS NOR gate comparison of CMOS and TTL – performance . Boolean laws and theorems – Su..."
+        },
+        {
+          "no": 2,
+          "summary": "Combinational circuits half adder and full adder half subtractor and full – , subtractor 4 -bit parallel binary adder/subtractor – . Comparators parity generators and checkers encoders – – – decoders – BCD to seven segment decoder . Multiplexers implementation of boolean expressions using – multiplexers demultiplexers – ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "GBMAT401",
+      "code": "GBMAT401",
+      "title": "Mathematics for Electrical Science - 4",
+      "category": "Math & Science",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "Basiccalculus",
+      "common_note": "",
+      "shared_branches": [
+        "ECE",
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/GBMAT401.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Random variables Discrete random variables and their probability , distributions Cumulativedistributionfunction Expectation Meanand , , , variance Binomial distribution Poisson distribution Poisson , , , distribution as a limit of the binomial distribution Joint pmf of two , discrete random variables Marginal pmf Independent random , , variables Expectedvalueofafunctionoftwodis..."
+        },
+        {
+          "no": 2,
+          "summary": "Continuous random variables and their probability distributions , Cumulative distribution function Expectation Mean and variance , , , Uniform Normal and Exponential distributions Joint pdf of two , , Continuous random variables Marginal pdf Independent random , , variables Expectationvalueofafunctionoftwocontinuousvariables , . [Text1:Relevanttopicsfromsections31 41 42 43 44 5..."
+        },
+        {
+          "no": 3,
+          "summary": "Confidence Intervals Confidence Level Confidence Intervals and , , One-side confidence intervals for a Population Mean for large and small samples (normal distribution and t -distribution) Hypotheses and , TestProcedures TypeIandTypeIIerror zTestsforHypothesesabout , , a Population Mean (for large sample) t Test for Hypotheses about a , Population Mean (for small sample) Tests ..."
+        },
+        {
+          "no": 4,
+          "summary": "Random process concept classification of process Methods of , , Description of Random process Special classes Average Values of , , Random Process Stationarity- SSS WSS Autocorrelation functions , , , and its properties Ergodicity Mean-Ergodic Process Mean-Ergodic , , , Theorem CorrelationErgodicProcess DistributionErgodicProcess , , . [Text2:RelevanttopicsfromChapter6]"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCEEL407",
+      "code": "PCEEL407",
+      "title": "DC Machines & Transformers Lab",
+      "category": "Lab",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "prerequisites": "PCEET303",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL407.pdf",
+      "modules": [],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCEEL408",
+      "code": "PCEEL408",
+      "title": "Branch Name (Branch Code) COURSE NAME: POWER ELECTRONICS and DRIVES LAB",
+      "category": "Lab",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "prerequisites": "PCEET403",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL408.pdf",
+      "modules": [],
+      "experiments_count": 17,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "StaticVIcharacteristicsofPowerDevices Aim: To simulate the static VI characteristics of (a) Power Diode (b) SCR (b) MOSFET (c) IGBT using anysuitablesimulationsoftwareandcomparewithdatasheetvalues"
+        },
+        {
+          "no": "2",
+          "title": "Highfrequencydiode-Measurementofpowerlossandreverserecoverytime Aim: To measure the power losses & reverse recovery time of a high frequency diode compare with , theoreticalestimateandtocomparewithaschottkydiodeofsimilar..."
+        },
+        {
+          "no": "3",
+          "title": "Single-Phase half -wave-controlled rectifier feeding R/RL load Aim: To simulate and set up a half -wave-controlled rectifier with line synchronized R and RC firing circuits and plot relevant waveforms such as voltage wav..."
+        },
+        {
+          "no": "4",
+          "title": "Single-Phase half -controlled(semi -converter)/fully-controlled rectifier feeding R/RL loads Aim: To simulate and set up any type of linesynchronized Triggering circuit such as UJT firing Ramp firing , , Digital firing e..."
+        },
+        {
+          "no": "5",
+          "title": "Effect of source inductance in single-phase controlled rectifier feeding highly inductive loads Aim: To set up a single-phase full controlled rectifier with source inductance for highly inductive loads , , observe releva..."
+        },
+        {
+          "no": "6",
+          "title": "Single-Phase half -controlled/fully-controlled Rectifier fed PMDC/Separately excited DC motor drive Aim: To simulate and set up a single-phase half -controlled/full controlled rectifier feeding a PMDC/SEDC motor (additio..."
+        },
+        {
+          "no": "7",
+          "title": "ACVoltagecontrollerfeedingR/RLloads Aim: To set up a single-phase AC voltage controller using TRIAC/SCR and to observe relevant waveforms suchasvoltagewaveformsacrosstheload(R/RLLoad)&TRIAC/SCR gatevoltage gatecurrentetc..."
+        },
+        {
+          "no": "8",
+          "title": "IsolatedGateDriverCircuitforSingle-phasehalf -BridgeIGBT/MOSFETInverter Aim: (a) To identify the gate current and voltage requirement to drive the MOSFET/IGBT in a half -bridge configuration for a certain switching frequ..."
+        },
+        {
+          "no": "9",
+          "title": "GatedriveusingBootstraptechnique Aim: To identify the gate current and voltage requirement to drive the MOSFET/IGBT with boot -strap technique for a certain switching frequency understand the merits & pertinent limitatio..."
+        },
+        {
+          "no": "10",
+          "title": "Single-phasehalf -bridge/full -bridgeIGBT/MOSFETinverterfeedingRLload Aim: To simulate and set up a single-phase half -bridge inverter with L/LC filter for square wave and sine- trianglePWM observerelevantwaveformsandobt..."
+        },
+        {
+          "no": "11",
+          "title": "InductordesignandFabrication Aim:Todesignandfabricateaninductortobeusedinahighfrequencyswitchingapplicationand measure theinductancevalueusingtimeconstantmeasurement/LCRmeter Note:Theinductormaybedesignedtakingintoaccoun..."
+        },
+        {
+          "no": "12",
+          "title": "Designandset -upabuck/boost/buck -boostconverter (MandatoryExperiment) Aim: (a) Design simulate and set up a buck/boost/buck -boost converter (continuous conduction mode) and , observe relevant waveforms (b) Compare the ..."
+        },
+        {
+          "no": "13",
+          "title": "SpeedcontrolofPermanentMagnet/Separately-ExcitedDCmotorusingchopperdrive Aim: To simulate and set up a One-quadrant/Two-quadrant DC chopper to control the speed of a PMDC/SEDCmotorforoperationincontinuousconductionandobs..."
+        },
+        {
+          "no": "14",
+          "title": "Three-phaseIGBT/MOSFETinverterfeedingRLLoad Aim: To simulate and set up (Demo is sufficient) a three-phase inverter for (a) sine-triangle PWM (b) third -harmonic (or triple-n harmonic) injection PWM and observe relevant ..."
+        },
+        {
+          "no": "15",
+          "title": "StatorVoltagecontrolofThree-PhaseInductionMotor Aim: To set up (Demo is sufficient) a three-phase induction motor drive using stator voltage control and observerelevantwaveforms&THD(Simulationmaybeusedtogetmoreinsights) ..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PEEET411",
+      "code": "PEEET411",
+      "title": "Electronic Instrumentation",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCEET205",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET411.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Functional elements of electronic instrumentation system Calibration – methods:Static Dynamic Field Traceable Master , , , , . Transducers- Classification-Criteria for selection- Static and dynamic characteristics- Zeroth and first order instruments and time responses . Resistive transducersforliquidlevelandhumidity Inductive transducers- types and basic principles- LVDT synchr..."
+        },
+        {
+          "no": 2,
+          "summary": "Signal conditioning for instrumentation systems: Voltage to Current Converter Transducer bridges: null type and deflection bridges AC , , bridgesusingpushpulltransducers Amplifiers: Instrumentation amplifiers- charge amplifiers- isolation amplifier Roleoffilters: Lowpass high pass bandpassandbandrejectionfilters , , , Introductiontodigitalfilters Data Transmission- Types of Tel..."
+        },
+        {
+          "no": 3,
+          "summary": "Display methods and devices: Different types of display –display system buildingblocks . Data Presentation Element: Recorders-Strip Chart Recorder , Potentiometric Recorder X -Y Recorder Magnetic recorder Digital , . , recorders- Data logger Experiments and statistical analysis: Performance of experiment - characteristics of experimental data- description of dispensed data- typ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET412",
+      "code": "PEEET412",
+      "title": "Renewable Energy Sources",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET412.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: Principles of renewable energy; energy and sustainable development fundamentals and social implications Worldwide , . renewable energy availability renewable energy availability in India , , typesofrenewableenergy . WindEnergy:Propertiesofwind availabilityofwindenergyinIndia , , wind velocity and power from wind (numerical problems); major problems associated with..."
+        },
+        {
+          "no": 2,
+          "summary": "Solar Energy: Fundamentals; Solar Radiation; Estimation of solar radiation on horizontal and inclined surfaces; Solar radiation Measurements Pyrheliometers Pyranometer Sunshine Recorder - , , . Solar Thermal systems: concentrating and non-concentrating collectors - Flat plate collectors; Solar tower electric power plant . Photovoltaic system for electric power generation – Clas..."
+        },
+        {
+          "no": 3,
+          "summary": "BiomassEnergy:Introduction;Principleofbiomassenergygeneration Biofuels; Biomass Resources; Biomass conversion technologies-fixed - dome type biogas plant; Urban waste to energy conversion; Biomass gasification(Downdraft) . Tidal Power: Tides and waves as energy suppliers and their mechanics; fundamental characteristics of tidal power classification , of tidal power plants - har..."
+        },
+        {
+          "no": 4,
+          "summary": "Ocean Thermal Energy Conversion: Principle of working , classification OTECpowerstationsintheworld environmentalimpacts , , associatedwithOTEC . Introductiontogeothermalenergy Green Energy: Introduction Fuel cells: Classification of fuel cells , – Hydrogen energy; Operating principles Zero-energy Concepts Benefits , . of hydrogen energy hydrogen production technologies (electro..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET413",
+      "code": "PEEET413",
+      "title": "Mathematics for Machine Learning",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET413.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "LINEAR ALGEBRA: Systems of Linear Equations Matrices Solving – , Systems of Linear Equations Vector Spaces –Vector Spaces Linear . , Independence Basis and Rank Linear Mappings Matrix Representation of , . – LinearMappings BasisChange ImageandKernel , , ."
+        },
+        {
+          "no": 2,
+          "summary": "ANALYTIC GEOMETRY MATRIX DECOMPOSITIONS: Norms Inner , , Products Lengths and Distances Angles and Orthogonality Orthonormal , , , Basis Orthogonal Complement Orthogonal Projections Projection into One , , – Dimensional Subspaces Projection onto General Subspaces Gram-Schmidt , , Orthogonalization . Determinant and Trace Eigenvalues and Eigenvectors Cholesky , , Decomposition E..."
+        },
+        {
+          "no": 3,
+          "summary": "VECTOR CALCULUS: Differentiation of Univariate Functions Partial - DifferentiationandGradients GradientsofVectorValuedFunctions , , GradientsofMatrices UsefulIdentitiesforComputingGradients Back , . propagation and Automatic Differentiation Gradients in Deep Network – , Automatic Differentiation Higher Order Derivatives- Linearization and . MultivariateTaylorSeries ."
+        },
+        {
+          "no": 4,
+          "summary": "Probability and Distributions: Construction of a Probability Space - Discrete and Continuous Probabilities Bayes’ Theorem Summary Statistics and , . Independence Gaussian Distribution Conjugacy and the Exponential – - Family Change of Variables/Inverse Transform - . Optimization: Optimization Using Gradient Descent Gradient Descent With - Momentum Constrained Optimization and L..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET414",
+      "code": "PEEET414",
+      "title": "Theory of Computation",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET414.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to formal language theory– Alphabets Strings , , Concatenationofstrings , Languages Regular Languages Deterministic Finite State Automata . - (DFA) (Proof of correctness of construction not required) , Nondeterministic Finite State Automata (NFA) Equivalence of DFA and , NFA RegularGrammar(RG) EquivalenceofRGsandDFA , , ."
+        },
+        {
+          "no": 2,
+          "summary": "Regular Languages -Regular Expression (RE) Equivalence of REs and , DFA Homomorphisms Necessary conditions for regular languages , , , Closure Properties of Regular Languages DFA stateminimization (No , proof required) .Context Free Grammar (CFG) CFG representation of - ContextFreeLanguages(proofofcorrectnessisrequired) derivationtrees , andambiguity NormalformsforCFGs ,"
+        },
+        {
+          "no": 3,
+          "summary": "Context -Free Languages -Nondeterministic Pushdown Automata (PDA) , Deterministic Pushdown Automata (DPDA) Equivalence of PDAs and , CFGs (Proof not required) Pumping Lemma for Context -Free , Languages (Proofnotrequired) ClosurePropertiesofContextFreeLanguages ,"
+        },
+        {
+          "no": 4,
+          "summary": "Context Sensitive Languages Context Sensitive Grammar (CSG) Linear - , BoundedAutomata . Turing Machines Standard Turing Machine Robustness of Turing - , Machine Universal Turing Machine Halting Problem Recursive and , , , Recursively Enumerable Languages Chomsky classification of . formallanguages"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET416",
+      "code": "PEEET416",
+      "title": "Computer Organization",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET416.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Basic Structure of computers –functional units basic operational - concepts - bus structures . Memory locations and addresses -memory operations Instructions and instruction sequencing addressing modes , , . Basic processing unit fundamental concepts instruction cycle – – – execution of a complete instruction -single bus and multiple bus organization ."
+        },
+        {
+          "no": 2,
+          "summary": "Register transfer logic: Inter register transfer arithmetic logic and shift – , micro-operations . Processor logic design: - processor organization – Arithmetic logic unit - design of arithmetic circuit design of logic circuit Design of arithmetic - – logic unit - status register – design of shifter - processor unit – design of accumulator(BasicConceptOnly) ."
+        },
+        {
+          "no": 3,
+          "summary": "Control Logic Design:Hardwired control -microprogrammed control - Microinstructions MicroprogramSequencing , . Arithmetic algorithms: Signed -Operand multiplication Booth Algorithm , , fast multiplication-bit pair recoding of multipliers . Pipelining:Basicprinciples classificationofpipelineprocessors instruction , , and arithmetic pipelines (Design examples not required) hazard..."
+        },
+        {
+          "no": 4,
+          "summary": "Memory system: Types of memory(Concepts only)Virtual memory , , Content addressable memory , cache memories - mapping functions . I/O organization: Characteristics of I/O devices Data transfer schemes , - Programmed controlled I/O transfer Interrupt controlled I/O transfer , . Organization of interrupts vectored interrupts Servicing of multiple - – input/output devices – Pollin..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET417",
+      "code": "PEEET417",
+      "title": "Solid State Devices",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "GYEST104",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET417.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Wave shaping circuits: First order RC low pass and high pass filters , Differentiator and Integrator Diode clipping circuits Diode clamping , , circuits Voltagemultipliers , Transistor biasing: Concept of DC and AC load lines Types -Fixed bias , circuit Self -bias voltage divider bias Bias stabilization , , , . Switching Circuits: Astable Bistable and Monostable multivibrators ..."
+        },
+        {
+          "no": 2,
+          "summary": "BJT amplifiers: RC coupled amplifier –Design Voltage gain and , frequency response . Small signal analysis of CE configuration - small signal hybrid -pi model for mid and low frequency (Gain Input and output , impedance) High frequency equivalent circuits of BJT Miller effect . , , AnalysisofhighfrequencyresponseofCEamplifier . Multistage amplifiers Cascade and Cascode amplifie..."
+        },
+        {
+          "no": 3,
+          "summary": "MOSFETs - MOSFET as an amplifier , Biasing of p-channel and n- channel MOSFET circuits Small signal equivalent circuit Small signal , , Voltage gain current gain input and output impedances of CS , , configuration CSstage withdiodeconnectedload , . Feedback topologies: Effect of positive and negative feedback on gain , frequency response and distortion Feedback topologies and i..."
+        },
+        {
+          "no": 4,
+          "summary": "Oscillators: Introduction Barkhausen criterion Classification of , , oscillators RC phase shift Wien bridge Hartley Colpitts and Crystal oscillators - , , , (working principle and design equations of the circuits only) Analysis of . RCphaseshiftoscillator . Power amplifiers: Classification Transformer coupled class A power , amplifier push pull class B and class AB power amplif..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET418",
+      "code": "PEEET418",
+      "title": "Illumination Technology",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "GBPHT121 , GYEST104",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET418.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Light: Electromagnetic radiation Visible spectrum Human , , eye and light perception Visible light production by black body radiation , andemissionspectrum Daylighting Artificiallighting , , . Qualities of good lighting Factor affecting the lighting Glare , – (Discomfort and disability glare) Visual comfort probability (VCP) and , Unified glare rating (UGR) to m..."
+        },
+        {
+          "no": 2,
+          "summary": "Measurements of Light : Definitions and units – Luminous flux & Lumen , luminous intensity & Candela illuminance& Lux Luminance , , &Candela/m2 luminous efficacy colour temperature Candle power , , , . MHCP MSCP and MHSCP of lamp Efficiency of a lamp . . . ., . . . . . . . . . , , ConceptofCIE1931colourspace Laws of illumination – Inverse square law of illumination , Lambert’s ..."
+        },
+        {
+          "no": 3,
+          "summary": "Design of Interior Lighting: Definitions of maintenance factor Uniformity , ratio Direct ratio Coefficients of utilisation and factors affecting it , , , Illuminationrequiredforvariousworkplanes Typesoffixturesandrelative , terms used for interior illumination such as DLOR and ULOR Selection of , lamp and luminance Selection of utilisation factor reflection factor and , , maint..."
+        },
+        {
+          "no": 4,
+          "summary": "Design of Outdoor Lighting: Street Lighting Types of street and their - level of illumination required Terms related to street lighting Types of , , fixtures used and their suitable application Various arrangements in street , lighting Requirements of good street lighting Selection of lamp and , , luminaire Calculationofilluminationlevelavailableonroad , . Flood Lighting: Terms..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET419",
+      "code": "PEEET419",
+      "title": "Object Oriented Programming",
+      "category": "Program Elective",
+      "semesters": [
+        "S4"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "GBEST204 ProgramminginC",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET419.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: Approaches to Software Design Functional Oriented Design Object - , OrientedDesign CaseStudyofAutomatedFireAlarmSystem , . Object Modeling Using Unified Modeling Language (UML) Basic – Object -Oriented concepts UML diagrams Use case Diagram Class , , , diagram . Introduction to Java - Java Buzzwords , Java program structure , Java compiler Bytecode Java Virtual Ma..."
+        },
+        {
+          "no": 2,
+          "summary": "CoreJavaFundamentals: Primitive Data types Integers Floating Point Types Characters Boolean - , , , . TypeConversionandCasting Variables Arrays Strings , , , . Operators Arithmetic Operators Bitwise Operators Relational Operators - , , , Boolean Logical Operators Assignment Operator Conditional (Ternary) , , Operator OperatorPrecedence , . Control Statements Selection Statement..."
+        },
+        {
+          "no": 3,
+          "summary": "MorefeaturesofJava: Packages Defining Package Importing Packages - , . Access Control -public private protected , , . Exception Handling Checked Exceptions Unchecked Exceptions try - , , Block and catch Clause Multiple catch Clauses Nested try Statements , , , throw throwsandfinally , . Multithreaded programming-Thread model Creating threads Creating , , multiplethreads threads..."
+        },
+        {
+          "no": 4,
+          "summary": "GraphicalUserInterfaceandDatabasesupportofJava: Swings fundamentals Swing Key Features Model View Controller - , (MVC) Components and Containers Swing Packages Swing Layout , , , Managers . Event Handling in Swings: Delegation event model event handling using , swing components-JFrame JLabel JButton JTextField , , , . Java DataBase Connectivity (JDBC) JDBC architecture Creating..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCEET501",
+      "code": "PCEET501",
+      "title": "Power Generation, Transmission and Protection",
+      "category": "Core",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "PCEET302",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET501.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Generation from renewable and non-renewable sources – Hydro thermal nuclear- (block schematic details environmental and , , , ethicalfactors advantages disadvantages) , , Solar and wind (block schematic details environmental factors - , , regulations advantages disadvantages) , , Energy storage systems as alternative energy sources – BESS , CESS , thermalSS Load curve – Load du..."
+        },
+        {
+          "no": 2,
+          "summary": "Power Transmission System (Electrical Model) Line parameters - - – resistance inductance and capacitance (Derivation of three phase double - circuit) Transmission line modelling classifications (concept only) transmission - – line as two port network – derivation and calculation of ABCD parameters (derivationandnumericalproblems) Skin Effect & Ferranti Effect Corona (qualitativ..."
+        },
+        {
+          "no": 3,
+          "summary": "IntroductiontoEHVACandHVDC:Principle advantages/disadvantages , Underground cables ratings classification Capacitance of cables – - - – grading 2 types – AC Distribution systems connection schemes radial and ring main – – systems single phase only (numerical problems) – Method of power factor improvement using capacitors (numerical problems) Tariff different types - Introductio..."
+        },
+        {
+          "no": 4,
+          "summary": "Need for protection- Types of protection schemes – primary and back -up Protective relays – Basics of typical electromechanical relay induction type only – Static(blockdiagramsofo/candinstantaneouso/crelays) Microprocessor(blockdiagramandflowchartofo/crelay) FundamentalsofNumericalrelay Principlesofovercurrent directional distanceanddifferential , , Circuit breakers – operating..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCEET502",
+      "code": "PCEET502",
+      "title": "Electromagnetic Theory",
+      "category": "Core",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:1:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "GBMAT201",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET502.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Mathematical Preliminaries : Rectangular Cylindrical and , Spherical Coordinate Systems Representation of Point Unit vector - , , Vector Constantsurfaces Transformationofpoints unitvectorsand , , , vectors among the three coordinate systems - Transformation matrices Del operator Representation in the three coordinate , - systems Gradient of scalar field Physical meaning of grad..."
+        },
+        {
+          "no": 2,
+          "summary": "Electrostatic Fields in material media :Gauss’s law point form - , Electric potential Relation between E and V Field due to electric , , dipole Energy density in static electric fields Conduction and , , Convection Current Ohm’s law in point form Resistance , , , Capacitance of parallel plate capacitor Coaxial and Spherical , capacitors Continuityequation Boundaryconditions Poi..."
+        },
+        {
+          "no": 3,
+          "summary": "MagnetostaticsinMaterialMedia:Forceonachargedparticledue to a magnetic field Force between two current carrying conductors , , MagneticTorqueandMoment Magnetizationinmaterials Magnetic , , boundary conditions Inductance Energy stored in magnetostatic , , fields . Electromagnetic Induction and Maxwell Heaviside Equations: - Faraday’s law Transformer emf and Motional emf Displace..."
+        },
+        {
+          "no": 4,
+          "summary": "ElectromagneticWaves:Timevaryingpotentials Wavesingeneral , , Electromagneticwaves Wavepropagationinlossydielectrics Plane , , waves in free space conductors skin effect Power Poynting , , , , theorem Reflectionofplanewaveatnormalincidence , . Transmission Lines: Transmission line equations Characteristic , impedance Inputimpedance Standingwaveratio , , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCEET503",
+      "code": "PCEET503",
+      "title": "Signals and Systems",
+      "category": "Core",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "Mathematicsfor ElectricalScience",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET503.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "IntroductiontoSignalsandSystems: ElementarySignals Classificationandrepresentationofcontinuoustime , anddiscretetimesignals Signaloperations (3hours) , . Conceptofsystem:Continuoustimeanddiscretetimesystems; Properties of systems: Time invariance Linearity Causality Systems , , , withandwithoutmemory Stability (3hours) , . ConvolutionIntegralandsum (2hours) . Impulseandstepresp..."
+        },
+        {
+          "no": 2,
+          "summary": "FrequencydomaincharacterizationofSignalsandSystems: Fourier transform: Existence Properties of Continuous time Fourier - transform; Concept of Frequency response; Significance of Fourier transformanddifferencefromFourierseries (3hours) . ReviewofLaplaceTransforms . CharacterizationofLTIsystems:Differentialequationrepresentationof continuous time LTI systems Transfer function re..."
+        },
+        {
+          "no": 3,
+          "summary": "SampledDataSystemsandZ -Transform: Sampling process - Impulse train sampling-sampling theorem- Aliasing effect (2hour) . Zero-order and First -order hold circuits Signal reconstruction (2 hours) - . Z -Transform: Region of convergence- Properties of Z -Transform Inverse Z -Transform Pulse transfer function Difference equations representation . . using Z -transform and it’s solu..."
+        },
+        {
+          "no": 4,
+          "summary": "DynamicSystemRepresentationandStability: Openloopandclosedloopsystems Effectoffeedbackin systems Block . . diagram representation block diagram reduction Signal flow graph - . - Mason'sgainformula (5hours) . Type and Order of the systems Pole-Zero representation of systems - . Characteristicequation Routhstabilitycriterion (3hours) . ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PBEET504",
+      "code": "PBEET504",
+      "title": "Electrical and Electronics Engineering (EE) MICROPROCESSORS and EMBEDDED SYSTEMS",
+      "category": "PBL Core",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:1",
+      "exam_hours": "",
+      "course_type": "PBL",
+      "prerequisites": "PBEET304 GBE, PBEET404 S T204 ,",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBEET504.pdf",
+      "modules": [],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCEEL507",
+      "code": "PCEEL507",
+      "title": "AC Machines Lab",
+      "category": "Lab",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Lab",
+      "prerequisites": "PCEET402",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 7,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL507.pdf",
+      "modules": [],
+      "experiments_count": 14,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "Load test on a 3 -phase squirrel -cage induction motor (CO1) Objectives: a) Start the motor using star-delta starter / auto-transformer starter b) Determinetheperformancecharacteristics"
+        },
+        {
+          "no": "2",
+          "title": "Loadtestona3 -phaseslip-ringinductionmotor(CO1) Objectives: a) Start the motor using rotor resistance starter / auto-transformer starter b) Determinetheperformancecharacteristics"
+        },
+        {
+          "no": "3",
+          "title": "No-loadandblocked -rotortestsona3 -phasesquirrel -cageinductionmotor(CO1) Objectives: a) Determinetheequivalentcircuitparameters b) Predetermineitsperformanceatratedspeedfromequivalentcircuit c) Predetermine its performa..."
+        },
+        {
+          "no": "4",
+          "title": "No-loadandblocked -rotortestson3 -phasepole-changinginductionmotor(CO1) Objectives: a) Conduct no-load and blocked -rotor tests in two different pole configurations (example4poleand8pole) b) Predetermine its performance ..."
+        },
+        {
+          "no": "5",
+          "title": "Variationofstartingtorquewithrotorresistancein3 -phaseslip-ringinduction motor(CO1) Objectives: a) Plotthevariationofstartingtorqueagainstrotorresistance b) Determinetheexternalrotorresistanceforwhichmaximumstartingtorqu..."
+        },
+        {
+          "no": "6",
+          "title": "Braketeston1 -phaseinductionmotor(CO6) Objectives: Plottheperformancecharacteristics"
+        },
+        {
+          "no": "7",
+          "title": "No-loadandblocked -rotortestson1 -phaseinductionmotor(CO6) Objectives: a) Determinetheequivalentcircuit b) Predetermine the efficiency on full -load from equivalent circuit"
+        },
+        {
+          "no": "8",
+          "title": "3 -phaseinductionmachineworkingasmotorandgenerator(CO2) Objectives: Determine the performance of 3 -phase induction machine working as motor and generator"
+        },
+        {
+          "no": "9",
+          "title": "Speedcontrolof3 -phasesquirrel -cageinductionmotorusingV/ftechnique(CO3) Objectives: Perform the speed control of a 3 -phase squirrel -cage induction motor by varying supplyvoltageandfrequency"
+        },
+        {
+          "no": "10",
+          "title": "Voltageregulationof3 -phasesynchronousgeneratorbyEMFandMMFmethod (CO4) Objectives: a) ConductOCandSCtests . b) Predetermine the full -load voltage regulation at different power factors ."
+        },
+        {
+          "no": "11",
+          "title": "Voltageregulationof3 -phasesynchronousgeneratorbydirectloading(CO4) Objectives: a) Determine the voltage regulation at full -load or half full -load at any power factor . b) Comparethevoltageregulationwithemfmethod ."
+        },
+        {
+          "no": "12",
+          "title": "Voltageregulationof3 -phasesynchronousgeneratorbyPotiermethod(CO4) Objectives: a) ConductOC SCandZPFCtests , . b) Predetermine the full -load voltage regulation at different power factors ."
+        },
+        {
+          "no": "13",
+          "title": "VcurvesandInvertedVcurvesofsynchronousmachines(CO5) Objectives: a) Synchronise the 3 -phase alternator using dark lamp or bright lamp method b) Plot the V curves and inverted V curves of synchronous motor on no-load and ..."
+        },
+        {
+          "no": "14",
+          "title": "Slipteston3 -phasesalient -polesynchronousmachines(CO4) Objectives: a) Determine direct -axis and quadrature-axis synchronous reactances b) Predetermine the full -load voltage regulation at different power factors c) Pre..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCEEL508",
+      "code": "PCEEL508",
+      "title": "Engineering (EE) Electrical and Electronics MICROPROC CESSOR and EMBEDDED SYSTEMS LAB",
+      "category": "Lab",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "",
+      "honours_option": false,
+      "cie": "0",
+      "ese": "2",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "",
+      "course_type": "Lab",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 6,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL508.pdf",
+      "modules": [],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET521",
+      "code": "PEEET521",
+      "title": "Energy Storage Systems",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET521.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Need and role of energy storage systems in power system General , considerations Energy and power balance in a storage unit , , Mathematical model of storage system: modelling of power transformation system (PTS) -Central store (CS) and charge–discharge controlsystem(CDCS) Econometricmodelofstoragesystem , . Thermal energy: General considerations -Storage media- Containment - T..."
+        },
+        {
+          "no": 2,
+          "summary": "Kinetic energy: Mechanical - Flywheel , Power to Gas: Hydrogen- Synthetic methane Electro chemical energy: Batteries-Battery . parameters: C -rating– SoC – DoD -Specific Energy- Specific power (numerical examples) Fuel cells Electrostatic energy (Super , , Capacitors) Electromagnetic energy (Superconducting Magnetic , Energy Storage) Comparative analysis Environmental impacts o..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET522",
+      "code": "PEEET522",
+      "title": "ELECTRIC VEHICLES PEEET522 CIE Marks",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "2:1:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "PCEET303 PCEET304 , PCEET403",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET522.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Conventional Vehicles: Basics of vehicle performance Vehicle power , sourcecharacterization Transmissioncharacteristics(1hr) , . Introduction to Electric Vehicles: History of electric vehicles , Classificationofelectricvehicles OverviewofEVchallenges Overviewof . . EV technologies-motor drive technology energy source technology , , battery charging technology vehicle-to-grid te..."
+        },
+        {
+          "no": 2,
+          "summary": "DC Drives:Motoring using a PM DC Machine - DC motor electric drive using DC -DC converter - Generating/Braking using a PM DC Machine . (3hrs) PMSM Drives: Review of PMSM motor basics Independent control of – orthogonal flux and torque (concept only) Field Oriented Control (FOC) - – Sensoredandsensorlesscontrol(blockdiagramonly) (4hrs) . Sizing the drive system: Matching the ele..."
+        },
+        {
+          "no": 3,
+          "summary": "Battery based energy storage systems: Types of battery-battery parameters-units of battery energy storage - capacity rate , - cell voltage - specific energy - cycle life - self -discharge- static battery equivalent circuit model series-parallel battery pack equivalent circuits .(3hrs) - Other storage topologies: Fuel Cell based energy storage systems- Supercapacitors- Flywheel ..."
+        },
+        {
+          "no": 4,
+          "summary": "Overview of Electric Vehicle Battery Chargers–Types of chargers-On- board chargers Off board chargers Wireless charger Electric Vehicle , - , . Supply Equipment (EVSE) Grid to EVSE to On-board chargers to battery - pack power flow block schematic diagrams – V2G concept(3hrs) Types of charging stations AC Level 1 & 2 DC Level 3 -Types of - , - Connectors CHAdeMO CCS Type1 and 2 ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET523",
+      "code": "PEEET523",
+      "title": "Digital System Design",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET523.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "ClockedSynchronousNetworks Analysis of ClockedSynchronousSequential , Networks(CSSN) ModellingofCSSN Stateassignmentandreduction Design , , , ofCSSN ."
+        },
+        {
+          "no": 2,
+          "summary": "ASMChartanditsrealization . Asynchronous Sequential Circuits Analysis of Asynchronous Sequential , Circuits(ASC) Flowtablereduction RacesinASC Stateassignmentproblem , , , andthetransitiontable ."
+        },
+        {
+          "no": 3,
+          "summary": "Hazards static and dynamic hazards in combinational networks Essential – , Hazards DesignofHazardfreecircuits Datasynchronizers Mixedoperating , , , mode asynchronous circuits Practical issues- clock skew and jitter , , Synchronousandasynchronousinputs . Faults: Fault table method path sensitization method Boolean difference – – method ."
+        },
+        {
+          "no": 4,
+          "summary": "VLSI Design flow: Design entry: Schematic Data types and objects different , , modelling styles in VHDL Dataflow Behavioural and Structural Modelling - , . VHDLconstructsandcodesforcombinationalandsequentialcircuits ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET524",
+      "code": "PEEET524",
+      "title": "Software Engineering",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET524.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Software Engineering: Introduction to Software Engineering Professional software development Software engineering - , ethics . Software process models - The waterfall model , Incremental development Process activities Software specification Software design . - , andimplementation Softwarevalidation Softwareevolution Copingwith , , . change Prototyping Incrementa..."
+        },
+        {
+          "no": 2,
+          "summary": "Requirement Analysis and Design: Functional and non-functional requirements Requirements engineering processes Requirements , . elicitation Requirements validation Requirements change Traceability , , , Matrix Developing use cases Software Requirements Specification . , Template Personas Scenarios User stories Feature identification , , , , . Design concepts Design within the c..."
+        },
+        {
+          "no": 3,
+          "summary": "ImplementationandTesting(12hours) Object -oriented design using the UML Design patterns Implementation , , issues Open-source development Open-source licensing GPL LGPL , - - , , BSD Review Techniques Cost impact of Software Defects Code review . - , and statistical analysis Informal Review Formal Technical Reviews Post . , , - mortem evaluations Software testing strategies Uni..."
+        },
+        {
+          "no": 4,
+          "summary": "Software Project Management: Software Project Management Risk - management Managing people Teamwork Project Planning Software , , . , pricing Plan-driven development Project scheduling Agile planning , , , . Estimation techniques COCOMO cost modeling Configuration , . management Version management System building Change , , , management Release management Agile software managem..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET526",
+      "code": "PEEET526",
+      "title": "Data Structures",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30 Min . .",
+      "course_type": "Elective",
+      "prerequisites": "UCEST105 GBEST204 ,",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET526.pdf",
+      "modules": [
+        {
+          "no": 3,
+          "summary": "Trees and Graphs: Trees Binary Trees-Tree Operations Binary Tree , , Representation TreeTraversals BinarySearch , , Trees- Binary Search Tree Operations Graphs Representation of Graphs Depth First Searchand Breadth First , , SearchonGraphs ApplicationsofGraphs ,"
+        },
+        {
+          "no": 4,
+          "summary": "Sorting and Hashing: Sorting Techniques Selection Sort Insertion Sort – , , QuickSort MergeSortandHeapSort , Hashing- Hashing Techniques Collision Resolution Overflow handling , , , Hashing functions – Mid square , Division , Folding , Digit Analysis"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET527",
+      "code": "PEEET527",
+      "title": "Introduction to Machine Learning",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "GYEST305 , UCEST105",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET527.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Mathematics for Machine Learning Association of two variables . - - Discrete variables Ordinal and Continuous variable Probability calculus , , - Summary Statistics probability distributions Inductive statistics Point , , - estimation Interval estimation Hypothesis Testing Basic definitions t -test , , - , , F -test ANOVA ,"
+        },
+        {
+          "no": 2,
+          "summary": "Introduction to machine learning algorithms - supervised vs . unsupervisedlearning regressionandclassification lineardiscriminant , , analysis decision trees random forests and bagging Unsupervised , , , . - Principal Component Analysis clustering algorithms SVMs re-sampling , , , methods: cross-validation and bootstrapping"
+        },
+        {
+          "no": 3,
+          "summary": "IntroductiontopythonforML -essentialpythonlibrariesandML functions (NumPy pandas Matplotlib SciKit -Learn) working with data sets , , , , data cleaning and pre-processing functions Data visualization- bar scatter – , , , histogram heatmaps , ."
+        },
+        {
+          "no": 4,
+          "summary": "MLalgorithmimplementationwithpython- LinearRegressionSimple andmultiplelinearregression Modelevaluationmetrics:MSE RMSE R² , , , , Classification Algorithms Logistic regression k -Nearest Neighbours (k - , - NN) DecisionTrees Modelevaluationmetrics:accuracy precision recall , , , , , F1 -score Support Vector Machines (SVM) Ensemble methods (Random , , Forest Gradient Boosting) ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET528",
+      "code": "PEEET528",
+      "title": "Computer Network Systems",
+      "category": "Program Elective",
+      "semesters": [
+        "S5"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET528.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction Uses of computer networks Network hardware Network – , , software Protocol hierarchies Design issues for the layers Connection - – – oriented versus connectionless service . Reference models – The OSI reference model The TCP/IP reference model Comparison of OSI and TCP/IP , , referencemodels . Physical Layer –Transmission media overview Twisted pair and fiber – opt..."
+        },
+        {
+          "no": 2,
+          "summary": "Data link layer Data link layer design issues Error detection and correction - , , Slidingwindowprotocols . Medium Access Control (MAC) sublayer Channel allocation problem , , Multiple access protocols – CSMA , Collision free protocols . Ethernet Switched Ethernet fast Ethernet and gigabit Ethernet – , . Wireless LANs 802 .11 Architecture and protocol stack Use of Bridges - – ,..."
+        },
+        {
+          "no": 3,
+          "summary": "Network layer design issues Routing algorithms The Optimality Principle . - , Shortestpathrouting Flooding DistanceVectorRouting LinkStateRouting , , , , Routingformobilehosts . Congestion control algorithms Approaches to congestion control (Details – not required) Quality of Service (QoS) Requirements Techniques for . - , achieving good QoS Traffic shaping Packet scheduling – ..."
+        },
+        {
+          "no": 4,
+          "summary": "Transport service – Services provided to the upper layers , Transport service primitives User Datagram Protocol (UDP) Introduction Remote . – , procedure call ELECTRICAL AND ELECTRONICS Transmission . Control Protocol (TCP) Introduction TCP service model TCP protocol – , , , TCP segment header Connection establishment & release Application , . Layer –Domain Name System (DNS) – ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCEET601",
+      "code": "PCEET601",
+      "title": "Control Systems",
+      "category": "Core",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "PCEET503",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET601.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "IntroductiontoControlSystemsanditstimedomainanalysis Review of Open loop and Closed loop control systems; Automatic control systems;Necessityandsignificance (Notforevaluation) . (1hour) Timedomainanalysisofcontrolsystems:ImpulseandStepresponsesoffirst and second order systems Pole dominance for higher order systems Time - . domainspecifications (4hours) . Error analysis: Steady..."
+        },
+        {
+          "no": 2,
+          "summary": "RootLocusAnalysisandControllers: Root locus technique: Construction of Root locus stability analysis- effect - ofadditionofpolesandzeros;EffectofpositivefeedbacksystemsonRoot locus (5hours) . Controller design: Types of controllers and their control action- proportional(P) integral(I) derivative(D) PIDcontrol PIDtuningusing , , , . Ziegler-Nichols method (2 hours) ."
+        },
+        {
+          "no": 3,
+          "summary": "Frequencydomainanalysis: Bode Plot: Construction Concept of gain margin and phase margin-stability , analysis (4hours) . Frequency domain specifications correlation between time domain and - frequencydomainresponses(Resonantpeakandresonantfrequency) . Introductiontocompensators (Conceptonly) (2hours) . . Polarplot:Gainmarginandphasemargin Stabilityanalysis , . (2hours) Nyquists..."
+        },
+        {
+          "no": 4,
+          "summary": "Statespacerepresentationofsystems: Introduction to state-space modelling: State variables state equations State , . variablerepresentationofelectricalsystems (2hours) . Relationship between State space and Transferfunction models: Derivation of transfer functions from state equations Controllable Observable and . , Diagonal/Jordancanonicalforms . Introductiontosimilaritytransfo..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCEET602",
+      "code": "PCEET602",
+      "title": "Electrical System Design and Estimation",
+      "category": "Core",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Theory",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEET602.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Awareness on IS Codes - IS 732 , IS 3043 , IS 2026 - IS 3646 -part 1 & 2 - IS 5216part1&2 Electricity supply code-2014 IE Act 1910 2003 NEC , , , LT system wiring components selection of cables wires switches , , , , distributionbox meteringsystem basicsofstarratingandlabelling , , PrincipleofoperationofFuse MCB MCCB ELCB/RCCB isolator , , , , ."
+        },
+        {
+          "no": 2,
+          "summary": "General requirements for electrical installations- Residential/ Commercial/ Highrisebuilding methodofloadsurveyforelectricalinstallation Diversity , , factor Sizingandselectionofwires MSB SSB DBandprotectiondevices Design , , , . steps in electrical wiring material estimation and development of single line , diagrams Electrical CAD (optional) Pre-commissioning test applicable t..."
+        },
+        {
+          "no": 3,
+          "summary": "Indoor and Outdoor substation- selection of transformer switch gears and , protective devices Procedure for HT connection design and estimation the , , quantity of material required for substations Pre-commissioning tests for , transformers Industrial loads selection of starters cable and switchgears Power factor , , , improvement kVAR calculation correction methods – , Design ..."
+        },
+        {
+          "no": 4,
+          "summary": "Standby DG Systems with AMF panel Essential protections UPS system – . anditsdesignforresidentialapplication Selectionandinstallationofelevatorsandlifts Earthing and Soil Resistivity calculation– Earth electrodes Methods of . earthing Plate earthing Pipe earthing Rod earthing Methods of improving - - - . earth resistance Size of earth continuity conductor - Substationearthingan..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PBEET604",
+      "code": "PBEET604",
+      "title": "Branch Name (Branch Code) COURSE NAME: POWER SYSTEM ANALYSIS",
+      "category": "PBL Core",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:1",
+      "exam_hours": "",
+      "course_type": "PBL",
+      "prerequisites": "PCEET501",
+      "common_note": "B Group",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 2,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PBEET604.pdf",
+      "modules": [],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PCEEL607",
+      "code": "PCEEL607",
+      "title": "Control System Lab",
+      "category": "Lab",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "2",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:3:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Lab",
+      "prerequisites": "PCEET302/ PCEET601",
+      "common_note": "EE Branch",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 8,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL607.pdf",
+      "modules": [],
+      "experiments_count": 14,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "Transfer Function and State Space Modelling of Armatureand Field Controlled DC Motor . Objective: Obtain the transfer function and state space model of the armature and field - controlledDCmotorbyexperiment ."
+        },
+        {
+          "no": "2",
+          "title": "TransferfunctionofAC Servomotor . . . Objective:ObtainthetransferfunctionofACServomotorbyexperiment ."
+        },
+        {
+          "no": "3",
+          "title": "SynchroTransmitterandReceiverforopenlooppositioncontrol . Objective: a) Plotthecharacteristicsofsynchro . Errorstudyofthesynchrotransmitterandreceiverpairasasimpleopenloopposition controlinDirectmodeandDifferentialmode ."
+        },
+        {
+          "no": "4",
+          "title": "Stepresponseandfrequencyresponseofasecondordersystemrealisedusing passivecomponents Objective:Designasecondorder (RLCnetwork) systemtoanalysethefollowing: a Theeffectofdampingfactor(0<ξ<1 ξ=1 ξ>1)fora stepinput . , , . b..."
+        },
+        {
+          "no": "5",
+          "title": "Realisationofleadcompensator . Objective:Design setupandanalysethegainandphaseplotsofaleadcompensatorby , hardwareexperimentationusingi)passiveelementsandii)activecomponents"
+        },
+        {
+          "no": "6",
+          "title": "Realisationoflagcompensator . Objective: Design set up and analyse the gain and phase plots of a lag compensator by , hardwareexperimentationusing: i)passiveelementsandii)activecomponents ."
+        },
+        {
+          "no": "7",
+          "title": "Performanceofatypicalprocesscontrolsystem Objective:Studyofperformancecharacteristicsandresponseanalysisofatypical temperature/Flow/Levelcontrolsystem ."
+        },
+        {
+          "no": "8",
+          "title": "SystemIdentificationandModeling Objective:Obtainthefrequencyresponseandidentifythetransferfunctionofthegiven system(blackbox) ,"
+        },
+        {
+          "no": "9",
+          "title": "Stepresponseandfrequencyresponseofasecondordersystemusingsimulation Objective: To analyse the response of the second order system (in experiment 1) using (MATLAB/SCILAB/similarsoftwares) a Theeffectofdampingfactor(0<ξ<1 ..."
+        },
+        {
+          "no": "10",
+          "title": "Performance Analysis using Root -Locus and frequency Response Methods in MATLAB/SCILAB/similarsoftwares . Objective: 1 Plotthei)rootlocusii)Bodeplotandiii)Nyquistplotandiv)Nicholschartforthe . giventransferfunctionsand a..."
+        },
+        {
+          "no": "11",
+          "title": "Design of lag lead and lag-lead compensator using root locus , . Objective:Designasuitablecompensatorforthegivensystemtosatisfythegiventime domainspecificationsusingMATLAB/SCILAB/similarsoftware ."
+        },
+        {
+          "no": "12",
+          "title": "Design of lag lead and lag-lead compensator using frequency response , . Objective:Designasuitablecompensatorforthegivensystemtosatisfythegiven frequencydomainspecificationsusingMATLAB/SCILAB/similarsoftware ."
+        },
+        {
+          "no": "13",
+          "title": "StateSpaceModel AnalysisandControllerDesign , Objective: Analyse the given system (eg DC Servo motor modelled in experiment no1 . . for speed control) in state space and design a controller by pole-placement technique us..."
+        },
+        {
+          "no": "14",
+          "title": "PIDControllerDesign Objective:DesignaPIDcontrollerforthegivensystem(eg DCServomotormodelledin . experimentno 1forpositioncontrol)usingSIMULINK/MATLABbasedtoolboxes . . a Design of P PI PD PID controller using the Ziegler..."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PCEEL609",
+      "code": "PCEEL609",
+      "title": "Power System Lab",
+      "category": "Lab",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "1",
+      "honours_option": false,
+      "cie": "50",
+      "ese": "50",
+      "ltpr": "0:0:2:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Lab",
+      "prerequisites": "PCEET501",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 5,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PCEEL609.pdf",
+      "modules": [],
+      "experiments_count": 20,
+      "experiments": [
+        {
+          "no": "1",
+          "title": "Y -Busformulation: Aim:(i)Toformulatethebusadmittancematrixofthegivenpowersystemfromitssingle linediagram usingbasicMATLABprogramming , . (ii)Toincorporatechangesinbasictopology ."
+        },
+        {
+          "no": "2",
+          "title": "TransmissionLineModelling:ABCDconstants Aim:(i)TomodelthegivenmediumtransmissionlineusingnominalTandnominalpi representationandtoderivetheABCDconstantsusingbasicMATLABprogramming ."
+        },
+        {
+          "no": "3",
+          "title": "Load Flow Analysis Gauss-Siedel Method Newton Raphson Method Fast Decoupled – , - , Method Aim: (i) To conduct load flow analysis using Gauss-Siedel method Newton- – , Raphsonmethod FastDecoupledmethodandtostudytheeffect..."
+        },
+        {
+          "no": "4",
+          "title": "Load Flow Analysis Gauss-Siedel Method Newton Raphson Method Fast Decoupled – , - , Method Aim: (i) To conduct load flow analysis using Gauss-Siedel method Newton-Raphson , method FastDecoupledmethodandtostudytheeffectof..."
+        },
+        {
+          "no": "5",
+          "title": "Short Circuit Analysis Symmetrical Faults and Unsymmetrical Faults – Aim:(i)Toconductshortcircuitanalysisforsymmetricalandunsymmetricalfaults ."
+        },
+        {
+          "no": "6",
+          "title": "TransientStabilityAnalysis Aim:Toconducttransientstabilityanalysisofagivensystemandplotsuitablegraphs usingMATLABSimulinkordedicatedsoftware(ifavailable)"
+        },
+        {
+          "no": "7",
+          "title": "Automatic Generation Control Single Area Two Area – , Aim:ToimplementAutomaticGenerationControlinMATLABSimulink ."
+        },
+        {
+          "no": "8",
+          "title": "AutomaticVoltageRegulator Aim:ToimplementAutomaticVoltageRegulatorinMATLABSimulink ."
+        },
+        {
+          "no": "9",
+          "title": "FerrantiEffectandReactivePowerCompensation Aim: (i) To exhibit Ferranti effect in alightly loaded long transmissionline in MATLAB Simulinkandtoshowtheeffectofreactivepowercompensation . (ii)TocalculateSurgeImpedanceLoadi..."
+        },
+        {
+          "no": "10",
+          "title": "PlottheIVcharacteristicsofaPVmoduleanddetermineMaximumPowerPoint Aim:ToplottheIVcharacteristicsofaPVmoduleinMATLABSimulinkanddetermine the MaximumPowerPoint"
+        },
+        {
+          "no": "11",
+          "title": "High Voltage Testing Power frequency /impulse –"
+        },
+        {
+          "no": "12",
+          "title": "High Voltage Testing DC -"
+        },
+        {
+          "no": "13",
+          "title": "Relay Testing Over current Relay / Earth Fault (Electromechanical / Static /Numerical) – Aim:Todrawthecharacteristicsofthegivenrelay ."
+        },
+        {
+          "no": "14",
+          "title": "Relay Testing –Voltage relay/ Impedance Relay (Electromechanical/Static/Numerical) Aim:Todrawthecharacteristicsofthegivenrelay ."
+        },
+        {
+          "no": "15",
+          "title": "Insulation Testing LT & HT Cable – Aim:TodeterminetheinsulationresistanceofthegivenLT&HTcable ."
+        }
+      ],
+      "video_links": []
+    },
+    {
+      "id": "PEEET631",
+      "code": "PEEET631",
+      "title": "Digital Protection of Power Systems",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PCEET501 , PBEET604",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET631.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: Need for protective systems Zones of protection Current , , transformers and voltage transformers (Electromagnetic and Capacitive voltage transformers) Principle of operation of magneto optic CT/ PT , , effectonrelayingphilosophy . Relays: Over current relays - time-current characteristics of over current relays: definite time over current relays , inverse Definit..."
+        },
+        {
+          "no": 2,
+          "summary": "Protection of Transmission Lines: Schemes of distance protection , Differentiallineprotection Phasecomparisonlineprotection , . Protection of Bus-bar Transformer and Generator & Motor: Types of , faults differential protection: High impedance and low impedance , differential protection schemes harmonic restraint relay Restricted Earth , , Fault Protection frame leakage protecti..."
+        },
+        {
+          "no": 3,
+          "summary": "Digital(Numerical)Relays: BasicComponentsofnumericalRelayswith block diagram Processing Unit Human machine Interface Principle of , , , operation Comparison of numerical relays with electromechanical and , static relays Advantages of numerical relays communication in protective , - relays (IEC 61850) Information handling with substation automation , system(SAS)SignalConditionin..."
+        },
+        {
+          "no": 4,
+          "summary": "Signal processing techniques: Sinusoidal wave based algorithms Fourier , Analysis based algorithms (half cycle and full cycle) Least squares based , algorithm Digital filters Fundamentals of Infinite Impulse Response . – Filters Finite Impulse Response filters Filters with sine and cosine , , windows . Wide Area Protection and Measurement: Phasor Measurement Units , concept of ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET632",
+      "code": "PEEET632",
+      "title": "Operating Systems",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Mins . .",
+      "course_type": "PE -Theory",
+      "prerequisites": "PEEET526",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET632.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: Operating system overview Functions Boot Process – , Processes - Process states , Process control block , threads , scheduling , Operations on processes - process creation and termination Inter-process communication - shared memory systems , Message passing systems ."
+        },
+        {
+          "no": 2,
+          "summary": "Process Scheduling Basic concepts- Scheduling criteria -scheduling algorithms- First – comeFirstServed ShortestJobFirs Priorityscheduling Roundrobinscheduling , , , Process synchronization- Race conditions Critical section problem Peterson’s – – solution Synchronization hardware Mutex Locks Semaphores Monitors , , , , – Synchronization problems Producer Consumer Dining Philosop..."
+        },
+        {
+          "no": 3,
+          "summary": "Deadlocks: Necessary conditions Resource allocation graphs Deadlock prevention , , , Deadlock avoidance Banker’s algorithms Deadlock detection Recovery from – , , deadlock . Memory Management: Concept of address spaces Swapping Contiguous memory , , allocation fixed and variable partitions Segmentation Paging Virtual memory , , , . , Demandpaging Pagereplacementalgorithms , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET633",
+      "code": "PEEET633",
+      "title": "High Voltage Engineering",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET633.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Generation of High DC and AC Voltages- half -wave rectifier circuit - Cockroft -Walton voltage multiplier circuit Electrostatic generator- - Generation of high AC voltages-Cascaded Transformers- Series resonant circuit . Generation of Impulse Voltages and Currents- Impulse voltage- Impulse generator circuits- Multistage impulse generator circuit - Constructionofimpulsegenerator..."
+        },
+        {
+          "no": 2,
+          "summary": "High Voltage Measurement Techniques -Measuring Spark Gaps Sphere- - to-sphere Spark Gap -Rod -to-rod Spark Gap Electrostatic Voltmeter- - Field Sensors Electrically Short Sensors Electrically Long Sensors - , , Potential -free Probes Generator-mode Sensors Electro- optical and , , Magneto-optical Field Sensors Voltage Dividers Instrument - - Transformers Measurements of R .M .S..."
+        },
+        {
+          "no": 3,
+          "summary": "Classification of Voltages and Overvoltages-Origin of Overvoltages – Representative Overvoltages- Performance Criterion –Withstand voltage . Insulation Coordination Procedure- Determination of Representative Voltages and Overvoltages-Continuous Power Frequency Voltage , Temporary Overvoltages Slow-Front Overvoltages Fast -Front , , Overvoltages Determination of Coordination Wit..."
+        },
+        {
+          "no": 4,
+          "summary": "High voltage Testing of insulators bushings isolators circuit breakers , , , , transformers surgediverters cables , , . Insulation Systems for AC Voltages -Cables bushings and transformers- , Insulation Systems for DC Voltages- Capacitors HVDC bushings and , Cables-Insulation Systems for Impulse Voltages -Electrical Stress and Strength -Energy Storage -Impulse Capacitors (Energ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET634",
+      "code": "PEEET634",
+      "title": "Internet of Things",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET634.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to IoT technology: Definitions of IoT Characteristics of , IoT devices – power , computational constraints , IoT Architectural view – Middleware based architecture Service oriented architecture M2M , , CommunicationandIoT TypicalapplicationareasofIoTtechnology(case , studies of at least four domains) Energy management and Smart grid IoT - , forHome Cities Environme..."
+        },
+        {
+          "no": 2,
+          "summary": "Components of IoT technology: Identification/Addressing Electronic - Product Codes RFID ubiquitous code IPv4 IPv6 Sensors and , , , , . Actuators* IoT Hardware** IoT Software overview of Operating . , – systems Firmware Middle ware Application software used in IoT , , , . Connectivity for IoT devices characteristics – ."
+        },
+        {
+          "no": 3,
+          "summary": "Communication technologies for IoT : Zigbee - key features , architecture limitations Bluetooth technology bluetooth stack piconet , , - , , scatternet limitations Bluetooth Low Energy (key features architecture , , , , limitations) Wifi (IEEE 802 .11) technology key features limitations , – , , Cellular technology GSM 3G 4GLTE (overview) features limitations – , , , , , LoRa t..."
+        },
+        {
+          "no": 4,
+          "summary": "IoT Data Management : Storage technologies for IoT hardware – Volatile Non-volatile Embedded (MTP/OTP) external flash , , , (NAND/NOR) DRAM eflash UFS eMMC (overview of technologies) , , , , . Cloud and IoT Cloud computing architecture advantages of cloud , – , computing Software as a Service (SaaS) Platform as a Service (PaaS) , , , Infrastructure as a Service (IaaS) Case stud..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET636",
+      "code": "PEEET636",
+      "title": "Digital Signal Processing",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "PCEET603/ PEEOT522",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET636.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "IntroductiontoDSPandDiscreteFouriertransform: BasicelementsofDSPsystem Advantagesandapplications . . Review of Discrete-Time Fourier transform (DTFT) and its properties . Frequency domain sampling Discrete Fourier transform (DFT) DFT pair , - , properties of DFT frequency response analysis of signals using the DFT , , circularconvolutionusingDFT linearfilteringbasedonDFT , . Fa..."
+        },
+        {
+          "no": 2,
+          "summary": "RealisationofFilters: IntroductiontoIIRandFIRsystems . Structures for IIR Systems: Direct -Form Structures Cascade-Form , Structures Parallel -Form Structures Lattice Structures for IIR Systems , , . Structures for FIR Systems: Direct -Form Structure Cascade-Form , Structures LatticeStructure LinearPhaseFIRfilters , . . SignalFlowGraphsandTransposedStructures ."
+        },
+        {
+          "no": 3,
+          "summary": "DesignofDigitalFilters: General considerations Causality and its implications characteristics of , , practicalfrequencyselectivefilters . IIRfilterdesign:DiscretetimeIIRfilterfromanalogfilter(Butterworth) IIR , filter (LPF HPF BPF BRF) design by Impulse Invariance Bilinear , , , , transformation . FIRfilterdesign:StructuresofFIRfilter LinearphaseFIRfilter , Filterdesignusingwin..."
+        },
+        {
+          "no": 4,
+          "summary": "FiniteWordLengtheffectsinDigitalFilters: Fixed point and floating-point number representations Comparison , , TruncationandRoundingerrors . Quantization noise Derivation for quantization noise power coefficient , , quantizationerror Productquantizationerror , . Overflow error Round -off noise power Limit cycle oscillations due to , . product round -off and overflow errors signa..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET637",
+      "code": "PEEET637",
+      "title": "Cloud Computing",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs30Min",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET637.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Traditional computing- Limitations Overview of Computing Paradigms-Grid . Computing Cluster Computing Distributed Computing Utility Computing , , , , Cloud Computing NIST reference Model -Basic terminology and concepts . . Cloud characteristics benefits and challenges Roles and Boundaries Cloud , , . delivery (service) models-Infrastructure-as-a-Service (IaaS) Platform-as-a- , ..."
+        },
+        {
+          "no": 2,
+          "summary": "Introduction to virtualization-Virtualizing physical computing resources , Virtual Machines (Machine virtualization) Non-virtualized v/s Virtualized , machine environments Types of VMs- Process VM v/s System VM . . Emulation Interpretation and Binary translation Virtualization layers , . . Hypervisors/VMM Types of Hypervisors Full Virtualization Para - . , Virtualization Hardwa..."
+        },
+        {
+          "no": 3,
+          "summary": "Resource provisioning techniques: Static and Dynamic Resource provisioning in cloud Open Source Software platforms for Private Cloud : . OpenStack Eucalyptus OpenNebula Nimbus , , , Popular public cloud platforms: AWS AWS ecosystem Compute services: - , EC2 Advanced compute services Storage services: Amazon S3 Amazon , , , EBS Database services other major services Google Cloud..."
+        },
+        {
+          "no": 4,
+          "summary": "Cloudprogramming:ParallelComputingandProgrammingParadigms Map , Reduce Hadoop Library from Apache HDFS Pig Latin Basics Apache – , , , Spark Fundamentals of Cloud Security: Basic terms & concepts in security Threat – agents Cloud security threat/risks Trust OS security Virtual Machine , , . – security Security of Virtualization Security risk posed by Shared Images – – , Securit..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET638",
+      "code": "PEEET638",
+      "title": "Optimization Techniques",
+      "category": "Program Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2 Hrs 30Min",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET638.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Motivationandintroductiontooptimizationinengineeringpractice Properties of single variable functions and optimality criteria Region , elimination methods Polynomial estimation methods quadratic , - estimation Bisectionmethod Newtonraphsonmethod Secantmethod , , , , Cubic searchmethod"
+        },
+        {
+          "no": 2,
+          "summary": "Functionsofseveralvariables optimalitycriteria Directsearchmethod , , , Hooke-Jeeves pattern search method Powell’s method Gradient search , , methods Cauchy’s method Newton’s method - , Formulation of linear programming models Graphical solution in two , variables Standard form ,"
+        },
+        {
+          "no": 3,
+          "summary": "Simplex method Duality Dual simplex method Karmarkar’s method , , - Equality constrained problems Lagrange multipliers Kuhn Tucker - - conditions Kuhn Tucker theorems Saddlepoint conditions Second - - - orderoptimalityconditions-GeneralizedLagrangianmultipliermethod"
+        },
+        {
+          "no": 4,
+          "summary": "Transformation methods Concept of penalty penalty functions - - - MethodofMultipliers Constrained direct search simple direct search method Complex - - method -Randomsearch methods Linearization methods for constrained Problems Successive linear - problems Separable programming Method of feasible directions - - - Simplex extensions for linearly constrained problems Generalized ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEEET611",
+      "code": "OEEET611",
+      "title": "Introduction to Control Systems",
+      "category": "Open Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET611.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "IntroductiontoControlSystems mathematicalmodellingandTransfer , functionBasedAnalysis Open loop and Closed loop control systems; Automatic control systems; Necessityandsignificance (1 hour) . ModellingofLTIsystems:LTISystems Transferfunctionrepresentationof , differentialequationinLaplacedomain . Electrical translational and rotational mechanical systems DC servo-motor , , mode..."
+        },
+        {
+          "no": 2,
+          "summary": "PerformanceAnalysisofControlSystems: Timedomainanalysisofcontrolsystems:ImpulseandStepresponsesoffirst and second order systems Pole dominance for higher order systems Time - . domain specifications Steady state error analysis and static error constants . (5hours) Characteristicequation Routhstabilitycriterion (3hours) . ."
+        },
+        {
+          "no": 3,
+          "summary": "RootLocusAnalysisandControllers: Root locus technique: Construction of Root locus stability analysis- effect - ofadditionofpolesandzeros;EffectofpositivefeedbacksystemsonRoot locus (5hours) . Controller design: Types of controllers and their control action-proportional (P) integral (I) derivative (D) PID control PID tuning using Ziegler-Nichols , , , . method (3hours) ."
+        },
+        {
+          "no": 4,
+          "summary": "Frequencydomainanalysis: Bode Plot: Construction Concept of gain margin and phase margin-stability , analysis (4hours) . Frequency domain specifications correlation between time domain and - frequency domain responses (Resonant peak and resonant frequency) (2 . hours) Polarplot:Gainmarginandphasemargin Stabilityanalysis (2hours) , . Nyquiststabilitycriterion ConceptofNicholsCha..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEEET612",
+      "code": "OEEET612",
+      "title": "Energy Management",
+      "category": "Open Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET612.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "General aspects of energy management and energy audit: Energy Management – Definition , General principles of energy management and energymanagementplanning Energy Audit: Definition need types and methodologies Instruments for , , . energy audit , Energy audit report - Power quality audit Energyconservationinbuildings:ECBCcode(basicaspects) Building , ManagementSystem(BMS) ."
+        },
+        {
+          "no": 2,
+          "summary": "EnergyEfficiencyinElectricalUtilities: Electricitytransmissionanddistributionsystem cascadeefficiency , . Lighting: Modern energy efficient light sources life and efficacy , comparisonwitholderlightsources energyconservationinlighting , . Motors: Development of energy efficient motors and the present status , techniquesforimprovingenergyefficiency necessityforloadmatchingand , ..."
+        },
+        {
+          "no": 3,
+          "summary": "EnergyManagementinElectricalUtilities: Boilers: working principle - blow down , energy conservation opportunities inboiler . Steam: properties of steam distribution losses steam trapping Identifying , , . opportunitiesforenergysavingsinsteamdistribution . Furnace: General fuel economy measures energy conservation , opportunitiesinfurnaces . HVAC system: Performance and saving o..."
+        },
+        {
+          "no": 4,
+          "summary": "EnergyEconomics:Economicanalysis:methods cashflowmodel time , , value of money evaluation of proposals pay-back period average rate of , , , returnmethod internalrateofreturnmethod presentvaluemethod life , , , cyclecostingapproach ComputeraidedEnergyManagementSystems . (EMS) ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEEET613",
+      "code": "OEEET613",
+      "title": "Renewable Energy Systems",
+      "category": "Open Elective",
+      "semesters": [
+        "S6"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET613.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: Principles of renewable energy; energy and sustainable development fundamentalsandsocialimplications Worldwiderenewable , . energy availability renewable energy availability in India types of , , renewableenergy . WindEnergy:Propertiesofwind availabilityofwindenergyinIndia wind , , velocityandpowerfromwind(numericalproblems);majorproblems associatedwithwindpower B..."
+        },
+        {
+          "no": 2,
+          "summary": "SolarEnergy:Fundamentals;SolarRadiation;Estimationofsolarradiation on horizontal and inclined surfaces; Solar radiation Measurements - Pyrheliometers Pyranometer SunshineRecorder SolarThermalsystems: , , . concentrating and non-concentrating collectors Flat plate collectors; Solar - towerelectricpowerplant Photovoltaicsystemforelectricpowergeneration . Classification of PV syst..."
+        },
+        {
+          "no": 3,
+          "summary": "Biomass Energy: Introduction; Principle of biomass energy generation - Biofuels; Biomass Resources; Biomass conversion technologies-fixed dome type biogas plant; Urban waste to energy conversion; Biomass gasification(Downdraft) . TidalPower:Tidesandwavesasenergysuppliersandtheirmechanics; fundamentalcharacteristicsoftidalpower classificationoftidalpower , plants - harnessing ti..."
+        },
+        {
+          "no": 4,
+          "summary": "Ocean Thermal Energy Conversion: Principle of working classification , , OTEC power stations in the world environmental impacts associated with , OTEC . Introductiontogeothermalenergy Green Energy: Introduction Fuel cells: Classification of fuel cells , – Hydrogen energy; Operating principles Zero-energy Concepts Benefits of , . hydrogenenergy hydrogenproductiontechnologies(ele..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET741",
+      "code": "PEEET741",
+      "title": "Power System Operation and Control",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCEET501 PBEET604 ,",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET741.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction- Optimum load dispatch First order gradient method base - point and participation factors Economic dispatch versus unit commitment . . Unit Commitment Solution Methods Priority-List Methods Security - – ConstrainedUnitCommitment ."
+        },
+        {
+          "no": 2,
+          "summary": "Generation with limited supply-Take or pay fuel supply contract - Introduction to Hydrothermal coordination-Long range and short range scheduling Hydro-electric plant models-scheduling energy problems - types of scheduling problems . Scheduling energy - The Hydrothermal Scheduling Problem Hydro scheduling with storage limitation Introduction to - - Pumpedstoragehydroplants ."
+        },
+        {
+          "no": 3,
+          "summary": "Inter change evaluation and power pools- Interchange contracts – Energy interchange between utilities Interchange evaluation with unit commitment - - Energy banking- power pools . Power system security- Factors Affecting Power System Security Contingency Analysis: Detection of Network - Problems Generation Outages Transmission Outages An Overview of - - - SecurityAnalysis ."
+        },
+        {
+          "no": 4,
+          "summary": "Introduction to State estimation in power system Maximum Likelihood , Weighted Least Squares Estimation - State Estimation of an AC Network - Sources of Error in State Estimation Detection and Identification of Bad - Measurements Estimation of Quantities Not Being Measured Network - - Observability and Pseudo-measurements The Use of Phasor Measurement - Units (PMUs) Application..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET742",
+      "code": "PEEET742",
+      "title": "Energy Management and Auditing",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET742.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "General aspects of energy management and energy audit: Energy Management – Definition , General principles of energy management and energymanagementplanning Energy Audit: Definition need types and methodologies Instruments for , , . energy audit , Energy audit report - Power quality audit Energyconservationinbuildings:ECBCcode(basicaspects) Building , ManagementSystem(BMS) ."
+        },
+        {
+          "no": 2,
+          "summary": "EnergyEfficiencyinElectricalUtilities: Electricitytransmissionanddistributionsystem cascadeefficiency , . Lighting: Modern energy efficient light sources life and efficacy , comparisonwitholderlightsources energyconservationinlighting , . Motors: Development of energy efficient motors and the present status , techniquesforimprovingenergyefficiency necessityforloadmatchingand , ..."
+        },
+        {
+          "no": 3,
+          "summary": "EnergyManagementinElectricalUtilities: Boilers: working principle - blow down , energy conservation opportunities inboiler . Steam: properties of steam distribution losses steam trapping Identifying , , . opportunitiesforenergysavingsinsteamdistribution . Furnace: General fuel economy measures energy conservation , opportunitiesinfurnaces . HVAC system: Performance and saving o..."
+        },
+        {
+          "no": 4,
+          "summary": "EnergyEconomics:Economicanalysis:methods cashflowmodel time , , value of money evaluation of proposals pay-back period average rate of , , , returnmethod internalrateofreturnmethod presentvaluemethod life , , , cyclecostingapproach ComputeraidedEnergyManagementSystems . (EMS) ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET743",
+      "code": "PEEET743",
+      "title": "Special Electrical Machines",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET743.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Stepper motors basic principle types variable reluctance permanent – - - , magnet hybrid types constructional features principle of operation , – - – comparison modes of operation monofilar and bifilar windings modes - – – of excitation – one phase ON mode , two phase ON mode , half -step mode – micro-stepping static and dynamic characteristics open-loop and closed - – loop con..."
+        },
+        {
+          "no": 2,
+          "summary": "Synchronous Reluctance Motor Constructional details principle of – - operation phasor diagram torque equation applications - - - . Switched reluctance motors constructional details principle of operation – - - torque equation – characteristics - power converter circuits - control of SRM - rotor position sensors- torque pulsations – sources of noise - noise mitigation techniques..."
+        },
+        {
+          "no": 3,
+          "summary": "PM Brushless DC motor- constructional details permanent magnets - – different types demagnetization characteristics arrangement of - – permanent magnets magnetization of permanent magnets axial and – – parallel magnetizations- principle of operation Control of BLDC motor – - applications . Permanent Magnet Synchronous Motors construction principle of - - operation Control of PM..."
+        },
+        {
+          "no": 4,
+          "summary": "Linear Electric Machines: Linear motors different types linear – – reluctance motor linear synchronous motors construction comparison - – – . Linear Induction Motor Construction- Thrust Equation Transverse edge – , and end effects- Equivalent Circuit Thrust -Speed characteristics , , Applications . Single Phase Special Electrical Machines- AC series Motor Repulsion , Motor Hyst..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET744",
+      "code": "PEEET744",
+      "title": "Discrete Time Control Systems",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET744.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "AnalysisofSampledDataSystems: Review of Z Transforms; Sampling Theorem Impulse Sampling , , Sampling Rate Selection Data Hold ZOH FOH Pulse Transfer , – , , Function Control configurations Mapping between the s-plane and the z- , . plane . Stability analysis of closed -loop system in the z-plane Jury’s test Schur- , , Cohn test Bilinear Transformation Routh -Hurwitz method in w..."
+        },
+        {
+          "no": 2,
+          "summary": "DesignofCompensators: Direct design based on root locus: Design of Lag Compensator Design of , Lead Compensator Design of Lead -Lag Compensator , . Digital Controller Design in Frequency Domain: Direct design based on frequency response Design of Lag Compensator Design of Lead , , Compensator Design of Lag-Lead Compensator Realization of digital , , controllers ."
+        },
+        {
+          "no": 3,
+          "summary": "Discrete-time State Space System: State variable model of discrete data systems with S/H devices State - transition equations state diagrams Relationship between state space , . representation and pulse transfer function Transformation to canonical , formsandphasevariableform . Solution of state equation Computation of state transition matrix using , Cayley-Hamilton theorem and..."
+        },
+        {
+          "no": 4,
+          "summary": "DesignusingStateSpaceapproach: Discretization of continuous time state-space equations Controllability , , Observability . StatefeedbackcontrollerdesignviaPolePlacement . StateObserverDesign:FullorderobserversandReducedorderobservers . ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET746",
+      "code": "PEEET746",
+      "title": "Digital Image Processing",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET746.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Digital Image Fundamentals: Image representation Types of images , , Elements of DIP system Basic relationship between pixels Distance , , Measures Simple image formation model Brightness contrast hue , . , , , saturation Mach band effect Colour image fundamentals-RGB CMY HIS , . , , models 2Dsamplingandquantization , ."
+        },
+        {
+          "no": 2,
+          "summary": "2D Image transforms: DFT Properties Walsh transform Hadamard , , , transform Haar transform DCT KL transform and Singular Value , , , Decomposition . Image Compression: Image compression model Lossy lossless , , compression Concept of transform coding JPEG Image compression , , standard ."
+        },
+        {
+          "no": 3,
+          "summary": "Image Enhancement: Spatial domain methods: Basic Gray Level Transformations Histogram Processing Enhancement Using , , Arithmetic/Logic Operations Basics of Spatial Filtering Smoothing spatial , , Filters SharpeningspatialFilters , . Frequency domain methods: low pass filtering high pass filtering , , homomorphicfiltering ."
+        },
+        {
+          "no": 4,
+          "summary": "Image Restoration: Degradation model Inverse filtering- removal of blur , caused by uniform linear motion Minimum Mean Square Error (Wiener) , Filtering . Image segmentation: Region based approach clustering Segmentation , , basedonthresholding edgebasedsegmentation HoughTransform , , ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET751",
+      "code": "PEEET751",
+      "title": "Power Quality",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET751.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Power quality phenomenon - Sources and effects of power quality problems NeedforconcernofPowerquality , Types of power quality disturbances –Transients – classification and origin , Short duration voltage variation – interruption , sag , swell , Long duration voltage variation voltage unbalance waveform distortion , , - notching harmonicsandvoltageflicker , Power Quality issues..."
+        },
+        {
+          "no": 2,
+          "summary": "Harmonics mechanism of harmonic generation Triplen harmonics - , , Harmonic sources – switching devices , arcing devices and saturable devices , Effects of harmonics on power system equipment and loads – transformers capacitor banks motors and telecommunication systems , , , Effectoftriplenharmonicsonneutralcurrent lineandphasevoltages , . Harmonic analysis using Fourier series..."
+        },
+        {
+          "no": 3,
+          "summary": "Harmonic indices (CF , DF , THD , TDD , TIF , DIN , C – message weights) , DisplacementandtotalpowerfactorOverviewofpowerqualitystandards: IEEE519 IEEE1433andIEC61000 , Power quality Monitoring: Objectives and measurement issues different , monitoring instruments Power quality analyzer harmonic spectrum – , analyzer flickermeters ,"
+        },
+        {
+          "no": 4,
+          "summary": "Mitigation of Power quality problems Harmonic elimination Design - - simpleproblemsandanalysisofpassivefilters toreduce harmonicdistortion demerits of passive filters description of active filters shunt series – – - , , hybrid filters sag and swell correction using DVR Power quality , conditioners DSTATCOM and UPQC Configuration and working - - Power factor correction – Single ..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET752",
+      "code": "PEEET752",
+      "title": "Nonlinear Control Systems",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET752.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introductiontononlinearsystems: Basic characteristics of nonlinear systems Examples State-space . . representationofnonlinearsystems Classificationofnonlinearities . . Phaseplaneanalysis:Conceptofphaseplane singularpoints , . Definition of stability asymptotic stability instability; Construction – , using isoclinemethod Classification ofequilibrium points;Systems with . multipl..."
+        },
+        {
+          "no": 2,
+          "summary": "LyapunovStabilityTheory: Lyapunov's direct method Definite functions Stability theorems; - - - Variable gradient method La-Salle theorems – . Stability of linear systems Lyapunov equation for time-invariant - systems Lyapunov’s linearization (indirect) method Region of - - attraction(conceptonly) ."
+        },
+        {
+          "no": 3,
+          "summary": "FrequencydomainAnalysisofFeedbacksystems: Describing function method: Analysis through harmonic linearization- Determination of describing function of nonlinearities Application of . describing function for stability analysis of autonomous system with singlenonlinearity(relay deadzoneandsaturationonly) , . Feedback Stabilisation Kalman-Yakubovitch -Popov lemma (Concept , only);..."
+        },
+        {
+          "no": 4,
+          "summary": "NonlinearControlDesign: Lie Derivatives and Lie Brackets; Feedback linearization Input state , linearization and input output linearization of SISO systems (3 hours) – . Design via linearization regulation via integral control; gain scheduling - , tracking . Concepts of other nonlinear controllers sliding mode backstepping – , . ofwhich1questionshouldbeanswered .  Eachquestion..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET753",
+      "code": "PEEET753",
+      "title": "Deep Learning",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "Basicunderstandingof probabilitytheory linear , algebraandmachine learning",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET753.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "NeuralNetwork: Introduction to neural networks -Single layer perceptrons Multi Layer , Perceptrons (MLPs) Activation functions Sigmoid Tanh ReLU Softmax , - , , , , Risk minimization Loss function Training MLPs with Backpropagation , , , Practical issues in neural network training The problem of Overfitting - , Vanishing and Exploding gradient problems Difficulties in convergen..."
+        },
+        {
+          "no": 2,
+          "summary": "DeepLearning: Introduction to Deep Learning Deep Feed Forward network Training deep , , learning models Optimization techniques Gradient Descent (GD) GD with , - , momentum Nesterov accelerated GD Batch Mini -batch and Stochastic GD , , , , AdaGrad RMSProp Adam , ,"
+        },
+        {
+          "no": 3,
+          "summary": "ConvolutionalNeuralNetwork(CNN): Introduction to CNN - Convolution and Pooling , Convolution and Pooling as an infinitely strong prior variants of convolution functions Efficient , , convolution algorithms Applications Computer Vision , -"
+        },
+        {
+          "no": 4,
+          "summary": "RecurrentNeuralNetwork(RNN): Introduction to RNN Computational graphs RNN design Encoder-decoder - , , sequence to sequence architectures , Deep RNNs , Modern RNN - LSTM and GRU Applications Natural Language Processing (NLP) , - ,"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET754",
+      "code": "PEEET754",
+      "title": "Computer Vision",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET754.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Review of image processing techniques: Digital filters linear filters- , Homomorphic filtering Point operators- Histogram neighbourhood operators , , , thresholding Mathematical morphology Binary shape analysis Binary shape analysis , , , Erosion Dilation Opening and Closing Hit -or-Miss Transform , , , ,connectedness object labelling and counting Boundary descriptors Chain , ,..."
+        },
+        {
+          "no": 2,
+          "summary": "Feature Detection and Image Synthesis ,Edge detection edges lines active – , , contours Split and merge Mean shift and mode finding Normalized cuts , , , , Graph cuts energy- based methods- Cranny’s Algorithm Corner detection , , , Harris corner detection algorithm Hough transform-Line and curve detection . ."
+        },
+        {
+          "no": 3,
+          "summary": "Shape from X Shape from shading Photometric stereo Texture Occluding - , , contour detection Motion Analysis- Regularization theory ,Optical Flow: . brightness constancy equation aperture problem Horn-Shunck method Lucas- , , , Kanademethod Structurefrommotion ."
+        },
+        {
+          "no": 4,
+          "summary": "Object recognition-Shape correspondence and shape matching PCA ,SVM , LDA Bayes rule andML methods Eigen facesFace detection Face , . , , recognition Application: Scene analysis Examples of real time applications: In- , vehiclevisionsystem ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEEET721",
+      "code": "OEEET721",
+      "title": "Design of Solar Pv Systems Oeeet721",
+      "category": "Open Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET721.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction Basic Concept of Energy -Source of Solar Energy -Formation - of the Atmosphere Solar Spectrum Solar Constant -Air Mass -Solar Time- - . Sun‒Earth Angles-Solar Radiation-Instruments to Measure Solar Radiation- Pyrheliometer –Pyranometer - Sunshine Recorder -Solar Radiation on a Horizontal Surface Extra-terrestrial Region Terrestrial Region -Solar - .- Radiation on a..."
+        },
+        {
+          "no": 2,
+          "summary": "Solar Thermal system-Principle of Conversion of Solar Radiation into Heat , –Solar thermal collectors –General description and characteristics –Flat plate collectors –Heat transfer processes –Solar concentrators (parabolic trough , parabolic dish Central Tower Collector) performance evaluation , – . Applications -Solar heating system Air conditioning and Refrigeration , system ..."
+        },
+        {
+          "no": 4,
+          "summary": "Solar PV Systems –stand -alone and grid connected -Design steps for a Stand -Alone system Storage batteries and Ultra capacitors Design PV – . powered DC fan and pump without battery-Design of Standalone System withBatteryandACorDCLoad . Life cycle costing Growth models Annual payment and present worth , , factor payback period LCC with examples Introduction to simulation , , ...."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEEET722",
+      "code": "OEEET722",
+      "title": "Hybrid and Electric Vehicles",
+      "category": "Open Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET722.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Hybrid and Electric Vehicles: History of hybrid and electricvehicles Socialandenvironmentalimportanceofhybridandelectric , vehicles . Vehicle Dynamics & Load Forces : mathematical models to describe vehicle performance vehicle load forces (concept only): aerodynamic drag , rolling resistance grading resistance vehicle acceleration calculation of , , , , motorpow..."
+        },
+        {
+          "no": 2,
+          "summary": "Electric Drives: Block diagram Introduction to electric motors used in , hybridandelectricvehicles . DC Motor Drives: Introduction Configuration and control of separately , excited DC motors Motoring using a PM DC Machine - DC motor drive using DC -DC converter - Generating/Braking using a PM DC Machine (conceptonly) Induction Motor Drives: Introduction Speed control of inducti..."
+        },
+        {
+          "no": 3,
+          "summary": "Battery based energy storage systems: Types of battery-battery parameters-units of battery energy storage - capacity rate , - cell voltage - specific energy - cycle life - self -discharge- static battery equivalent circuit model series-parallel battery pack equivalent circuits - Other storage topologies (Basics only): Fuel Cell based energy storage systems- Supercapacitors- fly..."
+        },
+        {
+          "no": 4,
+          "summary": "Battery management system: Introduction to energy management strategies ClassificationofBatterymanagementsystem(conceptonly) , Vehicle Communication protocols: Need & requirements Functions of - Control Pilot (CP) and Proximity Pilot (PP) pins Communication Protocols , - CAN LIN FLEXRAY (Basics only) Power line communication (PLC) in , , - EV AutonomousVehicles:Levelsofautomati..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEEET723",
+      "code": "OEEET723",
+      "title": "Introduction to Energy Storage Systems",
+      "category": "Open Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET723.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Need and role of energy storage systems in power system General , considerations Energy and power balance in a storage unit , , Mathematical model of storage system: modelling of power transformation system (PTS) -Central store (CS) and charge–discharge controlsystem(CDCS) Econometricmodelofstoragesystem , . Thermal energy: General considerations -Storage media- Containment - T..."
+        },
+        {
+          "no": 2,
+          "summary": "Kinetic energy: Mechanical - Flywheel , Power to Gas: Hydrogen- Synthetic methane Electro chemical energy: Batteries-Battery parameters: C -rating– . SoC – DoD -Specific Energy- Specific power (numerical examples) , Fuel cells Electrostatic energy (Super Capacitors) Electromagnetic energy , , (Superconducting Magnetic Energy Storage) Comparative analysis , , Environmentalimpact..."
+        },
+        {
+          "no": 3,
+          "summary": "Types of renewable energy sources: Wave - Wind – Tidal – Hydroelectric - Solarthermal technologies and Photovoltaics Storage rolein isolated power , systems with renewable powersources Storage role in an integrated power , system with grid -connected renewablepowersources ."
+        },
+        {
+          "no": 4,
+          "summary": "Smart grid Smart micro grid Smart house Mobile storage system: , , , Electric vehicles Grid to Vehicle (G2V) -Vehicle to Grid (V2G) – , Managementandcontrolhierarchyofstoragesystems . Aggregating energy storage systems and distributed generation (Virtual Power Plant Energy Management with storage systems) Battery SCADA , , Hybridenergystoragesystems:configurationsandapplication..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET861",
+      "code": "PEEET861",
+      "title": "Smart Grid Technologies",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET861.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Smart Grid: Evolution of electric grid Definitions Need , , forsmartgrid Smartgriddrivers Functionsofsmartgrid Opportunitiesand , , , barriers of smart grid Difference between conventional grid and smart grid , , Concept of resilient and self healing grid Components and architecture - . , Inter-operability Impacts of smart grid on system reliability Present , , ..."
+        },
+        {
+          "no": 2,
+          "summary": "Smart grid Technologies Part I: Introduction to smart meters Electricity , tariff Real Time Pricing- Automatic Meter Reading (AMR) System , - , Services and Functions Components of AMR Systems Advanced Metering , , Infrastructure (AMI) Plug in Hybrid Electric Vehicles (PHEV) Vehicle to . , Grid (V2G) Grid to Vehicle (G2V) Smart Sensors Smart energy efficient , , , end use devic..."
+        },
+        {
+          "no": 3,
+          "summary": "Smart grid Technologies Part II: Smart substations Substation , automation Feeder automation Fault detection Isolation and Service , , , , Restoration (FDISR) Geographic Information System (GIS) Outage , , Management System (OMS) Introduction to Smart distributed energy . resources and their grid integration Smart inverters Concepts of microgrid , , , Need and application of mi..."
+        },
+        {
+          "no": 4,
+          "summary": "Cloudcomputinginsmartgrid:Private Publicandhybridcloud Typesof , . cloud computing services- Software as a Service (SaaS) Platform as a , service (PaaS) Infrastructure as a service (IaaS) Data as a service (DaaS) , , , Cloudarchitectureforsmartgrid . Cyber Security Cyber security challenges and solutions in smart grid - , Cybersecurityriskassessment Securityindexcomputation , ...."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET862",
+      "code": "PEEET862",
+      "title": "HVDC and FACTS",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "PCEET403",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET862.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to HVDC System: Comparison of AC and DC Transmission - Types of HVDC system Current Source Converters Analysis without and - - with overlap period . Voltage Source Converters (VSC) - VSC with AC cur- rentcontrolandVSCwithACvoltagecontrol HVDC Controls - Functions of HVDC Controls - Equivalent circuit for a two terminal DC Link - Control Basics for a two terminal DC..."
+        },
+        {
+          "no": 2,
+          "summary": "Introduction to FACTS: Power flow in Power Systems Voltage regula- – tion and reactive power flow control in Power Systems - Power flow control -Constraints of maximum transmission line loading - Needs and emergence of FACTS Types of FACTS controllers-Advantages and disadvantages - Transmission line compensation- Uncompensated line -shunt compensation - Series compensation -Pha..."
+        },
+        {
+          "no": 3,
+          "summary": "Shunt and Series Facts Devices: Static shunt Compensator Objectives of - shunt compensations Variable impedance type VAR Generators -TCR - , TSR TSC FC -TCR (Principle of operation and schematic) and STAT , , - - COM (Principle of operation and schematic) Static Series compensator . - Objectives of series compensations-Variable impedance type series compen- sators GCSC TCSC TSS..."
+        },
+        {
+          "no": 4,
+          "summary": "UPFC AND IPFC: Unified Power Flow Controller: Circuit Arrangement , Operation of UPFC Basic principle of P and Q control independent real and - - reactive power flow control - Applications Introduction to interline power flow controller (IPFC) (Principle of operation and schematic) Thyristor con- trolled Voltage and Phase angle Regulators (Principle of operation and schematic)"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET863",
+      "code": "PEEET863",
+      "title": "Mechatronic Systems",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET863.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Mechatronics: Introduction Examples of Mechatronic sys- , tems Electric circuits and components Semiconductor Electronics Transis- , , , torApplications Sensorsandtransducers:Performanceterminologyofsensors Displacement , , Position & Proximity Sensors-I Displacement Position & Proximity Sen- , , sors-II , Force , Fluid pressure , Liquid flow sensors , temperatu..."
+        },
+        {
+          "no": 2,
+          "summary": "Actuators and mechanisms: Mechanical Actuation System Hydraulic & , Pneumatic Actuation System Electrical Actuation System-I Electrical Actu- , , ation System-II Data Presentation system , Signal conditioning: Introduction to signal processing & Op-Amp Op-Amp , as signal conditioner Analogue to Digital Converter Digital to Analogue , , Converter Artificialintelligence ,"
+        },
+        {
+          "no": 3,
+          "summary": "Microprocessors and microcontrollers: Digital circuits-I Digital circuits-II , , Microprocessor Micro Controller Programming of Microcontrollers Model , - ing and system response: Mechanical system model , Electrical system mod - el Fluid systemmodel Dynamicresponse ofsystems Transferfunction and , , , frequencyresponse ."
+        },
+        {
+          "no": 4,
+          "summary": "Closed loop controllers: P I PID Controllers Digital Controllers Program , , , , Logic Controllers Input/output & Communication systems Fault findings , , Mechatronicsdesigns examplesandcasestudies ,"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEEET864",
+      "code": "PEEET864",
+      "title": "Electronic Communication",
+      "category": "Program Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:3:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "GYEST104 PBEET304 ,",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 3,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEEET864.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "AnalogCommunication: Introduction tocommunicationsystems Classificationofchannels Needfor , , modulation Amplitude modulation: Equation and frequency spectrum of . AM signal Double-side band suppressed carrier (DSB -SC) modulation Sin- , , gle sideband modulation (SSB) , comparison of spectrum , power and effi - ciency of all the three variants Amplitude modulator circuits -bal..."
+        },
+        {
+          "no": 2,
+          "summary": "AngleModulation: Frequency and phase modulation Narrow and wide band FM and their spec- , tra Modulation and demodulation techniques for FM pre-emphasis and de- , , emphasis FM transmitter and receiver Noise in receivers Noise figures , , , , Performance of analog modulation schemes in AWGN: SNR and figure of meritfordifferentschemes ."
+        },
+        {
+          "no": 3,
+          "summary": "Digitalbasebandcommunication: Elements of digital communication system Sources channels andreceivers . , , Sampling and Reconstruction of Analog Signals: Nyquist Sampling Theo- rem Ideal Reconstruction Filter Pulse Amplitude Modulation (PAM) Time , , , division multiplexing with PAM Pulse Code Modulation (PCM) A -law and , , mu-law quantization ."
+        },
+        {
+          "no": 4,
+          "summary": "Digitalbandpasscommunication: Digital bandpass communication system Bandpass modulation techniques: ,"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEEET831",
+      "code": "OEEET831",
+      "title": "Introduction to Robotics",
+      "category": "Open Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET831.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Definitions- Robots Robotics; Types of Robots- Manipulators Mobile Ro- , , bots-wheeled & Legged Robots Aerial Robots; Anatomy of a robotic ma- , nipulator-links joints actuators sensors controller; open kinematic vs , , , , closed kinematic chain; degrees of freedom; Robot considerations for an ap- plication- number of axes work volume capacity & speed stroke &reach , , , , Re..."
+        },
+        {
+          "no": 2,
+          "summary": "SensorsandActuators Sensor classification- touch force proximity vision sensors , , , . Internal sensors-Position sensors velocity sensors acceleration sensors , , , Force sensors; External sensors-contact type noncontact type , Actuators for robots- classification-Electric Hydraulic Pneumatic actuators; , , their advantages and disadvantages; Electric actuators- Stepper motors..."
+        },
+        {
+          "no": 3,
+          "summary": "KinematicsandMotionPlanning Robot Coordinate Systems- Fundamental and composite rotations homoge- , neous co-ordinates and transformations Kinematic parameters D -H repre- , , sentation Direct Kinematics The Arm equation- forward Kinematic analysis , . ofatypicalrobotsupto3DOF . Motion Planning- joint space trajectory planning-cubic polynomial linear , trajectory with parabolic..."
+        },
+        {
+          "no": 4,
+          "summary": "DynamicsandControlofRobots Building of a servo controlled robot – 1R two link chain , construction of link andjointandmountingofencoder actuator etc , , . Dynamics- Dynamic model of a robot using Lagrange’s equation dynamic , modelling of 1DOF robot including motor and gearbox 2R planar manipu- , , lator . Control Techniques- Transfer function and state space representation Per..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEEET832",
+      "code": "OEEET832",
+      "title": "PLC and Automation",
+      "category": "Open Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "4",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:1:0",
+      "exam_hours": "2Hrs 30Min . .",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET832.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to computer based control system -Role of computers in measurement and (process) control Basic components of computer based measurement and control systems Architecture – computer based process control system –Centralised Distributed and Hierarchical Human Machine , . Interface (HMI) Hardware for computer based process control system , Interfacingcomputersystemwith..."
+        },
+        {
+          "no": 2,
+          "summary": "PLC Hardware and Internal Architecture-Input –output devices .Basics of - Ladder Programming on/offinstructions internalrelay jumpinstructions , , , , datahandlinginstruction datamanipulationinstructions Arithmeticand , , Comparison PIDandotherimportantinstructions ,"
+        },
+        {
+          "no": 3,
+          "summary": "Timers and Counters in PLC Problems Design Development and . . Simulation of PLC Programme Program on Temperature control Valve sequencing ConveyorbeltcontrolandControlofaprocess , . PLC Installation trouble shooting and maintenance Design of Alarms and , , Interlocks NetworksofPLC , Distributed Control System- DCS Evolution– Various Architectures - – Comparison Local control u..."
+        },
+        {
+          "no": 4,
+          "summary": "DCS -LCU Languages-Process interfacing issues-communication facilities- Operator interface-Low level and High level Operator interface- Displays - Engineering interfaces Low level and high level engineering interfaces – – Factors to be considered in selecting DCS Other key issues in DCS – – PackagingandPowersystemissues ."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "OEEET833",
+      "code": "OEEET833",
+      "title": "Mechatronic Systems and Control",
+      "category": "Open Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Open Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "EEE"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/OEEET833.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to Mechatronics: Introduction Examples of Mechatronic sys- , tems Electric circuits and components Semiconductor Electronics Transis- , , , torApplications Sensorsandtransducers:Performanceterminologyofsensors Displacement , , Position & Proximity Sensors-I Displacement Position & Proximity Sen- , , sors-II , Force , Fluid pressure , Liquid flow sensors , temperatu..."
+        },
+        {
+          "no": 2,
+          "summary": "Actuators and mechanisms: Mechanical Actuation System Hydraulic & , Pneumatic Actuation System Electrical Actuation System-I Electrical Actu- , , ation System-II Data Presentation system , Signal conditioning: Introduction to signal processing & Op-Amp Op-Amp , as signal conditioner Analogue to Digital Converter Digital to Analogue , , Converter Artificialintelligence ,"
+        },
+        {
+          "no": 3,
+          "summary": "Microprocessors and microcontrollers: Digital circuits-I Digital circuits-II , , Microprocessor Micro Controller Programming of Microcontrollers Model , - ing and system response: Mechanical system model , Electrical system mod - el Fluid systemmodel Dynamicresponse ofsystems Transferfunction and , , , frequencyresponse ."
+        },
+        {
+          "no": 4,
+          "summary": "Closed loop controllers: P I PID Controllers Digital Controllers Program , , , , Logic Controllers Input/output & Communication systems Fault findings , , Mechatronicsdesignsandcasestudies"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    }
+  ]
+}
