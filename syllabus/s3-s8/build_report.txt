@@ -269,7 +269,7 @@ SOURCE: ECE.pdf -> ECE (Electronics and Communication Engineering) — 367 pages
   - PEECT754   | p.295-298 ( 4p) | S7    | Program Elective    | cr:3   | Mixed Signal Circuits
   - PEECT756   | p.299-301 ( 3p) | S7    | Program Elective    | cr:3   | Speech and Audio Processing
   - PEECT757   | p.302-305 ( 4p) | S7    | Program Elective    | cr:3   | Microwave Devices & Circuits
-  - PEECT755   | p.306-311 ( 6p) | S7    | Program Elective    | cr:5/3 | Semester S 7 Mixed Signal Circuit Design
+  - PEECT755   | p.306-311 ( 6p) | S7    | Program Elective    | cr:5/3 | Mixed Signal Circuit Design
   - OEECT721   | p.312-315 ( 4p) | S7    | Open Elective       | cr:3   | Optical Communication
   - OEECT722   | p.316-319 ( 4p) | S7    | Open Elective       | cr:3   | Digital Image Processing
   - OEECT723   | p.320-323 ( 4p) | S7    | Open Elective       | cr:3   | Optimization Techniques
@@ -296,7 +296,7 @@ SOURCE: EEE.pdf -> EEE (Electrical and Electronics Engineering) — 341 pages
   - PCEEL308   | p. 43- 47 ( 5p) | S3    | Lab                 | cr:2   | Analog Electronics Lab
   - GBMAT401   | p. 49- 53 ( 5p) | S4    | Math & Science      | cr:3   | Mathematics for Electrical Science - 4
   - PCEET402   | p. 54- 58 ( 5p) | S4    | Core                | cr:4   | Synchronous & Induction Machines
-  - PCEET403   | p. 59- 63 ( 5p) | S4    | Core                | cr:4   | PCEET403
+  - PCEET403   | p. 59- 63 ( 5p) | S4    | Core                | cr:4   | Power Electronics and Drives
   - PBEET404   | p. 64- 71 ( 8p) | S4    | PBL Core            | cr:4   | Digital Electronics
   - PEEET411   | p. 72- 77 ( 6p) | S4    | Program Elective    | cr:3   | Electronic Instrumentation
   - PEEET412   | p. 78- 81 ( 4p) | S4    | Program Elective    | cr:3   | Renewable Energy Sources
@@ -309,11 +309,11 @@ SOURCE: EEE.pdf -> EEE (Electrical and Electronics Engineering) — 341 pages
   - UCHUT346   | p.111-117 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Economics for Engineers
   - UCHUT347   | p.118-123 ( 6p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
   - PCEEL407   | p.124-130 ( 7p) | S4    | Lab                 | cr:2   | DC Machines & Transformers Lab
-  - PCEEL408   | p.131-137 ( 7p) | S4    | Lab                 | cr:2   | Semester - IV Power Electronics and Drives Lab
+  - PCEEL408   | p.131-137 ( 7p) | S4    | Lab                 | cr:2   | Power Electronics and Drives Lab
   - PCEET501   | p.140-144 ( 5p) | S5    | Core                | cr:4   | Power Generation, Transmission and Protection
   - PCEET502   | p.145-149 ( 5p) | S5    | Core                | cr:4   | Electromagnetic Theory
   - PCEET503   | p.150-153 ( 4p) | S5    | Core                | cr:3   | Signals and Systems
-  - PBEET504   | p.154-160 ( 7p) | S5    | PBL Core            | cr:4   | Semester -V Microprocessors and Embedded Systems
+  - PBEET504   | p.154-160 ( 7p) | S5    | PBL Core            | cr:4   | Microprocessors and Embedded Systems
   - PEEET521   | p.161-164 ( 4p) | S5    | Program Elective    | cr:3   | Energy Storage Systems
   - PEEET522   | p.165-169 ( 5p) | S5    | Program Elective    | cr:3   | Electric Vehicles
   - PEEET523   | p.170-173 ( 4p) | S5    | Program Elective    | cr:3   | Digital System Design
@@ -322,7 +322,7 @@ SOURCE: EEE.pdf -> EEE (Electrical and Electronics Engineering) — 341 pages
   - PEEET527   | p.184-187 ( 4p) | S5    | Program Elective    | cr:3   | Introduction to Machine Learning
   - PEEET528   | p.188-191 ( 4p) | S5    | Program Elective    | cr:3   | Computer Network Systems
   - PCEEL507   | p.192-198 ( 7p) | S5    | Lab                 | cr:2   | AC Machines Lab
-  - PCEEL508   | p.199-204 ( 6p) | S5    | Lab                 | cr:    | Microprocessor and Embedded Systems Lab
+  - PCEEL508   | p.199-204 ( 6p) | S5    | Lab                 | cr:2   | Microprocessor and Embedded Systems Lab
   - PCEET601   | p.207-210 ( 4p) | S6    | Core                | cr:3   | Control Systems
   - PCEET602   | p.211-214 ( 4p) | S6    | Core                | cr:3   | Electrical System Design and Estimation
   - PEEET631   | p.215-218 ( 4p) | S6    | Program Elective    | cr:3   | Digital Protection of Power Systems
@@ -332,7 +332,7 @@ SOURCE: EEE.pdf -> EEE (Electrical and Electronics Engineering) — 341 pages
   - PEEET636   | p.231-234 ( 4p) | S6    | Program Elective    | cr:3   | Digital Signal Processing
   - PEEET637   | p.235-238 ( 4p) | S6    | Program Elective    | cr:3   | Cloud Computing
   - PEEET638   | p.239-242 ( 4p) | S6    | Program Elective    | cr:3   | Optimization Techniques
-  - PBEET604   | p.243-244 ( 2p) | S6    | PBL Core            | cr:4   | PBEET604
+  - PBEET604   | p.243-244 ( 2p) | S6    | PBL Core            | cr:4   | Power System Analysis
   - OEEET611   | p.246-249 ( 4p) | S6    | Open Elective       | cr:3   | Introduction to Control Systems
   - OEEET612   | p.250-253 ( 4p) | S6    | Open Elective       | cr:3   | Energy Management
   - OEEET613   | p.254-257 ( 4p) | S6    | Open Elective       | cr:3   | Renewable Energy Systems
@@ -384,7 +384,7 @@ SOURCE: ME.pdf -> ME (Mechanical Engineering) — 447 pages
   - UCHUT347   | p.100-105 ( 6p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
   - PCMEL407   | p.106-110 ( 5p) | S4    | Lab                 | cr:2   | Fluid Mechanics and Hydraulic Machines Lab
   - PCMEL408   | p.111-115 ( 5p) | S4    | Lab                 | cr:2   | Manufacturing Technology Lab
-  - PCMET501   | p.117-120 ( 4p) | S5    | Core                | cr:4   | Dynamics of Machinery
+  - PCMET501   | p.117-120 ( 4p) | S5    | Core                | cr:4   | Dynamics of Machinery Cie
   - PCMET502   | p.121-125 ( 5p) | S5    | Core                | cr:4   | Advanced Manufacturing Engineering
   - PCMET503   | p.126-131 ( 6p) | S5    | Core                | cr:3   | Heat and Mass Transfer
   - PBMET504   | p.132-137 ( 6p) | S5    | PBL Core            | cr:4   | Management for Engineers
@@ -397,11 +397,11 @@ SOURCE: ME.pdf -> ME (Mechanical Engineering) — 447 pages
   - PEMET528   | p.164-167 ( 4p) | S5    | Program Elective    | cr:3   | Operations Research
   - PEMET525   | p.168-172 ( 5p) | S5    | Program Elective    | cr:5/3 | Instrumentation and Control Systems
   - PCMEL507   | p.173-178 ( 6p) | S5    | Lab                 | cr:2   | Thermal Engineering Lab - 1
-  - PCMEL508   | p.179-185 ( 7p) | S5    | Lab                 | cr:2   | Lab
+  - PCMEL508   | p.179-185 ( 7p) | S5    | Lab                 | cr:2   | Mechanical Engineering Lab
   - PCMET601   | p.187-191 ( 5p) | S6    | Core                | cr:3   | Industrial and Systems Engineering
   - PCMET602   | p.192-196 ( 5p) | S6    | Core                | cr:3   | Machine Design
   - PEMET631   | p.197-201 ( 5p) | S6    | Program Elective    | cr:3   | Power Plant Engineering
-  - PEMET632   | p.202-205 ( 4p) | S6    | Program Elective    | cr:3   | Compressible Fluid Flow
+  - PEMET632   | p.202-205 ( 4p) | S6    | Program Elective    | cr:3   | Compressible Fluid Flow Cie
   - PEMET633   | p.206-210 ( 5p) | S6    | Program Elective    | cr:3   | Industrial Tribology
   - PEMET634   | p.211-215 ( 5p) | S6    | Program Elective    | cr:3   | Finite Element Methods
   - PEMET636   | p.216-220 ( 5p) | S6    | Program Elective    | cr:3   | Non-Destructive Testing
@@ -482,7 +482,7 @@ SOURCE: CE.pdf -> CE (Civil Engineering) — 407 pages
   - UCHUT346   | p.106-112 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Economics for Engineers
   - UCHUT347   | p.113-119 ( 7p) | S3,S4 | Common / Humanities | cr:2   | Engineering Ethics and Sustainable Development
   - PCCEL407   | p.120-125 ( 6p) | S4    | Lab                 | cr:2   | Materials Testing Lab (Group C)
-  - PCCEL408   | p.126-130 ( 5p) | S4    | Lab                 | cr:2   | Modelling Lab
+  - PCCEL408   | p.126-130 ( 5p) | S4    | Lab                 | cr:2   | Civil Engineering Modelling Lab
   - PCCET501   | p.132-135 ( 4p) | S5    | Core                | cr:4   | Hydrology and Water Resources Engineering
   - PCCET502   | p.136-140 ( 5p) | S5    | Core                | cr:4   | Transportation Engineering
   - PCCET503   | p.141-144 ( 4p) | S5    | Core                | cr:3   | Environmental Engineering
@@ -549,9 +549,8 @@ SOURCE: CE.pdf -> CE (Civil Engineering) — 407 pages
 
 =================================================================
 SUMMARY: 6 branches | 431 unique deduplicated PDFs
-QA WARNINGS (5):
+QA WARNINGS (4):
   [OVERRIDE] CSE p.355: Official KTU PDF printed PECST753; mapped to PECST756 (Game Theory and Mechanism Design)
   [CREDITS] CSE OECST725 (p.392): Suspicious credits='0' (Mobile Application Development)
-  [MODULES] EEE PCEET403 (p.59): Extracted 2/4 modules (PCEET403)
-  [CREDITS] EEE PCEEL508 (p.199): Suspicious credits='' (Microprocessor and Embedded Systems Lab)
+  [MODULES] EEE PCEET403 (p.59): Extracted 2/4 modules (Power Electronics and Drives)
   [CIE/ESE] ME PBMET304 (p.14): PBL course has CIE=40/ESE=60 in top table (Manufacturing Processes)

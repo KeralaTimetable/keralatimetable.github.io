@@ -620,7 +620,7 @@
     {
       "id": "PCCEL408",
       "code": "PCCEL408",
-      "title": "Modelling Lab",
+      "title": "Civil Engineering Modelling Lab",
       "category": "Lab",
       "credits": "2",
       "branches": [
@@ -818,7 +818,7 @@
     {
       "id": "PCEEL408",
       "code": "PCEEL408",
-      "title": "Semester - IV Power Electronics and Drives Lab",
+      "title": "Power Electronics and Drives Lab",
       "category": "Lab",
       "credits": "2",
       "branches": [
@@ -846,7 +846,7 @@
     {
       "id": "PCEET403",
       "code": "PCEET403",
-      "title": "PCEET403",
+      "title": "Power Electronics and Drives",
       "category": "Core",
       "credits": "4",
       "branches": [
@@ -1555,7 +1555,7 @@
     {
       "id": "PBEET504",
       "code": "PBEET504",
-      "title": "Semester -V Microprocessors and Embedded Systems",
+      "title": "Microprocessors and Embedded Systems",
       "category": "PBL Core",
       "credits": "4",
       "branches": [
@@ -1840,7 +1840,7 @@
       "code": "PCEEL508",
       "title": "Microprocessor and Embedded Systems Lab",
       "category": "Lab",
-      "credits": "",
+      "credits": "2",
       "branches": [
         "EEE"
       ],
@@ -1908,7 +1908,7 @@
     {
       "id": "PCMEL508",
       "code": "PCMEL508",
-      "title": "Lab",
+      "title": "Mechanical Engineering Lab",
       "category": "Lab",
       "credits": "2",
       "branches": [
@@ -1922,7 +1922,7 @@
     {
       "id": "PCMET501",
       "code": "PCMET501",
-      "title": "Dynamics of Machinery",
+      "title": "Dynamics of Machinery Cie",
       "category": "Core",
       "credits": "4",
       "branches": [
@@ -2994,7 +2994,7 @@
     {
       "id": "PBEET604",
       "code": "PBEET604",
-      "title": "PBEET604",
+      "title": "Power System Analysis",
       "category": "PBL Core",
       "credits": "4",
       "branches": [
@@ -3800,7 +3800,7 @@
     {
       "id": "PEMET632",
       "code": "PEMET632",
-      "title": "Compressible Fluid Flow",
+      "title": "Compressible Fluid Flow Cie",
       "category": "Program Elective",
       "credits": "3",
       "branches": [
@@ -4901,7 +4901,7 @@
     {
       "id": "PEECT755",
       "code": "PEECT755",
-      "title": "Semester S 7 Mixed Signal Circuit Design",
+      "title": "Mixed Signal Circuit Design",
       "category": "Program Elective",
       "credits": "5/3",
       "branches": [

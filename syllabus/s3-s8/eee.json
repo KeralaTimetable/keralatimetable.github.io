@@ -576,7 +576,7 @@
     {
       "id": "PCEET403",
       "code": "PCEET403",
-      "title": "PCEET403",
+      "title": "Power Electronics and Drives",
       "category": "Core",
       "semesters": [
         "S4"
@@ -589,7 +589,7 @@
       "exam_hours": "",
       "course_type": "Theory",
       "prerequisites": "PCEET303 PCEET304 ,",
-      "common_note": "",
+      "common_note": "B Group",
       "shared_branches": [
         "EEE"
       ],
@@ -728,7 +728,7 @@
     {
       "id": "PCEEL408",
       "code": "PCEEL408",
-      "title": "Semester - IV Power Electronics and Drives Lab",
+      "title": "Power Electronics and Drives Lab",
       "category": "Lab",
       "semesters": [
         "S4"
@@ -1300,7 +1300,7 @@
     {
       "id": "PBEET504",
       "code": "PBEET504",
-      "title": "Semester -V Microprocessors and Embedded Systems",
+      "title": "Microprocessors and Embedded Systems",
       "category": "PBL Core",
       "semesters": [
         "S5"
@@ -1433,7 +1433,7 @@
       "semesters": [
         "S5"
       ],
-      "credits": "",
+      "credits": "2",
       "honours_option": false,
       "cie": "0",
       "ese": "2",
@@ -1851,7 +1851,7 @@
     {
       "id": "PBEET604",
       "code": "PBEET604",
-      "title": "PBEET604",
+      "title": "Power System Analysis",
       "category": "PBL Core",
       "semesters": [
         "S6"
@@ -1864,7 +1864,7 @@
       "exam_hours": "",
       "course_type": "PBL",
       "prerequisites": "PCEET501",
-      "common_note": "",
+      "common_note": "B Group",
       "shared_branches": [
         "EEE"
       ],
