@@ -23,8 +23,8 @@
     "Math & Science": 3,
     "Common / Humanities": 2,
     "Lab": 8,
-    "Program Elective": 49,
-    "Open Elective": 20
+    "Program Elective": 48,
+    "Open Elective": 21
   },
   "courses": [
     {
@@ -296,7 +296,7 @@
         },
         {
           "no": 4,
-          "summary": "Value Analysis and value Engineering Cost Value Exchange Value Use - , , Value , Esteem Value - Aims , Advantages and Application areas of Value Engineering - Value Engineering Procedure - Break -even Analysis - Cost - Benefit Analysis Capital Budgeting Process planning - -"
+          "summary": "Value Analysis and value Engineering Cost Value Exchange Value Use - , , Value , Esteem Value - Aims , Advantages and Application areas of Value Engineering - Value Engineering Procedure - Break -even Analysis - Cost - Benefit Analysis Capital Budgeting Process planning - -  2questionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . 2Questionsfromeach  Each ..."
         }
       ],
       "experiments_count": 0,
@@ -942,7 +942,7 @@
         },
         {
           "no": 4,
-          "summary": "Ceramicmatrixcomposites(CMC):classificationofceramicsandtheir potentialroleasmatrices properties characteristicsandapplicationsof , , CMC conventionalproductiontechniques:coldpressingandsintering hot , , pressing reactionbonding liquidinfiltration pultrusion lanxideprocess , , , . , insitu chemical technique sol -gel technique , ."
+          "summary": "Ceramicmatrixcomposites(CMC):classificationofceramicsandtheir potentialroleasmatrices properties characteristicsandapplicationsof , , CMC conventionalproductiontechniques:coldpressingandsintering hot , , pressing reactionbonding liquidinfiltration pultrusion lanxideprocess , , , . , insitu chemical technique sol -gel technique , .  Eachquestioncarries9marks .  Twoquestionswil..."
         }
       ],
       "experiments_count": 0,
@@ -1030,7 +1030,7 @@
         },
         {
           "no": 4,
-          "summary": "Torsion of non-circular bars: St .Venant’s and Prandtl’s methods-solutions for elliptical cross-section Membrane analogy Torsion of thin-walled tubes . . , thinrectangularsections rolledsectionsandmultiplyconnectedsections ,"
+          "summary": "Torsion of non-circular bars: St .Venant’s and Prandtl’s methods-solutions for elliptical cross-section Membrane analogy Torsion of thin-walled tubes . . , thinrectangularsections rolledsectionsandmultiplyconnectedsections ,  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -1162,7 +1162,7 @@
         },
         {
           "no": 4,
-          "summary": "Logisticsmanagementanditscomponents Modesoftransportationandtheir . performance Characteristics & Transportationinfrastructure policies Design . options for a transportation and logistics network Trade-offs in . transportation design Tailored transportation Role of sustainability in a , . supplychain Sustainabilityconnected . supplychaindrivers ."
+          "summary": "Logisticsmanagementanditscomponents Modesoftransportationandtheir . performance Characteristics & Transportationinfrastructure policies Design . options for a transportation and logistics network Trade-offs in . transportation design Tailored transportation Role of sustainability in a , . supplychain Sustainabilityconnected . supplychaindrivers .  Eachquestioncarries9marks . ..."
         }
       ],
       "experiments_count": 0,
@@ -1436,7 +1436,7 @@
     {
       "id": "PCMEL508",
       "code": "PCMEL508",
-      "title": "Mechanical Engineering Lab",
+      "title": "Lab",
       "category": "Lab",
       "semesters": [
         "S5"
@@ -1646,7 +1646,7 @@
         },
         {
           "no": 4,
-          "summary": "Introduction to finite element analysis steps involved in FEM pre- , , processingphase discretization typesofelements stiffnessmatrix , , , Fundamentals of Finite volume methods different types of finite volume , grids approximation of surface and volume integrals; interpolation , methods Reviewofgoverningequations ,"
+          "summary": "Introduction to finite element analysis steps involved in FEM pre- , , processingphase discretization typesofelements stiffnessmatrix , , , Fundamentals of Finite volume methods different types of finite volume , grids approximation of surface and volume integrals; interpolation , methods Reviewofgoverningequations ,  Eachquestioncarries9marks .  Twoquestionswillbegivenfromea..."
         }
       ],
       "experiments_count": 0,
@@ -1690,7 +1690,7 @@
         },
         {
           "no": 4,
-          "summary": "DesignforAM(DFAM) AM unique capabilities DFAM concepts and objectives Design , , freedom andsynthesismethods . ApplicationsforAM Applications: Prototyping Industrial tooling Aerospace Automobile , , , , Medicaletc ."
+          "summary": "DesignforAM(DFAM) AM unique capabilities DFAM concepts and objectives Design , , freedom andsynthesismethods . ApplicationsforAM Applications: Prototyping Industrial tooling Aerospace Automobile , , , , Medicaletc .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub divisions . (4x9=..."
         }
       ],
       "experiments_count": 0,
@@ -1866,7 +1866,7 @@
         },
         {
           "no": 4,
-          "summary": "Scope of queuing theory Importance and applications Kendall’s Notations , , , Characteristics of Queuing Systems Performance Measures in Queuing , Systems Classic Queuing Models Single-server exponential arrival and , , service times Two-server exponential arrival and service times , ."
+          "summary": "Scope of queuing theory Importance and applications Kendall’s Notations , , , Characteristics of Queuing Systems Performance Measures in Queuing , Systems Classic Queuing Models Single-server exponential arrival and , , service times Two-server exponential arrival and service times , .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questions..."
         }
       ],
       "experiments_count": 0,
@@ -2414,7 +2414,7 @@
         },
         {
           "no": 4,
-          "summary": "Advanced NDI Techniques: Principle and Procedure of Digital Signal and imageProcessing&DigitalImagecorrelation AcousticemissionInspection , , Thermography ComputedTomography ,"
+          "summary": "Advanced NDI Techniques: Principle and Procedure of Digital Signal and imageProcessing&DigitalImagecorrelation AcousticemissionInspection , , Thermography ComputedTomography ,  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -2546,7 +2546,7 @@
         },
         {
           "no": 4,
-          "summary": "PrescriptiveAnalytics:Introduction Business Performance Management: Business Performance Management cycle-Performance management system-Key Performance Indicators . Analytics in Business support functions: Sales and Marketing Human - Resources-Financial Analytics-Production and Operations Analytics ."
+          "summary": "PrescriptiveAnalytics:Introduction Business Performance Management: Business Performance Management cycle-Performance management system-Key Performance Indicators . Analytics in Business support functions: Sales and Marketing Human - Resources-Financial Analytics-Production and Operations Analytics .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , of..."
         }
       ],
       "experiments_count": 0,
@@ -2590,7 +2590,7 @@
         },
         {
           "no": 4,
-          "summary": "Queuing theory: Scope terminology classification Importance and , , applications Performance Measures in Queuing Systems Single-server , , exponential arrival and service times . Multi - server problems . Simulation: Monte Carlo simulation Queuing simulation model – - Generationofrandomnumbers"
+          "summary": "Queuing theory: Scope terminology classification Importance and , , applications Performance Measures in Queuing Systems Single-server , , exponential arrival and service times . Multi - server problems . Simulation: Monte Carlo simulation Queuing simulation model – - Generationofrandomnumbers  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1q..."
         }
       ],
       "experiments_count": 0,
@@ -2766,7 +2766,7 @@
         },
         {
           "no": 4,
-          "summary": "DesignforAM(DFAM) AM unique capabilities DFAM concepts and objectives Design freedom , , andsynthesismethods . ApplicationsforAM Applications: Prototyping Industrial tooling Aerospace Automobile , , , , Medicaletc ."
+          "summary": "DesignforAM(DFAM) AM unique capabilities DFAM concepts and objectives Design freedom , , andsynthesismethods . ApplicationsforAM Applications: Prototyping Industrial tooling Aerospace Automobile , , , , Medicaletc .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -2803,6 +2803,10 @@
         {
           "no": 2,
           "summary": "Solar collectors: Flat plate collector thermal analysis heat removal factor , , . Overview of other thermal collectors Concentrating collectors theoretical . , limit classifications of concentrators Parabolic trough collector thermal , . , analysis compound parabolic concentrators Linear Fresnel Reflector , , , parabolic dish collector central receiver tower Tracking of solar ,..."
+        },
+        {
+          "no": 3,
+          "summary": "Non-thermal routes for solar energy conversion Basics of photovoltaic , effect Fundamentals of PV: Principles and performance analysis , , Photovoltaic materials Modules Array Maximum Power Point Tracking , , , (MPPT) etc; standalone PV system: Components and design of standalone . system fundamentals of battery system; grid connected PV system: , componentsanddesignofgridconne..."
         },
         {
           "no": 4,
@@ -2982,7 +2986,7 @@
         },
         {
           "no": 4,
-          "summary": "AdvancedTopicsinFailureAnalysis Contact fatigue High -temperature effects Corrosion Shock and impact , , , loading designing for contact fatigue Influence of high temperatures on , , material properties Mechanisms of corrosion and prevention Integration of , , fracturemechanicsprinciples Designingforcomplexloadingconditions , ."
+          "summary": "AdvancedTopicsinFailureAnalysis Contact fatigue High -temperature effects Corrosion Shock and impact , , , loading designing for contact fatigue Influence of high temperatures on , , material properties Mechanisms of corrosion and prevention Integration of , , fracturemechanicsprinciples Designingforcomplexloadingconditions , .  Eachquestioncarries9marks .  Twoquestionswillbe..."
         }
       ],
       "experiments_count": 0,
@@ -3378,7 +3382,7 @@
         },
         {
           "no": 4,
-          "summary": "Introductionto Geneticalgorithm BasicGAframework GAoperators: , , Encoding Crossover Selection Mutation , , , Introduction to Fuzzy logic Fuzzy sets and membership functions . . OperationsonFuzzysets OptimizationofFuzzySystems . ."
+          "summary": "Introductionto Geneticalgorithm BasicGAframework GAoperators: , , Encoding Crossover Selection Mutation , , , Introduction to Fuzzy logic Fuzzy sets and membership functions . . OperationsonFuzzysets OptimizationofFuzzySystems . .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule , outofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -3418,7 +3422,11 @@
         },
         {
           "no": 3,
-          "summary": "Sensors for mobile robot navigation: Sensor classification Characterizing , sensor performance Wheel /motor sensors Heading sensors , , , Accelerometers IMUs Ground -based beacons Active ranging , , , , Motion/speed sensors and Vision-based sensors , . Robot navigation: Localization Error propagation model Probabilistic map- , ,"
+          "summary": "Sensors for mobile robot navigation: Sensor classification Characterizing , sensor performance Wheel /motor sensors Heading sensors , , , Accelerometers IMUs Ground -based beacons Active ranging , , , , Motion/speed sensors and Vision-based sensors , . Robot navigation: Localization Error propagation model Probabilistic map- , ,  Eachquestioncarries9marks .  Twoquestionswillb..."
+        },
+        {
+          "no": 4,
+          "summary": "Path Planning: local vs global path planning, Graph search, Potential field- based path planning; Map based path planning- Dijkstra’s algorithm, A*, D* algorithms. Obstacle avoidance- Bug algorithm, Vector field histogram, Dynamic window approach. Control of mobile robots: Control of differential drive robot and steered robot based on its kinematic model, Case study- design and..."
         }
       ],
       "experiments_count": 0,
@@ -3459,6 +3467,10 @@
         {
           "no": 3,
           "summary": "Computer aided programme generation & Product Manufacturing , Automated Material Movement and Storage System- Automated Storage andRetrievalSystems(AS/RS) IndustrialRobots CuttingToolsandTool , , Management Tool Preset Identification and Data Transfer - , ."
+        },
+        {
+          "no": 4,
+          "summary": "FMS Planning: CADConsiderationsFMSplanning CAMConsiderations , for FMS planning FMS Software Structure- General Structure and . Requirements Types of FMS Software Modules FMS installation and , ,  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -3499,6 +3511,10 @@
         {
           "no": 3,
           "summary": "Tools and Techniques in TQM: Affinity diagram -brainstorming - cause and effect analysis - process flow chart – check sheets- Scatter diagram Pareto chart Histogram - - . Quality control and Inspection Fundamentals of statistics accuracy , , and precision causes of variation in quality Statistical Process , , Control control charts 𝑥̅ and R chart problems process capability , ,..."
+        },
+        {
+          "no": 4,
+          "summary": " Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule , outofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -3630,7 +3646,7 @@
         },
         {
           "no": 4,
-          "summary": "Strong and Weak form Galerkin’s weighted residual FEM formulation ; , , One dimensional axially loaded bar heat flow in a bar natural coordinate , , system Iso parametric elements Quadrilateral elements- Serendipity , , elementsIsoparametricformulations Jacobianmatrix stiffnessmatrices , , ."
+          "summary": "Strong and Weak form Galerkin’s weighted residual FEM formulation ; , , One dimensional axially loaded bar heat flow in a bar natural coordinate , , system Iso parametric elements Quadrilateral elements- Serendipity , , elementsIsoparametricformulations Jacobianmatrix stiffnessmatrices , , .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1que..."
         }
       ],
       "experiments_count": 0,
@@ -3762,7 +3778,7 @@
         },
         {
           "no": 4,
-          "summary": "Introduction to Finite volume method Solution of one-dimensional steady . state conduction problems Handling different boundary conditions . . Solution of one-dimensional convection diffusion problems using central differenceschemesandupwindscheme IntroductiontoSIMPLE algorithm . forincompressibleflows ."
+          "summary": "Introduction to Finite volume method Solution of one-dimensional steady . state conduction problems Handling different boundary conditions . . Solution of one-dimensional convection diffusion problems using central differenceschemesandupwindscheme IntroductiontoSIMPLE algorithm . forincompressibleflows .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out ..."
         }
       ],
       "experiments_count": 0,
@@ -3807,50 +3823,6 @@
         {
           "no": 4,
           "summary": "EnergyStorage Pumped hydro Compressed air energy storage flywheel energy storage , , , Electrochemical energy storage magnetic energy storage Thermal energy , , storage . Economicsofpowergeneration Estimation of load -load curve-load factor-diversity factor-capacity factor-use factor-economics in plant selection-economics of generation and distribution of power-useful life-tari..."
-        }
-      ],
-      "experiments_count": 0,
-      "experiments": [],
-      "video_links": []
-    },
-    {
-      "id": "PEMET837",
-      "code": "PEMET837",
-      "title": "Product Design and Innovation",
-      "category": "Program Elective",
-      "semesters": [
-        "S8"
-      ],
-      "credits": "3",
-      "honours_option": false,
-      "cie": "40",
-      "ese": "60",
-      "ltpr": "3:0:0:0",
-      "exam_hours": "",
-      "course_type": "Elective",
-      "prerequisites": "",
-      "common_note": "",
-      "shared_branches": [
-        "ME"
-      ],
-      "pages": 4,
-      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET837.pdf",
-      "modules": [
-        {
-          "no": 1,
-          "summary": "Introduction: Classification/ SpecificationsofProducts Productlife cycle , , productmix Introductiontoproductdesign Modernproductdevelopment . , processDesignbyevolution Designbyinnovation Morphologyofdesign , , Ethicsinproductdesign legalfactorsandsocialissues ,"
-        },
-        {
-          "no": 2,
-          "summary": "Creativity Techniques: Creative thinking conceptualization brain , , storming primary design drawing simulation detail design , , , , . Conceptual Design: Generation selection & embodiment of concept , , Product architecture Industrial design: process need . , . RobustDesign:TaguchiDesigns Designofexperiments ,"
-        },
-        {
-          "no": 3,
-          "summary": "Design for Manufacturing and Assembly: Methods of designing for Manufacturing and Assembly Design for Maintenance Design for . . Environment Ergonomicsinproduct design Aestheticsinproduct design . . . Concepts of size and texture colour Value Engineering Definition . - . Methodology Casestudies , ."
-        },
-        {
-          "no": 4,
-          "summary": "Product costing Economic analysis: Qualitative & Quantitative . . Psychological and Physiological considerations Concurrent Engineering - Elements of concurrent engineering Benefits Rapid prototyping: concepts , , processes and advantages Reverse engineering: steps in reverse . engineering- hardware and software in reverse engineering Tools for . product design Drafting / Model..."
         }
       ],
       "experiments_count": 0,
@@ -3934,7 +3906,7 @@
         },
         {
           "no": 3,
-          "summary": "Design of tall vessel under wind and seismic load Design of leg lug and . , saddle supports Buckling -Analysis of Elastic buckling of cylinders or . pipes under external pressure- Design of Stiffeners for pressure vessel (Use relevant ASME codes and standard practices in pressure vessel"
+          "summary": "Design of tall vessel under wind and seismic load Design of leg lug and . , saddle supports Buckling -Analysis of Elastic buckling of cylinders or . pipes under external pressure- Design of Stiffeners for pressure vessel (Use relevant ASME codes and standard practices in pressure vessel designfortheentirethirdmodule)"
         },
         {
           "no": 4,
@@ -4158,7 +4130,7 @@
         },
         {
           "no": 4,
-          "summary": "Reverse Engineering for metal AM Data Handling Simulation and , , Analysis Modelling for AM –Support Structures Functional Integration , , , Value analysis Cost Time Performance and Sustainability -Future of – , , metalAM"
+          "summary": "Reverse Engineering for metal AM Data Handling Simulation and , , Analysis Modelling for AM –Support Structures Functional Integration , , , Value analysis Cost Time Performance and Sustainability -Future of – , , metalAM  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -4246,7 +4218,7 @@
         },
         {
           "no": 4,
-          "summary": "Circuits: sequential circuits cascade methods mapping methods step - - – counter method compound circuit design combination circuit design -fault , - . finding of circuits - use of microprocessors for sequencing Introduction to different types of industrial controllers- Types of automation system ,PLC , Lowcostautomation"
+          "summary": "Circuits: sequential circuits cascade methods mapping methods step - - – counter method compound circuit design combination circuit design -fault , - . finding of circuits - use of microprocessors for sequencing Introduction to different types of industrial controllers- Types of automation system ,PLC , Lowcostautomation  Eachquestioncarries9marks .  Twoquestionswillbegivenfr..."
         }
       ],
       "experiments_count": 0,
@@ -4378,7 +4350,7 @@
         },
         {
           "no": 4,
-          "summary": "BUSINESS CHANNELS : - Distribution Channels- Functions- Types- Internal and external trades Import and exportWhole sale and retail . . system Theory of retailing Business channel Intermediaries Franchising . . . – Branding Business Insurance system Business Combination systems- . . Needs- Acquisition-Merging- Takeover ."
+          "summary": "BUSINESS CHANNELS : - Distribution Channels- Functions- Types- Internal and external trades Import and exportWhole sale and retail . . system Theory of retailing Business channel Intermediaries Franchising . . . – Branding Business Insurance system Business Combination systems- . . Needs- Acquisition-Merging- Takeover .  Eachquestioncarries9marks .  Twoquestionswillbegivenfro..."
         }
       ],
       "experiments_count": 0,
@@ -4422,7 +4394,7 @@
         },
         {
           "no": 4,
-          "summary": "WORLD CLASS MANUFACTURING -RECENT TRENDS &INDIA: World class manufacturing Companies in INDIA -Production 4 .0 -Industry 4 .0 -Digitalization process in India-AI -Robotics-3D Printing-Extended Realities- VR& AR –Digital Twins .Automation in Industries-Case studies . Reshoring-Make in INDIA -Sustainable Manufacturing ."
+          "summary": "WORLD CLASS MANUFACTURING -RECENT TRENDS &INDIA: World class manufacturing Companies in INDIA -Production 4 .0 -Industry 4 .0 -Digitalization process in India-AI -Robotics-3D Printing-Extended Realities- VR& AR –Digital Twins .Automation in Industries-Case studies . Reshoring-Make in INDIA -Sustainable Manufacturing . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfrome..."
         }
       ],
       "experiments_count": 0,
@@ -4466,7 +4438,51 @@
         },
         {
           "no": 4,
-          "summary": "Microsystems Design Design considerations Process design – – – Mechanical Design CAD Micro system packaging Levels Bonding – – – – Interfaces Assembly Selection of Packaging Materials – – – ."
+          "summary": "Microsystems Design Design considerations Process design – – – Mechanical Design CAD Micro system packaging Levels Bonding – – – – Interfaces Assembly Selection of Packaging Materials – – – .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
+      "id": "PEMET837",
+      "code": "PEMET837",
+      "title": "Product Design and Innovation",
+      "category": "Open Elective",
+      "semesters": [
+        "S8"
+      ],
+      "credits": "3",
+      "honours_option": false,
+      "cie": "40",
+      "ese": "60",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "ME"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PEMET837.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction: Classification/ SpecificationsofProducts Productlife cycle , , productmix Introductiontoproductdesign Modernproductdevelopment . , processDesignbyevolution Designbyinnovation Morphologyofdesign , , Ethicsinproductdesign legalfactorsandsocialissues ,"
+        },
+        {
+          "no": 2,
+          "summary": "Creativity Techniques: Creative thinking conceptualization brain , , storming primary design drawing simulation detail design , , , , . Conceptual Design: Generation selection & embodiment of concept , , Product architecture Industrial design: process need . , . RobustDesign:TaguchiDesigns Designofexperiments ,"
+        },
+        {
+          "no": 3,
+          "summary": "Design for Manufacturing and Assembly: Methods of designing for Manufacturing and Assembly Design for Maintenance Design for . . Environment Ergonomicsinproduct design Aestheticsinproduct design . . . Concepts of size and texture colour Value Engineering Definition . - . Methodology Casestudies , ."
+        },
+        {
+          "no": 4,
+          "summary": "Product costing Economic analysis: Qualitative & Quantitative . . Psychological and Physiological considerations Concurrent Engineering - Elements of concurrent engineering Benefits Rapid prototyping: concepts , , processes and advantages Reverse engineering: steps in reverse . engineering- hardware and software in reverse engineering Tools for . product design Drafting / Model..."
         }
       ],
       "experiments_count": 0,

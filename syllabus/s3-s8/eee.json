@@ -60,7 +60,11 @@
         },
         {
           "no": 3,
-          "summary": "Laplacetransforms(Reviewonly) Transient response of simple series and parallel RL and RC circuits with"
+          "summary": "Laplacetransforms(Reviewonly) Transient response of simple series and parallel RL and RC circuits with  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
+        },
+        {
+          "no": 4,
+          "summary": "Two port networks – Z, Y, h, T parameters – conditions for symmetry and reciprocity – relationship between parameters – interconnection of two port networks – series, parallel and cascade Coupled circuit – dot convention – fixing of dots – coefficient of coupling - conductively coupled equivalent circuit - sinusoidal steady state analysis of coupled circuits."
         }
       ],
       "experiments_count": 0,
@@ -292,7 +296,7 @@
         },
         {
           "no": 4,
-          "summary": "Value Analysis and value Engineering Cost Value Exchange Value Use - , , Value , Esteem Value - Aims , Advantages and Application areas of Value Engineering - Value Engineering Procedure - Break -even Analysis - Cost - Benefit Analysis Capital Budgeting Process planning - -"
+          "summary": "Value Analysis and value Engineering Cost Value Exchange Value Use - , , Value , Esteem Value - Aims , Advantages and Application areas of Value Engineering - Value Engineering Procedure - Break -even Analysis - Cost - Benefit Analysis Capital Budgeting Process planning - -  2questionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . 2Questionsfromeach  Each ..."
         }
       ],
       "experiments_count": 0,
@@ -572,7 +576,7 @@
     {
       "id": "PCEET403",
       "code": "PCEET403",
-      "title": "SEMSEMESTER-4 COURSE NAME: Power Electronics and Drives",
+      "title": "PCEET403",
       "category": "Core",
       "semesters": [
         "S4"
@@ -585,13 +589,22 @@
       "exam_hours": "",
       "course_type": "Theory",
       "prerequisites": "PCEET303 PCEET304 ,",
-      "common_note": "B Group",
+      "common_note": "",
       "shared_branches": [
         "EEE"
       ],
       "pages": 5,
       "pdf_url": "/syllabus/s3-s8/pdfs/PCEET403.pdf",
-      "modules": [],
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Mohan, Undeland, Robbins, Wiley India, 2022 4. Power Electronics- Essentials and Applications by L. Umanand, John Wiley, 2009 Module-II Controlled Rectifiers (Single Phase) – Fully controlled and half-controlled rectifiers (semi- converter) with RL and RLE loads- Rectifier and inverter modes of operation- waveforms (continuous & discontinuous conduction)– Output voltage, Input ..."
+        },
+        {
+          "no": 2,
+          "summary": "Need for improved utility interface- Generation of current harmonics- Power factor- Harmonics and IEEE 519 standard- Active shaping of the input line current- Single-phase front end boost converter (circuit diagram, operation, block diagram of the control scheme) [2 Hrs] Reference Texts: 1. Power Electronics- Converters, Applications and Design, 3ed (Indian Adaptation) by Mohan..."
+        }
+      ],
       "experiments_count": 0,
       "experiments": [],
       "video_links": []
@@ -626,6 +639,14 @@
         {
           "no": 2,
           "summary": "Combinational circuits half adder and full adder half subtractor and full – , subtractor 4 -bit parallel binary adder/subtractor – . Comparators parity generators and checkers encoders – – – decoders – BCD to seven segment decoder . Multiplexers implementation of boolean expressions using – multiplexers demultiplexers – ."
+        },
+        {
+          "no": 3,
+          "summary": "Flip-Flops – SR, JK, D and T flip-flops – characteristic table and excitation table – JK Master Slave Flip-flop – Conversion of flip- flops – SR to JK and JK to SR only. Up/Down counters – asynchronous counters – mod-6 and mod-10 counters. Synchronous counters – design of synchronous counters – Ring counter – Johnson Counter. Shift registers - SISO, SIPO, PISO, PIPO."
+        },
+        {
+          "no": 4,
+          "summary": "State Machines – state transition diagram – Moore and Mealy machines. Digital to Analog converter –weighted resistor type, R-2R Ladder type. Analog to Digital Converter – flash type, successive approximation type. Introduction to Verilog – Implementation of AND, OR, half adder and full adder."
         }
       ],
       "experiments_count": 0,
@@ -670,7 +691,7 @@
         },
         {
           "no": 4,
-          "summary": "Random process concept classification of process Methods of , , Description of Random process Special classes Average Values of , , Random Process Stationarity- SSS WSS Autocorrelation functions , , , and its properties Ergodicity Mean-Ergodic Process Mean-Ergodic , , , Theorem CorrelationErgodicProcess DistributionErgodicProcess , , . [Text2:RelevanttopicsfromChapter6]"
+          "summary": "Random process concept classification of process Methods of , , Description of Random process Special classes Average Values of , , Random Process Stationarity- SSS WSS Autocorrelation functions , , , and its properties Ergodicity Mean-Ergodic Process Mean-Ergodic , , , Theorem CorrelationErgodicProcess DistributionErgodicProcess , , . [Text2:RelevanttopicsfromChapter6]  Eachq..."
         }
       ],
       "experiments_count": 0,
@@ -707,7 +728,7 @@
     {
       "id": "PCEEL408",
       "code": "PCEEL408",
-      "title": "Branch Name (Branch Code) COURSE NAME: POWER ELECTRONICS and DRIVES LAB",
+      "title": "Semester - IV Power Electronics and Drives Lab",
       "category": "Lab",
       "semesters": [
         "S4"
@@ -826,6 +847,10 @@
         {
           "no": 3,
           "summary": "Display methods and devices: Different types of display –display system buildingblocks . Data Presentation Element: Recorders-Strip Chart Recorder , Potentiometric Recorder X -Y Recorder Magnetic recorder Digital , . , recorders- Data logger Experiments and statistical analysis: Performance of experiment - characteristics of experimental data- description of dispensed data- typ..."
+        },
+        {
+          "no": 4,
+          "summary": "Introduction to Process Control - Block diagram of the process control loop. Analog and Digital DAS: Programmable logic controllers (PLC), Organization- Hardware details- I/O- Power supply- CPU- Standards Programming aspects- Ladder programming- realization of AND, OR, NAND, NOR and XOR logic, the concept of latching, Introduction to Timer/Counters, Numerical Exercises based on..."
         }
       ],
       "experiments_count": 0,
@@ -1221,7 +1246,7 @@
         },
         {
           "no": 4,
-          "summary": "ElectromagneticWaves:Timevaryingpotentials Wavesingeneral , , Electromagneticwaves Wavepropagationinlossydielectrics Plane , , waves in free space conductors skin effect Power Poynting , , , , theorem Reflectionofplanewaveatnormalincidence , . Transmission Lines: Transmission line equations Characteristic , impedance Inputimpedance Standingwaveratio , , ."
+          "summary": "ElectromagneticWaves:Timevaryingpotentials Wavesingeneral , , Electromagneticwaves Wavepropagationinlossydielectrics Plane , , waves in free space conductors skin effect Power Poynting , , , , theorem Reflectionofplanewaveatnormalincidence , . Transmission Lines: Transmission line equations Characteristic , impedance Inputimpedance Standingwaveratio , , . Eachquestioncarries9ma..."
         }
       ],
       "experiments_count": 0,
@@ -1275,7 +1300,7 @@
     {
       "id": "PBEET504",
       "code": "PBEET504",
-      "title": "Electrical and Electronics Engineering (EE) MICROPROCESSORS and EMBEDDED SYSTEMS",
+      "title": "Semester -V Microprocessors and Embedded Systems",
       "category": "PBL Core",
       "semesters": [
         "S5"
@@ -1294,7 +1319,24 @@
       ],
       "pages": 7,
       "pdf_url": "/syllabus/s3-s8/pdfs/PBEET504.pdf",
-      "modules": [],
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction to microprocessors- Features and Architecture of 8085 Registers of 8085 Flags 8085 Pin diagram- Pins Signals - - - , and functions Assembly language programming- Basic - Instruction set to write Simple programs - Arithmetic , Logical , Branchinginstructions Opcodes handcoding Programs , , , involving8and16bitAddition Subtraction MemoryReading , , and writing Sortin..."
+        },
+        {
+          "no": 2,
+          "summary": "states fetch and execute cycles –Timing diagram for – instructions- Delay subroutines Interrupts- Interrupt service – Routines- Interfacing ADC and DAC"
+        },
+        {
+          "no": 3,
+          "summary": "Introduction to Embedded Systems-Application domain features , and characteristics Microprocessors and Micro controllers– , Choiceandsuitabilityforapplications Introduction to Arduino UNO(8bit) Hardware fundamentals - ofATmega328PmicrocontrollerbasedBoard Arduino . Architecture Pin diagram and functions of Pins- Overview of , mainfeaturessuchasI/OPorts Timers interrupts PWM ADC..."
+        },
+        {
+          "no": 4,
+          "summary": "ARM(AdvancedRISCMachines)basedEmbeddedSystem Design: ClassificationofMicroprocessorsbasedontheword length architecture and Instruction Set Reduced Instruction Set , - Computer(RISC)andComplexInstructionSetComputer (CISC) Featuresandcharacteristics . Introduction to Arduino due(32bit) micro controller board - (based on the atmel sam3x-- arm cortex- m3 cpu) - Features , General S..."
+        }
+      ],
       "experiments_count": 0,
       "experiments": [],
       "video_links": []
@@ -1386,7 +1428,7 @@
     {
       "id": "PCEEL508",
       "code": "PCEEL508",
-      "title": "Engineering (EE) Electrical and Electronics MICROPROC CESSOR and EMBEDDED SYSTEMS LAB",
+      "title": "Microprocessor and Embedded Systems Lab",
       "category": "Lab",
       "semesters": [
         "S5"
@@ -1440,6 +1482,14 @@
         {
           "no": 2,
           "summary": "Kinetic energy: Mechanical - Flywheel , Power to Gas: Hydrogen- Synthetic methane Electro chemical energy: Batteries-Battery . parameters: C -rating– SoC – DoD -Specific Energy- Specific power (numerical examples) Fuel cells Electrostatic energy (Super , , Capacitors) Electromagnetic energy (Superconducting Magnetic , Energy Storage) Comparative analysis Environmental impacts o..."
+        },
+        {
+          "no": 3,
+          "summary": "Eachquestioncarries9marks  . Twoquestionswillbegivenfromeachmodule outof  , which1questionshouldbeanswered . Eachquestioncanhaveamaximumof3subdivisions  . (4x9=36marks) Totalof8Questions each  ,"
+        },
+        {
+          "no": 4,
+          "summary": "Smart grid, Smart micro grid, Smart house, Mobile storage system: Electric vehicles – Grid to Vehicle (G2V)-Vehicle to Grid (V2G), Management and control hierarchy of storage systems. Aggregating energy storage systems and distributed generation (Virtual Power Plant Energy Management with storage systems), Battery SCADA, Hybrid energy storage systems: configurations and applica..."
         }
       ],
       "experiments_count": 0,
@@ -1449,7 +1499,7 @@
     {
       "id": "PEEET522",
       "code": "PEEET522",
-      "title": "ELECTRIC VEHICLES PEEET522 CIE Marks",
+      "title": "Electric Vehicles",
       "category": "Program Elective",
       "semesters": [
         "S5"
@@ -1527,7 +1577,7 @@
         },
         {
           "no": 4,
-          "summary": "VLSI Design flow: Design entry: Schematic Data types and objects different , , modelling styles in VHDL Dataflow Behavioural and Structural Modelling - , . VHDLconstructsandcodesforcombinationalandsequentialcircuits ."
+          "summary": "VLSI Design flow: Design entry: Schematic Data types and objects different , , modelling styles in VHDL Dataflow Behavioural and Structural Modelling - , . VHDLconstructsandcodesforcombinationalandsequentialcircuits . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -1602,12 +1652,20 @@
       "pdf_url": "/syllabus/s3-s8/pdfs/PEEET526.pdf",
       "modules": [
         {
+          "no": 1,
+          "summary": "Basic Concepts of Data Structures: Algorithms Performance Analysis , , SpaceComplexity TimeComplexity AsymptoticNotations , , Arrays: Linear Search and Binary Search Stacks Queues-Circular , , Queues Priority Queues Double Ended Queues Evaluation of , , , Expressions Linked List: Self -Referential Structures Dynamic Memory Allocation , , Singly Linked List - Operations on Linke..."
+        },
+        {
+          "no": 2,
+          "summary": "Linked List: Self-Referential Structures, Dynamic Memory Allocation, Singly Linked List- Operations on Linked List. Doubly Linked List, Circular Linked List, Stacks and Queues using Linked List, Polynomial representation using Linked List"
+        },
+        {
           "no": 3,
           "summary": "Trees and Graphs: Trees Binary Trees-Tree Operations Binary Tree , , Representation TreeTraversals BinarySearch , , Trees- Binary Search Tree Operations Graphs Representation of Graphs Depth First Searchand Breadth First , , SearchonGraphs ApplicationsofGraphs ,"
         },
         {
           "no": 4,
-          "summary": "Sorting and Hashing: Sorting Techniques Selection Sort Insertion Sort – , , QuickSort MergeSortandHeapSort , Hashing- Hashing Techniques Collision Resolution Overflow handling , , , Hashing functions – Mid square , Division , Folding , Digit Analysis"
+          "summary": "Sorting and Hashing: Sorting Techniques Selection Sort Insertion Sort – , , QuickSort MergeSortandHeapSort , Hashing- Hashing Techniques Collision Resolution Overflow handling , , , Hashing functions – Mid square , Division , Folding , Digit Analysis Eachquestioncarries9marks  . Twoquestionswillbegivenfromeachmodule outof  , which1questionshouldbeanswered . Eachquestioncanhav..."
         }
       ],
       "experiments_count": 0,
@@ -1793,7 +1851,7 @@
     {
       "id": "PBEET604",
       "code": "PBEET604",
-      "title": "Branch Name (Branch Code) COURSE NAME: POWER SYSTEM ANALYSIS",
+      "title": "PBEET604",
       "category": "PBL Core",
       "semesters": [
         "S6"
@@ -1806,13 +1864,30 @@
       "exam_hours": "",
       "course_type": "PBL",
       "prerequisites": "PCEET501",
-      "common_note": "B Group",
+      "common_note": "",
       "shared_branches": [
         "EEE"
       ],
       "pages": 2,
       "pdf_url": "/syllabus/s3-s8/pdfs/PBEET604.pdf",
-      "modules": [],
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Per unit quantities-single phase and three phase Symmetrical components -- sequence networks Types of faults Fault calculations(shunt only) -symmetrical and unsymmetrical – 2nd edition 2002 , ."
+        },
+        {
+          "no": 2,
+          "summary": "Load flow studies Introduction- Types of buses – Network model admittance matrix - Gauss-Siedel (Qualitative study) Newton-Raphson (Qualitative study) FastDecoupledmethod(Qualitativestudy) PrincipleofDCloadflow D P Kothariand . . I J Nagrath . ."
+        },
+        {
+          "no": 3,
+          "summary": "Power system stability steady state dynamic and transient stability - , power angle curve - steady state stability limit - swing equation solution of swing equation RK method - Equalarea criterionandapplication methods ofimprovingstabilitylimits PowerSystemAnalysis and De sign"
+        },
+        {
+          "no": 4,
+          "summary": "Models of governors turbines generator-load (numerical problems) , , Automatic Generation Control - Load frequency control - single area and two area systems Automatic voltage control Exciter Control – UnitCommitment EconomicDispatch , Bloom’sKnowledge Level(KL) K1 Remember K2 Understand K3 Apply K4 Analyse K5 Evaluate K6 - , - , - , - , - , - CourseArticulationMatrix(Mappingof..."
+        }
+      ],
       "experiments_count": 0,
       "experiments": [],
       "video_links": []
@@ -2066,7 +2141,11 @@
         },
         {
           "no": 3,
-          "summary": "Deadlocks: Necessary conditions Resource allocation graphs Deadlock prevention , , , Deadlock avoidance Banker’s algorithms Deadlock detection Recovery from – , , deadlock . Memory Management: Concept of address spaces Swapping Contiguous memory , , allocation fixed and variable partitions Segmentation Paging Virtual memory , , , . , Demandpaging Pagereplacementalgorithms , ."
+          "summary": "Deadlocks: Necessary conditions Resource allocation graphs Deadlock prevention , , , Deadlock avoidance Banker’s algorithms Deadlock detection Recovery from – , , deadlock . Memory Management: Concept of address spaces Swapping Contiguous memory , , allocation fixed and variable partitions Segmentation Paging Virtual memory , , , . , Demandpaging Pagereplacementalgorithms , . o..."
+        },
+        {
+          "no": 4,
+          "summary": "File System: File concept - Attributes, Operations, types, structure – Access methods, Protection. File-system implementation, Directory implementation. Allocation methods. Storage Management: Magnetic disks, Solid-state disks, Disk Structure, Disk scheduling, Disk formatting."
         }
       ],
       "experiments_count": 0,
@@ -2506,7 +2585,7 @@
         },
         {
           "no": 4,
-          "summary": "EnergyEconomics:Economicanalysis:methods cashflowmodel time , , value of money evaluation of proposals pay-back period average rate of , , , returnmethod internalrateofreturnmethod presentvaluemethod life , , , cyclecostingapproach ComputeraidedEnergyManagementSystems . (EMS) ."
+          "summary": "EnergyEconomics:Economicanalysis:methods cashflowmodel time , , value of money evaluation of proposals pay-back period average rate of , , , returnmethod internalrateofreturnmethod presentvaluemethod life , , , cyclecostingapproach ComputeraidedEnergyManagementSystems . (EMS) .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbea..."
         }
       ],
       "experiments_count": 0,
@@ -2594,7 +2673,7 @@
         },
         {
           "no": 4,
-          "summary": "DesignusingStateSpaceapproach: Discretization of continuous time state-space equations Controllability , , Observability . StatefeedbackcontrollerdesignviaPolePlacement . StateObserverDesign:FullorderobserversandReducedorderobservers . ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
+          "summary": "DesignusingStateSpaceapproach: Discretization of continuous time state-space equations Controllability , , Observability . StatefeedbackcontrollerdesignviaPolePlacement . StateObserverDesign:FullorderobserversandReducedorderobservers .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -2638,7 +2717,7 @@
         },
         {
           "no": 4,
-          "summary": "Image Restoration: Degradation model Inverse filtering- removal of blur , caused by uniform linear motion Minimum Mean Square Error (Wiener) , Filtering . Image segmentation: Region based approach clustering Segmentation , , basedonthresholding edgebasedsegmentation HoughTransform , , ."
+          "summary": "Image Restoration: Degradation model Inverse filtering- removal of blur , caused by uniform linear motion Minimum Mean Square Error (Wiener) , Filtering . Image segmentation: Region based approach clustering Segmentation , , basedonthresholding edgebasedsegmentation HoughTransform , , . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1question..."
         }
       ],
       "experiments_count": 0,
@@ -2726,7 +2805,7 @@
         },
         {
           "no": 4,
-          "summary": "NonlinearControlDesign: Lie Derivatives and Lie Brackets; Feedback linearization Input state , linearization and input output linearization of SISO systems (3 hours) – . Design via linearization regulation via integral control; gain scheduling - , tracking . Concepts of other nonlinear controllers sliding mode backstepping – , . ofwhich1questionshouldbeanswered .  Eachquestion..."
+          "summary": "NonlinearControlDesign: Lie Derivatives and Lie Brackets; Feedback linearization Input state , linearization and input output linearization of SISO systems (3 hours) – . Design via linearization regulation via integral control; gain scheduling - , tracking . Concepts of other nonlinear controllers sliding mode backstepping – , .  Twoquestionswillbegivenfromeachmodule out , ofw..."
         }
       ],
       "experiments_count": 0,
@@ -2770,7 +2849,7 @@
         },
         {
           "no": 4,
-          "summary": "RecurrentNeuralNetwork(RNN): Introduction to RNN Computational graphs RNN design Encoder-decoder - , , sequence to sequence architectures , Deep RNNs , Modern RNN - LSTM and GRU Applications Natural Language Processing (NLP) , - ,"
+          "summary": "RecurrentNeuralNetwork(RNN): Introduction to RNN Computational graphs RNN design Encoder-decoder - , , sequence to sequence architectures , Deep RNNs , Modern RNN - LSTM and GRU Applications Natural Language Processing (NLP) , - , ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -2814,7 +2893,7 @@
         },
         {
           "no": 4,
-          "summary": "Object recognition-Shape correspondence and shape matching PCA ,SVM , LDA Bayes rule andML methods Eigen facesFace detection Face , . , , recognition Application: Scene analysis Examples of real time applications: In- , vehiclevisionsystem ."
+          "summary": "Object recognition-Shape correspondence and shape matching PCA ,SVM , LDA Bayes rule andML methods Eigen facesFace detection Face , . , , recognition Application: Scene analysis Examples of real time applications: In- , vehiclevisionsystem .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaxim..."
         }
       ],
       "experiments_count": 0,
@@ -2824,7 +2903,7 @@
     {
       "id": "OEEET721",
       "code": "OEEET721",
-      "title": "Design of Solar Pv Systems Oeeet721",
+      "title": "Design of Solar PV Systems",
       "category": "Open Elective",
       "semesters": [
         "S7"
@@ -2851,6 +2930,10 @@
         {
           "no": 2,
           "summary": "Solar Thermal system-Principle of Conversion of Solar Radiation into Heat , –Solar thermal collectors –General description and characteristics –Flat plate collectors –Heat transfer processes –Solar concentrators (parabolic trough , parabolic dish Central Tower Collector) performance evaluation , – . Applications -Solar heating system Air conditioning and Refrigeration , system ..."
+        },
+        {
+          "no": 3,
+          "summary": "Solar PV Systems-Introduction -Fundamentals of Semiconductor and Solar Cells Photovoltaic Effect -Solar Cell (Photovoltaic) Materials Basic - - Parameters of the Solar Cell Generation of Solar Cell (Photovoltaic) - Materials-.Photovoltaic (PV) Module and PV Array Single-Crystal Solar - Cell Module Thin-Film PV Modules III –V Single Junction and , , Multifunction PV Modules-Emer..."
         },
         {
           "no": 4,
@@ -3030,7 +3113,7 @@
         },
         {
           "no": 4,
-          "summary": "UPFC AND IPFC: Unified Power Flow Controller: Circuit Arrangement , Operation of UPFC Basic principle of P and Q control independent real and - - reactive power flow control - Applications Introduction to interline power flow controller (IPFC) (Principle of operation and schematic) Thyristor con- trolled Voltage and Phase angle Regulators (Principle of operation and schematic)"
+          "summary": "UPFC AND IPFC: Unified Power Flow Controller: Circuit Arrangement , Operation of UPFC Basic principle of P and Q control independent real and - - reactive power flow control - Applications Introduction to interline power flow controller (IPFC) (Principle of operation and schematic) Thyristor con- trolled Voltage and Phase angle Regulators (Principle of operation and schematic) ..."
         }
       ],
       "experiments_count": 0,
@@ -3074,7 +3157,7 @@
         },
         {
           "no": 4,
-          "summary": "Closed loop controllers: P I PID Controllers Digital Controllers Program , , , , Logic Controllers Input/output & Communication systems Fault findings , , Mechatronicsdesigns examplesandcasestudies ,"
+          "summary": "Closed loop controllers: P I PID Controllers Digital Controllers Program , , , , Logic Controllers Input/output & Communication systems Fault findings , , Mechatronicsdesigns examplesandcasestudies ,  2 Questions from each mod -  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Each question can have a maximum of 3 sub divi -"
         }
       ],
       "experiments_count": 0,
@@ -3118,7 +3201,7 @@
         },
         {
           "no": 4,
-          "summary": "Digitalbandpasscommunication: Digital bandpass communication system Bandpass modulation techniques: ,"
+          "summary": "Digitalbandpasscommunication: Digital bandpass communication system Bandpass modulation techniques: ,  2 Questions from each mod -  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Each question can have a maximum of 3 sub divi -"
         }
       ],
       "experiments_count": 0,
@@ -3250,7 +3333,7 @@
         },
         {
           "no": 4,
-          "summary": "Closed loop controllers: P I PID Controllers Digital Controllers Program , , , , Logic Controllers Input/output & Communication systems Fault findings , , Mechatronicsdesignsandcasestudies"
+          "summary": "Closed loop controllers: P I PID Controllers Digital Controllers Program , , , , Logic Controllers Input/output & Communication systems Fault findings , , Mechatronicsdesignsandcasestudies  2 Questions from each mod -  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Each question can have a maximum of 3 sub divi -"
         }
       ],
       "experiments_count": 0,

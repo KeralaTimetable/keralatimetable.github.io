@@ -13,7 +13,7 @@
     "S3": 9,
     "S4": 18,
     "S5": 15,
-    "S6": 20,
+    "S6": 19,
     "S7": 25,
     "S8": 14
   },
@@ -110,7 +110,7 @@
         },
         {
           "no": 4,
-          "summary": "SortingandSearching Sorting Techniques :- Selection Sort Insertion Sort Quick Sort Merge , , , Sort HeapSort RadixSort , , . Searching Techniques :- Linear Search , Binary Search , Hashing - Hashing functions : Mid square Division Folding Digit Analysis; Collision , , , Resolution : Linear probing Quadratic Probing Double hashing Open , , , hashing ."
+          "summary": "SortingandSearching Sorting Techniques :- Selection Sort Insertion Sort Quick Sort Merge , , , Sort HeapSort RadixSort , , . Searching Techniques :- Linear Search , Binary Search , Hashing - Hashing functions : Mid square Division Folding Digit Analysis; Collision , , , Resolution : Linear probing Quadratic Probing Double hashing Open , , , hashing .  Eachquestioncarries9marks..."
         }
       ],
       "experiments_count": 0,
@@ -186,8 +186,16 @@
       "pdf_url": "/syllabus/s3-s8/pdfs/GAEST305.pdf",
       "modules": [
         {
+          "no": 1,
+          "summary": "IntroductiontodigitalSystems:- Digitalabstraction Number Systems Binary Hexadecimal grouping bits Base conversion; – , , , Binary Arithmetic Addition and subtraction Unsigned and Signed – , numbers; Fixed -Point Number Systems; Floating-Point Number Systems Basic gates- Operation of a Logic circuit; Buffer; Gates - Inverter , AND gate , OR gate NOR gate NAND gate XOR gate XNOR ..."
+        },
+        {
           "no": 2,
           "summary": "Combinational Logic Design: – Boolean Algebra Operations Axioms Theorems; Combinational logic - , , analysis Canonical SOP and POS Minterm and Maxterm equivalence; - , Logic minimization - Algebraic minimization , K -map minimization , Dont cares Codeconvertors , . ModelingconcurrentfunctionalityinVerilog:- Continuous assignment Continuous Assignment with logical operators - , ..."
+        },
+        {
+          "no": 3,
+          "summary": "MSILogicandDigitalBuildingBlocks MSI logic Decoders (One-Hot decoder 7 segment display decoder) - , , Encoders Multiplexers Demultiplexers; Digital Building Blocks , , - Arithmetic Circuits Half adder Full adder half subtractor full subtractor; - , , , Comparators . Structural design and hierarchy lower level module instantiation gate level - , primitives userdefinedprimitives ..."
         },
         {
           "no": 4,
@@ -236,7 +244,7 @@
         },
         {
           "no": 4,
-          "summary": "Markov Chains Random Walk Model Chapman–Kolmogorov Equations , , , Classificationof States IrreducibleMarkovchain Recurrentstate Transient , , , state Long-Run Proportions (Theorems without proof) , . [Text2:Relevanttopicsfromsections41 42 43 44] . , . , . , ."
+          "summary": "Markov Chains Random Walk Model Chapman–Kolmogorov Equations , , , Classificationof States IrreducibleMarkovchain Recurrentstate Transient , , , state Long-Run Proportions (Theorems without proof) , . [Text2:Relevanttopicsfromsections41 42 43 44] . , . , . , .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachqu..."
         }
       ],
       "experiments_count": 0,
@@ -286,7 +294,7 @@
         },
         {
           "no": 4,
-          "summary": "Value Analysis and value Engineering Cost Value Exchange Value Use - , , Value , Esteem Value - Aims , Advantages and Application areas of Value Engineering - Value Engineering Procedure - Break -even Analysis - Cost - Benefit Analysis Capital Budgeting Process planning - -"
+          "summary": "Value Analysis and value Engineering Cost Value Exchange Value Use - , , Value , Esteem Value - Aims , Advantages and Application areas of Value Engineering - Value Engineering Procedure - Break -even Analysis - Cost - Benefit Analysis Capital Budgeting Process planning - -  2questionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . 2Questionsfromeach  Each ..."
         }
       ],
       "experiments_count": 0,
@@ -631,7 +639,7 @@
         },
         {
           "no": 4,
-          "summary": "Matrix representation of graphs- Adjacency matrix Incidence Matrix Circuit , , Matrix Path Matrix Coloring Chromatic number Chromatic polynomial , , , , , Greedycolouringalgorithm . [Text1:Relevanttopicsfromsections71 73 78 79 81 83 Proofsof . , . , . , . , . , . . theorems74 77 78 82 83 85 86areexcluded] . , . , . , . , . , . , . ."
+          "summary": "Matrix representation of graphs- Adjacency matrix Incidence Matrix Circuit , , Matrix Path Matrix Coloring Chromatic number Chromatic polynomial , , , , , Greedycolouringalgorithm . [Text1:Relevanttopicsfromsections71 73 78 79 81 83 Proofsof . , . , . , . , . , . . theorems74 77 78 82 83 85 86areexcluded] . , . , . , . , . , . , . .  Eachquestioncarries9marks .  Twoquestionsw..."
         }
       ],
       "experiments_count": 0,
@@ -661,7 +669,7 @@
       "pages": 5,
       "pdf_url": "/syllabus/s3-s8/pdfs/PCCML408.pdf",
       "modules": [],
-      "experiments_count": 10,
+      "experiments_count": 11,
       "experiments": [
         {
           "no": "1",
@@ -674,6 +682,10 @@
         {
           "no": "3",
           "title": "A crypt -arithmetic puzzle is a type of mathematical puzzle in which digits are assigned to alphabeticallettersorsymbols Theendgoalistofindtheuniquedigitassignment toeach . lettersothatthegivenmathematicaloperationholdst..."
+        },
+        {
+          "no": "4",
+          "title": "ConsidertheBlocksWorldDomainGamewhich startswithaninitialstateconsistingofa"
         },
         {
           "no": "5",
@@ -829,6 +841,10 @@
         {
           "no": 3,
           "summary": "Memory Systems: Introduction; performance analysis; Caches basic - concepts Cache mapping Cache replacement Multiple-Level Caches , , , , Reducing Miss Rate Write Policy; Virtual Memory Address Translation; , - PageTable;TranslationLookasideBuffer;MemoryProtection ."
+        },
+        {
+          "no": 4,
+          "summary": "Input / Output External Devices; I/O Modules; Programmed I/O Interrupt - , Driven I/O; Direct Memory Access; Embedded I/O Systems Embedded I/O - , GeneralPurposeI/O SerialI/O OtherPeripherals , , ."
         }
       ],
       "experiments_count": 0,
@@ -963,7 +979,7 @@
         },
         {
           "no": 4,
-          "summary": "Algebraic Types; Case Study Huffman Codes; Abstract Data Types; Lazy - Programming;TimeandSpaceBehaviour . [TextCh 15 16 17 20] . , , ,"
+          "summary": "Algebraic Types; Case Study Huffman Codes; Abstract Data Types; Lazy - Programming;TimeandSpaceBehaviour . [TextCh 15 16 17 20] . , , , ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -1008,7 +1024,7 @@
         },
         {
           "no": 4,
-          "summary": "Turbo codes: Turbo decoding Distance properties of turbo codes , , Convergenceofturbocodes . Automaticrepeatrequestschemes Applicationsoflinearcodes ."
+          "summary": "Turbo codes: Turbo decoding Distance properties of turbo codes , , Convergenceofturbocodes . Automaticrepeatrequestschemes Applicationsoflinearcodes . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -1038,7 +1054,24 @@
       ],
       "pages": 4,
       "pdf_url": "/syllabus/s3-s8/pdfs/PECST416.pdf",
-      "modules": [],
+      "modules": [
+        {
+          "no": 1,
+          "summary": "1D Signals A general introduction to real time signals CT and DT signals - - , Sinusoids Spectrum representation Sampling and Aliasing (Concept only) , , , AnalogfrequencyandDigitalfrequency . DTFS - Determining the Fourier-Series Representation of a Sequence , Properties of Discrete-Time Fourier Series Linearity Translation (Time - , Shifting) Modulation (Frequency Shifting) R..."
+        },
+        {
+          "no": 2,
+          "summary": "Discrete-Time Fourier Transform for Aperiodic Sequences Properties of the - Discrete-Time Fourier Transform (Periodicity Linearity Translation (Time , , Shifting) Modulation (Frequency-Domain Shifting) Conjugation Time , , , Reversal Convolution Multiplication Frequency-Domain Differentiation , , , , Differencing Parseval'stheorem Even/Oddsymmetry realsequences) , , , DTFT of p..."
+        },
+        {
+          "no": 3,
+          "summary": "Discrete time systems Block diagram representation and mathematical - representation of discrete-time systems-Some common elements of Discrete- time systems (adder constant multiplier signal multiplier unit delay unit , , , , advance) Recursive DT systems and non recursive discrete time systems , , Relaxedsystem LinearityandtimeinvariancepropertyofaDTsystem , . Discrete time LT..."
+        },
+        {
+          "no": 4,
+          "summary": "Z transform - motivation for z transform , Relationship Between z Transform and Discrete-Time Fourier Transform Region of Convergence for the z , Transform . Properties of z transform - Translation (Time Shifting) , Complex Modulation (z-Domain Scaling) Conjugation Time Reversal Upsampling (Time , , , Expansion Downsampling Convolution z-Domain Differentiation , , , , Differenc..."
+        }
+      ],
       "experiments_count": 0,
       "experiments": [],
       "video_links": []
@@ -1081,7 +1114,7 @@
         },
         {
           "no": 4,
-          "summary": "Multi -objective optimization problem Principles of Multi objective . - optimization Dominance and pareto-optimality Optimality conditions , . . Collective Systems Biological Self -Organization Particle Swarm , , Optimization AntColonyOptimization SwarmRobotics , , ."
+          "summary": "Multi -objective optimization problem Principles of Multi objective . - optimization Dominance and pareto-optimality Optimality conditions , . . Collective Systems Biological Self -Organization Particle Swarm , , Optimization AntColonyOptimization SwarmRobotics , , . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ●..."
         }
       ],
       "experiments_count": 0,
@@ -1305,7 +1338,7 @@
         },
         {
           "no": 4,
-          "summary": "SNMP ASN1(Book1Ch9) , . Physical Layer: Data and signals Digital transmission Analog transmission , , , Bandwidthutilization Transmissionmedia(Book1Ch7) ,"
+          "summary": "SNMP ASN1(Book1Ch9) , . Physical Layer: Data and signals Digital transmission Analog transmission , , , Bandwidthutilization Transmissionmedia(Book1Ch7) , ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -1603,7 +1636,7 @@
         },
         {
           "no": 4,
-          "summary": "HowtoSelectanAppropriateProblem TheStagesintheDevelopmentofan , Expert System Types of Errors to Expect in the Development Stages , , SoftwareEngineerandExpertSystems TheExpectedLifeCycleofanExpert , System LifeCycleModel , . Expert System Examples MYCIN ,DART - . ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
+          "summary": "HowtoSelectanAppropriateProblem TheStagesintheDevelopmentofan , Expert System Types of Errors to Expect in the Development Stages , , SoftwareEngineerandExpertSystems TheExpectedLifeCycleofanExpert , System LifeCycleModel , . Expert System Examples MYCIN ,DART - . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -1647,7 +1680,7 @@
         },
         {
           "no": 4,
-          "summary": "Fuzzy Inference Systems :- Approximate Reasoning Fuzzy (Rule-Based) Systems Multiple conjunctive , – antecedents Multiple disjunctive antecedents Aggregation of fuzzy rules , , , Graphical Techniques of Inference Fuzzy Controllers -Mamdani FIS Larsen . , Model . ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
+          "summary": "Fuzzy Inference Systems :- Approximate Reasoning Fuzzy (Rule-Based) Systems Multiple conjunctive , – antecedents Multiple disjunctive antecedents Aggregation of fuzzy rules , , , Graphical Techniques of Inference Fuzzy Controllers -Mamdani FIS Larsen . , Model . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -1691,7 +1724,7 @@
         },
         {
           "no": 4,
-          "summary": "Generation of Target code from intermediate code Code generation of – Data structure references- address calculation array references if and , , whilestatements . CodeOptimizationTechniques:Principalsourcesofcodeoptimization , Classification of optimizations Data Structures and Implementation , TechniquesforOptimizations . ofwhich1questionshouldbeanswered . ● Eachquestioncanhav..."
+          "summary": "Generation of Target code from intermediate code Code generation of – Data structure references- address calculation array references if and , , whilestatements . CodeOptimizationTechniques:Principalsourcesofcodeoptimization , Classification of optimizations Data Structures and Implementation , TechniquesforOptimizations . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1q..."
         }
       ],
       "experiments_count": 0,
@@ -1871,7 +1904,7 @@
         },
         {
           "no": 4,
-          "summary": "Audio Compression :- Audio Compression Companding The Human Auditory System Heinrich - , , Georg Barkhausen Linear Prediction µ-Law and A -Law Companding , , , Shorten"
+          "summary": "Audio Compression :- Audio Compression Companding The Human Auditory System Heinrich - , , Georg Barkhausen Linear Prediction µ-Law and A -Law Companding , , , Shorten ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -2005,7 +2038,7 @@
         },
         {
           "no": 4,
-          "summary": "QA Systems Machine Translation and Large Language Models:- , , Question-Answering Systems Transformer-Based QA models Open- - , Domain QA; Machine Translation Neural Machine Translation (NMT) - , Transformer-Based NMT Multilingual NLP Models; Introduction to Large , Language Models GPT -3 GPT -4 and their applications - , , ofwhich1questionshouldbeanswered . ● Eachquestioncanha..."
+          "summary": "QA Systems Machine Translation and Large Language Models:- , , Question-Answering Systems Transformer-Based QA models Open- - , Domain QA; Machine Translation Neural Machine Translation (NMT) - , Transformer-Based NMT Multilingual NLP Models; Introduction to Large , Language Models GPT -3 GPT -4 and their applications - , , ● Twoquestionswillbegivenfromeachmodule out , ofwhich1..."
         }
       ],
       "experiments_count": 0,
@@ -2042,6 +2075,14 @@
         {
           "no": 2,
           "summary": "Autoencoders Autoencoders The Encoder The Decoder Joining the - , , , EncodertotheDecoder AnalysisofAutoencoder VariationalAutoencoders; , , Kullback –Leibler (KL) divergence loss function; Generative Adversarial Network Introduction to GANs The Discriminator The Generator Training - , , , theGAN GANChallenges OscillatingLoss ModeCollapse Uninformative , , , , Loss Hyperparamet..."
+        },
+        {
+          "no": 3,
+          "summary": "Recurrent Neural Network (RNN). Architecture of RNN, Long Short-Term Memory (LSTM), Architecture of LSTM, Gated Recurrent Unit (GRU), Architecture of GRU, Encoder-Decoder Models, Question-Answer Generator using RNN and Encoder-Decoder, Architecture, Attention mechanisms, Transformer Architecture, Self Attention, Analysis of the Transformer, BERT, GPT-2 ,Large Language Models (L..."
+        },
+        {
+          "no": 4,
+          "summary": "Cost Optimization in the Development and Operation of Generative AI Applications, Fine Tuning and customizability, Parameter Efficient Fine Tuning Methods, Prompt Tuning, Prefix Tuning, P‐Tuning, IA3, Low‐Rank Adaptation, Prompt Engineering, Clear and Direct Prompts, Adding Qualifying Words for Brief Responses, Breaking Down the Request, In‐ context learning (ICL) in LLMs."
         }
       ],
       "experiments_count": 0,
@@ -2269,51 +2310,6 @@
       "video_links": []
     },
     {
-      "id": "PECMT745",
-      "code": "PECMT745",
-      "title": "Reinforcement Learning",
-      "category": "Program Elective",
-      "semesters": [
-        "S6",
-        "S7"
-      ],
-      "credits": "5/3",
-      "honours_option": true,
-      "cie": "60",
-      "ese": "40",
-      "ltpr": "3:0:0:0",
-      "exam_hours": "",
-      "course_type": "Elective",
-      "prerequisites": "",
-      "common_note": "",
-      "shared_branches": [
-        "AIML"
-      ],
-      "pages": 4,
-      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT745.pdf",
-      "modules": [
-        {
-          "no": 1,
-          "summary": "Introduction:Deep Reinforcement Learning Suitability of Reinforcement , Learning Components of Reinforcement Learning Agent Environment , - , , Observations Actions .Examples The Bandit Walk Environment Agent , - , - Environmentinteractioncycle . Markov Decision Process (MDP):The Engine of the Environment States - , Actions TransitionFunction RewardSignal , , ."
-        },
-        {
-          "no": 2,
-          "summary": "Planning:Objective of a decision making agent -environment Plan Optimal , , policy Comparison of Policies Bellman Equation/State-Value Function , , , Action-Value Function Action-Advantage Function Optimality , , . Exploitation and Exploration of Reinforcement Learning:Bandits- Single State Decision Problem (Multi -Armed Bandit(MAB) problem) The cost of , exploration Approaches..."
-        },
-        {
-          "no": 3,
-          "summary": "Model Free Reinforcement Learning:Monte Carlo Prediction (MC) First , - Visit MC (FVMC) Every-Visit MC (EVMC) Temporal Difference Learning , , (TD) Learning to Estimate from Multiple Steps N -step TD Learning , , , Forward -View TD(λ) Backward -View TD(λ) Generalized Policy , , Iteration(GPI) Monte Carlo Control SARSA: On-Policy TD control Q , , , - learning: Off -Policy TD con..."
-        },
-        {
-          "no": 4,
-          "summary": "Value Based Reinforcement Learning:Deep Reinforcement Learning AgentswithSequentialFeedback EvaluativeFeedback SampledFeedback , , , Function Approximation for Reinforcement Learning High -Dimensional - State and Action Spaces Continuous State and Action Spaces State-Value , , Function and Action-Value Function with and without Function Approximation , Neural Fitted Q (NFQ) Dee..."
-        }
-      ],
-      "experiments_count": 0,
-      "experiments": [],
-      "video_links": []
-    },
-    {
       "id": "PECST631",
       "code": "PECST631",
       "title": "Software Testing",
@@ -2441,7 +2437,7 @@
         },
         {
           "no": 4,
-          "summary": "Graph database - Introduction , Data Modelling with Graphs , Building a Graph Database application Data Modeling Predictive Analysis with Graph Theory; , , Depth and Breadth First Search; Path -Finding with Dijkstra’s Algorithm; GraphTheoryandPredictiveModeling"
+          "summary": "Graph database - Introduction , Data Modelling with Graphs , Building a Graph Database application Data Modeling Predictive Analysis with Graph Theory; , , Depth and Breadth First Search; Path -Finding with Dijkstra’s Algorithm; GraphTheoryandPredictiveModeling ● Eachquestioncarries9 marks . ● Twoquestionswillbegivenfromeachmodule , outofwhich1questionshouldbeanswered . ● Eachq..."
         }
       ],
       "experiments_count": 0,
@@ -2576,7 +2572,7 @@
         },
         {
           "no": 4,
-          "summary": "Cryptographic Hash Functions Applications of Cryptographic Hash - Functions Secure Hash Algorithm (SHA) SHA -3; MAC; MD5; Digital , , Signatures .; Key Management and Distribution - Symmetric Key Distribution;X509certificates;PKI . ."
+          "summary": "Cryptographic Hash Functions Applications of Cryptographic Hash - Functions Secure Hash Algorithm (SHA) SHA -3; MAC; MD5; Digital , , Signatures .; Key Management and Distribution - Symmetric Key Distribution;X509certificates;PKI . . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -2623,7 +2619,7 @@
         },
         {
           "no": 4,
-          "summary": "Quantum Communication: - Von Neumann entropy Holevo Bound Data compression Classical , , , information over noisy quantum channels Quantum information over noisy , quantum channels Quantum Key Distribution Quantum Communication , , protocols [Text 2 Ch 11 .3 Ch 12 .1 12 .5 ] - , -"
+          "summary": "Quantum Communication: - Von Neumann entropy Holevo Bound Data compression Classical , , , information over noisy quantum channels Quantum information over noisy , quantum channels Quantum Key Distribution Quantum Communication , , protocols [Text 2 Ch 11 .3 Ch 12 .1 12 .5 ] - , - ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshould..."
         }
       ],
       "experiments_count": 0,
@@ -2668,7 +2664,7 @@
         },
         {
           "no": 4,
-          "summary": "Randomized Rounding and Martingales Randomized rounding techniques - , Applications in approximation algorithms Introduction to martingales , , Azuma's inequality (Text 5 Chapter 14) . - Randomized Complexity Classes RP ZPP and BPP Relationships - , , , betweencomplexityclasses Amplificationandderandomizationtechniques , (Text 6 Chapter 7) -"
+          "summary": "Randomized Rounding and Martingales Randomized rounding techniques - , Applications in approximation algorithms Introduction to martingales , , Azuma's inequality (Text 5 Chapter 14) . - Randomized Complexity Classes RP ZPP and BPP Relationships - , , , betweencomplexityclasses Amplificationandderandomizationtechniques , (Text 6 Chapter 7) - ● Eachquestioncarries9marks . ● Twoq..."
         }
       ],
       "experiments_count": 0,
@@ -2712,7 +2708,7 @@
         },
         {
           "no": 4,
-          "summary": "Reinforcement Learning :- Learning from Rewards Passive Reinforcement , Learning Active Reinforcement Learning Generalization in Reinforcement , , Learning Policy Search Apprenticeship and Inverse Reinforcement , , Learning ApplicationsofReinforcementLearning ,"
+          "summary": "Reinforcement Learning :- Learning from Rewards Passive Reinforcement , Learning Active Reinforcement Learning Generalization in Reinforcement , , Learning Policy Search Apprenticeship and Inverse Reinforcement , , Learning ApplicationsofReinforcementLearning , ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachq..."
         }
       ],
       "experiments_count": 0,
@@ -2802,7 +2798,7 @@
         },
         {
           "no": 4,
-          "summary": "Digital data communication techniques Asynchronous transmission - , Synchronous transmission . Detecting and correcting errors - Types of errors , Parity check Checksum Cyclic Redundancy Check (CRC) Forward Error , , , Correction (FEC) Hamming distance Hamming code Basic principles of , , . switching Circuit switching Packet switching Message switching - , , ."
+          "summary": "Digital data communication techniques Asynchronous transmission - , Synchronous transmission . Detecting and correcting errors - Types of errors , Parity check Checksum Cyclic Redundancy Check (CRC) Forward Error , , , Correction (FEC) Hamming distance Hamming code Basic principles of , , . switching Circuit switching Packet switching Message switching - , , . ● Eachquestioncar..."
         }
       ],
       "experiments_count": 0,
@@ -2847,7 +2843,7 @@
         },
         {
           "no": 4,
-          "summary": "Symmetric key Ciphers Block Cipher principles & Algorithms- DES AES - , , Differential and Linear Cryptanalysis; Asymmetric Key Ciphers- RSA ECC; , Hash Functions MD5 SHA -1 - , ."
+          "summary": "Symmetric key Ciphers Block Cipher principles & Algorithms- DES AES - , , Differential and Linear Cryptanalysis; Asymmetric Key Ciphers- RSA ECC; , Hash Functions MD5 SHA -1 - , . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -2900,6 +2896,50 @@
       "video_links": []
     },
     {
+      "id": "PECMT745",
+      "code": "PECMT745",
+      "title": "Reinforcement Learning",
+      "category": "Program Elective",
+      "semesters": [
+        "S7"
+      ],
+      "credits": "5/3",
+      "honours_option": true,
+      "cie": "60",
+      "ese": "40",
+      "ltpr": "3:0:0:0",
+      "exam_hours": "",
+      "course_type": "Elective",
+      "prerequisites": "",
+      "common_note": "",
+      "shared_branches": [
+        "AIML"
+      ],
+      "pages": 4,
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT745.pdf",
+      "modules": [
+        {
+          "no": 1,
+          "summary": "Introduction:Deep Reinforcement Learning Suitability of Reinforcement , Learning Components of Reinforcement Learning Agent Environment , - , , Observations Actions .Examples The Bandit Walk Environment Agent , - , - Environmentinteractioncycle . Markov Decision Process (MDP):The Engine of the Environment States - , Actions TransitionFunction RewardSignal , , ."
+        },
+        {
+          "no": 2,
+          "summary": "Planning:Objective of a decision making agent -environment Plan Optimal , , policy Comparison of Policies Bellman Equation/State-Value Function , , , Action-Value Function Action-Advantage Function Optimality , , . Exploitation and Exploration of Reinforcement Learning:Bandits- Single State Decision Problem (Multi -Armed Bandit(MAB) problem) The cost of , exploration Approaches..."
+        },
+        {
+          "no": 3,
+          "summary": "Model Free Reinforcement Learning:Monte Carlo Prediction (MC) First , - Visit MC (FVMC) Every-Visit MC (EVMC) Temporal Difference Learning , , (TD) Learning to Estimate from Multiple Steps N -step TD Learning , , , Forward -View TD(λ) Backward -View TD(λ) Generalized Policy , , Iteration(GPI) Monte Carlo Control SARSA: On-Policy TD control Q , , , - learning: Off -Policy TD con..."
+        },
+        {
+          "no": 4,
+          "summary": "Value Based Reinforcement Learning:Deep Reinforcement Learning AgentswithSequentialFeedback EvaluativeFeedback SampledFeedback , , , Function Approximation for Reinforcement Learning High -Dimensional - State and Action Spaces Continuous State and Action Spaces State-Value , , Function and Action-Value Function with and without Function Approximation , Neural Fitted Q (NFQ) Dee..."
+        }
+      ],
+      "experiments_count": 0,
+      "experiments": [],
+      "video_links": []
+    },
+    {
       "id": "PECMT753",
       "code": "PECMT753",
       "title": "Computational Linguistics",
@@ -2936,7 +2976,7 @@
         },
         {
           "no": 4,
-          "summary": "Natural Language Applications:- Machine Translation Sentiment analysis Chatbots and dialogue systems , , , Textextractionandsummarization . Natural language user interfaces - Text -based question answering , knowledge- based question answering Voice-based web services and assistants , . ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
+          "summary": "Natural Language Applications:- Machine Translation Sentiment analysis Chatbots and dialogue systems , , , Textextractionandsummarization . Natural language user interfaces - Text -based question answering , knowledge- based question answering Voice-based web services and assistants , . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquest..."
         }
       ],
       "experiments_count": 0,
@@ -2981,7 +3021,7 @@
         },
         {
           "no": 4,
-          "summary": "Program Verification:- Inter-procedure verification of programs in VCC function contracts pure , , functions loopinvariants provingtotalcorrectnessofprogramsinVCC , , ."
+          "summary": "Program Verification:- Inter-procedure verification of programs in VCC function contracts pure , , functions loopinvariants provingtotalcorrectnessofprogramsinVCC , , . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -3067,11 +3107,11 @@
         },
         {
           "no": 3,
-          "summary": "CombinatorialPatternMatching(9hours) CombinatorialPatternMatching Repeatfinding KeywordTrees SuffixTrees , , , , Heuristicsimilaritysearchalgorithms ApproximatePatternMatching ,"
+          "summary": "CombinatorialPatternMatching(9hours) Combinatorial Pattern Matching Repeat finding Keyword Trees Suffix , , , Trees Heuristicsimilaritysearchalgorithms ApproximatePatternMatching , , ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3sub"
         },
         {
           "no": 4,
-          "summary": "RFORBIOINFORMATICS Variables Data types control flow constructs String manipulation Pattern , , , , Matching arrays listsandhashes Filehandling Programstohandlebiological , , , , dataandparseoutputfilesforinterpretation packages forsequencealignment , , FASTA BLAST(Bioconductor msa Biostringsetc) , , , . IndicativeLaboratory/MicroprojectTasks Biological Databases Sequence align..."
+          "summary": "R FOR BIOINFORMATICS Variables, Data types, control flow constructs, String manipulation, Pattern Matching, arrays, lists and hashes, File handling, Programs to handle biological data and parse output files for interpretation, packages for sequence alignment, FASTA, BLAST (Bioconductor, msa, Biostrings etc.) Indicative Laboratory/Microproject Tasks Biological Databases, Sequenc..."
         }
       ],
       "experiments_count": 0,
@@ -3116,7 +3156,7 @@
         },
         {
           "no": 4,
-          "summary": "Security in Networks Threats in networks Network Security Controls - , -"
+          "summary": "Security in Networks Threats in networks Network Security Controls - , - 2 Questions from each ● Eachquestioncarries9marks . module ● Two questions will be given from each module out . , Total of 8 Questions each ofwhich1questionshouldbeanswered , . carrying3marks ● Each question can have a maximum of 3 (8x3=24marks) (4x9=36marks) CourseOutcomes(COs) theendofthecoursestudentssh..."
         }
       ],
       "experiments_count": 0,
@@ -3161,7 +3201,7 @@
         },
         {
           "no": 4,
-          "summary": "Integration and Testing of Embedded Hardware and Firmware :- Integration of Hardware and Firmware Boards Bring up The Embedded , , System Development Environment The Integrated Development - Environment (IDE) Types of files generated on CrossCompilation , , Disassembler/Decompiler Simulators EmulatorsandDebugging Target , , , HardwareDebugging BoundaryScan , ."
+          "summary": "Integration and Testing of Embedded Hardware and Firmware :- Integration of Hardware and Firmware Boards Bring up The Embedded , , System Development Environment The Integrated Development - Environment (IDE) Types of files generated on CrossCompilation , , Disassembler/Decompiler Simulators EmulatorsandDebugging Target , , , HardwareDebugging BoundaryScan , . ● Eachquestioncar..."
         }
       ],
       "experiments_count": 0,
@@ -3198,15 +3238,15 @@
         },
         {
           "no": 2,
-          "summary": "CryptographyinBlockchainandConsensusMechanisms Concept of Hashing , Creating a Transaction Hash , Merkle Trees - Importance of Merkle tree Chaining of Blocks Building the Network Accessing the , , , network TypesofWallets , . NeedforConsensus TwoGenerals’Problem ByzantineGenerals’Problem , , , Byzantine Fault Tolerance (BFT) Practical Byzantine Fault Tolerance , (PBFT) working ..."
+          "summary": "CryptographyinBlockchainandConsensusMechanisms Concept of Hashing , Creating a Transaction Hash , Merkle Trees - Importance of Merkle tree Chaining of Blocks Building the Network , , , Accessingthenetwork TypesofWallets , . NeedforConsensus TwoGenerals’Problem ByzantineGenerals’ Problem , , , Byzantine Fault Tolerance (BFT) Practical Byzantine Fault Tolerance , (PBFT) working P..."
         },
         {
           "no": 3,
-          "summary": "Cryptocurrencies Bitcoin and Ethereum - Bitcoin: Components Nodes in Bitcoin network Transactions and memory , , pools Proof of Work -Mining Cryptocurrencies Hard and Soft Forks , , , Tracking Bitcoins-Unspent Transaction Outputs . Ethereum:TransitionfromBitcointoEthereum ConceptofEthereumWorld , Computer Ethereum Virtual Machine Ethereum Network Transition from , , , PoW to Po..."
+          "summary": "Cryptocurrencies Bitcoin and Ethereum - Bitcoin: Components Nodes in Bitcoin network Transactions and memory , , ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         },
         {
           "no": 4,
-          "summary": "Blockchain Ethereum Platform using Solidity and Use Cases in Blockchain :- Solidity Language - Remix IDE , Structure of a Smart Contract Program , Modifiers Events Functions Inheritance ExternalLibraries ErrorHandling , , , , , . Permissioned Blockchains Introduction to Hyperledger Foundation , , HyperledgerDistributedLedgerframeworks HyperledgerFabric , . Use Cases in Blockcha..."
+          "summary": "Blockchain Ethereum Platform using Solidity and Use Cases in Blockchain :- Solidity Language - Remix IDE, Structure of a Smart Contract Program, Modifiers, Events, Functions, Inheritance, External Libraries, Error Handling. Permissioned Blockchains, Introduction to Hyperledger Foundation, Hyperledger Distributed Ledger frameworks, Hyperledger Fabric. Use Cases in Blockchain - F..."
         }
       ],
       "experiments_count": 0,
@@ -3251,7 +3291,7 @@
         },
         {
           "no": 4,
-          "summary": "RT communications: QoS framework models Real -Time Communication in a , , LAN IEEE8024 RETHER CommunicationoverPacketSwitchedNetworks , . , , , Routing algorithms RSVP rate control; RT databases Applications , , - , characteristics of temporal data Concurrency control Commercial RT , , databases Special topics in Real -Time systems , ."
+          "summary": "RT communications: QoS framework models Real -Time Communication in a , , LAN IEEE8024 RETHER CommunicationoverPacketSwitchedNetworks , . , , , Routing algorithms RSVP rate control; RT databases Applications , , - , characteristics of temporal data Concurrency control Commercial RT , , databases Special topics in Real -Time systems , . ● Twoquestionswillbegivenfromeachmodule ou..."
         }
       ],
       "experiments_count": 0,
@@ -3296,7 +3336,7 @@
         },
         {
           "no": 4,
-          "summary": "Inapproximability Results Introduction to inapproximability Reductions - , and hardness of approximation PCP theorem andits implications (Chapter , . 10) Network Design Problems Steiner tree problem Traveling Salesman - , Problem(TSP) Multicommodityflowproblem (Chapter7) , ."
+          "summary": "Inapproximability Results Introduction to inapproximability Reductions - , and hardness of approximation PCP theorem andits implications (Chapter , . 10) Network Design Problems Steiner tree problem Traveling Salesman - , Problem(TSP) Multicommodityflowproblem (Chapter7) , . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeansw..."
         }
       ],
       "experiments_count": 0,
@@ -3329,19 +3369,19 @@
       "modules": [
         {
           "no": 1,
-          "summary": "Review of Computer Networking Fundamentals OSI and TCP/IP Models - , Layers and Protocols IP Addressing and Subnetting Routing Protocols RIP , , - , OSPF BGP; , QoS in IP networks Random Early Detection Protocols for QoS support - , - RSVP RTP Multiprotocol Label Switching (MPLS): Overview and Use , , Cases; Network Security Basics Firewalls ACLs and NAT; Working of - , , NAT; ..."
+          "summary": "Review of Computer Networking Fundamentals OSI and TCP/IP Models - , Layers and Protocols IP Addressing and Subnetting Routing Protocols , , - RIP OSPF BGP; , , QoS in IP networks Random Early Detection Protocols for QoS support - , - RSVP RTP Multiprotocol Label Switching (MPLS): Overview and Use , , Cases; Network Security Basics Firewalls ACLs and NAT; Working of - , , NAT; ..."
         },
         {
           "no": 2,
-          "summary": "DLL switching Overview VLANs Inter-VLAN Routing; Spanning Tree - , , Protocol (STP) IEEE 802 .1D Rapid Spanning Tree Protocol (RSTP) IEEE - , - 802 .1w Multiple Spanning Tree Protocol (MSTP) IEEE 802 .1s STP , - , Enhancements BPDU Guard Root Guard and Loop Guard; - , , Data Center Network Architectures - Traditional vs . Modern Data Center Designs (Spine-Leaf Clos Networks) Et..."
+          "summary": "DLL switching Overview VLANs Inter-VLAN Routing; Spanning Tree - , , Protocol (STP) IEEE 802 .1D Rapid Spanning Tree Protocol (RSTP) - , - IEEE 802 .1w Multiple Spanning Tree Protocol (MSTP) IEEE 802 .1s STP , - , Enhancements BPDU Guard Root Guard and Loop Guard; - , , Data Center Network Architectures - Traditional vs . Modern Data Center Designs (Spine-Leaf Clos Networks) Et..."
         },
         {
           "no": 3,
-          "summary": "SDN Architecture and Components Control Plane Data Plane and - , , ApplicationPlane;OpenFlowProtocolanditsRoleinSDN;SDNControllers Ryu OpenDaylight and ONOS; SDN Use Cases Traffic Engineering - , , - , Network Function Virtualization (NFV) NFV Concepts Virtualizing - , Network Functions and Services; NFV Infrastructure (NFVI) and Management (MANO); Service Function Chaining (SF..."
+          "summary": "SDN Architecture and Components Control Plane Data Plane and - , , Application Plane; OpenFlow Protocol and its Role in SDN; SDN Controllers Ryu OpenDaylight and ONOS; SDN Use Cases Traffic - , , - ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         },
         {
           "no": 4,
-          "summary": "Data Center Interconnect (DCI) Technologies for Data Center - Interconnection(VPLS OTV and VXLAN) DCI Design and Deployment , , , Considerations; Intent -Based Networking (IBN) Introduction to Intent - - Based Networking; Content Distribution on the Internet - Architectures for Information-Centric Networking; Content Naming Routing and Caching , , SecurityinNamedDataNetworking;..."
+          "summary": "Data Center Interconnect (DCI) - Technologies for Data Center Interconnection(VPLS, OTV, and VXLAN), DCI Design and Deployment Considerations; Intent-Based Networking (IBN) - Introduction to Intent- Based Networking; Content Distribution on the Internet - Architectures for Information-Centric Networking; Content Naming, Routing and Caching, Security in Named Data Networking; Ne..."
         }
       ],
       "experiments_count": 0,
@@ -3386,7 +3426,7 @@
         },
         {
           "no": 4,
-          "summary": "Future of Responsible AI and Case Studies : - Future of Responsible AI Emerging trends and technologies in AI ethics - andresponsibility . Case Studies Recommendation systems Medical diagnosis Computer - , , Vision NaturalLanguageProcessing , ."
+          "summary": "Future of Responsible AI and Case Studies : - Future of Responsible AI Emerging trends and technologies in AI ethics - andresponsibility . Case Studies Recommendation systems Medical diagnosis Computer - , , Vision NaturalLanguageProcessing , . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveama..."
         }
       ],
       "experiments_count": 0,
@@ -3468,15 +3508,15 @@
         },
         {
           "no": 2,
-          "summary": "Infrastructure and Service Discovery Protocols Layered Architecture for IoT - , Protocol Architecture of IoT Infrastructure Protocols Device or Service , , DiscoveryforIoT Protocols&productsforIoTServiceDiscovery;Integration , Technologies and Tools Smart Enterprises and Environments Sensor and - , Actuator Networks The IoT Device Integration Concepts Standards and , , , Implem..."
+          "summary": "Infrastructure and Service Discovery Protocols Layered Architecture for IoT - , Protocol Architecture of IoT Infrastructure Protocols Device or Service , , Discovery for IoT Protocols & products for IoT Service Discovery; , Integration Technologies and Tools Smart Enterprises and Environments - , Sensor and Actuator Networks The IoT Device Integration Concepts , , Standards and..."
         },
         {
           "no": 3,
-          "summary": "Platforms for IoT Applications and Analytics The IoT Building Blocks - , Usecases M2MApplicationPlatform IoTArchitecturalBuildingBlocks Data , , , Analytics Platforms IoT Data Virtualization Platforms and capabilities The , , IoT Edge Data Analytics; Clouds for IoT Applications and Analytics - Reflecting the Cloud Journey The Key Motivations for Cloud -Enabled , Environments Io..."
+          "summary": "Platforms for IoT Applications and Analytics The IoT Building Blocks - , Usecases M2M Application Platform IoT Architectural Building Blocks , , , Data Analytics Platforms IoT Data Virtualization Platforms and capabilities , , The IoT Edge Data Analytics; Clouds for IoT Applications and Analytics -"
         },
         {
           "no": 4,
-          "summary": "Introduction to Raspberry Pi Creating your first project Creating a Sensor to , , Measure Ambient Light Creating an Actuator for Controlling Illumination , , Publishing Information Using MQTT&HTTP Creating Web Pages for Your , Devices ."
+          "summary": "Introduction to Raspberry Pi, Creating your first project, Creating a Sensor to Measure Ambient Light, Creating an Actuator for Controlling Illumination, Publishing Information Using MQTT & HTTP, Creating Web Pages for Your Devices."
         }
       ],
       "experiments_count": 0,
@@ -3521,7 +3561,7 @@
         },
         {
           "no": 4,
-          "summary": "Introduction to VCG mechanism VCG in Combinatorial allocations , , applications to Internet advertising slot allocation and payments in position , auctions pros and cons of VCG mechanism; Affine maximizers single , , object allocation Myerson’s lemma optimal mechanism design; Single and , , multi -agent optimal mechanism design examples of optimal mechanisms ,"
+          "summary": "Introduction to VCG mechanism VCG in Combinatorial allocations , , applications to Internet advertising slot allocation and payments in position , auctions pros and cons of VCG mechanism; Affine maximizers single , , object allocation Myerson’s lemma optimal mechanism design; Single and , , multi -agent optimal mechanism design examples of optimal mechanisms , ● Eachquestioncar..."
         }
       ],
       "experiments_count": 0,
@@ -3608,6 +3648,10 @@
         {
           "no": 3,
           "summary": "Expressions and Statements Expressions Conditional Statements and - , Guards Loops and Variations on WHILE The GOTO Controversy and Loop , , Exits Exception Handling Case Study: Computing the Values of Static , , ExpressionsinTinyAda . Procedures and Environments- Procedure Definition and Activation , Procedure Semantics Parameter-Passing Mechanisms Procedure , , Environments A..."
+        },
+        {
+          "no": 4,
+          "summary": "Abstract Data Types and Modules- The Algebraic Specification of Abstract Data Types Abstract Data Type Mechanisms and Modules Separate , , Compilation in C C++ Namespaces and Java Packages Ada Packages , , , , Modules in ML Modules in Earlier Languages Problems with Abstract Data , , TypeMechanisms TheMathematicsofAbstractDataTypes , . ● Eachquestioncarries9marks . ● Twoquestio..."
         }
       ],
       "experiments_count": 0,
@@ -3784,6 +3828,10 @@
         {
           "no": 3,
           "summary": "Malwares and Protection against Malwares :- Virus Worms Trojans Spyware Adware Key-logger Ransomware , , , , , , , Common Methods of Malware Propagation- Email Attachments Malicious , Websites Removable Media File Sharing Networks Malvertising Protection , , , , against Malware- Antivirus/Antimalware Software Regular Software Updates , , Email Filtering Web Filtering Data Backu..."
+        },
+        {
+          "no": 4,
+          "summary": "● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -3828,7 +3876,7 @@
         },
         {
           "no": 4,
-          "summary": "Cloud Computing Tools Tools and Technologies for Cloud Apache - , Hadoop Cloud Tools; Cloud Applications Moving Applications to the , - Cloud Microsoft Cloud Services Google Cloud Applications Amazon , , , CloudServices ."
+          "summary": "Cloud Computing Tools Tools and Technologies for Cloud Apache - , Hadoop Cloud Tools; Cloud Applications Moving Applications to the , - Cloud Microsoft Cloud Services Google Cloud Applications Amazon , , , CloudServices . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -3918,7 +3966,7 @@
         },
         {
           "no": 4,
-          "summary": "Transport Layer:- Transport Layer Protocols- UDP TCP; Congestion Control Open Loop Vs , - Closed Loop Congestion Control Congestion Control in TCP; Application , Layer - Application Layer Paradigms , Client -server applications , World Wide Web and HTTP FTP Electronic Mail DNS; Peer-to-peer paradigm P2P , . , - Networks . which1questionshouldbeanswered . Eachquestioncanhaveamax..."
+          "summary": "Transport Layer:- Transport Layer Protocols- UDP TCP; Congestion Control Open Loop Vs , - Closed Loop Congestion Control Congestion Control in TCP; Application , Layer - Application Layer Paradigms , Client -server applications , World Wide Web and HTTP FTP Electronic Mail DNS; Peer-to-peer paradigm P2P , . , - Networks . Twoquestionswillbegivenfromeachmodule outof , which1ques..."
         }
       ],
       "experiments_count": 0,
@@ -3933,7 +3981,7 @@
       "semesters": [
         "S7"
       ],
-      "credits": "0",
+      "credits": "3",
       "honours_option": false,
       "cie": "40",
       "ese": "60",
@@ -3963,7 +4011,7 @@
         },
         {
           "no": 4,
-          "summary": "IndustryPracticesandAppDeployment: Advanced UI Components and Animations App Security Best Practices , , Testing and Debugging Flutter Applications Publishing Apps to Google Play , Store and Apple App Store Industry Trends and Future of Mobile , DevelopmentwithFlutter"
+          "summary": "IndustryPracticesandAppDeployment: Advanced UI Components and Animations App Security Best Practices , , Testing and Debugging Flutter Applications Publishing Apps to Google Play , Store and Apple App Store Industry Trends and Future of Mobile , DevelopmentwithFlutter ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ..."
         }
       ],
       "experiments_count": 0,
@@ -4007,7 +4055,7 @@
         },
         {
           "no": 4,
-          "summary": "Retrieval -Augmented Generation :– Introduction BasicsofRAG OptimizingRAG EnhancingRAG Evaluating , , , , RAGApplications . LLMs in Production :– Introduction LLMApplications LLMEvaluationMetrics LLMBenchmark , , , Datasets LLM Selection Tooling for Application Development Inference , , , , LLMOps . ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
+          "summary": "Retrieval -Augmented Generation :– Introduction BasicsofRAG OptimizingRAG EnhancingRAG Evaluating , , , , RAGApplications . LLMs in Production :– Introduction LLMApplications LLMEvaluationMetrics LLMBenchmark , , , Datasets LLM Selection Tooling for Application Development Inference , , , , LLMOps . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered ..."
         }
       ],
       "experiments_count": 0,
@@ -4052,7 +4100,7 @@
         },
         {
           "no": 4,
-          "summary": "ArchitectureEvaluationandDescription:DescribingArchitecturesand Viewpoints EvaluatingArchitectures ArchitecturalDescriptionLanguages , . (ADLs) Overview and Applications - ."
+          "summary": "ArchitectureEvaluationandDescription:DescribingArchitecturesand Viewpoints EvaluatingArchitectures ArchitecturalDescriptionLanguages , . (ADLs) Overview and Applications - . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -4097,7 +4145,7 @@
         },
         {
           "no": 4,
-          "summary": "Security policies and models: Confidentiality Policies Bell LaPadula , - model Integrity policies Biba model Clark -Wilson models Chinese wall , , , , model waterfallmodel , . Management and Incidents- Security Planning Business Continuity , Planning HandlingIncidents RiskAnalysis DealingwithDisaster , , ,"
+          "summary": "Security policies and models: Confidentiality Policies Bell LaPadula , - model Integrity policies Biba model Clark -Wilson models Chinese wall , , , , model waterfallmodel , . Management and Incidents- Security Planning Business Continuity , Planning HandlingIncidents RiskAnalysis DealingwithDisaster , , , ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule ou..."
         }
       ],
       "experiments_count": 0,
@@ -4142,7 +4190,7 @@
         },
         {
           "no": 4,
-          "summary": "Circuit Complexity Boolean circuits and circuit complexity Circuit lower - , bounds Complexity of specific functions (Text 2 Ch 9) , . - Quantum Complexity Basics of quantum computation Quantum - , complexity classes: BQP QMA Quantum algorithms and their complexity , , . (Text 3 Ch 10 11) - ,"
+          "summary": "Circuit Complexity Boolean circuits and circuit complexity Circuit lower - , bounds Complexity of specific functions (Text 2 Ch 9) , . - Quantum Complexity Basics of quantum computation Quantum - , complexity classes: BQP QMA Quantum algorithms and their complexity , , . (Text 3 Ch 10 11) - , ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1qu..."
         }
       ],
       "experiments_count": 0,
@@ -4229,6 +4277,10 @@
         {
           "no": 3,
           "summary": "Speech Enhancement :- Spectral subtraction and Filtering Harmonic , filtering Parametric resynthesis; Speech coding fundamentals class of , - , coders : Time domain/spectral domain/vocoders Sub band coding adaptive , , transform coding phase vocoder; Speaker Recognition :- Speaker , verification and speaker identification log-likelihood; Language , identification Implicit and e..."
+        },
+        {
+          "no": 4,
+          "summary": "● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -4273,7 +4325,7 @@
         },
         {
           "no": 4,
-          "summary": "Storage Management:- Capacity Management Capacity Reporting Thin Provisioning - , Considerations Deduplication and Compression Quotas and Archiving , , , Showback and Chargeback Performance Management Latency/Response , - Time IOPSMBps and Transfer Rate Factors Affecting Storage , , , Performance ManagementProtocolsandInterfaces ."
+          "summary": "Storage Management:- Capacity Management Capacity Reporting Thin Provisioning - , Considerations Deduplication and Compression Quotas and Archiving , , , Showback and Chargeback Performance Management Latency/Response , - Time IOPSMBps and Transfer Rate Factors Affecting Storage , , , Performance ManagementProtocolsandInterfaces . ● Eachquestioncarries9marks . ● Twoquestionswil..."
         }
       ],
       "experiments_count": 0,
@@ -4318,7 +4370,7 @@
         },
         {
           "no": 4,
-          "summary": "Challenges Future Trends and Research in Prompt Engineering :- , , Challenges in Prompt Engineering: Ambiguity Bias and Misinterpretation; , , Evaluating and Improving Prompt Performance: Metrics and Benchmarks; FutureTrends:EmergingTechniquesandtheEvolutionofLanguageModels; Handson : Working on a capstone project to solve a real -world problem using promptengineering"
+          "summary": "Challenges Future Trends and Research in Prompt Engineering :- , , Challenges in Prompt Engineering: Ambiguity Bias and Misinterpretation; , , Evaluating and Improving Prompt Performance: Metrics and Benchmarks; FutureTrends:EmergingTechniquesandtheEvolutionofLanguageModels; Handson : Working on a capstone project to solve a real -world problem using promptengineering ● Eachque..."
         }
       ],
       "experiments_count": 0,
@@ -4363,7 +4415,7 @@
         },
         {
           "no": 4,
-          "summary": "Algebraic Number Theory Algebraic integers and number fields - , Factorization in number fields; Computational Methods Algorithms for - solving Diophantine equations Applications in computational algebra; , Recent Developments and Applications Applications in modern - cryptographyandcodingtheory"
+          "summary": "Algebraic Number Theory Algebraic integers and number fields - , Factorization in number fields; Computational Methods Algorithms for - solving Diophantine equations Applications in computational algebra; , Recent Developments and Applications Applications in modern - cryptographyandcodingtheory ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich..."
         }
       ],
       "experiments_count": 0,
@@ -4408,7 +4460,7 @@
         },
         {
           "no": 4,
-          "summary": "Dynamic Programming The Control Abstraction- The Optimality Principle -"
+          "summary": "Dynamic Programming The Control Abstraction- The Optimality Principle - ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3"
         }
       ],
       "experiments_count": 0,
@@ -4543,7 +4595,7 @@
         },
         {
           "no": 4,
-          "summary": "Programming Raspberry Pi with Python-Controlling LED with Raspberry Pi , Interfacing an LED and switch with Raspberry Pi Other IoT devices- , PcDino BeagleboneBlack Cubieboard DataAnalyticsforIoT , , , which1questionshouldbeanswered . Eachquestioncanhaveamaximumof3subdivisions ."
+          "summary": "Programming Raspberry Pi with Python-Controlling LED with Raspberry Pi , Interfacing an LED and switch with Raspberry Pi Other IoT devices- , PcDino BeagleboneBlack Cubieboard DataAnalyticsforIoT , , , Twoquestionswillbegivenfromeachmodule outof , which1questionshouldbeanswered . Eachquestioncanhaveamaximumof3subdivisions ."
         }
       ],
       "experiments_count": 0,
@@ -4588,7 +4640,7 @@
         },
         {
           "no": 4,
-          "summary": "Three dimensional graphics Three dimensional viewing pipeline - . Projections- Parallel and Perspective projections Visible surface detection . algorithms- Back face detection Depth buffer algorithm Scan line , , algorithm Abufferalgorithm , ."
+          "summary": "Three dimensional graphics Three dimensional viewing pipeline - . Projections- Parallel and Perspective projections Visible surface detection . algorithms- Back face detection Depth buffer algorithm Scan line , , algorithm Abufferalgorithm , . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamax..."
         }
       ],
       "experiments_count": 0,

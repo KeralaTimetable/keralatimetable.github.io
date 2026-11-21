@@ -620,7 +620,7 @@
     {
       "id": "PCCEL408",
       "code": "PCCEL408",
-      "title": "Civil Engineering Modelling Lab",
+      "title": "Modelling Lab",
       "category": "Lab",
       "credits": "2",
       "branches": [
@@ -648,7 +648,7 @@
     {
       "id": "PCCET403",
       "code": "PCCET403",
-      "title": "Structural Analysis - Ii",
+      "title": "Structural Analysis - II",
       "category": "Core",
       "credits": "4",
       "branches": [
@@ -818,7 +818,7 @@
     {
       "id": "PCEEL408",
       "code": "PCEEL408",
-      "title": "Branch Name (Branch Code) COURSE NAME: POWER ELECTRONICS and DRIVES LAB",
+      "title": "Semester - IV Power Electronics and Drives Lab",
       "category": "Lab",
       "credits": "2",
       "branches": [
@@ -846,7 +846,7 @@
     {
       "id": "PCEET403",
       "code": "PCEET403",
-      "title": "SEMSEMESTER-4 COURSE NAME: Power Electronics and Drives",
+      "title": "PCEET403",
       "category": "Core",
       "credits": "4",
       "branches": [
@@ -1102,7 +1102,7 @@
     {
       "id": "PECST415",
       "code": "PECST415",
-      "title": "PECST415",
+      "title": "VLSI Design",
       "category": "Program Elective",
       "credits": "5/3",
       "branches": [
@@ -1555,7 +1555,7 @@
     {
       "id": "PBEET504",
       "code": "PBEET504",
-      "title": "Electrical and Electronics Engineering (EE) MICROPROCESSORS and EMBEDDED SYSTEMS",
+      "title": "Semester -V Microprocessors and Embedded Systems",
       "category": "PBL Core",
       "credits": "4",
       "branches": [
@@ -1597,7 +1597,7 @@
     {
       "id": "PCCEL508",
       "code": "PCCEL508",
-      "title": "Concrete Lab (Mt-2)",
+      "title": "Concrete Lab (MT-2)",
       "category": "Lab",
       "credits": "2",
       "branches": [
@@ -1754,7 +1754,7 @@
     {
       "id": "PCECL507",
       "code": "PCECL507",
-      "title": "Course Name: Digital Signal Processing Lab",
+      "title": "Digital Signal Processing Lab",
       "category": "Lab",
       "credits": "2",
       "branches": [
@@ -1838,7 +1838,7 @@
     {
       "id": "PCEEL508",
       "code": "PCEEL508",
-      "title": "Engineering (EE) Electrical and Electronics MICROPROC CESSOR and EMBEDDED SYSTEMS LAB",
+      "title": "Microprocessor and Embedded Systems Lab",
       "category": "Lab",
       "credits": "",
       "branches": [
@@ -1908,7 +1908,7 @@
     {
       "id": "PCMEL508",
       "code": "PCMEL508",
-      "title": "Mechanical Engineering Lab",
+      "title": "Lab",
       "category": "Lab",
       "credits": "2",
       "branches": [
@@ -2388,7 +2388,7 @@
     {
       "id": "PEEET522",
       "code": "PEEET522",
-      "title": "ELECTRIC VEHICLES PEEET522 CIE Marks",
+      "title": "Electric Vehicles",
       "category": "Program Elective",
       "credits": "3",
       "branches": [
@@ -2994,7 +2994,7 @@
     {
       "id": "PBEET604",
       "code": "PBEET604",
-      "title": "Branch Name (Branch Code) COURSE NAME: POWER SYSTEM ANALYSIS",
+      "title": "PBEET604",
       "category": "PBL Core",
       "credits": "4",
       "branches": [
@@ -3162,7 +3162,7 @@
     {
       "id": "PCECL607",
       "code": "PCECL607",
-      "title": "Communication Lab Ii",
+      "title": "Communication Lab II",
       "category": "Lab",
       "credits": "2",
       "branches": [
@@ -3190,7 +3190,7 @@
     {
       "id": "PCECT602",
       "code": "PCECT602",
-      "title": "Microwaves & Antennas Pcect602",
+      "title": "Microwaves & Antennas",
       "category": "Core",
       "credits": "3",
       "branches": [
@@ -3438,21 +3438,6 @@
         "S6"
       ],
       "pdf_url": "/syllabus/s3-s8/pdfs/PECMT695.pdf"
-    },
-    {
-      "id": "PECMT745",
-      "code": "PECMT745",
-      "title": "Reinforcement Learning",
-      "category": "Program Elective",
-      "credits": "5/3",
-      "branches": [
-        "AIML"
-      ],
-      "semesters": [
-        "S6",
-        "S7"
-      ],
-      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT745.pdf"
     },
     {
       "id": "PECST631",
@@ -3941,7 +3926,7 @@
     {
       "id": "OECET723",
       "code": "OECET723",
-      "title": "Watershed Conservation and Mangement",
+      "title": "Watershed Conservation and Management",
       "category": "Open Elective",
       "credits": "3",
       "branches": [
@@ -4045,7 +4030,7 @@
       "code": "OECST725",
       "title": "Mobile Application Development",
       "category": "Open Elective",
-      "credits": "0",
+      "credits": "3",
       "branches": [
         "CSE",
         "AIML"
@@ -4100,7 +4085,7 @@
     {
       "id": "OEEET721",
       "code": "OEEET721",
-      "title": "Design of Solar Pv Systems Oeeet721",
+      "title": "Design of Solar PV Systems",
       "category": "Open Elective",
       "credits": "3",
       "branches": [
@@ -4241,7 +4226,7 @@
       "id": "PCECT751",
       "code": "PCECT751",
       "title": "Satellite and Radar Communication",
-      "category": "Core",
+      "category": "Program Elective",
       "credits": "3",
       "branches": [
         "ECE"
@@ -4446,6 +4431,20 @@
         "S7"
       ],
       "pdf_url": "/syllabus/s3-s8/pdfs/PECET757.pdf"
+    },
+    {
+      "id": "PECMT745",
+      "code": "PECMT745",
+      "title": "Reinforcement Learning",
+      "category": "Program Elective",
+      "credits": "5/3",
+      "branches": [
+        "AIML"
+      ],
+      "semesters": [
+        "S7"
+      ],
+      "pdf_url": "/syllabus/s3-s8/pdfs/PECMT745.pdf"
     },
     {
       "id": "PECMT753",
@@ -4902,7 +4901,7 @@
     {
       "id": "PEECT755",
       "code": "PEECT755",
-      "title": "Mixed Signal Circuit Design",
+      "title": "Semester S 7 Mixed Signal Circuit Design",
       "category": "Program Elective",
       "credits": "5/3",
       "branches": [
@@ -6008,7 +6007,7 @@
       "id": "PEMET837",
       "code": "PEMET837",
       "title": "Product Design and Innovation",
-      "category": "Program Elective",
+      "category": "Open Elective",
       "credits": "3",
       "branches": [
         "ME"

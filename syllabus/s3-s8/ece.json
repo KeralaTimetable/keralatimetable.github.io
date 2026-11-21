@@ -18,12 +18,12 @@
     "S8": 10
   },
   "category_counts": {
-    "Core": 10,
+    "Core": 9,
     "PBL Core": 4,
     "Math & Science": 3,
     "Common / Humanities": 2,
     "Lab": 7,
-    "Program Elective": 41,
+    "Program Elective": 42,
     "Open Elective": 8
   },
   "courses": [
@@ -296,7 +296,7 @@
         },
         {
           "no": 4,
-          "summary": "Value Analysis and value Engineering Cost Value Exchange Value Use - , , Value , Esteem Value - Aims , Advantages and Application areas of Value Engineering - Value Engineering Procedure - Break -even Analysis - Cost - Benefit Analysis Capital Budgeting Process planning - -"
+          "summary": "Value Analysis and value Engineering Cost Value Exchange Value Use - , , Value , Esteem Value - Aims , Advantages and Application areas of Value Engineering - Value Engineering Procedure - Break -even Analysis - Cost - Benefit Analysis Capital Budgeting Process planning - -  2questionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . 2Questionsfromeach  Each ..."
         }
       ],
       "experiments_count": 0,
@@ -376,12 +376,8 @@
       "pages": 5,
       "pdf_url": "/syllabus/s3-s8/pdfs/PCECL307.pdf",
       "modules": [],
-      "experiments_count": 12,
+      "experiments_count": 21,
       "experiments": [
-        {
-          "no": "10",
-          "title": "Transistor series voltage regulator – Design for a specific output voltage with & without short circuitprotection(plotload&lineregulationcharacteristics) ."
-        },
         {
           "no": "1",
           "title": "RC Integrating and Differentiating Circuits (Transient analysis with different inputs and – frequencyresponse)"
@@ -423,8 +419,24 @@
           "title": "Transistor series voltage regulator – Design for a specific output voltage with & without short circuitprotection(plotload&lineregulationcharacteristics) ."
         },
         {
-          "no": "10",
-          "title": "Transistor series voltage regulator – Design for a specific output voltage with & without short"
+          "no": "1",
+          "title": "RC Integrating and Differentiating Circuits (Transient analysis with different inputs and – frequencyresponse)"
+        },
+        {
+          "no": "2",
+          "title": "DiodeClippingandClampingCircuits(Transientandtransfercharacteristics)"
+        },
+        {
+          "no": "3",
+          "title": "CE amplifier – Design for a specific voltage gain and plot frequency response characteristics"
+        },
+        {
+          "no": "4",
+          "title": "CS MOSFET amplifier - Design for a specific voltage gain and plot frequency response characteristics"
+        },
+        {
+          "no": "5",
+          "title": "Cascaded amplifier (CE – CE) - Design for a specific voltage gain and plot frequency responsecharacteristics"
         }
       ],
       "video_links": []
@@ -452,8 +464,52 @@
       "pages": 6,
       "pdf_url": "/syllabus/s3-s8/pdfs/PCECL308.pdf",
       "modules": [],
-      "experiments_count": 8,
+      "experiments_count": 19,
       "experiments": [
+        {
+          "no": "1",
+          "title": "Realizationoffunctionsusingbasicanduniversalgates(SOPandPOSforms) ."
+        },
+        {
+          "no": "2",
+          "title": "DesignandRealizationofhalf/fulladderandsubtractorusingbasicgatesanduniversalgates ."
+        },
+        {
+          "no": "3",
+          "title": "4bitadder/subtractorandBCDadderusing7483"
+        },
+        {
+          "no": "4",
+          "title": "Study of Flip Flops : S -R D T JK and Master slave JK FF using NAND gates , , ,"
+        },
+        {
+          "no": "5",
+          "title": "AsynchronousCounter:3bitup/downcounter RealizationofModNCounter ,"
+        },
+        {
+          "no": "6",
+          "title": "Synchronous Counter: Realization of 4 -bit up/down counter Realization of Mod -N counters ,"
+        },
+        {
+          "no": "7",
+          "title": "RingcounterandJohnsonCounter ."
+        },
+        {
+          "no": "8",
+          "title": "RealizationofcountersusingIC’s(7490 7492 7493) , , ."
+        },
+        {
+          "no": "9",
+          "title": "RealizationofcombinationalcircuitsusingMUX&DEMUX usingICs(74150 74154) , ,"
+        },
+        {
+          "no": "10",
+          "title": "SequenceGenerator/Detector"
+        },
+        {
+          "no": "1",
+          "title": "Experiment1:RealizationofLogicGatesandFamiliarizationofFPGAs"
+        },
         {
           "no": "2",
           "title": "Experiment2:AddersinVerilog (a)Developmentofverilogmodulesforhalfadderinanyofthe3modelingstyles (b)Developmentofverilogmodulesforfulladderinstructuralmodelingusinghalfadder ."
@@ -469,22 +525,6 @@
         {
           "no": "5",
           "title": "Experiment5 MultiplexerandLogicImplementationinFPGA . (a)Makeagateleveldesignofan8:1multiplexer writetoFPGAandtestitsfunctionality , . (b)Usetheabovemoduletorealizeanylogicfunction"
-        },
-        {
-          "no": "6",
-          "title": "Experiment 6 Flip-Flops and their Conversion in FPGA . (a) Make gate level designs of J -K J -K master-slave T and D flip-flops implement and test them , , , ontheFPGAboard . (b) Implement and test the conversions such a..."
-        },
-        {
-          "no": "7",
-          "title": "Experiment7:AsynchronousandSynchronousCountersinFPGA (a) Make a design of a 4 -bit up down ripple counter using T -flip-flops in the previous experiment , implementandtestthemontheFPGAboard . (b) Make a design of a 4 -bi..."
-        },
-        {
-          "no": "8",
-          "title": "Experiment8:UniversalShiftRegisterinFPGA (a) Make a design of a 4 -bit universal shift register using D -flip-flops in the previous experiment , implementandtestthemontheFPGAboard . (b)ImplementringandJohnsoncounterswith..."
-        },
-        {
-          "no": "9",
-          "title": "Experiment9 BCDtoSevenSegmentDecoderinFPGA . (a)Makeagateleveldesignofasevensegmentdecoder writetoFPGAandtestitsfunctionality , . (b)Testitwithswitchesandsevensegmentdisplay Useouputportsforconnectiontothedisplay . ."
         }
       ],
       "video_links": []
@@ -659,7 +699,7 @@
         },
         {
           "no": 4,
-          "summary": "Random process concept classification of process Methods of , , Description of Random process Special classes Average Values of , , Random Process Stationarity- SSS WSS Autocorrelation functions , , , and its properties Ergodicity Mean-Ergodic Process Mean-Ergodic , , , Theorem CorrelationErgodicProcess DistributionErgodicProcess , , . [Text2:RelevanttopicsfromChapter6]"
+          "summary": "Random process concept classification of process Methods of , , Description of Random process Special classes Average Values of , , Random Process Stationarity- SSS WSS Autocorrelation functions , , , and its properties Ergodicity Mean-Ergodic Process Mean-Ergodic , , , Theorem CorrelationErgodicProcess DistributionErgodicProcess , , . [Text2:RelevanttopicsfromChapter6]  Eachq..."
         }
       ],
       "experiments_count": 0,
@@ -689,15 +729,67 @@
       "pages": 5,
       "pdf_url": "/syllabus/s3-s8/pdfs/PCECL407.pdf",
       "modules": [],
-      "experiments_count": 2,
+      "experiments_count": 18,
       "experiments": [
         {
           "no": "1",
-          "title": "Simulationofanythreecircuitsfromexperiments3 5 6 7 8 9 10and11of , , , , , , sectionI"
+          "title": "Familiarization of Operational amplifiers Inverting and Non inverting amplifiers - , Integrator , Differentiator - frequency response , Adder , Comparators"
         },
         {
           "no": "2",
-          "title": "Simulationofexperiments3or4fromsectionII"
+          "title": "Measurement of Op-Amp parameters"
+        },
+        {
+          "no": "3",
+          "title": "DifferenceAmplifierandInstrumentationamplifier"
+        },
+        {
+          "no": "4",
+          "title": "Schmitttriggercircuit"
+        },
+        {
+          "no": "5",
+          "title": "AstableandMonostablemultivibrators"
+        },
+        {
+          "no": "6",
+          "title": "Waveform generators using Op Amps Triangular and Sawtooth -"
+        },
+        {
+          "no": "7",
+          "title": "Wien bridge oscillator without & with amplitude stabilization -"
+        },
+        {
+          "no": "8",
+          "title": "RCPhaseshiftOscillator"
+        },
+        {
+          "no": "9",
+          "title": "Activefirstandsecondorderfilters(LPF HPF BPFandBRF) , ,"
+        },
+        {
+          "no": "10",
+          "title": "ActiveNotchfiltertoeliminatethe50Hzpowerlinefrequency"
+        },
+        {
+          "no": "11",
+          "title": "Precisionrectifiers"
+        },
+        {
+          "no": "1",
+          "title": "AstableandMonostablemultivibratorusingTimerICNE555"
+        },
+        {
+          "no": "2",
+          "title": "DCpowersupplyusingIC723:Lowvoltageandhighvoltageconfigurations , Short circuit and Fold -back protection ."
+        },
+        {
+          "no": "3",
+          "title": "A/D converters- counter ramp and flash type ."
+        },
+        {
+          "no": "4",
+          "title": "D/A Converters R -2R ladder circuit -"
         }
       ],
       "video_links": []
@@ -725,8 +817,52 @@
       "pages": 6,
       "pdf_url": "/syllabus/s3-s8/pdfs/PCECL408.pdf",
       "modules": [],
-      "experiments_count": 5,
+      "experiments_count": 16,
       "experiments": [
+        {
+          "no": "1",
+          "title": "Multiplication of two 16 -bit numbers ."
+        },
+        {
+          "no": "2",
+          "title": "Largest/smallestfromaseries ."
+        },
+        {
+          "no": "3",
+          "title": "Sorting(Ascending/Descending)ofdata ."
+        },
+        {
+          "no": "4",
+          "title": "Matrixaddition ."
+        },
+        {
+          "no": "5",
+          "title": "LCM and HCF of two 8 -bit numbers ."
+        },
+        {
+          "no": "6",
+          "title": "Code conversion – Hex to Decimal/ASCII to Decimal and vice versa ."
+        },
+        {
+          "no": "1",
+          "title": "Timedelaygenerationandrelayinterface ."
+        },
+        {
+          "no": "2",
+          "title": "Display(LED/Sevensegments/LCD)andkeyboardinterface ."
+        },
+        {
+          "no": "3",
+          "title": "ADCinterface ."
+        },
+        {
+          "no": "4",
+          "title": "DACinterfacewithwaveformgeneration ."
+        },
+        {
+          "no": "5",
+          "title": "SteppermotorandDCmotorinterface ."
+        },
         {
           "no": "1",
           "title": "PWMgenerationforDCmotorcontrol ."
@@ -742,10 +878,6 @@
         {
           "no": "4",
           "title": "SPI/I2Cinterfacetodisplay ."
-        },
-        {
-          "no": "5",
-          "title": "Real -time clock ."
         }
       ],
       "video_links": []
@@ -831,7 +963,7 @@
         },
         {
           "no": 4,
-          "summary": "DC -AC Switch Mode Inverters: Inverter topologies Driven , Inverters: Push -Pull Half bridge and Full bridge configurations Single , , phase PWM inverters (Single pulse width and sinusoidal pulse width modulation) – rms output voltage equation and output voltage waveforms ."
+          "summary": "DC -AC Switch Mode Inverters: Inverter topologies Driven , Inverters: Push -Pull Half bridge and Full bridge configurations Single , , phase PWM inverters (Single pulse width and sinusoidal pulse width modulation) – rms output voltage equation and output voltage waveforms .  Twoquestionswillbegivenfromeach module outofwhich1questionshouldbe ,  Eachquestioncanhaveamaximumof3su..."
         }
       ],
       "experiments_count": 0,
@@ -875,7 +1007,7 @@
         },
         {
           "no": 4,
-          "summary": "Introduction to Artificial Neural Networks: Biological Neuron , Perceptron Training limitations XORproblem Multilayerperceptron , , , , , Gradient based learning stochastic gradient descent Activation , , Functions-Sigmoid ReLU tanh Back propagation- Chain rule , , . , Regularization- L1 L2 , ,"
+          "summary": "Introduction to Artificial Neural Networks: Biological Neuron , Perceptron Training limitations XORproblem Multilayerperceptron , , , , , Gradient based learning stochastic gradient descent Activation , , Functions-Sigmoid ReLU tanh Back propagation- Chain rule , , . , Regularization- L1 L2 , ,  Twoquestionswillbegivenfromeach module outofwhich1questionshouldbe ,  Eachquestio..."
         }
       ],
       "experiments_count": 0,
@@ -960,6 +1092,10 @@
         {
           "no": 3,
           "summary": "Hazards static and dynamic hazards in combinational networks Essential – , Hazards Design of Hazard free circuits Data synchronizers Mixed , , , operating mode asynchronous circuits Practical issues- clock skew and , jitter Synchronous and asynchronous inputs Flip-Flops and Simple Flip- , , FlopApplications switchdebouncer , . Faults Fault table method path sensitization method..."
+        },
+        {
+          "no": 4,
+          "summary": "VLSIDesignflow:Designentry:Schematic FSM&HDL VHDLHardware , , Description Language VHDL Modules VHDL Processes Different , , , modeling styles in VHDL Data types and operators Objects Dataflow , , , , BehavioralandStructuralModeling Synthesis Simulation , , . VHDLconstructsandcodesforcombinationalandsequentialcircuits ."
         }
       ],
       "experiments_count": 0,
@@ -1003,7 +1139,7 @@
         },
         {
           "no": 4,
-          "summary": "VLSI Design flow: Design entry: Schematic Data types and objects , , different modelling styles in VHDL Dataflow Behavioural and - , Structural Modelling VHDL constructs and codes for combinational . andsequentialcircuits ."
+          "summary": "VLSI Design flow: Design entry: Schematic Data types and objects , , different modelling styles in VHDL Dataflow Behavioural and - , Structural Modelling VHDL constructs and codes for combinational . andsequentialcircuits .  Twoquestionswillbegivenfromeach module outofwhich1questionshouldbe ,  Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -1091,7 +1227,7 @@
         },
         {
           "no": 4,
-          "summary": "Digital band pass modulation schemes-BPSK system and signal constellation BPSK transmitter and receiver QPSK system and Signal . . constellations BER analysis of BPSK and QPSK in erfc Plots of BER Vs . . SNR QPSK transmitter and receiver Quadrature amplitude modulation and . . signalconstellation ."
+          "summary": "Digital band pass modulation schemes-BPSK system and signal constellation BPSK transmitter and receiver QPSK system and Signal . . constellations BER analysis of BPSK and QPSK in erfc Plots of BER Vs . . SNR QPSK transmitter and receiver Quadrature amplitude modulation and . . signalconstellation . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwh..."
         }
       ],
       "experiments_count": 0,
@@ -1135,7 +1271,7 @@
         },
         {
           "no": 4,
-          "summary": "StateVariableAnalysisofLinearSystems: State variables state equations state variable representation of electrical , , systems Transfer function from State equation Solutions of the state . , equations state transition matrix Controllability and observability , , - Kalman’sTest ."
+          "summary": "StateVariableAnalysisofLinearSystems: State variables state equations state variable representation of electrical , , systems Transfer function from State equation Solutions of the state . , equations state transition matrix Controllability and observability , , - Kalman’sTest . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbe..."
         }
       ],
       "experiments_count": 0,
@@ -1189,7 +1325,7 @@
     {
       "id": "PCECL507",
       "code": "PCECL507",
-      "title": "Course Name: Digital Signal Processing Lab",
+      "title": "Digital Signal Processing Lab",
       "category": "Lab",
       "semesters": [
         "S5"
@@ -1387,7 +1523,7 @@
         },
         {
           "no": 4,
-          "summary": "Sorting and Hashing: Sorting Techniques Selection Sort Insertion Sort – , , QuickSort MergeSortandHeapSort , Hashing- Hashing Techniques Collision Resolution Overflow handling , , , Hashing functions – Mid square , Division , Folding , Digit Analysis"
+          "summary": "Sorting and Hashing: Sorting Techniques Selection Sort Insertion Sort – , , QuickSort MergeSortandHeapSort , Hashing- Hashing Techniques Collision Resolution Overflow handling , , , Hashing functions – Mid square , Division , Folding , Digit Analysis  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanh..."
         }
       ],
       "experiments_count": 0,
@@ -1427,7 +1563,11 @@
         },
         {
           "no": 3,
-          "summary": "Flow Sensors Ultrasonic Flow Sensors Electromagnetic Flow Sensors - , . Temperature Sensors Resistance Temperature Detectors Thermistors - , , Thermocouple ."
+          "summary": "Flow Sensors Ultrasonic Flow Sensors Electromagnetic Flow Sensors - , . Temperature Sensors Resistance Temperature Detectors Thermistors - , , Thermocouple . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3sub"
+        },
+        {
+          "no": 4,
+          "summary": "Actuators: - Definition- classification-Electric, Hydraulic, Pneumatic actuators. Hydraulic System - Physical Components and typical circuit. Hydraulic actuators - Linear actuators, Rotary actuators - Gear motor, vane motor. Pneumatic System - Components and typical circuit. Pneumatic Actuators - Bellows actuator, Flapper-nozzle, Diaphragm actuators for industrial control valve..."
         }
       ],
       "experiments_count": 0,
@@ -1603,7 +1743,7 @@
         },
         {
           "no": 4,
-          "summary": "StatisticalDetectionTheoryII Detection of deterministic signals matched filters detection of random , , signals estimator-correlator linear model application examples , , , ."
+          "summary": "StatisticalDetectionTheoryII Detection of deterministic signals matched filters detection of random , , signals estimator-correlator linear model application examples , , , . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -1657,7 +1797,7 @@
     {
       "id": "PCECT602",
       "code": "PCECT602",
-      "title": "Microwaves & Antennas Pcect602",
+      "title": "Microwaves & Antennas",
       "category": "Core",
       "semesters": [
         "S6"
@@ -1745,7 +1885,7 @@
     {
       "id": "PCECL607",
       "code": "PCECL607",
-      "title": "Communication Lab Ii",
+      "title": "Communication Lab II",
       "category": "Lab",
       "semesters": [
         "S6"
@@ -1911,7 +2051,7 @@
         },
         {
           "no": 4,
-          "summary": "Image Restoration: Degradation model Inverse filtering- removal of blur , caused by uniform linear motion Minimum Mean Square Error (Wiener) , Filtering . Image segmentation: Region based approach clustering Segmentation , , basedonthresholding edgebasedsegmentation HoughTransform , , ."
+          "summary": "Image Restoration: Degradation model Inverse filtering- removal of blur , caused by uniform linear motion Minimum Mean Square Error (Wiener) , Filtering . Image segmentation: Region based approach clustering Segmentation , , basedonthresholding edgebasedsegmentation HoughTransform , , .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1question..."
         }
       ],
       "experiments_count": 0,
@@ -2036,6 +2176,14 @@
         {
           "no": 2,
           "summary": "2D Image transforms: DFT Properties Walsh transform Hadamard , , , transform Haar transform DCT KL transform and Singular Value , , , Decomposition . Image Compression: Image compression model Lossy lossless , , compression Concept of transform coding JPEG Image compression , , standard ."
+        },
+        {
+          "no": 3,
+          "summary": "Image Enhancement: Spatial domain methods: Basic Gray Level Transformations, Histogram Processing, Enhancement Using Arithmetic/Logic Operations, Basics of Spatial Filtering, Smoothing spatial Filters, Sharpening spatial Filters. Frequency domain methods: low pass filtering, high pass filtering, homomorphic filtering."
+        },
+        {
+          "no": 4,
+          "summary": "Image Restoration: Degradation model, Inverse filtering- removal of blur caused by uniform linear motion, Minimum Mean Square Error (Wiener) Filtering. Constrained Least square filtering, geometric mean filtering. Image segmentation: Region based approach, clustering, Segmentation based on thresholding, edge based segmentation, Hough Transform."
         }
       ],
       "experiments_count": 0,
@@ -2110,8 +2258,20 @@
       "pdf_url": "/syllabus/s3-s8/pdfs/PEECT637.pdf",
       "modules": [
         {
+          "no": 1,
+          "summary": "Engineering application of Optimization – Statement of an Optimization problem–Classification Review of basic calculus concepts –Stationary , points; Functions of single and two variables; Convexity and concavity of functions –Definition of Global and Local optima Optimality criteria – , Linear programming methods for optimum design Standard form of linear – programming (LP) pr..."
+        },
+        {
+          "no": 2,
+          "summary": "Optimization algorithms for solving unconstrained nonlinear optimization problems Search based techniques: Direct search: Fibonacci and golden – section search Hookes and Jeeves Gradient based method: Newton’s , , method"
+        },
+        {
+          "no": 3,
+          "summary": "Optimization algorithms for solving constrained optimization problems– direct methods penalty function methods barrier method -Optimization of – , function of multiple variables subject to equality constraints; Lagrangian function– Inequality constrained techniques-KKT conditions-constrained steepestdescentmethod"
+        },
+        {
           "no": 4,
-          "summary": "Modern methods of Optimization– Metaheuristic techniques: Genetic Algorithms Simulated Annealing Particle Swarm optimization –Ant – – colony optimization– : Use of Matlab/Scilab to solve optimization problem"
+          "summary": "Modern methods of Optimization– Metaheuristic techniques: Genetic Algorithms Simulated Annealing Particle Swarm optimization –Ant – – colony optimization– : Use of Matlab/Scilab to solve optimization problem ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -2151,7 +2311,11 @@
         },
         {
           "no": 3,
-          "summary": "High Definition Video and Audio: Pixel resolution Comparison with ,"
+          "summary": "High Definition Video and Audio: Pixel resolution Comparison with ,  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
+        },
+        {
+          "no": 4,
+          "summary": "Display Technology: Block diagram of video reproduction system in a TV, Cathode Ray tubes, Basic principle of Plasma displays, LC displays, Light- emitting diode displays, Field emission displays, Organic light emitting device displays. Television of future: Holographic TV, Virtual Reality, Augmented Reality."
         }
       ],
       "experiments_count": 0,
@@ -2250,7 +2414,7 @@
       "id": "PCECT751",
       "code": "PCECT751",
       "title": "Satellite and Radar Communication",
-      "category": "Core",
+      "category": "Program Elective",
       "semesters": [
         "S7"
       ],
@@ -2368,6 +2532,10 @@
         {
           "no": 3,
           "summary": "Sequence models Recurrent Neural Networks (RNN): cell structure and , architecture Training RNN back propagation through time Vanishing , , . andexplodinggradients . Long Short -Term Memory (LSTM) architecture and training , . GatedRecurrentUnits(GRU) architecttureandtraining , ."
+        },
+        {
+          "no": 4,
+          "summary": "Introduction to Generative models: parameter estimation Maximum , LikelyhoodEstimation Autoencoders latentspacevariationalautoencoders , . GANs:adversarialtraining Discriminator Generator upsampling . , , , Transformer models architecture Word embedding position encoding , , , attention training transformermodels , LargelanguagemodelsBERTGPT , (Detailedmathematicaltreatmentnotr..."
         }
       ],
       "experiments_count": 0,
@@ -2496,6 +2664,10 @@
         {
           "no": 3,
           "summary": "Sequence models Recurrent Neural Networks (RNN): cell structure and , architecture Training RNN back propagation through time Vanishing , , ."
+        },
+        {
+          "no": 4,
+          "summary": "Introduction to Generative models: parameter estimation, Maximum Likelyhood Estimation Auto encoders, latent space variational auto encoders. GANs : adversarial training. Discriminator , Generator, up sampling, Transformer models, architecture Word embedding, position encoding , attention , training transformer models Large language models BERT,GPT ( Detailed mathematical treat..."
         }
       ],
       "experiments_count": 0,
@@ -2583,7 +2755,7 @@
         },
         {
           "no": 4,
-          "summary": "Cryptanalysis: Primality testing- pseudo primes- the rho method . Cryptanalysismethods:linear differential higherorderdifferential , , , quadratic Factoring Algorithms- Trial Division Dixon's Algorithm . , , QuadraticSieve ."
+          "summary": "Cryptanalysis: Primality testing- pseudo primes- the rho method . Cryptanalysismethods:linear differential higherorderdifferential , , , quadratic Factoring Algorithms- Trial Division Dixon's Algorithm . , , QuadraticSieve .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub andasymm..."
         }
       ],
       "experiments_count": 0,
@@ -2715,7 +2887,7 @@
         },
         {
           "no": 4,
-          "summary": "DataConverters:DACspecifications ADCspecifications , DAC Architecture Resistor String R -2R Ladder Networks Current - , , Steering ChargeScaling cyclicand , , Pipelinetypes . ADC Architecture- Flash type The Successive approximation type and , oversamplingADCs ."
+          "summary": "DataConverters:DACspecifications ADCspecifications , DAC Architecture Resistor String R -2R Ladder Networks Current - , , Steering ChargeScaling cyclicand , , Pipelinetypes . ADC Architecture- Flash type The Successive approximation type and , oversamplingADCs . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Each..."
         }
       ],
       "experiments_count": 0,
@@ -2725,7 +2897,7 @@
     {
       "id": "PEECT755",
       "code": "PEECT755",
-      "title": "Mixed Signal Circuit Design",
+      "title": "Semester S 7 Mixed Signal Circuit Design",
       "category": "Program Elective",
       "semesters": [
         "S7"
@@ -2803,7 +2975,7 @@
         },
         {
           "no": 4,
-          "summary": "Signal Processing models of audio perception: Basic anatomy of hearing System: Basilar membrane behaviour Sound perception: Auditory Filter . Banks Critical Band Structure Absolute Threshold of Hearing Masking- , , , SimultaneousMasking TemporalMasking Modelsofspeechperception , ."
+          "summary": "Signal Processing models of audio perception: Basic anatomy of hearing System: Basilar membrane behaviour Sound perception: Auditory Filter . Banks Critical Band Structure Absolute Threshold of Hearing Masking- , , , SimultaneousMasking TemporalMasking Modelsofspeechperception , . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshould..."
         }
       ],
       "experiments_count": 0,
@@ -2844,6 +3016,10 @@
         {
           "no": 3,
           "summary": "Microwave filters Periodic structures Analysis of infinite periodic – – structuresandterminatedperiodicstructures"
+        },
+        {
+          "no": 4,
+          "summary": "● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -2931,7 +3107,7 @@
         },
         {
           "no": 4,
-          "summary": "Image Restoration: Degradation model Inverse filtering- removal of blur , caused by uniform linear motion Minimum Mean Square Error (Wiener) , Filtering . Image segmentation: Region based approach clustering Segmentation , , basedonthresholding edgebasedsegmentation HoughTransform , , ."
+          "summary": "Image Restoration: Degradation model Inverse filtering- removal of blur , caused by uniform linear motion Minimum Mean Square Error (Wiener) , Filtering . Image segmentation: Region based approach clustering Segmentation , , basedonthresholding edgebasedsegmentation HoughTransform , , .  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1question..."
         }
       ],
       "experiments_count": 0,
@@ -2975,7 +3151,7 @@
         },
         {
           "no": 4,
-          "summary": "Modern methods of Optimization– Metaheuristic techniques: Genetic Algorithms Simulated Annealing Particle Swarm optimization –Ant – – colony optimization– : Use of Matlab/Scilab to solve optimization problem"
+          "summary": "Modern methods of Optimization– Metaheuristic techniques: Genetic Algorithms Simulated Annealing Particle Swarm optimization –Ant – – colony optimization– : Use of Matlab/Scilab to solve optimization problem  Eachquestioncarries9marks .  Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered .  Eachquestioncanhaveamaximumof3sub"
         }
       ],
       "experiments_count": 0,
@@ -3019,7 +3195,7 @@
         },
         {
           "no": 4,
-          "summary": "WSN architecture: Single node architecture: Hardware components Energy , consumptionof sensor nodes Lowpowerwireless sensornetworks Routing , , protocols-LEACH PEGASIS and RPL Operating systems and execution , , environments CaseStudy:TinyOSandnesC50Otherexamples , ."
+          "summary": "WSN architecture: Single node architecture: Hardware components Energy , consumptionof sensor nodes Lowpowerwireless sensornetworks Routing , , protocols-LEACH PEGASIS and RPL Operating systems and execution , , environments CaseStudy:TinyOSandnesC50Otherexamples , . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ●..."
         }
       ],
       "experiments_count": 0,
@@ -3063,7 +3239,7 @@
         },
         {
           "no": 4,
-          "summary": "Basic oscillator model -Feedback oscillator design—Negative Resistance Oscillator- Dielectric Resonator Oscillator YIG Tuned Oscillator - Mixer Basic characteristics Single-Ended Mixer Design Single-balanced - – , and double-balanced mixers"
+          "summary": "Basic oscillator model -Feedback oscillator design—Negative Resistance Oscillator- Dielectric Resonator Oscillator YIG Tuned Oscillator - Mixer Basic characteristics Single-Ended Mixer Design Single-balanced - – , and double-balanced mixers ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeanswered . ● Eachquestioncanhaveamaximu..."
         }
       ],
       "experiments_count": 0,
@@ -3327,7 +3503,7 @@
         },
         {
           "no": 4,
-          "summary": "RadioWavePropagation Ground wave propagation Plane earth reflection Space wave and surface , , wave Spherical earth propagation Tropospheric waves Ionospheric , , , propagation Effects of earth’s magneticfield Critical frequency Maximum , , , usableFrequency Virtualheight , ."
+          "summary": "RadioWavePropagation Ground wave propagation Plane earth reflection Space wave and surface , , wave Spherical earth propagation Tropospheric waves Ionospheric , , , propagation Effects of earth’s magneticfield Critical frequency Maximum , , , usableFrequency Virtualheight , . ● Eachquestioncarries9marks . ● Twoquestionswillbegivenfromeachmodule out , ofwhich1questionshouldbeans..."
         }
       ],
       "experiments_count": 0,
