@@ -35,6 +35,10 @@ OFFICIAL_CODE_OVERRIDES = {
 COURSE_CODE_RE = re.compile(r"\b([A-Z]{4,5}\s*\d{3})\b")
 URL_RE = re.compile(r"https?://[^\s\)\]\>\"']+")
 ROMAN_MOD_MAP = {"I": 1, "II": 2, "III": 3, "IV": 4}
+SEM_PREFIX_RE = re.compile(
+    r"^(?:SEM)?SEMESTER\s*[:\-–—]?\s*(?:S\s*[3-8](?:\s*/\s*S?\s*[3-8])?|[3-8]|VIII|VII|VI|IV|III|V)\b\s*[:\-–—]?\s*",
+    re.I,
+)
 
 ACRONYMS = [
     "2D", "3D", "5G", "AI", "ML", "DL", "NLP", "LLM", "IoT", "IIoT", "AR", "VR",
@@ -66,12 +70,12 @@ def clean_space(text: str) -> str:
 
 def normalize_title(raw_title: str, course_code: str = "") -> str:
     t = clean_space(raw_title)
-    t = re.sub(r"^(SEM)?SEMESTER\s*[:\-]?\s*S?[3-8](?:\s*/\s*S?[3-8])?\s*", "", t, flags=re.I)
+    t = SEM_PREFIX_RE.sub("", t)
     t = re.sub(r"\bBranch\s+Name\s*\(\s*Branch\s+Code\s*\)\s*", "", t, flags=re.I)
+    # Only strip branch headers when tagged with an explicit branch code like '(EE)'
     t = re.sub(
-        r"\b(Electrical\s+and\s+Electronics\s+Engineering|Engineering\s*\(EE\)\s*Electrical\s+and\s+Electronics|"
-        r"Electronics\s+and\s+Communication\s+Engineering|Mechanical\s+Engineering|Civil\s+Engineering|"
-        r"Computer\s+Science\s+and\s+Engineering)\s*(\([A-Z]{2,4}\))?\s*",
+        r"\b(?:Engineering\s*\([A-Z]{2,4}\)\s*Electrical\s+and\s+Electronics|"
+        r"(?:Electrical\s+and\s+Electronics|Electronics\s+and\s+Communication|Mechanical|Civil|Computer\s+Science\s+and)\s+Engineering\s*\([A-Z]{2,4}\))\s*",
         "", t, flags=re.I,
     )
     t = re.sub(r"\bCOURSE\s+NAME\s*[:\-]?\s*", "", t, flags=re.I)
@@ -260,29 +264,28 @@ def detect_course_start(page: fitz.Page, branch_code: str, section_sem: str):
             return None
         code = re.sub(r"\s+", "", m.group(1)).upper()
 
+    # Anchor cutoff to the exact 'Course Code' visual line (handles titles inside row 0 of metadata table)
     all_top_lines = get_sorted_visual_lines(page, max_y=rect.height * 0.45)
-    if meta_table_top_y is None:
-        meta_table_top_y = rect.height * 0.35
-        for y0, txt in all_top_lines:
-            if re.search(r"Course\s+Code", txt, re.I):
-                meta_table_top_y = y0
-                break
+    cutoff_y = meta_table_top_y if meta_table_top_y is not None else rect.height * 0.35
+    for y0, txt in all_top_lines:
+        if re.search(r"Course\s+Code", txt, re.I):
+            cutoff_y = y0
+            break
 
     header_lines = []
     for y0, text in all_top_lines:
-        if y0 >= meta_table_top_y - 2:
+        if y0 >= cutoff_y - 2:
             break
         if re.fullmatch(r"\d{1,2}", text):
             continue
         if re.search(r"^(B\.?\s*Tech\s*2024|APJ\s+Abdul\s+Kalam|Branch\s+Name\s*\(\s*Branch\s+Code\s*\))$", text, re.I):
             continue
         if re.search(
-            r"^(Electrical\s+and\s+Electronics\s+Engineering|Electronics\s+and\s+Communication\s+Engineering|"
-            r"Mechanical\s+Engineering|Civil\s+Engineering|Computer\s+Science\s+and\s+Engineering)\s*(\([A-Z]{2,4}\))?$",
+            r"^(?:Electrical\s+and\s+Electronics|Electronics\s+and\s+Communication|Mechanical|Civil|Computer\s+Science\s+and)\s+Engineering\s*\([A-Z]{2,4}\)$",
             text, re.I,
         ):
             continue
-        if re.search(r"^Course\s+Code\b", text, re.I):
+        if re.search(r"(Course\s+Code|CIE\s+Marks)", text, re.I):
             break
         header_lines.append(text)
 
@@ -290,9 +293,9 @@ def detect_course_start(page: fitz.Page, branch_code: str, section_sem: str):
     common_note = ""
     title_parts = []
     for ln in header_lines:
-        if re.match(r"^(SEM)?SEMESTER\b", ln, re.I):
+        if re.match(r"^(?:SEM)?SEMESTER\b", ln, re.I):
             sem_label = ln
-            after_sem = re.sub(r"^(SEM)?SEMESTER\s*[:\-]?\s*S?[3-8](?:\s*/\s*S?[3-8])?\s*", "", ln, flags=re.I).strip()
+            after_sem = SEM_PREFIX_RE.sub("", ln).strip()
             if after_sem:
                 title_parts.append(after_sem)
         elif (ln.startswith("(") and ln.endswith(")")) or re.search(r"^\(?\s*Common\s+(to|with)\b", ln, re.I):
@@ -315,14 +318,14 @@ def detect_course_start(page: fitz.Page, branch_code: str, section_sem: str):
 
     sems_found = set()
     sem_src = sem_label.upper()
-    dual_m = re.search(r"S?([3-8])\s*/\s*S?([3-8])", sem_src)
+    dual_m = re.search(r"S?\s*([3-8])\s*/\s*S?\s*([3-8])", sem_src)
     if dual_m:
         sems_found.add(f"S{dual_m.group(1)}")
         sems_found.add(f"S{dual_m.group(2)}")
     elif section_sem:
         sems_found.add(section_sem)
     else:
-        single_m = re.search(r"SEMESTER\s*[:\-]?\s*S?([3-8])\b", sem_src)
+        single_m = re.search(r"SEMESTER\s*[:\-]?\s*S?\s*([3-8])\b", sem_src)
         if single_m:
             sems_found.add(f"S{single_m.group(1)}")
         else:
@@ -338,10 +341,6 @@ def detect_course_start(page: fitz.Page, branch_code: str, section_sem: str):
         m = re.search(r"ESE\s+Marks\s+(\d+)", flat_top, re.I)
         if m:
             ese = m.group(1)
-    if not credits:
-        m = re.search(r"Credits\s+(\d+(?:\s*/\s*\d+)?)", flat_top, re.I)
-        if m:
-            credits = re.sub(r"\s+", "", m.group(1))
     if not ltpr:
         m = re.search(r"\b(\d\s*[:\-]\s*\d\s*[:\-]\s*\d\s*[:\-]\s*\d)\b", flat_top)
         if m:
@@ -350,6 +349,14 @@ def detect_course_start(page: fitz.Page, branch_code: str, section_sem: str):
         m_ltpr = re.search(r"(\d\s*[:\-]\s*\d\s*[:\-]\s*\d\s*[:\-]\s*\d)", ltpr)
         if m_ltpr:
             ltpr = re.sub(r"\s*[:\-]\s*", ":", m_ltpr.group(1))
+    if not credits:
+        m = re.search(r"Credits\s+(\d+(?:\s*/\s*\d+)?)", flat_top, re.I)
+        if m:
+            credits = re.sub(r"\s+", "", m.group(1))
+    # Fill blank credits on standard 0:0:3:0 Labs (e.g. EEE PCEEL508)
+    if not credits and ltpr == "0:0:3:0" and (len(code) >= 5 and code[4] == "L"):
+        credits = "2"
+
     if not course_type:
         if len(code) >= 5 and code[4] == "L":
             course_type = "Lab"
@@ -443,7 +450,6 @@ def parse_module_number(cell_text: str) -> int | None:
 
 
 def extract_modules_text_fallback(doc: fitz.Document, start_p: int, end_p: int) -> dict[int, str]:
-    """Fallback parser if a syllabus table has missing borders or unusual merged cells."""
     chunks = []
     for pno in range(start_p, min(end_p + 1, start_p + 4)):
         txt = doc[pno].get_text("text")
@@ -545,7 +551,6 @@ def extract_subject_details(doc: fitz.Document, start_p: int, end_p: int, is_lab
             if not in_syllabus_zone:
                 continue
 
-            # Skip non-syllabus tables
             if re.search(
                 r"(Course\s+Code|CIE\s+Marks|Attendance|Part\s+A\b.*Part\s+B|Course\s+Outcome|\bPO1\b|"
                 r"Text\s+Books|Reference\s+Books|Data\s+Books|PBL\s+Course|Evaluation\s+for|Sl\.?\s*No|Reflective\s+Journal)",
@@ -569,20 +574,18 @@ def extract_subject_details(doc: fitz.Document, start_p: int, end_p: int, is_lab
                         experiments.append({"no": c0.rstrip("."), "title": c1[:220] + ("..." if len(c1) > 220 else "")})
                 continue
 
-            # 3) THEORY SYLLABUS TABLE (handles 2, 3, or 4 columns cleanly!)
+            # 3) THEORY SYLLABUS TABLE
             for r in rows:
                 if not r or len(r) < 2:
                     continue
                 cells = [clean_space(x or "") for x in r]
                 c0 = cells[0]
 
-                # Skip ONLY genuine header rows (never skip rows just because description mentions "module")
                 if re.fullmatch(r"(Modu\s*le(\s*No\.?)?|No\.?)", c0, re.I) or any(
                     re.fullmatch(r"Syllabus\s+Description", c, re.I) for c in cells
                 ):
                     continue
 
-                # Pick description cell = longest non-numeric cell (excluding c0 if c0 is a module number)
                 mod_num = parse_module_number(c0)
                 candidate_cells = cells[1:] if (mod_num is not None or c0 == "") else cells
                 non_num_cells = [c for c in candidate_cells if c and not re.fullmatch(r"\d{1,2}(\s*hrs?\.?)?", c, re.I)]
@@ -606,7 +609,6 @@ def extract_subject_details(doc: fitz.Document, start_p: int, end_p: int, is_lab
         if pass_after_page:
             in_syllabus_zone = False
 
-    # Fallback if a theory subject still has < 4 modules from table detection
     if not is_lab and len(modules) < 4:
         fb = extract_modules_text_fallback(doc, start_p, end_p)
         for k, v in fb.items():
