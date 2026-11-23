@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Liquid Glass + Three.js 3D Lab | Kerala Timetable</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Tailwind Local with CDN Fallback -->
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ot-ease-emph: cubic-bezier(0.2, 0, 0, 1);
+            --ot-ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+            --glassMaterialBackground: rgba(248, 250, 252, 0.62);
+            --glassMaterialShadowColor: rgba(15, 23, 42, 0.10);
+        }
+
+        html.dark {
+            --glassMaterialBackground: rgba(24, 30, 46, 0.68);
+            --glassMaterialShadowColor: rgba(0, 0, 0, 0.60);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f1f5fb;
+            background-image:
+                radial-gradient(at 0% 0%, hsla(253, 100%, 93%, 0.88) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(189, 100%, 90%, 0.82) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(208, 100%, 94%, 0.88) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(283, 100%, 94%, 0.82) 0px, transparent 50%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        /* ==========================================================================
+           THREE.JS FIXED BACKGROUND CANVAS LAYER
+           Sits at z-index: 0 (above body bg, strictly behind header/main/footer)
+           so backdrop-filter & OpenBlast feDisplacementMap refract live 3D!
+           ========================================================================== */
+        #three-bg-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            z-index: 0;
+            pointer-events: none;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.65s ease;
+        }
+        #three-bg-canvas.canvas-ready {
+            opacity: 1;
+        }
+        #three-bg-canvas.canvas-hidden {
+            opacity: 0 !important;
+        }
+
+        /* Standard Liquid Glass Surfaces (Same as index.html) */
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.54);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 52%);
+            backdrop-filter: blur(22px) saturate(190%);
+            -webkit-backdrop-filter: blur(22px) saturate(190%);
+            border: none;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3,
+                0 14px 40px -10px rgba(15, 23, 42, 0.08);
+            transition: transform 0.34s var(--ot-ease-settle), box-shadow 0.3s ease, background-color 0.25s ease;
+        }
+
+        .hybrid-card {
+            background-color: rgba(255, 255, 255, 0.60);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0) 55%);
+            backdrop-filter: blur(18px) saturate(190%);
+            -webkit-backdrop-filter: blur(18px) saturate(190%);
+            border: none;
+            border-radius: 1.25rem;
+            padding: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            text-decoration: none;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                inset 0 0 14px #fff3,
+                0 8px 22px -6px rgba(15, 23, 42, 0.06);
+            transition: transform 0.34s var(--ot-ease-settle), background-color 0.22s ease, box-shadow 0.28s ease;
+        }
+        @media (min-width: 768px) {
+            .hybrid-card {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+                padding: 1rem 1.25rem;
+                border-radius: 1.5rem;
+            }
+        }
+
+        .ot-press { transition: transform 0.16s var(--ot-ease-settle), filter 0.15s ease; }
+        .ot-press:not(:disabled):active { transform: scale(0.93); transition-duration: 80ms; }
+
+        /* Lab Switcher Active Pill */
+        .lab-btn-active {
+            background: #4f46e5 !important;
+            color: #ffffff !important;
+            border-color: transparent !important;
+            box-shadow: 0 6px 16px -4px rgba(79, 70, 229, 0.50) !important;
+        }
+
+        /* Allow subtle glass translucency in Dark Mode during 3D test so refraction is visible */
+        html.dark .glass-panel-3d-peek {
+            background: linear-gradient(145deg, rgba(20, 26, 44, 0.72) 0%, rgba(11, 15, 28, 0.78) 100%) !important;
+            backdrop-filter: blur(14px) saturate(160%) !important;
+            -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 antialiased flex flex-col relative overflow-x-hidden selection:bg-indigo-600 selection:text-white">
+
+    <!-- LIVE THREE.JS 3D BACKGROUND CANVAS -->
+    <canvas id="three-bg-canvas" aria-hidden="true"></canvas>
+
+    <!-- Global Sticky Liquid Glass Navigation (Mounted by components.js) -->
+    <div id="navigation-container" class="w-full z-50 sticky top-0"></div>
+
+    <!-- ColorOS Live Capsule (Managed by components.js KTUFlow) -->
+    <div id="coloros-live-capsule"></div>
+
+    <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-5 md:py-7 flex flex-col items-center relative z-10 space-y-6">
+
+        <!-- ==================================================================
+             3D LAB LIVE CONTROL PILL (Uses OpenBlast Optical Liquid Glass!)
+             ================================================================== -->
+        <section id="lab-control-pill" class="glass-pill rounded-3xl md:rounded-full w-full p-3 sm:px-5 sm:py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="relative z-10 flex items-center gap-2 flex-wrap">
+                <span class="px-2.5 py-1 rounded-full bg-slate-900 text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                    3D Lab
+                </span>
+
+                <div class="flex items-center gap-1.5 flex-wrap">
+                    <button type="button" data-mode="hybrid" onclick="setThreeMode('hybrid')" class="lab-mode-btn lab-btn-active ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
+                        Hybrid
+                    </button>
+                    <button type="button" data-mode="silk" onclick="setThreeMode('silk')" class="lab-mode-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
+                        Liquid Silk
+                    </button>
+                    <button type="button" data-mode="shapes" onclick="setThreeMode('shapes')" class="lab-mode-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
+                        3D Glass Shapes
+                    </button>
+                    <button type="button" data-mode="off" onclick="setThreeMode('off')" class="lab-mode-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
+                        Off (CSS)
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative z-10 flex items-center gap-2 flex-wrap">
+                <button type="button" id="btn-fps-cap" onclick="toggleFpsCap()" class="ot-press px-3 py-1.5 rounded-full bg-white/85 border border-slate-200/80 text-slate-700 text-[11px] font-extrabold flex items-center gap-1.5 transition-all">
+                    <i class="fas fa-tachometer-alt text-indigo-600 text-[10px]"></i>
+                    <span id="fps-cap-label">Cap: 30 FPS</span>
+                </button>
+
+                <button type="button" id="btn-scroll-pause" onclick="toggleScrollPause()" class="ot-press px-3 py-1.5 rounded-full bg-white/85 border border-slate-200/80 text-slate-700 text-[11px] font-extrabold flex items-center gap-1.5 transition-all">
+                    <i class="fas fa-hand-paper text-amber-500 text-[10px]"></i>
+                    <span id="scroll-pause-label">Scroll Pause: Off</span>
+                </button>
+
+                <span id="live-fps-badge" class="font-mono-code px-2.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold">
+                    -- FPS
+                </span>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             HERO LIQUID GLASS PANEL (Watch 3D Shapes Refract Behind Glass!)
+             ================================================================== -->
+        <section class="glass-panel glass-panel-3d-peek rounded-[2.25rem] md:rounded-[2.5rem] w-full p-6 sm:p-9 relative overflow-hidden">
+            <div class="max-w-2xl relative z-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50/90 dark:bg-indigo-950/60 border border-indigo-300 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-300 text-[10px] md:text-xs font-black uppercase tracking-wider mb-3 shadow-sm">
+                    <i class="fas fa-cubes text-indigo-500"></i> Three.js + OpenBlast Liquid Glass
+                </div>
+
+                <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.08] mb-3">
+                    KTU Resources, <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-400">Now With 3D Depth.</span>
+                </h1>
+
+                <p class="text-slate-600 font-bold text-xs sm:text-sm max-w-lg mb-6 leading-relaxed">
+                    Move your mouse, scroll slowly, or toggle Light / Dark theme from the top bar. Watch how the optical refraction pills bend the live WebGL layer passing underneath.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <button type="button" onclick="window.KTUFlow?.capsule('success', 'Three.js + Liquid Glass active!')" class="ot-press px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-emerald-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-500/25 flex items-center gap-2">
+                        <i class="fas fa-bolt"></i> Test Live Capsule
+                    </button>
+                    <a href="#quick-access" class="ot-press px-6 py-2.5 rounded-full bg-white/85 border border-white/80 text-slate-800 font-bold text-xs sm:text-sm shadow-sm flex items-center gap-2">
+                        Scroll Test <i class="fas fa-arrow-down text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             SMART SEARCH BAR (True OpenBlast Optical Liquid Glass Pill!)
+             ================================================================== -->
+        <div id="search-wrapper" class="w-full relative z-30">
+            <div id="smart-search-pill" class="glass-pill rounded-2xl md:rounded-full relative">
+                <form onsubmit="event.preventDefault(); window.KTUFlow?.capsule('info', 'Optical Lens Search Pill Tested');" class="relative z-10 flex items-center w-full p-1 md:p-1.5">
+                    <button type="submit" aria-label="Search" class="ot-press w-11 h-11 md:w-12 md:h-12 flex-shrink-0 text-slate-500 hover:text-indigo-600 transition-colors rounded-full flex items-center justify-center">
+                        <i class="fas fa-search text-base md:text-lg"></i>
+                    </button>
+                    <input type="search" placeholder="Look at the pill edges while scrolling over 3D objects..." class="w-full bg-transparent border-none focus:outline-none text-slate-800 font-bold placeholder-slate-400 text-xs sm:text-sm md:text-base px-2 h-11 md:h-12" autocomplete="off">
+                    <button type="button" onclick="toggleFpsCap()" class="ot-press px-3.5 h-10 md:h-11 flex-shrink-0 flex items-center justify-center gap-1.5 text-slate-700 bg-white/75 rounded-xl md:rounded-full mr-1 text-xs font-bold shadow-sm">
+                        <span>Refract</span>
+                        <i class="fas fa-sparkles text-[11px] text-indigo-500"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ==================================================================
+             QUICK ACCESS HYBRID LIQUID GLASS GRID
+             ================================================================== -->
+        <section id="quick-access" class="w-full pt-1">
+            <div class="flex items-center justify-between mb-3 px-2">
+                <h2 class="text-xs font-extrabold text-slate-600 uppercase tracking-widest">Quick Access (Scroll Stress Test)</h2>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-2.5 md:gap-3.5">
+                <a href="timetable.html" class="hybrid-card group">
+                    <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center text-white shadow-md shadow-orange-500/30 shrink-0">
+                            <i class="fas fa-calendar-day text-lg md:text-xl"></i>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h4 class="font-extrabold text-slate-900 text-xs md:text-sm lg:text-base leading-snug">Timetables</h4>
+                            <p class="hidden md:block text-xs text-slate-500 font-medium">Check semester & exam schedules</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center border border-slate-900/15 shrink-0">
+                        <i class="fas fa-chevron-right text-[10px]"></i>
+                    </div>
+                </a>
+
+                <a href="notes.html" class="hybrid-card group">
+                    <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-indigo-500/30 shrink-0">
+                            <i class="fas fa-book-open text-lg md:text-xl"></i>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h4 class="font-extrabold text-slate-900 text-xs md:text-sm lg:text-base leading-snug">Study Notes</h4>
+                            <p class="hidden md:block text-xs text-slate-500 font-medium">Free notes by KTU students</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center border border-slate-900/15 shrink-0">
+                        <i class="fas fa-chevron-right text-[10px]"></i>
+                    </div>
+                </a>
+
+                <a href="pyq.html" class="hybrid-card group">
+                    <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-fuchsia-500 to-pink-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-fuchsia-500/30 shrink-0">
+                            <i class="fas fa-file-alt text-lg md:text-xl"></i>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h4 class="font-extrabold text-slate-900 text-[11px] sm:text-xs md:text-sm lg:text-base leading-snug">Previous Year Question Papers</h4>
+                            <p class="hidden md:block text-xs text-slate-500 font-medium">All PYQs in one place</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center border border-slate-900/15 shrink-0">
+                        <i class="fas fa-chevron-right text-[10px]"></i>
+                    </div>
+                </a>
+
+                <a href="https://keralatimetable.in/syllabus/" class="hybrid-card group">
+                    <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-teal-500/30 shrink-0">
+                            <i class="fas fa-list-alt text-lg md:text-xl"></i>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h4 class="font-extrabold text-slate-900 text-xs md:text-sm lg:text-base leading-snug">Syllabus</h4>
+                            <p class="hidden md:block text-xs text-slate-500 font-medium">2024 & 2019 scheme syllabus</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center border border-slate-900/15 shrink-0">
+                        <i class="fas fa-chevron-right text-[10px]"></i>
+                    </div>
+                </a>
+
+                <a href="updates.html" class="hybrid-card group">
+                    <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center text-white shadow-md shadow-emerald-500/30 shrink-0">
+                            <i class="fas fa-bullhorn text-lg md:text-xl"></i>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h4 class="font-extrabold text-slate-900 text-xs md:text-sm lg:text-base leading-snug">KTU Updates</h4>
+                            <p class="hidden md:block text-xs text-slate-500 font-medium">Latest announcements & news</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center border border-slate-900/15 shrink-0">
+                        <i class="fas fa-chevron-right text-[10px]"></i>
+                    </div>
+                </a>
+
+                <a href="https://keralatimetable.in/polls/" class="hybrid-card group">
+                    <div class="flex flex-col md:flex-row items-center gap-1.5 md:gap-3.5 w-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-rose-500 to-red-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-rose-500/30 relative shrink-0">
+                            <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-rose-400 border-2 border-red-500"></span>
+                            </span>
+                            <i class="fas fa-poll text-lg md:text-xl"></i>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h4 class="font-extrabold text-slate-900 text-[11px] sm:text-xs md:text-sm lg:text-base leading-snug">Exam Review Hub</h4>
+                            <p class="hidden md:block text-xs text-slate-500 font-medium">Student polls & difficulty ratings</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex w-7 h-7 rounded-full bg-white text-slate-500 items-center justify-center border border-slate-900/15 shrink-0">
+                        <i class="fas fa-chevron-right text-[10px]"></i>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- STATS PILL (Optical Liquid Glass Refraction Test) -->
+        <section class="w-full pt-2">
+            <div id="test-stats-pill" class="glass-pill rounded-[2rem] md:rounded-full p-6 md:px-10 flex flex-wrap md:flex-nowrap items-center justify-between gap-6">
+                <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
+                    <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-lg shrink-0 border border-indigo-200">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">2L+</h4>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Happy Students</p>
+                    </div>
+                </div>
+                <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0 relative z-10"></div>
+                <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
+                    <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg shrink-0 border border-emerald-200">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">WebGL2</h4>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">3D Background</p>
+                    </div>
+                </div>
+                <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0 relative z-10"></div>
+                <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-lg shrink-0 border border-blue-200">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">1:1 Lens</h4>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Optical Glass</p>
+                    </div>
+                </div>
+                <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0 relative z-10"></div>
+                <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
+                    <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-lg shrink-0 border border-orange-200">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">Adaptive</h4>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Eco FPS Cap</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Extra Scroll Space to Test Parallax + Refraction Smoothness -->
+        <section class="glass-panel glass-panel-3d-peek rounded-[2rem] w-full p-6 sm:p-8 text-center">
+            <h3 class="text-base sm:text-lg font-black text-slate-900 mb-1.5">Scroll &amp; Refraction Benchmark Zone</h3>
+            <p class="text-xs sm:text-sm text-slate-600 font-medium max-w-xl mx-auto">
+                Scroll up and down rapidly on mobile and desktop while switching between <strong>Hybrid</strong>, <strong>Liquid Silk</strong>, <strong>3D Glass Shapes</strong>, and <strong>30 FPS / Max FPS</strong> to see which balance feels best for KTU students.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Liquid Glass Footer Pill -->
+    <footer class="w-full max-w-6xl mx-auto px-4 pb-8 relative z-10">
+        <div id="test-footer-pill" class="glass-pill rounded-full px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="relative z-10 text-xs md:text-sm font-medium text-slate-700">
+                Kerala Timetable • <strong class="text-indigo-600">Three.js + Liquid Glass Lab</strong>
+            </p>
+            <a href="/index.html" class="ot-press relative z-10 text-xs md:text-sm font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
+                Back to Home <i class="fas fa-chevron-right text-[10px]"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Your Official Site Components -->
+    <script src="/components.js?v=25" onerror="this.onerror=null;this.src='components.js';"></script>
+    <script>
+        if (typeof loadNavigation === 'function') {
+            loadNavigation('home', '', false);
+        }
+        // Attach your existing OpenBlast Liquid Glass engine to the extra lab pills!
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.KTULiquidGlass && typeof window.KTULiquidGlass.attachLiquidPill === 'function') {
+                window.KTULiquidGlass.attachLiquidPill(document.getElementById('lab-control-pill'), 18, 20);
+                window.KTULiquidGlass.attachLiquidPill(document.getElementById('smart-search-pill'), 22, 22);
+                window.KTULiquidGlass.attachLiquidPill(document.getElementById('test-stats-pill'), 22, 22);
+                window.KTULiquidGlass.attachLiquidPill(document.getElementById('test-footer-pill'), 20, 20);
+            }
+        });
+    </script>
+
+    <!-- ======================================================================
+         THREE.JS ADAPTIVE 3D BACKGROUND ENGINE (Liquid Silk + 3D Glass Shapes)
+         ====================================================================== -->
+    <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
+
+        const canvas = document.getElementById('three-bg-canvas');
+        const fpsBadge = document.getElementById('live-fps-badge');
+
+        const state = {
+            mode: 'hybrid',       // 'hybrid' | 'silk' | 'shapes' | 'off'
+            fpsCap: 30,           // 30 (Eco) or 0 (Uncapped 60/120fps)
+            scrollPause: false,
+            isScrolling: false,
+            isHidden: document.hidden,
+            darkMix: document.documentElement.classList.contains('dark') ? 1 : 0,
+            targetDarkMix: document.documentElement.classList.contains('dark') ? 1 : 0,
+            pointerX: 0,
+            pointerY: 0,
+            smoothX: 0,
+            smoothY: 0,
+            scrollRatio: 0
+        };
+
+        // 1. Renderer (Capped DPR for crisp mobile visuals without thermal throttling)
+        const renderer = new THREE.WebGLRenderer({
+            canvas,
+            antialias: true,
+            alpha: true,
+            powerPreference: 'high-performance'
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+        renderer.setSize(window.innerWidth, window.innerHeight, false);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.08;
+
+        // 2. Two Scenes: (A) Fullscreen Liquid Silk Shader, (B) 3D Glass Shapes
+        const silkScene = new THREE.Scene();
+        const silkCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+        const silkUniforms = {
+            uTime:    { value: 0 },
+            uDarkMix: { value: state.darkMix },
+            uMouse:   { value: new THREE.Vector2(0, 0) },
+            uScroll:  { value: 0 },
+            uRes:     { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+        };
+
+        const silkMat = new THREE.ShaderMaterial({
+            uniforms: silkUniforms,
+            depthTest: false,
+            depthWrite: false,
+            vertexShader: `
+                varying vec2 vUv;
+                void main() {
+                    vUv = uv;
+                    gl_Position = vec4(position.xy, 0.0, 1.0);
+                }
+            `,
+            fragmentShader: `
+                precision mediump float;
+                varying vec2 vUv;
+                uniform float uTime;
+                uniform float uDarkMix;
+                uniform vec2 uMouse;
+                uniform float uScroll;
+                uniform vec2 uRes;
+
+                float hash(vec2 p) {
+                    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+                }
+                float noise(vec2 p) {
+                    vec2 i = floor(p);
+                    vec2 f = fract(p);
+                    vec2 u = f * f * (3.0 - 2.0 * f);
+                    return mix(
+                        mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
+                        mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
+                        u.y
+                    );
+                }
+
+                void main() {
+                    vec2 uv = vUv;
+                    float aspect = uRes.x / max(uRes.y, 1.0);
+                    vec2 p = (uv - 0.5) * vec2(aspect, 1.0);
+
+                    float t = uTime * 0.22;
+                    vec2 drift = vec2(uMouse.x * 0.12, -uMouse.y * 0.12 - uScroll * 0.35);
+
+                    float n1 = noise(p * 1.65 + vec2(t, t * 0.6) + drift);
+                    float n2 = noise(p * 2.40 - vec2(t * 0.8, -t * 0.5) + n1 * 0.85);
+                    float wave = smoothstep(0.15, 0.88, n2);
+
+                    // Apple-style Light Mode Silk Palette
+                    vec3 lBase = vec3(0.945, 0.962, 0.988);   // #f1f5fc
+                    vec3 lIndigo = vec3(0.76, 0.79, 0.99);    // Soft Indigo
+                    vec3 lCyan = vec3(0.70, 0.93, 0.98);      // Soft Sky Cyan
+                    vec3 lMint = vec3(0.73, 0.96, 0.88);      // Soft Mint
+
+                    vec3 lightCol = mix(lBase, lIndigo, smoothstep(0.2, 0.85, n1) * 0.62);
+                    lightCol = mix(lightCol, lCyan, wave * 0.55);
+                    lightCol = mix(lightCol, lMint, smoothstep(0.45, 0.95, sin(p.x * 1.8 + n1 * 3.0 + t) * 0.5 + 0.5) * 0.40);
+
+                    // Cosmic Obsidian Dark Mode Silk Palette
+                    vec3 dBase = vec3(0.024, 0.035, 0.075);   // #060913
+                    vec3 dIndigo = vec3(0.16, 0.14, 0.44);    // Deep Indigo
+                    vec3 dCyan = vec3(0.04, 0.25, 0.38);      // Deep Cyan
+                    vec3 dMint = vec3(0.04, 0.26, 0.22);      // Deep Emerald
+
+                    vec3 darkCol = mix(dBase, dIndigo, smoothstep(0.22, 0.88, n1) * 0.72);
+                    darkCol = mix(darkCol, dCyan, wave * 0.58);
+                    darkCol = mix(darkCol, dMint, smoothstep(0.48, 0.95, sin(p.x * 1.8 + n1 * 3.0 + t) * 0.5 + 0.5) * 0.45);
+
+                    vec3 finalCol = mix(lightCol, darkCol, uDarkMix);
+                    gl_FragColor = vec4(finalCol, 1.0);
+                }
+            `
+        });
+
+        silkScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), silkMat));
+
+        // 3. 3D Floating Glass Shapes Scene
+        const shapesScene = new THREE.Scene();
+        const shapesCam = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+        shapesCam.position.set(0, 0, 14);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+        const keyLight = new THREE.DirectionalLight(0x818cf8, 2.2);
+        keyLight.position.set(8, 10, 10);
+        const rimLight = new THREE.PointLight(0x34d399, 3.0, 35);
+        rimLight.position.set(-9, -6, 8);
+        const accentLight = new THREE.PointLight(0x38bdf8, 2.6, 35);
+        accentLight.position.set(9, -5, 6);
+        shapesScene.add(ambientLight, keyLight, rimLight, accentLight);
+
+        const shapesGroup = new THREE.Group();
+        shapesScene.add(shapesGroup);
+
+        const shapeSpecs = [
+            { geo: new THREE.TorusKnotGeometry(1.15, 0.32, 80, 16), pos: [-5.6,  3.2, -1.5], color: 0x6366f1, speed: [0.22, 0.30] },
+            { geo: new THREE.IcosahedronGeometry(1.35, 0),          pos: [ 5.8,  2.8, -2.0], color: 0x0ea5e9, speed: [0.18, 0.24] },
+            { geo: new THREE.TorusGeometry(1.35, 0.32, 24, 60),     pos: [-5.4, -3.1, -1.0], color: 0x10b981, speed: [0.24, 0.16] },
+            { geo: new THREE.OctahedronGeometry(1.25, 0),           pos: [ 5.5, -3.2, -1.2], color: 0x8b5cf6, speed: [0.20, 0.28] },
+            { geo: new THREE.SphereGeometry(0.95, 32, 32),          pos: [ 0.4,  4.4, -3.5], color: 0x38bdf8, speed: [0.12, 0.15] },
+            { geo: new THREE.IcosahedronGeometry(0.9, 0),           pos: [-1.8, -4.3, -2.5], color: 0xf43f5e, speed: [0.26, 0.22] },
+            { geo: new THREE.TorusGeometry(0.85, 0.22, 20, 48),     pos: [ 2.6,  0.2, -4.2], color: 0x6366f1, speed: [0.15, 0.25] }
+        ];
+
+        const floatingMeshes = shapeSpecs.map((spec, idx) => {
+            const holder = new THREE.Group();
+            holder.position.set(...spec.pos);
+
+            // Fast glossy glass-look material (no costly multi-pass transmission!)
+            const mat = new THREE.MeshPhysicalMaterial({
+                color: spec.color,
+                roughness: 0.14,
+                metalness: 0.08,
+                clearcoat: 1.0,
+                clearcoatRoughness: 0.08,
+                transparent: true,
+                opacity: 0.42
+            });
+            const mesh = new THREE.Mesh(spec.geo, mat);
+
+            // Subtle engineering wireframe rim
+            const wireMat = new THREE.MeshBasicMaterial({
+                color: spec.color,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.16
+            });
+            const wire = new THREE.Mesh(spec.geo, wireMat);
+            wire.scale.setScalar(1.03);
+
+            holder.add(mesh, wire);
+            shapesGroup.add(holder);
+
+            return {
+                holder,
+                mat,
+                wireMat,
+                basePos: new THREE.Vector3(...spec.pos),
+                speed: spec.speed,
+                phase: idx * 1.15
+            };
+        });
+
+        // 4. Sync with components.js Light/Dark Theme Toggle
+        const themeObserver = new MutationObserver(() => {
+            state.targetDarkMix = document.documentElement.classList.contains('dark') ? 1 : 0;
+        });
+        themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+        // 5. Pointer, Scroll, Resize & Visibility Listeners
+        window.addEventListener('pointermove', (e) => {
+            state.pointerX = (e.clientX / window.innerWidth) * 2 - 1;
+            state.pointerY = (e.clientY / window.innerHeight) * 2 - 1;
+        }, { passive: true });
+
+        let scrollIdleTimer = null;
+        window.addEventListener('scroll', () => {
+            const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+            state.scrollRatio = window.scrollY / maxScroll;
+            state.isScrolling = true;
+            clearTimeout(scrollIdleTimer);
+            scrollIdleTimer = setTimeout(() => { state.isScrolling = false; }, 140);
+        }, { passive: true });
+
+        window.addEventListener('resize', () => {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+            renderer.setSize(w, h, false);
+            shapesCam.aspect = w / h;
+            shapesCam.updateProjectionMatrix();
+            silkUniforms.uRes.value.set(w, h);
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            state.isHidden = document.hidden;
+        });
+
+        // 6. Interactive Lab Controls (Exposed to Window)
+        window.setThreeMode = function(mode) {
+            state.mode = mode;
+            canvas.classList.toggle('canvas-hidden', mode === 'off');
+            document.querySelectorAll('.lab-mode-btn').forEach(btn => {
+                btn.classList.toggle('lab-btn-active', btn.getAttribute('data-mode') === mode);
+            });
+            if (mode === 'off' && fpsBadge) {
+                fpsBadge.textContent = 'CSS Only';
+            }
+        };
+
+        window.toggleFpsCap = function() {
+            state.fpsCap = state.fpsCap === 30 ? 0 : 30;
+            const lbl = document.getElementById('fps-cap-label');
+            if (lbl) lbl.textContent = state.fpsCap === 30 ? 'Cap: 30 FPS' : 'Cap: Max FPS';
+        };
+
+        window.toggleScrollPause = function() {
+            state.scrollPause = !state.scrollPause;
+            const lbl = document.getElementById('scroll-pause-label');
+            if (lbl) lbl.textContent = state.scrollPause ? 'Scroll Pause: On' : 'Scroll Pause: Off';
+        };
+
+        // 7. Adaptive Render Loop with Live FPS Telemetry
+        const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let lastFrameMs = 0;
+        let simTime = 0;
+        let fpsFrames = 0;
+        let fpsWindowStart = performance.now();
+
+        canvas.classList.add('canvas-ready');
+
+        function animate(now) {
+            requestAnimationFrame(animate);
+
+            if (state.isHidden || state.mode === 'off') return;
+            if (state.scrollPause && state.isScrolling) return;
+
+            const minInterval = state.fpsCap > 0 ? (1000 / state.fpsCap) : 0;
+            const deltaMs = now - lastFrameMs;
+            if (minInterval > 0 && deltaMs < minInterval - 1) return;
+
+            const dt = Math.min(deltaMs / 1000, 0.08);
+            lastFrameMs = now;
+            if (!prefersReduced) simTime += dt;
+
+            // Smoothly morph Light <-> Dark mode
+            state.darkMix += (state.targetDarkMix - state.darkMix) * Math.min(1, dt * 6);
+            state.smoothX += (state.pointerX - state.smoothX) * Math.min(1, dt * 4);
+            state.smoothY += (state.pointerY - state.smoothY) * Math.min(1, dt * 4);
+
+            renderer.autoClear = true;
+            renderer.clear();
+
+            // Pass 1: Flowing Liquid Silk Shader
+            if (state.mode === 'silk' || state.mode === 'hybrid') {
+                silkUniforms.uTime.value = simTime;
+                silkUniforms.uDarkMix.value = state.darkMix;
+                silkUniforms.uMouse.value.set(state.smoothX, state.smoothY);
+                silkUniforms.uScroll.value = state.scrollRatio;
+                renderer.render(silkScene, silkCam);
+            }
+
+            // Pass 2: Floating 3D Glass Shapes
+            if (state.mode === 'shapes' || state.mode === 'hybrid') {
+                renderer.autoClear = false;
+                renderer.clearDepth();
+
+                // Subtle parallax camera sway
+                shapesCam.position.x = state.smoothX * 0.9;
+                shapesCam.position.y = -state.smoothY * 0.6 - state.scrollRatio * 2.4;
+                shapesCam.lookAt(0, -state.scrollRatio * 1.4, 0);
+
+                // Adjust glass opacity gently between light & dark mode
+                const shapeOpacity = 0.36 + state.darkMix * 0.22;
+                const wireOpacity = 0.14 + state.darkMix * 0.18;
+
+                for (let i = 0; i < floatingMeshes.length; i++) {
+                    const item = floatingMeshes[i];
+                    item.holder.rotation.x = simTime * item.speed[0] + item.phase;
+                    item.holder.rotation.y = simTime * item.speed[1] + item.phase;
+                    item.holder.position.y = item.basePos.y + Math.sin(simTime * 0.8 + item.phase) * 0.45;
+                    item.holder.position.x = item.basePos.x + Math.cos(simTime * 0.55 + item.phase) * 0.30;
+                    item.mat.opacity = shapeOpacity;
+                    item.wireMat.opacity = wireOpacity;
+                }
+
+                renderer.render(shapesScene, shapesCam);
+            }
+
+            // Update live FPS counter every 500ms
+            fpsFrames++;
+            if (now - fpsWindowStart >= 500) {
+                const fps = Math.round((fpsFrames * 1000) / (now - fpsWindowStart));
+                if (fpsBadge) fpsBadge.textContent = `${fps} FPS`;
+                fpsFrames = 0;
+                fpsWindowStart = now;
+            }
+        }
+
+        requestAnimationFrame(animate);
+    </script>
+</body>
+</html>
