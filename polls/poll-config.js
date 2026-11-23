@@ -3,10 +3,12 @@
 // Sources:
 //   - KTU/SOEX-IV/2122/2024 (07.11.2026) — B.Tech S3 (R, S) Exam Nov 2026 (2024 Scheme)
 //   - KTU/EX-II#1/1833/2025 (07.11.2026) — B.Tech S5 (R) Exam Nov 2026 (2024 Scheme)
+//   - KTU/SOEX-IV/2122/2024 (07.11.2026) — B.Tech S7 (R, S) Exam Nov 2026 (2019 Scheme)
 //
 // Auto-Timing Rule:
-//   - Mon–Thu & Sat exams run 1:30 PM – 4:00 PM IST -> polls open 16:00:00+05:30.
-//   - Friday exams (S5 Slot B) run 2:00 PM – 4:30 PM IST -> polls open 16:30:00+05:30.
+//   - Morning exams (S7 All Slots): 9:30 AM – 12:30 PM IST -> polls open 12:30:00+05:30.
+//   - Afternoon exams (S3 All, S5 A/C/D/E): 1:30 PM – 4:00 PM IST -> polls open 16:00:00+05:30.
+//   - Friday afternoon exam (S5 Slot B): 2:00 PM – 4:30 PM IST -> polls open 16:30:00+05:30.
 //   - All polls auto-lock 24h after opening.
 //
 // Shareable Links:
@@ -14,7 +16,8 @@
 //   - S3 Poll     : https://keralatimetable.in/polls/?s=s3-2024-<lowercase-code>
 //   - S5 Series   : https://keralatimetable.in/polls/?exam=btech-s5-2024
 //   - S5 Poll     : https://keralatimetable.in/polls/?s=s5-2024-<lowercase-code>
-//     (e.g. https://keralatimetable.in/polls/?s=s5-2024-pccst501)
+//   - S7 Series   : https://keralatimetable.in/polls/?exam=btech-s7-2019
+//   - S7 Poll     : https://keralatimetable.in/polls/?s=s7-2019-<lowercase-code>
 // ============================================================================
 
 (function () {
@@ -468,6 +471,232 @@
         ])
     ];
 
+    // ========================================================================
+    // B.TECH S7 (R, S) NOVEMBER 2026 — 2019 SCHEME
+    // ========================================================================
+    const s7Nov2026Subjects = [
+        // ====================================================================
+        // SLOT A — EXAM DAY 1 — 23.11.2026 (Monday, 9:30 AM – 12:30 PM)
+        // ====================================================================
+        ...buildSlotSubjects("s7-2019", "S7", "A", 1, "2026-11-23", "2026-11-24", [
+            ["CST401", "Artificial Intelligence", "CSE"],
+            ["ECT401", "Microwaves and Antennas", "ECE"],
+            ["EET401", "Advanced Control Systems", "EEE"],
+            ["MET401", "Design of Machine Elements", "ME"],
+            ["CET401", "Design of Steel Structures", "CE"],
+            ["ITT401", "Data Analytics", "IT"],
+            ["AET401", "Communication Engineering", "AEI"],
+            ["AGT401", "Irrigation Engineering", "AG"],
+            ["AIT401", "Foundations of Deep Learning", "AI"],
+            ["AOT401", "Computational Aerodynamics", "AO"],
+            ["AUT401", "Advanced IC Engines", "AU"],
+            ["BMT401", "Principles of Medical Image Processing", "BM"],
+            ["BTT401", "Process Equipment and Plant Design", "BT"],
+            ["CCT401", "Ethical Hacking", "CC"],
+            ["CDT401", "Concepts in Cloud Computing", "CD"],
+            ["CGT401", "Arduino Programming", "CG"],
+            ["CHT401", "Chemical Process Equipment Design I", "CH"],
+            ["CIT401", "IoT Cloud Processing and Analytics", "CI"],
+            ["CNT401", "Environmental Engineering II", "CN"],
+            ["CXT401", "User Interface Software and Technology (UIST)", "CX"],
+            ["EBT401", "Principles of Radio Diagnosis and Radiotherapy", "EB"],
+            ["EOT401", "Control Systems", "EO"],
+            ["ERT401", "CMOS VLSI Design", "ER"],
+            ["EVT401", "Real Time Operating Systems", "EV"],
+            ["FST401", "Safety in Petroleum and Petrochemical Industries", "FS"],
+            ["FTT401", "Food Processing and Preservation", "FT"],
+            ["ICT401", "PLC and DCS", "IC"],
+            ["IET401", "Quality Engineering", "IE"],
+            ["MPT401", "Machine Design", "MP"],
+            ["MRT401", "Advanced Automation Systems", "MR"],
+            ["MUT401", "Heat and Mass Transfer", "MU"],
+            ["PET401", "Industrial Engineering", "PE"],
+            ["POT401", "Polymer Testing", "PO"],
+            ["RAT401", "Algorithms and Data Structures", "RA"],
+            ["RIT401", "AI for Robotics", "RI"],
+            ["SBT401", "Ship Design - II", "SB"]
+        ], "12:30:00"),
+
+        // ====================================================================
+        // SLOT B — EXAM DAY 2 — 25.11.2026 (Wednesday, 9:30 AM – 12:30 PM)
+        // ====================================================================
+        ...buildSlotSubjects("s7-2019", "S7", "B", 2, "2026-11-25", "2026-11-26", [
+            ["CST413", "Machine Learning", "CSE"],
+            ["CST423", "Cloud Computing", "CSE"],
+            ["CST433", "Security in Computing", "CSE"],
+            ["CST443", "Model Based Software Development", "CSE"],
+            ["CST463", "Web Programming", "CSE"],
+            ["CST473", "Natural Language Processing", "CSE"],
+            ["ECT413", "Optical Fiber Communication", "ECE"],
+            ["ECT423", "Computer Networks", "ECE"],
+            ["ECT433", "Opto-Electronic Devices", "ECE"],
+            ["ECT443", "Instrumentation", "ECE"],
+            ["ECT453", "Error Control Codes", "ECE"],
+            ["ECT463", "Machine Learning", "ECE"],
+            ["ECT473", "DSP Architectures", "ECE"],
+            ["EET413", "Electric Drives", "EEE"],
+            ["EET423", "Digital Control Systems", "EEE"],
+            ["EET433", "Modern Operating Systems", "EEE"],
+            ["EET443", "Data Structures", "EEE"],
+            ["EET453", "Digital Signal Processing", "EEE"],
+            ["EET463", "Illumination Technology", "EEE"],
+            ["EET473", "Digital Protection of Power Systems", "EEE"],
+            ["MET413", "Advanced Methods in Nondestructive Testing", "ME"],
+            ["MET423", "Optimization Techniques and Applications", "ME"],
+            ["MET443", "Aerospace Engineering", "ME"],
+            ["MET453", "Hybrid and Electric Vehicles", "ME"],
+            ["MET463", "Operations Management", "ME"],
+            ["MET473", "Air Conditioning and Refrigeration", "ME"],
+            ["CET413", "Prestressed Concrete", "CE"],
+            ["CET423", "Ground Improvement Techniques", "CE"],
+            ["CET433", "Highway Materials and Design", "CE"],
+            ["CET443", "Applied Hydrology", "CE"],
+            ["CET453", "Construction Planning and Management", "CE"],
+            ["CET463", "Advanced Environmental Engineering", "CE"],
+            ["CET473", "Optimisation Techniques in Civil Engineering", "CE"],
+            ["ITT413", "Mobile Computing", "IT"],
+            ["ITT423", "Artificial Intelligence", "IT"],
+            ["ITT433", "Object Oriented Modeling and Design", "IT"],
+            ["ITT443", "Advanced Database Management Systems", "IT"],
+            ["ITT453", "Machine Learning", "IT"],
+            ["ADT453", "Information Extraction and Retrieval", "AI & DS"],
+            ["AET423", "SCADA and Distributed Control System", "AEI"],
+            ["AET433", "Electromagnetic Interference and Compatibility", "AEI"],
+            ["AET473", "Data Structures and Algorithms", "AEI"],
+            ["AGT433", "Remote Sensing and GIS in Agriculture", "AG"],
+            ["AGT443", "Agriculture Waste Management", "AG"],
+            ["AIT453", "Game Programming", "AI"],
+            ["AOT413", "Experimental Stress Analysis", "AO"],
+            ["AOT433", "Actuators and Controls in Aircraft", "AO"],
+            ["AOT443", "Fatigue and Fracture Mechanics", "AO"],
+            ["AOT453", "Wind Tunnel Techniques", "AO"],
+            ["AOT463", "Aerospace Engineering and Navigation Instrumentation", "AO"],
+            ["AUT413", "Alternate Energy Sources for Automobile", "AU"],
+            ["BMT443", "Clinical Engineering", "BM"],
+            ["BMT473", "Biomedical Optics and Biophotonics", "BM"],
+            ["BTT423", "Genetic Engineering", "BT"],
+            ["BTT433", "Proteomics and Protein Engineering", "BT"],
+            ["BTT443", "Bio Nanotechnology", "BT"],
+            ["CBT433", "HR Management", "CSBS"],
+            ["CCT423", "Intrusion Detection and Prevention System", "CC"],
+            ["CCT433", "Cloud Computing and Security", "CC"],
+            ["CDT423", "Concepts in Artificial Intelligence", "CD"],
+            ["CGT423", "Foundations of Network Forensics", "CG"],
+            ["CHT413", "Food Processing and Technology", "CH"],
+            ["CHT433", "Process Modelling and Simulation", "CH"],
+            ["CHT443", "Corrosion Engineering", "CH"],
+            ["CHT453", "Project Engineering", "CH"],
+            ["CIT433", "Embedded Systems", "CI"],
+            ["CMT453", "Fundamentals of Business Analytics", "AI & ML"],
+            ["CNT413", "Industrial Water Pollution Control", "CN"],
+            ["CNT423", "Environmental Health and Safety", "CN"],
+            ["CXT433", "Video Editing", "CX"],
+            ["CXT453", "Design Process and Perspective", "CX"],
+            ["EBT433", "Telemedicine", "EB"],
+            ["EBT463", "Computational Methods in Biomedical Engineering", "EB"],
+            ["EBT473", "Biomedical Optics and Biophotonics", "EB"],
+            ["EOT413", "Real Time Operating Systems", "EO"],
+            ["EOT423", "Energy Management", "EO"],
+            ["ERT423", "Introduction to Biomedical Signal Processing", "ER"],
+            ["ERT433", "Hybrid and Electric Vehicles", "ER"],
+            ["ERT443", "Formal Languages and Automata Theory", "ER"],
+            ["EVT413", "ARM Architecture and Programming", "EV"],
+            ["EVT443", "Instrumentation", "EV"],
+            ["FST463", "Safety in Material Handling", "FS"],
+            ["FTT413", "Food Packaging Technology", "FT"],
+            ["FTT433", "Non Thermal Processing", "FT"],
+            ["FTT453", "Meat and Fish Processing Technology", "FT"],
+            ["FTT463", "Post Harvest Physiology and Spoilage in Food", "FT"],
+            ["ICT423", "Industrial Process Control", "IC"],
+            ["ICT443", "Refinery Instrumentation", "IC"],
+            ["ICT473", "Corrosion Control", "IC"],
+            ["IET423", "Enterprise Resource Planning", "IE"],
+            ["MRT433", "Renewable Energy", "MR"],
+            ["MRT443", "Manufacturing Technology", "MR"],
+            ["MRT453", "Entrepreneurship", "MR"],
+            ["MUT423", "Vehicle Performance and Testing", "MU"],
+            ["MUT433", "Tractors and Farm Equipments", "MU"],
+            ["MUT463", "Automotive Testing Equipments", "MU"],
+            ["PET413", "Nonconventional Machining", "PE"],
+            ["PET433", "TQM", "PE"],
+            ["PET453", "Failure of Materials", "PE"],
+            ["POT453", "Project Engineering", "PO"],
+            ["RAT413", "Mobile Robotics", "RA"],
+            ["RAT423", "PLC and Distributed Control Systems", "RA"],
+            ["RAT433", "Theory of Elasticity", "RA"],
+            ["RAT453", "Tribology", "RA"],
+            ["RIT413", "Mobile Robotics", "RI"],
+            ["SBT443", "Ship Production", "SB"]
+        ], "12:30:00"),
+
+        // ====================================================================
+        // SLOT C — EXAM DAY 3 — 27.11.2026 (Friday, 9:30 AM – 12:30 PM)
+        // ====================================================================
+        ...buildSlotSubjects("s7-2019", "S7", "C", 3, "2026-11-27", "2026-11-28", [
+            ["CST415", "Introduction to Mobile Computing", "CSE"],
+            ["CST425", "Introduction to Deep Learning", "CSE"],
+            ["CST435", "Computer Graphics", "CSE"],
+            ["CST445", "Python for Engineers", "CSE"],
+            ["CST455", "Object Oriented Concepts", "CSE"],
+            ["ECT415", "Mechatronics", "ECE"],
+            ["ECT425", "Biomedical Instrumentation", "ECE"],
+            ["ECT435", "Electronic Hardware for Engineers", "ECE"],
+            ["ECT445", "IoT and Applications", "ECE"],
+            ["EET435", "Renewable Energy Systems", "EEE"],
+            ["EET445", "Electric Vehicles", "EEE"],
+            ["EET455", "Energy Management", "EEE"],
+            ["MET415", "Introduction to Business Analytics", "ME"],
+            ["MET425", "Quantitative Techniques for Engineers", "ME"],
+            ["MET435", "Automotive Technology", "ME"],
+            ["MET445", "Renewable Energy Engineering", "ME"],
+            ["MET455", "Quality Engineering and Management", "ME"],
+            ["CET415", "Environmental Impact Assessment", "CE"],
+            ["CET425", "Applied Earth Systems", "CE"],
+            ["CET445", "Natural Disasters and Mitigation", "CE"],
+            ["CET455", "Environmental Health and Safety", "CE"],
+            ["CET465", "Geoinformatics", "CE"],
+            ["ITT415", "Web Designing", "IT"],
+            ["ITT435", "Free and Open Source Software", "IT"],
+            ["AET425", "Biomedical Engineering", "AEI"],
+            ["AET445", "Robotics and Industrial Automation", "AEI"],
+            ["AGT445", "Food Plant Design and Management", "AG"],
+            ["AOT435", "Flight Against Gravity", "AO"],
+            ["AUT425", "Hybrid and Electric Vehicles", "AU"],
+            ["BMT415", "Biomedical Instrumentation", "BM"],
+            ["BMT425", "Medical Imaging and Image Processing", "BM"],
+            ["BMT435", "Artificial Organs and Implants", "BM"],
+            ["BTT435", "Sustainable Energy Process", "BT"],
+            ["BTT445", "Occupational Health and General Safety", "BT"],
+            ["CHT415", "Energy Technology and Energy Management", "CH"],
+            ["CHT435", "Process Safety Engineering", "CH"],
+            ["EBT415", "Biomedical Instrumentation", "EB"],
+            ["ERT427", "Robotics and Automation", "ER"],
+            ["ERT455", "Concepts in Machine Learning", "ER"],
+            ["FST425", "Safety in Construction Industry", "FS"],
+            ["FTT415", "Food Process Engineering", "FT"],
+            ["ICT415", "Environmental Instrumentation", "IC"],
+            ["ICT425", "Industrial Instrumentation", "IC"],
+            ["IET435", "System Simulation", "IE"],
+            ["MPT415", "Product Development and Design", "MP"],
+            ["MPT445", "Industrial Psychology and Organisational Behaviour", "MP"],
+            ["MRT415", "Basics of Robotics and Automation", "MR"],
+            ["MTT425", "Non Destructive Testing and Failure Analysis", "MT"],
+            ["MUT425", "Hybrid and Electric Vehicles", "MU"],
+            ["PET425", "Contemporary Materials", "PE"],
+            ["PET435", "Flight Against Gravity", "PE"],
+            ["RAT415", "Fundamentals of Robotics", "RA"],
+            ["RIT415", "Fundamentals of Robotics", "RI"],
+            ["SBT435", "Marine Materials and Corrosion", "SB"]
+        ], "12:30:00"),
+
+        // ====================================================================
+        // SLOT D — EXAM DAY 4 — 02.12.2026 (Wednesday, 9:30 AM – 12:30 PM)
+        // ====================================================================
+        ...buildSlotSubjects("s7-2019", "S7", "D", 4, "2026-12-02", "2026-12-03", [
+            ["MCN401", "Industrial Safety Engineering", "Common"]
+        ], "12:30:00")
+    ];
+
     window.KTU_POLL_EXAMS = [
         {
             id: "btech-s3-2024",
@@ -486,6 +715,15 @@
             scheme: "2024 Scheme",
             type: "Regular",
             subjects: s5Nov2026Subjects
+        },
+        {
+            id: "btech-s7-2019",
+            title: "B.Tech S7 (R, S) November 2026 — 2019 Scheme Exam Review",
+            semester: "S7",
+            course: "B.Tech",
+            scheme: "2019 Scheme",
+            type: "Regular / Supply",
+            subjects: s7Nov2026Subjects
         }
     ];
 })();
