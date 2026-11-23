@@ -7,7 +7,7 @@
 
     <title id="dynamic-page-title">KTU Exam Review Hub | Live B.Tech Exam Polls - Kerala Timetable</title>
     <meta id="dynamic-meta-desc" name="description" content="Vote anonymously on today's KTU B.Tech exam papers and see live student difficulty ratings (Easy, Average, Hard, Supply Confirm) across all branches. Polls open right after exams end.">
-    <meta name="keywords" content="ktu exam review, ktu exam poll, ktu paper difficulty review, ktu s3 exam review, ktu s5 exam review, kerala timetable poll, apjaktu exam feedback">
+    <meta name="keywords" content="ktu exam review, ktu exam poll, ktu paper difficulty review, ktu s3 exam review, ktu s5 exam review, ktu s7 exam review, kerala timetable poll, apjaktu exam feedback">
     <meta name="robots" content="index, follow">
 
     <link id="dynamic-canonical" rel="canonical" href="https://keralatimetable.in/polls/" />
@@ -218,6 +218,68 @@
         }
 
         /* ==========================================================================
+           EXPANDABLE SUBJECT SEARCH DRAWER (Apple Spring Expand-on-Touch)
+           ========================================================================== */
+        .exam-search-drawer {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            transform: translateY(-6px) scale(0.985);
+            pointer-events: none;
+            margin-bottom: 0;
+            transition:
+                grid-template-rows 0.36s var(--apple-spring),
+                opacity 0.24s ease,
+                transform 0.36s var(--apple-spring),
+                margin 0.36s var(--apple-spring);
+        }
+        .exam-search-drawer.is-open {
+            grid-template-rows: 1fr;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+            margin-bottom: 0.875rem;
+        }
+        .exam-search-drawer-inner {
+            overflow: hidden;
+            padding: 2px 1px;
+        }
+        .exam-search-trigger-active {
+            background: #4f46e5 !important;
+            color: #ffffff !important;
+            border-color: transparent !important;
+            box-shadow: 0 6px 16px -4px rgba(79, 70, 229, 0.45) !important;
+        }
+        .exam-search-box {
+            background: rgba(255, 255, 255, 0.88);
+            border: 1.5px solid rgba(99, 102, 241, 0.25);
+            box-shadow:
+                inset 0 1px 2px rgba(15, 23, 42, 0.04),
+                0 8px 20px -8px rgba(79, 70, 229, 0.16);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .exam-search-box:focus-within {
+            border-color: #4f46e5;
+            box-shadow:
+                0 0 0 3px rgba(79, 70, 229, 0.14),
+                0 10px 24px -8px rgba(79, 70, 229, 0.22);
+        }
+        html.dark .exam-search-box {
+            background: rgba(15, 23, 42, 0.78) !important;
+            border-color: rgba(129, 140, 248, 0.30) !important;
+        }
+        html.dark .exam-search-box:focus-within {
+            border-color: #818cf8 !important;
+            box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.18) !important;
+        }
+        html.dark .exam-search-input {
+            color: #f8fafc !important;
+        }
+        html.dark .exam-search-input::placeholder {
+            color: rgba(148, 163, 184, 0.78) !important;
+        }
+
+        /* ==========================================================================
            FACEBOOK-REACTION-STYLE EMOJI BURST PARTICLE ENGINE (120FPS GPU)
            ========================================================================== */
         .emoji-burst-particle {
@@ -301,8 +363,9 @@
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         @media (prefers-reduced-motion: reduce) {
-            .drift-a, .drift-b, .emoji-burst-particle, .emoji-burst-ring, .view-enter-forward, .view-enter-back, .ot-swap-in {
+            .drift-a, .drift-b, .emoji-burst-particle, .emoji-burst-ring, .view-enter-forward, .view-enter-back, .ot-swap-in, .exam-search-drawer {
                 animation: none !important;
+                transition: none !important;
             }
         }
     </style>
@@ -462,9 +525,39 @@
                 <h2 id="exam-detail-title" class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-snug mb-1">
                     B.Tech S3 (R,S) 2024 Scheme Exam Review
                 </h2>
-                <p id="exam-detail-subtitle" class="text-xs sm:text-sm font-medium text-slate-500 mb-4">
-                    Tap your branch filter or scroll down to vote on your paper.
-                </p>
+
+                <div class="flex items-center justify-between gap-3 mb-3.5">
+                    <p id="exam-detail-subtitle" class="text-xs sm:text-sm font-medium text-slate-500">
+                        Tap your branch or search to find your paper. One vote per exam day.
+                    </p>
+                    <button type="button" id="exam-search-toggle-btn" onclick="toggleExamSearch()"
+                            aria-expanded="false" aria-controls="exam-search-drawer"
+                            class="ot-press shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white text-slate-700 border border-slate-200/90 text-[11px] font-extrabold shadow-sm transition-all">
+                        <i id="exam-search-toggle-icon" class="fas fa-search text-[10px] text-indigo-600"></i>
+                        <span id="exam-search-toggle-label">Search</span>
+                    </button>
+                </div>
+
+                <!-- Expandable Animated Subject Search Drawer (Expands only when Search is touched) -->
+                <div id="exam-search-drawer" class="exam-search-drawer" aria-hidden="true">
+                    <div class="exam-search-drawer-inner">
+                        <div class="exam-search-box rounded-2xl px-3.5 py-2.5 flex items-center gap-2.5">
+                            <i class="fas fa-search text-indigo-500 text-xs shrink-0"></i>
+                            <input type="text"
+                                   id="exam-search-input"
+                                   class="exam-search-input w-full bg-transparent text-xs sm:text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none"
+                                   placeholder="Search subject, course code (e.g. PCCST501), or branch..."
+                                   autocomplete="off"
+                                   spellcheck="false">
+                            <span id="exam-search-count" class="hidden shrink-0 px-2 py-0.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-300 text-[10px] font-extrabold whitespace-nowrap"></span>
+                            <button type="button" id="exam-search-clear-btn" onclick="clearExamSearch()"
+                                    class="hidden ot-press w-6 h-6 rounded-full bg-slate-200/80 dark:bg-slate-700/80 hover:bg-slate-300 text-slate-600 dark:text-slate-200 flex items-center justify-center shrink-0 transition-colors"
+                                    title="Clear search">
+                                <i class="fas fa-times text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Auto-Generated Branch Filter Pills -->
                 <div id="exam-branch-filters" class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar pt-3 border-t border-slate-200/70 dark:border-white/10"></div>
@@ -517,9 +610,10 @@
             </p>
         </div>
     </footer>
+
     <!-- Global Site Components & Poll Config -->
     <script src="/components.js?v=25" onerror="this.onerror=null;this.src='https://keralatimetable.in/components.js?v=25';"></script>
-    <script src="./poll-config.js?v=2"></script>
+    <script src="./poll-config.js?v=3"></script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
@@ -572,11 +666,13 @@
         let db = null;
         let examList = [];
         let activeUnsubscribes = [];
-        let currentRoute = { view: 'home', examId: null, subjectId: null, branchFilter: 'ALL' };
+        let activeVotingSessions = new Set();
+        let currentRoute = { view: 'home', examId: null, subjectId: null, branchFilter: 'ALL', searchQuery: '', searchOpen: false };
         let countdownRefreshPending = false;
+        let searchDebounceTimer = null;
 
         // =====================================================================
-        // 2. HELPERS (Escape, Capsule, Clipboard, Triple-Thud Haptics)
+        // 2. HELPERS (Escape, Capsule, Clipboard, Haptics, Same-Day Vote Lock)
         // =====================================================================
         function escapeHtml(str) {
             return String(str ?? '')
@@ -637,6 +733,32 @@
 
         function saveVotedChoice(subjectId, category) {
             try { localStorage.setItem('voted_' + subjectId, category); } catch {}
+        }
+
+        // Unique session key per Exam Series + Exam Day/Slot Window.
+        // All subjects running simultaneously on Day 1 share the same key;
+        // Day 2 has a different opensAt, so Day 2 unlocks cleanly for 1 vote again.
+        function getSameDayKey(exam, subj) {
+            if (!exam || !subj) return '';
+            const windowId = subj.opensAt || `day-${subj.day ?? subj.slot ?? '0'}`;
+            return `${exam.id}::${windowId}`;
+        }
+
+        // Derived directly from voted_<subjectId> (single source of truth -> zero stale-lock bugs)
+        function getSameDayVotedInfo(exam, targetSubj) {
+            if (!exam || !targetSubj) return null;
+            const targetKey = getSameDayKey(exam, targetSubj);
+            const list = exam.subjects || [];
+            for (let i = 0; i < list.length; i++) {
+                const s = list[i];
+                if (getSameDayKey(exam, s) === targetKey) {
+                    const choice = getVotedChoice(s.id);
+                    if (choice) {
+                        return { subject: s, choice };
+                    }
+                }
+            }
+            return null;
         }
 
         // Triple-thud haptic vibration for ALL reactions
@@ -891,7 +1013,8 @@
 
         function renderHomeView(direction = 'back') {
             clearActiveListeners();
-            currentRoute = { view: 'home', examId: null, subjectId: null, branchFilter: 'ALL' };
+            resetSearchDrawerUI(false);
+            currentRoute = { view: 'home', examId: null, subjectId: null, branchFilter: 'ALL', searchQuery: '', searchOpen: false };
 
             document.getElementById('hub-hero')?.classList.remove('hidden');
             document.getElementById('view-breadcrumb')?.classList.add('hidden');
@@ -960,9 +1083,44 @@
         // =====================================================================
         // 6. SUBJECT POLL CARD BUILDER (Exam Series + Single Subject Spotlight)
         // =====================================================================
-        function buildSubjectPollCardHTML(subj, exam, nowMs, isSpotlight = false) {
+        function buildResultsBoxHTML(subj, isLive, lockedByOtherSubj = null) {
+            const dayText = subj.day ? `Day ${subj.day}` : (subj.slot ? `Slot ${subj.slot}` : 'this exam session');
+            const lockedNoticeHTML = lockedByOtherSubj ? `
+                <div class="mb-3.5 px-3 py-2 rounded-xl bg-amber-50/90 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-500/25 flex items-center gap-2 text-[11px] font-bold text-amber-800 dark:text-amber-200">
+                    <i class="fas fa-check-circle text-amber-500 shrink-0"></i>
+                    <span>Already voted for <strong>${escapeHtml(lockedByOtherSubj.code || lockedByOtherSubj.subjectName)}</strong> on ${escapeHtml(dayText)}. You can vote again on the next exam day.</span>
+                </div>
+            ` : '';
+
+            return `
+                <div id="results-box-${escapeHtml(subj.id)}" class="inner-glass rounded-2xl p-4 sm:p-5 ot-swap-in">
+                    ${lockedNoticeHTML}
+                    <div class="flex items-center justify-between gap-2 pb-2.5 mb-3.5 border-b border-slate-200/70 dark:border-white/10">
+                        <span class="text-xs font-black text-slate-800 uppercase tracking-wider">Live Distribution</span>
+                        <span id="votes-count-${escapeHtml(subj.id)}" class="text-[11px] font-sporty font-extrabold text-indigo-600 bg-white/90 px-2.5 py-0.5 rounded-lg border border-slate-200/70 shadow-sm">...</span>
+                    </div>
+                    <div id="charts-${escapeHtml(subj.id)}" class="space-y-3">
+                        <div class="text-center text-xs font-bold text-slate-400 py-3"><i class="fas fa-circle-notch fa-spin mr-1.5"></i>Loading live votes...</div>
+                    </div>
+                    ${isLive ? `
+                        <div class="mt-3.5 pt-2.5 border-t border-slate-200/60 dark:border-white/10 flex items-center justify-center gap-1.5 text-[11px] font-bold text-slate-400">
+                            <i class="far fa-clock text-[10px]"></i>
+                            <span>Auto-locks in</span>
+                            <span class="countdown-target font-sporty text-slate-600" data-target-iso="${escapeHtml(subj.closesAt)}">--:--:--</span>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function buildSubjectPollCardHTML(subj, exam, nowMs) {
             const timing = getSubjectTiming(subj, nowMs);
+            const sessionKey = getSameDayKey(exam, subj);
             const votedChoice = getVotedChoice(subj.id);
+            const sameDayVoted = !votedChoice ? getSameDayVotedInfo(exam, subj) : null;
+            const lockedByOtherSubj = (timing.state === 'LIVE' && sameDayVoted && sameDayVoted.subject.id !== subj.id)
+                ? sameDayVoted.subject
+                : null;
 
             let statusPill = '';
             if (timing.state === 'LIVE') {
@@ -993,7 +1151,8 @@
                         <div class="countdown-target font-sporty text-indigo-600 text-base sm:text-lg font-black mt-2" data-target-iso="${escapeHtml(subj.opensAt)}">--:--:--</div>
                     </div>
                 `;
-            } else if (timing.state === 'LIVE' && !votedChoice) {
+            } else if (timing.state === 'LIVE' && !votedChoice && !lockedByOtherSubj) {
+                const isSessionBusy = activeVotingSessions.has(sessionKey);
                 bodyHTML = `
                     <div id="vote-box-${escapeHtml(subj.id)}" class="inner-glass rounded-2xl p-4 sm:p-5">
                         <div class="flex items-center justify-between gap-2 mb-3.5">
@@ -1007,6 +1166,8 @@
                             ${Object.entries(VOTE_META).map(([key, m]) => `
                                 <button type="button"
                                         data-vote-group="${escapeHtml(subj.id)}"
+                                        data-vote-session="${escapeHtml(sessionKey)}"
+                                        ${isSessionBusy ? 'disabled' : ''}
                                         onclick="submitVote('${escapeHtml(subj.id)}', '${key}', this)"
                                         class="vote-option-btn ${m.hoverCls} rounded-2xl p-3.5 sm:p-4 flex flex-col items-center justify-center gap-1.5 group focus:outline-none cursor-pointer">
                                     <span class="text-3xl sm:text-4xl transition-transform duration-200 group-hover:scale-115 leading-none">${m.emoji}</span>
@@ -1023,28 +1184,15 @@
                     </div>
                 `;
             } else {
-                bodyHTML = `
-                    <div id="results-box-${escapeHtml(subj.id)}" class="inner-glass rounded-2xl p-4 sm:p-5 ot-swap-in">
-                        <div class="flex items-center justify-between gap-2 pb-2.5 mb-3.5 border-b border-slate-200/70 dark:border-white/10">
-                            <span class="text-xs font-black text-slate-800 uppercase tracking-wider">Live Distribution</span>
-                            <span id="votes-count-${escapeHtml(subj.id)}" class="text-[11px] font-sporty font-extrabold text-indigo-600 bg-white/90 px-2.5 py-0.5 rounded-lg border border-slate-200/70 shadow-sm">...</span>
-                        </div>
-                        <div id="charts-${escapeHtml(subj.id)}" class="space-y-3">
-                            <div class="text-center text-xs font-bold text-slate-400 py-3"><i class="fas fa-circle-notch fa-spin mr-1.5"></i>Loading live votes...</div>
-                        </div>
-                        ${timing.state === 'LIVE' ? `
-                            <div class="mt-3.5 pt-2.5 border-t border-slate-200/60 dark:border-white/10 flex items-center justify-center gap-1.5 text-[11px] font-bold text-slate-400">
-                                <i class="far fa-clock text-[10px]"></i>
-                                <span>Auto-locks in</span>
-                                <span class="countdown-target font-sporty text-slate-600" data-target-iso="${escapeHtml(subj.closesAt)}">--:--:--</span>
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
+                bodyHTML = buildResultsBoxHTML(subj, timing.state === 'LIVE', lockedByOtherSubj);
             }
 
             return `
-                <article id="poll-card-${escapeHtml(subj.id)}" class="real-glass rounded-[1.8rem] p-5 sm:p-6 ot-swap-in">
+                <article id="poll-card-${escapeHtml(subj.id)}"
+                         data-poll-subject="${escapeHtml(subj.id)}"
+                         data-poll-session="${escapeHtml(sessionKey)}"
+                         data-poll-state="${timing.state}"
+                         class="real-glass rounded-[1.8rem] p-5 sm:p-6 ot-swap-in">
                     <div class="flex items-start justify-between gap-3 mb-4">
                         <div class="min-w-0">
                             <div class="flex flex-wrap items-center gap-1.5 mb-2">
@@ -1151,13 +1299,49 @@
         }
 
         // =====================================================================
-        // 7. VOTING ACTION WITH TRIPLE-THUD HAPTICS + EMOJI BURST + FIREBASE
+        // 7. VOTING ACTION WITH SAME-DAY 1-VOTE LOCK + HAPTICS + EMOJI BURST
         // =====================================================================
+        function setSessionButtonsDisabled(sessionKey, disabled) {
+            document.querySelectorAll('button[data-vote-session]').forEach(btn => {
+                if (btn.getAttribute('data-vote-session') === sessionKey) {
+                    btn.disabled = disabled;
+                }
+            });
+        }
+
         window.submitVote = function(subjectId, category, btnEl) {
             const meta = VOTE_META[category];
-            if (!meta || !db) return;
+            const found = findSubjectGlobally(subjectId);
+            if (!meta || !db || !found) return;
 
-            document.querySelectorAll(`[data-vote-group="${subjectId}"]`).forEach(b => b.disabled = true);
+            const { exam, subj } = found;
+            const sessionKey = getSameDayKey(exam, subj);
+
+            // Guard 1: Already voted this exact subject
+            if (getVotedChoice(subjectId)) return;
+
+            // Guard 2: Another vote in this same exam day/slot is currently being submitted
+            if (activeVotingSessions.has(sessionKey)) {
+                triggerCapsule('info', 'Recording your vote...');
+                return;
+            }
+
+            // Guard 3: Already voted another subject running in the same exam day/slot
+            const existingDayVote = getSameDayVotedInfo(exam, subj);
+            if (existingDayVote && existingDayVote.subject.id !== subjectId) {
+                const bodyEl = document.getElementById('poll-body-' + subjectId);
+                if (bodyEl) {
+                    bodyEl.innerHTML = buildResultsBoxHTML(subj, true, existingDayVote.subject);
+                    attachLiveResultsListener(subjectId, false);
+                    tickAllCountdowns();
+                }
+                triggerCapsule('error', `Already voted for ${existingDayVote.subject.code || existingDayVote.subject.subjectName} today!`);
+                return;
+            }
+
+            // Lock all buttons across this same exam day/slot immediately during submission
+            activeVotingSessions.add(sessionKey);
+            setSessionButtonsDisabled(sessionKey, true);
             btnEl?.classList.add('vote-popped');
 
             // Synchronized triple-thud haptic vibration + radial emoji burst
@@ -1170,45 +1354,257 @@
             const burstDelay = new Promise(resolve => setTimeout(resolve, 560));
 
             Promise.all([txPromise, burstDelay]).then(() => {
-                const found = findSubjectGlobally(subjectId);
-                const subj = found?.subj;
+                activeVotingSessions.delete(sessionKey);
+
+                // 1. Transition the voted subject card to live results
                 const bodyEl = document.getElementById('poll-body-' + subjectId);
-                if (bodyEl && subj) {
-                    bodyEl.innerHTML = `
-                        <div id="results-box-${escapeHtml(subjectId)}" class="inner-glass rounded-2xl p-4 sm:p-5 ot-swap-in">
-                            <div class="flex items-center justify-between gap-2 pb-2.5 mb-3.5 border-b border-slate-200/70 dark:border-white/10">
-                                <span class="text-xs font-black text-slate-800 uppercase tracking-wider">Live Distribution</span>
-                                <span id="votes-count-${escapeHtml(subjectId)}" class="text-[11px] font-sporty font-extrabold text-indigo-600 bg-white/90 px-2.5 py-0.5 rounded-lg border border-slate-200/70 shadow-sm">...</span>
-                            </div>
-                            <div id="charts-${escapeHtml(subjectId)}" class="space-y-3"></div>
-                            <div class="mt-3.5 pt-2.5 border-t border-slate-200/60 dark:border-white/10 flex items-center justify-center gap-1.5 text-[11px] font-bold text-slate-400">
-                                <i class="far fa-clock text-[10px]"></i>
-                                <span>Auto-locks in</span>
-                                <span class="countdown-target font-sporty text-slate-600" data-target-iso="${escapeHtml(subj.closesAt)}">--:--:--</span>
-                            </div>
-                        </div>
-                    `;
+                if (bodyEl) {
+                    bodyEl.innerHTML = buildResultsBoxHTML(subj, true, null);
                     attachLiveResultsListener(subjectId, false);
-                    tickAllCountdowns();
                 }
+
+                // 2. Lock all other currently-rendered LIVE sibling subjects in the same exam day/slot
+                document.querySelectorAll('article[data-poll-session]').forEach(cardEl => {
+                    const cardSession = cardEl.getAttribute('data-poll-session');
+                    const cardSubjId = cardEl.getAttribute('data-poll-subject');
+                    const cardState = cardEl.getAttribute('data-poll-state');
+                    if (cardSession === sessionKey && cardSubjId && cardSubjId !== subjectId && cardState === 'LIVE') {
+                        const siblingSubj = (exam.subjects || []).find(s => s.id === cardSubjId);
+                        const siblingBody = document.getElementById('poll-body-' + cardSubjId);
+                        if (siblingSubj && siblingBody) {
+                            siblingBody.innerHTML = buildResultsBoxHTML(siblingSubj, true, subj);
+                            attachLiveResultsListener(cardSubjId, false);
+                        }
+                    }
+                });
+
+                tickAllCountdowns();
                 triggerCapsule('success', `Vote recorded! ${meta.emoji}`);
             }).catch(err => {
                 console.error('Firebase vote error:', err);
+                activeVotingSessions.delete(sessionKey);
                 try { localStorage.removeItem('voted_' + subjectId); } catch {}
-                document.querySelectorAll(`[data-vote-group="${subjectId}"]`).forEach(b => b.disabled = false);
+                btnEl?.classList.remove('vote-popped');
+                setSessionButtonsDisabled(sessionKey, false);
                 triggerCapsule('error', 'Could not save vote. Try again.');
             });
         };
 
         // =====================================================================
-        // 8. VIEW 2: INSIDE AN EXAM SERIES (Live -> Soonest Upcoming -> Closed, CSE & CE First)
+        // 8. EXPANDABLE ANIMATED SUBJECT SEARCH CONTROLS
         // =====================================================================
-        function renderExamSeriesView(examId, branchFilter = 'ALL', direction = 'forward') {
+        function syncSearchDrawerUI() {
+            const drawer = document.getElementById('exam-search-drawer');
+            const toggleBtn = document.getElementById('exam-search-toggle-btn');
+            const toggleIcon = document.getElementById('exam-search-toggle-icon');
+            const toggleLabel = document.getElementById('exam-search-toggle-label');
+            const input = document.getElementById('exam-search-input');
+            const clearBtn = document.getElementById('exam-search-clear-btn');
+
+            if (!drawer || !toggleBtn) return;
+
+            const isOpen = !!currentRoute.searchOpen;
+            drawer.classList.toggle('is-open', isOpen);
+            drawer.setAttribute('aria-hidden', String(!isOpen));
+            toggleBtn.setAttribute('aria-expanded', String(isOpen));
+            toggleBtn.classList.toggle('exam-search-trigger-active', isOpen);
+
+            if (toggleIcon) {
+                toggleIcon.className = isOpen
+                    ? 'fas fa-times text-[10px] text-white'
+                    : 'fas fa-search text-[10px] text-indigo-600';
+            }
+            if (toggleLabel) {
+                toggleLabel.textContent = isOpen ? 'Close' : 'Search';
+            }
+            if (input && input.value !== currentRoute.searchQuery) {
+                input.value = currentRoute.searchQuery;
+            }
+            if (clearBtn) {
+                clearBtn.classList.toggle('hidden', !currentRoute.searchQuery);
+                clearBtn.classList.toggle('flex', Boolean(currentRoute.searchQuery));
+            }
+        }
+
+        function resetSearchDrawerUI(rerenderList = false) {
+            currentRoute.searchOpen = false;
+            currentRoute.searchQuery = '';
+            const countBadge = document.getElementById('exam-search-count');
+            if (countBadge) countBadge.classList.add('hidden');
+            syncSearchDrawerUI();
+            if (rerenderList && currentRoute.view === 'exam' && currentRoute.examId) {
+                const exam = examList.find(e => e.id === currentRoute.examId);
+                if (exam) renderExamSubjectsList(exam);
+            }
+        }
+
+        window.toggleExamSearch = function() {
+            if (currentRoute.view !== 'exam') return;
+            currentRoute.searchOpen = !currentRoute.searchOpen;
+
+            if (!currentRoute.searchOpen && currentRoute.searchQuery) {
+                currentRoute.searchQuery = '';
+                const exam = examList.find(e => e.id === currentRoute.examId);
+                if (exam) renderExamSubjectsList(exam);
+            }
+
+            syncSearchDrawerUI();
+
+            if (currentRoute.searchOpen) {
+                setTimeout(() => {
+                    const input = document.getElementById('exam-search-input');
+                    if (input) input.focus({ preventScroll: true });
+                }, 140);
+            }
+        };
+
+        window.clearExamSearch = function() {
+            currentRoute.searchQuery = '';
+            syncSearchDrawerUI();
+            const exam = examList.find(e => e.id === currentRoute.examId);
+            if (exam) renderExamSubjectsList(exam);
+            const input = document.getElementById('exam-search-input');
+            if (input) input.focus({ preventScroll: true });
+        };
+
+        window.resetExamFilters = function() {
+            currentRoute.searchQuery = '';
+            currentRoute.branchFilter = 'ALL';
+            syncSearchDrawerUI();
+            if (currentRoute.view === 'exam' && currentRoute.examId) {
+                renderExamSeriesView(currentRoute.examId, 'ALL', 'forward', true);
+            }
+        };
+
+        // Bind live input & Escape key once
+        const examSearchInputEl = document.getElementById('exam-search-input');
+        if (examSearchInputEl) {
+            examSearchInputEl.addEventListener('input', (e) => {
+                currentRoute.searchQuery = e.target.value || '';
+                syncSearchDrawerUI();
+                clearTimeout(searchDebounceTimer);
+                searchDebounceTimer = setTimeout(() => {
+                    if (currentRoute.view === 'exam' && currentRoute.examId) {
+                        const exam = examList.find(x => x.id === currentRoute.examId);
+                        if (exam) renderExamSubjectsList(exam);
+                    }
+                }, 100);
+            });
+            examSearchInputEl.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    window.toggleExamSearch();
+                }
+            });
+        }
+
+        // =====================================================================
+        // 9. VIEW 2: INSIDE AN EXAM SERIES (Live -> Soonest Upcoming -> Closed)
+        // =====================================================================
+        function renderExamSubjectsList(exam) {
+            clearActiveListeners();
+            const nowMs = Date.now();
+            const branchFilter = currentRoute.branchFilter || 'ALL';
+            const query = (currentRoute.searchQuery || '').trim().toLowerCase();
+
+            // MASTER SORT PRIORITY:
+            // 1. State: LIVE (Running) -> UPCOMING -> CLOSED
+            // 2. Time:  LIVE = soonest closing; UPCOMING = least time until opens; CLOSED = newest closed first
+            // 3. Branch tie-breaker: CSE -> CE -> ECE -> ME -> EEE -> IT -> alphabetical
+            const rankMap = { LIVE: 1, UPCOMING: 2, CLOSED: 3 };
+            const subjects = (exam.subjects || [])
+                .filter(s => {
+                    if (branchFilter !== 'ALL' && s.branch !== branchFilter) return false;
+                    if (!query) return true;
+                    const haystack = [
+                        s.subjectName,
+                        s.code,
+                        s.branch,
+                        s.slot ? `slot ${s.slot}` : '',
+                        s.day ? `day ${s.day}` : '',
+                        ...(s.tags || [])
+                    ].join(' ').toLowerCase();
+                    return haystack.includes(query);
+                })
+                .map(s => ({ subj: s, timing: getSubjectTiming(s, nowMs) }))
+                .sort((a, b) => {
+                    const stateDiff = rankMap[a.timing.state] - rankMap[b.timing.state];
+                    if (stateDiff !== 0) return stateDiff;
+
+                    if (a.timing.state === 'LIVE') {
+                        const closeDiff = a.timing.closeMs - b.timing.closeMs;
+                        if (closeDiff !== 0) return closeDiff;
+                    } else if (a.timing.state === 'UPCOMING') {
+                        const openDiff = a.timing.openMs - b.timing.openMs;
+                        if (openDiff !== 0) return openDiff;
+                    } else {
+                        const closedDiff = b.timing.closeMs - a.timing.closeMs;
+                        if (closedDiff !== 0) return closedDiff;
+                    }
+
+                    const brDiff = getBranchPriority(a.subj.branch) - getBranchPriority(b.subj.branch);
+                    if (brDiff !== 0) return brDiff;
+
+                    return (a.subj.code || a.subj.subjectName || '').localeCompare(b.subj.code || b.subj.subjectName || '');
+                });
+
+            const countBadge = document.getElementById('exam-search-count');
+            if (countBadge) {
+                if (query) {
+                    countBadge.textContent = `${subjects.length} ${subjects.length === 1 ? 'match' : 'matches'}`;
+                    countBadge.classList.remove('hidden');
+                } else {
+                    countBadge.classList.add('hidden');
+                }
+            }
+
+            const listEl = document.getElementById('exam-subjects-list');
+            if (!subjects.length) {
+                listEl.innerHTML = `
+                    <div class="real-glass rounded-[1.8rem] p-8 text-center ot-swap-in">
+                        <i class="fas fa-search text-2xl text-slate-300 mb-2.5"></i>
+                        <h3 class="text-sm sm:text-base font-black text-slate-800">No matching subject found</h3>
+                        <p class="text-xs text-slate-500 mt-1 mb-4">
+                            No papers matched ${query ? `"${escapeHtml(currentRoute.searchQuery)}"` : 'this filter'}${branchFilter !== 'ALL' ? ` in ${escapeHtml(branchFilter)}` : ''}.
+                        </p>
+                        <button type="button" onclick="resetExamFilters()" class="ot-press inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold shadow-sm">
+                            <i class="fas fa-undo text-[10px]"></i>
+                            <span>Show All Subjects</span>
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            listEl.innerHTML = subjects.map(({ subj }) => buildSubjectPollCardHTML(subj, exam, nowMs)).join('');
+
+            subjects.forEach(({ subj, timing }) => {
+                const hasOwnVote = Boolean(getVotedChoice(subj.id));
+                const hasSameDayVote = !hasOwnVote && Boolean(getSameDayVotedInfo(exam, subj));
+                if (timing.state === 'CLOSED' || (timing.state === 'LIVE' && (hasOwnVote || hasSameDayVote))) {
+                    attachLiveResultsListener(subj.id, timing.state === 'CLOSED');
+                }
+            });
+
+            tickAllCountdowns();
+        }
+
+        function renderExamSeriesView(examId, branchFilter = 'ALL', direction = 'forward', preserveSearch = false) {
             clearActiveListeners();
             const exam = examList.find(e => e.id === examId);
             if (!exam) { renderHomeView('back'); return; }
 
-            currentRoute = { view: 'exam', examId: exam.id, subjectId: null, branchFilter };
+            const isSameExam = currentRoute.view === 'exam' && currentRoute.examId === exam.id;
+            const keepSearch = preserveSearch && isSameExam;
+
+            currentRoute = {
+                view: 'exam',
+                examId: exam.id,
+                subjectId: null,
+                branchFilter,
+                searchQuery: keepSearch ? currentRoute.searchQuery : '',
+                searchOpen: keepSearch ? currentRoute.searchOpen : false
+            };
+
             const nowMs = Date.now();
             const info = analyzeExamSeries(exam, nowMs);
 
@@ -1259,59 +1655,28 @@
                 `;
             }).join('');
 
-            // MASTER SORT PRIORITY:
-            // 1. State: LIVE (Running) -> UPCOMING -> CLOSED
-            // 2. Time:  LIVE = soonest closing; UPCOMING = least time until opens (Day 1 -> Day 6); CLOSED = newest closed first
-            // 3. Branch tie-breaker: CSE -> CE -> ECE -> ME -> EEE -> IT -> alphabetical
-            const rankMap = { LIVE: 1, UPCOMING: 2, CLOSED: 3 };
-            const subjects = (exam.subjects || [])
-                .filter(s => branchFilter === 'ALL' || s.branch === branchFilter)
-                .map(s => ({ subj: s, timing: getSubjectTiming(s, nowMs) }))
-                .sort((a, b) => {
-                    const stateDiff = rankMap[a.timing.state] - rankMap[b.timing.state];
-                    if (stateDiff !== 0) return stateDiff;
-
-                    if (a.timing.state === 'LIVE') {
-                        const closeDiff = a.timing.closeMs - b.timing.closeMs;
-                        if (closeDiff !== 0) return closeDiff;
-                    } else if (a.timing.state === 'UPCOMING') {
-                        const openDiff = a.timing.openMs - b.timing.openMs;
-                        if (openDiff !== 0) return openDiff;
-                    } else {
-                        const closedDiff = b.timing.closeMs - a.timing.closeMs;
-                        if (closedDiff !== 0) return closedDiff;
-                    }
-
-                    const brDiff = getBranchPriority(a.subj.branch) - getBranchPriority(b.subj.branch);
-                    if (brDiff !== 0) return brDiff;
-
-                    return (a.subj.code || a.subj.subjectName || '').localeCompare(b.subj.code || b.subj.subjectName || '');
-                });
-
-            const listEl = document.getElementById('exam-subjects-list');
-            listEl.innerHTML = subjects.map(({ subj }) => buildSubjectPollCardHTML(subj, exam, nowMs, false)).join('');
-
-            subjects.forEach(({ subj, timing }) => {
-                if (timing.state === 'CLOSED' || (timing.state === 'LIVE' && getVotedChoice(subj.id))) {
-                    attachLiveResultsListener(subj.id, timing.state === 'CLOSED');
-                }
-            });
+            syncSearchDrawerUI();
+            renderExamSubjectsList(exam);
 
             const viewEl = document.getElementById('view-exam');
-            viewEl.classList.remove('hidden', 'view-enter-forward', 'view-enter-back');
-            void viewEl.offsetWidth;
-            viewEl.classList.add(direction === 'back' ? 'view-enter-back' : 'view-enter-forward');
+            if (!keepSearch) {
+                viewEl.classList.remove('hidden', 'view-enter-forward', 'view-enter-back');
+                void viewEl.offsetWidth;
+                viewEl.classList.add(direction === 'back' ? 'view-enter-back' : 'view-enter-forward');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                viewEl.classList.remove('hidden');
+            }
 
             document.title = `${exam.title} | Kerala Timetable`;
-            tickAllCountdowns();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // =====================================================================
-        // 9. VIEW 3: SINGLE SUBJECT SPOTLIGHT (?s=<subjectId>)
+        // 10. VIEW 3: SINGLE SUBJECT SPOTLIGHT (?s=<subjectId>)
         // =====================================================================
         function renderSingleSubjectView(subjectId) {
             clearActiveListeners();
+            resetSearchDrawerUI(false);
             const found = findSubjectGlobally(subjectId);
             if (!found) {
                 triggerCapsule('error', 'Poll not found');
@@ -1320,7 +1685,7 @@
             }
 
             const { exam, subj } = found;
-            currentRoute = { view: 'single', examId: exam.id, subjectId: subj.id, branchFilter: 'ALL' };
+            currentRoute = { view: 'single', examId: exam.id, subjectId: subj.id, branchFilter: 'ALL', searchQuery: '', searchOpen: false };
             const nowMs = Date.now();
             const timing = getSubjectTiming(subj, nowMs);
 
@@ -1334,12 +1699,14 @@
             document.getElementById('crumb-current').textContent = subj.subjectName;
 
             document.getElementById('single-exam-context').textContent = `${exam.title}${subj.day ? ` • Exam Day ${subj.day}` : ''}`;
-            document.getElementById('single-subject-slot').innerHTML = buildSubjectPollCardHTML(subj, exam, nowMs, true);
+            document.getElementById('single-subject-slot').innerHTML = buildSubjectPollCardHTML(subj, exam, nowMs);
 
             const viewAllBtn = document.getElementById('single-view-all-btn');
             viewAllBtn.onclick = () => window.openExamSeries(exam.id);
 
-            if (timing.state === 'CLOSED' || (timing.state === 'LIVE' && getVotedChoice(subj.id))) {
+            const hasOwnVote = Boolean(getVotedChoice(subj.id));
+            const hasSameDayVote = !hasOwnVote && Boolean(getSameDayVotedInfo(exam, subj));
+            if (timing.state === 'CLOSED' || (timing.state === 'LIVE' && (hasOwnVote || hasSameDayVote))) {
                 attachLiveResultsListener(subj.id, timing.state === 'CLOSED');
             }
 
@@ -1354,7 +1721,7 @@
         }
 
         // =====================================================================
-        // 10. URL ROUTER & NAVIGATION ACTIONS
+        // 11. URL ROUTER & NAVIGATION ACTIONS
         // =====================================================================
         function pushRouteUrl(paramsObj) {
             const params = new URLSearchParams(paramsObj);
@@ -1371,7 +1738,7 @@
 
         window.openExamSeries = function(examId) {
             pushRouteUrl({ exam: examId });
-            renderExamSeriesView(examId, 'ALL', 'forward');
+            renderExamSeriesView(examId, 'ALL', 'forward', false);
         };
 
         window.openSingleSubject = function(subjectId) {
@@ -1381,7 +1748,7 @@
 
         window.setBranchFilter = function(branch) {
             if (currentRoute.view === 'exam' && currentRoute.examId) {
-                renderExamSeriesView(currentRoute.examId, branch, 'forward');
+                renderExamSeriesView(currentRoute.examId, branch, 'forward', true);
             }
         };
 
@@ -1402,7 +1769,7 @@
             if (singleId) {
                 renderSingleSubjectView(singleId.trim());
             } else if (examId) {
-                renderExamSeriesView(examId.trim(), 'ALL', 'forward');
+                renderExamSeriesView(examId.trim(), 'ALL', 'forward', false);
             } else {
                 renderHomeView('forward');
             }
@@ -1411,7 +1778,7 @@
         window.addEventListener('popstate', resolveRouteFromUrl);
 
         // =====================================================================
-        // 11. SINGLE GLOBAL 1-SECOND COUNTDOWN ENGINE
+        // 12. SINGLE GLOBAL 1-SECOND COUNTDOWN ENGINE
         // =====================================================================
         function tickAllCountdowns() {
             const nodes = document.querySelectorAll('.countdown-target[data-target-iso]');
@@ -1449,7 +1816,7 @@
         }
 
         // =====================================================================
-        // 12. BOOT
+        // 13. BOOT
         // =====================================================================
         try {
             const app = initializeApp(firebaseConfig);
