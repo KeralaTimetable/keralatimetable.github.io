@@ -422,7 +422,7 @@
     </script>
 
     <!-- ======================================================================
-         THREE.JS ADAPTIVE 3D BACKGROUND ENGINE (Liquid Silk + 3D Glass Shapes)
+         THREE.JS ADAPTIVE 3D BACKGROUND ENGINE (Fixed Liquid Silk + 3D Shapes)
          ====================================================================== -->
     <script type="module">
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
@@ -457,9 +457,9 @@
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.08;
 
-        // 2. Two Scenes: (A) Fullscreen Liquid Silk Shader, (B) 3D Glass Shapes
+        // 2. Scene A: Fullscreen Liquid Silk Shader (Mobile-GPU Safe, No Hash Overflow)
         const silkScene = new THREE.Scene();
-        const silkCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        const silkCam = new THREE.OrthographicCamera(-1, 1, 1, -1, -1, 1);
 
         const silkUniforms = {
             uTime:    { value: 0 },
@@ -473,6 +473,7 @@
             uniforms: silkUniforms,
             depthTest: false,
             depthWrite: false,
+            side: THREE.DoubleSide,
             vertexShader: `
                 varying vec2 vUv;
                 void main() {
@@ -481,7 +482,12 @@
                 }
             `,
             fragmentShader: `
-                precision mediump float;
+                #ifdef GL_FRAGMENT_PRECISION_HIGH
+                    precision highp float;
+                #else
+                    precision mediump float;
+                #endif
+
                 varying vec2 vUv;
                 uniform float uTime;
                 uniform float uDarkMix;
@@ -489,51 +495,46 @@
                 uniform float uScroll;
                 uniform vec2 uRes;
 
-                float hash(vec2 p) {
-                    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-                }
-                float noise(vec2 p) {
-                    vec2 i = floor(p);
-                    vec2 f = fract(p);
-                    vec2 u = f * f * (3.0 - 2.0 * f);
-                    return mix(
-                        mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
-                        mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
-                        u.y
-                    );
-                }
-
                 void main() {
-                    vec2 uv = vUv;
                     float aspect = uRes.x / max(uRes.y, 1.0);
-                    vec2 p = (uv - 0.5) * vec2(aspect, 1.0);
+                    vec2 p = (vUv - 0.5) * vec2(aspect, 1.0) * 2.2;
 
-                    float t = uTime * 0.22;
-                    vec2 drift = vec2(uMouse.x * 0.12, -uMouse.y * 0.12 - uScroll * 0.35);
+                    float t = uTime * 0.55;
+                    p += vec2(uMouse.x * 0.22, -uMouse.y * 0.22 - uScroll * 0.9);
 
-                    float n1 = noise(p * 1.65 + vec2(t, t * 0.6) + drift);
-                    float n2 = noise(p * 2.40 - vec2(t * 0.8, -t * 0.5) + n1 * 0.85);
-                    float wave = smoothstep(0.15, 0.88, n2);
+                    // Smooth multi-layer domain-warped liquid silk folds
+                    vec2 q = p;
+                    for (int i = 1; i <= 4; i++) {
+                        float fi = float(i);
+                        q.x += 0.42 / fi * sin(fi * 1.65 * q.y + t + fi * 1.1);
+                        q.y += 0.42 / fi * cos(fi * 1.55 * q.x - t * 0.85 + fi * 0.7);
+                    }
 
-                    // Apple-style Light Mode Silk Palette
-                    vec3 lBase = vec3(0.945, 0.962, 0.988);   // #f1f5fc
-                    vec3 lIndigo = vec3(0.76, 0.79, 0.99);    // Soft Indigo
-                    vec3 lCyan = vec3(0.70, 0.93, 0.98);      // Soft Sky Cyan
-                    vec3 lMint = vec3(0.73, 0.96, 0.88);      // Soft Mint
+                    float ribbon1 = 0.5 + 0.5 * sin(q.x * 1.8 + q.y * 1.2 + t * 0.5);
+                    float ribbon2 = 0.5 + 0.5 * cos(q.y * 2.1 - q.x * 1.1 - t * 0.4);
+                    float sheen   = smoothstep(0.55, 0.98, 0.5 + 0.5 * sin((q.x + q.y) * 2.4));
 
-                    vec3 lightCol = mix(lBase, lIndigo, smoothstep(0.2, 0.85, n1) * 0.62);
-                    lightCol = mix(lightCol, lCyan, wave * 0.55);
-                    lightCol = mix(lightCol, lMint, smoothstep(0.45, 0.95, sin(p.x * 1.8 + n1 * 3.0 + t) * 0.5 + 0.5) * 0.40);
+                    // Light Mode: Luminous Apple Liquid Silk
+                    vec3 lPearl  = vec3(0.94, 0.96, 1.00);
+                    vec3 lIndigo = vec3(0.52, 0.56, 0.98);
+                    vec3 lCyan   = vec3(0.32, 0.78, 0.98);
+                    vec3 lMint   = vec3(0.36, 0.88, 0.72);
 
-                    // Cosmic Obsidian Dark Mode Silk Palette
-                    vec3 dBase = vec3(0.024, 0.035, 0.075);   // #060913
-                    vec3 dIndigo = vec3(0.16, 0.14, 0.44);    // Deep Indigo
-                    vec3 dCyan = vec3(0.04, 0.25, 0.38);      // Deep Cyan
-                    vec3 dMint = vec3(0.04, 0.26, 0.22);      // Deep Emerald
+                    vec3 lightCol = mix(lPearl, lIndigo, smoothstep(0.15, 0.85, ribbon1) * 0.52);
+                    lightCol = mix(lightCol, lCyan, smoothstep(0.20, 0.90, ribbon2) * 0.48);
+                    lightCol = mix(lightCol, lMint, sheen * 0.36);
+                    lightCol += vec3(0.10, 0.11, 0.14) * pow(sheen, 3.0);
 
-                    vec3 darkCol = mix(dBase, dIndigo, smoothstep(0.22, 0.88, n1) * 0.72);
-                    darkCol = mix(darkCol, dCyan, wave * 0.58);
-                    darkCol = mix(darkCol, dMint, smoothstep(0.48, 0.95, sin(p.x * 1.8 + n1 * 3.0 + t) * 0.5 + 0.5) * 0.45);
+                    // Dark Mode: Deep Aurora Silk
+                    vec3 dBase   = vec3(0.025, 0.035, 0.080);
+                    vec3 dIndigo = vec3(0.28, 0.22, 0.78);
+                    vec3 dCyan   = vec3(0.06, 0.46, 0.72);
+                    vec3 dMint   = vec3(0.06, 0.52, 0.42);
+
+                    vec3 darkCol = mix(dBase, dIndigo, smoothstep(0.18, 0.88, ribbon1) * 0.78);
+                    darkCol = mix(darkCol, dCyan, smoothstep(0.22, 0.92, ribbon2) * 0.65);
+                    darkCol = mix(darkCol, dMint, sheen * 0.48);
+                    darkCol += vec3(0.10, 0.14, 0.25) * pow(sheen, 4.0);
 
                     vec3 finalCol = mix(lightCol, darkCol, uDarkMix);
                     gl_FragColor = vec4(finalCol, 1.0);
@@ -541,9 +542,11 @@
             `
         });
 
-        silkScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), silkMat));
+        const silkMesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), silkMat);
+        silkMesh.frustumCulled = false;
+        silkScene.add(silkMesh);
 
-        // 3. 3D Floating Glass Shapes Scene
+        // 3. Scene B: 3D Floating Glass Shapes
         const shapesScene = new THREE.Scene();
         const shapesCam = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
         shapesCam.position.set(0, 0, 14);
@@ -566,7 +569,7 @@
             { geo: new THREE.TorusGeometry(1.35, 0.32, 24, 60),     pos: [-5.4, -3.1, -1.0], color: 0x10b981, speed: [0.24, 0.16] },
             { geo: new THREE.OctahedronGeometry(1.25, 0),           pos: [ 5.5, -3.2, -1.2], color: 0x8b5cf6, speed: [0.20, 0.28] },
             { geo: new THREE.SphereGeometry(0.95, 32, 32),          pos: [ 0.4,  4.4, -3.5], color: 0x38bdf8, speed: [0.12, 0.15] },
-            { geo: new THREE.IcosahedronGeometry(0.9, 0),           pos: [-1.8, -4.3, -2.5], color: 0xf43f5e, speed: [0.26, 0.22] },
+            { geo: new THREE.IcosahedronGeometry(0.90, 0),          pos: [-1.8, -4.3, -2.5], color: 0xf43f5e, speed: [0.26, 0.22] },
             { geo: new THREE.TorusGeometry(0.85, 0.22, 20, 48),     pos: [ 2.6,  0.2, -4.2], color: 0x6366f1, speed: [0.15, 0.25] }
         ];
 
