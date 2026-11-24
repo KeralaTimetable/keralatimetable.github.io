@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>Liquid Silk + Optical Glass Lab | Kerala Timetable</title>
+    <title>New Liquid Silk Lab | Kerala Timetable</title>
     <meta name="robots" content="noindex, nofollow">
 
     <!-- Tailwind Local with CDN Fallback -->
@@ -15,12 +15,12 @@
         :root {
             --ot-ease-emph: cubic-bezier(0.2, 0, 0, 1);
             --ot-ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
-            --glassMaterialBackground: rgba(248, 250, 252, 0.52);
+            --glassMaterialBackground: rgba(248, 250, 252, 0.50);
             --glassMaterialShadowColor: rgba(15, 23, 42, 0.10);
         }
 
         html.dark {
-            --glassMaterialBackground: rgba(16, 22, 38, 0.72);
+            --glassMaterialBackground: rgba(14, 19, 34, 0.64);
             --glassMaterialShadowColor: rgba(0, 0, 0, 0.60);
         }
 
@@ -32,15 +32,15 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #eef3fb;
             background-image:
-                radial-gradient(at 0% 0%, hsla(248, 95%, 90%, 0.85) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(192, 95%, 88%, 0.80) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, hsla(212, 95%, 92%, 0.85) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, hsla(168, 85%, 90%, 0.78) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, hsla(248, 95%, 88%, 0.85) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(192, 95%, 86%, 0.80) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(212, 95%, 90%, 0.85) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(168, 85%, 88%, 0.78) 0px, transparent 50%);
             min-height: 100vh;
         }
 
         html.dark body {
-            background-color: #060914;
+            background-color: #050814;
             background-image: none;
         }
 
@@ -48,8 +48,6 @@
 
         /* ==========================================================================
            THREE.JS FIXED BACKGROUND CANVAS (Mobile Tile-Safe)
-           Uses 100lvh so address-bar hide/show never triggers WebGL reallocation
-           during touch scroll.
            ========================================================================== */
         #three-bg-canvas {
             position: fixed;
@@ -75,12 +73,10 @@
             opacity: 0 !important;
         }
 
-        /* Rebalanced Liquid Glass Surfaces
-           Slightly lighter white fill in Light Mode so silk folds read cleanly;
-           slightly reduced blur radius on mobile to prevent compositor tile stalls. */
+        /* Balanced Frosted Glass Panels */
         .glass-panel {
-            background-color: rgba(255, 255, 255, 0.46);
-            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.04) 55%);
+            background-color: rgba(255, 255, 255, 0.50);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.04) 55%);
             backdrop-filter: blur(16px) saturate(180%);
             -webkit-backdrop-filter: blur(16px) saturate(180%);
             border: none;
@@ -89,13 +85,13 @@
                 inset -1.5px -1.5px 0 -0.5px #fff8,
                 inset 0 0 0 0.5px #00000014,
                 inset 0 0 12px #fff2,
-                0 14px 36px -10px rgba(15, 23, 42, 0.08);
+                0 14px 36px -10px rgba(15, 23, 42, 0.09);
             transition: transform 0.34s var(--ot-ease-settle), box-shadow 0.3s ease, background-color 0.25s ease;
         }
 
         .hybrid-card {
-            background-color: rgba(255, 255, 255, 0.52);
-            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.04) 55%);
+            background-color: rgba(255, 255, 255, 0.56);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.04) 55%);
             backdrop-filter: blur(14px) saturate(180%);
             -webkit-backdrop-filter: blur(14px) saturate(180%);
             border: none;
@@ -128,16 +124,16 @@
             }
         }
 
-        /* Cohesive Dark Mode Glass (matches nav/pills without neon bleed) */
+        /* Dark Mode Glass tuned to let sculpted silk show cleanly */
         html.dark .glass-panel-3d-peek {
-            background: linear-gradient(145deg, rgba(16, 22, 38, 0.74) 0%, rgba(9, 13, 24, 0.80) 100%) !important;
-            backdrop-filter: blur(14px) saturate(145%) !important;
-            -webkit-backdrop-filter: blur(14px) saturate(145%) !important;
+            background: linear-gradient(145deg, rgba(14, 20, 36, 0.62) 0%, rgba(8, 12, 24, 0.70) 100%) !important;
+            backdrop-filter: blur(14px) saturate(155%) !important;
+            -webkit-backdrop-filter: blur(14px) saturate(155%) !important;
         }
         html.dark .hybrid-card {
-            background: linear-gradient(145deg, rgba(18, 24, 42, 0.72) 0%, rgba(11, 15, 28, 0.78) 100%);
+            background: linear-gradient(145deg, rgba(16, 22, 40, 0.64) 0%, rgba(10, 14, 28, 0.72) 100%);
             box-shadow:
-                inset 1px 1px 0 0 rgba(255, 255, 255, 0.09),
+                inset 1px 1px 0 0 rgba(255, 255, 255, 0.10),
                 inset 0 0 0 0.5px rgba(255, 255, 255, 0.06),
                 0 10px 26px -8px rgba(0, 0, 0, 0.45);
         }
@@ -149,7 +145,7 @@
             background: #4f46e5 !important;
             color: #ffffff !important;
             border-color: transparent !important;
-            box-shadow: 0 6px 16px -4px rgba(79, 70, 229, 0.45) !important;
+            box-shadow: 0 6px 16px -4px rgba(79, 70, 229, 0.48) !important;
         }
     </style>
 </head>
@@ -159,33 +155,36 @@
     <!-- LIVE THREE.JS LIQUID SILK CANVAS -->
     <canvas id="three-bg-canvas" aria-hidden="true"></canvas>
 
-    <!-- Global Sticky Liquid Glass Navigation (Mounted by components.js) -->
+    <!-- Global Sticky Liquid Glass Navigation -->
     <div id="navigation-container" class="w-full z-50 sticky top-0"></div>
 
-    <!-- ColorOS Live Capsule (Managed by components.js KTUFlow) -->
+    <!-- ColorOS Live Capsule -->
     <div id="coloros-live-capsule"></div>
 
     <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-5 md:py-7 flex flex-col items-center relative z-10 space-y-6">
 
         <!-- ==================================================================
-             LIQUID SILK LAB CONTROLS
+             NEW LIQUID SILK LAB CONTROLS
              ================================================================== -->
         <section id="lab-control-pill" class="glass-pill rounded-3xl md:rounded-full w-full p-3 sm:px-5 sm:py-3 flex flex-wrap items-center justify-between gap-3">
             <div class="relative z-10 flex items-center gap-2 flex-wrap">
                 <span class="px-2.5 py-1 rounded-full bg-slate-900 text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                    Silk Lab
+                    Silk v2
                 </span>
 
                 <div class="flex items-center gap-1.5 flex-wrap">
-                    <button type="button" data-finish="satin" onclick="setSilkFinish('satin')" class="lab-finish-btn lab-btn-active ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
-                        Satin Folds
+                    <button type="button" data-style="draped" onclick="setSilkStyle('draped')" class="lab-style-btn lab-btn-active ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
+                        Draped Silk
                     </button>
-                    <button type="button" data-finish="mesh" onclick="setSilkFinish('mesh')" class="lab-finish-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
-                        Soft Mesh
+                    <button type="button" data-style="pearl" onclick="setSilkStyle('pearl')" class="lab-style-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
+                        Liquid Pearl
                     </button>
-                    <button type="button" data-finish="off" onclick="setSilkFinish('off')" class="lab-finish-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
-                        Off (CSS)
+                    <button type="button" data-style="waves" onclick="setSilkStyle('waves')" class="lab-style-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
+                        Satin Waves
+                    </button>
+                    <button type="button" data-style="off" onclick="setSilkStyle('off')" class="lab-style-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
+                        Off
                     </button>
                 </div>
             </div>
@@ -193,7 +192,7 @@
             <div class="relative z-10 flex items-center gap-2 flex-wrap">
                 <button type="button" id="btn-intensity" onclick="cycleIntensity()" class="ot-press px-3 py-1.5 rounded-full bg-white/85 border border-slate-200/80 text-slate-700 text-[11px] font-extrabold flex items-center gap-1.5 transition-all">
                     <i class="fas fa-sliders-h text-indigo-600 text-[10px]"></i>
-                    <span id="intensity-label">Strength: Balanced</span>
+                    <span id="intensity-label">Look: Balanced</span>
                 </button>
 
                 <button type="button" id="btn-fps-cap" onclick="toggleFpsCap()" class="ot-press px-3 py-1.5 rounded-full bg-white/85 border border-slate-200/80 text-slate-700 text-[11px] font-extrabold flex items-center gap-1.5 transition-all">
@@ -213,20 +212,20 @@
         <section class="glass-panel glass-panel-3d-peek rounded-[2.25rem] md:rounded-[2.5rem] w-full p-6 sm:p-9 relative overflow-hidden">
             <div class="max-w-2xl relative z-10">
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50/90 dark:bg-indigo-950/60 border border-indigo-300 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-300 text-[10px] md:text-xs font-black uppercase tracking-wider mb-3 shadow-sm">
-                    <i class="fas fa-water text-indigo-500"></i> Enhanced Liquid Silk Shader
+                    <i class="fas fa-wind text-indigo-500"></i> Sculpted Ribbon Silk Engine
                 </div>
 
                 <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.08] mb-3">
                     KTU Resources, <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-400">Fluid 3D Silk Depth.</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-400">Layered Liquid Silk.</span>
                 </h1>
 
                 <p class="text-slate-600 font-bold text-xs sm:text-sm max-w-lg mb-6 leading-relaxed">
-                    Scroll up and down rapidly and toggle Light / Dark mode from the top bar. Notice the sculpted silk folds in Light Mode, calmer obsidian tone in Dark Mode, and tile-free scrolling.
+                    Try switching between <strong>Draped Silk</strong>, <strong>Liquid Pearl</strong>, and <strong>Satin Waves</strong> across both Light &amp; Dark modes. Notice the crisp folded ribbons gliding cleanly behind every glass panel.
                 </p>
 
                 <div class="flex flex-wrap items-center gap-3">
-                    <button type="button" onclick="window.KTUFlow?.capsule('success', 'Enhanced Liquid Silk active!')" class="ot-press px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-emerald-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-500/25 flex items-center gap-2">
+                    <button type="button" onclick="window.KTUFlow?.capsule('success', 'New Liquid Silk Shader active!')" class="ot-press px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-emerald-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-500/25 flex items-center gap-2">
                         <i class="fas fa-bolt"></i> Test Live Capsule
                     </button>
                     <a href="#quick-access" class="ot-press px-6 py-2.5 rounded-full bg-white/85 border border-white/80 text-slate-800 font-bold text-xs sm:text-sm shadow-sm flex items-center gap-2">
@@ -245,9 +244,9 @@
                     <button type="submit" aria-label="Search" class="ot-press w-11 h-11 md:w-12 md:h-12 flex-shrink-0 text-slate-500 hover:text-indigo-600 transition-colors rounded-full flex items-center justify-center">
                         <i class="fas fa-search text-base md:text-lg"></i>
                     </button>
-                    <input type="search" placeholder="Scroll quickly to check for smooth silk motion..." class="w-full bg-transparent border-none focus:outline-none text-slate-800 font-bold placeholder-slate-400 text-xs sm:text-sm md:text-base px-2 h-11 md:h-12" autocomplete="off">
+                    <input type="search" placeholder="Watch the silk ribbons bend along the pill edges..." class="w-full bg-transparent border-none focus:outline-none text-slate-800 font-bold placeholder-slate-400 text-xs sm:text-sm md:text-base px-2 h-11 md:h-12" autocomplete="off">
                     <button type="button" onclick="cycleIntensity()" class="ot-press px-3.5 h-10 md:h-11 flex-shrink-0 flex items-center justify-center gap-1.5 text-slate-700 bg-white/75 rounded-xl md:rounded-full mr-1 text-xs font-bold shadow-sm">
-                        <span>Tune</span>
+                        <span>Boost</span>
                         <i class="fas fa-sparkles text-[11px] text-indigo-500"></i>
                     </button>
                 </form>
@@ -359,7 +358,7 @@
             </div>
         </section>
 
-        <!-- STATS PILL (Optical Liquid Glass Refraction Test) -->
+        <!-- STATS PILL -->
         <section class="w-full pt-2">
             <div id="test-stats-pill" class="glass-pill rounded-[2rem] md:rounded-full p-6 md:px-10 flex flex-wrap md:flex-nowrap items-center justify-between gap-6">
                 <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
@@ -374,21 +373,21 @@
                 <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0 relative z-10"></div>
                 <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
                     <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg shrink-0 border border-emerald-200">
-                        <i class="fas fa-feather-alt"></i>
+                        <i class="fas fa-layer-group"></i>
                     </div>
                     <div>
-                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">1-Pass</h4>
-                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Single Quad GPU</p>
+                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">5-Layer</h4>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Draped Ribbons</p>
                     </div>
                 </div>
                 <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0 relative z-10"></div>
                 <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
                     <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-lg shrink-0 border border-blue-200">
-                        <i class="fas fa-eye"></i>
+                        <i class="fas fa-gem"></i>
                     </div>
                     <div>
-                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">3D Lit</h4>
-                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Satin Normals</p>
+                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">3 Styles</h4>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Live Silk Presets</p>
                     </div>
                 </div>
                 <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0 relative z-10"></div>
@@ -397,25 +396,25 @@
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <div>
-                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">0.65x</h4>
-                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Tile-Safe Scale</p>
+                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">Tile-Free</h4>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">100lvh Engine</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Extra Scroll Benchmark Cards -->
+        <!-- Extra Scroll Runway -->
         <section class="glass-panel glass-panel-3d-peek rounded-[2rem] w-full p-6 sm:p-8 text-center">
-            <h3 class="text-base sm:text-lg font-black text-slate-900 mb-1.5">Scroll &amp; Tile-Glitch Benchmark Zone</h3>
+            <h3 class="text-base sm:text-lg font-black text-slate-900 mb-1.5">Scroll &amp; Visibility Test Zone</h3>
             <p class="text-xs sm:text-sm text-slate-600 font-medium max-w-xl mx-auto">
-                Flick-scroll rapidly from top to bottom on mobile while switching between <strong>Satin Folds</strong> and <strong>Soft Mesh</strong>, and test both Light &amp; Dark themes. The silk should glide continuously without breaking into square tiles.
+                Compare <strong>Draped Silk</strong>, <strong>Liquid Pearl</strong>, and <strong>Satin Waves</strong> while scrolling fast in Light and Dark themes.
             </p>
         </section>
 
         <section class="glass-panel glass-panel-3d-peek rounded-[2rem] w-full p-6 sm:p-8 text-center">
-            <h3 class="text-sm sm:text-base font-extrabold text-slate-900 mb-1">Deep Scroll Parallax Check</h3>
+            <h3 class="text-sm sm:text-base font-extrabold text-slate-900 mb-1">Bottom Parallax Runway</h3>
             <p class="text-xs text-slate-500 font-medium max-w-lg mx-auto">
-                Extra vertical runway so the mobile Chrome address bar collapses and expands while you test scroll smoothness.
+                Extra vertical scroll space to verify smooth ribbon motion when the mobile browser bar collapses.
             </p>
         </section>
 
@@ -425,7 +424,7 @@
     <footer class="w-full max-w-6xl mx-auto px-4 pb-8 relative z-10">
         <div id="test-footer-pill" class="glass-pill rounded-full px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="relative z-10 text-xs md:text-sm font-medium text-slate-700">
-                Kerala Timetable • <strong class="text-indigo-600">Enhanced Liquid Silk Lab</strong>
+                Kerala Timetable • <strong class="text-indigo-600">Liquid Silk v2 Lab</strong>
             </p>
             <a href="/index.html" class="ot-press relative z-10 text-xs md:text-sm font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
                 Back to Home <i class="fas fa-chevron-right text-[10px]"></i>
@@ -450,7 +449,7 @@
     </script>
 
     <!-- ======================================================================
-         THREE.JS ENHANCED LIQUID SILK ENGINE (Single-Pass, Mobile Tile-Safe)
+         THREE.JS NEW LIQUID SILK ENGINE (3 Distinct Sculpted Silk Designs)
          ====================================================================== -->
     <script type="module">
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
@@ -459,24 +458,24 @@
         const fpsBadge = document.getElementById('live-fps-badge');
 
         const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
-        // Soft silk shaders look identical at 0.65x DPR and eliminate mobile GPU tile stalls
-        const renderScale = isMobile ? 0.65 : 0.85;
+        const renderScale = isMobile ? 0.72 : 1.0;
 
         const intensitySteps = [
-            { label: 'Subtle',   val: 0.72 },
+            { label: 'Soft',     val: 0.78 },
             { label: 'Balanced', val: 1.00 },
-            { label: 'Vivid',    val: 1.28 }
+            { label: 'Vivid',    val: 1.24 }
         ];
 
+        const styleMap = { draped: 0, pearl: 1, waves: 2 };
+
         const state = {
-            finish: 'satin',      // 'satin' | 'mesh' | 'off'
+            style: 'draped',
+            styleIdx: 0,
             intensityIdx: 1,
-            fpsCap: 30,           // 30 | 60
+            fpsCap: 30,
             isHidden: document.hidden,
             darkMix: document.documentElement.classList.contains('dark') ? 1 : 0,
             targetDarkMix: document.documentElement.classList.contains('dark') ? 1 : 0,
-            satinMix: 1.0,
-            targetSatinMix: 1.0,
             intensity: 1.0,
             targetIntensity: 1.0,
             pointerX: 0,
@@ -488,7 +487,7 @@
             scrollBoost: 0
         };
 
-        // 1. Lean Single-Pass WebGL Renderer (No MSAA, No Alpha/Depth/Stencil overhead)
+        // 1. Lean Single-Pass WebGL Renderer (Mobile Tile-Safe)
         const renderer = new THREE.WebGLRenderer({
             canvas,
             antialias: false,
@@ -503,12 +502,11 @@
 
         function sizeRenderer(force = false) {
             const w = window.innerWidth;
-            // Use screen/large height on mobile so address bar slide doesn't resize WebGL
             const h = isMobile
                 ? Math.max(window.innerHeight, window.screen ? window.screen.height : window.innerHeight)
                 : window.innerHeight;
 
-            // Ignore small mobile URL-bar height shifts (<140px) while scrolling
+            // Ignore mobile URL-bar collapse/expand so WebGL never reallocates mid-scroll
             if (!force && Math.abs(w - lastW) <= 2 && Math.abs(h - lastH) < 140) return;
 
             lastW = w;
@@ -518,14 +516,14 @@
             silkUniforms.uRes.value.set(w, h);
         }
 
-        // 2. Fullscreen Liquid Silk Scene
+        // 2. Fullscreen Shader Scene
         const silkScene = new THREE.Scene();
         const silkCam = new THREE.OrthographicCamera(-1, 1, 1, -1, -1, 1);
 
         const silkUniforms = {
             uTime:      { value: 0 },
             uDarkMix:   { value: state.darkMix },
-            uSatinMix:  { value: state.satinMix },
+            uStyle:     { value: 0 },
             uIntensity: { value: state.intensity },
             uMouse:     { value: new THREE.Vector2(0, 0) },
             uScroll:    { value: 0 },
@@ -553,114 +551,196 @@
                 varying vec2 vUv;
                 uniform float uTime;
                 uniform float uDarkMix;
-                uniform float uSatinMix;
+                uniform int   uStyle;
                 uniform float uIntensity;
                 uniform vec2  uMouse;
                 uniform float uScroll;
                 uniform vec2  uRes;
 
-                // Domain-warped silk height field (returns height in [-1, 1] and warped coords)
-                vec3 silkField(vec2 p, float t) {
+                // ------------------------------------------------------------
+                // STYLE 0: DRAPED SILK (5 Layered 3D Overlapping Satin Ribbons)
+                // ------------------------------------------------------------
+                vec3 renderDrapedSilk(vec2 uv, float t, float darkMix) {
+                    float aspect = uRes.x / max(uRes.y, 1.0);
+                    vec2 p = (uv - 0.5) * vec2(aspect, 1.0);
+                    p *= (aspect < 0.85) ? 2.25 : 1.75;
+                    p += vec2(uMouse.x * 0.14, -uMouse.y * 0.14 - uScroll * 0.50);
+
+                    // Diagonal fabric drape angle
+                    vec2 rp = mat2(0.89, -0.45, 0.45, 0.89) * p;
+
+                    // Crisp luminous base behind the ribbons
+                    vec3 lightBase = mix(vec3(0.93, 0.96, 1.00), vec3(0.82, 0.90, 1.00), clamp(uv.y * 0.8 + 0.1, 0.0, 1.0));
+                    vec3 darkBase  = mix(vec3(0.025, 0.035, 0.085), vec3(0.055, 0.075, 0.16), clamp(uv.y, 0.0, 1.0));
+                    vec3 col = mix(lightBase, darkBase, darkMix);
+
+                    // 5 distinct brand-aligned silk ribbon palettes (Light vs Dark)
+                    vec3 lPal[5];
+                    lPal[0] = vec3(0.46, 0.42, 0.98); // Electric Violet-Indigo
+                    lPal[1] = vec3(0.18, 0.58, 0.98); // Luminous Cobalt Sky
+                    lPal[2] = vec3(0.12, 0.78, 0.78); // Aqua Silk
+                    lPal[3] = vec3(0.35, 0.45, 0.96); // Royal Periwinkle
+                    lPal[4] = vec3(0.16, 0.80, 0.62); // Fresh Emerald Mint
+
+                    vec3 dPal[5];
+                    dPal[0] = vec3(0.24, 0.16, 0.62); // Deep Royal Violet
+                    dPal[1] = vec3(0.10, 0.30, 0.72); // Midnight Sapphire
+                    dPal[2] = vec3(0.05, 0.44, 0.56); // Deep Ocean Cyan
+                    dPal[3] = vec3(0.18, 0.22, 0.66); // Indigo Velvet
+                    dPal[4] = vec3(0.05, 0.46, 0.38); // Velvet Emerald
+
+                    vec3 lRim = vec3(0.98, 0.99, 1.00);
+                    vec3 dRim = vec3(0.46, 0.78, 1.00);
+
+                    for (int i = 0; i < 5; i++) {
+                        float fi = float(i);
+                        float phase = fi * 1.38;
+                        float baseY = -0.82 + fi * 0.41;
+
+                        // Flowing S-curve wave spine
+                        float wave = 0.22 * sin(rp.x * (1.70 + fi * 0.14) + t * (0.58 + fi * 0.06) + phase)
+                                   + 0.11 * cos(rp.x * (3.15 - fi * 0.10) - t * 0.44 + phase * 1.4)
+                                   + 0.05 * sin(rp.x * 4.80 + t * 0.72 + fi);
+
+                        float d = rp.y - (baseY + wave);
+
+                        // Soft drop shadow cast upward onto the layer behind
+                        float above = smoothstep(-0.015, 0.035, d);
+                        float dropShadow = above * exp(-abs(d) * 7.2);
+                        col *= (1.0 - dropShadow * mix(0.20, 0.62, darkMix));
+
+                        // Smooth ribbon coverage mask
+                        float body = smoothstep(0.025, -0.020, d);
+                        if (body > 0.001) {
+                            // 3D curved silk cross-section shading
+                            float depthShade = exp(min(d, 0.0) * 2.15);
+                            float crestGlow  = exp(-abs(d + 0.025) * 15.0);
+                            float subFold    = 0.5 + 0.5 * sin(rp.x * 3.8 + d * 11.5 + t * 0.65 + phase);
+                            float silkSheen  = pow(subFold, 3.0) * exp(min(d, 0.0) * 1.4);
+
+                            vec3 lRibbon = mix(vec3(0.88, 0.92, 0.99), lPal[i], 0.55 + 0.38 * depthShade);
+                            lRibbon = mix(lRibbon, lRim, crestGlow * 0.68 + silkSheen * 0.28);
+                            lRibbon *= (0.84 + 0.20 * depthShade);
+
+                            vec3 dRibbon = dPal[i] * (0.34 + 0.78 * depthShade);
+                            dRibbon += dRim * (crestGlow * 0.55 + silkSheen * 0.22);
+
+                            vec3 ribbonCol = mix(lRibbon, dRibbon, darkMix);
+                            col = mix(col, ribbonCol, body);
+                        }
+                    }
+
+                    return col;
+                }
+
+                // ------------------------------------------------------------
+                // STYLE 1: LIQUID PEARL (Pinched Iridescent Satin Creases)
+                // ------------------------------------------------------------
+                vec3 renderLiquidPearl(vec2 uv, float t, float darkMix) {
+                    float aspect = uRes.x / max(uRes.y, 1.0);
+                    float scale = aspect < 0.85 ? 2.6 : 1.95;
+                    vec2 p = (uv - 0.5) * vec2(aspect, 1.0) * scale;
+                    p += vec2(uMouse.x * 0.16, -uMouse.y * 0.16 - uScroll * 0.55);
+
+                    // Fluid curl warp
                     vec2 q = p;
-                    q.x += 0.46 * sin(1.30 * q.y + t * 0.62);
-                    q.y += 0.46 * cos(1.22 * q.x - t * 0.52);
+                    q.x += 0.55 * sin(1.35 * q.y + t * 0.58);
+                    q.y += 0.55 * cos(1.25 * q.x - t * 0.48);
+                    q.x += 0.28 * sin(2.30 * q.y - t * 0.42 + 1.2);
+                    q.y += 0.28 * cos(2.15 * q.x + t * 0.36 + 0.9);
 
-                    q.x += 0.26 * sin(2.15 * q.y - t * 0.44 + 1.35);
-                    q.y += 0.26 * cos(2.00 * q.x + t * 0.38 + 0.85);
+                    // Sharp pinched silk ridges (creates unmistakable liquid-fabric lines)
+                    float r1 = 1.0 - abs(sin(q.x * 1.85 + q.y * 1.15 + t * 0.25));
+                    float r2 = 1.0 - abs(cos(q.y * 1.95 - q.x * 1.05 - t * 0.20));
+                    float ridgeA = pow(clamp(r1, 0.0, 1.0), 2.4);
+                    float ridgeB = pow(clamp(r2, 0.0, 1.0), 2.6);
+                    float specLine = pow(clamp(max(r1, r2), 0.0, 1.0), 7.5);
+                    float valley   = smoothstep(0.55, 0.0, max(ridgeA, ridgeB));
 
-                    q.x += 0.13 * sin(3.10 * q.y + t * 0.30 + 2.20);
-                    q.y += 0.13 * cos(2.95 * q.x - t * 0.26 + 1.65);
+                    // Light Mode: Iridescent pearl silk with deep colour troughs
+                    vec3 lCol = vec3(0.94, 0.96, 1.00);
+                    lCol = mix(lCol, vec3(0.38, 0.44, 0.98), ridgeA * 0.72);
+                    lCol = mix(lCol, vec3(0.08, 0.70, 0.94), ridgeB * 0.65);
+                    lCol = mix(lCol, vec3(0.14, 0.84, 0.66), ridgeA * ridgeB * 0.85);
+                    lCol = mix(lCol, vec3(0.76, 0.82, 0.96), valley * 0.42);
+                    lCol += vec3(0.24, 0.26, 0.30) * specLine;
 
-                    float waveA = sin(q.x * 1.45 + q.y * 1.10 + t * 0.22);
-                    float waveB = cos(q.y * 1.60 - q.x * 0.95 - t * 0.18);
-                    float h = 0.55 * waveA + 0.45 * waveB;
-                    return vec3(h, q.x, q.y);
+                    // Dark Mode: Obsidian base with luminous liquid-chrome silk veins
+                    vec3 dCol = vec3(0.025, 0.035, 0.080);
+                    dCol = mix(dCol, vec3(0.26, 0.20, 0.76), ridgeA * 0.78);
+                    dCol = mix(dCol, vec3(0.06, 0.48, 0.74), ridgeB * 0.72);
+                    dCol = mix(dCol, vec3(0.08, 0.62, 0.50), ridgeA * ridgeB * 0.75);
+                    dCol *= (0.72 + 0.38 * (1.0 - valley));
+                    dCol += vec3(0.38, 0.56, 0.88) * specLine * 0.72;
+
+                    return mix(lCol, dCol, darkMix);
+                }
+
+                // ------------------------------------------------------------
+                // STYLE 2: SATIN WAVES (Flagship OS Flowing Pleated Curtains)
+                // ------------------------------------------------------------
+                vec3 renderSatinWaves(vec2 uv, float t, float darkMix) {
+                    float aspect = uRes.x / max(uRes.y, 1.0);
+                    vec2 p = (uv - 0.5) * vec2(aspect, 1.0) * (aspect < 0.85 ? 2.4 : 1.85);
+                    p += vec2(uMouse.x * 0.14, -uMouse.y * 0.14 - uScroll * 0.55);
+
+                    // Sweeping diagonal pleats
+                    vec2 r = mat2(0.82, -0.57, 0.57, 0.82) * p;
+                    float bend = 0.45 * sin(r.x * 1.45 + t * 0.55) + 0.22 * cos(r.x * 2.6 - t * 0.40);
+                    float phase = (r.y + bend) * 4.8 + 0.75 * sin(r.x * 2.1 - t * 0.35);
+
+                    // Pleated wave height & analytic slope for crisp satin specular
+                    float fold = 0.5 + 0.5 * sin(phase);
+                    float slope = cos(phase);
+                    float highlight = pow(clamp(0.5 + 0.5 * slope, 0.0, 1.0), 5.0);
+                    float deepFold  = pow(clamp(1.0 - fold, 0.0, 1.0), 1.8);
+
+                    float hueShift = 0.5 + 0.5 * sin(r.x * 1.15 - r.y * 0.85 + t * 0.25);
+
+                    // Light Mode: Bright sculptural satin folds
+                    vec3 lTintA = vec3(0.38, 0.46, 0.98);
+                    vec3 lTintB = vec3(0.10, 0.74, 0.90);
+                    vec3 lTintC = vec3(0.16, 0.82, 0.65);
+                    vec3 lTint  = mix(mix(lTintA, lTintB, hueShift), lTintC, smoothstep(0.35, 0.95, uv.x));
+
+                    vec3 lCol = mix(vec3(0.95, 0.97, 1.00), lTint, 0.35 + 0.52 * fold);
+                    lCol = mix(lCol, vec3(0.68, 0.75, 0.94), deepFold * 0.45);
+                    lCol += vec3(0.22, 0.24, 0.28) * highlight;
+
+                    // Dark Mode: Deep velvet pleats with glowing satin ridges
+                    vec3 dTintA = vec3(0.22, 0.18, 0.68);
+                    vec3 dTintB = vec3(0.05, 0.42, 0.66);
+                    vec3 dTintC = vec3(0.06, 0.50, 0.42);
+                    vec3 dTint  = mix(mix(dTintA, dTintB, hueShift), dTintC, smoothstep(0.35, 0.95, uv.x));
+
+                    vec3 dCol = mix(vec3(0.022, 0.032, 0.075), dTint, 0.18 + 0.78 * fold);
+                    dCol *= (1.0 - deepFold * 0.55);
+                    dCol += vec3(0.30, 0.50, 0.84) * highlight * 0.65;
+
+                    return mix(lCol, dCol, darkMix);
                 }
 
                 void main() {
-                    float aspect = uRes.x / max(uRes.y, 1.0);
+                    float t = uTime * 0.85;
+                    vec3 col;
 
-                    // Portrait-friendly framing so phones show 2-3 clear diagonal silk ribbons
-                    float scale = aspect < 0.85 ? 2.65 : 2.05;
-                    vec2 p = (vUv - 0.5) * vec2(aspect, 1.0) * scale;
+                    if (uStyle == 0) {
+                        col = renderDrapedSilk(vUv, t, uDarkMix);
+                    } else if (uStyle == 1) {
+                        col = renderLiquidPearl(vUv, t, uDarkMix);
+                    } else {
+                        col = renderSatinWaves(vUv, t, uDarkMix);
+                    }
 
-                    // Gentle diagonal tilt for organic fabric sweep
-                    float c = 0.94, s = 0.34;
-                    p = mat2(c, -s, s, c) * p;
+                    // Apply Look Strength (Soft / Balanced / Vivid) around neutral theme anchor
+                    vec3 neutral = mix(vec3(0.93, 0.96, 1.00), vec3(0.03, 0.045, 0.10), uDarkMix);
+                    col = mix(neutral, col, uIntensity);
 
-                    float t = uTime * 0.52;
-                    p += vec2(uMouse.x * 0.18 + uScroll * 0.18, -uMouse.y * 0.18 - uScroll * 0.65);
-
-                    // 3-tap finite-difference 3D surface normal (smooth at any DPR)
-                    float eps = 0.04;
-                    vec3 f0 = silkField(p, t);
-                    float hx = silkField(p + vec2(eps, 0.0), t).x;
-                    float hy = silkField(p + vec2(0.0, eps), t).x;
-
-                    float h = f0.x;
-                    vec2 q = f0.yz;
-
-                    float foldDepth = mix(0.16, 0.52, uSatinMix);
-                    vec3 normal = normalize(vec3((h - hx) / eps * foldDepth, (h - hy) / eps * foldDepth, 1.0));
-
-                    // Studio directional key light + subtle rim highlight
-                    vec3 lightDir = normalize(vec3(0.45, 0.65, 1.0));
-                    vec3 halfVec  = normalize(lightDir + vec3(0.0, 0.0, 1.0));
-
-                    float diffuse = clamp(dot(normal, lightDir), 0.0, 1.0);
-                    float specPow = mix(12.0, 26.0, uDarkMix);
-                    float spec    = pow(clamp(dot(normal, halfVec), 0.0, 1.0), specPow) * mix(0.28, 1.0, uSatinMix);
-
-                    // Colour-band masks from warped silk coordinates
-                    float band1  = smoothstep(-0.75, 0.80, sin(q.x * 1.25 + q.y * 0.70 + t * 0.18));
-                    float band2  = smoothstep(-0.70, 0.85, cos(q.y * 1.35 - q.x * 0.80 - t * 0.15));
-                    float valley = smoothstep(0.25, -0.85, h);
-                    float crest  = smoothstep(-0.15, 0.90, h);
-
-                    // --------------------------------------------------------
-                    // LIGHT MODE: Crisp pearl base + richer visible silk folds
-                    // --------------------------------------------------------
-                    vec3 lPearl  = vec3(0.925, 0.950, 0.995);
-                    vec3 lIndigo = vec3(0.40,  0.46,  0.96);
-                    vec3 lCyan   = vec3(0.16,  0.69,  0.95);
-                    vec3 lMint   = vec3(0.20,  0.83,  0.69);
-                    vec3 lCrease = vec3(0.70,  0.76,  0.93);
-
-                    vec3 lightCol = lPearl;
-                    lightCol = mix(lightCol, lIndigo, band1 * 0.52 * uIntensity);
-                    lightCol = mix(lightCol, lCyan,   band2 * 0.44 * uIntensity);
-                    lightCol = mix(lightCol, lMint,   crest * band2 * 0.34 * uIntensity);
-                    // Sculpted fold shadows so ripples read cleanly behind frosted glass
-                    lightCol = mix(lightCol, lCrease, valley * mix(0.14, 0.34, uSatinMix) * uIntensity);
-                    lightCol *= (0.93 + 0.09 * diffuse);
-                    // Luminous satin crest catchlight
-                    lightCol += vec3(0.16, 0.18, 0.22) * spec * uIntensity;
-
-                    // --------------------------------------------------------
-                    // DARK MODE: Velvety midnight silk (calm, never neon)
-                    // --------------------------------------------------------
-                    vec3 dBase   = vec3(0.024, 0.033, 0.068);
-                    vec3 dIndigo = vec3(0.15,  0.14,  0.40);
-                    vec3 dCyan   = vec3(0.04,  0.20,  0.34);
-                    vec3 dMint   = vec3(0.04,  0.23,  0.20);
-
-                    vec3 darkCol = dBase;
-                    darkCol = mix(darkCol, dIndigo, band1 * 0.56 * uIntensity);
-                    darkCol = mix(darkCol, dCyan,   band2 * 0.42 * uIntensity);
-                    darkCol = mix(darkCol, dMint,   crest * band2 * 0.28 * uIntensity);
-                    // Keep valleys genuinely dark so UI cards pop cleanly
-                    darkCol *= mix(1.0, 0.62, valley * mix(0.35, 0.80, uSatinMix));
-                    darkCol *= (0.86 + 0.22 * diffuse);
-                    // Delicate thin satin highlight only on sharp ridges
-                    darkCol += vec3(0.13, 0.19, 0.32) * spec * 0.55 * uIntensity;
-
-                    vec3 finalCol = mix(lightCol, darkCol, uDarkMix);
-
-                    // Invisible micro-dithering to prevent 8-bit colour banding in Dark Mode
+                    // Invisible micro-dither to prevent 8-bit banding on mobile OLEDs
                     float dither = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453) - 0.5;
-                    finalCol += dither / 255.0;
+                    col += dither / 255.0;
 
-                    gl_FragColor = vec4(clamp(finalCol, 0.0, 1.0), 1.0);
+                    gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
                 }
             `
         });
@@ -671,13 +751,13 @@
 
         sizeRenderer(true);
 
-        // 3. Theme Observer (syncs with components.js Light/Dark toggle)
+        // 3. Sync with Light/Dark Toggle
         const themeObserver = new MutationObserver(() => {
             state.targetDarkMix = document.documentElement.classList.contains('dark') ? 1 : 0;
         });
         themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
-        // 4. Listeners (Pointer + Smooth Scroll + Orientation-only Resize)
+        // 4. Input & Lifecycle Listeners
         if (!isMobile) {
             window.addEventListener('pointermove', (e) => {
                 state.pointerX = (e.clientX / window.innerWidth) * 2 - 1;
@@ -689,8 +769,7 @@
             const nextY = window.scrollY || 0;
             const delta = Math.abs(nextY - state.scrollY);
             state.scrollY = nextY;
-            // Subtle flow momentum boost when thumb-scrolling
-            state.scrollBoost = Math.min(state.scrollBoost + delta * 0.0025, 0.9);
+            state.scrollBoost = Math.min(state.scrollBoost + delta * 0.0025, 0.85);
         }, { passive: true });
 
         let resizeTimer = null;
@@ -707,17 +786,18 @@
             state.isHidden = document.hidden;
         });
 
-        // 5. Interactive Lab Controls
-        window.setSilkFinish = function(finish) {
-            state.finish = finish;
-            canvas.classList.toggle('canvas-hidden', finish === 'off');
-            if (finish === 'satin') state.targetSatinMix = 1.0;
-            if (finish === 'mesh')  state.targetSatinMix = 0.0;
-
-            document.querySelectorAll('.lab-finish-btn').forEach(btn => {
-                btn.classList.toggle('lab-btn-active', btn.getAttribute('data-finish') === finish);
+        // 5. Lab Controls
+        window.setSilkStyle = function(style) {
+            state.style = style;
+            canvas.classList.toggle('canvas-hidden', style === 'off');
+            if (style !== 'off') {
+                state.styleIdx = styleMap[style] ?? 0;
+                silkUniforms.uStyle.value = state.styleIdx;
+            }
+            document.querySelectorAll('.lab-style-btn').forEach(btn => {
+                btn.classList.toggle('lab-btn-active', btn.getAttribute('data-style') === style);
             });
-            if (finish === 'off' && fpsBadge) {
+            if (style === 'off' && fpsBadge) {
                 fpsBadge.textContent = 'CSS Only';
             }
         };
@@ -727,7 +807,7 @@
             const step = intensitySteps[state.intensityIdx];
             state.targetIntensity = step.val;
             const lbl = document.getElementById('intensity-label');
-            if (lbl) lbl.textContent = `Strength: ${step.label}`;
+            if (lbl) lbl.textContent = `Look: ${step.label}`;
         };
 
         window.toggleFpsCap = function() {
@@ -748,7 +828,7 @@
         function animate(now) {
             requestAnimationFrame(animate);
 
-            if (state.isHidden || state.finish === 'off') return;
+            if (state.isHidden || state.style === 'off') return;
 
             const minInterval = 1000 / state.fpsCap;
             const deltaMs = now - lastFrameMs;
@@ -757,21 +837,18 @@
             const dt = Math.min(deltaMs / 1000, 0.06);
             lastFrameMs = now;
 
-            // Smoothly decay scroll velocity boost so folds glide naturally with scrolling
             state.scrollBoost *= Math.pow(0.08, dt);
             if (!prefersReduced) {
-                simTime += dt * (1.0 + state.scrollBoost * 0.55);
+                simTime += dt * (1.0 + state.scrollBoost * 0.5);
             }
 
             const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
             const targetScroll = state.scrollY / maxScroll;
 
-            // Smoothly interpolate all visual parameters (no snapping or jitter)
             const easeFast = Math.min(1, dt * 6.5);
             const easeSoft = Math.min(1, dt * 4.5);
 
             state.darkMix      += (state.targetDarkMix   - state.darkMix)      * easeFast;
-            state.satinMix     += (state.targetSatinMix  - state.satinMix)     * easeFast;
             state.intensity    += (state.targetIntensity - state.intensity)    * easeFast;
             state.smoothScroll += (targetScroll          - state.smoothScroll) * easeSoft;
             state.smoothX      += (state.pointerX        - state.smoothX)      * easeSoft;
@@ -779,7 +856,6 @@
 
             silkUniforms.uTime.value      = simTime;
             silkUniforms.uDarkMix.value   = state.darkMix;
-            silkUniforms.uSatinMix.value  = state.satinMix;
             silkUniforms.uIntensity.value = state.intensity;
             silkUniforms.uScroll.value    = state.smoothScroll;
             silkUniforms.uMouse.value.set(state.smoothX, state.smoothY);
