@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>New Liquid Silk Lab | Kerala Timetable</title>
+    <title>Liquid Silk v3 Lab | Kerala Timetable</title>
     <meta name="robots" content="noindex, nofollow">
 
     <!-- Tailwind Local with CDN Fallback -->
@@ -15,12 +15,12 @@
         :root {
             --ot-ease-emph: cubic-bezier(0.2, 0, 0, 1);
             --ot-ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
-            --glassMaterialBackground: rgba(248, 250, 252, 0.50);
+            --glassMaterialBackground: rgba(255, 255, 255, 0.64);
             --glassMaterialShadowColor: rgba(15, 23, 42, 0.10);
         }
 
         html.dark {
-            --glassMaterialBackground: rgba(14, 19, 34, 0.64);
+            --glassMaterialBackground: rgba(14, 20, 36, 0.66);
             --glassMaterialShadowColor: rgba(0, 0, 0, 0.60);
         }
 
@@ -30,24 +30,24 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #eef3fb;
+            background-color: #ebf2ff;
             background-image:
-                radial-gradient(at 0% 0%, hsla(248, 95%, 88%, 0.85) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(192, 95%, 86%, 0.80) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, hsla(212, 95%, 90%, 0.85) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, hsla(168, 85%, 88%, 0.78) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, hsla(245, 95%, 86%, 0.90) 0px, transparent 52%),
+                radial-gradient(at 100% 0%, hsla(195, 95%, 84%, 0.85) 0px, transparent 52%),
+                radial-gradient(at 100% 100%, hsla(215, 95%, 88%, 0.88) 0px, transparent 52%),
+                radial-gradient(at 0% 100%, hsla(165, 85%, 86%, 0.82) 0px, transparent 52%);
             min-height: 100vh;
         }
 
         html.dark body {
-            background-color: #050814;
+            background-color: #050816;
             background-image: none;
         }
 
         .font-mono-code { font-family: 'Fira Code', monospace; }
 
         /* ==========================================================================
-           THREE.JS FIXED BACKGROUND CANVAS (Mobile Tile-Safe)
+           THREE.JS FIXED BACKGROUND CANVAS (Mobile Tile-Safe + Smooth)
            ========================================================================== */
         #three-bg-canvas {
             position: fixed;
@@ -73,27 +73,27 @@
             opacity: 0 !important;
         }
 
-        /* Balanced Frosted Glass Panels */
+        /* Light Mode: Higher Milky Opacity + Lush Frosted Blur */
         .glass-panel {
-            background-color: rgba(255, 255, 255, 0.50);
-            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.04) 55%);
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.62);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0.08) 58%);
+            backdrop-filter: blur(22px) saturate(195%);
+            -webkit-backdrop-filter: blur(22px) saturate(195%);
             border: none;
             box-shadow:
-                inset 1.5px 1.5px 0 -0.5px #fffffff2,
-                inset -1.5px -1.5px 0 -0.5px #fff8,
+                inset 1.5px 1.5px 0 -0.5px #fffffff6,
+                inset -1.5px -1.5px 0 -0.5px #fffa,
                 inset 0 0 0 0.5px #00000014,
-                inset 0 0 12px #fff2,
-                0 14px 36px -10px rgba(15, 23, 42, 0.09);
+                inset 0 0 16px #fff4,
+                0 16px 40px -10px rgba(15, 23, 42, 0.09);
             transition: transform 0.34s var(--ot-ease-settle), box-shadow 0.3s ease, background-color 0.25s ease;
         }
 
         .hybrid-card {
-            background-color: rgba(255, 255, 255, 0.56);
-            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.04) 55%);
-            backdrop-filter: blur(14px) saturate(180%);
-            -webkit-backdrop-filter: blur(14px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.68);
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0.10) 58%);
+            backdrop-filter: blur(20px) saturate(195%);
+            -webkit-backdrop-filter: blur(20px) saturate(195%);
             border: none;
             border-radius: 1.25rem;
             padding: 0.95rem;
@@ -103,17 +103,17 @@
             text-align: center;
             text-decoration: none;
             box-shadow:
-                inset 1.5px 1.5px 0 -0.5px #fffffff2,
-                inset -1.5px -1.5px 0 -0.5px #fff8,
+                inset 1.5px 1.5px 0 -0.5px #fffffff6,
+                inset -1.5px -1.5px 0 -0.5px #fffa,
                 inset 0 0 0 0.5px #00000014,
-                inset 0 0 12px #fff2,
-                0 8px 22px -6px rgba(15, 23, 42, 0.06);
+                inset 0 0 14px #fff4,
+                0 10px 24px -6px rgba(15, 23, 42, 0.07);
             transition: transform 0.34s var(--ot-ease-settle), background-color 0.22s ease, box-shadow 0.28s ease;
         }
         @media (min-width: 768px) {
             .glass-panel {
-                backdrop-filter: blur(20px) saturate(185%);
-                -webkit-backdrop-filter: blur(20px) saturate(185%);
+                backdrop-filter: blur(26px) saturate(200%);
+                -webkit-backdrop-filter: blur(26px) saturate(200%);
             }
             .hybrid-card {
                 flex-direction: row;
@@ -121,21 +121,25 @@
                 text-align: left;
                 padding: 1rem 1.25rem;
                 border-radius: 1.5rem;
+                backdrop-filter: blur(22px) saturate(200%);
+                -webkit-backdrop-filter: blur(22px) saturate(200%);
             }
         }
 
-        /* Dark Mode Glass tuned to let sculpted silk show cleanly */
+        /* Dark Mode: Smooth Frosted Obsidian Glass */
         html.dark .glass-panel-3d-peek {
-            background: linear-gradient(145deg, rgba(14, 20, 36, 0.62) 0%, rgba(8, 12, 24, 0.70) 100%) !important;
-            backdrop-filter: blur(14px) saturate(155%) !important;
-            -webkit-backdrop-filter: blur(14px) saturate(155%) !important;
+            background: linear-gradient(145deg, rgba(14, 20, 38, 0.64) 0%, rgba(8, 12, 26, 0.72) 100%) !important;
+            backdrop-filter: blur(20px) saturate(165%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(165%) !important;
         }
         html.dark .hybrid-card {
-            background: linear-gradient(145deg, rgba(16, 22, 40, 0.64) 0%, rgba(10, 14, 28, 0.72) 100%);
+            background: linear-gradient(145deg, rgba(16, 23, 42, 0.66) 0%, rgba(10, 14, 28, 0.74) 100%);
+            backdrop-filter: blur(18px) saturate(165%);
+            -webkit-backdrop-filter: blur(18px) saturate(165%);
             box-shadow:
-                inset 1px 1px 0 0 rgba(255, 255, 255, 0.10),
+                inset 1px 1px 0 0 rgba(255, 255, 255, 0.11),
                 inset 0 0 0 0.5px rgba(255, 255, 255, 0.06),
-                0 10px 26px -8px rgba(0, 0, 0, 0.45);
+                0 12px 28px -8px rgba(0, 0, 0, 0.48);
         }
 
         .ot-press { transition: transform 0.16s var(--ot-ease-settle), filter 0.15s ease; }
@@ -164,40 +168,40 @@
     <main class="flex-grow w-full max-w-6xl mx-auto px-4 py-5 md:py-7 flex flex-col items-center relative z-10 space-y-6">
 
         <!-- ==================================================================
-             NEW LIQUID SILK LAB CONTROLS
+             LIQUID SILK v3 CONTROLS
              ================================================================== -->
         <section id="lab-control-pill" class="glass-pill rounded-3xl md:rounded-full w-full p-3 sm:px-5 sm:py-3 flex flex-wrap items-center justify-between gap-3">
             <div class="relative z-10 flex items-center gap-2 flex-wrap">
                 <span class="px-2.5 py-1 rounded-full bg-slate-900 text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                    Silk v2
+                    Silk v3
                 </span>
 
                 <div class="flex items-center gap-1.5 flex-wrap">
-                    <button type="button" data-style="draped" onclick="setSilkStyle('draped')" class="lab-style-btn lab-btn-active ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
-                        Draped Silk
+                    <button type="button" data-style="aura" onclick="setSilkStyle('aura')" class="lab-style-btn lab-btn-active ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/85 text-slate-700 transition-all">
+                        Liquid Aura
                     </button>
-                    <button type="button" data-style="pearl" onclick="setSilkStyle('pearl')" class="lab-style-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
-                        Liquid Pearl
+                    <button type="button" data-style="velvet" onclick="setSilkStyle('velvet')" class="lab-style-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/85 text-slate-700 transition-all">
+                        Velvet Silk
                     </button>
-                    <button type="button" data-style="waves" onclick="setSilkStyle('waves')" class="lab-style-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
-                        Satin Waves
+                    <button type="button" data-style="aurora" onclick="setSilkStyle('aurora')" class="lab-style-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/85 text-slate-700 transition-all">
+                        Aurora Drift
                     </button>
-                    <button type="button" data-style="off" onclick="setSilkStyle('off')" class="lab-style-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/80 text-slate-700 transition-all">
+                    <button type="button" data-style="off" onclick="setSilkStyle('off')" class="lab-style-btn ot-press px-3 py-1.5 rounded-full text-[11px] font-extrabold border border-slate-200/80 bg-white/85 text-slate-700 transition-all">
                         Off
                     </button>
                 </div>
             </div>
 
             <div class="relative z-10 flex items-center gap-2 flex-wrap">
-                <button type="button" id="btn-intensity" onclick="cycleIntensity()" class="ot-press px-3 py-1.5 rounded-full bg-white/85 border border-slate-200/80 text-slate-700 text-[11px] font-extrabold flex items-center gap-1.5 transition-all">
-                    <i class="fas fa-sliders-h text-indigo-600 text-[10px]"></i>
-                    <span id="intensity-label">Look: Balanced</span>
+                <button type="button" id="btn-blur" onclick="cycleBlur()" class="ot-press px-3 py-1.5 rounded-full bg-white/90 border border-slate-200/80 text-slate-700 text-[11px] font-extrabold flex items-center gap-1.5 transition-all">
+                    <i class="fas fa-droplet text-sky-500 text-[10px]"></i>
+                    <span id="blur-label">Blur: Dreamy</span>
                 </button>
 
-                <button type="button" id="btn-fps-cap" onclick="toggleFpsCap()" class="ot-press px-3 py-1.5 rounded-full bg-white/85 border border-slate-200/80 text-slate-700 text-[11px] font-extrabold flex items-center gap-1.5 transition-all">
+                <button type="button" id="btn-fps-cap" onclick="toggleFpsCap()" class="ot-press px-3 py-1.5 rounded-full bg-white/90 border border-slate-200/80 text-slate-700 text-[11px] font-extrabold flex items-center gap-1.5 transition-all">
                     <i class="fas fa-tachometer-alt text-emerald-600 text-[10px]"></i>
-                    <span id="fps-cap-label">Cap: 30 FPS</span>
+                    <span id="fps-cap-label">Smooth (Native)</span>
                 </button>
 
                 <span id="live-fps-badge" class="font-mono-code px-2.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold">
@@ -212,23 +216,23 @@
         <section class="glass-panel glass-panel-3d-peek rounded-[2.25rem] md:rounded-[2.5rem] w-full p-6 sm:p-9 relative overflow-hidden">
             <div class="max-w-2xl relative z-10">
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50/90 dark:bg-indigo-950/60 border border-indigo-300 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-300 text-[10px] md:text-xs font-black uppercase tracking-wider mb-3 shadow-sm">
-                    <i class="fas fa-wind text-indigo-500"></i> Sculpted Ribbon Silk Engine
+                    <i class="fas fa-sparkles text-indigo-500"></i> Soft-Blurred Smooth Liquid Silk
                 </div>
 
                 <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.08] mb-3">
                     KTU Resources, <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-400">Layered Liquid Silk.</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-400">Silky Smooth Flow.</span>
                 </h1>
 
                 <p class="text-slate-600 font-bold text-xs sm:text-sm max-w-lg mb-6 leading-relaxed">
-                    Try switching between <strong>Draped Silk</strong>, <strong>Liquid Pearl</strong>, and <strong>Satin Waves</strong> across both Light &amp; Dark modes. Notice the crisp folded ribbons gliding cleanly behind every glass panel.
+                    Built for portrait mobile displays at native refresh rate. Compare <strong>Liquid Aura</strong>, <strong>Velvet Silk</strong>, and <strong>Aurora Drift</strong> with boosted Light Mode frosted glass and soft optical blur.
                 </p>
 
                 <div class="flex flex-wrap items-center gap-3">
-                    <button type="button" onclick="window.KTUFlow?.capsule('success', 'New Liquid Silk Shader active!')" class="ot-press px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-emerald-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-500/25 flex items-center gap-2">
+                    <button type="button" onclick="window.KTUFlow?.capsule('success', 'Liquid Silk v3 Smooth Flow active!')" class="ot-press px-6 py-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-emerald-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-indigo-500/25 flex items-center gap-2">
                         <i class="fas fa-bolt"></i> Test Live Capsule
                     </button>
-                    <a href="#quick-access" class="ot-press px-6 py-2.5 rounded-full bg-white/85 border border-white/80 text-slate-800 font-bold text-xs sm:text-sm shadow-sm flex items-center gap-2">
+                    <a href="#quick-access" class="ot-press px-6 py-2.5 rounded-full bg-white/90 border border-white/80 text-slate-800 font-bold text-xs sm:text-sm shadow-sm flex items-center gap-2">
                         Scroll Test <i class="fas fa-arrow-down text-xs"></i>
                     </a>
                 </div>
@@ -244,10 +248,10 @@
                     <button type="submit" aria-label="Search" class="ot-press w-11 h-11 md:w-12 md:h-12 flex-shrink-0 text-slate-500 hover:text-indigo-600 transition-colors rounded-full flex items-center justify-center">
                         <i class="fas fa-search text-base md:text-lg"></i>
                     </button>
-                    <input type="search" placeholder="Watch the silk ribbons bend along the pill edges..." class="w-full bg-transparent border-none focus:outline-none text-slate-800 font-bold placeholder-slate-400 text-xs sm:text-sm md:text-base px-2 h-11 md:h-12" autocomplete="off">
-                    <button type="button" onclick="cycleIntensity()" class="ot-press px-3.5 h-10 md:h-11 flex-shrink-0 flex items-center justify-center gap-1.5 text-slate-700 bg-white/75 rounded-xl md:rounded-full mr-1 text-xs font-bold shadow-sm">
-                        <span>Boost</span>
-                        <i class="fas fa-sparkles text-[11px] text-indigo-500"></i>
+                    <input type="search" placeholder="Watch the blurred silk glide smoothly behind the glass..." class="w-full bg-transparent border-none focus:outline-none text-slate-800 font-bold placeholder-slate-400 text-xs sm:text-sm md:text-base px-2 h-11 md:h-12" autocomplete="off">
+                    <button type="button" onclick="cycleBlur()" class="ot-press px-3.5 h-10 md:h-11 flex-shrink-0 flex items-center justify-center gap-1.5 text-slate-700 bg-white/80 rounded-xl md:rounded-full mr-1 text-xs font-bold shadow-sm">
+                        <span>Blur</span>
+                        <i class="fas fa-droplet text-[11px] text-indigo-500"></i>
                     </button>
                 </form>
             </div>
@@ -373,21 +377,21 @@
                 <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0 relative z-10"></div>
                 <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
                     <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg shrink-0 border border-emerald-200">
-                        <i class="fas fa-layer-group"></i>
+                        <i class="fas fa-wind"></i>
                     </div>
                     <div>
-                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">5-Layer</h4>
-                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Draped Ribbons</p>
+                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">Native Hz</h4>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Silky Motion</p>
                     </div>
                 </div>
                 <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0 relative z-10"></div>
                 <div class="relative z-10 flex items-center gap-3 w-[45%] md:w-auto">
                     <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-lg shrink-0 border border-blue-200">
-                        <i class="fas fa-gem"></i>
+                        <i class="fas fa-droplet"></i>
                     </div>
                     <div>
-                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">3 Styles</h4>
-                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Live Silk Presets</p>
+                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">Soft Blur</h4>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Gaussian Blooms</p>
                     </div>
                 </div>
                 <div class="hidden md:block w-px h-10 bg-slate-900/15 dark:bg-white/10 shrink-0 relative z-10"></div>
@@ -396,8 +400,8 @@
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <div>
-                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">Tile-Free</h4>
-                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">100lvh Engine</p>
+                        <h4 class="font-extrabold text-slate-900 text-lg leading-tight">Portrait</h4>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-bold uppercase tracking-wider">Isotropic Scale</p>
                     </div>
                 </div>
             </div>
@@ -405,16 +409,16 @@
 
         <!-- Extra Scroll Runway -->
         <section class="glass-panel glass-panel-3d-peek rounded-[2rem] w-full p-6 sm:p-8 text-center">
-            <h3 class="text-base sm:text-lg font-black text-slate-900 mb-1.5">Scroll &amp; Visibility Test Zone</h3>
+            <h3 class="text-base sm:text-lg font-black text-slate-900 mb-1.5">Smooth Scroll &amp; Blur Check</h3>
             <p class="text-xs sm:text-sm text-slate-600 font-medium max-w-xl mx-auto">
-                Compare <strong>Draped Silk</strong>, <strong>Liquid Pearl</strong>, and <strong>Satin Waves</strong> while scrolling fast in Light and Dark themes.
+                Scroll up and down rapidly on mobile while switching between <strong>Liquid Aura</strong>, <strong>Velvet Silk</strong>, and <strong>Aurora Drift</strong>. Check the frosted opacity in Light Mode and smoothness at native refresh rate.
             </p>
         </section>
 
         <section class="glass-panel glass-panel-3d-peek rounded-[2rem] w-full p-6 sm:p-8 text-center">
             <h3 class="text-sm sm:text-base font-extrabold text-slate-900 mb-1">Bottom Parallax Runway</h3>
             <p class="text-xs text-slate-500 font-medium max-w-lg mx-auto">
-                Extra vertical scroll space to verify smooth ribbon motion when the mobile browser bar collapses.
+                Extra vertical space so the mobile address bar collapses cleanly while the silk continues gliding underneath.
             </p>
         </section>
 
@@ -424,7 +428,7 @@
     <footer class="w-full max-w-6xl mx-auto px-4 pb-8 relative z-10">
         <div id="test-footer-pill" class="glass-pill rounded-full px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p class="relative z-10 text-xs md:text-sm font-medium text-slate-700">
-                Kerala Timetable • <strong class="text-indigo-600">Liquid Silk v2 Lab</strong>
+                Kerala Timetable • <strong class="text-indigo-600">Liquid Silk v3 Lab</strong>
             </p>
             <a href="/index.html" class="ot-press relative z-10 text-xs md:text-sm font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
                 Back to Home <i class="fas fa-chevron-right text-[10px]"></i>
@@ -449,7 +453,7 @@
     </script>
 
     <!-- ======================================================================
-         THREE.JS NEW LIQUID SILK ENGINE (3 Distinct Sculpted Silk Designs)
+         THREE.JS LIQUID SILK v3 (Soft-Blurred Fluid Aura, Native-Smooth Mobile)
          ====================================================================== -->
     <script type="module">
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
@@ -458,26 +462,28 @@
         const fpsBadge = document.getElementById('live-fps-badge');
 
         const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
-        const renderScale = isMobile ? 0.72 : 1.0;
+        // Clean 1.0x CSS-pixel resolution on mobile: razor smooth for soft blurred silk, zero GPU overload
+        const renderScale = isMobile
+            ? Math.min(window.devicePixelRatio || 1, 1.0)
+            : Math.min(window.devicePixelRatio || 1, 1.25);
 
-        const intensitySteps = [
-            { label: 'Soft',     val: 0.78 },
-            { label: 'Balanced', val: 1.00 },
-            { label: 'Vivid',    val: 1.24 }
+        const blurSteps = [
+            { label: 'Soft',   val: 0.25 },
+            { label: 'Dreamy', val: 0.65 },
+            { label: 'Ultra',  val: 1.00 }
         ];
 
-        const styleMap = { draped: 0, pearl: 1, waves: 2 };
+        const styleMap = { aura: 0, velvet: 1, aurora: 2 };
 
         const state = {
-            style: 'draped',
-            styleIdx: 0,
-            intensityIdx: 1,
-            fpsCap: 30,
+            style: 'aura',
+            blurIdx: 1,
+            fpsCap: 0,            // 0 = Native Smooth (60/90/120Hz), 30 = Eco
             isHidden: document.hidden,
             darkMix: document.documentElement.classList.contains('dark') ? 1 : 0,
             targetDarkMix: document.documentElement.classList.contains('dark') ? 1 : 0,
-            intensity: 1.0,
-            targetIntensity: 1.0,
+            blurAmount: 0.65,
+            targetBlurAmount: 0.65,
             pointerX: 0,
             pointerY: 0,
             smoothX: 0,
@@ -487,14 +493,14 @@
             scrollBoost: 0
         };
 
-        // 1. Lean Single-Pass WebGL Renderer (Mobile Tile-Safe)
+        // 1. Lightweight Single-Pass WebGL Renderer (Mobile Tile-Safe)
         const renderer = new THREE.WebGLRenderer({
             canvas,
             antialias: false,
             alpha: false,
             depth: false,
             stencil: false,
-            powerPreference: 'default'
+            powerPreference: 'high-performance'
         });
 
         let lastW = 0;
@@ -506,8 +512,8 @@
                 ? Math.max(window.innerHeight, window.screen ? window.screen.height : window.innerHeight)
                 : window.innerHeight;
 
-            // Ignore mobile URL-bar collapse/expand so WebGL never reallocates mid-scroll
-            if (!force && Math.abs(w - lastW) <= 2 && Math.abs(h - lastH) < 140) return;
+            // Ignore mobile URL-bar height shifts so WebGL never reallocates mid-scroll
+            if (!force && Math.abs(w - lastW) <= 2 && Math.abs(h - lastH) < 150) return;
 
             lastW = w;
             lastH = h;
@@ -516,18 +522,18 @@
             silkUniforms.uRes.value.set(w, h);
         }
 
-        // 2. Fullscreen Shader Scene
+        // 2. Fullscreen Soft-Blurred Liquid Silk Scene
         const silkScene = new THREE.Scene();
         const silkCam = new THREE.OrthographicCamera(-1, 1, 1, -1, -1, 1);
 
         const silkUniforms = {
-            uTime:      { value: 0 },
-            uDarkMix:   { value: state.darkMix },
-            uStyle:     { value: 0 },
-            uIntensity: { value: state.intensity },
-            uMouse:     { value: new THREE.Vector2(0, 0) },
-            uScroll:    { value: 0 },
-            uRes:       { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+            uTime:    { value: 0 },
+            uDarkMix: { value: state.darkMix },
+            uStyle:   { value: 0 },
+            uBlur:    { value: state.blurAmount },
+            uMouse:   { value: new THREE.Vector2(0, 0) },
+            uScroll:  { value: 0 },
+            uRes:     { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
         };
 
         const silkMat = new THREE.ShaderMaterial({
@@ -552,193 +558,177 @@
                 uniform float uTime;
                 uniform float uDarkMix;
                 uniform int   uStyle;
-                uniform float uIntensity;
+                uniform float uBlur;
                 uniform vec2  uMouse;
                 uniform float uScroll;
                 uniform vec2  uRes;
 
-                // ------------------------------------------------------------
-                // STYLE 0: DRAPED SILK (5 Layered 3D Overlapping Satin Ribbons)
-                // ------------------------------------------------------------
-                vec3 renderDrapedSilk(vec2 uv, float t, float darkMix) {
+                // Isotropic portrait & desktop coordinate space (short axis = 1.0)
+                vec2 getNormCoord(vec2 uv) {
                     float aspect = uRes.x / max(uRes.y, 1.0);
-                    vec2 p = (uv - 0.5) * vec2(aspect, 1.0);
-                    p *= (aspect < 0.85) ? 2.25 : 1.75;
-                    p += vec2(uMouse.x * 0.14, -uMouse.y * 0.14 - uScroll * 0.50);
+                    vec2 centered = uv - 0.5;
+                    return aspect < 1.0
+                        ? vec2(centered.x, centered.y / aspect)
+                        : vec2(centered.x * aspect, centered.y);
+                }
 
-                    // Diagonal fabric drape angle
-                    vec2 rp = mat2(0.89, -0.45, 0.45, 0.89) * p;
-
-                    // Crisp luminous base behind the ribbons
-                    vec3 lightBase = mix(vec3(0.93, 0.96, 1.00), vec3(0.82, 0.90, 1.00), clamp(uv.y * 0.8 + 0.1, 0.0, 1.0));
-                    vec3 darkBase  = mix(vec3(0.025, 0.035, 0.085), vec3(0.055, 0.075, 0.16), clamp(uv.y, 0.0, 1.0));
-                    vec3 col = mix(lightBase, darkBase, darkMix);
-
-                    // 5 distinct brand-aligned silk ribbon palettes (Light vs Dark)
-                    vec3 lPal[5];
-                    lPal[0] = vec3(0.46, 0.42, 0.98); // Electric Violet-Indigo
-                    lPal[1] = vec3(0.18, 0.58, 0.98); // Luminous Cobalt Sky
-                    lPal[2] = vec3(0.12, 0.78, 0.78); // Aqua Silk
-                    lPal[3] = vec3(0.35, 0.45, 0.96); // Royal Periwinkle
-                    lPal[4] = vec3(0.16, 0.80, 0.62); // Fresh Emerald Mint
-
-                    vec3 dPal[5];
-                    dPal[0] = vec3(0.24, 0.16, 0.62); // Deep Royal Violet
-                    dPal[1] = vec3(0.10, 0.30, 0.72); // Midnight Sapphire
-                    dPal[2] = vec3(0.05, 0.44, 0.56); // Deep Ocean Cyan
-                    dPal[3] = vec3(0.18, 0.22, 0.66); // Indigo Velvet
-                    dPal[4] = vec3(0.05, 0.46, 0.38); // Velvet Emerald
-
-                    vec3 lRim = vec3(0.98, 0.99, 1.00);
-                    vec3 dRim = vec3(0.46, 0.78, 1.00);
-
-                    for (int i = 0; i < 5; i++) {
-                        float fi = float(i);
-                        float phase = fi * 1.38;
-                        float baseY = -0.82 + fi * 0.41;
-
-                        // Flowing S-curve wave spine
-                        float wave = 0.22 * sin(rp.x * (1.70 + fi * 0.14) + t * (0.58 + fi * 0.06) + phase)
-                                   + 0.11 * cos(rp.x * (3.15 - fi * 0.10) - t * 0.44 + phase * 1.4)
-                                   + 0.05 * sin(rp.x * 4.80 + t * 0.72 + fi);
-
-                        float d = rp.y - (baseY + wave);
-
-                        // Soft drop shadow cast upward onto the layer behind
-                        float above = smoothstep(-0.015, 0.035, d);
-                        float dropShadow = above * exp(-abs(d) * 7.2);
-                        col *= (1.0 - dropShadow * mix(0.20, 0.62, darkMix));
-
-                        // Smooth ribbon coverage mask
-                        float body = smoothstep(0.025, -0.020, d);
-                        if (body > 0.001) {
-                            // 3D curved silk cross-section shading
-                            float depthShade = exp(min(d, 0.0) * 2.15);
-                            float crestGlow  = exp(-abs(d + 0.025) * 15.0);
-                            float subFold    = 0.5 + 0.5 * sin(rp.x * 3.8 + d * 11.5 + t * 0.65 + phase);
-                            float silkSheen  = pow(subFold, 3.0) * exp(min(d, 0.0) * 1.4);
-
-                            vec3 lRibbon = mix(vec3(0.88, 0.92, 0.99), lPal[i], 0.55 + 0.38 * depthShade);
-                            lRibbon = mix(lRibbon, lRim, crestGlow * 0.68 + silkSheen * 0.28);
-                            lRibbon *= (0.84 + 0.20 * depthShade);
-
-                            vec3 dRibbon = dPal[i] * (0.34 + 0.78 * depthShade);
-                            dRibbon += dRim * (crestGlow * 0.55 + silkSheen * 0.22);
-
-                            vec3 ribbonCol = mix(lRibbon, dRibbon, darkMix);
-                            col = mix(col, ribbonCol, body);
-                        }
-                    }
-
-                    return col;
+                // Soft analytic Gaussian bloom (true optical blur at zero extra GPU cost)
+                float softOrb(vec2 p, vec2 center, float radius) {
+                    vec2 d = p - center;
+                    return exp(-dot(d, d) / (radius * radius));
                 }
 
                 // ------------------------------------------------------------
-                // STYLE 1: LIQUID PEARL (Pinched Iridescent Satin Creases)
+                // STYLE 0: LIQUID AURA (Dreamy Blurred Apple/Stripe Silk Mesh)
                 // ------------------------------------------------------------
-                vec3 renderLiquidPearl(vec2 uv, float t, float darkMix) {
-                    float aspect = uRes.x / max(uRes.y, 1.0);
-                    float scale = aspect < 0.85 ? 2.6 : 1.95;
-                    vec2 p = (uv - 0.5) * vec2(aspect, 1.0) * scale;
-                    p += vec2(uMouse.x * 0.16, -uMouse.y * 0.16 - uScroll * 0.55);
+                vec3 renderLiquidAura(vec2 p, float t, float darkMix, float blur) {
+                    // Gently warp space like silk floating in water
+                    vec2 q = p * mix(1.45, 1.05, blur);
+                    q += vec2(uMouse.x * 0.12, -uMouse.y * 0.12 - uScroll * 0.35);
 
-                    // Fluid curl warp
-                    vec2 q = p;
-                    q.x += 0.55 * sin(1.35 * q.y + t * 0.58);
-                    q.y += 0.55 * cos(1.25 * q.x - t * 0.48);
-                    q.x += 0.28 * sin(2.30 * q.y - t * 0.42 + 1.2);
-                    q.y += 0.28 * cos(2.15 * q.x + t * 0.36 + 0.9);
+                    float w1 = sin(q.y * 2.1 + t * 0.55) * 0.32;
+                    float w2 = cos(q.x * 2.0 - t * 0.48) * 0.32;
+                    vec2 fluid = q + vec2(w1, w2);
 
-                    // Sharp pinched silk ridges (creates unmistakable liquid-fabric lines)
-                    float r1 = 1.0 - abs(sin(q.x * 1.85 + q.y * 1.15 + t * 0.25));
-                    float r2 = 1.0 - abs(cos(q.y * 1.95 - q.x * 1.05 - t * 0.20));
-                    float ridgeA = pow(clamp(r1, 0.0, 1.0), 2.4);
-                    float ridgeB = pow(clamp(r2, 0.0, 1.0), 2.6);
-                    float specLine = pow(clamp(max(r1, r2), 0.0, 1.0), 7.5);
-                    float valley   = smoothstep(0.55, 0.0, max(ridgeA, ridgeB));
+                    float w3 = sin(fluid.y * 2.6 - t * 0.40 + 1.4) * 0.18;
+                    float w4 = cos(fluid.x * 2.4 + t * 0.36 + 0.9) * 0.18;
+                    vec2 silk = fluid + vec2(w3, w4);
 
-                    // Light Mode: Iridescent pearl silk with deep colour troughs
-                    vec3 lCol = vec3(0.94, 0.96, 1.00);
-                    lCol = mix(lCol, vec3(0.38, 0.44, 0.98), ridgeA * 0.72);
-                    lCol = mix(lCol, vec3(0.08, 0.70, 0.94), ridgeB * 0.65);
-                    lCol = mix(lCol, vec3(0.14, 0.84, 0.66), ridgeA * ridgeB * 0.85);
-                    lCol = mix(lCol, vec3(0.76, 0.82, 0.96), valley * 0.42);
-                    lCol += vec3(0.24, 0.26, 0.30) * specLine;
+                    // 4 wide orbiting Gaussian silk plumes (scaled cleanly for portrait & desktop)
+                    float rBase = mix(0.68, 0.98, blur);
+                    vec2 c1 = vec2(sin(t * 0.34) * 0.46,  cos(t * 0.28) * 0.58 + 0.18);
+                    vec2 c2 = vec2(cos(t * 0.30) * 0.48,  sin(t * 0.36) * 0.55 - 0.18);
+                    vec2 c3 = vec2(sin(t * 0.25 + 2.2) * 0.44, cos(t * 0.32 + 1.2) * 0.62);
+                    vec2 c4 = vec2(cos(t * 0.38 + 3.6) * 0.42, sin(t * 0.26 + 2.5) * 0.52);
 
-                    // Dark Mode: Obsidian base with luminous liquid-chrome silk veins
-                    vec3 dCol = vec3(0.025, 0.035, 0.080);
-                    dCol = mix(dCol, vec3(0.26, 0.20, 0.76), ridgeA * 0.78);
-                    dCol = mix(dCol, vec3(0.06, 0.48, 0.74), ridgeB * 0.72);
-                    dCol = mix(dCol, vec3(0.08, 0.62, 0.50), ridgeA * ridgeB * 0.75);
-                    dCol *= (0.72 + 0.38 * (1.0 - valley));
-                    dCol += vec3(0.38, 0.56, 0.88) * specLine * 0.72;
+                    float b1 = softOrb(silk * 0.72, c1, rBase);
+                    float b2 = softOrb(silk * 0.72, c2, rBase * 1.06);
+                    float b3 = softOrb(silk * 0.72, c3, rBase * 0.96);
+                    float b4 = softOrb(silk * 0.72, c4, rBase * 1.04);
+
+                    // Soft satin wave highlights gliding across the blurred aura
+                    float sheen = 0.5 + 0.5 * sin(silk.x * 2.1 + silk.y * 1.7 + t * 0.45);
+                    sheen = smoothstep(0.15, 0.95, sheen);
+
+                    // LIGHT MODE: Rich, vibrant silk blooms so colours glow cleanly behind high-opacity white glass
+                    vec3 lBase   = vec3(0.92, 0.95, 1.00);
+                    vec3 lIndigo = vec3(0.36, 0.38, 0.98);
+                    vec3 lSky    = vec3(0.08, 0.64, 0.98);
+                    vec3 lMint   = vec3(0.10, 0.82, 0.66);
+                    vec3 lViolet = vec3(0.58, 0.38, 0.98);
+
+                    vec3 lCol = lBase;
+                    lCol = mix(lCol, lIndigo, clamp(b1 * 0.88, 0.0, 0.86));
+                    lCol = mix(lCol, lSky,    clamp(b2 * 0.84, 0.0, 0.82));
+                    lCol = mix(lCol, lMint,   clamp(b3 * 0.76, 0.0, 0.74));
+                    lCol = mix(lCol, lViolet, clamp(b4 * 0.66, 0.0, 0.64));
+                    // Creamy satin luminescence across fold peaks
+                    lCol = mix(lCol, vec3(0.98, 0.99, 1.00), sheen * mix(0.26, 0.14, blur));
+
+                    // DARK MODE: Deep midnight base with lush blurred sapphire/indigo/teal plumes
+                    vec3 dBase   = vec3(0.024, 0.034, 0.082);
+                    vec3 dIndigo = vec3(0.24,  0.18,  0.68);
+                    vec3 dSky    = vec3(0.05,  0.38,  0.66);
+                    vec3 dMint   = vec3(0.04,  0.44,  0.38);
+                    vec3 dViolet = vec3(0.32,  0.14,  0.58);
+
+                    vec3 dCol = dBase;
+                    dCol += dIndigo * b1 * 0.68;
+                    dCol += dSky    * b2 * 0.60;
+                    dCol += dMint   * b3 * 0.48;
+                    dCol += dViolet * b4 * 0.45;
+                    dCol += vec3(0.07, 0.12, 0.22) * sheen * mix(0.65, 0.35, blur);
 
                     return mix(lCol, dCol, darkMix);
                 }
 
                 // ------------------------------------------------------------
-                // STYLE 2: SATIN WAVES (Flagship OS Flowing Pleated Curtains)
+                // STYLE 1: VELVET SILK (Soft-Blurred Flowing Satin Folds)
                 // ------------------------------------------------------------
-                vec3 renderSatinWaves(vec2 uv, float t, float darkMix) {
-                    float aspect = uRes.x / max(uRes.y, 1.0);
-                    vec2 p = (uv - 0.5) * vec2(aspect, 1.0) * (aspect < 0.85 ? 2.4 : 1.85);
-                    p += vec2(uMouse.x * 0.14, -uMouse.y * 0.14 - uScroll * 0.55);
+                vec3 renderVelvetSilk(vec2 p, float t, float darkMix, float blur) {
+                    // Smooth diagonal flow tuned for vertical phones and wide monitors
+                    vec2 r = mat2(0.84, -0.54, 0.54, 0.84) * p;
+                    r += vec2(uMouse.x * 0.10, -uMouse.y * 0.10 - uScroll * 0.38);
 
-                    // Sweeping diagonal pleats
-                    vec2 r = mat2(0.82, -0.57, 0.57, 0.82) * p;
-                    float bend = 0.45 * sin(r.x * 1.45 + t * 0.55) + 0.22 * cos(r.x * 2.6 - t * 0.40);
-                    float phase = (r.y + bend) * 4.8 + 0.75 * sin(r.x * 2.1 - t * 0.35);
+                    float freq = mix(2.8, 1.85, blur);
+                    vec2 q = r * freq;
+                    q.x += 0.52 * sin(q.y * 1.15 + t * 0.52);
+                    q.y += 0.52 * cos(q.x * 1.05 - t * 0.44);
+                    q.x += 0.24 * sin(q.y * 1.85 - t * 0.36 + 1.3);
+                    q.y += 0.24 * cos(q.x * 1.75 + t * 0.32 + 0.8);
 
-                    // Pleated wave height & analytic slope for crisp satin specular
-                    float fold = 0.5 + 0.5 * sin(phase);
-                    float slope = cos(phase);
-                    float highlight = pow(clamp(0.5 + 0.5 * slope, 0.0, 1.0), 5.0);
-                    float deepFold  = pow(clamp(1.0 - fold, 0.0, 1.0), 1.8);
+                    // Soft sinusoidal satin folds (zero harsh edges)
+                    float wave1 = 0.5 + 0.5 * sin(q.x * 1.35 + q.y * 0.90 + t * 0.28);
+                    float wave2 = 0.5 + 0.5 * cos(q.y * 1.45 - q.x * 0.85 - t * 0.24);
+                    float softFold = smoothstep(0.05, 0.95, wave1 * 0.6 + wave2 * 0.4);
+                    float glowCrest = pow(softFold, mix(2.6, 1.6, blur));
 
-                    float hueShift = 0.5 + 0.5 * sin(r.x * 1.15 - r.y * 0.85 + t * 0.25);
+                    // Light Mode: Saturated pearl-satin waves clearly visible through frosted glass
+                    vec3 lCol = vec3(0.91, 0.94, 1.00);
+                    lCol = mix(lCol, vec3(0.35, 0.40, 0.97), smoothstep(0.15, 0.90, wave1) * 0.72);
+                    lCol = mix(lCol, vec3(0.08, 0.68, 0.95), smoothstep(0.18, 0.92, wave2) * 0.64);
+                    lCol = mix(lCol, vec3(0.14, 0.84, 0.66), glowCrest * 0.52);
+                    lCol = mix(lCol, vec3(0.98, 0.99, 1.00), pow(glowCrest, 2.2) * 0.45);
 
-                    // Light Mode: Bright sculptural satin folds
-                    vec3 lTintA = vec3(0.38, 0.46, 0.98);
-                    vec3 lTintB = vec3(0.10, 0.74, 0.90);
-                    vec3 lTintC = vec3(0.16, 0.82, 0.65);
-                    vec3 lTint  = mix(mix(lTintA, lTintB, hueShift), lTintC, smoothstep(0.35, 0.95, uv.x));
+                    // Dark Mode: Calm velvet folds with silky soft cyan-indigo highlights
+                    vec3 dCol = vec3(0.022, 0.032, 0.078);
+                    dCol = mix(dCol, vec3(0.22, 0.18, 0.66), smoothstep(0.15, 0.92, wave1) * 0.72);
+                    dCol = mix(dCol, vec3(0.05, 0.42, 0.68), smoothstep(0.20, 0.95, wave2) * 0.60);
+                    dCol = mix(dCol, vec3(0.06, 0.52, 0.44), glowCrest * 0.44);
+                    dCol += vec3(0.16, 0.28, 0.48) * pow(glowCrest, 2.4) * 0.55;
 
-                    vec3 lCol = mix(vec3(0.95, 0.97, 1.00), lTint, 0.35 + 0.52 * fold);
-                    lCol = mix(lCol, vec3(0.68, 0.75, 0.94), deepFold * 0.45);
-                    lCol += vec3(0.22, 0.24, 0.28) * highlight;
+                    return mix(lCol, dCol, darkMix);
+                }
 
-                    // Dark Mode: Deep velvet pleats with glowing satin ridges
-                    vec3 dTintA = vec3(0.22, 0.18, 0.68);
-                    vec3 dTintB = vec3(0.05, 0.42, 0.66);
-                    vec3 dTintC = vec3(0.06, 0.50, 0.42);
-                    vec3 dTint  = mix(mix(dTintA, dTintB, hueShift), dTintC, smoothstep(0.35, 0.95, uv.x));
+                // ------------------------------------------------------------
+                // STYLE 2: AURORA DRIFT (Blurred Diagonal Silk Ribbons + Bokeh)
+                // ------------------------------------------------------------
+                vec3 renderAuroraDrift(vec2 p, float t, float darkMix, float blur) {
+                    vec2 q = p + vec2(uMouse.x * 0.10, -uMouse.y * 0.10 - uScroll * 0.40);
+                    vec2 r = mat2(0.76, -0.65, 0.65, 0.76) * q;
 
-                    vec3 dCol = mix(vec3(0.022, 0.032, 0.075), dTint, 0.18 + 0.78 * fold);
-                    dCol *= (1.0 - deepFold * 0.55);
-                    dCol += vec3(0.30, 0.50, 0.84) * highlight * 0.65;
+                    float spread = mix(0.28, 0.52, blur);
+                    float y1 = sin(r.x * 2.1 + t * 0.55) * 0.24 - 0.22;
+                    float y2 = cos(r.x * 1.8 - t * 0.46 + 1.2) * 0.26 + 0.02;
+                    float y3 = sin(r.x * 2.4 + t * 0.40 + 2.6) * 0.22 + 0.26;
+
+                    // Soft Gaussian-blurred sweeping silk curtains
+                    float band1 = exp(-pow((r.y - y1) / spread, 2.0));
+                    float band2 = exp(-pow((r.y - y2) / (spread * 1.15), 2.0));
+                    float band3 = exp(-pow((r.y - y3) / (spread * 1.05), 2.0));
+
+                    // Light Mode: Luminous blurred silk streams
+                    vec3 lCol = vec3(0.93, 0.96, 1.00);
+                    lCol = mix(lCol, vec3(0.38, 0.40, 0.98), band1 * 0.78);
+                    lCol = mix(lCol, vec3(0.06, 0.68, 0.96), band2 * 0.74);
+                    lCol = mix(lCol, vec3(0.12, 0.84, 0.66), band3 * 0.68);
+                    lCol += vec3(0.12, 0.14, 0.18) * (band1 * band2 + band2 * band3);
+
+                    // Dark Mode: Soft blurred northern-lights silk over deep obsidian
+                    vec3 dCol = vec3(0.020, 0.030, 0.075);
+                    dCol += vec3(0.28, 0.20, 0.76) * band1 * 0.62;
+                    dCol += vec3(0.06, 0.44, 0.72) * band2 * 0.58;
+                    dCol += vec3(0.06, 0.52, 0.44) * band3 * 0.50;
 
                     return mix(lCol, dCol, darkMix);
                 }
 
                 void main() {
-                    float t = uTime * 0.85;
+                    vec2 p = getNormCoord(vUv);
+                    float t = uTime * 0.90;
                     vec3 col;
 
                     if (uStyle == 0) {
-                        col = renderDrapedSilk(vUv, t, uDarkMix);
+                        col = renderLiquidAura(p, t, uDarkMix, uBlur);
                     } else if (uStyle == 1) {
-                        col = renderLiquidPearl(vUv, t, uDarkMix);
+                        col = renderVelvetSilk(p, t, uDarkMix, uBlur);
                     } else {
-                        col = renderSatinWaves(vUv, t, uDarkMix);
+                        col = renderAuroraDrift(p, t, uDarkMix, uBlur);
                     }
 
-                    // Apply Look Strength (Soft / Balanced / Vivid) around neutral theme anchor
-                    vec3 neutral = mix(vec3(0.93, 0.96, 1.00), vec3(0.03, 0.045, 0.10), uDarkMix);
-                    col = mix(neutral, col, uIntensity);
-
-                    // Invisible micro-dither to prevent 8-bit banding on mobile OLEDs
-                    float dither = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453) - 0.5;
-                    col += dither / 255.0;
+                    // Smooth Interleaved Gradient Noise dither (mobile mediump-safe, eliminates colour banding)
+                    float ign = fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(0.06711056, 0.00583715))));
+                    col += (ign - 0.5) / 255.0;
 
                     gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
                 }
@@ -751,13 +741,13 @@
 
         sizeRenderer(true);
 
-        // 3. Sync with Light/Dark Toggle
+        // 3. Theme Observer (syncs smoothly with Light / Dark toggle)
         const themeObserver = new MutationObserver(() => {
             state.targetDarkMix = document.documentElement.classList.contains('dark') ? 1 : 0;
         });
         themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
-        // 4. Input & Lifecycle Listeners
+        // 4. Listeners
         if (!isMobile) {
             window.addEventListener('pointermove', (e) => {
                 state.pointerX = (e.clientX / window.innerWidth) * 2 - 1;
@@ -769,7 +759,7 @@
             const nextY = window.scrollY || 0;
             const delta = Math.abs(nextY - state.scrollY);
             state.scrollY = nextY;
-            state.scrollBoost = Math.min(state.scrollBoost + delta * 0.0025, 0.85);
+            state.scrollBoost = Math.min(state.scrollBoost + delta * 0.002, 0.75);
         }, { passive: true });
 
         let resizeTimer = null;
@@ -791,8 +781,7 @@
             state.style = style;
             canvas.classList.toggle('canvas-hidden', style === 'off');
             if (style !== 'off') {
-                state.styleIdx = styleMap[style] ?? 0;
-                silkUniforms.uStyle.value = state.styleIdx;
+                silkUniforms.uStyle.value = styleMap[style] ?? 0;
             }
             document.querySelectorAll('.lab-style-btn').forEach(btn => {
                 btn.classList.toggle('lab-btn-active', btn.getAttribute('data-style') === style);
@@ -802,23 +791,23 @@
             }
         };
 
-        window.cycleIntensity = function() {
-            state.intensityIdx = (state.intensityIdx + 1) % intensitySteps.length;
-            const step = intensitySteps[state.intensityIdx];
-            state.targetIntensity = step.val;
-            const lbl = document.getElementById('intensity-label');
-            if (lbl) lbl.textContent = `Look: ${step.label}`;
+        window.cycleBlur = function() {
+            state.blurIdx = (state.blurIdx + 1) % blurSteps.length;
+            const step = blurSteps[state.blurIdx];
+            state.targetBlurAmount = step.val;
+            const lbl = document.getElementById('blur-label');
+            if (lbl) lbl.textContent = `Blur: ${step.label}`;
         };
 
         window.toggleFpsCap = function() {
-            state.fpsCap = state.fpsCap === 30 ? 60 : 30;
+            state.fpsCap = state.fpsCap === 0 ? 30 : 0;
             const lbl = document.getElementById('fps-cap-label');
-            if (lbl) lbl.textContent = `Cap: ${state.fpsCap} FPS`;
+            if (lbl) lbl.textContent = state.fpsCap === 0 ? 'Smooth (Native)' : 'Eco (30 FPS)';
         };
 
-        // 6. Smooth Render Loop
+        // 6. Native-Smooth Render Loop
         const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        let lastFrameMs = 0;
+        let lastFrameMs = performance.now();
         let simTime = 0;
         let fpsFrames = 0;
         let fpsWindowStart = performance.now();
@@ -830,16 +819,15 @@
 
             if (state.isHidden || state.style === 'off') return;
 
-            const minInterval = 1000 / state.fpsCap;
             const deltaMs = now - lastFrameMs;
-            if (deltaMs < minInterval - 1.5) return;
+            if (state.fpsCap > 0 && deltaMs < (1000 / state.fpsCap) - 1.5) return;
 
-            const dt = Math.min(deltaMs / 1000, 0.06);
+            const dt = Math.min(Math.max(deltaMs / 1000, 0.001), 0.05);
             lastFrameMs = now;
 
             state.scrollBoost *= Math.pow(0.08, dt);
             if (!prefersReduced) {
-                simTime += dt * (1.0 + state.scrollBoost * 0.5);
+                simTime += dt * (1.0 + state.scrollBoost * 0.45);
             }
 
             const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
@@ -848,16 +836,16 @@
             const easeFast = Math.min(1, dt * 6.5);
             const easeSoft = Math.min(1, dt * 4.5);
 
-            state.darkMix      += (state.targetDarkMix   - state.darkMix)      * easeFast;
-            state.intensity    += (state.targetIntensity - state.intensity)    * easeFast;
-            state.smoothScroll += (targetScroll          - state.smoothScroll) * easeSoft;
-            state.smoothX      += (state.pointerX        - state.smoothX)      * easeSoft;
-            state.smoothY      += (state.pointerY        - state.smoothY)      * easeSoft;
+            state.darkMix      += (state.targetDarkMix    - state.darkMix)      * easeFast;
+            state.blurAmount   += (state.targetBlurAmount - state.blurAmount)   * easeFast;
+            state.smoothScroll += (targetScroll           - state.smoothScroll) * easeSoft;
+            state.smoothX      += (state.pointerX         - state.smoothX)      * easeSoft;
+            state.smoothY      += (state.pointerY         - state.smoothY)      * easeSoft;
 
-            silkUniforms.uTime.value      = simTime;
-            silkUniforms.uDarkMix.value   = state.darkMix;
-            silkUniforms.uIntensity.value = state.intensity;
-            silkUniforms.uScroll.value    = state.smoothScroll;
+            silkUniforms.uTime.value    = simTime;
+            silkUniforms.uDarkMix.value = state.darkMix;
+            silkUniforms.uBlur.value    = state.blurAmount;
+            silkUniforms.uScroll.value  = state.smoothScroll;
             silkUniforms.uMouse.value.set(state.smoothX, state.smoothY);
 
             renderer.render(silkScene, silkCam);
