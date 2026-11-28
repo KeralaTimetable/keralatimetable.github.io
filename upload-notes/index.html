@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="google-site-verification" content="cPHgzg8741NBFQ5HszgVIPA3EMrKJLlj7IHcyLGM2Lo" />
+
+    <title>Upload KTU Notes & Top Contributors | Kerala Timetable</title>
+    <link rel="canonical" href="https://keralatimetable.in/upload-notes/" />
+    <meta name="description" content="Share your KTU B.Tech handwritten or printed study notes with 2 Lakh+ students. Get your name credited on the Notes Download Page and climb the Top Contributors Leaderboard.">
+    <meta name="keywords" content="upload ktu notes, share ktu study materials, ktu notes contributors, kerala timetable upload notes, ktu 2024 scheme notes">
+    <link rel="icon" href="/favicon.png" type="image/png">
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Kerala Timetable">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Upload KTU Notes & Top Contributors | Kerala Timetable">
+    <meta property="og:description" content="Contribute your KTU study notes, get credited on the official Notes Download Page, and rank on our Top Contributors Leaderboard.">
+    <meta property="og:url" content="https://keralatimetable.in/upload-notes/">
+    <meta property="og:image" content="https://keralatimetable.in/social-preview.png">
+
+    <!-- Tailwind & Fonts -->
+    <script src="/tailwind-local.js" onerror="this.onerror=null;this.src='https://cdn.tailwindcss.com';"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --apple-spring: cubic-bezier(0.22, 1, 0.36, 1);
+            --glassMaterialBackground: rgba(248, 250, 252, 0.62);
+            --glassMaterialShadowColor: rgba(15, 23, 42, 0.10);
+        }
+
+        html.dark {
+            --glassMaterialBackground: rgba(24, 30, 46, 0.68);
+            --glassMaterialShadowColor: rgba(0, 0, 0, 0.60);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            background:
+                radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.72) 0px, transparent 52%),
+                radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.60) 0px, transparent 52%),
+                radial-gradient(at 100% 100%, rgba(219, 234, 254, 0.60) 0px, transparent 52%),
+                radial-gradient(at 0% 100%, rgba(243, 232, 255, 0.55) 0px, transparent 52%),
+                #f4f7fc;
+            min-height: 100vh;
+        }
+
+        .font-mono-code { font-family: 'Fira Code', monospace; }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(20px, -14px, 0) scale(1.05); }
+        }
+        .ambient-orb { animation: floatOrb 16s ease-in-out infinite; will-change: transform; }
+        .ambient-orb-delayed { animation: floatOrb 20s ease-in-out 2s infinite reverse; will-change: transform; }
+
+        .real-glass {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.80) 0%, rgba(255, 255, 255, 0.56) 100%);
+            backdrop-filter: blur(26px) saturate(190%);
+            -webkit-backdrop-filter: blur(26px) saturate(190%);
+            border: none;
+            box-shadow:
+                inset 1.5px 1.5px 0 -0.5px #fffffff2,
+                inset -1.5px -1.5px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000014,
+                0 18px 40px -12px rgba(15, 23, 42, 0.08);
+        }
+
+        .inner-glass {
+            background: rgba(255, 255, 255, 0.68);
+            border: none;
+            box-shadow:
+                inset 1.2px 1.2px 0 -0.5px #fffffff2,
+                inset -1.2px -1.2px 0 -0.5px #fff9,
+                inset 0 0 0 0.5px #00000010;
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.86);
+            border: 1.5px solid rgba(15, 23, 42, 0.12);
+            color: #0f172a;
+            transition: all 0.2s ease;
+        }
+        .glass-input:focus {
+            background: #ffffff;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.14);
+            outline: none;
+        }
+
+        select.custom-select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23475569%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 0.65rem auto;
+            padding-right: 2.4rem;
+        }
+
+        /* Drag & Drop Zone */
+        .drop-zone {
+            border: 2px dashed rgba(99, 102, 241, 0.35);
+            background: rgba(238, 242, 255, 0.45);
+            transition: all 0.24s var(--apple-spring);
+        }
+        .drop-zone:hover,
+        .drop-zone.drag-over {
+            border-color: #4f46e5;
+            background: rgba(224, 231, 255, 0.65);
+            transform: scale(1.008);
+        }
+        html.dark .drop-zone {
+            border-color: rgba(129, 140, 248, 0.35) !important;
+            background: rgba(30, 41, 59, 0.55) !important;
+        }
+        html.dark .drop-zone:hover,
+        html.dark .drop-zone.drag-over {
+            border-color: #818cf8 !important;
+            background: rgba(49, 46, 129, 0.35) !important;
+        }
+
+        /* Segmented Tab Pill States */
+        .tab-btn-active {
+            background: #4f46e5 !important;
+            color: #ffffff !important;
+            box-shadow: 0 8px 18px -5px rgba(79, 70, 229, 0.48) !important;
+        }
+
+        .mode-btn-active {
+            background: #4f46e5 !important;
+            color: #ffffff !important;
+            border-color: transparent !important;
+            box-shadow: 0 6px 14px -4px rgba(79, 70, 229, 0.45) !important;
+        }
+
+        /* Podium Glows */
+        .podium-gold {
+            background: linear-gradient(155deg, rgba(254, 249, 195, 0.88) 0%, rgba(255, 255, 255, 0.72) 100%);
+            border: 1.5px solid rgba(234, 179, 8, 0.45);
+        }
+        .podium-silver {
+            background: linear-gradient(155deg, rgba(241, 245, 249, 0.90) 0%, rgba(255, 255, 255, 0.72) 100%);
+            border: 1.5px solid rgba(148, 163, 184, 0.45);
+        }
+        .podium-bronze {
+            background: linear-gradient(155deg, rgba(255, 237, 213, 0.88) 0%, rgba(255, 255, 255, 0.72) 100%);
+            border: 1.5px solid rgba(249, 115, 22, 0.40);
+        }
+        html.dark .podium-gold {
+            background: linear-gradient(155deg, rgba(113, 63, 18, 0.38) 0%, rgba(15, 23, 42, 0.88) 100%) !important;
+            border-color: rgba(250, 204, 21, 0.42) !important;
+        }
+        html.dark .podium-silver {
+            background: linear-gradient(155deg, rgba(51, 65, 85, 0.48) 0%, rgba(15, 23, 42, 0.88) 100%) !important;
+            border-color: rgba(148, 163, 184, 0.38) !important;
+        }
+        html.dark .podium-bronze {
+            background: linear-gradient(155deg, rgba(124, 45, 18, 0.38) 0%, rgba(15, 23, 42, 0.88) 100%) !important;
+            border-color: rgba(251, 146, 60, 0.38) !important;
+        }
+
+        /* Autocomplete Dropdown */
+        .ac-dropdown {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(99, 102, 241, 0.22);
+            box-shadow: 0 18px 36px -8px rgba(15, 23, 42, 0.16);
+        }
+        html.dark .ac-dropdown {
+            background: rgba(15, 23, 42, 0.97) !important;
+            border-color: rgba(129, 140, 248, 0.30) !important;
+        }
+
+        .ot-press { transition: transform 0.16s var(--apple-spring); }
+        .ot-press:not(:disabled):active { transform: scale(0.95); transition-duration: 80ms; }
+
+        @keyframes fadeUpSoft {
+            0% { opacity: 0; transform: translate3d(0, 14px, 0) scale(0.99); }
+            100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+        }
+        .fade-up { animation: fadeUpSoft 0.42s var(--apple-spring) both; }
+    </style>
+</head>
+
+<body class="text-slate-800 antialiased flex flex-col min-h-screen relative selection:bg-indigo-600 selection:text-white">
+
+    <!-- Global Sticky Liquid Glass Header -->
+    <div id="navigation-container" class="z-50 sticky top-0 w-full"></div>
+
+    <!-- ColorOS Live Capsule -->
+    <div id="coloros-live-capsule"></div>
+
+    <!-- Ambient Orbs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+        <div class="ambient-orb absolute -top-16 -left-16 w-80 h-80 bg-indigo-400/22 rounded-full blur-[85px]"></div>
+        <div class="ambient-orb-delayed absolute top-1/3 -right-16 w-80 h-80 bg-emerald-400/18 rounded-full blur-[90px]"></div>
+    </div>
+
+    <main class="flex-grow w-full max-w-4xl mx-auto px-3.5 sm:px-6 pt-7 sm:pt-11 pb-16 relative z-10">
+
+        <!-- HERO HEADER -->
+        <div class="text-center mb-7 sm:mb-8 fade-up">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50/90 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-300 text-[11px] font-extrabold uppercase tracking-wider mb-3.5 shadow-sm">
+                <i class="fas fa-heart text-rose-500"></i>
+                <span>Built By KTU Students, For KTU Students</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-3">
+                Share Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500">KTU Notes</span>
+            </h1>
+
+            <p class="text-slate-600 font-medium text-xs sm:text-base max-w-xl mx-auto leading-relaxed">
+                Upload your handwritten or typed study notes to help 2 Lakh+ students. Once reviewed, your name will be credited on the official <strong>Notes Download Page</strong> and featured on our <strong>Top Contributors Rank</strong>.
+            </p>
+        </div>
+
+        <!-- LIQUID GLASS SEGMENTED TAB SWITCHER -->
+        <div class="flex justify-center mb-6 sm:mb-8 fade-up" style="animation-delay: 60ms;">
+            <div id="upload-tab-pill" class="glass-pill rounded-full p-1.5 inline-grid grid-cols-2 gap-1.5 w-full max-w-sm">
+                <button type="button" id="tab-btn-upload" onclick="switchTab('upload')"
+                        class="ot-press relative z-10 tab-btn-active py-2.5 px-4 rounded-full text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition-all">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Upload Notes</span>
+                </button>
+                <button type="button" id="tab-btn-contributors" onclick="switchTab('contributors')"
+                        class="ot-press relative z-10 py-2.5 px-4 rounded-full text-xs sm:text-sm font-extrabold text-slate-600 hover:text-indigo-600 flex items-center justify-center gap-2 transition-all">
+                    <i class="fas fa-trophy text-amber-500"></i>
+                    <span>Top Contributors</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================================================================
+             TAB 1: UPLOAD NOTES FORM + WHY CONTRIBUTE CARDS
+             ================================================================== -->
+        <section id="panel-upload" class="fade-up" style="animation-delay: 100ms;">
+            <!-- Quick Benefit Strip -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+                <div class="inner-glass rounded-2xl p-3.5 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-200">
+                        <i class="fas fa-id-badge text-sm"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <p class="text-xs font-extrabold text-slate-800">Download Page Credit</p>
+                        <p class="text-[11px] text-slate-500 font-medium leading-tight">Your name shown on the notes page</p>
+                    </div>
+                </div>
+
+                <div class="inner-glass rounded-2xl p-3.5 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-200">
+                        <i class="fas fa-medal text-sm"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <p class="text-xs font-extrabold text-slate-800">Top Contributors Rank</p>
+                        <p class="text-[11px] text-slate-500 font-medium leading-tight">Climb the leaderboard after review</p>
+                    </div>
+                </div>
+
+                <div class="inner-glass rounded-2xl p-3.5 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-200">
+                        <i class="fas fa-shield-alt text-sm"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <p class="text-xs font-extrabold text-slate-800">Reviewed & Verified</p>
+                        <p class="text-[11px] text-slate-500 font-medium leading-tight">Manually checked before publishing</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAIN UPLOAD GLASS CARD -->
+            <div class="real-glass rounded-[2rem] p-5 sm:p-8 md:p-9 relative overflow-hidden">
+                <form id="uploadNotesForm" onsubmit="submitNotesForm(event)" class="space-y-6">
+
+                    <!-- STEP 1: CONTRIBUTOR DETAILS -->
+                    <div>
+                        <div class="flex items-center gap-2 mb-3.5">
+                            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-[11px] font-black flex items-center justify-center shrink-0">1</span>
+                            <h2 class="text-sm sm:text-base font-black text-slate-900 tracking-tight">Your Details (For Notes Page Credit)</h2>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="contribName" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                                    Full Name <span class="text-indigo-500">*</span>
+                                </label>
+                                <input type="text" id="contribName" required placeholder="e.g. Rahul Krishnan"
+                                       class="glass-input w-full text-sm font-semibold rounded-xl px-4 py-3">
+                            </div>
+
+                            <div>
+                                <label for="contribCollege" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                                    College Name <span class="text-slate-400 normal-case font-medium">(Optional)</span>
+                                </label>
+                                <input type="text" id="contribCollege" placeholder="e.g. CET Trivandrum / GEC Thrissur"
+                                       class="glass-input w-full text-sm font-semibold rounded-xl px-4 py-3">
+                            </div>
+
+                            <div>
+                                <label for="contribWhatsapp" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                                    WhatsApp Number <span class="text-indigo-500">*</span>
+                                </label>
+                                <input type="tel" id="contribWhatsapp" required placeholder="e.g. +91 98765 43210"
+                                       class="glass-input w-full text-sm font-semibold rounded-xl px-4 py-3">
+                            </div>
+
+                            <div>
+                                <label for="contribEmail" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                                    Email Address <span class="text-slate-400 normal-case font-medium">(Optional)</span>
+                                </label>
+                                <input type="email" id="contribEmail" placeholder="e.g. rahul@email.com"
+                                       class="glass-input w-full text-sm font-semibold rounded-xl px-4 py-3">
+                            </div>
+                        </div>
+
+                        <label class="mt-3.5 inline-flex items-center gap-2.5 cursor-pointer select-none px-1">
+                            <input type="checkbox" id="creditOptIn" checked class="w-4 h-4 rounded accent-indigo-600 cursor-pointer">
+                            <span class="text-xs font-bold text-slate-600">
+                                Display my name on the published <strong>Notes Download Page</strong> &amp; <strong>Top Contributors Leaderboard</strong> after review
+                            </span>
+                        </label>
+                    </div>
+
+                    <hr class="border-slate-200/70 dark:border-white/10">
+
+                    <!-- STEP 2: ACADEMIC & NOTES DETAILS -->
+                    <div>
+                        <div class="flex items-center gap-2 mb-3.5">
+                            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-[11px] font-black flex items-center justify-center shrink-0">2</span>
+                            <h2 class="text-sm sm:text-base font-black text-slate-900 tracking-tight">Notes Details</h2>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label for="noteScheme" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                                    Scheme <span class="text-indigo-500">*</span>
+                                </label>
+                                <select id="noteScheme" required class="custom-select glass-input w-full text-sm font-semibold rounded-xl px-4 py-3 cursor-pointer">
+                                    <option value="2024 Scheme" selected>2024 Scheme</option>
+                                    <option value="2019 Scheme">2019 Scheme</option>
+                                    <option value="Other / Common">Other / Common</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="noteSemester" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                                    Semester <span class="text-indigo-500">*</span>
+                                </label>
+                                <select id="noteSemester" required class="custom-select glass-input w-full text-sm font-semibold rounded-xl px-4 py-3 cursor-pointer">
+                                    <option value="" disabled selected>Select Semester</option>
+                                    <option value="S1">Semester 1 (S1)</option>
+                                    <option value="S2">Semester 2 (S2)</option>
+                                    <option value="S3">Semester 3 (S3)</option>
+                                    <option value="S4">Semester 4 (S4)</option>
+                                    <option value="S5">Semester 5 (S5)</option>
+                                    <option value="S6">Semester 6 (S6)</option>
+                                    <option value="S7">Semester 7 (S7)</option>
+                                    <option value="S8">Semester 8 (S8)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="noteBranch" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                                    Branch <span class="text-indigo-500">*</span>
+                                </label>
+                                <select id="noteBranch" required class="custom-select glass-input w-full text-sm font-semibold rounded-xl px-4 py-3 cursor-pointer">
+                                    <option value="" disabled selected>Select Branch</option>
+                                    <option value="CSE">Computer Science (CSE)</option>
+                                    <option value="ECE">Electronics &amp; Comm (ECE)</option>
+                                    <option value="EEE">Electrical &amp; Electronics (EEE)</option>
+                                    <option value="ME">Mechanical Engg (ME)</option>
+                                    <option value="CE">Civil Engineering (CE)</option>
+                                    <option value="IT">Information Technology (IT)</option>
+                                    <option value="AI & ML">AI &amp; Machine Learning</option>
+                                    <option value="AI & DS">AI &amp; Data Science</option>
+                                    <option value="Common / Group A-D">Common / First Year Group</option>
+                                    <option value="Other">Other Branch</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Subject & Course Code with KTUFlow Live Autocomplete -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div class="relative" id="subject-ac-wrapper">
+                                <label for="noteSubject" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                                    Course Code &amp; Subject Name <span class="text-indigo-500">*</span>
+                                </label>
+                                <input type="text" id="noteSubject" required autocomplete="off"
+                                       placeholder="Type code or subject (e.g. PCCST303 Data Structures)"
+                                       class="glass-input w-full text-sm font-semibold rounded-xl px-4 py-3">
+                                <div id="subject-ac-list" class="ac-dropdown hidden absolute left-0 right-0 top-full mt-1.5 rounded-2xl p-1.5 z-40 max-h-52 overflow-y-auto divide-y divide-slate-100 dark:divide-white/5"></div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label for="noteModule" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                                        Module <span class="text-indigo-500">*</span>
+                                    </label>
+                                    <select id="noteModule" required class="custom-select glass-input w-full text-sm font-semibold rounded-xl px-3.5 py-3 cursor-pointer">
+                                        <option value="All Modules (Full)">All Modules</option>
+                                        <option value="Module 1">Module 1</option>
+                                        <option value="Module 2">Module 2</option>
+                                        <option value="Module 3">Module 3</option>
+                                        <option value="Module 4">Module 4</option>
+                                        <option value="Module 5">Module 5</option>
+                                        <option value="Important Q&A / Formula Sheet">Q&amp;A / Formulas</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="noteType" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                                        Format
+                                    </label>
+                                    <select id="noteType" class="custom-select glass-input w-full text-sm font-semibold rounded-xl px-3.5 py-3 cursor-pointer">
+                                        <option value="Handwritten Notes">Handwritten</option>
+                                        <option value="Typed / Printed Notes">Typed / PDF</option>
+                                        <option value="Short Notes / Capsule">Short Notes</option>
+                                        <option value="Solved PYQs">Solved PYQs</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="noteDescription" class="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
+                                Extra Notes / Remarks <span class="text-slate-400 normal-case font-medium">(Optional)</span>
+                            </label>
+                            <textarea id="noteDescription" rows="2"
+                                      placeholder="Mention if it includes solved university questions, teacher slides, or specific module highlights..."
+                                      class="glass-input w-full text-sm font-medium rounded-xl px-4 py-2.5 resize-none leading-relaxed"></textarea>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-200/70 dark:border-white/10">
+
+                    <!-- STEP 3: DUAL UPLOAD MODE (DIRECT FILES OR DRIVE LINK) -->
+                    <div>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
+                            <div class="flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-[11px] font-black flex items-center justify-center shrink-0">3</span>
+                                <h2 class="text-sm sm:text-base font-black text-slate-900 tracking-tight">Attach Notes</h2>
+                            </div>
+
+                            <div class="inline-flex items-center gap-1.5 p-1 rounded-full inner-glass">
+                                <button type="button" id="mode-btn-file" onclick="setUploadMode('file')"
+                                        class="ot-press mode-btn-active px-3 py-1 rounded-full text-[11px] font-extrabold transition-all flex items-center gap-1.5">
+                                    <i class="fas fa-file-pdf text-[10px]"></i>
+                                    <span>Direct Files</span>
+                                </button>
+                                <button type="button" id="mode-btn-link" onclick="setUploadMode('link')"
+                                        class="ot-press px-3 py-1 rounded-full text-[11px] font-extrabold text-slate-600 hover:text-indigo-600 transition-all flex items-center gap-1.5">
+                                    <i class="fab fa-google-drive text-[10px]"></i>
+                                    <span>Drive Link</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- MODE A: DIRECT FILE UPLOAD -->
+                        <div id="upload-mode-file">
+                            <div id="drop-zone" onclick="document.getElementById('noteFilesInput').click()"
+                                 class="drop-zone rounded-2xl p-6 sm:p-8 text-center cursor-pointer select-none">
+                                <input type="file" id="noteFilesInput" accept=".pdf,image/*" multiple class="hidden">
+                                <div class="w-12 h-12 rounded-2xl bg-indigo-100 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 flex items-center justify-center mx-auto mb-3 text-xl shadow-sm">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <p class="text-sm font-extrabold text-slate-800">Tap to choose PDFs or Images</p>
+                                <p class="text-[11px] sm:text-xs font-medium text-slate-500 mt-1">
+                                    Supports PDF, JPG, PNG • Up to <strong>10 files</strong> (Max <strong>45 MB</strong> total)
+                                </p>
+                                <p class="text-[10px] font-bold text-indigo-600 dark:text-indigo-300 mt-2">
+                                    Larger than 45 MB? Switch to the "Drive Link" option above.
+                                </p>
+                            </div>
+
+                            <!-- Selected Files Preview Chips -->
+                            <div id="selected-files-wrap" class="hidden mt-3.5 space-y-2">
+                                <div class="flex items-center justify-between text-[11px] font-extrabold text-slate-500 px-1">
+                                    <span id="selected-files-summary">0 files selected</span>
+                                    <button type="button" onclick="clearSelectedFiles()" class="text-rose-500 hover:underline">Clear all</button>
+                                </div>
+                                <div id="selected-files-list" class="space-y-1.5"></div>
+                            </div>
+                        </div>
+
+                        <!-- MODE B: GOOGLE DRIVE / ONEDRIVE LINK -->
+                        <div id="upload-mode-link" class="hidden space-y-3">
+                            <div class="px-3.5 py-2.5 rounded-xl bg-amber-50/90 dark:bg-amber-950/35 border border-amber-200/80 dark:border-amber-500/25 text-[11px] font-bold text-amber-800 dark:text-amber-200 flex items-start gap-2">
+                                <i class="fas fa-info-circle text-amber-500 mt-0.5 shrink-0"></i>
+                                <span>Make sure your Google Drive / OneDrive link is set to <strong>"Anyone with the link can view"</strong> so our team can review it quickly.</span>
+                            </div>
+
+                            <div id="drive-links-container" class="space-y-2.5">
+                                <div class="flex items-center gap-2 drive-link-row">
+                                    <input type="url" name="driveLink" placeholder="https://drive.google.com/file/d/..."
+                                           class="glass-input w-full text-sm font-semibold rounded-xl px-4 py-3">
+                                </div>
+                            </div>
+
+                            <button type="button" id="add-link-btn" onclick="addDriveLinkRow()"
+                                    class="ot-press inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full inner-glass text-[11px] font-extrabold text-indigo-600 hover:text-indigo-700">
+                                <i class="fas fa-plus text-[9px]"></i>
+                                <span>Add Another Link (Max 10)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CONFIRMATION & SUBMIT -->
+                    <div class="pt-1 space-y-4">
+                        <label class="flex items-start gap-2.5 cursor-pointer select-none px-1">
+                            <input type="checkbox" id="confirmOriginal" required class="w-4 h-4 mt-0.5 rounded accent-indigo-600 cursor-pointer shrink-0">
+                            <span class="text-xs font-semibold text-slate-600 leading-relaxed">
+                                I confirm these notes are clear, helpful for KTU students, and safe to publish on Kerala Timetable with my name credited on the download page.
+                            </span>
+                        </label>
+
+                        <button type="submit" id="submitNotesBtn"
+                                class="ot-press w-full bg-gradient-to-r from-indigo-600 via-blue-600 to-emerald-500 hover:brightness-105 text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 text-sm">
+                            <i class="fas fa-paper-plane text-xs"></i>
+                            <span>Submit Notes for Review</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- SUCCESS OVERLAY -->
+                <div id="upload-success-state" class="hidden absolute inset-0 real-glass bg-white/95 dark:bg-slate-900/95 rounded-[2rem] flex flex-col items-center justify-center p-7 sm:p-10 text-center z-30 fade-up">
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mb-4 shadow-sm border border-emerald-200">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">Notes Received!</h3>
+                    <p class="text-xs sm:text-sm text-slate-500 max-w-md leading-relaxed">
+                        Thank you for contributing to <strong>Kerala Timetable</strong>! Our team will review your notes shortly. Once published, your name will be credited on the <strong>Notes Download Page</strong> and added to the <strong>Top Contributors Leaderboard</strong>.
+                    </p>
+                    <div class="flex flex-wrap items-center justify-center gap-2.5 mt-6">
+                        <button type="button" onclick="resetUploadForm()" class="ot-press px-5 py-2.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-extrabold shadow-md">
+                            Upload More Notes
+                        </button>
+                        <button type="button" onclick="resetUploadForm(); switchTab('contributors');" class="ot-press px-5 py-2.5 rounded-full inner-glass text-indigo-600 text-xs font-extrabold">
+                            View Top Contributors
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             TAB 2: TOP CONTRIBUTORS RANK LEADERBOARD
+             ================================================================== -->
+        <section id="panel-contributors" class="hidden fade-up">
+            <!-- Community Impact Stats -->
+            <div class="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
+                <div class="real-glass rounded-2xl p-4 sm:p-5 flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg border border-indigo-200 shrink-0">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div>
+                        <p id="stat-total-uploads" class="text-xl sm:text-2xl font-black text-slate-900 leading-none">0</p>
+                        <p class="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Approved Notes</p>
+                    </div>
+                </div>
+
+                <div class="real-glass rounded-2xl p-4 sm:p-5 flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-lg border border-amber-200 shrink-0">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <p id="stat-total-contributors" class="text-xl sm:text-2xl font-black text-slate-900 leading-none">0</p>
+                        <p class="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Top Contributors</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top 3 Podium -->
+            <div id="contributors-podium" class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 mb-6"></div>
+
+            <!-- Full Ranked Leaderboard List -->
+            <div id="contributors-list-card" class="real-glass rounded-[2rem] p-5 sm:p-7">
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-3.5 mb-4 border-b border-slate-200/70 dark:border-white/10">
+                    <div>
+                        <h2 class="text-base sm:text-lg font-black text-slate-900">Hall of Fame Rankings</h2>
+                        <p class="text-[11px] font-semibold text-slate-500">Updated manually after each approved notes upload</p>
+                    </div>
+                    <button type="button" onclick="switchTab('upload')" class="ot-press px-3.5 py-1.5 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-extrabold flex items-center gap-1.5 shadow-sm">
+                        <i class="fas fa-plus text-[9px]"></i>
+                        <span>Join Leaderboard</span>
+                    </button>
+                </div>
+
+                <div id="contributors-full-list" class="space-y-2.5"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Frosted Footer -->
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/60 backdrop-blur-md py-6 text-center relative z-10">
+        <div class="max-w-3xl mx-auto px-4">
+            <p class="text-slate-500 text-xs font-medium">
+                <strong class="text-slate-800">Kerala Timetable</strong> • Student-Powered KTU Notes &amp; Study Resource Hub.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Global Site Components & Contributors Config -->
+    <script src="/components.js?v=25" onerror="this.onerror=null;this.src='../components.js';"></script>
+    <script src="./contributors-config.js?v=1"></script>
+
+    <script>
+        if (typeof loadNavigation === 'function') {
+            loadNavigation('notes', '', false);
+        }
+
+        const HF_AUTH_URL = "https://keralatimetable-ktu-papers-api.hf.space/telegram-auth";
+        const MAX_FILES = 10;
+        const MAX_TOTAL_BYTES = 45 * 1024 * 1024; // 45 MB safe ceiling for Telegram Bot API (50 MB limit)
+
+        let uploadMode = 'file';
+        let selectedFiles = [];
+        let flatCatalogSubjects = null;
+
+        // =====================================================================
+        // 1. TAB SWITCHING & URL SYNC (?tab=contributors)
+        // =====================================================================
+        function switchTab(tab) {
+            const isUpload = tab !== 'contributors';
+            document.getElementById('panel-upload').classList.toggle('hidden', !isUpload);
+            document.getElementById('panel-contributors').classList.toggle('hidden', isUpload);
+
+            const btnUp = document.getElementById('tab-btn-upload');
+            const btnCo = document.getElementById('tab-btn-contributors');
+
+            btnUp.classList.toggle('tab-btn-active', isUpload);
+            btnUp.classList.toggle('text-slate-600', !isUpload);
+            btnCo.classList.toggle('tab-btn-active', !isUpload);
+            btnCo.classList.toggle('text-slate-600', isUpload);
+
+            try {
+                const url = isUpload ? window.location.pathname : `${window.location.pathname}?tab=contributors`;
+                window.history.replaceState({}, '', url);
+            } catch {}
+        }
+
+        // =====================================================================
+        // 2. DUAL UPLOAD MODE (DIRECT FILES vs GOOGLE DRIVE LINKS)
+        // =====================================================================
+        function setUploadMode(mode) {
+            uploadMode = mode === 'link' ? 'link' : 'file';
+            document.getElementById('upload-mode-file').classList.toggle('hidden', uploadMode !== 'file');
+            document.getElementById('upload-mode-link').classList.toggle('hidden', uploadMode !== 'link');
+
+            const btnFile = document.getElementById('mode-btn-file');
+            const btnLink = document.getElementById('mode-btn-link');
+            btnFile.classList.toggle('mode-btn-active', uploadMode === 'file');
+            btnFile.classList.toggle('text-slate-600', uploadMode !== 'file');
+            btnLink.classList.toggle('mode-btn-active', uploadMode === 'link');
+            btnLink.classList.toggle('text-slate-600', uploadMode !== 'link');
+        }
+
+        function formatBytes(bytes) {
+            if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+            return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+        }
+
+        function addFilesToSelection(fileList) {
+            const incoming = Array.from(fileList || []);
+            if (!incoming.length) return;
+
+            for (const f of incoming) {
+                if (selectedFiles.length >= MAX_FILES) {
+                    window.KTUFlow?.capsule('amber', `Maximum ${MAX_FILES} files allowed per submission`);
+                    break;
+                }
+                const alreadyExists = selectedFiles.some(x => x.name === f.name && x.size === f.size);
+                if (!alreadyExists) selectedFiles.push(f);
+            }
+
+            const totalBytes = selectedFiles.reduce((sum, f) => sum + f.size, 0);
+            if (totalBytes > MAX_TOTAL_BYTES) {
+                window.KTUFlow?.capsule('amber', 'Total exceeds 45 MB — use Drive Link tab for large PDFs!');
+            }
+            renderSelectedFiles();
+        }
+
+        function removeSelectedFile(index) {
+            selectedFiles.splice(index, 1);
+            renderSelectedFiles();
+        }
+
+        function clearSelectedFiles() {
+            selectedFiles = [];
+            const input = document.getElementById('noteFilesInput');
+            if (input) input.value = '';
+            renderSelectedFiles();
+        }
+
+        function renderSelectedFiles() {
+            const wrap = document.getElementById('selected-files-wrap');
+            const listEl = document.getElementById('selected-files-list');
+            const summaryEl = document.getElementById('selected-files-summary');
+
+            if (!selectedFiles.length) {
+                wrap.classList.add('hidden');
+                listEl.innerHTML = '';
+                return;
+            }
+
+            const totalBytes = selectedFiles.reduce((sum, f) => sum + f.size, 0);
+            const overLimit = totalBytes > MAX_TOTAL_BYTES;
+            wrap.classList.remove('hidden');
+            summaryEl.innerHTML = `${selectedFiles.length} ${selectedFiles.length === 1 ? 'file' : 'files'} • <span class="${overLimit ? 'text-rose-600' : 'text-indigo-600'}">${formatBytes(totalBytes)} / 45 MB</span>`;
+
+            listEl.innerHTML = selectedFiles.map((f, idx) => {
+                const isPdf = f.name.toLowerCase().endsWith('.pdf') || f.type === 'application/pdf';
+                return `
+                    <div class="inner-glass rounded-xl px-3.5 py-2 flex items-center justify-between gap-2.5">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <i class="fas ${isPdf ? 'fa-file-pdf text-rose-500' : 'fa-file-image text-indigo-500'} text-sm shrink-0"></i>
+                            <span class="text-xs font-bold text-slate-800 truncate">${escapeHtml(f.name)}</span>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="text-[10px] font-mono-code font-bold text-slate-500">${formatBytes(f.size)}</span>
+                            <button type="button" onclick="removeSelectedFile(${idx})" aria-label="Remove file"
+                                    class="w-6 h-6 rounded-full bg-rose-50 hover:bg-rose-500 text-rose-500 hover:text-white flex items-center justify-center text-[10px] transition-colors">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function addDriveLinkRow() {
+            const container = document.getElementById('drive-links-container');
+            const rows = container.querySelectorAll('.drive-link-row');
+            if (rows.length >= MAX_FILES) {
+                window.KTUFlow?.capsule('amber', 'Maximum 10 links per submission');
+                return;
+            }
+            const row = document.createElement('div');
+            row.className = 'flex items-center gap-2 drive-link-row fade-up';
+            row.innerHTML = `
+                <input type="url" name="driveLink" placeholder="https://drive.google.com/..."
+                       class="glass-input w-full text-sm font-semibold rounded-xl px-4 py-3">
+                <button type="button" onclick="this.parentElement.remove()" aria-label="Remove link"
+                        class="ot-press w-10 h-10 rounded-xl bg-rose-50 hover:bg-rose-500 text-rose-500 hover:text-white flex items-center justify-center shrink-0 transition-colors">
+                    <i class="fas fa-trash-alt text-xs"></i>
+                </button>
+            `;
+            container.appendChild(row);
+        }
+
+        // =====================================================================
+        // 3. KTUFLOW PROFILE AUTO-FILL & SUBJECT CATALOG AUTOCOMPLETE
+        // =====================================================================
+        function escapeHtml(str = '') {
+            return String(str)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
+        function escapeTgHTML(str = '') {
+            return String(str)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        async function loadCatalogSubjects() {
+            if (flatCatalogSubjects) return flatCatalogSubjects;
+            try {
+                const data = window.KTUFlow ? await window.KTUFlow.getCatalog() : null;
+                if (!data || !data.catalog) return [];
+                const seen = new Set();
+                flatCatalogSubjects = [];
+                Object.keys(data.catalog).forEach(scheme => {
+                    const branches = data.catalog[scheme] || {};
+                    Object.keys(branches).forEach(b => {
+                        const sems = branches[b] || {};
+                        Object.keys(sems).forEach(s => {
+                            (sems[s] || []).forEach(subj => {
+                                if (!subj.course_code) return;
+                                const code = subj.course_code.toUpperCase();
+                                if (!seen.has(code)) {
+                                    seen.add(code);
+                                    flatCatalogSubjects.push({ code, name: subj.subject_name || '' });
+                                }
+                            });
+                        });
+                    });
+                });
+                return flatCatalogSubjects;
+            } catch {
+                return [];
+            }
+        }
+
+        function pickSubjectSuggestion(code, name) {
+            const input = document.getElementById('noteSubject');
+            const listEl = document.getElementById('subject-ac-list');
+            if (input) input.value = `${code} - ${name}`;
+            if (listEl) listEl.classList.add('hidden');
+        }
+
+        // =====================================================================
+        // 4. TELEGRAM DELIVERY PIPELINE (Exact HF Auth + Smart 1-File / Group)
+        // =====================================================================
+        function resetUploadForm() {
+            document.getElementById('upload-success-state').classList.add('hidden');
+            document.getElementById('uploadNotesForm').reset();
+            clearSelectedFiles();
+            const container = document.getElementById('drive-links-container');
+            container.innerHTML = `
+                <div class="flex items-center gap-2 drive-link-row">
+                    <input type="url" name="driveLink" placeholder="https://drive.google.com/file/d/..."
+                           class="glass-input w-full text-sm font-semibold rounded-xl px-4 py-3">
+                </div>
+            `;
+        }
+
+        async function submitNotesForm(e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('submitNotesBtn');
+            const originalHTML = btn.innerHTML;
+
+            // Validate payload based on active upload mode
+            const driveLinks = Array.from(document.querySelectorAll('input[name="driveLink"]'))
+                .map(el => el.value.trim())
+                .filter(Boolean);
+
+            if (uploadMode === 'file') {
+                if (selectedFiles.length === 0) {
+                    window.KTUFlow?.capsule('amber', 'Please attach at least 1 PDF/Image or switch to Drive Link');
+                    return;
+                }
+                const totalBytes = selectedFiles.reduce((sum, f) => sum + f.size, 0);
+                if (totalBytes > MAX_TOTAL_BYTES) {
+                    window.KTUFlow?.capsule('error', 'Files exceed 45 MB. Please share a Google Drive link instead.');
+                    setUploadMode('link');
+                    return;
+                }
+            } else {
+                if (driveLinks.length === 0) {
+                    window.KTUFlow?.capsule('amber', 'Please paste at least one Drive / OneDrive link');
+                    return;
+                }
+            }
+
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin text-xs"></i> <span>Uploading to Team...</span>';
+            btn.disabled = true;
+            window.KTUFlow?.capsule('loading', 'Uploading notes for admin review...');
+
+            const name = escapeTgHTML(document.getElementById('contribName').value.trim());
+            const collegeRaw = document.getElementById('contribCollege').value.trim();
+            const college = collegeRaw ? escapeTgHTML(collegeRaw) : 'Not specified';
+            const whatsapp = escapeTgHTML(document.getElementById('contribWhatsapp').value.trim());
+            const emailRaw = document.getElementById('contribEmail').value.trim();
+            const email = emailRaw ? escapeTgHTML(emailRaw) : 'Not provided';
+            const creditOptIn = document.getElementById('creditOptIn').checked ? 'Yes (Credit on Notes Page & Leaderboard)' : 'No (Anonymous)';
+
+            const scheme = escapeTgHTML(document.getElementById('noteScheme').value);
+            const semester = escapeTgHTML(document.getElementById('noteSemester').value);
+            const branch = escapeTgHTML(document.getElementById('noteBranch').value);
+            const subject = escapeTgHTML(document.getElementById('noteSubject').value.trim());
+            const moduleVal = escapeTgHTML(document.getElementById('noteModule').value);
+            const noteType = escapeTgHTML(document.getElementById('noteType').value);
+            const descRaw = document.getElementById('noteDescription').value.trim();
+            const desc = descRaw ? escapeTgHTML(descRaw) : 'None';
+
+            let captionText =
+                `📚 <b>NEW KTU NOTES SUBMISSION</b> 📚\n\n` +
+                `👤 <b>Contributor:</b> ${name}\n` +
+                `🏫 <b>College:</b> ${college}\n` +
+                `📱 <b>WhatsApp:</b> ${whatsapp}\n` +
+                `📧 <b>Email:</b> ${email}\n` +
+                `🏅 <b>Download Page Credit:</b> ${creditOptIn}\n\n` +
+                `🎓 <b>Scheme/Sem/Branch:</b> ${scheme} • ${semester} • ${branch}\n` +
+                `📘 <b>Subject:</b> ${subject}\n` +
+                `📑 <b>Module:</b> ${moduleVal} (${noteType})\n` +
+                `📝 <b>Remarks:</b> ${desc}`;
+
+            if (uploadMode === 'link') {
+                const linksBlock = driveLinks.map((lnk, i) => `${i + 1}. ${escapeTgHTML(lnk)}`).join('\n');
+                captionText += `\n\n🔗 <b>Shared Links:</b>\n${linksBlock}`;
+            }
+
+            try {
+                // 1. Fetch XOR-masked Telegram credentials from Hugging Face Space
+                const authRes = await fetch(HF_AUTH_URL, { method: 'POST' });
+                if (!authRes.ok) throw new Error('Auth check failed');
+                const authData = await authRes.json();
+                const botToken = authData.t.map(b => String.fromCharCode(b ^ 42)).join('');
+                const chatId = authData.c.map(b => String.fromCharCode(b ^ 42)).join('');
+
+                let response;
+
+                if (uploadMode === 'link') {
+                    response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            chat_id: chatId,
+                            text: captionText,
+                            parse_mode: 'HTML',
+                            disable_web_page_preview: true
+                        })
+                    });
+                } else if (selectedFiles.length === 1) {
+                    // Single file: sendPhoto (if image) or sendDocument (if PDF) — 100% reliable!
+                    const file = selectedFiles[0];
+                    const isImage = file.type && file.type.startsWith('image/');
+                    const endpoint = isImage ? 'sendPhoto' : 'sendDocument';
+                    const fieldName = isImage ? 'photo' : 'document';
+
+                    const formData = new FormData();
+                    formData.append('chat_id', chatId);
+                    formData.append(fieldName, file);
+                    formData.append('caption', captionText.slice(0, 1020));
+                    formData.append('parse_mode', 'HTML');
+
+                    response = await fetch(`https://api.telegram.org/bot${botToken}/${endpoint}`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                } else {
+                    // 2 to 10 files: sendMediaGroup
+                    const formData = new FormData();
+                    formData.append('chat_id', chatId);
+                    const allImages = selectedFiles.every(f => f.type && f.type.startsWith('image/'));
+                    const mediaType = allImages ? 'photo' : 'document';
+                    const mediaArray = [];
+
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        const fileKey = `file${i}`;
+                        formData.append(fileKey, selectedFiles[i]);
+                        const item = { type: mediaType, media: `attach://${fileKey}` };
+                        if (i === 0) {
+                            item.caption = captionText.slice(0, 1020);
+                            item.parse_mode = 'HTML';
+                        }
+                        mediaArray.push(item);
+                    }
+                    formData.append('media', JSON.stringify(mediaArray));
+
+                    response = await fetch(`https://api.telegram.org/bot${botToken}/sendMediaGroup`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                }
+
+                if (response && response.ok) {
+                    document.getElementById('upload-success-state').classList.remove('hidden');
+                    window.KTUFlow?.capsule('success', 'Notes delivered for review!');
+                } else {
+                    throw new Error('Telegram API rejected upload');
+                }
+            } catch (err) {
+                console.error('Upload notes error:', err);
+                window.KTUFlow?.capsule('error', 'Upload failed. Try Drive Link for large files.');
+            } finally {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }
+        }
+
+        // =====================================================================
+        // 5. TOP CONTRIBUTORS RANK RENDERER
+        // =====================================================================
+        function getInitials(name = '') {
+            const parts = name.trim().split(/\s+/).filter(Boolean);
+            if (!parts.length) return 'KT';
+            if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+        }
+
+        function getTierBadge(uploads) {
+            if (uploads >= 6) return { label: 'KTU Legend', cls: 'bg-amber-100 text-amber-700 border-amber-200' };
+            if (uploads >= 3) return { label: 'Rising Star', cls: 'bg-indigo-100 text-indigo-700 border-indigo-200' };
+            return { label: 'Contributor', cls: 'bg-emerald-100 text-emerald-700 border-emerald-200' };
+        }
+
+        function renderContributorsLeaderboard() {
+            const raw = Array.isArray(window.KTU_TOP_CONTRIBUTORS) ? window.KTU_TOP_CONTRIBUTORS : [];
+            const sorted = [...raw].sort((a, b) => (b.uploads || 0) - (a.uploads || 0) || (a.name || '').localeCompare(b.name || ''));
+
+            const totalUploads = sorted.reduce((sum, c) => sum + (c.uploads || 0), 0);
+            document.getElementById('stat-total-uploads').textContent = totalUploads;
+            document.getElementById('stat-total-contributors').textContent = sorted.length;
+
+            const podiumEl = document.getElementById('contributors-podium');
+            const listEl = document.getElementById('contributors-full-list');
+
+            if (!sorted.length) {
+                podiumEl.classList.add('hidden');
+                listEl.innerHTML = `
+                    <div class="text-center py-10">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center mx-auto mb-3 text-2xl border border-amber-200">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3 class="text-base font-black text-slate-800">Be Our #1 Top Contributor!</h3>
+                        <p class="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-4">
+                            Share your first set of KTU study notes and claim the Gold #1 spot on our Hall of Fame.
+                        </p>
+                        <button type="button" onclick="switchTab('upload')" class="ot-press px-5 py-2.5 rounded-full bg-indigo-600 text-white text-xs font-extrabold shadow-md">
+                            Upload Notes Now
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            const top3 = sorted.slice(0, 3);
+            const podiumStyles = [
+                { medal: '🥇', rank: '#1', cardCls: 'podium-gold', ringCls: 'bg-amber-500 text-white shadow-amber-500/30' },
+                { medal: '🥈', rank: '#2', cardCls: 'podium-silver', ringCls: 'bg-slate-500 text-white shadow-slate-500/25' },
+                { medal: '🥉', rank: '#3', cardCls: 'podium-bronze', ringCls: 'bg-orange-500 text-white shadow-orange-500/25' }
+            ];
+
+            podiumEl.classList.remove('hidden');
+            podiumEl.innerHTML = top3.map((c, i) => {
+                const st = podiumStyles[i];
+                const tier = getTierBadge(c.uploads || 0);
+                return `
+                    <div class="${st.cardCls} rounded-[1.75rem] p-5 text-center flex flex-col items-center shadow-sm">
+                        <div class="text-2xl mb-2">${st.medal}</div>
+                        <div class="w-12 h-12 rounded-2xl ${st.ringCls} font-black text-sm flex items-center justify-center shadow-md mb-2.5">
+                            ${escapeHtml(getInitials(c.name))}
+                        </div>
+                        <h3 class="text-sm sm:text-base font-black text-slate-900 leading-snug">${escapeHtml(c.name)}</h3>
+                        <p class="text-[11px] font-semibold text-slate-500 mt-0.5 truncate max-w-full">
+                            ${escapeHtml([c.college, c.branch].filter(Boolean).join(' • ') || 'KTU Student')}
+                        </p>
+                        <div class="mt-3 flex items-center gap-1.5">
+                            <span class="px-2.5 py-0.5 rounded-full bg-white/85 dark:bg-slate-800/80 border border-slate-200/80 dark:border-white/10 text-[11px] font-black text-indigo-600 dark:text-indigo-300">
+                                ${c.uploads || 0} ${(c.uploads || 0) === 1 ? 'Note' : 'Notes'}
+                            </span>
+                            <span class="px-2 py-0.5 rounded-full border text-[10px] font-extrabold ${tier.cls}">
+                                ${tier.label}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            listEl.innerHTML = sorted.map((c, idx) => {
+                const rank = idx + 1;
+                const tier = getTierBadge(c.uploads || 0);
+                const rankBadge = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `#${rank}`;
+                return `
+                    <div class="inner-glass rounded-2xl px-4 py-3 flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <span class="w-8 h-8 rounded-xl bg-white/85 dark:bg-slate-800/80 border border-slate-200/80 dark:border-white/10 flex items-center justify-center text-xs font-black text-slate-700 shrink-0">
+                                ${rankBadge}
+                            </span>
+                            <div class="min-w-0">
+                                <div class="flex flex-wrap items-center gap-1.5">
+                                    <h4 class="text-xs sm:text-sm font-black text-slate-900 truncate">${escapeHtml(c.name)}</h4>
+                                    <span class="px-2 py-0.5 rounded-full border text-[9px] font-extrabold ${tier.cls}">${tier.label}</span>
+                                </div>
+                                <p class="text-[11px] font-semibold text-slate-500 truncate">
+                                    ${escapeHtml([c.college, c.branch, c.highlight].filter(Boolean).join(' • '))}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="text-right shrink-0">
+                            <span class="font-mono-code text-xs sm:text-sm font-black text-indigo-600 dark:text-indigo-400">${c.uploads || 0}</span>
+                            <p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Approved</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // =====================================================================
+        // 6. INIT & EVENT BINDINGS
+        // =====================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Attach OpenBlast Liquid Glass Lens to Tab Switcher
+            if (window.KTULiquidGlass && typeof window.KTULiquidGlass.attachLiquidPill === 'function') {
+                window.KTULiquidGlass.attachLiquidPill(document.getElementById('upload-tab-pill'), 18, 20);
+            }
+
+            // Pre-fill Scheme / Branch / Semester from KTUFlow Profile
+            if (window.KTUFlow && typeof window.KTUFlow.getProfile === 'function') {
+                const prof = window.KTUFlow.getProfile();
+                const semEl = document.getElementById('noteSemester');
+                const brEl = document.getElementById('noteBranch');
+                if (prof.sem && semEl.querySelector(`option[value="${prof.sem}"]`)) semEl.value = prof.sem;
+                if (prof.branch && brEl.querySelector(`option[value="${prof.branch}"]`)) brEl.value = prof.branch;
+            }
+
+            // Drag & Drop + File Picker Events
+            const dropZone = document.getElementById('drop-zone');
+            const fileInput = document.getElementById('noteFilesInput');
+
+            fileInput.addEventListener('change', (e) => {
+                addFilesToSelection(e.target.files);
+                fileInput.value = '';
+            });
+
+            ['dragenter', 'dragover'].forEach(evt => {
+                dropZone.addEventListener(evt, (e) => {
+                    e.preventDefault();
+                    dropZone.classList.add('drag-over');
+                });
+            });
+            ['dragleave', 'drop'].forEach(evt => {
+                dropZone.addEventListener(evt, (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('drag-over');
+                });
+            });
+            dropZone.addEventListener('drop', (e) => {
+                if (e.dataTransfer && e.dataTransfer.files) {
+                    addFilesToSelection(e.dataTransfer.files);
+                }
+            });
+
+            // Subject Autocomplete powered by KTUFlow Catalog
+            const subjInput = document.getElementById('noteSubject');
+            const acList = document.getElementById('subject-ac-list');
+            const acWrap = document.getElementById('subject-ac-wrapper');
+
+            subjInput.addEventListener('input', async (e) => {
+                const q = e.target.value.trim().toUpperCase();
+                if (q.length < 2) {
+                    acList.classList.add('hidden');
+                    return;
+                }
+                const catalog = await loadCatalogSubjects();
+                const matches = catalog.filter(s => s.code.includes(q) || s.name.toUpperCase().includes(q)).slice(0, 6);
+                if (!matches.length) {
+                    acList.classList.add('hidden');
+                    return;
+                }
+                acList.innerHTML = matches.map(m => `
+                    <button type="button" onclick="pickSubjectSuggestion('${escapeHtml(m.code)}', '${escapeHtml(m.name).replace(/'/g, "\\'")}')"
+                            class="w-full text-left px-3 py-2 rounded-xl hover:bg-indigo-50/90 dark:hover:bg-slate-800/80 flex items-center justify-between gap-2 transition-colors">
+                        <span class="truncate text-xs font-bold text-slate-700 dark:text-slate-200">
+                            <span class="font-mono-code font-extrabold text-indigo-600 dark:text-indigo-400 mr-1.5">${escapeHtml(m.code)}</span>
+                            ${escapeHtml(m.name)}
+                        </span>
+                    </button>
+                `).join('');
+                acList.classList.remove('hidden');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!acWrap.contains(e.target)) acList.classList.add('hidden');
+            });
+
+            // Render Top Contributors Leaderboard
+            renderContributorsLeaderboard();
+
+            // Support direct link to ?tab=contributors
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('tab') === 'contributors') {
+                switchTab('contributors');
+            }
+        });
+    </script>
+</body>
+</html>
